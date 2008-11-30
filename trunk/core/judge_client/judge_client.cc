@@ -427,18 +427,6 @@ int main(int argc, char** argv) {
 				wait4(pidApp,&status,0,&ruse);
 				sig=status>>8;
 				
-				ptrace(PTRACE_GETREGS,pidApp,NULL,&reg);
-				
-				fprintf(stderr,"System Call = %d\n",reg.orig_eax);
-
-				if (cleft[reg.orig_eax]==0){
-					ACflg=OJ_RE;
-					syslog(LOG_ERR|LOG_DAEMON,"Error @ %s %d\n",argv[1],reg.orig_eax);
-					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
-				}else{
-					if (sub==1) cleft[reg.orig_eax]--;
-				}
-				sub=1-sub;	
 				if (WIFEXITED(status)) break;
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
@@ -462,6 +450,19 @@ int main(int argc, char** argv) {
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
 				}
+
+				// check the system calls
+				ptrace(PTRACE_GETREGS,pidApp,NULL,&reg);
+				if (cleft[reg.orig_eax]==0){
+					ACflg=OJ_RE;
+					syslog(LOG_ERR|LOG_DAEMON,"Error @ %s %d\n",argv[1],reg.orig_eax);
+					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
+				}else{
+					if (sub==1) cleft[reg.orig_eax]--;
+				}
+				sub=1-sub;	
+				
+				// check the usage
 				tempmemory=ruse.ru_minflt*getpagesize();
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory>mem_lmt*STD_MB){

@@ -6,6 +6,7 @@
 #include <syslog.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdarg.h>
 #include <mysql/mysql.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -43,7 +44,7 @@ void init_mysql_conf(){
 	sleep_time=3;
 	oj_tot=1;
 	oj_mod=0;
-	fp=fopen("/home/hoj/etc/judge.conf","r");
+	fp=fopen("/home/judge/etc/judge.conf","r");
 	while (fgets(buf,bufsize-1,fp)){
 		buf[strlen(buf)-1]=0;
 		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
@@ -91,6 +92,23 @@ void run_client(int runid){
 	exit(0);
 }
 
+
+void write_log(const char *fmt, ...)
+{
+	va_list         ap;
+	char            buffer[4096];
+	time_t          t = time(NULL);
+	int             l;
+	FILE *fp = fopen("/home/judge/log/server.log","a+");
+	if (fp==NULL) fprintf(stderr,"openfile error!\n");
+	va_start(ap, fmt);
+	l = vsprintf(buffer, fmt, ap);
+	fprintf(fp,"%s\n",buffer);
+	va_end(ap);
+	fclose(fp);
+}
+
+
 int work(){
 	char buf[1024];
 	int retcnt;
@@ -104,12 +122,12 @@ int work(){
 	/* connect the database */
 	if(!mysql_real_connect(conn,host_name,user_name,password,
 			db_name,port_number,0,0)){
-		syslog(LOG_ERR | LOG_DAEMON, "%s", mysql_error(conn));
+		write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
 	}
 	if (mysql_real_query(conn,query,strlen(query))){
-		syslog(LOG_ERR | LOG_DAEMON, "%s", mysql_error(conn));
+		write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
 	}
@@ -121,7 +139,7 @@ int work(){
 	while (row=mysql_fetch_row(res)){
 		runid=atoi(row[0]);
 		if (runid%oj_tot!=oj_mod) continue;
-		syslog(LOG_INFO | LOG_DAEMON, "Judging solution %d",runid);
+		write_log("Judging solution %d",runid);
 		if (workcnt==max_running){		// if no more client can running
 			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
 			for (i=0;i<max_running;i++)	// get the client id
@@ -237,7 +255,7 @@ int main(){
 	final_sleep.tv_sec=0;
 	final_sleep.tv_nsec=500000000;
 	init_mysql_conf();	// set the database info
-	chdir("/home/hoj");	// change the dir
+	chdir("/home/judge");	// change the dir
 	while (1){			// start to run
 		if (work()==0){	// if nothing done 
 			sleep(sleep_time);	// sleep

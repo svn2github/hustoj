@@ -9,8 +9,8 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdarg.h>
 
-#include <sys/syslog.h>
 #include <sys/wait.h>
 #include <sys/ptrace.h>
 #include <sys/types.h>
@@ -84,7 +84,7 @@ void init_mysql_conf(){
 	port_number=3306;
 	max_running=3;
 	sleep_time=3;
-	fp=fopen("/home/hoj/etc/judge.conf","r");
+	fp=fopen("/home/judge/etc/judge.conf","r");
 	while (fgets(buf,bufsize-1,fp)){
 		buf[strlen(buf)-1]=0;
 		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
@@ -99,6 +99,21 @@ void init_mysql_conf(){
 			sscanf(buf+15,"%d",&port_number);
 		}
 	}
+}
+
+void write_log(const char *fmt, ...)
+{
+	va_list         ap;
+	char            buffer[4096];
+	time_t          t = time(NULL);
+	int             l;
+	FILE *fp = fopen("/home/judge/log/client.log","a+");
+	if (fp==NULL) fprintf(stderr,"openfile error!\n");
+	va_start(ap, fmt);
+	l = vsprintf(buffer, fmt, ap);
+	fprintf(fp,"%s\n",buffer);
+	va_end(ap);
+	fclose(fp);
 }
 
 
@@ -195,10 +210,10 @@ void update_user(char user_id[]){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=\'%s\' AND `result`=\'4\') WHERE `user_id`=\'%s\'",user_id,user_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
-		syslog(LOG_ERR|LOG_DAEMON,mysql_error(conn));
+		write_log(mysql_error(conn));
 	sprintf(sql,"UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=\'%s\') WHERE `user_id`=\'%s\'",user_id,user_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
-		syslog(LOG_ERR|LOG_DAEMON,mysql_error(conn));
+		write_log(mysql_error(conn));
 }
 
 
@@ -206,18 +221,18 @@ void update_problem(int p_id){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'%d\' AND `result`=\'4\') WHERE `problem_id`=\'%d\'",p_id,p_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
-		syslog(LOG_ERR|LOG_DAEMON,mysql_error(conn));
+		write_log(mysql_error(conn));
 	sprintf(sql,"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'%d\') WHERE `problem_id`=\'%d\'",p_id,p_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
-		syslog(LOG_ERR|LOG_DAEMON,mysql_error(conn));
+		write_log(mysql_error(conn));
 }
 
 int compile(int lang){
 	int pid;
-	char *const CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
-	char *const CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
-	char *const CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
-	char *const CP_J[]={"javac","Main.java",NULL};
+	char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
+	char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
+	char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
+	char * CP_J[]={"javac","Main.java",NULL};
 	pid=fork();
 	if (pid==0){
 		struct rlimit LIM;
@@ -276,7 +291,7 @@ int main(int argc, char** argv) {
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	
-	sprintf(work_dir,"/home/hoj/run%s/",argv[2]);
+	sprintf(work_dir,"/home/judge/run%s/",argv[2]);
 	
 	chdir(work_dir);
 
@@ -328,7 +343,7 @@ int main(int argc, char** argv) {
 	
 	// copy java.policy
 	if (lang==3){
-		sprintf(cmd,"cp /home/hoj/etc/java%s.policy %sjava.policy", argv[2],work_dir);
+		sprintf(cmd,"cp /home/judge/etc/java%s.policy %sjava.policy", argv[2],work_dir);
 		system(cmd);
 	}
 
@@ -355,7 +370,7 @@ int main(int argc, char** argv) {
 	char outfile[bufsize];	// PATH&Name of the OUTPUT FILES
 	char userfile[bufsize];	// PATH&Name of the USERs OUTPUT FILES
 	
-	sprintf(fullpath,"/home/hoj/data/%d",p_id);	// the fullpath of data dir
+	sprintf(fullpath,"/home/judge/data/%d",p_id);	// the fullpath of data dir
 	
 	// open DIRs
 	DIR *dp;
@@ -377,11 +392,11 @@ int main(int argc, char** argv) {
 //		printf("ACflg=%d %d check a file!\n",ACflg,solution_id);
 		strncpy(fname,dirp->d_name,namelen);
 		fname[namelen]=0;
-		sprintf(infile,"/home/hoj/data/%d/%s.in",p_id,fname);
+		sprintf(infile,"/home/judge/data/%d/%s.in",p_id,fname);
 		sprintf(cmd,"cp %s %sdata.in",infile,work_dir);
 		system(cmd);
-		sprintf(outfile,"/home/hoj/data/%d/%s.out",p_id,fname);
-		sprintf(userfile,"/home/hoj/run%s/user.out",argv[2]);
+		sprintf(outfile,"/home/judge/data/%d/%s.out",p_id,fname);
+		sprintf(userfile,"/home/judge/run%s/user.out",argv[2]);
 		pid_t pidApp=fork();
 		if (pidApp==0){		// child
 			// set the limit
@@ -455,8 +470,7 @@ int main(int argc, char** argv) {
 				ptrace(PTRACE_GETREGS,pidApp,NULL,&reg);
 				if (cleft[reg.orig_eax]==0){
 					ACflg=OJ_RE;
-					syslog(LOG_ERR|LOG_DAEMON,"Error @ %s %d\n",argv[1],reg.orig_eax);
-					fprintf(stderr,"Error @ %s %d\n",argv[1],reg.orig_eax);
+					write_log("[ERROR] A Not allowed system call: runid:%s callid:%d\n",argv[1],reg.orig_eax);
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 				}else{
 					if (sub==1) cleft[reg.orig_eax]--;
@@ -478,7 +492,7 @@ int main(int argc, char** argv) {
 			// compare
 			if (ACflg==OJ_AC){
 				if (isspj){
-					sprintf(buf,"/home/hoj/data/%d/spj %s %s %s", p_id, infile, outfile, userfile);
+					sprintf(buf,"/home/judge/data/%d/spj %s %s %s", p_id, infile, outfile, userfile);
 					comp_res = system(buf);
 					if (comp_res == 0) comp_res = OJ_AC;
 					else comp_res = OJ_WA;

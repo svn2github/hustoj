@@ -106,7 +106,8 @@ echo "</select>";
 ?>
 </select>
 <input type=submit value='Go'>
-</form></tr>
+</form>
+<table>
 <tr align=center class='toprow'>
 <td width="8%">Run ID
 <td width="10%">User

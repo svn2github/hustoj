@@ -101,7 +101,6 @@ while ($row=mysql_fetch_object($result)){
 echo "</table></center>";
 mysql_free_result($result);
 ?>
-</center>
 <?
 }
 require_once("oj-footer.php");

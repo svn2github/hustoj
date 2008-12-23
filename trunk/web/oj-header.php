@@ -22,11 +22,12 @@ function checkcontest(){
 	$on = new online();
 ?>
 </head>
+<body>
 <center>
 <h2><font color="red">Welcome To HUST ACM-ICPC Online Judge</font></h2>
 <table width=96%>
 	<tr align="center" class='hd' valign="top">
-		<th><a href="./FAQs.html">F.A.Qs</a></th>
+		<th><a href="./faqs.php">F.A.Qs</a></th>
 		<th><a href="./bbs.php">BBS</a></th>
 		<th><a href="./">HOME</a></th>
 		<th><a href="./problemset.php">PROBLEMS</a></th>

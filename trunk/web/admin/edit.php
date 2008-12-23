@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Edit Problem</title>
 </head>
+<body>
 <center>
 <?require_once("../include/db_info.inc.php");?>
 <?require_once("admin-header.php");?>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, Huazhong Univ. of Sci. & Tech.</font></td>
+<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, Huazhong Univ. of Sci. & Tech.</font>
 <td width="100"></td>
 </center>
 <hr>
@@ -63,5 +64,6 @@ $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_l
 echo "Edit OK!";
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
 endif?>
-</body></html>
+</body>
+</html>
 

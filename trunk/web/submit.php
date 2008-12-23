@@ -31,7 +31,9 @@ else if (isset($_POST['pid']) && isset($_POST['cid'])){
 			$ccnt=intval($row[0]);
 			mysql_free_result($result);
 			if ($ccnt==0){
+				require_once("contest-header.php");
 				echo "You are not invited!\n";
+				require_once("oj-footer.php");
 				exit(0);
 			}
 		}
@@ -73,6 +75,23 @@ if ($len>65536){
 	require_once("oj-footer.php");
 	exit(0);
 }
+
+// last submit
+
+$sql="SELECT `in_date` from `solution` where `user_id`='$user_id' order by `in_date` desc limit 1";
+$res=mysql_query($sql);
+if (mysql_num_rows($res)==1){
+	$row=mysql_fetch_row($res);
+	$last=strtotime($row[0]);
+	$cur=time();
+	if ($cur-$last<10){
+		require_once('oj-header.php');
+		echo "You should not submit more than twice in 10 seconds.....<br>";
+		require_once('oj-footer.php');
+		exit(0);
+	}
+}
+
 if (!isset($pid)){
 $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
 	VALUES('$id','$user_id',NOW(),'$language','$ip','$len')";

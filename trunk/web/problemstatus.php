@@ -82,7 +82,7 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	$sscore=strval($row->score);
 	$s_time=intval(substr($sscore,1,8));
 	$s_memory=intval(substr($sscore,9,6));
-	$s_cl=intval(substr($sscore,16,5));
+	$s_cl=intval(substr($sscore,15,5));
 	if ($i&1) echo "<tr class=oddrow>";
 	else echo "<tr class=evenrow>";
 	echo "<td>$i";

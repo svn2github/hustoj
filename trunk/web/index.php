@@ -19,5 +19,22 @@
 		}
 		echo "</table>";
 	}
-	require("oj-footer.php");
 ?>
+<?php if(function_exists('apc_cache_info')): ?>
+<?php $_apc_cache_info = apc_cache_info(); ?>
+<div style="text-align:center">
+<div style="margin: auto; width:400px; text-align:left">
+<h4>Alternative PHP Cache:<strong>ACTIVE</strong></h4>
+<strong>Performace Data<strong>
+<ul id="apc">
+	<li><span>Hits: </span><?=$_apc_cache_info['num_hits']?></li>
+	<li><span>Misses: </span><?=$_apc_cache_info['num_misses']?></li>
+	<li><span>Entries: </span><?=$_apc_cache_info['num_entries']?></li>
+	<li><span>Inserts: </span><?=$_apc_cache_info['num_inserts']?></li>
+	<li><span>Cached Files: </span><?=$_apc_cache_info['mem_size']/1024?>KB</li>
+</ul>
+</div>
+</div>
+<?php endif;?>
+
+<?php require('oj-footer.php');?>

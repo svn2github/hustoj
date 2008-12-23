@@ -1,10 +1,11 @@
 <?
-session_start();
+	session_start();
 ?>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href='include/hoj.css' type='text/css'>
 <?
+
 function checkcontest(){
 	require_once("include/db_info.inc.php");
 	$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
@@ -15,6 +16,10 @@ function checkcontest(){
 	mysql_free_result($result);
 	return $retmsg;
 }
+
+	require_once('./include/db_info.inc.php');
+	require_once('./include/online.php');
+	$on = new online();
 ?>
 </head>
 <center>

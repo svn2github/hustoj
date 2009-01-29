@@ -8,6 +8,7 @@ if (isset($_GET['page']))
 else $page=0;
 
 echo "<title>Problem $id Status</title>";
+echo "<h1>Problem $id Status</h1>";
 
 echo "<center><table><tr><td>";
 echo "<table>";

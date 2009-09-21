@@ -1,4 +1,4 @@
-// 
+//
 // File:   main.cc
 // Author: sempr
 //
@@ -229,8 +229,8 @@ void update_problem(int p_id){
 
 int compile(int lang){
 	int pid;
-	char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
-	char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static",NULL};
+	char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
+	char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-DONLINE_JUDGE","-I/usr/include/c++/4.3",NULL};
 	char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
 	char * CP_J[]={"javac","Main.java",NULL};
 	pid=fork();
@@ -275,13 +275,13 @@ int main(int argc, char** argv) {
 	init_mysql_conf();
 	conn=mysql_init(NULL);
 	mysql_real_connect(conn,host_name,user_name,password,db_name,port_number,0,0);
-	
+
 	// copy the source file and get the limit
 	char sql[bufsize];
 	char work_dir[bufsize];
 	char src_pth[bufsize];
 	char cmd[bufsize];
-	
+
 	int solution_id=atoi(argv[1]);
 	int p_id,time_lmt,mem_lmt,cas_lmt,lang,isspj;
 	char user_id[bufsize];
@@ -290,9 +290,9 @@ int main(int argc, char** argv) {
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	
+
 	sprintf(work_dir,"/home/judge/run%s/",argv[2]);
-	
+
 	chdir(work_dir);
 
 	// get the problem id and user id from Table:solution
@@ -314,9 +314,9 @@ int main(int argc, char** argv) {
 	mem_lmt=atoi(row[1]);
 	cas_lmt=atoi(row[2]);
 	isspj=row[3][0]-'0';
-	
+
 	mysql_free_result(res);
-	
+
 	// the limit for java
 	if (lang==3){
 		time_lmt=time_lmt*2+2;
@@ -329,18 +329,18 @@ int main(int argc, char** argv) {
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
 	row=mysql_fetch_row(res);
-	
+
 	// clear the work dir
 	sprintf(cmd,"rm -rf %s*",work_dir);
 	system(cmd);
-	
+
 	// create the src file
 	sprintf(src_pth,"Main.%s",lang_ext[lang]);
 	FILE *fp_src=fopen(src_pth,"w");
 	fprintf(fp_src,"%s",row[0]);
 	mysql_free_result(res);
 	fclose(fp_src);
-	
+
 	// copy java.policy
 	if (lang==3){
 		sprintf(cmd,"cp /home/judge/etc/java%s.policy %sjava.policy", argv[2],work_dir);
@@ -348,7 +348,7 @@ int main(int argc, char** argv) {
 	}
 
 	// compile
-	
+
 //	printf("%s\n",cmd);
 	// set the result to compiling
 	int Compile_OK;
@@ -369,9 +369,9 @@ int main(int argc, char** argv) {
 	char infile[bufsize];	// PATH&Name of the INPUT FILES
 	char outfile[bufsize];	// PATH&Name of the OUTPUT FILES
 	char userfile[bufsize];	// PATH&Name of the USERs OUTPUT FILES
-	
+
 	sprintf(fullpath,"/home/judge/data/%d",p_id);	// the fullpath of data dir
-	
+
 	// open DIRs
 	DIR *dp;
 	dirent *dirp;
@@ -415,19 +415,19 @@ int main(int argc, char** argv) {
 			// set the stack
 			LIM.rlim_cur=STD_MB<<3; LIM.rlim_max=STD_MB<<3;
 			setrlimit(RLIMIT_STACK,&LIM);
-	
-			chdir(work_dir);
-			// now the user is "judger"
-			// open the files
-			if (lang!=3) chroot(work_dir);
 
-			setuid(1536);
+			chdir(work_dir);
+
+			// open the files
 			freopen("data.in","r",stdin);
 			freopen("user.out","w",stdout);
 			freopen("error.out","w",stderr);
 			// trace me
 			ptrace(PTRACE_TRACEME,0,NULL,NULL);
 			// run me
+			if (lang!=3) chroot(work_dir);
+			// now the user is "judger"
+			setuid(1536);
 			if (lang!=3) execl("./Main","./Main",NULL);
 			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
@@ -441,7 +441,7 @@ int main(int argc, char** argv) {
 			while (1){
 				wait4(pidApp,&status,0,&ruse);
 				sig=status>>8;
-				
+
 				if (WIFEXITED(status)) break;
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
@@ -475,12 +475,12 @@ int main(int argc, char** argv) {
 				}else{
 					if (sub==1) cleft[reg.orig_eax]--;
 				}
-				sub=1-sub;	
-				
+				sub=1-sub;
+
 				// check the usage
 				tempmemory=ruse.ru_minflt*getpagesize();
 				if (tempmemory>topmemory) topmemory=tempmemory;
-				if (topmemory>mem_lmt*STD_MB){
+				if (topmemory/STD_MB>mem_lmt){
 					if (ACflg==OJ_AC) ACflg=OJ_ML;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 				}

@@ -10,6 +10,7 @@
 #include <mysql/mysql.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
@@ -27,7 +28,7 @@ static int oj_mod;
 
 static MYSQL *conn;
 static MYSQL_RES *res;
-static MYSQL_ROW row; 
+static MYSQL_ROW row;
 static FILE *fp_log;
 static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC LIMIT 0,30";
 
@@ -126,7 +127,11 @@ int work(){
 		sleep_time=60;
 		return 0;
 	}
-	if (mysql_real_query(conn,query,strlen(query))){
+	if (mysql_real_query(conn,"set names utf8;",strlen("set names utf8;"))){
+		write_log("%s", mysql_error(conn));
+		sleep_time=60;
+		return 0;
+	}if (mysql_real_query(conn,query,strlen(query))){
 		write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
@@ -153,7 +158,7 @@ int work(){
 		ID[i]=fork();					// start to fork
 		if (ID[i]==0){
 			run_client(i);	// if the process is the son, run it
-			exit(0);	
+			exit(0);
 		}
 		retcnt++;
 	}
@@ -245,8 +250,8 @@ void daemonize(){
 	fd2 = dup(0);
 }
 
-int main(){
-	daemonize();
+int main(int argc, char** argv){
+	if (argc==1) daemonize();
 	if (already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
 		return 1;
@@ -257,7 +262,7 @@ int main(){
 	init_mysql_conf();	// set the database info
 	chdir("/home/judge");	// change the dir
 	while (1){			// start to run
-		if (work()==0){	// if nothing done 
+		if (work()==0){	// if nothing done
 			sleep(sleep_time);	// sleep
 			syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping 1 second");
 		}

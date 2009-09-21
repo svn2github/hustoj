@@ -9,7 +9,7 @@ if (isset($_GET['id'])){
 	if (!isset($_SESSION['administrator']))
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
-						SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW()))";
+						SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or `private`='1'))";
 	else
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
 

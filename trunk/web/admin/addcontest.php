@@ -1,4 +1,4 @@
-<?session_start();?>
+<?require_once("admin-header.php");?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Add a contest</title>
 

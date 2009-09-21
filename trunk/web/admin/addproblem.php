@@ -34,7 +34,18 @@ if (intval($_POST['contest_id'])>999){
 	mysql_free_result($result);
 	mysql_query($sql);
 }
-echo "Please add the data file in /home/hoj/data/$pid";
+
+echo "Please add more data file in /home/hoj/data/$pid";
+/*
+	mkdir('/home/hoj/data/$pid','0777',1);
+	$fp=fopen("/home/hoj/data/$pid/sample.in","w");
+	fputs($fp,$sample_input);
+	fclose($fp);
+	
+	$fp=fopen("/home/hoj/data/$pid/sample.out","w");
+	fputs($fp,$sample_input);
+	fclose($fp);
+	*/
 ?>
 <?require_once("../oj-footer.php");?>
 

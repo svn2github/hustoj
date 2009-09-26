@@ -1,0 +1,12 @@
+#labels Featured,Phase-Deploy,Phase-Implementation
+#安装 指南
+
+= Introduction =
+
+安装这个OJ系统需要GNU/Linux的一个较新的发行版，推荐ubuntu9.04 [http://www.ubuntu.com]
+
+
+= Details =
+请下载install.tar.gz 或 根据README操作，您在安装过程中需要一个互联网连接，以下载源代码。
+
+对于没有连接到互联网的主机，也可以用svn从其他的主机上下载好源码后复制到磁盘上进行安装。

@@ -104,7 +104,7 @@ $insert_id=mysql_insert_id();
 $source=addslashes($source);
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
-echo $sql;
-//if (!isset($cid)) header("Location: ./status.php");
-//else header("Location: ./status.php?cid=$cid");
+//echo $sql;
+if (!isset($cid)) header("Location: ./status.php");
+else header("Location: ./status.php?cid=$cid");
 ?>

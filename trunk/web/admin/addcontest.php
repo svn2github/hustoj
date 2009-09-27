@@ -23,7 +23,7 @@ if (isset($_POST['syear']))
 	$pieces = explode(",", trim($_POST['cproblem']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
-			VALUES ('$cid','$pieces[0]','N')";
+			VALUES ('$cid','$pieces[0]',0)";
 		for ($i=1;$i<count($pieces);$i++){
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		}

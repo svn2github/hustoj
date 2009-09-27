@@ -9,38 +9,38 @@ $len=strlen($user_id);
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
 if($len>20){
-	$err_str=$err_str."User ID Too Long!\n";
+	$err_str=$err_str."User ID Too Long!\\n";
 	$err_cnt++;
 }else if ($len<3){
-	$err_str=$err_str."User ID Too Short!\n";
+	$err_str=$err_str."User ID Too Short!\\n";
 	$err_cnt++;
 }
 if (!is_valid_user_name($user_id)){
-	$err_str=$err_str."User ID can only contain NUMBERs & LETTERs!\n";
+	$err_str=$err_str."User ID can only contain NUMBERs & LETTERs!\\n";
 	$err_cnt++;
 }
 $nick=trim($_POST['nick']);
 $len=strlen($nick);
 if ($len>100){
-	$err_str=$err_str."Nick Name Too Long!\n";
+	$err_str=$err_str."Nick Name Too Long!\\n";
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
 if (strcmp($_POST['password'],$_POST['rptpassword'])!=0){
-	$err_str=$err_str."Password Not Same!\n";
+	$err_str=$err_str."Password Not Same!\\n";
 	$err_cnt++;
 }
 if (strlen($_POST['password'])<6){
 	$err_cnt++;
-	$err_str=$err_str."Password should be Longer than 6!\n";
+	$err_str=$err_str."Password should be Longer than 6!\\n";
 }
 $len=strlen($_POST['school']);
 if ($len>100){
-	$err_str=$err_str."School Name Too Long!\n";
+	$err_str=$err_str."School Name Too Long!\\n";
 	$err_cnt++;
 }
 $len=strlen($_POST['email']);
 if ($len>100){
-	$err_str=$err_str."Email Too Long!\n";
+	$err_str=$err_str."Email Too Long!\\n";
 	$err_cnt++;
 }
 if ($err_cnt>0){

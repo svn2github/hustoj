@@ -297,6 +297,7 @@ int main(int argc, char** argv) {
 
 	// get the problem id and user id from Table:solution
 	sprintf(sql,"SELECT problem_id, user_id, language FROM solution where solution_id=%s\0",argv[1]);
+	//printf("%s\n",sql);
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
 	row=mysql_fetch_row(res);

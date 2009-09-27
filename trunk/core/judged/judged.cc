@@ -86,10 +86,11 @@ void updatedb(int solution_id,int result,int time,int memory){
 	}
 }
 
-void run_client(int runid){
-	char buf[2];
-	buf[0]=runid+'0'; buf[1]=0;
-	execl("/usr/bin/judge_client","/usr/bin/judge_client",row[0],buf,NULL);
+void run_client(int runid,int clientid){
+	char buf[2],runidstr[1024];
+	buf[0]=clientid+'0'; buf[1]=0;
+	sprintf(runidstr,"%d",runid);
+	execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
 	exit(0);
 }
 
@@ -157,7 +158,7 @@ int work(){
 		updatedb(atoi(row[0]),2,0,0);
 		ID[i]=fork();					// start to fork
 		if (ID[i]==0){
-			run_client(i);	// if the process is the son, run it
+			run_client(runid,i);	// if the process is the son, run it
 			exit(0);
 		}
 		retcnt++;

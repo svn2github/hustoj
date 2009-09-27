@@ -7,12 +7,12 @@ $cid=intval($_GET['cid']);
 $pid=intval($_GET['pid']);
 ?>
 <table width=100% class=toprow><tr align=center>
-	<td width=15%><a class=u href='./'>Home Page</a>
-	<td width=15%><a class=u href='./bbs.php'>Web Board</a>
-	<td width=15%><a class=u href='./contest.php?cid=<?=$cid?>'>Problems</a>
-	<td width=15%><a class=u href='./contestrank.php?cid=<?=$cid?>'>Standing</a>
-	<td width=15%><a class=u href='./status.php?cid=<?=$cid?>'>Status</a>
-	<td width=15%><a class=u href='./conteststatistics.php?cid=<?=$cid?>'>Statistics</a>
+	<td width=15%><a class=hd href='./'>Home Page</a>
+	<td width=15%><a class=hd href='./bbs.php'>Web Board</a>
+	<td width=15%><a class=hd href='./contest.php?cid=<?=$cid?>'>Problems</a>
+	<td width=15%><a class=hd href='./contestrank.php?cid=<?=$cid?>'>Standing</a>
+	<td width=15%><a class=hd href='./status.php?cid=<?=$cid?>'>Status</a>
+	<td width=15%><a class=hd href='./conteststatistics.php?cid=<?=$cid?>'>Statistics</a>
 </tr></table>
 <br>
 <?

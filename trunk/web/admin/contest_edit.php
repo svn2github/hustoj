@@ -25,9 +25,23 @@ if (isset($_POST['syear']))
 			VALUES ('$cid','$pieces[0]',0)";
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
-		echo $sql_1;
+		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
 	}
+	
+	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
+	mysql_query($sql);
+	$pieces = explode("\n", trim($_POST['ulist']));
+	if (count($pieces)>0 && strlen($pieces[0])>0){
+		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
+			VALUES ('".trim($pieces[0])."','c$cid')";
+		for ($i=1;$i<count($pieces);$i++)
+			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
+		//echo $sql_1;
+		mysql_query($sql_1) or die(mysql_error());
+	}
+	
+	
 	require_once("../oj-footer.php");
 	exit();
 }else{
@@ -53,6 +67,16 @@ if (isset($_POST['syear']))
 		$plist=$plist.$row[0];
 		if ($i>1) $plist=$plist.',';
 	}
+	$ulist="";
+	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`='c$cid' order by user_id";
+	$result=mysql_query($sql) or die(mysql_error());
+	for ($i=mysql_num_rows($result);$i>0;$i--){
+		$row=mysql_fetch_row($result);
+		$ulist=$ulist.$row[0];
+		if ($i>1) $ulist=$ulist."\n";
+	}
+	
+	
 }
 ?>
 
@@ -79,7 +103,9 @@ Public/Private:<select name=private>
 	<option value=1 <?=$private=='1'?'selected=selected':''?>>Private</option>
 </select>
 <br>Problems:<input type=text size=100 name=cproblem value='<?=$plist?>'><br>
+Users:<textarea name="ulist" rows="10" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
+
 </form>
 <?require_once("../oj-footer.php");?>
 

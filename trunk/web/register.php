@@ -73,5 +73,16 @@ mysql_query($sql);// or die("Insert Error!\n");
 $sql="INSERT INTO `loginlog` VALUES('$user_id','$password','$ip',NOW())";
 mysql_query($sql);
 $_SESSION['user_id']=$user_id;
+
+		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
+		//echo $sql."<br />";
+		$result=mysql_query($sql);
+		echo mysql_error();
+		while ($row=mysql_fetch_assoc($result)){
+			$_SESSION[$row['rightstr']]=true;
+			//echo $_SESSION[$row['rightstr']]."<br />";
+		}
+		$_SESSION['ac']=Array();
+		$_SESSION['sub']=Array();
 header("Location: ./");
 ?>

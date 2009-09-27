@@ -83,7 +83,7 @@ $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
 	$row=mysql_fetch_row($res);
 	$last=strtotime($row[0]);
-	$cur=time();
+	$cur=time()+28800;
 	if ($cur-$last<10){
 		require_once('oj-header.php');
 		echo "You should not submit more than twice in 10 seconds.....<br>";
@@ -101,8 +101,10 @@ $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,co
 }
 mysql_query($sql);
 $insert_id=mysql_insert_id();
+$source=addslashes($source);
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
-if (!isset($cid)) header("Location: ./status.php");
-else header("Location: ./status.php?cid=$cid");
+echo $sql;
+//if (!isset($cid)) header("Location: ./status.php");
+//else header("Location: ./status.php?cid=$cid");
 ?>

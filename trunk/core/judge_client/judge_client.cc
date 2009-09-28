@@ -275,8 +275,18 @@ int main(int argc, char** argv) {
 	// init our work
 	init_mysql_conf();
 	conn=mysql_init(NULL);
-	mysql_real_connect(conn,host_name,user_name,password,db_name,port_number,0,0);
+	//mysql_real_connect(conn,host_name,user_name,password,db_name,port_number,0,0);
 
+    if(!mysql_real_connect(conn,host_name,user_name,password,
+			db_name,port_number,0,0)){
+		write_log("%s", mysql_error(conn));
+		return 0;
+	}
+    char * utf8sql="set names utf8";
+	if (mysql_real_query(conn,utf8sql,strlen(utf8sql))){
+		write_log("%s", mysql_error(conn));
+		return 0;
+	}
 	// copy the source file and get the limit
 	char sql[bufsize];
 	char work_dir[bufsize];

@@ -104,7 +104,7 @@ void updatedb(int solution_id,int result,int time,int memory){
 }
 
 void run_client(int runid,int clientid){
-    write_log("=sid=%d===clientid=%d==\n",runid,clientid);
+    if(DEBUG)write_log("=sid=%d===clientid=%d==\n",runid,clientid);
 	char buf[2],runidstr[1024];
         struct rlimit LIM;
 		LIM.rlim_max=5;
@@ -122,7 +122,7 @@ void run_client(int runid,int clientid){
 	buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);
 	execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
-    write_log("<<done!>>",runid,clientid);
+    if(DEBUG)write_log("<<done!>>",runid,clientid);
 
 	exit(0);
 }

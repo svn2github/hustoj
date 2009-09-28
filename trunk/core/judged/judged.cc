@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-#define DEBUG 1
+#define DEBUG 0
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)

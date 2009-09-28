@@ -11,10 +11,11 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+#define DEBUG 0
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
-
+#define STD_MB 1048576
 static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
@@ -32,6 +33,22 @@ static MYSQL_ROW row;
 static FILE *fp_log;
 static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC LIMIT 0,30";
 
+void write_log(const char *fmt, ...)
+{
+	va_list         ap;
+	char            buffer[4096];
+//	time_t          t = time(NULL);
+	int             l;
+	FILE *fp = fopen("/home/judge/log/server.log","a+");
+	if (fp==NULL) fprintf(stderr,"openfile error!\n");
+	va_start(ap, fmt);
+	l = vsprintf(buffer, fmt, ap);
+	fprintf(fp,"%s\n",buffer);
+	if (DEBUG) printf("%s\n",buffer);
+	va_end(ap);
+	fclose(fp);
+
+}
 // read the configue file
 void init_mysql_conf(){
 	FILE *fp;
@@ -87,28 +104,30 @@ void updatedb(int solution_id,int result,int time,int memory){
 }
 
 void run_client(int runid,int clientid){
+    write_log("=sid=%d===clientid=%d==\n",runid,clientid);
 	char buf[2],runidstr[1024];
+        struct rlimit LIM;
+		LIM.rlim_max=5;
+		LIM.rlim_cur=5;
+		setrlimit(RLIMIT_CPU,&LIM);
+
+		LIM.rlim_max=8*STD_MB;
+		LIM.rlim_cur=8*STD_MB;
+		setrlimit(RLIMIT_FSIZE,&LIM);
+
+		LIM.rlim_max=512*STD_MB;
+		LIM.rlim_cur=512*STD_MB;
+		setrlimit(RLIMIT_AS,&LIM);
+
 	buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);
 	execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
+    write_log("<<done!>>",runid,clientid);
+
 	exit(0);
 }
 
 
-void write_log(const char *fmt, ...)
-{
-	va_list         ap;
-	char            buffer[4096];
-	time_t          t = time(NULL);
-	int             l;
-	FILE *fp = fopen("/home/judge/log/server.log","a+");
-	if (fp==NULL) fprintf(stderr,"openfile error!\n");
-	va_start(ap, fmt);
-	l = vsprintf(buffer, fmt, ap);
-	fprintf(fp,"%s\n",buffer);
-	va_end(ap);
-	fclose(fp);
-}
 
 
 int work(){
@@ -119,7 +138,9 @@ int work(){
 	static int workcnt=0;
 	int runid;
 	pid_t tmp_pid;
+
 	retcnt=0;
+	const char * sql=NULL;
 	conn=mysql_init(NULL);		// init the database connection
 	/* connect the database */
 	if(!mysql_real_connect(conn,host_name,user_name,password,
@@ -128,7 +149,8 @@ int work(){
 		sleep_time=60;
 		return 0;
 	}
-	if (mysql_real_query(conn,"set names utf8;",strlen("set names utf8;"))){
+	sql="set names utf8";
+	if (mysql_real_query(conn,sql,strlen(sql))){
 		write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
@@ -171,6 +193,12 @@ int work(){
 		memset(ID,0,sizeof(ID));
 	}
 	mysql_free_result(res);				// free the memory
+	sql="commit";
+	if (mysql_real_query(conn,sql,strlen(sql))){
+		write_log("%s", mysql_error(conn));
+		sleep_time=60;
+		return retcnt;
+	}
 	mysql_close(conn);					// close db
 	return retcnt;
 }
@@ -252,22 +280,22 @@ void daemonize(){
 }
 
 int main(int argc, char** argv){
-	if (argc==1) daemonize();
+	if (argc==1&&!DEBUG) daemonize();
 	if (already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
 		return 1;
 	}
-	struct timespec final_sleep;
-	final_sleep.tv_sec=0;
-	final_sleep.tv_nsec=500000000;
+//	struct timespec final_sleep;
+//	final_sleep.tv_sec=0;
+//	final_sleep.tv_nsec=500000000;
 	init_mysql_conf();	// set the database info
 	chdir("/home/judge");	// change the dir
 	while (1){			// start to run
 		if (work()==0){	// if nothing done
 			sleep(sleep_time);	// sleep
-			syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping 1 second");
+			syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
 		}
-		nanosleep(&final_sleep,NULL);
+//		nanosleep(&final_sleep,NULL);
 	}
 	return 0;
 }

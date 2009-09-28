@@ -43,7 +43,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
-
+#define DEBUG 1
 static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
@@ -105,13 +105,14 @@ void write_log(const char *fmt, ...)
 {
 	va_list         ap;
 	char            buffer[4096];
-	time_t          t = time(NULL);
+//	time_t          t = time(NULL);
 	int             l;
 	FILE *fp = fopen("/home/judge/log/client.log","a+");
 	if (fp==NULL) fprintf(stderr,"openfile error!\n");
 	va_start(ap, fmt);
 	l = vsprintf(buffer, fmt, ap);
 	fprintf(fp,"%s\n",buffer);
+	if (DEBUG) printf("%s\n",buffer);
 	va_end(ap);
 	fclose(fp);
 }
@@ -244,8 +245,8 @@ int compile(int lang){
 		LIM.rlim_cur=8*STD_MB;
 		setrlimit(RLIMIT_FSIZE,&LIM);
 
-		LIM.rlim_max=512*STD_MB;
-		LIM.rlim_cur=512*STD_MB;
+		LIM.rlim_max=64*STD_MB;
+		LIM.rlim_cur=64*STD_MB;
 		setrlimit(RLIMIT_AS,&LIM);
 
 		freopen("ce.txt","w",stderr);
@@ -377,7 +378,7 @@ int main(int argc, char** argv) {
 	DIR *dp;
 	dirent *dirp;
 	if ((dp=opendir(fullpath))==NULL){
-		printf("No such dir!\n");
+		write_log("No such dir:%s!\n",fullpath);
 		return -1;
 	}
 	int ACflg,PEflg;

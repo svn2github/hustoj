@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-#define DEBUG 0
+#define DEBUG 1
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
@@ -104,8 +104,7 @@ void updatedb(int solution_id,int result,int time,int memory){
 }
 
 void run_client(int runid,int clientid){
-    if(DEBUG)write_log("=sid=%d===clientid=%d==\n",runid,clientid);
-	char buf[2],runidstr[1024];
+    char buf[2],runidstr[1024];
         struct rlimit LIM;
 		LIM.rlim_max=5;
 		LIM.rlim_cur=5;
@@ -122,9 +121,9 @@ void run_client(int runid,int clientid){
 	buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);
 	execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
-    if(DEBUG)write_log("<<done!>>",runid,clientid);
 
-	exit(0);
+
+	//exit(0);
 }
 
 
@@ -143,6 +142,9 @@ int work(){
 	const char * sql=NULL;
 	conn=mysql_init(NULL);		// init the database connection
 	/* connect the database */
+	const char timeout=30;
+	mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
+
 	if(!mysql_real_connect(conn,host_name,user_name,password,
 			db_name,port_number,0,0)){
 		write_log("%s", mysql_error(conn));
@@ -180,7 +182,9 @@ int work(){
 		updatedb(atoi(row[0]),2,0,0);
 		ID[i]=fork();					// start to fork
 		if (ID[i]==0){
+		    if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
 			run_client(runid,i);	// if the process is the son, run it
+
 			exit(0);
 		}
 		retcnt++;
@@ -189,6 +193,7 @@ int work(){
 		while (workcnt>0){
 			workcnt--;
 			waitpid(-1,NULL,0);
+			if(DEBUG)write_log("<<%ddone!>>",workcnt);
 		}
 		memset(ID,0,sizeof(ID));
 	}

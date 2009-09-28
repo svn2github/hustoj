@@ -276,6 +276,8 @@ int main(int argc, char** argv) {
 	init_mysql_conf();
 	conn=mysql_init(NULL);
 	//mysql_real_connect(conn,host_name,user_name,password,db_name,port_number,0,0);
+    const char timeout=30;
+	mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
 
     if(!mysql_real_connect(conn,host_name,user_name,password,
 			db_name,port_number,0,0)){

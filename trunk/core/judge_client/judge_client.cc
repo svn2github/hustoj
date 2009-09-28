@@ -245,8 +245,8 @@ int compile(int lang){
 		LIM.rlim_cur=8*STD_MB;
 		setrlimit(RLIMIT_FSIZE,&LIM);
 
-		LIM.rlim_max=64*STD_MB;
-		LIM.rlim_cur=64*STD_MB;
+		LIM.rlim_max=256*STD_MB;
+		LIM.rlim_cur=256*STD_MB;
 		setrlimit(RLIMIT_AS,&LIM);
 
 		freopen("ce.txt","w",stderr);

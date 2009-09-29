@@ -101,7 +101,7 @@ $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,co
 }
 mysql_query($sql);
 $insert_id=mysql_insert_id();
-$source=addslashes($source);
+$source=str_replace("'","''",$source);
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
 //echo $sql;

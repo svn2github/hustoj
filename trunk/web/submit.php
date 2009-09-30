@@ -1,11 +1,12 @@
-<?require_once("./include/db_info.inc.php")?>
 <?
+	session_start();
 if (!isset($_SESSION['user_id'])){
 	require_once("oj-header.php");
 	echo "<a href='loginpage.php'>Please Login First!</a>";
 	require_once("oj-footer.php");
 	exit(0);
 }
+require_once("include/db_info.inc.php");
 $user_id=$_SESSION['user_id'];
 if (isset($_POST['id'])) $id=intval($_POST['id']);
 else if (isset($_POST['pid']) && isset($_POST['cid'])){
@@ -56,13 +57,18 @@ else if (isset($_POST['pid']) && isset($_POST['cid'])){
 	echo "<h2>No Such Problem!</h2>";
 	exit(0);
 }
-$source=trim($_POST['source']);
+$source=$_POST['source'];
+if(strlen($_POST['testquote'])==2)
+	$source=stripslashes($source);
+$source=trim($source);
 $len=strlen($source);
+//echo $source;
+
 $language=intval($_POST['language']);
 if ($language>3 || $language<0) $language=0;
 $language=strval($language);
 $ip=$_SERVER['REMOTE_ADDR'];
-//$source=mysql_escape_string($source);
+$source=mysql_escape_string($source);
 if ($len<20){
 	require_once("oj-header.php");
 	echo "Source Code Too Short!";
@@ -83,7 +89,7 @@ $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
 	$row=mysql_fetch_row($res);
 	$last=strtotime($row[0]);
-	$cur=time()+28800;
+	$cur=time();
 	if ($cur-$last<10){
 		require_once('oj-header.php');
 		echo "You should not submit more than twice in 10 seconds.....<br>";
@@ -101,7 +107,7 @@ $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,co
 }
 mysql_query($sql);
 $insert_id=mysql_insert_id();
-$source=str_replace("'","''",$source);
+
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
 //echo $sql;

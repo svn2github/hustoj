@@ -51,7 +51,7 @@ static char db_name  [bufsize];
 static int port_number;
 static int max_running;
 static int sleep_time;
-static int sleep_tmp;
+//static int sleep_tmp;
 
 MYSQL *conn;
 
@@ -176,7 +176,7 @@ void updatedb(int solution_id,int result,int time,int memory){
 }
 
 
-int addceinfo(int solution_id){
+void addceinfo(int solution_id){
 	char sql[(1<<16)],*end;
 	char ceinfo[(1<<16)],*cend;
 	FILE *fp=fopen("ce.txt","r");
@@ -230,10 +230,11 @@ void update_problem(int p_id){
 
 int compile(int lang){
 	int pid;
-	char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
-	char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-DONLINE_JUDGE","-I/usr/include/c++/4.3",NULL};
-	char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
-	char * CP_J[]={"javac","Main.java",NULL};
+
+     const char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
+	 const char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-DONLINE_JUDGE","-I/usr/include/c++/4.3",NULL};
+     const char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
+	 const char * CP_J[]={"javac","Main.java",NULL};
 	pid=fork();
 	if (pid==0){
 		struct rlimit LIM;
@@ -252,12 +253,13 @@ int compile(int lang){
 		freopen("ce.txt","w",stderr);
 		freopen("/dev/null","w",stdout);
 		switch(lang){
-			case 0:execvp(CP_C[0],CP_C); break;
-			case 1:execvp(CP_X[0],CP_X); break;
-			case 2:execvp(CP_P[0],CP_P); break;
-			case 3:execvp(CP_J[0],CP_J); break;
+			case 0:execvp(CP_C[0],(char * const*)CP_C); break;
+			case 1:execvp(CP_X[0],(char * const*)CP_X); break;
+			case 2:execvp(CP_P[0],(char * const*)CP_P); break;
+			case 3:execvp(CP_J[0],(char * const*)CP_J); break;
 		}
 //		printf("compile end!\n");
+        return 0;
 	}else{
 		int status;
 		waitpid(pid,&status,0);
@@ -284,7 +286,7 @@ int main(int argc, char** argv) {
 		write_log("%s", mysql_error(conn));
 		return 0;
 	}
-    char * utf8sql="set names utf8";
+    const char * utf8sql="set names utf8";
 	if (mysql_real_query(conn,utf8sql,strlen(utf8sql))){
 		write_log("%s", mysql_error(conn));
 		return 0;
@@ -309,7 +311,7 @@ int main(int argc, char** argv) {
 	chdir(work_dir);
 
 	// get the problem id and user id from Table:solution
-	sprintf(sql,"SELECT problem_id, user_id, language FROM solution where solution_id=%s\0",argv[1]);
+	sprintf(sql,"SELECT problem_id, user_id, language FROM solution where solution_id=%s",argv[1]);
 	//printf("%s\n",sql);
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
@@ -320,7 +322,7 @@ int main(int argc, char** argv) {
 	mysql_free_result(res);
 
 	// get the problem info from Table:problem
-	sprintf(sql,"SELECT time_limit,memory_limit,case_time_limit,spj FROM problem where problem_id=%d\0",p_id);
+	sprintf(sql,"SELECT time_limit,memory_limit,case_time_limit,spj FROM problem where problem_id=%d",p_id);
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
 	row=mysql_fetch_row(res);
@@ -339,7 +341,7 @@ int main(int argc, char** argv) {
 //	printf("time: %d mem: %d\n",time_lmt,mem_lmt);
 
 	// get the source code
-	sprintf(sql,"SELECT source FROM source_code WHERE solution_id=%s\0",argv[1]);
+	sprintf(sql,"SELECT source FROM source_code WHERE solution_id=%s",argv[1]);
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
 	row=mysql_fetch_row(res);

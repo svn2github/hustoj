@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-#define DEBUG 0
+int DEBUG=0;
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
@@ -30,7 +30,7 @@ static int oj_mod;
 static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
-static FILE *fp_log;
+//static FILE *fp_log;
 static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC LIMIT 0,30";
 
 void write_log(const char *fmt, ...)
@@ -125,12 +125,36 @@ void run_client(int runid,int clientid){
 
 	//exit(0);
 }
+int executesql(const char * sql){
+
+	if (mysql_real_query(conn,sql,strlen(sql))){
+		write_log("%s", mysql_error(conn));
+		sleep_time=60;
+		return 1;
+	}else
+	    return 0;
+}
 
 
+int init_mysql(){
+   // if(conn!=NULL) mysql_close(conn);	// close db
+	conn=mysql_init(NULL);		// init the database connection
+	/* connect the database */
+	const char timeout=30;
+    mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
 
-
+	if(!mysql_real_connect(conn,host_name,user_name,password,
+			db_name,port_number,0,0)){
+		write_log("%s", mysql_error(conn));
+		sleep_time=60;
+		return 1;
+	}
+	if (executesql("set names utf8"))
+        return 1;
+	return 0;
+}
 int work(){
-	char buf[1024];
+//	char buf[1024];
 	int retcnt;
 	int i;
 	static pid_t ID[8]={0,0,0,0,0,0,0,0};
@@ -139,24 +163,9 @@ int work(){
 	pid_t tmp_pid;
 
 	retcnt=0;
-	const char * sql=NULL;
-	conn=mysql_init(NULL);		// init the database connection
-	/* connect the database */
-	const char timeout=30;
-	mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
 
-	if(!mysql_real_connect(conn,host_name,user_name,password,
-			db_name,port_number,0,0)){
-		write_log("%s", mysql_error(conn));
-		sleep_time=60;
-		return 0;
-	}
-	sql="set names utf8";
-	if (mysql_real_query(conn,sql,strlen(sql))){
-		write_log("%s", mysql_error(conn));
-		sleep_time=60;
-		return 0;
-	}if (mysql_real_query(conn,query,strlen(query))){
+
+	if (mysql_real_query(conn,query,strlen(query))){
 		write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
@@ -166,7 +175,7 @@ int work(){
 	retcnt=0;
 	res=mysql_store_result(conn);
 	/* exec the submit */
-	while (row=mysql_fetch_row(res)){
+	while ((row=mysql_fetch_row(res))){
 		runid=atoi(row[0]);
 		if (runid%oj_tot!=oj_mod) continue;
 		write_log("Judging solution %d",runid);
@@ -193,18 +202,13 @@ int work(){
 		while (workcnt>0){
 			workcnt--;
 			waitpid(-1,NULL,0);
-			if(DEBUG)write_log("<<%ddone!>>",workcnt);
+
 		}
 		memset(ID,0,sizeof(ID));
 	}
 	mysql_free_result(res);				// free the memory
-	sql="commit";
-	if (mysql_real_query(conn,sql,strlen(sql))){
-		write_log("%s", mysql_error(conn));
-		sleep_time=60;
-		return retcnt;
-	}
-	mysql_close(conn);					// close db
+	executesql("commit");
+    if(DEBUG)write_log("<<%ddone!>>",workcnt);
 	return retcnt;
 }
 
@@ -278,14 +282,15 @@ void daemonize(){
 	}
 	if (rl.rlim_max == RLIM_INFINITY) rl.rlim_max=1024;
 	if (rl.rlim_max>1024) rl.rlim_max=1024;
-	for (i=0; i < rl.rlim_max; i++) close(i);
+	for (i=0; i < (int)rl.rlim_max; i++) close(i);
 	fd0 = open("/dev/null", O_RDWR);
 	fd1 = dup(0);
 	fd2 = dup(0);
 }
 
 int main(int argc, char** argv){
-	if (argc==1&&!DEBUG) daemonize();
+    DEBUG=(argc!=1);
+	if (!DEBUG) daemonize();
 	if (already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
 		return 1;
@@ -296,10 +301,16 @@ int main(int argc, char** argv){
 	init_mysql_conf();	// set the database info
 	chdir("/home/judge");	// change the dir
 	while (1){			// start to run
-		if (work()==0){	// if nothing done
-			sleep(sleep_time);	// sleep
-			syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
+	    if(!init_mysql()){
+	        int j=work();
+	        mysql_close(conn);	// close db
+            if (j==0){	// if nothing done
+                sleep(sleep_time);	// sleep
+                syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
+            }
+
 		}
+
 //		nanosleep(&final_sleep,NULL);
 	}
 	return 0;

@@ -1,5 +1,5 @@
 <?require_once("admin-header.php");?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Add a contest</title>
 
 <?
@@ -68,6 +68,8 @@ Minute:<input type=text name=eminute value=00 size=7 ></p>
 Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 <br>Problems:<input type=text size=100 name=cproblem><br>
 Users:<textarea name="ulist" rows="10" cols="20"></textarea>
+<br />
+*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 </form>
 <?require_once("../oj-footer.php");?>

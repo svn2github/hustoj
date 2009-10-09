@@ -42,6 +42,7 @@ Language:
 </select>
 <br>
 <textarea cols=80 rows=35 name="source"></textarea><br>
+<input type=hidden name=testquote value='"'>
 <input type=submit value="Submit">
 <input type=reset value="Reset">
 </form>

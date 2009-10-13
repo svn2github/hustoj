@@ -69,12 +69,12 @@ if (mysql_num_rows($result)!=1){
 	echo "<b>Time Limit: </b>$row->time_limit Sec&nbsp;&nbsp;";
 	echo "<b>Memory Limit: </b>".$row->memory_limit." MB<br>";
 	echo "<b>Submissions: </b>".$row->submit."&nbsp;&nbsp;";
-	echo "<b>Solved: </b>".$row->accepted."<br>";
+	echo "<b>Solved: </b>".$row->accepted."<br>"; 
 	echo "</center>";
 
-	echo "<h2>Description</h2><p>".nl2br($row->description)."</p>";
-	echo "<h2>Input</h2><p>".nl2br($row->input)."</p>";
-	echo "<h2>Output</h2><p>".nl2br($row->output)."</p>";
+	echo "<h2>Description</h2><p><pre>".htmlspecialchars($row->description)."</pre></p>";
+	echo "<h2>Input</h2><p><pre>".htmlspecialchars($row->input)."</pre></p>";
+	echo "<h2>Output</h2><p><pre>".htmlspecialchars($row->output)."</pre></p>";
 	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
 	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
 	if ($pr_flag) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";

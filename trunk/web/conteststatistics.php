@@ -6,7 +6,7 @@ require_once("./include/my_func.inc.php");
 require_once("contest-header.php");
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
-$cid=$_GET['cid'];
+$cid=intval($_GET['cid']);
 
 $sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<NOW()";
 $result=mysql_query($sql);

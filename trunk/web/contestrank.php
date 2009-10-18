@@ -36,7 +36,7 @@ function s_cmp($A,$B){
 
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
-$cid=$_GET['cid'];
+$cid=intval($_GET['cid']);
 require_once("contest-header.php");
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql) or die(mysql_error());

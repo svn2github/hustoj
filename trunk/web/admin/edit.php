@@ -62,6 +62,18 @@ $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_l
 
 @mysql_query($sql) or die(mysql_error());
 echo "Edit OK!";
+$basedir="/home/judge/data/$id";
+echo "Sample data file in $basedir Updated!<br>";
+
+	//mkdir($basedir);
+	$fp=fopen($basedir."/sample.in","w");
+	fputs($fp,$sample_input);
+	fclose($fp);
+	
+	$fp=fopen($basedir."/sample.out","w");
+	fputs($fp,$sample_input);
+	fclose($fp);
+	
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
 endif?>
 </body>

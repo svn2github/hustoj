@@ -11,6 +11,8 @@ $input=$_POST['input'];
 $output=$_POST['output'];
 $sample_input=$_POST['sample_input'];
 $sample_output=$_POST['sample_output'];
+$test_input=$_POST['test_input'];
+$test_output=$_POST['test_output'];
 $hint=$_POST['hint'];
 $source=$_POST['source'];
 $spj=$_POST['spj'];
@@ -34,18 +36,30 @@ if (intval($_POST['contest_id'])>999){
 	mysql_free_result($result);
 	mysql_query($sql);
 }
+$basedir="/home/judge/data/$pid";
+echo "Please add more data file in $basedir";
 
-echo "Please add more data file in /home/hoj/data/$pid";
-/*
-	mkdir('/home/hoj/data/$pid','0777',1);
-	$fp=fopen("/home/hoj/data/$pid/sample.in","w");
+	mkdir($basedir);
+	$fp=fopen($basedir."/sample.in","w");
 	fputs($fp,$sample_input);
 	fclose($fp);
 	
-	$fp=fopen("/home/hoj/data/$pid/sample.out","w");
+	$fp=fopen($basedir."/sample.out","w");
 	fputs($fp,$sample_input);
 	fclose($fp);
-	*/
+	
+	if(strlen($test_output)>0){
+		$fp=fopen($basedir."/test.in","w");
+		fputs($fp,$sample_input);
+		fclose($fp);
+		
+		$fp=fopen($basedir."/test.out","w");
+		fputs($fp,$sample_input);
+		fclose($fp);
+	
+	
+	}
+/*	*/
 ?>
 <?require_once("../oj-footer.php");?>
 

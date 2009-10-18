@@ -29,10 +29,12 @@
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
 <p align=left>Description:<br><textarea rows=13 name=description cols=120></textarea></p>
-<p align=left>Input:<br><textarea rows=13 name=input cols=120></textarea></p>
-<p align=left>Output:<br><textarea rows=13 name=output cols=120></textarea></p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=120></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=120></textarea></p>
+<p align=left>Input:<br><textarea rows=13 name=input cols=80></textarea></p>
+<p align=left>Output:<br><textarea rows=13 name=output cols=80></textarea></p>
+<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80></textarea></p>
+<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80></textarea></p>
+<p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
+<p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br><textarea rows=13 name=hint cols=120></textarea></p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>

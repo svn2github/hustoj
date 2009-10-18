@@ -12,7 +12,7 @@ $cnt=intval($row->upid)-1000;
 $cnt=$cnt/$page_cnt;
 
 if (isset($_GET['page'])){
-	$page=$_GET['page'];
+	$page=intval($_GET['page']);
 }else $page="1";
 $pstart=1000+$page_cnt*intval($page)-$page_cnt;
 $pend=$pstart+$page_cnt;

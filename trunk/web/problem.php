@@ -1,4 +1,5 @@
 <?require_once("./include/db_info.inc.php")?>
+<?require_once("./include/ubb.php")?>
 <?
 $pr_flag=false;
 $co_flag=false;
@@ -72,12 +73,12 @@ if (mysql_num_rows($result)!=1){
 	echo "<b>Solved: </b>".$row->accepted."<br>"; 
 	echo "</center>";
 
-	echo "<h2>Description</h2><p>".nl2br(htmlspecialchars($row->description))."</p>";
-	echo "<h2>Input</h2><p><pre>".htmlspecialchars($row->input)."</pre></p>";
-	echo "<h2>Output</h2><p><pre>".htmlspecialchars($row->output)."</pre></p>";
+	echo "<h2>Description</h2><p>".ubb(nl2br(htmlspecialchars($row->description)))."</p>";
+	echo "<h2>Input</h2><p>".ubb(htmlspecialchars($row->input))."</p>";
+	echo "<h2>Output</h2><p>".ubb(htmlspecialchars($row->output))."</p>";
 	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
 	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
-	if ($pr_flag) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";
+	if ($pr_flag||true) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";
 	if ($pr_flag) echo "<h2>Source</h2><p>".nl2br($row->source)."</p>";
 	echo "<center>";
 	if ($pr_flag){

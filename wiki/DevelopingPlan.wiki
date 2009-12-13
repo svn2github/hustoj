@@ -1,0 +1,17 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+2009-2010寒假开发计划
+
+
+= Details =
+
+ # problem.php 比赛中的题目No Such Problem!给出比赛链接。
+ # admin privilidge 查看权限列表
+ # 分离角色权限
+  建立administrator/teacher/student三级
+||      ||题目管理||比赛管理||初始化密码||查看提交源代码||
+||管理员||全部    ||全部    ||全部          ||全部          ||
+||老师  ||自己    ||自己    ||学生          ||全部          ||
+||学生  ||无     ||自己    ||自己          ||自己          ||

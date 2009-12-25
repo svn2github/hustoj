@@ -43,7 +43,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
-#define DEBUG 1
+#define DEBUG 0
 static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
@@ -147,6 +147,7 @@ int compare(const char *file1,const char *file2){
 //		printf("A:%s\nB:%s\n",s1,s2);
 		delete[] s1;
 		delete[] s2;
+
 		return OJ_WA;
 	}else{
 		f1=fopen(file1,"r");
@@ -272,7 +273,12 @@ int compile(int lang){
 int main(int argc, char** argv) {
 	if (argc!=3){
 		fprintf(stderr,"Usage:%s runid runmachine.\n",argv[0]);
-		exit(1);
+		if(!DEBUG){		
+			argc=3;
+			const char * args[]={"judge_client","23063","0"};
+			argv=(char **)args;
+		}else
+			exit(1);
 	}
 	// init our work
 	init_mysql_conf();
@@ -511,11 +517,17 @@ int main(int argc, char** argv) {
 					sprintf(buf,"/home/judge/data/%d/spj %s %s %s", p_id, infile, outfile, userfile);
 					comp_res = system(buf);
 					if (comp_res == 0) comp_res = OJ_AC;
-					else comp_res = OJ_WA;
+					else{
+					    if(DEBUG) printf("fail test %s\n",infile);
+					    comp_res = OJ_WA;
+                    }
 				}else{
 					comp_res=compare(outfile,userfile);
 				}
-				if (comp_res==OJ_WA) ACflg=OJ_WA;
+				if (comp_res==OJ_WA) {
+				    ACflg=OJ_WA;
+				    if(DEBUG) printf("fail test %s\n",infile);
+				}
 				else if (comp_res==OJ_PE) PEflg=OJ_PE;
 			}
 		}

@@ -28,7 +28,7 @@
 <p align=left>Title:<input type=text name=title size=71></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
-<p align=left>Description:<br><textarea rows=13 name=description cols=120></textarea></p>
+<p align=left>Description:<br><textarea rows=13 name=description cols=80></textarea></p>
 <p align=left>Input:<br><textarea rows=13 name=input cols=80></textarea></p>
 <p align=left>Output:<br><textarea rows=13 name=output cols=80></textarea></p>
 <p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80></textarea></p>

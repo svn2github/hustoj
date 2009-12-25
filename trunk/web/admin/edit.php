@@ -71,7 +71,7 @@ echo "Sample data file in $basedir Updated!<br>";
 	fclose($fp);
 	
 	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,$sample_input);
+	fputs($fp,$sample_output);
 	fclose($fp);
 	
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";

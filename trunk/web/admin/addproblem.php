@@ -45,16 +45,16 @@ echo "Please add more data file in $basedir";
 	fclose($fp);
 	
 	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,$sample_input);
+	fputs($fp,$sample_output);
 	fclose($fp);
 	
 	if(strlen($test_output)>0){
 		$fp=fopen($basedir."/test.in","w");
-		fputs($fp,$sample_input);
+		fputs($fp,$test_input);
 		fclose($fp);
 		
 		$fp=fopen($basedir."/test.out","w");
-		fputs($fp,$sample_input);
+		fputs($fp,$test_output);
 		fclose($fp);
 	
 	

@@ -55,8 +55,26 @@ if (isset($_GET['id'])){
 }
 $result=mysql_query($sql) or die(mysql_error());
 if (mysql_num_rows($result)!=1){
-	echo "<title>No Such Problem!</title>";
-	echo "<h2>No Such Problem!</h2>";
+   if(isset($_GET['id'])){
+      $id=$_GET['id'];
+	   mysql_free_result($result);
+	   $sql="SELECT `contest_id` FROM `contest_problem` WHERE `problem_id`=$id ORDER BY `num`";
+	   $result=mysql_query($sql);
+	   if($i=mysql_num_rows($result)){
+	      echo "This problem is in Contest(s) below:<br>";
+		   for (;$i>0;$i--){
+				$row=mysql_fetch_row($result);
+				echo "<a href=contest.php?cid=$row[0]>Contest $row[0]</a><br>";
+				
+			}
+		}else{
+			echo "<title>No Such Problem!</title>";
+			echo "<h2>No Such Problem!</h2>";
+		}
+   }else{
+		echo "<title>No Such Problem!</title>";
+		echo "<h2>No Such Problem!</h2>";
+	}
 }else{
 	$row=mysql_fetch_object($result);
 	if ($pr_flag){

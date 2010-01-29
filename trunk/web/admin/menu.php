@@ -20,6 +20,6 @@
 <li>
 	<a href="rejudge.php" target="main"><b>Rejudge</b></a>
 <li>
-	<a href="privilege_.php" target="main"><b>User Privilege</b></a>
+	<a href="privilege_add.php" target="main"><b>User Privilege</b></a>
 </ol>
 

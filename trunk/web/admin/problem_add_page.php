@@ -21,7 +21,7 @@
 </center>
 <hr>
 <h1>Add New problem</h1>
-<form method=POST action=addproblem.php>
+<form method=POST action=problem_add.php>
 <p align=center><font size=4 color=#333399>Add a Problem</font></p>
 <input type=hidden name=problem_id value=New Problem>
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>

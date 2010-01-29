@@ -11,7 +11,7 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<td>".$row->problem_id;
 	echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
 	echo "<td>".$row->in_date;
-	echo "<td><a href=change.php?id=$row->problem_id>".($row->defunct=="N"?"Delete":"Resume")."</a>";
+	echo "<td><a href=problem_df_change.php?id=$row->problem_id>".($row->defunct=="N"?"Delete":"Resume")."</a>";
 	echo "<td><a href=edit.php?id=$row->problem_id>Edit</a>";
 	echo "</tr>";
 }

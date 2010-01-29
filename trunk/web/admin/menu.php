@@ -6,13 +6,13 @@
 <li>
 	<a href="../index.php" target="main"><b>SeeOJ</b></a>
 <li>
-	<a href="addproblempage.php" target="main"><b>Add A New Problem</b></a>
+	<a href="problem_add_page.php" target="main"><b>Add A New Problem</b></a>
 <li>
-	<a href="addcontest.php" target="main"><b>Add A Contest</b></a>
+	<a href="contest_add.php" target="main"><b>Add A Contest</b></a>
 <li>
-	<a href="problemlist.php" target="main"><b>ProblemList</b></a>
+	<a href="problem_list.php" target="main"><b>ProblemList</b></a>
 <li>
-	<a href="contestlist.php" target="main"><b>ContestList</b></a>
+	<a href="contest_list.php" target="main"><b>ContestList</b></a>
 <li>
 	<a href="setmsg.php" target="main"><b>SetMessage</b></a>
 <li>
@@ -20,6 +20,6 @@
 <li>
 	<a href="rejudge.php" target="main"><b>Rejudge</b></a>
 <li>
-	<a href="addprivilege.php" target="main"><b>User Privilege</b></a>
+	<a href="privilege_.php" target="main"><b>User Privilege</b></a>
 </ol>
 

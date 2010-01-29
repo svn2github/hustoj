@@ -1,1 +1,7 @@
-解题报告 请看 http://algorithm.byhh.net/
+新手点击<a href=http://acm.zj.cn/wiki/en/%E5%A6%82%E4%BD%95%E5%81%9A%E9%A2%98 target=_blank>这里</a> 学习如何做题！点击
+<a href=http://acm.zj.cn/wiki/en/%E5%A6%82%E4%BD%95%E6%AF%94%E8%B5%9B target=_blank>这里</a>学习如何比赛和完成上机作业。
+点击
+<a href=http://acm.zj.cn/wiki/en/%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD>这里</a>可以下载各种编程开发工具
+<br>
+<b><red>注意main函数必须返回0，不要输出题目没有要求的文字如“sum is xx”,否则判错<br>你必须跟题目要求一字不差进行输出，多一个空格都算错。<br>不要输出题目没要求的“请输入”、“please input”</red>
+<br>Happy Christmas, ACMers!

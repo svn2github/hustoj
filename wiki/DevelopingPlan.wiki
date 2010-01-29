@@ -8,7 +8,6 @@
 = Details =
  # 添加快速复制现有比赛，用于添加新的作业。 done!
  # problem.php 比赛中的题目No Such Problem!给出比赛链接。done!
- # 注册成功时，自动登录抽取权限。
  # admin privilidge 查看权限列表 
  # 分离角色权限
   建立administrator/teacher/student三级

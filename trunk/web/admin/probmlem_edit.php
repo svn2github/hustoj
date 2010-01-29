@@ -14,7 +14,7 @@
 <hr>
 <?if(isset($_GET['id'])):?>
 <h1>Edit New problem</h1>
-<form method=POST action=edit.php>
+<form method=POST >
 <input type=hidden name=problem_id value=New Problem>
 <?
 $sql="SELECT * FROM `problem` WHERE `problem_id`=".$_GET['id'];

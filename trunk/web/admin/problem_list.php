@@ -12,7 +12,7 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
 	echo "<td>".$row->in_date;
 	echo "<td><a href=problem_df_change.php?id=$row->problem_id>".($row->defunct=="N"?"Delete":"Resume")."</a>";
-	echo "<td><a href=edit.php?id=$row->problem_id>Edit</a>";
+	echo "<td><a href=probmlem_edit.php?id=$row->problem_id>Edit</a>";
 	echo "</tr>";
 }
 echo "</table></center>";

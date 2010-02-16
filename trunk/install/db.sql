@@ -504,4 +504,6 @@ CREATE TABLE `users` (
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;
+
  

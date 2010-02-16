@@ -21,12 +21,14 @@ if (isset($_GET['id'])){
 	$pid=$_GET['pid'];
 
 	if (!isset($_SESSION['administrator']))
-		$sql="SELECT count(*) FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<NOW()";
+		$sql="SELECT langmask FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<NOW()";
 	else
-		$sql="SELECT count(*) FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
+		$sql="SELECT langmask FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
 	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
-	$ok_cnt=intval($row[0]);
+	$rows_cnt=mysql_num_rows($result);
+   $ok_cnt=$rows_cnt==1;		
+	$row=mysql_fetch_row($result);
+	$langmask=$row[0];
 	mysql_free_result($result);
 	if ($ok_cnt!=1){
 		// not started
@@ -102,7 +104,7 @@ if (mysql_num_rows($result)!=1){
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";
 	}else{
-		echo "[<a href='submitpage.php?cid=$cid&pid=$pid'>Submit</a>]";
+		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>Submit</a>]";
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>Status</a>]";
 	echo "[<a href='bbs.php?id=".$row->problem_id."'>Discuss</a>]";

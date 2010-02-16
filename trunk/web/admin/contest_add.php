@@ -3,6 +3,7 @@
 <title>Add a contest</title>
 
 <?
+  
 if (isset($_POST['syear']))
 {
 	require_once("../include/db_info.inc.php");
@@ -13,8 +14,17 @@ if (isset($_POST['syear']))
 	
 	$title=$_POST['title'];
 	$private=$_POST['private'];
-	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`)
-		VALUES('$title','$starttime','$endtime','$private')";
+	
+   $lang=$_POST['lang'];
+   $langmask=0;
+   foreach($lang as $t){
+			$langmask+=1<<$t;
+	} 
+	$langmask=15&(~$langmask);
+	//echo $langmask;	
+	
+	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`)
+		VALUES('$title','$starttime','$endtime','$private',$langmask)";
 //	echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$cid=mysql_insert_id();
@@ -60,7 +70,7 @@ else{
 				if ($i>1) $plist=$plist.',';
 			}
    }
-   echo "$cid<---";
+  
    
 ?>
 	
@@ -81,7 +91,14 @@ else{
 	Hour:<input type=text name=ehour size=7 value=<?=date('h')?>>&nbsp;
 	Minute:<input type=text name=eminute value=00 size=7 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
-	<br>Problems:<input type=text size=100 name=cproblem value="<?=$plist?$plist:""?>"><br>
+	Language:<select name="lang[]" multiple>
+		<option value=0 selected>C</option>
+		<option value=1 selected>C++</option>
+		<option value=2 selected>Pascal</option>
+		<option value=3 selected>Java</option>	
+	</select>
+	<br>Problems:<input type=text size=60 name=cproblem value="<?=$plist?$plist:""?>">
+	<br>
 	Users:<textarea name="ulist" rows="10" cols="20"></textarea>
 	<br />
 	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。

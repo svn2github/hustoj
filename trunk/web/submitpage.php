@@ -37,6 +37,10 @@ function checksource(src){
 		var msg="";
 		keys[0]="void main";
 		errs[0]="main函数返回值不能为void,否则会编译出错,请使用int main()，并在最后return 0。\n虽然VC等windows下的编译器支持,C/C++标准中不允许使用void main()!!!";
+      if (document.getElementById("language").value=="3"){
+		     keys[0]="int main";
+	        errs[0]="java要求有public static void main函数";
+      }
 		keys[1]="Please";
 		errs[1]="除非题目要求，否则不要使用类似‘Please input’这样的提示";		
 		keys[2]="请";
@@ -76,10 +80,18 @@ Problem <font color=blue><b><?=$PID[$pid]?></b></font> of Contest <font color=bl
 <?}?>
 Language:
 <select name="language">
-	<option value=0>C</option>
-	<option value=1 selected>C++</option>
-	<option value=2>Pascal</option>
-	<option value=3>Java</option>
+<? 
+  $langmask=$_GET['langmask'];
+  $lang=(~((int)$langmask))&15;
+ $C_=($lang&1)>0;
+ $CPP_=($lang&2)>0;
+ $P_=($lang&4)>0;
+ $J_=($lang&8)>0;
+ if($C_) echo"	   <option value=0>C</option>";
+ if($CPP_) echo"		<option value=1 selected>C++</option>";
+ if($P_) echo"		<option value=2>Pascal</option>";
+ if($J_) echo"		<option value=3>Java</option>";
+?>
 </select>
 <br>
 <textarea cols=80 rows=35 id="source" name="source"></textarea><br>

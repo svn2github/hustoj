@@ -13,8 +13,18 @@ if (isset($_POST['syear']))
 	
 	$title=$_POST['title'];
 	$private=$_POST['private'];
+	
+   $lang=$_POST['lang'];
+   $langmask=0;
+   foreach($lang as $t){
+			$langmask+=1<<$t;
+	} 
+	$langmask=15&(~$langmask);
+	//echo $langmask;	
+
 	$cid=$_POST['cid'];
-	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private' WHERE `contest_id`='$cid'";
+	
+	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
 	echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
@@ -57,6 +67,7 @@ if (isset($_POST['syear']))
 	$starttime=$row['start_time'];
 	$endtime=$row['end_time'];
 	$private=$row['private'];
+	$langmask=$row['langmask'];
 	$title=htmlspecialchars($row['title']);
 	mysql_free_result($result);
 	$plist="";
@@ -102,7 +113,25 @@ Public/Private:<select name=private>
 	<option value=0 <?=$private=='0'?'selected=selected':''?>>Public</option>
 	<option value=1 <?=$private=='1'?'selected=selected':''?>>Private</option>
 </select>
-<br>Problems:<input type=text size=100 name=cproblem value='<?=$plist?>'><br>
+<br>Problems:<input type=text size=60 name=cproblem value='<?=$plist?>'>
+<?
+ $lang=(~((int)$langmask))&15;
+ $C_select=($lang&1)>0?"selected":"";
+ $CPP_select=($lang&2)>0?"selected":"";
+ $P_select=($lang&4)>0?"selected":"";
+ $J_select=($lang&8)>0?"selected":"";
+// echo $lang;
+?>
+
+ Language:<select name="lang[]" multiple>
+		<option value=0 <?=$C_select?>>C</option>
+		<option value=1 <?=$CPP_select?>>C++</option>
+		<option value=2 <?=$P_select?>>Pascal</option>
+		<option value=3 <?=$J_select?>>Java</option>	
+	</select>
+	
+
+<br>
 Users:<textarea name="ulist" rows="10" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 

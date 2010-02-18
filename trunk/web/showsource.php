@@ -1,5 +1,19 @@
 <?require_once("oj-header.php")?>
 <title>Source Code</title>
+
+<link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='highlight/scripts/shCore.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushCpp.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushCss.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script> 
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
+SyntaxHighlighter.all();
+</script>
+
 <?
 require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
@@ -16,9 +30,8 @@ $row=mysql_fetch_object($result);
 if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 if ($ok==true){
-	echo "<pre>";
-	
-	echo "/****************************************************************\n";
+	echo "<pre class=\"brush: ".strtolower($language_name[$row->language]).";\">";
+	echo "/**************************************************************\n";
 	echo "\tProblem: $row->problem_id\n\tUser: $row->user_id\n";
 	echo "\tLanguage: ".$language_name[$row->language]."\n\tResult: ".$judge_result[$row->result]."\n";
 	if ($row->result==4){

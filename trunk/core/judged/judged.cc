@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-int DEBUG=0;
+static int DEBUG=0;
 #define bufsize 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
@@ -128,7 +128,7 @@ void run_client(int runid,int clientid){
 int executesql(const char * sql){
 
 	if (mysql_real_query(conn,sql,strlen(sql))){
-		write_log("%s", mysql_error(conn));
+		if(DEBUG)write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 1;
 	}else
@@ -145,7 +145,7 @@ int init_mysql(){
 
 	if(!mysql_real_connect(conn,host_name,user_name,password,
 			db_name,port_number,0,0)){
-		write_log("%s", mysql_error(conn));
+		if(DEBUG)write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 1;
 	}
@@ -166,7 +166,7 @@ int work(){
 
 
 	if (mysql_real_query(conn,query,strlen(query))){
-		write_log("%s", mysql_error(conn));
+		if(DEBUG)write_log("%s", mysql_error(conn));
 		sleep_time=60;
 		return 0;
 	}
@@ -178,7 +178,7 @@ int work(){
 	while ((row=mysql_fetch_row(res))){
 		runid=atoi(row[0]);
 		if (runid%oj_tot!=oj_mod) continue;
-		write_log("Judging solution %d",runid);
+		if(DEBUG)write_log("Judging solution %d",runid);
 		if (workcnt==max_running){		// if no more client can running
 			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
 			for (i=0;i<max_running;i++)	// get the client id
@@ -310,8 +310,7 @@ int main(int argc, char** argv){
             }
 
 		}
-
-//		nanosleep(&final_sleep,NULL);
+		sleep(sleep_time);
 	}
 	return 0;
 }

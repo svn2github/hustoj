@@ -7,7 +7,7 @@ if (isset($_GET['cid'])){
 //	print $cid;
 	require_once("contest-header.php");
 	// check contest valid
-	$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `defunct`='N'";
+	$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `defunct`='N' ";
 	$result=mysql_query($sql);
 	$rows_cnt=mysql_num_rows($result);
 	echo "<center>";
@@ -73,7 +73,7 @@ require_once("oj-header.php");
 ?>
 <title>Contest List</title>
 <?
-$sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `start_time` DESC";
+$sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC";
 $result=mysql_query($sql);
 $color=false;
 echo "<center><table width=90%><caption>Contest List</caption>";

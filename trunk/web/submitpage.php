@@ -32,15 +32,16 @@ function checkIsChinese(str){
 	         return   false;  
 }
 function checksource(src){
+      
 		var keys=new Array();
 		var errs=new Array();
 		var msg="";
 		keys[0]="void main";
 		errs[0]="main函数返回值不能为void,否则会编译出错,请使用int main()，并在最后return 0。\n虽然VC等windows下的编译器支持,C/C++标准中不允许使用void main()!!!";
-      if (document.getElementById("language").value=="3"){
-		     keys[0]="int main";
-	        errs[0]="java要求有public static void main函数";
-      }
+   		if (document.getElementById("language").value=="3"){
+		     	keys[0]="int main";
+	        	errs[0]="java要求有public static void main函数";
+      		}
 		keys[1]="Please";
 		errs[1]="除非题目要求，否则不要使用类似‘Please input’这样的提示";		
 		keys[2]="请";
@@ -51,6 +52,8 @@ function checksource(src){
 		errs[3]="除非题目要求，否则不要使用类似‘Please input’这样的提示";		
 		keys[4]="max=%d";
 		errs[4]="除非题目要求，否则不要使用类似‘max=’这样的提示";		
+		keys[5]="mian";
+		errs[5]="是不是把main打成mian了？";	
 		for(var i=0;i<keys.length;i++){
 			if(src.indexOf(keys[i])!=-1){
 				msg+=errs[i]+"\n";
@@ -79,7 +82,7 @@ Problem <font color=blue><b><?=$PID[$pid]?></b></font> of Contest <font color=bl
 <input type='hidden' value='<?=$pid?>' name="pid">
 <?}?>
 Language:
-<select name="language">
+<select id="language" name="language">
 <? 
   $langmask=$_GET['langmask'];
   $lang=(~((int)$langmask))&15;

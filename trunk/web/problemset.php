@@ -48,7 +48,7 @@ if (!isset($_SESSION['administrator'])){
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or private='1'
 		)
-	)";
+	) or problem_id=1000";
 	$sql=$sql." AND `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 else{

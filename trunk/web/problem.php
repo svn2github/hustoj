@@ -7,10 +7,11 @@ if (isset($_GET['id'])){
 	// practice
 	$id=intval($_GET['id']);
 	require_once("oj-header.php");
-	if (!isset($_SESSION['administrator']))
+	if (!isset($_SESSION['administrator']) && $id!=1000)
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
-						SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or `private`='1'))";
+						SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or `private`='1'))
+                                ";
 	else
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
 
@@ -60,13 +61,14 @@ if (mysql_num_rows($result)!=1){
    if(isset($_GET['id'])){
       $id=$_GET['id'];
 	   mysql_free_result($result);
-	   $sql="SELECT `contest_id` FROM `contest_problem` WHERE `problem_id`=$id ORDER BY `num`";
-	   $result=mysql_query($sql);
+	   $sql="SELECT  contest.`contest_id` , contest.`title`,contest_problem.num FROM `contest_problem`,`contest` WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=$id and defunct='N'  ORDER BY `num`";
+	   //echo $sql;
+           $result=mysql_query($sql);
 	   if($i=mysql_num_rows($result)){
 	      echo "This problem is in Contest(s) below:<br>";
 		   for (;$i>0;$i--){
 				$row=mysql_fetch_row($result);
-				echo "<a href=contest.php?cid=$row[0]>Contest $row[0]</a><br>";
+				echo "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";
 				
 			}
 		}else{
@@ -94,8 +96,8 @@ if (mysql_num_rows($result)!=1){
 	echo "</center>";
 
 	echo "<h2>Description</h2><p>".ubb(nl2br(htmlspecialchars($row->description)))."</p>";
-	echo "<h2>Input</h2><p>".ubb(htmlspecialchars($row->input))."</p>";
-	echo "<h2>Output</h2><p>".ubb(htmlspecialchars($row->output))."</p>";
+	echo "<h2>Input</h2><pre>".ubb(htmlspecialchars($row->input))."</pre>";
+	echo "<h2>Output</h2><pre>".ubb(htmlspecialchars($row->output))."</pre>";
 	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
 	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
 	if ($pr_flag||true) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";

@@ -3,7 +3,7 @@
 ?>
 <hr>
 <center>
-  <font size="+3">HUST Online Judge FAQ</font>
+  <font size="+3">ZJICM Online Judge FAQ</font>
 </center>
 <hr>
 <p><font color=green>Q</font>:What is the compiler the judge is using and what are the compiler options?<br>
@@ -75,6 +75,7 @@ end.
 
 Here is a sample solution for problem 1000 using Java:<br>
 <pre><font color="blue">
+import java.util.*;
 public class Main{
 	public static void main(String args[]){
 		Scanner cin = new Scanner(System.in);
@@ -128,7 +129,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 <br>
 <hr>
 <center>
-  <font color=green size="+2">Any questions/suggestions please post to <a href="http://algorithm.byhh.net/">Algorithm@BYHH</a></font>
+  <font color=green size="+2">Any questions/suggestions please post to <a href="http://zjicmacm.5d6d.com">ZJICM ACM BBS</a></font>
 </center>
 <hr>
 <center>

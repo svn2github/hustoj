@@ -95,9 +95,9 @@ if (mysql_num_rows($result)!=1){
 	echo "<b>Solved: </b>".$row->accepted."<br>"; 
 	echo "</center>";
 
-	echo "<h2>Description</h2><p>".ubb(nl2br(htmlspecialchars($row->description)))."</p>";
-	echo "<h2>Input</h2><pre>".ubb(htmlspecialchars($row->input))."</pre>";
-	echo "<h2>Output</h2><pre>".ubb(htmlspecialchars($row->output))."</pre>";
+	echo "<h2>Description</h2><p>".$row->description."</p>";
+	echo "<h2>Input</h2><p>".$row->input."</p>";
+	echo "<h2>Output</h2><p>".$row->output."</p>";
 	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
 	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
 	if ($pr_flag||true) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";

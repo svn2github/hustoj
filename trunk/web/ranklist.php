@@ -7,7 +7,7 @@ td{font-size:14}
 	require_once("./include/db_info.inc.php");
 	$rank=intval($_GET['start']);
 	if ($rank<0) $rank=0;
-	$sql="SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC LIMIT "
+	$sql="SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,reg_time  LIMIT  "
 	.strval($rank).",25";
 	$result=mysql_query($sql);//mysql_error();
 	echo "<center><table width=90%>";

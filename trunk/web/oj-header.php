@@ -24,12 +24,12 @@ function checkcontest(){
 </head>
 <body>
 <center>
-<h2><font color="red">Welcome To HUST ACM-ICPC Online Judge</font></h2>
+<h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 <table width=96%>
 	<tr align="center" class='hd' valign="top">
 		<th><a href="./faqs.php">F.A.Qs</a></th>
 		<th><a href="./bbs.php">BBS</a></th>
-		<th><a href="./">HOME</a></th>
+		<th><a href="http://acm.zj.cn/wiki/en">HOME</a></th>
 		<th><a href="./problemset.php">PROBLEMS</a></th>
 		<th><a href="./status.php">STATUS</a></th>
 		<th><a href="./ranklist.php">RANKLIST</a></th>

@@ -8,13 +8,16 @@
 <center>
 <?require_once("../include/db_info.inc.php");?>
 <?require_once("admin-header.php");?>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, Huazhong Univ. of Sci. & Tech.</font>
+<?php
+include_once("../fckeditor/fckeditor.php") ;
+?>
+<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, <?=$OJ_NAME?>.</font>
 <td width="100"></td>
 </center>
 <hr>
 <?if(isset($_GET['id'])):?>
-<h1>Edit New problem</h1>
-<form method=POST >
+<h1>Edit problem</h1>
+<form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
 <?
 $sql="SELECT * FROM `problem` WHERE `problem_id`=".$_GET['id'];
@@ -26,9 +29,52 @@ $row=mysql_fetch_object($result);
 <p>Title:<input type=text name=title size=71 value='<?=htmlspecialchars($row->title)?>'></p>
 <p>Time Limit:<input type=text name=time_limit size=20 value='<?=$row->time_limit?>'>S</p>
 <p>Memory Limit:<input type=text name=memory_limit size=20 value='<?=$row->memory_limit?>'>MByte</p>
+
+<!--
 <p>Description:<br><textarea rows=13 name=description cols=120><?=htmlspecialchars($row->description)?></textarea></p>
 <p>Input:<br><textarea rows=13 name=input cols=120><?=htmlspecialchars($row->input)?></textarea></p>
 <p>Output:<br><textarea rows=13 name=output cols=120><?=htmlspecialchars($row->output)?></textarea></p>
+-->
+<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+
+<?php
+$description = new FCKeditor('description') ;
+$description->BasePath = '../fckeditor/' ;
+$description->Height = 600 ;
+$description->Width=600;
+
+$description->Value = $row->description ;
+$description->Create() ;
+?>
+</p>
+
+<p align=left>Input:<br><!--<textarea rows=13 name=input cols=80></textarea>-->
+
+<?php
+$input = new FCKeditor('input') ;
+$input->BasePath = '../fckeditor/' ;
+$input->Height = 600 ;
+$input->Width=600;
+
+$input->Value = $row->input ;
+$input->Create() ;
+?>
+</p>
+
+</p>
+<p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
+
+
+<?php
+$output = new FCKeditor('output') ;
+$output->BasePath = '../fckeditor/' ;
+$output->Height = 600 ;
+$output->Width=600;
+
+$output->Value = $row->output;
+$output->Create() ;
+?>
+
 <p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?=htmlspecialchars($row->sample_input)?></textarea></p>
 <p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?=htmlspecialchars($row->sample_output)?></textarea></p>
 <p>Hint:<br><textarea rows=13 name=hint cols=120><?=htmlspecialchars($row->hint)?></textarea></p>

@@ -10,11 +10,15 @@
 <center>
 <?require_once("../include/db_info.inc.php");?>
 <?require_once("admin-header.php");?>
+<?php
+include_once("../fckeditor/fckeditor.php") ;
+?>
+
 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse"  width="100%" height="50">
 <tr>
 <td width="100"></td>
 <td>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, Huazhong Univ. of Sci. & Tech.</font></td>
+<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC,<?=$OJ_NAME?>.</font></td>
 <td width="100"></td>
 </tr>
 </table>
@@ -28,9 +32,47 @@
 <p align=left>Title:<input type=text name=title size=71></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
-<p align=left>Description:<br><textarea rows=13 name=description cols=80></textarea></p>
-<p align=left>Input:<br><textarea rows=13 name=input cols=80></textarea></p>
-<p align=left>Output:<br><textarea rows=13 name=output cols=80></textarea></p>
+<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+
+<?php
+$description = new FCKeditor('description') ;
+$description->BasePath = '../fckeditor/' ;
+$description->Height = 600 ;
+$description->Width=600;
+
+$description->Value = '<p>Please Input Description Here</p>' ;
+$description->Create() ;
+?>
+</p>
+
+<p align=left>Input:<br><!--<textarea rows=13 name=input cols=80></textarea>-->
+
+<?php
+$input = new FCKeditor('input') ;
+$input->BasePath = '../fckeditor/' ;
+$input->Height = 600 ;
+$input->Width=600;
+
+$input->Value = '<p>Please Input Input Here</p>' ;
+$input->Create() ;
+?>
+</p>
+
+</p>
+<p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
+
+
+<?php
+$output = new FCKeditor('output') ;
+$output->BasePath = '../fckeditor/' ;
+$output->Height = 600 ;
+$output->Width=600;
+
+$output->Value = '<p>Please Input Output Here</p>' ;
+$output->Create() ;
+?>
+
+</p>
 <p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80></textarea></p>
 <p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80></textarea></p>
 <p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>

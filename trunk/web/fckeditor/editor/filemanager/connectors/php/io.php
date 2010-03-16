@@ -275,21 +275,10 @@ function SanitizeFileName( $sNewFileName )
 
 	// Remove \ / | : ? * " < >
 	$sNewFileName = preg_replace( '/\\\\|\\/|\\||\\:|\\?|\\*|"|<|>|[[:cntrl:]]/', '_', $sNewFileName ) ;
-//randome file
-$sExtension = substr( $sNewFileName, ( strrpos($sNewFileName, '.') + 1 ) ) ;
-$sNewFileName = my_setfilename().'.'.$sExtension;
 
 	return $sNewFileName ;
 }
 
-function my_setfilename(){
-$gettime = explode(' ',microtime());
-$string = 'abcdefghijklmnopgrstuvwxyz0123456789';
-$rand = '';
-for ($x=0;$x<12;$x++)
-　$rand .= substr($string,mt_rand(0,strlen($string)-1),1);
-return date("ymdHis").substr($gettime[0],2,6).$rand;
-} 
 
 // This is the function that sends the results of the uploading process.
 function SendUploadResults( $errorNumber, $fileUrl = '', $fileName = '', $customMsg = '' )

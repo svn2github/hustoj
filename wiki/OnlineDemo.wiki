@@ -7,3 +7,9 @@ a demo of current version is online
 
 = Details =
 http://www.newsclan.com/JudgeOnline/
+
+[http://hustoj.googlecode.com/files/hustojaddproblem.jpg]
+
+[http://hustoj.googlecode.com/files/hustojcontestcopy.jpg]
+
+[http://hustoj.googlecode.com/files/hustojcontestlist.jpg]

@@ -41,20 +41,20 @@ echo "Please add more data file in $basedir";
 
 	mkdir($basedir);
 	$fp=fopen($basedir."/sample.in","w");
-	fputs($fp,$sample_input);
+	fputs($fp,ereg_replace("\r\n","\n",$sample_input));
 	fclose($fp);
 	
 	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,$sample_output);
+	fputs($fp,ereg_replace("\r\n","\n",$sample_output));
 	fclose($fp);
 	
 	if(strlen($test_output)>0){
 		$fp=fopen($basedir."/test.in","w");
-		fputs($fp,$test_input);
+		fputs($fp,ereg_replace("\r\n","\n",$test_input));
 		fclose($fp);
 		
 		$fp=fopen($basedir."/test.out","w");
-		fputs($fp,$test_output);
+		fputs($fp,ereg_replace("\r\n","\n",$test_output));
 		fclose($fp);
 	
 	

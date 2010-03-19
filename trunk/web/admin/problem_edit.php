@@ -113,13 +113,13 @@ echo "Sample data file in $basedir Updated!<br>";
 
 	//mkdir($basedir);
 	$fp=fopen($basedir."/sample.in","w");
-	fputs($fp,$sample_input);
+	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_input)));
 	fclose($fp);
 	
 	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,$sample_output);
+	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_output)));
 	fclose($fp);
-	
+		
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
 endif?>
 </body>

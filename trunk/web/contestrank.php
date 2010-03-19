@@ -8,6 +8,7 @@ class TM{
 	var $p_wa_num;
 	var $p_ac_sec;
 	var $user_id;
+        var $nick;
 	function TM(){
 		$this->solved=0;
 		$this->time=0;
@@ -66,7 +67,8 @@ $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
 mysql_free_result($result);
 
-$sql="SELECT `user_id`,`result`,`num`,`in_date` FROM `solution` WHERE `contest_id`='$cid' ORDER BY `user_id`,`in_date`";
+$sql="SELECT users.user_id,users.nick,solution.result,solution.num,solution.in_date FROM solution,users  WHERE users.user_id=solution.user_id and solution.contest_id='$cid' ORDER BY users.user_id,in_date";
+//echo $sql;
 $result=mysql_query($sql);
 $user_cnt=0;
 $user_name='';
@@ -77,6 +79,8 @@ while ($row=mysql_fetch_object($result)){
 		$user_cnt++;
 		$U[$user_cnt]=new TM();
 		$U[$user_cnt]->user_id=$row->user_id;
+                $U[$user_cnt]->nick=$row->nick;
+
 		$user_name=$n_user;
 	}
 	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));
@@ -86,7 +90,7 @@ $rank=1;
 echo "<style> td{font-size:14} </style>";
 echo "<title>Contest RankList -- $title</title>";
 echo "<center><h3>Contest RankList -- $title</h3></center>";
-echo "<table><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=5%>Solved<td width=5%>Penalty";
+echo "<table><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty";
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
 echo "</tr>";
@@ -96,8 +100,10 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td>$rank";
 	$rank++;
 	$uuid=$U[$i]->user_id;
+        
 	$usolved=$U[$i]->solved;
 	echo "<td><a href=userinfo.php?user=$uuid>$uuid</a>";
+	echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";
 	echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
 	echo "<td>".sec2str($U[$i]->time);
 	for ($j=0;$j<$pid_cnt;$j++){

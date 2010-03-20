@@ -110,8 +110,8 @@ void run_client(int runid,int clientid){
 		LIM.rlim_cur=5;
 		setrlimit(RLIMIT_CPU,&LIM);
 
-		LIM.rlim_max=8*STD_MB;
-		LIM.rlim_cur=8*STD_MB;
+		LIM.rlim_max=80*STD_MB;
+		LIM.rlim_cur=80*STD_MB;
 		setrlimit(RLIMIT_FSIZE,&LIM);
 
 		LIM.rlim_max=512*STD_MB;

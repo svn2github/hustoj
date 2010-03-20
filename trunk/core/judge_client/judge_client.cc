@@ -43,7 +43,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
-#define DEBUG 0
+static int DEBUG=0;
 static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
@@ -125,6 +125,19 @@ int isInFile(const char fname[]){
 	else return l-3;
 }
 
+
+int compare(const char *file1,const char *file2){
+	char diff[1024];
+	sprintf(diff,"diff -q -B -b -w %s %s",file1,file2);
+	int d=system(diff);
+	if (d) return OJ_WA;
+	sprintf(diff,"diff -q -B -b %s %s",file1,file2);
+	int p=system(diff);
+	if (p) return OJ_PE;
+	else return OJ_AC;
+	
+}
+/****	
 void delnextline(char s[]){
 	int L;
 	L=strlen(s);
@@ -165,7 +178,7 @@ int compare(const char *file1,const char *file2){
 		else return OJ_AC;
 	}
 }
-
+*/
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"
@@ -233,7 +246,7 @@ int compile(int lang){
 	int pid;
 
      const char * CP_C[]={"gcc","Main.c","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
-	 const char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-DONLINE_JUDGE","-I/usr/include/c++/4.3",NULL};
+	 const char * CP_X[]={"g++","Main.cc","-o","Main","-ansi","-fno-asm","-O2","-Wall","-lm","--static","-DONLINE_JUDGE",NULL};//"-I/usr/include/c++/4.3",
      const char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
 	 const char * CP_J[]={"javac","Main.java",NULL};
 	pid=fork();
@@ -271,15 +284,11 @@ int compile(int lang){
 }
 
 int main(int argc, char** argv) {
-	if (argc!=3){
+	if (argc<3){
 		fprintf(stderr,"Usage:%s runid runmachine.\n",argv[0]);
-		if(!DEBUG){		
-			argc=3;
-			const char * args[]={"judge_client","23063","0"};
-			argv=(char **)args;
-		}else
-			exit(1);
+		exit(1);
 	}
+	if(argc==4) DEBUG=1;
 	// init our work
 	init_mysql_conf();
 	conn=mysql_init(NULL);

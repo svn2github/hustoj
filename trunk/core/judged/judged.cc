@@ -31,7 +31,7 @@ static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
 //static FILE *fp_log;
-static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC LIMIT 0,30";
+static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC ";
 
 void write_log(const char *fmt, ...)
 {
@@ -120,7 +120,10 @@ void run_client(int runid,int clientid){
 
 	buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);
-	execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
+	if (!DEBUG)
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
+	else
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,"debug",NULL);
 
 
 	//exit(0);

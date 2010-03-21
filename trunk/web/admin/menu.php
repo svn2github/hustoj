@@ -4,7 +4,7 @@
 <hr>
 <ol>
 <li>
-	<a href="../index.php" target="main"><b>SeeOJ</b></a>
+	<a href="../status.php" target="main"><b>SeeOJ</b></a>
 <li>
 	<a href="problem_add_page.php" target="main"><b>Add A New Problem</b></a>
 <li>
@@ -23,5 +23,7 @@
 	<a href="privilege_add.php" target="main"><b>User Privilege</b></a>
 <li>
 	<a href="privilege_list.php" target="main"><b>Privilege List</b></a>
+<li>
+	<a href="source_give.php" target="main"><b>Give Source</b></a>
 </ol>
 

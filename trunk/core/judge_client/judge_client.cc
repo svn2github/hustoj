@@ -125,7 +125,7 @@ int isInFile(const char fname[]){
 	else return l-3;
 }
 
-
+/****	
 int compare(const char *file1,const char *file2){
 	char diff[1024];
 	sprintf(diff,"diff -q -B -b -w %s %s",file1,file2);
@@ -137,7 +137,7 @@ int compare(const char *file1,const char *file2){
 	else return OJ_AC;
 	
 }
-/****	
+*/
 void delnextline(char s[]){
 	int L;
 	L=strlen(s);
@@ -178,7 +178,7 @@ int compare(const char *file1,const char *file2){
 		else return OJ_AC;
 	}
 }
-*/
+
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"

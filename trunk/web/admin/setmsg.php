@@ -17,7 +17,7 @@ while (!feof($fp)){
 ?>
 	<b>Set Message</b>
 	<form action='setmsg.php' method='post'>
-		<textarea name='msg' rows=3 cols=60><?=$msg?></textarea><br>
+		<textarea name='msg' rows=25 cols=60><?=$msg?></textarea><br>
 		<input type='hidden' name='do' value='do'>
 		<input type='submit' value='change'>
 	</form>

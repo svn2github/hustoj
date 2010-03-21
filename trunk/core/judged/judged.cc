@@ -211,7 +211,7 @@ int work(){
 	}
 	mysql_free_result(res);				// free the memory
 	executesql("commit");
-    if(DEBUG)write_log("<<%ddone!>>",workcnt);
+    if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
 	return retcnt;
 }
 

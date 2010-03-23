@@ -46,10 +46,10 @@ if (!isset($_SESSION['administrator'])){
 	$sql="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` ".
 	"WHERE `defunct`='N' AND `problem_id` NOT IN(
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-			SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or private='1'
+			SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or private=1
 		)
-	) or problem_id=1000";
-	$sql=$sql." AND `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
+	)";
+	$sql=$sql." AND `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."'  or problem_id=1000 ";
 }
 else{
 	$sql="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` ";

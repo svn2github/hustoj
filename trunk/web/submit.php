@@ -58,9 +58,10 @@ else if (isset($_POST['pid']) && isset($_POST['cid'])){
 	exit(0);
 }
 $source=$_POST['source'];
-if(strlen($_POST['testquote'])==2)
+if(get_magic_quotes_gpc())
 	$source=stripslashes($source);
-$source=trim($source);
+$source=mysql_real_escape_string($source);
+//$source=trim($source);
 $len=strlen($source);
 //echo $source;
 
@@ -68,7 +69,7 @@ $language=intval($_POST['language']);
 if ($language>3 || $language<0) $language=0;
 $language=strval($language);
 $ip=$_SERVER['REMOTE_ADDR'];
-$source=mysql_escape_string($source);
+
 if ($len<20){
 	require_once("oj-header.php");
 	echo "Source Code Too Short!";

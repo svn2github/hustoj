@@ -9,5 +9,5 @@ This OJ is used on these site:
 
 
   * http://acm.ajou.ac.kr/JudgeOnline/
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * 
+  * 

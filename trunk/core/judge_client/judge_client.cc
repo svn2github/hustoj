@@ -128,10 +128,10 @@ int isInFile(const char fname[]){
 /****	
 int compare(const char *file1,const char *file2){
 	char diff[1024];
-	sprintf(diff,"diff -q -B -b -w %s %s",file1,file2);
+	sprintf(diff,"diff -q -B -b -w --strip-trailing-cr %s %s",file1,file2);
 	int d=system(diff);
 	if (d) return OJ_WA;
-	sprintf(diff,"diff -q -B -b %s %s",file1,file2);
+	sprintf(diff,"diff -q --strip-trailing-cr %s %s",file1,file2);
 	int p=system(diff);
 	if (p) return OJ_PE;
 	else return OJ_AC;
@@ -153,9 +153,11 @@ int compare(const char *file1,const char *file2){
 	f1=fopen(file1,"r");
 	for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
 		while (*p1) p1++;
+	fclose(f1);
 	f2=fopen(file2,"r");
 	for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
 		while (*p2) p2++;
+	fclose(f2);
 	if (strcmp(s1,s2)!=0){
 //		printf("A:%s\nB:%s\n",s1,s2);
 		delete[] s1;

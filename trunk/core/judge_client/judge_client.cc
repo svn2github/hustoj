@@ -131,7 +131,7 @@ int compare(const char *file1,const char *file2){
 	sprintf(diff,"diff -q -B -b -w --strip-trailing-cr %s %s",file1,file2);
 	int d=system(diff);
 	if (d) return OJ_WA;
-	sprintf(diff,"diff -q --strip-trailing-cr %s %s",file1,file2);
+	sprintf(diff,"diff -q -B --strip-trailing-cr %s %s",file1,file2);
 	int p=system(diff);
 	if (p) return OJ_PE;
 	else return OJ_AC;
@@ -176,6 +176,7 @@ int compare(const char *file1,const char *file2){
 		}
 		delete [] s1;
 		delete [] s2;
+		fclose(f1);fclose(f2);
 		if (PEflg) return OJ_PE;
 		else return OJ_AC;
 	}

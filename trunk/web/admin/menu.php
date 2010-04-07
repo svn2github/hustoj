@@ -25,5 +25,7 @@
 	<a href="privilege_list.php" target="main"><b>Privilege List</b></a>
 <li>
 	<a href="source_give.php" target="main"><b>Give Source</b></a>
+<li>
+	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
 </ol>
 

@@ -89,6 +89,9 @@ if ($_POST ['do'] == 'do') {
 <source>
 <![CDATA[<?=$row->source?>]]>
 </source>
+<solution>
+<![CDATA[<?=$row->spj?>]]>
+</solution>
 <spj>
 <![CDATA[<?=$row->spj?>]]>
 </spj>

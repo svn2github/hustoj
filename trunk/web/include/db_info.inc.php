@@ -6,7 +6,7 @@
 	// connect db
 	$OJ_NAME="Huazhong Univ. of Sci. & Tech";
 	$OJ_HOME="/";
-	$OJ_ADMIN="root@localhost"
+	$OJ_ADMIN="root@localhost";
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());
 	// use db

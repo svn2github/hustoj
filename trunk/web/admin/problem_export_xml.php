@@ -93,8 +93,6 @@ if ($_POST ['do'] == 'do') {
 <![CDATA[<?=$row->spj?>]]>
 </spj>
 </item>
-
-
 <?
 	}
 	mysql_free_result ( $result );

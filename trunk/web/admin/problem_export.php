@@ -5,5 +5,6 @@
 	start pid:<input type=text size=10 name="start" value=1000><br />
 	end pid:<input type=text size=10 name="end" value=1000><br />
 	<input type='hidden' name='do' value='do'>
-	<input type=submit value='Export'>
+	<input type=submit name=submit value='Export'>
+   <input type=submit value='Download'>
 </form>

@@ -13,7 +13,12 @@ if($_POST['do']=='do'){
 	$sql="select * from problem where problem_id>=$start and problem_id<=$end";
 	//echo $sql;
 	$result=mysql_query($sql) or die(mysql_error());
-   header('Content-Type:   text/xml'); 
+   if ($_POST['submit']=="Export")
+   	header('Content-Type:   text/xml');
+   else{
+   	header("content-type:   application/file");    
+      header("content-disposition:   attachment;   filename=fps$start-$end.xml");  
+   }
    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 ?>
 

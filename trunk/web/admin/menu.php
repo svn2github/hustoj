@@ -27,5 +27,7 @@
 	<a href="source_give.php" target="main"><b>Give Source</b></a>
 <li>
 	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
+<li>
+	<a href="problem_import.php" target="main"><b>Import Problem(on the way)</b></a>
 </ol>
 

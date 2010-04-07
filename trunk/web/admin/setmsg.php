@@ -7,12 +7,8 @@ if($_POST['do']=='do'){
 	echo "Update At ".date('Y-m-d h:i:s');
 }
 
-$fp=fopen("msg.txt","r");
-$msg="";
-while (!feof($fp)){
-	$strtmp=fgets($fp);
-	$msg=$msg.$strtmp;
-}
+
+$msg=file_get_contents("msg.txt");
 
 ?>
 	<b>Set Message</b>

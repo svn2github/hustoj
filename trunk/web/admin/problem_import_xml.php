@@ -4,17 +4,61 @@ require_once ("admin-header.php");
 <?
 
 require_once ("../include/problem.php");
+
+function submitSolution($pid,$solution,$language)
+{
+	require ("../include/const.inc.php");
+//	require ("../include/db_info.inc.php");
+//	echo  $DB_PASS;
+//	$con = mysql_connect ( $DB_HOST, $DB_USER, $DB_PASS );
+//	if (! $con) {
+//		die ( 'Could not connect: ' . mysql_error ($con) );
+//	}
+//	mysql_db_query ( $DB_NAME, "set names utf8", $con );
+//	mysql_set_charset ( "utf8", $con );
+//	mysql_select_db ( $DB_NAME, $con );
+	for($i=0;$i<count($language_name);$i++){
+		echo "$language=$language_name[$i]=".($language==$language_name[$i]);
+		if($language==$language_name[$i]){
+			$language=$i;
+			echo $language;
+			break;
+		}
+		
+	}
+//	
+	$len=mb_strlen($solution,'utf-8');
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
+	VALUES('$pid','".$_SESSION['user_id']."',NOW(),'$language','127.0.0.1','$len')";
+	
+	mysql_query ( $sql );
+	$insert_id = mysql_insert_id ();
+	$solution=mysql_real_escape_string($solution);
+	echo "submiting$language.....";
+	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
+	mysql_query ( $sql );
+//    mysql_close($con);
+}
 ?>
 Import Function is On the way.
 
 <?php
-function getValue($Node,$TagName){
+function getValue($Node, $TagName) {
 	
-	$children=$Node->getElementsByTagName($TagName);
-	if ($children->length>0)
-		$ret= $children->item ( 0 )->nodeValue;
+	$children = $Node->getElementsByTagName ( $TagName );
+	if ($children->length > 0)
+		$ret = $children->item ( 0 )->nodeValue;
 	else
-	    $ret=""; 
+		$ret = "";
+	return $ret;
+}
+function getAttribute($Node, $TagName,$attribute) {
+	
+	$children = $Node->getElementsByTagName ( $TagName );
+	if ($children->length > 0)
+		$ret = $children->item ( 0 )->getAttribute($attribute);
+	else
+		$ret = "";
 	return $ret;
 }
 
@@ -27,44 +71,47 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
 	echo "Stored in: " . $tempfile;
 	
-	$xmlDoc = new DOMDocument ( );
+	$xmlDoc = new DOMDocument ();
 	$xmlDoc->load ( $tempfile );
 	
 	$searchNodes = $xmlDoc->getElementsByTagName ( "item" );
 	
 	foreach ( $searchNodes as $searchNode ) {
-		$title = getValue($searchNode,'title');
-		$time_limit = getValue($searchNode,'time_limit');
-		$memory_limit = getValue($searchNode,'memory_limit');
-		$description = getValue($searchNode,'description');
-		$input = getValue($searchNode,'input');
-		$output = getValue($searchNode,'output');
-		$sample_input = getValue($searchNode,'sample_input');
-		$sample_output = getValue($searchNode,'sample_output');
-		$test_input = getValue($searchNode,'test_input');
-		$test_output = getValue($searchNode,'test_output');
-		$hint = getValue($searchNode,'hint');
-		$source = getValue($searchNode,'source');
-		$solution = getValue($searchNode,'$solution');
+		$title = getValue ( $searchNode, 'title' );
+		$time_limit = getValue ( $searchNode, 'time_limit' );
+		$memory_limit = getValue ( $searchNode, 'memory_limit' );
+		$description = getValue ( $searchNode, 'description' );
+		$input = getValue ( $searchNode, 'input' );
+		$output = getValue ( $searchNode, 'output' );
+		$sample_input = getValue ( $searchNode, 'sample_input' );
+		$sample_output = getValue ( $searchNode, 'sample_output' );
+		$test_input = getValue ( $searchNode, 'test_input' );
+		$test_output = getValue ( $searchNode, 'test_output' );
+		$hint = getValue ( $searchNode, 'hint' );
+		$source = getValue ( $searchNode, 'source' );
+		$solution = getValue ( $searchNode, 'solution' );
+		$language =getAttribute( $searchNode, 'solution','language' );
 		$spj = 0;
-//		
-//      $valueID = $searchNode->getAttribute ( 'ID' );
+		//		
+		//      $valueID = $searchNode->getAttribute ( 'ID' );
 		
-//		
-//		echo "->$title<br>\n";
-//		echo "->$time_limit<br>\n";
-//		echo "->$memory_limit<br>\n";
-//		echo "->$description<br>\n";
-//		echo "->$input<br>\n";
-//		echo "->$output<br>\n";
-//		echo "->$sample_input<br>\n";
-//		echo "->$sample_output<br>\n";
-//		echo "->$test_input<br>\n";
-//		echo "->$test_output<br>\n";
-//		echo "->$spj<br>\n";
-		addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj ,$OJ_DATA);
-		
-		
+
+		//		
+		//		echo "->$title<br>\n";
+		//		echo "->$time_limit<br>\n";
+		//		echo "->$memory_limit<br>\n";
+		//		echo "->$description<br>\n";
+		//		echo "->$input<br>\n";
+		//		echo "->$output<br>\n";
+		//		echo "->$sample_input<br>\n";
+		//		echo "->$sample_output<br>\n";
+		//		echo "->$test_input<br>\n";
+		//		echo "->$test_output<br>\n";
+		//		echo "->$spj<br>\n";
+				echo "->$solution<-<br>\n";
+				echo "->$language<-<br>\n";
+		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj, $OJ_DATA );
+	    if($solution) submitSolution($pid,$solution,$language);
 	}
 	unlink ( $tempfile );
 }

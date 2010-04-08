@@ -9,7 +9,7 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	
 	@mysql_query ( $sql ) or die ( mysql_error () );
 	$pid = mysql_insert_id ();
-	echo "Add $pid <br>";
+	echo "<br>Add $pid  ";
 	if (intval ( $_POST ['contest_id'] ) > 999) {
 		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=" . strval ( intval ( $_POST ['contest_id'] ) );
 		$result = @mysql_query ( $sql ) or die ( mysql_error () );
@@ -43,5 +43,6 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 		fclose ( $fp );
 	
 	}
+	return $pid;
 }
 ?>

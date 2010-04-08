@@ -31,6 +31,7 @@ if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 if ($ok==true){
 	echo "<pre class=\"brush: ".strtolower($language_name[$row->language]).";\">";
+	ob_start();
 	echo "/**************************************************************\n";
 	echo "\tProblem: $row->problem_id\n\tUser: $row->user_id\n";
 	echo "\tLanguage: ".$language_name[$row->language]."\n\tResult: ".$judge_result[$row->result]."\n";
@@ -39,12 +40,13 @@ if ($ok==true){
 		echo "\tMemory:".$row->memory." kb\n";
 	}
 	echo "****************************************************************/\n\n";
-	
+	$auth=ob_get_contents();
+	ob_end_clean();
 	mysql_free_result($result);
 	$sql="SELECT `source` FROM `source_code` WHERE `solution_id`='".$id."'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_object($result);
-	echo htmlspecialchars(str_replace("\n\r","\n",$row->source))."</pre>";
+	echo htmlspecialchars(str_replace("\n\r","\n",$row->source))."\n".$auth."</pre>";
 	mysql_free_result($result);
 }else{
 	mysql_free_result($result);

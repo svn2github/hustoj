@@ -92,7 +92,7 @@ if ($_POST ['do'] == 'do') {
 <time_limit><![CDATA[<?=$row->time_limit?>]]></time_limit>
 <memory_limit><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
 <description><![CDATA[<?=$row->description?>]]></description>
-<input><![CDATA[<?=$row->input?>]]></input>
+<input><![CDATA[<?=$row->input?>]]></input> 
 <output><![CDATA[<?=$row->output?>]]></output>
 <sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
@@ -103,7 +103,14 @@ if ($_POST ['do'] == 'do') {
 <solution language="<?$solution=getSolution($row->problem_id)?>"><![CDATA[<?=$solution?>]]></solution>
 <spj><![CDATA[<?
  if($row->spj!=0){
- 	echo file_get_contents ( "$OJ_DATA/$pid/spj.cc" );
+ 	$filec="$OJ_DATA/".$row->problem_id."/spj.c";
+ 	$filecc="$OJ_DATA/".$row->problem_id."/spj.cc";
+ 	
+ 	if(file_exists( $filec ))
+ 		echo file_get_contents ($filec );
+ 	elseif(file_exists( $filecc ))
+ 		echo file_get_contents ($filec );
+ 	
  }
 ?>]]></spj>
 </item>

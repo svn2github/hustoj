@@ -84,7 +84,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$solution = getValue ( $searchNode, 'solution' );
 		$language =getAttribute( $searchNode, 'solution','language' );
 		$spjcode = getValue ( $searchNode, 'spj' );
-		$spj = $spjcode?0:1;
+		$spj = $spjcode?1:0;
 		//		
 		//      $valueID = $searchNode->getAttribute ( 'ID' );
 		
@@ -110,7 +110,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	    	$fp=fopen("$basedir/spj.cc","w");
 			fputs($fp, $spjcode);
 			fclose($fp);
-	    	echo "you need to complie $basedir/spj.cc for spj[g++ -o spj spj.cc]";
+	    	echo "you need to complie $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
 	    }
 	}
 	unlink ( $tempfile );

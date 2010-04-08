@@ -4,8 +4,8 @@
 	$DB_USER="root";
 	$DB_PASS="";
 	// connect db
-	$OJ_NAME="Huazhong Univ. of Sci. & Tech";
-	$OJ_HOME="/";
+	$OJ_NAME="HUST-OJ";
+	$OJ_HOME="http://code.google.com/p/hustoj/";
 	$OJ_ADMIN="root@localhost";
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());

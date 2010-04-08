@@ -1,8 +1,8 @@
 <?
-	$DB_HOST="localhost";
+	$DB_HOST="127.1";
 	$DB_NAME="jol";
 	$DB_USER="root";
-	$DB_PASS="";
+	$DB_PASS="root";
 	// connect db 
 	$OJ_NAME="FPS-OJ";
 	$OJ_HOME="http://code.google.com/p/freeproblemset/";

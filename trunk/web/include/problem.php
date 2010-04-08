@@ -16,7 +16,7 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 		$row = mysql_fetch_row ( $result );
 		$cid = $_POST ['contest_id'];
 		$num = $row [0];
-		echo "Num=" . $num . "<br>";
+		echo "Num=" . $num . ":";
 		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES('$pid','$cid','$num')";
 		mysql_free_result ( $result );
 		mysql_query ( $sql );

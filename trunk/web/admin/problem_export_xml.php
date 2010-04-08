@@ -80,9 +80,10 @@ if ($_POST ['do'] == 'do') {
 	}
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	?>
-
-<fps version="1.0">
-<?
+ 
+<fps version="1.0" url="http://code.google.com/p/freeproblemset/">
+	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
+	<?
 	while ( $row = mysql_fetch_object ( $result ) ) {
 		$testfile = getTestFileName ( $row->problem_id ,$OJ_DATA);
 		?>

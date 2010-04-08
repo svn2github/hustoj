@@ -28,6 +28,6 @@
 <li>
 	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
 <li>
-	<a href="problem_import.php" target="main"><b>Import Problem(on the way)</b></a>
+	<a href="problem_import.php" target="main"><b>Import Problem(nosoj)</b></a>
 </ol>
 

@@ -108,7 +108,7 @@ $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_l
 
 @mysql_query($sql) or die(mysql_error());
 echo "Edit OK!";
-$basedir="/home/judge/data/$id";
+$basedir=$OJ_DATA."$id";
 echo "Sample data file in $basedir Updated!<br>";
 
 	//mkdir($basedir);

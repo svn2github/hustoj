@@ -1,7 +1,7 @@
 <?
 function getTestFileName($pid) {
 	$ret = "";
-	$pdir = opendir ( "/home/judge/data/$pid/" );
+	$pdir = opendir ( "$OJ_DATA/$pid/" );
 	while ( $file = readdir ( $pdir ) ) {
 		$pinfo = pathinfo ( $file );
 		if ($pinfo ['extension'] == "in" && $pinfo ['basename'] != "sample.in") {
@@ -15,13 +15,13 @@ function getTestFileName($pid) {
 
 function getTestFileIn($pid, $testfile) {
 	if ($testfile != "")
-		return file_get_contents ( "/home/judge/data/$pid/" . $testfile . ".in" );
+		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".in" );
 	else
 		return "";
 }
 function getTestFileOut($pid, $testfile) {
 	if ($testfile != "")
-		return file_get_contents ( "/home/judge/data/$pid/" . $testfile . ".out" );
+		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".out" );
 	else
 		return "";
 }
@@ -56,45 +56,23 @@ if ($_POST ['do'] == 'do') {
 		?>
 <item>
 <title><![CDATA[<?=$row->title?>]]></title>
-<time_limit>
-<![CDATA[<?=$row->time_limit?>]]>
-</time_limit>
-<memory_limit>
-<![CDATA[<?=$row->memory_limit?>]]>
-</memory_limit>
-<description>
-<![CDATA[<?=$row->description?>]]>
-</description>
-<input>
-<![CDATA[<?=$row->input?>]]>
-</input>
-<output>
-<![CDATA[<?=$row->output?>]]>
-</output>
-<sample_input>
-<![CDATA[<?=$row->sample_input?>]]>
-</sample_input>
-<sample_output>
-<![CDATA[<?=$row->sample_output?>]]>
-</sample_output>
-<test_input>
-<![CDATA[<?=getTestFileIn ( $row->problem_id, $testfile )?>]]>
-</test_input>
-<test_output>
-<![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile )?>]]>
-</test_output>
-<hint>
-<![CDATA[<?=$row->hint?>]]>
-</hint>
-<source>
-<![CDATA[<?=$row->source?>]]>
-</source>
-<solution>
-<![CDATA[<?=$row->solution?>]]>
-</solution>
-<spj>
-<![CDATA[<?=$row->spj?>]]>
-</spj>
+<time_limit><![CDATA[<?=$row->time_limit?>]]></time_limit>
+<memory_limit><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
+<description><![CDATA[<?=$row->description?>]]></description>
+<input><![CDATA[<?=$row->input?>]]></input>
+<output><![CDATA[<?=$row->output?>]]></output>
+<sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
+<sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
+<test_input><![CDATA[<?=getTestFileIn ( $row->problem_id, $testfile )?>]]></test_input>
+<test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile )?>]]></test_output>
+<hint><![CDATA[<?=$row->hint?>]]></hint>
+<source><![CDATA[<?=$row->source?>]]></source>
+<solution><![CDATA[<?=$row->solution?>]]></solution>
+<spj><![CDATA[<?
+ if($row->spj!=0){
+ 	echo file_get_contents ( "$OJ_DATA/$pid/spj.cc" );
+ }
+?>]]></spj>
 </item>
 <?
 	}

@@ -83,7 +83,8 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$source = getValue ( $searchNode, 'source' );
 		$solution = getValue ( $searchNode, 'solution' );
 		$language =getAttribute( $searchNode, 'solution','language' );
-		$spj = 0;
+		$spjcode = getValue ( $searchNode, 'spj' );
+		$spj = $spjcode?0:1;
 		//		
 		//      $valueID = $searchNode->getAttribute ( 'ID' );
 		
@@ -100,10 +101,17 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		//		echo "->$test_input<br>\n";
 		//		echo "->$test_output<br>\n";
 		//		echo "->$spj<br>\n";
-				echo "->$solution<-<br>\n";
-				echo "->$language<-<br>\n";
+//				echo "->$solution<-<br>\n";
+//				echo "->$language<-<br>\n";
 		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj, $OJ_DATA );
 	    if($solution) submitSolution($pid,$solution,$language);
+	    if($spj) {
+	    	$basedir = "$OJ_DATA/$pid";
+	    	$fp=fopen("$basedir/spj.cc","w");
+			fputs($fp, $spjcode);
+			fclose($fp);
+	    	echo "you need to complie $basedir/spj.cc for spj[g++ -o spj spj.cc]";
+	    }
 	}
 	unlink ( $tempfile );
 }

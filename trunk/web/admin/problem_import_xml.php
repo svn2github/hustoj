@@ -104,14 +104,16 @@ if ($_FILES ["fps"] ["error"] > 0) {
 //				echo "->$solution<-<br>\n";
 //				echo "->$language<-<br>\n";
 		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj, $OJ_DATA );
-	    if($solution) submitSolution($pid,$solution,$language);
 	    if($spj) {
 	    	$basedir = "$OJ_DATA/$pid";
 	    	$fp=fopen("$basedir/spj.cc","w");
 			fputs($fp, $spjcode);
 			fclose($fp);
-	    	echo "you need to complie $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
+			if(system( " g++ -o $basedir/spj $basedir/spj.cc  "))
+	    		echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
 	    }
+	    if($solution) submitSolution($pid,$solution,$language);
+	    
 	}
 	unlink ( $tempfile );
 }

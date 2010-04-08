@@ -45,7 +45,7 @@ if ($_POST ['do'] == 'do') {
 		header ( 'Content-Type:   text/xml' );
 	else {
 		header ( "content-type:   application/file" );
-		header ( "content-disposition:   attachment;   filename=fps$start-$end.xml" );
+		header ( "content-disposition:   attachment;   filename=fps-".$_SESSION['user_id']."-$start-$end.xml" );
 	}
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	?>

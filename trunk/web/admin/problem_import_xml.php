@@ -50,18 +50,18 @@ if ($_FILES ["fps"] ["error"] > 0) {
 //		
 //      $valueID = $searchNode->getAttribute ( 'ID' );
 		
-		
-		echo "->$title<br>\n";
-		echo "->$time_limit<br>\n";
-		echo "->$memory_limit<br>\n";
-		echo "->$description<br>\n";
-		echo "->$input<br>\n";
-		echo "->$output<br>\n";
-		echo "->$sample_input<br>\n";
-		echo "->$sample_output<br>\n";
-		echo "->$test_input<br>\n";
-		echo "->$test_output<br>\n";
-		echo "->$spj<br>\n";
+//		
+//		echo "->$title<br>\n";
+//		echo "->$time_limit<br>\n";
+//		echo "->$memory_limit<br>\n";
+//		echo "->$description<br>\n";
+//		echo "->$input<br>\n";
+//		echo "->$output<br>\n";
+//		echo "->$sample_input<br>\n";
+//		echo "->$sample_output<br>\n";
+//		echo "->$test_input<br>\n";
+//		echo "->$test_output<br>\n";
+//		echo "->$spj<br>\n";
 		addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj ,$OJ_DATA);
 		
 		

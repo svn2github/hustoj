@@ -1,0 +1,1 @@
+修改OJ基本信息请看include/db_info.inc.php

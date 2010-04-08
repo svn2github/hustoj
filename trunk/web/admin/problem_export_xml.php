@@ -38,7 +38,7 @@ function getSolution($pid){
 	mysql_db_query($DB_NAME,"set names utf8",$con);
 	mysql_set_charset("utf8",$con);
 	mysql_select_db($DB_NAME,$con);
-	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4";
+	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 order by language";
 //	echo $sql;
 	$result = mysql_db_query($DB_NAME, $sql,$con ) ;
 	if($result&&$row = mysql_fetch_row ( $result) ){

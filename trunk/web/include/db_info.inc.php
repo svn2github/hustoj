@@ -1,13 +1,13 @@
 <?
 	$DB_HOST="localhost";
-	$DB_NAME="180_testjol";
-	$DB_USER="180_root";
-	$DB_PASS="root";
+	$DB_NAME="jol";
+	$DB_USER="root";
+	$DB_PASS="";
 	// connect db 
 	$OJ_NAME="FPS-OJ";
 	$OJ_HOME="http://code.google.com/p/freeproblemset/";
 	$OJ_ADMIN="root@localhost";
-	$OJ_DATA="/home/zhblue/testoj/";
+	$OJ_DATA="/home/judge/data/";
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());
 	// use db

@@ -28,7 +28,7 @@ function getTestFileOut($pid, $testfile,$OJ_DATA) {
 }
 function getSolution($pid){
 	$ret="";
-	require_once("./include/const.inc.php");
+	require_once("../include/const.inc.php");
 	$sql = "select solution_id,language from solution where problem_id=$pid and result=4";
 	$result = mysql_query ( $sql ) or die ( mysql_error () );
 	if($row = mysql_fetch_object ( $result) ){

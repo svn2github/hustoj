@@ -26,6 +26,23 @@ function getTestFileOut($pid, $testfile,$OJ_DATA) {
 	else
 		return "";
 }
+function getSolution($pid){
+	$ret="";
+	require_once("./include/const.inc.php");
+	$sql = "select solution_id,language from solution where problem_id=$pid and result=4";
+	$result = mysql_query ( $sql ) or die ( mysql_error () );
+	if($row = mysql_fetch_object ( $result) ){
+		$solution_id=$row->solutin_id;
+		$language=$language_name[$row->language];
+		$sql = "select source from source_code where solution_id=$solution_id";
+		$result = mysql_query ( $sql ) or die ( mysql_error () );
+		if($row = mysql_fetch_object ( $result) ){
+			$ret=$row->source;
+			
+		}
+	}
+	return $ret;
+}
 session_start ();
 if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -68,7 +85,7 @@ if ($_POST ['do'] == 'do') {
 <test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile,$OJ_DATA )?>]]></test_output>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=$row->source?>]]></source>
-<solution><![CDATA[<?=$row->solution?>]]></solution>
+<solution><![CDATA[<?=getSolution($row->solution)?>]]></solution>
 <spj><![CDATA[<?
  if($row->spj!=0){
  	echo file_get_contents ( "$OJ_DATA/$pid/spj.cc" );

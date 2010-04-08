@@ -99,9 +99,7 @@ if ($_POST ['do'] == 'do') {
 <test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile,$OJ_DATA )?>]]></test_output>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=$row->source?>]]></source>
-<solution language="<?$solution=getSolution($row->problem_id)?>"><![CDATA[
-<?=$solution?>
-]]></solution>
+<solution language="<?$solution=getSolution($row->problem_id)?>"><![CDATA[<?=$solution?>]]></solution>
 <spj><![CDATA[<?
  if($row->spj!=0){
  	echo file_get_contents ( "$OJ_DATA/$pid/spj.cc" );

@@ -8,15 +8,7 @@ require_once ("../include/problem.php");
 function submitSolution($pid,$solution,$language)
 {
 	require ("../include/const.inc.php");
-//	require ("../include/db_info.inc.php");
-//	echo  $DB_PASS;
-//	$con = mysql_connect ( $DB_HOST, $DB_USER, $DB_PASS );
-//	if (! $con) {
-//		die ( 'Could not connect: ' . mysql_error ($con) );
-//	}
-//	mysql_db_query ( $DB_NAME, "set names utf8", $con );
-//	mysql_set_charset ( "utf8", $con );
-//	mysql_select_db ( $DB_NAME, $con );
+
 	for($i=0;$i<count($language_name);$i++){
 		echo "$language=$language_name[$i]=".($language==$language_name[$i]);
 		if($language==$language_name[$i]){
@@ -26,7 +18,7 @@ function submitSolution($pid,$solution,$language)
 		}
 		
 	}
-//	
+	
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
 	VALUES('$pid','".$_SESSION['user_id']."',NOW(),'$language','127.0.0.1','$len')";
@@ -37,7 +29,7 @@ function submitSolution($pid,$solution,$language)
 	echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
 	mysql_query ( $sql );
-//    mysql_close($con);
+
 }
 ?>
 Import Function is On the way.

@@ -28,19 +28,33 @@ function getTestFileOut($pid, $testfile,$OJ_DATA) {
 }
 function getSolution($pid){
 	$ret="";
-	require_once("../include/const.inc.php");
-	$sql = "select solution_id,language from solution where problem_id=$pid and result=4";
-	$result = mysql_query ( $sql ) or die ( mysql_error () );
-	if($row = mysql_fetch_object ( $result) ){
-		$solution_id=$row->solutin_id;
-		$language=$language_name[$row->language];
+	require("../include/const.inc.php");
+	require("../include/db_info.inc.php");
+	$con = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
+	if (!$con)
+    {
+  	    die('Could not connect: ' . mysql_error());
+    }
+	mysql_db_query($DB_NAME,"set names utf8",$con);
+	mysql_set_charset("utf8",$con);
+	mysql_select_db($DB_NAME,$con);
+	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4";
+//	echo $sql;
+	$result = mysql_db_query($DB_NAME, $sql,$con ) ;
+	if($result&&$row = mysql_fetch_row ( $result) ){
+		$solution_id=$row[0];
+		$language=$language_name[$row[1]];
+		echo $language;
+		mysql_free_result($result);
 		$sql = "select source from source_code where solution_id=$solution_id";
 		$result = mysql_query ( $sql ) or die ( mysql_error () );
 		if($row = mysql_fetch_object ( $result) ){
 			$ret=$row->source;
 			
 		}
+		mysql_free_result($result);
 	}
+    mysql_close($con);
 	return $ret;
 }
 session_start ();
@@ -85,7 +99,9 @@ if ($_POST ['do'] == 'do') {
 <test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile,$OJ_DATA )?>]]></test_output>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=$row->source?>]]></source>
-<solution><![CDATA[<?=getSolution($row->solution)?>]]></solution>
+<solution language="<?$solution=getSolution($row->problem_id)?>"><![CDATA[
+<?=$solution?>
+]]></solution>
 <spj><![CDATA[<?
  if($row->spj!=0){
  	echo file_get_contents ( "$OJ_DATA/$pid/spj.cc" );

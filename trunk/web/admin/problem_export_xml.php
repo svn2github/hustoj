@@ -109,7 +109,7 @@ if ($_POST ['do'] == 'do') {
  	if(file_exists( $filec ))
  		echo file_get_contents ($filec );
  	elseif(file_exists( $filecc ))
- 		echo file_get_contents ($filec );
+ 		echo file_get_contents ($filecc );
  	
  }
 ?>]]></spj>

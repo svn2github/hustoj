@@ -15,9 +15,7 @@ function getValue($Node,$TagName){
 		$ret= $children->item ( 0 )->nodeValue;
 	else
 	    $ret=""; 
-	if ($ret.length>0) $ret=mb_substr($ret, 1, mb_strlen($ret,'utf-8')-1, 'utf-8');
-	if ($ret=="\n\n") return "";
-    return $ret;
+	return $ret;
 }
 
 if ($_FILES ["fps"] ["error"] > 0) {
@@ -64,7 +62,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		echo "->$test_input<br>\n";
 		echo "->$test_output<br>\n";
 		echo "->$spj<br>\n";
-		addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj );
+		addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj ,$OJ_DATA);
 		
 		
 	}

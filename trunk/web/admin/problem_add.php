@@ -17,8 +17,8 @@ $test_output=$_POST['test_output'];
 $hint=$_POST['hint'];
 $source=$_POST['source'];
 $spj=$_POST['spj'];
-
-addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj );
+echo "->".$OJ_DATA."<-";
+addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj,$OJ_DATA );
 
 /*	*/
 ?>

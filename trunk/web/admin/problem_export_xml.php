@@ -1,5 +1,6 @@
 <?
-function getTestFileName($pid) {
+require_once ("../include/db_info.inc.php");
+function getTestFileName($pid,$OJ_DATA) {
 	$ret = "";
 	$pdir = opendir ( "$OJ_DATA/$pid/" );
 	while ( $file = readdir ( $pdir ) ) {
@@ -13,13 +14,13 @@ function getTestFileName($pid) {
 	return $ret;
 }
 
-function getTestFileIn($pid, $testfile) {
+function getTestFileIn($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
 		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".in" );
 	else
 		return "";
 }
-function getTestFileOut($pid, $testfile) {
+function getTestFileOut($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
 		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".out" );
 	else
@@ -31,7 +32,7 @@ if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit ( 1 );
 }
-require_once ("../include/db_info.inc.php");
+
 
 if ($_POST ['do'] == 'do') {
 	$start = addslashes ( $_POST ['start'] );
@@ -52,7 +53,7 @@ if ($_POST ['do'] == 'do') {
 <fps version="1.0">
 <?
 	while ( $row = mysql_fetch_object ( $result ) ) {
-		$testfile = getTestFileName ( $row->problem_id );
+		$testfile = getTestFileName ( $row->problem_id ,$OJ_DATA);
 		?>
 <item>
 <title><![CDATA[<?=$row->title?>]]></title>
@@ -63,8 +64,8 @@ if ($_POST ['do'] == 'do') {
 <output><![CDATA[<?=$row->output?>]]></output>
 <sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
-<test_input><![CDATA[<?=getTestFileIn ( $row->problem_id, $testfile )?>]]></test_input>
-<test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile )?>]]></test_output>
+<test_input><![CDATA[<?=getTestFileIn ( $row->problem_id, $testfile ,$OJ_DATA)?>]]></test_input>
+<test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile,$OJ_DATA )?>]]></test_output>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=$row->source?>]]></source>
 <solution><![CDATA[<?=$row->solution?>]]></solution>

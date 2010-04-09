@@ -13,13 +13,13 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	$test_output=($test_output);
 	$hint=mysql_real_escape_string($hint);
 	$source=mysql_real_escape_string($source);
-	$spj=mysql_real_escape_string($spj);
+	$spj=($spj);
 	
 	$sql = "INSERT into `problem` (`title`,`time_limit`,`memory_limit`,
 	`description`,`input`,`output`,`sample_input`,`sample_output`,`hint`,`source`,`spj`,`in_date`,`defunct`)
 	VALUES('$title','$time_limit','$memory_limit','$description','$input','$output',
 			'$sample_input','$sample_output','$hint','$source','$spj',NOW(),'Y')";
-	
+	//echo $sql;
 	@mysql_query ( $sql ) or die ( mysql_error () );
 	$pid = mysql_insert_id ();
 	echo "<br>Add $pid  ";
@@ -46,7 +46,7 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	fputs ( $fp, ereg_replace ( "\r\n", "\n", $sample_output ) );
 	fclose ( $fp );
 	
-	if (strlen ( $test_output ) > 0) {
+	if ( $test_output ) {
 		$fp = fopen ( $basedir . "/test.in", "w" );
 		fputs ( $fp, ereg_replace ( "\r\n", "\n", $test_input ) );
 		fclose ( $fp );

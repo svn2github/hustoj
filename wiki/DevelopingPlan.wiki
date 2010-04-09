@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#开发计划
 
 = Introduction =
 
@@ -6,15 +6,19 @@
 
 
 = Details =
- # 添加快速复制现有比赛，用于添加新的作业。 done!
- # problem.php 比赛中的题目No Such Problem!给出比赛链接。done!
- # admin privilidge 查看权限列表 done!
- # FPS格式题目导入导出
- # 分离角色权限
- # ranklist /static 另外开一个表格 用数据库来缓存 
 
-  建立administrator/teacher/student三级
+未完成
+ # FPS扩展多个测试数据文件
+ # 分离角色权限
+建立administrator/teacher/student三级
 ||      ||题目管理||比赛管理||初始化密码||查看提交源代码||
 ||管理员||全部    ||全部    ||全部          ||全部          ||
 ||老师  ||自己    ||自己    ||学生          ||全部          ||
 ||学生  ||无     ||自己    ||自己          ||自己          ||
+
+已完成
+ # 添加快速复制现有比赛，用于添加新的作业。 done!
+ # problem.php 比赛中的题目No Such Problem!给出比赛链接。done!
+ # admin privilidge 查看权限列表 done!
+ # FPS格式题目导入导出 done!
+ # ranklist /static 文件缓存 done!

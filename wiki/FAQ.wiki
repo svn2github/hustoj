@@ -1,0 +1,21 @@
+#labels Featured
+#FAQ
+
+= Introduction =
+
+When people asked question, we put the answer here
+
+
+= Details =
+
+  * Why the added problem don't show up to non-admin users?
+    
+    problem is deleted when first added, admin need to Resume them in the "Problem List"
+
+  * Why Java can't work?
+    
+    Use SUN-JDK not anyother,if you are working with a 64bit System, check [issue2]
+
+  * How much dollar to get this system ?
+  
+    0, God bless GPL.

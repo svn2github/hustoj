@@ -1,6 +1,19 @@
 <?php
 
 function addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj,$OJ_DATA) {
+	$title=mysql_real_escape_string($title);
+	$time_limit=mysql_real_escape_string($time_limit);
+	$memory_limit=mysql_real_escape_string($memory_limit);
+	$description=mysql_real_escape_string($description);
+	$input=mysql_real_escape_string($input);
+	$output=mysql_real_escape_string($output);
+	$sample_input=($sample_input);
+	$sample_output=($sample_output);
+	$test_input=($test_input);
+	$test_output=($test_output);
+	$hint=mysql_real_escape_string($hint);
+	$source=mysql_real_escape_string($source);
+	$spj=mysql_real_escape_string($spj);
 	
 	$sql = "INSERT into `problem` (`title`,`time_limit`,`memory_limit`,
 	`description`,`input`,`output`,`sample_input`,`sample_output`,`hint`,`source`,`spj`,`in_date`,`defunct`)

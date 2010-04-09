@@ -5,9 +5,18 @@
 
 When people asked question, we put the answer here
 
+这里是常见问答。
 
 = Details =
-
+  * 使用HUSTOJ要花多少钱？
+    不要钱，我们是GPL的。
+  * 为什么我添加的题目普通用户看不到？
+    题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中的Resume启用题目。
+  * 为什么我提交的答案始终在pending？
+    判题程序judged需要用root帐号启动，请看[README]
+  * 为何我的C/C++都能用，唯独Java总是CE/RE？
+　　目前只支持sun原版jdk，其他jdk暂不支持。如果你用的是64位系统，你可能需要自己调整一下源代码。看看本站issue2,或联系我。
+  
   * Why the added problem don't show up to non-admin users?
     
     problem is deleted when first added, admin need to Resume them in the "Problem List"

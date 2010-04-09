@@ -16,7 +16,9 @@ When people asked question, we put the answer here
     判题程序judged需要用root帐号启动，请看[InstallGuide]
   * 为何我的C/C++都能用，唯独Java总是CE/RE？
 　　目前只支持sun原版jdk，其他jdk暂不支持。如果你用的是64位系统，你可能需要自己调整一下源代码。看看本站issue2,或联系我。
-  
+  * 我是管理员，为什么不能查看别人的源码？  
+    请给自己增加source_browser权限。
+[http://hustoj.googlecode.com/issues/attachment?aid=-7787219608930552649&name=source_browser.jpg&inline=1&thumb=1]
   * Why the added problem don't show up to non-admin users?
     
     problem is deleted when first added, admin need to Resume them in the "Problem List"

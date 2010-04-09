@@ -13,7 +13,7 @@ When people asked question, we put the answer here
   * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
     您需要修改系统php.ini,给予php操作数据目录的权限。
     以下是推荐修改的设置
-{{{    sudo gedit php5/apache2/php.ini 
+{{{    sudo gedit /etc/php5/apache2/php.ini 
        open_basedir =/home/judge/data:/var/www/JudgeOnline  
        
        max_execution_time = 300     ; Maximum execution time of each script, in seconds
@@ -21,8 +21,8 @@ When people asked question, we put the answer here
        memory_limit = 128M      ; Maximum amount of memory a script may consume (16MB)
        post_max_size = 64M
        upload_max_file_size = 64M
-
-}}}
+      
+}}}修改php.ini后apache需重启
     
   * 为什么我添加的题目普通用户看不到？
     题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中的Resume启用题目。

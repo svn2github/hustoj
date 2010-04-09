@@ -1,3 +1,16 @@
+<?php
+	$now = time ();
+	$cid=intval($_GET['cid']);
+	$file = "contestrank$cid.html";
+	if (file_exists ( $file ))
+		$last = filemtime ( $file );
+	if ($now - $last < 10) {
+		header ( "Location: $file" );
+		exit ();
+	} else {
+		ob_start ();
+		
+		?>
 <?
 require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
@@ -119,3 +132,12 @@ echo "</table>";
 mysql_free_result($result);
 ?>
 <?require_once("oj-footer.php")?>
+<?php
+		
+		$conntent = ob_get_contents ();
+		$fp = fopen ( $file, "w" );
+		fputs ( $fp, $conntent );
+		fclose ( $fp );
+	}
+	
+	?>

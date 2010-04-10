@@ -10,6 +10,8 @@ When people asked question, we put the answer here
 = Details =
   * 使用HUSTOJ要花多少钱？
     不要钱，我们是GPL的。
+  * 管理员如何添加，如何管理？
+    查看安装说明[README],管理员登录后有Admin菜单。
   * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
     您需要修改系统php.ini,给予php操作数据目录的权限。
     以下是推荐修改的设置

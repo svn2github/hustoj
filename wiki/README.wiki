@@ -1,4 +1,4 @@
-#labels Featured,Phase-Support
+#labels Featured
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)
 
@@ -68,4 +68,5 @@ cp judge_client /usr/bin
    with root or sudo
    echo "LANG=C /usr/bin/judged" > /etc/init.d/judged
    chmod +x  /etc/init.d/judged
+   ln -s /etc/init.d/judged /etc/rc2.d/S93judged
    ln -s /etc/init.d/judged /etc/rc3.d/S93judged

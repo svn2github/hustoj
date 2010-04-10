@@ -7,13 +7,13 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	$description=mysql_real_escape_string($description);
 	$input=mysql_real_escape_string($input);
 	$output=mysql_real_escape_string($output);
-	$sample_input=($sample_input);
-	$sample_output=($sample_output);
-	$test_input=($test_input);
-	$test_output=($test_output);
+//	$sample_input=($sample_input);
+//	$sample_output=($sample_output);
+//	$test_input=($test_input);
+//	$test_output=($test_output);
 	$hint=mysql_real_escape_string($hint);
 	$source=mysql_real_escape_string($source);
-	$spj=($spj);
+//	$spj=($spj);
 	
 	$sql = "INSERT into `problem` (`title`,`time_limit`,`memory_limit`,
 	`description`,`input`,`output`,`sample_input`,`sample_output`,`hint`,`source`,`spj`,`in_date`,`defunct`)
@@ -39,20 +39,20 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	
 	mkdir ( $basedir );
 	$fp = fopen ( $basedir . "/sample.in", "w" );
-	fputs ( $fp, ereg_replace ( "\r\n", "\n", $sample_input ) );
+	fputs ( $fp, preg_replace ( "([\r\n])", "\n", $sample_input ) );
 	fclose ( $fp );
 	
 	$fp = fopen ( $basedir . "/sample.out", "w" );
-	fputs ( $fp, ereg_replace ( "\r\n", "\n", $sample_output ) );
+	fputs ( $fp, preg_replace ( "([\r\n])", "\n", $sample_output ) );
 	fclose ( $fp );
 	
 	if ( $test_output ) {
 		$fp = fopen ( $basedir . "/test.in", "w" );
-		fputs ( $fp, ereg_replace ( "\r\n", "\n", $test_input ) );
+		fputs ( $fp, preg_replace ( "([\r\n])", "\n", $test_input ) );
 		fclose ( $fp );
 		
 		$fp = fopen ( $basedir . "/test.out", "w" );
-		fputs ( $fp, ereg_replace ( "\r\n", "\n", $test_output ) );
+		fputs ( $fp, preg_replace ( "([\r\n])", "\n", $test_output ) );
 		fclose ( $fp );
 	
 	}

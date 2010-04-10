@@ -1,0 +1,26 @@
+#系统软硬件需求
+
+= Introduction =
+
+系统安装软硬件需求
+
+
+= Details =
+
+最低配置:
+   * PIII-450 
+   * 128M  
+   * 10G
+   * 10/100M 
+推荐配置:
+   * CPU 1G+ x2 
+   * 1G+ RAM
+   * 100G+ HD
+   * 100/1000M LAN
+软件系统：
+  * GNU/Linux 32bit (推荐Ubuntu9.04+)
+  * GCC 4.3.0+
+  * MySQL 5.0+
+  * Apache2.0+
+  * PHP   5.0+
+   

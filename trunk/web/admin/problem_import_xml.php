@@ -109,8 +109,22 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	    	$fp=fopen("$basedir/spj.cc","w");
 			fputs($fp, $spjcode);
 			fclose($fp);
-			if(system( " g++ -o $basedir/spj $basedir/spj.cc  "))
-	    		echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
+			system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+			if(!file_exists("$basedir/spj") ){
+	    		$fp=fopen("$basedir/spj.c","w");
+				fputs($fp, $spjcode);
+				fclose($fp);
+				system( " gcc -o $basedir/spj $basedir/spj.c  ");
+				if(!file_exists("$basedir/spj")){
+					echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
+				
+				}else{
+					
+					unlink("$basedir/spj.cc");
+				}
+	    	
+			
+			}
 	    }
 	    if($solution) submitSolution($pid,$solution,$language);
 	    

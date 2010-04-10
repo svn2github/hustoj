@@ -39,20 +39,20 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	
 	mkdir ( $basedir );
 	$fp = fopen ( $basedir . "/sample.in", "w" );
-	fputs ( $fp, preg_replace ( "([\r\n])", "\n", $sample_input ) );
+	fputs ( $fp, preg_replace ( "(\r\n)", "\n", $sample_input ) );
 	fclose ( $fp );
 	
 	$fp = fopen ( $basedir . "/sample.out", "w" );
-	fputs ( $fp, preg_replace ( "([\r\n])", "\n", $sample_output ) );
+	fputs ( $fp, preg_replace ( "(\r\n)", "\n", $sample_output ) );
 	fclose ( $fp );
 	
 	if ( $test_output ) {
 		$fp = fopen ( $basedir . "/test.in", "w" );
-		fputs ( $fp, preg_replace ( "([\r\n])", "\n", $test_input ) );
+		fputs ( $fp, preg_replace ( "(\r\n)", "\n", $test_input ) );
 		fclose ( $fp );
 		
 		$fp = fopen ( $basedir . "/test.out", "w" );
-		fputs ( $fp, preg_replace ( "([\r\n])", "\n", $test_output ) );
+		fputs ( $fp, preg_replace ( "(\r\n)", "\n", $test_output ) );
 		fclose ( $fp );
 	
 	}

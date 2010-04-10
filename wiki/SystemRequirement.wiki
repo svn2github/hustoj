@@ -1,3 +1,4 @@
+#labels Featured,Phase-Requirements,Phase-Support
 #系统软硬件需求
 
 = Introduction =

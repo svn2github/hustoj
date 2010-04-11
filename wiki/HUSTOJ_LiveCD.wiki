@@ -6,7 +6,7 @@
 为了帮助不了解HUSTOJ的用户快速获得使用体验，准备发布一张LiveCD.
 In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
-[http://hustoj.googlecode.com/files/LiveCD.png]
+[http://hustoj.googlecode.com/files/hustojVirtualBoxOSE.png]
 
 = Details =
 

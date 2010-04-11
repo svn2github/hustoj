@@ -1,0 +1,24 @@
+#labels Featured
+#a all in one CD is on the way
+
+= Introduction =
+
+为了帮助不了解HUSTOJ的用户快速获得使用体验，准备发布一张LiveCD.
+
+
+
+= Details =
+
+
+  * 基于Ubuntu9.10
+  * 无须硬盘，不影响现有系统
+  * CDROM 256M内存 32bit x86即可运行
+  * 内置5道题目，可以导入FPS题目
+  * 内置FPS样例
+  * 内置C/C++IDE(Codeblocks)
+
+启动后以judge用户登录，密码judge,可进入图形界面。
+
+启动Firefox访问http://127.0.0.1/可进入OJ界面。
+
+运行ifconfig查得IP后,其他电脑可通过网络访问。

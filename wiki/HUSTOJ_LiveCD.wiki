@@ -19,6 +19,6 @@
 
 启动后以judge用户登录，密码judge,可进入图形界面。
 
-启动Firefox访问http://127.0.0.1/可进入OJ界面。
+启动Firefox访问[http://127.0.0.1/]可进入OJ界面。
 
 运行ifconfig查得IP后,其他电脑可通过网络访问。

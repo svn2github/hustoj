@@ -3,7 +3,8 @@
 
 = Introduction =
 
-为了帮助不了解HUSTOJ的用户快速获得使用体验，准备发布一张LiveCD.
+为了帮助不了解HUSTOJ的用户快速获得使用体验，发布一张LiveCD.
+
 In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
 [http://hustoj.googlecode.com/files/hustojVirtualBoxOSE.png]
@@ -28,7 +29,7 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 
 管理员可以导入/fps下的FPS格式的xml文件。
 
-下载地址: uploading... don't download until GMT-2010-04-11 14:00
+下载地址: 
 
 [http://dl.dropbox.com/u/6045405/hustoj-FPS.iso] 
 

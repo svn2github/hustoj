@@ -4,7 +4,7 @@
 = Introduction =
 
 为了帮助不了解HUSTOJ的用户快速获得使用体验，准备发布一张LiveCD.
-
+In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
 
 = Details =
@@ -17,8 +17,16 @@
   * 内置FPS样例
   * 内置C/C++IDE(Codeblocks)
 
-启动后以judge用户登录，密码judge,可进入图形界面。
+启动后以judge用户登录，密码judge,可进入图形界面。 user judge's password is judge
 
-启动Firefox访问[http://127.0.0.1/]可进入OJ界面。
+启动Firefox访问[http://127.0.0.1/]可进入OJ界面。after booting apache is serving at http://0.0.0.0:80
 
 运行ifconfig查得IP后,其他电脑可通过网络访问。
+
+OJ管理员admin初始密码为admin. administrator of OJ is admin, password admin.
+
+下载地址: uploading... download after GMT-2010-04-11 13:00
+
+[http://dl.dropbox.com/u/6045405/hustoj-FPS.iso] 
+
+[https://dl.dropbox.com/u/6045405/hustoj-FPS.iso]

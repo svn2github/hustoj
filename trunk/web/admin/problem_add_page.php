@@ -40,7 +40,7 @@ $description->BasePath = '../fckeditor/' ;
 $description->Height = 600 ;
 $description->Width=600;
 
-$description->Value = '<p>Please Input Description Here</p>' ;
+$description->Value = '<p></p>' ;
 $description->Create() ;
 ?>
 </p>
@@ -53,7 +53,7 @@ $input->BasePath = '../fckeditor/' ;
 $input->Height = 600 ;
 $input->Width=600;
 
-$input->Value = '<p>Please Input Input Here</p>' ;
+$input->Value = '<p></p>' ;
 $input->Create() ;
 ?>
 </p>
@@ -68,7 +68,7 @@ $output->BasePath = '../fckeditor/' ;
 $output->Height = 600 ;
 $output->Width=600;
 
-$output->Value = '<p>Please Input Output Here</p>' ;
+$output->Value = '<p></p>' ;
 $output->Create() ;
 ?>
 

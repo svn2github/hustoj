@@ -60,8 +60,7 @@ MYSQL *conn;
 char lang_ext[4][8]={"c","cc","pas","java"};
 char buf[bufsize];
 
-long
-   get_file_size( char * filename )
+long get_file_size(const char * filename )
    {
         struct stat f_stat;
 

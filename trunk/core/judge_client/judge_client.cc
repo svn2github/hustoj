@@ -19,7 +19,9 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/signal.h>
-
+//#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <mysql/mysql.h>
 
 #include "okcalls.h"
@@ -58,7 +60,17 @@ MYSQL *conn;
 char lang_ext[4][8]={"c","cc","pas","java"};
 char buf[bufsize];
 
+long
+   get_file_size( char * filename )
+   {
+        struct stat f_stat;
 
+        if( stat( filename, &f_stat ) == -1 ){
+            return -1;
+        }
+
+        return (long)f_stat.st_size;
+    }
 int cleft[512];
 
 void init_cleft(int lang){
@@ -477,6 +489,10 @@ int main(int argc, char** argv) {
 				sig=status>>8;
 
 				if (WIFEXITED(status)) break;
+				if(get_file_size("error.out")){
+					ACflg=OJ_RE;
+					break;				
+				}
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
 					printf("sig=%d\n",sig);

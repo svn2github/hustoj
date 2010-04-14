@@ -28,6 +28,8 @@
 <li>
 	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
 <li>
-	<a href="problem_import.php" target="main"><b>Import Problem</b></a>
+	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
+<li>
+	<a href="http://code.google.com/p/freeproblemset/" target="main"><b>FreeProblemSet</b></a>
 </ol>
 

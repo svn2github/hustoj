@@ -7,8 +7,8 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	$description=mysql_real_escape_string($description);
 	$input=mysql_real_escape_string($input);
 	$output=mysql_real_escape_string($output);
-//	$sample_input=($sample_input);
-//	$sample_output=($sample_output);
+	$sample_input=mysql_real_escape_string($sample_input);
+	$sample_output=mysql_real_escape_string($sample_output);
 //	$test_input=($test_input);
 //	$test_output=($test_output);
 	$hint=mysql_real_escape_string($hint);

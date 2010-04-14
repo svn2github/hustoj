@@ -106,16 +106,18 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 	    $basedir = "$OJ_DATA/$pid";
 	    mkdir ( $basedir );
-		mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
-		mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
+		if($sample_input) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
+		if($sample_output) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
 		$testinputs=$searchNode->getElementsByTagName("test_input");
 		$testno=0;
 		foreach($testinputs as $testNode){
+			if($testNode->nodeValue)
 			mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
 		}
 		$testinputs=$searchNode->getElementsByTagName("test_output");
 		$testno=0;
 		foreach($testinputs as $testNode){
+			if($testNode->nodeValue)
 			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
 		}
 		

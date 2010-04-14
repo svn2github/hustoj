@@ -37,7 +37,7 @@ include_once("../fckeditor/fckeditor.php") ;
 <?php
 $description = new FCKeditor('description') ;
 $description->BasePath = '../fckeditor/' ;
-$description->Height = 600 ;
+$description->Height = 300 ;
 $description->Width=600;
 
 $description->Value = '<p></p>' ;
@@ -50,7 +50,7 @@ $description->Create() ;
 <?php
 $input = new FCKeditor('input') ;
 $input->BasePath = '../fckeditor/' ;
-$input->Height = 600 ;
+$input->Height = 300 ;
 $input->Width=600;
 
 $input->Value = '<p></p>' ;
@@ -65,7 +65,7 @@ $input->Create() ;
 <?php
 $output = new FCKeditor('output') ;
 $output->BasePath = '../fckeditor/' ;
-$output->Height = 600 ;
+$output->Height = 300 ;
 $output->Width=600;
 
 $output->Value = '<p></p>' ;
@@ -77,7 +77,17 @@ $output->Create() ;
 <p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80></textarea></p>
 <p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
 <p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
-<p align=left>Hint:<br><textarea rows=13 name=hint cols=120></textarea></p>
+<p align=left>Hint:<br>
+<?php
+$output = new FCKeditor('hint') ;
+$output->BasePath = '../fckeditor/' ;
+$output->Height = 300 ;
+$output->Width=600;
+
+$output->Value = '<p></p>' ;
+$output->Create() ;
+?>
+</p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
 <p align=left>contest:

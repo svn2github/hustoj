@@ -13,7 +13,7 @@ function submitSolution($pid,$solution,$language)
 		echo "$language=$language_name[$i]=".($language==$language_name[$i]);
 		if($language==$language_name[$i]){
 			$language=$i;
-			echo $language;
+			//echo $language;
 			break;
 		}
 		
@@ -26,7 +26,7 @@ function submitSolution($pid,$solution,$language)
 	mysql_query ( $sql );
 	$insert_id = mysql_insert_id ();
 	$solution=mysql_real_escape_string($solution);
-	echo "submiting$language.....";
+	//echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
 	mysql_query ( $sql );
 

@@ -7,3 +7,6 @@ Import FPS data ,please make sure you file is smaller than the [upload_max_files
 	<input type=file name=fps >
     <input type=submit value='Import'>
 </form>
+
+
+free problem set FPS-xml can be download at <a href=http://code.google.com/p/freeproblemset/downloads/list>FPS-Googlecode</a>

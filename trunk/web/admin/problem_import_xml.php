@@ -10,7 +10,7 @@ function submitSolution($pid,$solution,$language)
 	require ("../include/const.inc.php");
 
 	for($i=0;$i<count($language_name);$i++){
-		echo "$language=$language_name[$i]=".($language==$language_name[$i]);
+		//echo "$language=$language_name[$i]=".($language==$language_name[$i]);
 		if($language==$language_name[$i]){
 			$language=$i;
 			//echo $language;

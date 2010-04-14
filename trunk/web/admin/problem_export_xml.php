@@ -1,17 +1,7 @@
 <?
 require_once ("../include/db_info.inc.php");
 function getTestFileName($pid,$OJ_DATA) {
-	$ret = "";
-	$pdir = opendir ( "$OJ_DATA/$pid/" );
-	while ( $file = readdir ( $pdir ) ) {
-		$pinfo = pathinfo ( $file );
-		if ($pinfo ['extension'] == "in" && $pinfo ['basename'] != "sample.in") {
-			$ret = basename ( $pinfo ['basename'], "." . $pinfo ['extension'] );
-			break;
-		}
-	}
-	closedir ( $pdir );
-	return $ret;
+	
 }
 
 function getTestFileIn($pid, $testfile,$OJ_DATA) {
@@ -22,9 +12,30 @@ function getTestFileIn($pid, $testfile,$OJ_DATA) {
 }
 function getTestFileOut($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
-		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".out" );
+		return file_get_contents (  );
 	else
 		return "";
+}
+function printTestCases($pid,$OJ_DATA){
+	$ret = "";
+	$pdir = opendir ( "$OJ_DATA/$pid/" );
+	while ( $file = readdir ( $pdir ) ) {
+		$pinfo = pathinfo ( $file );
+		if ($pinfo ['extension'] == "in" && $pinfo ['basename'] != "sample.in") {
+			$ret = basename ( $pinfo ['basename'], "." . $pinfo ['extension'] );
+			
+			$outfile="$OJ_DATA/$pid/" . $ret . ".out";
+			$infile="$OJ_DATA/$pid/" . $ret . ".in";
+			if(file_exists($infile)){
+				echo "<test_input><![CDATA[".file_get_contents ($infile)."]]></test_input>\n";
+			}if(file_exists($outfile)){
+				echo "<test_output><![CDATA[".file_get_contents ($outfile)."]]></test_output>\n";
+			}
+//			break;
+		}
+	}
+	closedir ( $pdir );
+	return $ret;
 }
 function getSolution($pid){
 	$ret="";
@@ -96,8 +107,7 @@ if ($_POST ['do'] == 'do') {
 <output><![CDATA[<?=$row->output?>]]></output>
 <sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
-<test_input><![CDATA[<?=getTestFileIn ( $row->problem_id, $testfile ,$OJ_DATA)?>]]></test_input>
-<test_output><![CDATA[<?=getTestFileOut ( $row->problem_id, $testfile,$OJ_DATA )?>]]></test_output>
+<?php printTestCases($row->problem_id,$OJ_DATA)?>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=$row->source?>]]></source>
 <solution language="<?$solution=getSolution($row->problem_id)?>"><![CDATA[<?=$solution?>]]></solution>

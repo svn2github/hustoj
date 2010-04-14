@@ -77,8 +77,8 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$output = getValue ( $searchNode, 'output' );
 		$sample_input = getValue ( $searchNode, 'sample_input' );
 		$sample_output = getValue ( $searchNode, 'sample_output' );
-		$test_input = getValue ( $searchNode, 'test_input' );
-		$test_output = getValue ( $searchNode, 'test_output' );
+//		$test_input = getValue ( $searchNode, 'test_input' );
+//		$test_output = getValue ( $searchNode, 'test_output' );
 		$hint = getValue ( $searchNode, 'hint' );
 		$source = getValue ( $searchNode, 'source' );
 		$solution = getValue ( $searchNode, 'solution' );
@@ -103,8 +103,23 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		//		echo "->$spj<br>\n";
 //				echo "->$solution<-<br>\n";
 //				echo "->$language<-<br>\n";
-		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj, $OJ_DATA );
-	    if($spj) {
+		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
+	    $basedir = "$OJ_DATA/$pid";
+	    mkdir ( $basedir );
+		mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
+		mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
+		$testinputs=$searchNode->getElementsByTagName("test_input");
+		$testno=0;
+		foreach($testinputs as $testNode){
+			mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
+		}
+		$testinputs=$searchNode->getElementsByTagName("test_output");
+		$testno=0;
+		foreach($testinputs as $testNode){
+			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+		}
+		
+		if($spj) {
 	    	$basedir = "$OJ_DATA/$pid";
 	    	$fp=fopen("$basedir/spj.cc","w");
 			fputs($fp, $spjcode);

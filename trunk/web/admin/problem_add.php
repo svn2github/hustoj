@@ -44,7 +44,13 @@ if (get_magic_quotes_gpc ()) {
 	$source = stripslashes ( $source );
 }
 //echo "->".$OJ_DATA."<-"; 
-addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $test_input, $test_output, $hint, $source, $spj, $OJ_DATA );
+$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
+$basedir = "$OJ_DATA/$pid";
+mkdir ( $basedir );
+mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
+mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
+mkdata($pid,"test.in",$test_input,$OJ_DATA);
+mkdata($pid,"test.out",$test_output,$OJ_DATA);
 
 /*	*/
 ?>

@@ -34,3 +34,5 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 [http://dl.dropbox.com/u/6045405/hustoj-FPS.iso] 
 
 [https://dl.dropbox.com/u/6045405/hustoj-FPS.iso]
+
+md5: e93acdc057cd1d40e3797eec115d85db

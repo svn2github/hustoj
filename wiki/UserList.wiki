@@ -11,4 +11,5 @@ This OJ is used on these site:
 
   * http://acm.ajou.ac.kr/JudgeOnline/
   * http://icpc.sogang.ac.kr:8080/JudgeOnline/
-  * 
+  * http://moonwalk.snucse.org:8080/JudgeOnline/
+  

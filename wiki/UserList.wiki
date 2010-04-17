@@ -13,3 +13,12 @@ This OJ is used on these site:
   * http://icpc.sogang.ac.kr:8080/JudgeOnline/
   * http://moonwalk.snucse.org:8080/JudgeOnline/
   
+
+首批LiveCD试用：
+  * 浙江纺织服装学院
+  * 湖州职业技术学院
+  * 浙江理工大学
+  * 嘉兴职业技术学院
+  * 浙江工业大学
+  * 宁波工程学院
+  * 宁波职业技术学院

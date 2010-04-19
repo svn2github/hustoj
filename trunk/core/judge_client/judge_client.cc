@@ -296,7 +296,16 @@ int compile(int lang){
 	}
 
 }
-
+int read_proc_statm(int pid){
+    FILE * pf;
+    char fn[4096];
+    int ret;
+    sprintf(fn,"/proc/%d/statm",pid);
+    pf=fopen(fn,"r");
+    fscanf(pf,"%d",&ret);
+    fclose(pf);
+    return ret;
+}
 int main(int argc, char** argv) {
 	if (argc<3){
 		fprintf(stderr,"Usage:%s runid runmachine.\n",argv[0]);
@@ -447,7 +456,9 @@ int main(int argc, char** argv) {
 			// set the limit
 			struct rlimit LIM; // time limit, file limit& memory limit
 			// time limit
-			LIM.rlim_max=(time_lmt-usedtime/1000)+1; LIM.rlim_cur=time_lmt-usedtime/1000;
+			LIM.rlim_cur=(time_lmt-usedtime/1000)+2;
+			LIM.rlim_max=LIM.rlim_cur+1;
+			//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 			setrlimit(RLIMIT_CPU,  &LIM);
 			alarm(LIM.rlim_cur*2+3);
 			// file limit
@@ -473,9 +484,11 @@ int main(int argc, char** argv) {
 			if (lang!=3) chroot(work_dir);
 			// now the user is "judger"
 			setuid(1536);
+			sleep(1);
 			if (lang!=3) execl("./Main","./Main",NULL);
 			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
+			
 			return 0;
 		}else{				// parent
 			int status,sig;
@@ -528,6 +541,7 @@ int main(int argc, char** argv) {
 
 				// check the usage
 				tempmemory=ruse.ru_minflt*getpagesize();
+				tempmemory=read_proc_statm(pidApp)*getpagesize();
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory/STD_MB>mem_lmt){
 					if (ACflg==OJ_AC) ACflg=OJ_ML;
@@ -537,6 +551,7 @@ int main(int argc, char** argv) {
 			}
 			usedtime+=(ruse.ru_utime.tv_sec*1000+ruse.ru_utime.tv_usec/1000);
 			usedtime+=(ruse.ru_stime.tv_sec*1000+ruse.ru_stime.tv_usec/1000);
+			//usedtime-=1000;
 			if (ACflg==OJ_AC && usedtime>time_lmt*1000) ACflg=OJ_TL;
 			// compare
 			if (ACflg==OJ_AC){

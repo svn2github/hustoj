@@ -162,12 +162,12 @@ int compare(const char *file1,const char *file2){
 	s1=new char[STD_F_LIM+512];
 	s2=new char[STD_F_LIM+512];
 	if (!(f1=fopen(file1,"r")))
-		return OJ_RE;
+		return OJ_AC;
 	for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
 		while (*p1) p1++;
 	fclose(f1);
 	if (!(f2=fopen(file2,"r")))
-		return OJ_AC;
+		return OJ_RE;
 	for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
 		while (*p2) p2++;
 	fclose(f2);

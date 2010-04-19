@@ -161,11 +161,13 @@ int compare(const char *file1,const char *file2){
 	int PEflg;
 	s1=new char[STD_F_LIM+512];
 	s2=new char[STD_F_LIM+512];
-	f1=fopen(file1,"r");
+	if (!(f1=fopen(file1,"r")))
+		return OJ_RE;
 	for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
 		while (*p1) p1++;
 	fclose(f1);
-	f2=fopen(file2,"r");
+	if (!(f2=fopen(file2,"r")))
+		return OJ_AC;
 	for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
 		while (*p2) p2++;
 	fclose(f2);
@@ -484,11 +486,11 @@ int main(int argc, char** argv) {
 			if (lang!=3) chroot(work_dir);
 			// now the user is "judger"
 			setuid(1536);
-			sleep(1);
+			
 			if (lang!=3) execl("./Main","./Main",NULL);
 			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
-			
+			//sleep(1);
 			return 0;
 		}else{				// parent
 			int status,sig;

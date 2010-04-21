@@ -7,7 +7,6 @@
 
 In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
-[http://hustoj.googlecode.com/files/hustojVirtualBoxOSE.png]
 [http://hustoj.googlecode.com/files/HUSTOJ-Live2.0.png]
 
 = Details =

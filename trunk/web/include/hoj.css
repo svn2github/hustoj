@@ -1,17 +1,22 @@
-a:link{color:blue;text-decoration:none}
-a:visited{color:blue;text-decoration:none}
-a:hover{color:cyan}
+a{ color:#1a5cc8; text-decoration:none }
+a:hover { color:orange; text-decoration:underline }
+
 h2{color:blue}
 .toprow{
-	background-color:#8080FF;
+	background-color:#1a5cc8;
 	color:#FFFFFF;
-    font-weight:bold;
+        font-weight:bold;
 }
-.oddrow{background-color:#A0FFFF;}
-.evenrow{background-color:#E0FFF0;}
-body{background-color:#F0F0F0}
+ a.toprow { font-family: Arial; font-weight: bold; font-size: 18px; color: #FFFFFF; margin: 15px }
+ a:hover.toprow { font-family: Arial; font-weight: bold; font-size: 18px; color:orange; margin: 15px }
+
+.oddrow{background-color:#FFFFFF;}
+.evenrow{background-color:#D7EBFF;}
+body{
+	background-color:#FFFFFF;
+	background-image: url(../image/background.jpg);
+}
 .hd{
-background-color:#F1F1F1;
 color:#FFFFFF;
 font-weight:bold;
 }

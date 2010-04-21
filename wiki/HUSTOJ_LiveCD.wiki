@@ -1,4 +1,4 @@
-#labels Featured
+#labels Featured,LiveCD
 #a all in one CD is on the way
 
 = Introduction =

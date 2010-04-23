@@ -26,4 +26,4 @@
   连接到转换后的judgeonline数据库
 
   * 进行简单测试
-  * 注意：因为HUSTOJ在编译时使用更严格的参数，因此void main(){}的声明是不能使用的，必须遵守C的iso标准,使用int main(){return 0;}这一原型。
+  * 注意：因为HUSTOJ在编译时使用更严格的参数，因此void main(){}的声明是不能使用的，必须遵守C的iso标准,使用int main(){return 0;}这一原型。参考 http://www.vcworld.net/bbs/archiver/tid-587.html

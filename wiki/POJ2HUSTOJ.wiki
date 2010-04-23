@@ -1,0 +1,28 @@
+#labels Featured,系统迁移
+#很多学校在使用POJ免费版，并且积累了一定的题目数据，不舍得抛弃，这里解决数据迁移问题。
+
+= Introduction =
+
+如何从POJ免费版进行迁移。
+
+
+= Details =
+
+  * 数据库迁移
+    利用mysql工具备份一个judgeonline数据库的备份，并在上面运行poj2hustoj.sql，可以转换为HUSTOJ兼容的诉据库。
+  * 测试数据迁移
+    从windows的d:\data复制所有数据到/home/judge/data/
+    执行
+{{{
+   find . -name *.in -exec dos2unix {} \;
+   find . -name *.out -exec dos2unix {} \;
+}}}
+  * 配置
+{{{
+  /var/www/JudgeOnline/include/db_info.inc.php 
+  /home/judge/etc/judge.conf
+}}}
+  连接到转换后的judgeonline数据库
+
+  * 进行简单测试
+  * 注意：因为HUSTOJ在编译时使用更严格的参数，因此void main(){}的声明是不能使用的，必须遵守C的iso标准,使用int main(){return 0;}这一原型。

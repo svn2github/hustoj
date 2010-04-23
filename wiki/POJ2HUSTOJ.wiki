@@ -9,7 +9,8 @@
 = Details =
 
   * 数据库迁移
-    利用mysql工具备份一个judgeonline数据库的备份，并在上面运行poj2hustoj.sql，可以转换为HUSTOJ兼容的诉据库。
+    利用mysql工具备份一个judgeonline数据库的备份，并在上面运行
+     http://hustoj.googlecode.com/files/poj2hustoj.sql ，可以转换为HUSTOJ兼容的诉据库。
   * 测试数据迁移
     从windows的d:\data复制所有数据到/home/judge/data/
     执行

@@ -155,7 +155,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	}
 	if ($flag){
 
-	if ($row->result==4){
+	if ($row->result>=4){
 		echo "<td>".$row->memory." <font color=red>kb</font>";
 		echo "<td>".$row->time." <font color=red>ms</font>";
 	}else{

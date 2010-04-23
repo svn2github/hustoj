@@ -77,7 +77,17 @@ $output->Create() ;
 
 <p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?=htmlspecialchars($row->sample_input)?></textarea></p>
 <p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?=htmlspecialchars($row->sample_output)?></textarea></p>
-<p>Hint:<br><textarea rows=13 name=hint cols=120><?=htmlspecialchars($row->hint)?></textarea></p>
+<p>Hint:<br>
+<?php
+$output = new FCKeditor('hint') ;
+$output->BasePath = '../fckeditor/' ;
+$output->Height = 200 ;
+$output->Width=600;
+
+$output->Value = $row->hint;
+$output->Create() ;
+?>
+</p>
 <p>SpecialJudge: 
 N<input type=radio name=spj value='0' <?=$row->spj=="0"?"checked":""?>>
 Y<input type=radio name=spj value='1' <?=$row->spj=="1"?"checked":""?>></p>

@@ -41,12 +41,7 @@ When people asked question, we put the answer here
     svn up /var/www/JudgeOnline
     或重新运行install.sh
   * 如何从POJ的免费版迁移？
-    题目表是兼容的，用户的密码可以用
-{{{
-     select user_id,convert(decode(password,'PWDforJO2005'),char) from users
-}}}
-    取出。
-    数据可以用dos2unix进行批量转换。
+    参考[POJ2HUSTOJ]
 
   * 我有问题怎么办？
     到issues去提问，new issue

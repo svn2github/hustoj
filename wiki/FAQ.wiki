@@ -1,5 +1,5 @@
 #labels Featured,FAQ
-#FAQ
+#FAQ常见问答
 
 = Introduction =
 

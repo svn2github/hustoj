@@ -12,7 +12,7 @@ This OJ is used on these site:
   * http://acm.ajou.ac.kr/JudgeOnline/
   * http://icpc.sogang.ac.kr:8080/JudgeOnline/
   * http://moonwalk.snucse.org:8080/JudgeOnline/
-  
+  * http://icpc.snucse.org:8080/JudgeOnline/
 
 首批LiveCD试用：
   * 浙江纺织服装学院

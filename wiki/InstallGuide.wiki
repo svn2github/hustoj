@@ -13,7 +13,7 @@
 
 另外，对于Linux系统不熟悉的用户可以选择使用LiveCD系统进行图形化安装。
 
- * 下载HUSTOJ_LiveCD系统，并刻录为光盘。
+ * 下载[HUSTOJ_LiveCD]系统，并刻录为光盘。
  * 在服务器上用光盘启动，以judge用户登录。
  * 从开始菜单->附件启动LXTerminal
  * 输入 

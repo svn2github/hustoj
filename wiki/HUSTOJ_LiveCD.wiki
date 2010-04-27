@@ -1,5 +1,5 @@
 #labels Featured,LiveCD
-#a all in one CD is on the way
+#演示和安装一体化的光盘版 a all in one CD is on the way
 
 = Introduction =
 

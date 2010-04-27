@@ -22,4 +22,7 @@ sudo ubiquity
 }}}
   再输入judge的密码judge,就可以进入图形化安装程序。
  * 按照提示，只需要7步简单的操作就能够将LiveCD完整安装到服务器上了。
- * 安装成功后注意修改judge和root账号口令，以及mysql账号口令。
+ * 安装成功后注意
+   # 登录时输入密码前选择会话（Session）为LXDE
+   # 修改judge和root账号口令，以及mysql账号口令。
+   # 修改系统管理员admin密码

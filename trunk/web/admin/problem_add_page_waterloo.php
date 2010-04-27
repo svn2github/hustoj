@@ -6,19 +6,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>New Problem</title>
 </head>
-<body leftmargin="30" >
-
+<body leftmargin="30">
+<center>
 <?require_once("../include/db_info.inc.php");?>
+
 <?require_once("admin-header.php");?>
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>
-<h1 >Add New problem</h1>
 
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse"  width="100%" height="50">
+<tr>
+<td width="100"></td>
+<td>
+<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC,<?=$OJ_NAME?>.</font></td>
+<td width="100"></td>
+</tr>
+</table>
+</center>
+<hr>
+<h1>Add New problem</h1>
+<?
+  require_once("../include/simple_html_dom.php");
+  //$url='http://plg1.cs.uwaterloo.ca/~acm00/020921/A.html';
+  $url=$_POST ['url'];
+  if (get_magic_quotes_gpc ()) {
+	$url = stripslashes ( $url);
+  }
+  $baseurl=substr($url,0,strrpos($url,"/")+1);
+//  echo $baseurl;
+  $html = file_get_html($url);
+  foreach($html->find('img') as $element)
+        $element->src=$baseurl.$element->src;
+  $element=$html->find('h2',0);
+  $title=$element->plaintext;
+  $i=1;
+  $sample_output=$sample_input=$descriptionHTML="";
+  
+  $html=$html->innertext;
+  $i=strpos($html,"<h3>");
+ // echo $i."-".strlen($html);
+  $descriptionHTML=substr($html,0,$i-1);
+ // echo $i."-".strlen($descriptionHTML);
+  $i=strpos($html,"<pre>",$i);
+  $j=strpos($html,"</pre>",$i);
+  $sample_input=substr($html,$i+5,$j-$i-5);
+  $i=strpos($html,"<pre>",$j);
+  $j=strpos($html,"</pre>",$i);
+  $sample_output=substr($html,$i+5,$j-$i-5);
+
+?>
 <form method=POST action=problem_add.php>
-<input type=hidden name=problem_id value="New Problem">
+<p align=center><font size=4 color=#333399>Add a Problem</font></p>
+<input type=hidden name=problem_id value=New Problem>
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71></p>
+<p align=left>Title:<input type=text name=title size=71 value="<?=$title?>"></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
@@ -29,7 +71,7 @@ $description->BasePath = '../fckeditor/' ;
 $description->Height = 300 ;
 $description->Width=600;
 
-$description->Value = '<p></p>' ;
+$description->Value ="<p></p>".$descriptionHTML;
 $description->Create() ;
 ?>
 </p>
@@ -62,8 +104,8 @@ $output->Create() ;
 ?>
 
 </p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80></textarea></p>
+<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?=$sample_input?></textarea></p>
+<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?=$sample_output?></textarea></p>
 <p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
 <p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br>

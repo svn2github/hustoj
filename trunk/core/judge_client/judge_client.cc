@@ -486,6 +486,7 @@ int main(int argc, char** argv) {
 			if (lang!=3) chroot(work_dir);
 			// now the user is "judger"
 			setuid(1536);
+			setresuid(1536,1536,1536);
 			
 			if (lang!=3) execl("./Main","./Main",NULL);
 			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"

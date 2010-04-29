@@ -501,7 +501,7 @@ int main(int argc, char** argv) {
 			sub=0;
 			while (1){
 				wait4(pidApp,&status,0,&ruse);
-				sig=status>>8;
+				sig=status>>8;/*status >> 8 差不多是EXITCODE*/
 
 				if (WIFEXITED(status)) break;
 				if(get_file_size("error.out")){
@@ -519,6 +519,7 @@ int main(int argc, char** argv) {
 					}
 					break;
 				}
+				
 				if (sig==0x05);
 				else {
 					if (ACflg==OJ_AC) switch (sig){
@@ -530,6 +531,18 @@ int main(int argc, char** argv) {
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
 				}
+/* sig == 5 差不多是正常暂停     commited from http://www.felix021.com/blog/index.php?go=category_13
+
+WIFSIGNALED: 如果进程是被信号结束的，返回True
+  WTERMSIG: 返回在上述情况下结束进程的信号
+
+WIFSTOPPED: 如果进程在被ptrace调用监控的时候被信号暂停/停止，返回True
+  WSTOPSIG: 返回在上述情况下暂停/停止进程的信号
+
+另 psignal(int sig, char *s)，进行类似perror(char *s)的操作，打印 s, 并输出信号 sig 对应的提示，其中
+sig = 5 对应的是 Trace/breakpoint trap
+sig = 11 对应的是 Segmentation fault
+sig = 25 对应的是 File size limit exceeded*/
 
 				// check the system calls
 				ptrace(PTRACE_GETREGS,pidApp,NULL,&reg);

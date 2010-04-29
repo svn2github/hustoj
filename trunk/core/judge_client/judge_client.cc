@@ -376,7 +376,7 @@ int main(int argc, char** argv) {
 	// the limit for java
 	if (lang==3){
 		time_lmt=time_lmt*2+2;
-		mem_lmt=mem_lmt*2;
+		mem_lmt=mem_lmt*2+128*STD_MB;
 	}
 //	printf("time: %d mem: %d\n",time_lmt,mem_lmt);
 

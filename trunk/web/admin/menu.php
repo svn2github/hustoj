@@ -33,5 +33,7 @@
 	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
 <li>
 	<a href="http://code.google.com/p/freeproblemset/" target="main"><b>FreeProblemSet</b></a>
-</ol>
 
+</ol>
+<br>
+<a href="problem_copy.php" target="main"><font color=white>CopyProblem</font></a>

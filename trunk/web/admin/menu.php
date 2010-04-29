@@ -35,5 +35,4 @@
 	<a href="http://code.google.com/p/freeproblemset/" target="main"><b>FreeProblemSet</b></a>
 
 </ol>
-<br>
-<a href="problem_copy.php" target="main"><font color=white>CopyProblem</font></a>
+<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>

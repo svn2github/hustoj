@@ -9,12 +9,12 @@ This OJ is used on these site:
 = Details =
 
 
-  * http://acm.ajou.ac.kr/JudgeOnline/
-  * http://icpc.sogang.ac.kr:8080/JudgeOnline/
+  * http://acm.ajou.ac.kr/JudgeOnline/ 韩国京畿道大学
+  * http://icpc.sogang.ac.kr:8080/JudgeOnline/  韩国西江大学
   * http://moonwalk.snucse.org:8080/JudgeOnline/
   * http://icpc.snucse.org:8080/JudgeOnline/
-  * http://judge.oi.hk/
-  * http://59.73.16.90/  沈阳工程学院
+  * http://judge.oi.hk/ 香港信息学竞赛网
+  * http://59.73.16.90/  中国沈阳工程学院
 首批LiveCD试用：
   * 浙江纺织服装学院
   * 湖州职业技术学院

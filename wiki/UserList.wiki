@@ -14,6 +14,7 @@ This OJ is used on these site:
   * http://moonwalk.snucse.org:8080/JudgeOnline/
   * http://icpc.snucse.org:8080/JudgeOnline/
   * http://judge.oi.hk/
+  * http://59.73.16.90/  沈阳工程学院
 首批LiveCD试用：
   * 浙江纺织服装学院
   * 湖州职业技术学院

@@ -287,6 +287,17 @@ CREATE TABLE `online` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
  
+CREATE TABLE `topic` (
+  `tid` int(11) NOT NULL auto_increment,
+  `title` varbinary(60) NOT NULL,
+  `status` int(2) NOT NULL default '0',
+  `top_level` int(2) NOT NULL default '0',
+  `cid` int(11) default NULL,
+  `pid` int(11) NOT NULL,
+  `author_id` varchar(20) NOT NULL,
+  PRIMARY KEY  (`tid`),
+  KEY `cid` (`cid`,`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -506,4 +517,3 @@ CREATE TABLE `users` (
 
 ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;
 
- 

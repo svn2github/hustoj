@@ -1,4 +1,6 @@
 <?
+/* header("Location:discuss.php?id=".$_GET['id']);
+*/
 $pid=(int)$_GET['id'];
 if($pid>0){
 $pid="p".$pid;
@@ -6,4 +8,5 @@ $pid="p".$pid;
 }else{
     header("Location:bbs/");
 }
+
 ?>

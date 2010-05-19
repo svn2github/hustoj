@@ -25,7 +25,7 @@ function checkcontest(){
 <body>
 <center>
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
-<table width=96%>
+<table width=96%> 
 	<tr align="center" class='hd' valign="top">
 		<th><a href="./faqs.php">F.A.Qs</a></th>
 		<th><a href="./discuss.php">BBS</a></th>

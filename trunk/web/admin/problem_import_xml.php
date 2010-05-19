@@ -117,7 +117,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$testinputs=$searchNode->getElementsByTagName("test_output");
 		$testno=0;
 		foreach($testinputs as $testNode){
-			if($testNode->nodeValue)
+			//if($testNode->nodeValue)
 			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
 		}
 		

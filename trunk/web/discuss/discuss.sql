@@ -21,4 +21,4 @@ CREATE TABLE `reply` (
  `ip` varchar(30) NOT NULL,
  PRIMARY KEY  (`rid`),
  KEY `author_id` (`author_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;;

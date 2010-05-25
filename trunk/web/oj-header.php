@@ -29,7 +29,7 @@ function checkcontest(){
 	<tr align="center" class='hd' valign="top">
 		<th><a href="./faqs.php">F.A.Qs</a></th>
 		<th><a href="./bbs.php">BBS</a></th>
-		<th><a href="http://acm.zj.cn/wiki/en">HOME</a></th>
+		<th><a href="<?=$OJ_HOME?>">HOME</a></th>
 		<th><a href="./problemset.php">PROBLEMS</a></th>
 		<th><a href="./status.php">STATUS</a></th>
 		<th><a href="./ranklist.php">RANKLIST</a></th>

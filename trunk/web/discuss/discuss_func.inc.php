@@ -1,6 +1,6 @@
 <?php
 function problem_exist($pid,$cid){
-	require_once("./include/db_info.inc.php");
+	require_once("../include/db_info.inc.php");
 	if ($pid=='') $pid=0;
 	if ($cid!='')
 		$cid="'".mysql_escape_string($cid)."'";

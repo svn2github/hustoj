@@ -1,5 +1,5 @@
 <?php
-	require_once("include/discuss_func.inc.php");
+	require_once("discuss_func.inc.php");
 	$pid=$_REQUEST['pid']; $cid=$_REQUEST['cid'];
 	$prob_exist = problem_exist($pid, $cid);
 	if ($cid!='' && $cid!=null && $prob_exist) require_once("contest-header.php");
@@ -80,7 +80,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	echo "<td>";
 	if ($row->pid!=0) echo"<a href=\"discuss.php?pid={$row->pid}&cid={$row->cid}\">{$row->pid}</a>";
 	echo "</td>";
-	echo "<td><a href=\"userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
+	echo "<td><a href=\"../userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
 	echo "<td><a href=\"thread.php?tid={$row->tid}\">".nl2br(htmlspecialchars($row->title))."</a></td>";
 	echo "<td>{$row->posttime}</td>";
 	echo "<td>{$row->lastupdate}</td>";
@@ -99,4 +99,4 @@ mysql_free_result($result);
 <span style = "font-size:75%; margin:0 10">[<b class="lock">Lock</b>] 锁帖</span>
 </div>
 </center>
-<?require_once("oj-footer.php")?>
+<?require_once("../oj-footer.php")?>

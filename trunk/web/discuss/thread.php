@@ -32,7 +32,7 @@ if ($isadmin){
 </tr>
 
 <?php
-	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
+	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <=1 ORDER BY `rid` LIMIT 30";
 	$result=mysql_query($sql) or die("Error! ".mysql_error());
 	$rows_cnt = mysql_num_rows($result);
 	$cnt=0;
@@ -98,4 +98,4 @@ if (isset($_SESSION['user_id'])){?>
 </center>
 </div>
 
-<?require_once("oj-footer.php")?>
+<?require_once("../oj-footer.php")?>

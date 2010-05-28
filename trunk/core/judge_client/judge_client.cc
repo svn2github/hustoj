@@ -261,10 +261,10 @@ void update_problem(int p_id){
 int compile(int lang){
 	int pid;
 
-     const char * CP_C[]={"gcc","Main.c","-o","Main","-O2","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
+     const char * CP_C[]={"gcc","Main.c","-o","Main","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
 	 const char * CP_X[]={"g++","Main.cc","-o","Main","-O2","-Wall","-lm","--static","-DONLINE_JUDGE",NULL};//"-I/usr/include/c++/4.3",
      const char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
-	 const char * CP_J[]={"javac","Main.java",NULL};
+	 const char * CP_J[]={"javac","-J-Xmx256m","Main.java",NULL};
 	pid=fork();
 	if (pid==0){
 		struct rlimit LIM;
@@ -452,8 +452,9 @@ int main(int argc, char** argv) {
 		sprintf(cmd,"cp %s %sdata.in",infile,work_dir);
 		system(cmd);
 		sprintf(outfile,"/home/judge/data/%d/%s.out",p_id,fname);
-		sprintf(userfile,"/home/judge/run%s/user.out",argv[2]);
-		pid_t pidApp=fork();
+		sprintf(userfile,"/home/judge/run%s/user.out",argv[2]);\
+		init_cleft(lang);
+		pid_t pidApp=fork();	
 		if (pidApp==0){		// child
 			// set the limit
 			struct rlimit LIM; // time limit, file limit& memory limit
@@ -489,17 +490,29 @@ int main(int argc, char** argv) {
 			setresuid(1536,1536,1536);
 			
 			if (lang!=3) execl("./Main","./Main",NULL);
-			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
+			else execl("/usr/bin/java","/usr/bin/java","-Xmx256m","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			//sleep(1);
 			return 0;
 		}else{				// parent
+		        sprintf(cmd,"/proc/%d/statm",pidApp);
+				FILE * proc=fopen(cmd,"r");
+				fscanf(proc,"%d",&tempmemory);
+				fclose(proc);
+				tempmemory*=getpagesize();
 			int status,sig;
 			struct user_regs_struct reg;
 			struct rusage ruse;
-			init_cleft(lang);
+			
 			sub=0;
 			while (1){
+				// check the usage
+				sprintf(cmd,"/proc/%d/statm",pidApp);
+				FILE * proc=fopen(cmd,"r");
+				fscanf(proc,"%d",&tempmemory);
+				fclose(proc);
+				tempmemory*=getpagesize();
+				
 				wait4(pidApp,&status,0,&ruse);
 				sig=status>>8;/*status >> 8 差不多是EXITCODE*/
 
@@ -555,8 +568,8 @@ sig = 25 对应的是 File size limit exceeded*/
 				}
 				sub=1-sub;
 
-				// check the usage
-				tempmemory=ruse.ru_minflt*getpagesize();
+				
+				//printf("%ld\t%ld\t%ld\t%d\t%ld\n",ruse.ru_maxrss,ruse.ru_isrss,ruse.ru_ixrss,getpagesize(),ruse.ru_minflt);
 				tempmemory=read_proc_statm(pidApp)*getpagesize();
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory/STD_MB>mem_lmt){

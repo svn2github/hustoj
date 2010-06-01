@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!isset($_SESSION['administrator'])){
+	exit(1);
+}
 /*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2010 Frederico Caldeira Knabben

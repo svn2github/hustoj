@@ -15,12 +15,10 @@
     从Windows的POJ导出的数据库sql脚本很有可能是GBK/GB2312编码的，使用编码转换工具iconv -f gbk -t utf8进行转换后再在Linux系统进行还原，就可以解决乱码问题。具体可以参考：
 
 
- # 原始数据windows下的文件拷贝到linux下
-  d:\mysql......\data\judgeonline => /var/lib/mysql/judgeonline
- # 用ubuntu源里的官方mysql administrator进行备份(backup),得到utf8编码的乱码sql文件,其中汉字是gbk->latin1->utf8的。设为［utf8.sql］文件
- # iconv -f utf8 -t latin1 utf8.sql>gbk.sql   获得gbk编码的sql文件。
- # iconv -f gbk -t utf8 gbk.sql >utf8.sql  获得可以正常在linux下查看的utf8编码sql文件。
- # 用mysql administrator导入新的uft8.sql。
+ # mysqldump -uroot -proot --hex-blob --complete-insert=true --default-character-set=latin1 judgeonline>gbk.sql
+ # iconv -c -f gbk -t utf8 gbk.sql >utf8.sql 
+ # sed 's/latin1/utf8/g' utf8.sql >newjol.sql 
+
 
 
   * 测试数据迁移

@@ -93,8 +93,17 @@ if (mysql_num_rows($result)!=1){
 	echo "<b>Memory Limit: </b>".$row->memory_limit." MB<br>";
 	echo "<b>Submissions: </b>".$row->submit."&nbsp;&nbsp;";
 	echo "<b>Solved: </b>".$row->accepted."<br>"; 
+	
+	if ($pr_flag){
+		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";
+	}else{
+		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>Submit</a>]";
+	}
+	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>Status</a>]";
+	echo "[<a href='bbs.php?id=".$row->problem_id."'>Discuss</a>]";
+	
 	echo "</center>";
-
+	
 	echo "<h2>Description</h2><p>".$row->description."</p>";
 	echo "<h2>Input</h2><p>".$row->input."</p>";
 	echo "<h2>Output</h2><p>".$row->output."</p>";

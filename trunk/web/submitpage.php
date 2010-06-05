@@ -52,7 +52,7 @@ Language:
 ?>
 </select>
 <br>
-<textarea cols=80 rows=35 id="source" name="source"></textarea><br>
+<textarea cols=80 rows=20 id="source" name="source"></textarea><br>
 
 <input type=submit value="Submit">
 <input type=reset value="Reset">

@@ -305,6 +305,23 @@ int read_proc_statm(int pid){
     sprintf(fn,"/proc/%d/statm",pid);
     pf=fopen(fn,"r");
     fscanf(pf,"%d",&ret);
+    if(false&&DEBUG) {
+		    int debug;
+		    printf("statm: %d\t",ret);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\t",debug);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\t",debug);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\t",debug);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\t",debug);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\t",debug);
+	    	fscanf(pf,"%d",&debug);
+	    	printf("%d\n",debug);
+	    	
+	}
     fclose(pf);
     return ret;
 }
@@ -376,9 +393,9 @@ int main(int argc, char** argv) {
 	// the limit for java
 	if (lang==3){
 		time_lmt=time_lmt*2+2;
-		mem_lmt=mem_lmt*2+128*STD_MB;
+		mem_lmt=mem_lmt*2+687;
 	}
-//	printf("time: %d mem: %d\n",time_lmt,mem_lmt);
+    if(DEBUG)printf("time: %d mem: %d\n",time_lmt,mem_lmt);
 
 	// get the source code
 	sprintf(sql,"SELECT source FROM source_code WHERE solution_id=%s",argv[1]);
@@ -476,7 +493,7 @@ int main(int argc, char** argv) {
 			setrlimit(RLIMIT_STACK,&LIM);
 
 			chdir(work_dir);
-
+			if(DEBUG) printf("starting \n");
 			// open the files
 			freopen("data.in","r",stdin);
 			freopen("user.out","w",stdout);
@@ -493,13 +510,11 @@ int main(int argc, char** argv) {
 			else execl("/usr/bin/java","/usr/bin/java","-Xmx256m","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			//sleep(1);
+			
+			
 			return 0;
 		}else{				// parent
-		        sprintf(cmd,"/proc/%d/statm",pidApp);
-				FILE * proc=fopen(cmd,"r");
-				fscanf(proc,"%d",&tempmemory);
-				fclose(proc);
-				tempmemory*=getpagesize();
+			if(DEBUG) printf("judging \n");
 			int status,sig;
 			struct user_regs_struct reg;
 			struct rusage ruse;
@@ -507,12 +522,7 @@ int main(int argc, char** argv) {
 			sub=0;
 			while (1){
 				// check the usage
-				sprintf(cmd,"/proc/%d/statm",pidApp);
-				FILE * proc=fopen(cmd,"r");
-				fscanf(proc,"%d",&tempmemory);
-				fclose(proc);
-				tempmemory*=getpagesize();
-				
+
 				wait4(pidApp,&status,0,&ruse);
 				sig=status>>8;/*status >> 8 差不多是EXITCODE*/
 
@@ -568,13 +578,21 @@ sig = 25 对应的是 File size limit exceeded*/
 				}
 				sub=1-sub;
 
-				
-				//printf("%ld\t%ld\t%ld\t%d\t%ld\n",ruse.ru_maxrss,ruse.ru_isrss,ruse.ru_ixrss,getpagesize(),ruse.ru_minflt);
+				   
 				tempmemory=read_proc_statm(pidApp)*getpagesize();
 				if (tempmemory>topmemory) topmemory=tempmemory;
-				if (topmemory/STD_MB>mem_lmt){
+				if(DEBUG&&false) {
+					printf("wait4: %ld\t%ld\t%ld\t%d\t%ld\n",ruse.ru_maxrss,ruse.ru_isrss,ruse.ru_ixrss,getpagesize(),ruse.ru_minflt);
+					printf("memory: %d %d %ld\n",topmemory,mem_lmt*STD_MB,ruse.ru_majflt);
+					//system("jps");
+					//sprintf(cmd,"jstat -gccapacity %d",pidApp);
+					//system(cmd);
+				}
+				if (topmemory>mem_lmt*STD_MB){
+					if(DEBUG) printf("out of memory %d\n",topmemory);
 					if (ACflg==OJ_AC) ACflg=OJ_ML;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
+					break;
 				}
 				ptrace(PTRACE_SYSCALL,pidApp,NULL,NULL);
 			}
@@ -601,9 +619,29 @@ sig = 25 对应的是 File size limit exceeded*/
 				}
 				else if (comp_res==OJ_PE) PEflg=OJ_PE;
 			}
+			if(lang==3&&ACflg!=OJ_AC){
+				sprintf(buf,"cat %s/error.out", work_dir);
+				comp_res = system(buf);
+				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/error.out", work_dir);
+				comp_res = system(buf);
+				printf("MLE:%d",comp_res);
+				if(!comp_res) {
+					ACflg=OJ_ML;
+					topmemory=512*STD_MB;
+				}
+				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
+				comp_res = system(buf);
+				printf("jvm:%d",comp_res);
+				if(!comp_res) {
+					ACflg=OJ_RE;
+					topmemory=0;
+				}
+			}
 		}
 	}
-	system("rm *");
+	if(DEBUG) printf("result: %d\n",ACflg);
+	sprintf(buf,"rm %s/*", work_dir);
+	system(buf);
 	if (ACflg==OJ_AC && PEflg==OJ_PE) ACflg=OJ_PE;
 	updatedb(solution_id,ACflg,usedtime,topmemory>>10);
 	update_user(user_id);

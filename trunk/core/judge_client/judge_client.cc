@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <stdarg.h>
-
+#include <ctype.h>
 #include <sys/wait.h>
 #include <sys/ptrace.h>
 #include <sys/types.h>
@@ -149,13 +149,81 @@ int compare(const char *file1,const char *file2){
 	
 }
 */
+/*
+ * translated from ZOJ judger r367
+ * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
+ * 
+ * */
+int compare(const char *file1,const char *file2) {
+    int ret = OJ_AC;
+    FILE * f1,*f2;
+    f1=fopen(file1,"r");
+    f2=fopen(file2,"r");
+    if (!f1||!f2) {
+        ret=OJ_RE;
+    }else
+    for (;;) {
+        // Find the first non-space character at the beginning of line.
+        // Blank lines are skipped.
+        int c1 = fgetc(f1);
+        int c2 = fgetc(f2);
+        while (isspace(c1) || isspace(c2)) {
+            if (c1 != c2) {
+                ret = OJ_PE;
+            }
+            if (isspace(c1)) {
+                c1 = fgetc(f1);
+            }
+            if (isspace(c2)) {
+                c2 = fgetc(f2);
+            }
+        }
+        // Compare the current line.
+        for (;;) {
+            // Read until 2 files return a space or 0 together.
+            while ((!isspace(c1) && c1) || (!isspace(c2) && c2)) {
+                if (c1 < 0 || c2 < 0) {
+                    return -1;
+                }
+                if (c1 != c2) {
+                    // Consecutive non-space characters should be all exactly the same
+                    return OJ_WA;
+                }
+                c1 = fgetc(f1);
+                c2 = fgetc(f2);
+            }
+            // Find the next non-space character or \n.
+            while ((isspace(c1) && c1 != '\n') || (isspace(c2) && c2 != '\n')) {
+                if (c1 != c2) {
+                    ret = OJ_PE;
+                }
+                if (isspace(c1) && c1 != '\n') {
+                    c1 = fgetc(f1);
+                }
+                if (isspace(c2) && c2 != '\n') {
+                    c2 = fgetc(f2);
+                }
+            }
+            if (c1 < 0 || c2 < 0) {
+                return OJ_RE;
+            }
+            if (!c1 && !c2) {
+                return ret;
+            }
+            if ((c1 == '\n' || !c1) && (c2 == '\n' || !c2)) {
+                break;
+            }
+        }
+    }
+    return ret;
+}/*
 void delnextline(char s[]){
 	int L;
 	L=strlen(s);
 	while (L>0&&(s[L-1]=='\n'||s[L-1]=='\r')) s[--L]=0;
 }
 
-int compare(const char *file1,const char *file2){
+int compare_old(const char *file1,const char *file2){
 	FILE *f1,*f2;
 	char *s1,*s2,*p1,*p2;
 	int PEflg;
@@ -163,13 +231,17 @@ int compare(const char *file1,const char *file2){
 	s2=new char[STD_F_LIM+512];
 	if (!(f1=fopen(file1,"r")))
 		return OJ_AC;
-	for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
+	for (p1=s1;EOF!=fscanf(f1,"%s\n",p1);){
 		while (*p1) p1++;
+		*p1='\n';p1++;
+	}
 	fclose(f1);
 	if (!(f2=fopen(file2,"r")))
 		return OJ_RE;
-	for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
+	for (p2=s2;EOF!=fscanf(f2,"%s\n",p2);){
 		while (*p2) p2++;
+		*p2='\n';p2++;
+	}
 	fclose(f2);
 	if (strcmp(s1,s2)!=0){
 //		printf("A:%s\nB:%s\n",s1,s2);
@@ -194,7 +266,7 @@ int compare(const char *file1,const char *file2){
 		else return OJ_AC;
 	}
 }
-
+*/
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"

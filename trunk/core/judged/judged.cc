@@ -106,8 +106,8 @@ void updatedb(int solution_id,int result,int time,int memory){
 void run_client(int runid,int clientid){
     char buf[2],runidstr[1024];
         struct rlimit LIM;
-		LIM.rlim_max=5;
-		LIM.rlim_cur=5;
+		LIM.rlim_max=300;
+		LIM.rlim_cur=300;
 		setrlimit(RLIMIT_CPU,&LIM);
 
 		LIM.rlim_max=80*STD_MB;

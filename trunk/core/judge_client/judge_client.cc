@@ -340,8 +340,8 @@ int compile(int lang){
 	pid=fork();
 	if (pid==0){
 		struct rlimit LIM;
-		LIM.rlim_max=5;
-		LIM.rlim_cur=5;
+		LIM.rlim_max=60;
+		LIM.rlim_cur=60;
 		setrlimit(RLIMIT_CPU,&LIM);
 
 		LIM.rlim_max=8*STD_MB;

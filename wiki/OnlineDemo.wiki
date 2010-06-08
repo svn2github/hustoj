@@ -14,6 +14,9 @@ http://hustoj.googlecode.com/files/share.tar.gz
 = Details =
 http://www.newsclan.com/JudgeOnline/
 
+or check the [[UserList]]
+
+
 [http://hustoj.googlecode.com/files/hustojaddproblem.jpg]
 
 [http://hustoj.googlecode.com/files/hustojcontestcopy.jpg]

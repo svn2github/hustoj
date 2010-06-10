@@ -551,13 +551,13 @@ int main(int argc, char** argv) {
 				if (WIFEXITED(status)) break;
 				if(get_file_size("error.out")){
 					ACflg=OJ_RE;
-					//ptrace(PTRACE_KILL,pidApp,NULL,NULL);
+					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;				
 				}
 				
 				if(get_file_size(userfile)>get_file_size(outfile)*10){
 					ACflg=OJ_OL;
-					//ptrace(PTRACE_KILL,pidApp,NULL,NULL);
+					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
 				}
 				

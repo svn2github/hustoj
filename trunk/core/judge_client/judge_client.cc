@@ -216,57 +216,7 @@ int compare(const char *file1,const char *file2) {
         }
     }
     return ret;
-}/*
-void delnextline(char s[]){
-	int L;
-	L=strlen(s);
-	while (L>0&&(s[L-1]=='\n'||s[L-1]=='\r')) s[--L]=0;
 }
-
-int compare_old(const char *file1,const char *file2){
-	FILE *f1,*f2;
-	char *s1,*s2,*p1,*p2;
-	int PEflg;
-	s1=new char[STD_F_LIM+512];
-	s2=new char[STD_F_LIM+512];
-	if (!(f1=fopen(file1,"r")))
-		return OJ_AC;
-	for (p1=s1;EOF!=fscanf(f1,"%s\n",p1);){
-		while (*p1) p1++;
-		*p1='\n';p1++;
-	}
-	fclose(f1);
-	if (!(f2=fopen(file2,"r")))
-		return OJ_RE;
-	for (p2=s2;EOF!=fscanf(f2,"%s\n",p2);){
-		while (*p2) p2++;
-		*p2='\n';p2++;
-	}
-	fclose(f2);
-	if (strcmp(s1,s2)!=0){
-//		printf("A:%s\nB:%s\n",s1,s2);
-		delete[] s1;
-		delete[] s2;
-
-		return OJ_WA;
-	}else{
-		f1=fopen(file1,"r");
-		f2=fopen(file2,"r");
-		PEflg=0;
-		while (PEflg==0 && fgets(s1,STD_F_LIM,f1) && fgets(s2,STD_F_LIM,f2)){
-			delnextline(s1);
-			delnextline(s2);
-			if (strcmp(s1,s2)==0) continue;
-			else PEflg=1;
-		}
-		delete [] s1;
-		delete [] s2;
-		fclose(f1);fclose(f2);
-		if (PEflg) return OJ_PE;
-		else return OJ_AC;
-	}
-}
-*/
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"
@@ -604,13 +554,13 @@ int main(int argc, char** argv) {
 					//ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;				
 				}
-				/*
+				
 				if(get_file_size(userfile)>get_file_size(outfile)*10){
 					ACflg=OJ_OL;
 					//ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
 				}
-				*/
+				
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
 					printf("sig=%d\n",sig);

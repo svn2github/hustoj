@@ -34,9 +34,9 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 
 下载地址: 
 r288 [http://code.google.com/p/freeproblemset/source/browse/trunk/hustoj-FPS.iso]
-
 emule;
-ed2k://|file|hustoj-FPS.iso|724424704|4390E4CDF88D60363D8B472E07AD4BA8|/
+ed2k://|file|hustoj-FPS.iso|714954752|367F863D9B1431298218E573AB934D19|/
+
 
 
 

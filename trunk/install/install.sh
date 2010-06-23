@@ -16,7 +16,7 @@ sudo useradd -m -u 1536 judge
 
 #try install tools
 sudo apt-get install g++ libmysql++-dev
-sudo yum install g++ libmysql++-dev
+sudo yum install g++  mysql-devel 
 
 #compile and install the core
 cd hustoj-read-only/core/judged/
@@ -31,6 +31,7 @@ sudo cp -R hustoj-read-only/web $WEBBASE/JudgeOnline
 sudo mysql -h localhost -u$DBUSER -p$DBPASS < db.sql
 
 #create work dir set default conf
+sudo    mkdir /home/judge
 sudo    mkdir /home/judge/etc
 sudo    mkdir /home/judge/data
 sudo    mkdir /home/judge/log
@@ -39,7 +40,7 @@ sudo cp java0.policy  judge.conf /home/judge/etc
 sudo chown -R judge /home/judge
 
 #boot up judged
-sudo echo "LANG=C /usr/bin/judged" > /etc/init.d/judged
+sudo echo "/usr/bin/judged" > /etc/init.d/judged
 sudo chmod +x  /etc/init.d/judged
 sudo ln -s /etc/init.d/judged /etc/rc3.d/S93judged
 sudo /etc/init.d/judged

@@ -12,7 +12,7 @@ DBPASS=root
 svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
 
 #create user and homedir
-sudo useradd -u 1536 judge
+sudo useradd -m -u 1536 judge
 
 #try install tools
 sudo apt-get install g++ libmysql++-dev

@@ -149,11 +149,57 @@ int compare(const char *file1,const char *file2){
 	
 }
 */
+void delnextline(char s[]){
+        int L;
+        L=strlen(s);
+        while (L>0&&(s[L-1]=='\n'||s[L-1]=='\r')) s[--L]=0;
+}
+
+int compare(const char *file1,const char *file2){
+        FILE *f1,*f2;
+        char *s1,*s2,*p1,*p2;
+        int PEflg;
+        s1=new char[STD_F_LIM+512];
+        s2=new char[STD_F_LIM+512];
+        if (!(f1=fopen(file1,"r")))
+                return OJ_AC;
+        for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
+                while (*p1) p1++;
+        fclose(f1);
+        if (!(f2=fopen(file2,"r")))
+                return OJ_RE;
+        for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
+                while (*p2) p2++;
+        fclose(f2);
+        if (strcmp(s1,s2)!=0){
+//              printf("A:%s\nB:%s\n",s1,s2);
+                delete[] s1;
+                delete[] s2;
+
+                return OJ_WA;
+        }else{
+                f1=fopen(file1,"r");
+                f2=fopen(file2,"r");
+                PEflg=0;
+                while (PEflg==0 && fgets(s1,STD_F_LIM,f1) && fgets(s2,STD_F_LIM,f2)){
+                        delnextline(s1);
+                        delnextline(s2);
+                        if (strcmp(s1,s2)==0) continue;
+                        else PEflg=1;
+                }
+                delete [] s1;
+                delete [] s2;
+                fclose(f1);fclose(f2);
+                if (PEflg) return OJ_PE;
+                else return OJ_AC;
+        }
+}
+
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
  * 
- * */
+
 int compare(const char *file1,const char *file2) {
     int ret = OJ_AC;
     FILE * f1,*f2;
@@ -183,7 +229,7 @@ int compare(const char *file1,const char *file2) {
             // Read until 2 files return a space or 0 together.
             while ((!isspace(c1) && c1) || (!isspace(c2) && c2)) {
                 if (c1 < 0 || c2 < 0) {
-                    return -1;
+                    return OJ_RE;
                 }
                 if (c1 != c2) {
                     // Consecutive non-space characters should be all exactly the same
@@ -217,6 +263,7 @@ int compare(const char *file1,const char *file2) {
     }
     return ret;
 }
+*  * */
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"
@@ -648,6 +695,7 @@ sig = 25 对应的是 File size limit exceeded*/
 				    if(DEBUG) printf("fail test %s\n",infile);
 				}
 				else if (comp_res==OJ_PE) PEflg=OJ_PE;
+				ACflg=comp_res;
 			}
 			if(lang==3&&ACflg!=OJ_AC){
 				sprintf(buf,"cat %s/error.out", work_dir);

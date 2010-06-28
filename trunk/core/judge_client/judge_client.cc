@@ -183,9 +183,7 @@ int compare(const char *file1,const char *file2) {
             // Read until 2 files return a space or 0 together.
             while ((!isspace(c1) && c1) || (!isspace(c2) && c2)) {
                 if (c1 < 0 || c2 < 0) {
-					if(c1<1) ret=OJ_RE;
-                    if(c2<1) ret=OJ_WA;
-                    return ret;
+                    return -1;
                 }
                 if (c1 != c2) {
                     // Consecutive non-space characters should be all exactly the same
@@ -561,7 +559,7 @@ int main(int argc, char** argv) {
 					ACflg=OJ_OL;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
-				}
+				} 
 				
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
@@ -650,7 +648,6 @@ sig = 25 对应的是 File size limit exceeded*/
 				    if(DEBUG) printf("fail test %s\n",infile);
 				}
 				else if (comp_res==OJ_PE) PEflg=OJ_PE;
-				if(DEBUG) printf("onetest=%d",comp_res);
 			}
 			if(lang==3&&ACflg!=OJ_AC){
 				sprintf(buf,"cat %s/error.out", work_dir);
@@ -672,12 +669,9 @@ sig = 25 对应的是 File size limit exceeded*/
 			}
 		}
 	}
-	if(DEBUG) 
-	    printf("result: %d\n",ACflg);
-	else{ 
-		sprintf(buf,"rm %s/*", work_dir);
-		system(buf);
-	}
+	if(DEBUG) printf("result: %d\n",ACflg);
+	sprintf(buf,"rm %s/*", work_dir);
+	system(buf);
 	if (ACflg==OJ_AC && PEflg==OJ_PE) ACflg=OJ_PE;
 	updatedb(solution_id,ACflg,usedtime,topmemory>>10);
 	update_user(user_id);

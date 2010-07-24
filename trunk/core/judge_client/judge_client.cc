@@ -602,7 +602,7 @@ int main(int argc, char** argv) {
 					break;				
 				}
 				
-				if(get_file_size(userfile)>get_file_size(outfile)*10){
+				if(!isspj&&get_file_size(userfile)>get_file_size(outfile)*10){
 					ACflg=OJ_OL;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;

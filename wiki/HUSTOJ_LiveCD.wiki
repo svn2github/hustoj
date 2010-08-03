@@ -36,19 +36,28 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 r301
 
 [http://www.xun6.com/file/5b7a11397/hustoj-FPS.part1.rar.html]
+
 [http://www.xun6.com/file/66ba8d187/hustoj-FPS.part2.rar.html]
+
 [http://www.xun6.com/file/f0c7081a7/hustoj-FPS.part3.rar.html]
+
 [http://www.xun6.com/file/bf5a93ab7/hustoj-FPS.part4.rar.html]
+
 [http://www.xun6.com/file/4025e3d37/hustoj-FPS.part5.rar.html]
+
 [http://www.xun6.com/file/be98834a7/hustoj-FPS.part6.rar.html]
+
 [http://www.xun6.com/file/61b543587/hustoj-FPS.part7.rar.html]
+
 [http://www.xun6.com/file/478d5f617/hustoj-FPS.part8.rar.html]
 
 
-r288 [http://code.google.com/p/freeproblemset/source/browse/trunk/hustoj-FPS.iso]
+r288:
+[http://code.google.com/p/freeproblemset/source/browse/trunk/hustoj-FPS.iso]
 
 
-emule;
+emule:
+
 ed2k://|file|hustoj-FPS.iso|714954752|367F863D9B1431298218E573AB934D19|/
 
 

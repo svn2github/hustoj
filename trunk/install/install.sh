@@ -15,7 +15,7 @@ svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
 sudo useradd -m -u 1536 judge
 
 #try install tools
-sudo apt-get install g++ libmysql++-dev
+sudo apt-get install g++ libmysql++-dev php5 apache2 mysql-server php5-mysql
 sudo yum install g++  mysql-devel 
 
 #compile and install the core

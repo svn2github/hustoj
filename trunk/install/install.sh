@@ -38,6 +38,8 @@ sudo    mkdir /home/judge/log
 sudo    mkdir /home/judge/run0
 sudo cp java0.policy  judge.conf /home/judge/etc
 sudo chown -R judge /home/judge
+sudo chgrp -R www-data /home/judge/data
+sudo chmod 771 /home/judge/data
 
 #boot up judged
 sudo echo "/usr/bin/judged" > /etc/init.d/judged

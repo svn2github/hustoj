@@ -33,6 +33,12 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 管理员可以导入/fps下的FPS格式的xml文件。
 
 下载地址: 
+
+r307
+
+[https://dl.dropbox.com/u/6045405/hustoj-FPS.iso]
+
+
 r301
 
 [http://www.xun6.com/file/5b7a11397/hustoj-FPS.part1.rar.html]
@@ -59,8 +65,3 @@ r288:
 emule:
 
 ed2k://|file|hustoj-FPS.iso|714954752|367F863D9B1431298218E573AB934D19|/
-
-
-
-
-[https://dl.dropbox.com/u/6045405/hustoj-FPS.iso]

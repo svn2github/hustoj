@@ -111,7 +111,36 @@ $sample_output=$_POST['sample_output'];
 $hint=$_POST['hint'];
 $source=$_POST['source'];
 $spj=$_POST['spj'];
-
+if (get_magic_quotes_gpc ()) {
+	$title = stripslashes ( $title);
+	$time_limit = stripslashes ( $time_limit);
+	$memory_limit = stripslashes ( $memory_limit);
+	$description = stripslashes ( $description);
+	$input = stripslashes ( $input);
+	$output = stripslashes ( $output);
+	$sample_input = stripslashes ( $sample_input);
+	$sample_output = stripslashes ( $sample_output);
+	$test_input = stripslashes ( $test_input);
+	$test_output = stripslashes ( $test_output);
+	$hint = stripslashes ( $hint);
+	$source = stripslashes ( $source); 
+	$spj = stripslashes ( $spj);
+	$source = stripslashes ( $source );
+}
+	$title=mysql_real_escape_string($title);
+	$time_limit=mysql_real_escape_string($time_limit);
+	$memory_limit=mysql_real_escape_string($memory_limit);
+	$description=mysql_real_escape_string($description);
+	$input=mysql_real_escape_string($input);
+	$output=mysql_real_escape_string($output);
+	$sample_input=mysql_real_escape_string($sample_input);
+	$sample_output=mysql_real_escape_string($sample_output);
+//	$test_input=($test_input);
+//	$test_output=($test_output);
+	$hint=mysql_real_escape_string($hint);
+	$source=mysql_real_escape_string($source);
+//	$spj=($spj);
+	
 $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_limit`='$memory_limit',
 	`description`='$description',`input`='$input',`output`='$output',`sample_input`='$sample_input',`sample_output`='$sample_output',`hint`='$hint',`source`='$source',`spj`=$spj,`in_date`=NOW()
 	WHERE `problem_id`=$id";

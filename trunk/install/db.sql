@@ -2,39 +2,6 @@ set names utf8;
 create database jol;
 use jol;
 
--- phpMyAdmin SQL Dump
-
--- version 2.9.1.1-Debian-10
-
--- http://www.phpmyadmin.net
-
--- 
-
--- Ö÷»ú: localhost
-
--- Éú³ÉÈÕÆÚ: 2009 Äê 04 ÔÂ 24 ÈÕ 12:08
-
--- ·þÎñÆ÷°æ±Ÿ: 5.0.32
-
--- PHP °æ±Ÿ: 5.2.0-8+etch13
-
--- 
-
--- ÊýŸÝ¿â: `judge`
-
--- 
-
- 
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `compileinfo`
-
--- 
 
  
 
@@ -48,17 +15,6 @@ CREATE TABLE `compileinfo` (
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
- 
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `contest`
-
--- 
 
  
 
@@ -84,16 +40,6 @@ CREATE TABLE `contest` (
 
  
 
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `contest_problem`
-
--- 
-
  
 
 CREATE TABLE `contest_problem` (
@@ -110,18 +56,6 @@ CREATE TABLE `contest_problem` (
 
  
 
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `loginlog`
-
--- 
-
- 
-
 CREATE TABLE `loginlog` (
 
   `user_id` varchar(20) NOT NULL default '',
@@ -135,98 +69,6 @@ CREATE TABLE `loginlog` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
  
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `mail`
-
--- 
-
- 
-
-CREATE TABLE `mail` (
-
-  `mail_id` int(11) NOT NULL auto_increment,
-
-  `to_user` varchar(20) NOT NULL default '',
-
-  `from_user` varchar(20) NOT NULL default '',
-
-  `title` varchar(200) NOT NULL default '',
-
-  `content` text,
-
-  `new_mail` tinyint(1) NOT NULL default '1',
-
-  `reply` tinyint(4) default '0',
-
-  `in_date` datetime default NULL,
-
-  `defunct` char(1) NOT NULL default 'N',
-
-  PRIMARY KEY  (`mail_id`),
-
-  KEY `uid` (`to_user`)
-
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
- 
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `message`
-
--- 
-
- 
-
-CREATE TABLE `message` (
-
-  `message_id` int(11) NOT NULL auto_increment,
-
-  `problem_id` int(11) NOT NULL default '0',
-
-  `parent_id` int(11) NOT NULL default '0',
-
-  `thread_id` int(11) NOT NULL default '0',
-
-  `depth` int(11) NOT NULL default '0',
-
-  `orderNum` int(11) NOT NULL default '0',
-
-  `user_id` varchar(20) NOT NULL default '',
-
-  `title` varchar(200) NOT NULL default '',
-
-  `content` text,
-
-  `in_date` datetime default NULL,
-
-  `defunct` char(1) NOT NULL default 'N',
-
-  PRIMARY KEY  (`message_id`)
-
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
-
- 
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `news`
-
--- 
 
  
 
@@ -252,63 +94,6 @@ CREATE TABLE `news` (
 
  
 
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `online`
-
--- 
-
- 
-
-CREATE TABLE `online` (
-
-  `hash` varchar(32) collate utf8_unicode_ci NOT NULL,
-
-  `ip` varchar(20) character set utf8 NOT NULL default '',
-
-  `ua` varchar(255) character set utf8 NOT NULL default '',
-
-  `refer` varchar(255) collate utf8_unicode_ci default NULL,
-
-  `lastmove` int(10) NOT NULL,
-
-  `firsttime` int(10) default NULL,
-
-  `uri` varchar(255) collate utf8_unicode_ci default NULL,
-
-  PRIMARY KEY  (`hash`),
-
-  UNIQUE KEY `hash` (`hash`)
-
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
- 
-CREATE TABLE `topic` (
-  `tid` int(11) NOT NULL auto_increment,
-  `title` varbinary(60) NOT NULL,
-  `status` int(2) NOT NULL default '0',
-  `top_level` int(2) NOT NULL default '0',
-  `cid` int(11) default NULL,
-  `pid` int(11) NOT NULL,
-  `author_id` varchar(20) NOT NULL,
-  PRIMARY KEY  (`tid`),
-  KEY `cid` (`cid`,`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `privilege`
-
--- 
-
  
 
 CREATE TABLE `privilege` (
@@ -320,18 +105,6 @@ CREATE TABLE `privilege` (
   `defunct` char(1) NOT NULL default 'N'
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
- 
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `problem`
-
--- 
 
  
 
@@ -388,17 +161,6 @@ CREATE TABLE `problem` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
 
  
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `solution`
-
--- 
-
  
 
 CREATE TABLE `solution` (
@@ -446,17 +208,6 @@ CREATE TABLE `solution` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22930 ;
 
  
-
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `source_code`
-
--- 
-
  
 
 CREATE TABLE `source_code` (
@@ -469,19 +220,7 @@ CREATE TABLE `source_code` (
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
- 
 
--- --------------------------------------------------------
-
- 
-
--- 
-
--- ±íµÄœá¹¹ `users`
-
--- 
-
- 
 
 CREATE TABLE `users` (
 
@@ -518,18 +257,19 @@ CREATE TABLE `users` (
 ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;
 
 
+
 CREATE TABLE `topic` (
- `tid` int(11) NOT NULL auto_increment,
- `title` varbinary(60) NOT NULL,
- `status` int(2) NOT NULL default '0',
- `top_level` int(2) NOT NULL default '0',
- `cid` int(11) default NULL,
- `pid` int(11) NOT NULL,
- `author_id` varchar(20) NOT NULL,
- PRIMARY KEY  (`tid`),
- KEY `cid` (`cid`,`pid`)
-)
- ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `tid` int(11) NOT NULL auto_increment,
+  `title` varbinary(60) NOT NULL,
+  `status` int(2) NOT NULL default '0',
+  `top_level` int(2) NOT NULL default '0',
+  `cid` int(11) default NULL,
+  `pid` int(11) NOT NULL,
+  `author_id` varchar(20) NOT NULL,
+  PRIMARY KEY  (`tid`),
+  KEY `cid` (`cid`,`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 CREATE TABLE `reply` (
  `rid` int(11) NOT NULL auto_increment,

@@ -28,6 +28,8 @@ sudo cp judge_client /usr/bin
 cd ../../../
 #install web and db
 sudo cp -R hustoj-read-only/web $WEBBASE/JudgeOnline
+sudo chmod -R 771 $WEBBASE/JudgeOnline
+sudo chown -R www-data $WEBBASE/JudgeOnline
 sudo mysql -h localhost -u$DBUSER -p$DBPASS < db.sql
 
 #create work dir set default conf

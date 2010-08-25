@@ -28,7 +28,7 @@ function checkcontest(){
 <table width=96%> 
 	<tr align="center" class='hd' valign="top">
 		<th><a href="./faqs.php">F.A.Qs</a></th>
-		<th><a href="./bbs.php">BBS</a></th>
+		<th><a href="./bbs.php"><?=strtoupper($OJ_BBS)?></a></th>
 		<th><a href="<?=$OJ_HOME?>">HOME</a></th>
 		<th><a href="./problemset.php">PROBLEMS</a></th>
 		<th><a href="./status.php">STATUS</a></th>

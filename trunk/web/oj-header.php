@@ -35,8 +35,9 @@ function checkcontest(){
 		<th><a href="./ranklist.php">RANKLIST</a></th>
 		<th><a href="./contest.php"><?=checkcontest()?></a></th>
 		<?
-			$sid=$_SESSION['user_id'];
+			
 			if (isset($_SESSION['user_id'])){
+				$sid=$_SESSION['user_id'];
 				print "<th><a href=./modifypage.php><b>U</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'><font color=red>$sid</font></a></th>";
 				print "<th><a href=logout.php>LOGOUT</a></th>";
 			}else{

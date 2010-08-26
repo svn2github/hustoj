@@ -1,6 +1,6 @@
 <?
 require_once("admin-header.php");
-if($_POST['do']=='do'){
+if(isset($_POST['do'])){
 	$fp=fopen("msg.txt","w");
 	fputs($fp, stripslashes($_POST['msg']));
 	fclose($fp);

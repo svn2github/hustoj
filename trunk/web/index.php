@@ -6,7 +6,7 @@
 			."FROM `news` "
 			."WHERE `defunct`!='Y'"
 			."ORDER BY `importance` ASC,`time` DESC "
-			."LIMIT ".strval($_GET['pageid']*5).",5";
+			."LIMIT 5";
 	$result=mysql_query($sql);//mysql_escape_string($sql));
 	if (!$result){
 		echo "<h3>No News Now!</h3>";

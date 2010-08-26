@@ -17,5 +17,5 @@
 	
 	if(mysql_select_db($DB_NAME));
 	else die('Can\'t use foo : ' . mysql_error());
-	@session_start();
+	//@session_start();
 ?>

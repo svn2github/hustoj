@@ -1,6 +1,6 @@
 <?require("admin-header.php");?>
 <?
-if($_POST['do']=='do'){
+if(isset($_POST['do'])){
 	if (isset($_POST['rjpid'])){
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$_POST['rjpid'];
 		mysql_query($sql) or die(mysql_error());

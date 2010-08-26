@@ -1,6 +1,6 @@
 <?require_once("admin-header.php");?>
 <?
-if($_POST['do']=='do'){
+if(isset($_POST['do'])){
 	$user_id=addslashes($_POST['user_id']);
 	$passwd =MD5($_POST['passwd']);
 	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'";

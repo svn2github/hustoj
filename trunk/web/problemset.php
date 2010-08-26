@@ -79,7 +79,7 @@ while ($row=mysql_fetch_object($result)){
 	else echo "<tr class='evenrow'>";
 	echo "<td>";
 	if ($sub_arr[$row->problem_id]){
-		if ($acc_arr[$row->problem_id]) echo "<font color=green>Y</font>";
+		if (isset($acc_arr[$row->problem_id])) echo "<font color=green>Y</font>";
 		else echo "<font color=red>N</font>";
 	}
 	echo "<td align=center>".$row->problem_id;

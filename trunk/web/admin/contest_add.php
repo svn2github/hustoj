@@ -54,8 +54,9 @@ if (isset($_POST['syear']))
 		
 }
 else{
-   $cid=$_GET['cid'];
-   if(isset($cid)){
+   
+   if(isset($_GET['cid'])){
+		   $cid=$_GET['cid'];
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
 		   $result=mysql_query($sql) or die(mysql_error());
 		   $row=mysql_fetch_object($result);
@@ -76,7 +77,7 @@ else{
 	
 	<form method=POST action='<?=$_SERVER['PHP_SELF']?>'>
 	<p align=center><font size=4 color=#333399>Add a Contest</font></p>
-	<p align=left>Title:<input type=text name=title size=71 value="<?=$title?$title:""?>"></p>
+	<p align=left>Title:<input type=text name=title size=71 value="<?=isset($title)?$title:""?>"></p>
 	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
 	Year:<input type=text name=syear value=<?=date('Y')?> size=7 >
 	Month:<input type=text name=smonth value=<?=date('m')?> size=7 >
@@ -97,7 +98,7 @@ else{
 		<option value=2 selected>Pascal</option>
 		<option value=3 selected>Java</option>	
 	</select>
-	<br>Problems:<input type=text size=60 name=cproblem value="<?=$plist?$plist:""?>">
+	<br>Problems:<input type=text size=60 name=cproblem value="<?=isset($plist)?$plist:""?>">
 	<br>
 	Users:<textarea name="ulist" rows="10" cols="20"></textarea>
 	<br />

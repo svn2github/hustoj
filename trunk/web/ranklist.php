@@ -1,6 +1,9 @@
 <?php
 	$now = time ();
-	$rank = intval ( $_GET ['start'] );
+	if(isset( $_GET ['start'] ))
+		$rank = intval ( $_GET ['start'] );
+	else
+	    $rank = 0;
 	$file = "ranklist$rank.html";
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
@@ -23,7 +26,7 @@
 	</style>
 	<?
 		require_once ("./include/db_info.inc.php");
-		$rank = intval ( $_GET ['start'] );
+		//$rank = intval ( $_GET ['start'] );
 		if ($rank < 0)
 			$rank = 0;
 		$sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,reg_time  LIMIT  " . strval ( $rank ) . ",25";

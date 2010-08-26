@@ -1,6 +1,6 @@
 <?require_once("admin-header.php");?>
 <?
-if($_POST['do']=='do'){
+if(isset($_POST['do'])){
 	$from=addslashes($_POST['from']);
 	$to=addslashes($_POST['to']);
 	$start=addslashes($_POST['start']);

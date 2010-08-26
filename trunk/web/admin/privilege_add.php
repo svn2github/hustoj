@@ -1,6 +1,6 @@
 <?require_once("admin-header.php");?>
 <?
-if($_POST['do']=='do'){
+if(isset($_POST['do'])){
 	$user_id=addslashes($_POST['user_id']);
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values('$user_id','$rightstr','N')";

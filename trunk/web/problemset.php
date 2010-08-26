@@ -78,7 +78,7 @@ while ($row=mysql_fetch_object($result)){
 	if ($cnt) echo "<tr class='oddrow'>";
 	else echo "<tr class='evenrow'>";
 	echo "<td>";
-	if ($sub_arr[$row->problem_id]){
+	if (isset($sub_arr[$row->problem_id])){
 		if (isset($acc_arr[$row->problem_id])) echo "<font color=green>Y</font>";
 		else echo "<font color=red>N</font>";
 	}

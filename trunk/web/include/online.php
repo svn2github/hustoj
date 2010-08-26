@@ -1,6 +1,6 @@
 <?php
 /*
-Êý¾Ý¿â
+æ•°æ®åº“
 CREATE TABLE `online` (
   `hash` varchar(32) collate utf8_unicode_ci NOT NULL,
   `ip` varchar(20) character set utf8 NOT NULL default '',
@@ -15,7 +15,7 @@ CREATE TABLE `online` (
 
  */
 /**
- * ÅÐ¶¨¶à¾ÃÎ´ÏìÓ¦µÄÓÃ»§ÎªÒÑ¾­Àë¿ªµÄÓÃ»§
+ * åˆ¤å®šå¤šä¹…æœªå“åº”çš„ç”¨æˆ·ä¸ºå·²ç»ç¦»å¼€çš„ç”¨æˆ·
  * @var int
  */
 
@@ -23,7 +23,7 @@ define('ONLINE_DURATION', 600);
 
 /**
  * 
- * ±¾ÀàÓÃÀ´¶ÔÔÚÏßÓÃ»§½øÐÐÍ³¼Æ
+ * æœ¬ç±»ç”¨æ¥å¯¹åœ¨çº¿ç”¨æˆ·è¿›è¡Œç»Ÿè®¡
  * 
  * @package online
  * @author freefcw
@@ -102,8 +102,10 @@ class online{
 		
 		$sql = 'SELECT * FROM online';
 		$res = mysql_query($sql);
-		while($rt = mysql_fetch_object($res)) $ret[] = $rt;
-		mysql_free_result($res);
+		if($res ){
+			while($rt = mysql_fetch_object($res)) $ret[] = $rt;
+			mysql_free_result($res);
+		}
 		return $ret;
 	}
 	/**
@@ -135,9 +137,13 @@ class online{
 	{
 		$sql = 'SELECT count(ip) as nums FROM online';
 		$res = mysql_query($sql);
-		$ret = mysql_fetch_object($res);
-		mysql_free_result($res);
-		return $ret->nums;
+		$ret = 0;
+		if($res){
+			$ret = mysql_fetch_object($res);
+			$ret = $ret->nums;
+			mysql_free_result($res);
+	    }
+		return $ret;
 	}
 	/**
 	 * check the record exist
@@ -148,7 +154,7 @@ class online{
 	{
 		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
 		$res = mysql_query($sql);
-		if(mysql_num_rows($res) == 0)
+		if($res&&mysql_num_rows($res) == 0)
 			return false;
 		else
 			return true;

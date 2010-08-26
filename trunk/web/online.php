@@ -1,6 +1,7 @@
 <?php
 	$debug = true;
 	require_once('./oj-header.php');
+	require_once('./include/db_info.inc.php');
 	require_once('./include/iplocation.php');
 	$users = $on->getAll();
 	$ip = new IpLocation();
@@ -20,7 +21,7 @@
 	else
 		echo $l['area'].'@'.$l['country'];
 	?></td><td><?=$u->uri?></td><td><?=$u->refer?></td>
-<td class="time"><?=sprintf("%dmin %dsec",($u->lastmove-$u->firsttime)/60,($u->lastmove-$u->firsttime) % 60)?></td><td><?php $b=get_browser($u->ua, false);echo $b->browser.$b->version.'@'.$b->platform;?></td></tr>
+<td class="time"><?=sprintf("%dmin %dsec",($u->lastmove-$u->firsttime)/60,($u->lastmove-$u->firsttime) % 60)?></td><td><?=$u->ua?></td></tr>
 <?php endforeach;?>
 </tbody>
 </table>

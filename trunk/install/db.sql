@@ -283,3 +283,14 @@ CREATE TABLE `reply` (
  KEY `author_id` (`author_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE `online` (
+  `hash` varchar(32) collate utf8_unicode_ci NOT NULL,
+  `ip` varchar(20) character set utf8 NOT NULL default '',
+  `ua` varchar(255) character set utf8 NOT NULL default '',
+  `refer` varchar(255) collate utf8_unicode_ci default NULL,
+  `lastmove` int(10) NOT NULL,
+  `firsttime` int(10) default NULL,
+  `uri` varchar(255) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`hash`),
+  UNIQUE KEY `hash` (`hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

@@ -1,5 +1,6 @@
 <?php
 	require_once('oj-header.php'); 
+	require_once("./include/db_info.inc.php");
 ?>
 <hr>
 <center>
@@ -135,7 +136,7 @@ public class Main{
 <center>
   <table width=100% border=0>
     <tr>
-      <td align=right width=65%><a href = "index.php"><font color=red>Huazhong University of Science and Technology Online Judge</font></a> <a href = ""><font color=red>V1.9.9.0</font></a></td>
+      <td align=right width=65%><a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> <a href = ""><font color=red>V1.9.9.0</font></a></td>
     </tr>
   </table>
 </center>

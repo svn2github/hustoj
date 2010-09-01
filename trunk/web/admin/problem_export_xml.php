@@ -81,7 +81,7 @@ if (! isset ( $_SESSION ['administrator'] )) {
 
 
 if ($_POST ['do'] == 'do') {
-   if(isset($_POST ['in'])){
+   if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
    	$in=addslashes ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
    }else{

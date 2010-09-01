@@ -81,9 +81,16 @@ if (! isset ( $_SESSION ['administrator'] )) {
 
 
 if ($_POST ['do'] == 'do') {
-	$start = addslashes ( $_POST ['start'] );
-	$end = addslashes ( $_POST ['end'] );
-	$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
+   if(isset($_POST ['in'])){
+   	$in=addslashes ( $_POST ['in'] );
+   	$sql = "select * from problem where problem_id in($in)";
+   }else{
+	   $start = addslashes ( $_POST ['start'] );
+		$end = addslashes ( $_POST ['end'] );
+		$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
+   }
+
+	
 	//echo $sql;
 	$result = mysql_query ( $sql ) or die ( mysql_error () );
 	

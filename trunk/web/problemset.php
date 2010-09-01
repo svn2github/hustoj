@@ -49,7 +49,7 @@ if (!isset($_SESSION['administrator'])){
 			SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or private=1
 		)
 	)";
-	$sql=$sql." AND `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."'  or problem_id=1000 ";
+	$sql=$sql." AND `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 else{
 	$sql="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` ";

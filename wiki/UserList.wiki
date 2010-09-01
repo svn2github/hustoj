@@ -17,7 +17,7 @@ This OJ is used on these site:
   * http://acm.sie.edu.cn/  中国沈阳工程学院
   * http://222.196.35.62/JudgeOnline/ SWUST Judge Online 
   * http://172.31.2.24/JudgeOnline/problemset.php 重庆大学(内网)
-  * http://202.194.155.49/JudgeOnline  中国石油大学（华东）
+  * http://202.194.155.49/JudgeOnline  中国石油大学（华东）测试中 未来可能为acm.upc.edu.cn
 首批LiveCD试用：
   * 浙江纺织服装学院
   * 湖州职业技术学院

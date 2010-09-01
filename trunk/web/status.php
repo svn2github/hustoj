@@ -161,7 +161,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	}else{
 		echo "<td>------<td>------";
 	}
-	if (isset($_SESSION['user_id'])&&strtolower($row->user_id)!=strtolower($_SESSION['user_id']) && !isset($_SESSION['source_browser'])){
+	if (!isset($_SESSION['user_id'])&&strtolower($row->user_id)!=strtolower($_SESSION['user_id']) && !isset($_SESSION['source_browser'])){
 		echo "<td>".$language_name[$row->language];
 	}else{
 		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";

@@ -12,7 +12,7 @@
 		echo "<h3>No News Now!</h3>";
 		echo mysql_error();
 	}else{
-		echo "<table width=96%><tr><td width=20%><td><font size=16 color=blue>News...</font></tr>";
+		echo "<table width=96%>";
 		while ($row=mysql_fetch_object($result)){
 			echo "<tr><td><td><font color=red><b>".$row->user_id."</b>:".$row->title."</font></tr>";
 			echo "<tr><td><td>".$row->content."</tr>";

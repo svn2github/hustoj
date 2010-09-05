@@ -1,8 +1,5 @@
 <?
 require_once ("../include/db_info.inc.php");
-function getTestFileName($pid,$OJ_DATA) {
-	
-}
 
 function getTestFileIn($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
@@ -72,6 +69,33 @@ function getSolution($pid){
     mysql_close($con);
 	return $ret;
 }
+function fixurl($img_url){
+   $img_url=htmlspecialchars_decode( $img_url);
+   
+	if (substr($img_url,0,7)!="http://"){
+	  if(substr($img_url,0,1)=="/"){
+	     	$ret='http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$img_url;
+     }else{
+     		$path= dirname($_SERVER['PHP_SELF']);
+	      $ret='http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$path."/../".$img_url;
+     }
+   }else{
+   	$ret=$img_url;
+   }
+   return  $ret;
+} 
+function image_base64_encode($img_url){
+   $img_url=fixurl($img_url);
+	$handle = fopen($img_url, "rb");
+	$contents = stream_get_contents($handle);
+	$encoded_img= base64_encode($contents);
+	fclose($handle);
+	return $encoded_img;
+}
+function getImages($content){
+    preg_match_all("<[iI][mM][gG][^<>]+[sS][rR][cC]=\"?([^ \"\>]+)/?>",$content,$images);
+    return $images;
+}
 session_start ();
 if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -103,17 +127,32 @@ if ($_POST ['do'] == 'do') {
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	?>
  
-<fps version="1.0" url="http://code.google.com/p/freeproblemset/">
+<fps version="1.1" url="http://code.google.com/p/freeproblemset/">
 	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
 	<?
 	while ( $row = mysql_fetch_object ( $result ) ) {
-		$testfile = getTestFileName ( $row->problem_id ,$OJ_DATA);
+		
 		?>
 <item>
 <title><![CDATA[<?=$row->title?>]]></title>
 <time_limit><![CDATA[<?=$row->time_limit?>]]></time_limit>
 <memory_limit><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
-<description><![CDATA[<?=$row->description?>]]></description>
+
+<? 
+   $description=$row->description;
+   $images=getImages($description);
+   foreach($images[1] as $img){
+   		$description=str_replace($img,fixurl($img),$description); 
+          
+	      echo "<img><src><![CDATA[";
+	      echo fixurl($img);
+	      echo "]]></src><base64><![CDATA[";
+	      echo image_base64_encode($img);
+	      echo "]]></base64></img>";
+      
+   }
+?>
+<description><![CDATA[<?=$description?>]]></description>
 <input><![CDATA[<?=$row->input?>]]></input> 
 <output><![CDATA[<?=$row->output?>]]></output>
 <sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>

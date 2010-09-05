@@ -2,7 +2,11 @@
 require_once ("admin-header.php");
 ?>
 <?
-
+function image_save_file($filepath ,$base64_encoded_img){
+	$fp=fopen($filepath ,wb);
+	fwrite($fp,base64_decode($base64_encoded_img));
+	fclose($fp);
+}
 require_once ("../include/problem.php");
 
 function submitSolution($pid,$solution,$language)
@@ -119,6 +123,23 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		foreach($testinputs as $testNode){
 			//if($testNode->nodeValue)
 			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+		}
+		$images=$searchNode->getElementsByTagName("img");
+		$testno=0;
+		foreach($images as $img){
+			$src=getValue($img,"src");
+			$base64=getValue($img,"base64");
+			$ext=pathinfo($src);
+			$ext=$ext['extension'];
+			$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
+			image_save_file($newpath,$base64);
+			$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
+			$src=mysql_real_escape_string($src);
+			$newpath=mysql_real_escape_string($newpath);
+			$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";
+			//echo $sql;         
+         mysql_query ( $sql );
+	
 		}
 		
 		if($spj) {

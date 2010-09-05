@@ -85,12 +85,15 @@ function fixurl($img_url){
    return  $ret;
 } 
 function image_base64_encode($img_url){
-   $img_url=fixurl($img_url);
-	$handle = fopen($img_url, "rb");
-	$contents = stream_get_contents($handle);
-	$encoded_img= base64_encode($contents);
-	fclose($handle);
-	return $encoded_img;
+    $img_url=fixurl($img_url);
+	$handle = @fopen($img_url, "rb");
+	if($handle){
+		$contents = stream_get_contents($handle);
+		$encoded_img= base64_encode($contents);
+		fclose($handle);
+		return $encoded_img;
+	}else
+		return false;
 }
 function getImages($content){
     preg_match_all("<[iI][mM][gG][^<>]+[sS][rR][cC]=\"?([^ \"\>]+)/?>",$content,$images);
@@ -142,13 +145,16 @@ if ($_POST ['do'] == 'do') {
    $description=$row->description;
    $images=getImages($description);
    foreach($images[1] as $img){
-   		$description=str_replace($img,fixurl($img),$description); 
-          
-	      echo "<img><src><![CDATA[";
-	      echo fixurl($img);
-	      echo "]]></src><base64><![CDATA[";
-	      echo image_base64_encode($img);
-	      echo "]]></base64></img>";
+		  $description=str_replace($img,fixurl($img),$description); 
+          $base64=image_base64_encode($img);
+          if($base64){
+			  echo "<img><src><![CDATA[";
+			  echo fixurl($img);
+			  echo "]]></src><base64><![CDATA[";
+			  echo $base64;
+			  echo "]]></base64></img>";
+	      
+		 }
       
    }
 ?>

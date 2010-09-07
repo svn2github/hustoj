@@ -52,7 +52,7 @@ include_once("../fckeditor/fckeditor.php") ;
   
   $element=$html->find('pre[class=sio]',0);
   $sample_input=$element->innertext;
-  $element=$html->find('pre[class=sio]',0);
+  $element=$html->find('pre[class=sio]',1);
   $sample_output=$element->innertext;
 
 ?>

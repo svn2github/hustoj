@@ -127,6 +127,15 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
+	//mkdir($basedir);
+	$fp=fopen($basedir."/sample.in","w");
+	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_input)));
+	fclose($fp);
+	
+	$fp=fopen($basedir."/sample.out","w");
+	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_output)));
+	fclose($fp);
+
 	$title=mysql_real_escape_string($title);
 	$time_limit=mysql_real_escape_string($time_limit);
 	$memory_limit=mysql_real_escape_string($memory_limit);
@@ -150,14 +159,7 @@ echo "Edit OK!";
 $basedir=$OJ_DATA."$id";
 echo "Sample data file in $basedir Updated!<br>";
 
-	//mkdir($basedir);
-	$fp=fopen($basedir."/sample.in","w");
-	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_input)));
-	fclose($fp);
-	
-	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_output)));
-	fclose($fp);
+
 		
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
 endif?>

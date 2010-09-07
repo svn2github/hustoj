@@ -132,11 +132,11 @@ echo "Sample data file in $basedir Updated!<br>";
 
 	//mkdir($basedir);
 	$fp=fopen($basedir."/sample.in","w");
-	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_input)));
+	fputs($fp,str_replace("\r\n","\n",$sample_input));
 	fclose($fp);
 	
 	$fp=fopen($basedir."/sample.out","w");
-	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_output)));
+	fputs($fp,str_replace("\r\n","\n",$sample_output));
 	fclose($fp);
 
 	$title=mysql_real_escape_string($title);

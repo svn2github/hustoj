@@ -9,12 +9,10 @@
 <body leftmargin="30">
 <center>
 <?require_once("../include/db_info.inc.php");?>
-
 <?require_once("admin-header.php");?>
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>
-
 
 <?
   require_once("../include/simple_html_dom.php");
@@ -33,7 +31,6 @@ include_once("../fckeditor/fckeditor.php") ;
   $title=$element->plaintext;
   
   $element=$html->find('div[class=plm]',0);
-
   $tlimit=$element->find('td',0);//->next_sibling();
   $tlimit=substr($tlimit->plaintext,11);
   $tlimit=substr($tlimit,0,strlen($tlimit)-2);
@@ -54,7 +51,6 @@ include_once("../fckeditor/fckeditor.php") ;
   $sample_input=$element->innertext;
   $element=$html->find('pre[class=sio]',1);
   $sample_output=$element->innertext;
-
 ?>
 <form method=POST action=problem_add.php>
 <p align=center><font size=4 color=#333399>Add a Problem</font></p>
@@ -64,45 +60,36 @@ include_once("../fckeditor/fckeditor.php") ;
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value="<?=$tlimit?>">S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value="<?=$mlimit?>">MByte</p>
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
-
 <?php
 $description = new FCKeditor('description') ;
 $description->BasePath = '../fckeditor/' ;
 $description->Height = 300 ;
 $description->Width=600;
-
 $description->Value =$descriptionHTML;
 $description->Create() ;
 ?>
 </p>
-
 <p align=left>Input:<br><!--<textarea rows=13 name=input cols=80></textarea>-->
-
 <?php
 $input = new FCKeditor('input') ;
 $input->BasePath = '../fckeditor/' ;
 $input->Height = 300 ;
 $input->Width=600;
-
 $input->Value = $inputHTML;//'<p></p>' ;
 $input->Create() ;
 ?>
 </p>
-
 </p>
 <p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
-
 
 <?php
 $output = new FCKeditor('output') ;
 $output->BasePath = '../fckeditor/' ;
 $output->Height = 300 ;
 $output->Width=600;
-
 $output->Value =$outputHTML;// '<p></p>' ;
 $output->Create() ;
 ?>
-
 </p>
 <p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?=$sample_input?></textarea></p>
 <p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?=$sample_output?></textarea></p>
@@ -114,7 +101,6 @@ $output = new FCKeditor('hint') ;
 $output->BasePath = '../fckeditor/' ;
 $output->Height = 300 ;
 $output->Width=600;
-
 $output->Value = '<p></p>' ;
 $output->Create() ;
 ?>
@@ -141,4 +127,3 @@ if (mysql_num_rows($result)==0){
 <p>
 <?require_once("../oj-footer.php");?>
 </body></html>
-

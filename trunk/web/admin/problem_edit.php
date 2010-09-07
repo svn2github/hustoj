@@ -127,6 +127,9 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
+$basedir=$OJ_DATA."$id";
+echo "Sample data file in $basedir Updated!<br>";
+
 	//mkdir($basedir);
 	$fp=fopen($basedir."/sample.in","w");
 	fputs($fp,stripslashes(str_replace("\r\n","\n",$sample_input)));
@@ -156,8 +159,6 @@ $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_l
 
 @mysql_query($sql) or die(mysql_error());
 echo "Edit OK!";
-$basedir=$OJ_DATA."$id";
-echo "Sample data file in $basedir Updated!<br>";
 
 
 		

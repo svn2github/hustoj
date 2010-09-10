@@ -589,8 +589,12 @@ int main(int argc, char** argv) {
 			setrlimit(RLIMIT_FSIZE,&LIM);
 
 			// proc limit
-			LIM.rlim_cur=10; LIM.rlim_max=10;
-			if(lang!=3) setrlimit(RLIMIT_NPROC,&LIM);
+			if(lang!=3){
+			    LIM.rlim_cur=10; LIM.rlim_max=10;
+			}else{
+			    LIM.rlim_cur=100; LIM.rlim_max=100;
+			}
+			setrlimit(RLIMIT_NPROC,&LIM);
 			// set the stack
 			LIM.rlim_cur=STD_MB<<3; LIM.rlim_max=STD_MB<<3;
 			setrlimit(RLIMIT_STACK,&LIM);
@@ -610,7 +614,7 @@ int main(int argc, char** argv) {
 			setresuid(1536,1536,1536);
 			
 			if (lang!=3) execl("./Main","./Main",NULL);
-			else execl("/usr/bin/java","/usr/bin/java","-Xms32m","-Xmx256m","-Xss128k","-Djava.security.manager"
+			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			//sleep(1);
 			

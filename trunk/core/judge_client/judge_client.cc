@@ -45,6 +45,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
+
 static int DEBUG=0;
 static char host_name[bufsize];
 static char user_name[bufsize];
@@ -53,8 +54,10 @@ static char db_name  [bufsize];
 static int port_number;
 static int max_running;
 static int sleep_time;
+static int java_time_bonus=5;
+static int java_memory_bonus=512;
 //static int sleep_tmp;
-
+#define ZOJ_COM
 MYSQL *conn;
 
 char lang_ext[4][8]={"c","cc","pas","java"};
@@ -108,6 +111,10 @@ void init_mysql_conf(){
 			strcpy(db_name,buf+11);
 		}else if (strncmp(buf,"OJ_PORT_NUMBER",14)==0){
 			sscanf(buf+15,"%d",&port_number);
+		}else if (strncmp(buf,"OJ_JAVA_TIME_BONUS",18)==0){
+			sscanf(buf+19,"%d",&java_time_bonus);
+		}else if (strncmp(buf,"OJ_JAVA_MEMORY_BONUS",20)==0){
+			sscanf(buf+21,"%d",&java_memory_bonus);
 		}
 	}
 }
@@ -136,7 +143,7 @@ int isInFile(const char fname[]){
 	else return l-3;
 }
 
-/****	
+/***
 int compare(const char *file1,const char *file2){
 	char diff[1024];
 	sprintf(diff,"diff -q -B -b -w --strip-trailing-cr %s %s",file1,file2);
@@ -148,59 +155,13 @@ int compare(const char *file1,const char *file2){
 	else return OJ_AC;
 	
 }
-
-void delnextline(char s[]){
-        int L;
-        L=strlen(s);
-        while (L>0&&(s[L-1]=='\n'||s[L-1]=='\r')) s[--L]=0;
-}
-
-int compare(const char *file1,const char *file2){
-        FILE *f1,*f2;
-        char *s1,*s2,*p1,*p2;
-        int PEflg;
-        s1=new char[STD_F_LIM+512];
-        s2=new char[STD_F_LIM+512];
-        if (!(f1=fopen(file1,"r")))
-                return OJ_AC;
-        for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
-                while (*p1) p1++;
-        fclose(f1);
-        if (!(f2=fopen(file2,"r")))
-                return OJ_RE;
-        for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
-                while (*p2) p2++;
-        fclose(f2);
-        if (strcmp(s1,s2)!=0){
-//              printf("A:%s\nB:%s\n",s1,s2);
-                delete[] s1;
-                delete[] s2;
-
-                return OJ_WA;
-        }else{
-                f1=fopen(file1,"r");
-                f2=fopen(file2,"r");
-                PEflg=0;
-                while (PEflg==0 && fgets(s1,STD_F_LIM,f1) && fgets(s2,STD_F_LIM,f2)){
-                        delnextline(s1);
-                        delnextline(s2);
-                        if (strcmp(s1,s2)==0) continue;
-                        else PEflg=1;
-                }
-                delete [] s1;
-                delete [] s2;
-                fclose(f1);fclose(f2);
-                if (PEflg) return OJ_PE;
-                else return OJ_AC;
-        }
-}
 */
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
  * 
 */
-int compare(const char *file1,const char *file2) {
+int compare_zoj(const char *file1,const char *file2) {
     int ret = OJ_AC;
     FILE * f1,*f2;
     f1=fopen(file1,"r");
@@ -267,7 +228,7 @@ int compare(const char *file1,const char *file2) {
                 goto end;
             }
             if (c1 ==EOF || c2 ==EOF) {
-                ret=OJ_RE;
+                ret=OJ_WA;
                 goto end;
             }
 
@@ -281,6 +242,59 @@ end:
     if(f2)fclose(f2);
     return ret;
 }
+
+void delnextline(char s[]){
+        int L;
+        L=strlen(s);
+        while (L>0&&(s[L-1]=='\n'||s[L-1]=='\r')) s[--L]=0;
+}
+
+int compare(const char *file1,const char *file2){
+#ifdef ZOJ_COM
+		return compare_zoj(file1,file2);
+#endif
+#ifndef ZOJ_COM
+        FILE *f1,*f2;
+        char *s1,*s2,*p1,*p2;
+        int PEflg;
+        s1=new char[STD_F_LIM+512];
+        s2=new char[STD_F_LIM+512];
+        if (!(f1=fopen(file1,"r")))
+                return OJ_AC;
+        for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
+                while (*p1) p1++;
+        fclose(f1);
+        if (!(f2=fopen(file2,"r")))
+                return OJ_RE;
+        for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
+                while (*p2) p2++;
+        fclose(f2);
+        if (strcmp(s1,s2)!=0){
+//              printf("A:%s\nB:%s\n",s1,s2);
+                delete[] s1;
+                delete[] s2;
+
+                return OJ_WA;
+        }else{
+                f1=fopen(file1,"r");
+                f2=fopen(file2,"r");
+                PEflg=0;
+                while (PEflg==0 && fgets(s1,STD_F_LIM,f1) && fgets(s2,STD_F_LIM,f2)){
+                        delnextline(s1);
+                        delnextline(s2);
+                        if (strcmp(s1,s2)==0) continue;
+                        else PEflg=1;
+                }
+                delete [] s1;
+                delete [] s2;
+                fclose(f1);fclose(f2);
+                if (PEflg) return OJ_PE;
+                else return OJ_AC;
+        }
+#endif
+}
+
+
 
 /*  * */
 void updatedb(int solution_id,int result,int time,int memory){
@@ -480,8 +494,8 @@ int main(int argc, char** argv) {
 
 	// the limit for java
 	if (lang==3){
-		time_lmt=time_lmt*2+2;
-		mem_lmt=mem_lmt*2+687;
+		time_lmt=time_lmt+java_time_bonus;
+		mem_lmt=mem_lmt+java_memory_bonus;
 	}
     if(DEBUG)printf("time: %d mem: %d\n",time_lmt,mem_lmt);
 

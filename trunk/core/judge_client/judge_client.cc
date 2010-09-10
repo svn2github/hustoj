@@ -474,7 +474,8 @@ int main(int argc, char** argv) {
 
 	// clear the work dir
 	sprintf(cmd,"rm -rf %s*",work_dir);
-	system(cmd);
+	if(!DEBUG)
+		system(cmd);
 
 	// create the src file
 	sprintf(src_pth,"Main.%s",lang_ext[lang]);
@@ -576,7 +577,7 @@ int main(int argc, char** argv) {
 			setresuid(1536,1536,1536);
 			
 			if (lang!=3) execl("./Main","./Main",NULL);
-			else execl("/usr/bin/java","/usr/bin/java","-Xmx256m","-Djava.security.manager"
+			else execl("/usr/bin/java","/usr/bin/java","-Xms32m","-Xmx256m","-Xss128k","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			//sleep(1);
 			
@@ -707,6 +708,13 @@ sig = 25 对应的是 File size limit exceeded*/
 					ACflg=OJ_ML;
 					topmemory=512*STD_MB;
 				}
+				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
+				comp_res = system(buf);
+				printf("MLE:%d",comp_res);
+				if(!comp_res) {
+					ACflg=OJ_ML;
+					topmemory=512*STD_MB;
+				}
 				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
 				comp_res = system(buf);
 				printf("jvm:%d",comp_res);
@@ -717,8 +725,13 @@ sig = 25 对应的是 File size limit exceeded*/
 			}
 		}
 	}
-	if(DEBUG) printf("result: %d\n",ACflg);
-	sprintf(buf,"rm %s/*", work_dir);
+	if(DEBUG) {
+		printf("result: %d\n",ACflg);
+		sprintf(buf,"mv %s/* %slog/",work_dir, work_dir);
+		system(buf);
+	}else{
+		sprintf(buf,"rm %s/*", work_dir);
+	}
 	system(buf);
 	if (ACflg==OJ_AC && PEflg==OJ_PE) ACflg=OJ_PE;
 	updatedb(solution_id,ACflg,usedtime,topmemory>>10);

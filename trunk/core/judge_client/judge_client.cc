@@ -590,7 +590,7 @@ int main(int argc, char** argv) {
 
 			// proc limit
 			LIM.rlim_cur=10; LIM.rlim_max=10;
-			setrlimit(RLIMIT_NPROC,&LIM);
+			if(lang!=3) setrlimit(RLIMIT_NPROC,&LIM);
 			// set the stack
 			LIM.rlim_cur=STD_MB<<3; LIM.rlim_max=STD_MB<<3;
 			setrlimit(RLIMIT_STACK,&LIM);

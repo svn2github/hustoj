@@ -148,7 +148,7 @@ int compare(const char *file1,const char *file2){
 	else return OJ_AC;
 	
 }
-*/
+
 void delnextline(char s[]){
         int L;
         L=strlen(s);
@@ -194,12 +194,12 @@ int compare(const char *file1,const char *file2){
                 else return OJ_AC;
         }
 }
-
+*/
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
  * 
-
+*/
 int compare(const char *file1,const char *file2) {
     int ret = OJ_AC;
     FILE * f1,*f2;
@@ -214,6 +214,7 @@ int compare(const char *file1,const char *file2) {
         int c1 = fgetc(f1);
         int c2 = fgetc(f2);
         while (isspace(c1) || isspace(c2)) {
+
             if (c1 != c2) {
                 ret = OJ_PE;
             }
@@ -228,42 +229,60 @@ int compare(const char *file1,const char *file2) {
         for (;;) {
             // Read until 2 files return a space or 0 together.
             while ((!isspace(c1) && c1) || (!isspace(c2) && c2)) {
-                if (c1 < 0 || c2 < 0) {
-                    return OJ_RE;
-                }
+                if (c1==EOF && c2==EOF) {
+					goto end;
+				}
+				if (c1 ==EOF || c2==EOF) {
+					break;
+				}
                 if (c1 != c2) {
                     // Consecutive non-space characters should be all exactly the same
-                    return OJ_WA;
+                    ret=OJ_WA;
+					goto end;
                 }
                 c1 = fgetc(f1);
                 c2 = fgetc(f2);
             }
             // Find the next non-space character or \n.
-            while ((isspace(c1) && c1 != '\n') || (isspace(c2) && c2 != '\n')) {
+            while ((isspace(c1) ) || (isspace(c2) )) {
                 if (c1 != c2) {
-                    ret = OJ_PE;
+                    if(c2==EOF){
+                        c1 = fgetc(f1);
+                        continue;
+                    }else if(c1==EOF){
+                        c2 = fgetc(f2);
+                        continue;
+                    }else{
+                        ret = OJ_PE;
+                    }
                 }
-                if (isspace(c1) && c1 != '\n') {
+                if (isspace(c1) ) {
                     c1 = fgetc(f1);
                 }
-                if (isspace(c2) && c2 != '\n') {
+                if (isspace(c2) ) {
                     c2 = fgetc(f2);
                 }
             }
-            if (c1 < 0 || c2 < 0) {
-                return OJ_RE;
+            if (c1==EOF && c2==EOF) {
+                goto end;
             }
-            if (!c1 && !c2) {
-                return ret;
+            if (c1 ==EOF || c2 ==EOF) {
+                ret=OJ_RE;
+                goto end;
             }
+
             if ((c1 == '\n' || !c1) && (c2 == '\n' || !c2)) {
                 break;
             }
         }
     }
+end:
+    if(f1)fclose(f1);
+    if(f2)fclose(f2);
     return ret;
 }
-*  * */
+
+/*  * */
 void updatedb(int solution_id,int result,int time,int memory){
 	char sql[bufsize];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"

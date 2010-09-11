@@ -603,7 +603,6 @@ int main(int argc, char** argv) {
 			setrlimit(RLIMIT_STACK,&LIM);
 
 			chdir(work_dir);
-			if(DEBUG) printf("starting \n");
 			// open the files
 			freopen("data.in","r",stdin);
 			freopen("user.out","w",stdout);
@@ -625,8 +624,6 @@ int main(int argc, char** argv) {
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			}
 			//sleep(1);
-			
-			
 			return 0;
 		}else{				// parent
 			if(DEBUG) printf("judging %s\n",infile);
@@ -741,22 +738,24 @@ sig = 25 对应的是 File size limit exceeded*/
 				comp_res = system(buf);
 				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/error.out", work_dir);
 				comp_res = system(buf);
-				printf("MLE:%d",comp_res);
+				
 				if(!comp_res) {
+					printf("JVM need more Memory!");
 					ACflg=OJ_ML;
 					//topmemory=512*STD_MB;
 				}
 				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
 				comp_res = system(buf);
-				printf("MLE:%d",comp_res);
 				if(!comp_res) {
+					printf("JVM need more Memory or Threads!");
 					ACflg=OJ_ML;
 					//topmemory=512*STD_MB;
 				}
 				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
 				comp_res = system(buf);
-				printf("jvm:%d",comp_res);
+				
 				if(!comp_res) {
+					printf("jvm need more resource,tweak -Xmx Settings");
 					ACflg=OJ_RE;
 					//topmemory=0;
 				}

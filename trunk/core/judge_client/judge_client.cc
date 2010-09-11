@@ -582,7 +582,7 @@ int main(int argc, char** argv) {
 			// set the limit
 			struct rlimit LIM; // time limit, file limit& memory limit
 			// time limit
-			LIM.rlim_cur=(time_lmt-usedtime/1000)+2;
+			LIM.rlim_cur=(time_lmt-usedtime/1000)+1;
 			LIM.rlim_max=LIM.rlim_cur+1;
 			//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 			setrlimit(RLIMIT_CPU,  &LIM);

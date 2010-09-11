@@ -30,7 +30,7 @@
 #define STD_T_LIM 2
 #define STD_F_LIM (STD_MB<<5)
 #define STD_M_LIM (STD_MB<<7)
-#define bufsize 512
+#define BUFFER_SIZE 512
 
 #define OJ_WT0 0
 #define OJ_WT1 1
@@ -47,10 +47,10 @@
 #define OJ_CO 12
 
 static int DEBUG=0;
-static char host_name[bufsize];
-static char user_name[bufsize];
-static char password [bufsize];
-static char db_name  [bufsize];
+static char host_name[BUFFER_SIZE];
+static char user_name[BUFFER_SIZE];
+static char password [BUFFER_SIZE];
+static char db_name  [BUFFER_SIZE];
 static int port_number;
 static int max_running;
 static int sleep_time;
@@ -61,7 +61,7 @@ static int java_memory_bonus=512;
 MYSQL *conn;
 
 char lang_ext[4][8]={"c","cc","pas","java"};
-char buf[bufsize];
+char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename )
    {
@@ -90,7 +90,7 @@ void init_cleft(int lang){
 // read the configue file
 void init_mysql_conf(){
 	FILE *fp;
-	char buf[bufsize];
+	char buf[BUFFER_SIZE];
 	host_name[0]=0;
 	user_name[0]=0;
 	password[0]=0;
@@ -99,7 +99,7 @@ void init_mysql_conf(){
 	max_running=3;
 	sleep_time=3;
 	fp=fopen("/home/judge/etc/judge.conf","r");
-	while (fgets(buf,bufsize-1,fp)){
+	while (fgets(buf,BUFFER_SIZE-1,fp)){
 		buf[strlen(buf)-1]=0;
 		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
 			strcpy(host_name,buf+13);
@@ -298,7 +298,7 @@ int compare(const char *file1,const char *file2){
 
 /*  * */
 void updatedb(int solution_id,int result,int time,int memory){
-	char sql[bufsize];
+	char sql[BUFFER_SIZE];
 	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c"
 			,result,time,memory,solution_id,0);
 //	printf("sql= %s\n",sql);
@@ -340,7 +340,7 @@ void addceinfo(int solution_id){
 
 
 void update_user(char user_id[]){
-	char sql[bufsize];
+	char sql[BUFFER_SIZE];
 	sprintf(sql,"UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=\'%s\' AND `result`=\'4\') WHERE `user_id`=\'%s\'",user_id,user_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
 		write_log(mysql_error(conn));
@@ -351,7 +351,7 @@ void update_user(char user_id[]){
 
 
 void update_problem(int p_id){
-	char sql[bufsize];
+	char sql[BUFFER_SIZE];
 	sprintf(sql,"UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'%d\' AND `result`=\'4\') WHERE `problem_id`=\'%d\'",p_id,p_id);
 	if (mysql_real_query(conn,sql,strlen(sql)))
 		write_log(mysql_error(conn));
@@ -414,14 +414,13 @@ int read_proc_statm(int pid){
 */
 int read_proc_status(int pid,const char * mark){
     FILE * pf;
-    char fn[bufsize],buf[bufsize];
+    char fn[BUFFER_SIZE],buf[BUFFER_SIZE];
     int ret=0;
     sprintf(fn,"/proc/%d/status",pid);
     pf=fopen(fn,"r");
     int m=strlen(mark);
-    while(pf&&fgets(buf,bufsize-1,pf)){
-		printf("%s",buf);
-
+    while(pf&&fgets(buf,BUFFER_SIZE-1,pf)){
+		//if(DEBUG)printf("%s",buf);
 		buf[strlen(buf)-1]=0;
 		if (strncmp(buf,mark,m)==0){
 			sscanf(buf+m+1,"%d",&ret);
@@ -455,14 +454,14 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 	// copy the source file and get the limit
-	char sql[bufsize];
-	char work_dir[bufsize];
-	char src_pth[bufsize];
-	char cmd[bufsize];
+	char sql[BUFFER_SIZE];
+	char work_dir[BUFFER_SIZE];
+	char src_pth[BUFFER_SIZE];
+	char cmd[BUFFER_SIZE];
 
 	int solution_id=atoi(argv[1]);
 	int p_id,time_lmt,mem_lmt,cas_lmt,lang,isspj;
-	char user_id[bufsize];
+	char user_id[BUFFER_SIZE];
 
 	int sub;
 
@@ -544,11 +543,11 @@ int main(int argc, char** argv) {
 		updatedb(solution_id,OJ_RI,0,0);
 	}
 	// run
-	char fullpath[bufsize];	// DIR of the datafiles
-	char fname[bufsize];	// FULL Name of the FILES
-	char infile[bufsize];	// PATH&Name of the INPUT FILES
-	char outfile[bufsize];	// PATH&Name of the OUTPUT FILES
-	char userfile[bufsize];	// PATH&Name of the USERs OUTPUT FILES
+	char fullpath[BUFFER_SIZE];	// DIR of the datafiles
+	char fname[BUFFER_SIZE];	// FULL Name of the FILES
+	char infile[BUFFER_SIZE];	// PATH&Name of the INPUT FILES
+	char outfile[BUFFER_SIZE];	// PATH&Name of the OUTPUT FILES
+	char userfile[BUFFER_SIZE];	// PATH&Name of the USERs OUTPUT FILES
 
 	sprintf(fullpath,"/home/judge/data/%d",p_id);	// the fullpath of data dir
 
@@ -617,15 +616,20 @@ int main(int argc, char** argv) {
 			setuid(1536);
 			setresuid(1536,1536,1536);
 			
-			if (lang!=3) execl("./Main","./Main",NULL);
-			else execl("/usr/bin/java","/usr/bin/java","-Djava.security.manager"
+			if (lang!=3){
+				 execl("./Main","./Main",NULL);
+			 }
+			else {
+				sprintf(cmd,"-Xmx%dM",mem_lmt);
+				execl("/usr/bin/java","/usr/bin/java","-Xmx256M","-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
+			}
 			//sleep(1);
 			
 			
 			return 0;
 		}else{				// parent
-			if(DEBUG) printf("judging \n");
+			if(DEBUG) printf("judging %s\n",infile);
 			int status,sig;
 			struct user_regs_struct reg;
 			struct rusage ruse;
@@ -740,21 +744,21 @@ sig = 25 对应的是 File size limit exceeded*/
 				printf("MLE:%d",comp_res);
 				if(!comp_res) {
 					ACflg=OJ_ML;
-					topmemory=512*STD_MB;
+					//topmemory=512*STD_MB;
 				}
 				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
 				comp_res = system(buf);
 				printf("MLE:%d",comp_res);
 				if(!comp_res) {
 					ACflg=OJ_ML;
-					topmemory=512*STD_MB;
+					//topmemory=512*STD_MB;
 				}
 				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
 				comp_res = system(buf);
 				printf("jvm:%d",comp_res);
 				if(!comp_res) {
 					ACflg=OJ_RE;
-					topmemory=0;
+					//topmemory=0;
 				}
 			}
 		}

@@ -522,7 +522,7 @@ int main(int argc, char** argv) {
 
 	// copy java.policy
 	if (lang==3){
-		sprintf(cmd,"cp /home/judge/etc/java%s.policy %sjava.policy", argv[2],work_dir);
+		sprintf(cmd,"cp /home/judge/etc/java0.policy %sjava.policy",work_dir);
 		system(cmd);
 	}
 

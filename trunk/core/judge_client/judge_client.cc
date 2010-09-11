@@ -742,14 +742,14 @@ sig = 25 对应的是 File size limit exceeded*/
 				if(!comp_res) {
 					printf("JVM need more Memory!");
 					ACflg=OJ_ML;
-					//topmemory=512*STD_MB;
+					topmemory=mem_lmt*STD_MB;
 				}
 				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
 				comp_res = system(buf);
 				if(!comp_res) {
 					printf("JVM need more Memory or Threads!");
 					ACflg=OJ_ML;
-					//topmemory=512*STD_MB;
+					topmemory=mem_lmt*STD_MB;
 				}
 				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
 				comp_res = system(buf);

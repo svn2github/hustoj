@@ -583,7 +583,7 @@ int main(int argc, char** argv) {
 			struct rlimit LIM; // time limit, file limit& memory limit
 			// time limit
 			LIM.rlim_cur=(time_lmt-usedtime/1000)+1;
-			LIM.rlim_max=LIM.rlim_cur+1;
+			LIM.rlim_max=LIM.rlim_cur;
 			//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 			setrlimit(RLIMIT_CPU,  &LIM);
 			alarm(LIM.rlim_cur*2+3);
@@ -626,7 +626,7 @@ int main(int argc, char** argv) {
 			//sleep(1);
 			return 0;
 		}else{				// parent
-			if(DEBUG) printf("judging %s\n",infile);
+			if(DEBUG) printf("pid=%d judging %s\n",pidApp,infile);
 			int status,sig;
 			struct user_regs_struct reg;
 			struct rusage ruse;

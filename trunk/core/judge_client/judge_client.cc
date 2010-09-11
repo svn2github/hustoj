@@ -400,6 +400,7 @@ int compile(int lang){
 	}
 
 }
+/*
 int read_proc_statm(int pid){
     FILE * pf;
     char fn[4096];
@@ -407,26 +408,29 @@ int read_proc_statm(int pid){
     sprintf(fn,"/proc/%d/statm",pid);
     pf=fopen(fn,"r");
     fscanf(pf,"%d",&ret);
-    if(false&&DEBUG) {
-		    int debug;
-		    printf("statm: %d\t",ret);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\t",debug);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\t",debug);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\t",debug);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\t",debug);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\t",debug);
-	    	fscanf(pf,"%d",&debug);
-	    	printf("%d\n",debug);
-	    	
-	}
     fclose(pf);
     return ret;
 }
+*/
+int read_proc_status(int pid,const char * mark){
+    FILE * pf;
+    char fn[bufsize],buf[bufsize];
+    int ret=0;
+    sprintf(fn,"/proc/%d/status",pid);
+    pf=fopen(fn,"r");
+    int m=strlen(mark);
+    while(pf&&fgets(buf,bufsize-1,pf)){
+		printf("%s",buf);
+
+		buf[strlen(buf)-1]=0;
+		if (strncmp(buf,mark,m)==0){
+			sscanf(buf+m+1,"%d",&ret);
+		}
+	}
+    if(pf)fclose(pf);
+    return ret;
+}
+
 int main(int argc, char** argv) {
 	if (argc<3){
 		fprintf(stderr,"Usage:%s runid runmachine.\n",argv[0]);
@@ -693,16 +697,9 @@ sig = 25 对应的是 File size limit exceeded*/
 				}
 				sub=1-sub;
 
-				   
-				tempmemory=read_proc_statm(pidApp)*getpagesize();
+				//tempmemory=read_proc_statm(pidApp)*getpagesize();
+				tempmemory=read_proc_status(pidApp,"VmPeak:")*1024;
 				if (tempmemory>topmemory) topmemory=tempmemory;
-				if(DEBUG&&false) {
-					printf("wait4: %ld\t%ld\t%ld\t%d\t%ld\n",ruse.ru_maxrss,ruse.ru_isrss,ruse.ru_ixrss,getpagesize(),ruse.ru_minflt);
-					printf("memory: %d %d %ld\n",topmemory,mem_lmt*STD_MB,ruse.ru_majflt);
-					//system("jps");
-					//sprintf(cmd,"jstat -gccapacity %d",pidApp);
-					//system(cmd);
-				}
 				if (topmemory>mem_lmt*STD_MB){
 					if(DEBUG) printf("out of memory %d\n",topmemory);
 					if (ACflg==OJ_AC) ACflg=OJ_ML;

@@ -15,7 +15,7 @@ h2{color:blue}
 .evenrow{background-color:#D7EBFF;}
 body{
 	background-color:#FFFFFF;
-	background-image: url(image/background.jpg);
+	background-image: url(../image/background.jpg);
 }
 .hd{
 color:#FFFFFF;

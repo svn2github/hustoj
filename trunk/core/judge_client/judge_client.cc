@@ -56,6 +56,7 @@ static int max_running;
 static int sleep_time;
 static int java_time_bonus=5;
 static int java_memory_bonus=512;
+static char java_xmx  [BUFFER_SIZE];
 //static int sleep_tmp;
 #define ZOJ_COM
 MYSQL *conn;
@@ -98,6 +99,7 @@ void init_mysql_conf(){
 	port_number=3306;
 	max_running=3;
 	sleep_time=3;
+	strcpy(java_xmx,"-Xmx256M");
 	fp=fopen("/home/judge/etc/judge.conf","r");
 	while (fgets(buf,BUFFER_SIZE-1,fp)){
 		buf[strlen(buf)-1]=0;
@@ -115,6 +117,9 @@ void init_mysql_conf(){
 			sscanf(buf+19,"%d",&java_time_bonus);
 		}else if (strncmp(buf,"OJ_JAVA_MEMORY_BONUS",20)==0){
 			sscanf(buf+21,"%d",&java_memory_bonus);
+		}else if (strncmp(buf,"OJ_JAVA_XMX",11)==0){
+			strcpy(java_xmx, buf+12);
+			printf("javaxmx:%s\n",java_xmx);
 		}
 	}
 }
@@ -420,7 +425,7 @@ int read_proc_status(int pid,const char * mark){
     pf=fopen(fn,"r");
     int m=strlen(mark);
     while(pf&&fgets(buf,BUFFER_SIZE-1,pf)){
-		//if(DEBUG)printf("%s",buf);
+		//if(DEBUG&&buf[0]=='V') printf("%s",buf);
 		buf[strlen(buf)-1]=0;
 		if (strncmp(buf,mark,m)==0){
 			sscanf(buf+m+1,"%d",&ret);
@@ -620,7 +625,7 @@ int main(int argc, char** argv) {
 			 }
 			else {
 				sprintf(cmd,"-Xmx%dM",mem_lmt);
-				execl("/usr/bin/java","/usr/bin/java","-Xmx256M","-Djava.security.manager"
+				execl("/usr/bin/java","/usr/bin/java",java_xmx,"-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			}
 			//sleep(1);
@@ -654,6 +659,10 @@ int main(int argc, char** argv) {
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
 					printf("sig=%d\n",sig);
+					if(DEBUG){
+						 psignal(sig, cmd);
+						 printf("RE:%s",cmd);
+					}
 					if (ACflg==OJ_AC) switch (sig){
 						case SIGALRM:
 						case SIGXCPU: ACflg=OJ_TL; break;
@@ -665,13 +674,15 @@ int main(int argc, char** argv) {
 				
 				if (sig==0x05);
 				else {
-					if (ACflg==OJ_AC) switch (sig){
+					if (ACflg==OJ_AC) 
+					switch (sig){
 						case SIGALRM:
 						case SIGXCPU: ACflg=OJ_TL; break;
 						case SIGXFSZ: ACflg=OJ_OL; break;
 						default: ACflg=OJ_RE;
 					}
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
+					
 					break;
 				}
 /* sig == 5 差不多是正常暂停     commited from http://www.felix021.com/blog/index.php?go=category_13
@@ -697,9 +708,16 @@ sig = 25 对应的是 File size limit exceeded*/
 					if (sub==1) cleft[reg.orig_eax]--;
 				}
 				sub=1-sub;
-
+				
 				//tempmemory=read_proc_statm(pidApp)*getpagesize();
-				tempmemory=read_proc_status(pidApp,"VmPeak:")*1024;
+				if(0&&DEBUG&&lang==3){
+					int m_vmpeak,m_vmdata,m_minflt;
+					m_vmpeak=read_proc_status(pidApp,"VmPeak:");
+					m_vmdata=read_proc_status(pidApp,"VmData:");
+					m_minflt=ruse.ru_minflt*getpagesize()>>10;	
+					printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n",m_vmpeak,m_vmdata,m_minflt);		
+				}
+				tempmemory=read_proc_status(pidApp,"VmPeak:")<<10;
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory>mem_lmt*STD_MB){
 					if(DEBUG) printf("out of memory %d\n",topmemory);

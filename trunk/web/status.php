@@ -70,8 +70,8 @@ if ($language!=-1){
 	$str2=$str2."&language=".$language;
 }
 ?>
-Problem ID:<input type=text size=10 name=problem_id value='<?=$problem_id?>'>
-User ID:<input type=text size=10 name=user_id value='<?=$user_id?>'>
+Problem ID:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
+User ID:<input type=text size=6 name=user_id value='<?=$user_id?>'>
 <?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 Language:<select size="1" name="language">
 <?
@@ -107,8 +107,8 @@ echo "</select>";
 </select>
 <input type=submit value='Go'>
 </form>
-<table>
-<tr align=center class='toprow'>
+<table align=center>
+<tr  class='toprow'>
 <td width="8%">Run ID
 <td width="10%">User
 <td width="6%">Problem

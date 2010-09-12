@@ -82,7 +82,7 @@ public class Main{
 		Scanner cin = new Scanner(System.in);
 		int a, b;
 		while (cin.hasNext()){
-			a = cin.nextInt(), b = cin.nextInt();
+			a = cin.nextInt(); b = cin.nextInt();
 			System.out.println(a + b);
 		}
 	}

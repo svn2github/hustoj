@@ -659,7 +659,7 @@ int main(int argc, char** argv) {
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
 					printf("sig=%d\n",sig);
-					if(DEBUG){
+	/*				if(DEBUG){
 						 psignal(sig, cmd);
 						 printf("RE:%s",cmd);
 					}
@@ -670,6 +670,7 @@ int main(int argc, char** argv) {
 						default: ACflg=OJ_RE;
 					}
 					break;
+			*/
 				}
 				
 				if (sig==0x05);
@@ -679,6 +680,7 @@ int main(int argc, char** argv) {
 						case SIGALRM:
 						case SIGXCPU: ACflg=OJ_TL; break;
 						case SIGXFSZ: ACflg=OJ_OL; break;
+						case 9: ACflg=OJ_ML; break;
 						default: ACflg=OJ_RE;
 					}
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
@@ -710,14 +712,19 @@ sig = 25 对应的是 File size limit exceeded*/
 				sub=1-sub;
 				
 				//tempmemory=read_proc_statm(pidApp)*getpagesize();
-				if(0&&DEBUG&&lang==3){
+				if(lang==3){//java use pagefault
 					int m_vmpeak,m_vmdata,m_minflt;
-					m_vmpeak=read_proc_status(pidApp,"VmPeak:");
-					m_vmdata=read_proc_status(pidApp,"VmData:");
-					m_minflt=ruse.ru_minflt*getpagesize()>>10;	
-					printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n",m_vmpeak,m_vmdata,m_minflt);		
+					m_minflt=ruse.ru_minflt*getpagesize();	
+					if(0&&DEBUG){
+						m_vmpeak=read_proc_status(pidApp,"VmPeak:");
+						m_vmdata=read_proc_status(pidApp,"VmData:");
+						printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n",m_vmpeak,m_vmdata,m_minflt>>10);
+					}	
+					tempmemory=m_minflt;
+				}else{//other use VmPeak
+					tempmemory=read_proc_status(pidApp,"VmPeak:")<<10;
+					
 				}
-				tempmemory=read_proc_status(pidApp,"VmPeak:")<<10;
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory>mem_lmt*STD_MB){
 					if(DEBUG) printf("out of memory %d\n",topmemory);

@@ -371,7 +371,7 @@ int compile(int lang){
      const char * CP_C[]={"gcc","Main.c","-o","Main","-Wall","-lm","--static","-std=c99","-DONLINE_JUDGE",NULL};
 	 const char * CP_X[]={"g++","Main.cc","-o","Main","-O2","-Wall","-lm","--static","-DONLINE_JUDGE",NULL};//"-I/usr/include/c++/4.3",
      const char * CP_P[]={"fpc","Main.pas","-oMain","-Co","-Cr","-Ct","-Ci",NULL};
-	 const char * CP_J[]={"javac","-J-Xmx256m","Main.java",NULL};
+	 const char * CP_J[]={"javac","-J-Xms32m","-J-Xmx256m","Main.java",NULL};
 	pid=fork();
 	if (pid==0){
 		struct rlimit LIM;
@@ -625,7 +625,7 @@ int main(int argc, char** argv) {
 			 }
 			else {
 				sprintf(cmd,"-Xmx%dM",mem_lmt);
-				execl("/usr/bin/java","/usr/bin/java",java_xmx,"-Djava.security.manager"
+				execl("/usr/bin/java","/usr/bin/java","-Xms32m",java_xmx,"-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			}
 			//sleep(1);

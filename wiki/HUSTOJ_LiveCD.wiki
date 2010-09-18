@@ -36,7 +36,7 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 
 下载地址: 
 r352
-http://u.115.com/file/f6ffc5f87a
+http://u.115.com/file/f6bc99db5a
 hustoj-FPS.iso
 
 r324

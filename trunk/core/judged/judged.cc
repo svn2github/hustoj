@@ -20,6 +20,7 @@ static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
 static char db_name  [bufsize];
+static char oj_home  [bufsize];
 static int port_number;
 static int max_running;
 static int sleep_time;
@@ -39,9 +40,11 @@ void write_log(const char *fmt, ...)
 	char            buffer[4096];
 //	time_t          t = time(NULL);
 	int             l;
-	FILE *fp = fopen("/home/judge/log/server.log","a+");
-	if (fp==NULL) fprintf(stderr,"openfile error!\n");
-	va_start(ap, fmt);
+	FILE *fp = fopen("./log/server.log","a+");
+	if (fp==NULL){
+		 fprintf(stderr,"openfile error!\n");
+		 system("pwd");
+	}va_start(ap, fmt);
 	l = vsprintf(buffer, fmt, ap);
 	fprintf(fp,"%s\n",buffer);
 	if (DEBUG) printf("%s\n",buffer);
@@ -62,7 +65,7 @@ void init_mysql_conf(){
 	sleep_time=3;
 	oj_tot=1;
 	oj_mod=0;
-	fp=fopen("/home/judge/etc/judge.conf","r");
+	fp=fopen("./etc/judge.conf","r");
 	while (fgets(buf,bufsize-1,fp)){
 		buf[strlen(buf)-1]=0;
 		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
@@ -121,9 +124,9 @@ void run_client(int runid,int clientid){
 	buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);
 	if (!DEBUG)
-		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,NULL);
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);
 	else
-		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,"debug",NULL);
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,"debug",NULL);
 
 
 	//exit(0);
@@ -279,7 +282,7 @@ void daemonize(){
 		exit(1);
 	}else if (pid != 0) exit(0);
 
-	if (chdir("/") < 0){
+	if (chdir(oj_home) < 0){
 		syslog(LOG_ERR|LOG_DAEMON,"can't change dirctory to /");
 		exit(1);
 	}
@@ -292,9 +295,15 @@ void daemonize(){
 }
 
 int main(int argc, char** argv){
-    DEBUG=(argc!=1);
+    DEBUG=(argc>2);
+    if (argc>1)
+		strcpy(oj_home,argv[1]);
+	else
+	   strcpy(oj_home,"/home/judge");
+	chdir(oj_home);// change the dir
+
 	if (!DEBUG) daemonize();
-	if (already_running()){
+	if ( strcmp(oj_home,"/home/judge")==0&&already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
 		return 1;
 	}
@@ -302,7 +311,7 @@ int main(int argc, char** argv){
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;
 	init_mysql_conf();	// set the database info
-	chdir("/home/judge");	// change the dir
+
 	while (1){			// start to run
 	    if(!init_mysql()){
 	        int j=work();

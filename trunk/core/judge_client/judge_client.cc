@@ -51,6 +51,7 @@ static char host_name[BUFFER_SIZE];
 static char user_name[BUFFER_SIZE];
 static char password [BUFFER_SIZE];
 static char db_name  [BUFFER_SIZE];
+static char oj_home  [BUFFER_SIZE];
 static int port_number;
 static int max_running;
 static int sleep_time;
@@ -100,7 +101,7 @@ void init_mysql_conf(){
 	max_running=3;
 	sleep_time=3;
 	strcpy(java_xmx,"-Xmx256M");
-	fp=fopen("/home/judge/etc/judge.conf","r");
+	fp=fopen("./etc/judge.conf","r");
 	while (fgets(buf,BUFFER_SIZE-1,fp)){
 		buf[strlen(buf)-1]=0;
 		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
@@ -130,8 +131,11 @@ void write_log(const char *fmt, ...)
 	char            buffer[4096];
 //	time_t          t = time(NULL);
 	int             l;
-	FILE *fp = fopen("/home/judge/log/client.log","a+");
-	if (fp==NULL) fprintf(stderr,"openfile error!\n");
+	FILE *fp = fopen("../log/client.log","a+");
+	if (fp==NULL){
+		 fprintf(stderr,"openfile error!\n");
+		 system("pwd");
+	}
 	va_start(ap, fmt);
 	l = vsprintf(buffer, fmt, ap);
 	fprintf(fp,"%s\n",buffer);
@@ -158,13 +162,13 @@ int compare(const char *file1,const char *file2){
 	int p=system(diff);
 	if (p) return OJ_PE;
 	else return OJ_AC;
-	
+
 }
 */
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
- * 
+ *
 */
 int compare_zoj(const char *file1,const char *file2) {
     int ret = OJ_AC;
@@ -440,8 +444,12 @@ int main(int argc, char** argv) {
 		fprintf(stderr,"Usage:%s runid runmachine.\n",argv[0]);
 		exit(1);
 	}
-	if(argc==4) DEBUG=1;
-	// init our work
+	DEBUG=(argc>4);
+    if (argc>3)
+		strcpy(oj_home,argv[3]);
+	else
+	   strcpy(oj_home,"/home/judge");
+	chdir(oj_home);// change the dir// init our work
 	init_mysql_conf();
 	conn=mysql_init(NULL);
 	//mysql_real_connect(conn,host_name,user_name,password,db_name,port_number,0,0);
@@ -473,7 +481,7 @@ int main(int argc, char** argv) {
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 
-	sprintf(work_dir,"/home/judge/run%s/",argv[2]);
+	sprintf(work_dir,"%s/run%s/",oj_home,argv[2]);
 
 	chdir(work_dir);
 
@@ -527,7 +535,7 @@ int main(int argc, char** argv) {
 
 	// copy java.policy
 	if (lang==3){
-		sprintf(cmd,"cp /home/judge/etc/java0.policy %sjava.policy",work_dir);
+		sprintf(cmd,"cp %s/etc/java0.policy %sjava.policy",oj_home,work_dir);
 		system(cmd);
 	}
 
@@ -554,7 +562,7 @@ int main(int argc, char** argv) {
 	char outfile[BUFFER_SIZE];	// PATH&Name of the OUTPUT FILES
 	char userfile[BUFFER_SIZE];	// PATH&Name of the USERs OUTPUT FILES
 
-	sprintf(fullpath,"/home/judge/data/%d",p_id);	// the fullpath of data dir
+	sprintf(fullpath,"%s/data/%d",oj_home,p_id);	// the fullpath of data dir
 
 	// open DIRs
 	DIR *dp;
@@ -576,13 +584,13 @@ int main(int argc, char** argv) {
 //		printf("ACflg=%d %d check a file!\n",ACflg,solution_id);
 		strncpy(fname,dirp->d_name,namelen);
 		fname[namelen]=0;
-		sprintf(infile,"/home/judge/data/%d/%s.in",p_id,fname);
+		sprintf(infile,"%s/data/%d/%s.in",oj_home,p_id,fname);
 		sprintf(cmd,"cp %s %sdata.in",infile,work_dir);
 		system(cmd);
-		sprintf(outfile,"/home/judge/data/%d/%s.out",p_id,fname);
-		sprintf(userfile,"/home/judge/run%s/user.out",argv[2]);\
+		sprintf(outfile,"%s/data/%d/%s.out",oj_home,p_id,fname);
+		sprintf(userfile,"%s/run%s/user.out",oj_home,argv[2]);\
 		init_cleft(lang);
-		pid_t pidApp=fork();	
+		pid_t pidApp=fork();
 		if (pidApp==0){		// child
 			// set the limit
 			struct rlimit LIM; // time limit, file limit& memory limit
@@ -619,7 +627,7 @@ int main(int argc, char** argv) {
 			// now the user is "judger"
 			setuid(1536);
 			setresuid(1536,1536,1536);
-			
+
 			if (lang!=3){
 				 execl("./Main","./Main",NULL);
 			 }
@@ -635,7 +643,7 @@ int main(int argc, char** argv) {
 			int status,sig;
 			struct user_regs_struct reg;
 			struct rusage ruse;
-			
+
 			sub=0;
 			while (1){
 				// check the usage
@@ -647,15 +655,15 @@ int main(int argc, char** argv) {
 				if(get_file_size("error.out")){
 					ACflg=OJ_RE;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
-					break;				
+					break;
 				}
-				
+
 				if(!isspj&&get_file_size(userfile)>get_file_size(outfile)*10){
 					ACflg=OJ_OL;
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 					break;
-				} 
-				
+				}
+
 				if (WIFSIGNALED(status)){
 					sig=WTERMSIG(status);
 					printf("sig=%d\n",sig);
@@ -672,10 +680,10 @@ int main(int argc, char** argv) {
 					break;
 			*/
 				}
-				
+
 				if (sig==0x05);
 				else {
-					if (ACflg==OJ_AC) 
+					if (ACflg==OJ_AC)
 					switch (sig){
 						case SIGALRM:
 						case SIGXCPU: ACflg=OJ_TL; break;
@@ -684,7 +692,7 @@ int main(int argc, char** argv) {
 						default: ACflg=OJ_RE;
 					}
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
-					
+
 					break;
 				}
 /* sig == 5 差不多是正常暂停     commited from http://www.felix021.com/blog/index.php?go=category_13
@@ -710,20 +718,20 @@ sig = 25 对应的是 File size limit exceeded*/
 					if (sub==1) cleft[reg.orig_eax]--;
 				}
 				sub=1-sub;
-				
+
 				//tempmemory=read_proc_statm(pidApp)*getpagesize();
 				if(lang==3){//java use pagefault
 					int m_vmpeak,m_vmdata,m_minflt;
-					m_minflt=ruse.ru_minflt*getpagesize();	
+					m_minflt=ruse.ru_minflt*getpagesize();
 					if(0&&DEBUG){
 						m_vmpeak=read_proc_status(pidApp,"VmPeak:");
 						m_vmdata=read_proc_status(pidApp,"VmData:");
 						printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n",m_vmpeak,m_vmdata,m_minflt>>10);
-					}	
+					}
 					tempmemory=m_minflt;
 				}else{//other use VmPeak
 					tempmemory=read_proc_status(pidApp,"VmPeak:")<<10;
-					
+
 				}
 				if (tempmemory>topmemory) topmemory=tempmemory;
 				if (topmemory>mem_lmt*STD_MB){
@@ -741,7 +749,7 @@ sig = 25 对应的是 File size limit exceeded*/
 			// compare
 			if (ACflg==OJ_AC){
 				if (isspj){
-					sprintf(buf,"/home/judge/data/%d/spj %s %s %s", p_id, infile, outfile, userfile);
+					sprintf(buf,"%s/data/%d/spj %s %s %s",oj_home, p_id, infile, outfile, userfile);
 					comp_res = system(buf);
 					if (comp_res == 0) comp_res = OJ_AC;
 					else{
@@ -763,7 +771,7 @@ sig = 25 对应的是 File size limit exceeded*/
 				comp_res = system(buf);
 				sprintf(buf,"grep 'java.lang.OutOfMemoryError'  %s/error.out", work_dir);
 				comp_res = system(buf);
-				
+
 				if(!comp_res) {
 					printf("JVM need more Memory!");
 					ACflg=OJ_ML;
@@ -778,7 +786,7 @@ sig = 25 对应的是 File size limit exceeded*/
 				}
 				sprintf(buf,"grep 'Could not create'  %s/error.out", work_dir);
 				comp_res = system(buf);
-				
+
 				if(!comp_res) {
 					printf("jvm need more resource,tweak -Xmx Settings");
 					ACflg=OJ_RE;

@@ -19,6 +19,7 @@ This OJ is used on these site:
   * http://172.31.2.24/JudgeOnline/problemset.php 重庆大学(内网)
   * http://acm.upc.edu.cn/ 中国石油大学（华东）测试中
   * http://210.94.181.157/JudgeOnline/ DNA online Judge (Korea)
+  * http://www.newsclan.com/Judgeonline/  FPS-OJ Demo
 首批LiveCD试用：
   * 浙江纺织服装学院
   * 湖州职业技术学院

@@ -11,8 +11,6 @@ This OJ is used on these site:
 
   * http://acm.ajou.ac.kr/JudgeOnline/ 韩国京畿道大学
   * http://www.acmicpc.net/JudgeOnline  韩国西江大学
-  * http://moonwalk.snucse.org:8080/JudgeOnline/
-  * http://icpc.snucse.org:8080/JudgeOnline/
   * http://judge.oi.hk/ 香港信息学竞赛网
   * http://acm.sie.edu.cn/  中国沈阳工程学院
   * http://222.196.35.62/JudgeOnline/ SWUST Judge Online 

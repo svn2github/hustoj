@@ -107,10 +107,13 @@ if (! isset ( $_SESSION ['administrator'] )) {
 }
 
 
-if ($_POST ['do'] == 'do') {
+if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
    	$in=addslashes ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
+   }else if (isset($_GET['cid'])){
+      $cid=intval( $_GET['cid'] );
+      $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
    }else{
 	   $start = addslashes ( $_POST ['start'] );
 		$end = addslashes ( $_POST ['end'] );

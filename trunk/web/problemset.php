@@ -55,7 +55,10 @@ else{
 	$sql="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` ";
 	$sql=$sql."WHERE `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
-
+if(isset($_GET['search'])){
+	$search=mysql_real_escape_string($_GET['search']);
+   $sql=$sql." AND title like '%$search%'";
+}
 $sql=$sql."ORDER BY `problem_id`";
 ?>
 <title>Problem Set</title>
@@ -72,6 +75,8 @@ for ($i=1;$i<=$cnt+1;$i++){
 }
 echo "</h3>";
 echo "<center><table width=90%>";
+echo "<tr align=center class='oddrow'><td width=5><td width=100% colspan=3><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
+
 echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=20%>Ratio(AC/Submit)</tr>";
 $cnt=0;
 while ($row=mysql_fetch_object($result)){

@@ -664,36 +664,44 @@ int main(int argc, char** argv) {
 					break;
 				}
 
-				if (WIFSIGNALED(status)){
-					sig=WTERMSIG(status);
-					printf("sig=%d\n",sig);
-	/*				if(DEBUG){
-						 psignal(sig, cmd);
-						 printf("RE:%s",cmd);
-					}
-					if (ACflg==OJ_AC) switch (sig){
-						case SIGALRM:
-						case SIGXCPU: ACflg=OJ_TL; break;
-						case SIGXFSZ: ACflg=OJ_OL; break;
-						default: ACflg=OJ_RE;
-					}
-					break;
-			*/
+				if(DEBUG&&status!=1407){
+						 printf("status=%d\n",status);
+						 psignal(sig, NULL);
 				}
 
-				if (sig==0x05);
+				if (sig==0x05||sig==0);
 				else {
+					if(DEBUG){
+						 printf("status>>8=%d\n",sig);
+						 psignal(sig, NULL);
+					}
 					if (ACflg==OJ_AC)
 					switch (sig){
-						case SIGALRM:
 						case SIGXCPU: ACflg=OJ_TL; break;
 						case SIGXFSZ: ACflg=OJ_OL; break;
-						case 9: ACflg=OJ_ML; break;
+						case SIGALRM:
 						default: ACflg=OJ_RE;
 					}
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);
 
 					break;
+				}
+				if (WIFSIGNALED(status)){
+					sig=WTERMSIG(status);
+					if(DEBUG){
+						 printf("WTERMSIG=%d\n",sig);
+						 psignal(sig, NULL);
+					}
+					if (ACflg==OJ_AC) 
+					switch (sig){
+						case SIGALRM:
+						case SIGKILL:
+						case SIGXCPU: ACflg=OJ_TL; break;
+						case SIGXFSZ: ACflg=OJ_OL; break;
+
+						default: ACflg=OJ_RE;
+					}
+					break;			
 				}
 /* sig == 5 差不多是正常暂停     commited from http://www.felix021.com/blog/index.php?go=category_13
 

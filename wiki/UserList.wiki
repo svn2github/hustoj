@@ -8,6 +8,7 @@ This OJ is used on these site:
 
 = Details =
 
+发源地：http://acm.hust.edu.cn/thx/ 华中科技大学
 
   * http://acm.ajou.ac.kr/JudgeOnline/ 韩国京畿道大学
   * http://www.acmicpc.net/JudgeOnline  韩国西江大学
@@ -18,6 +19,9 @@ This OJ is used on these site:
   * http://acm.upc.edu.cn/ 中国石油大学（华东）测试中
   * http://210.94.181.157/JudgeOnline/ DNA online Judge (Korea)
   * http://www.newsclan.com/Judgeonline/  FPS-OJ Demo
+  * http://acm.zjgsu.edu.cn/JudgeOnline/ 浙江工商大学
+  
+ 
 首批LiveCD试用：
   * 浙江纺织服装学院
   * 湖州职业技术学院

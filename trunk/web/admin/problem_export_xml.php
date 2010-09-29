@@ -174,23 +174,23 @@ $solution=getSolution($row->problem_id);
 if ($solution->language){?>
 <solution language="<?=$solution->language?>"><![CDATA[<?=$solution->source_code?>]]></solution>
 <?}?>
-<![CDATA[<?
+<?
  if($row->spj!=0){
  	$filec="$OJ_DATA/".$row->problem_id."/spj.c";
  	$filecc="$OJ_DATA/".$row->problem_id."/spj.cc";
  	
  	if(file_exists( $filec )){
-		echo "<spj language=\"C\">";
+		echo "<spj language=\"C\"><![CDATA[";
  		echo file_get_contents ($filec );
- 		echo "</spj>";
+ 		echo "]]></spj>";
 	}
  	elseif(file_exists( $filecc )){
- 	    echo "<spj language=\"C++\">";
+ 	    echo "<spj language=\"C++\"><![CDATA[";
  		echo file_get_contents ($filecc );
- 		echo "</spj>";
+ 		echo "]]></spj>";
  	}
  }
-?>]]>
+?>
 </item>
 <?
 	}

@@ -99,6 +99,10 @@ function getImages($content){
     preg_match_all("<[iI][mM][gG][^<>]+[sS][rR][cC]=\"?([^ \"\>]+)/?>",$content,$images);
     return $images;
 }
+function fixcdata($content){
+    return str_replace("]]>","]]]]><![CDATA[>",$content);
+}
+
 session_start ();
 if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -160,6 +164,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		 }
       
    }
+   
 ?>
 <description><![CDATA[<?=$description?>]]></description>
 <input><![CDATA[<?=$row->input?>]]></input> 
@@ -168,11 +173,11 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
 <?php printTestCases($row->problem_id,$OJ_DATA)?>
 <hint><![CDATA[<?=$row->hint?>]]></hint>
-<source><![CDATA[<?=$row->source?>]]></source>
+<source><![CDATA[<?=fixcdata($row->source)?>]]></source>
 <?
 $solution=getSolution($row->problem_id);
 if ($solution->language){?>
-<solution language="<?=$solution->language?>"><![CDATA[<?=$solution->source_code?>]]></solution>
+<solution language="<?=$solution->language?>"><![CDATA[<?=fixcdata($solution->source_code)?>]]></solution>
 <?}?>
 <?
  if($row->spj!=0){
@@ -181,12 +186,12 @@ if ($solution->language){?>
  	
  	if(file_exists( $filec )){
 		echo "<spj language=\"C\"><![CDATA[";
- 		echo file_get_contents ($filec );
+ 		echo fixcdata(file_get_contents ($filec ));
  		echo "]]></spj>";
 	}
  	elseif(file_exists( $filecc )){
  	    echo "<spj language=\"C++\"><![CDATA[";
- 		echo file_get_contents ($filecc );
+ 		echo fixcdata(file_get_contents ($filecc ));
  		echo "]]></spj>";
  	}
  }

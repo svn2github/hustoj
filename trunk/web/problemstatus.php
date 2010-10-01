@@ -41,7 +41,7 @@ for ($i=4;$i<12;$i++){
 	$row=mysql_fetch_array($result);
 	$tmp=intval($row[0]);
 	if ($tmp>0)
-		echo "<tr bgcolor=cyan><td>".$jresult[$i]."<td>".$tmp."</tr>";
+		echo "<tr bgcolor=cyan><td>".$jresult[$i]."<td><a href=status.php?jresult=$i >".$tmp."</a></tr>";
 	$total-=$tmp;
 	mysql_free_result($result);
 }

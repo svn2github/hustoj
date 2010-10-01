@@ -72,5 +72,5 @@ if (strlen($msg)>5){
 	echo "</marquee>";
 }
 ?>
-<hr>
-<br>
+<script src="include/underlineTranslation.js" type="text/javascript"></script> 
+<script type="text/javascript">dictInit();</script> 

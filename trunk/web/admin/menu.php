@@ -3,33 +3,77 @@
 
 <hr>
 <ol>
-<li>
-	<a href="../status.php" target="main"><b>SeeOJ</b></a>
-<li>
-	<a href="problem_add_page.php" target="main"><b>Add A New Problem</b></a>
-<li>
-	<a href="problem_list.php" target="main"><b>ProblemList</b></a>
+
+	<li>
+		<a href="../status.php" target="main"><b>SeeOJ</b></a>
+
+<?
+if (isset($_SESSION['administrator'])){
+	?>
+	<li>
+		<a href="problem_add_page.php" target="main"><b>Add A New Problem</b></a>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?>
+	<li>
+		<a href="problem_list.php" target="main"><b>ProblemList</b></a>
+<?
+}
+if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+?>		
 <li>
 	<a href="contest_add.php" target="main"><b>Add A Contest</b></a>
+<?
+}
+if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+?>
 <li>
 	<a href="contest_list.php" target="main"><b>ContestList</b></a>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?>
 <li>
 	<a href="setmsg.php" target="main"><b>SetMessage</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="changepass.php" target="main"><b>ChangePassWD</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="rejudge.php" target="main"><b>Rejudge</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="privilege_add.php" target="main"><b>User Privilege</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="privilege_list.php" target="main"><b>Privilege List</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="source_give.php" target="main"><b>Give Source</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
-<li>
+<?
+}
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="problem_import.php" target="main"><b>Import Problem</b></a>
-<li>
+<?
+}
+?><li>
 	<a href="../online.php" target="main"><b>Online Users</b></a>
 <li>
 	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
@@ -37,4 +81,10 @@
 	<a href="http://code.google.com/p/freeproblemset/" target="main"><b>FreeProblemSet</b></a>
 
 </ol>
-<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>
+<?
+if (isset($_SESSION['administrator'])){
+?>
+	<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>
+<?
+}
+?>

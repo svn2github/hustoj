@@ -2,7 +2,7 @@
 require("admin-header.php");
 echo "<title>Privilege List</title>"; 
 echo "<center><h2>Privilege List</h2></center>";
-$sql="select * FROM privilege where rightstr not like 'c%' ";
+$sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator') ";
 $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 echo "<tr><td>user<td>right<td>defunc</tr>";

@@ -35,6 +35,7 @@ function checkcontest(){
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 <table width=96%> 
 	<tr align="center" class='hd' valign="top">
+		<th><span id="dict_status"></span></th>
 		<th><a href="./faqs.php">F.A.Qs</a></th>
 		<th><a href="./bbs.php"><?=strtoupper($OJ_BBS)?></a></th>
 		<th><a href="<?=$OJ_HOME?>">HOME</a></th>

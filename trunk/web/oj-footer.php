@@ -7,6 +7,6 @@
 		All Copyright Reserved 2008-2010 <a href='<?=$OJ_HOME?>'><?=$OJ_NAME?></a> TEAM<br>
 		GPL Source 2003-2010 <a href='http://code.google.com/p/hustoj/'>HUSTOJ Project</a> TEAM<br>
 		Anything about the Problems, Please Contact Admin:<a href="mailto:<?=$OJ_ADMIN?>">admin</a><br>
-		<span id="dict_status"></span>
+		
 	</p>
 </center>

@@ -121,7 +121,8 @@ void run_client(int runid,int clientid){
 		LIM.rlim_cur=1024*STD_MB;
 		setrlimit(RLIMIT_AS,&LIM);
 
-	buf[0]=clientid+'0'; buf[1]=0;
+	//buf[0]=clientid+'0'; buf[1]=0;
+	sprintf(buf,"%d",clientid);
 	sprintf(runidstr,"%d",runid);
 	if (!DEBUG)
 		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);

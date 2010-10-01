@@ -49,7 +49,7 @@ function checkcontest(){
 				print "<th><a href=loginpage.php>LOGIN</a></th>";
 				print "<th><a href=registerpage.php>REGISTER</a></th>";
 			}
-			if (isset($_SESSION['administrator'])){
+			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 				print "<th><a href=admin>Admin</a></th>";
 			
 			}

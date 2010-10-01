@@ -89,16 +89,19 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	echo "<td>$i";
 	echo "<td>$row->solution_id";
 	if (intval($row->att)>1) echo "(".$row->att.")";
-	echo "<td>$row->user_id";
+	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
 	echo "<td>";
 	if ($flag) echo "$s_memory KB";
 	else echo "------";
 	echo "<td>";
 	if ($flag) echo "$s_time MS";
 	else echo "------";
-	echo "<td>";
-	echo $language_name[$row->language];
-	echo "<td>";
+	
+	if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+		echo "<td>".$language_name[$row->language];
+	}else{
+		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";
+	}echo "<td>";
 	if ($flag) echo "$s_cl B";
 	else echo "------";
 	echo "<td>$row->in_date";

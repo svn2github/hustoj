@@ -2,7 +2,7 @@
 //		if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'deflate')&&function_exists("ob_gzhandler")&&(!isset($file)))
 // 			ob_start("ob_gzhandler"); 
 //		else 
- 			ob_start(); 
+// 			ob_start(); 
  			
 ?>
 <?

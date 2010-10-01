@@ -110,7 +110,7 @@ if (mysql_num_rows($result)!=1){
 	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
 	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
 	if ($pr_flag||true) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";
-	if ($pr_flag) echo "<h2>Source</h2><p>".nl2br($row->source)."</p>";
+	if ($pr_flag) echo "<h2>Source</h2><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p>";
 	echo "<center>";
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";

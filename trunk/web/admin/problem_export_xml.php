@@ -115,13 +115,21 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
    	$in=addslashes ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
+   	  $filename="-$in";
    }else if (isset($_GET['cid'])){
-      $cid=intval( $_GET['cid'] );
+	  $cid=intval( $_GET['cid'] );
+      $sql= "select title from contest where contest_id='$cid'";
+      $result = mysql_query ( $sql ) or die ( mysql_error () );
+      $row = mysql_fetch_object ( $result );
+      $filename='-'.$row->title;
+      mysql_free_result ( $result );
       $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
+	  
    }else{
 	   $start = addslashes ( $_POST ['start'] );
 		$end = addslashes ( $_POST ['end'] );
-		$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
+	 	$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
+       $filename="-$start-$end";
    }
 
 	
@@ -132,7 +140,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		header ( 'Content-Type:   text/xml' );
 	else {
 		header ( "content-type:   application/file" );
-		header ( "content-disposition:   attachment;   filename=fps-".$_SESSION['user_id']."-$start-$end.xml" );
+		header ( "content-disposition:   attachment;   filename=fps-".$_SESSION['user_id'].$filename.".xml" );
 	}
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	?>

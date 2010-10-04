@@ -71,7 +71,18 @@ else{
 				if ($i>1) $plist=$plist.',';
 			}
    }
-  
+else if(isset($_POST['problem2contest'])){
+	   $plist="";
+	   //echo $_POST['pid'];
+	   sort($_POST['pid']);
+	   foreach($_POST['pid'] as $i){		    
+			if ($plist) 
+				$plist.=','.$i;
+			else
+				$plist=$i;
+	   }
+	
+	}  
    
 ?>
 	

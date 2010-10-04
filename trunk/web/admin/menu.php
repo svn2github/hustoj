@@ -11,7 +11,7 @@
 if (isset($_SESSION['administrator'])){
 	?>
 	<li>
-		<a href="problem_add_page.php" target="main"><b>Add A New Problem</b></a>
+		<a href="problem_add_page.php" target="main"><b>NewProblem</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])){
@@ -23,7 +23,7 @@ if (isset($_SESSION['administrator'])){
 if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 ?>		
 <li>
-	<a href="contest_add.php" target="main"><b>Add A Contest</b></a>
+	<a href="contest_add.php" target="main"><b>NewContest</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
@@ -50,31 +50,31 @@ if (isset($_SESSION['administrator'])){
 }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="privilege_add.php" target="main"><b>User Privilege</b></a>
+	<a href="privilege_add.php" target="main"><b>AddPrivilege</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="privilege_list.php" target="main"><b>Privilege List</b></a>
+	<a href="privilege_list.php" target="main"><b>PrivilegeList</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="source_give.php" target="main"><b>Give Source</b></a>
+	<a href="source_give.php" target="main"><b>GiveSource</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="problem_export.php" target="main"><b>Export Problem</b></a>
+	<a href="problem_export.php" target="main"><b>ExportProblem</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="problem_import.php" target="main"><b>Import Problem</b></a>
+	<a href="problem_import.php" target="main"><b>ImportProblem</b></a>
 <?
 }
 ?><li>
-	<a href="../online.php" target="main"><b>Online Users</b></a>
+	<a href="../online.php" target="main"><b>Online</b></a>
 <li>
 	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
 <li>

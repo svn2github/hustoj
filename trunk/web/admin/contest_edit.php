@@ -29,7 +29,8 @@ if (isset($_POST['syear']))
 	mysql_query($sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	mysql_query($sql);
-	$pieces = split(',', trim($_POST['cproblem']));
+	$plist=trim($_POST['cproblem']);
+	$pieces = explode(',', $plist);
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
 			VALUES ('$cid','$pieces[0]',0)";
@@ -37,6 +38,9 @@ if (isset($_POST['syear']))
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
+		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
+		mysql_query($sql) or die(mysql_error());
+	
 	}
 	
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";

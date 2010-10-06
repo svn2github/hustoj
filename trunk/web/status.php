@@ -15,15 +15,12 @@ if (isset($_GET['cid'])){
 	$sql=$sql." AND `contest_id`='$cid' ";
 	$str2=$str2."&cid=$cid";
 	require_once("contest-header.php");
-	echo "<table width=90%><tr><td colspan=9>";
 }else{
 	require_once("oj-header.php");
-	echo "<table width=90%><tr><td colspan=9>";
 }
 ?>
-<style>
-td{font-size:14}
-</style>
+<table width=90%>
+<tr><td>
 <?
 $order_str=" ORDER BY `solution_id` DESC ";
 $start_first=1;
@@ -107,6 +104,8 @@ echo "</select>";
 </select>
 <input type=submit value='Go'>
 </form>
+</td></tr>
+</table>
 <table align=center>
 <tr  class='toprow'>
 <td width="8%">Run ID

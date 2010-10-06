@@ -19,11 +19,7 @@
 		require_once ("oj-header.php");
 		?>
 	<title>Rank List</title>
-	<style>
-	td {
-		font-size: 14
-	}
-	</style>
+
 	<?
 		require_once ("./include/db_info.inc.php");
 		//$rank = intval ( $_GET ['start'] );

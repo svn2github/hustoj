@@ -35,6 +35,9 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 管理员可以导入/fps下的FPS格式的xml文件。
 
 下载地址: 
+http://u.115.com/file/f6efdecce6
+hustoj-FPS-r418.iso
+
 r390
 
 http://u.115.com/file/f699e5d9d9

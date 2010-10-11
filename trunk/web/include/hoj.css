@@ -3,20 +3,18 @@ a{ color:#1a5cc8; text-decoration:none }
 a:hover { color:orange; text-decoration:underline }
 
 h2{color:blue} 
-table{
-    white-space: nowrap;
-}
+
 .toprow{
 	background-color:#1a5cc8;
 	color:#FFFFFF;
     font-weight:bold;
-   
+   white-space: nowrap;
 }
 .toprow a{ font-family: Arial; font-weight: bold; font-size: 18px; color: #FFFFFF; margin: 15px }
 .toprow a:hover{ font-family: Arial; font-weight: bold; font-size: 18px; color:orange; margin: 15px }
 
-.oddrow{background-color:#D7EBFF;}
-.evenrow{background-color:#FFFFFF;}
+.oddrow{background-color:#D7EBFF;white-space: nowrap;}
+.evenrow{background-color:#FFFFFF;white-space: nowrap;}
 body{
 	background-color:#FFFFFF;
 	background-image: url(../image/background.jpg);

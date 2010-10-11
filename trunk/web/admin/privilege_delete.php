@@ -1,5 +1,9 @@
 <?require_once("admin-header.php");?>
 <?
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
 if(isset($_GET['uid'])){
 	$user_id=addslashes($_GET['uid']);
 	$rightstr =$_GET['rightstr'];

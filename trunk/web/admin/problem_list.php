@@ -1,5 +1,9 @@
 <?
 require("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
 echo "<title>Problem List</title>";
 echo "<center><h2>Problem List</h2></center>";
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` order by `problem_id` desc";

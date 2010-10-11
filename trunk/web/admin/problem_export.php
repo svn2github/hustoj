@@ -1,4 +1,9 @@
-<?require_once("admin-header.php");?>
+<?require_once("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
+?>
 
 <form action='problem_export_xml.php' method=post>
 	<b>Export Problem:</b><br />

@@ -1,4 +1,3 @@
-<?session_start();?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -7,7 +6,12 @@
 <body>
 <center>
 <?require_once("../include/db_info.inc.php");?>
-<?require_once("admin-header.php");?>
+<?require_once("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
+?>
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>

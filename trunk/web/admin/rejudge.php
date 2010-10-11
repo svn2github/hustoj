@@ -1,4 +1,8 @@
-<?require("admin-header.php");?>
+<?require("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}?>
 <?
 if(isset($_POST['do'])){
 	if (isset($_POST['rjpid'])){

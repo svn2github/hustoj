@@ -1,5 +1,10 @@
 <?
+
 require("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
 echo "<title>Privilege List</title>"; 
 echo "<center><h2>Privilege List</h2></center>";
 $sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator') ";

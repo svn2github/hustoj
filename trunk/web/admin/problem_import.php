@@ -1,4 +1,8 @@
-<?require_once("admin-header.php");?>
+<?require_once("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}?>
 Import FPS data ,please make sure you file is smaller than the [upload_max_filesize] in PHP.ini
 <br>
 <form action='problem_import_xml.php' method=post enctype="multipart/form-data">

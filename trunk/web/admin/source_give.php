@@ -5,10 +5,10 @@ if (!(isset($_SESSION['administrator']))){
 }?>
 <?
 if(isset($_POST['do'])){
-	$from=addslashes($_POST['from']);
-	$to=addslashes($_POST['to']);
-	$start=addslashes($_POST['start']);
-	$end=addslashes($_POST['end']);
+	$from=intval($_POST['from']);
+	$to=intval($_POST['to']);
+	$start=intval($_POST['start']);
+	$end=intval($_POST['end']);
 	$sql="update `solution` set `user_id`='$to' where `user_id`='$from' and problem_id>=$start and problem_id<=$end and result=4";
 	echo $sql;
 	mysql_query($sql);

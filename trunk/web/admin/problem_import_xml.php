@@ -92,7 +92,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$solution = getValue ( $searchNode, 'solution' );
 		$language =getAttribute( $searchNode, 'solution','language' );
 		$spjcode = getValue ( $searchNode, 'spj' );
-		$spj = $spjcode?1:0;
+		$spj = trim($spjcode)?1:0;
 	
 		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 	    $basedir = "$OJ_DATA/$pid";

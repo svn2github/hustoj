@@ -2,6 +2,8 @@
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)
 
+HUSTOJ_LiveCD and FAQ is suggested
+
 下载安装程序
 http://hustoj.googlecode.com/files/install.tar.gz
 自动安装使用install.sh，运行前阅读脚本头部说明设置数据库帐号，使用root运行。

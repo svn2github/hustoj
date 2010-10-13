@@ -2,7 +2,7 @@
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)
 
-HUSTOJ_LiveCD and FAQ is suggested
+[HUSTOJ_LiveCD] and [FAQ] is suggested
 
 下载安装程序
 http://hustoj.googlecode.com/files/install.tar.gz

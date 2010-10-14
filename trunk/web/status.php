@@ -1,6 +1,13 @@
-<?require_once("./include/my_func.inc.php");
+<?
+require_once("./include/my_func.inc.php");
+$runtime= new runtime;
+$runtime->start();
 require_once("./include/const.inc.php");
-require_once("./include/db_info.inc.php");?>
+require_once("./include/db_info.inc.php");
+
+
+
+?>
 
 
 <meta http-equiv='refresh' content='60'>
@@ -34,7 +41,7 @@ else if (isset($_GET['bottom'])){
 	$bottom=strval(intval($_GET['bottom']));
 	if ($bottom!=-1){
 	  	$sql=$sql."AND `solution_id`>'".strval(intval($bottom))."' ";
-		$order_str=" ORDER BY `solution_id` ASC ";
+		//$order_str=" ORDER BY `solution_id` ASC ";
 		$start_first=0;
 	}
 }
@@ -134,9 +141,9 @@ if ($start_first){
 }
 
 
-for ($i=0;$i<$rows_cnt;$i++){
-	mysql_data_seek($result,$row_start+$row_add*$i);
-	$row=mysql_fetch_object($result);
+//for ($i=0;$i<$rows_cnt;$i++){
+//	mysql_data_seek($result,$row_start+$row_add*$i);
+while(	$row=mysql_fetch_object($result)){
 	if ($top==-1) $top=$row->solution_id;
 	$bottom=$row->solution_id;
 	if ($cnt) echo "<tr align=center class='oddrow'>";
@@ -180,4 +187,8 @@ echo "[<a href=status.php?".$str2."&bottom=".$top.">Previous Page</a>]&nbsp;&nbs
 echo "[<a href=status.php?".$str2."&top=".$bottom.">Next Page</a>]";
 ?>
 </center>
-<?require_once("oj-footer.php");?>
+<?require_once("oj-footer.php");
+$runtime->stop();
+echo "页面执行时间: ".$runtime->spent()." 毫秒";
+
+?>

@@ -20,6 +20,7 @@ This OJ is used on these site:
   * http://icpc.dongguk.ac.kr/JudgeOnline/ DNA online Judge (Korea)
   * http://www.newsclan.com/Judgeonline/  FPS-OJ Demo
   * http://acm.zjgsu.edu.cn/JudgeOnline/ 浙江工商大学
+  * http://www.nputic.com/ 西北工业大学腾讯俱乐部在线评测系统
   
  
 首批LiveCD试用：

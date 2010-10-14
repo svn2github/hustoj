@@ -26,7 +26,7 @@ function checkcontest(){
 }
 
 	require_once('./include/db_info.inc.php');
-	require_once('./include/online.php');
+	//require_once('./include/online.php');
 	$on = new online();
 ?>
 </head>

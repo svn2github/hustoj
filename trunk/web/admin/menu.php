@@ -74,7 +74,7 @@ if (isset($_SESSION['administrator'])){
 <?
 }
 ?><li>
-	<a href="../online.php" target="main"><b>Online</b></a>
+<!-- <a href="../online.php" target="main"><b>Online</b></a> -->	
 <li>
 	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
 <li>

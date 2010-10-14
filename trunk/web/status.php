@@ -1,7 +1,5 @@
 <?
 require_once("./include/my_func.inc.php");
-$runtime= new runtime;
-$runtime->start();
 require_once("./include/const.inc.php");
 require_once("./include/db_info.inc.php");
 
@@ -188,7 +186,4 @@ echo "[<a href=status.php?".$str2."&top=".$bottom.">Next Page</a>]";
 ?>
 </center>
 <?require_once("oj-footer.php");
-$runtime->stop();
-echo "页面执行时间: ".$runtime->spent()." 毫秒";
-
 ?>

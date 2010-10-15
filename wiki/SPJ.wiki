@@ -1,0 +1,25 @@
+#labels Featured,Phase-Support
+#Special Judger usage in hustoj
+
+= Introduction =
+
+sometimes,thers are more than one possible output for one test case.
+
+a program which called special judger is needed for judging the result.
+
+
+= Details =
+
+HUSTOJ support SPJ.
+
+you can put a program name spj (set execute mode) in data dir of the problem.
+
+and if you want to be able to export it, you should provide a source file name spj.c or spj.cc,too
+
+this program take 3 parameters when running,which is "test input file" , "test output file", and "users output file".
+
+the result is returned by spj process with exit code, an 0 exit value means AC, and others means WA.
+
+spj.c 或 spj.cc，需编译为spj，执行spj时传3个文件名参数：输入，参考输出，用户输出。
+
+spj的退出值决定判断结果，成功退出(0)表示AC,其余表示WA.

@@ -20,6 +20,8 @@ this program take 3 parameters when running,which is "test input file" , "test o
 
 the result is returned by spj process with exit code, an 0 exit value means AC, and others means WA.
 
+spj的文件可以是c或cpp编写的程序，编译为spj文件，并设执行权限。
+
 spj.c 或 spj.cc，需编译为spj，执行spj时传3个文件名参数：输入，参考输出，用户输出。
 
 spj的退出值决定判断结果，成功退出(0)表示AC,其余表示WA.

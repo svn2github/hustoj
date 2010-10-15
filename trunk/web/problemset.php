@@ -43,7 +43,7 @@ while ($row=mysql_fetch_array($result))
 }
 
 if (!isset($_SESSION['administrator'])){
-	$sql0="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` ".
+	$sql0="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
 	"WHERE `defunct`='N' AND `problem_id` NOT IN(
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or private=1
@@ -76,7 +76,7 @@ for ($i=1;$i<=$cnt+1;$i++){
 echo "</h3>";
 echo "<center><table width=90%>";
 echo "<tr align=center class='evenrow'><td width=5><td width=100% colspan=3><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
-echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=20%>Ratio(AC/Submit)</tr>";
+echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=10%>source<td width=10%>Ratio(AC/Submit)</tr>";
 $cnt=0;
 while ($row=mysql_fetch_object($result)){
 	if ($cnt) echo "<tr class='oddrow'>";
@@ -88,6 +88,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 	echo "<td align=center>".$row->problem_id;
 	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";
+	echo "<td align=left>".$row->source;
 	echo "<td align=center><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
 		.$row->accepted."</a>/<a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
 	echo "</tr>";

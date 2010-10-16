@@ -34,7 +34,7 @@ if (isset($_GET['top'])){
 	$top=strval(intval($_GET['top']));
 	if ($top!=-1) $sql=$sql."AND `solution_id`<'".$top."' ";
 }
-// check the bottom arg
+/*
 else if (isset($_GET['bottom'])){
 	$bottom=strval(intval($_GET['bottom']));
 	if ($bottom!=-1){
@@ -42,7 +42,7 @@ else if (isset($_GET['bottom'])){
 		//$order_str=" ORDER BY `solution_id` ASC ";
 		$start_first=0;
 	}
-}
+}*/
 // check the problem arg
 $problem_id="";
 if (isset($_GET['problem_id'])){
@@ -181,7 +181,7 @@ mysql_free_result($result);
 </table>
 <?
 echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&bottom=".$top.">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
 echo "[<a href=status.php?".$str2."&top=".$bottom.">Next Page</a>]";
 ?>
 </center>

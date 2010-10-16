@@ -73,8 +73,9 @@ if (isset($_SESSION['administrator'])){
 	<a href="problem_import.php" target="main"><b>ImportProblem</b></a>
 <?
 }
-?><li>
-<!-- <a href="../online.php" target="main"><b>Online</b></a> -->	
+?>
+<!--<li>
+ <a href="../online.php" target="main"><b>Online</b></a> -->	
 <li>
 	<a href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
 <li>

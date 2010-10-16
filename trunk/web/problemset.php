@@ -53,7 +53,7 @@ if (!isset($_SESSION['administrator'])){
 	$sql=$sql0."  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 else{
-	$sql0="SELECT `problem_id`,`title`,`submit`,`accepted` FROM `problem` WHERE ";
+	$sql0="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE ";
 	$sql=$sql0." `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 if(isset($_GET['search'])){

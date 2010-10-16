@@ -18,8 +18,18 @@
             function generateCompareTRs(iCol, sDataType) {
         
                 return  function compareTRs(oTR1, oTR2) {
-                            var vValue1 = convert(oTR1.cells[iCol].firstChild.text, sDataType);
-                            var vValue2 = convert(oTR2.cells[iCol].firstChild.text, sDataType);
+					        var td1=oTR1.cells[iCol].firstChild;
+					        var td2=oTR2.cells[iCol].firstChild;
+					        if(td1.text=="undefined"||td1.text==null){
+								td1=td1.innerText;
+								td2=td2.innerText;
+							}else{
+								td1=td1.text;
+								td2=td2.text;
+							}
+
+                            var vValue1 = convert(td1, sDataType);
+                            var vValue2 = convert(td2, sDataType);
         
                             if (vValue1 < vValue2) {
                                 return -1;

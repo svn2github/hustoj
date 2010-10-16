@@ -2,6 +2,7 @@
 require_once("oj-header.php");
 require_once("./include/db_info.inc.php");
 ?>
+<script src="include/sortTable.js"></script>
 <?
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=50;
@@ -74,9 +75,11 @@ for ($i=1;$i<=$cnt+1;$i++){
 	else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
 }
 echo "</h3>";
-echo "<center><table width=90%>";
-echo "<tr align=center class='evenrow'><td width=5><td width=100% colspan=3><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
-echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=10%>source<td width=10%>Ratio(AC/Submit)</tr>";
+echo "<center><table id=problemset width=90%>";
+echo "<thead><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
+echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=10%>source";
+echo "<td onclick=\"sortTable('problemset', 4, 'int');\" width=5%><A>AC</A><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width=5%><A>Submit</A></tr>";
+echo "</thead><tbody>";
 $cnt=0;
 while ($row=mysql_fetch_object($result)){
 	if ($cnt) echo "<tr class='oddrow'>";
@@ -90,13 +93,13 @@ while ($row=mysql_fetch_object($result)){
 	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";
 	echo "<td align=left>".$row->source;
 	echo "<td align=center><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
-		.$row->accepted."</a>/<a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
+		.$row->accepted."</a><td><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
 	echo "</tr>";
 	$cnt=1-$cnt;
 }
 mysql_free_result($result);
-echo "<tr align=center class='evenrow'><td width=5><td width=100% colspan=3><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
+echo "</tbody><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
 
-echo "</center></table>";
+echo "</table></center>";
 ?>
 <?require_once("oj-footer.php")?>

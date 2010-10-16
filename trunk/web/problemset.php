@@ -77,7 +77,7 @@ for ($i=1;$i<=$cnt+1;$i++){
 echo "</h3>";
 echo "<center><table id=problemset width=90%>";
 echo "<thead><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
-echo "<tr align=center class='toprow'><td width=5><td width=10%>Problem ID<td width=70%>Title<td width=10%>source";
+echo "<tr align=center class='toprow'><td width=5><td onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>Problem ID</A><td width=60%>Title<td width=20%>source";
 echo "<td onclick=\"sortTable('problemset', 4, 'int');\" width=5%><A>AC</A><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width=5%><A>Submit</A></tr>";
 echo "</thead><tbody>";
 $cnt=0;
@@ -91,7 +91,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 	echo "<td align=center>".$row->problem_id;
 	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";
-	echo "<td align=left>".$row->source;
+	echo "<td align=left><div style=\"width:150px;overflow:hidden\">".$row->source."</div>";
 	echo "<td align=center><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
 		.$row->accepted."</a><td><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
 	echo "</tr>";

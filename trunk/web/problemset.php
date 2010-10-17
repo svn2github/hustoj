@@ -91,7 +91,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 	echo "<td align=center>".$row->problem_id;
 	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";
-	echo "<td align=left><div style=\"width:150px;overflow:hidden\">".$row->source."</div>";
+	echo "<td align=left><div style=\"width:163px;overflow:auto\">".$row->source."</div>";
 	echo "<td align=center><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
 		.$row->accepted."</a><td><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
 	echo "</tr>";

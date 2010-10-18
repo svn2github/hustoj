@@ -51,7 +51,7 @@ mysql_free_result($result);
 	mysql_free_result($result);
 	
 //}
-echo "<tr bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
+echo "<tr id=pie bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
 echo "</table>";
 ?>
 <script language="javascript">
@@ -60,13 +60,11 @@ echo "</table>";
 	var dt=document.getElementById("statics");
 	var data=dt.rows;
 	var n;
-	for(var i=3;dt.rows[i].bgColor=="cyan";i++){
+	for(var i=3;dt.rows[i].id!="pie";i++){
 			x.push(dt.rows[i].cells[0].innerHTML);
 			n=dt.rows[i].cells[1].firstChild;
-			if(n.text=="undefined"||n.text==null)
-					n=n.innerText;
-			else
-					n=n.text;
+			n=n.innerText || n.textContent;
+			//alert(n);
 			n=parseInt(n);
 			y.push(n);
 	}

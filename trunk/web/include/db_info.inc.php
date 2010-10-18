@@ -8,7 +8,7 @@ static 	$OJ_NAME="FPS-OJ";
 static 	$OJ_HOME="http://code.google.com/p/freeproblemset/";
 static 	$OJ_ADMIN="root@localhost";
 static 	$OJ_DATA="/home/judge/data";
-static 	$OJ_BBS="bbs";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
+static 	$OJ_BBS="discuss";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());
 	// use db

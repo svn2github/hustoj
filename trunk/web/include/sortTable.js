@@ -20,13 +20,10 @@
                 return  function compareTRs(oTR1, oTR2) {
 					        var td1=oTR1.cells[iCol].firstChild;
 					        var td2=oTR2.cells[iCol].firstChild;
-					        if(td1.text=="undefined"||td1.text==null){
-								td1=td1.innerText;
-								td2=td2.innerText;
-							}else{
-								td1=td1.text;
-								td2=td2.text;
-							}
+					        
+							td1=td1.innerText || td1.textContent;
+							td2=td2.innerText || td2.textContent;
+							
 
                             var vValue1 = convert(td1, sDataType);
                             var vValue2 = convert(td2, sDataType);

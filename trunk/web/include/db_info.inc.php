@@ -1,14 +1,14 @@
 <?
-	$DB_HOST="127.1";
-	$DB_NAME="jol";
-	$DB_USER="root";
-	$DB_PASS="root";
+static 	$DB_HOST="127.1";
+static 	$DB_NAME="jol";
+static 	$DB_USER="root";
+static 	$DB_PASS="root";
 	// connect db 
-	$OJ_NAME="FPS-OJ";
-	$OJ_HOME="http://code.google.com/p/freeproblemset/";
-	$OJ_ADMIN="root@localhost";
-	$OJ_DATA="/home/judge/data/";
-	$OJ_BBS="bbs";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
+static 	$OJ_NAME="FPS-OJ";
+static 	$OJ_HOME="http://code.google.com/p/freeproblemset/";
+static 	$OJ_ADMIN="root@localhost";
+static 	$OJ_DATA="/home/judge/data";
+static 	$OJ_BBS="bbs";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());
 	// use db

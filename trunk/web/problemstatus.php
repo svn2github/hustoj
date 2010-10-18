@@ -8,10 +8,14 @@ if (isset($_GET['page']))
 else $page=0;
 
 echo "<title>Problem $id Status</title>";
+?>
+<script type="text/javascript" src="include/wz_jsgraphics.js"></script>
+<script type="text/javascript" src="include/pie.js"></script>
+<?
 echo "<h1>Problem $id Status</h1>";
 
 echo "<center><table><tr><td>";
-echo "<table>";
+echo "<table id=statics >";
 // total submit
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql) or die(mysql_error());
@@ -35,19 +39,44 @@ $acuser=intval($row[0]);
 echo "<tr bgcolor=cyan><td>Users(Solved)<td>".$row[0]."</tr>";
 mysql_free_result($result);
 
-for ($i=4;$i<12;$i++){
-	$sql="SELECT count(*) FROM solution WHERE problem_id='$id' AND result='$i'";
+//for ($i=4;$i<12;$i++){
+	//$i=0;
+	$sql="SELECT result,count(1) FROM solution WHERE problem_id='$id' AND result>=4 group by result order by result";
 	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
-	$tmp=intval($row[0]);
-	if ($tmp>0)
-		echo "<tr bgcolor=cyan><td>".$jresult[$i]."<td><a href=status.php?problem_id=$id&jresult=$i >".$tmp."</a></tr>";
-	$total-=$tmp;
+	while($row=mysql_fetch_array($result)){
+		
+		//i++;
+		echo "<tr bgcolor=cyan><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[1]." >".$row[1]."</a></tr>";
+	}
 	mysql_free_result($result);
-}
-if ($total>0) echo "<tr bgcolor=cyan><td>OT<td>$total</tr>";
+	
+//}
+echo "<tr bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
 echo "</table>";
+?>
+<script language="javascript">
+	var y= new Array ();
+	var x = new Array ();
+	var dt=document.getElementById("statics");
+	var data=dt.rows;
+	var n;
+	for(var i=3;dt.rows[i].bgColor=="cyan";i++){
+			x.push(dt.rows[i].cells[0].innerHTML);
+			n=dt.rows[i].cells[1].firstChild;
+			if(n.text=="undefined"||n.text==null)
+					n=n.innerText;
+			else
+					n=n.text;
+			n=parseInt(n);
+			y.push(n);
+	}
+	var mypie=  new Pie("PieDiv");
+	mypie.drawPie(y,x);
+	//mypie.clearPie();
 
+</script> 
+
+<?
 $pagemin=0; $pagemax=intval(($acuser-1)/20);
 
 if ($page<$pagemin) $page=$pagemin;

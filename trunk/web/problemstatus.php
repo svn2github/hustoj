@@ -46,7 +46,7 @@ mysql_free_result($result);
 	while($row=mysql_fetch_array($result)){
 		
 		//i++;
-		echo "<tr bgcolor=cyan><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[1]." >".$row[1]."</a></tr>";
+		echo "<tr bgcolor=cyan><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a></tr>";
 	}
 	mysql_free_result($result);
 	

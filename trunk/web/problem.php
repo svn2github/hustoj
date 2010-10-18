@@ -90,8 +90,9 @@ if (mysql_num_rows($result)!=1){
 		echo "<center><h2>Problem $PID[$pid]: $row->title</h2>";
 	}
 	echo "<b>Time Limit: </b>$row->time_limit Sec&nbsp;&nbsp;";
-	echo "<b>Memory Limit: </b>".$row->memory_limit." MB<br>";
-	echo "<b>Submissions: </b>".$row->submit."&nbsp;&nbsp;";
+	echo "<b>Memory Limit: </b>".$row->memory_limit." MB";
+	if ($row->spj) echo "Sec&nbsp;&nbsp;<b>Special Judge</b>";
+	echo "<br><b>Submissions: </b>".$row->submit."&nbsp;&nbsp;";
 	echo "<b>Solved: </b>".$row->accepted."<br>"; 
 	
 	if ($pr_flag){

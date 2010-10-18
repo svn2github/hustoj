@@ -35,9 +35,14 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 管理员可以导入/fps下的FPS格式的xml文件。
 
 使用时如果已经联网，可以用sudo update-hustoj进行程序更新。
-
+root密码freeproblemset
 下载地址: 
-r434 root密码freeproblemset
+r455
+
+http://u.115.com/file/f69d6d1958
+hustoj-root-freeproblemset-r455.iso
+
+r434 
 http://u.115.com/file/f650fe4fcc
 hustoj-root[freeproblemset]-r434.iso
 
@@ -49,18 +54,6 @@ r418 based on ubuntu10.04 root密码freeproblemset
 http://u.115.com/file/f6b85a933b
 hustoj-root[freeproblemset]-r418.iso
 
-
+r418 based on ubuntu9.10
 http://u.115.com/file/f6efdecce6
 hustoj-FPS-r418.iso
-
-r390
-
-http://u.115.com/file/f699e5d9d9
-
-r384
-
-http://u.115.com/file/f67aae2933
-
-r381
-
-http://u.115.com/file/f61819db2a

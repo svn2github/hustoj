@@ -71,7 +71,7 @@ $result=mysql_query($sql) or die(mysql_error());
 echo "<h3 align=center>";
 for ($i=1;$i<=$cnt+1;$i++){
 	if ($i>1) echo '&nbsp;';
-	if ($i==$page) echo "<font color=red>$i</font>";
+	if ($i==$page) echo "<span class=red>$i</span>";
 	else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
 }
 echo "</h3>";
@@ -86,8 +86,8 @@ while ($row=mysql_fetch_object($result)){
 	else echo "<tr class='evenrow'>";
 	echo "<td>";
 	if (isset($sub_arr[$row->problem_id])){
-		if (isset($acc_arr[$row->problem_id])) echo "<font color=green>Y</font>";
-		else echo "<font color=red>N</font>";
+		if (isset($acc_arr[$row->problem_id])) echo "<span class=yes>Y</span>";
+		else echo "<span class=no>N</span>";
 	}
 	echo "<td align=center>".$row->problem_id;
 	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";

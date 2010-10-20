@@ -42,7 +42,7 @@ function getSolution($pid){
 	$ret=new Solution();
 	require("../include/const.inc.php");
 	require("../include/db_info.inc.php");
-	$con = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
+	$con = mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS);
 	if (!$con)
     {
   	    die('Could not connect: ' . mysql_error());

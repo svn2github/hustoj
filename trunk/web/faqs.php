@@ -13,11 +13,11 @@
 <table border="1">
   <tr>
     <td>C:</td>
-    <td><font color=blue>gcc Main.c -o Main -ansi -fno-asm -O2 -Wall -lm --static</font></td>
+    <td><font color=blue>gcc Main.c -o Main -Wall -lm --static -std=c99 -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ Main.c -o Main -ansi -fno-asm -O2 -Wall -lm --static</font></td>
+    <td><font color=blue>g++ Main.cc -o Main -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>
@@ -25,14 +25,14 @@
   </tr>
   <tr>
     <td>Java:</td>
-    <td><font color="blue">javac Main.java</font></td>
+    <td><font color="blue">javac -J-Xms32m -J-Xmx256m Main.java</font></td>
   </tr>
 </table>
 <p>  Our compiler software version:<br>
-  <font color=blue>gcc/g++  4.1.2 20061115 (prerelease) (Debian 4.1.1-21)</font><br>
+  <font color=blue>gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5</font><br>
   <font color=blue>glibc 2.3.6</font><br>
-<font color=blue>Free Pascal Compiler version 2.0.0 [2005/09/09] for i386<br>
-Java 1.6.0_06<br>
+<font color=blue>Free Pascal Compiler version 2.4.0-2 [2010/03/06] for i386<br>
+java version "1.6.0_22"<br>
 </font></p>
 <hr>
 <font color=green>Q</font>:Where is the input and the output?<br>
@@ -136,7 +136,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 <center>
   <table width=100% border=0>
     <tr>
-      <td align=right width=65%><a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> <a href = ""><font color=red>V1.9.9.0</font></a></td>
+      <td align=right width=65%><a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> <a href = ""><font color=red>R466</font></a></td>
     </tr>
   </table>
 </center>

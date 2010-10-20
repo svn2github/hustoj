@@ -294,3 +294,4 @@ CREATE TABLE `online` (
   PRIMARY KEY  (`hash`),
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+ALTER TABLE `jol`.`online` ENGINE = MEMORY;

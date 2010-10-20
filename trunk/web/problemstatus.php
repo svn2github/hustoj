@@ -20,7 +20,7 @@ echo "<table id=statics >";
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql) or die(mysql_error());
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=cyan><td>Total Submissions<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>Total Submissions<td>".$row[0]."</tr>";
 $total=intval($row[0]);
 mysql_free_result($result);
 
@@ -28,7 +28,7 @@ mysql_free_result($result);
 $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=cyan><td>Users(Submitted)<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>Users(Submitted)<td>".$row[0]."</tr>";
 mysql_free_result($result);
 
 // ac users
@@ -36,7 +36,7 @@ $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id' AND re
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $acuser=intval($row[0]);
-echo "<tr bgcolor=cyan><td>Users(Solved)<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>Users(Solved)<td>".$row[0]."</tr>";
 mysql_free_result($result);
 
 //for ($i=4;$i<12;$i++){
@@ -46,7 +46,7 @@ mysql_free_result($result);
 	while($row=mysql_fetch_array($result)){
 		
 		//i++;
-		echo "<tr bgcolor=cyan><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a></tr>";
+		echo "<tr bgcolor=#D7EBFF><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a></tr>";
 	}
 	mysql_free_result($result);
 	

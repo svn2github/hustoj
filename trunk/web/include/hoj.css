@@ -36,11 +36,11 @@ tr.userinfo{
 	background-color:#FFFFF0;
 	font-size: 16px;
 }
-span.yes{
+span.yes,.green {
 color:green;
 font-weight: bolder; 
 }
-span.no{
+span.no,.red{
 color:red;
 font-weight: bolder;
 }

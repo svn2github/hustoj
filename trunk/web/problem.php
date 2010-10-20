@@ -89,11 +89,11 @@ if (mysql_num_rows($result)!=1){
 		echo "<title>Problem $PID[$pid]: $row->title </title>";
 		echo "<center><h2>Problem $PID[$pid]: $row->title</h2>";
 	}
-	echo "<b>Time Limit: </b>$row->time_limit Sec&nbsp;&nbsp;";
-	echo "<b>Memory Limit: </b>".$row->memory_limit." MB";
-	if ($row->spj) echo "Sec&nbsp;&nbsp;<b>Special Judge</b>";
-	echo "<br><b>Submissions: </b>".$row->submit."&nbsp;&nbsp;";
-	echo "<b>Solved: </b>".$row->accepted."<br>"; 
+	echo "<span class=green>Time Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
+	echo "<span class=green>Memory Limit: </span>".$row->memory_limit." MB";
+	if ($row->spj) echo "Sec&nbsp;&nbsp;<span class=red>Special Judge</span>";
+	echo "<br><span class=green>Submissions: </span>".$row->submit."&nbsp;&nbsp;";
+	echo "<span class=green>Solved: </span>".$row->accepted."<br>"; 
 	
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";

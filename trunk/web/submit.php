@@ -85,12 +85,12 @@ if ($len>65536){
 
 // last submit
 
-$sql="SELECT `in_date` from `solution` where `user_id`='$user_id' order by `in_date` desc limit 1";
+$sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>now()-10 order by `in_date` desc limit 1";
 $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
-	$row=mysql_fetch_row($res);
-	$last=strtotime($row[0]);
-	$cur=time();
+	//$row=mysql_fetch_row($res);
+	//$last=strtotime($row[0]);
+	//$cur=time();
 	if ($cur-$last<10){
 		require_once('oj-header.php');
 		echo "You should not submit more than twice in 10 seconds.....<br>";

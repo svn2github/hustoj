@@ -11,7 +11,7 @@ CREATE TABLE `online` (
   `uri` varchar(255) collate utf8_unicode_ci default NULL,
   PRIMARY KEY  (`hash`),
   UNIQUE KEY `hash` (`hash`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MEMORY DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
  */
 /**
@@ -84,7 +84,7 @@ class online{
 		if($this->exist()){
 			//update databse
 			$this->update();
-		}else{
+		}else if(!(strstr($this->ua,"bot")||strstr($this->ua,"spider"))){
 			//if none, add this record
 			$this->addRecord();
 		}
@@ -104,6 +104,8 @@ class online{
 		
 		$sql = 'SELECT * FROM online';
 		$res = mysql_query($sql);
+		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
+		//$res = mysql_query($sql);
 		if($res ){
 			while($rt = mysql_fetch_object($res)) $ret[] = $rt;
 			mysql_free_result($res);

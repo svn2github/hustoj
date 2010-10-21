@@ -3,7 +3,7 @@
 
 = Introduction =
 
-安装这个OJ系统需要GNU/Linux的一个较新的发行版，推荐ubuntu9.04 [http://www.ubuntu.com]
+安装这个OJ系统需要GNU/Linux的一个较新的发行版，推荐ubuntu10.04 [http://www.ubuntu.com]
 
 
 = Details =
@@ -14,15 +14,15 @@
 另外，对于Linux系统不熟悉的用户可以选择使用LiveCD系统进行图形化安装。
 
  * 下载[HUSTOJ_LiveCD]系统，并刻录为光盘。
- * 在服务器上用光盘启动，以judge用户登录。
+ * 在服务器上用光盘启动，以root用户登录,密码freeproblemset。
  * 从开始菜单->附件启动LXTerminal
  * 输入 
 {{{
 sudo ubiquity
 }}}
-  再输入judge的密码judge,就可以进入图形化安装程序。
+  就可以进入图形化安装程序。
  * 按照提示，只需要7步简单的操作就能够将LiveCD完整安装到服务器上了。
  * 安装成功后注意
    # 登录时输入密码前选择会话（Session）为LXDE
-   # 修改judge和root账号口令，以及mysql账号口令。
+   # 修改judge和root账号口令，以及mysql账号口令,修改judge.conf和db_info.inc.php。
    # 修改系统管理员admin密码

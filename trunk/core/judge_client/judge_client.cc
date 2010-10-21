@@ -473,7 +473,7 @@ int main(int argc, char** argv) {
 	char cmd[BUFFER_SIZE];
 
 	int solution_id=atoi(argv[1]);
-	int p_id,time_lmt,mem_lmt,cas_lmt,lang,isspj;
+	int p_id,time_lmt,mem_lmt,lang,isspj;
 	char user_id[BUFFER_SIZE];
 
 	int sub;
@@ -497,14 +497,13 @@ int main(int argc, char** argv) {
 	mysql_free_result(res);
 
 	// get the problem info from Table:problem
-	sprintf(sql,"SELECT time_limit,memory_limit,case_time_limit,spj FROM problem where problem_id=%d",p_id);
+	sprintf(sql,"SELECT time_limit,memory_limit,spj FROM problem where problem_id=%d",p_id);
 	mysql_real_query(conn,sql,strlen(sql));
 	res=mysql_store_result(conn);
 	row=mysql_fetch_row(res);
 	time_lmt=atoi(row[0]);
 	mem_lmt=atoi(row[1]);
-	cas_lmt=atoi(row[2]);
-	isspj=row[3][0]-'0';
+	isspj=row[2][0]-'0';
 
 	mysql_free_result(res);
 

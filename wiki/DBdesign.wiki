@@ -1,0 +1,11 @@
+#summary One-sentence summary of this page.
+#labels Featured,Phase-Design
+
+= Introduction =
+
+the main tables in database.
+
+
+= Details =
+
+[http://hustoj.googlecode.com/files/hustoj-db.png]

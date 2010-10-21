@@ -46,7 +46,7 @@ $Rank=intval($row[0])+1;
 <caption><?=$user."--".$nick?></caption>
 <tr bgcolor=#D7EBFF><td width=15%>Rank:<td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
 <tr bgcolor=#D7EBFF><td>Solved:<td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
-<td rowspan=12 align=center>
+<td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
 <?

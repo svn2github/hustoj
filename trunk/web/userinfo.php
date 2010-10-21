@@ -1,5 +1,10 @@
 <?require_once("oj-header.php")?>
-<?require_once("./include/db_info.inc.php")?>
+<?require_once("./include/db_info.inc.php");
+require_once("./include/const.inc.php");
+?>
+
+<script type="text/javascript" src="include/wz_jsgraphics.js"></script>
+<script type="text/javascript" src="include/pie.js"></script>
 <?
 // check user
 $user=$_GET['user'];
@@ -37,11 +42,11 @@ $row=mysql_fetch_array($result);
 $Rank=intval($row[0])+1;
 ?>
 <center>
-<table width=70%>
+<table id=statics width=70%>
 <caption><?=$user."--".$nick?></caption>
-<tr bgcolor=#ccffff><td width=15%>Rank:<td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
-<tr bgcolor=#ccffff><td>Solved:<td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
-<td rowspan=4 align=center>
+<tr bgcolor=#D7EBFF><td width=15%>Rank:<td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
+<tr bgcolor=#D7EBFF><td>Solved:<td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
+<td rowspan=12 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
 <?
@@ -53,9 +58,46 @@ mysql_free_result($result);
 ?>
 </script>
 </tr>
-<tr bgcolor=#ccffff><td>Submmissions:<td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
-<tr bgcolor=#ccffff><td>School:<td align=center><?=$school?></tr>
-<tr bgcolor=#ccffff><td>Email:<td align=center><?=$email?></tr>
+<tr bgcolor=#D7EBFF><td>Submmissions:<td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
+<?php 
+	$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user'  AND result>=4 group by result order by result";
+	$result=mysql_query($sql);
+	while($row=mysql_fetch_array($result)){
+		
+		//i++;
+		echo "<tr bgcolor=#D7EBFF><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a></tr>";
+	}
+	mysql_free_result($result);
+	
+//}
+echo "<tr id=pie bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
+
+?>
+<script language="javascript">
+	var y= new Array ();
+	var x = new Array ();
+	var dt=document.getElementById("statics");
+	var data=dt.rows;
+	var n;
+	for(var i=3;dt.rows[i].id!="pie";i++){
+			n=dt.rows[i].cells[0];
+			n=n.innerText || n.textContent;
+			x.push(n);
+			n=dt.rows[i].cells[1].firstChild;
+			n=n.innerText || n.textContent;
+			//alert(n);
+			n=parseInt(n);
+			y.push(n);
+	}
+	var mypie=  new Pie("PieDiv");
+	mypie.drawPie(y,x);
+	//mypie.clearPie();
+
+</script> 
+
+
+<tr bgcolor=#D7EBFF><td>School:<td align=center><?=$school?></tr>
+<tr bgcolor=#D7EBFF><td>Email:<td align=center><?=$email?></tr>
 </table>
 <?
 if (isset($_SESSION['administrator'])){

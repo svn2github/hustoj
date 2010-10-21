@@ -15,7 +15,7 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 本光盘是一张LiveCD，即无需安装、无需硬盘，只需要有光驱、内存大于256的x86-32bit系统即可以光盘启动方式运行。登陆用户和密码均为judge，进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含5道题目，更多题目可以在线下载。局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。judge用户有sudo权限。
 
 
-  * 基于Ubuntu9.10
+  * 基于Ubuntu10.04 LTS Desktop
   * 无须硬盘，不影响现有系统
   * CDROM 256M内存 32bit x86即可运行
   * 内置5道题目，可以导入FPS题目
@@ -39,6 +39,9 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r475
+
+
 
 r455
 
@@ -56,7 +59,3 @@ r418 based on ubuntu10.04 root密码freeproblemset
 
 http://u.115.com/file/f6b85a933b
 hustoj-root[freeproblemset]-r418.iso
-
-r418 based on ubuntu9.10
-http://u.115.com/file/f6efdecce6
-hustoj-FPS-r418.iso

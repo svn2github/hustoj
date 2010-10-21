@@ -70,7 +70,7 @@ mysql_free_result($result);
 	mysql_free_result($result);
 	
 //}
-echo "<tr id=pie bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
+echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
 
 ?>
 <script language="javascript">

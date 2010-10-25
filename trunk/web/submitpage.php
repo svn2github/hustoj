@@ -45,10 +45,13 @@ Language:
  $CPP_=($lang&2)>0;
  $P_=($lang&4)>0;
  $J_=($lang&8)>0;
- if($C_) echo"	   <option value=0>C</option>";
- if($CPP_) echo"		<option value=1 selected>C++</option>";
- if($P_) echo"		<option value=2>Pascal</option>";
- if($J_) echo"		<option value=3>Java</option>";
+ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
+ else $lastlang=1;
+ 
+ if($C_) echo"	    <option value=0 ".( $lastlang==0?"selected":"").">C</option>";
+ if($CPP_) echo"	<option value=1 ".( $lastlang==1?"selected":"").">C++</option>";
+ if($P_) echo"		<option value=2 ".( $lastlang==2?"selected":"").">Pascal</option>";
+ if($J_) echo"		<option value=3 ".( $lastlang==3?"selected":"").">Java</option>";
 ?>
 </select>
 <br>

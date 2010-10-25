@@ -68,6 +68,9 @@ $len=strlen($source);
 $language=intval($_POST['language']);
 if ($language>3 || $language<0) $language=0;
 $language=strval($language);
+
+setcookie('lastlang',$language,time()+360000,"/JudgeOnline/submitpage.php");
+
 $ip=$_SERVER['REMOTE_ADDR'];
 
 if ($len<20){

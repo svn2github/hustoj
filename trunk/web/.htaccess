@@ -1,8 +1,0 @@
-
-php_value open_basedir =/home/judge/data:/var/www/JudgeOnline:/tmp  
-php_value max_execution_time = 300
-php_value max_input_time = 600 
-php_value memory_limit = 256M
-php_value post_max_size = 128M
-php_value upload_tmp_dir =/tmp
-php_value upload_max_filesize = 128M

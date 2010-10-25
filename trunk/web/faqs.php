@@ -130,13 +130,15 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 <br>
 <hr>
 <center>
-  <font color=green size="+2">Any questions/suggestions please post to <a href="http://zjicmacm.5d6d.com">ZJICM ACM BBS</a></font>
+  <font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php">ZJICM ACM BBS</a></font>
 </center>
 <hr>
 <center>
   <table width=100% border=0>
     <tr>
-      <td align=right width=65%><a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> <a href = ""><font color=red>R466</font></a></td>
+      <td align=right width=65%>
+      <a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> 
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R486</font></a></td>
     </tr>
   </table>
 </center>

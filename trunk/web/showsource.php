@@ -8,6 +8,7 @@
 <script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushCss.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushDelphi.js' type='text/javascript'></script> 
 <script language='javascript'> 
 SyntaxHighlighter.config.bloggerMode = false;
 SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
@@ -30,7 +31,9 @@ $row=mysql_fetch_object($result);
 if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 if ($ok==true){
-	echo "<pre class=\"brush: ".strtolower($language_name[$row->language]).";\">";
+	$brush=strtolower($language_name[$row->language]);
+	if ($brush=='pascal') $brush='delphi';
+	echo "<pre class=\"brush:".$brush.";\">";
 	ob_start();
 	echo "/**************************************************************\n";
 	echo "\tProblem: $row->problem_id\n\tUser: $row->user_id\n";

@@ -631,8 +631,9 @@ int main(int argc, char** argv) {
 				 execl("./Main","./Main",NULL);
 			 }
 			else {
-				sprintf(cmd,"-Xmx%dM",mem_lmt);
-				execl("/usr/bin/java","/usr/bin/java","-Xms32m",java_xmx,"-Djava.security.manager"
+				sprintf(cmd,"-Xms%dM",mem_lmt/2);
+				sprintf(buf,"-Xmx%dM",mem_lmt);
+				execl("/usr/bin/java","/usr/bin/java",cmd,buf,"-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			}
 			//sleep(1);

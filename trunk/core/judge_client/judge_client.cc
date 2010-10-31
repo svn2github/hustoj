@@ -471,7 +471,9 @@ int main(int argc, char** argv) {
 	char work_dir[BUFFER_SIZE];
 	char src_pth[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
-
+	char java_p1[BUFFER_SIZE];
+	char java_p2[BUFFER_SIZE];
+	
 	int solution_id=atoi(argv[1]);
 	int p_id,time_lmt,mem_lmt,lang,isspj;
 	char user_id[BUFFER_SIZE];
@@ -631,9 +633,10 @@ int main(int argc, char** argv) {
 				 execl("./Main","./Main",NULL);
 			 }
 			else {
-				sprintf(cmd,"-Xms%dM",mem_lmt/2);
-				sprintf(buf,"-Xmx%dM",mem_lmt);
-				execl("/usr/bin/java","/usr/bin/java",cmd,buf,"-Djava.security.manager"
+				sprintf(java_p1,"-Xms%dM",mem_lmt/2);
+				sprintf(java_p2,"-Xmx%dM",mem_lmt);
+				write_log("java_parameter:%s %s",java_p1,java_p2);
+				execl("/usr/bin/java","/usr/bin/java",java_p1,java_p2,"-Djava.security.manager"
 			,"-Djava.security.policy=./java.policy","Main",NULL);
 			}
 			//sleep(1);

@@ -721,7 +721,7 @@ sig = 25 对应的是 File size limit exceeded*/
 
 				// check the system calls
 				ptrace(PTRACE_GETREGS,pidApp,NULL,&reg);
-				if (cleft[reg.orig_eax]==0){
+				if (lang!=3&&cleft[reg.orig_eax]==0){ //do not limit JVM syscall for using different JVM
 					ACflg=OJ_RE;
 					write_log("[ERROR] A Not allowed system call: runid:%s callid:%d\n",argv[1],reg.orig_eax);
 					ptrace(PTRACE_KILL,pidApp,NULL,NULL);

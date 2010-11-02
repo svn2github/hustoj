@@ -34,7 +34,7 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 
 管理员可以导入/fps下的FPS格式的xml文件。
 
-使用时如果已经联网，可以用sudo update-hustoj进行程序更新。
+*使用时如果已经联网，可以用sudo update-hustoj进行程序更新，获得最新版本。*
 
 root密码freeproblemset
 

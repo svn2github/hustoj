@@ -39,6 +39,11 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r492
+
+http://u.115.com/file/f6dd26d6ce
+hust-root-freeproblemset-r492.iso
+
 r475
 
 http://u.115.com/file/f6dd21b145
@@ -46,20 +51,3 @@ hustoj-root-freeproblemset-r475.iso
 
 http://u.115.com/file/f6dd21afbb
 hustoj-root-freeproblemset-r475.iso
-
-r455
-
-http://u.115.com/file/f69d6d1958
-hustoj-root-freeproblemset-r455.iso
-
-r434 
-http://u.115.com/file/f650fe4fcc
-hustoj-root[freeproblemset]-r434.iso
-
-http://www.rayfile.com/zh-cn/files/9fd555bd-d826-11df-9d74-0015c55db73d/
- 
-
-r418 based on ubuntu10.04 root密码freeproblemset
-
-http://u.115.com/file/f6b85a933b
-hustoj-root[freeproblemset]-r418.iso

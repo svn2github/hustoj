@@ -55,6 +55,6 @@ hustoj-root-freeproblemset-r475.iso
 LiveCD System on k6-2 System
 K6-2-450 320M 1G-CF
 
-[http://hustoj.googlecode.com/files/k6-2-system.JPG]
-[http://hustoj.googlecode.com/files/k6-2-status.JPG]
-[http://hustoj.googlecode.com/files/k6-2-HustOJ.JPG]
+<img src=http://hustoj.googlecode.com/files/k6-2-system.JPG width=800>
+<img src=http://hustoj.googlecode.com/files/k6-2-status.JPG width=800>
+<img src=http://hustoj.googlecode.com/files/k6-2-HustOJ.JPG width=800>

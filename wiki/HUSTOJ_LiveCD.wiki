@@ -39,6 +39,11 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r496 自动升级版
+
+http://u.115.com/file/f62aa64132
+hust-root-freeproblemset-r496.iso
+
 r492
 
 http://u.115.com/file/f6dd26d6ce

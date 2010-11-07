@@ -22,7 +22,7 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
   * 内置FPS样例
   * 内置C/C++IDE(Codeblocks)
 
-启动后以root用户登录，密码freeproblemset,可进入图形界面。 user root's password is freeproblemset
+启动后以root/ubuntu用户登录，密码freeproblemset,可进入图形界面。 user root's password is freeproblemset
 
 启动Firefox访问[http://127.0.0.1/]可进入OJ界面。after booting apache is serving at 80
 

@@ -25,7 +25,10 @@
   </tr>
   <tr>
     <td>Java:</td>
-    <td><font color="blue">javac -J-Xms32m -J-Xmx256m Main.java</font></td>
+    <td><font color="blue">javac -J-Xms32m -J-Xmx256m Main.java</font>
+    <br>
+    <font size="-1" color="red">*Java has 2 more seconds and 512M more memory when running and judging.</font>
+    </td>
   </tr>
 </table>
 <p>  Our compiler software version:<br>
@@ -130,7 +133,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 <br>
 <hr>
 <center>
-  <font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php">ZJICM ACM BBS</a></font>
+  <font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php"><?=$OJ_NAME?> BBS</a></font>
 </center>
 <hr>
 <center>
@@ -138,7 +141,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R486</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R500+</font></a></td>
     </tr>
   </table>
 </center>

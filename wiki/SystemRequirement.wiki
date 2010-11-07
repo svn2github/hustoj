@@ -1,12 +1,12 @@
 #labels Featured,Phase-Requirements,Phase-Support
 #系统软硬件需求
 
-= Introduction =
-
-系统安装软硬件需求
+= 系统安装软硬件需求 =
 
 
-= Details =
+
+
+= 安装版 =
 
 最低配置:
    * PIII-450 
@@ -25,3 +25,12 @@
   * Apache2.0+
   * PHP   5.0+
    
+
+= LiveCD版 =
+
+最低配置:
+   * K2-2-450 
+   * 256M  
+   * CDROM
+   * 无须硬盘
+   * 无网络可本地运行、有网络可升级至最新版

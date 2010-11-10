@@ -172,6 +172,36 @@ int isInFile(const char fname[]) {
 		return l - 3;
 }
 
+void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
+	// Find the next non-space character or \n.
+	while ((isspace(c1)) || (isspace(c2))) {
+		if (c1 != c2) {
+			if (c2 == EOF) {
+				do {
+					c1 = fgetc(f1);
+				} while (isspace(c1));
+				continue;
+			} else if (c1 == EOF) {
+				do {
+					c2 = fgetc(f2);
+				} while (isspace(c2));
+				continue;
+			} else {
+				if (DEBUG)
+					printf("%d=%c\t%d=%c", c1, c1, c2, c2);
+				;
+				ret = OJ_PE;
+			}
+		}
+		if (isspace(c1)) {
+			c1 = fgetc(f1);
+		}
+		if (isspace(c2)) {
+			c2 = fgetc(f2);
+		}
+	}
+}
+
 /***
  int compare_diff(const char *file1,const char *file2){
  char diff[1024];
@@ -203,29 +233,7 @@ int compare_zoj(const char *file1, const char *file2) {
 			// Blank lines are skipped.
 			int c1 = fgetc(f1);
 			int c2 = fgetc(f2);
-			while (isspace(c1) || isspace(c2)) {
-
-				if (c1 != c2) {
-					if (c2 == EOF && c1 == '\n') {
-						c1 = fgetc(f1);
-						continue;
-					} else if (c1 == EOF && c2 == '\n') {
-						c2 = fgetc(f2);
-						continue;
-					} else {
-						if (DEBUG)
-							printf("%d=%c\t%d=%c", c1, c1, c2, c2);
-						;
-						ret = OJ_PE;
-					}
-				}
-				if (isspace(c1)) {
-					c1 = fgetc(f1);
-				}
-				if (isspace(c2)) {
-					c2 = fgetc(f2);
-				}
-			}
+			find_next_nonspace(c1, c2, f1, f2, ret);
 			// Compare the current line.
 			for (;;) {
 				// Read until 2 files return a space or 0 together.
@@ -244,29 +252,7 @@ int compare_zoj(const char *file1, const char *file2) {
 					c1 = fgetc(f1);
 					c2 = fgetc(f2);
 				}
-				// Find the next non-space character or \n.
-				while ((isspace(c1)) || (isspace(c2))) {
-					if (c1 != c2) {
-						if (c2 == EOF) {
-							c1 = fgetc(f1);
-							continue;
-						} else if (c1 == EOF) {
-							c2 = fgetc(f2);
-							continue;
-						} else {
-							if (DEBUG)
-								printf("%d=%c\t%d=%c", c1, c1, c2, c2);
-							;
-							ret = OJ_PE;
-						}
-					}
-					if (isspace(c1)) {
-						c1 = fgetc(f1);
-					}
-					if (isspace(c2)) {
-						c2 = fgetc(f2);
-					}
-				}
+				find_next_nonspace(c1, c2, f1, f2, ret);
 				if (c1 == EOF && c2 == EOF) {
 					goto end;
 				}
@@ -865,8 +851,11 @@ void clean_workdir(char work_dir[BUFFER_SIZE]) {
 int main(int argc, char** argv) {
 	if (argc < 3) {
 		fprintf(stderr, "Usage:%s solution_id runner_id.\n", argv[0]);
-		fprintf(stderr, "Multi:%s solution_id runner_id judge_base_path.\n", argv[0]);
-		fprintf(stderr, "Debug:%s solution_id runner_id judge_base_path debug.\n", argv[0]);
+		fprintf(stderr, "Multi:%s solution_id runner_id judge_base_path.\n",
+				argv[0]);
+		fprintf(stderr,
+				"Debug:%s solution_id runner_id judge_base_path debug.\n",
+				argv[0]);
 		exit(1);
 	}
 	DEBUG = (argc > 4);
@@ -905,10 +894,12 @@ int main(int argc, char** argv) {
 		sprintf(cmd, "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
 		system(cmd);
 	}
-	//never bigger than judged set value; 
-	if(time_lmt>300||time_lmt<1) time_lmt=300;
-	if(mem_lmt>1024||mem_lmt<1) mem_lmt=1024;
-	
+	//never bigger than judged set value;
+	if (time_lmt > 300 || time_lmt < 1)
+		time_lmt = 300;
+	if (mem_lmt > 1024 || mem_lmt < 1)
+		mem_lmt = 1024;
+
 	if (DEBUG)
 		printf("time: %d mem: %d\n", time_lmt, mem_lmt);
 

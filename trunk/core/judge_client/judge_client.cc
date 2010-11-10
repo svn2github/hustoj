@@ -905,6 +905,10 @@ int main(int argc, char** argv) {
 		sprintf(cmd, "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
 		system(cmd);
 	}
+	//never bigger than judged set value; 
+	if(time_lmt>300||time_lmt<1) time_lmt=300;
+	if(mem_lmt>1024||mem_lmt<1) mem_lmt=1024;
+	
 	if (DEBUG)
 		printf("time: %d mem: %d\n", time_lmt, mem_lmt);
 

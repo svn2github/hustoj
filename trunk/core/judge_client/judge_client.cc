@@ -186,7 +186,16 @@ int compare_zoj(const char *file1,const char *file2) {
         while (isspace(c1) || isspace(c2)) {
 
             if (c1 != c2) {
-                ret = OJ_PE;
+					if(c2==EOF&&c1=='\n'){
+                        c1 = fgetc(f1);
+                        continue;
+                    }else if(c1==EOF&&c2=='\n'){
+                        c2 = fgetc(f2);
+                        continue;
+                    }else{
+						if(DEBUG)printf("%d=%c\t%d=%c",c1,c1,c2,c2);;
+                        ret = OJ_PE;
+                    }
             }
             if (isspace(c1)) {
                 c1 = fgetc(f1);
@@ -223,6 +232,7 @@ int compare_zoj(const char *file1,const char *file2) {
                         c2 = fgetc(f2);
                         continue;
                     }else{
+						if(DEBUG)printf("%d=%c\t%d=%c",c1,c1,c2,c2);;
                         ret = OJ_PE;
                     }
                 }

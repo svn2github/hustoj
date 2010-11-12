@@ -39,6 +39,10 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r509 650M 支持CDRW可擦写
+http://u.115.com/file/f6d4c8e0dd
+hustoj-root-freeproblemset-r509.iso
+
 r496 自动升级版
 
 http://u.115.com/file/f62aa64132

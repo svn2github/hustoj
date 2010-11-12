@@ -2,16 +2,22 @@
 
 = Introduction =
 
-2009-2010寒假开发计划
+一些可能考虑的开发方向和近期开发的新功能
 
 
 = Details =
 
 未完成
+ # 比赛帐号导入导出
+ # 
  # 代码抄袭识别？怎么实现才能不影响系统速度呢？
 
 
 已完成
+
+ # judge_client.cc main重构、移植ZOJcompare、兼容\r\n DOS-style data
+ # 题目提交饼图
+ # 个人提交饼图
  # FPS扩展多个测试数据文件
  # 添加角色 contest_creator
  # 添加快速复制现有比赛，用于添加新的作业。 done!

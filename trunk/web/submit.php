@@ -69,7 +69,7 @@ $language=intval($_POST['language']);
 if ($language>3 || $language<0) $language=0;
 $language=strval($language);
 
-setcookie('lastlang',$language,time()+360000,"/JudgeOnline/submitpage.php");
+setcookie('lastlang',$language,time()+360000);
 
 $ip=$_SERVER['REMOTE_ADDR'];
 

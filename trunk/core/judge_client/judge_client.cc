@@ -80,8 +80,8 @@ static char java_xmx[BUFFER_SIZE];
 #define ZOJ_COM
 MYSQL *conn;
 
-char lang_ext[4][8] = { "c", "cc", "pas", "java" };
-char buf[BUFFER_SIZE];
+static char lang_ext[4][8] = { "c", "cc", "pas", "java" };
+static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
 	struct stat f_stat;
@@ -186,8 +186,8 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
 					c2 = fgetc(f2);
 				} while (isspace(c2));
 				continue;
-			}else if((c1=='\r'&&c2=='\n')){
-				c1=fgetc(f1);
+			} else if ((c1 == '\r' && c2 == '\n')) {
+				c1 = fgetc(f1);
 			} else {
 				if (DEBUG)
 					printf("%d=%c\t%d=%c", c1, c1, c2, c2);
@@ -284,9 +284,12 @@ void delnextline(char s[]) {
 
 int compare(const char *file1, const char *file2) {
 #ifdef ZOJ_COM
+	//compare ported and improved from zoj don't limit file size
 	return compare_zoj(file1, file2);
 #endif
 #ifndef ZOJ_COM
+	//the original compare from the first version of hustoj has file size limit
+	//and waste memory
 	FILE *f1,*f2;
 	char *s1,*s2,*p1,*p2;
 	int PEflg;
@@ -327,7 +330,7 @@ int compare(const char *file1, const char *file2) {
 #endif
 }
 
-/*  * */
+/* write result back to database */
 void update_solution(int solution_id, int result, int time, int memory) {
 	char sql[BUFFER_SIZE];
 	sprintf(
@@ -340,6 +343,7 @@ void update_solution(int solution_id, int result, int time, int memory) {
 	}
 }
 
+/* write compile error message back to database */
 void addceinfo(int solution_id) {
 	char sql[(1 << 16)], *end;
 	char ceinfo[(1 << 16)], *cend;
@@ -410,7 +414,7 @@ int compile(int lang) {
 	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-Wall", "-lm",
 			"--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-O2", "-Wall",
-			"-lm", "--static", "-DONLINE_JUDGE", NULL };//"-I/usr/include/c++/4.3",
+			"-lm", "--static", "-DONLINE_JUDGE", NULL };
 	const char * CP_P[] = { "fpc", "Main.pas", "-oMain", "-Co", "-Cr", "-Ct",
 			"-Ci", NULL };
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
@@ -446,12 +450,14 @@ int compile(int lang) {
 			execvp(CP_J[0], (char * const *) CP_J);
 			break;
 		}
-		//		printf("compile end!\n");
+		if (DEBUG)
+			printf("compile end!\n");
 		return 0;
 	} else {
 		int status;
 		waitpid(pid, &status, 0);
-		//		printf("status=%d\n",status);
+		if (DEBUG)
+			printf("status=%d\n", status);
 		return status;
 	}
 
@@ -468,7 +474,7 @@ int compile(int lang) {
  return ret;
  }
  */
-int read_proc_status(int pid, const char * mark) {
+int get_proc_status(int pid, const char * mark) {
 	FILE * pf;
 	char fn[BUFFER_SIZE], buf[BUFFER_SIZE];
 	int ret = 0;
@@ -668,6 +674,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 			PEflg = OJ_PE;
 		ACflg = comp_res;
 	}
+	//jvm popup messages, if don't consider them will get miss-WrongAnswer
 	if (lang == 3 && ACflg != OJ_AC) {
 		sprintf(buf, "cat %s/error.out", work_dir);
 		comp_res = system(buf);
@@ -698,6 +705,19 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	}
 }
 
+int get_page_fault_mem(struct rusage & ruse, pid_t & pidApp) {
+	//java use pagefault
+	int m_vmpeak, m_vmdata, m_minflt;
+	m_minflt = ruse.ru_minflt * getpagesize();
+	if (0 && DEBUG) {
+		m_vmpeak = get_proc_status(pidApp, "VmPeak:");
+		m_vmdata = get_proc_status(pidApp, "VmData:");
+		printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n", m_vmpeak, m_vmdata,
+				m_minflt >> 10);
+	}
+	return m_minflt;
+}
+
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		char * userfile, char * outfile, int solution_id, int lang,
 		int & topmemory, int mem_lmt, int & usedtime, int time_lmt, int & p_id,
@@ -707,7 +727,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	if (DEBUG)
 		printf("pid=%d judging %s\n", pidApp, infile);
 
-	int status, sig;
+	int status, sig, exitcode;
 	struct user_regs_struct reg;
 	struct rusage ruse;
 	int sub = 0;
@@ -715,7 +735,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		// check the usage
 
 		wait4(pidApp, &status, 0, &ruse);
-		sig = status >> 8;/*status >> 8 差不多是EXITCODE*/
+		//sig = status >> 8;/*status >> 8 差不多是EXITCODE*/
 
 		if (WIFEXITED(status))
 			break;
@@ -731,20 +751,18 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		}
 
-		if (DEBUG && status != 1407) {
-			printf("status=%d\n", status);
-			psignal(sig, NULL);
-		}
-
-		if (sig == 0x05 || sig == 0)
+		exitcode = WEXITSTATUS(status);
+		/*exitcode == 5 是正常暂停 */
+		if (exitcode == 0x05 || exitcode == 0)
+			//go on and on
 			;
 		else {
 			if (DEBUG) {
-				printf("status>>8=%d\n", sig);
-				psignal(sig, NULL);
+				printf("status>>8=%d\n", exitcode);
+				psignal(exitcode, NULL);
 			}
 			if (ACflg == OJ_AC)
-				switch (sig) {
+				switch (exitcode) {
 				case SIGXCPU:
 					ACflg = OJ_TL;
 					break;
@@ -760,6 +778,15 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		}
 		if (WIFSIGNALED(status)) {
+			/*  WIFSIGNALED: 如果进程是被信号结束的，返回True
+			 *
+			 *  另 psignal(int sig, char *s)，进行类似perror(char *s)的操作，打印 s, 并输出信号 sig 对应的提示，其中
+			 *  sig = 5 对应的是 Trace/breakpoint trap
+			 *  sig = 11 对应的是 Segmentation fault
+			 *  sig = 25 对应的是 File size limit exceeded
+			 *
+			 *  WTERMSIG: 返回在上述情况下结束进程的信号
+			 *  */
 			sig = WTERMSIG(status);
 			if (DEBUG) {
 				printf("WTERMSIG=%d\n", sig);
@@ -781,18 +808,13 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				}
 			break;
 		}
-		/* sig == 5 差不多是正常暂停     commited from http://www.felix021.com/blog/index.php?go=category_13
+		/*     commited from http://www.felix021.com/blog/index.php?go=category_13
 
-		 WIFSIGNALED: 如果进程是被信号结束的，返回True
-		 WTERMSIG: 返回在上述情况下结束进程的信号
 
 		 WIFSTOPPED: 如果进程在被ptrace调用监控的时候被信号暂停/停止，返回True
 		 WSTOPSIG: 返回在上述情况下暂停/停止进程的信号
 
-		 另 psignal(int sig, char *s)，进行类似perror(char *s)的操作，打印 s, 并输出信号 sig 对应的提示，其中
-		 sig = 5 对应的是 Trace/breakpoint trap
-		 sig = 11 对应的是 Segmentation fault
-		 sig = 25 对应的是 File size limit exceeded*/
+		 */
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
@@ -809,20 +831,11 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		}
 		sub = 1 - sub;
 
-		//tempmemory=read_proc_statm(pidApp)*getpagesize();
-		if (lang == 3) {//java use pagefault
-			int m_vmpeak, m_vmdata, m_minflt;
-			m_minflt = ruse.ru_minflt * getpagesize();
-			if (0 && DEBUG) {
-				m_vmpeak = read_proc_status(pidApp, "VmPeak:");
-				m_vmdata = read_proc_status(pidApp, "VmData:");
-				printf("VmPeak:%d KB VmData:%d KB minflt:%d KB\n", m_vmpeak,
-						m_vmdata, m_minflt >> 10);
-			}
-			tempmemory = m_minflt;
+		//jvm gc ask VM before need,so used kernel page fault times and page size
+		if (lang == 3) {
+			tempmemory = get_page_fault_mem(ruse, pidApp);
 		} else {//other use VmPeak
-			tempmemory = read_proc_status(pidApp, "VmPeak:") << 10;
-
+			tempmemory = get_proc_status(pidApp, "VmPeak:") << 10;
 		}
 		if (tempmemory > topmemory)
 			topmemory = tempmemory;
@@ -850,7 +863,8 @@ void clean_workdir(char work_dir[BUFFER_SIZE]) {
 	system(buf);
 }
 
-int main(int argc, char** argv) {
+void init_parameters(int argc, char **& argv, int & solution_id,
+		int & runner_id) {
 	if (argc < 3) {
 		fprintf(stderr, "Usage:%s solution_id runner_id.\n", argv[0]);
 		fprintf(stderr, "Multi:%s solution_id runner_id judge_base_path.\n",
@@ -863,28 +877,37 @@ int main(int argc, char** argv) {
 	DEBUG = (argc > 4);
 	if (argc > 3)
 		strcpy(oj_home, argv[3]);
+
 	else
 		strcpy(oj_home, "/home/judge");
-	chdir(oj_home);// change the dir// init our work
 
+	chdir(oj_home); // change the dir// init our work
 	if (!init_mysql_conn()) {
-		return 0; //exit if mysql is down
+		exit(0); //exit if mysql is down
 	}
-	// copy the source file and get the limit
+	solution_id = atoi(argv[1]);
+	runner_id = atoi(argv[2]);
+}
+
+int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
-
+	char user_id[BUFFER_SIZE];
 	int solution_id = atoi(argv[1]);
 	int runner_id = atoi(argv[2]);
 	int p_id, time_lmt, mem_lmt, lang, isspj;
-	char user_id[BUFFER_SIZE];
 
+	init_parameters(argc, argv, solution_id, runner_id);
+
+	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
-
 	chdir(work_dir);
+
 	get_solution_info(solution_id, p_id, user_id, lang);
+	//get the limit
 	get_problem_info(p_id, time_lmt, mem_lmt, isspj);
+	//copy source file
 	get_solution(solution_id, work_dir, lang);
 
 	//java is lucky

@@ -52,10 +52,10 @@ judge_client.cc:424
 
 cd hustoj-read-only/core/judged/
 make
-cp judged /usr/bin
+sudo cp judged /usr/bin
 cd hustoj-read-only/core/judge_client
 make
-cp judge_client /usr/bin
+sudo cp judge_client /usr/bin
 }}}
 
           判题配置文件 

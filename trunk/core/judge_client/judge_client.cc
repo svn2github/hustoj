@@ -64,6 +64,22 @@
 #define OJ_CE 11
 #define OJ_CO 12
 
+/*copy from ZOJ 
+http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
+*/
+#ifdef __i386
+	#define REG_SYSCALL orig_eax
+	#define REG_RET eax
+	#define REG_ARG0 ebx
+	#define REG_ARG1 ecx
+#else
+	#define REG_SYSCALL orig_rax
+	#define REG_RET rax
+	#define REG_ARG0 rdi
+	#define REG_ARG1 rsi
+	
+#endif
+
 static int DEBUG = 0;
 static char host_name[BUFFER_SIZE];
 static char user_name[BUFFER_SIZE];
@@ -92,19 +108,49 @@ long get_file_size(const char * filename) {
 
 	return (long) f_stat.st_size;
 }
+
+
+void write_log(const char *fmt, ...) {
+	va_list ap;
+	char buffer[4096];
+	//	time_t          t = time(NULL);
+	int l;
+	FILE *fp = fopen("../log/client.log", "a+");
+	if (fp == NULL) {
+		fprintf(stderr, "openfile error!\n");
+		system("pwd");
+	}
+	va_start(ap, fmt);
+	l = vsprintf(buffer, fmt, ap);
+	fprintf(fp, "%s\n", buffer);
+	if (DEBUG)
+		printf("%s\n", buffer);
+	va_end(ap);
+	fclose(fp);
+
+}
+
 int call_counter[512];
 
 void init_syscalls_limits(int lang) {
 	int i;
 	memset(call_counter, 0, sizeof(call_counter));
+if(DEBUG)
+	write_log("init_call_counter:%d",lang);		
 	if (lang <= 1) { // C & C++
-		for (i = 0; LANG_CV[i]; i++)
+	write_log("LANG_CV[0]:%d",LANG_CV[0]);		
+	
+		for (i = 0; LANG_CC[i]; i++){
 			call_counter[LANG_CV[i]] = LANG_CC[i];
+			//if(DEBUG){
+			//write_log("call:%lucounter:%d",i,call_counter[i]);		
+		//}
+		}
 	} else if (lang == 2) { // Pascal
-		for (i = 0; LANG_PV[i]; i++)
+		for (i = 0; LANG_PC[i]; i++)
 			call_counter[LANG_PV[i]] = LANG_PC[i];
 	} else { // Java
-		for (i = 0; LANG_JV[i]; i++)
+		for (i = 0; LANG_JC[i]; i++)
 			call_counter[LANG_JV[i]] = LANG_JC[i];
 	}
 }
@@ -145,24 +191,6 @@ void init_mysql_conf() {
 	}
 }
 
-void write_log(const char *fmt, ...) {
-	va_list ap;
-	char buffer[4096];
-	//	time_t          t = time(NULL);
-	int l;
-	FILE *fp = fopen("../log/client.log", "a+");
-	if (fp == NULL) {
-		fprintf(stderr, "openfile error!\n");
-		system("pwd");
-	}
-	va_start(ap, fmt);
-	l = vsprintf(buffer, fmt, ap);
-	fprintf(fp, "%s\n", buffer);
-	if (DEBUG)
-		printf("%s\n", buffer);
-	va_end(ap);
-	fclose(fp);
-}
 
 int isInFile(const char fname[]) {
 	int l = strlen(fname);
@@ -430,8 +458,8 @@ int compile(int lang) {
 		LIM.rlim_cur = 8 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
-		LIM.rlim_max = 512 * STD_MB;
-		LIM.rlim_cur = 512 * STD_MB;
+		LIM.rlim_max = 1024 * STD_MB;
+		LIM.rlim_cur = 1024 * STD_MB;
 		setrlimit(RLIMIT_AS, &LIM);
 
 		freopen("ce.txt", "w", stderr);
@@ -818,16 +846,19 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		if (call_counter[reg.orig_eax] == 0) { //do not limit JVM syscall for using different JVM
+		/*if(DEBUG){
+			write_log("call:%lucounter:%d",reg.REG_SYSCALL,call_counter[reg.REG_SYSCALL]);		
+		}*/
+		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 			write_log(
 					"[ERROR] A Not allowed system call: runid:%d callid:%d\n",
-					solution_id, reg.orig_eax);
+					solution_id, reg.REG_SYSCALL);
 
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		} else {
 			if (sub == 1)
-				call_counter[reg.orig_eax]--;
+				call_counter[reg.REG_SYSCALL]--;
 		}
 		sub = 1 - sub;
 
@@ -939,7 +970,7 @@ int main(int argc, char** argv) {
 		update_user(user_id);
 		update_problem(p_id);
 		mysql_close(conn);
-		system("rm *");
+		if(!DEBUG)system("rm *");
 		exit(0);
 	} else {
 		update_solution(solution_id, OJ_RI, 0, 0);

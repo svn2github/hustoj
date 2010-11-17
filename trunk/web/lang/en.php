@@ -1,4 +1,5 @@
 <?php
+	//oj-header.php
 	$MSG_FAQ="F.A.Qs";
 	$MSG_BBS="Web Board";
 	$MSG_HOME="HOME";
@@ -12,7 +13,8 @@
 	$MSG_ADMIN="ADMIN";
 	$MSG_STANDING="STANDING";
 	$MSG_STATISTICS="STATISTICS";
-	
+	$MSG_USERINFO="ModifyUser";
+	//status.php
 	$MSG_Pending="Pending";
 	$MSG_Pending_Rejudging="Pending Rejudging";
 	$MSG_Compiling="Compiling";
@@ -26,7 +28,16 @@
 	$MSG_Runtime_Error="Runtime Error";
 	$MSG_Compile_Error="Compile Error";
 	$MSG_Compile_OK="Compile OK";
-	
+	$MSG_RUNID="RunID";
+	$MSG_USER="User";
+	$MSG_PROBLEM="Problem";
+	$MSG_RESULT="Result";
+	$MSG_MEMORY="Memory";
+	$MSG_TIME="Time";
+	$MSG_LANG="Language";
+	$MSG_CODE_LENGTH="Code Length";
+	$MSG_SUBMIT_TIME="Submit Time";
+	//problemstatistics.php
 	$MSG_PD="PD";
 	$MSG_PR="PR";
 	$MSG_CI="CI";
@@ -41,16 +52,20 @@
 	$MSG_CE="CE";
 	$MSG_CO="CO";
 	
-	$MSG_RUNID="RunID";
-	$MSG_USER="User";
-	$MSG_PROBLEM="Problem";
-	$MSG_RESULT="Result";
-	$MSG_MEMORY="Memory";
-	$MSG_TIME="Time";
-	$MSG_LANG="Language";
-	$MSG_CODE_LENGTH="Code Length";
-	$MSG_SUBMIT_TIME="Submit Time";
+	//problemset.php
+	$MSG_SEARCH="Search";
+	$MSG_PROBLEM_ID="Problem ID";
+	$MSG_TITLE="Title";
+	$MSG_SOURCE="Source";
+	$MSG_SUBMIT="Submit";
 	
+	//ranklist.php
+	$MSG_Number="No.";
+	$MSG_NICK="Nick Name";
+	$MSG_SOVLED="Solved";
+	$MSG_RATIO="Ratio";
+	
+
 
 
 ?>

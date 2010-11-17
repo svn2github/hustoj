@@ -12,6 +12,7 @@
 	$MSG_ADMIN="管&nbsp;&nbsp;&nbsp;&nbsp;理";
 	$MSG_STANDING="名&nbsp;&nbsp;&nbsp;&nbsp;次";
 	$MSG_STATISTICS="统&nbsp;&nbsp;&nbsp;&nbsp;计";
+	$MSG_USERINFO="修改帐号";
 	
 	$MSG_Pending="等待";
 	$MSG_Pending_Rejudging="等待重判";
@@ -50,6 +51,19 @@
 	$MSG_LANG="语言";
 	$MSG_CODE_LENGTH="代码长度";
 	$MSG_SUBMIT_TIME="提交时间";
+	
+	$MSG_SEARCH="查找";
+	$MSG_PROBLEM_ID="题目编号";
+	$MSG_TITLE="标题";
+	$MSG_SOURCE="来源";
+	$MSG_SUBMIT="提交";
+	
+	//ranklist.php
+	$MSG_Number="名次";
+	$MSG_NICK="昵称";
+	$MSG_SOVLED="解决";
+	$MSG_RATIO="比率";
+	
 
 
 

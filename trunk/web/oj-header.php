@@ -44,7 +44,7 @@ function checkcontest(){
 			
 			if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
-				print "<th><a href=./modifypage.php><b>U</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'><font color=red>$sid</font></a></th>";
+				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'><font color=red>$sid</font></a></th>";
 				print "<th><a href=logout.php>$MSG_LOGOUT</a></th>";
 			}else{
 				print "<th><a href=loginpage.php>$MSG_LOGIN</a></th>";

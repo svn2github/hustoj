@@ -22,6 +22,10 @@
 
 	<?
 		require_once ("./include/db_info.inc.php");
+		
+		if(isset($OJ_LANG)){
+			require_once("./lang/$OJ_LANG.php");
+		}
 		//$rank = intval ( $_GET ['start'] );
 		if ($rank < 0)
 			$rank = 0;
@@ -29,12 +33,12 @@
 		$result = mysql_query ( $sql ); //mysql_error();
 		echo "<center><table width=90%>";
 		echo "<tr class='toprow'>
-				<td width=5% align=center><b>No.</b>
-				<td width=10% align=center><b>User ID</b>
-				<td width=55% align=center><b>Nick Name</b>
-				<td width=10% align=center><b>Solved</b>
-				<td width=10% align=center><b>Submit</b>
-				<td width=10% align=center><b>Ratio</b></tr>";
+				<td width=5% align=center><b>$MSG_Number</b>
+				<td width=10% align=center><b>$MSG_USER</b>
+				<td width=55% align=center><b>$MSG_NICK</b>
+				<td width=10% align=center><b>$MSG_AC</b>
+				<td width=10% align=center><b>$MSG_SUBMIT</b>
+				<td width=10% align=center><b>$MSG_RATIO</b></tr>";
 		while ( $row = mysql_fetch_object ( $result ) ) {
 			$rank ++;
 			if ($rank % 2 == 1)

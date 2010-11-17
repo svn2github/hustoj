@@ -73,10 +73,10 @@ if ($language!=-1){
 	$str2=$str2."&language=".$language;
 }
 ?>
-Problem ID:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
-User ID:<input type=text size=6 name=user_id value='<?=$user_id?>'>
+<?=$MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
+<?=$MSG_USER?>:<input type=text size=6 name=user_id value='<?=$user_id?>'>
 <?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-Language:<select size="1" name="language">
+<?=$MSG_LANG?>:<select size="1" name="language">
 <?
 if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
@@ -89,7 +89,7 @@ for ($i=0;$i<5;$i++){
 }
 ?>
 </select>
-Result:<select size="1" name="jresult">
+<?=$MSG_RESULT?>:<select size="1" name="jresult">
 <?
 if (isset($_GET['jresult'])) $jresult=intval($_GET['jresult']);
 else $jresult=-1;
@@ -108,7 +108,7 @@ for ($j=0;$j<12;$j++){
 echo "</select>";
 ?>
 </select>
-<input type=submit value='Go'>
+<input type=submit value='<?=$MSG_SEARCH?>'>
 </form>
 </td></tr>
 </table>

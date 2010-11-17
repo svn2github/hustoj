@@ -1,3 +1,4 @@
+<?require_once("./include/db_info.inc.php");?>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href='include/hoj.css' type='text/css'>
@@ -7,12 +8,12 @@ $cid=intval($_GET['cid']);
 $pid=intval($_GET['pid']);
 ?>
 <table width=100% class=toprow><tr align=center>
-	<td width=15%><a class=hd href='./'>Home Page</a>
-	<td width=15%><a class=hd href='./bbs.php'>Web Board</a>
-	<td width=15%><a class=hd href='./contest.php?cid=<?=$cid?>'>Problems</a>
-	<td width=15%><a class=hd href='./contestrank.php?cid=<?=$cid?>'>Standing</a>
-	<td width=15%><a class=hd href='./status.php?cid=<?=$cid?>'>Status</a>
-	<td width=15%><a class=hd href='./conteststatistics.php?cid=<?=$cid?>'>Statistics</a>
+	<td width=15%><a class=hd href='./'><?=$MSG_HOME?></a>
+	<td width=15%><a class=hd href='./bbs.php'><?=$MSG_BBS?></a>
+	<td width=15%><a class=hd href='./contest.php?cid=<?=$cid?>'><?=$MSG_PROBLEMS?></a>
+	<td width=15%><a class=hd href='./contestrank.php?cid=<?=$cid?>'><?=$MSG_STANDING?></a>
+	<td width=15%><a class=hd href='./status.php?cid=<?=$cid?>'><?=$MSG_STATUS?></a>
+	<td width=15%><a class=hd href='./conteststatistics.php?cid=<?=$cid?>'><?=$MSG_STATISTICS?></a>
 </tr></table>
 <br>
 <?
@@ -29,7 +30,7 @@ if (strlen($msg)>5){
 	echo "</font>";
 	echo "</marquee>";
 }
-require_once("./include/db_info.inc.php");
+
 $contest_ok=true;
 $str_private="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' && `private`='1'";
 $result=mysql_query($str_private);

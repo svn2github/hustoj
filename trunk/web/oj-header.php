@@ -11,13 +11,16 @@ function checkcontest(){
 	$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_row($result);
-	if (intval($row[0])==0) $retmsg="CONTEST";
-	else $retmsg=$row[0]."<font color=red>&nbsp;CONTESTs</font>";
+	if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
+	else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
 	mysql_free_result($result);
 	return $retmsg;
 }
 
 	require_once('./include/db_info.inc.php');
+	if(isset($OJ_LANG)){
+		require_once("./lang/$OJ_LANG.php");
+	}
 	if($OJ_ONLINE){
 		require_once('./include/online.php');
 		$on = new online();
@@ -30,25 +33,25 @@ function checkcontest(){
 <table width=96%> 
 	<tr align="center" class='hd' valign="top">
 		<th><span style="color:1a5cc8" id="dict_status"></span></th>
-		<th><a href="./faqs.php">F.A.Qs</a></th>
-		<th><a href="./bbs.php"><?=strtoupper($OJ_BBS)?></a></th>
-		<th><a href="<?=$OJ_HOME?>">HOME</a></th>
-		<th><a href="./problemset.php">PROBLEMS</a></th>
-		<th><a href="./status.php">STATUS</a></th>
-		<th><a href="./ranklist.php">RANKLIST</a></th>
+		<th><a href="./faqs.php"><?=$MSG_FAQ?></a></th>
+		<th><a href="./bbs.php"><?=$MSG_BBS?></a></th>
+		<th><a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a></th>
+		<th><a href="./problemset.php"><?=$MSG_PROBLEMS?></a></th>
+		<th><a href="./status.php"><?=$MSG_STATUS?></a></th>
+		<th><a href="./ranklist.php"><?=$MSG_RANKLIST?></a></th>
 		<th><a href="./contest.php"><?=checkcontest()?></a></th>
 		<?
 			
 			if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
 				print "<th><a href=./modifypage.php><b>U</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'><font color=red>$sid</font></a></th>";
-				print "<th><a href=logout.php>LOGOUT</a></th>";
+				print "<th><a href=logout.php>$MSG_LOGOUT</a></th>";
 			}else{
-				print "<th><a href=loginpage.php>LOGIN</a></th>";
-				print "<th><a href=registerpage.php>REGISTER</a></th>";
+				print "<th><a href=loginpage.php>$MSG_LOGIN</a></th>";
+				print "<th><a href=registerpage.php>$MSG_REGISTER</a></th>";
 			}
 			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-				print "<th><a href=admin>Admin</a></th>";
+				print "<th><a href=admin>$MSG_ADMIN</a></th>";
 			
 			}
 		?>

@@ -65,6 +65,13 @@
 	$MSG_SOVLED="Solved";
 	$MSG_RATIO="Ratio";
 	
+	//registerpage.php
+	$MSG_USER_ID="User ID";
+	$MSG_PASSWORD="Password";
+	$MSG_REPEAT_PASSWORD="Repeat Password";
+	$MSG_SCHOOL="School";
+	$MSG_EMAIL="Email";
+	$MSG_REG_INFO="Register Information";
 
 
 

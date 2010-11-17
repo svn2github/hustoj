@@ -41,7 +41,16 @@
 	$MSG_CE="CE";
 	$MSG_CO="CO";
 	
-
+	$MSG_RUNID="RunID";
+	$MSG_USER="User";
+	$MSG_PROBLEM="Problem";
+	$MSG_RESULT="Result";
+	$MSG_MEMORY="Memory";
+	$MSG_TIME="Time";
+	$MSG_LANG="Language";
+	$MSG_CODE_LENGTH="Code Length";
+	$MSG_SUBMIT_TIME="Submit Time";
+	
 
 
 ?>

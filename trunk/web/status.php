@@ -114,15 +114,15 @@ echo "</select>";
 </table>
 <table align=center>
 <tr  class='toprow'>
-<td width="8%">Run ID
-<td width="10%">User
-<td width="6%">Problem
-<td width="17%">Result
-<td width="10%">Memory
-<td width="8%">Time
-<td width="6%">Language
-<td width="10%">Code Length
-<td width="17%">Submit Time
+<td width="8%"><?=$MSG_RUNID?>
+<td width="10%"><?=$MSG_USER?>
+<td width="6%"><?=$MSG_PROBLEM?>
+<td width="17%"><?=$MSG_RESULT?>
+<td width="10%"><?=$MSG_MEMORY?>
+<td width="8%"><?=$MSG_TIME?>
+<td width="6%"><?=$MSG_LANG?>
+<td width="10%"><?=$MSG_CODE_LENGTH?>
+<td width="17%"><?=$MSG_SUBMIT_TIME?>
 </tr>
 <?
 $sql=$sql.$order_str."LIMIT 20";

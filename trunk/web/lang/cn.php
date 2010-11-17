@@ -13,7 +13,7 @@
 	$MSG_STANDING="名&nbsp;&nbsp;&nbsp;&nbsp;次";
 	$MSG_STATISTICS="统&nbsp;&nbsp;&nbsp;&nbsp;计";
 	
-	$MSG_Pending="重判";
+	$MSG_Pending="等待";
 	$MSG_Pending_Rejudging="等待重判";
 	$MSG_Compiling="编译中";
 	$MSG_Running_Judging="运行并评判";
@@ -27,20 +27,29 @@
 	$MSG_Compile_Error="编译错误";
 	$MSG_Compile_OK="编译成功";
 	
-	$MSG_PD="PD";
-	$MSG_PR="PR";
-	$MSG_CI="CI";
-	$MSG_RJ="RJ";
-	$MSG_AC="AC";
-	$MSG_PE="PE";
-	$MSG_WA="WA";
-	$MSG_TLE="TLE";
-	$MSG_MLE="MLE";
-	$MSG_OLE="OLE";
-	$MSG_RE="RE";
-	$MSG_CE="CE";
-	$MSG_CO="CO";
+	$MSG_PD="等待";
+	$MSG_PR="等待重判";
+	$MSG_CI="编译中";
+	$MSG_RJ="运行并评判";
+	$MSG_AC="正确";
+	$MSG_PE="格式错误";
+	$MSG_WA="答案错误";
+	$MSG_TLE="时间超限";
+	$MSG_MLE="内存超限";
+	$MSG_OLE="输出超限";
+	$MSG_RE="运行错误";
+	$MSG_CE="编译错误";
+	$MSG_CO="编译成功";
 	
+	$MSG_RUNID="运行编号";
+	$MSG_USER="用户";
+	$MSG_PROBLEM="问题";
+	$MSG_RESULT="结果";
+	$MSG_MEMORY="内存";
+	$MSG_TIME="耗时";
+	$MSG_LANG="语言";
+	$MSG_CODE_LENGTH="代码长度";
+	$MSG_SUBMIT_TIME="提交时间";
 
 
 

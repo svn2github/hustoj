@@ -72,6 +72,17 @@
 	$MSG_EMAIL="电子邮件";
 	$MSG_REG_INFO="注册信息";
 
-
+		//problem.php
+	$MSG_NO_SUCH_PROBLEM="题目不可用!";
+	$MSG_Description="题目描述"  ;
+	$MSG_Input="输入"  ;
+	$MSG_Output= "输出" ;
+	$MSG_Sample_Input= "样例输入" ;
+	$MSG_Sample_Output= "样例输出" ;
+	$MSG_HINT= "提示" ;
+	$MSG_Source= "来源" ;
+	$MSG_Time_Limit="时间限制";
+	$MSG_Memory_Limit="内存限制";
+	
 
 ?>

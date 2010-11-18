@@ -1,4 +1,10 @@
-<?require_once("./include/db_info.inc.php")?>
+<?
+    require_once("./include/db_info.inc.php");
+
+	if(isset($OJ_LANG)){
+		require_once("./lang/$OJ_LANG.php");
+	}
+?>
 
 <?
 $pr_flag=false;
@@ -52,7 +58,7 @@ if (isset($_GET['id'])){
 	$co_flag=true;
 }else{
 	require_once("oj-header.php");
-	echo "<title>No Such Problem!</title><h2>No Such Problem!</h2>";
+	echo "<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
 	require_once("oj-footer.php");
 	exit(0);
 }
@@ -72,54 +78,54 @@ if (mysql_num_rows($result)!=1){
 				
 			}
 		}else{
-			echo "<title>No Such Problem!</title>";
-			echo "<h2>No Such Problem!</h2>";
+			echo "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+			echo "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 		}
    }else{
-		echo "<title>No Such Problem!</title>";
-		echo "<h2>No Such Problem!</h2>";
+		echo "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+		echo "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 	}
 }else{
 	$row=mysql_fetch_object($result);
 	if ($pr_flag){
-		echo "<title>Problem $row->problem_id. -- $row->title</title>";
+		echo "<title>$MSG_PROBLEM $row->problem_id. -- $row->title</title>";
 		echo "<center><h2>$row->title</h2>";
 	}else{
 		$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		echo "<title>Problem $PID[$pid]: $row->title </title>";
-		echo "<center><h2>Problem $PID[$pid]: $row->title</h2>";
+		echo "<title>$MSG_PROBLEM $PID[$pid]: $row->title </title>";
+		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row->title</h2>";
 	}
-	echo "<span class=green>Time Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
-	echo "<span class=green>Memory Limit: </span>".$row->memory_limit." MB";
+	echo "<span class=green>$MSG_Time_Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_Memory_Limit: </span>".$row->memory_limit." MB";
 	if ($row->spj) echo "Sec&nbsp;&nbsp;<span class=red>Special Judge</span>";
-	echo "<br><span class=green>Submissions: </span>".$row->submit."&nbsp;&nbsp;";
-	echo "<span class=green>Solved: </span>".$row->accepted."<br>"; 
+	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row->submit."&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_SOVLED: </span>".$row->accepted."<br>"; 
 	
 	if ($pr_flag){
-		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";
+		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 	}else{
-		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>Submit</a>]";
+		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
-	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>Status</a>]";
-	echo "[<a href='bbs.php?id=".$row->problem_id."'>Discuss</a>]";
+	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
+	echo "[<a href='bbs.php?id=".$row->problem_id."'>$MSG_BBS</a>]";
 	
 	echo "</center>";
 	
-	echo "<h2>Description</h2><p>".$row->description."</p>";
-	echo "<h2>Input</h2><p>".$row->input."</p>";
-	echo "<h2>Output</h2><p>".$row->output."</p>";
-	echo "<h2>Sample Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
-	echo "<h2>Sample Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
-	if ($pr_flag||true) echo "<h2>HINT</h2><p>".nl2br($row->hint)."</p>";
-	if ($pr_flag) echo "<h2>Source</h2><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p>";
+	echo "<h2>$MSG_Description</h2><p>".$row->description."</p>";
+	echo "<h2>$MSG_Input</h2><p>".$row->input."</p>";
+	echo "<h2>$MSG_Output</h2><p>".$row->output."</p>";
+	echo "<h2>$MSG_Sample_Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
+	echo "<h2>$MSG_Sample_Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
+	if ($pr_flag||true) echo "<h2>$MSG_HINT</h2><p>".nl2br($row->hint)."</p>";
+	if ($pr_flag) echo "<h2>$MSG_Source</h2><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p>";
 	echo "<center>";
 	if ($pr_flag){
-		echo "[<a href='submitpage.php?id=$id'>Submit</a>]";
+		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 	}else{
-		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>Submit</a>]";
+		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
-	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>Status</a>]";
-	echo "[<a href='bbs.php?id=".$row->problem_id."'>Discuss</a>]";
+	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
+	echo "[<a href='bbs.php?id=".$row->problem_id."'>$MSG_BBS</a>]";
 	echo "</center>";
 }
 mysql_free_result($result);

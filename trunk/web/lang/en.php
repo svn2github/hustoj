@@ -73,6 +73,17 @@
 	$MSG_EMAIL="Email";
 	$MSG_REG_INFO="Register Information";
 
-
-
+	//problem.php
+	$MSG_NO_SUCH_PROBLEM="Problem is not Available!";
+	$MSG_Description="Description"  ;
+	$MSG_Input="Input"  ;
+	$MSG_Output= "Output" ;
+	$MSG_Sample_Input= "Sample Input" ;
+	$MSG_Sample_Output= "Sample Output" ;
+	$MSG_HINT= "HINT" ;
+	$MSG_Source= "Source" ;
+	$MSG_Time_Limit="Time Limit";
+	$MSG_Memory_Limit="Memory Limit";
+	
+	
 ?>

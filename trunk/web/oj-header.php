@@ -22,7 +22,11 @@
 	
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
+		if(file_exists("./faqs.$OJ_LANG.php")){
+			$OJ_FAQ_LINK="faqs.$OJ_LANG.php";
+		}
 	}
+	
 
 	if($OJ_ONLINE){
 		require_once('./include/online.php');
@@ -36,7 +40,7 @@
 <table width=96%> 
 	<tr align="center" class='hd' valign="top">
 		<th><span style="color:1a5cc8" id="dict_status"></span></th>
-		<th><a href="./faqs.php"><?=$MSG_FAQ?></a></th>
+		<th><a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a></th>
 		<th><a href="./bbs.php"><?=$MSG_BBS?></a></th>
 		<th><a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a></th>
 		<th><a href="./problemset.php"><?=$MSG_PROBLEMS?></a></th>

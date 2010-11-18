@@ -4,7 +4,7 @@
 ?>
 <hr>
 <center>
-  <font size="+3">ZJICM Online Judge FAQ</font>
+  <font size="+3"><?=$OJ_NAME?> Online Judge FAQ</font>
 </center>
 <hr>
 <p><font color=green>Q</font>:What is the compiler the judge is using and what are the compiler options?<br>

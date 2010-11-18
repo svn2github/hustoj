@@ -6,21 +6,24 @@
 	<link rel=stylesheet href='include/hoj.css' type='text/css'>
 <?
 
-function checkcontest(){
-	require_once("include/db_info.inc.php");
-	$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_row($result);
-	if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
-	else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
-	mysql_free_result($result);
-	return $retmsg;
-}
-
 	require_once('./include/db_info.inc.php');
+
+	
+	function checkcontest($MSG_CONTEST){
+		require_once("include/db_info.inc.php");
+		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
+		$result=mysql_query($sql);
+		$row=mysql_fetch_row($result);
+		if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
+		else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
+		mysql_free_result($result);
+		return $retmsg;
+	}
+	
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
+
 	if($OJ_ONLINE){
 		require_once('./include/online.php');
 		$on = new online();
@@ -39,7 +42,7 @@ function checkcontest(){
 		<th><a href="./problemset.php"><?=$MSG_PROBLEMS?></a></th>
 		<th><a href="./status.php"><?=$MSG_STATUS?></a></th>
 		<th><a href="./ranklist.php"><?=$MSG_RANKLIST?></a></th>
-		<th><a href="./contest.php"><?=checkcontest()?></a></th>
+		<th><a href="./contest.php"><?=checkcontest($MSG_CONTEST)?></a></th>
 		<?
 			
 			if (isset($_SESSION['user_id'])){

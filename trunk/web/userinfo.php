@@ -1,5 +1,7 @@
 <?require_once("oj-header.php")?>
 <?require_once("./include/db_info.inc.php");
+if(isset($OJ_LANG))
+		require_once("./lang/$OJ_LANG.php");
 require_once("./include/const.inc.php");
 ?>
 
@@ -44,8 +46,8 @@ $Rank=intval($row[0])+1;
 <center>
 <table id=statics width=70%>
 <caption><?=$user."--".$nick?></caption>
-<tr bgcolor=#D7EBFF><td width=15%>Rank:<td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
-<tr bgcolor=#D7EBFF><td>Solved:<td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
+<tr bgcolor=#D7EBFF><td width=15%><?=$MSG_Number?><td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
+<tr bgcolor=#D7EBFF><td><?=$MSG_SOVLED?><td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
@@ -58,7 +60,7 @@ mysql_free_result($result);
 ?>
 </script>
 </tr>
-<tr bgcolor=#D7EBFF><td>Submmissions:<td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
+<tr bgcolor=#D7EBFF><td><?=$MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
 <?php 
 	$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user'  AND result>=4 group by result order by result";
 	$result=mysql_query($sql);

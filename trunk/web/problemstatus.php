@@ -23,7 +23,7 @@ echo "<table id=statics >";
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql) or die(mysql_error());
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=#D7EBFF><td>Total Submissions<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>$MSG_SUBMIT<td>".$row[0]."</tr>";
 $total=intval($row[0]);
 mysql_free_result($result);
 
@@ -31,7 +31,7 @@ mysql_free_result($result);
 $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=#D7EBFF><td>Users(Submitted)<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>$MSG_USER($MSG_SUBMIT)<td>".$row[0]."</tr>";
 mysql_free_result($result);
 
 // ac users
@@ -39,7 +39,7 @@ $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id' AND re
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $acuser=intval($row[0]);
-echo "<tr bgcolor=#D7EBFF><td>Users(Solved)<td>".$row[0]."</tr>";
+echo "<tr bgcolor=#D7EBFF><td>$MSG_USER($MSG_SOVLED)<td>".$row[0]."</tr>";
 mysql_free_result($result);
 
 //for ($i=4;$i<12;$i++){
@@ -108,7 +108,7 @@ else $flag=true;
 
 echo "<td>";
 echo "<table>";
-echo "<tr class=toprow><td>Rank<td>RunID<td>User<td>Memory<td>Time<td>Language<td>Code Length<td>Submit Time</tr>";
+echo "<tr class=toprow><td>$MSG_Number<td>RunID<td>$MSG_USER<td>$MSG_MEMORY<td>$MSG_TIME<td>$MSG_LANG<td>$MSG_CODE_LENGTH<td>$MSG_SUBMIT_TIME</tr>";
 for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	$sscore=strval($row->score);
 	$s_time=intval(substr($sscore,1,8));

@@ -77,8 +77,8 @@ for ($i=1;$i<=$cnt+1;$i++){
 echo "</h3>";
 echo "<center><table id=problemset width=90%>";
 echo "<thead><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>$MSG_SEARCH<input type=text name=search><input type=submit value='$MSG_SEARCH' ></form> </tr>";
-echo "<tr align=center class='toprow'><td width=5><td onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A><td width=60%>$MSG_TITLE<td width=20%>$MSG_SOURCE";
-echo "<td onclick=\"sortTable('problemset', 4, 'int');\" width=5%><A>$MSG_AC</A><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width=5%><A>$MSG_SUBMIT</A></tr>";
+echo "<tr align=center class='toprow'><td width=5><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A><td width=60%>$MSG_TITLE<td width=20%>$MSG_SOURCE";
+echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width=5%><A>$MSG_AC</A><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width=5%><A>$MSG_SUBMIT</A></tr>";
 echo "</thead><tbody>";
 $cnt=0;
 while ($row=mysql_fetch_object($result)){

@@ -8,7 +8,7 @@ if(isset($_POST['do'])){
 	if (isset($_POST['rjpid'])){
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$_POST['rjpid'];
 		mysql_query($sql) or die(mysql_error());
-		$sql="delete from `sim` WHERE `s_id` in select solution_id from solution where `problem_id`=".$_POST['rjpid'];
+		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=".$_POST['rjpid'].")";
 		mysql_query($sql) or die(mysql_error());
 		$url="../status.php?problem_id=".$_POST['rjpid'];
 		echo "Rejudged Problem ".$_POST['rjpid'];

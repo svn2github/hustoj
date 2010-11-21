@@ -295,3 +295,21 @@ CREATE TABLE `online` (
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ALTER TABLE `jol`.`online` ENGINE = MEMORY;
+
+
+ALTER TABLE `jol`.`problem` DROP COLUMN `sample_Program`,
+ DROP COLUMN `ratio`,
+ DROP COLUMN `error`,
+ DROP COLUMN `difficulty`,
+ DROP COLUMN `submit_user`,
+ DROP COLUMN `case_time_limit`;
+
+CREATE TABLE `solution_sim` (
+
+  `solution_id` int(11) NOT NULL,
+  `sim_solution_id` int(11) NULL,
+  `sim` int(11) NULL,
+
+  PRIMARY KEY  (`solution_id`)
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

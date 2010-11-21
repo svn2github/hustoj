@@ -313,3 +313,9 @@ CREATE TABLE `solution_sim` (
   PRIMARY KEY  (`solution_id`)
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `solution_sim` RENAME TO `sim`,
+ CHANGE COLUMN `solution_id` `s_id` INTEGER  NOT NULL,
+ CHANGE COLUMN `sim_solution_id` `sim_s_id` INTEGER  DEFAULT NULL,
+ DROP PRIMARY KEY,
+ ADD PRIMARY KEY  USING BTREE(`s_id`);

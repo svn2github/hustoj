@@ -363,7 +363,7 @@ int compare(const char *file1, const char *file2) {
 }
 
 /* write result back to database */
-void update_solution(int solution_id, int result, int time, int memory,int sim) {
+void update_solution(int solution_id, int result, int time, int memory,int sim,int sim_s_id) {
 	char sql[BUFFER_SIZE];
 	sprintf(
 			sql,
@@ -376,8 +376,8 @@ void update_solution(int solution_id, int result, int time, int memory,int sim) 
 	if(sim){
 		sprintf(
 			sql,
-			"insert into sim(s_id,sim) values(%d,%d)",
-			 solution_id, sim);
+			"insert into sim(s_id,sim_s_id,sim) values(%d,%d,%d)",
+			 solution_id,sim_s_id, sim);
 		//	printf("sql= %s\n",sql);
 		if (mysql_real_query(conn, sql, strlen(sql))) {
 			//		printf("..update failed! %s\n",mysql_error(conn));
@@ -935,19 +935,28 @@ void init_parameters(int argc, char **& argv, int & solution_id,
 	solution_id = atoi(argv[1]);
 	runner_id = atoi(argv[2]);
 }
-int get_sim(int solution_id,int lang,int pid){
+int get_sim(int solution_id,int lang,int pid,int &sim_s_id){
 	char src_pth[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	sprintf(cmd,"sim.sh %s %d",src_pth,pid);
-	//printf("%s",cmd);	
+	if (DEBUG)printf("%s\n",cmd);	
+	
 	int sim=system(cmd);
 	if(!sim){
 		sprintf(cmd,"mkdir ../data/%d/ac/",pid);
 		system (cmd);
 		sprintf(cmd,"mv %s ../data/%d/ac/%d.%s",src_pth,pid,solution_id,lang_ext[lang]);
-		//printf("%s",cmd);	
 		system(cmd);
+	}else{
+		
+		FILE * pf;
+		pf=fopen("sim","r");
+		if(pf){
+			fscanf(pf,"%d%d",&sim,&sim_s_id);
+			fclose(pf);
+		}
+			
 	}
 	return sim;
 }
@@ -958,7 +967,7 @@ int main(int argc, char** argv) {
 	char user_id[BUFFER_SIZE];
 	int solution_id = atoi(argv[1]);
 	int runner_id = atoi(argv[2]);
-	int p_id, time_lmt, mem_lmt, lang, isspj,sim;
+	int p_id, time_lmt, mem_lmt, lang, isspj,sim,sim_s_id;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -996,7 +1005,7 @@ int main(int argc, char** argv) {
 	int Compile_OK;
 	Compile_OK = compile(lang);
 	if (Compile_OK != 0) {
-		update_solution(solution_id, OJ_CE, 0, 0,0);
+		update_solution(solution_id, OJ_CE, 0, 0,0,0);
 		addceinfo(solution_id);
 		update_user(user_id);
 		update_problem(p_id);
@@ -1004,7 +1013,7 @@ int main(int argc, char** argv) {
 		if(!DEBUG)system("rm *");
 		exit(0);
 	} else {
-		update_solution(solution_id, OJ_RI, 0, 0,0);
+		update_solution(solution_id, OJ_RI, 0, 0,0,0);
 	}
 	// run
 	char fullpath[BUFFER_SIZE];
@@ -1047,13 +1056,14 @@ int main(int argc, char** argv) {
 					mem_lmt);
 		}
 	}
-	if(sim_enable){
-			sim=get_sim(solution_id,lang,p_id);
-	}
-	clean_workdir(work_dir);
 	if (ACflg == OJ_AC && PEflg == OJ_PE)
 		ACflg = OJ_PE;
-	update_solution(solution_id, ACflg, usedtime, topmemory >> 10,sim);
+	if(sim_enable&&ACflg == OJ_AC){
+			sim=get_sim(solution_id,lang,p_id,sim_s_id);
+	}
+	clean_workdir(work_dir);
+	
+	update_solution(solution_id, ACflg, usedtime, topmemory >> 10,sim,sim_s_id);
 	update_user(user_id);
 	update_problem(p_id);
 	

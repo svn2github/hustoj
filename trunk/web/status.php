@@ -15,7 +15,7 @@ require_once("./include/const.inc.php");
 <form action="status.php" method="get">
 <?
 if($OJ_SIM){
-	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE s_id!=sim_s_id ";
 }else{
 	$sql="SELECT * FROM `solution` WHERE 1 ";
 }

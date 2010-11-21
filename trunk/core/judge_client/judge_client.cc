@@ -376,7 +376,7 @@ void update_solution(int solution_id, int result, int time, int memory,int sim) 
 	if(sim){
 		sprintf(
 			sql,
-			"insert into solution_sim(solution_id,sim) values(%d,%d)",
+			"insert into sim(s_id,sim) values(%d,%d)",
 			 solution_id, sim);
 		//	printf("sql= %s\n",sql);
 		if (mysql_real_query(conn, sql, strlen(sql))) {

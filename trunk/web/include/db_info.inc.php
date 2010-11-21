@@ -11,7 +11,7 @@ static 	$OJ_DATA="/home/judge/data";
 static 	$OJ_BBS="discuss";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
 static  $OJ_ONLINE=false;
 static  $OJ_LANG="en";
-
+static  $OJ_SIM=false;
 
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());

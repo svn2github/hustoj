@@ -15,7 +15,7 @@ require_once("./include/const.inc.php");
 <form action="status.php" method="get">
 <?
 if($OJ_SIM){
-	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE s_id!=sim_s_id ";
+	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
 }else{
 	$sql="SELECT * FROM `solution` WHERE 1 ";
 }
@@ -160,7 +160,7 @@ while(	$row=mysql_fetch_object($result)){
 	if (intval($row->result)==11 && ($row->user_id==$_SESSION['user_id'] || isset($_SESSION['source_browser']))){
 		echo "<td><a href='ceinfo.php?sid=$row->solution_id'><font color=".$judge_color[$row->result].">".$judge_result[$row->result]."</font></a>";
 	}else{
-		if($OJ_SIM&&$row->sim) {
+		if($OJ_SIM&&$row->sim&&$row->sim_s_id!=$row->s_id) {
 			echo "<td><font color=".$judge_color[$row->result].">*".$judge_result[$row->result]."</font>-<font color=red>";
 			if( isset($_SESSION['source_browser'])){
 					echo "<a href=showsource.php?id=".$row->sim_s_id.">".$row->sim_s_id."</a>";

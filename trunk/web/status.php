@@ -160,11 +160,18 @@ while(	$row=mysql_fetch_object($result)){
 	if (intval($row->result)==11 && ($row->user_id==$_SESSION['user_id'] || isset($_SESSION['source_browser']))){
 		echo "<td><a href='ceinfo.php?sid=$row->solution_id'><font color=".$judge_color[$row->result].">".$judge_result[$row->result]."</font></a>";
 	}else{
-		if($OJ_SIM&&$row->sim) 
-			$SIM='*';
-		else
-			$SIM="";
-		echo "<td><font color=".$judge_color[$row->result].">".$SIM.$judge_result[$row->result]."</font>";
+		if($OJ_SIM&&$row->sim) {
+			echo "<td><font color=".$judge_color[$row->result].">*".$judge_result[$row->result]."</font>-<font color=red>";
+			if( isset($_SESSION['source_browser'])){
+					echo "<a href=showsource.php?id=".$row->sim_s_id.">".$row->sim_s_id."</a>";
+			}else{
+					echo $row->sim_s_id;
+			}
+			echo	 "</font>";
+		}else{
+			echo "<td><font color=".$judge_color[$row->result].">".$judge_result[$row->result]."</font>";
+		}
+		
 	}
 	if ($flag){
 

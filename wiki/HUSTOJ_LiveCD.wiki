@@ -40,6 +40,11 @@ root密码freeproblemset
 
 下载地址: 
 r509 650M 支持CDRW可擦写
+
+http://dl.dropbox.com/u/2385751/hustoj-root-freeproblemset-r509.iso
+
+https://dl.dropbox.com/u/2385751/hustoj-root-freeproblemset-r509.iso
+
 http://u.115.com/file/f6d4c8e0dd
 hustoj-root-freeproblemset-r509.iso
 

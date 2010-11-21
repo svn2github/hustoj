@@ -1,0 +1,11 @@
+#!/bin/bash
+EXTENSION=`echo "$1" | cut -d'.' -f2`
+for i in ../data/$2/ac/*.$EXTENSION
+do 
+	sim=`sim_$EXTENSION -p $1 $i |grep ^$1|awk '{print $4}'`
+	if [ ! -z $sim ] && [ $sim -gt 50 ]
+	then 
+		exit $sim 
+	fi
+done
+exit 0;

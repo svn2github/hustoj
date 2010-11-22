@@ -163,7 +163,7 @@ while(	$row=mysql_fetch_object($result)){
 		if($OJ_SIM&&$row->sim&&$row->sim_s_id!=$row->s_id) {
 			echo "<td><font color=".$judge_color[$row->result].">*".$judge_result[$row->result]."</font>-<font color=red>";
 			if( isset($_SESSION['source_browser'])){
-					echo "<a href=showsource.php?id=".$row->sim_s_id.">".$row->sim_s_id."</a>";
+					echo "<a href=showsource.php?id=".$row->sim_s_id.">".$row->sim_s_id."(".$row->sim."%)</a>";
 			}else{
 					echo $row->sim_s_id;
 			}

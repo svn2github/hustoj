@@ -197,7 +197,7 @@ mysql_free_result($result);
 </table>
 <?
 echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href=status.php?".$str2."&top=".($top+21).">Previous Page</a>]&nbsp;&nbsp;";
 echo "[<a href=status.php?".$str2."&top=".$bottom.">Next Page</a>]";
 ?>
 </center>

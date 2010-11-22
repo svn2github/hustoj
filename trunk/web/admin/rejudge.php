@@ -17,7 +17,7 @@ if(isset($_POST['do'])){
 	else if (isset($_POST['rjsid'])){
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=".$_POST['rjsid'];
 		mysql_query($sql) or die(mysql_error());
-		$sql="delete from `sim` WHERE `s_id`=".$_POST['rjpid'];
+		$sql="delete from `sim` WHERE `s_id`=".$_POST['rjsid'];
 		mysql_query($sql) or die(mysql_error());
 		$url="../status.php?top=".(intval($_POST['rjsid'])+1);
 		echo "Rejudged Runid ".$_POST['rjsid'];

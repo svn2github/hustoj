@@ -39,12 +39,8 @@ judge_client.cc:424
     mkdir /home/judge/log
     mkdir /home/judge/run0
 
-cd hustoj-read-only/core/judged/
-make
-cp judged /usr/bin
-cd hustoj-read-only/core/judge_client
-make
-cp judge_client /usr/bin
+cd hustoj-read-only/core/
+sudo ./make.sh
 
 
           判题配置文件 

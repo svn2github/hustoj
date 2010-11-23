@@ -43,7 +43,7 @@ judge_client.cc:424
 
 {{{
           需要make g++ libmysql++-dev 
-	(yum install g++  mysql-devel  / apt-get install g++ libmysql++-dev)
+	(yum install gcc-c++  mysql-devel  / apt-get install g++ libmysql++-dev)
     mkdir /home/judge/
     mkdir /home/judge/etc
     mkdir /home/judge/data

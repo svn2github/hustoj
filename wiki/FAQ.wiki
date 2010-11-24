@@ -48,6 +48,9 @@ When people asked question, we put the answer here
   * Why the added problem don't show up to non-admin users?
     
     problem is deleted when first added, admin need to Resume them in the "Problem List"
+ 
+  * I install hustoj on CentOS, why it doesn't work?
+    disable your SELinux and check /etc/php.ini for short_open_tag = On
 
   * Why Java can't work?
     

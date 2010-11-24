@@ -1,0 +1,40 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+if you want to enable AntiCheat on hustoj, follow the steps
+
+
+= Details =
+  # update web and core using svn or the [[AutoUpdateShellScript]]
+  # add in judge.conf
+{{{
+OJ_SIM_ENABLE=0 
+}}}
+  # add in db_info.inc.php
+{{{
+static  $OJ_SIM=false;
+}}}
+  # create table in mysql
+{{{
+CREATE TABLE `sim` (
+
+
+
+  `s_id` int(11) NOT NULL,
+
+  `sim_s_id` int(11) NULL,
+
+  `sim` int(11) NULL,
+
+
+
+  PRIMARY KEY  (`s_id`)
+
+
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+}}}

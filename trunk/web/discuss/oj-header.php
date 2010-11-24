@@ -1,21 +1,4 @@
 <?
-	session_start();
-?>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href='../include/hoj.css' type='text/css'>
-<?
-	
-	function checkcontest($MSG_CONTEST){
-		require_once("../include/db_info.inc.php");
-		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
-		$result=mysql_query($sql);
-		$row=mysql_fetch_row($result);
-		if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
-		else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
-		mysql_free_result($result);
-		return $retmsg;
-	}
 	require("../include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("../lang/$OJ_LANG.php");
@@ -23,10 +6,27 @@
 			$OJ_FAQ_LINK="faqs.$OJ_LANG.php";
 		}
 	}
+?>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel=stylesheet href='../include/hoj.css' type='text/css'>
+<?
+	
+	function checkcontest($MSG){
+		require_once("../include/db_info.inc.php");
+		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
+		$result=mysql_query($sql);
+		$row=mysql_fetch_row($result);
+		if (intval($row[0])==0) $retmsg=$MSG;
+		else $retmsg=$row[0]."<font color=red>&nbsp;$MSG</font>";
+		mysql_free_result($result);
+		return $retmsg;
+	}
+	
 	
 
 	if($OJ_ONLINE){
-		require_once('./include/online.php');
+		require_once('../include/online.php');
 		$on = new online();
 	}
 ?>

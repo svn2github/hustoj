@@ -16,7 +16,7 @@ sudo useradd -m -u 1536 judge
 
 #try install tools
 sudo apt-get install g++ libmysql++-dev php5 apache2 mysql-server php5-mysql
-sudo yum install g++  mysql-devel 
+sudo yum install gcc-c++  mysql-devel php
 
 #compile and install the core
 cd hustoj-read-only/core/

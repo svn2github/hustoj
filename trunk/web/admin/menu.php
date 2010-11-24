@@ -73,6 +73,11 @@ if (isset($_SESSION['administrator'])){
 	<a href="problem_import.php" target="main"><b>ImportProblem</b></a>
 <?
 }
+if (isset($_SESSION['administrator'])){
+?><li>
+	<a href="update_db.php" target="main"><b>Update DataBase</b></a>
+<?
+}
 if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 ?><li>
 	<a href="../online.php" target="main"><b>Online</b></a>

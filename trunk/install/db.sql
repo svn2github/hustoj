@@ -304,18 +304,10 @@ ALTER TABLE `jol`.`problem` DROP COLUMN `sample_Program`,
  DROP COLUMN `submit_user`,
  DROP COLUMN `case_time_limit`;
 
-CREATE TABLE `solution_sim` (
-
-  `solution_id` int(11) NOT NULL,
-  `sim_solution_id` int(11) NULL,
+CREATE TABLE `sim` (
+  `s_id` int(11) NOT NULL,
+  `sim_s_id` int(11) NULL,
   `sim` int(11) NULL,
-
-  PRIMARY KEY  (`solution_id`)
-
+  PRIMARY KEY  (`s_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `solution_sim` RENAME TO `sim`,
- CHANGE COLUMN `solution_id` `s_id` INTEGER  NOT NULL,
- CHANGE COLUMN `sim_solution_id` `sim_s_id` INTEGER  DEFAULT NULL,
- DROP PRIMARY KEY,
- ADD PRIMARY KEY  USING BTREE(`s_id`);

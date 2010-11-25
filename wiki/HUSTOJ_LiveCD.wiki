@@ -68,7 +68,7 @@ r496 自动升级版
 http://u.115.com/file/f62aa64132
 hust-root-freeproblemset-r496.iso
 
-[ed2k://|file|hust-root-freeproblemset-r496.iso|711766016|F79DE61050D171ED863010AD4B5056AC|/]
+ed2k://|file|hust-root-freeproblemset-r496.iso|711766016|F79DE61050D171ED863010AD4B5056AC|/ 
 
 
 最低配置实测：

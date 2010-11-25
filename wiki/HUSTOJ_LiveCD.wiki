@@ -68,18 +68,8 @@ r496 自动升级版
 http://u.115.com/file/f62aa64132
 hust-root-freeproblemset-r496.iso
 
-r492
+ed2k://|file|hust-root-freeproblemset-r496.iso|711766016|F79DE61050D171ED863010AD4B5056AC|/
 
-http://u.115.com/file/f6dd26d6ce
-hust-root-freeproblemset-r492.iso
-
-r475
-
-http://u.115.com/file/f6dd21b145
-hustoj-root-freeproblemset-r475.iso
-
-http://u.115.com/file/f6dd21afbb
-hustoj-root-freeproblemset-r475.iso
 
 最低配置实测：
 LiveCD System on k6-2 System

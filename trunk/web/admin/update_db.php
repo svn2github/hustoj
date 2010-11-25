@@ -66,6 +66,7 @@ if(isset($_POST['do'])){
 ?>
 <b>Update DataBase</b>
 	Create New Tables ,drop useless columes.
+	<b>Necessary for using plagiarism detection.</b>
 	<form action='update_db.php' method=post>
 		<input type='hidden' name='do' value='do'>
 		<input type=submit value=Update>

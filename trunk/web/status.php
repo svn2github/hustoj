@@ -19,7 +19,7 @@ if($OJ_SIM){
 	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
 	if(isset($_GET['showsim'])){
 		$showsim=intval($_GET['showsim']);
-		$sql="SELECT * FROM `solution` right join `sim` on solution.solution_id=sim.s_id WHERE sim_s_id!=solution_id and sim.sim>= $showsim ";	
+		$sql="SELECT * FROM `solution` right join `sim` on solution.solution_id=sim.s_id left join(select solution_id old_s_id,user_id old_user_id from solution) old on old.old_s_id=sim.sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim.sim>= $showsim ";	
 		$str2="showsim=$showsim";
 	}
 }else{
@@ -118,11 +118,10 @@ for ($j=0;$j<12;$j++){
 echo "</select>";
 ?>
 </select>
-<input type=submit value='<?=$MSG_SEARCH?>'>
-</form>
+<input type=submit value='<?=$MSG_SEARCH?>'></form>
 <?
 if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-	echo "<form action=status.php>SIM:<select name=showsim>
+	echo "</td><td><form action=status.php>SIM:<select name=showsim>
 			<option value=50>50</option>
 			<option value=60>60</option>
 			<option value=70>70</option>
@@ -188,6 +187,10 @@ while(	$row=mysql_fetch_object($result)){
 					echo "<a href=showsource.php?id=".$row->sim_s_id." target=original>".$row->sim_s_id."(".$row->sim."%)</a>";
 			}else{
 					echo $row->sim_s_id;
+			}
+			if(isset($_GET['showsim'])){
+					echo "$row->old_user_id";
+				
 			}
 			echo	 "</font>";
 		}else{

@@ -50,7 +50,7 @@ static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
 //static FILE *fp_log;
-static const char query[]="SELECT solution_id FROM solution WHERE result<2 ORDER BY result ASC,solution_id ASC ";
+static char query[bufsize];
 
 void write_log(const char *fmt, ...)
 {
@@ -112,6 +112,7 @@ void init_mysql_conf(){
 			if (oj_mod<0 || oj_mod>=oj_tot) oj_mod=0;
 		}
 	}
+	sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
 	sleep_tmp=sleep_time;
 }
 

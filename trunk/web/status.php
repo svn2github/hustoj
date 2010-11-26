@@ -14,12 +14,18 @@ require_once("./include/const.inc.php");
 <center>
 <form action="status.php" method="get">
 <?
+$str2="";
 if($OJ_SIM){
 	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+	if(isset($_GET['showsim'])){
+		$showsim=intval($_GET['showsim']);
+		$sql="SELECT * FROM `solution` right join `sim` on solution.solution_id=sim.s_id WHERE sim_s_id!=solution_id and sim.sim>= $showsim ";	
+		$str2="showsim=$showsim";
+	}
 }else{
 	$sql="SELECT * FROM `solution` WHERE 1 ";
 }
-$str2="";
+
 if (isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
 	$sql=$sql." AND `contest_id`='$cid' ";
@@ -114,6 +120,22 @@ echo "</select>";
 </select>
 <input type=submit value='<?=$MSG_SEARCH?>'>
 </form>
+<?
+if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+	echo "<form action=status.php>SIM:<select name=showsim>
+			<option value=50>50</option>
+			<option value=60>60</option>
+			<option value=70>70</option>
+			<option value=80>80</option>
+			<option value=90>90</option>
+			<option value=100>100</option>
+		  </select>";
+	echo "<input type=submit>";
+	echo "</form>";
+	
+	
+}
+?>
 </td></tr>
 </table>
 <table align=center>
@@ -163,7 +185,7 @@ while(	$row=mysql_fetch_object($result)){
 		if($OJ_SIM&&$row->sim&&$row->sim_s_id!=$row->s_id) {
 			echo "<td><font color=".$judge_color[$row->result].">*".$judge_result[$row->result]."</font>-<font color=red>";
 			if( isset($_SESSION['source_browser'])){
-					echo "<a href=showsource.php?id=".$row->sim_s_id.">".$row->sim_s_id."(".$row->sim."%)</a>";
+					echo "<a href=showsource.php?id=".$row->sim_s_id." target=original>".$row->sim_s_id."(".$row->sim."%)</a>";
 			}else{
 					echo $row->sim_s_id;
 			}

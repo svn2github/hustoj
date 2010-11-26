@@ -43,7 +43,7 @@ $start_first=1;
 // check the top arg
 if (isset($_GET['top'])){
 	$top=strval(intval($_GET['top']));
-	if ($top!=-1) $sql=$sql."AND `solution_id`<'".$top."' ";
+	if ($top!=-1) $sql=$sql."AND `solution_id`<='".$top."' ";
 }
 /*
 else if (isset($_GET['bottom'])){
@@ -222,8 +222,11 @@ mysql_free_result($result);
 </table>
 <?
 echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".($top+21).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".$bottom.">Next Page</a>]";
+if (isset($_GET['prevtop']))
+	echo "[<a href=status.php?".$str2."&top=".$_GET['prevtop'].">Previous Page</a>]&nbsp;&nbsp;";
+else
+	echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
 </center>
 <?require_once("oj-footer.php");

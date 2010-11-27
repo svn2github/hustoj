@@ -12,7 +12,7 @@ require_once("./include/const.inc.php");
 <meta http-equiv='refresh' content='60'>
 <title>Submission Status</title>
 <center>
-<form action="status.php" method="get">
+
 <?
 $str2="";
 /*
@@ -47,15 +47,7 @@ if (isset($_GET['top'])){
 	$top=strval(intval($_GET['top']));
 	if ($top!=-1) $sql=$sql."AND `solution_id`<='".$top."' ";
 }
-/*
-else if (isset($_GET['bottom'])){
-	$bottom=strval(intval($_GET['bottom']));
-	if ($bottom!=-1){
-	  	$sql=$sql."AND `solution_id`>'".strval(intval($bottom))."' ";
-		//$order_str=" ORDER BY `solution_id` ASC ";
-		$start_first=0;
-	}
-}*/
+
 // check the problem arg
 $problem_id="";
 if (isset($_GET['problem_id'])){
@@ -85,6 +77,7 @@ if ($language!=-1){
 	$str2=$str2."&language=".$language;
 }
 ?>
+<form id=simform action="status.php" method="get">
 <?=$MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
 <?=$MSG_USER?>:<input type=text size=6 name=user_id value='<?=$user_id?>'>
 <?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
@@ -120,15 +113,16 @@ for ($j=0;$j<12;$j++){
 echo "</select>";
 ?>
 </select>
-<input type=submit value='<?=$MSG_SEARCH?>'></form>
+
 <?
 if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 	if(isset($_GET['showsim']))
 		$showsim=intval($_GET['showsim']);
 	else
-		$showsim=50;
-	echo "</td><td><form id=simform >SIM:
+		$showsim=0;
+	echo "SIM:
 			<select name=showsim onchange=\"document.getElementById('simform').submit();\">
+			<option value=0 ".($showsim==0?'selected':'').">All</option>
 			<option value=50 ".($showsim==50?'selected':'').">50</option>
 			<option value=60 ".($showsim==60?'selected':'').">60</option>
 			<option value=70 ".($showsim==70?'selected':'').">70</option>
@@ -136,9 +130,8 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 			<option value=90 ".($showsim==90?'selected':'').">90</option>
 			<option value=100 ".($showsim==100?'selected':'').">100</option>
 		  </select>";
-	if (isset($_GET['cid'])) 
+/*	if (isset($_GET['cid'])) 
 		echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
-	
 	if (isset($_GET['language'])) 
 		echo "<input type=hidden name=language value='".$_GET['language']."'>";
 	if (isset($_GET['user_id'])) 
@@ -146,10 +139,12 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 	if (isset($_GET['problem_id'])) 
 		echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
 	//echo "<input type=submit>";
-	echo "</form>";
+*/
+	
 	
 	
 }
+echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
 </td></tr>
 </table>
@@ -173,7 +168,7 @@ else
 	$sql=$sql." and result=4 ";
 if($OJ_SIM){
 	$sql="select * from ($sql) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
-	if(isset($_GET['showsim'])){
+	if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
 		$showsim=intval($_GET['showsim']);
 		$sql="SELECT * FROM ($sql) `solution` left join(select solution_id old_s_id,user_id old_user_id from solution) old on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim>= $showsim  ";	
 		$sql=$sql.$order_str."LIMIT 20";

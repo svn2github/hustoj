@@ -15,6 +15,7 @@ require_once("./include/const.inc.php");
 <form action="status.php" method="get">
 <?
 $str2="";
+/*
 if($OJ_SIM){
 	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
 	if(isset($_GET['showsim'])){
@@ -25,7 +26,8 @@ if($OJ_SIM){
 }else{
 	$sql="SELECT * FROM `solution` WHERE 1 ";
 }
-
+*/
+$sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
 	$sql=$sql." AND `contest_id`='$cid' ";
@@ -150,7 +152,19 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 <td width="17%"><?=$MSG_SUBMIT_TIME?>
 </tr>
 <?
-$sql=$sql.$order_str."LIMIT 20";
+
+if(!isset($_GET['showsim']))
+	$sql=$sql.$order_str."LIMIT 20";
+
+if($OJ_SIM){
+	$sql="select * from ($sql) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+	if(isset($_GET['showsim'])){
+		$showsim=intval($_GET['showsim']);
+		$sql="SELECT * FROM ($sql) `solution` left join(select solution_id old_s_id,user_id old_user_id from solution) old on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim>= $showsim  ";	
+		$sql=$sql.$order_str."LIMIT 20";
+		$str2="showsim=$showsim";
+	}
+}
 //echo $sql;
 $result = mysql_query($sql) or die("Error! ".mysql_error());
 $rows_cnt=mysql_num_rows($result);

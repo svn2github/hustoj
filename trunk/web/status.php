@@ -123,18 +123,22 @@ echo "</select>";
 <input type=submit value='<?=$MSG_SEARCH?>'></form>
 <?
 if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-	
-	echo "</td><td><form>SIM:<select name=showsim>
-			<option value=50>50</option>
-			<option value=60>60</option>
-			<option value=70>70</option>
-			<option value=80>80</option>
-			<option value=90>90</option>
-			<option value=100>100</option>
+	if(isset($_GET['showsim']))
+		$showsim=intval($_GET['showsim']);
+	else
+		$showsim=50;
+	echo "</td><td><form id=simform >SIM:
+			<select name=showsim onchange=\"document.getElementById('simform').submit();\">
+			<option value=50 ".($showsim==50?'selected':'').">50</option>
+			<option value=60 ".($showsim==60?'selected':'').">60</option>
+			<option value=70 ".($showsim==70?'selected':'').">70</option>
+			<option value=80 ".($showsim==80?'selected':'').">80</option>
+			<option value=90 ".($showsim==90?'selected':'').">90</option>
+			<option value=100 ".($showsim==100?'selected':'').">100</option>
 		  </select>";
 	if (isset($_GET['cid'])) 
 		echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
-	echo "<input type=submit>";
+	//echo "<input type=submit>";
 	echo "</form>";
 	
 	

@@ -161,8 +161,9 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 <?
 
 if(!isset($_GET['showsim']))
-	$sql=$sql.$order_str."LIMIT 20";
-
+	$sql=$sql.$order_str." LIMIT 20";
+else
+	$sql=$sql." and result=4 ";
 if($OJ_SIM){
 	$sql="select * from ($sql) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
 	if(isset($_GET['showsim'])){

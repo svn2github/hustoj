@@ -73,7 +73,7 @@ if (isset($_GET['user_id'])){
 	if (is_valid_user_name($user_id) && $user_id!=""){
 		$sql=$sql."AND `user_id`='".$user_id."' ";
 		if ($str2!="") $str=$str."&";
-		$str2=$str2."&user_id=".$user_id;
+		$str2=$str2."user_id=".$user_id;
 	}else $user_id="";
 }
 if (isset($_GET['language'])) $language=intval($_GET['language']);
@@ -123,7 +123,8 @@ echo "</select>";
 <input type=submit value='<?=$MSG_SEARCH?>'></form>
 <?
 if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-	echo "</td><td><form action=status.php>SIM:<select name=showsim>
+	
+	echo "</td><td><form>SIM:<select name=showsim>
 			<option value=50>50</option>
 			<option value=60>60</option>
 			<option value=70>70</option>
@@ -131,6 +132,8 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 			<option value=90>90</option>
 			<option value=100>100</option>
 		  </select>";
+	if (isset($_GET['cid'])) 
+		echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
 	echo "<input type=submit>";
 	echo "</form>";
 	
@@ -162,7 +165,7 @@ if($OJ_SIM){
 		$showsim=intval($_GET['showsim']);
 		$sql="SELECT * FROM ($sql) `solution` left join(select solution_id old_s_id,user_id old_user_id from solution) old on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim>= $showsim  ";	
 		$sql=$sql.$order_str."LIMIT 20";
-		$str2="showsim=$showsim";
+		$str2.="&showsim=$showsim";
 	}
 }
 //echo $sql;

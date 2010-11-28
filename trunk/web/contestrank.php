@@ -74,7 +74,7 @@ if ($start_time>time()){
 	exit(0);
 }
 
-$sql="SELECT count(*) FROM `contest_problem` WHERE `contest_id`='$cid'";
+$sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);

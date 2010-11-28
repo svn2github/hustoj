@@ -80,7 +80,13 @@ $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
 mysql_free_result($result);
 
-$sql="SELECT users.user_id,users.nick,solution.result,solution.num,solution.in_date FROM solution,users  WHERE users.user_id=solution.user_id and solution.contest_id='$cid' ORDER BY users.user_id,in_date";
+$sql="SELECT 
+	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
+		FROM 
+			(select * from solution where solution.contest_id='$cid') solution 
+		left join users 
+		on users.user_id=solution.user_id 
+	ORDER BY users.user_id,in_date";
 //echo $sql;
 $result=mysql_query($sql);
 $user_cnt=0;

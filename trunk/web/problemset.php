@@ -68,17 +68,21 @@ $sql=$sql." ORDER BY `problem_id`";
 
 <?
 $result=mysql_query($sql) or die(mysql_error());
-echo "<h3 align=center>";
+echo "<h3 align='center'>";
 for ($i=1;$i<=$cnt+1;$i++){
 	if ($i>1) echo '&nbsp;';
 	if ($i==$page) echo "<span class=red>$i</span>";
 	else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
 }
 echo "</h3>";
-echo "<center><table id=problemset width=90%>";
-echo "<thead><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>$MSG_SEARCH<input type=text name=search><input type=submit value='$MSG_SEARCH' ></form> </tr>";
-echo "<tr align=center class='toprow'><td width=5><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A><td width=60%>$MSG_TITLE<td width=20%>$MSG_SOURCE";
-echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width=5%><A>$MSG_AC</A><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width=5%><A>$MSG_SUBMIT</A></tr>";
+echo "<center><table id='problemset' width='90%'>";
+echo "<thead><tr align='center' class='evenrow'><td width='5'></td>";
+echo "<td width='100%' colspan='5'><form>$MSG_SEARCH<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td></tr>";
+echo "<tr align=center class='toprow'>";
+echo "<td width='5'><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A>";
+echo "<td width='60%'>$MSG_TITLE</td><td width='20%'>$MSG_SOURCE</td>";
+echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width='5%'><A>$MSG_AC</A></td>";
+echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width='5%'><A>$MSG_SUBMIT</A></td></tr>";
 echo "</thead><tbody>";
 $cnt=0;
 while ($row=mysql_fetch_object($result)){
@@ -89,16 +93,17 @@ while ($row=mysql_fetch_object($result)){
 		if (isset($acc_arr[$row->problem_id])) echo "<span class=yes>Y</span>";
 		else echo "<span class=no>N</span>";
 	}
-	echo "<td align=center>".$row->problem_id;
-	echo "<td align=left><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a>";
-	echo "<td align=left><div style=\"width:163px;overflow:auto\">".$row->source."</div>";
-	echo "<td align=center><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
-		.$row->accepted."</a><td><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a>";
+	echo "</td>";
+	echo "<td align='center'>".$row->problem_id."</td>";
+	echo "<td align='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></td>";
+	echo "<td align='center'>".$row->source."</td>";
+	echo "<td align='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
+		.$row->accepted."</a></td><td align='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></td>";
 	echo "</tr>";
 	$cnt=1-$cnt;
 }
 mysql_free_result($result);
-echo "</tbody><tr align=center class='evenrow'><td width=5><td width=100% colspan=5><form>Search<input type=text name=search><input type=submit value=GO ></form> </tr>";
+echo "</tbody>";
 
 echo "</table></center>";
 ?>

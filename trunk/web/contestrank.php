@@ -104,6 +104,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));
 }
+mysql_free_result($result);
 usort($U,"s_cmp");
 $rank=1;
 echo "<style> td{font-size:14} </style>";
@@ -135,7 +136,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "</tr>";
 }
 echo "</table>";
-mysql_free_result($result);
+
 ?>
 <?require_once("oj-footer.php")?>
 <?php

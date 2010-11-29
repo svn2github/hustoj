@@ -13,7 +13,7 @@ OJ_SIM_ENABLE=1
 }}}
   # add in db_info.inc.php
 {{{
-  $OJ_SIM=false;
+  $OJ_SIM=true;
 }}}
   # create table in mysql
 {{{

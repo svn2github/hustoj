@@ -376,8 +376,8 @@ void update_solution(int solution_id, int result, int time, int memory,int sim,i
 	if(sim){
 		sprintf(
 			sql,
-			"insert into sim(s_id,sim_s_id,sim) values(%d,%d,%d)",
-			 solution_id,sim_s_id, sim);
+			"insert into sim(s_id,sim_s_id,sim) values(%d,%d,%d) on duplicate key update  sim_s_id=%d,sim=%d",
+			 solution_id,sim_s_id, sim,sim_s_id,sim);
 		//	printf("sql= %s\n",sql);
 		if (mysql_real_query(conn, sql, strlen(sql))) {
 			//		printf("..update failed! %s\n",mysql_error(conn));

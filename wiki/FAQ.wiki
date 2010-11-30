@@ -45,6 +45,58 @@ When people asked question, we put the answer here
 
   * 我有问题怎么办？
     到issues去提问，new issue
+
+  *   如何获得管理员帐号？
+在mysql执行
+    insert into privilege(user_id,rightstr) values('zhblue','administrator');
+zhblue 为需要加管理员权限的帐号
+
+  * 如何进入后台？
+以管理员身份登录，点击Admin/管理进入后台。
+
+  * 如何添加题目？
+进入后台，点击左侧NewProblem。
+
+  * 如何添加测试数据？
+添加题目时，可以在test input/test output添加一组测试数据，大规模的数据（10kb+）和更多的数据，可以在添加完题目后，通过ftp/sftp,上传到题目对应目录，通常是 /home/judge/data/题号。命名规则是输入数据以.in结尾，输出数据以.out结尾，主文件名相同。
+
+  * 如何编辑题目？
+后台中点击ProblemList,找到需要编辑的题目，点击Edit。编辑时不能修改测试数据，测试数据请使用ftp工具修改。
+
+  * 如何启用题目？
+题目添加后，默认是停用状态，以防比赛提前漏题，后台中点击ProblemList，找到题目，点击Resume启用题目，或者组织比赛，比赛中的题目将自动启用。
+
+  * 如何组织比赛？
+在题目列表ProblemList中选择使用的题目，在PID一栏打钩，点击CheckToNewContest按钮，进入到比赛添加页面，输入比赛名称，设定比赛时间，语言类型，访问权限提交即可。
+也可以使用管理菜单中的NewContest,需要手动输入题目编号，用英文逗号分隔。
+
+  * 如何修改、删除比赛？
+点击比赛列表ContestList，选择Edit或Delete。
+
+  * 如何修改公告信息？
+点击SetMessage。
+
+  * 如何修改用户密码？
+点击ChangPassWD
+
+  * 如何重新判题？
+点击Rejudge,输入题号或运行编号。
+
+  * 如何增加用户权限？
+Addprivilege, administrator为管理员，source_browser为代码审查，contest_creator为比赛组织者。
+通常给使用系统的老师分配代码审查和比赛组织者权限即可。
+
+  * 如何导入、导出题目？
+使用ImportProblem，上传FPS文件。
+使用ExportProblem，输入起始编号，结束编号，或题号列表，如果输入了列表，起始结束将不起作用。
+
+  * 如何更新数据库结构？
+系统升级中，有对数据库的修改，这些修改不能通过SVN实现自动更新，如果发现升级web/core代码后系统报错，可以执行update database操作，进行数据库升级。因为脚本中有测试代码，所以重复执行不会造成影响。
+
+  * 如何下载新题目？
+访问FreeProblemSet,查看Downloads列表。
+
+
   * Why the added problem don't show up to non-admin users?
     
     problem is deleted when first added, admin need to Resume them in the "Problem List"

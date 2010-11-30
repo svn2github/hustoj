@@ -131,7 +131,7 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
-$basedir=$OJ_DATA."$id";
+$basedir=$OJ_DATA."/$id";
 echo "Sample data file in $basedir Updated!<br>";
 
 	if($sample_input){

@@ -477,9 +477,12 @@ int compile(int lang) {
 		LIM.rlim_max = 1024 * STD_MB;
 		LIM.rlim_cur = 1024 * STD_MB;
 		setrlimit(RLIMIT_AS, &LIM);
-
-		freopen("ce.txt", "w", stderr);
-		freopen("/dev/null", "w", stdout);
+		if(lang!=2){
+			freopen("ce.txt", "w", stderr);
+			freopen("/dev/null", "w", stdout);
+		}else{
+			freopen("ce.txt", "w", stdout);
+		}
 		switch (lang) {
 		case 0:
 			execvp(CP_C[0], (char * const *) CP_C);

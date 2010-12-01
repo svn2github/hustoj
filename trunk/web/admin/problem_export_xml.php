@@ -126,8 +126,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
       $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
 	  
    }else{
-	   $start = addslashes ( $_POST ['start'] );
-		$end = addslashes ( $_POST ['end'] );
+	   $start = intval ( $_POST ['start'] );
+		$end = intval ( $_POST ['end'] );
 	 	$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
        $filename="-$start-$end";
    }
@@ -159,7 +159,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <? 
    $description=$row->description;
    $images=getImages($description);
-   foreach($images[1] as $img){
+   $imgs=array_unique($images[1]);
+   foreach($imgs as $img){
 		  $description=str_replace($img,fixurl($img),$description); 
           $base64=image_base64_encode($img);
           if($base64){
@@ -167,10 +168,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 			  echo fixurl($img);
 			  echo "]]></src><base64><![CDATA[";
 			  echo $base64;
-			  echo "]]></base64></img>";
-	      
+			  echo "]]></base64></img>";   
 		 }
-      
    }
    
 ?>

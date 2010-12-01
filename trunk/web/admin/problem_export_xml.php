@@ -102,7 +102,21 @@ function getImages($content){
 function fixcdata($content){
     return str_replace("]]>","]]]]><![CDATA[>",$content);
 }
-
+function fixImageURL(&$html){
+   $images=getImages($html);
+   $imgs=array_unique($images[1]);
+   foreach($imgs as $img){
+		  $html=str_replace($img,fixurl($img),$html); 
+          $base64=image_base64_encode($img);
+          if($base64){
+			  echo "<img><src><![CDATA[";
+			  echo fixurl($img);
+			  echo "]]></src><base64><![CDATA[";
+			  echo $base64;
+			  echo "]]></base64></img>";   
+		 }
+   }   	
+}
 session_start ();
 if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -157,24 +171,16 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <memory_limit><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
 
 <? 
-   $description=$row->description;
-   $images=getImages($description);
-   $imgs=array_unique($images[1]);
-   foreach($imgs as $img){
-		  $description=str_replace($img,fixurl($img),$description); 
-          $base64=image_base64_encode($img);
-          if($base64){
-			  echo "<img><src><![CDATA[";
-			  echo fixurl($img);
-			  echo "]]></src><base64><![CDATA[";
-			  echo $base64;
-			  echo "]]></base64></img>";   
-		 }
-   }
-   
+	$description=$row->description;
+	fixImageURL($description);
+	$input=$row->input;
+	fixImageURL($input);
+	fixImageURL($row->output);
+	fixImageURL($row->hint);
+	
 ?>
 <description><![CDATA[<?=$description?>]]></description>
-<input><![CDATA[<?=$row->input?>]]></input> 
+<input><![CDATA[<?=$input?>]]></input> 
 <output><![CDATA[<?=$row->output?>]]></output>
 <sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>

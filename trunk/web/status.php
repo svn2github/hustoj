@@ -203,7 +203,7 @@ while(	$row=mysql_fetch_object($result)){
 	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
 	if (isset($cid)) echo "<td><a href='problem.php?cid=$cid&pid=$row->num'>".$PID[$row->num]."</a>";
 	else echo "<td><a href='problem.php?id=".$row->problem_id."'>".$row->problem_id."</a>";
-	if (intval($row->result)==11 && ($row->user_id==$_SESSION['user_id'] || isset($_SESSION['source_browser']))){
+	if (intval($row->result)==11 && ((isset($_SESSION['user_id'])&&$row->user_id==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
 		echo "<td><a href='ceinfo.php?sid=$row->solution_id'><font color=".$judge_color[$row->result].">".$judge_result[$row->result]."</font></a>";
 	}else{
 		if($OJ_SIM&&$row->sim&&$row->sim_s_id!=$row->s_id) {

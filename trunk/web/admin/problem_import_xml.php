@@ -112,25 +112,29 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
 		}
 		$images=($searchNode->getElementsByTagName("img"));
+		$did=array();
 		$testno=0;
 		foreach($images as $img){
-			$src=getValue($img,"src");
-			$base64=getValue($img,"base64");
-			$ext=pathinfo($src);
-			$ext=$ext['extension'];
-			$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
-			image_save_file($newpath,$base64);
-			$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
-			$src=mysql_real_escape_string($src);
-			$newpath=mysql_real_escape_string($newpath);
-			$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-			$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-			$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-			$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
+			if(!in_array($img,$did)){
+				$src=getValue($img,"src");
+				$base64=getValue($img,"base64");
+				$ext=pathinfo($src);
+				$ext=$ext['extension'];
+				$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
+				image_save_file($newpath,$base64);
+				$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
+				$src=mysql_real_escape_string($src);
+				$newpath=mysql_real_escape_string($newpath);
+				$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
+				mysql_query ( $sql );
+				$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
+				mysql_query ( $sql );
+				$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
+				mysql_query ( $sql );
+				$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
+				mysql_query ( $sql );
+				array_push($did,$img);
+			}
 			
 		}
 		

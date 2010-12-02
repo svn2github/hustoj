@@ -111,7 +111,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			//if($testNode->nodeValue)
 			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
 		}
-		$images=array_unique($searchNode->getElementsByTagName("img"));
+		$images=($searchNode->getElementsByTagName("img"));
 		$testno=0;
 		foreach($images as $img){
 			$src=getValue($img,"src");
@@ -123,12 +123,6 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
 			$src=mysql_real_escape_string($src);
 			$newpath=mysql_real_escape_string($newpath);
-<<<<<<< .mine
-			$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";
-			//echo $sql;         
-			mysql_query ( $sql );
-	
-=======
 			$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
 			mysql_query ( $sql );
 			$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
@@ -138,15 +132,8 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
 			mysql_query ( $sql );
 			
->>>>>>> .r617
-			$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-			$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-			$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
-			mysql_query ( $sql );
-
 		}
+		
 		
 		if($spj) {
 	    	$basedir = "$OJ_DATA/$pid";

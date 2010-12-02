@@ -7,7 +7,7 @@ if (!(isset($_SESSION['administrator']))){
 ?>
 <?
 function image_save_file($filepath ,$base64_encoded_img){
-	$fp=fopen($filepath ,wb);
+	$fp=fopen($filepath ,"wb");
 	fwrite($fp,base64_decode($base64_encoded_img));
 	fclose($fp);
 }

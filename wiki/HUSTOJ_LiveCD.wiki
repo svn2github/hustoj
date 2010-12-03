@@ -45,6 +45,9 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r624
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r624.iso
+
 r596 650M 支持CDRW可擦写
 
 http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r596.iso

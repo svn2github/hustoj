@@ -24,5 +24,10 @@ sudo ubiquity
  * 按照提示，只需要7步简单的操作就能够将LiveCD完整安装到服务器上了。
  * 安装成功后注意
    # 登录时输入密码前选择会话（Session）为LXDE
+     如果会话不可选，可以按下alt+f1用控制台登录，然后安装万丈lubuntu桌面：
+     sudo apt-get install lubuntu-desktop
+     提示lxdm配置时先确定，然后选择lxdm.
+     安装完成sudo reboot重启，即可看到新的图形登录界面。
    # 修改judge和root账号口令，以及mysql账号口令,修改judge.conf和db_info.inc.php。
    # 修改系统管理员admin密码
+   

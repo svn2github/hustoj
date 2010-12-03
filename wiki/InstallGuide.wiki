@@ -23,6 +23,7 @@ sudo ubiquity
   就可以进入图形化安装程序。
  * 按照提示，只需要7步简单的操作就能够将LiveCD完整安装到服务器上了。
  * 安装成功后注意
+   # 安装中建立的帐号无效，请使用ubuntu/freeprblemset登录。
    # 登录时输入密码前选择会话（Session）为LXDE
      如果会话不可选，可以按下alt+f1用控制台登录，然后安装万丈lubuntu桌面：
      sudo apt-get install lubuntu-desktop

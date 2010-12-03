@@ -76,6 +76,7 @@ OJ_TOTAL都设为3，OJ_MOD分别设为0,1,2
 或用同步命令。
 {{{
    rsync -vzrtopg --progress --delete root@主机ip:/home/judge/data /home/judge/
+}}}
 
 最后，在各判题机重启判题程序。
 {{{

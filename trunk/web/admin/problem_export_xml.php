@@ -1,6 +1,8 @@
-<?
+<?@session_start ();
 require_once ("../include/db_info.inc.php");
-
+if(isset($OJ_LANG)){
+		require_once("../lang/$OJ_LANG.php");
+}
 function getTestFileIn($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
 		return file_get_contents ( "$OJ_DATA/$pid/" . $testfile . ".in" );
@@ -40,8 +42,11 @@ class Solution{
 }
 function getSolution($pid){
 	$ret=new Solution();
-	require("../include/const.inc.php");
 	require("../include/db_info.inc.php");
+	if(isset($OJ_LANG)){
+			require("../lang/$OJ_LANG.php");
+	}
+	require("../include/const.inc.php");
 	$con = mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS);
 	if (!$con)
     {
@@ -121,7 +126,7 @@ function fixImageURL(&$html,&$did){
 		 }
    }   	
 }
-session_start ();
+
 if (! isset ( $_SESSION ['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
@@ -154,7 +159,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	//echo $sql;
 	$result = mysql_query ( $sql ) or die ( mysql_error () );
 	
-	if ($_POST ['submit'] == "Export")
+	if (isset($_POST ['submit'])&&$_POST ['submit'] == "Export")
 		header ( 'Content-Type:   text/xml' );
 	else {
 		header ( "content-type:   application/file" );

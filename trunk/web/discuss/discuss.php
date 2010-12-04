@@ -1,6 +1,13 @@
 <?php
 	require_once("discuss_func.inc.php");
-	$pid=$_REQUEST['pid']; $cid=$_REQUEST['cid'];
+	if(isset($_REQUEST['pid']))
+		$pid=intval($_REQUEST['pid']); 
+	else
+		$pid=0;
+	if(isset($_REQUEST['pid']))
+		$cid=intval($_REQUEST['cid']);
+	else
+		$cid=0;
 	$prob_exist = problem_exist($pid, $cid);
 	if ($cid!='' && $cid!=null && $prob_exist) require_once("contest-header.php");
 	else require_once("oj-header.php");

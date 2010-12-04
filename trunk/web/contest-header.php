@@ -10,8 +10,10 @@
 	<link rel=stylesheet href='include/hoj.css' type='text/css'>
 </head>
 <?
-$cid=intval($_GET['cid']);
-$pid=intval($_GET['pid']);
+if(isset($_GET['cid']))
+	$cid=intval($_GET['cid']);
+if (isset($_GET['pid']))
+	$pid=intval($_GET['pid']);
 ?>
 <table width=100% class=toprow><tr align=center>
 	<td width=15%><a class=hd href='./'><?=$MSG_HOME?></a>

@@ -1,7 +1,8 @@
 <?require_once("./include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
-	}?>
+	}
+?>
 
 <?require_once("./include/my_func.inc.php")?>
 <?require_once("./include/const.inc.php")?>

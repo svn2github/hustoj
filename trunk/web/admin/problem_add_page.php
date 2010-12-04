@@ -31,8 +31,8 @@ include_once("../fckeditor/fckeditor.php") ;
 <?php
 $description = new FCKeditor('description') ;
 $description->BasePath = '../fckeditor/' ;
-$description->Height = 300 ;
-$description->Width=600;
+$description->Height = 250 ;
+$description->Width=800;
 
 $description->Value = '<p></p>' ;
 $description->Create() ;
@@ -44,8 +44,8 @@ $description->Create() ;
 <?php
 $input = new FCKeditor('input') ;
 $input->BasePath = '../fckeditor/' ;
-$input->Height = 300 ;
-$input->Width=600;
+$input->Height = 250 ;
+$input->Width=800;
 
 $input->Value = '<p></p>' ;
 $input->Create() ;
@@ -59,8 +59,8 @@ $input->Create() ;
 <?php
 $output = new FCKeditor('output') ;
 $output->BasePath = '../fckeditor/' ;
-$output->Height = 300 ;
-$output->Width=600;
+$output->Height = 250 ;
+$output->Width=800;
 
 $output->Value = '<p></p>' ;
 $output->Create() ;
@@ -75,8 +75,8 @@ $output->Create() ;
 <?php
 $output = new FCKeditor('hint') ;
 $output->BasePath = '../fckeditor/' ;
-$output->Height = 300 ;
-$output->Width=600;
+$output->Height = 250 ;
+$output->Width=800;
 
 $output->Value = '<p></p>' ;
 $output->Create() ;

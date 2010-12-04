@@ -124,8 +124,8 @@ if (get_magic_quotes_gpc ()) {
 	$output = stripslashes ( $output);
 	$sample_input = stripslashes ( $sample_input);
 	$sample_output = stripslashes ( $sample_output);
-	$test_input = stripslashes ( $test_input);
-	$test_output = stripslashes ( $test_output);
+//	$test_input = stripslashes ( $test_input);
+//	$test_output = stripslashes ( $test_output);
 	$hint = stripslashes ( $hint);
 	$source = stripslashes ( $source); 
 	$spj = stripslashes ( $spj);

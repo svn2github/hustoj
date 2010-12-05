@@ -15,6 +15,11 @@ require_once ("../include/problem.php");
 
 function submitSolution($pid,$solution,$language)
 {
+	
+	require ("../include/db_info.inc.php");
+	if(isset($OJ_LANG)){
+		require("../lang/$OJ_LANG.php");
+	}	
 	require ("../include/const.inc.php");
 
 	for($i=0;$i<count($language_name);$i++){

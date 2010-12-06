@@ -14,7 +14,7 @@ if (isset($_SESSION['administrator'])){
 		<a href="problem_add_page.php" target="main"><b>NewProblem</b></a>
 <?
 }
-if (isset($_SESSION['administrator'])){
+if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 ?>
 	<li>
 		<a href="problem_list.php" target="main"><b>ProblemList</b></a>

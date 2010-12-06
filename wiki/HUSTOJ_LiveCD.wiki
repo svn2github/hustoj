@@ -45,46 +45,13 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
-r624
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r624.iso
+r
 
-r596 650M 支持CDRW可擦写
+r647
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r596.iso
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r647.iso
 
-http://real.zjicm.edu.cn/qyt/hustoj/hustoj-root-freeproblemset-r596.iso
-
-r574 650M 支持CDRW可擦写
-
-ed2k://|file|hustoj-root-freeproblemset-r574.iso|678247767|7CC5532B0BA99DC86A6081C23D976F78|/
-
-r509 650M 支持CDRW可擦写
-
-http://www.100upload.com/nqaczli7pa54.html
-
-http://www.100upload.com/7e13g0t8xiaj.html
-
-http://www.100upload.com/9d34ic9ijwmj.html
-
-http://www.100upload.com/3431ww0igxdb.html
-
-http://www.100upload.com/ow5kglznhgim.html
-
-http://www.100upload.com/bpifayh3myuo.html
-
-http://www.100upload.com/0peefpy46yy7.html
-
-
-http://u.115.com/file/f6d4c8e0dd
-hustoj-root-freeproblemset-r509.iso
-
-r496 自动升级版
-
-http://u.115.com/file/f62aa64132
-hust-root-freeproblemset-r496.iso
-
-ed2k://|file|hust-root-freeproblemset-r496.iso|711766016|F79DE61050D171ED863010AD4B5056AC|/ 
-
+md5sum:a20735cf6a08645459072e3788300277
 
 最低配置实测：
 LiveCD System on k6-2 System

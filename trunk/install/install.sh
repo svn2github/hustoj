@@ -34,10 +34,14 @@ sudo    mkdir /home/judge/etc
 sudo    mkdir /home/judge/data
 sudo    mkdir /home/judge/log
 sudo    mkdir /home/judge/run0
+sudo    mkdir /home/judge/run1
+sudo    mkdir /home/judge/run2
+sudo    mkdir /home/judge/run3
 sudo cp java0.policy  judge.conf /home/judge/etc
 sudo chown -R judge /home/judge
 sudo chgrp -R www-data /home/judge/data
-sudo chmod 771 /home/judge/data
+sudo chgrp -R root /home/judge/etc /home/judge/run?
+sudo chmod 771 /home/judge/data /home/judge/etc /home/judge/run?
 
 #boot up judged
 sudo echo "/usr/bin/judged" > /etc/init.d/judged

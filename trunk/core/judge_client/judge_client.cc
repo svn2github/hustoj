@@ -968,8 +968,8 @@ int main(int argc, char** argv) {
 	char work_dir[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	char user_id[BUFFER_SIZE];
-	int solution_id = atoi(argv[1]);
-	int runner_id = atoi(argv[2]);
+	int solution_id=1000;
+	int runner_id = 0;
 	int p_id, time_lmt, mem_lmt, lang, isspj,sim,sim_s_id;
 
 	init_parameters(argc, argv, solution_id, runner_id);

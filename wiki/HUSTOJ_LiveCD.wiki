@@ -49,7 +49,7 @@ r
 
 r647
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r647.iso
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset.r647.iso
 
 md5sum:a20735cf6a08645459072e3788300277
 

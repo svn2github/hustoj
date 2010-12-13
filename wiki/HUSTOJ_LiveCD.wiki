@@ -49,6 +49,7 @@ r651
 
 http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r651.iso
 
+http://down.newsclan.com/hustoj/hustoj.bz2.rar (change name back to bz2 to extract)
 
 
 最低配置实测：

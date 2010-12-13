@@ -29,7 +29,7 @@ sudo ubiquity
 {{{
 sudo apt-get install lubuntu-desktop
 }}}
-     提示lxdm配置时先确定，然后选择lxdm.
+     提示lxdm配置时先确定，然后选择gdm.
      安装完成sudo reboot重启，即可看到新的图形登录界面。
    # 修改judge和root账号口令，以及mysql账号口令,修改judge.conf和db_info.inc.php。
    # 修改系统管理员admin密码

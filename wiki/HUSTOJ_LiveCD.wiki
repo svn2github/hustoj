@@ -45,15 +45,11 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
-r650
+r651
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r650.iso
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r651.iso
 
-r647
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset.r647.iso
-
-md5sum:a20735cf6a08645459072e3788300277
 
 最低配置实测：
 LiveCD System on k6-2 System

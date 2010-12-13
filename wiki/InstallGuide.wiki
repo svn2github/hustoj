@@ -25,7 +25,7 @@ sudo ubiquity
  * 安装成功后注意
    # 安装中建立的帐号无效，请使用ubuntu/freeprblemset登录。
    # 登录时输入密码前选择会话（Session）为LXDE
-     如果会话不可选，可以按下alt+f1用控制台登录，然后安装万丈lubuntu桌面：
+     如果会话不可选，可以按下alt+f1用控制台登录，然后安装完整lubuntu桌面：
 {{{
 sudo apt-get install lubuntu-desktop
 }}}

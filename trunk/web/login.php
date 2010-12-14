@@ -18,8 +18,8 @@
 		echo mysql_error();
 		while ($row=mysql_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
-		$_SESSION['ac']=Array();
-		$_SESSION['sub']=Array();
+//		$_SESSION['ac']=Array();
+//		$_SESSION['sub']=Array();
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";
 		echo "</script>";

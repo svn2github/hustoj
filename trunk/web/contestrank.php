@@ -1,11 +1,14 @@
 <?php
 	$now = time ();
 	$cid=intval($_GET['cid']);
-	$file = "contestrank$cid.html";
+	$file = "cache/contestrank$cid.html";
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
+	else
+		$last =0;
 	if ($now - $last < 10) {
-		header ( "Location: $file" );
+		//header ( "Location: $file" );
+		include ($file);
 		exit ();
 	} else {
 		ob_start ();

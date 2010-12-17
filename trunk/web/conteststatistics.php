@@ -1,11 +1,14 @@
 <?php
 	$now = time ();
 	$cid=intval($_GET['cid']);
-	$file = "conteststatistics$cid.html";
+	$file = "cache/conteststatistics$cid.html";
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
+	else
+		$last = 0;
 	if ($now - $last < 10) {
-		header ( "Location: $file" );
+		//header ( "Location: $file" );
+		include ($file);
 		exit ();
 	} else {
 		ob_start ();
@@ -57,13 +60,24 @@ mysql_free_result($result);
 echo "<center><h3>Contest Statistics</h3><table width=60%>";
 echo "<tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java</tr>";
 for ($i=0;$i<$pid_cnt;$i++){
-	if ($i&1) echo "<tr align=center class=oddrow><td><a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
-	else echo "<tr align=center class=evenrow><td><a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
-	for ($j=0;$j<15;$j++) echo "<td>".$R[$i][$j];
+	if(!isset($PID[$i])) $PID[$i]="";
+	
+	if ($i&1) 
+		echo "<tr align=center class=oddrow><td>";
+	else 
+		echo "<tr align=center class=evenrow><td>";
+	echo "<a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
+	for ($j=0;$j<15;$j++) {
+		if(!isset($R[$i][$j])) $R[$i][$j]="";
+		echo "<td>".$R[$i][$j];
+	}
 	echo "</tr>";
 }
 echo "<tr align=center class=evenrow><td>Total";	
-for ($j=0;$j<15;$j++) echo "<td>".$R[$i][$j];
+for ($j=0;$j<15;$j++) {
+	if(!isset($R[$i][$j])) $R[$i][$j]="";
+	echo "<td>".$R[$i][$j];
+}
 echo "</tr>";
 echo "<table></center>";
 ?>

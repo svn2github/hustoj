@@ -147,7 +147,7 @@ echo "</table>";
 ?>
 <?require_once("oj-footer.php")?>
 <?php
-		
+		@mkdir("cache");
 		$conntent = ob_get_contents ();
 		$fp = fopen ( $file, "w" );
 		fputs ( $fp, $conntent );

@@ -49,12 +49,30 @@ while ($row=mysql_fetch_object($result)){
 	if ($res<0) $res=8;
 	$num=intval($row->num);
 	$lag=intval($row->language);
-	$R[$num][$res]++;
-	$R[$num][$lag+10]++;
-	$R[$pid_cnt][$res]++;
-	$R[$pid_cnt][$lag+10]++;
-	$R[$num][8]++;
-	$R[$pid_cnt][8]++;
+	if(!isset($R[$num][$res]))
+		$R[$num][$res]=1;
+	else
+		$R[$num][$res]++;
+	if(!isset($R[$num][$lag+10]))
+		$R[$num][$lag+10]=1;
+	else
+		$R[$num][$lag+10]++;
+	if(!isset($R[$pid_cnt][$res]))
+		$R[$pid_cnt][$res]=1;
+	else
+		$R[$pid_cnt][$res]++;
+	if(!isset($R[$pid_cnt][$lag+10]))
+		$R[$pid_cnt][$lag+10]=1;
+	else
+		$R[$pid_cnt][$lag+10]++;
+	if(!isset($R[$num][8]))
+		$R[$num][8]=1;
+	else
+		$R[$num][8]++;
+	if(!isset($R[$pid_cnt][8]))
+		$R[$pid_cnt][8]=1;
+	else
+		$R[$pid_cnt][8]++;
 }
 mysql_free_result($result);
 echo "<center><h3>Contest Statistics</h3><table width=60%>";
@@ -83,11 +101,9 @@ echo "<table></center>";
 ?>
 <?require_once("oj-footer.php")?>
 <?php
-		@mkdir("cache");
-		$conntent = ob_get_contents ();
-		$fp = fopen ( $file, "w" );
-		fputs ( $fp, $conntent );
-		fclose ( $fp );
+		
+		if(!file_exists("cache")) mkdir("cache");
+		file_put_contents($file,ob_get_contents ());
 	}
 	
 	?>

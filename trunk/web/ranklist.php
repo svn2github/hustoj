@@ -4,11 +4,14 @@
 		$rank = intval ( $_GET ['start'] );
 	else
 	    $rank = 0;
-	$file = "ranklist$rank.html";
+	$file = "cache/ranklist$rank.html";
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
+	else
+		$last =0;
 	if ($now - $last < 10) {
-		header ( "Location: $file" );
+		//header ( "Location: $file" );
+		include ($file);
 		exit ();
 	} else {
 		ob_start ();
@@ -83,10 +86,9 @@
 		?>
 		<?php
 		
-		$conntent = ob_get_contents ();
-		$fp = fopen ( $file, "w" );
-		fputs ( $fp, $conntent );
-		fclose ( $fp );
+		if(!file_exists("cache")) mkdir("cache");
+		file_put_contents($file,ob_get_contents ());
+		
 	}
 	
-	?>
+?>

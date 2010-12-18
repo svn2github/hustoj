@@ -97,14 +97,14 @@ else if(isset($_POST['problem2contest'])){
 	Year:<input type=text name=syear value=<?=date('Y')?> size=7 >
 	Month:<input type=text name=smonth value=<?=date('m')?> size=7 >
 	Day:<input type=text name=sday size=7 value=<?=date('d')?> >&nbsp;
-	Hour:<input type=text name=shour size=7 value=<?=date('h')?>>&nbsp;
+	Hour:<input type=text name=shour size=7 value=<?=date('H')?>>&nbsp;
 	Minute:<input type=text name=sminute value=00 size=7 ></p>
 	<p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
 	Year:<input type=text name=eyear value=<?=date('Y')?> size=7 >
 	Month:<input type=text name=emonth value=<?=date('m')?> size=7 >
 	
 	Day:<input type=text name=eday size=7 value=<?=date('d')?>>&nbsp;
-	Hour:<input type=text name=ehour size=7 value=<?=date('h')?>>&nbsp;
+	Hour:<input type=text name=ehour size=7 value=<?=date('H')+4?>>&nbsp;
 	Minute:<input type=text name=eminute value=00 size=7 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>

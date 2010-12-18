@@ -64,7 +64,7 @@ if (isset($_GET['user_id'])){
 	$user_id=trim($_GET['user_id']);
 	if (is_valid_user_name($user_id) && $user_id!=""){
 		$sql=$sql."AND `user_id`='".$user_id."' ";
-		if ($str2!="") $str=$str."&";
+		if ($str2!="") $str2=$str2."&";
 		$str2=$str2."user_id=".$user_id;
 	}else $user_id="";
 }

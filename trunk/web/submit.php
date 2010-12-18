@@ -115,6 +115,8 @@ $insert_id=mysql_insert_id();
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
 //echo $sql;
-if (!isset($cid)) header("Location: ./status.php");
-else header("Location: ./status.php?cid=$cid");
+if (!isset($cid)) 
+	header("Location: ./status.php?"."user_id=".$_SESSION['user_id']);
+else 
+	header("Location: ./status.php?cid=$cid"."&user_id=".$_SESSION['user_id']);
 ?>

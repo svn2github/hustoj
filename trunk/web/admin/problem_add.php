@@ -51,9 +51,11 @@ if (get_magic_quotes_gpc ()) {
 $pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 $basedir = "$OJ_DATA/$pid";
 mkdir ( $basedir );
-if($sample_output) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
+if($sample_output&&!$sample_input) $sample_input="0";
+if($sample_input) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
 if($sample_output)mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
-if($test_output)mkdata($pid,"test.in",$test_input,$OJ_DATA);
+if($test_output&&!$test_input) $test_input="0";
+if($test_input)mkdata($pid,"test.in",$test_input,$OJ_DATA);
 if($test_output)mkdata($pid,"test.out",$test_output,$OJ_DATA);
 
 /*	*/

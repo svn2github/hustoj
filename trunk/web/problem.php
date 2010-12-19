@@ -111,13 +111,23 @@ if (mysql_num_rows($result)!=1){
 	
 	echo "</center>";
 	
-	echo "<h2>$MSG_Description</h2><p>".$row->description."</p>";
-	echo "<h2>$MSG_Input</h2><p>".$row->input."</p>";
-	echo "<h2>$MSG_Output</h2><p>".$row->output."</p>";
-	echo "<h2>$MSG_Sample_Input</h2><pre>".htmlspecialchars($row->sample_input)."</pre>";
-	echo "<h2>$MSG_Sample_Output</h2><pre>".htmlspecialchars($row->sample_output)."</pre>";
-	if ($pr_flag||true) echo "<h2>$MSG_HINT</h2><p>".nl2br($row->hint)."</p>";
-	if ($pr_flag) echo "<h2>$MSG_Source</h2><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p>";
+	echo "<h2>$MSG_Description</h2><div class=content>".$row->description."</div>";
+	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
+	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
+	echo "<h2>$MSG_Sample_Input</h2>
+			<div class=content>
+				<pre>".htmlspecialchars($row->sample_input)."</pre>
+			</div>";
+	echo "<h2>$MSG_Sample_Output</h2>
+			<div class=content>
+				<pre>".htmlspecialchars($row->sample_output)."</pre>
+			</div>";
+	if ($pr_flag||true) 
+		echo "<h2>$MSG_HINT</h2>
+			<div class=content><p>".nl2br($row->hint)."</p></div>";
+	if ($pr_flag) 
+		echo "<h2>$MSG_Source</h2>
+			<div class=content><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p></div>";
 	echo "<center>";
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";

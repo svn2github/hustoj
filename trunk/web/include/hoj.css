@@ -51,3 +51,13 @@ color:gray;
 #center{
   text-align:center;
 }
+
+div.content {
+	height: auto;
+	background: url(../image/content.png);
+	margin: 0;
+	padding: 0 20px;
+	font-size: 14px;
+	font-family: Times New Roman;
+	text-align: left
+}

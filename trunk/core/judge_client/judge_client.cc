@@ -1073,13 +1073,15 @@ int main(int argc, char** argv) {
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
-
+	//create chroot for ruby
+	if(lang==4) copy_ruby_runtime(work_dir);
+	
 	// read files and run
 	for (; ACflg == OJ_AC && (dirp = readdir(dp)) != NULL;) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-		if(lang==4) copy_ruby_runtime(work_dir);
+		
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
 		init_syscalls_limits(lang);

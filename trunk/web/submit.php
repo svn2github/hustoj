@@ -66,7 +66,7 @@ $len=strlen($source);
 //echo $source;
 
 $language=intval($_POST['language']);
-if ($language>3 || $language<0) $language=0;
+if ($language>5 || $language<0) $language=0;
 $language=strval($language);
 
 setcookie('lastlang',$language,time()+360000);
@@ -94,12 +94,12 @@ if (mysql_num_rows($res)==1){
 	//$row=mysql_fetch_row($res);
 	//$last=strtotime($row[0]);
 	//$cur=time();
-	if ($cur-$last<10){
+	//if ($cur-$last<10){
 		require_once('oj-header.php');
 		echo "You should not submit more than twice in 10 seconds.....<br>";
 		require_once('oj-footer.php');
 		exit(0);
-	}
+	//}
 }
 
 if (!isset($pid)){

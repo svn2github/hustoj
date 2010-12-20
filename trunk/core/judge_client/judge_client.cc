@@ -97,7 +97,7 @@ static int sim_enable = 0 ;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[4][8] = { "c", "cc", "pas", "java" };
+static char lang_ext[5][8] = { "c", "cc", "pas", "java","rb" };
 static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -139,21 +139,20 @@ void init_syscalls_limits(int lang) {
 if(DEBUG)
 	write_log("init_call_counter:%d",lang);		
 	if (lang <= 1) { // C & C++
-	write_log("LANG_CV[0]:%d",LANG_CV[0]);		
-	
 		for (i = 0; LANG_CC[i]; i++){
 			call_counter[LANG_CV[i]] = LANG_CC[i];
-			//if(DEBUG){
-			//write_log("call:%lucounter:%d",i,call_counter[i]);		
-		//}
 		}
 	} else if (lang == 2) { // Pascal
 		for (i = 0; LANG_PC[i]; i++)
 			call_counter[LANG_PV[i]] = LANG_PC[i];
-	} else { // Java
+	} else if (lang==3){ // Java
 		for (i = 0; LANG_JC[i]; i++)
 			call_counter[LANG_JV[i]] = LANG_JC[i];
+	} else if (lang==4){ // Ruby
+		for (i = 0; LANG_RC[i]; i++)
+			call_counter[LANG_RV[i]] = LANG_RC[i];
 	}
+	
 }
 
 // read the configue file
@@ -463,6 +462,7 @@ int compile(int lang) {
 			"-Ci", NULL };
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };
+	const char * CP_R[] = { "ruby", "-c",  "Main.rb",NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -496,6 +496,11 @@ int compile(int lang) {
 		case 3:
 			execvp(CP_J[0], (char * const *) CP_J);
 			break;
+		case 4:
+			execvp(CP_R[0], (char * const *) CP_R);
+			break;
+		default:
+			printf("nothing to do!\n");
 		}
 		if (DEBUG)
 			printf("compile end!\n");
@@ -633,7 +638,29 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
 	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
 }
-
+void copy_ruby_runtime(char * work_dir){
+	char cmd[BUFFER_SIZE];
+	//const char * ruby_run="/usr/bin/ruby";
+	
+	sprintf(cmd, "mkdir %s/usr", work_dir);
+	system(cmd);
+	sprintf(cmd, "mkdir %s/usr/lib", work_dir);
+	system(cmd);
+	sprintf(cmd, "mkdir %s/lib", work_dir);
+	system(cmd);
+	sprintf(cmd, "mkdir %s/bin", work_dir);
+	system(cmd);
+	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
+	system(cmd);
+	sprintf(cmd, "cp /lib/* %s/lib/", work_dir);
+	system(cmd);
+	sprintf(cmd, "cp /bin/busybox %s/bin/", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/sh", work_dir);
+	system(cmd);
+	sprintf(cmd, "cp /usr/bin/ruby* %s/", work_dir);
+	system(cmd);
+}
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
@@ -651,7 +678,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_cur = STD_F_LIM;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-	if (lang != 3) {
+	if (lang < 3) {
 		LIM.rlim_cur = 10;
 		LIM.rlim_max = 10;
 	} else {
@@ -671,21 +698,29 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang != 3)
+	if (lang !=3 )
 		chroot(work_dir);
 
 	// now the user is "judger"
 	setuid(1536);
 	setresuid(1536, 1536, 1536);
-	if (lang != 3) {
+	switch (lang){
+	  case 0:
+	  case 1:
+	  case 2:
 		execl("./Main", "./Main", NULL);
-	} else {
+		break;
+	  case 3:
 		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
 		sprintf(java_p2, "-Xmx%dM", mem_lmt);
-		write_log("java_parameter:%s %s", java_p1, java_p2);
+		if(DEBUG)write_log("java_parameter:%s %s", java_p1, java_p2);
 		execl("/usr/bin/java", "/usr/bin/java", java_p1, java_p2,
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", NULL);
+		break;
+	  case 4:
+		system("/ruby Main.rb<data.in");
+	    //execl("./ruby", "Main.rb", NULL);
 	}
 	//sleep(1);
 	exit(0);
@@ -799,8 +834,10 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		}
 
 		exitcode = WEXITSTATUS(status);
-		/*exitcode == 5 是正常暂停 */
-		if (exitcode == 0x05 || exitcode == 0)
+		/*exitcode == 5 是正常暂停
+		 * ruby using system to run,exit 17 ok
+		 *  */
+		if ((lang==4&&exitcode==17)||exitcode == 0x05 || exitcode == 0)
 			//go on and on
 			;
 		else {
@@ -873,7 +910,6 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			write_log(
 					"[ERROR] A Not allowed system call: runid:%d callid:%d\n",
 					solution_id, reg.REG_SYSCALL);
-
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		} else {
 			if (sub == 1)
@@ -1043,7 +1079,7 @@ int main(int argc, char** argv) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-
+		if(lang==4) copy_ruby_runtime(work_dir);
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
 		init_syscalls_limits(lang);
@@ -1069,7 +1105,7 @@ int main(int argc, char** argv) {
 	update_solution(solution_id, ACflg, usedtime, topmemory >> 10,sim,sim_s_id);
 	update_user(user_id);
 	update_problem(p_id);
-	
+	if(DEBUG) write_log("result=%d",ACflg);
 	mysql_close(conn);
 	return 0;
 }

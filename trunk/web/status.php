@@ -197,7 +197,7 @@ while(	$row=mysql_fetch_object($result)){
 	$bottom=$row->solution_id;
 	if ($cnt) echo "<tr align=center class='oddrow'>";
 	else echo "<tr align=center class='evenrow'>";
-	$flag=!is_running(intval($row->contest_id)) || isset($_SESSION['administrator']) || strcmp($row->user_id,$_SESSION['user_id'])==0;
+	$flag=!is_running(intval($row->contest_id)) || isset($_SESSION['administrator']) || (isset($_SESSION['user_id'])&&strcmp($row->user_id,$_SESSION['user_id']))==0;
 	$cnt=1-$cnt;
 	echo "<td>".$row->solution_id;
 	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";

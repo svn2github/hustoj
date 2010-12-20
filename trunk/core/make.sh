@@ -14,3 +14,4 @@ cp sim_pasc /usr/bin/sim_pas
 cd ..
 cp sim.sh /usr/bin
 ln -s /usr/bin/sim_c /usr/bin/sim_cc
+ln -s /usr/bin/sim_c /usr/bin/sim_rb

@@ -944,7 +944,7 @@ void clean_workdir(char work_dir[BUFFER_SIZE]) {
 		sprintf(buf, "mv %s/* %slog/", work_dir, work_dir);
 		system(buf);
 	} else {
-		sprintf(buf, "rm %s/*", work_dir);
+		sprintf(buf, "rm -Rf %s/*", work_dir);
 	}
 	system(buf);
 }

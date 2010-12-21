@@ -1,4 +1,4 @@
-<br>
+﻿<br>
 
 <a href="./"><span class=red>HOME</span></a>
 <a href="javascript:history.go(-1)"><span class=red>Back</span></a>
@@ -7,7 +7,7 @@
 <center>
 	<p>
 	<?if(file_exists("setlang.php")){?>
-		<a href=setlang.php?lang=ko>한국어</a>&nbsp;<a href=setlang.php?lang=cn>中文</a>&nbsp;<a href=setlang.php?lang=en>English</a>
+		<a href=setlang.php?lang=ko>한국어</a>&nbsp;<a href=setlang.php?lang=cn>中文</a>&nbsp;<a href=setlang.php?lang=fa>فارسی</a>&nbsp;<a href=setlang.php?lang=en>English</a>
 	<?}?>
 		<br>
 		All Copyright Reserved 2008-2010 <a href='<?=$OJ_HOME?>'><?=$OJ_NAME?></a> TEAM<br>

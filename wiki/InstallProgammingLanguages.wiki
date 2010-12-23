@@ -1,0 +1,25 @@
+#labels Featured
+#Install More Programming Language Support other than C/CPP
+= Introduction =
+
+After standard installation C/CPP should already installed, because the core itself is using gcc/g++.
+
+HUSTOJ support more programming languages :
+  * Pascal
+  * Java
+  * Ruby
+
+= Details =
+
+  * Pascal
+{{{
+sudo apt-get install fpc
+}}}
+  * Java
+{{{
+sudo apt-get install openjdk-6-jdk
+}}}
+  * Ruby
+{{{
+sudo apt-get install ruby
+}}}

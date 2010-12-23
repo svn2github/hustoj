@@ -38,3 +38,5 @@ sudo apt-get install lubuntu-desktop
 sudo apt-get install openssh-server
 }}}
    
+
+* 手动安装参考 [[README]] *

@@ -47,7 +47,9 @@ root密码freeproblemset
 下载地址: 
 r651
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r651.iso
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r651.iso 
+
+md5:3a8566a81768189ea6674e0213e519f0
 
 http://down.newsclan.com/hustoj/hustoj.bz2.rar (change name back to bz2 to extract)
 

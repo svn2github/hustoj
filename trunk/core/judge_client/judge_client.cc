@@ -1150,7 +1150,7 @@ int main(int argc, char** argv) {
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)
 		ACflg = OJ_PE;
-	if(sim_enable&&ACflg == OJ_AC){
+	if(sim_enable&&ACflg == OJ_AC&&lang<5){//bash don't supported
 			sim=get_sim(solution_id,lang,p_id,sim_s_id);
 	}
 	clean_workdir(work_dir);

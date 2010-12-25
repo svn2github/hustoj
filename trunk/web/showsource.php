@@ -10,6 +10,7 @@
 <script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushDelphi.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushRuby.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushBash.js' type='text/javascript'></script> 
 <script language='javascript'> 
 SyntaxHighlighter.config.bloggerMode = false;
 SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';

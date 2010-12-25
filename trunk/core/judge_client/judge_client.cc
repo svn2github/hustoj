@@ -97,7 +97,7 @@ static int sim_enable = 0 ;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[5][8] = { "c", "cc", "pas", "java","rb" };
+static char lang_ext[6][8] = { "c", "cc", "pas", "java","rb","sh" };
 static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -151,6 +151,10 @@ if(DEBUG)
 	} else if (lang==4){ // Ruby
 		for (i = 0; LANG_RC[i]; i++)
 			call_counter[LANG_RV[i]] = LANG_RC[i];
+	}
+	 else if (lang==5){ // Bash
+		for (i = 0; LANG_BC[i]; i++)
+			call_counter[LANG_BV[i]] = LANG_BC[i];
 	}
 	
 }
@@ -463,6 +467,7 @@ int compile(int lang) {
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };
 	const char * CP_R[] = { "ruby", "-c",  "Main.rb",NULL };
+	const char * CP_B[] = { "chmod", "+x",  "Main.sh",NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -498,6 +503,9 @@ int compile(int lang) {
 			break;
 		case 4:
 			execvp(CP_R[0], (char * const *) CP_R);
+			break;
+		case 5:
+			execvp(CP_B[0], (char * const *) CP_B);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -582,6 +590,7 @@ void get_solution(int solution_id, char * work_dir, int & lang) {
 
 	// create the src file
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
+	if (DEBUG) printf("Main=%s",src_pth);
 	FILE *fp_src = fopen(src_pth, "w");
 	fprintf(fp_src, "%s", row[0]);
 	mysql_free_result(res);
@@ -638,9 +647,8 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
 	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
 }
-void copy_ruby_runtime(char * work_dir){
+void copy_shell_runtime(char * work_dir){
 	char cmd[BUFFER_SIZE];
-	//const char * ruby_run="/usr/bin/ruby";
 	
 	sprintf(cmd, "mkdir %s/usr", work_dir);
 	system(cmd);
@@ -650,13 +658,40 @@ void copy_ruby_runtime(char * work_dir){
 	system(cmd);
 	sprintf(cmd, "mkdir %s/bin", work_dir);
 	system(cmd);
-	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
-	system(cmd);
 	sprintf(cmd, "cp /lib/* %s/lib/", work_dir);
 	system(cmd);
 	sprintf(cmd, "cp /bin/busybox %s/bin/", work_dir);
 	system(cmd);
 	sprintf(cmd, "ln -s /bin/busybox %s/bin/sh", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/awk", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/sed", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/sort", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/join", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/wc", work_dir);
+	system(cmd);
+	
+	
+	
+}
+void copy_bash_runtime(char * work_dir){
+	char cmd[BUFFER_SIZE];
+	//const char * ruby_run="/usr/bin/ruby";
+	copy_shell_runtime(work_dir);
+	sprintf(cmd, "cp /bin/bash %s/bin/bash", work_dir);
+	system(cmd);
+	sprintf(cmd, "busybox dos2unix Main.sh", work_dir);
+	system(cmd);
+}
+void copy_ruby_runtime(char * work_dir){
+	char cmd[BUFFER_SIZE];
+	//const char * ruby_run="/usr/bin/ruby";
+	copy_shell_runtime(work_dir);
+	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
 	system(cmd);
 	sprintf(cmd, "cp /usr/bin/ruby* %s/", work_dir);
 	system(cmd);
@@ -678,7 +713,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_cur = STD_F_LIM;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-	if (lang < 3) {
+	if (lang != 3) {
 		LIM.rlim_cur = 10;
 		LIM.rlim_max = 10;
 	} else {
@@ -721,6 +756,8 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	  case 4:
 		system("/ruby Main.rb<data.in");
 	    //execl("./ruby", "Main.rb", NULL);
+	  case 5: //bash
+		system("/Main.sh<data.in");
 	}
 	//sleep(1);
 	exit(0);
@@ -837,7 +874,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		/*exitcode == 5 是正常暂停
 		 * ruby using system to run,exit 17 ok
 		 *  */
-		if ((lang==4&&exitcode==17)||exitcode == 0x05 || exitcode == 0)
+		if ((lang>=4&&exitcode==17)||exitcode == 0x05 || exitcode == 0)
 			//go on and on
 			;
 		else {
@@ -1075,7 +1112,7 @@ int main(int argc, char** argv) {
 	int usedtime = 0, topmemory = 0;
 	//create chroot for ruby
 	if(lang==4) copy_ruby_runtime(work_dir);
-	
+	if(lang==5) copy_bash_runtime(work_dir);
 	// read files and run
 	for (; ACflg == OJ_AC && (dirp = readdir(dp)) != NULL;) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not

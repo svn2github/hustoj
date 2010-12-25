@@ -66,7 +66,7 @@ $len=strlen($source);
 //echo $source;
 
 $language=intval($_POST['language']);
-if ($language>5 || $language<0) $language=0;
+if ($language>6 || $language<0) $language=0;
 $language=strval($language);
 
 setcookie('lastlang',$language,time()+360000);

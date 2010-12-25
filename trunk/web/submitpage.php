@@ -40,12 +40,13 @@ Language:
 <select id="language" name="language">
 <? 
   $langmask=$_GET['langmask'];
-  $lang=(~((int)$langmask))&31;
+  $lang=(~((int)$langmask))&63;
  $C_=($lang&1)>0;
  $CPP_=($lang&2)>0;
  $P_=($lang&4)>0;
  $J_=($lang&8)>0;
  $R_=($lang&16)>0;
+ $B_=($lang&32)>0;
  if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
  else $lastlang=1;
  
@@ -54,6 +55,7 @@ Language:
  if($P_) echo"		<option value=2 ".( $lastlang==2?"selected":"").">Pascal</option>";
  if($J_) echo"		<option value=3 ".( $lastlang==3?"selected":"").">Java</option>";
  if($R_) echo"		<option value=4 ".( $lastlang==4?"selected":"").">Ruby</option>";
+ if($B_) echo"		<option value=5 ".( $lastlang==5?"selected":"").">Bash</option>";
  
 ?>
 </select>

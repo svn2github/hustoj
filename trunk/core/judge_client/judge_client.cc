@@ -664,16 +664,7 @@ void copy_shell_runtime(char * work_dir){
 	system(cmd);
 	sprintf(cmd, "ln -s /bin/busybox %s/bin/sh", work_dir);
 	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/awk", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/sed", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/sort", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/join", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/wc", work_dir);
-	system(cmd);
+	
 	
 	
 	
@@ -686,6 +677,29 @@ void copy_bash_runtime(char * work_dir){
 	system(cmd);
 	sprintf(cmd, "busybox dos2unix Main.sh", work_dir);
 	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/awk", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/sed", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/sort", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/join", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/wc", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/tr", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/dc", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/dd", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/cat", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/tail", work_dir);
+	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/head", work_dir);
+	system(cmd);
+
 }
 void copy_ruby_runtime(char * work_dir){
 	char cmd[BUFFER_SIZE];

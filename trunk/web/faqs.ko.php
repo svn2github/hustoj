@@ -8,7 +8,7 @@
 </center>
 <hr>
 <p><font color=green>Q</font>:채점을 위해 사용되는 컴파일러와 각 컴파일러의 옵션은 어떤것입니까?<br>
-  <font color=red>A</font>:채점 시스템은 <a href="http://www.debian.org/">Debian Linux</a>에서 구동됩니다. 현재 C/C++ 코드 컴파일을 위해 <a href="http://gcc.gnu.org/">GNU GCC/G++</a>를 사용하고 있으며, pascal 코드 컴파일을 위해 <a href="http://www.freepascal.org">Free Pascal</a> 을, 그리고 Java 코드 컴파일을 위해  <a href="http://www.gnu-pascal.de">sun-java-jdk1.6</a>를 사용합니다. 컴파일을 위해서 다음과 같은 옵션을 사용합니다:<br>
+  <font color=red>A</font>:채점 시스템은 <a href="http://www.debian.org/">Debian Linux</a>에서 구동됩니다. 현재 C/C++ 코드 컴파일을 위해 <a href="http://gcc.gnu.org/">GNU GCC/G++</a>를 사용하고 있으며, pascal 코드 컴파일을 위해 <a href="http://www.freepascal.org">Free Pascal</a> 을, 그리고 Java 코드 컴파일을 위해  <a href="http://www.oracle.com/technetwork/java/index.html">sun-java-jdk1.6</a>를 사용합니다. 컴파일을 위해서 다음과 같은 옵션을 사용합니다:<br>
 </p>
 <table border="1">
   <tr>

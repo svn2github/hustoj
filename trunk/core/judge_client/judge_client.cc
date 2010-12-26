@@ -650,10 +650,7 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 void copy_shell_runtime(char * work_dir){
 	char cmd[BUFFER_SIZE];
 	
-	sprintf(cmd, "mkdir %s/usr", work_dir);
-	system(cmd);
-	sprintf(cmd, "mkdir %s/usr/lib", work_dir);
-	system(cmd);
+
 	sprintf(cmd, "mkdir %s/lib", work_dir);
 	system(cmd);
 	sprintf(cmd, "mkdir %s/bin", work_dir);
@@ -706,7 +703,11 @@ void copy_bash_runtime(char * work_dir){
 void copy_ruby_runtime(char * work_dir){
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
-	copy_bash_runtime(work_dir);
+	copy_shell_runtime(work_dir);
+	sprintf(cmd, "mkdir %s/usr", work_dir);
+	system(cmd);
+	sprintf(cmd, "mkdir %s/usr/lib", work_dir);
+	system(cmd);
 	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
 	system(cmd);
 	sprintf(cmd, "cp /usr/bin/ruby* %s/", work_dir);
@@ -772,6 +773,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	  case 4:
 		system("/ruby Main.rb<data.in");
 	    //execl("./ruby", "Main.rb", NULL);
+	    break;
 	  case 5: //bash
 		system("/Main.sh<data.in");
 	}

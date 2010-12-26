@@ -677,6 +677,8 @@ void copy_bash_runtime(char * work_dir){
 	system(cmd);
 	sprintf(cmd, "busybox dos2unix Main.sh", work_dir);
 	system(cmd);
+	sprintf(cmd, "ln -s /bin/busybox %s/bin/grep", work_dir);
+	system(cmd);
 	sprintf(cmd, "ln -s /bin/busybox %s/bin/awk", work_dir);
 	system(cmd);
 	sprintf(cmd, "ln -s /bin/busybox %s/bin/sed", work_dir);

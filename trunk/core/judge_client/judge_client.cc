@@ -876,7 +876,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		if (WIFEXITED(status))
 			break;
-		if (get_file_size("error.out")) {
+		if (lang<4&&get_file_size("error.out")) {
 			ACflg = OJ_RE;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			break;
@@ -933,6 +933,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			}
 			if (ACflg == OJ_AC)
 				switch (sig) {
+				case SIGCHLD:
 				case SIGALRM:
 				case SIGKILL:
 				case SIGXCPU:

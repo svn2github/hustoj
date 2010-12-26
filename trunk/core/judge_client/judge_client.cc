@@ -65,19 +65,19 @@
 #define OJ_CO 12
 
 /*copy from ZOJ 
-http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
-*/
+ http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
+ */
 #ifdef __i386
-	#define REG_SYSCALL orig_eax
-	#define REG_RET eax
-	#define REG_ARG0 ebx
-	#define REG_ARG1 ecx
+#define REG_SYSCALL orig_eax
+#define REG_RET eax
+#define REG_ARG0 ebx
+#define REG_ARG1 ecx
 #else
-	#define REG_SYSCALL orig_rax
-	#define REG_RET rax
-	#define REG_ARG0 rdi
-	#define REG_ARG1 rsi
-	
+#define REG_SYSCALL orig_rax
+#define REG_RET rax
+#define REG_ARG0 rdi
+#define REG_ARG1 rsi
+
 #endif
 
 static int DEBUG = 0;
@@ -92,12 +92,12 @@ static int sleep_time;
 static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
 static char java_xmx[BUFFER_SIZE];
-static int sim_enable = 0 ;
+static int sim_enable = 0;
 //static int sleep_tmp;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[6][8] = { "c", "cc", "pas", "java","rb","sh" };
+static char lang_ext[6][8] = { "c", "cc", "pas", "java", "rb", "sh" };
 static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -109,7 +109,6 @@ long get_file_size(const char * filename) {
 
 	return (long) f_stat.st_size;
 }
-
 
 void write_log(const char *fmt, ...) {
 	va_list ap;
@@ -136,27 +135,26 @@ int call_counter[512];
 void init_syscalls_limits(int lang) {
 	int i;
 	memset(call_counter, 0, sizeof(call_counter));
-if(DEBUG)
-	write_log("init_call_counter:%d",lang);		
+	if (DEBUG)
+		write_log("init_call_counter:%d", lang);
 	if (lang <= 1) { // C & C++
-		for (i = 0; LANG_CC[i]; i++){
+		for (i = 0; LANG_CC[i]; i++) {
 			call_counter[LANG_CV[i]] = LANG_CC[i];
 		}
 	} else if (lang == 2) { // Pascal
 		for (i = 0; LANG_PC[i]; i++)
 			call_counter[LANG_PV[i]] = LANG_PC[i];
-	} else if (lang==3){ // Java
+	} else if (lang == 3) { // Java
 		for (i = 0; LANG_JC[i]; i++)
 			call_counter[LANG_JV[i]] = LANG_JC[i];
-	} else if (lang==4){ // Ruby
+	} else if (lang == 4) { // Ruby
 		for (i = 0; LANG_RC[i]; i++)
 			call_counter[LANG_RV[i]] = LANG_RC[i];
-	}
-	 else if (lang==5){ // Bash
+	} else if (lang == 5) { // Bash
 		for (i = 0; LANG_BC[i]; i++)
 			call_counter[LANG_BV[i]] = LANG_BC[i];
 	}
-	
+
 }
 
 // read the configue file
@@ -193,11 +191,10 @@ void init_mysql_conf() {
 			printf("javaxmx:%s\n", java_xmx);
 		} else if (strncmp(buf, "OJ_SIM_ENABLE", 13) == 0) {
 			sscanf(buf + 14, "%d", &sim_enable);
-			printf("sim=%d\n",sim_enable);
+			printf("sim=%d\n", sim_enable);
 		}
 	}
 }
-
 
 int isInFile(const char fname[]) {
 	int l = strlen(fname);
@@ -366,7 +363,8 @@ int compare(const char *file1, const char *file2) {
 }
 
 /* write result back to database */
-void update_solution(int solution_id, int result, int time, int memory,int sim,int sim_s_id) {
+void update_solution(int solution_id, int result, int time, int memory,
+		int sim, int sim_s_id) {
 	char sql[BUFFER_SIZE];
 	sprintf(
 			sql,
@@ -376,18 +374,18 @@ void update_solution(int solution_id, int result, int time, int memory,int sim,i
 	if (mysql_real_query(conn, sql, strlen(sql))) {
 		//		printf("..update failed! %s\n",mysql_error(conn));
 	}
-	if(sim){
+	if (sim) {
 		sprintf(
-			sql,
-			"insert into sim(s_id,sim_s_id,sim) values(%d,%d,%d) on duplicate key update  sim_s_id=%d,sim=%d",
-			 solution_id,sim_s_id, sim,sim_s_id,sim);
+				sql,
+				"insert into sim(s_id,sim_s_id,sim) values(%d,%d,%d) on duplicate key update  sim_s_id=%d,sim=%d",
+				solution_id, sim_s_id, sim, sim_s_id, sim);
 		//	printf("sql= %s\n",sql);
 		if (mysql_real_query(conn, sql, strlen(sql))) {
 			//		printf("..update failed! %s\n",mysql_error(conn));
 		}
-		
+
 	}
-	
+
 }
 
 /* write compile error message back to database */
@@ -466,8 +464,8 @@ int compile(int lang) {
 			"-Ci", NULL };
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };
-	const char * CP_R[] = { "ruby", "-c",  "Main.rb",NULL };
-	const char * CP_B[] = { "chmod", "+x",  "Main.sh",NULL };
+	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
+	const char * CP_B[] = { "chmod", "+x", "Main.sh", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -482,10 +480,10 @@ int compile(int lang) {
 		LIM.rlim_max = 1024 * STD_MB;
 		LIM.rlim_cur = 1024 * STD_MB;
 		setrlimit(RLIMIT_AS, &LIM);
-		if(lang!=2){
+		if (lang != 2) {
 			freopen("ce.txt", "w", stderr);
 			freopen("/dev/null", "w", stdout);
-		}else{
+		} else {
 			freopen("ce.txt", "w", stdout);
 		}
 		switch (lang) {
@@ -590,7 +588,8 @@ void get_solution(int solution_id, char * work_dir, int & lang) {
 
 	// create the src file
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
-	if (DEBUG) printf("Main=%s",src_pth);
+	if (DEBUG)
+		printf("Main=%s", src_pth);
 	FILE *fp_src = fopen(src_pth, "w");
 	fprintf(fp_src, "%s", row[0]);
 	mysql_free_result(res);
@@ -647,9 +646,8 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
 	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
 }
-void copy_shell_runtime(char * work_dir){
+void copy_shell_runtime(char * work_dir) {
 	char cmd[BUFFER_SIZE];
-	
 
 	sprintf(cmd, "mkdir %s/lib", work_dir);
 	system(cmd);
@@ -661,12 +659,9 @@ void copy_shell_runtime(char * work_dir){
 	system(cmd);
 	sprintf(cmd, "ln -s /bin/busybox %s/bin/sh", work_dir);
 	system(cmd);
-	
-	
-	
-	
+
 }
-void copy_bash_runtime(char * work_dir){
+void copy_bash_runtime(char * work_dir) {
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
@@ -700,7 +695,7 @@ void copy_bash_runtime(char * work_dir){
 	system(cmd);
 
 }
-void copy_ruby_runtime(char * work_dir){
+void copy_ruby_runtime(char * work_dir) {
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
@@ -750,36 +745,66 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang !=3 )
+	if (lang != 3)
 		chroot(work_dir);
 
 	// now the user is "judger"
 	setuid(1536);
 	setresuid(1536, 1536, 1536);
-	switch (lang){
-	  case 0:
-	  case 1:
-	  case 2:
+	switch (lang) {
+	case 0:
+	case 1:
+	case 2:
 		execl("./Main", "./Main", NULL);
 		break;
-	  case 3:
+	case 3:
 		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
 		sprintf(java_p2, "-Xmx%dM", mem_lmt);
-		if(DEBUG)write_log("java_parameter:%s %s", java_p1, java_p2);
+		if (DEBUG)
+			write_log("java_parameter:%s %s", java_p1, java_p2);
 		execl("/usr/bin/java", "/usr/bin/java", java_p1, java_p2,
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", NULL);
 		break;
-	  case 4:
+	case 4:
 		system("/ruby Main.rb<data.in");
-	    //execl("./ruby", "Main.rb", NULL);
-	    break;
-	  case 5: //bash
+		//execl("./ruby", "Main.rb", NULL);
+		break;
+	case 5: //bash
 		system("/Main.sh<data.in");
 	}
 	//sleep(1);
 	exit(0);
 }
+int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
+		int mem_lmt) {
+	int comp_res = OJ_AC;
+	sprintf(buf, "cat %s/error.out", work_dir);
+	comp_res = system(buf);
+	sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/error.out", work_dir);
+	comp_res = system(buf);
+	if (!comp_res) {
+		printf("JVM need more Memory!");
+		ACflg = OJ_ML;
+		topmemory = mem_lmt * STD_MB;
+	}
+	sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
+	comp_res = system(buf);
+	if (!comp_res) {
+		printf("JVM need more Memory or Threads!");
+		ACflg = OJ_ML;
+		topmemory = mem_lmt * STD_MB;
+	}
+	sprintf(buf, "grep 'Could not create'  %s/error.out", work_dir);
+	comp_res = system(buf);
+	if (!comp_res) {
+		printf("jvm need more resource,tweak -Xmx Settings");
+		ACflg = OJ_RE;
+		//topmemory=0;
+	}
+	return comp_res;
+}
+
 void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 		int p_id, char * infile, char * outfile, char * userfile, int & PEflg,
 		int lang, char * work_dir, int & topmemory, int mem_lmt) {
@@ -813,32 +838,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	}
 	//jvm popup messages, if don't consider them will get miss-WrongAnswer
 	if (lang == 3 && ACflg != OJ_AC) {
-		sprintf(buf, "cat %s/error.out", work_dir);
-		comp_res = system(buf);
-		sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/error.out",
-				work_dir);
-		comp_res = system(buf);
-
-		if (!comp_res) {
-			printf("JVM need more Memory!");
-			ACflg = OJ_ML;
-			topmemory = mem_lmt * STD_MB;
-		}
-		sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
-		comp_res = system(buf);
-		if (!comp_res) {
-			printf("JVM need more Memory or Threads!");
-			ACflg = OJ_ML;
-			topmemory = mem_lmt * STD_MB;
-		}
-		sprintf(buf, "grep 'Could not create'  %s/error.out", work_dir);
-		comp_res = system(buf);
-
-		if (!comp_res) {
-			printf("jvm need more resource,tweak -Xmx Settings");
-			ACflg = OJ_RE;
-			//topmemory=0;
-		}
+		comp_res = fix_java_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
 	}
 }
 
@@ -876,7 +876,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		if (WIFEXITED(status))
 			break;
-		if (lang<4&&get_file_size("error.out")) {
+		if (lang < 4 && get_file_size("error.out")) {
 			ACflg = OJ_RE;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			break;
@@ -892,7 +892,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		/*exitcode == 5 是正常暂停
 		 * ruby using system to run,exit 17 ok
 		 *  */
-		if ((lang>=4&&exitcode==17)||exitcode == 0x05 || exitcode == 0)
+		if ((lang >= 4 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
 			//go on and on
 			;
 		else {
@@ -959,8 +959,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 		/*if(DEBUG){
-			write_log("call:%lucounter:%d",reg.REG_SYSCALL,call_counter[reg.REG_SYSCALL]);		
-		}*/
+		 write_log("call:%lucounter:%d",reg.REG_SYSCALL,call_counter[reg.REG_SYSCALL]);
+		 }*/
 		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 			write_log(
@@ -1030,28 +1030,30 @@ void init_parameters(int argc, char **& argv, int & solution_id,
 	solution_id = atoi(argv[1]);
 	runner_id = atoi(argv[2]);
 }
-int get_sim(int solution_id,int lang,int pid,int &sim_s_id){
+int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 	char src_pth[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
-	sprintf(cmd,"sim.sh %s %d",src_pth,pid);
-	if (DEBUG)printf("%s\n",cmd);	
-	
-	int sim=system(cmd);
-	if(!sim){
-		sprintf(cmd,"mkdir ../data/%d/ac/",pid);
-		system (cmd);
-		sprintf(cmd,"mv %s ../data/%d/ac/%d.%s",src_pth,pid,solution_id,lang_ext[lang]);
+	sprintf(cmd, "sim.sh %s %d", src_pth, pid);
+	if (DEBUG)
+		printf("%s\n", cmd);
+
+	int sim = system(cmd);
+	if (!sim) {
+		sprintf(cmd, "mkdir ../data/%d/ac/", pid);
 		system(cmd);
-	}else{
-		
+		sprintf(cmd, "mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
+				lang_ext[lang]);
+		system(cmd);
+	} else {
+
 		FILE * pf;
-		pf=fopen("sim","r");
-		if(pf){
-			fscanf(pf,"%d%d",&sim,&sim_s_id);
+		pf = fopen("sim", "r");
+		if (pf) {
+			fscanf(pf, "%d%d", &sim, &sim_s_id);
 			fclose(pf);
 		}
-			
+
 	}
 	return sim;
 }
@@ -1060,9 +1062,9 @@ int main(int argc, char** argv) {
 	char work_dir[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	char user_id[BUFFER_SIZE];
-	int solution_id=1000;
+	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id, time_lmt, mem_lmt, lang, isspj,sim,sim_s_id;
+	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -1100,15 +1102,16 @@ int main(int argc, char** argv) {
 	int Compile_OK;
 	Compile_OK = compile(lang);
 	if (Compile_OK != 0) {
-		update_solution(solution_id, OJ_CE, 0, 0,0,0);
+		update_solution(solution_id, OJ_CE, 0, 0, 0, 0);
 		addceinfo(solution_id);
 		update_user(user_id);
 		update_problem(p_id);
 		mysql_close(conn);
-		if(!DEBUG)system("rm *");
+		if (!DEBUG)
+			system("rm *");
 		exit(0);
 	} else {
-		update_solution(solution_id, OJ_RI, 0, 0,0,0);
+		update_solution(solution_id, OJ_RI, 0, 0, 0, 0);
 	}
 	// run
 	char fullpath[BUFFER_SIZE];
@@ -1130,14 +1133,16 @@ int main(int argc, char** argv) {
 	int namelen;
 	int usedtime = 0, topmemory = 0;
 	//create chroot for ruby
-	if(lang==4) copy_ruby_runtime(work_dir);
-	if(lang==5) copy_bash_runtime(work_dir);
+	if (lang == 4)
+		copy_ruby_runtime(work_dir);
+	if (lang == 5)
+		copy_bash_runtime(work_dir);
 	// read files and run
 	for (; ACflg == OJ_AC && (dirp = readdir(dp)) != NULL;) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-		
+
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
 		init_syscalls_limits(lang);
@@ -1155,15 +1160,17 @@ int main(int argc, char** argv) {
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)
 		ACflg = OJ_PE;
-	if(sim_enable&&ACflg == OJ_AC&&lang<5){//bash don't supported
-			sim=get_sim(solution_id,lang,p_id,sim_s_id);
+	if (sim_enable && ACflg == OJ_AC && lang < 5) {//bash don't supported
+		sim = get_sim(solution_id, lang, p_id, sim_s_id);
 	}
 	clean_workdir(work_dir);
-	
-	update_solution(solution_id, ACflg, usedtime, topmemory >> 10,sim,sim_s_id);
+
+	update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
+			sim_s_id);
 	update_user(user_id);
 	update_problem(p_id);
-	if(DEBUG) write_log("result=%d",ACflg);
+	if (DEBUG)
+		write_log("result=%d", ACflg);
 	mysql_close(conn);
 	return 0;
 }

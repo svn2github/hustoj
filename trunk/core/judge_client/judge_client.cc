@@ -706,7 +706,7 @@ void copy_bash_runtime(char * work_dir){
 void copy_ruby_runtime(char * work_dir){
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
-	copy_shell_runtime(work_dir);
+	copy_bash_runtime(work_dir);
 	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
 	system(cmd);
 	sprintf(cmd, "cp /usr/bin/ruby* %s/", work_dir);

@@ -213,7 +213,7 @@ while(	$row=mysql_fetch_object($result)){
 			}else{
 					echo $row->sim_s_id;
 			}
-			if(isset($_GET['showsim'])){
+			if(isset($_GET['showsim'])&&isset($row->old_user_id)){
 					echo "$row->old_user_id";
 				
 			}

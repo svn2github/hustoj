@@ -129,6 +129,18 @@ void write_log(const char *fmt, ...) {
 	fclose(fp);
 
 }
+int execute_cmd(const char * fmt, ...) {
+	char cmd[BUFFER_SIZE];
+
+	int ret = 0;
+	va_list ap;
+
+	va_start(ap, fmt);
+	vsprintf(cmd, fmt, ap);
+	ret = system(cmd);
+	va_end(ap);
+	return ret;
+}
 
 int call_counter[512];
 
@@ -641,72 +653,50 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 	strncpy(fname, filename, namelen);
 	fname[namelen] = 0;
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	sprintf(cmd, "cp %s %sdata.in", infile, work_dir);
-	system(cmd);
+	execute_cmd("cp %s %sdata.in", infile, work_dir);
+
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
 	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
 }
-void copy_shell_runtime(char * work_dir) {
-	char cmd[BUFFER_SIZE];
 
-	sprintf(cmd, "mkdir %s/lib", work_dir);
-	system(cmd);
-	sprintf(cmd, "mkdir %s/bin", work_dir);
-	system(cmd);
-	sprintf(cmd, "cp /lib/* %s/lib/", work_dir);
-	system(cmd);
-	sprintf(cmd, "cp /bin/busybox %s/bin/", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/sh", work_dir);
-	system(cmd);
+void copy_shell_runtime(char * work_dir) {
+
+	execute_cmd("mkdir %s/lib", work_dir);
+	execute_cmd("mkdir %s/bin", work_dir);
+	execute_cmd("cp /lib/* %s/lib/", work_dir);
+	execute_cmd("cp /bin/busybox %s/bin/", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
 
 }
 void copy_bash_runtime(char * work_dir) {
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
-	sprintf(cmd, "cp /bin/bash %s/bin/bash", work_dir);
-	system(cmd);
-	sprintf(cmd, "busybox dos2unix Main.sh", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/grep", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/awk", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/sed", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/sort", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/join", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/wc", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/tr", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/dc", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/dd", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/cat", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/tail", work_dir);
-	system(cmd);
-	sprintf(cmd, "ln -s /bin/busybox %s/bin/head", work_dir);
-	system(cmd);
+	execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
+	execute_cmd("busybox dos2unix Main.sh", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/grep", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/awk", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/sed", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/sort", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/join", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/wc", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/tr", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/dc", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/dd", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/cat", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/tail", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/head", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/xargs", work_dir);
 
 }
 void copy_ruby_runtime(char * work_dir) {
-	char cmd[BUFFER_SIZE];
-	//const char * ruby_run="/usr/bin/ruby";
+
 	copy_shell_runtime(work_dir);
-	sprintf(cmd, "mkdir %s/usr", work_dir);
-	system(cmd);
-	sprintf(cmd, "mkdir %s/usr/lib", work_dir);
-	system(cmd);
-	sprintf(cmd, "cp /usr/lib/libruby* %s/usr/lib/", work_dir);
-	system(cmd);
-	sprintf(cmd, "cp /usr/bin/ruby* %s/", work_dir);
-	system(cmd);
+	execute_cmd("mkdir %s/usr", work_dir);
+	execute_cmd("mkdir %s/usr/lib", work_dir);
+	execute_cmd("cp /usr/lib/libruby* %s/usr/lib/", work_dir);
+	execute_cmd("cp /usr/bin/ruby* %s/", work_dir);
+
 }
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
@@ -1034,17 +1024,15 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 	char src_pth[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
-	sprintf(cmd, "sim.sh %s %d", src_pth, pid);
-	if (DEBUG)
-		printf("%s\n", cmd);
 
-	int sim = system(cmd);
+
+	int sim = execute_cmd("sim.sh %s %d", src_pth, pid);
 	if (!sim) {
-		sprintf(cmd, "mkdir ../data/%d/ac/", pid);
-		system(cmd);
-		sprintf(cmd, "mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
+		execute_cmd("mkdir ../data/%d/ac/", pid);
+
+		execute_cmd("mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
 				lang_ext[lang]);
-		system(cmd);
+
 	} else {
 
 		FILE * pf;

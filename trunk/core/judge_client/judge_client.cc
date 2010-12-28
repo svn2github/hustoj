@@ -769,24 +769,26 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
 		int mem_lmt) {
 	int comp_res = OJ_AC;
-	sprintf(buf, "cat %s/error.out", work_dir);
-	comp_res = system(buf);
-	sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/error.out", work_dir);
-	comp_res = system(buf);
+	if (DEBUG)
+		execute_cmd("cat %s/error.out", work_dir);
+	comp_res = execute_cmd("grep 'java.lang.OutOfMemoryError'  %s/error.out",
+			work_dir);
+
 	if (!comp_res) {
 		printf("JVM need more Memory!");
 		ACflg = OJ_ML;
 		topmemory = mem_lmt * STD_MB;
 	}
-	sprintf(buf, "grep 'java.lang.OutOfMemoryError'  %s/user.out", work_dir);
-	comp_res = system(buf);
+	comp_res = execute_cmd("grep 'java.lang.OutOfMemoryError'  %s/user.out",
+			work_dir);
+
 	if (!comp_res) {
 		printf("JVM need more Memory or Threads!");
 		ACflg = OJ_ML;
 		topmemory = mem_lmt * STD_MB;
 	}
-	sprintf(buf, "grep 'Could not create'  %s/error.out", work_dir);
-	comp_res = system(buf);
+	comp_res = execute_cmd("grep 'Could not create'  %s/error.out", work_dir);
+
 	if (!comp_res) {
 		printf("jvm need more resource,tweak -Xmx Settings");
 		ACflg = OJ_RE;
@@ -805,9 +807,9 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	// compare
 	if (ACflg == OJ_AC) {
 		if (isspj) {
-			sprintf(buf, "%s/data/%d/spj %s %s %s", oj_home, p_id, infile,
-					outfile, userfile);
-			comp_res = system(buf);
+			comp_res = execute_cmd(buf, "%s/data/%d/spj %s %s %s", oj_home,
+					p_id, infile, outfile, userfile);
+
 			if (comp_res == 0)
 				comp_res = OJ_AC;
 			else {
@@ -987,12 +989,12 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 }
 void clean_workdir(char work_dir[BUFFER_SIZE]) {
 	if (DEBUG) {
-		sprintf(buf, "mv %s/* %slog/", work_dir, work_dir);
-		system(buf);
+		execute_cmd("mv %s/* %slog/", work_dir, work_dir);
+
 	} else {
-		sprintf(buf, "rm -Rf %s/*", work_dir);
+		execute_cmd("rm -Rf %s/*", work_dir);
 	}
-	system(buf);
+
 }
 
 void init_parameters(int argc, char **& argv, int & solution_id,
@@ -1024,7 +1026,6 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 	char src_pth[BUFFER_SIZE];
 	char cmd[BUFFER_SIZE];
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
-
 
 	int sim = execute_cmd("sim.sh %s %d", src_pth, pid);
 	if (!sim) {
@@ -1072,8 +1073,8 @@ int main(int argc, char** argv) {
 		time_lmt = time_lmt + java_time_bonus;
 		mem_lmt = mem_lmt + java_memory_bonus;
 		// copy java.policy
-		sprintf(cmd, "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
-		system(cmd);
+		execute_cmd( "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
+
 	}
 	//never bigger than judged set value;
 	if (time_lmt > 300 || time_lmt < 1)

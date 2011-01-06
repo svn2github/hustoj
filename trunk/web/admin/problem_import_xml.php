@@ -94,8 +94,8 @@ if ($_FILES ["fps"] ["error"] > 0) {
 //		$test_output = getValue ( $searchNode, 'test_output' );
 		$hint = getValue ( $searchNode, 'hint' );
 		$source = getValue ( $searchNode, 'source' );
-		$solution = getValue ( $searchNode, 'solution' );
-		$language =getAttribute( $searchNode, 'solution','language' );
+		$solutions = $searchNode->getElementsByTagName("solution");
+		
 		$spjcode = getValue ( $searchNode, 'spj' );
 		$spj = trim($spjcode)?1:0;
 	
@@ -167,8 +167,11 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			
 			}
 	    }
-	    if($solution) submitSolution($pid,$solution,$language);
+	    foreach($solutions as $solution) {
+			$language =$solution->getAttribute("language");
+			submitSolution($pid,$solution->nodeValue,$language);
 	    
+	    }
 	}
 	unlink ( $tempfile );
 }

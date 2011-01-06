@@ -20,7 +20,9 @@ function printTestCases($pid,$OJ_DATA){
 	$pdir = opendir ( "$OJ_DATA/$pid/" );
 	while ( $file = readdir ( $pdir ) ) {
 		$pinfo = pathinfo ( $file );
-		if ($pinfo ['extension'] == "in" && $pinfo ['basename'] != "sample.in") {
+		if (isset($pinfo ['extension'])
+			&&$pinfo ['extension'] == "in" 
+			&& $pinfo ['basename'] != "sample.in") {
 			$ret = basename ( $pinfo ['basename'], "." . $pinfo ['extension'] );
 			
 			$outfile="$OJ_DATA/$pid/" . $ret . ".out";

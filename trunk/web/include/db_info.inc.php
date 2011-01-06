@@ -14,6 +14,7 @@ static  $OJ_ONLINE=false;
 static  $OJ_LANG="en";
 static  $OJ_SIM=true; 
 static  $OJ_DICT=true;
+static  $OJ_LANGMASK=0; //1mC 2mCPP 4mPascal 8mJava 16mRuby 32mBash 
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
 	else die('Could not connect: ' . mysql_error());

@@ -16,7 +16,7 @@ if (isset($_POST['syear']))
 	$private=$_POST['private'];
 	
    $lang=$_POST['lang'];
-   $langmask=0;
+   $langmask=$OJ_LANGMASK;
    foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 

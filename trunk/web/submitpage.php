@@ -39,7 +39,11 @@ Problem <font color=blue><b><?=$PID[$pid]?></b></font> of Contest <font color=bl
 Language:
 <select id="language" name="language">
 <? 
-  $langmask=$_GET['langmask'];
+  if(isset($_GET['langmask']))
+	$langmask=$_GET['langmask'];
+  else
+	$langmask=$OJ_LANGMASK;
+	
   $lang=(~((int)$langmask))&63;
  $C_=($lang&1)>0;
  $CPP_=($lang&2)>0;

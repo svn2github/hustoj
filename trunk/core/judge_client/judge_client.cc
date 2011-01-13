@@ -807,7 +807,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	// compare
 	if (ACflg == OJ_AC) {
 		if (isspj) {
-			comp_res = execute_cmd(buf, "%s/data/%d/spj %s %s %s", oj_home,
+			comp_res = execute_cmd("%s/data/%d/spj %s %s %s", oj_home,
 					p_id, infile, outfile, userfile);
 
 			if (comp_res == 0)

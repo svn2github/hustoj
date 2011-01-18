@@ -54,7 +54,8 @@
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=$_POST['tid'];
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`) SELECT '".mysql_escape_string($_SESSION['user_id'])."', NOW(), '".mysql_escape_string($_POST['content'])."', '".mysql_escape_string($tid)."' FROM `topic` WHERE `tid` = '".mysql_escape_string($tid)."' AND `status` = 0 ";
+                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT '".mysql_escape_string($_SESSION['user_id'])."', NOW(), '".mysql_escape_string($_POST['content'])."', '".mysql_escape_string($tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".mysql_escape_string($tid)."' AND `status` = 0 ";
+                        
                         mysql_query($sql) or die (mysql_error());
                         if(mysql_affected_rows()>0)
                         {

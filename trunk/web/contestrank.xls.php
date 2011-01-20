@@ -5,7 +5,10 @@
 ?>
 <?
 require_once("./include/db_info.inc.php");
-
+global $mark_base,$mark_per_problem,$mark_per_punish;
+ $mark_base=60;
+ $mark_per_problem=10;
+ $mark_per_punish=1;
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 }
@@ -25,11 +28,9 @@ class TM{
 		$this->p_wa_num=array(0);
 		$this->p_ac_sec=array(0);
 	}
-	function Add($pid,$sec,$res){
+	function Add($pid,$sec,$res,$mark_base,$mark_per_problem,$mark_per_punish){
 //		echo "Add $pid $sec $res<br>";
-		$mark_base=60;
-		$mark_per_problem=10;
-		$mark_per_punish=1;
+	
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
 			return;
 		if ($res!=4) 
@@ -92,6 +93,8 @@ $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
+
+$mark_per_problem=(100-$mark_base)/$pid_cnt;
 mysql_free_result($result);
 
 $sql="SELECT 
@@ -116,7 +119,7 @@ while ($row=mysql_fetch_object($result)){
 
 		$user_name=$n_user;
 	}
-	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));
+	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result),$mark_base,$mark_per_problem,$mark_per_punish);
 }
 mysql_free_result($result);
 usort($U,"s_cmp");

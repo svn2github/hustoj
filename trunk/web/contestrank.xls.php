@@ -1,19 +1,7 @@
 <?php
-	$now = time ();
-	$cid=intval($_GET['cid']);
-	$file = "cache/contestrank$cid.html";
-	if (file_exists ( $file ))
-		$last = filemtime ( $file );
-	else
-		$last =0;
-	if ($now - $last < 10) {
-		//header ( "Location: $file" );
-		include ($file);
-		exit ();
-	} else {
-		ob_start ();
-		
-		?>
+		header ( "content-type:   application/file" );
+		header ( "content-disposition:   attachment;   filename=contest_".$_GET['cid'].".xls" );
+?>
 <?
 require_once("./include/db_info.inc.php");
 
@@ -28,7 +16,8 @@ class TM{
 	var $p_wa_num;
 	var $p_ac_sec;
 	var $user_id;
-        var $nick;
+    var $nick;
+    var $mark=0;
 	function TM(){
 		$this->solved=0;
 		$this->time=0;
@@ -37,17 +26,28 @@ class TM{
 	}
 	function Add($pid,$sec,$res){
 //		echo "Add $pid $sec $res<br>";
+		$mark_base=60;
+		$mark_per_problem=10;
+		$mark_per_punish=1;
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
 			return;
-		if ($res!=4){
+		if ($res!=4) 
 			if(isset($this->p_wa_num[$pid]))
 				$this->p_wa_num[$pid]++;
 			else
 				$this->p_wa_num[$pid]=1;
-		}else{
+		else{
 			$this->p_ac_sec[$pid]=$sec;
 			$this->solved++;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
+			if($this->mark==0){
+				$this->mark=$mark_base;
+			}else{
+				$this->mark+=$mark_per_problem;
+			}
+			if($this->p_wa_num[$pid]*$mark_per_punish<$mark_per_problem)
+					$this->mark-=$this->p_wa_num[$pid]*$mark_per_punish;
+			
 //			echo "Time:".$this->time."<br>";
 //			echo "Solved:".$this->solved."<br>";
 		}
@@ -63,7 +63,7 @@ function s_cmp($A,$B){
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
-require_once("contest-header.php");
+//require_once("contest-header.php");
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql) or die(mysql_error());
 $rows_cnt=mysql_num_rows($result);
@@ -119,13 +119,12 @@ while ($row=mysql_fetch_object($result)){
 mysql_free_result($result);
 usort($U,"s_cmp");
 $rank=1;
-echo "<style> td{font-size:14} </style>";
-echo "<title>Contest RankList -- $title</title>";
-echo "<center><h3>Contest RankList -- $title</h3><a href=contestrank.xls.php?cid=$cid>Download</a>
-     </center>";
-echo "<table><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty";
+//echo "<style> td{font-size:14} </style>";
+//echo "<title>Contest RankList -- $title</title>";
+//echo "<center><h3>Contest RankList -- $title</h3></center>";
+echo "<table><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
 for ($i=0;$i<$pid_cnt;$i++)
-	echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+	echo "<td>$PID[$i]";
 echo "</tr>";
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>";
@@ -135,10 +134,10 @@ for ($i=0;$i<$user_cnt;$i++){
 	$uuid=$U[$i]->user_id;
         
 	$usolved=$U[$i]->solved;
-	echo "<td><a href=userinfo.php?user=$uuid>$uuid</a>";
-	echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";
-	echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
-	echo "<td>".sec2str($U[$i]->time);
+	echo "<td>$uuid";
+	echo "<td>".$U[$i]->nick."";
+	echo "<td>$usolved";
+	echo "<td>".($U[$i]->mark);
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){
@@ -153,10 +152,3 @@ for ($i=0;$i<$user_cnt;$i++){
 echo "</table>";
 
 ?>
-<?require_once("oj-footer.php")?>
-<?php
-		if(!file_exists("cache")) mkdir("cache");
-		file_put_contents($file,ob_get_contents ());
-	}
-	
-	?>

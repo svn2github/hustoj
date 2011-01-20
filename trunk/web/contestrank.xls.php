@@ -1,6 +1,7 @@
 <?php
+		ob_start();
 		header ( "content-type:   application/file" );
-		header ( "content-disposition:   attachment;   filename=contest_".$_GET['cid'].".xls" );
+		
 ?>
 <?
 require_once("./include/db_info.inc.php");
@@ -72,17 +73,18 @@ if ($rows_cnt>0){
 	$row=mysql_fetch_array($result);
 	$start_time=strtotime($row[0]);
 	$title=$row[1];
+	header ( "content-disposition:   attachment;   filename=contest".$_GET['cid']."_".$title.".xls" );
 }
 mysql_free_result($result);
 if ($start_time==0){
 	echo "No Such Contest";
-	require_once("oj-footer.php");
+	//require_once("oj-footer.php");
 	exit(0);
 }
 
 if ($start_time>time()){
 	echo "Contest Not Started!";
-	require_once("oj-footer.php");
+	//require_once("oj-footer.php");
 	exit(0);
 }
 

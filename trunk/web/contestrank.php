@@ -40,10 +40,11 @@ class TM{
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
 			return;
 		if ($res!=4){
-			if(isset($this->p_wa_num[$pid]))
+			if(isset($this->p_wa_num[$pid])){
 				$this->p_wa_num[$pid]++;
-			else
+			}else{
 				$this->p_wa_num[$pid]=1;
+			}
 		}else{
 			$this->p_ac_sec[$pid]=$sec;
 			$this->solved++;
@@ -121,8 +122,7 @@ usort($U,"s_cmp");
 $rank=1;
 echo "<style> td{font-size:14} </style>";
 echo "<title>Contest RankList -- $title</title>";
-echo "<center><h3>Contest RankList -- $title</h3><a href=contestrank.xls.php?cid=$cid>Download</a>
-     </center>";
+echo "<center><h3>Contest RankList -- $title</h3><a href=contestrank.xls.php?cid=$cid>Download</a></center>";
 echo "<table><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty";
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";

@@ -46,6 +46,15 @@ root密码freeproblemset
 
 下载地址: 
 
+r719
+
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r719.iso 
+
+md5:e3d3f21cdf5e10c1ea9b8f2e462eba31
+
+
+
+
 R707:ruby/bash included
 
 http://www.tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r707.iso
@@ -53,13 +62,6 @@ http://www.tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r707.iso
 md5:7f2c87ffd1a3ce933bc834b8fb7939f3
 
 
-r651
-
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r651.iso 
-
-md5:3a8566a81768189ea6674e0213e519f0
-
-http://down.newsclan.com/hustoj/hustoj.bz2.rar (change name back to bz2 to extract)
 
 
 最低配置实测：

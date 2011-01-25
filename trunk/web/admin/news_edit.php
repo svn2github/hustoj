@@ -1,6 +1,12 @@
-<?session_start();?>
+<?
+require_once ("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Add a contest</title>
+<title>News Edit</title>
 
 <?
 require_once("../include/db_info.inc.php");

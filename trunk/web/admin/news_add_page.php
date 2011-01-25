@@ -27,7 +27,7 @@ include_once("../fckeditor/fckeditor.php") ;
 <?php
 $description = new FCKeditor('content') ;
 $description->BasePath = '../fckeditor/' ;
-$description->Height = 250 ;
+$description->Height = 450 ;
 $description->Width=800;
 
 $description->Value = '<p></p>' ;

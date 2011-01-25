@@ -1,3 +1,10 @@
+<?
+require_once ("admin-header.php");
+if (!(isset($_SESSION['administrator']))){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
+?>
 <ol>
 <li>
 Copy from http://plg1.cs.uwaterloo.ca/~acm00/

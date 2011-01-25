@@ -45,6 +45,9 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r729
+md5: 0002c862e84f5598caf99267ed8b4b9f
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r729.iso 
 
 r719
 

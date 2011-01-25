@@ -12,11 +12,13 @@
 		echo "<h3>No News Now!</h3>";
 		echo mysql_error();
 	}else{
-		echo "<table width=96%><tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a>.</font></tr>";
+		echo "<table width=96%>";
+		
 		while ($row=mysql_fetch_object($result)){
-			echo "<tr><td><td><font color=red><b>".$row->user_id."</b>:".$row->title."</font></tr>";
+			echo "<tr><td><td><font size=big><b>".$row->title."</b></font>-<font size=small>[".$row->user_id."]</font></tr>";
 			echo "<tr><td><td>".$row->content."</tr>";
 		}
+		echo "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a>.</font></tr>";
 		echo "</table>";
 	}
 ?>

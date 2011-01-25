@@ -18,8 +18,6 @@ if (!(isset($_SESSION['administrator']))){
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>
-<h1 >Add New problem</h1>
-
 <form method=POST action=news_add.php>
 
 <p align=left>Post a News</p>

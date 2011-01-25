@@ -1,9 +1,6 @@
-<?session_start();?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Add a contest</title>
-
 <?
-require_once("../include/db_info.inc.php");
+require("admin-header.php");
+
 if (isset($_POST['syear']))
 {
 	$starttime=$_POST['syear']."-".$_POST['smonth']."-".$_POST['sday']." ".$_POST['shour'].":".$_POST['sminute'].":00";

@@ -44,7 +44,7 @@ $user_id=mysql_real_escape_string($user_id);
 	$row=mysql_fetch_assoc($result);
 	
 	$title=htmlspecialchars($row['title']);
-	$content=$row['title'];
+	$content=$row['content'];
 	mysql_free_result($result);
 		
 }

@@ -11,6 +11,10 @@
 if (isset($_SESSION['administrator'])){
 	?>
 	<li>
+		<a href="news_add_page.php" target="main"><b>AddNews</b></a>
+	<li>
+		<a href="news_list.php" target="main"><b>NewsList</b></a>
+	<li>
 		<a href="problem_add_page.php" target="main"><b>NewProblem</b></a>
 <?
 }

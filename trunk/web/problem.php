@@ -115,13 +115,9 @@ if (mysql_num_rows($result)!=1){
 	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
 	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
 	echo "<h2>$MSG_Sample_Input</h2>
-			<div class=content>
-				<pre>".htmlspecialchars($row->sample_input)."</pre>
-			</div>";
+			<div class=content><span class=sampledata>".($row->sample_input)."</span></div>";
 	echo "<h2>$MSG_Sample_Output</h2>
-			<div class=content>
-				<pre>".htmlspecialchars($row->sample_output)."</pre>
-			</div>";
+			<div class=content><span class=sampledata>".($row->sample_output)."</span></div>";
 	if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";

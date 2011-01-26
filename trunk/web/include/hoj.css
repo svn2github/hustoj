@@ -54,10 +54,15 @@ color:gray;
 
 div.content {
 	height: auto;
-	background: url(../image/content.png);
+	background:#e4f0f8;
 	margin: 0;
 	padding: 0 20px;
 	font-size: 14px;
 	font-family: Times New Roman;
 	text-align: left
+}
+.sampledata{
+    white-space:pre;
+    background:#8db8ff;
+    font-size: 18px;
 }

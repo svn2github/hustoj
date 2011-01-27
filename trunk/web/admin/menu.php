@@ -39,6 +39,8 @@ if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 if (isset($_SESSION['administrator'])){
 ?>
 <li>
+	<a href="team_generate.php" target="main"><b>TeamGenerator</b></a>
+<li>
 	<a href="setmsg.php" target="main"><b>SetMessage</b></a>
 <?
 }

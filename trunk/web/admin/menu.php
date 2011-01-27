@@ -15,7 +15,7 @@ if (isset($_SESSION['administrator'])){
 	<li>
 		<a href="news_list.php" target="main"><b>NewsList</b></a>
 	<li>
-		<a href="problem_add_page.php" target="main"><b>NewProblem</b></a>
+		<a href="problem_add_page.php" target="main"><b>AddProblem</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
@@ -27,7 +27,7 @@ if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 ?>		
 <li>
-	<a href="contest_add.php" target="main"><b>NewContest</b></a>
+	<a href="contest_add.php" target="main"><b>AddContest</b></a>
 <?
 }
 if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){

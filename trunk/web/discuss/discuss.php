@@ -33,7 +33,7 @@ if ($pid!=null && $pid!=0) echo " >> <a href=\"discuss.php?pid=".$pid."&cid=".$c
 
 <div style="float:right;font-size:80%;color:red;font-weight:bold">
 <? if ($pid!=null && $pid!=0 && ($cid=='' || $cid==null)){?>
-<a href="problem.php?id=<?echo $pid?>">See the problem</a>
+<a href="../problem.php?id=<?echo $pid?>">See the problem</a>
 <?}?>
 </div>
 <?}

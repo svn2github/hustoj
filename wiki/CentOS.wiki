@@ -1,3 +1,4 @@
+#labels Featured,Phase-Deploy,Phase-Support
 #CentOS用户须知
 
 尽管我们强烈推荐使用Debian/Ubuntu，但是由于驱动或资源的原因，有的用户不得不使用CentOS/RE/Federa。
@@ -16,3 +17,4 @@
  * 编译时mysql库的位置在/usr/lib/mysql
    因此需要手工修改judged和judge_client中两个makefile 
    将  -L/usr/local/mysql/lib/mysql 改为  -L/usr/lib/mysql
+       -I/usr/local/mysql/include/mysql 改为 -I/usr/include/mysql

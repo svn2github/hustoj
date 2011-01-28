@@ -64,7 +64,7 @@
 #define OJ_CE 11
 #define OJ_CO 12
 
-/*copy from ZOJ 
+/*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
 #ifdef __i386
@@ -1151,7 +1151,9 @@ int main(int argc, char** argv) {
 		ACflg = OJ_PE;
 	if (sim_enable && ACflg == OJ_AC && lang < 5) {//bash don't supported
 		sim = get_sim(solution_id, lang, p_id, sim_s_id);
-	}
+	}else{
+	    sim = 0;
+    }
 	clean_workdir(work_dir);
 
 	update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,

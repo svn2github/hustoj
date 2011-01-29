@@ -761,6 +761,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		//execl("./ruby", "Main.rb", NULL);
 		break;
 	case 5: //bash
+        system("chmod +x /Main.sh");
 		system("/Main.sh<data.in");
 	}
 	//sleep(1);

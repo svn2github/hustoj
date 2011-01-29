@@ -606,6 +606,8 @@ void get_solution(int solution_id, char * work_dir, int & lang) {
 	fprintf(fp_src, "%s", row[0]);
 	mysql_free_result(res);
 	fclose(fp_src);
+	if (lang==5)
+        system("chmod +x Main.sh");
 }
 void get_solution_info(int solution_id, int & p_id, char * user_id, int & lang) {
 	MYSQL_RES *res;
@@ -761,7 +763,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		//execl("./ruby", "Main.rb", NULL);
 		break;
 	case 5: //bash
-        system("chmod +x /Main.sh");
+
 		system("/Main.sh<data.in");
 	}
 	//sleep(1);

@@ -606,8 +606,6 @@ void get_solution(int solution_id, char * work_dir, int & lang) {
 	fprintf(fp_src, "%s", row[0]);
 	mysql_free_result(res);
 	fclose(fp_src);
-	if (lang==5)
-        system("chmod +x Main.sh");
 }
 void get_solution_info(int solution_id, int & p_id, char * user_id, int & lang) {
 	MYSQL_RES *res;
@@ -689,6 +687,7 @@ void copy_bash_runtime(char * work_dir) {
 	execute_cmd("ln -s /bin/busybox %s/bin/tail", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/head", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/xargs", work_dir);
+    execute_cmd("chmod +rx %s/Main.sh", work_dir);
 
 }
 void copy_ruby_runtime(char * work_dir) {

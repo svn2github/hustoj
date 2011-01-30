@@ -477,7 +477,7 @@ int compile(int lang) {
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
-	const char * CP_B[] = { "chmod", "+x", "Main.sh", NULL };
+	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;

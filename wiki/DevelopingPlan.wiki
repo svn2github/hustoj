@@ -8,12 +8,15 @@
 = Details =
 
 未完成
- # 比赛计分规则
- # 比赛帐号导入导出
+
+
 
 
 
 已完成
+
+ # 比赛帐号批量生成
+ # 比赛计分规则导出为Excel
  # 代码抄袭识别 借助SIM
  # judge_client.cc main重构、移植ZOJcompare、兼容\r\n DOS-style data
  # 题目提交饼图

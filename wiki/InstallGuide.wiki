@@ -31,6 +31,11 @@ sudo apt-get install lubuntu-desktop
 }}}
      提示lxdm配置时先确定，然后选择gdm.
      安装完成sudo reboot重启，即可看到新的图形登录界面。
+   # 如果图形界面无法登陆，或用于专用服务器，平时不使用图形界面，建议删除图形登录界面。
+{{{
+sudo apt-get remove gdm lxdm
+}}}
+这样系统启动后不会启动图形界面，有效节约系统资源，如果偶尔需要使用图形化界面，可在登录后使用startx命令。
    # 修改judge和root账号口令，以及mysql账号口令,修改judge.conf和db_info.inc.php。
    # 修改系统管理员admin密码
    # 如需远程控制，请安装sshd,命令

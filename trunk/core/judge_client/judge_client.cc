@@ -780,7 +780,6 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 5: //bash
 		system("/Main.sh<data.in");
 		break;
-	}
 	case 6: //Python
 		system("/python Main.py<data.in");
 		break;

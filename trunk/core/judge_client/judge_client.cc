@@ -97,7 +97,7 @@ static int sim_enable = 0;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[6][8] = { "c", "cc", "pas", "java", "rb", "sh" };
+static char lang_ext[7][8] = { "c", "cc", "pas", "java", "rb", "sh", "py" };
 static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {

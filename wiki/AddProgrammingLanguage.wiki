@@ -59,4 +59,5 @@ judge_client 2028 0 /home/judge debug
  * web/submitpage.php, add Python select option, r765
  * web/showsource.php, add Python high lighten , r766
  * web/conteststatistics.php, add Python statistic , r767
- * 
+ * web/admin/contest_add.php, add Python langmask option,r769
+ * web/admin/contest_edit.php, add Python langmask edit option,r770

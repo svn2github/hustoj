@@ -36,6 +36,8 @@ int LANG_RC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 int LANG_BV[256]={SYS_access,SYS_brk,SYS_close,SYS_dup2,SYS_execve,SYS_exit_group,SYS_fcntl64,SYS_fstat64,SYS_getegid32,SYS_geteuid32,SYS_getgid32,SYS_getpgrp,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_gettimeofday,SYS_getuid32,SYS_ioctl,SYS__llseek,SYS_mmap2,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_thread_area,SYS_stat64,SYS_time,SYS_uname,SYS_write};
 int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
+int LANG_YV[256]={SYS_access,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fcntl64,SYS_fstat64,SYS_futex,SYS_getcwd,SYS_getdents64,SYS_getegid32,SYS_geteuid32,SYS_getgid32,SYS_getrlimit,SYS_getuid32,SYS_ioctl,SYS__llseek,SYS_lstat64,SYS_mmap2,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_readlink,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_thread_area,SYS_set_tid_address,SYS_stat64,SYS_uname,SYS_write};
+int LANG_YC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 #else
 
   
@@ -47,11 +49,13 @@ int LANG_CC[256]={-1,       -1,        -1,        -1,       -1,        -1,      
 
 int LANG_PV[256]={SYS_open, SYS_set_thread_area, SYS_brk, SYS_read, SYS_uname, SYS_write, SYS_execve, SYS_ioctl, SYS_readlink, SYS_mmap, SYS_rt_sigaction, SYS_getrlimit, 252,191,158,231,0};
 int LANG_PC[256]={-1,       -1,                  -1,      -1,       -1,        -1,        1,          -1,        -1,           -1,       -1,               -1,            2,-1,-1,-1,0};
-//disable Ruby on 64bits , so it compile and work with others, at least.
+//disable Ruby Bash Python on 64bits , so it compile and work with others, at least.
 int LANG_RV[256]={0};
 int LANG_RC[256]={0};
 
 int LANG_BV[256]={0};
 int LANG_BC[256]={0};
 
+int LANG_YV[256]={0};
+int LANG_YC[256]={0};
 #endif

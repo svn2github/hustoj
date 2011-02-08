@@ -36,3 +36,10 @@ int LANG_YC[256]={0};
 }}}
 
  * edit judge_client.cc
+   * lang_ext add new ext for lang , "py" for python,r749
+   * init_syscalls_limits add new route for python,r750
+   * compile or chmod for python, r751
+   * add void copy_python_runtime(char * work_dir),if there is a vm or runtime libs needed to copy into chroot dir. use "whereis python" to locate the files,r752
+   * add python run command in run_solution(),r753
+ 
+   

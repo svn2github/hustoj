@@ -1,0 +1,61 @@
+#labels Featured,Phase-Implementation
+#how to add programming language to hustoj.
+
+= Introduction =
+
+Python for example
+
+
+= Details =
+  
+ # write A+B problem solution in this language.
+{{{
+#!/usr/bin/python
+a=input()
+b=input()
+print a+b
+}}}
+
+ #strace to check minimal syscalls
+{{{
+strace python Main.py 2>&1|awk -F\( '{print $1}'|sort -u
+}}}
+output like:
+{{{
+access
+brk
+close
+execve
+exit_group
+fcntl64
+fstat64
+futex
+getcwd
+getdents64
+getegid32
+geteuid32
+getgid32
+getrlimit
+getuid32
+ioctl
+_llseek
+lstat64
+mmap2
+mprotect
+munmap
+open
+read
+readlink
+rt_sigaction
+rt_sigprocmask
+set_robust_list
+set_thread_area
+set_tid_address
+stat64
+uname
+write
+}}}
+ # add new arrays in to okcalls.h
+{{{
+
+}}}

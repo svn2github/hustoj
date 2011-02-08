@@ -16,7 +16,7 @@ b=input()
 print a+b
 }}}
 
- * strace to check minimal syscalls
+ * strace to check minimal syscalls,if you want 32-bits do it under 32-bits ,if you want a 64-bits do it under 64-bits too.
 {{{
 strace python Main.py 2>&1|awk -F\( '{print $1}'|sort -u
 }}}
@@ -34,3 +34,4 @@ int LANG_YC[256]={-1,-1,......,0};
 int LANG_YV[256]={};
 int LANG_YC[256]={0};
 }}}
+ * edit judge_client.cc

@@ -706,6 +706,15 @@ void copy_ruby_runtime(char * work_dir) {
 	execute_cmd("cp /usr/bin/ruby* %s/", work_dir);
 
 }
+void copy_python_runtime(char * work_dir) {
+
+	copy_shell_runtime(work_dir);
+	execute_cmd("mkdir %s/usr", work_dir);
+	execute_cmd("mkdir %s/usr/lib", work_dir);
+	execute_cmd("cp /usr/bin/python* %s/", work_dir);
+
+}
+
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];

@@ -732,7 +732,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_cur = STD_F_LIM;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-	if (lang < 3) { //java ruby bash need more threads/processes
+	if (lang < 3) { //java ruby bash python need more threads/processes
 		LIM.rlim_cur = 10;
 		LIM.rlim_max = 10;
 	} else {
@@ -780,6 +780,10 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 5: //bash
 
 		system("/Main.sh<data.in");
+	}
+	case 6: //Python
+
+		system("/python Main.py<data.in");
 	}
 	//sleep(1);
 	exit(0);

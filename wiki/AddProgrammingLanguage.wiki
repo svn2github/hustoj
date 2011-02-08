@@ -53,3 +53,10 @@ update solution set language=6,result=0 where solution_id=2028;
 judge_client 2028 0 /home/judge debug
 }}}
  * if you finally get AC on the A+B problem showed OtherLanguage, continue for web.
+
+ * web/include/const.inc.php add "Python" before "Other Language",r764
+
+ * web/submitpage.php, add Python select option, r765
+ * web/showsource.php, add Python high lighten , r766
+ * web/conteststatistics.php, add Python statistic , r767
+ * 

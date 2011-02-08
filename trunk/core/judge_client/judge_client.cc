@@ -481,6 +481,7 @@ int compile(int lang) {
 			NULL };
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
 	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
+	const char * CP_Y[] = { "chmod", "+rx", "Main.py", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -519,6 +520,9 @@ int compile(int lang) {
 			break;
 		case 5:
 			execvp(CP_B[0], (char * const *) CP_B);
+			break;
+		case 6:
+			execvp(CP_Y[0], (char * const *) CP_Y);
 			break;
 		default:
 			printf("nothing to do!\n");

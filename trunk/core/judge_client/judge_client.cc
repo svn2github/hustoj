@@ -165,6 +165,9 @@ void init_syscalls_limits(int lang) {
 	} else if (lang == 5) { // Bash
 		for (i = 0; LANG_BC[i]; i++)
 			call_counter[LANG_BV[i]] = LANG_BC[i];
+	}else if (lang == 6) { // Python
+		for (i = 0; LANG_YC[i]; i++)
+			call_counter[LANG_YV[i]] = LANG_YC[i];
 	}
 
 }

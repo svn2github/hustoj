@@ -41,5 +41,11 @@ int LANG_YC[256]={0};
    * compile or chmod for python, r751
    * add void copy_python_runtime(char * work_dir),if there is a vm or runtime libs needed to copy into chroot dir. use "whereis python" to locate the files,r752
    * add python run command in run_solution(),r753-r756
- 
+ * recompile core using make.sh
+ * add a new problem to test new language
+ * submit the solution with an exist language
+ * modify database to set language=6 and rejudge
+{{{
+update solution set language=6,result=0 where solution_id=2028;
+}}}
    

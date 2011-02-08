@@ -1147,6 +1147,9 @@ int main(int argc, char** argv) {
 		copy_ruby_runtime(work_dir);
 	if (lang == 5)
 		copy_bash_runtime(work_dir);
+	if (lang == 6)
+		copy_python_runtime(work_dir);
+		
 	// read files and run
 	for (; ACflg == OJ_AC && (dirp = readdir(dp)) != NULL;) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not

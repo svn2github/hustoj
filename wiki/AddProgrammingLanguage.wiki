@@ -26,7 +26,7 @@ access
 ......
 write
 }}}
- * copy the calls names to add new arrays in to okcalls.h,remember to add twice for both 32-bits and 64-bits
+ * copy the calls names to add new arrays in to okcalls.h,remember to add twice for both 32-bits and 64-bits, like r747
 {{{
 int LANG_YV[256]={SYS_access,SYS_write.....};
 int LANG_YC[256]={-1,-1,......,0};
@@ -34,4 +34,5 @@ int LANG_YC[256]={-1,-1,......,0};
 int LANG_YV[256]={};
 int LANG_YC[256]={0};
 }}}
+
  * edit judge_client.cc

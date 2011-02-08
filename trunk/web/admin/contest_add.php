@@ -20,7 +20,7 @@ if (isset($_POST['syear']))
    foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 
-	$langmask=63&(~$langmask);
+	$langmask=127&(~$langmask);
 	//echo $langmask;	
 	
 	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`)
@@ -114,6 +114,7 @@ else if(isset($_POST['problem2contest'])){
 		<option value=3 selected>Java</option>	
 		<option value=4 selected>Ruby</option>	
 		<option value=5 selected>Bash</option>	
+		<option value=6 selected>Python</option>	
 	</select>
 	<br>Problems:<input type=text size=60 name=cproblem value="<?=isset($plist)?$plist:""?>">
 	<br>

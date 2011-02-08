@@ -52,7 +52,7 @@ update solution set language=6,result=0 where solution_id=2028;
 {{{
 judge_client 2028 0 /home/judge debug
 }}}
- * if you finally get AC on the A+B problem showed OtherLanguage, continue for web.
+ * if you finally get AC on the A+B problem showed "Other Language", continue for web.
 
  * web/include/const.inc.php add "Python" before "Other Language",r764
 

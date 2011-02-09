@@ -1,4 +1,4 @@
-#labels Featured
+#labels Featured,Phase-Support
 #Install More Programming Language Support other than C/CPP
 = Introduction =
 
@@ -8,6 +8,8 @@ HUSTOJ support more programming languages :
   * Pascal
   * Java
   * Ruby
+  * Bash
+  * Python
 
 = Details =
 
@@ -22,4 +24,8 @@ sudo apt-get install openjdk-6-jdk
   * Ruby
 {{{
 sudo apt-get install ruby
+}}}
+  * Python
+{{{
+sudo apt-get install python
 }}}

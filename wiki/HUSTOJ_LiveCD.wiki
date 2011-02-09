@@ -45,13 +45,18 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
+r774 Python xdm
+
+md5:03106b1caa6eb7fac273ce85bfaf9f94
+
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r729.iso
+
 r729
 md5: 0002c862e84f5598caf99267ed8b4b9f
 http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r729.iso 
 
 r719
-
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r719.iso 
+md5:e3d3f21cdf5e10c1ea9b8f2e462eba31
 
 [http://5990.1a1a.info/hustoj-root-freeproblemset-r719.jpg backupURL]rename to .iso
 
@@ -59,7 +64,7 @@ http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r719.iso
 http://u.115.com/file/f6c1bc660a#
 hustoj-root-freeproblemset-r719.iso
 
-md5:e3d3f21cdf5e10c1ea9b8f2e462eba31
+
 
 
 

@@ -9,7 +9,8 @@ function checkIsChinese(str){
 	         return   false;  
 }
 function checksource(src){
-      
+        if (document.getElementById("language").value>"3")
+            return true;
 		var keys=new Array();
 		var errs=new Array();
 		var msg="";

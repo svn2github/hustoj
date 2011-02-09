@@ -23,7 +23,11 @@ else{
 <script src="include/checksource.js">
 
 </script>
-<form action="submit.php" method="post"  onsubmit="return checksource(document.getElementById('source').value);">
+<form action="submit.php" method="post" 
+<?if($OJ_LANG=="cn"){?>
+ onsubmit="return checksource(document.getElementById('source').value);"
+<?}?> 
+ >
 <?if (isset($id)){?>
 Problem <font color=blue><b><?=$id?></b></font><br>
 <input type='hidden' value='<?=$id?>' name="id">

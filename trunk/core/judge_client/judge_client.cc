@@ -529,10 +529,7 @@ int compile(int lang) {
 		}
 		if (DEBUG)
 			printf("compile end!\n");
-		fflush(stderr);
-		fflush(stdout);
-		fcloseall();
-		exit(system("cat ce.txt"));
+		exit(!system("cat ce.txt"));
 		//exit(0);
 	} else {
 		int status=0;

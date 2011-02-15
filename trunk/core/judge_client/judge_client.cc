@@ -104,7 +104,7 @@ long get_file_size(const char * filename) {
 	struct stat f_stat;
 
 	if (stat(filename, &f_stat) == -1) {
-		return -1;
+		return 0;
 	}
 
 	return (long) f_stat.st_size;
@@ -481,7 +481,7 @@ int compile(int lang) {
 			NULL };
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
 	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
-	const char * CP_Y[] = { "python","-c","import py_compile,sys; py_compile.compile(r'Main.py',1)", NULL };
+	const char * CP_Y[] = { "python","-c","import py_compile; py_compile.compile(r'Main.py')", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -498,7 +498,7 @@ int compile(int lang) {
 		setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2) {
 			freopen("ce.txt", "w", stderr);
-			freopen("/dev/null", "w", stdout);
+			//freopen("/dev/null", "w", stdout);
 		} else {
 			freopen("ce.txt", "w", stdout);
 		}
@@ -529,10 +529,17 @@ int compile(int lang) {
 		}
 		if (DEBUG)
 			printf("compile end!\n");
-		return 0;
+		fflush(stderr);
+		fflush(stdout);
+		fcloseall();
+		exit(system("cat ce.txt"));
+		//exit(0);
 	} else {
-		int status;
+		int status=0;
+		
 		waitpid(pid, &status, 0);
+		if(lang>3)
+			status=get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
 		return status;
@@ -1119,10 +1126,13 @@ int main(int argc, char** argv) {
 		mysql_close(conn);
 		if (!DEBUG)
 			system("rm *");
+		else
+			write_log("compile error");
 		exit(0);
 	} else {
 		update_solution(solution_id, OJ_RI, 0, 0, 0, 0);
 	}
+	//exit(0);
 	// run
 	char fullpath[BUFFER_SIZE];
 	char infile[BUFFER_SIZE];
@@ -1142,7 +1152,7 @@ int main(int argc, char** argv) {
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
-	//create chroot for ruby
+	//create chroot for ruby bash python
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
 	if (lang == 5)

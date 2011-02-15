@@ -481,7 +481,7 @@ int compile(int lang) {
 			NULL };
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
 	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
-	const char * CP_Y[] = { "chmod", "+rx", "Main.py", NULL };
+	const char * CP_Y[] = { "python","-c","import py_compile,sys; py_compile.compile(r'Main.py',1)", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;

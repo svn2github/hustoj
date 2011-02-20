@@ -49,7 +49,9 @@ r774 Python xdm
 
 md5:03106b1caa6eb7fac273ce85bfaf9f94
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r729.iso
+http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r774.iso
+
+http://www.newsclan.com/hustoj/hustoj-root-freeproblemset-r774.iso   5G/month limited
 
 r729
 md5: 0002c862e84f5598caf99267ed8b4b9f

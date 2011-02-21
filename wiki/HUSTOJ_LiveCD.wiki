@@ -64,21 +64,6 @@ md5:e3d3f21cdf5e10c1ea9b8f2e462eba31
 [http://5990.1a1a.info/hustoj-root-freeproblemset-r719.jpg backupURL]rename to .iso
 
 
-http://u.115.com/file/f6c1bc660a#
-hustoj-root-freeproblemset-r719.iso
-
-
-
-
-
-
-R707:ruby/bash included
-
-http://www.tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r707.iso
-
-md5:7f2c87ffd1a3ce933bc834b8fb7939f3
-
-
 
 
 最低配置实测：

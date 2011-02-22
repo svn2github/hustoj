@@ -71,7 +71,7 @@ if (isset($_GET['user_id'])){
 if (isset($_GET['language'])) $language=intval($_GET['language']);
 else $language=-1;
 
-if ($language>5 || $language<0) $language=-1;
+if ($language>6 || $language<0) $language=-1;
 if ($language!=-1){
 	$sql=$sql."AND `language`='".strval($language)."' ";
 	$str2=$str2."&language=".$language;

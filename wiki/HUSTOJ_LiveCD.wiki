@@ -16,7 +16,7 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 [http://v.youku.com/v_show/id_XMTk5NTAyOTgw.html]
 
 = Details =
-本光盘是一张LiveCD，即无需安装、无需硬盘，只需要有光驱、内存大于256的x86-32bit系统即可以光盘启动方式运行。*启动时看到“人形=键盘”提示，按下人任意键进入菜单选试用*，进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含1道题目，更多题目在/fps,也可以在线下载。局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。ubuntu用户有sudo权限。
+本光盘是一张LiveCD，即无需安装、无需硬盘，只需要有光驱、内存大于256的x86-32bit系统即可以光盘启动方式运行。*启动时看到“键盘=人形”提示，按下人任意键进入菜单选试用*，进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含1道题目，更多题目在/fps,也可以在线下载。局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。ubuntu用户有sudo权限。
 
 
   * 基于Ubuntu10.04 LTS Desktop

@@ -34,6 +34,22 @@ static int DEBUG=0;
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 #define STD_MB 1048576
+
+#define OJ_WT0 0
+#define OJ_WT1 1
+#define OJ_CI 2
+#define OJ_RI 3
+#define OJ_AC 4
+#define OJ_PE 5
+#define OJ_WA 6
+#define OJ_TL 7
+#define OJ_ML 8
+#define OJ_OL 9
+#define OJ_RE 10
+#define OJ_CE 11
+#define OJ_CO 12
+
+
 static char host_name[bufsize];
 static char user_name[bufsize];
 static char password [bufsize];
@@ -45,6 +61,8 @@ static int sleep_time;
 static int sleep_tmp;
 static int oj_tot;
 static int oj_mod;
+
+
 
 static MYSQL *conn;
 static MYSQL_RES *res;
@@ -116,13 +134,20 @@ void init_mysql_conf(){
 	sleep_tmp=sleep_time;
 }
 
-void updatedb(int solution_id,int result,int time,int memory){
+bool updatedb(int solution_id,int result){
 	char sql[bufsize];
-	sprintf(sql,"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1"
-			,result,time,memory,solution_id);
+	sprintf(sql,"UPDATE solution SET result=%d,time=0,memory=0,judgetime=NOW() WHERE solution_id=%d and result<2 LIMIT 1"
+			,result,solution_id);
 	if (mysql_real_query(conn,sql,strlen(sql))){
 		syslog(LOG_ERR | LOG_DAEMON, "%s",mysql_error(conn));
+		return false;
+	}else{
+		if(mysql_affected_rows(conn)>0ul)
+			return true;
+		else
+			return false;
 	}
+	
 }
 
 void run_client(int runid,int clientid){
@@ -214,15 +239,15 @@ int work(){
 			for (i=0;i<max_running;i++)	// find the client id
 				if (ID[i]==0) break;	// got the client id
 		}
-		updatedb(atoi(row[0]),2,0,0);
-		ID[i]=fork();					// start to fork
-		if (ID[i]==0){
-		    if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
-			run_client(runid,i);	// if the process is the son, run it
-
-			exit(0);
+		if(updatedb(atoi(row[0]),OJ_CI)){
+			ID[i]=fork();					// start to fork
+			if (ID[i]==0){
+				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
+				run_client(runid,i);	// if the process is the son, run it
+				exit(0);
+			}
+			retcnt++;
 		}
-		retcnt++;
 	}
 	if (retcnt==0){
 		while (workcnt>0){

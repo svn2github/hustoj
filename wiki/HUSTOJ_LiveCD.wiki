@@ -36,7 +36,7 @@ user root's password is freeproblemset
 
 OJ管理员admin初始密码为admin. administrator of OJ is admin, password admin.
 
-在终端中运行sudo ubiquity可启动图形化安装界面，将LiveCD安装至硬盘系统，适合不了解Linux的用户进行HUSTOJ的初次安装。请参考[InstallGuide]
+*启动时不按任何键*或在终端中运行sudo ubiquity可启动图形化安装界面，将LiveCD安装至硬盘系统，适合不了解Linux的用户进行HUSTOJ的初次安装。请参考[InstallGuide]
 
 管理员可以导入/fps下的FPS格式的xml文件。
 

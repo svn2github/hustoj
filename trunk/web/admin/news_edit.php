@@ -25,7 +25,7 @@ $content=mysql_real_escape_string($content);
 $user_id=mysql_real_escape_string($user_id);
 
 	$sql="UPDATE `news` set `title`='$title',`time`=now(),`content`='$content',user_id='$user_id' WHERE `news_id`=$news_id";
-	echo $sql;
+	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	
 	

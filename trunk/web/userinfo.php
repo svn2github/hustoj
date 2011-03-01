@@ -15,7 +15,8 @@ if (!is_valid_user_name($user)){
 	echo "No such User!";
 	exit(0);
 }
-$sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`='$user'";
+$user_mysql=mysql_real_escape_string($user);
+$sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`='$user_mysql'";
 $result=mysql_query($sql);
 $row_cnt=mysql_num_rows($result);
 if ($row_cnt==0){ 
@@ -29,19 +30,19 @@ $email=$row->email;
 $nick=$row->nick;
 mysql_free_result($result);
 // count solved
-$sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`='".$_GET['user']."' AND `result`=4";
+$sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`='".$user_mysql."' AND `result`=4";
 $result=mysql_query($sql) or die(mysql_error());
 $row=mysql_fetch_object($result);
 $AC=$row->ac;
 mysql_free_result($result);
 // count submission
-$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$_GET['user']."'";
+$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$user_mysql."'";
 $result=mysql_query($sql) or die(mysql_error());
 $row=mysql_fetch_object($result);
 $Submit=$row->Submit;
 mysql_free_result($result);
 // update solved 
-$sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`='".$user."'";
+$sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`='".$user_mysql."'";
 $result=mysql_query($sql);
 $sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>$AC";
 $result=mysql_query($sql);
@@ -57,7 +58,7 @@ $Rank=intval($row[0])+1;
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
 <?
-$sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user' AND `result`=4 ORDER BY `problem_id` ASC";	
+$sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";	
 if (!($result=mysql_query($sql))) echo mysql_error();
 while ($row=mysql_fetch_array($result))
 	echo "p($row[0]);";
@@ -67,7 +68,7 @@ mysql_free_result($result);
 </tr>
 <tr bgcolor=#D7EBFF><td><?=$MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
 <?php 
-	$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user'  AND result>=4 group by result order by result";
+	$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND result>=4 group by result order by result";
 	$result=mysql_query($sql);
 	while($row=mysql_fetch_array($result)){
 		
@@ -108,7 +109,7 @@ echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='posit
 </table>
 <?
 if (isset($_SESSION['administrator'])){
-$sql="SELECT * FROM `loginlog` WHERE `user_id`='$user' order by `time` desc LIMIT 0,10";
+$sql="SELECT * FROM `loginlog` WHERE `user_id`='$user_mysql' order by `time` desc LIMIT 0,10";
 $result=mysql_query($sql) or die(mysql_error());
 echo "<table border=1>";
 echo "<tr align=center><td>UserID<td>Password<td>IP<td>Time</tr>";

@@ -4,6 +4,8 @@
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
+
+
 ?>
 
 <?
@@ -114,10 +116,19 @@ if (mysql_num_rows($result)!=1){
 	echo "<h2>$MSG_Description</h2><div class=content>".$row->description."</div>";
 	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
 	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
+	
+	$ie6s="";
+	$ie6e="";
+	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0'))
+	{
+		$ie6s="<pre>";
+		$ie6e="</pre>";
+	}
+	
 	echo "<h2>$MSG_Sample_Input</h2>
-			<div class=content><span class=sampledata><pre>".($row->sample_input)."</pre></span></div>";
+			<div class=content><span class=sampledata>".$ie6s.($row->sample_input).$ie6e."</span></div>";
 	echo "<h2>$MSG_Sample_Output</h2>
-			<div class=content><span class=sampledata><pre>".($row->sample_output)."</pre></span></div>";
+			<div class=content><span class=sampledata>".$ie6s.($row->sample_output).$ie6e."</span></div>";
 	if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";

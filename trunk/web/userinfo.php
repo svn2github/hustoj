@@ -3,6 +3,7 @@
 if(isset($OJ_LANG))
 		require_once("./lang/$OJ_LANG.php");
 require_once("./include/const.inc.php");
+require_once("./include/my_func.inc.php");
 ?>
 
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
@@ -10,10 +11,14 @@ require_once("./include/const.inc.php");
 <?
 // check user
 $user=$_GET['user'];
+if (!is_valid_user_name($user)){
+	echo "No such User!";
+	exit(0);
+}
 $sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`='$user'";
 $result=mysql_query($sql);
 $row_cnt=mysql_num_rows($result);
-if ($row_cnt==0){
+if ($row_cnt==0){ 
 	echo "No such User!";
 	exit(0);
 }

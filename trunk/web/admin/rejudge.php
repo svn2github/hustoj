@@ -12,7 +12,7 @@ if(isset($_POST['do'])){
 		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=".$rjpid.")";
 		mysql_query($sql) or die(mysql_error());
 		$url="../status.php?problem_id=".$rjpid;
-		echo "Rejudged Problem ".$_POST['rjpid'];
+		echo "Rejudged Problem ".$rjpid;
 		echo "<script>location.href='$url';</script>";
 	}
 	else if (isset($_POST['rjsid'])){

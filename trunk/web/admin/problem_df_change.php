@@ -5,7 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 }
 ?>
 <?
-$id=$_GET['id'];
+$id=intval($_GET['id']);
 $sql="SELECT `defunct` FROM `problem` WHERE `problem_id`=$id";
 $result=mysql_query($sql);
 $row=mysql_fetch_row($result);

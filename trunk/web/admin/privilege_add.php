@@ -5,7 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 	exit(1);
 }
 if(isset($_POST['do'])){
-	$user_id=addslashes($_POST['user_id']);
+	$user_id=mysql_real_escape_string($_POST['user_id']);
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values('$user_id','$rightstr','N')";
 	mysql_query($sql);

@@ -9,15 +9,21 @@ if (isset($_POST['syear']))
 	require_once("../include/db_info.inc.php");
 	$starttime=$_POST['syear']."-".$_POST['smonth']."-".$_POST['sday']." ".$_POST['shour'].":".$_POST['sminute'].":00";
 	$endtime=$_POST['eyear']."-".$_POST['emonth']."-".$_POST['eday']." ".$_POST['ehour'].":".$_POST['eminute'].":00";
-//	echo $starttime;
-//	echo $endtime;
+	//	echo $starttime;
+	//	echo $endtime;
+
+	$title=mysql_real_escape_string($_POST['title']);
+	$private=mysql_real_escape_string($_POST['private']);
+	if (get_magic_quotes_gpc ()){
+		$title = stripslashes ($title);
+		$private = stripslashes ($private);
+	}
+	$title=mysql_real_escape_string($title);
+	$private=mysql_real_escape_string($private);
 	
-	$title=$_POST['title'];
-	$private=$_POST['private'];
-	
-   $lang=$_POST['lang'];
-   $langmask=$OJ_LANGMASK;
-   foreach($lang as $t){
+    $lang=$_POST['lang'];
+    $langmask=$OJ_LANGMASK;
+    foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 
 	$langmask=127&(~$langmask);
@@ -42,7 +48,6 @@ if (isset($_POST['syear']))
 		mysql_query($sql_1) or die(mysql_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
 		mysql_query($sql) or die(mysql_error());
-	
 	}
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
 	mysql_query($sql);
@@ -55,10 +60,8 @@ if (isset($_POST['syear']))
 		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
 	}
-		
 }
 else{
-   
    if(isset($_GET['cid'])){
 		   $cid=$_GET['cid'];
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
@@ -85,9 +88,8 @@ else if(isset($_POST['problem2contest'])){
 			else
 				$plist=$i;
 	   }
-	
-	}  
-   
+}  
+  
 ?>
 	
 	<form method=POST action='<?=$_SERVER['PHP_SELF']?>'>

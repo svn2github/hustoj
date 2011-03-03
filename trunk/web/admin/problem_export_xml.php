@@ -138,7 +138,7 @@ if (! isset ( $_SESSION ['administrator'] )) {
 
 if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
-   	$in=addslashes ( $_POST ['in'] );
+   	$in=mysql_real_escape_string ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
    	  $filename="-$in";
    }else if (isset($_GET['cid'])){

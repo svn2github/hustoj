@@ -8,8 +8,8 @@ if (isset($_POST['syear']))
 //	echo $starttime;
 //	echo $endtime;
 	
-	$title=$_POST['title'];
-	$private=$_POST['private'];
+	$title=mysql_real_escape_string($_POST['title']);
+	$private=mysql_real_escape_string($_POST['private']);
 	
    $lang=$_POST['lang'];
    $langmask=0;
@@ -19,7 +19,7 @@ if (isset($_POST['syear']))
 	$langmask=127&(~$langmask);
 	echo $langmask;	
 
-	$cid=$_POST['cid'];
+	$cid=intval($_POST['cid']);
 	
 	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
 	echo $sql;

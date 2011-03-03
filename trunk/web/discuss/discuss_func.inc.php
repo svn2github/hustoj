@@ -10,7 +10,7 @@ function problem_exist($pid,$cid){
 		if($cid!='NULL')
 			$sql="SELECT 1 FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".mysql_escape_string($pid)."'";
 		else
-			$sql="SELECT 1 FROM `problem` WHERE `problem_id` = '".mysql_escape_string($pid)."'";
+			$sql="SELECT 1 FROM `problem` WHERE `problem_id` = ".intval($pid)."";
 	else if($cid!='NULL')
 		$sql="SELECT 1 FROM `contest` WHERE `contest_id` = $cid";
 	else

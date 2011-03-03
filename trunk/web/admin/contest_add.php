@@ -3,12 +3,12 @@
 <title>Add a contest</title>
 
 <?
-  
+
 if (isset($_POST['syear']))
 {
 	require_once("../include/db_info.inc.php");
-	$starttime=$_POST['syear']."-".$_POST['smonth']."-".$_POST['sday']." ".$_POST['shour'].":".$_POST['sminute'].":00";
-	$endtime=$_POST['eyear']."-".$_POST['emonth']."-".$_POST['eday']." ".$_POST['ehour'].":".$_POST['eminute'].":00";
+	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
+	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 	//	echo $starttime;
 	//	echo $endtime;
 
@@ -105,8 +105,8 @@ else if(isset($_POST['problem2contest'])){
 	Year:<input type=text name=eyear value=<?=date('Y')?> size=7 >
 	Month:<input type=text name=emonth value=<?=date('m')?> size=7 >
 	
-	Day:<input type=text name=eday size=7 value=<?=date('d')?>>&nbsp;
-	Hour:<input type=text name=ehour size=7 value=<?=date('H')+4?>>&nbsp;
+	Day:<input type=text name=eday size=7 value=<?=date('d')+(date('H')+4>23?1:0)?>>&nbsp;
+	Hour:<input type=text name=ehour size=7 value=<?=(date('H')+4)%24?>>&nbsp;
 	Minute:<input type=text name=eminute value=00 size=7 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>

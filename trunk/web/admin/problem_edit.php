@@ -24,7 +24,7 @@ include_once("../fckeditor/fckeditor.php") ;
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
 <?
-$sql="SELECT * FROM `problem` WHERE `problem_id`=".$_GET['id'];
+$sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
 $result=mysql_query($sql);
 $row=mysql_fetch_object($result);
 ?>

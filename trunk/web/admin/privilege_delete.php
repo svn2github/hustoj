@@ -6,7 +6,7 @@ if (!(isset($_SESSION['administrator']))){
 }
 if(isset($_GET['uid'])){
 	$user_id=mysql_real_escape_string($_GET['uid']);
-	$rightstr =$_GET['rightstr'];
+	$rightstr =mysql_real_escape_string($_GET['rightstr']);
 	$sql="delete from `privilege` where user_id='$user_id' and rightstr='$rightstr'";
 	mysql_query($sql);
 	if (mysql_affected_rows()==1) echo "$user_id $rightstr deleted!";

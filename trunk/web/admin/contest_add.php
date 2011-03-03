@@ -63,7 +63,7 @@ if (isset($_POST['syear']))
 }
 else{
    if(isset($_GET['cid'])){
-		   $cid=$_GET['cid'];
+		   $cid=intval($_GET['cid']);
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
 		   $result=mysql_query($sql) or die(mysql_error());
 		   $row=mysql_fetch_object($result);

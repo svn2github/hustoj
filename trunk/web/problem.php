@@ -26,8 +26,8 @@ if (isset($_GET['id'])){
 	$pr_flag=true;
 }else if (isset($_GET['cid']) && isset($_GET['pid'])){
 	// contest
-	$cid=$_GET['cid'];
-	$pid=$_GET['pid'];
+	$cid=intval($_GET['cid']);
+	$pid=intval($_GET['pid']);
 
 	if (!isset($_SESSION['administrator']))
 		$sql="SELECT langmask FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<NOW()";
@@ -67,7 +67,7 @@ if (isset($_GET['id'])){
 $result=mysql_query($sql) or die(mysql_error());
 if (mysql_num_rows($result)!=1){
    if(isset($_GET['id'])){
-      $id=$_GET['id'];
+      $id=intval($_GET['id']);
 	   mysql_free_result($result);
 	   $sql="SELECT  contest.`contest_id` , contest.`title`,contest_problem.num FROM `contest_problem`,`contest` WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=$id and defunct='N'  ORDER BY `num`";
 	   //echo $sql;

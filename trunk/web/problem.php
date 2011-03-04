@@ -119,7 +119,7 @@ if (mysql_num_rows($result)!=1){
 	
 	$ie6s="";
 	$ie6e="";
-	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0'))
+	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
 	{
 		$ie6s="<pre>";
 		$ie6e="</pre>";

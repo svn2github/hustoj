@@ -91,7 +91,7 @@ if (mysql_num_rows($result)!=1){
 	$row=mysql_fetch_object($result);
 	if ($pr_flag){
 		echo "<title>$MSG_PROBLEM $row->problem_id. -- $row->title</title>";
-		echo "<center><h2>$row->title</h2>";
+		echo "<center><h2>$id: $row->title</h2>";
 	}else{
 		$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		echo "<title>$MSG_PROBLEM $PID[$pid]: $row->title </title>";

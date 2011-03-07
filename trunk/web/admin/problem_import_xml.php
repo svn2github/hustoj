@@ -125,7 +125,11 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			if(!in_array($src,$did)){
 					$base64=getValue($img,"base64");
 					$ext=pathinfo($src);
-					$ext=$ext['extension'];
+					$ext=strtolower($ext['extension']);
+					if(!stristr(",jpeg,jpg,png,gif,bmp",$ext)){
+						$ext="bad";
+						exit(1);
+					}
 					$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
 					image_save_file($newpath,$base64);
 					$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;

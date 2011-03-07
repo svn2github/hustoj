@@ -4,7 +4,13 @@ if (!(isset($_SESSION['administrator']))){
 	exit(1);
 }?>
 <?
-if(isset($_POST['do'])){
+if(isset($_POST['prefix'])){
+	$prefix=$_POST['prefix'];
+	require_once("../include/my_func.inc.php");
+	if (!is_valid_user_name($prefix)){
+		echo "Prefix is not valid.";
+		exit(0);
+	}
 	$teamnumber=intval($_POST['teamnumber']);
 	if ($teamnumber>0){
 		echo "<table border=1>";
@@ -12,8 +18,8 @@ if(isset($_POST['do'])){
 		echo "<tr><td>login_id</td><td>password</td></tr>";
 		for($i=1;$i<=$teamnumber;$i++){
 			
-			$user_id="team".$i;
-			$password=substr(MD5($user_id.rand(0,9999999)),0,10);
+			$user_id=$prefix.$i;
+			$password=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));
 			echo "<tr><td>$user_id</td><td>$password</td></tr>";
 			
 			$password=MD5($password);
@@ -33,8 +39,8 @@ if(isset($_POST['do'])){
 <b>TeamGenerator:</b>
 	
 	<form action='team_generate.php' method=post>
+	    Prefix:<input type='test' name='prefix' value='team'>
 		Generate<input type=input name='teamnumber' value=50>Teams.
-		<input type='hidden' name='do' value='do'>
 		<input type=submit value=Generate>
 	</form>
 

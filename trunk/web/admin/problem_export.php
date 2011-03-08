@@ -13,6 +13,7 @@ if (!(isset($_SESSION['administrator']))){
 	<input type='hidden' name='do' value='do'>
 	<input type=submit name=submit value='Export'>
    <input type=submit value='Download'>
+   <?require_once("../include/set_post_key.php");?>
 </form>
 * from-to will working will empty IN <br>
 * if using IN,from-to will not working.<br>

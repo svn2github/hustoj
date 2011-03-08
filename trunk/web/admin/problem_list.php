@@ -1,5 +1,6 @@
 <?
 require("admin-header.php");
+require_once("../include/set_get_key.php");
 if (!(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -19,8 +20,8 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
 	echo "<td>".$row->in_date;
 	if(isset($_SESSION['administrator'])){
-		echo "<td><a href=problem_df_change.php?id=$row->problem_id>".($row->defunct=="N"?"Delete":"Resume")."</a>";
-		echo "<td><a href=problem_edit.php?id=$row->problem_id>Edit</a>";
+		echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">".($row->defunct=="N"?"Delete":"Resume")."</a>";
+		echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
 		//echo "<td><input type=submit name='problem2contest' value='ToNewContest'>";
 	}
 	echo "</tr>";

@@ -30,6 +30,7 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 	<b>Import Problem:</b><br />
 	
 	<input type=file name=fps >
+	<?require_once("../include/set_post_key.php");?>
     <input type=submit value='Import'>
 </form>
 <?php 

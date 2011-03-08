@@ -7,6 +7,7 @@
 <center>
 <?require_once("../include/db_info.inc.php");?>
 <?require_once("admin-header.php");
+
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -19,7 +20,11 @@ include_once("../fckeditor/fckeditor.php") ;
 <td width="100"></td>
 </center>
 <hr>
-<?if(isset($_GET['id'])):?>
+<?
+
+if(isset($_GET['id'])){
+	require_once("../include/check_post_key.php");
+?>
 <h1>Edit problem</h1>
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
@@ -97,12 +102,13 @@ N<input type=radio name=spj value='0' <?=$row->spj=="0"?"checked":""?>>
 Y<input type=radio name=spj value='1' <?=$row->spj=="1"?"checked":""?>></p>
 <p>Source:<br><textarea name=source rows=1 cols=70><?=htmlspecialchars($row->source)?></textarea></p>
 <div align=center>
+<?require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
 <?require_once("../oj-footer.php");?>
-<?else:
-
+<?}else{
+require_once("../include/check_post_key.php");
 $id=$_POST['problem_id'];
 $title=$_POST['title'];
 $time_limit=$_POST['time_limit'];
@@ -168,7 +174,8 @@ echo "Edit OK!";
 
 		
 echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
-endif?>
+}
+?>
 </body>
 </html>
 

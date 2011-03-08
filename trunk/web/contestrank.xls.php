@@ -1,6 +1,6 @@
 <?php
 		ob_start();
-		header ( "content-type:   application/file" );
+		header ( "content-type:   application/excel" );
 		
 ?>
 <?
@@ -74,7 +74,10 @@ if ($rows_cnt>0){
 	$row=mysql_fetch_array($result);
 	$start_time=strtotime($row[0]);
 	$title=$row[1];
-	header ( "content-disposition:   attachment;   filename=contest".$_GET['cid']."_".$title.".xls" );
+	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')){
+		$title=iconv("utf8","gbk",$title);
+	}
+	header ( "content-disposition:   attachment;   filename=contest".$cid."_".$title.".xls" );
 }
 mysql_free_result($result);
 if ($start_time==0){

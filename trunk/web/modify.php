@@ -1,5 +1,10 @@
 <?
+
 require_once("./include/db_info.inc.php");
+
+if ($_SESSION['postkey']!=$_POST['postkey'])
+	exit(1);
+
 $err_str="";
 $err_cnt=0;
 $len;

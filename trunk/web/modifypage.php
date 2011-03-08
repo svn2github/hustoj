@@ -17,6 +17,8 @@ $row=mysql_fetch_object($result);
 		<tr><td colspan=2 height=40 width=500>&nbsp;&nbsp;&nbsp;Update Information</tr>
 		<tr><td width=25%>User ID:
 			<td width=75%><?=$_SESSION['user_id']?>
+			<? $_SESSION['postkey']=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));?>
+			<input type=hidden name="postkey" value="<?=$_SESSION['postkey']?>">
 		</tr>
 		<tr><td>Nick Name:
 			<td><input name="nick" size=50 type=text value="<?=htmlspecialchars($row->nick)?>" >

@@ -51,14 +51,14 @@ if (strlen($_POST['npassword'])==0)
 	$password=MD5($_POST['opassword']);
 else 
 	$password=MD5($_POST['npassword']);
-$nick=$nick;
-$school=$school;
-$email=$email;
+$nick=mysql_real_escape_string(htmlspecialchars ($nick));
+$school=mysql_real_escape_string(htmlspecialchars ($school));
+$email=mysql_real_escape_string(htmlspecialchars ($email));
 $sql="UPDATE `users` SET"
-."`password`='".mysql_real_escape_string($password)."',"
-."`nick`='".mysql_real_escape_string($nick)."',"
-."`school`='".mysql_real_escape_string($school)."',"
-."`email`='".mysql_real_escape_string($email)."' "
+."`password`='".($password)."',"
+."`nick`='".($nick)."',"
+."`school`='".($school)."',"
+."`email`='".($email)."' "
 ."WHERE `user_id`='".mysql_real_escape_string($user_id)."'"
 ;
 //echo $sql;

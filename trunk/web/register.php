@@ -62,9 +62,9 @@ if ($rows_cnt == 1){
 	print "history.go(-1);\n</script>";
 	exit(0);
 }
-$nick=$nick;
-$school=$school;
-$email=$email;
+$nick=mysql_real_escape_string(htmlspecialchars ($nick));
+$school=mysql_real_escape_string(htmlspecialchars ($school));
+$email=mysql_real_escape_string(htmlspecialchars ($email));
 $ip=$_SERVER['REMOTE_ADDR'];
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"

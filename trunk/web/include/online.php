@@ -72,10 +72,10 @@ class online{
 	function __construct()
 	{
 		$this->ip = mysql_real_escape_string($_SERVER['REMOTE_ADDR']);
-		$this->ua = mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']);
+		$this->ua = mysql_real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 		$this->uri = mysql_real_escape_string($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
-			$this->refer = mysql_real_escape_string($_SERVER['HTTP_REFERER']);
+			$this->refer = mysql_real_escape_string(htmlspecialchars($_SERVER['HTTP_REFERER']));
 	    }
 		$this->hash = mysql_real_escape_string(session_id());
 		//$this->db = new mysqli(DBHOST, DBUSER, DBPASSWORD, )

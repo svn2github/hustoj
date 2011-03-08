@@ -47,17 +47,19 @@ if ($err_cnt>0){
 	exit(0);
 	
 }
-if (strlen($_POST['npassword'])==0) $password=MD5($_POST['opassword']);
-else $password=MD5($_POST['npassword']);
+if (strlen($_POST['npassword'])==0) 
+	$password=MD5($_POST['opassword']);
+else 
+	$password=MD5($_POST['npassword']);
 $nick=$nick;
 $school=$school;
 $email=$email;
 $sql="UPDATE `users` SET"
-."`password`='".$password."',"
-."`nick`='".$nick."',"
-."`school`='".$school."',"
-."`email`='".$email."' "
-."WHERE `user_id`='".$user_id."'"
+."`password`='".mysql_real_escape_string($password)."',"
+."`nick`='".mysql_real_escape_string($nick)."',"
+."`school`='".mysql_real_escape_string($school)."',"
+."`email`='".mysql_real_escape_string($email)."' "
+."WHERE `user_id`='".mysql_real_escape_string($user_id)."'"
 ;
 //echo $sql;
 //exit(0);

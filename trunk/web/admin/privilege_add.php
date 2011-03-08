@@ -5,6 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 	exit(1);
 }
 if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
 	$user_id=mysql_real_escape_string($_POST['user_id']);
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values('$user_id','$rightstr','N')";
@@ -14,6 +15,7 @@ if(isset($_POST['do'])){
 }
 ?>
 <form method=post>
+<?require("../include/set_post_key.php");?>
 	<b>Add privilege for User:</b><br />
 	User:<input type=text size=10 name="user_id"><br />
 	Privilege:
@@ -37,4 +39,5 @@ while(list($key, $val)=each($rightarray)) {
 	Contest:<input type=text size=10 name="rightstr">c1000 for Contest1000<br />
 	<input type='hidden' name='do' value='do'>
 	<input type=submit value='Add'>
+	<input type=hidden name="postkey" value="<?=$_SESSION['postkey']?>">
 </form>

@@ -1,5 +1,6 @@
 <?
 require("admin-header.php");
+require_once("../include/set_get_key.php");
 if (!isset($_SESSION['administrator'])){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -17,7 +18,7 @@ for (;$row=mysql_fetch_object($result);){
 	//echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";
 	echo "<td><a href='news_edit.php?$row->news_id</a>'>".$row->title."</a>";
 	echo "<td>".$row->time;
-	echo "<td><a href=news_df_change.php?id=$row->news_id>".($row->defunct=="N"?"Delete":"Resume")."</a>";
+	echo "<td><a href=news_df_change.php?id=$row->news_id&getkey=".$_SESSION['getkey'].">".($row->defunct=="N"?"Delete":"Resume")."</a>";
 		echo "<td><a href=news_edit.php?id=$row->news_id>Edit</a>";
 	
 	echo "</tr>";

@@ -1,5 +1,6 @@
 <?
 require_once ("admin-header.php");
+
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -12,6 +13,7 @@ if (!(isset($_SESSION['administrator']))){
 require_once("../include/db_info.inc.php");
 if (isset($_POST['news_id']))
 {
+	require_once("../include/check_post_key.php");
 $title = $_POST ['title'];
 $content = $_POST ['content'];
 $user_id=$_SESSION['user_id'];
@@ -67,7 +69,7 @@ $description->Value = $content ;
 $description->Create() ;
 ?>
 </p>
-
+<?require_once("../include/set_post_key.php");?>
 </form>
 <?require_once("../oj-footer.php");?>
 

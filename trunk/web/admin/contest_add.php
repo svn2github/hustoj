@@ -6,7 +6,9 @@
 
 if (isset($_POST['syear']))
 {
+	
 	require_once("../include/db_info.inc.php");
+	require_once("../include/check_post_key.php");
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 	//	echo $starttime;
@@ -118,6 +120,7 @@ else if(isset($_POST['problem2contest'])){
 		<option value=5 selected>Bash</option>	
 		<option value=6 selected>Python</option>	
 	</select>
+	<?require_once("../include/set_post_key.php");?>
 	<br>Problems:<input type=text size=60 name=cproblem value="<?=isset($plist)?$plist:""?>">
 	<br>
 	Users:<textarea name="ulist" rows="10" cols="20"></textarea>

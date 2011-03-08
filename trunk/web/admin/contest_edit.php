@@ -3,6 +3,7 @@ require("admin-header.php");
 
 if (isset($_POST['syear']))
 {
+	require_once("../include/check_post_key.php");
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 //	echo $starttime;
@@ -93,6 +94,7 @@ if (isset($_POST['syear']))
 ?>
 
 <form method=POST action='<?=$_SERVER['PHP_SELF']?>'>
+<?require_once("../include/set_post_key.php");?>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
 <input type=hidden name='cid' value=<?=$cid?>>
 <p align=left>Title:<input type=text name=title size=71 value='<?=$title?>'></p>

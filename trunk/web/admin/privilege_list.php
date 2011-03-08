@@ -1,6 +1,7 @@
 <?
 
 require("admin-header.php");
+require_once("../include/set_get_key.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -18,7 +19,7 @@ for (;$row=mysql_fetch_object($result);){
 //	echo "<td>".$row->start_time;
 //	echo "<td>".$row->end_time;
 //	echo "<td><a href=contest_pr_change.php?cid=$row->contest_id>".($row->private=="0"?"Public->Private":"Private->Public")."</a>";
-	echo "<td><a href=privilege_delete.php?uid=$row->user_id&rightstr=$row->rightstr>Delete</a>";
+	echo "<td><a href=privilege_delete.php?uid=$row->user_id&rightstr=$row->rightstr&getkey=".$_SESSION['getkey'].">Delete</a>";
 //	echo "<td><a href=contest_edit.php?cid=$row->contest_id>Edit</a>";
 //	echo "<td><a href=contest_add.php?cid=$row->contest_id>Copy</a>";
 	echo "</tr>";

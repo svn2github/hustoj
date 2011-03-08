@@ -34,7 +34,7 @@ $description->Value = '<p></p>' ;
 $description->Create() ;
 ?>
 </p>
-
+<?require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>

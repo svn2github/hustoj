@@ -129,8 +129,8 @@ usort($U,"s_cmp");
 $rank=1;
 //echo "<style> td{font-size:14} </style>";
 //echo "<title>Contest RankList -- $title</title>";
-//echo "<center><h3>Contest RankList -- $title</h3></center>";
-echo "<table><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
+echo "<center><h3>Contest RankList -- $title</h3></center>";
+echo "<table border=1><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td>$PID[$i]";
 echo "</tr>";

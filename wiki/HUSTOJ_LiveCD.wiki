@@ -48,13 +48,13 @@ root密码freeproblemset
 r808
 md5sum:175cb54cc7d563caa34447ad1853e9d2
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r808.iso
 
 r784
 
 md5sum:a8514adcd91ce834678a1d5014c6897c
 
-http://tongzhuanye.com/hustoj/hustoj-root-freeproblemset-r784.iso
+http://u.115.com/file/f6beb4a37a#
+hustoj-root-freeproblemset-r784.iso
 
 
 

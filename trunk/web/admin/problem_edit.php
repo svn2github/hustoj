@@ -23,7 +23,7 @@ include_once("../fckeditor/fckeditor.php") ;
 <?
 
 if(isset($_GET['id'])){
-	require_once("../include/check_post_key.php");
+	require_once("../include/check_get_key.php");
 ?>
 <h1>Edit problem</h1>
 <form method=POST action=problem_edit.php>

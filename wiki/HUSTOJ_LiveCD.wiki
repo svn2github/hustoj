@@ -45,8 +45,10 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
-r808
-md5sum:175cb54cc7d563caa34447ad1853e9d2
+r824
+md5sum:9062677006ff8d29411281fc6763fea4 
+
+
 
 
 r784

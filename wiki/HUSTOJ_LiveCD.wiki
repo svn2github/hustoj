@@ -48,7 +48,8 @@ root密码freeproblemset
 r824
 md5sum:9062677006ff8d29411281fc6763fea4 
 
-
+http://u.115.com/file/f6bf98a2a3#
+hustoj-root-freeproblemset-r824.iso
 
 
 r784

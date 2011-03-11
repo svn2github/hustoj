@@ -51,7 +51,8 @@ root密码freeproblemset
 r831
 md5sum:b9cf78544007a1e785bd7c6f72c8d88e
 
-
+http://u.115.com/file/f6dae80b4d#
+hustoj-root-freeproblemset-r831.iso
 
 r824
 md5sum:9062677006ff8d29411281fc6763fea4 

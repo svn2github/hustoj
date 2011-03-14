@@ -12,11 +12,11 @@ $result=mysql_query($sql);
 echo mysql_error();
 $row=mysql_fetch_object($result);
 $cnt=intval($row->upid)-1000;
-$cnt=intval($cnt/$page_cnt);
+$cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
 if (isset($_GET['page'])){
 	$page=intval($_GET['page']);
 }else $page=$cnt;
-$pstart=1000+$page_cnt*intval($page);
+$pstart=1000+$page_cnt*intval($page-1);
 $pend=$pstart+$page_cnt;
 
 echo "<title>Problem List</title>";

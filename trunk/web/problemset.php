@@ -43,8 +43,13 @@ while ($row=mysql_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
 
-if (!isset($_SESSION['administrator'])){
-	$sql0="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
+if (isset($_SESSION['administrator'])){
+	
+	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE ";
+	
+}
+else{
+	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
 	"WHERE `defunct`='N' AND `problem_id` NOT IN(
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
@@ -52,19 +57,16 @@ if (!isset($_SESSION['administrator'])){
 			
 		)
 	) AND";
-	$sql=$sql0."  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
-}
-else{
-	$sql0="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE ";
-	$sql=$sql0." `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
+
 }
 if(isset($_GET['search'])){
 	$search=mysql_real_escape_string($_GET['search']);
-    $sql=$sql0." ( title like '%$search%'";
-    $sql=$sql." or source like '%$search%')";
+    $sql.=" ( title like '%$search%' or source like '%$search%')";
     
+}else{
+	$sql.="  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
-$sql=$sql." ORDER BY `problem_id`";
+$sql.=" ORDER BY `problem_id`";
 ?>
 <title>Problem Set</title>
 

@@ -1,10 +1,12 @@
 <?require("admin-header.php");
+
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }?>
 <?
 if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$rjpid;
@@ -33,9 +35,11 @@ if(isset($_POST['do'])){
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjpid'>	<input type='hidden' name='do' value='do'>
 		<input type=submit value=submit>
+		<?require_once("../include/set_post_key.php");?>
 	</form>
 	<li>Solution
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjsid'>	<input type='hidden' name='do' value='do'>
+		<input type=hidden name="postkey" value="<?=$_SESSION['postkey']?>">
 		<input type=submit value=submit>
 	</form>

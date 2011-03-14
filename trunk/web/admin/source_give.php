@@ -5,6 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 }?>
 <?
 if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
 	$from=intval($_POST['from']);
 	$to=intval($_POST['to']);
 	$start=intval($_POST['start']);
@@ -23,5 +24,7 @@ if(isset($_POST['do'])){
 	start pid:<input type=text size=10 name="start"><br />
 	end pid:<input type=text size=10 name="end"><br />
 	<input type='hidden' name='do' value='do'>
+	
+	<?require_once("../include/set_post_key.php");?>
 	<input type=submit value='GiveMySourceToHim'>
 </form>

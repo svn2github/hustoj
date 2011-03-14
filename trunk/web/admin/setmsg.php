@@ -5,6 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 	exit(1);
 }
 if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
 	$fp=fopen("msg.txt","w");
 	fputs($fp, stripslashes($_POST['msg']));
 	fclose($fp);
@@ -20,6 +21,7 @@ $msg=file_get_contents("msg.txt");
 		<textarea name='msg' rows=25 cols=60><?=$msg?></textarea><br>
 		<input type='hidden' name='do' value='do'>
 		<input type='submit' value='change'>
+		<?require_once("../include/set_post_key.php");?>
 	</form>
 	
 <?

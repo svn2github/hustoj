@@ -5,6 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 }?>
 <?
 if(isset($_POST['prefix'])){
+	require_once("../include/check_post_key.php");
 	$prefix=$_POST['prefix'];
 	require_once("../include/my_func.inc.php");
 	if (!is_valid_user_name($prefix)){
@@ -42,6 +43,7 @@ if(isset($_POST['prefix'])){
 	    Prefix:<input type='test' name='prefix' value='team'>
 		Generate<input type=input name='teamnumber' value=50>Teams.
 		<input type=submit value=Generate>
+		<?require_once("../include/set_post_key.php");?>
 	</form>
 
 

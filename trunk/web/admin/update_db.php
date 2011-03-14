@@ -1,4 +1,5 @@
 <?require("admin-header.php");
+
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -54,6 +55,7 @@ CREATE TABLE `sim` (
 
 
 if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
 		if(!mysql_query($tsql[$i])){
@@ -68,6 +70,7 @@ if(isset($_POST['do'])){
 	Create New Tables ,drop useless columes.
 	<b>Necessary for using plagiarism detection.</b>
 	<form action='update_db.php' method=post>
+		<?require_once("../include/set_post_key.php");?>
 		<input type='hidden' name='do' value='do'>
 		<input type=submit value=Update>
 	</form>

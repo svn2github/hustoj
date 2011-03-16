@@ -234,7 +234,9 @@ while(	$row=mysql_fetch_object($result)){
 	if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
 		echo "<td>".$language_name[$row->language];
 	}else{
-		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";
+		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>/";
+		echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
+		
 	}
 	echo "<td>".$row->code_length." B";
 	

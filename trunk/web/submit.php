@@ -73,7 +73,7 @@ setcookie('lastlang',$language,time()+360000);
 
 $ip=$_SERVER['REMOTE_ADDR'];
 
-if ($len<20){
+if ($len<2){
 	require_once("oj-header.php");
 	echo "Source Code Too Short!";
 	require_once("oj-footer.php");

@@ -145,6 +145,9 @@ for ($i=0;$i<$user_cnt;$i++){
         
 	$usolved=$U[$i]->solved;
 	echo "<td>$uuid";
+	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')){
+		$U[$i]->nick=iconv("utf8","gbk",$U[$i]->nick);
+	}
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
 	echo "<td>".($U[$i]->mark);

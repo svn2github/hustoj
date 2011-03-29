@@ -1,17 +1,17 @@
 <?php
 	$MSG_FAQ="常见问答";
-	$MSG_BBS="讨&nbsp;论&nbsp;版";
-	$MSG_HOME="主&nbsp;&nbsp;页";
-	$MSG_PROBLEMS="问&nbsp;&nbsp;题";
-	$MSG_STATUS="状&nbsp;&nbsp;态";
-	$MSG_RANKLIST="排&nbsp;&nbsp;名";
-	$MSG_CONTEST="竞&nbsp;&nbsp;赛";
-	$MSG_LOGOUT="注&nbsp;&nbsp;销";
-	$MSG_LOGIN="登&nbsp;&nbsp;录";
-	$MSG_REGISTER="注&nbsp;&nbsp;册";
-	$MSG_ADMIN="管&nbsp;&nbsp;理";
-	$MSG_STANDING="名&nbsp;&nbsp;次";
-	$MSG_STATISTICS="统&nbsp;&nbsp;计";
+	$MSG_BBS="&nbsp;讨论版";
+	$MSG_HOME="&nbsp;主页&nbsp;";
+	$MSG_PROBLEMS="&nbsp;问题&nbsp;";
+	$MSG_STATUS="&nbsp;状态&nbsp;";
+	$MSG_RANKLIST="&nbsp;排名&nbsp;";
+	$MSG_CONTEST="&nbsp;竞赛&nbsp;";
+	$MSG_LOGOUT="&nbsp;注销&nbsp;";
+	$MSG_LOGIN="&nbsp;登录&nbsp;";
+	$MSG_REGISTER="&nbsp;注册&nbsp;";
+	$MSG_ADMIN="&nbsp;管理&nbsp;";
+	$MSG_STANDING="&nbsp;名次&nbsp;";
+	$MSG_STATISTICS="&nbsp;统计&nbsp;";
 	$MSG_USERINFO="修改帐号";
 	
 	$MSG_Pending="等待";

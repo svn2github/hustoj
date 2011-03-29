@@ -34,7 +34,10 @@ $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=5><input type=submit name='problem2contest' value='CheckToNewContest'>";
-echo "<tr><td>PID<td>Title<td>Date<td>Defunct<td>Edit</tr>";
+echo "<tr><td>PID<td>Title<td>Date";
+if(isset($_SESSION['administrator'])){
+	echo "<td>Defunct<td>Edit</tr>";
+}
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
 	echo "<td>".$row->problem_id;

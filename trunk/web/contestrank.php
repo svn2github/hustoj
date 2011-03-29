@@ -140,7 +140,15 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
 	echo "<td>".sec2str($U[$i]->time);
 	for ($j=0;$j<$pid_cnt;$j++){
-		echo "<td>";
+		$bg_color="eeeeee";
+		if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0){
+			$bg_color="aaffaa";
+		}else if(isset($U[$i]->p_wa_num[$j])&&$U[$i]->p_wa_num[$j]>0) {
+			$bg_color="ffaaaa";
+		}
+		
+		
+		echo "<td bgcolor=$bg_color>";
 		if(isset($U[$i])){
 			if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0)
 				echo sec2str($U[$i]->p_ac_sec[$j]);

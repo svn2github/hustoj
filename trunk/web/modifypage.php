@@ -43,7 +43,9 @@ $row=mysql_fetch_object($result);
 				<input value="Reset" name="reset" type="reset">
 		</tr>
 	</table></center>
-	<br><br>
+	<br>
+	<a href=export_ac_code.php>Download All AC Source</a>
+	<br>
 <?
 mysql_free_result($result);
 ?>

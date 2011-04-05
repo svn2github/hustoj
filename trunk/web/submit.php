@@ -8,8 +8,10 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once("include/db_info.inc.php");
 $user_id=$_SESSION['user_id'];
-if (isset($_POST['id'])) $id=intval($_POST['id']);
-else if (isset($_POST['pid']) && isset($_POST['cid'])){
+if (isset($_POST['id'])) {
+	$id=intval($_POST['id']);
+	
+}else if (isset($_POST['pid']) && isset($_POST['cid'])){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
 	// check user if private
@@ -101,6 +103,22 @@ if (mysql_num_rows($res)==1){
 		exit(0);
 	//}
 }
+if (isset($pid))
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$pid' ";
+else
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' ";
+	
+if(!isset($_SESSION['administrator']))
+	$sql.=" and defunct='N'";
+$res=mysql_query($sql);
+if (mysql_num_rows($res)<1){
+		require_once('oj-header.php');
+		echo "Where do find this link? No such problem.<br>";
+		require_once('oj-footer.php');
+		exit(0);
+}
+
+
 
 if (!isset($pid)){
 $sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)

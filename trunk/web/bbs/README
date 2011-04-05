@@ -10,4 +10,4 @@ to make more integretion with HUSTOJ,you can modify phpBB3 as follow:
 
 2. search "WORD_IN_NO_POST" /language/[YOUR_LANG]/search.php
    edit the right string of "=>" tobe as follow:
-   'No posts were found because the word is not contained in any post.  <a href=/posting.php?mode=post&f=2&pid=%s><B>ClickHere</B></a> to ask a new question.',
+   'No posts were found because the word is not contained in any post.  <a href=/bbs/posting.php?mode=post&f=2&pid=%s><B>ClickHere</B></a> to ask a new question.',

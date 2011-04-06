@@ -1,6 +1,6 @@
 <?@session_start ();
 require_once ("../include/db_info.inc.php");
-require_once("../include/check_post_key.php");
+
 if(isset($OJ_LANG)){
 		require_once("../lang/$OJ_LANG.php");
 }
@@ -139,10 +139,12 @@ if (! isset ( $_SESSION ['administrator'] )) {
 
 if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
+	require_once("../include/check_post_key.php");
    	$in=mysql_real_escape_string ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
    	  $filename="-$in";
    }else if (isset($_GET['cid'])){
+	  require_once("../include/check_get_key.php");
 	  $cid=intval( $_GET['cid'] );
       $sql= "select title from contest where contest_id='$cid'";
       $result = mysql_query ( $sql ) or die ( mysql_error () );
@@ -152,6 +154,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
       $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
 	  
    }else{
+	   require_once("../include/check_post_key.php");
 	   $start = intval ( $_POST ['start'] );
 		$end = intval ( $_POST ['end'] );
 	 	$sql = "select * from problem where problem_id>=$start and problem_id<=$end";

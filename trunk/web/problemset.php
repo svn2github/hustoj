@@ -81,8 +81,9 @@ for ($i=1;$i<=$cnt+1;$i++){
 echo "</h3>";
 echo "<center><table id='problemset' width='90%'>";
 echo "<thead><tr align='center' class='evenrow'><td width='5'></td>";
-echo "<td width='100%' colspan='5'><form>$MSG_SEARCH<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td></tr>";
-echo "<tr align=center class='toprow'>";
+echo "<td width='10%' colspan='1'><form action=problem.php>Problem ID<input type='text' name='id' size=5><input type='submit' value='GO' ></form></td>";
+echo "<td width='90%' colspan='4'><form>$MSG_SEARCH<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td>";
+echo "</tr><tr align=center class='toprow'>";
 echo "<td width='5'><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A>";
 echo "<td width='60%'>$MSG_TITLE</td><td width='20%'>$MSG_SOURCE</td>";
 echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width='5%'><A>$MSG_AC</A></td>";

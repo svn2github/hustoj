@@ -5,7 +5,7 @@ require_once("./include/db_info.inc.php");
 <script src="include/sortTable.js"></script>
 <?
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
-$page_cnt=50;
+$page_cnt=100;
 $result=mysql_query($sql);
 echo mysql_error();
 $row=mysql_fetch_object($result);

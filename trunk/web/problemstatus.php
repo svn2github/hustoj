@@ -98,13 +98,19 @@ $result=mysql_query($sql);
 
 // check whether the problem in a contest
 
-$sql="SELECT count(*) FROM `contest_problem` WHERE `problem_id`=$id AND `contest_id` IN (
+$sql="SELECT 1 FROM `contest_problem` WHERE `problem_id`=$id AND `contest_id` IN (
 	SELECT `contest_id` FROM `contest` WHERE `start_time`<NOW() AND `end_time`>NOW())";
 $rrs=mysql_query($sql);
-
-$rrow=mysql_fetch_row($rrs);
-if (intval($rrow[0])>0) $flag=false;
-else $flag=true;
+$flag=!(mysql_num_rows($rrs)>0);
+	
+// check whether the problem is ACed by user
+$AC=false;
+if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
+	$sql="SELECT 1 FROM solution where 
+			result=4 and problem_id=$id and user_id='".$_SESSION['user_id']."'";
+	$rrs=mysql_query($sql);
+	$AC=(mysql_num_rows($rrs)>0);
+}
 
 echo "<td>";
 echo "<table>";
@@ -127,7 +133,9 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	if ($flag) echo "$s_time MS";
 	else echo "------";
 	
-	if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+	if (!(isset($_SESSION['user_id'])&&strcasecmp($row->user_id,$_SESSION['user_id']) ||
+		isset($_SESSION['source_browser'])||
+		(isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&$AC))){
 		echo "<td>".$language_name[$row->language];
 	}else{
 		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";

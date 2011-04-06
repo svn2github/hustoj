@@ -31,19 +31,38 @@ $id=strval(intval($_GET['id']));
 $sql="SELECT * FROM `solution` WHERE `solution_id`='".$id."'";
 $result=mysql_query($sql);
 $row=mysql_fetch_object($result);
-if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
+$slanguage=$row->language;
+$sresult=$row->result;
+$stime=$row->time;
+$smemory=$row->memory;
+$sproblem_id=$row->problem_id;
+$suser_id=$row->user_id;
+
+
+
+if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
+	$sql="SELECT 1 FROM solution where 
+			result=4 and problem_id=$sproblem_id and user_id='".$_SESSION['user_id']."'";
+	$rrs=mysql_query($sql);
+	$ok=(mysql_num_rows($rrs)>0);
+}
+
+if (isset($_SESSION['user_id'])&&$row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
+
+
+
 if ($ok==true){
 	$brush=strtolower($language_name[$row->language]);
 	if ($brush=='pascal') $brush='delphi';
 	echo "<pre class=\"brush:".$brush.";\">";
 	ob_start();
 	echo "/**************************************************************\n";
-	echo "\tProblem: $row->problem_id\n\tUser: $row->user_id\n";
-	echo "\tLanguage: ".$language_name[$row->language]."\n\tResult: ".$judge_result[$row->result]."\n";
-	if ($row->result==4){
-		echo "\tTime:".$row->time." ms\n";
-		echo "\tMemory:".$row->memory." kb\n";
+	echo "\tProblem: $sproblem_id\n\tUser: $suser_id\n";
+	echo "\tLanguage: ".$language_name[$slanguage]."\n\tResult: ".$judge_result[$row->result]."\n";
+	if ($sresult==4){
+		echo "\tTime:".$stime." ms\n";
+		echo "\tMemory:".$smemory." kb\n";
 	}
 	echo "****************************************************************/\n\n";
 	$auth=ob_get_contents();

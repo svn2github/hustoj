@@ -39,7 +39,7 @@
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 <table width=96%> 
 	<tr align="center" class='hd' valign="top">
-		<?if(isset($OJ_DICT)&&$OJ_DICT){?>
+		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
 		<th><span style="color:1a5cc8" id="dict_status"></span></th>
 		<?}?>
 		<th><a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a></th>

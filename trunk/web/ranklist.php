@@ -37,6 +37,11 @@
 		$sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
 		$result = mysql_query ( $sql ); //mysql_error();
 		echo "<center><table width=90%>";
+		echo "<tr><td colspan=6 align=center>
+			<form action=userinfo.php>
+				$MSG_USER<input name=user>
+				<input type=submit value=Go>
+			</form></td></tr>";
 		echo "<tr class='toprow'>
 				<td width=5% align=center><b>$MSG_Number</b>
 				<td width=10% align=center><b>$MSG_USER</b>

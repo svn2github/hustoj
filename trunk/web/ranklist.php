@@ -16,6 +16,7 @@
 	} else {
 		ob_start ();
 		
+		
 		?>
 		<?
 		
@@ -29,10 +30,11 @@
 		if(isset($OJ_LANG)){
 			require_once("./lang/$OJ_LANG.php");
 		}
+		$page_size=50;
 		//$rank = intval ( $_GET ['start'] );
 		if ($rank < 0)
 			$rank = 0;
-		$sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,reg_time  LIMIT  " . strval ( $rank ) . ",25";
+		$sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
 		$result = mysql_query ( $sql ); //mysql_error();
 		echo "<center><table width=90%>";
 		echo "<tr class='toprow'>
@@ -68,11 +70,11 @@
 		echo mysql_error ();
 		$row = mysql_fetch_object ( $result );
 		echo "<center>";
-		for($i = 0; $i < $row->mycount; $i += 25) {
+		for($i = 0; $i < $row->mycount; $i += $page_size) {
 			echo "<a href=./ranklist.php?start=" . strval ( $i ) . ">";
 			echo strval ( $i + 1 );
 			echo "-";
-			echo strval ( $i + 25 );
+			echo strval ( $i + $page_size );
 			echo "</a>&nbsp;";
 			if ($i % 250 == 200)
 				echo "<br>";

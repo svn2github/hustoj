@@ -14,6 +14,7 @@
 	$MSG_STANDING="순위";
 	$MSG_STATISTICS="통계";
 	$MSG_USERINFO="정보 수정";
+	$MSG_MAIL="Mail";
 	//status.php
 	$MSG_Pending="Pending";
 	$MSG_Pending_Rejudging="Pending Rejudging";

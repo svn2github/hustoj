@@ -14,6 +14,7 @@
 	$MSG_STANDING="STANDING";
 	$MSG_STATISTICS="STATISTICS";
 	$MSG_USERINFO="ModifyUser";
+	$MSG_MAIL="Mail";
 	//status.php
 	$MSG_Pending="Pending";
 	$MSG_Pending_Rejudging="Pending Rejudging";

@@ -13,6 +13,7 @@
 	$MSG_STANDING="&nbsp;名次&nbsp;";
 	$MSG_STATISTICS="&nbsp;统计&nbsp;";
 	$MSG_USERINFO="修改帐号";
+	$MSG_MAIL="Mail";
 	
 	$MSG_Pending="等待";
 	$MSG_Pending_Rejudging="等待重判";

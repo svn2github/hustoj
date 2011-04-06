@@ -8,6 +8,31 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once("include/db_info.inc.php");
 $user_id=$_SESSION['user_id'];
+
+if (isset($_POST['cid'])){
+	$pid=intval($_POST['pid']);
+	$cid=intval($_POST['cid']);
+	$sql="SELECT `problem_id` from `contest_problem` 
+				where `num`='$pid' and contest_id=$cid";
+}else{
+	$id=intval($_POST['id']);
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem)";
+	if(!isset($_SESSION['administrator']))
+		$sql.=" and defunct='N'";
+}
+//echo $sql;	
+
+$res=mysql_query($sql);
+if (mysql_num_rows($res)<1){
+		require_once('oj-header.php');
+		echo "Where do find this link? No such problem.<br>";
+		require_once('oj-footer.php');
+		exit(0);
+}
+
+
+
+
 if (isset($_POST['id'])) {
 	$id=intval($_POST['id']);
 	
@@ -102,20 +127,6 @@ if (mysql_num_rows($res)==1){
 		require_once('oj-footer.php');
 		exit(0);
 	//}
-}
-if (isset($pid))
-	$sql="SELECT `problem_id` from `problem` where `problem_id`='$pid' ";
-else
-	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' ";
-	
-if(!isset($_SESSION['administrator']))
-	$sql.=" and defunct='N'";
-$res=mysql_query($sql);
-if (mysql_num_rows($res)<1){
-		require_once('oj-header.php');
-		echo "Where do find this link? No such problem.<br>";
-		require_once('oj-footer.php');
-		exit(0);
 }
 
 

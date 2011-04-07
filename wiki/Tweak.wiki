@@ -29,7 +29,7 @@ query_cache_size        = 128M
 
 
 = Test =
-this test running no more then 25(1page) pending on Dell D620 
+this test running no more then 20(1page) pending on Dell D620 
 {{{
 #!/bin/bash
 #use firebug to get the post data in file "post"

@@ -74,7 +74,7 @@ if(isset($_POST['to_user'])){
 	$title=mysql_real_escape_string($title);
 	$content=mysql_real_escape_string($content);
 	$from_user=mysql_real_escape_string($from_user);
-	$sql="select 1 from users where user_id='$to_user' order by mail_id desc";
+	$sql="select 1 from users where user_id='$to_user' ";
 	$res=mysql_query($sql);
 	if ($res&&mysql_num_rows($res)<1){
 			mysql_free_result($res);
@@ -93,7 +93,8 @@ if(isset($_POST['to_user'])){
 	}
 }
 //list mail
-	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'";
+	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
+					order by mail_id desc";
 	$result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 echo "<tr><td>Mail ID<td>From:Title<td>Date</tr>";

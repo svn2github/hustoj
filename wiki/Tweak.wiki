@@ -3,7 +3,7 @@
 
 = Introduction =
 
-except distribute system , you can optimize system.
+except DistributionSystem  , you can optimize system.
 
 
 = Details =

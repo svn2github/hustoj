@@ -70,6 +70,7 @@ $description->Create() ;
 ?>
 </p>
 <?require_once("../include/set_post_key.php");?>
+<input type=submit>
 </form>
 <?require_once("../oj-footer.php");?>
 

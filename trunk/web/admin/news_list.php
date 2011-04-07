@@ -16,7 +16,7 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
 	echo "<td>".$row->news_id;
 	//echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";
-	echo "<td><a href='news_edit.php?$row->news_id</a>'>".$row->title."</a>";
+	echo "<td><a href='news_edit.php?id=$row->news_id'>".$row->title."</a>";
 	echo "<td>".$row->time;
 	echo "<td><a href=news_df_change.php?id=$row->news_id&getkey=".$_SESSION['getkey'].">".($row->defunct=="N"?"Delete":"Resume")."</a>";
 		echo "<td><a href=news_edit.php?id=$row->news_id>Edit</a>";

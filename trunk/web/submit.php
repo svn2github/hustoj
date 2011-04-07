@@ -16,7 +16,9 @@ if (isset($_POST['cid'])){
 				where `num`='$pid' and contest_id=$cid";
 }else{
 	$id=intval($_POST['id']);
-	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem)";
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
+			SELECT `contest_id` FROM `contest` WHERE 
+			(`end_time`>NOW() or private=1)and `defunct`='N')";
 	if(!isset($_SESSION['administrator']))
 		$sql.=" and defunct='N'";
 }

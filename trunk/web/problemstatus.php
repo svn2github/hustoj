@@ -110,6 +110,7 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 			result=4 and problem_id=$id and user_id='".$_SESSION['user_id']."'";
 	$rrs=mysql_query($sql);
 	$AC=(mysql_num_rows($rrs)>0);
+	mysql_free_result($rrs);
 }
 
 echo "<td>";

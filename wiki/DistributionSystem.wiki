@@ -27,7 +27,7 @@ IDENTIFIED BY 'judge_pass' WITH GRANT OPTION;
 bind-address        = 0.0.0.0
 }}}
 
- *为了提高性能，可以适当增大 *
+ * 为了提高性能，可以适当增大 *
 {{{
 key_buffer              = 128M
 query_cache_limit       = 4M

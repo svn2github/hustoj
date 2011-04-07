@@ -109,7 +109,7 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 	$sql="SELECT 1 FROM solution where 
 			result=4 and problem_id=$id and user_id='".$_SESSION['user_id']."'";
 	$rrs=mysql_query($sql);
-	$AC=(mysql_num_rows($rrs)>0);
+	$AC=(intval(mysql_num_rows($rrs))>0);
 	mysql_free_result($rrs);
 }
 
@@ -134,7 +134,7 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	if ($flag) echo "$s_time MS";
 	else echo "------";
 	
-	if (!(isset($_SESSION['user_id'])&&strcasecmp($row->user_id,$_SESSION['user_id']) ||
+	if (!(isset($_SESSION['user_id'])&&!strcasecmp($row->user_id,$_SESSION['user_id']) ||
 		isset($_SESSION['source_browser'])||
 		(isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&$AC))){
 		echo "<td>".$language_name[$row->language];

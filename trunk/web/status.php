@@ -197,7 +197,10 @@ while(	$row=mysql_fetch_object($result)){
 	$bottom=$row->solution_id;
 	if ($cnt) echo "<tr align=center class='oddrow'>";
 	else echo "<tr align=center class='evenrow'>";
-	$flag=!is_running(intval($row->contest_id)) || isset($_SESSION['administrator']) || (isset($_SESSION['user_id'])&&strcmp($row->user_id,$_SESSION['user_id']))==0;
+	$flag=(!is_running(intval($row->contest_id))) ||
+			isset($_SESSION['source_browser']) ||
+			isset($_SESSION['administrator']) || 
+			(isset($_SESSION['user_id'])&&!strcmp($row->user_id,$_SESSION['user_id']));
 	$cnt=1-$cnt;
 	echo "<td>".$row->solution_id;
 	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
@@ -225,26 +228,21 @@ while(	$row=mysql_fetch_object($result)){
 	}
 	if ($flag){
 
-	if (
-		(
-		$row->contest_id==0||
-		isset($_SESSION['user_id'])&&strcasecmp($row->user_id,$_SESSION['user_id'])==0
-		) 
-		&&$row->result>=4){
-		echo "<td>".$row->memory." <font color=red>kb</font>";
-		echo "<td>".$row->time." <font color=red>ms</font>";
-	}else{
-		echo "<td>------<td>------";
-	}
-	if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-		echo "<td>".$language_name[$row->language];
-	}else{
-		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>/";
-		echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
+		if ($row->result>=4){
+			echo "<td>".$row->memory." <font color=red>kb</font>";
+			echo "<td>".$row->time." <font color=red>ms</font>";
+		}else{
+			echo "<td>------<td>------";
+		}
+		if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+			echo "<td>".$language_name[$row->language];
+		}else{
+			echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>/";
+			echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
+			
+		}
+		echo "<td>".$row->code_length." B";
 		
-	}
-	echo "<td>".$row->code_length." B";
-	
 	}else echo "<td>------<td>------<td>".$language_name[$row->language]."<td>------";
 	echo "<td>".$row->in_date;
 	echo "</tr>";

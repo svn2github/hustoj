@@ -13,4 +13,4 @@ to improve OJ speed
   * mkdirs run1,run2.....run(N-1) make sure the chown judge and chmod 755
   * sudo pkill judged && sudo judged
 
-* important: in most case N should be no more than you CPU number*2.
+* important: in most case N should be no more than you CPU number*4.

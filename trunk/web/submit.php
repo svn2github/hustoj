@@ -24,12 +24,13 @@ if (isset($_POST['cid'])){
 
 $res=mysql_query($sql);
 if (mysql_num_rows($res)<1){
+		mysql_free_result($res);
 		require_once('oj-header.php');
 		echo "Where do find this link? No such problem.<br>";
 		require_once('oj-footer.php');
 		exit(0);
 }
-
+mysql_free_result($res);
 
 
 

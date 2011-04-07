@@ -51,7 +51,13 @@ $Rank=intval($row[0])+1;
 ?>
 <center>
 <table id=statics width=70%>
-<caption><?=$user."--".htmlspecialchars($nick)?></caption>
+<caption>
+<?=$user."--".htmlspecialchars($nick)?>
+<?
+ if($mail)
+	echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
+?>
+</caption>
 <tr bgcolor=#D7EBFF><td width=15%><?=$MSG_Number?><td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
 <tr bgcolor=#D7EBFF><td><?=$MSG_SOVLED?><td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
 <td rowspan=14 align=center>

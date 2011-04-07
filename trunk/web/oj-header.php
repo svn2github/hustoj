@@ -19,6 +19,17 @@
 		mysql_free_result($result);
 		return $retmsg;
 	}
+	function checkmail(){
+		require_once("include/db_info.inc.php");
+		$sql="SELECT count(1) FROM `mail` WHERE 
+				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
+		$result=mysql_query($sql);
+		if(!$result) return false;
+		$row=mysql_fetch_row($result);
+		$retmsg="<font color=red>(".$row[0].")</font>";
+		mysql_free_result($result);
+		return $retmsg;
+	}
 	
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -53,8 +64,12 @@
 			
 			if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
-				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'><font color=red>$sid</font></a></th>";
-				print "<th><a href=logout.php>$MSG_LOGOUT</a></th>";
+				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'>
+				<font color=red>$sid</font></a>";
+				$mail=checkmail();
+				if ($mail)
+					print "<a href=mail.php>$mail</a>";
+				print "</th><th><a href=logout.php>$MSG_LOGOUT</a></th>";
 			}else{
 				print "<th><a href=loginpage.php>$MSG_LOGIN</a></th>";
 				print "<th><a href=registerpage.php>$MSG_REGISTER</a></th>";

@@ -97,7 +97,7 @@ if(isset($_POST['to_user'])){
 	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
 					order by mail_id desc";
 	$result=mysql_query($sql) or die(mysql_error());
-echo "<center><table width=90% border=1>";
+echo "<center><table border=1>";
 echo "<tr><td>Mail ID<td>From:Title<td>Date</tr>";
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";

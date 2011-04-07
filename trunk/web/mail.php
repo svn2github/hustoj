@@ -47,7 +47,8 @@ if (isset($_GET['vid'])){
    <table><form method=post action=mail.php>
 	<tr>
 		<td>  To:<input name=to_user size=10 value="<?=$to_user?>">
-	 Title:<input name=title size=20><input type=submit value=<?=$MSG_SUBMIT?>></td>
+			Title:<input name=title size=20>
+		    <input type=submit value=<?=$MSG_SUBMIT?>></td>
 	</tr>
 	<tr><td> 
 		<textarea name=content rows=10 cols=50></textarea>
@@ -79,17 +80,17 @@ if(isset($_POST['to_user'])){
 	if ($res&&mysql_num_rows($res)<1){
 			mysql_free_result($res);
 			echo "No Such User!";
-			require_once('oj-footer.php');
-			exit(0);
-	}
-	if($res)mysql_free_result($res);
-	$sql="insert into mail(to_user,from_user,title,content,in_date)
-					values('$to_user','$from_user','$title','$content',now())";
-	
-	if(!mysql_query($sql)){
-		echo "Not Mailed!<br>";
+			
 	}else{
-		echo "Mailed!<br>";
+		if($res)mysql_free_result($res);
+		$sql="insert into mail(to_user,from_user,title,content,in_date)
+						values('$to_user','$from_user','$title','$content',now())";
+		
+		if(!mysql_query($sql)){
+			echo "Not Mailed!<br>";
+		}else{
+			echo "Mailed!<br>";
+		}
 	}
 }
 //list mail

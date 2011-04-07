@@ -1,0 +1,21 @@
+#labels Featured,Phase-Deploy,Phase-Support
+#Tweak System to make optimize.
+
+= Introduction =
+
+except distribute system , you can optimize system.
+
+
+= Details =
+
+ * install alternate php cache php-apc
+{{{
+sudo apt-get install php-apc
+}}}
+ * tweak /etc/mysql/my.cnf
+{{{
+key_buffer              = 128M
+query_cache_limit       = 4M
+query_cache_size        = 128M
+}}}
+ * 

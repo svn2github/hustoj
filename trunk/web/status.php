@@ -225,7 +225,12 @@ while(	$row=mysql_fetch_object($result)){
 	}
 	if ($flag){
 
-	if ($row->result>=4){
+	if (
+		(
+		$row->contest_id==0||
+		isset($_SESSION['user_id'])&&strcasecmp($row->user_id,$_SESSION['user_id'])==0
+		) 
+		&&$row->result>=4){
 		echo "<td>".$row->memory." <font color=red>kb</font>";
 		echo "<td>".$row->time." <font color=red>ms</font>";
 	}else{

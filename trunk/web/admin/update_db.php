@@ -53,6 +53,23 @@ CREATE TABLE `sim` (
   PRIMARY KEY  (`s_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
+$tsql[4]="select 1 from mail limit 1";
+$csql[4]="
+CREATE TABLE `mail` (
+
+  `mail_id` int(11) NOT NULL auto_increment,
+  `to_user` varchar(20) NOT NULL default '',
+  `from_user` varchar(20) NOT NULL default '',
+  `title` varchar(200) NOT NULL default '',
+  `content` text,
+  `new_mail` tinyint(1) NOT NULL default '1',
+  `reply` tinyint(4) default '0',
+  `in_date` datetime default NULL,
+  `defunct` char(1) NOT NULL default 'N',
+  PRIMARY KEY  (`mail_id`),
+  KEY `uid` (`to_user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";
+
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

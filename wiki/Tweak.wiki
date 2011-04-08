@@ -52,7 +52,7 @@ this test running no more then 10(half-page) pending on Dell D620 (1.83GHz CPUx2
 #!/bin/bash
 # use firebug to get the post data in file "post"
 # and the SID
-# change submit.php:121 to enable constant submit
+# change submit.php:124 to enable constant submit
 # if (0&&mysql_num_rows($res)==1){
 
 SID=[login with firebug to get this value for sessionid]

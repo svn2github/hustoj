@@ -8,11 +8,11 @@ except DistributionSystem  , you can optimize system.
 
 = Details =
 
- # install alternate php cache php-apc
+ 1 install alternate php cache php-apc
 {{{
 sudo apt-get install php-apc
 }}}
- # tweak /etc/mysql/my.cnf  
+ 2 tweak /etc/mysql/my.cnf  
 for example, if you have more than 2G ram
 {{{
 [mysqld]
@@ -29,7 +29,7 @@ table_cache             = 256
 }}}
   You can copy this to create a new file "/etc/mysql/conf.d/jol.cnf" , if you are using Ubuntu. *
 
- # set judge.conf to use MultiRUNNING
+ 3 set judge.conf to use MultiRUNNING
 
   * edit /home/judge/etc/judge.conf to set OJ_RUNNING=N (N>1)
   * mkdirs run1,run2.....run(N-1) make sure the chown judge and chmod 755
@@ -37,9 +37,10 @@ table_cache             = 256
 
   * important: in most case N should be no more than you CPU number*4.
 
- # cheat php to use memory for session
+ 4 cheat php to use memory for session
   * edit php.ini (/etc/php5/apache2/php.ini)
   * set session_save_path to somewhere under /dev/shm
+ 5 using /dev/shm for "JudgeOnline/cache" dir
 
 = Test =
 this test running no more then 10(half-page) pending on Dell D620 

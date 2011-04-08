@@ -12,7 +12,7 @@ except DistributionSystem  , you can optimize system.
 {{{
 sudo apt-get install php-apc
 }}}
- # tweak /etc/mysql/my.cnf
+ # tweak /etc/mysql/my.cnf  if you have more than 2G ram
 {{{
 key_buffer              = 128M
 query_cache_limit       = 4M

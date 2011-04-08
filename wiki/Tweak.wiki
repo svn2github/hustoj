@@ -23,7 +23,7 @@ max_connections         = 1024
 thread_cache_size       = 80
 wait_timeout            = 7200
 tmp_table_size          = 128M
-
+table_cache             = 256
 }}}
  # set judge.conf to use MultiRUNNING
 

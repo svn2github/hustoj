@@ -3,7 +3,7 @@
 
 = Introduction =
 
-except DistributionSystem  , you can optimize system.
+Except using DistributionSystem  , you can optimize your system to host a BIG contest.
 
 
 = Details =

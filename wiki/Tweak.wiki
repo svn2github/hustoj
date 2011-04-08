@@ -27,7 +27,7 @@ wait_timeout            = 7200
 tmp_table_size          = 128M
 table_cache             = 256
 }}}
-   * you can copy this to create a new file "/etc/mysql/conf.d/jol.cnf" , if you are using Ubuntu. *
+  You can copy this to create a new file "/etc/mysql/conf.d/jol.cnf" , if you are using Ubuntu. *
 
  # set judge.conf to use MultiRUNNING
 

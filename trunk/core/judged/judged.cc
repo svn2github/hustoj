@@ -367,7 +367,7 @@ int main(int argc, char** argv){
             }
 
 		}else{
-			sleep(sleep_time);
+			sleep(sleep_time*2);
 		}
 	}
 	return 0;

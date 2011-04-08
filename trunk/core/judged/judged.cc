@@ -366,8 +366,9 @@ int main(int argc, char** argv){
                 syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
             }
 
+		}else{
+			sleep(sleep_time);
 		}
-		//sleep(sleep_time);
 	}
 	return 0;
 }

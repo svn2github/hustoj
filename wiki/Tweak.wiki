@@ -46,17 +46,22 @@ table_cache             = 256
 this test running no more then 10(half-page) pending on Dell D620 
 {{{
 #!/bin/bash
-#use firebug to get the post data in file "post"
+# use firebug to get the post data in file "post"
+# and the SID
 # change submit.php:121 to enable constant submit
 # if (0&&mysql_num_rows($res)==1){
+
+SID=[login with firebug to get this value for sessionid]
 
 ab -c 300 -n 100000 http://127.1/JudgeOnline/status.php &
 for i in {1..50}
 do
    
-   ab -q -c 10 -n 10 -T 'application/x-www-form-urlencoded' -p post -C PHPSESSID=d55d43ce050162e3701b64bfbd443ec1 http://127.1/JudgeOnline/submit.php
+   ab -q -c 10 -n 10 -T 'application/x-www-form-urlencoded' -p post -C PHPSESSID=$SID http://127.1/JudgeOnline/submit.php
    sleep 10
 
 done
 
 }}}
+
+The test simulate 10 teams submit 1 solution per 10 seconds , while 300 others keep freshing status.php.

@@ -1,3 +1,31 @@
+<?php
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+	@session_start();
+	$file="cache/index.html";
+	if (isset($_SESSION['user_id'])){
+		$sid=session_id().$_SERVER['REMOTE_ADDR'];
+		if (isset($_GET['cid'])){
+			$sid.=intval($_GET['cid']);
+		}
+		$sid=md5($sid);
+		$file = "cache/status_$sid.html";
+	}
+	
+	
+	if (file_exists ( $file ))
+		$last = filemtime ( $file );
+	else
+		$last =0;
+	if (!isset($_GET['top'])&&time () - $last < 5) {
+		//header ( "Location: $file" );
+		include ($file);
+		exit ();
+	} else {
+		ob_start ();
+		
+		?>
+
 <?
 require_once("./include/my_func.inc.php");
 require_once("./include/db_info.inc.php");
@@ -261,3 +289,12 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 </center>
 <?require_once("oj-footer.php");
 ?>
+<?php
+		
+		if(!isset($_GET['top'])){
+			if(!file_exists("cache")) mkdir("cache");
+			file_put_contents($file,ob_get_contents());
+		}
+	}
+	
+	?>

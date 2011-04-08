@@ -50,7 +50,7 @@ root密码freeproblemset
 下载地址: u.115.com请点击"备份下载"
 r883
 
-http://u.115.com/file/f6becf816c#
+http://u.115.com/file/f6becfb7a2#
 hustoj-root-freeproblemset-r883.iso
 
 r845 md5sum:17d362f96a6d7e450d03b0065982cf0b

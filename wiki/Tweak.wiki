@@ -43,7 +43,7 @@ table_cache             = 256
  5 using /dev/shm for "JudgeOnline/cache" dir
 
 = Test =
-this test running no more then 10(half-page) pending on Dell D620 (1.83GHz CPUx2 1.5GRAM 80Gsata using Ubuntu10.4 LTS on ReiserFS)
+this test running no more then 10(half-page) pending on Dell D620 (1.83GHz CPUx2 1.5GRAM 80Gsata using Ubuntu10.4 LTS on ReiserFS)  with steps 1~3 only
 
 {{{
 #!/bin/bash

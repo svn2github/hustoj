@@ -14,6 +14,7 @@ sudo apt-get install php-apc
 }}}
  # tweak /etc/mysql/my.cnf  if you have more than 2G ram
 {{{
+[mysqld]
 key_buffer              = 128M
 query_cache_limit       = 4M
 query_cache_size        = 128M

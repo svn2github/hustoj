@@ -17,6 +17,11 @@ sudo apt-get install php-apc
 key_buffer              = 128M
 query_cache_limit       = 4M
 query_cache_size        = 128M
+back_log                = 500
+interactive_timeout     = 7200
+max_connections         = 1024
+thread_cache_size       = 80
+wait_timeout            = 7200
 }}}
  # set judge.conf to use MultiRUNNING
 

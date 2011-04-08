@@ -12,7 +12,10 @@ except DistributionSystem  , you can optimize system.
 {{{
 sudo apt-get install php-apc
 }}}
- # tweak /etc/mysql/my.cnf  if you have more than 2G ram
+ # tweak /etc/mysql/my.cnf  
+
+for example, if you have more than 2G ram
+
 {{{
 [mysqld]
 key_buffer              = 128M
@@ -26,6 +29,8 @@ wait_timeout            = 7200
 tmp_table_size          = 128M
 table_cache             = 256
 }}}
+  * you can copy this to create a new file "/etc/mysql/conf.d/jol.cnf" , if you are using Ubuntu.
+
  # set judge.conf to use MultiRUNNING
 
   * edit /home/judge/etc/judge.conf to set OJ_RUNNING=N (N>1)

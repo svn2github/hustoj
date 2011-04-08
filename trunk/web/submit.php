@@ -148,6 +148,19 @@ $insert_id=mysql_insert_id();
 $sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 mysql_query($sql);
 //echo $sql;
+
+
+	$file="cache/index.html";
+	if (isset($_SESSION['user_id'])){
+		$sid=session_id().$_SERVER['REMOTE_ADDR'];
+		if (isset($_GET['cid'])){
+			$sid.=intval($_GET['cid']);
+		}
+		$sid=md5($sid);
+		$file = "cache/status_$sid.html";
+	}
+	unlink($file);
+
 if (!isset($cid)) 
 	header("Location: ./status.php?"."user_id=".$_SESSION['user_id']);
 else 

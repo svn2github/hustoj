@@ -180,7 +180,8 @@ int executesql(const char * sql){
 
 	if (mysql_real_query(conn,sql,strlen(sql))){
 		if(DEBUG)write_log("%s", mysql_error(conn));
-		sleep_time=60;
+		sleep(20);
+		conn=NULL;
 		return 1;
 	}else
 	    return 0;
@@ -188,17 +189,18 @@ int executesql(const char * sql){
 
 
 int init_mysql(){
-   // if(conn!=NULL) mysql_close(conn);	// close db
-	conn=mysql_init(NULL);		// init the database connection
-	/* connect the database */
-	const char timeout=30;
-    mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
+    if(conn==NULL){
+		conn=mysql_init(NULL);		// init the database connection
+		/* connect the database */
+		const char timeout=30;
+		mysql_options(conn,MYSQL_OPT_CONNECT_TIMEOUT,&timeout);
 
-	if(!mysql_real_connect(conn,host_name,user_name,password,
-			db_name,port_number,0,0)){
-		if(DEBUG)write_log("%s", mysql_error(conn));
-		sleep_time=60;
-		return 1;
+		if(!mysql_real_connect(conn,host_name,user_name,password,
+				db_name,port_number,0,0)){
+			if(DEBUG)write_log("%s", mysql_error(conn));
+			sleep(20);
+			return 1;
+		}
 	}
 	if (executesql("set names utf8"))
         return 1;
@@ -218,10 +220,10 @@ int work(){
 
 	if (mysql_real_query(conn,query,strlen(query))){
 		if(DEBUG)write_log("%s", mysql_error(conn));
-		sleep_time=60;
+		sleep(20);
 		return 0;
 	}
-	sleep_time=sleep_tmp;
+	//sleep_time=sleep_tmp;
 	/* get the database info */
 	retcnt=0;
 	res=mysql_store_result(conn);
@@ -360,7 +362,7 @@ int main(int argc, char** argv){
 	while (1){			// start to run
 	    if(!init_mysql()){
 	        int j=work();
-	        mysql_close(conn);	// close db
+	        //mysql_close(conn);	//keep connection if possible to save resource
             if (j==0){	// if nothing done
                 sleep(sleep_time);	// sleep
                 syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");

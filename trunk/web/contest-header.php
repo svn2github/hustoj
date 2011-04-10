@@ -4,7 +4,7 @@
 		require_once("./lang/$OJ_LANG.php");
 	}
 ?>
-
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel=stylesheet href='include/hoj.css' type='text/css'>

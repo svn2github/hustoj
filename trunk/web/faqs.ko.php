@@ -21,7 +21,7 @@
   </tr>
   <tr>
     <td>Pascal:</td>
-    <td><font color=blue>fpc -Co -Cr -Ct -Ci</font></td>
+    <td><font color=blue>fpc Main.pas -oMain -O1 -Co -Cr -Ct -Ci </font></td>
   </tr>
   <tr>
     <td>Java:</td>

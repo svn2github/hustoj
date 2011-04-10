@@ -471,11 +471,11 @@ void update_problem(int p_id) {
 int compile(int lang) {
 	int pid;
 
-	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-Wall", "-lm",
+	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-O2","-Wall", "-lm",
 			"--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-O2", "-Wall",
 			"-lm", "--static", "-DONLINE_JUDGE", NULL };
-	const char * CP_P[] = { "fpc", "Main.pas", "-oMain", "-Co", "-Cr", "-Ct",
+	const char * CP_P[] = { "fpc", "Main.pas", "-oMain", "-O1","-Co", "-Cr", "-Ct",
 			"-Ci", NULL };
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };

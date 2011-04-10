@@ -58,6 +58,6 @@ sudo ./make.sh
 
 设置启动脚本 
    with root or sudo
-   echo "LANG=C /usr/bin/judged" > /etc/init.d/judged
+   echo "/usr/bin/judged" > /etc/init.d/judged
    chmod +x  /etc/init.d/judged
-   ln -s /etc/init.d/judged /etc/rc3.d/S93judged
+   ln -s /etc/init.d/judged /etc/rc3.d/S99judged

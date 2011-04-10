@@ -232,8 +232,10 @@ while(	$row=mysql_fetch_object($result)){
 	$cnt=1-$cnt;
 	echo "<td>".$row->solution_id;
 	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
-	if (isset($cid)) echo "<td><a href='problem.php?cid=$cid&pid=$row->num'>".$PID[$row->num]."</a>";
-	else echo "<td><a href='problem.php?id=".$row->problem_id."'>".$row->problem_id."</a>";
+	if (isset($cid)) 
+		echo "<td><a href='problem.php?cid=$cid&pid=$row->num'>".$PID[$row->num]."</a>";
+	else 
+		echo "<td><a href='problem.php?id=".$row->problem_id."'>".$row->problem_id."</a>";
 	if (intval($row->result)==11 && ((isset($_SESSION['user_id'])&&$row->user_id==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
 		echo "<td><a href='ceinfo.php?sid=$row->solution_id'><font color=".$judge_color[$row->result].">".$judge_result[$row->result]."</font></a>";
 	}else{
@@ -266,8 +268,11 @@ while(	$row=mysql_fetch_object($result)){
 			echo "<td>".$language_name[$row->language];
 		}else{
 			echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>/";
-			echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
-			
+			if (isset($cid)) {
+				echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=$row->num&sid=".$row->solution_id."\">Edit</a>";
+			}else{
+				echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
+			}
 		}
 		echo "<td>".$row->code_length." B";
 		

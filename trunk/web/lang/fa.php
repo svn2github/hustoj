@@ -164,6 +164,20 @@
 	$MSG_Time_Limit="محدودیت زمانی";
 
 	$MSG_Memory_Limit="محدودیت حجمی";
-
+//admin menu
+	$MSG_SEEOJ="SeeOJ";
+	$MSG_ADD="Add";
+	$MSG_LIST="List";
+	$MSG_NEWS="News";
+	$MSG_TEAMGENERATOR="TeamGenerator";
+	$MSG_SETMESSAGE="SetMessage";
+	$MSG_SETPASSWORD="ChangePassWD";
+	$MSG_REJUDGE="Rejudge";
+	$MSG_PRIVILEGE="Privilege";
+	$MSG_GIVESOURCE="GiveSource";
+	$MSG_IMPORT="Import";
+	$MSG_EXPORT="Export";
+	$MSG_UPDATE_DATABASE="UpdateDatabase";
+	$MSG_ONLINE="Online";
 
 ?>

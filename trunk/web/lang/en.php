@@ -2,17 +2,17 @@
 	//oj-header.php
 	$MSG_FAQ="F.A.Qs";
 	$MSG_BBS="Web Board";
-	$MSG_HOME="HOME";
-	$MSG_PROBLEMS="PROBLEMS";
-	$MSG_STATUS="STATUS";
-	$MSG_RANKLIST="RANKLIST";
-	$MSG_CONTEST="CONTEST";
-	$MSG_LOGOUT="LOGOUT";
-	$MSG_LOGIN="LOGIN";
-	$MSG_REGISTER="REGISTER";
-	$MSG_ADMIN="ADMIN";
-	$MSG_STANDING="STANDING";
-	$MSG_STATISTICS="STATISTICS";
+	$MSG_HOME="Home";
+	$MSG_PROBLEMS="ProblemSet";
+	$MSG_STATUS="Status";
+	$MSG_RANKLIST="Ranklist";
+	$MSG_CONTEST="Contest";
+	$MSG_LOGOUT="Logout";
+	$MSG_LOGIN="Login";
+	$MSG_REGISTER="Register";
+	$MSG_ADMIN="Admin";
+	$MSG_STANDING="Standing";
+	$MSG_STATISTICS="Statistics";
 	$MSG_USERINFO="ModifyUser";
 	$MSG_MAIL="Mail";
 	//status.php
@@ -86,5 +86,19 @@
 	$MSG_Time_Limit="Time Limit";
 	$MSG_Memory_Limit="Memory Limit";
 	
-	
+	//admin menu
+	$MSG_SEEOJ="SeeOJ";
+	$MSG_ADD="Add";
+	$MSG_LIST="List";
+	$MSG_NEWS="News";
+	$MSG_TEAMGENERATOR="TeamGenerator";
+	$MSG_SETMESSAGE="SetMessage";
+	$MSG_SETPASSWORD="ChangePassWD";
+	$MSG_REJUDGE="Rejudge";
+	$MSG_PRIVILEGE="Privilege";
+	$MSG_GIVESOURCE="GiveSource";
+	$MSG_IMPORT="Import";
+	$MSG_EXPORT="Export";
+	$MSG_UPDATE_DATABASE="UpdateDatabase";
+	$MSG_ONLINE="Online";
 ?>

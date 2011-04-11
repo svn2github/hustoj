@@ -5,7 +5,7 @@
 	$MSG_PROBLEMS="&nbsp;问题&nbsp;";
 	$MSG_STATUS="&nbsp;状态&nbsp;";
 	$MSG_RANKLIST="&nbsp;排名&nbsp;";
-	$MSG_CONTEST="&nbsp;竞赛&nbsp;";
+	$MSG_CONTEST="竞赛";
 	$MSG_LOGOUT="&nbsp;注销&nbsp;";
 	$MSG_LOGIN="&nbsp;登录&nbsp;";
 	$MSG_REGISTER="&nbsp;注册&nbsp;";
@@ -84,6 +84,20 @@
 	$MSG_Source= "来源" ;
 	$MSG_Time_Limit="时间限制";
 	$MSG_Memory_Limit="内存限制";
-	
+	//admin menu
+	$MSG_SEEOJ="查看前台";
+	$MSG_ADD="添加";
+	$MSG_LIST="列表";
+	$MSG_NEWS="新闻";
+	$MSG_TEAMGENERATOR="比赛队帐号生成器";
+	$MSG_SETMESSAGE="设置公告";
+	$MSG_SETPASSWORD="修改密码";
+	$MSG_REJUDGE="重判题目";
+	$MSG_PRIVILEGE="权限";
+	$MSG_GIVESOURCE="转移源码";
+	$MSG_IMPORT="导入";
+	$MSG_EXPORT="导出";
+	$MSG_UPDATE_DATABASE="更新数据库";
+	$MSG_ONLINE="在线";
 
 ?>

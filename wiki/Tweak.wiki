@@ -30,16 +30,16 @@ table_cache             = 256
   You can copy this to create a new file "/etc/mysql/conf.d/jol.cnf" , if you are using Ubuntu. *
 
  3 set judge.conf to use MultiRUNNING
-
-  * edit /home/judge/etc/judge.conf to set OJ_RUNNING=N (N>1)
-  * mkdirs run1,run2.....run(N-1) make sure the chown judge and chmod 755
-  * sudo pkill judged && sudo judged
-
-  * important: in most case N should be no more than you CPU number*4.
-
+{{{
+ edit /home/judge/etc/judge.conf to set OJ_RUNNING=N (N>1)
+ mkdirs run1,run2.....run(N-1) make sure the chown judge and chmod 755
+ sudo pkill judged && sudo judged
+ important: in most case N should be no more than you CPU number*4.
+}}}
  4 cheat php to use memory for session
-  * edit php.ini (/etc/php5/apache2/php.ini)
-  * set session_save_path to somewhere under /dev/shm
+{{{edit php.ini (/etc/php5/apache2/php.ini)
+set session_save_path to somewhere under /dev/shm
+}}}
  5 using /dev/shm for "JudgeOnline/cache" dir
 {{{
   mkdir /dev/shm/cache

@@ -12,18 +12,17 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		$file = "cache/status_$sid.html";
 	}
 	
-	
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
 	else
 		$last =0;
-	if (!isset($_GET['top'])&&time () - $last < 5) {
+	if ($_SERVER['QUERY_STRING']==""&&time () - $last < 5) {
 		//header ( "Location: $file" );
 		include ($file);
 		exit ();
-	} else {
+	} else if(strlen($_SERVER['QUERY_STRING'])>0){
 		ob_start ();
-		
+	}
 		?>
 
 <?
@@ -296,10 +295,9 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 ?>
 <?php
 		
-		if(!isset($_GET['top'])){
+		if(strlen($_SERVER['QUERY_STRING'])>0){
 			if(!file_exists("cache")) mkdir("cache");
 			file_put_contents($file,ob_get_contents());
 		}
-	}
-	
-	?>
+?>
+<!--not cached-->

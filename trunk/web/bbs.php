@@ -13,10 +13,9 @@ if($OJ_BBS=="discuss"){
 }else{
 
 	if(isset($_GET['id'])){
-	$pid="p".$pid;
-	    header("Location:bbs/search.php?fid[]=2&keywords=".$pid); //chenge this to your own phpBB search link
+	    header("Location:http://bbs.acm.zj.cn/search.php?fid[]=2&keywords=".$pid); //chenge this to your own phpBB search link
 	}else{
-	    header("Location:bbs/");
+	    header("Location:http://bbs.acm.zj.cn/");
 	}
 }
 ?>

@@ -2,6 +2,8 @@
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	@session_start();
+	
+	//cache head start
 	$file="cache/index.html";
 	if (isset($_SESSION['user_id'])){
 		$sid=session_id().$_SERVER['REMOTE_ADDR'];
@@ -28,9 +30,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	} else if($write_cache){
 		ob_start ();
 	}
-		?>
-
-<?
+//cache head stop
+	
 require_once("./include/my_func.inc.php");
 require_once("./include/db_info.inc.php");
 if(isset($OJ_LANG)){
@@ -299,10 +300,11 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 <?require_once("oj-footer.php");
 ?>
 <?php
-		
+	//cache foot start	
 		if($write_cache){
 			if(!file_exists("cache")) mkdir("cache");
 			file_put_contents($file,ob_get_contents());
 		}
+	//cache foot stop
 ?>
 <!--not cached-->

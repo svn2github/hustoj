@@ -16,11 +16,16 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		$last = filemtime ( $file );
 	else
 		$last =0;
-	if ($_SERVER['QUERY_STRING']==""&&time () - $last < 5) {
+	$write_cache=$_SERVER['QUERY_STRING']==""||
+				 $_SERVER['QUERY_STRING']==("cid=".$_GET['cid']);
+	$use_cache=(time () - $last < 5)&&$write_cache;
+	$write_cache=(!$use_cache)&&$write_cache;
+	
+	if ($use_cache) {
 		//header ( "Location: $file" );
 		include ($file);
 		exit ();
-	} else if(strlen($_SERVER['QUERY_STRING'])>0){
+	} else if($write_cache){
 		ob_start ();
 	}
 		?>
@@ -295,7 +300,7 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 ?>
 <?php
 		
-		if(strlen($_SERVER['QUERY_STRING'])>0){
+		if($write_cache){
 			if(!file_exists("cache")) mkdir("cache");
 			file_put_contents($file,ob_get_contents());
 		}

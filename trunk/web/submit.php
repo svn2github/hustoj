@@ -159,7 +159,7 @@ mysql_query($sql);
 		$sid=md5($sid);
 		$file = "cache/status_$sid.html";
 	}
-	if file_exists($file) unlink($file);
+	if (file_exists($file)) unlink($file);
 
 if (!isset($cid)) 
 	header("Location: ./status.php?"."user_id=".$_SESSION['user_id']);

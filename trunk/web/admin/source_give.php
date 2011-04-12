@@ -6,8 +6,8 @@ if (!(isset($_SESSION['administrator']))){
 <?
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
-	$from=intval($_POST['from']);
-	$to=intval($_POST['to']);
+	$from=mysql_real_escape_string($_POST['from']);
+	$to=mysql_real_escape_string($_POST['to']);
 	$start=intval($_POST['start']);
 	$end=intval($_POST['end']);
 	$sql="update `solution` set `user_id`='$to' where `user_id`='$from' and problem_id>=$start and problem_id<=$end and result=4";

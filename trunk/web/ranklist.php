@@ -4,7 +4,7 @@
 	if(isset($_GET['scope']))
 		$scope=$_GET['scope'];
 	if($scope!=""&&$scope!='d'&&$scope!='w'&&$scope!='m')
-		$scope!='y';
+		$scope='y';
 		
 	$rank = 0;
 	if(isset( $_GET ['start'] ))

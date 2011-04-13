@@ -1,10 +1,17 @@
 <?php
 	$now = time ();
+	$scope="";
+	if(isset($_GET['scope']))
+		$scope=$_GET['scope'];
+	if($scope!=""&&$scope!='d'&&$scope!='w'&&$scope!='m')
+		$scope!='y';
+		
+	$rank = 0;
 	if(isset( $_GET ['start'] ))
 		$rank = intval ( $_GET ['start'] );
-	else
-	    $rank = 0;
-	$file = "cache/ranklist$rank.html";
+
+	   
+	$file = "cache/ranklist$scope$rank.html";
 	if (file_exists ( $file ))
 		$last = filemtime ( $file );
 	else
@@ -34,14 +41,39 @@
 		//$rank = intval ( $_GET ['start'] );
 		if ($rank < 0)
 			$rank = 0;
+			
 		$sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
+		
+		if($scope){
+			$s="";
+			switch ($scope){
+				case 'd': $s=1000000;break;
+				case 'w': $s=7000000;break;
+				case 'm': $s=100000000;break;
+				case 'y': $s=10000000000;break;	
+			}
+			$sql="SELECT users.`user_id`,`nick`,s.`solved`,`submit` FROM `users` 
+					right join 
+					(select count(distinct problem_id) solved ,user_id from solution where in_date>now()-$s and result=4 group by user_id limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
+					right join 
+					(select count(distinct problem_id) sumbit ,user_id from solution where in_date>now()-$s group by user_id limit " . strval ( $rank ) . ",$page_size) t on users.user_id=t.user_id
+				ORDER BY s.`solved` DESC,submit,reg_time  LIMIT  0,50
+			 ";
+		}
+		
+		
 		$result = mysql_query ( $sql ); //mysql_error();
 		echo "<center><table width=90%>";
-		echo "<tr><td colspan=6 align=center>
+		echo "<tr><td colspan=3 align=left>
 			<form action=userinfo.php>
 				$MSG_USER<input name=user>
 				<input type=submit value=Go>
-			</form></td></tr>";
+			</form></td><td colspan=3 align=right>
+			<a href=ranklist.php?scope=d>Day</a>
+			<a href=ranklist.php?scope=w>Week</a>
+			<a href=ranklist.php?scope=m>Month</a>
+			<a href=ranklist.php?scope=y>Year</a>
+			</td></tr>";
 		echo "<tr class='toprow'>
 				<td width=5% align=center><b>$MSG_Number</b>
 				<td width=10% align=center><b>$MSG_USER</b>
@@ -76,7 +108,7 @@
 		$row = mysql_fetch_object ( $result );
 		echo "<center>";
 		for($i = 0; $i < $row->mycount; $i += $page_size) {
-			echo "<a href=./ranklist.php?start=" . strval ( $i ) . ">";
+			echo "<a href='./ranklist.php?start=" . strval ( $i ).($scope?"&scope=$scope":"") . "'>";
 			echo strval ( $i + 1 );
 			echo "-";
 			echo strval ( $i + $page_size );

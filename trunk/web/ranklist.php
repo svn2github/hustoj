@@ -47,10 +47,10 @@
 		if($scope){
 			$s="";
 			switch ($scope){
-				case 'd': $s=1000000;break;
-				case 'w': $s=7000000;break;
-				case 'm': $s=100000000;break;
-				case 'y': $s=10000000000;break;	
+				case 'd': $s='1000000';break;
+				case 'w': $s='7000000';break;
+				case 'm': $s='100000000';break;
+				case 'y': $s='10000000000';break;	
 			}
 			$sql="SELECT users.`user_id`,`nick`,s.`solved`,`submit` FROM `users` 
 					right join 

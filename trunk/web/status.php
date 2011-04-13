@@ -4,6 +4,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	@session_start();
 	
 	//cache head start
+	$cache_time=2;
 	$file="cache/index.html";
 	if (isset($_SESSION['user_id'])){
 		$sid=session_id().$_SERVER['REMOTE_ADDR'];
@@ -20,7 +21,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		$last =0;
 	$write_cache=$_SERVER['QUERY_STRING']==""||
 				 $_SERVER['QUERY_STRING']==("cid=".$_GET['cid']);
-	$use_cache=(time () - $last < 5)&&$write_cache;
+	$use_cache=(time () - $last < $cache_time)&&$write_cache;
 	$write_cache=(!$use_cache)&&$write_cache;
 	
 	if ($use_cache) {

@@ -126,7 +126,7 @@ ORDER BY score, in_date
 
 )c
 on b.score=c.score and b.user_id=c.user_id 
-order by c.score desc
+order by c.score,in_date
 LIMIT  $start, $sz";
 
 $result=mysql_query($sql);

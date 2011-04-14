@@ -86,15 +86,7 @@ $start=$page*20;
 $sz=20;
 if ($start+$sz>$acuser) $sz=$acuser-$start;
 
-$sql=" SELECT solution_id, count(*) att ,user_id, language, min(10000000000000000000+time *100000000000 + memory *100000 + code_length ) score, in_date
-FROM solution
-WHERE problem_id =$id
-AND result =4
-GROUP BY user_id
-ORDER BY score, in_date
-LIMIT  $start, $sz";
 
-$result=mysql_query($sql);
 
 // check whether the problem in a contest
 
@@ -112,6 +104,32 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 	$AC=(intval(mysql_num_rows($rrs))>0);
 	mysql_free_result($rrs);
 }
+
+$sql=" select * from
+(
+SELECT solution_id ,user_id,language,10000000000000000000+time *100000000000 + memory *100000 + code_length  score, in_date
+FROM solution 
+WHERE problem_id =$id 
+AND result =4
+
+ORDER BY score, in_date
+)b
+right join
+(
+
+SELECT count(*) att ,user_id, min(10000000000000000000+time *100000000000 + memory *100000 + code_length ) score
+FROM solution
+WHERE problem_id =$id
+AND result =4
+GROUP BY user_id
+ORDER BY score, in_date
+
+)c
+on b.score=c.score and b.user_id=c.user_id 
+order by c.score desc
+LIMIT  $start, $sz";
+
+$result=mysql_query($sql);
 
 echo "<td>";
 echo "<table>";

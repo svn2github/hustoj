@@ -169,21 +169,19 @@ CREATE TABLE `solution` (
 
   `problem_id` int(11) NOT NULL default '0',
 
-  `user_id` varchar(20) NOT NULL default '',
+  `user_id` char(20) NOT NULL default '',
 
   `time` int(11) NOT NULL default '0',
 
   `memory` int(11) NOT NULL default '0',
 
   `in_date` datetime NOT NULL default '0000-00-00 00:00:00',
-
-  `className` varchar(20) NOT NULL default '',
-
+ 
   `result` smallint(6) NOT NULL default '0',
 
   `language` tinyint(4) NOT NULL default '0',
 
-  `ip` varchar(20) NOT NULL default '',
+  `ip` char(15) NOT NULL default '',
 
   `contest_id` int(11) default NULL,
 

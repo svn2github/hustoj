@@ -46,6 +46,10 @@ set session_save_path to somewhere under /dev/shm
   mkdir /dev/shm/cache
   ln -s /dev/shm/cache JudgeOnline/cache
 }}}
+ 6 adjust the value of $cache_time in status.php
+{{{
+bigger value means slower pending but more efficient , smaller value means fast pending but less efficient 
+}}}
 = Test =
 this test running no more then 10(half-page) pending on Dell D620 (1.83GHz CPUx2 1.5GRAM 80Gsata using Ubuntu10.4 LTS on ReiserFS)  with steps 1~3 only
 

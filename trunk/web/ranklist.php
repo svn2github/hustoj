@@ -47,16 +47,26 @@
 		if($scope){
 			$s="";
 			switch ($scope){
-				case 'd': $s='1000000';break;
-				case 'w': $s='7000000';break;
-				case 'm': $s='100000000';break;
-				default : $s='10000000000';	
+				case 'd': 
+					$s=date('Y').'-'.date('m').'-'.date('d');
+					break;
+				case 'w': 
+					$monday=mktime(0, 0, 0, date("m"),date("d")-date("w")+1, date("Y"));
+					//$monday->subDays(date('w'));
+					$s=strftime("%Y-%m-%d",$monday);
+					break;
+				case 'm': 
+					$s=date('Y').'-'.date('m').'-01';
+					;break;
+				default : 
+					$s=date('Y').'-01-01';
 			}
+			//echo $s."<-------------------------";
 			$sql="SELECT users.`user_id`,`nick`,s.`solved`,t.`submit` FROM `users` 
 					right join 
-					(select count(distinct problem_id) solved ,user_id from solution where in_date>now()-'$s' and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
+					(select count(distinct problem_id) solved ,user_id from solution where in_date>'$s' and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
 					left join 
-					(select count( problem_id) submit ,user_id from solution where in_date>now()-'$s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
+					(select count( problem_id) submit ,user_id from solution where in_date>'$s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
 				ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
 			 ";
 			 //echo $sql;

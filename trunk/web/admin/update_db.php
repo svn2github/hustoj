@@ -69,15 +69,26 @@ CREATE TABLE `mail` (
   PRIMARY KEY  (`mail_id`),
   KEY `uid` (`to_user`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";
+$tsql[5]="ALTER TABLE `solution` 
+		MODIFY COLUMN `user_id` CHAR(20)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+		DROP COLUMN `className`,
+		MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+";
+$csql[5]="";
+
+$tsql[6]="whatever;";
+$csql[6]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
 
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
-		if(!mysql_query($tsql[$i])){
-				echo $csql[$i]."<br><br>";
+		if(!$res=mysql_query($tsql[$i])){
+				echo $csql[$i]."<br>";
 				mysql_query($csql[$i]);
+		}else{
+				echo mysql_error()."<br>";
 		}
 		
 	}

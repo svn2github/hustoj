@@ -52,6 +52,11 @@ or set session.save_handler=mm
 bigger value means slower pending but more efficient
 smaller value means fast pending but less efficient 
 }}}
+ 7 using /admin/updatedb.php to optimize tables structure.
+{{{
+Login with administrator privilige and access this page in admin menu.
+}}}
+
 = Test =
 this test running no more then 10(half-page) pending on Dell D620 (1.83GHz CPUx2 1.5GRAM 80Gsata using Ubuntu10.4 LTS on ReiserFS)  with steps 1~3 only
 

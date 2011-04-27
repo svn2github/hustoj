@@ -1,7 +1,7 @@
 //
 // File:   main.cc
 // Author: sempr
-//
+// refacted by zhblue
 /*
  * Copyright 2008 sempr <iamsempr@gmail.com>
  *
@@ -677,13 +677,13 @@ void copy_shell_runtime(char * work_dir) {
 	execute_cmd("cp /lib/* %s/lib/", work_dir);
 	execute_cmd("cp /bin/busybox %s/bin/", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
-
+	execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
+	
 }
 void copy_bash_runtime(char * work_dir) {
 	char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
-	execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
 	execute_cmd("cp `which bc`  %s/bin/", work_dir);
 	execute_cmd("busybox dos2unix Main.sh", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/grep", work_dir);

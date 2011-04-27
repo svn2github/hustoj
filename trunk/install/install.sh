@@ -21,7 +21,7 @@ sudo yum install gcc-c++  mysql-devel php
 #compile and install the core
 cd hustoj-read-only/core/
 sudo ./make.sh
-
+cd ..
 #install web and db
 sudo cp -R hustoj-read-only/web $WEBBASE/JudgeOnline
 sudo chmod -R 771 $WEBBASE/JudgeOnline

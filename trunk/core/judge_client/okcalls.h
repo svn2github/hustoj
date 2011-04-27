@@ -81,9 +81,40 @@ int LANG_BV[256]={SYS_access
 ,SYS_rt_sigprocmask
 ,SYS_stat
 ,SYS_uname
-,SYS_write,0};
-int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
+,SYS_write,14,0};
+int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
-int LANG_YV[256]={0};
-int LANG_YC[256]={0};
+int LANG_YV[256]={SYS_access
+,SYS_arch_prctl
+,SYS_brk
+,SYS_close
+,SYS_execve
+,SYS_exit_group
+,SYS_fcntl
+,SYS_fstat
+,SYS_futex
+,SYS_getcwd
+,SYS_getdents
+,SYS_getegid
+,SYS_geteuid
+,SYS_getgid
+,SYS_getrlimit
+,SYS_getuid
+,SYS_ioctl
+,SYS_lseek
+,SYS_lstat
+,SYS_mmap
+,SYS_mprotect
+,SYS_munmap
+,SYS_open
+,SYS_read
+,SYS_readlink
+,SYS_rt_sigaction
+,SYS_rt_sigprocmask
+,SYS_set_robust_list
+,SYS_set_tid_address
+,SYS_stat
+,SYS_write
+,0};
+int LANG_YC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 #endif

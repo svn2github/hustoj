@@ -50,8 +50,8 @@ int LANG_CC[256]={-1,       -1,        -1,        -1,       -1,        -1,      
 int LANG_PV[256]={SYS_open, SYS_set_thread_area, SYS_brk, SYS_read, SYS_uname, SYS_write, SYS_execve, SYS_ioctl, SYS_readlink, SYS_mmap, SYS_rt_sigaction, SYS_getrlimit, 252,191,158,231,SYS_close,SYS_exit_group,SYS_munmap,SYS_time,4,0};
 int LANG_PC[256]={-1,       -1,                  -1,      -1,       -1,        -1,        1,          -1,        -1,           -1,       -1,               -1,            2,-1,-1,-1,-1,-1,-1,-1,-1,0};
 //disable Ruby Bash Python on 64bits , so it compile and work with others, at least.
-int LANG_RV[256]={0};
-int LANG_RC[256]={0};
+int LANG_RV[256]={SYS_access,SYS_arch_prctl,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fstat,SYS_futex,SYS_getegid,SYS_geteuid,SYS_getgid,SYS_getuid,SYS_getrlimit,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_tid_address,SYS_write,0};
+int LANG_RC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
 int LANG_BV[256]={0};
 int LANG_BC[256]={0};

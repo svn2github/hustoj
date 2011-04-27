@@ -673,8 +673,10 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 void copy_shell_runtime(char * work_dir) {
 
 	execute_cmd("mkdir %s/lib", work_dir);
+	execute_cmd("mkdir %s/lib64", work_dir);
 	execute_cmd("mkdir %s/bin", work_dir);
 	execute_cmd("cp /lib/* %s/lib/", work_dir);
+	execute_cmd("cp /lib64/* %s/lib64/", work_dir);
 	execute_cmd("cp /bin/busybox %s/bin/", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
 	execute_cmd("cp /bin/bash %s/bin/bash", work_dir);

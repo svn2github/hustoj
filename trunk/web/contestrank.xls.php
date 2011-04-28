@@ -52,6 +52,8 @@ class TM{
 				$this->mark-=$punish;
 			else
 				$this->mark-=intval($mark_per_punish/2);
+			if($this->mark<$mark_base)
+				$this->mark=$mark_base;
 //			echo "Time:".$this->time."<br>";
 //			echo "Solved:".$this->solved."<br>";
 		}
@@ -98,7 +100,7 @@ $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
-
+if($pid_cnt==1) $mark_base=100;
 $mark_per_problem=(100-$mark_base)/$pid_cnt;
 mysql_free_result($result);
 
@@ -150,7 +152,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	}
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
-	echo "<td>".($U[$i]->mark);
+	echo "<td>".($U[$i]->mark==100?100-pow($rank,1/(1+log($user_cnt,40)))$U[$i]->mark);
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){

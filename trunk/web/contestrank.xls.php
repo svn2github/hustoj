@@ -152,7 +152,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	}
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
-	echo "<td>".($U[$i]->mark==100?100-pow($rank,1/(1+log($user_cnt,40)))$U[$i]->mark);
+	echo "<td>".($U[$i]->mark==100?100-pow($rank,1/(1+log($user_cnt,40))):$U[$i]->mark);
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){

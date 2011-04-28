@@ -51,7 +51,7 @@ class TM{
 			if($punish<intval($mark_per_problem/2))
 				$this->mark-=$punish;
 			else
-				$this->mark-=intval($mark_per_punish/2);
+				$this->mark-=intval($mark_per_problem/2);
 			if($this->mark<$mark_base)
 				$this->mark=$mark_base;
 //			echo "Time:".$this->time."<br>";

@@ -100,8 +100,12 @@ $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
-if($pid_cnt==1) $mark_base=100;
-$mark_per_problem=(100-$mark_base)/$pid_cnt;
+if($pid_cnt==1) {
+	$mark_base=100;
+	$mark_per_problem=0;
+}else{
+	$mark_per_problem=(100-$mark_base)/($pid_cnt-1);
+}
 mysql_free_result($result);
 
 $sql="SELECT 
@@ -152,7 +156,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	}
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
-	echo "<td>".($U[$i]->mark==100?100-pow($rank,1/(1+log($user_cnt,40))):$U[$i]->mark);
+	echo "<td>".intval($U[$i]->mark>99?100-pow($rank,1/(1+log($user_cnt,40))):$U[$i]->mark);
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){

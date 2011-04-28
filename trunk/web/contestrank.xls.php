@@ -8,7 +8,7 @@ require_once("./include/db_info.inc.php");
 global $mark_base,$mark_per_problem,$mark_per_punish;
  $mark_base=60;
  $mark_per_problem=10;
- $mark_per_punish=1;
+ $mark_per_punish=2;
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 }
@@ -48,12 +48,12 @@ class TM{
 				$this->mark+=$mark_per_problem;
 			}
 			$punish=intval($this->p_wa_num[$pid]*$mark_per_punish);
-			if($punish<intval($mark_per_problem/2))
+			if($punish<intval($mark_per_problem*.8))
 				$this->mark-=$punish;
 			else
-				$this->mark-=intval($mark_per_problem/2);
-			if($this->mark<$mark_base)
-				$this->mark=$mark_base;
+				$this->mark-=intval($mark_per_problem*.8);
+//			if($this->mark<$mark_base)
+//				$this->mark=$mark_base;
 //			echo "Time:".$this->time."<br>";
 //			echo "Solved:".$this->solved."<br>";
 		}
@@ -106,6 +106,7 @@ if($pid_cnt==1) {
 }else{
 	$mark_per_problem=(100-$mark_base)/($pid_cnt-1);
 }
+$mark_per_punish=$mark_per_problem/5;
 mysql_free_result($result);
 
 $sql="SELECT 
@@ -156,7 +157,16 @@ for ($i=0;$i<$user_cnt;$i++){
 	}
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
-	echo "<td>".intval($U[$i]->mark>99?100-pow($rank,1/(1+log($user_cnt,40))):$U[$i]->mark);
+	echo "<td>";
+	if($U[$i]->mark>$mark_base+$mark_per_problem||$pid_cnt==1)
+		$U[$i]->mark-=intval(pow($rank,log(39,$user_cnt)));
+        
+	if($U[$i]->mark<($mark_base+100)/2&&$usolved==$pid_cnt&&$pid_cnt>1)
+                $U[$i]->mark=($mark_base+100)/2;
+        
+	if($U[$i]->mark<$mark_base&&$usolved&&$pid_cnt>1)
+		$U[$i]->mark=$mark_base;
+	echo $U[$i]->mark>0?intval($U[$i]->mark):0;
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){

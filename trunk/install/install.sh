@@ -9,14 +9,16 @@ WEBBASE=/var/www/
 DBUSER=root
 DBPASS=root
 
-svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
+#try install tools
+sudo apt-get install g++ libmysql++-dev php5 apache2 mysql-server php5-mysql subversion
+sudo yum install gcc-c++  mysql-devel php
+
+sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
 
 #create user and homedir
 sudo useradd -m -u 1536 judge
 
-#try install tools
-sudo apt-get install g++ libmysql++-dev php5 apache2 mysql-server php5-mysql
-sudo yum install gcc-c++  mysql-devel php
+
 
 #compile and install the core
 cd hustoj-read-only/core/

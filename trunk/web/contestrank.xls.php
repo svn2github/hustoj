@@ -158,7 +158,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
 	echo "<td>";
-	if($U[$i]->mark>$mark_base+$mark_per_problem||$pid_cnt==1)
+	if($U[$i]->mark>$mark_base||$pid_cnt==1)
 		$U[$i]->mark-=intval(pow($rank,log(39,$user_cnt)));
         
 	if($U[$i]->mark<($mark_base+100)/2&&$usolved==$pid_cnt&&$pid_cnt>1)

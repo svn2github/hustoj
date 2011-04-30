@@ -96,7 +96,7 @@
 </div><!--end subhead-->
 
 <?
-	echo "<marquee id=broadcast scrollamount=3 direction=up scrolldelay=150>";
+	echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250>";
 	echo "<font color=red>";
 	require('./admin/msg.txt');
 	echo "</font>";

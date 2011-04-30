@@ -50,47 +50,45 @@
 <div id=head>
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 </div><!--end head-->
-<div id=menu>
-<table width=96% align="center"> 
-	<tr  class='hd' valign="top">
+<div id=menu >
+
 		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
-		<th><span style="color:1a5cc8" id="dict_status"></span></th>
+		<span style="color:1a5cc8" id="dict_status"></span>
 		<?}?>
-		<th><a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a></th>
-		<th><a href="./bbs.php"><?=$MSG_BBS?></a></th>
-		<th><a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a></th>
-		<th><a href="./problemset.php"><?=$MSG_PROBLEMS?></a></th>
-		<th><a href="./status.php"><?=$MSG_STATUS?></a></th>
-		<th><a href="./ranklist.php"><?=$MSG_RANKLIST?></a></th>
-		<th><a href="./contest.php"><?=checkcontest($MSG_CONTEST)?></a></th>
+		<a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
+		<a href="./bbs.php"><?=$MSG_BBS?></a>
+		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
+		<a href="./problemset.php"><?=$MSG_PROBLEMS?></a>
+		<a href="./status.php"><?=$MSG_STATUS?></a>
+		<a href="./ranklist.php"><?=$MSG_RANKLIST?></a>
+		<a href="./contest.php"><?=checkcontest($MSG_CONTEST)?></a>
 		
-	</tr>
-</table>
+	
 </div><!--end menu-->
-<div id=profile>
-<table width=96% align="center"><tr class='hd' valign="top">
+<div id=profile >
+
 <?
 			
 			if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
-				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b>
-					</a><th><a href='userinfo.php?user=$sid'>
+				print "&nbsp;<a href=./modifypage.php>$MSG_USERINFO
+					</a><a href='userinfo.php?user=$sid'>
 				<font color=red>$sid</font></a>";
 				$mail=checkmail();
 				if ($mail)
 					print "<a href=mail.php>$mail</a>";
-				print "</th><th><a href=logout.php>$MSG_LOGOUT</a></th>";
+				print "<a href=logout.php>$MSG_LOGOUT</a>";
 			}else{
-				print "<th><a href=loginpage.php>$MSG_LOGIN</a></th>";
-				print "<th><a href=registerpage.php>$MSG_REGISTER</a></th>";
+				print "<a href=loginpage.php>$MSG_LOGIN</a>";
+				print "<a href=registerpage.php>$MSG_REGISTER</a>";
 			}
 			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-				print "<th><a href=admin>$MSG_ADMIN</a></th>";
+				print "<a href=admin>$MSG_ADMIN</a>";
 			
 			}
 		?>
-</tr>
-</table>
+
+
 </div><!--end profile-->
 <div id=broadcast>
 <?

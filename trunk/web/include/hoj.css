@@ -77,26 +77,29 @@ div.content {
 	z-index:1; 
 	visibility:visible;
 	text-align:center;
+
 }
 #menu{
 	position:absolute; 
 	left:0px; 
 	top:53px;
-	width:730px; 
+	width:630px; 
 	height:32px;
 	z-index:2; 
 	visibility:visible;
-	text-align:center;
+	text-align:right;
+	font-weight:bold;
 }
 #profile{
 	position:absolute; 
-	left:730px; 
+	left:630px; 
 	top:53px;
-	width:289px; 
+	width:389px; 
 	height:32px;
 	z-index:3; 
 	visibility:visible;
-	text-align:center;
+	text-align:left;
+	font-weight:bold;
 }
 #broadcast{
 //	position:absolute; 
@@ -131,7 +134,7 @@ div.content {
 }
 #logo{
 	position:absolute; 
-	left:160px; 
+	left:120px; 
 	top:0px;
 }
 

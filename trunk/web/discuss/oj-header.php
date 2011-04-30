@@ -60,7 +60,7 @@
 		<?}?>
 		<a href="../<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
 		<a href="../bbs.php"><?=$MSG_BBS?></a>
-		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
+		<a href="../<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
 		<a href="../problemset.php"><?=$MSG_PROBLEMS?></a>
 		<a href="../status.php"><?=$MSG_STATUS?></a>
 		<a href="../ranklist.php"><?=$MSG_RANKLIST?></a>

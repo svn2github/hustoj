@@ -48,8 +48,8 @@
 	}
 ?>
 </head>
-<body><img id=logo src=./image/logo.png>
-<div id=head>
+<body>
+<div id=head><img id=logo src=./image/logo.png>
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 </div><!--end head-->
 <div id=subhead>

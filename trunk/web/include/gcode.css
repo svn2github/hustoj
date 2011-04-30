@@ -69,21 +69,8 @@ div.content {
 }
 
 
-#foot{
-	position:absolute; 
-	left:0px; 
-	top:320px;
-	width:1019px; 
-	height:133px;
-	z-index:7; 
-	visibility:visible
-	text-align:center;
-}
-#logo{
-	position:absolute; 
-	left:10px; 
-	top:54px;
-}
+
+
 #menu{
 position:absolute; 
 left:0px; top:0px;width:815px; height:54px;z-index:1; visibility:visible;
@@ -94,22 +81,41 @@ position:absolute;
  left:700px; top:0px;width:300px; height:54px;z-index:2; visibility:visible;
  text-align:right;
 }
+
+
 #head{
 position:absolute; 
-left:0px; top:90px;width:163px; height:66px;z-index:3; visibility:visible;
+left:0px; top:65px;width:163px; height:66px;z-index:3; visibility:visible;
 font-size:10;
 color:red;
 }
+#logo{
+	position:absolute; 
+	left:10px; 
+	top:-40px;
+}
+#broadcast{
+position:absolute; 
+left:163px; top:20px;width:800px; height:120px;z-index:6; visibility:visible;
+//background:#eeeeff;
+}
+
 #main{
 position:absolute; 
-left:163px; top:54px;width:800px; height:600px;z-index:4; visibility:visible;
+left:0px; top:163px;width:100%; height:600px;z-index:4; visibility:visible;
 }
 #submenu{
 position:absolute; 
 left:0px; top:120px;width:163px; height:169px;z-index:5; visibility:visible;
 }
-#broadcast{
-position:absolute; 
-left:0px; top:289px;width:163px; height:286px;z-index:6; visibility:visible;
+
+#foot{
+	position:relative; 
+	left:0px; 
+	top:auto;
+	width:1019px; 
+	z-index:7; 
+	visibility:visible
+	text-align:center;
 }
 

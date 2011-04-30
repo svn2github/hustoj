@@ -83,7 +83,7 @@ div.content {
 	position:absolute; 
 	left:0px; 
 	top:53px;
-	width:1019px; 
+	width:100%; 
 	height:32px;
 	z-index:2; 
 	visibility:visible;
@@ -92,9 +92,9 @@ div.content {
 }
 #profile{
 	position:absolute; 
-	left:630px; 
+	left:0px; 
 	top:0px;
-	width:389px; 
+	width:100%; 
 	height:32px;
 	z-index:3; 
 	visibility:visible;
@@ -105,7 +105,7 @@ div.content {
 //	position:absolute; 
 	left:0px; 
 	top:85px;
-	width:1019px; 
+	width:80%; 
 	height:39px;
 	z-index:4; 
 	visibility:visible;
@@ -116,7 +116,7 @@ div.content {
 //	position:absolute;
 	left:0px;
 	top:142px;
-	width:1019px; 
+	width:100%; 
 	height:auto;
 	z-index:6; 
 	visibility:visible
@@ -126,7 +126,7 @@ div.content {
 //	position:absolute; 
 	left:0px; 
 	top:320px;
-	width:1019px; 
+	width:100%; 
 	height:133px;
 	z-index:7; 
 	visibility:visible
@@ -139,5 +139,5 @@ div.content {
 	z-index:6; 
 	background: #F3F2E2 url(image/logo.png) no-repeat;
 }
-}
+
 

@@ -71,8 +71,7 @@ if (isset($_GET['cid'])){
 	require_once("oj-header.php");
 }
 ?>
-<table width=100%>
-<tr><td>
+<div>
 <?
 $order_str=" ORDER BY `solution_id` DESC ";
 $start_first=1;
@@ -180,19 +179,18 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 }
 echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
-</td></tr>
-</table>
+</div>
 <table align=center>
 <tr  class='toprow'>
-<td width="8%"><?=$MSG_RUNID?>
-<td width="10%"><?=$MSG_USER?>
-<td width="6%"><?=$MSG_PROBLEM?>
-<td width="17%"><?=$MSG_RESULT?>
-<td width="10%"><?=$MSG_MEMORY?>
-<td width="8%"><?=$MSG_TIME?>
-<td width="6%"><?=$MSG_LANG?>
-<td width="10%"><?=$MSG_CODE_LENGTH?>
-<td width="17%"><?=$MSG_SUBMIT_TIME?>
+<td ><?=$MSG_RUNID?>
+<td ><?=$MSG_USER?>
+<td ><?=$MSG_PROBLEM?>
+<td ><?=$MSG_RESULT?>
+<td ><?=$MSG_MEMORY?>
+<td ><?=$MSG_TIME?>
+<td ><?=$MSG_LANG?>
+<td ><?=$MSG_CODE_LENGTH?>
+<td ><?=$MSG_SUBMIT_TIME?>
 </tr>
 <?
 

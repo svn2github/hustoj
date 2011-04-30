@@ -1,0 +1,158 @@
+
+a{ color:#1a5cc8; text-decoration:none }
+a:hover { color:orange; text-decoration:underline }
+
+h2{color:blue} 
+
+.toprow{
+	background-color:#1a5cc8;
+	color:#FFFFFF;
+    font-weight:bold;
+   white-space: nowrap;
+}
+.toprow a{ font-family: Arial; font-weight: bold; font-size: 18px; color: #FFFFFF; margin: 15px }
+.toprow a:hover{ font-family: Arial; font-weight: bold; font-size: 18px; color:orange; margin: 15px }
+
+.oddrow{background-color:#D7EBFF;white-space: nowrap;}
+.evenrow{background-color:#FFFFFF;white-space: nowrap;}
+body{
+	background-color:#FFFFFF;
+	background-image: url(../image/background.jpg);
+}
+.hd{
+color:#FFFFFF;
+font-weight:bold;
+}
+
+
+.time{
+	text-align: right;
+}
+.ip{
+	text-align: right;
+	padding-right: 5px;
+}
+tr.userinfo{
+	background-color:#FFFFF0;
+	font-size: 16px;
+}
+span.yes,.green {
+color:green;
+font-weight: bolder; 
+}
+span.no,.red{
+color:red;
+font-weight: bolder;
+}
+
+span.exadmin{
+color:gray;
+}
+#center{
+  text-align:center;
+}
+
+div.content {
+	height: auto;
+	background:#e4f0f8;
+	margin: 0;
+	padding: 0 20px;
+	font-size: 14px;
+	font-family: Times New Roman;
+	text-align: left
+}
+.sampledata{
+    white-space:pre;
+    background:#8db8ff;
+    font-size: 18px;
+	font-family:Monospace;
+}
+
+#head{
+//	position:absolute; 
+	left:0px; 
+	top:0px;
+	width:100%; 
+	height:53px;
+	z-index:1; 
+	visibility:visible;
+	text-align:center;
+
+}
+#menu{
+	position:absolute; 
+	left:0px; 
+	top:53px;
+	width:630px; 
+	height:32px;
+	z-index:2; 
+	visibility:visible;
+	text-align:right;
+	font-weight:bold;
+}
+#profile{
+	position:absolute; 
+	left:630px; 
+	top:53px;
+	width:389px; 
+	height:32px;
+	z-index:3; 
+	visibility:visible;
+	text-align:left;
+	font-weight:bold;
+}
+#broadcast{
+//	position:absolute; 
+	left:0px; 
+	top:85px;
+	width:1019px; 
+	height:39px;
+	z-index:4; 
+	visibility:visible;
+	text-align:center;
+}
+
+#main{
+//	position:absolute;
+	left:0px;
+	top:142px;
+	width:1019px; 
+	height:auto;
+	z-index:6; 
+	visibility:visible
+	text-align:center;
+}
+#foot{
+//	position:absolute; 
+	left:0px; 
+	top:320px;
+	width:1019px; 
+	height:133px;
+	z-index:7; 
+	visibility:visible
+	text-align:center;
+}
+#logo{
+	position:absolute; 
+	left:120px; 
+	top:0px;
+}
+#menu{
+position:absolute; left:0px; top:0px;width:815px; height:54px;z-index:1; visibility:visible;
+}
+#profile{
+position:absolute; left:815px; top:0px;width:188px; height:54px;z-index:2; visibility:visible;
+}
+#head{
+position:absolute; left:0px; top:54px;width:163px; height:66px;z-index:3; visibility:visible;
+}
+#main{
+position:absolute; left:163px; top:54px;width:800px; height:600px;z-index:4; visibility:visible;
+}
+#submenu{
+position:absolute; left:0px; top:120px;width:163px; height:169px;z-index:5; visibility:visible;
+}
+#broadcast{
+position:absolute; left:0px; top:289px;width:163px; height:286px;z-index:6; visibility:visible;
+}
+

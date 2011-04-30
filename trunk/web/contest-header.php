@@ -23,8 +23,9 @@ if (isset($_GET['pid']))
 	<td width=15%><a class=hd href='./status.php?cid=<?=$cid?>'><?=$MSG_STATUS?></a>
 	<td width=15%><a class=hd href='./conteststatistics.php?cid=<?=$cid?>'><?=$MSG_STATISTICS?></a>
 </tr></table>
-<br>
-<?
+
+<div id=broadcast>
+<?php
 $fp=fopen("admin/msg.txt","r");
 $msg="";
 while (!feof($fp)){
@@ -38,7 +39,9 @@ if (strlen($msg)>5){
 	echo "</font>";
 	echo "</marquee>";
 }
-
+?>
+</div><!--end broadcast-->
+<?php
 $contest_ok=true;
 $str_private="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' && `private`='1'";
 $result=mysql_query($str_private);
@@ -47,3 +50,4 @@ mysql_free_result($result);
 if ($row[0]=='1' && !isset($_SESSION['c'.$cid])) $contest_ok=false;
 if (isset($_SESSION['administrator'])) $contest_ok=true;
 ?>
+<div id=main>

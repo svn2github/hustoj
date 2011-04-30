@@ -1,3 +1,5 @@
+</div><!--end main-->
+<div id=foot>
 ﻿<br>
 
 <a href="./"><span class=red>HOME</span></a>
@@ -20,5 +22,6 @@
 		
 	</p>
 </center>
+</div><!--end foot-->
 </body>
 </html>

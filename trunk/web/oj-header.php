@@ -47,10 +47,12 @@
 ?>
 </head>
 <body>
-<center>
+<div id=head>
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
-<table width=96%> 
-	<tr align="center" class='hd' valign="top">
+</div><!--end head-->
+<div id=menu>
+<table width=96% align="center"> 
+	<tr  class='hd' valign="top">
 		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
 		<th><span style="color:1a5cc8" id="dict_status"></span></th>
 		<?}?>
@@ -61,11 +63,18 @@
 		<th><a href="./status.php"><?=$MSG_STATUS?></a></th>
 		<th><a href="./ranklist.php"><?=$MSG_RANKLIST?></a></th>
 		<th><a href="./contest.php"><?=checkcontest($MSG_CONTEST)?></a></th>
-		<?
+		
+	</tr>
+</table>
+</div><!--end menu-->
+<div id=profile>
+<table width=96% align="center"><tr class='hd' valign="top">
+<?
 			
 			if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
-				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b></a>&nbsp;&nbsp;<a href='userinfo.php?user=$sid'>
+				print "<th><a href=./modifypage.php><b>$MSG_USERINFO</b>
+					</a><th><a href='userinfo.php?user=$sid'>
 				<font color=red>$sid</font></a>";
 				$mail=checkmail();
 				if ($mail)
@@ -80,9 +89,10 @@
 			
 			}
 		?>
-	</tr>
+</tr>
 </table>
-</center>
+</div><!--end profile-->
+<div id=broadcast>
 <?
 $fp=fopen("admin/msg.txt","r");
 $msg="";
@@ -98,5 +108,7 @@ if (strlen($msg)>5){
 	echo "</marquee>";
 }
 ?>
+</div><!--end broadcast-->
 <script src="include/underlineTranslation.js" type="text/javascript"></script> 
 <script type="text/javascript">dictInit();</script> 
+<div id=main>

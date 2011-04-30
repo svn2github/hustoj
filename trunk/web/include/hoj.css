@@ -82,7 +82,7 @@ div.content {
 	position:absolute; 
 	left:0px; 
 	top:53px;
-	width:830px; 
+	width:730px; 
 	height:32px;
 	z-index:2; 
 	visibility:visible;
@@ -90,9 +90,9 @@ div.content {
 }
 #profile{
 	position:absolute; 
-	left:830px; 
+	left:730px; 
 	top:53px;
-	width:189px; 
+	width:289px; 
 	height:32px;
 	z-index:3; 
 	visibility:visible;
@@ -108,15 +108,7 @@ div.content {
 	visibility:visible;
 	text-align:center;
 }
-#split{
-	position:absolute; 
-	left:0px; 
-	top:124px;
-	width:1019px; 
-	height:18px;
-	z-index:5; 
-	visibility:visible
-}
+
 #main{
 //	position:absolute;
 	left:0px;
@@ -124,14 +116,17 @@ div.content {
 	width:1019px; 
 	height:auto;
 	z-index:6; 
-	visibility:visible}
+	visibility:visible
+	text-align:center;
+}
 #foot{
-	position:absolute; 
+//	position:absolute; 
 	left:0px; 
 	top:320px;
 	width:1019px; 
 	height:133px;
 	z-index:7; 
 	visibility:visible
+	text-align:center;
 }
 

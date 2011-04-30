@@ -76,8 +76,11 @@ $tsql[5]="ALTER TABLE `solution`
 ";
 $csql[5]="";
 
-$tsql[6]="whatever;";
-$csql[6]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
+$tsql[6]="select langmask from contest limit 1;";
+$csql[6]="ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;";
+
+$tsql[7]="whatever;";
+$csql[7]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
 
 
 if(isset($_POST['do'])){

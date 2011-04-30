@@ -13,7 +13,7 @@ h2{color:blue}
 .toprow a{ font-family: Arial; font-weight: bold; font-size: 18px; color: #FFFFFF; margin: 15px }
 .toprow a:hover{ font-family: Arial; font-weight: bold; font-size: 18px; color:orange; margin: 15px }
 
-.oddrow{background-color:#D7EBFF;white-space: nowrap;}
+.oddrow{background-color:#E5ECF9;white-space: nowrap;}
 .evenrow{background-color:#FFFFFF;white-space: nowrap;}
 body{
 	background-color:#FFFFFF;

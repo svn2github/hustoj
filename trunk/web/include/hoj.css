@@ -129,4 +129,9 @@ div.content {
 	visibility:visible
 	text-align:center;
 }
+#logo{
+	position:absolute; 
+	left:160px; 
+	top:0px;
+}
 

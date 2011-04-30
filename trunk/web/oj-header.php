@@ -46,7 +46,7 @@
 	}
 ?>
 </head>
-<body>
+<body><img id=logo src=image/logo.png>
 <div id=head>
 <h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 </div><!--end head-->

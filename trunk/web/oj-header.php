@@ -94,16 +94,16 @@
 
 </div><!--end profile-->
 </div><!--end subhead-->
-<div id=broadcast>
+
 <?
-	echo "<marquee scrollamount=3 behavior=ALTERNATE scrolldelay=150>";
+	echo "<marquee id=broadcast scrollamount=3 direction=up scrolldelay=150>";
 	echo "<font color=red>";
 	require('./admin/msg.txt');
 	echo "</font>";
 	echo "</marquee>";
 
 ?>
-</div><!--end broadcast-->
+
 <script src="include/underlineTranslation.js" type="text/javascript"></script> 
 <script type="text/javascript">dictInit();</script> 
 <div id=main>

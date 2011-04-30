@@ -1,11 +1,12 @@
-</div><!--end main-->
+
 <div id=foot>
-﻿<br>
+﻿<!--<br>
 
 <a href="./"><span class=red>HOME</span></a>
 <a href="javascript:history.go(-1)"><span class=red>Back</span></a>
 
 <hr>
+-->
 <center>
 	<p>
 	<?if(file_exists("setlang.php")){?>
@@ -23,5 +24,6 @@
 	</p>
 </center>
 </div><!--end foot-->
+</div><!--end main-->
 </body>
 </html>

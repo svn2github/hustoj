@@ -71,7 +71,7 @@ if (isset($_GET['cid'])){
 	require_once("oj-header.php");
 }
 ?>
-<table width=90%>
+<table width=100%>
 <tr><td>
 <?
 $order_str=" ORDER BY `solution_id` DESC ";
@@ -113,7 +113,7 @@ if ($language!=-1){
 ?>
 <form id=simform action="status.php" method="get">
 <?=$MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
-<?=$MSG_USER?>:<input type=text size=6 name=user_id value='<?=$user_id?>'>
+<?=$MSG_USER?>:<input type=text size=4 name=user_id value='<?=$user_id?>'>
 <?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 <?=$MSG_LANG?>:<select size="1" name="language">
 <?
@@ -297,7 +297,7 @@ else
 	echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
-</center>
+
 <?require_once("oj-footer.php");
 ?>
 <?php

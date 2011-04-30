@@ -83,22 +83,22 @@ div.content {
 	position:absolute; 
 	left:0px; 
 	top:53px;
-	width:630px; 
+	width:1019px; 
 	height:32px;
 	z-index:2; 
 	visibility:visible;
-	text-align:right;
+	text-align:center;
 	font-weight:bold;
 }
 #profile{
 	position:absolute; 
 	left:630px; 
-	top:53px;
+	top:0px;
 	width:389px; 
 	height:32px;
 	z-index:3; 
 	visibility:visible;
-	text-align:left;
+	text-align:right;
 	font-weight:bold;
 }
 #broadcast{
@@ -136,5 +136,8 @@ div.content {
 	position:absolute; 
 	left:120px; 
 	top:0px;
+	z-index:6; 
+	background: #F3F2E2 url(image/logo.png) no-repeat;
+}
 }
 

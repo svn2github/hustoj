@@ -115,7 +115,7 @@ div.content {
 #main{
 //	position:absolute;
 	left:0px;
-	top:142px;
+	top:209px;
 	width:100%; 
 	height:auto;
 	z-index:6; 
@@ -123,7 +123,7 @@ div.content {
 	text-align:center;
 }
 #foot{
-//	position:absolute; 
+	position:static; 
 	left:0px; 
 	top:520px;
 	width:100%; 

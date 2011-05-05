@@ -48,6 +48,12 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: u.115.com请点击"备份下载"
+r988
+
+http://u.115.com/file/e6c00u7r#
+hustoj-FPS-r988.iso.iso
+
+
 r919
 
 md5:9fde0f381eaaca8712725bff142d234e

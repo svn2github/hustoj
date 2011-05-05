@@ -7,7 +7,7 @@
 	<link rel=stylesheet href='../include/hoj.css' type='text/css'>
 <?
 
-	require_once('../include/db_info.inc.php');
+	require('../include/db_info.inc.php');
 
 	
 	function checkcontest($MSG_CONTEST){
@@ -48,9 +48,9 @@
 	}
 ?>
 </head>
-<body><img id=logo src=../image/logo.png>
+<body>
 <div id=head>
-<h2><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
+<h2><img id=logo src=../image/logo.png><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
 </div><!--end head-->
 <div id=subhead>
 <div id=menu >
@@ -60,7 +60,7 @@
 		<?}?>
 		<a href="../<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
 		<a href="../bbs.php"><?=$MSG_BBS?></a>
-		<a href="../<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
+		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
 		<a href="../problemset.php"><?=$MSG_PROBLEMS?></a>
 		<a href="../status.php"><?=$MSG_STATUS?></a>
 		<a href="../ranklist.php"><?=$MSG_RANKLIST?></a>
@@ -96,11 +96,12 @@
 </div><!--end subhead-->
 <div id=broadcast>
 <?
-	echo "<marquee scrollamount=3 behavior=ALTERNATE scrolldelay=150>";
+	echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250>";
 	echo "<font color=red>";
 	require('../admin/msg.txt');
 	echo "</font>";
 	echo "</marquee>";
+
 
 ?>
 </div><!--end broadcast-->

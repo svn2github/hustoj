@@ -69,11 +69,7 @@ CREATE TABLE `mail` (
   PRIMARY KEY  (`mail_id`),
   KEY `uid` (`to_user`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";
-$tsql[5]="ALTER TABLE `solution` 
-		MODIFY COLUMN `user_id` CHAR(20)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-		DROP COLUMN `className`,
-		MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
-";
+$tsql[5]="ALTER TABLE `solution` MODIFY COLUMN `user_id` CHAR(20)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,	DROP COLUMN `className`,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
 $csql[5]="";
 
 $tsql[6]="select langmask from contest limit 1;";

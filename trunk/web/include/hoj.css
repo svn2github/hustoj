@@ -113,6 +113,7 @@ div.content {
 	z-index:4; 
 	visibility:visible;
 	text-align:center;
+	color:red;
 }
 
 #main{

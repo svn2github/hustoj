@@ -76,6 +76,9 @@ position:absolute;
 left:0px; top:0px;width:815px; height:54px;z-index:1; visibility:visible;
 text-align:left;
 }
+.menu_item{
+	display:inline;
+}
 #profile{
 position:absolute;
  left:700px; top:0px;width:300px; height:54px;z-index:2; visibility:visible;

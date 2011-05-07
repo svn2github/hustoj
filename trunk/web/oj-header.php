@@ -1,13 +1,13 @@
 <?php 
-	@session_start();
+	require('./include/db_info.inc.php');
+
 ?>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href='./include/hoj.css' type='text/css'>
+	<link rel=stylesheet href='./include/<?php echo $OJ_CSS?>' type='text/css'>
 <?
 
-	require_once('./include/db_info.inc.php');
 
 	
 	function checkcontest($MSG_CONTEST){
@@ -54,19 +54,30 @@
 </div><!--end head-->
 <div id=subhead>
 <div id=menu >
-
-		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
-		<span style="color:1a5cc8" id="dict_status"></span>
-		<?}?>
-		<a href="./<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
-		<a href="./bbs.php"><?=$MSG_BBS?></a>
+		<div class=menu_item >
 		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
-		<a href="./problemset.php"><?=$MSG_PROBLEMS?></a>
-		<a href="./status.php"><?=$MSG_STATUS?></a>
-		<a href="./ranklist.php"><?=$MSG_RANKLIST?></a>
-		<a href="./contest.php"><?=checkcontest($MSG_CONTEST)?></a>
-		
-	
+		</div>
+		<div class=menu_item >
+		<a href="bbs.php"><?=$MSG_BBS?></a>
+		</div>
+		<div class=menu_item >
+		<a href="problemset.php"><?=$MSG_PROBLEMS?></a>
+		</div>
+		<div class=menu_item >
+		<a href="status.php"><?=$MSG_STATUS?></a>
+		</div>
+		<div class=menu_item >
+		<a href="ranklist.php"><?=$MSG_RANKLIST?></a>
+		</div>
+		<div class=menu_item >
+		<a href="contest.php"><?=checkcontest($MSG_CONTEST)?></a>
+		</div>
+		<div class=menu_item >
+		<a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
+		</div>
+		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
+		<span style="color:1a5cc8" id="dict_status"></span></div>
+		<?}?>
 </div><!--end menu-->
 <div id=profile >
 

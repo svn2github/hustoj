@@ -69,9 +69,9 @@ div.content {
 }
 
 #head{
-//	position:absolute; 
-	left:0px; 
-	top:0px;
+	position:static; 
+//	left:0px; 
+//	top:0px;
 	width:100%; 
 	height:53px;
 	z-index:1; 
@@ -80,15 +80,18 @@ div.content {
 
 }
 #menu{
-	position:absolute; 
-	left:0px; 
-	top:63px;
+	position:static; 
+//	left:0px; 
+//	top:63px;
 	width:100%; 
 	height:32px;
 	z-index:2; 
 	visibility:visible;
 	text-align:center;
 	font-weight:bold;
+}
+.menu_item{
+	display:inline;
 }
 #profile{
 	position:absolute; 
@@ -102,20 +105,20 @@ div.content {
 	font-weight:bold;
 }
 #broadcast{
-//	position:absolute; 
-	left:0px; 
-	top:95px;
+	position:static; 
+//	left:0px; 
+//	top:105px;
 	width:80%; 
-	height:39px;
+	height:50px;
 	z-index:4; 
 	visibility:visible;
 	text-align:center;
 }
 
 #main{
-//	position:absolute;
-	left:0px;
-	top:209px;
+	position:static;
+//	left:0px;
+//	top:209px;
 	width:100%; 
 	height:auto;
 	z-index:6; 
@@ -124,8 +127,8 @@ div.content {
 }
 #foot{
 	position:static; 
-	left:0px; 
-	top:520px;
+//	left:0px; 
+//	top:520px;
 	width:100%; 
 	height:133px;
 	z-index:7; 

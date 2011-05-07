@@ -27,5 +27,5 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	
 	if(mysql_select_db($DB_NAME));
 	else die('Can\'t use foo : ' . mysql_error());
-
+	date_default_timezone_set("PRC");
 ?>

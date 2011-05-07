@@ -29,7 +29,7 @@ if (isset($_GET['cid'])){
 		echo "<title>Contest - $row->title</title>";
 		echo "<h3>Contest - $row->title</h3>Start Time: <font color=#993399>$row->start_time</font> ";
 		echo "End Time: <font color=#993399>$row->end_time</font><br>";
-		echo "Current Time: <font color=#993399>".date("Y-m-d H:i:s")."</font> Status:";
+		echo "Current Time: <font color=#993399><span id=nowdate >".date("Y-m-d H:i:s")."</span></font> Status:";
 		if ($now>$end_time) echo "<font color=red>Ended</font>";
 		else if ($now<$start_time) echo "<font color=red>Not Started</font>";
 		else echo "<font color=red>Running</font>";
@@ -81,7 +81,7 @@ require_once("oj-header.php");
 $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC";
 $result=mysql_query($sql);
 $color=false;
-echo "<center><table width=90%><caption>Contest List</caption>";
+echo "<center><table width=90%><h2>Contest List</h2>ServerTime:<span id=nowdate></span>";
 echo "<tr class=toprow align=center><td width=10%>ID<td width=50%>Name<td width=30%>Status<td width=10%>Private</tr>";
 while ($row=mysql_fetch_object($result)){
 	if ($color) echo "<tr align=center class=oddrow>";
@@ -106,8 +106,30 @@ while ($row=mysql_fetch_object($result)){
 echo "</table></center>";
 mysql_free_result($result);
 ?>
+
 <?
 }
 require_once("oj-footer.php");
 ?>
-
+<script>
+var diff=new Date("<?=date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
+//alert(diff);
+function clock()
+    {
+      var x,h,m,s,n,xingqi,y,mon,d;
+      var x = new Date(new Date().getTime()+diff);
+      y = x.getYear()+1900;
+      mon = x.getMonth()+1;
+      d = x.getDate();
+      xingqi = x.getDay();
+      h=x.getHours();
+      m=x.getMinutes();
+      s=x.getSeconds();
+  
+      n=y+"-"+mon+"-"+d+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
+      //alert(n);
+      document.getElementById('nowdate').innerHTML=n;
+      setTimeout("clock()",1000);
+    } 
+    clock();
+</script>

@@ -26,19 +26,11 @@ if (isset($_GET['pid']))
 
 <div id=broadcast>
 <?php
-$fp=fopen("admin/msg.txt","r");
-$msg="";
-while (!feof($fp)){
-	$strtmp=fgets($fp);
-	$msg=$msg.$strtmp;
-}
-if (strlen($msg)>5){
-	echo "<marquee scrollamount=3 behavior=ALTERNATE scrolldelay=150>";
-	echo "<font color=red>";
-	echo $msg;
-	echo "</font>";
+
+	echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250 onMouseOver='this.stop()' onMouseOut='this.start()';>";
+	require('./admin/msg.txt');
 	echo "</marquee>";
-}
+
 ?>
 </div><!--end broadcast-->
 <?php

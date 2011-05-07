@@ -172,6 +172,37 @@ void init_syscalls_limits(int lang) {
 
 }
 
+int after_equal(char * c){
+	int i=0;
+	for(;c[i]!='\0'&&c[i]!='=';i++);
+	return ++i;
+}
+void trim(char * c){
+    char buf[BUFFER_SIZE];
+    char * start,*end;
+    strcpy(buf,c);
+    start=buf;
+    while(isspace(*start)) start++;
+    end=start;
+    while(!isspace(*end)) end++;
+    *end='\0';
+    strcpy(c,start);
+}
+bool read_buf(char * buf,const char * key,char * value){
+   if (strncmp(buf,key, strlen(key)) == 0) {
+		strcpy(value, buf + after_equal(buf));
+		trim(value);	
+		if (DEBUG) printf("%s\n",value);
+		return 1;
+   }
+   return 0;
+}
+void read_int(char * buf,const char * key,int * value){
+	char buf2[BUFFER_SIZE];
+	if (read_buf(buf,key,buf2))
+		sscanf(buf2, "%d", value);
+		
+}
 // read the configue file
 void init_mysql_conf() {
 	FILE *fp;
@@ -187,27 +218,17 @@ void init_mysql_conf() {
 	fp = fopen("./etc/judge.conf", "r");
 	while (fgets(buf, BUFFER_SIZE - 1, fp)) {
 		buf[strlen(buf) - 1] = 0;
-		if (strncmp(buf, "OJ_HOST_NAME", 12) == 0) {
-			strcpy(host_name, buf + 13);
-		} else if (strncmp(buf, "OJ_USER_NAME", 12) == 0) {
-			strcpy(user_name, buf + 13);
-		} else if (strncmp(buf, "OJ_PASSWORD", 11) == 0) {
-			strcpy(password, buf + 12);
-		} else if (strncmp(buf, "OJ_DB_NAME", 10) == 0) {
-			strcpy(db_name, buf + 11);
-		} else if (strncmp(buf, "OJ_PORT_NUMBER", 14) == 0) {
-			sscanf(buf + 15, "%d", &port_number);
-		} else if (strncmp(buf, "OJ_JAVA_TIME_BONUS", 18) == 0) {
-			sscanf(buf + 19, "%d", &java_time_bonus);
-		} else if (strncmp(buf, "OJ_JAVA_MEMORY_BONUS", 20) == 0) {
-			sscanf(buf + 21, "%d", &java_memory_bonus);
-		} else if (strncmp(buf, "OJ_JAVA_XMX", 11) == 0) {
-			strcpy(java_xmx, buf + 12);
-			printf("javaxmx:%s\n", java_xmx);
-		} else if (strncmp(buf, "OJ_SIM_ENABLE", 13) == 0) {
-			sscanf(buf + 14, "%d", &sim_enable);
-			printf("sim=%d\n", sim_enable);
-		}
+		read_buf(buf,"OJ_HOST_NAME",host_name);	
+		read_buf(buf, "OJ_USER_NAME",user_name);
+		read_buf(buf, "OJ_PASSWORD",password);
+		read_buf(buf, "OJ_DB_NAME",db_name);
+		read_int(buf , "OJ_PORT_NUMBER", &port_number);
+		read_int(buf, "OJ_JAVA_TIME_BONUS", &java_time_bonus);
+		read_int(buf, "OJ_JAVA_MEMORY_BONUS", &java_memory_bonus);
+		read_int(buf , "OJ_SIM_ENABLE", &sim_enable);
+		read_buf(buf,"OJ_JAVA_XMX",java_xmx);
+		
+		
 	}
 }
 

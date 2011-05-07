@@ -19,6 +19,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <syslog.h>
@@ -30,7 +31,7 @@
 #include <sys/stat.h>
 
 static int DEBUG=0;
-#define bufsize 1024
+#define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 #define STD_MB 1048576
@@ -50,11 +51,11 @@ static int DEBUG=0;
 #define OJ_CO 12
 
 
-static char host_name[bufsize];
-static char user_name[bufsize];
-static char password [bufsize];
-static char db_name  [bufsize];
-static char oj_home  [bufsize];
+static char host_name[BUFFER_SIZE];
+static char user_name[BUFFER_SIZE];
+static char password [BUFFER_SIZE];
+static char db_name  [BUFFER_SIZE];
+static char oj_home  [BUFFER_SIZE];
 static int port_number;
 static int max_running;
 static int sleep_time;
@@ -68,7 +69,7 @@ static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
 //static FILE *fp_log;
-static char query[bufsize];
+static char query[BUFFER_SIZE];
 
 void write_log(const char *fmt, ...)
 {
@@ -88,10 +89,42 @@ void write_log(const char *fmt, ...)
 	fclose(fp);
 
 }
+
+int after_equal(char * c){
+	int i=0;
+	for(;c[i]!='\0'&&c[i]!='=';i++);
+	return ++i;
+}
+void trim(char * c){
+    char buf[BUFFER_SIZE];
+    char * start,*end;
+    strcpy(buf,c);
+    start=buf;
+    while(isspace(*start)) start++;
+    end=start;
+    while(!isspace(*end)) end++;
+    *end='\0';
+    strcpy(c,start);
+}
+bool read_buf(char * buf,const char * key,char * value){
+   if (strncmp(buf,key, strlen(key)) == 0) {
+		strcpy(value, buf + after_equal(buf));
+		trim(value);	
+		if (DEBUG) printf("%s\n",value);
+		return 1;
+   }
+   return 0;
+}
+void read_int(char * buf,const char * key,int * value){
+	char buf2[BUFFER_SIZE];
+	if (read_buf(buf,key,buf2))
+		sscanf(buf2, "%d", value);
+		
+}
 // read the configue file
-void init_mysql_conf(){
+void init_mysql_conf() {
 	FILE *fp;
-	char buf[bufsize];
+	char buf[BUFFER_SIZE];
 	host_name[0]=0;
 	user_name[0]=0;
 	password[0]=0;
@@ -101,41 +134,27 @@ void init_mysql_conf(){
 	sleep_time=3;
 	oj_tot=1;
 	oj_mod=0;
-	fp=fopen("./etc/judge.conf","r");
-	while (fgets(buf,bufsize-1,fp)){
-		buf[strlen(buf)-1]=0;
-		if (      strncmp(buf,"OJ_HOST_NAME",12)==0){
-			strcpy(host_name,buf+13);
-		}else if (strncmp(buf,"OJ_USER_NAME",12)==0){
-			strcpy(user_name,buf+13);
-		}else if (strncmp(buf,"OJ_PASSWORD",11)==0){
-			strcpy(password, buf+12);
-		}else if (strncmp(buf,"OJ_DB_NAME",10)==0){
-			strcpy(db_name,buf+11);
-		}else if (strncmp(buf,"OJ_PORT_NUMBER",14)==0){
-			sscanf(buf+15,"%d",&port_number);
-		}else if (strncmp(buf,"OJ_RUNNING",10)==0){
-			sscanf(buf+11,"%d",&max_running);
-			if (max_running<1) max_running=1;
-			if (max_running>8) max_running=8;
-		}else if (strncmp(buf,"OJ_SLEEP_TIME",13)==0){
-			sscanf(buf+14,"%d",&sleep_time);
-			if (sleep_time<1) sleep_time=1;
-			if (sleep_time>20) sleep_time=20;
-		}else if (strncmp(buf,"OJ_TOTAL",8)==0){
-			sscanf(buf+9,"%d",&oj_tot);
-			if (oj_tot<=0) oj_tot=1;
-		}else if (strncmp(buf,"OJ_MOD",6)==0){
-			sscanf(buf+7,"%d",&oj_mod);
-			if (oj_mod<0 || oj_mod>=oj_tot) oj_mod=0;
-		}
+	fp = fopen("./etc/judge.conf", "r");
+	while (fgets(buf, BUFFER_SIZE - 1, fp)) {
+		buf[strlen(buf) - 1] = 0;
+		read_buf(buf,"OJ_HOST_NAME",host_name);	
+		read_buf(buf, "OJ_USER_NAME",user_name);
+		read_buf(buf, "OJ_PASSWORD",password);
+		read_buf(buf, "OJ_DB_NAME",db_name);
+		read_int(buf , "OJ_PORT_NUMBER", &port_number);
+		read_int(buf, "OJ_RUNNING", &max_running);
+		read_int(buf, "OJ_SLEEP_TIME", &sleep_time);
+		read_int(buf , "OJ_TOTAL", &oj_tot);
+		
+		read_int(buf,"OJ_MOD",&oj_mod);
+		
 	}
 	sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
 	sleep_tmp=sleep_time;
 }
 
 bool updatedb(int solution_id,int result){
-	char sql[bufsize];
+	char sql[BUFFER_SIZE];
 	sprintf(sql,"UPDATE solution SET result=%d,time=0,memory=0,judgetime=NOW() WHERE solution_id=%d and result<2 LIMIT 1"
 			,result,solution_id);
 	if (mysql_real_query(conn,sql,strlen(sql))){

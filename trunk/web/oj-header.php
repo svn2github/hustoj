@@ -16,7 +16,7 @@
 		$result=mysql_query($sql);
 		$row=mysql_fetch_row($result);
 		if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
-		else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
+		else $retmsg=$row[0]."<span class=red>&nbsp;$MSG_CONTEST</span>";
 		mysql_free_result($result);
 		return $retmsg;
 	}
@@ -27,7 +27,7 @@
 		$result=mysql_query($sql);
 		if(!$result) return false;
 		$row=mysql_fetch_row($result);
-		$retmsg="<font color=red>(".$row[0].")</font>";
+		$retmsg="<span id=red>(".$row[0].")</span>";
 		mysql_free_result($result);
 		return $retmsg;
 	}
@@ -50,7 +50,7 @@
 </head>
 <body>
 <div id=head>
-<h2><img id=logo src=./image/logo.png><font color="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</font></h2>
+<h2><img id=logo src=./image/logo.png><span id="red">Welcome To <?=$OJ_NAME?> ACM-ICPC Online Judge</span></h2>
 </div><!--end head-->
 <div id=subhead>
 <div id=menu >
@@ -87,7 +87,7 @@
 				$sid=$_SESSION['user_id'];
 				print "&nbsp;<a href=./modifypage.php>$MSG_USERINFO
 					</a><a href='./userinfo.php?user=$sid'>
-				<font color=red>$sid</font></a>";
+				<span id=red>$sid</span></a>";
 				$mail=checkmail();
 				if ($mail)
 					print "<a href=./mail.php>$mail</a>";

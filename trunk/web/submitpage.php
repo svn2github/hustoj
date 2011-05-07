@@ -50,14 +50,14 @@ editAreaLoader.init({
 <?}?> 
  >
 <?if (isset($id)){?>
-Problem <font color=blue><b><?=$id?></b></font><br>
+Problem <span class=blue><b><?=$id?></b></span><br>
 <input type='hidden' value='<?=$id?>' name="id">
 <?
 }else{
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 if ($pid>25) $pid=25;
 ?>
-Problem <font color=blue><b><?=$PID[$pid]?></b></font> of Contest <font color=blue><b><?=$cid?></b></font><br>
+Problem <span class=blue><b><?=$PID[$pid]?></b></span> of Contest <span class=blue><b><?=$cid?></b></span><br>
 <input type='hidden' value='<?=$cid?>' name="cid">
 <input type='hidden' value='<?=$pid?>' name="pid">
 <?}?>

@@ -36,13 +36,31 @@ tr.userinfo{
 	background-color:#FFFFF0;
 	font-size: 16px;
 }
-span.yes,.green {
+span.yes {
 color:green;
 font-weight: bolder; 
 }
-span.no,.red{
+span.no{
 color:red;
 font-weight: bolder;
+}
+.green {
+color:green; 
+}
+.red{
+color:red;
+}
+.blue{
+color:blue;
+}
+.gray{
+color:gray
+}
+.orange{
+color:orange
+}
+.navy {
+color:navy
 }
 
 span.exadmin{

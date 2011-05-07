@@ -30,7 +30,7 @@ if (isset($_GET['vid'])){
 	echo "<center>
 	<table>
 			<tr>
-				<td><font color=blue>$to_user</font>:".htmlspecialchars(str_replace("\n\r","\n",$row->title))." </td>
+				<td class=blue>$to_user:".htmlspecialchars(str_replace("\n\r","\n",$row->title))." </td>
 			</tr>
 			<tr><td><pre>". htmlspecialchars(str_replace("\n\r","\n",$row->content))."</pre>		
 				</td></tr>
@@ -101,8 +101,8 @@ echo "<center><table border=1>";
 echo "<tr><td>Mail ID<td>From:Title<td>Date</tr>";
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
-	echo "<td>".$row->mail_id;
-	if ($row->new_mail) echo "<font color=red>New</font>";
+	echo "<td class=red>".$row->mail_id;
+	if ($row->new_mail) echo "New";
 	echo "<td><a href='mail.php?vid=$row->mail_id'>".
 			$row->from_user.":".$row->title."</a>";
 	echo "<td>".$row->in_date;

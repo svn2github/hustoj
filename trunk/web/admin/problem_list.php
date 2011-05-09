@@ -36,7 +36,7 @@ echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=5><input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "<tr><td>PID<td>Title<td>Date";
 if(isset($_SESSION['administrator'])){
-	echo "<td>Defunct<td>Edit</tr>";
+	echo "<td>Status<td>Edit</tr>";
 }
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
@@ -45,7 +45,8 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
 	echo "<td>".$row->in_date;
 	if(isset($_SESSION['administrator'])){
-		echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">".($row->defunct=="N"?"Delete":"Resume")."</a>";
+		echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
+		.($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
 		echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
 		//echo "<td><input type=submit name='problem2contest' value='ToNewContest'>";
 	}

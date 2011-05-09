@@ -54,6 +54,8 @@ if (isset($_SESSION['source_browser'])) $ok=true;
 
 
 if ($ok==true){
+	if($row->user_id!=$_SESSION['user_id'])
+		echo "<a href='mail.php?to_user=$row->user_id&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	$brush=strtolower($language_name[$row->language]);
 	if ($brush=='pascal') $brush='delphi';
 	echo "<pre class=\"brush:".$brush.";\">";

@@ -16,6 +16,8 @@ $row=mysql_fetch_object($result);
 if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 if ($ok==true){
+	if($row->user_id!=$_SESSION['user_id'])
+		echo "<a href='mail.php?to_user=$row->user_id&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	echo "<pre>";
 	mysql_free_result($result);
 	$sql="SELECT `error` FROM `compileinfo` WHERE `solution_id`='".$id."'";

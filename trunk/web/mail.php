@@ -1,9 +1,14 @@
 <?require_once("oj-header.php")?>
 <?
 $to_user="";
+$title="";
 if (isset($_GET['to_user'])){
 	$to_user=htmlspecialchars($_GET['to_user']);
 }
+if (isset($_GET['title'])){
+	$title=htmlspecialchars($_GET['title']);
+}
+
 if (!isset($_SESSION['user_id'])){
 	echo "<a href=loginpage.php>Please Login First</a>";
 	require_once("oj-footer.php");
@@ -47,7 +52,7 @@ if (isset($_GET['vid'])){
    <table><form method=post action=mail.php>
 	<tr>
 		<td>  To:<input name=to_user size=10 value="<?=$to_user?>">
-			Title:<input name=title size=20>
+			Title:<input name=title size=20 value="<?=$title?>">
 		    <input type=submit value=<?=$MSG_SUBMIT?>></td>
 	</tr>
 	<tr><td> 

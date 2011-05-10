@@ -46,7 +46,7 @@ function submitSolution($pid,$solution,$language)
 
 }
 ?>
-Import Function is On the way.
+Import Free Problem Set ... <br>
 
 <?php
 function getValue($Node, $TagName) {
@@ -67,15 +67,25 @@ function getAttribute($Node, $TagName,$attribute) {
 		$ret = "";
 	return $ret;
 }
+function hasProblem($description){
+	require("../include/db_info.inc.php");
+	$md5=md5($description);
+	$sql="select 1 from problem where md5(description)='$md5'";  
+	$result=mysql_query ( $sql );
+	$rows_cnt=mysql_num_rows($result);		
+	//echo "row->$rows_cnt";			
+	return  ($rows_cnt>0);
+
+}
 
 if ($_FILES ["fps"] ["error"] > 0) {
 	echo "Error: " . $_FILES ["fps"] ["error"] . "File size is too big, change in PHP.ini<br />";
 } else {
 	$tempfile = $_FILES ["fps"] ["tmp_name"];
-	echo "Upload: " . $_FILES ["fps"] ["name"] . "<br />";
-	echo "Type: " . $_FILES ["fps"] ["type"] . "<br />";
-	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
-	echo "Stored in: " . $tempfile;
+//	echo "Upload: " . $_FILES ["fps"] ["name"] . "<br />";
+//	echo "Type: " . $_FILES ["fps"] ["type"] . "<br />";
+//	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
+//	echo "Stored in: " . $tempfile;
 	
 	$xmlDoc = new DOMDocument ();
 	$xmlDoc->load ( $tempfile );
@@ -99,84 +109,87 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		
 		$spjcode = getValue ( $searchNode, 'spj' );
 		$spj = trim($spjcode)?1:0;
-	
-		$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
-	    $basedir = "$OJ_DATA/$pid";
-	    mkdir ( $basedir );
-		if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
-		if(strlen($sample_output)) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
-		$testinputs=$searchNode->getElementsByTagName("test_input");
-		$testno=0;
-		foreach($testinputs as $testNode){
-			if($testNode->nodeValue)
-			mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
-		}
-		$testinputs=$searchNode->getElementsByTagName("test_output");
-		$testno=0;
-		foreach($testinputs as $testNode){
-			//if($testNode->nodeValue)
-			mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
-		}
-		$images=($searchNode->getElementsByTagName("img"));
-		$did=array();
-		$testno=0;
-		foreach($images as $img){
-		//	
-			$src=getValue($img,"src");
-			if(!in_array($src,$did)){
-					$base64=getValue($img,"base64");
-					$ext=pathinfo($src);
-					$ext=strtolower($ext['extension']);
-					if(!stristr(",jpeg,jpg,png,gif,bmp",$ext)){
-						$ext="bad";
-						exit(1);
-					}
-					$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
-					image_save_file($newpath,$base64);
-					$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
-					$src=mysql_real_escape_string($src);
-					$newpath=mysql_real_escape_string($newpath);
-					$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
-					mysql_query ( $sql );
-					$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
-					mysql_query ( $sql );
-					$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
-					mysql_query ( $sql );
-					$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
-					mysql_query ( $sql );
-					array_push($did,$src);
+		if(!hasProblem($description )){
+			$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
+			$basedir = "$OJ_DATA/$pid";
+			mkdir ( $basedir );
+			if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
+			if(strlen($sample_output)) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
+			$testinputs=$searchNode->getElementsByTagName("test_input");
+			$testno=0;
+			foreach($testinputs as $testNode){
+				if($testNode->nodeValue)
+				mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
+			}
+			$testinputs=$searchNode->getElementsByTagName("test_output");
+			$testno=0;
+			foreach($testinputs as $testNode){
+				//if($testNode->nodeValue)
+				mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+			}
+			$images=($searchNode->getElementsByTagName("img"));
+			$did=array();
+			$testno=0;
+			foreach($images as $img){
+			//	
+				$src=getValue($img,"src");
+				if(!in_array($src,$did)){
+						$base64=getValue($img,"base64");
+						$ext=pathinfo($src);
+						$ext=strtolower($ext['extension']);
+						if(!stristr(",jpeg,jpg,png,gif,bmp",$ext)){
+							$ext="bad";
+							exit(1);
+						}
+						$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
+						image_save_file($newpath,$base64);
+						$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
+						$src=mysql_real_escape_string($src);
+						$newpath=mysql_real_escape_string($newpath);
+						$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
+						mysql_query ( $sql );
+						$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
+						mysql_query ( $sql );
+						$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
+						mysql_query ( $sql );
+						$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
+						mysql_query ( $sql );
+						array_push($did,$src);
+				}
+				
 			}
 			
-		}
-		
-		
-		if($spj) {
-	    	$basedir = "$OJ_DATA/$pid";
-	    	$fp=fopen("$basedir/spj.cc","w");
-			fputs($fp, $spjcode);
-			fclose($fp);
-			system( " g++ -o $basedir/spj $basedir/spj.cc  ");
-			if(!file_exists("$basedir/spj") ){
-	    		$fp=fopen("$basedir/spj.c","w");
+			
+			if($spj) {
+				$basedir = "$OJ_DATA/$pid";
+				$fp=fopen("$basedir/spj.cc","w");
 				fputs($fp, $spjcode);
 				fclose($fp);
-				system( " gcc -o $basedir/spj $basedir/spj.c  ");
-				if(!file_exists("$basedir/spj")){
-					echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
-				
-				}else{
+				system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+				if(!file_exists("$basedir/spj") ){
+					$fp=fopen("$basedir/spj.c","w");
+					fputs($fp, $spjcode);
+					fclose($fp);
+					system( " gcc -o $basedir/spj $basedir/spj.c  ");
+					if(!file_exists("$basedir/spj")){
+						echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
 					
-					unlink("$basedir/spj.cc");
+					}else{
+						
+						unlink("$basedir/spj.cc");
+					}
+				
+				
 				}
-	    	
+			}
+			foreach($solutions as $solution) {
+				$language =$solution->getAttribute("language");
+				submitSolution($pid,$solution->nodeValue,$language);
 			
 			}
-	    }
-	    foreach($solutions as $solution) {
-			$language =$solution->getAttribute("language");
-			submitSolution($pid,$solution->nodeValue,$language);
-	    
-	    }
+		}else{
+			echo "<span class=red>$title is already in this OJ</span><br>";		
+		}
 	}
 	unlink ( $tempfile );
 }

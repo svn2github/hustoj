@@ -188,7 +188,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			
 			}
 		}else{
-			echo "<span class=red>$title is already in this OJ</span><br>";		
+			echo "<br><span class=red>$title is already in this OJ</span>";		
 		}
 	}
 	unlink ( $tempfile );

@@ -34,7 +34,7 @@ global $Config ;
 $Config['Enabled'] = true ;
 
 // Path to user files relative to the document root.
-$Config['UserFilesPath'] = '/JudgeOnline/upload/'.date("Ym")."/"  ;
+$Config['UserFilesPath'] = strstr($_SERVER['REQUEST_URI'],"fckeditor",1)."upload/".date("Ym")."/"  ;
 
 // Fill the following value it you prefer to specify the absolute path for the
 // user files directory. Useful if you are using a virtual directory, symbolic

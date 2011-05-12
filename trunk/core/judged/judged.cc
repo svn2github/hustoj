@@ -29,6 +29,7 @@
 #include <mysql/mysql.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 static int DEBUG=0;
 #define BUFFER_SIZE 1024
@@ -63,13 +64,19 @@ static int sleep_tmp;
 static int oj_tot;
 static int oj_mod;
 
-
+static bool STOP=false;
 
 static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
 //static FILE *fp_log;
 static char query[BUFFER_SIZE];
+
+void call_for_exit(int s)
+{
+   STOP=true;
+   printf("Stopping judged...\n");
+}
 
 void write_log(const char *fmt, ...)
 {
@@ -377,8 +384,10 @@ int main(int argc, char** argv){
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;
 	init_mysql_conf();	// set the database info
-
-	while (1){			// start to run
+	signal(SIGQUIT,call_for_exit);
+	signal(SIGKILL,call_for_exit);
+	signal(SIGTERM,call_for_exit);
+	while (!STOP){			// start to run
 	    if(!init_mysql()){
 	        int j=work();
 	        //mysql_close(conn);	//keep connection if possible to save resource

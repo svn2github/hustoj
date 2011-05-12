@@ -54,26 +54,39 @@
 </div><!--end head-->
 <div id=subhead>
 <div id=menu >
+		<?php 
+			$url=basename($_SERVER['REQUEST_URI']);
+			//echo $url;
+		
+		?>
 		<div class=menu_item >
-		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
+		<a href="<?=$OJ_HOME?>"><?php if ($url=="JudgeOnline") echo "<span style='color:orange'>";?>
+								<?=$MSG_HOME?>
+								<?php if ($url=="JudgeOnline") echo "</span>";?>
+		</a>
 		</div>
 		<div class=menu_item >
-		<a href="bbs.php"><?=$MSG_BBS?></a>
+		<a href="bbs.php"><?php if ($url==$OJ_BBS.".php") echo "<span style='color:orange'>";?>
+		<?=$MSG_BBS?><?php if ($url==$OJ_BBS.".php") echo "</span>";?></a>
 		</div>
 		<div class=menu_item >
-		<a href="problemset.php"><?=$MSG_PROBLEMS?></a>
+		<a href="problemset.php"><?php if ($url=="problemset.php") echo "<span style='color:orange'>";?>
+		<?=$MSG_PROBLEMS?><?php if ($url=="problemset.php") echo "</span>";?></a>
 		</div>
 		<div class=menu_item >
-		<a href="status.php"><?=$MSG_STATUS?></a>
+		<a href="status.php"><?php if ($url=="status.php") echo "<span style='color:orange'>";?>
+		<?=$MSG_STATUS?><?php if ($url=="status.php") echo "</span>";?></a>
 		</div>
 		<div class=menu_item >
-		<a href="ranklist.php"><?=$MSG_RANKLIST?></a>
+		<a href="ranklist.php"><?php if ($url=="ranklist.php") echo "<span style='color:orange'>";?>
+		<?=$MSG_RANKLIST?><?php if ($url=="ranklist.php") echo "</span>";?></a>
 		</div>
 		<div class=menu_item >
-		<a href="contest.php"><?=checkcontest($MSG_CONTEST)?></a>
+		<a href="contest.php"><?php if ($url=="contest.php") echo "<span style='color:orange'>";?>
+		<?=checkcontest($MSG_CONTEST)?><?php if ($url=="contest.php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?></a>
+		<div class=menu_item ><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "<span style='color:orange'>";?>
+		<a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "</span>";?></a>
 		</div>
 		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
 		<span style="color:1a5cc8" id="dict_status"></span></div>

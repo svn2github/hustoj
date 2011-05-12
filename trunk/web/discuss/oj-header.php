@@ -58,7 +58,7 @@
 		<a href="../"><?=$MSG_HOME?></a>
 		</div>
 		<div class=menu_item >
-		<a href="../bbs.php"><?=$MSG_BBS?></a>
+		<a href="../bbs.php" style="color:orange"><?=$MSG_BBS?></a>
 		</div>
 		<div class=menu_item >
 		<a href="../problemset.php"><?=$MSG_PROBLEMS?></a>

@@ -55,7 +55,7 @@
 <div id=subhead>
 <div id=menu >
 		<div class=menu_item >
-		<a href="<?=$OJ_HOME?>"><?=$MSG_HOME?></a>
+		<a href="../"><?=$MSG_HOME?></a>
 		</div>
 		<div class=menu_item >
 		<a href="../bbs.php"><?=$MSG_BBS?></a>

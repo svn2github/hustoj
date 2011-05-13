@@ -18,6 +18,7 @@
 			echo "<tr><td><td><big><b>".$row->title."</b></big>-<small>[".$row->user_id."]</small></tr>";
 			echo "<tr><td><td>".$row->content."</tr>";
 		}
+		mysql_free_result($result);
 		echo "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a></tr>";
 		echo "</table>";
 	}

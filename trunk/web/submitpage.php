@@ -100,12 +100,15 @@ Language:
 	$row=mysql_fetch_object($result);
 	if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 	if (isset($_SESSION['source_browser'])) $ok=true;
+	mysql_free_result($result);
 	if ($ok==true){
 		$sql="SELECT `source` FROM `source_code` WHERE `solution_id`='".$sid."'";
 		$result=mysql_query($sql);
 		$row=mysql_fetch_object($result);
 		$src=$row->source;
+		mysql_free_result($result);
 	}
+	
  }
 ?>
 <textarea cols=80 rows=20 id="source" name="source"><?=$src?></textarea><br>

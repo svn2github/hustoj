@@ -91,7 +91,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	$xmlDoc->load ( $tempfile );
 	
 	$searchNodes = $xmlDoc->getElementsByTagName ( "item" );
-	
+	$spid=0;
 	foreach ( $searchNodes as $searchNode ) {
 		$title = getValue ( $searchNode, 'title' );
 		$time_limit = getValue ( $searchNode, 'time_limit' );
@@ -111,6 +111,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$spj = trim($spjcode)?1:0;
 		if(!hasProblem($description )){
 			$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
+			if($spid==0) $spid=$pid;
 			$basedir = "$OJ_DATA/$pid";
 			mkdir ( $basedir );
 			if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
@@ -192,5 +193,9 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		}
 	}
 	unlink ( $tempfile );
+	if($spid>0){
+		require_once("../include/set_get_key.php");
+		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION['getkey'].">Use these problems to create a contest.</a>";
+	 }
 }
 ?>

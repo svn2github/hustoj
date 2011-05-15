@@ -79,6 +79,7 @@ else{
 				$plist=$plist.$row[0];
 				if ($i>1) $plist=$plist.',';
 			}
+			mysql_free_result($result);
    }
 else if(isset($_POST['problem2contest'])){
 	   $plist="";
@@ -90,6 +91,19 @@ else if(isset($_POST['problem2contest'])){
 			else
 				$plist=$i;
 	   }
+}else if(isset($_GET['spid'])){
+	require_once("../include/check_get_key.php");
+		   $spid=intval($_GET['spid']);
+		 
+			$plist="";
+			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=$spid ";
+			$result=mysql_query($sql) or die(mysql_error());
+			for ($i=mysql_num_rows($result);$i>0;$i--){
+				$row=mysql_fetch_row($result);
+				$plist=$plist.$row[0];
+				if ($i>1) $plist=$plist.',';
+			}
+			mysql_free_result($result);
 }  
   
 ?>

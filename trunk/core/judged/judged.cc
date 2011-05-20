@@ -236,13 +236,15 @@ int work(){
 //	char buf[1024];
 	int retcnt;
 	int i;
-	static pid_t ID[8]={0,0,0,0,0,0,0,0};
+	static pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
 	static int workcnt=0;
 	int runid;
 	pid_t tmp_pid;
 
 	retcnt=0;
-
+	for(i=0;i<max_running;i++){
+		ID[i]=0;
+	}
 
 	if (mysql_real_query(conn,query,strlen(query))){
 		if(DEBUG)write_log("%s", mysql_error(conn));
@@ -288,6 +290,7 @@ int work(){
 	mysql_free_result(res);				// free the memory
 	executesql("commit");
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
+    free(ID);
 	return retcnt;
 }
 

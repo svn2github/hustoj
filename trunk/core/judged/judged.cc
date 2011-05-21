@@ -63,6 +63,8 @@ static int sleep_time;
 static int sleep_tmp;
 static int oj_tot;
 static int oj_mod;
+static int http_judge;
+static char http_baseurl[BUFFER_SIZE];
 
 static bool STOP=false;
 
@@ -152,29 +154,17 @@ void init_mysql_conf() {
 		read_int(buf, "OJ_RUNNING", &max_running);
 		read_int(buf, "OJ_SLEEP_TIME", &sleep_time);
 		read_int(buf , "OJ_TOTAL", &oj_tot);
-		
+
 		read_int(buf,"OJ_MOD",&oj_mod);
+		
+		read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
+		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
 		
 	}
 	sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
 	sleep_tmp=sleep_time;
 }
 
-bool updatedb(int solution_id,int result){
-	char sql[BUFFER_SIZE];
-	sprintf(sql,"UPDATE solution SET result=%d,time=0,memory=0,judgetime=NOW() WHERE solution_id=%d and result<2 LIMIT 1"
-			,result,solution_id);
-	if (mysql_real_query(conn,sql,strlen(sql))){
-		syslog(LOG_ERR | LOG_DAEMON, "%s",mysql_error(conn));
-		return false;
-	}else{
-		if(mysql_affected_rows(conn)>0ul)
-			return true;
-		else
-			return false;
-	}
-	
-}
 
 void run_client(int runid,int clientid){
     char buf[2],runidstr[1024];
@@ -232,6 +222,54 @@ int init_mysql(){
         return 1;
 	return 0;
 }
+void _get_jobs_http(int * jobs){
+}
+void _get_jobs_mysql(int * jobs){
+	if (mysql_real_query(conn,query,strlen(query))){
+		if(DEBUG)write_log("%s", mysql_error(conn));
+		sleep(20);
+		return ;
+	}
+	res=mysql_store_result(conn);
+	int i=0;
+	while((row=mysql_fetch_row(res))!=NULL){
+		jobs[i++]=atoi(row[0]);
+	}
+	while(i<=max_running*2) jobs[i++]=-1;
+}
+void get_jobs(int * jobs){
+	if (http_judge){
+		return _get_jobs_http(jobs);
+	}else
+		return _get_jobs_mysql(jobs);
+
+}
+bool _check_out_mysql(int solution_id,int result){
+	char sql[BUFFER_SIZE];
+	sprintf(sql,"UPDATE solution SET result=%d,time=0,memory=0,judgetime=NOW() WHERE solution_id=%d and result<2 LIMIT 1"
+			,result,solution_id);
+	if (mysql_real_query(conn,sql,strlen(sql))){
+		syslog(LOG_ERR | LOG_DAEMON, "%s",mysql_error(conn));
+		return false;
+	}else{
+		if(mysql_affected_rows(conn)>0ul)
+			return true;
+		else
+			return false;
+	}
+	
+}
+bool _check_out_http(int solution_id,int result){
+	return false;
+}
+bool check_out(int solution_id,int result){
+	
+	if (http_judge){
+		return _check_out_http(solution_id,result);
+	}else
+		return _check_out_mysql(solution_id,result);
+
+}
 int work(){
 //	char buf[1024];
 	int retcnt;
@@ -239,25 +277,22 @@ int work(){
 	static pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
 	static int workcnt=0;
 	int runid;
+	int * jobs=(int *)malloc(sizeof(int)*max_running*2+1);;
 	pid_t tmp_pid;
 
 	retcnt=0;
 	for(i=0;i<max_running;i++){
 		ID[i]=0;
 	}
-
-	if (mysql_real_query(conn,query,strlen(query))){
-		if(DEBUG)write_log("%s", mysql_error(conn));
-		sleep(20);
-		return 0;
-	}
+    
+	
 	//sleep_time=sleep_tmp;
 	/* get the database info */
-	retcnt=0;
-	res=mysql_store_result(conn);
+	
+	get_jobs(jobs);
 	/* exec the submit */
-	while ((row=mysql_fetch_row(res))){
-		runid=atoi(row[0]);
+	for (int j=0;jobs[j]>0;j++){
+		runid=jobs[j];
 		if (runid%oj_tot!=oj_mod) continue;
 		if(DEBUG)write_log("Judging solution %d",runid);
 		if (workcnt==max_running){		// if no more client can running
@@ -269,7 +304,7 @@ int work(){
 			for (i=0;i<max_running;i++)	// find the client id
 				if (ID[i]==0) break;	// got the client id
 		}
-		if(updatedb(atoi(row[0]),OJ_CI)){
+		if(check_out(runid,OJ_CI)){
 			ID[i]=fork();					// start to fork
 			if (ID[i]==0){
 				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
@@ -291,6 +326,7 @@ int work(){
 	executesql("commit");
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
     free(ID);
+    free(jobs);
 	return retcnt;
 }
 
@@ -391,7 +427,7 @@ int main(int argc, char** argv){
 	signal(SIGKILL,call_for_exit);
 	signal(SIGTERM,call_for_exit);
 	while (!STOP){			// start to run
-	    if(!init_mysql()){
+	    if(http_judge||!init_mysql()){
 	        int j=work();
 	        //mysql_close(conn);	//keep connection if possible to save resource
             if (j==0){	// if nothing done

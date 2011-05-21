@@ -93,12 +93,14 @@ static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
+static int http_judge;
+static char http_baseurl[BUFFER_SIZE];
 //static int sleep_tmp;
 #define ZOJ_COM
 MYSQL *conn;
 
 static char lang_ext[7][8] = { "c", "cc", "pas", "java", "rb", "sh", "py" };
-static char buf[BUFFER_SIZE];
+//static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
 	struct stat f_stat;
@@ -227,7 +229,8 @@ void init_mysql_conf() {
 		read_int(buf, "OJ_JAVA_MEMORY_BONUS", &java_memory_bonus);
 		read_int(buf , "OJ_SIM_ENABLE", &sim_enable);
 		read_buf(buf,"OJ_JAVA_XMX",java_xmx);
-		
+		read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
+		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
 		
 	}
 }
@@ -681,7 +684,7 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 		char * work_dir, char * outfile, char * userfile, int runner_id) {
 	//		printf("ACflg=%d %d check a file!\n",ACflg,solution_id);
 
-	char cmd[BUFFER_SIZE], fname[BUFFER_SIZE];
+	char  fname[BUFFER_SIZE];
 	strncpy(fname, filename, namelen);
 	fname[namelen] = 0;
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
@@ -704,7 +707,7 @@ void copy_shell_runtime(char * work_dir) {
 	
 }
 void copy_bash_runtime(char * work_dir) {
-	char cmd[BUFFER_SIZE];
+	//char cmd[BUFFER_SIZE];
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
 	execute_cmd("cp `which bc`  %s/bin/", work_dir);
@@ -1073,7 +1076,7 @@ void init_parameters(int argc, char **& argv, int & solution_id,
 }
 int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 	char src_pth[BUFFER_SIZE];
-	char cmd[BUFFER_SIZE];
+	//char cmd[BUFFER_SIZE];
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 
 	int sim = execute_cmd("sim.sh %s %d", src_pth, pid);
@@ -1098,7 +1101,7 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
-	char cmd[BUFFER_SIZE];
+	//char cmd[BUFFER_SIZE];
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;

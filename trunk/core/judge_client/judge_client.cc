@@ -726,7 +726,7 @@ int get_proc_status(int pid, const char * mark) {
 	pf = fopen(fn, "r");
 	int m = strlen(mark);
 	while (pf && fgets(buf, BUFFER_SIZE - 1, pf)) {
-		//if(DEBUG&&buf[0]=='V') printf("%s",buf);
+		
 		buf[strlen(buf) - 1] = 0;
 		if (strncmp(buf, mark, m) == 0) {
 			sscanf(buf + m + 1, "%d", &ret);
@@ -757,7 +757,7 @@ int init_mysql_conn() {
 	return 1;
 }
 void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
-	char sql[BUFFER_SIZE], cmd[BUFFER_SIZE], src_pth[BUFFER_SIZE];
+	char sql[BUFFER_SIZE], src_pth[BUFFER_SIZE];
 	// get the source code
 	MYSQL_RES *res;
 	MYSQL_ROW row;
@@ -766,10 +766,7 @@ void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 	mysql_real_query(conn, sql, strlen(sql));
 	res = mysql_store_result(conn);
 	row = mysql_fetch_row(res);
-	// clear the work dir
-	sprintf(cmd, "rm -rf %s*", work_dir);
-	if (!DEBUG)
-		system(cmd);
+	
 
 	// create the src file
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
@@ -781,12 +778,8 @@ void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 	fclose(fp_src);
 }
 void _get_solution_http(int solution_id, char * work_dir, int lang) {
-	char cmd[BUFFER_SIZE], src_pth[BUFFER_SIZE];
-	// clear the work dir
-	sprintf(cmd, "rm -rf %s*", work_dir);
-	if (!DEBUG)
-		system(cmd);
-
+	char  src_pth[BUFFER_SIZE];
+	
 	// create the src file
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	if (DEBUG)
@@ -1209,9 +1202,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		/*if(DEBUG){
-		 write_log("call:%lucounter:%d",reg.REG_SYSCALL,call_counter[reg.REG_SYSCALL]);
-		 }*/
+
 		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 			write_log(
@@ -1246,18 +1237,16 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 
 }
-void clean_workdir(char work_dir[BUFFER_SIZE]) {
+void clean_workdir(char * work_dir ) {
 	if (DEBUG) {
 		execute_cmd("mv %s/* %slog/", work_dir, work_dir);
-
 	} else {
 		execute_cmd("rm -Rf %s/*", work_dir);
 	}
 
 }
 
-void init_parameters(int argc, char **& argv, int & solution_id,
-		int & runner_id) {
+void init_parameters(int argc, char ** argv, int & solution_id,int & runner_id) {
 	if (argc < 3) {
 		fprintf(stderr, "Usage:%s solution_id runner_id.\n", argv[0]);
 		fprintf(stderr, "Multi:%s solution_id runner_id judge_base_path.\n",
@@ -1270,7 +1259,6 @@ void init_parameters(int argc, char **& argv, int & solution_id,
 	DEBUG = (argc > 4);
 	if (argc > 3)
 		strcpy(oj_home, argv[3]);
-
 	else
 		strcpy(oj_home, "/home/judge");
 
@@ -1306,12 +1294,14 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
-	//char cmd[BUFFER_SIZE];
+	char cmd[BUFFER_SIZE];
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
 	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id;
+	
 	init_parameters(argc, argv, solution_id, runner_id);
+	
 	init_mysql_conf();
 	
 	if (!http_judge&&!init_mysql_conn()) {
@@ -1320,12 +1310,20 @@ int main(int argc, char** argv) {
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	chdir(work_dir);
+	// clear the work dir
+	sprintf(cmd, "rm -rf %s/*", work_dir);
+	if (!DEBUG)
+		system(cmd);
+		
     if(http_judge)
 		system("ln -s ../cookie ./");
 	get_solution_info(solution_id, p_id, user_id, lang);
 	//get the limit
+	
+	
 	get_problem_info(p_id, time_lmt, mem_lmt, isspj);
 	//copy source file
+	
 	get_solution(solution_id, work_dir, lang);
 	
 	//java is lucky
@@ -1337,6 +1335,7 @@ int main(int argc, char** argv) {
 		execute_cmd( "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
 
 	}
+
 	//never bigger than judged set value;
 	if (time_lmt > 300 || time_lmt < 1)
 		time_lmt = 300;
@@ -1350,6 +1349,7 @@ int main(int argc, char** argv) {
 	//	printf("%s\n",cmd);
 	// set the result to compiling
 	int Compile_OK;
+	
 	Compile_OK = compile(lang);
 	if (Compile_OK != 0) {
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0);

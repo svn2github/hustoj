@@ -63,7 +63,7 @@ static int sleep_time;
 static int sleep_tmp;
 static int oj_tot;
 static int oj_mod;
-static int http_judge;
+static int http_judge=0;
 static char http_baseurl[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
@@ -285,7 +285,7 @@ bool _check_out_mysql(int solution_id,int result){
 	
 }
 bool check_login(){
-	const char  * cmd=" wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	const char  * cmd=" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	int ret=0;
 	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
 	fscanf(fjobs,"%d",&ret);

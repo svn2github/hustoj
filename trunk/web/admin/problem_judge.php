@@ -1,10 +1,10 @@
-<?require_once("admin-header.php");
+<?require_once("../include/db_info.inc.php");
 if (!(isset($_SESSION['http_judge']))){
-	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	echo "0";
 	exit(1);
 }?>
 <?
-if(isset($_POST['do'])){
+if(isset($_POST['judge'])){
 	require_once("../include/check_post_key.php");
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
@@ -21,8 +21,21 @@ if(isset($_POST['do'])){
 		mysql_query($sql);
 	}
 	
-}
+}else if(isset($_POST['checkout'])){
+	
+	$sid=intval($_POST['sid']);
+	$result=intval($_POST['result']);
+	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and result<2 LIMIT 1";
+	mysql_query($sql);
+	if(mysql_affected_rows()>0)
+		echo "1";
+	else
+		echo "0";
+}else if(isset($_POST['checklogin'])){
+	echo "1";
+}else{
 ?>
+
 <form action='problem_judge.php' method=post>
 	<b>HTTP Judge:</b><br />
 	sid:<input type=text size=10 name="sid" value=1244><br />
@@ -32,7 +45,10 @@ if(isset($_POST['do'])){
 	sim:<input type=text size=10 name="sim" value=100><br />
 	simid:<input type=text size=10 name="simid" value=0><br />
 	
-	<input type='hidden' name='do' value='do'>
+	<input type='hidden' name='judge' value='do'>
 	<?require_once("../include/set_post_key.php");?>
 	<input type=submit value='Judge'>
 </form>
+<?
+}
+?>

@@ -65,6 +65,8 @@ static int oj_tot;
 static int oj_mod;
 static int http_judge;
 static char http_baseurl[BUFFER_SIZE];
+static char http_username[BUFFER_SIZE];
+static char http_password[BUFFER_SIZE];
 
 static bool STOP=false;
 
@@ -159,6 +161,8 @@ void init_mysql_conf() {
 		
 		read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
 		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
+		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
+		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
 		
 	}
 	sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
@@ -222,7 +226,28 @@ int init_mysql(){
         return 1;
 	return 0;
 }
+FILE * read_cmd_output(const char * fmt, ...) {
+	char cmd[BUFFER_SIZE];
+
+	FILE *  ret =NULL;
+	va_list ap;
+
+	va_start(ap, fmt);
+	vsprintf(cmd, fmt, ap);
+	va_end(ap);
+	//if(DEBUG) printf("%s\n",cmd);
+	ret = popen(cmd,"r");
+	
+	return ret;
+}
 void _get_jobs_http(int * jobs){
+	//if (DEBUG) printf("get_jobs_http\n");
+	int i=0;
+	const char * cmd=" wget --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/status.php\"|w3m -dump -T text/html |grep Pending|awk '{print $1}'";
+	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
+	while(fscanf(fjobs,"%d",&jobs[i]) != EOF) i++;
+	pclose(fjobs);
+	jobs[i++]=0;
 }
 void _get_jobs_mysql(int * jobs){
 	if (mysql_real_query(conn,query,strlen(query))){
@@ -235,7 +260,7 @@ void _get_jobs_mysql(int * jobs){
 	while((row=mysql_fetch_row(res))!=NULL){
 		jobs[i++]=atoi(row[0]);
 	}
-	while(i<=max_running*2) jobs[i++]=-1;
+	while(i<=max_running*2) jobs[i++]=0;
 }
 void get_jobs(int * jobs){
 	if (http_judge){
@@ -259,8 +284,32 @@ bool _check_out_mysql(int solution_id,int result){
 	}
 	
 }
+bool check_login(){
+	const char  * cmd=" wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	int ret=0;
+	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
+	fscanf(fjobs,"%d",&ret);
+	pclose(fjobs);
+	
+	return ret;
+}
+void login(){
+	if(!check_login()){
+		char cmd[BUFFER_SIZE];
+		sprintf(cmd,"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/login.php\"",http_username,http_password,http_baseurl);
+		system(cmd);
+	}
+	
+}
 bool _check_out_http(int solution_id,int result){
-	return false;
+	login();
+	const char  * cmd="wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	int ret=0;
+	FILE * fjobs=read_cmd_output(cmd,solution_id,result,http_baseurl);
+	fscanf(fjobs,"%d",&ret);
+	pclose(fjobs);
+	
+	return ret;
 }
 bool check_out(int solution_id,int result){
 	
@@ -274,28 +323,27 @@ int work(){
 //	char buf[1024];
 	int retcnt;
 	int i;
-	static pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
+	pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
 	static int workcnt=0;
 	int runid;
 	int * jobs=(int *)malloc(sizeof(int)*max_running*2+1);;
 	pid_t tmp_pid;
 
 	retcnt=0;
+	
 	for(i=0;i<max_running;i++){
 		ID[i]=0;
 	}
     
-	
 	//sleep_time=sleep_tmp;
 	/* get the database info */
-	
 	get_jobs(jobs);
 	/* exec the submit */
 	for (int j=0;jobs[j]>0;j++){
 		runid=jobs[j];
 		if (runid%oj_tot!=oj_mod) continue;
 		if(DEBUG)write_log("Judging solution %d",runid);
-		if (workcnt==max_running){		// if no more client can running
+		if (workcnt>=max_running){		// if no more client can running
 			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
 			for (i=0;i<max_running;i++)	// get the client id
 				if (ID[i]==tmp_pid) break; // got the client id
@@ -304,7 +352,7 @@ int work(){
 			for (i=0;i<max_running;i++)	// find the client id
 				if (ID[i]==0) break;	// got the client id
 		}
-		if(check_out(runid,OJ_CI)){
+		if(i<max_running&&check_out(runid,OJ_CI)){
 			ID[i]=fork();					// start to fork
 			if (ID[i]==0){
 				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
@@ -320,10 +368,11 @@ int work(){
 			waitpid(-1,NULL,0);
 
 		}
-		memset(ID,0,sizeof(ID));
 	}
-	mysql_free_result(res);				// free the memory
-	executesql("commit");
+	if(!http_judge){
+		mysql_free_result(res);				// free the memory
+		executesql("commit");
+	}
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
     free(ID);
     free(jobs);

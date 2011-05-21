@@ -1311,7 +1311,7 @@ int main(int argc, char** argv) {
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	chdir(work_dir);
 	// clear the work dir
-	sprintf(cmd, "rm -rf %s/*", work_dir);
+	sprintf(cmd, "rm -Rf %s/*", work_dir);
 	if (!DEBUG)
 		system(cmd);
 		

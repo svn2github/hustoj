@@ -171,7 +171,7 @@ void init_mysql_conf() {
 
 
 void run_client(int runid,int clientid){
-    char buf[2],runidstr[1024];
+    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
         struct rlimit LIM;
 		LIM.rlim_max=300;
 		LIM.rlim_cur=300;
@@ -188,6 +188,7 @@ void run_client(int runid,int clientid){
 	//buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(buf,"%d",clientid);
 	sprintf(runidstr,"%d",runid);
+	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
 	if (!DEBUG)
 		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);
 	else
@@ -235,19 +236,21 @@ FILE * read_cmd_output(const char * fmt, ...) {
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
 	va_end(ap);
-	//if(DEBUG) printf("%s\n",cmd);
+	
 	ret = popen(cmd,"r");
 	
 	return ret;
 }
 void _get_jobs_http(int * jobs){
-	//if (DEBUG) printf("get_jobs_http\n");
+	
 	int i=0;
 	const char * cmd=" wget --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/status.php\"|w3m -dump -T text/html |grep Pending|awk '{print $1}'";
 	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
-	while(fscanf(fjobs,"%d",&jobs[i]) != EOF) i++;
+	while(fscanf(fjobs,"%d",&jobs[i]) != EOF){
+		 i++;
+	 }
 	pclose(fjobs);
-	jobs[i++]=0;
+	while(i<=max_running*2) jobs[i++]=0;
 }
 void _get_jobs_mysql(int * jobs){
 	if (mysql_real_query(conn,query,strlen(query))){
@@ -322,7 +325,7 @@ bool check_out(int solution_id,int result){
 int work(){
 //	char buf[1024];
 	int retcnt;
-	int i;
+	int i=0;
 	pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
 	static int workcnt=0;
 	int runid;

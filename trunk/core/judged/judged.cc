@@ -236,16 +236,33 @@ FILE * read_cmd_output(const char * fmt, ...) {
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
 	va_end(ap);
-	
+	if(DEBUG) printf("%s\n",cmd);
 	ret = popen(cmd,"r");
 	
 	return ret;
 }
-void _get_jobs_http(int * jobs){
-	
-	int i=0;
-	const char * cmd=" wget --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/status.php\"|w3m -dump -T text/html |grep Pending|awk '{print $1}'";
+bool check_login(){
+	const char  * cmd=" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	int ret=0;
 	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
+	fscanf(fjobs,"%d",&ret);
+	pclose(fjobs);
+	
+	return ret;
+}
+void login(){
+	if(!check_login()){
+		char cmd[BUFFER_SIZE];
+		sprintf(cmd,"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/login.php\"",http_username,http_password,http_baseurl);
+		system(cmd);
+	}
+	
+}
+void _get_jobs_http(int * jobs){
+	login();
+	int i=0;
+	const char * cmd="wget --post-data=\"getpending=1&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	FILE * fjobs=read_cmd_output(cmd,max_running,http_baseurl);
 	while(fscanf(fjobs,"%d",&jobs[i]) != EOF){
 		 i++;
 	 }
@@ -287,23 +304,7 @@ bool _check_out_mysql(int solution_id,int result){
 	}
 	
 }
-bool check_login(){
-	const char  * cmd=" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	int ret=0;
-	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
-	fscanf(fjobs,"%d",&ret);
-	pclose(fjobs);
-	
-	return ret;
-}
-void login(){
-	if(!check_login()){
-		char cmd[BUFFER_SIZE];
-		sprintf(cmd,"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/login.php\"",http_username,http_password,http_baseurl);
-		system(cmd);
-	}
-	
-}
+
 bool _check_out_http(int solution_id,int result){
 	login();
 	const char  * cmd="wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";

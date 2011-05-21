@@ -31,6 +31,15 @@ if(isset($_POST['update_solution'])){
 		echo "1";
 	else
 		echo "0";
+}else if(isset($_POST['getpending'])){
+	$max_running=intval($_POST['max_running']);
+	$sql="SELECT solution_id FROM solution WHERE result<2  ORDER BY result ASC,solution_id ASC limit $max_running";
+	$result=mysql_query($sql);
+	if ($row=mysql_fetch_object($result)){
+		echo $row->solution_id."\n";
+	}
+	mysql_free_result($result);
+	
 }else if(isset($_POST['getsolutioninfo'])){
 	
 	$sid=intval($_POST['sid']);

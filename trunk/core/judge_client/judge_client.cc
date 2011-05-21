@@ -1358,8 +1358,9 @@ int main(int argc, char** argv) {
 		update_problem(p_id);
 		if(!http_judge)
 			mysql_close(conn);
+		sprintf(cmd, "rm -Rf %s/*", work_dir);
 		if (!DEBUG)
-			system("rm *");
+			system(cmd);
 		else
 			write_log("compile error");
 		exit(0);
@@ -1373,7 +1374,7 @@ int main(int argc, char** argv) {
 	char outfile[BUFFER_SIZE];
 	char userfile[BUFFER_SIZE];
 	sprintf(fullpath, "%s/data/%d", oj_home, p_id); // the fullpath of data dir
-
+	
 	// open DIRs
 	DIR *dp;
 	dirent *dirp;
@@ -1423,12 +1424,13 @@ int main(int argc, char** argv) {
 	}else{
 	    sim = 0;
     }
-	clean_workdir(work_dir);
 
 	update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
 			sim_s_id);
 	update_user(user_id);
 	update_problem(p_id);
+	clean_workdir(work_dir);
+
 	if (DEBUG)
 		write_log("result=%d", ACflg);
 	if(!http_judge)

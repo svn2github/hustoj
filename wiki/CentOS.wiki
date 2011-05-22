@@ -5,7 +5,7 @@
 
 这里是已知的一些问题。
 
- * 默认web目录在/var/www/html，需要调整install.sh中的设置
+ * 默认web目录在/var/www/webapps，需要调整install.sh中的设置
 
  * SELinux会影响PHP的运行，可能需要关闭。
 

@@ -4,8 +4,9 @@
 尽管我们强烈推荐使用Debian/Ubuntu，但是由于驱动或资源的原因，有的用户不得不使用CentOS/RE/Federa。
 
 这里是已知的一些问题。
+ * yum install php httpd php-mysql mysql-server php-xml php-gd
 
- * 默认web目录在/var/www/webapps，需要调整install.sh中的设置
+ * 默认web目录在/var/www/html，需要调整install.sh中的设置
 
  * SELinux会影响PHP的运行，可能需要关闭。
 

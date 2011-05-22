@@ -20,3 +20,6 @@
    因此需要手工修改judged和judge_client中两个makefile 
    将  -L/usr/local/mysql/lib/mysql 改为  -L/usr/lib/mysql
        -I/usr/local/mysql/include/mysql 改为 -I/usr/include/mysql
+
+
+also see:http://yoozhu.com/?p=1457

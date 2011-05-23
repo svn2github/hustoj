@@ -49,18 +49,7 @@ require_once("./include/const.inc.php");
 
 <?
 $str2="";
-/*
-if($OJ_SIM){
-	$sql="SELECT * FROM `solution` left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
-	if(isset($_GET['showsim'])){
-		$showsim=intval($_GET['showsim']);
-		$sql="SELECT * FROM `solution` right join `sim` on solution.solution_id=sim.s_id left join(select solution_id old_s_id,user_id old_user_id from solution) old on old.old_s_id=sim.sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim.sim>= $showsim ";	
-		$str2="showsim=$showsim";
-	}
-}else{
-	$sql="SELECT * FROM `solution` WHERE 1 ";
-}
-*/
+
 $sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
@@ -195,11 +184,11 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 <?
 
 if($OJ_SIM){
-	$sql="select * from ($sql limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+	$sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
 	if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
 		$showsim=intval($_GET['showsim']);
 		$sql=$sql." and result=4 ";
-		$sql="SELECT * FROM ($sql limit 20 ) `solution` 
+		$sql="SELECT * FROM ($sql order by solution_id desc limit 20) `solution` 
 			left join(select solution_id old_s_id,user_id old_user_id from solution) old 
 				on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim>= $showsim  ";	
 	

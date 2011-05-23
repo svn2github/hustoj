@@ -85,7 +85,7 @@ echo "<td width='10%' colspan='1'><form action=problem.php>Problem ID<input type
 echo "<td width='90%' colspan='4'><form>$MSG_SEARCH<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td>";
 echo "</tr><tr align=center class='toprow'>";
 echo "<td width='5'><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A>";
-echo "<td width='60%'>$MSG_TITLE</td><td width='20%'>$MSG_SOURCE</td>";
+echo "<td width='60%'>$MSG_TITLE</td><td width='10%'>$MSG_SOURCE</td>";
 echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width='5%'><A>$MSG_AC</A></td>";
 echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width='5%'><A>$MSG_SUBMIT</A></td></tr>";
 echo "</thead><tbody>";
@@ -101,7 +101,7 @@ while ($row=mysql_fetch_object($result)){
 	echo "</td>";
 	echo "<td align='center'>".$row->problem_id."</td>";
 	echo "<td align='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></td>";
-	echo "<td align='center'>".$row->source."</td>";
+	echo "<td align='center'>".substr($row->source,0,6)."</td>";
 	echo "<td align='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
 		.$row->accepted."</a></td><td align='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></td>";
 	echo "</tr>";

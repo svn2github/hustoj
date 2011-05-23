@@ -101,7 +101,7 @@ while ($row=mysql_fetch_object($result)){
 	echo "</td>";
 	echo "<td align='center'>".$row->problem_id."</td>";
 	echo "<td align='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></td>";
-	echo "<td align='center'>".mb_substr($row->source,0,8)."</td>";
+	echo "<td align='center'>".mb_substr($row->source,0,8,'utf8')."</td>";
 	echo "<td align='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
 		.$row->accepted."</a></td><td align='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></td>";
 	echo "</tr>";

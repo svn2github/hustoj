@@ -5,6 +5,11 @@
 
 judged is supporting http connect to the web/mysql now.
 
+with this new feature, any web space supported mysql+php can be used as the web site of OJs , no matter it's windows or linux ,remote mysql(3306) is supported or not .
+
+and a side effect is by using the http mode a set of loadage is moved from the mysql server to the http server (apache) and share the pool-like pconnect system with php.
+
+Even more, the latest hustoj is now possible running on SAE(sina application Engine).
 
 = Details =
   * apt-get install wget

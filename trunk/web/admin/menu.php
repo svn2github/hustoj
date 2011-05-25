@@ -108,10 +108,10 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 
 </ol>
 <?
-if (isset($_SESSION['administrator'])){
+if (isset($_SESSION['administrator'])&&!$OJ_SAE){
 ?>
 	<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>
-	<a href="problem_reorder.php" target="main"><font color="eeeeee">ReOrderProblem</font></a>
+	<a href="problem_changeid.php" target="main"><font color="eeeeee">ReOrderProblem</font></a>
 <?
 }
 ?>

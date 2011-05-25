@@ -35,7 +35,13 @@ if(isset($_POST['do'])){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			
+			$sql="select max(problem_id) from problem";
+			if($result=mysql_query($sql)){
+				$f=mysql_fetch_array($result);
+				$nextid=$f[0]+1;
+				$sql="ALTER TABLE problem AUTO_INCREMENT = $nextid";
+				mysql_query($sql);
+			}
 			
 			
 		}
@@ -55,10 +61,10 @@ if(isset($_POST['do'])){
 	}	
 	if($show_form){
 ?>
-<b>REOrder</b>
+<b>Change ProblemID</b>
 	<ol>
 	<li>Problem
-	<form action='problem_reorder.php' method=post>
+	<form action='problem_changeid.php' method=post>
 		Move<input type=input name='from'>->
 		<input type=input name='to'>
 		<input type='hidden' name='do' value='do'>

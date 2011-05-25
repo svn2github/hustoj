@@ -20,7 +20,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	else
 		$last =0;
 	$write_cache=$_SERVER['QUERY_STRING']==""||
-				 $_SERVER['QUERY_STRING']==("cid=".$_GET['cid']);
+				 (isset($_GET['cid'])&&$_SERVER['QUERY_STRING']==("cid=".$_GET['cid']));
 	$use_cache=(time () - $last < $cache_time)&&$write_cache;
 	$write_cache=(!$use_cache)&&$write_cache;
 	

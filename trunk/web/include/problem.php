@@ -35,8 +35,9 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 		mysql_query ( $sql );
 	}
 	$basedir = "$OJ_DATA/$pid";
-	echo "Please add more data file in $basedir";
-	
+	if(!isset($OJ_SAE)||!$OJ_SAE){
+			echo "[$title]data in $basedir";
+	}
 	return $pid;
 }
 function mkdata($pid,$filename,$input,$OJ_DATA){

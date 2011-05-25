@@ -111,6 +111,7 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 if (isset($_SESSION['administrator'])){
 ?>
 	<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>
+	<a href="problem_reorder.php" target="main"><font color="eeeeee">ReOrderProblem</font></a>
 <?
 }
 ?>

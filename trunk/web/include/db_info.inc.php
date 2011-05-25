@@ -18,15 +18,18 @@ static  $OJ_LANGMASK=0; //1mC 2mCPP 4mPascal 8mJava 16mRuby 32mBash
 static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="hoj.css";
+static  $OJ_SAE=false; //using sina application engine
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
-//for normal install
-	if(mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS));
-	else die('Could not connect: ' . mysql_error());
-	
-// for sae.sina.com.cn
-// mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
-// $DB_NAME=SAE_MYSQL_DB;
 
+	if($OJ_SAE)	{
+	// for sae.sina.com.cn
+		mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+		$DB_NAME=SAE_MYSQL_DB;
+	}else{
+		//for normal install
+		if(!mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS)) 
+			die('Could not connect: ' . mysql_error());
+	}
 	// use db
 	mysql_query("set names utf8");
 	mysql_set_charset("utf8");

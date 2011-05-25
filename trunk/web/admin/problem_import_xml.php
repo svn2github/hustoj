@@ -67,10 +67,10 @@ function getAttribute($Node, $TagName,$attribute) {
 		$ret = "";
 	return $ret;
 }
-function hasProblem($description){
+function hasProblem($title){
 	require("../include/db_info.inc.php");
-	$md5=md5($description);
-	$sql="select 1 from problem where md5(description)='$md5'";  
+	$md5=md5($title);
+	$sql="select 1 from problem where md5(title)='$md5'";  
 	$result=mysql_query ( $sql );
 	$rows_cnt=mysql_num_rows($result);		
 	//echo "row->$rows_cnt";			
@@ -109,7 +109,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		
 		$spjcode = getValue ( $searchNode, 'spj' );
 		$spj = trim($spjcode)?1:0;
-		if(!hasProblem($description )){
+		if(!hasProblem($title )){
 			$pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 			if($spid==0) $spid=$pid;
 			$basedir = "$OJ_DATA/$pid";
@@ -118,15 +118,17 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			if(strlen($sample_output)) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
 			$testinputs=$searchNode->getElementsByTagName("test_input");
 			$testno=0;
-			foreach($testinputs as $testNode){
-				//if($testNode->nodeValue)
-				mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
-			}
-			$testinputs=$searchNode->getElementsByTagName("test_output");
-			$testno=0;
-			foreach($testinputs as $testNode){
-				//if($testNode->nodeValue)
-				mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+			if(!isset($OJ_SAE)||!$OJ_SAE){
+				foreach($testinputs as $testNode){
+					//if($testNode->nodeValue)
+					mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
+				}
+				$testinputs=$searchNode->getElementsByTagName("test_output");
+				$testno=0;
+				foreach($testinputs as $testNode){
+					//if($testNode->nodeValue)
+					mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+				}
 			}
 			$images=($searchNode->getElementsByTagName("img"));
 			$did=array();
@@ -160,27 +162,28 @@ if ($_FILES ["fps"] ["error"] > 0) {
 				
 			}
 			
-			
-			if($spj) {
-				$basedir = "$OJ_DATA/$pid";
-				$fp=fopen("$basedir/spj.cc","w");
-				fputs($fp, $spjcode);
-				fclose($fp);
-				system( " g++ -o $basedir/spj $basedir/spj.cc  ");
-				if(!file_exists("$basedir/spj") ){
-					$fp=fopen("$basedir/spj.c","w");
+			if(!isset($OJ_SAE)||!$OJ_SAE){
+				if($spj) {
+					$basedir = "$OJ_DATA/$pid";
+					$fp=fopen("$basedir/spj.cc","w");
 					fputs($fp, $spjcode);
 					fclose($fp);
-					system( " gcc -o $basedir/spj $basedir/spj.c  ");
-					if(!file_exists("$basedir/spj")){
-						echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
-					
-					}else{
+					system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+					if(!file_exists("$basedir/spj") ){
+						$fp=fopen("$basedir/spj.c","w");
+						fputs($fp, $spjcode);
+						fclose($fp);
+						system( " gcc -o $basedir/spj $basedir/spj.c  ");
+						if(!file_exists("$basedir/spj")){
+							echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
 						
-						unlink("$basedir/spj.cc");
+						}else{
+							
+							unlink("$basedir/spj.cc");
+						}
+					
+					
 					}
-				
-				
 				}
 			}
 			foreach($solutions as $solution) {

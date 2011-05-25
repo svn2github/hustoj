@@ -19,11 +19,21 @@ Import FPS data ,please make sure you file is smaller than [<?=$maxfile?>] <br/>
 or set upload_max_filesize and post_max_size in PHP.ini<br/>
 if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in php.ini.<br>
 <?php 
-   if(!strstr(ini_get("open_basedir"),$OJ_DATA)){
- 	   echo $OJ_DATA." is not in your open_basedir setting of php.ini, you can't use import function.<br>"; 
-   }else if(!writable("../upload")){
-       echo "../upload is not writable, chmod 770 to it.<br>";
-   }else{
+    $show_form=true;
+   if(!isset($OJ_SAE)||!$OJ_SAE){
+	   if(!writable($OJ_DATA)){
+		   echo " You need to add  $OJ_DATA into your open_basedir setting of php.ini,<br>
+					or you need to execute:<br>
+					   <b>chmod 775 -R $OJ_DATA && chgrp -R www-data $OJ_DATA</b><br>
+					you can't use import function at this time.<br>"; 
+			$show_form=false;
+	   }
+	   if(!writable("../upload")){
+		   echo "../upload is not writable, <b>chmod 770</b> to it.<br>";
+		   $show_form=false;
+	   }
+	}	
+	if($show_form){
 ?>
 <br>
 <form action='problem_import_xml.php' method=post enctype="multipart/form-data">
@@ -35,7 +45,7 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 </form>
 <?php 
   
-   		}
+   	}
    
 ?>
 <br>

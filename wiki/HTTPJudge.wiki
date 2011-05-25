@@ -17,6 +17,9 @@ OJ_HTTP_USERNAME=admin
 OJ_HTTP_PASSWORD=admin
 }}}
 OJ_HTTP_JUDGE for enable this feature
+
 OJ_HTTP_BASEURL give the URL of the OJ-web
+
 OJ_HTTP_USERNAME is the new user mentioned above with http_judge authorize
+
 OJ_HTTP_PASSWORD is the password

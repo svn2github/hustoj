@@ -19,7 +19,13 @@ if(isset($_POST['do'])){
 	if (isset($_POST['from'])){
 		$from=intval($_POST['from']);
 		$to=intval($_POST['to']);
-		if(rename("$OJ_DATA/$from","$OJ_DATA/$to")){
+		$row=0;
+		if($result=mysql_query("select 1 from problem where problem_id=$to")){
+			$row=mysql_num_rows($result);
+			mysql_free_result($result);
+		}
+		
+		if($row==0&&rename("$OJ_DATA/$from","$OJ_DATA/$to")){
 			$sql="UPDATE `problem` SET `problem_id`=$to WHERE `problem_id`=".$from;
 			if(!mysql_query($sql)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
@@ -39,11 +45,15 @@ if(isset($_POST['do'])){
 			if($result=mysql_query($sql)){
 				$f=mysql_fetch_array($result);
 				$nextid=$f[0]+1;
+				mysql_free_result($result);
 				$sql="ALTER TABLE problem AUTO_INCREMENT = $nextid";
 				mysql_query($sql);
 			}
 			
+			echo "done!";
+		}else{
 			
+				echo "fail...";
 		}
 
 	}

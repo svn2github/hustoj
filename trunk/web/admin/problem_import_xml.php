@@ -73,6 +73,7 @@ function hasProblem($title){
 	$sql="select 1 from problem where md5(title)='$md5'";  
 	$result=mysql_query ( $sql );
 	$rows_cnt=mysql_num_rows($result);		
+	mysql_free_result($result);
 	//echo "row->$rows_cnt";			
 	return  ($rows_cnt>0);
 

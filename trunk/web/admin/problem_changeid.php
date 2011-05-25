@@ -41,6 +41,11 @@ if(isset($_POST['do'])){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
+			$sql="UPDATE `topic` SET `pid`=$to WHERE `pid`=".$from;
+			if(!mysql_query($sql)){
+				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
+				 exit(1);
+			}
 			$sql="select max(problem_id) from problem";
 			if($result=mysql_query($sql)){
 				$f=mysql_fetch_array($result);

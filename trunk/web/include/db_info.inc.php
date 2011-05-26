@@ -37,5 +37,8 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	
 	if(mysql_select_db($DB_NAME));
 	else die('Can\'t use foo : ' . mysql_error());
+	//sychronize php and mysql server
 	date_default_timezone_set("PRC");
+	mysql_query("SET time_zone ='+8:00'");
+	
 ?>

@@ -236,19 +236,25 @@ FILE * read_cmd_output(const char * fmt, ...) {
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
 	va_end(ap);
-	if(DEBUG) printf("%s\n",cmd);
+	//if(DEBUG) printf("%s\n",cmd);
 	ret = popen(cmd,"r");
 	
 	return ret;
 }
+int read_int_http(FILE * f){
+	char buf[BUFFER_SIZE];
+	fgets(buf,BUFFER_SIZE-1,f);
+	return atoi(buf);
+}
 bool check_login(){
-	const char  * cmd=" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	const char  * cmd="wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	int ret=0;
+	
 	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
-	fscanf(fjobs,"%d",&ret);
+	ret=read_int_http(fjobs);
 	pclose(fjobs);
 	
-	return ret;
+	return ret>0;
 }
 void login(){
 	if(!check_login()){
@@ -261,10 +267,15 @@ void login(){
 void _get_jobs_http(int * jobs){
 	login();
 	int i=0;
+	char buf[BUFFER_SIZE];
 	const char * cmd="wget --post-data=\"getpending=1&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	FILE * fjobs=read_cmd_output(cmd,max_running,http_baseurl);
-	while(fscanf(fjobs,"%d",&jobs[i]) != EOF){
-		 i++;
+	while(fscanf(fjobs,"%s",buf) != EOF){
+		 //puts(buf);
+		 int sid=atoi(buf);
+		 if (sid>0)
+			jobs[i++]=sid;
+		 //i++;
 	 }
 	pclose(fjobs);
 	while(i<=max_running*2) jobs[i++]=0;

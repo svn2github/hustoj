@@ -31,7 +31,8 @@ Here is something for those users:
  * SELinux settings will stop php when it trying to make file I/O, so if you don't know how to make SELinux working with HUSTOJ, just disable it for a moment, and find the right way later.
  * PHP.ini is located at /etc/php.ini
  * You need to change php.ini
-{{{short_open_tag=On
+{{{
+short_open_tag=On
 register_globals=Off
 open_basedir=/var/www/html:/var/www/html/JudgeOnline:/tmp:/home/judge/data
 }}}

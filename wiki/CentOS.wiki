@@ -1,9 +1,13 @@
 #labels Featured,Phase-Deploy,Phase-Support
-#CentOS用户须知
+#CentOS用户须知 CentOS user need to know
 
 尽管我们强烈推荐使用Debian/Ubuntu，但是由于驱动或资源的原因，有的用户不得不使用CentOS/RE/Federa。
 
+Through Debian/Ubuntu is highly recommended, but in case of server hardware drivers or something else, people like to install HUSTOJ on CentOS/RedHat/Federa system.
+
 这里是已知的一些问题。
+Here is something for those users:
+
  * yum install php httpd php-mysql mysql-server php-xml php-gd gcc-c++
 
  * 默认web目录在/var/www/html，需要调整install.sh中的设置
@@ -20,6 +24,20 @@
    因此需要手工修改judged和judge_client中两个makefile 
    将  -L/usr/local/mysql/lib/mysql 改为  -L/usr/lib/mysql
        -I/usr/local/mysql/include/mysql 改为 -I/usr/include/mysql
+ * install what you need before starting by :
+   yum install php httpd php-mysql mysql-server php-xml php-gd gcc-c++
+ * the default web site root directory is different from debian/ubuntu
+   /var/www/html  you gonna need to adjust it in install.sh before running "sudo ./install.sh"
+ * SELinux settings will stop php when it trying to make file I/O, so if you don't know how to make SELinux working with HUSTOJ, just disable it for a moment, and find the right way later.
+ * PHP.ini is located at /etc/php.ini
+ * You need to change php.ini
+{{{short_open_tag=On
+register_globals=Off
+open_basedir=/var/www/html:/var/www/html/JudgeOnline:/tmp:/home/judge/data
+}}}
+ *  change makefiles in core/judged and core/judge_client
+   change -L/usr/local/mysql/lib/mysql to -L/usr/lib/mysql
+        -I/usr/local/mysql/include/mysql to -I/usr/include/mysql
 
-
-also see:http://yoozhu.com/?p=1457
+for English user ,email or issue is recommended
+for Chinese user ,QQ-qun group IM is recomended.

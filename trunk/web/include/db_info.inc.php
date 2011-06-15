@@ -33,7 +33,7 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	}
 	// use db
 	mysql_query("set names utf8");
-	if(!OJ_SAE)mysql_set_charset("utf8");
+	if(!$OJ_SAE)mysql_set_charset("utf8");
 	
 	if(mysql_select_db($DB_NAME));
 	else die('Can\'t use foo : ' . mysql_error());

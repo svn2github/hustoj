@@ -5,7 +5,9 @@
 #	and down here
 #and run this with root
 
+#CENTOS/REDHAT/FEDERA WEBBASE=/var/www/html APACHEUSER=apache 
 WEBBASE=/var/www/
+APACHEUSER=www-data
 DBUSER=root
 DBPASS=root
 
@@ -29,7 +31,7 @@ cd ../..
 #install web and db
 sudo cp -R hustoj-read-only/web $WEBBASE/JudgeOnline
 sudo chmod -R 771 $WEBBASE/JudgeOnline
-sudo chown -R www-data $WEBBASE/JudgeOnline
+sudo chown -R $APACHEUSER $WEBBASE/JudgeOnline
 sudo mysql -h localhost -u$DBUSER -p$DBPASS < db.sql
 
 #create work dir set default conf
@@ -43,7 +45,7 @@ sudo    mkdir /home/judge/run2
 sudo    mkdir /home/judge/run3
 sudo cp java0.policy  judge.conf /home/judge/etc
 sudo chown -R judge /home/judge
-sudo chgrp -R www-data /home/judge/data
+sudo chgrp -R $APACHEUSER /home/judge/data
 sudo chgrp -R root /home/judge/etc /home/judge/run?
 sudo chmod 771 /home/judge/data /home/judge/etc /home/judge/run?
 

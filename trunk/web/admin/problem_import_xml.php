@@ -95,8 +95,15 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	$spid=0;
 	foreach ( $searchNodes as $searchNode ) {
 		$title = getValue ( $searchNode, 'title' );
+		
 		$time_limit = getValue ( $searchNode, 'time_limit' );
+		$unit=getAttribute($searchNode,'time_limit','unit');
+		if($unit=='ms') $time_limit/=1000;
+		
 		$memory_limit = getValue ( $searchNode, 'memory_limit' );
+		$unit=getAttribute($searchNode,'memory_limit','unit');
+		if($unit=='kb') $memory_limit/=1024;
+		
 		$description = getValue ( $searchNode, 'description' );
 		$input = getValue ( $searchNode, 'input' );
 		$output = getValue ( $searchNode, 'output' );

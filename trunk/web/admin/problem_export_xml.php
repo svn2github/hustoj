@@ -182,8 +182,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		?>
 <item>
 <title><![CDATA[<?=$row->title?>]]></title>
-<time_limit><![CDATA[<?=$row->time_limit?>]]></time_limit>
-<memory_limit><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
+<time_limit unit="s"><![CDATA[<?=$row->time_limit?>]]></time_limit>
+<memory_limit unit="mb"><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
 
 <? 
 	$did=array();

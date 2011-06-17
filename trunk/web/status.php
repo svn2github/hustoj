@@ -184,18 +184,20 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 <?
 
 if($OJ_SIM){
-	$sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
-	if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
-		$showsim=intval($_GET['showsim']);
-		$sql=$sql." and result=4 ";
-		$sql="SELECT * FROM ($sql order by solution_id desc limit 20) `solution` 
-			left join(select solution_id old_s_id,user_id old_user_id from solution) old 
-				on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id and sim>= $showsim  ";	
-	
-		$str2.="&showsim=$showsim";
-	}
-	//$sql=$sql.$order_str." LIMIT 20";
+        $old=$sql;
+        $sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+        if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
+                $showsim=intval($_GET['showsim']);
+                $sql="select * from ($old ) solution 
+                     left join `sim` on solution.solution_id=sim.s_id WHERE result=4 and sim>=$showsim";
+                $sql="SELECT * FROM ($sql) `solution`
+                        left join(select solution_id old_s_id,user_id old_user_id from solution) old
+                        on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id ";
+                $str2.="&showsim=$showsim";
+        }
+        //$sql=$sql.$order_str." LIMIT 20";
 }
+
 $sql=$sql.$order_str." LIMIT 20";
 //echo $sql;
 $result = mysql_query($sql) or die("Error! ".mysql_error());

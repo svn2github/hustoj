@@ -462,9 +462,9 @@ void daemonize(){
 		syslog(LOG_ERR|LOG_DAEMON,"can't change dirctory to /");
 		exit(1);
 	}
-	if (rl.rlim_max == RLIM_INFINITY) rl.rlim_max=1024;
-	if (rl.rlim_max>1024) rl.rlim_max=1024;
-	for (i=0; i < (int)rl.rlim_max; i++) close(i);
+	//if (rl.rlim_max == RLIM_INFINITY) rl.rlim_max=1024;
+	//if (rl.rlim_max>1024) rl.rlim_max=1024;
+	for (i=0; i < 1024; i++) close(i);
 	fd0 = open("/dev/null", O_RDWR);
 	fd1 = dup(0);
 	fd2 = dup(0);

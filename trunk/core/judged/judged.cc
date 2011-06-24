@@ -88,7 +88,8 @@ void write_log(const char *fmt, ...)
 	char            buffer[4096];
 //	time_t          t = time(NULL);
 	int             l;
-	FILE *fp = fopen("./log/server.log","a+");
+	sprintf(buffer,"%s/log/client.log",oj_home);
+	FILE *fp = fopen(buffer, "a+");
 	if (fp==NULL){
 		 fprintf(stderr,"openfile error!\n");
 		 system("pwd");
@@ -425,7 +426,30 @@ int already_running(){
 	write(fd,buf,strlen(buf)+1);
 	return (0);
 }
+int daemon_init(void)
 
+ { pid_t pid;
+
+ if((pid = fork()) < 0) return(-1);
+
+ else if(pid != 0) exit(0); /* parent exit */
+
+ /* child continues */
+
+ setsid(); /* become session leader */
+
+ chdir(oj_home); /* change working directory */
+
+ umask(0); /* clear file mode creation mask */
+
+ close(0); /* close stdin */
+
+ close(1); /* close stdout */
+
+ close(2); /* close stderr */
+
+ return(0); 
+}
 void daemonize(){
 	int i,fd0,fd1,fd2;
 	pid_t pid;

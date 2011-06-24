@@ -121,7 +121,8 @@ void write_log(const char *fmt, ...) {
 	char buffer[4096];
 	//	time_t          t = time(NULL);
 	int l;
-	FILE *fp = fopen("../log/client.log", "a+");
+	sprintf(buffer,"%s/log/client.log",oj_home);
+	FILE *fp = fopen(buffer, "a+");
 	if (fp == NULL) {
 		fprintf(stderr, "openfile error!\n");
 		system("pwd");

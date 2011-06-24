@@ -225,7 +225,6 @@ void init_mysql_conf() {
 	strcpy(java_xmx, "-Xmx256M");
 	fp = fopen("./etc/judge.conf", "r");
 	while (fgets(buf, BUFFER_SIZE - 1, fp)) {
-		buf[strlen(buf) - 1] = 0;
 		read_buf(buf,"OJ_HOST_NAME",host_name);	
 		read_buf(buf, "OJ_USER_NAME",user_name);
 		read_buf(buf, "OJ_PASSWORD",password);

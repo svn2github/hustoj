@@ -720,7 +720,7 @@ int compile(int lang) {
 		int status=0;
 
 		waitpid(pid, &status, 0);
-		if(lang>3)
+		if(lang>3&&lang!=7)
 			status=get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);

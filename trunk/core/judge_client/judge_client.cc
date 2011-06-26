@@ -701,14 +701,14 @@ int compile(int lang) {
 			execvp(CP_Y[0], (char * const *) CP_Y);
 			break;
 		case 7:
-                        execvp(CP_PH[0], (char * const *) CP_PH);
-                        break;
-                case 8:
-                        execvp(CP_PL[0], (char * const *) CP_PL);
-                        break;
-                case 9:
-                        execvp(CP_CS[0], (char * const *) CP_CS);
-                        break;
+			execvp(CP_PH[0], (char * const *) CP_PH);
+			break;
+		case 8:
+			execvp(CP_PL[0], (char * const *) CP_PL);
+			break;
+		case 9:
+			execvp(CP_CS[0], (char * const *) CP_CS);
+			break;
 		default:
 			printf("nothing to do!\n");
 		}
@@ -1101,25 +1101,24 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 				"-Djava.security.policy=./java.policy", "Main", NULL);
 		break;
 	case 4:
-		system("/ruby Main.rb<data.in");
-		//execl("./ruby", "Main.rb", NULL);
+		//system("/ruby Main.rb<data.in");
+		execl("/ruby","/ruby", "Main.rb", NULL);
 		break;
 	case 5: //bash
-		system("/bin/bash Main.sh<data.in");
+		execl("/bin/bash","/bin/bash" ,"Main.sh",NULL);
 		break;
 	case 6: //Python
-		system("/python Main.py<data.in");
+		execl("/python","/python","Main.py",NULL);
 		break;
-        case 7: //php
-                system("/php Main.php<data.in");
-                break;
-        case 8: //perl
-                system("/perl Main.pl<data.in");
-                break;
-        case 9: //Mono C#
-                system("/mono --debug Main.exe<data.in");
-                
-                break;
+	case 7: //php
+		execl("/php","/php","Main.php",NULL);
+		break;
+	case 8: //perl
+		execl("/perl","/perl","Main.pl",NULL);
+		break;
+	case 9: //Mono C#
+		execl("/mono","/mono","--debug","Main.exe",NULL);
+        break;
 	}
 	//sleep(1);
 	exit(0);

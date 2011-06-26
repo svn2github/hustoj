@@ -17,7 +17,7 @@ if (isset($_POST['syear']))
    foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 
-	$langmask=127&(~$langmask);
+	$langmask=1023&(~$langmask);
 	echo $langmask;	
 
 	$cid=intval($_POST['cid']);
@@ -118,7 +118,7 @@ Public/Private:<select name=private>
 </select>
 <br>Problems:<input type=text size=60 name=cproblem value='<?=$plist?>'>
 <?
- $lang=(~((int)$langmask))&127;
+ $lang=(~((int)$langmask))&1023;
  $C_select=($lang&1)>0?"selected":"";
  $CPP_select=($lang&2)>0?"selected":"";
  $P_select=($lang&4)>0?"selected":"";
@@ -126,6 +126,9 @@ Public/Private:<select name=private>
  $R_select=($lang&16)>0?"selected":"";
  $B_select=($lang&32)>0?"selected":"";
  $Y_select=($lang&64)>0?"selected":"";
+$P_select=($lang&128)>0?"selected":"";
+$L_select=($lang&256)>0?"selected":"";
+$S_select=($lang&512)>0?"selected":"";
 // echo $lang;
 ?>
 
@@ -137,6 +140,9 @@ Public/Private:<select name=private>
 		<option value=4 <?=$R_select?>>Ruby</option>	
 		<option value=5 <?=$B_select?>>Bash</option>	
 	    <option value=6 <?=$Y_select?>>Python</option>	
+		<option value=7 <?=$P_select?>>PHP</option>	
+		<option value=8 <?=$L_select?>>Perl</option>	
+		<option value=9 <?=$S_select?>>C#</option>	
 	</select>
 	
 

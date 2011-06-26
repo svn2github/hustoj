@@ -69,7 +69,7 @@ Language:
   else
 	$langmask=$OJ_LANGMASK;
 	
-  $lang=(~((int)$langmask))&127;
+  $lang=(~((int)$langmask))&1023;
  $C_=($lang&1)>0;
  $CPP_=($lang&2)>0;
  $P_=($lang&4)>0;
@@ -77,6 +77,9 @@ Language:
  $R_=($lang&16)>0;
  $B_=($lang&32)>0;
  $Y_=($lang&64)>0;
+ $H_=($lang&128)>0;
+ $L_=($lang&256)>0;
+ $S_=($lang&512)>0;
  if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
  else $lastlang=1;
  
@@ -87,6 +90,9 @@ Language:
  if($R_) echo"		<option value=4 ".( $lastlang==4?"selected":"").">Ruby</option>";
  if($B_) echo"		<option value=5 ".( $lastlang==5?"selected":"").">Bash</option>";
  if($Y_) echo"		<option value=6 ".( $lastlang==6?"selected":"").">Python</option>";
+ if($H_) echo"		<option value=7 ".( $lastlang==7?"selected":"").">PHP</option>";
+ if($L_) echo"		<option value=8 ".( $lastlang==8?"selected":"").">Perl</option>";
+ if($S_) echo"		<option value=9 ".( $lastlang==9?"selected":"").">C-Sharp</option>";
  
 ?>
 </select>

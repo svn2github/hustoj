@@ -76,7 +76,7 @@ while ($row=mysql_fetch_object($result)){
 }
 mysql_free_result($result);
 echo "<center><h3>Contest Statistics</h3><table width=60%>";
-echo "<tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java<td>Ruby<td>Bash<td>Python</td></tr>";
+echo "<tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java<td>Ruby<td>Bash<td>Python<td>PHP<td>Perl<td>C#</td></tr>";
 for ($i=0;$i<$pid_cnt;$i++){
 	if(!isset($PID[$i])) $PID[$i]="";
 	
@@ -85,7 +85,7 @@ for ($i=0;$i<$pid_cnt;$i++){
 	else 
 		echo "<tr align=center class=evenrow><td>";
 	echo "<a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
-	for ($j=0;$j<17;$j++) {
+	for ($j=0;$j<20;$j++) {
 		if(!isset($R[$i][$j])) $R[$i][$j]="";
 		echo "<td>".$R[$i][$j];
 	}

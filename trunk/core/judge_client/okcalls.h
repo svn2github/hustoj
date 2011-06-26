@@ -33,8 +33,8 @@ int LANG_RV[256]={126,SYS_access,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS
 
 int LANG_RC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
-int LANG_BV[256]={158,117,60,39,102,191,183,SYS_access,SYS_brk,SYS_close,SYS_dup2,SYS_execve,SYS_exit_group,SYS_fcntl64,SYS_fstat64,SYS_getegid32,SYS_geteuid32,SYS_getgid32,SYS_getpgrp,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_gettimeofday,SYS_getuid32,SYS_ioctl,SYS__llseek,SYS_mmap2,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_thread_area,SYS_stat64,SYS_time,SYS_uname,SYS_write};
-int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
+int LANG_BV[256]={42,158,117,60,39,102,191,183,SYS_access,SYS_brk,SYS_close,SYS_dup2,SYS_execve,SYS_exit_group,SYS_fcntl64,SYS_fstat64,SYS_getegid32,SYS_geteuid32,SYS_getgid32,SYS_getpgrp,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_gettimeofday,SYS_getuid32,SYS_ioctl,SYS__llseek,SYS_mmap2,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_thread_area,SYS_stat64,SYS_time,SYS_uname,SYS_write};
+int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
 int LANG_YV[256]={158,117,60,39,102,191,SYS_access,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fcntl64,SYS_fstat64,SYS_futex,SYS_getcwd,SYS_getdents64,SYS_getegid32,SYS_geteuid32,SYS_getgid32,SYS_getrlimit,SYS_getuid32,SYS_ioctl,SYS__llseek,SYS_lstat64,SYS_mmap2,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_readlink,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_thread_area,SYS_set_tid_address,SYS_stat64,SYS_uname,SYS_write};
 int LANG_YC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};

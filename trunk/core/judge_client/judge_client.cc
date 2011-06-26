@@ -103,7 +103,7 @@ static char http_password[BUFFER_SIZE];
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[10][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "pl", "php","cs" };
+static char lang_ext[10][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs" };
 //static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {

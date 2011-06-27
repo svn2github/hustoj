@@ -15,7 +15,7 @@ DBPASS=root
 sudo apt-get install flex g++ libmysql++-dev php5 apache2 mysql-server php5-mysql subversion
 
 sudo yum -y update
-sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mysql-devel 
+sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mysql-devel php-mbstring
 
 sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
 

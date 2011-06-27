@@ -918,14 +918,17 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 
 void copy_shell_runtime(char * work_dir) {
 
-	execute_cmd("mkdir %s/lib", work_dir);
-	execute_cmd("mkdir %s/lib64", work_dir);
-	execute_cmd("mkdir %s/bin", work_dir);
-	execute_cmd("cp /lib/* %s/lib/", work_dir);
-	execute_cmd("cp /lib64/* %s/lib64/", work_dir);
-	execute_cmd("cp /bin/busybox %s/bin/", work_dir);
-	execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
-	execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
+
+        execute_cmd("mkdir %s/lib", work_dir);
+        execute_cmd("mkdir %s/lib64", work_dir);
+        execute_cmd("mkdir %s/bin", work_dir);
+        execute_cmd("cp /lib/* %s/lib/", work_dir);
+        execute_cmd("cp /lib64/* %s/lib64/", work_dir);
+        execute_cmd("cp -a /lib32 %s/", work_dir);
+        execute_cmd("cp /bin/busybox %s/bin/", work_dir);
+        execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
+        execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
+
 
 }
 void copy_bash_runtime(char * work_dir) {
@@ -996,18 +999,14 @@ void copy_mono_runtime(char * work_dir) {
         copy_shell_runtime(work_dir);
         execute_cmd("mkdir %s/usr", work_dir);
         execute_cmd("mkdir %s/proc", work_dir);
-        execute_cmd("mkdir %s/lib", work_dir);
-        execute_cmd("mkdir %s/usr/lib", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/2.0", work_dir);
+        execute_cmd("mkdir -p %s/usr/lib/mono/2.0", work_dir);
         /*execute_cmd("mkdir %s/usr/lib/mono/1.0", work_dir);
         execute_cmd("mkdir %s/usr/lib/mono/3.5", work_dir);
         execute_cmd("mkdir %s/usr/lib/mono/compat-1.0", work_dir);
         execute_cmd("mkdir %s/usr/lib/mono/compat-2.0", work_dir);
         execute_cmd("mkdir %s/usr/lib/mono/gac", work_dir);
         execute_cmd("mkdir %s/usr/lib/mono/monodoc", work_dir);*/
-        execute_cmd("cp /usr/lib/mono/2.0/mscorlib.dll %s/usr/lib/mono/2.0/", work_dir);
-        execute_cmd("cp -R /usr/lib/mono/gac/* %s/usr/lib/mono/gac/", work_dir);
+        execute_cmd("cp -a /usr/lib/mono %s/usr/lib/", work_dir);
         /*
         execute_cmd("ln /usr/lib/mono/1.0/* %s/usr/lib/mono/1.0/", work_dir);
         execute_cmd("ln /usr/lib/mono/3.5/* %s/usr/lib/mono/3.5/", work_dir);
@@ -1028,17 +1027,18 @@ void copy_mono_runtime(char * work_dir) {
         execute_cmd("cp /usr/lib/mono/ %s/usr/lib/mono", work_dir);*/
         execute_cmd("mount -o bind /proc %s/proc", work_dir);
         execute_cmd("cp /usr/bin/mono* %s/", work_dir);
-        
+
         execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
         execute_cmd("cp /lib/libglib* %s/lib/", work_dir);
         execute_cmd("cp /lib/tls/i686/cmov/lib* %s/lib/tls/i686/cmov/", work_dir);
         execute_cmd("cp /lib/libpcre* %s/lib/", work_dir);
         execute_cmd("cp /lib/ld-linux* %s/lib/", work_dir);
+        execute_cmd("cp /lib64/ld-linux* %s/lib64/", work_dir);
         execute_cmd("mkdir -p %s/home/judge", work_dir);
         execute_cmd("chown judge %s/home/judge", work_dir);
         execute_cmd("mkdir -p %s/etc", work_dir);
         execute_cmd("grep judge /etc/passwd>%s/etc/passwd", work_dir);
-        
+
 
 }
 

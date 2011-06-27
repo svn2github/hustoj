@@ -42,3 +42,13 @@ open_basedir=/var/www/html:/var/www/html/JudgeOnline:/tmp:/home/judge/data
 
 for English user ,email or issue is recommended
 for Chinese user ,QQ-qun group IM is recomended.
+
+================
+
+涛·C<tom@....com>  13:24:15
+刚刚在全新的CentOS 5.6中安装了OJ，主要遇到问题和解决方法如下：
+1、安装时候提示找不到www-data用户，修改web的用户为apache
+2、运行/etc/init.d/judged出错，修改这个文件为/usr/bin/judged
+3、打开页面空白，这是由于CentOS默认带的php版本为5.1，不支持mysql_set_charset函数，这个函数需要5.2.3的支持，打开include/db_info.inc.php，注释掉第37行， if(!$OJ_SAE)mysql_set_charset("utf8");
+4、打开题目列表页面不完全，yum install php-mbstring。
+Over~ 

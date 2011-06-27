@@ -18,7 +18,7 @@ CREATE TABLE  `jol`.`contest` (
   `defunct` char(1) NOT NULL DEFAULT 'N',
   `description` text,
   `private` tinyint(4) NOT NULL DEFAULT '0',
-  `langmask` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'bits for LANG to mask',
+  `langmask` int NOT NULL DEFAULT '0' COMMENT 'bits for LANG to mask',
   PRIMARY KEY (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 

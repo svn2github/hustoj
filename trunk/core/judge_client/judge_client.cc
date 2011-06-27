@@ -657,7 +657,7 @@ int compile(int lang) {
 	const char * CP_Y[] = { "python","-c","import py_compile; py_compile.compile(r'Main.py')", NULL };
 	const char * CP_PH[] = { "php", "-l","Main.php", NULL };
         const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
-        const char * CP_CS[] = { "gmcs", "Main.cs", NULL };
+        const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -720,7 +720,7 @@ int compile(int lang) {
 		int status=0;
 
 		waitpid(pid, &status, 0);
-		if(lang>3&&lang!=7)
+		if(lang>3&&lang<7)
 			status=get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
@@ -1238,8 +1238,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		}
 
 		exitcode = WEXITSTATUS(status);
-		/*exitcode == 5 æ˜¯æ­£å¸¸æš‚åœ
-		 * ruby using system to run,exit 17 ok
+		/*exitcode == 5 æ˜¯æ­£å¸¸æš‚å�?		 * ruby using system to run,exit 17 ok
 		 *  */
 		if ((lang >= 4 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
 			//go on and on
@@ -1268,13 +1267,11 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		if (WIFSIGNALED(status)) {
 			/*  WIFSIGNALED: å¦‚æžœè¿›ç¨‹æ˜¯è¢«ä¿¡å·ç»“æŸçš„ï¼Œè¿”å›žTrue
 			 *
-			 *  å¦ psignal(int sig, char *s)ï¼Œè¿›è¡Œç±»ä¼¼perror(char *s)çš„æ“ä½œï¼Œæ‰“å° s, å¹¶è¾“å‡ºä¿¡å· sig å¯¹åº”çš„æç¤ºï¼Œå…¶ä¸­
-			 *  sig = 5 å¯¹åº”çš„æ˜¯ Trace/breakpoint trap
-			 *  sig = 11 å¯¹åº”çš„æ˜¯ Segmentation fault
-			 *  sig = 25 å¯¹åº”çš„æ˜¯ File size limit exceeded
+			 *  å¦ psignal(int sig, char *s)ï¼Œè¿›è¡Œç±»ä¼¼perror(char *s)çš„æ“ä½œï¼Œæ‰“å�?s, å¹¶è¾“å‡ºä¿¡å�?sig å¯¹åº”çš„æç¤ºï¼Œå…¶ä¸�?			 *  sig = 5 å¯¹åº”çš„æ˜�?Trace/breakpoint trap
+			 *  sig = 11 å¯¹åº”çš„æ˜�?Segmentation fault
+			 *  sig = 25 å¯¹åº”çš„æ˜�?File size limit exceeded
 			 *
-			 *  WTERMSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹ç»“æŸè¿›ç¨‹çš„ä¿¡å·
-			 *  */
+			 *  WTERMSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹ç»“æŸè¿›ç¨‹çš„ä¿¡å�?			 *  */
 			sig = WTERMSIG(status);
 			if (DEBUG) {
 				printf("WTERMSIG=%d\n", sig);
@@ -1300,9 +1297,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		/*     commited from http://www.felix021.com/blog/index.php?go=category_13
 
 
-		 WIFSTOPPED: å¦‚æžœè¿›ç¨‹åœ¨è¢«ptraceè°ƒç”¨ç›‘æŽ§çš„æ—¶å€™è¢«ä¿¡å·æš‚åœ/åœæ­¢ï¼Œè¿”å›žTrue
-		 WSTOPSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹æš‚åœ/åœæ­¢è¿›ç¨‹çš„ä¿¡å·
-
+		 WIFSTOPPED: å¦‚æžœè¿›ç¨‹åœ¨è¢«ptraceè°ƒç”¨ç›‘æŽ§çš„æ—¶å€™è¢«ä¿¡å·æš‚å�?åœæ­¢ï¼Œè¿”å›žTrue
+		 WSTOPSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹æš‚å�?åœæ­¢è¿›ç¨‹çš„ä¿¡å�?
 		 */
 
 		// check the system calls

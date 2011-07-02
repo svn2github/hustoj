@@ -49,16 +49,11 @@ root密码freeproblemset
 
 下载地址: 
 r1065
+
 ftp://59.53.88.226/hustoj-FPS.r1065.iso
 
-r1057
-ftp://59.53.88.226/hustoj-FPS.r1057.iso
+http://oj.zjicm.acm.zj.cn:8090/hustoj-FPS.r1065.iso
 
-{{{
-MD5: C5C5AE2E23F64B7FFDEBE3F1B649CC60
-SHA1: EC29DF831C6C4208AE504B12BB5D2B6C85112ACC
-CRC32: 8945FEB3
-}}}
 
 
 

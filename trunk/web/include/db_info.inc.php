@@ -20,6 +20,9 @@ static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="hoj.css";
 static  $OJ_SAE=false; //using sina application engine
+static  $OJ_VCODE=false;
+
+
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 
 	if($OJ_SAE)	{

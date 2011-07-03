@@ -8,6 +8,12 @@ $user_id=trim($_POST['user_id']);
 $len=strlen($user_id);
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
+$vcode=trim($_POST['vcode']);
+if($OJ_VCODE&&$vcode!= $_SESSION["vcode"] ){
+	$_SESSION["vcode"]=null;
+	$err_str=$err_str."Vcode Wrong!\\n";
+	$err_cnt++;
+}
 if($len>20){
 	$err_str=$err_str."User ID Too Long!\\n";
 	$err_cnt++;

@@ -15,8 +15,8 @@
     }
    //4位验证码也可以用rand(1000,9999)直接生成
    //将生成的验证码写入session，备验证页面使用
-    Session_start();
-    $_SESSION["Checknum"] = $num;
+    session_start();
+    $_SESSION["vcode"] = $num;
    //创建图片，定义颜色值
     Header("Content-type: image/PNG");
     srand((double)microtime()*1000000);
@@ -38,7 +38,7 @@
     //在画布上随机生成大量黑点，起干扰作用;
     for($i=0;$i<80;$i++)
     {
-   imagesetpixel($im, rand(0,60), rand(0,20), $black);
+    imagesetpixel($im, rand(0,60), rand(0,20), $black);
     }
     //将四个数字随机显示在画布上,字符的水平间距和位置都按一定波动范围随机生成
     $strx=rand(3,8);

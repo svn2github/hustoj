@@ -22,6 +22,11 @@
 		<tr><td><?=$MSG_EMAIL?>:
 			<td><input name="email" size=30 type=text>
 		</tr>
+		<?php if($OJ_VCODE){?>
+		<tr><td>TYPE:<img src=vcode.php>
+			<td><input name="vcode" size=4 type=text>*
+		</tr>
+		<?php }?>
 		<tr><td>
 			<td><input value="Submit" name="submit" type="submit">
 				&nbsp; &nbsp;

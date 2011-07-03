@@ -9,7 +9,7 @@ $len=strlen($user_id);
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
 $vcode=trim($_POST['vcode']);
-if($OJ_VCODE&&$vcode!= $_SESSION["vcode"] ){
+if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
 	$_SESSION["vcode"]=null;
 	$err_str=$err_str."Vcode Wrong!\\n";
 	$err_cnt++;

@@ -88,8 +88,12 @@
 		<div class=menu_item ><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "<span style='color:orange'>";?>
 		<a href="<?=isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?=$MSG_FAQ?><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "</span>";?></a>
 		</div>
-		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
-		<span style="color:1a5cc8" id="dict_status"></span></div>
+		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
+      <div class=menu_item >
+		      <span style="color:1a5cc8" id="dict_status"></span>
+      </div>
+      <script src="include/underlineTranslation.js" type="text/javascript"></script> 
+
 		<?}?>
 </div><!--end menu-->
 <div id=profile >

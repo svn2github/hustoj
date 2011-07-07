@@ -19,6 +19,7 @@ GRANT ALL PRIVILEGES ON jol.* TO 'judge'@'%'
 IDENTIFIED BY 'judge_pass' WITH GRANT OPTION;
 }}}
 
+* 对于网络原因无法远程mysql的，请参考[HTTPJudge]
 
 其中jol为数据库，judge为帐号，judge_pass为密码。
 注意：

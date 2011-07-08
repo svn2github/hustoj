@@ -43,7 +43,7 @@ class Solution{
   var $language="";
   var $source_code="";	
 }
-function getSolution($pid){
+function getSolution($pid,$lang){
 	$ret=new Solution();
 	require("../include/db_info.inc.php");
 	if(isset($OJ_LANG)){
@@ -58,7 +58,7 @@ function getSolution($pid){
 	mysql_query("set names utf8",$con);
 	mysql_set_charset("utf8",$con);
 	mysql_select_db($DB_NAME,$con);
-	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 order by language";
+	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
 //	echo $sql;
 	$result = mysql_query($sql,$con ) ;
 	if($result&&$row = mysql_fetch_row ( $result) ){
@@ -202,10 +202,17 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <hint><![CDATA[<?=$row->hint?>]]></hint>
 <source><![CDATA[<?=fixcdata($row->source)?>]]></source>
 <?
-$solution=getSolution($row->problem_id);
-if ($solution->language){?>
-<solution language="<?=$solution->language?>"><![CDATA[<?=fixcdata($solution->source_code)?>]]></solution>
-<?}?>
+require("../include/const.inc.php");
+for ($lang=0;$lang<count($language_name);$lang++){
+
+	$solution=getSolution($row->problem_id,$lang);
+	if ($solution->language){?>
+	<solution language="<?=$solution->language?>"><![CDATA[<?=fixcdata($solution->source_code)?>]]></solution>
+	<?}
+
+
+}
+?>
 <?
  if($row->spj!=0){
  	$filec="$OJ_DATA/".$row->problem_id."/spj.c";

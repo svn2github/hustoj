@@ -1,19 +1,19 @@
 <?php
 	$MSG_FAQ="常见问答";
-	$MSG_BBS="&nbsp;讨论版";
-	$MSG_HOME="&nbsp;主页&nbsp;";
-	$MSG_PROBLEMS="&nbsp;问题&nbsp;";
-	$MSG_STATUS="&nbsp;状态&nbsp;";
-	$MSG_RANKLIST="&nbsp;排名&nbsp;";
+	$MSG_BBS="讨论版";
+	$MSG_HOME="主页";
+	$MSG_PROBLEMS="问题";
+	$MSG_STATUS="状态";
+	$MSG_RANKLIST="排名";
 	$MSG_CONTEST="竞赛";
-	$MSG_LOGOUT="&nbsp;注销&nbsp;";
-	$MSG_LOGIN="&nbsp;登录&nbsp;";
-	$MSG_REGISTER="&nbsp;注册&nbsp;";
-	$MSG_ADMIN="&nbsp;管理&nbsp;";
-	$MSG_STANDING="&nbsp;名次&nbsp;";
-	$MSG_STATISTICS="&nbsp;统计&nbsp;";
+	$MSG_LOGOUT="注销";
+	$MSG_LOGIN="登录";
+	$MSG_REGISTER="注册";
+	$MSG_ADMIN="管理";
+	$MSG_STANDING="名次";
+	$MSG_STATISTICS="统计";
 	$MSG_USERINFO="修改帐号";
-	$MSG_MAIL="Mail";
+	$MSG_MAIL="短消息";
 	
 	$MSG_Pending="等待";
 	$MSG_Pending_Rejudging="等待重判";

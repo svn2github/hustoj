@@ -19,24 +19,22 @@
 <?php
 if ($prob_exist){?>
 <div style="text-align:left;font-size:80%">
-[ <a href="newpost.php<?
-if ($pid!=0 && $cid!=null) echo "?pid=".$pid."&cid=".$cid;
+[ <a href="newpost.php<?php if ($pid!=0 && $cid!=null) echo "?pid=".$pid."&cid=".$cid;
 else if ($pid!=0) echo "?pid=".$pid;
 else if ($cid!=null) echo "?cid=".$cid;?>
 ">New Thread</a> ]</div>
 <div style="float:left;text-align:left;font-size:80%">
 Location : 
-<?
-if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";
+<?php if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";
 if ($pid!=null && $pid!=0) echo " >> <a href=\"discuss.php?pid=".$pid."&cid=".$cid."\">Problem ".$pid."</a>";?>
 </div>
 
 <div style="float:right;font-size:80%;color:red;font-weight:bold">
-<? if ($pid!=null && $pid!=0 && ($cid=='' || $cid==null)){?>
+<?php if ($pid!=null && $pid!=0 && ($cid=='' || $cid==null)){?>
 <a href="../problem.php?id=<?echo $pid?>">See the problem</a>
-<?}?>
+<?php }?>
 </div>
-<?}
+<?php }
 $sql = "SELECT `tid`, `title`, `top_level`, `topic`.`status`, `cid`, `pid`, CONVERT(MIN(`reply`.`time`),DATE) `posttime`, MAX(`reply`.`time`) `lastupdate`, `topic`.`author_id`, COUNT(`rid`) `count` FROM `topic`, `reply` WHERE `topic`.`status`!=2 AND `reply`.`status`!=2 AND `tid` = `topic_id`";
 if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".mysql_escape_string($_REQUEST['cid'])."'";
 else $sql.=" AND ( ISNULL(`cid`)";
@@ -57,7 +55,7 @@ $isadmin = isset($_SESSION['administrator']);
 ?>
 <table style="clear:both; width:100%">
 <tr align=center class='toprow'>
-	<td width="2%"><? if ($isadmin) echo "<input type=checkbox>"; ?></td>
+	<td width="2%"><?php if ($isadmin) echo "<input type=checkbox>"; ?></td>
 	<td width="3%"></td>
 	<td width="4%">Prob</td>
 	<td width="12%">Author</td>
@@ -66,8 +64,7 @@ $isadmin = isset($_SESSION['administrator']);
 	<td width="16%">Last Reply</td>
 	<td width="3%">Re</td>
 </tr>
-<?
-if ($rows_cnt==0) echo("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">No thread here.</td></tr>");
+<?php if ($rows_cnt==0) echo("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">No thread here.</td></tr>");
 
 for ($i=0;$i<$rows_cnt;$i++){
 	mysql_data_seek($result,$i);
@@ -106,4 +103,4 @@ mysql_free_result($result);
 <span style = "font-size:75%; margin:0 10">[<b class="lock">Lock</b>] 锁帖</span>
 </div>
 </center>
-<?require_once("../oj-footer.php")?>
+<?php require_once("../oj-footer.php")?>

@@ -8,8 +8,8 @@
 </head>
 <body leftmargin="30" >
 
-<?require_once("../include/db_info.inc.php");?>
-<?require_once("admin-header.php");
+<?php require_once("../include/db_info.inc.php");?>
+<?php require_once("admin-header.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -34,10 +34,10 @@ $description->Value = '<p></p>' ;
 $description->Create() ;
 ?>
 </p>
-<?require_once("../include/set_post_key.php");?>
+<?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?require_once("../oj-footer.php");?>
+<?php require_once("../oj-footer.php");?>
 </body></html>
 

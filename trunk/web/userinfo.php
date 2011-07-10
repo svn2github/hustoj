@@ -1,5 +1,5 @@
-<?require_once("oj-header.php")?>
-<?require_once("./include/db_info.inc.php");
+<?php require_once("oj-header.php")?>
+<?php require_once("./include/db_info.inc.php");
 if(isset($OJ_LANG))
 		require_once("./lang/$OJ_LANG.php");
 require_once("./include/const.inc.php");
@@ -8,8 +8,7 @@ require_once("./include/my_func.inc.php");
 
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
-<?
-// check user
+<?php // check user
 $user=$_GET['user'];
 if (!is_valid_user_name($user)){
 	echo "No such User!";
@@ -52,19 +51,17 @@ $Rank=intval($row[0])+1;
 <center>
 <table id=statics width=70%>
 <caption>
-<?=$user."--".htmlspecialchars($nick)?>
-<?
- if($mail)
+<?php echo $user."--".htmlspecialchars($nick)?>
+<?php if($mail)
 	echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 ?>
 </caption>
-<tr bgcolor=#D7EBFF><td width=15%><?=$MSG_Number?><td width=25% align=center><?=$Rank?><td width=70% align=center>Solved Problems List</tr>
-<tr bgcolor=#D7EBFF><td><?=$MSG_SOVLED?><td align=center><a href='status.php?user_id=<?=$user?>&jresult=4'><?=$AC?></a>
+<tr bgcolor=#D7EBFF><td width=15%><?php echo $MSG_Number?><td width=25% align=center><?php echo $Rank?><td width=70% align=center>Solved Problems List</tr>
+<tr bgcolor=#D7EBFF><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></a>
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
-<?
-$sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";	
+<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";	
 if (!($result=mysql_query($sql))) echo mysql_error();
 while ($row=mysql_fetch_array($result))
 	echo "p($row[0]);";
@@ -72,7 +69,7 @@ mysql_free_result($result);
 ?>
 </script>
 </tr>
-<tr bgcolor=#D7EBFF><td><?=$MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?=$user?>'><?=$Submit?></a></tr>
+<tr bgcolor=#D7EBFF><td><?php echo $MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?php echo $user?>'><?php echo $Submit?></a></tr>
 <?php 
 	$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND result>=4 group by result order by result";
 	$result=mysql_query($sql);
@@ -110,11 +107,10 @@ echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='posit
 </script> 
 
 
-<tr bgcolor=#D7EBFF><td>School:<td align=center><?=$school?></tr>
-<tr bgcolor=#D7EBFF><td>Email:<td align=center><?=$email?></tr>
+<tr bgcolor=#D7EBFF><td>School:<td align=center><?php echo $school?></tr>
+<tr bgcolor=#D7EBFF><td>Email:<td align=center><?php echo $email?></tr>
 </table>
-<?
-if (isset($_SESSION['administrator'])){
+<?php if (isset($_SESSION['administrator'])){
 $sql="SELECT * FROM `loginlog` WHERE `user_id`='$user_mysql' order by `time` desc LIMIT 0,10";
 $result=mysql_query($sql) or die(mysql_error());
 echo "<table border=1>";
@@ -132,4 +128,4 @@ mysql_free_result($result);
 }
 ?>
 </center>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>

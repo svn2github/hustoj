@@ -11,17 +11,12 @@
 <center>
 <div style="width:90%; margin:0 auto; text-align:left;"> 
 <div style="text-align:left;font-size:80%;float:left;">[ <a href="newpost.php">New Thread</a> ]</div>
-<?
-if ($isadmin){
-	?><div style="font-size:80%; float:right"> Change sticky level to<?
-	$adminurl = "threadadmin.php?target=thread&tid={$_REQUEST['tid']}&action=";
+<?php if ($isadmin){
+	?><div style="font-size:80%; float:right"> Change sticky level to<?php $adminurl = "threadadmin.php?target=thread&tid={$_REQUEST['tid']}&action=";
 	if ($row->top_level == 0) echo "[ <a href=\"{$adminurl}sticky&level=3\">Level Top</a> ] [ <a href=\"{$adminurl}sticky&level=2\">Level Mid</a> ] [ <a href=\"{$adminurl}sticky&level=1\">Level Low</a> ]"; else echo "[ <a href=\"{$adminurl}sticky&level=0\">Standard</a> ]";
-	?> | <?
-	if ($row->status != 1) echo (" [ <a  href=\"{$adminurl}lock\">Lock</a> ]"); else echo(" [ <a href=\"{$adminurl}resume\">Resume</a> ]");
-	?> | <?
-	echo (" [ <a href=\"{$adminurl}delete\">Delete</a> ]");
-	?></div><?
-}
+	?> | <?php if ($row->status != 1) echo (" [ <a  href=\"{$adminurl}lock\">Lock</a> ]"); else echo(" [ <a href=\"{$adminurl}resume\">Resume</a> ]");
+	?> | <?php echo (" [ <a href=\"{$adminurl}delete\">Delete</a> ]");
+	?></div><?php }
 ?>
 <table style="width:100%; clear:both">
 <tr align=center class='toprow'>
@@ -51,17 +46,15 @@ if ($isadmin){
 		<div class="mon" style="display:inline;text-align:right; float:right">
 			<?if (isset($_SESSION['administrator'])) {?>  
 			<span>[ <a href="
-				<? 
-				if ($row->status==0) echo $url."disable\">Disable";
+				<?php if ($row->status==0) echo $url."disable\">Disable";
 				else echo $url."resume\">Resume";
 				?> </a> ]</span>
 			<span>[ <a href="#">Reply</a> ]</span> 
-			<? } ?>
+			<?php } ?>
 			<span>[ <a href="#">Quote</a> ]</span>
 			<span>[ <a href="#">Edit</a> ]</span>
 			<span>[ <a 
-			<?
-				if ($isuser || $isadmin) echo "href=".$url."delete";
+			<?php if ($isuser || $isadmin) echo "href=".$url."delete";
 			?>
 			>Delete</a> ]</span>
 			<span style="width:5em;text-align:right;display:inline-block;font-weight:bold;margin:0 10px">
@@ -83,19 +76,17 @@ if ($isadmin){
 ?>
 </table>
 <div style="font-size:90%; width:100%; text-align:center">[<a href="#">Top</a>]  [<a href="#">Previous Page</a>]  [<a href="#">Next Page</a>] </div>
-<?
-if (isset($_SESSION['user_id'])){?>
+<?php if (isset($_SESSION['user_id'])){?>
 <div style="font-size:80%;"><div style="margin:0 10px">New Reply:</div></div>
 <form action="post.php?action=reply" method=post>
 <input type=hidden name=tid value=<?php echo $_REQUEST['tid'];?>>
 <div><textarea name=content style="border:1px dashed #8080FF; width:700px; height:200px; font-size:75%;margin:0 10px; padding:10px"></textarea></div>
 <div><input type="submit" style="margin:5px 10px" value="Submit"></input></div>
 </form>
-<?
-}
+<?php }
 ?>
 
 </center>
 </div>
 
-<?require_once("../oj-footer.php")?>
+<?php require_once("../oj-footer.php")?>

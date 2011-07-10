@@ -1,22 +1,15 @@
-<?
-require_once ("admin-header.php");
+<?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
 ?>
-<?
-
-require_once ("../include/db_info.inc.php");
+<?php require_once ("../include/db_info.inc.php");
 ?>
-<?
-
-require_once ("../include/problem.php");
+<?php require_once ("../include/problem.php");
 ?>
-<?
-
-// contest_id
+<?php // contest_id
 
 
 $title = $_POST ['title'];
@@ -61,9 +54,7 @@ if(strlen($test_output))mkdata($pid,"test.out",$test_output,$OJ_DATA);
 
 /*	*/
 ?>
-<?
-
-require_once ("../oj-footer.php");
+<?php require_once ("../oj-footer.php");
 
 ?>
 

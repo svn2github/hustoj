@@ -1,7 +1,6 @@
-<?require_once("oj-header.php")?>
+<?php require_once("oj-header.php")?>
 <title>Compile Error Info</title>
-<?
-require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
 if (!isset($_GET['sid'])){
 	echo "No such code!\n";
@@ -30,4 +29,4 @@ if ($ok==true){
 	echo "I am sorry, You could not view this message!";
 }
 ?>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>

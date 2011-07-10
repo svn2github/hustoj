@@ -1,10 +1,8 @@
-<?require_once("admin-header.php");?>
+<?php require_once("admin-header.php");?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Add a contest</title>
 
-<?
-
-if (isset($_POST['syear']))
+<?php if (isset($_POST['syear']))
 {
 	
 	require_once("../include/db_info.inc.php");
@@ -108,21 +106,21 @@ else if(isset($_POST['problem2contest'])){
   
 ?>
 	
-	<form method=POST action='<?=$_SERVER['PHP_SELF']?>'>
+	<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
 	<p align=center><font size=4 color=#333399>Add a Contest</font></p>
-	<p align=left>Title:<input type=text name=title size=71 value="<?=isset($title)?$title:""?>"></p>
+	<p align=left>Title:<input type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
 	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
-	Year:<input type=text name=syear value=<?=date('Y')?> size=7 >
-	Month:<input type=text name=smonth value=<?=date('m')?> size=7 >
-	Day:<input type=text name=sday size=7 value=<?=date('d')?> >&nbsp;
-	Hour:<input type=text name=shour size=7 value=<?=date('H')?>>&nbsp;
+	Year:<input type=text name=syear value=<?php echo date('Y')?> size=7 >
+	Month:<input type=text name=smonth value=<?php echo date('m')?> size=7 >
+	Day:<input type=text name=sday size=7 value=<?php echo date('d')?> >&nbsp;
+	Hour:<input type=text name=shour size=7 value=<?php echo date('H')?>>&nbsp;
 	Minute:<input type=text name=sminute value=00 size=7 ></p>
 	<p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
-	Year:<input type=text name=eyear value=<?=date('Y')?> size=7 >
-	Month:<input type=text name=emonth value=<?=date('m')?> size=7 >
+	Year:<input type=text name=eyear value=<?php echo date('Y')?> size=7 >
+	Month:<input type=text name=emonth value=<?php echo date('m')?> size=7 >
 	
-	Day:<input type=text name=eday size=7 value=<?=date('d')+(date('H')+4>23?1:0)?>>&nbsp;
-	Hour:<input type=text name=ehour size=7 value=<?=(date('H')+4)%24?>>&nbsp;
+	Day:<input type=text name=eday size=7 value=<?php echo date('d')+(date('H')+4>23?1:0)?>>&nbsp;
+	Hour:<input type=text name=ehour size=7 value=<?php echo (date('H')+4)%24?>>&nbsp;
 	Minute:<input type=text name=eminute value=00 size=7 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>
@@ -137,16 +135,15 @@ else if(isset($_POST['problem2contest'])){
 		<option value=8 selected>Perl</option>	
 		<option value=9 selected>C#</option>	
 	</select>
-	<?require_once("../include/set_post_key.php");?>
-	<br>Problems:<input type=text size=60 name=cproblem value="<?=isset($plist)?$plist:""?>">
+	<?php require_once("../include/set_post_key.php");?>
+	<br>Problems:<input type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>
 	Users:<textarea name="ulist" rows="10" cols="20"></textarea>
 	<br />
 	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。
 	<p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 	</form>
-<?
-}
+<?php }
 require_once("../oj-footer.php");
 
 ?>

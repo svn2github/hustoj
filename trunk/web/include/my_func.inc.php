@@ -1,5 +1,4 @@
-<?
-function is_valid_user_name($user_name){
+<?php function is_valid_user_name($user_name){
 	$len=strlen($user_name);
 	for ($i=0;$i<$len;$i++){
 		if (

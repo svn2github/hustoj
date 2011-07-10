@@ -8,8 +8,8 @@
 </head>
 <body leftmargin="30" >
 
-<?require_once("../include/db_info.inc.php");?>
-<?require_once("admin-header.php");
+<?php require_once("../include/db_info.inc.php");?>
+<?php require_once("admin-header.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -86,8 +86,7 @@ $output->Create() ;
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
 <p align=left>contest:
 	<select  name=contest_id>
-<?
-$sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
+<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
 $result=mysql_query($sql);
 echo "<option value=''>none</option>";
 if (mysql_num_rows($result)==0){
@@ -99,10 +98,10 @@ if (mysql_num_rows($result)==0){
 	</select>
 </p>
 <div align=center>
-<?require_once("../include/set_post_key.php");?>
+<?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?require_once("../oj-footer.php");?>
+<?php require_once("../oj-footer.php");?>
 </body></html>
 

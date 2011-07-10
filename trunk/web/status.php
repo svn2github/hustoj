@@ -47,8 +47,7 @@ require_once("./include/const.inc.php");
 <title>Submission Status</title>
 <center>
 
-<?
-$str2="";
+<?php $str2="";
 
 $sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
@@ -61,8 +60,7 @@ if (isset($_GET['cid'])){
 }
 ?>
 <div>
-<?
-$order_str=" ORDER BY `solution_id` DESC ";
+<?php $order_str=" ORDER BY `solution_id` DESC ";
 $start_first=1;
 // check the top arg
 if (isset($_GET['top'])){
@@ -100,12 +98,11 @@ if ($language!=-1){
 }
 ?>
 <form id=simform action="status.php" method="get">
-<?=$MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?=$problem_id?>'>
-<?=$MSG_USER?>:<input type=text size=4 name=user_id value='<?=$user_id?>'>
+<?php echo $MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
+<?php echo $MSG_USER?>:<input type=text size=4 name=user_id value='<?php echo $user_id?>'>
 <?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?=$MSG_LANG?>:<select size="1" name="language">
-<?
-if (isset($_GET['language'])) $language=$_GET['language'];
+<?php echo $MSG_LANG?>:<select size="1" name="language">
+<?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
 if ($language<0||$language>9) $language=-1;
 if ($language==-1) echo "<option value='-1' selected>All</option>";
@@ -116,9 +113,8 @@ for ($i=0;$i<10;$i++){
 }
 ?>
 </select>
-<?=$MSG_RESULT?>:<select size="1" name="jresult">
-<?
-if (isset($_GET['jresult'])) $jresult=intval($_GET['jresult']);
+<?php echo $MSG_RESULT?>:<select size="1" name="jresult">
+<?php if (isset($_GET['jresult'])) $jresult=intval($_GET['jresult']);
 else $jresult=-1;
 if ($jresult>=12||$jresult<0) $jresult=-1;
 if ($jresult!=-1){
@@ -136,8 +132,7 @@ echo "</select>";
 ?>
 </select>
 
-<?
-if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+<?php if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
 	if(isset($_GET['showsim']))
 		$showsim=intval($_GET['showsim']);
 	else
@@ -171,19 +166,17 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 </div>
 <table align=center>
 <tr  class='toprow'>
-<td ><?=$MSG_RUNID?>
-<td ><?=$MSG_USER?>
-<td ><?=$MSG_PROBLEM?>
-<td ><?=$MSG_RESULT?>
-<td ><?=$MSG_MEMORY?>
-<td ><?=$MSG_TIME?>
-<td ><?=$MSG_LANG?>
-<td ><?=$MSG_CODE_LENGTH?>
-<td ><?=$MSG_SUBMIT_TIME?>
+<td ><?php echo $MSG_RUNID?>
+<td ><?php echo $MSG_USER?>
+<td ><?php echo $MSG_PROBLEM?>
+<td ><?php echo $MSG_RESULT?>
+<td ><?php echo $MSG_MEMORY?>
+<td ><?php echo $MSG_TIME?>
+<td ><?php echo $MSG_LANG?>
+<td ><?php echo $MSG_CODE_LENGTH?>
+<td ><?php echo $MSG_SUBMIT_TIME?>
 </tr>
-<?
-
-if($OJ_SIM){
+<?php if($OJ_SIM){
         $old=$sql;
         $sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
         if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
@@ -278,8 +271,7 @@ while(	$row=mysql_fetch_object($result)){
 mysql_free_result($result);
 ?>
 </table>
-<?
-echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
 	echo "[<a href=status.php?".$str2."&top=".$_GET['prevtop'].">Previous Page</a>]&nbsp;&nbsp;";
 else
@@ -287,7 +279,7 @@ else
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
 
-<?require_once("oj-footer.php");
+<?php require_once("oj-footer.php");
 ?>
 <?php
 	//cache foot start	

@@ -4,7 +4,7 @@
 ?>
 <hr>
 <center>
-  <font size="+3"><?=$OJ_NAME?> Online Judge FAQ</font>
+  <font size="+3"><?php echo $OJ_NAME?> Online Judge FAQ</font>
 </center>
 <hr>
 <p><font color=green>Q</font>:What is the compiler the judge is using and what are the compiler options?<br>
@@ -133,14 +133,14 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 <br>
 <hr>
 <center>
-  <font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php"><?=$OJ_NAME?> BBS</a></font>
+  <font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php"><?php echo $OJ_NAME?> BBS</a></font>
 </center>
 <hr>
 <center>
   <table width=100% border=0>
     <tr>
       <td align=right width=65%>
-      <a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> 
+      <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
       <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R500+</font></a></td>
     </tr>
   </table>

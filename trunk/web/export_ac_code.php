@@ -1,7 +1,6 @@
-<?require_once('oj-header.php');?>
+<?php require_once('oj-header.php');?>
 <title>Export All AC Source</title>
-<?
-if (!isset($_SESSION['user_id'])){
+<?php if (!isset($_SESSION['user_id'])){
 	echo "<a href=./loginpage.php>Please LogIn First!</a>";
 	require_once('oj-footer.php');
 	exit();
@@ -19,4 +18,4 @@ while($row=mysql_fetch_object($result)){
 }
 mysql_free_result($result);
 ?>
-<?require_once('oj-footer.php');?>
+<?php require_once('oj-footer.php');?>

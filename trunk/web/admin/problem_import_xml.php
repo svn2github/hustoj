@@ -1,13 +1,11 @@
-<?
-require_once ("admin-header.php");
+<?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
 ?>
-<?
-function image_save_file($filepath ,$base64_encoded_img){
+<?php function image_save_file($filepath ,$base64_encoded_img){
 	$fp=fopen($filepath ,"wb");
 	fwrite($fp,base64_decode($base64_encoded_img));
 	fclose($fp);

@@ -1,5 +1,4 @@
-<?
-	@session_start();
+<?php @session_start();
 	ini_set("display_errors","Off");
 static 	$DB_HOST="127.1";
 static 	$DB_NAME="jol";
@@ -20,7 +19,7 @@ static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="hoj.css";
 static  $OJ_SAE=false; //using sina application engine
-static  $OJ_VCODE=false;
+static  $OJ_VCODE=true;
 
 
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];

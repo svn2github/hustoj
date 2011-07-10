@@ -25,14 +25,11 @@
 		
 		
 		?>
-		<?
-		
-		require_once ("oj-header.php");
+		<?php require_once ("oj-header.php");
 		?>
 	<title>Rank List</title>
 
-	<?
-		require_once ("./include/db_info.inc.php");
+	<?php require_once ("./include/db_info.inc.php");
 		
 		if(isset($OJ_LANG)){
 			require_once("./lang/$OJ_LANG.php");
@@ -131,8 +128,7 @@
 		mysql_free_result ( $result );
 		?>
 		
-		<?
-		require_once ("oj-footer.php");
+		<?php require_once ("oj-footer.php");
 		?>
 		<?php
 		

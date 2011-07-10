@@ -3,8 +3,7 @@
 		header ( "content-type:   application/excel" );
 		
 ?>
-<?
-require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 global $mark_base,$mark_per_problem,$mark_per_punish;
  $mark_base=60;
  $mark_per_problem=10;

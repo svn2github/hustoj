@@ -5,8 +5,8 @@
 </head>
 <body>
 <center>
-<?require_once("../include/db_info.inc.php");?>
-<?require_once("admin-header.php");
+<?php require_once("../include/db_info.inc.php");?>
+<?php require_once("admin-header.php");
 
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
@@ -16,33 +16,30 @@ if (!(isset($_SESSION['administrator']))){
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, <?=$OJ_NAME?>.</font>
+<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC, <?php echo $OJ_NAME?>.</font>
 <td width="100"></td>
 </center>
 <hr>
-<?
-
-if(isset($_GET['id'])){
+<?php if(isset($_GET['id'])){
 	require_once("../include/check_get_key.php");
 ?>
 <h1>Edit problem</h1>
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
-<?
-$sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
+<?php $sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
 $result=mysql_query($sql);
 $row=mysql_fetch_object($result);
 ?>
-<p>Problem Id: <?=$row->problem_id?></p>
-<input type=hidden name=problem_id value='<?=$row->problem_id?>'>
-<p>Title:<input type=text name=title size=71 value='<?=htmlspecialchars($row->title)?>'></p>
-<p>Time Limit:<input type=text name=time_limit size=20 value='<?=$row->time_limit?>'>S</p>
-<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?=$row->memory_limit?>'>MByte</p>
+<p>Problem Id: <?php echo $row->problem_id?></p>
+<input type=hidden name=problem_id value='<?php echo $row->problem_id?>'>
+<p>Title:<input type=text name=title size=71 value='<?php echo htmlspecialchars($row->title)?>'></p>
+<p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row->time_limit?>'>S</p>
+<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row->memory_limit?>'>MByte</p>
 
 <!--
-<p>Description:<br><textarea rows=13 name=description cols=120><?=htmlspecialchars($row->description)?></textarea></p>
-<p>Input:<br><textarea rows=13 name=input cols=120><?=htmlspecialchars($row->input)?></textarea></p>
-<p>Output:<br><textarea rows=13 name=output cols=120><?=htmlspecialchars($row->output)?></textarea></p>
+<p>Description:<br><textarea rows=13 name=description cols=120><?php echo htmlspecialchars($row->description)?></textarea></p>
+<p>Input:<br><textarea rows=13 name=input cols=120><?php echo htmlspecialchars($row->input)?></textarea></p>
+<p>Output:<br><textarea rows=13 name=output cols=120><?php echo htmlspecialchars($row->output)?></textarea></p>
 -->
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
 
@@ -84,8 +81,8 @@ $output->Value = $row->output;
 $output->Create() ;
 ?>
 
-<p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?=htmlspecialchars($row->sample_input)?></textarea></p>
-<p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?=htmlspecialchars($row->sample_output)?></textarea></p>
+<p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?php echo htmlspecialchars($row->sample_input)?></textarea></p>
+<p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?php echo htmlspecialchars($row->sample_output)?></textarea></p>
 <p>Hint:<br>
 <?php
 $output = new FCKeditor('hint') ;
@@ -98,16 +95,16 @@ $output->Create() ;
 ?>
 </p>
 <p>SpecialJudge: 
-N<input type=radio name=spj value='0' <?=$row->spj=="0"?"checked":""?>>
-Y<input type=radio name=spj value='1' <?=$row->spj=="1"?"checked":""?>></p>
-<p>Source:<br><textarea name=source rows=1 cols=70><?=htmlspecialchars($row->source)?></textarea></p>
+N<input type=radio name=spj value='0' <?php echo $row->spj=="0"?"checked":""?>>
+Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>></p>
+<p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlspecialchars($row->source)?></textarea></p>
 <div align=center>
-<?require_once("../include/set_post_key.php");?>
+<?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?require_once("../oj-footer.php");?>
-<?}else{
+<?php require_once("../oj-footer.php");?>
+<?php }else{
 require_once("../include/check_post_key.php");
 $id=$_POST['problem_id'];
 $title=$_POST['title'];

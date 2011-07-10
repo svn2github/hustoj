@@ -4,7 +4,7 @@
 ?>
 <hr>
 <center>
-  <font size="+3"><?=$OJ_NAME?> Online Judge FAQ</font>
+  <font size="+3"><?php echo $OJ_NAME?> Online Judge FAQ</font>
 </center>
 <hr>
 <p><font color=green>Q</font>:这个在线裁判系统使用什么样的编译器和编译选项?<br>
@@ -135,14 +135,14 @@ public class Main{
 <br>
 <hr>
 <center>
-  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?=$OJ_NAME?>论坛系统</a></font>
+  <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统</a></font>
 </center>
 <hr>
 <center>
   <table width=100% border=0>
     <tr>
       <td align=right width=65%>
-      <a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> 
+      <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
       <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R650+</font></a></td>
     </tr>
   </table>

@@ -1,5 +1,4 @@
-<?
-require_once ("admin-header.php");
+<?php require_once ("admin-header.php");
 
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
@@ -9,8 +8,7 @@ if (!(isset($_SESSION['administrator']))){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>News Edit</title>
 
-<?
-require_once("../include/db_info.inc.php");
+<?php require_once("../include/db_info.inc.php");
 if (isset($_POST['news_id']))
 {
 	require_once("../include/check_post_key.php");
@@ -52,10 +50,10 @@ $user_id=mysql_real_escape_string($user_id);
 }
 ?>
 
-<form method=POST action='<?=$_SERVER['PHP_SELF']?>'>
+<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
-<input type=hidden name='news_id' value=<?=$news_id?>>
-<p align=left>Title:<input type=text name=title size=71 value='<?=$title?>'></p>
+<input type=hidden name='news_id' value=<?php echo $news_id?>>
+<p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
 
 <p align=left>Content:<br>
 <?php
@@ -69,8 +67,8 @@ $description->Value = $content ;
 $description->Create() ;
 ?>
 </p>
-<?require_once("../include/set_post_key.php");?>
+<?php require_once("../include/set_post_key.php");?>
 <input type=submit>
 </form>
-<?require_once("../oj-footer.php");?>
+<?php require_once("../oj-footer.php");?>
 

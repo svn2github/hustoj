@@ -1,19 +1,14 @@
-<?
-require_once ("admin-header.php");
+<?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
 ?>
-<?
-
-require_once ("../include/db_info.inc.php");
+<?php require_once ("../include/db_info.inc.php");
 ?>
 
-<?
-
-// contest_id
+<?php // contest_id
 
 
 $title = $_POST ['title'];
@@ -30,9 +25,7 @@ $sql="insert into news(`user_id`,`title`,`content`,`time`) values('$user_id','$t
 mysql_query ( $sql );
 
 ?>
-<?
-
-require_once ("../oj-footer.php");
+<?php require_once ("../oj-footer.php");
 
 ?>
 

@@ -1,6 +1,5 @@
-<?require_once("oj-header.php")?>
-<?
-$to_user="";
+<?php require_once("oj-header.php")?>
+<?php $to_user="";
 $title="";
 if (isset($_GET['to_user'])){
 	$to_user=htmlspecialchars($_GET['to_user']);
@@ -51,9 +50,9 @@ if (isset($_GET['vid'])){
 <center>
    <table><form method=post action=mail.php>
 	<tr>
-		<td>  To:<input name=to_user size=10 value="<?=$to_user?>">
-			Title:<input name=title size=20 value="<?=$title?>">
-		    <input type=submit value=<?=$MSG_SUBMIT?>></td>
+		<td>  To:<input name=to_user size=10 value="<?php echo $to_user?>">
+			Title:<input name=title size=20 value="<?php echo $title?>">
+		    <input type=submit value=<?php echo $MSG_SUBMIT?>></td>
 	</tr>
 	<tr><td> 
 		<textarea name=content rows=10 cols=50></textarea>
@@ -64,8 +63,7 @@ if (isset($_GET['vid'])){
 </center> 
 	 
 
-<?
-//send mail
+<?php //send mail
 if(isset($_POST['to_user'])){
 	$to_user = $_POST ['to_user'];
 	$title = $_POST ['title'];
@@ -118,4 +116,4 @@ echo "</tr></form>";
 echo "</table></center>";
 
 ?>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>

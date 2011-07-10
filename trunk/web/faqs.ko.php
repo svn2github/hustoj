@@ -136,7 +136,7 @@ public class Main{
 <center>
   <table width=100% border=0>
     <tr>
-      <td align=right width=65%><a href = "index.php"><font color=red><?=$OJ_NAME?></font></a> <a href = ""><font color=red>V1.9.9.0</font></a></td>
+      <td align=right width=65%><a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> <a href = ""><font color=red>V1.9.9.0</font></a></td>
     </tr>
   </table>
 </center>

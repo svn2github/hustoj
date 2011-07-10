@@ -1,5 +1,4 @@
-<?
-require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 require_once("./include/my_func.inc.php");
 $err_str="";
 $err_cnt=0;

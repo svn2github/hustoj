@@ -1,13 +1,12 @@
-<?require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
 ?>
 
-<?require_once("./include/my_func.inc.php")?>
-<?require_once("./include/const.inc.php")?>
-<?
-if (isset($_GET['cid'])){
+<?php require_once("./include/my_func.inc.php")?>
+<?php require_once("./include/const.inc.php")?>
+<?php if (isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
 //	print $cid;
 	require_once("contest-header.php");
@@ -77,8 +76,7 @@ if (isset($_GET['cid'])){
 require_once("oj-header.php");
 ?>
 <title>Contest List</title>
-<?
-$sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC";
+<?php $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC";
 $result=mysql_query($sql);
 $color=false;
 echo "<center><table width=90%><h2>Contest List</h2>ServerTime:<span id=nowdate></span>";
@@ -107,12 +105,11 @@ echo "</table></center>";
 mysql_free_result($result);
 ?>
 
-<?
-}
+<?php }
 require_once("oj-footer.php");
 ?>
 <script>
-var diff=new Date("<?=date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
+var diff=new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
 //alert(diff);
 function clock()
     {

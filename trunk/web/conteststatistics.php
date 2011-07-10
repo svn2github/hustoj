@@ -13,8 +13,7 @@
 	} else {
 		ob_start ();
 		
-		?><?
-require_once("./include/db_info.inc.php");
+		?><?php require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
 require_once("./include/my_func.inc.php");
 
@@ -99,7 +98,7 @@ for ($j=0;$j<15;$j++) {
 echo "</tr>";
 echo "<table></center>";
 ?>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>
 <?php
 		
 		if(!file_exists("cache")) mkdir("cache");

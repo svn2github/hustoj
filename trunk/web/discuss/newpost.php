@@ -24,4 +24,4 @@
 </form>
 </div>
 </center>
-<?require_once("../oj-footer.php")?>
+<?php require_once("../oj-footer.php")?>

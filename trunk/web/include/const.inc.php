@@ -1,5 +1,4 @@
-<?
-if(file_exists("include/db_info.inc.php")){
+<?php if(file_exists("include/db_info.inc.php")){
 		require_once("include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");

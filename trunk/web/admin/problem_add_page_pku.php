@@ -8,8 +8,8 @@
 </head>
 <body leftmargin="30">
 <center>
-<?require_once("../include/db_info.inc.php");?>
-<?require_once("admin-header.php");
+<?php require_once("../include/db_info.inc.php");?>
+<?php require_once("admin-header.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -19,8 +19,7 @@ if (!(isset($_SESSION['administrator']))){
 include_once("../fckeditor/fckeditor.php") ;
 ?>
 
-<?
-  require_once("../include/simple_html_dom.php");
+<?php require_once("../include/simple_html_dom.php");
   //$url='http://acm.pku.edu.cn/JudgeOnline/problem?id=1000';
   $url=$_POST ['url'];
   if (get_magic_quotes_gpc ()) {
@@ -61,9 +60,9 @@ include_once("../fckeditor/fckeditor.php") ;
 <p align=center><font size=4 color=#333399>Add a Problem</font></p>
 <input type=hidden name=problem_id value=New Problem>
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71 value="<?=$title?>"></p>
-<p align=left>Time Limit:<input type=text name=time_limit size=20 value="<?=$tlimit?>">S</p>
-<p align=left>Memory Limit:<input type=text name=memory_limit size=20 value="<?=$mlimit?>">MByte</p>
+<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>"></p>
+<p align=left>Time Limit:<input type=text name=time_limit size=20 value="<?php echo $tlimit?>">S</p>
+<p align=left>Memory Limit:<input type=text name=memory_limit size=20 value="<?php echo $mlimit?>">MByte</p>
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
 <?php
 $description = new FCKeditor('description') ;
@@ -96,8 +95,8 @@ $output->Value =$outputHTML;// '<p></p>' ;
 $output->Create() ;
 ?>
 </p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?=$sample_input?></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?=$sample_output?></textarea></p>
+<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?php echo $sample_input?></textarea></p>
+<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
 <p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
 <p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br>
@@ -114,8 +113,7 @@ $output->Create() ;
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
 <p align=left>contest:
 	<select  name=contest_id>
-<?
-$sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
+<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
 $result=mysql_query($sql);
 echo "<option value=''>none</option>";
 if (mysql_num_rows($result)==0){
@@ -127,9 +125,9 @@ if (mysql_num_rows($result)==0){
 	</select>
 </p>
 <div align=center>
-<?require_once("../include/set_post_key.php");?>
+<?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?require_once("../oj-footer.php");?>
+<?php require_once("../oj-footer.php");?>
 </body></html>

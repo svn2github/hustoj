@@ -1,4 +1,4 @@
-<?require("admin-header.php");
+<?php require("admin-header.php");
 
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
@@ -13,8 +13,7 @@ function writable($path){
 	return $ret;
 }
 ?>
-<?
-if(isset($_POST['do'])){
+<?php if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	if (isset($_POST['from'])){
 		$from=intval($_POST['from']);
@@ -84,9 +83,8 @@ if(isset($_POST['do'])){
 		<input type=input name='to'>
 		<input type='hidden' name='do' value='do'>
 		<input type=submit value=submit>
-		<?require_once("../include/set_post_key.php");?>
+		<?php require_once("../include/set_post_key.php");?>
 	</form>
 	
-<?
-	}
+<?php }
 ?>

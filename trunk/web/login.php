@@ -1,5 +1,4 @@
-<?
-	require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 	$user_id=mysql_escape_string($_POST['user_id']);
 	$password=MD5($_POST['password']);
 	session_destroy();

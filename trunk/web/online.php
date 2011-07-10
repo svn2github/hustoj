@@ -6,7 +6,7 @@
 	$users = $on->getAll();
 	$ip = new IpLocation();
 ?>
-<h3>current online user: <?=$on->get_num()?></h3>
+<h3>current online user: <?php echo $on->get_num()?></h3>
 <table style="margin:auto;width:98%">
 <thead>
 <tr><th style="width: 50px">ip</th><th>uri</th><th>refer</th><th style="width:100px">stay time</th><th>user agent</th></tr>
@@ -23,8 +23,8 @@
 		echo $l['country'];
 	else
 		echo $l['area'].'@'.$l['country'];
-	?></td><td><?=$u->uri?></td><td><?=$u->refer?></td>
-<td class="time"><?=sprintf("%dmin %dsec",($u->lastmove-$u->firsttime)/60,($u->lastmove-$u->firsttime) % 60)?></td><td><?=$u->ua?></td></tr>
+	?></td><td><?php echo $u->uri?></td><td><?php echo $u->refer?></td>
+<td class="time"><?php echo sprintf("%dmin %dsec",($u->lastmove-$u->firsttime)/60,($u->lastmove-$u->firsttime) % 60)?></td><td><?php echo $u->ua?></td></tr>
 <?php 
 }
 endforeach;?>
@@ -32,8 +32,7 @@ endforeach;?>
 </table>
 
 
-<?
-if (isset($_SESSION['administrator'])){
+<?php if (isset($_SESSION['administrator'])){
 
 echo "<center>";
 echo "<td width='100%' colspan='5'><form>IP<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td></tr>";

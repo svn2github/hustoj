@@ -1,5 +1,4 @@
-<?
-require("admin-header.php");
+<?php require("admin-header.php");
 
 if (isset($_POST['syear']))
 {
@@ -93,32 +92,31 @@ if (isset($_POST['syear']))
 }
 ?>
 
-<form method=POST action='<?=$_SERVER['PHP_SELF']?>'>
-<?require_once("../include/set_post_key.php");?>
+<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
+<?php require_once("../include/set_post_key.php");?>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
-<input type=hidden name='cid' value=<?=$cid?>>
-<p align=left>Title:<input type=text name=title size=71 value='<?=$title?>'></p>
+<input type=hidden name='cid' value=<?php echo $cid?>>
+<p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
 <p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
-Year:<input type=text name=syear value=<?=substr($starttime,0,4)?> size=7 >
-Month:<input type=text name=smonth value='<?=substr($starttime,5,2)?>' size=7 >
-Day:<input type=text name=sday size=7 value='<?=substr($starttime,8,2)?>'>
-Hour:<input type=text name=shour size=7 value='<?=substr($starttime,11,2)?>'>;
-Minute:<input type=text name=sminute size=7 value=<?=substr($starttime,14,2)?>></p>
+Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=7 >
+Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=7 >
+Day:<input type=text name=sday size=7 value='<?php echo substr($starttime,8,2)?>'>
+Hour:<input type=text name=shour size=7 value='<?php echo substr($starttime,11,2)?>'>;
+Minute:<input type=text name=sminute size=7 value=<?php echo substr($starttime,14,2)?>></p>
 <p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
 
-Year:<input type=text name=eyear value=<?=substr($endtime,0,4)?> size=7 >
-Month:<input type=text name=emonth value=<?=substr($endtime,5,2)?> size=7 >
-Day:<input type=text name=eday size=7 value=<?=substr($endtime,8,2)?>>&nbsp;
-Hour:<input type=text name=ehour size=7 value=<?=substr($endtime,11,2)?>> &nbsp;
-Minute:<input type=text name=eminute size=7 value=<?=substr($endtime,14,2)?>></p>
+Year:<input type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=7 >
+Month:<input type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=7 >
+Day:<input type=text name=eday size=7 value=<?php echo substr($endtime,8,2)?>>&nbsp;
+Hour:<input type=text name=ehour size=7 value=<?php echo substr($endtime,11,2)?>> &nbsp;
+Minute:<input type=text name=eminute size=7 value=<?php echo substr($endtime,14,2)?>></p>
 
 Public/Private:<select name=private>
-	<option value=0 <?=$private=='0'?'selected=selected':''?>>Public</option>
-	<option value=1 <?=$private=='1'?'selected=selected':''?>>Private</option>
+	<option value=0 <?php echo $private=='0'?'selected=selected':''?>>Public</option>
+	<option value=1 <?php echo $private=='1'?'selected=selected':''?>>Private</option>
 </select>
-<br>Problems:<input type=text size=60 name=cproblem value='<?=$plist?>'>
-<?
- $lang=(~((int)$langmask))&1023;
+<br>Problems:<input type=text size=60 name=cproblem value='<?php echo $plist?>'>
+<?php $lang=(~((int)$langmask))&1023;
  $C_select=($lang&1)>0?"selected":"";
  $CPP_select=($lang&2)>0?"selected":"";
  $P_select=($lang&4)>0?"selected":"";
@@ -133,16 +131,16 @@ $S_select=($lang&512)>0?"selected":"";
 ?>
 
  Language:<select name="lang[]" multiple>
-		<option value=0 <?=$C_select?>>C</option>
-		<option value=1 <?=$CPP_select?>>C++</option>
-		<option value=2 <?=$P_select?>>Pascal</option>
-		<option value=3 <?=$J_select?>>Java</option>	
-		<option value=4 <?=$R_select?>>Ruby</option>	
-		<option value=5 <?=$B_select?>>Bash</option>	
-	    <option value=6 <?=$Y_select?>>Python</option>	
-		<option value=7 <?=$P_select?>>PHP</option>	
-		<option value=8 <?=$L_select?>>Perl</option>	
-		<option value=9 <?=$S_select?>>C#</option>	
+		<option value=0 <?php echo $C_select?>>C</option>
+		<option value=1 <?php echo $CPP_select?>>C++</option>
+		<option value=2 <?php echo $P_select?>>Pascal</option>
+		<option value=3 <?php echo $J_select?>>Java</option>	
+		<option value=4 <?php echo $R_select?>>Ruby</option>	
+		<option value=5 <?php echo $B_select?>>Bash</option>	
+	    <option value=6 <?php echo $Y_select?>>Python</option>	
+		<option value=7 <?php echo $P_select?>>PHP</option>	
+		<option value=8 <?php echo $L_select?>>Perl</option>	
+		<option value=9 <?php echo $S_select?>>C#</option>	
 	</select>
 	
 
@@ -151,5 +149,5 @@ Users:<textarea name="ulist" rows="10" cols="20"><?php if (isset($ulist)) { echo
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 
 </form>
-<?require_once("../oj-footer.php");?>
+<?php require_once("../oj-footer.php");?>
 

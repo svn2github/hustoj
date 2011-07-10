@@ -1,5 +1,4 @@
-<?
-require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
@@ -14,8 +13,7 @@ echo "<title>Problem $id Status</title>";
 ?>
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
-<?
-echo "<h1>Problem $id Status</h1>";
+<?php echo "<h1>Problem $id Status</h1>";
 
 echo "<center><table><tr><td>";
 echo "<table id=statics >";
@@ -77,8 +75,7 @@ echo "</table>";
 
 </script> 
 
-<?
-$pagemin=0; $pagemax=intval(($acuser-1)/20);
+<?php $pagemin=0; $pagemax=intval(($acuser-1)/20);
 
 if ($page<$pagemin) $page=$pagemin;
 if ($page>$pagemax) $page=$pagemax;

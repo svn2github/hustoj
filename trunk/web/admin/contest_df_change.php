@@ -1,5 +1,4 @@
-<?
-require_once("admin-header.php");
+<?php require_once("admin-header.php");
 require_once("../include/check_get_key.php");
 $cid=intval($_GET['cid']);
 $sql="select `defunct` FROM `contest` WHERE `contest_id`=$cid";

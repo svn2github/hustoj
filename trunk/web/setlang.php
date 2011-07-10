@@ -1,5 +1,4 @@
-<?
-	require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 	require_once("./include/my_func.inc.php");
 	$newlang=strval($_GET['lang']);
 	if(is_valid_user_name($newlang)&&strlen($newlang)<3){

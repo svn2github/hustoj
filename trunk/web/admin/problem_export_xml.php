@@ -231,8 +231,7 @@ for ($lang=0;$lang<count($language_name);$lang++){
  }
 ?>
 </item>
-<?
-	}
+<?php }
 	mysql_free_result ( $result );
 	
 	echo "</fps>";

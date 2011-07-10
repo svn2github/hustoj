@@ -1,10 +1,8 @@
-<?
-require_once("oj-header.php");
+<?php require_once("oj-header.php");
 require_once("./include/db_info.inc.php");
 ?>
 <script src="include/sortTable.js"></script>
-<?
-$sql="SELECT max(`problem_id`) as upid FROM `problem`";
+<?php $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
 $result=mysql_query($sql);
 echo mysql_error();
@@ -70,8 +68,7 @@ $sql.=" ORDER BY `problem_id`";
 ?>
 <title>Problem Set</title>
 
-<?
-$result=mysql_query($sql) or die(mysql_error());
+<?php $result=mysql_query($sql) or die(mysql_error());
 echo "<h3 align='center'>";
 for ($i=1;$i<=$cnt+1;$i++){
 	if ($i>1) echo '&nbsp;';
@@ -112,4 +109,4 @@ echo "</tbody>";
 
 echo "</table></center>";
 ?>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>

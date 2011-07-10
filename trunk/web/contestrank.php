@@ -14,8 +14,7 @@
 		ob_start ();
 		
 		?>
-<?
-require_once("./include/db_info.inc.php");
+<?php require_once("./include/db_info.inc.php");
 
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -161,7 +160,7 @@ for ($i=0;$i<$user_cnt;$i++){
 echo "</table>";
 
 ?>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>
 <?php
 		if(!file_exists("cache")) mkdir("cache");
 		file_put_contents($file,ob_get_contents ());

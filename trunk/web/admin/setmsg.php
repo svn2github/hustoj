@@ -1,5 +1,4 @@
-<?
-require_once("admin-header.php");
+<?php require_once("admin-header.php");
 if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -18,12 +17,11 @@ $msg=file_get_contents("msg.txt");
 ?>
 	<b>Set Message</b>
 	<form action='setmsg.php' method='post'>
-		<textarea name='msg' rows=25 cols=60><?=$msg?></textarea><br>
+		<textarea name='msg' rows=25 cols=60><?php echo $msg?></textarea><br>
 		<input type='hidden' name='do' value='do'>
 		<input type='submit' value='change'>
-		<?require_once("../include/set_post_key.php");?>
+		<?php require_once("../include/set_post_key.php");?>
 	</form>
 	
-<?
-require_once('../oj-footer.php');
+<?php require_once('../oj-footer.php');
 ?>

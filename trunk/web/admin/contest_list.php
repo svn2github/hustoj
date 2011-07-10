@@ -1,5 +1,4 @@
-<?
-require("admin-header.php");
+<?php require("admin-header.php");
 echo "<title>Problem List</title>";
 echo "<center><h2>Contest List</h2></center>";
 require_once("../include/set_get_key.php");

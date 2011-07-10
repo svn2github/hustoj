@@ -1,7 +1,6 @@
 <?session_start();?>
 <title>Submit Code</title>
-<?
-if (!isset($_SESSION['user_id'])){
+<?php if (!isset($_SESSION['user_id'])){
 	require_once("oj-header.php");
 	echo "<a href=loginpage.php>Please Login First</a>";
 	require_once("oj-footer.php");
@@ -47,24 +46,22 @@ editAreaLoader.init({
 <form action="submit.php" method="post" 
 <?if($OJ_LANG=="cn"){?>
  onsubmit="return checksource(document.getElementById('source').value);"
-<?}?> 
+<?php }?> 
  >
 <?if (isset($id)){?>
-Problem <span class=blue><b><?=$id?></b></span><br>
-<input type='hidden' value='<?=$id?>' name="id">
-<?
-}else{
+Problem <span class=blue><b><?php echo $id?></b></span><br>
+<input type='hidden' value='<?php echo $id?>' name="id">
+<?php }else{
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 if ($pid>25) $pid=25;
 ?>
-Problem <span class=blue><b><?=$PID[$pid]?></b></span> of Contest <span class=blue><b><?=$cid?></b></span><br>
-<input type='hidden' value='<?=$cid?>' name="cid">
-<input type='hidden' value='<?=$pid?>' name="pid">
-<?}?>
+Problem <span class=blue><b><?php echo $PID[$pid]?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+<input type='hidden' value='<?php echo $cid?>' name="cid">
+<input type='hidden' value='<?php echo $pid?>' name="pid">
+<?php }?>
 Language:
 <select id="language" name="language">
-<? 
-  if(isset($_GET['langmask']))
+<?php if(isset($_GET['langmask']))
 	$langmask=$_GET['langmask'];
   else
 	$langmask=$OJ_LANGMASK;
@@ -117,11 +114,11 @@ Language:
 	
  }
 ?>
-<textarea cols=80 rows=20 id="source" name="source"><?=$src?></textarea><br>
+<textarea cols=80 rows=20 id="source" name="source"><?php echo $src?></textarea><br>
 
 <input type=submit value="Submit">
 <input type=reset value="Reset">
 </form>
 </center>
-<?require_once("oj-footer.php")?>
+<?php require_once("oj-footer.php")?>
 

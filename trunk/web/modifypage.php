@@ -1,7 +1,6 @@
-<?require_once('oj-header.php');?>
+<?php require_once('oj-header.php');?>
 <title>Update Information</title>
-<?
-if (!isset($_SESSION['user_id'])){
+<?php if (!isset($_SESSION['user_id'])){
 	echo "<a href=./loginpage.php>Please LogIn First!</a>";
 	require_once('oj-footer.php');
 	exit();
@@ -16,11 +15,11 @@ $row=mysql_fetch_object($result);
 	<center><table>
 		<tr><td colspan=2 height=40 width=500>&nbsp;&nbsp;&nbsp;Update Information</tr>
 		<tr><td width=25%>User ID:
-			<td width=75%><?=$_SESSION['user_id']?>
-			<?require_once('./include/set_post_key.php');?>
+			<td width=75%><?php echo $_SESSION['user_id']?>
+			<?php require_once('./include/set_post_key.php');?>
 		</tr>
 		<tr><td>Nick Name:
-			<td><input name="nick" size=50 type=text value="<?=htmlspecialchars($row->nick)?>" >
+			<td><input name="nick" size=50 type=text value="<?php echo htmlspecialchars($row->nick)?>" >
 		</tr>
 		<tr><td>Old Password:
 			<td><input name="opassword" size=20 type=password>
@@ -32,10 +31,10 @@ $row=mysql_fetch_object($result);
 			<td><input name="rptpassword" size=20 type=password>
 		</tr>
 		<tr><td>School:
-			<td><input name="school" size=30 type=text value="<?=htmlspecialchars($row->school)?>" >
+			<td><input name="school" size=30 type=text value="<?php echo htmlspecialchars($row->school)?>" >
 		</tr>
 		<tr><td>Email:
-			<td><input name="email" size=30 type=text value="<?=htmlspecialchars($row->email)?>" >
+			<td><input name="email" size=30 type=text value="<?php echo htmlspecialchars($row->email)?>" >
 		</tr>
 		<tr><td>
 			<td><input value="Submit" name="submit" type="submit">
@@ -46,7 +45,6 @@ $row=mysql_fetch_object($result);
 	<br>
 	<a href=export_ac_code.php>Download All AC Source</a>
 	<br>
-<?
-mysql_free_result($result);
+<?php mysql_free_result($result);
 ?>
-<?require_once('oj-footer.php');?>
+<?php require_once('oj-footer.php');?>

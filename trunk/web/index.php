@@ -1,5 +1,4 @@
-<?
-	require_once("oj-header.php");
+<?php require_once("oj-header.php");
 	require_once("./include/db_info.inc.php");
 	echo "<title>Welcome To Online Judge</title>";
 	$sql=	"SELECT * "
@@ -30,11 +29,11 @@
 <h4>Alternative PHP Cache:<strong>ACTIVE</strong></h4>
 <strong>Performace Data<strong>
 <ul id="apc">
-	<li><span>Hits: </span><?=$_apc_cache_info['num_hits']?></li>
-	<li><span>Misses: </span><?=$_apc_cache_info['num_misses']?></li>
-	<li><span>Entries: </span><?=$_apc_cache_info['num_entries']?></li>
-	<li><span>Inserts: </span><?=$_apc_cache_info['num_inserts']?></li>
-	<li><span>Cached Files: </span><?=$_apc_cache_info['mem_size']/1024?>KB</li>
+	<li><span>Hits: </span><?php echo $_apc_cache_info['num_hits']?></li>
+	<li><span>Misses: </span><?php echo $_apc_cache_info['num_misses']?></li>
+	<li><span>Entries: </span><?php echo $_apc_cache_info['num_entries']?></li>
+	<li><span>Inserts: </span><?php echo $_apc_cache_info['num_inserts']?></li>
+	<li><span>Cached Files: </span><?php echo $_apc_cache_info['mem_size']/1024?>KB</li>
 </ul>
 </div>
 </div>

@@ -1,10 +1,9 @@
-<?require_once("../include/db_info.inc.php");
+<?php require_once("../include/db_info.inc.php");
 if (!(isset($_SESSION['http_judge']))){
 	echo "0";
 	exit(1);
 }?>
-<?
-if(isset($_POST['update_solution'])){
+<?php if(isset($_POST['update_solution'])){
 	//require_once("../include/check_post_key.php");
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
@@ -118,9 +117,8 @@ if(isset($_POST['update_solution'])){
 	simid:<input type=text size=10 name="simid" value=0><br />
 	
 	<input type='hidden' name='update_solution' value='do'>
-	<?require_once("../include/set_post_key.php");?>
+	<?php require_once("../include/set_post_key.php");?>
 	<input type=submit value='Judge'>
 </form>
-<?
-}
+<?php }
 ?>

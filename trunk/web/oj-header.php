@@ -97,18 +97,18 @@
 <?php if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
 				print "&nbsp;<a href=./modifypage.php>$MSG_USERINFO
-					</a><a href='./userinfo.php?user=$sid'>
-				<span id=red>$sid</span></a>";
+					</a>&nbsp;<a href='./userinfo.php?user=$sid'>
+				<span id=red>$sid</span></a>&nbsp;";
 				$mail=checkmail();
 				if ($mail)
-					print "<a href=./mail.php>$mail</a>";
-				print "<a href=./logout.php>$MSG_LOGOUT</a>";
+					print "<a href=./mail.php>$mail</a>&nbsp;";
+				print "<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
 			}else{
-				print "<a href=./loginpage.php>$MSG_LOGIN</a>";
-				print "<a href=./registerpage.php>$MSG_REGISTER</a>";
+				print "<a href=./loginpage.php>$MSG_LOGIN</a>&nbsp;";
+				print "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
 			}
 			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-				print "<a href=./admin>$MSG_ADMIN</a>";
+				print "<a href=./admin>$MSG_ADMIN</a>&nbsp;";
 			
 			}
 		?>

@@ -583,6 +583,72 @@ void addceinfo(int solution_id) {
 		_addceinfo_mysql(solution_id);
 	}
 }
+/* write runtime error message back to database */
+void _addreinfo_mysql(int solution_id) {
+	char sql[(1 << 16)], *end;
+	char reinfo[(1 << 16)], *rend;
+	FILE *fp = fopen("error.out", "r");
+	snprintf(sql, (1 << 16) - 1,
+			"DELETE FROM runtimeinfo WHERE solution_id=%d", solution_id);
+	mysql_real_query(conn, sql, strlen(sql));
+	rend = reinfo;
+	while (fgets(rend, 1024, fp)) {
+		rend += strlen(rend);
+		if (rend - reinfo > 40000)
+			break;
+	}
+	rend = 0;
+	end = sql;
+	strcpy(end, "INSERT INTO runtimeinfo VALUES(");
+	end += strlen(sql);
+	*end++ = '\'';
+	end += sprintf(end, "%d", solution_id);
+	*end++ = '\'';
+	*end++ = ',';
+	*end++ = '\'';
+	end += mysql_real_escape_string(conn, end, reinfo, strlen(reinfo));
+	*end++ = '\'';
+	*end++ = ')';
+	*end = 0;
+	//	printf("%s\n",ceinfo);
+	if (mysql_real_query(conn, sql, end - sql))
+		printf("%s\n", mysql_error(conn));
+	fclose(fp);
+}
+
+void _addreinfo_http(int solution_id) {
+
+	char reinfo[(1 << 16)], *rend;
+	char * reinfo_encode;
+	FILE *fp = fopen("error.out", "r");
+
+	rend = reinfo;
+	while (fgets(rend, 1024, fp)) {
+		rend += strlen(rend);
+		if (rend - reinfo > 40000)
+			break;
+	}
+	fclose(fp);
+	reinfo_encode=url_encode(reinfo);
+	FILE * re=fopen("re.post","w");
+	fprintf(re,"addreinfo=1&sid=%d&reinfo=%s",solution_id,reinfo_encode);
+	fclose(re);
+	free(reinfo_encode);
+
+	const char  * cmd=" wget --post-file=\"re.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	FILE * fjobs=read_cmd_output(cmd,http_baseurl);
+		//fscanf(fjobs,"%d",&ret);
+	pclose(fjobs);
+
+
+}
+void addreinfo(int solution_id) {
+	if(http_judge){
+		_addreinfo_http(solution_id);
+	}else{
+		_addreinfo_mysql(solution_id);
+	}
+}
 void _update_user_mysql(char * user_id) {
 	char sql[BUFFER_SIZE];
 	sprintf(
@@ -1221,12 +1287,13 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		// check the usage
 
 		wait4(pidApp, &status, 0, &ruse);
-		//sig = status >> 8;/*status >> 8 å·®ä¸å¤šæ˜¯EXITCODE*/
+		//sig = status >> 8;/*status >> 8 Ã¥Â·Â®Ã¤Â¸ÂÃ¥Â¤Å¡Ã¦ËÂ¯EXITCODE*/
 
 		if (WIFEXITED(status))
 			break;
-		if (lang < 4 && get_file_size("error.out")) {
+		if ((lang < 4 || lang == 9) && get_file_size("error.out")) {
 			ACflg = OJ_RE;
+			addreinfo(solution_id);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			break;
 		}
@@ -1238,7 +1305,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		}
 
 		exitcode = WEXITSTATUS(status);
-		/*exitcode == 5 æ˜¯æ­£å¸¸æš‚å�?		 * ruby using system to run,exit 17 ok
+		/*exitcode == 5 Ã¦ËÂ¯Ã¦Â­Â£Ã¥Â¸Â¸Ã¦Å¡âÃ¥ÂÅ?		 * ruby using system to run,exit 17 ok
 		 *  */
 		if ((lang >= 4 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
 			//go on and on
@@ -1265,13 +1332,13 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		}
 		if (WIFSIGNALED(status)) {
-			/*  WIFSIGNALED: å¦‚æžœè¿›ç¨‹æ˜¯è¢«ä¿¡å·ç»“æŸçš„ï¼Œè¿”å›žTrue
+			/*  WIFSIGNALED: Ã¥Â¦âÃ¦Å¾ÅÃ¨Â¿âºÃ§Â¨â¹Ã¦ËÂ¯Ã¨Â¢Â«Ã¤Â¿Â¡Ã¥ÂÂ·Ã§Â»âÃ¦ÂÅ¸Ã§Å¡âÃ¯Â¼ÅÃ¨Â¿âÃ¥âºÅ¾True
 			 *
-			 *  å¦ psignal(int sig, char *s)ï¼Œè¿›è¡Œç±»ä¼¼perror(char *s)çš„æ“ä½œï¼Œæ‰“å�?s, å¹¶è¾“å‡ºä¿¡å�?sig å¯¹åº”çš„æç¤ºï¼Œå…¶ä¸�?			 *  sig = 5 å¯¹åº”çš„æ˜�?Trace/breakpoint trap
-			 *  sig = 11 å¯¹åº”çš„æ˜�?Segmentation fault
-			 *  sig = 25 å¯¹åº”çš„æ˜�?File size limit exceeded
+			 *  Ã¥ÂÂ¦ psignal(int sig, char *s)Ã¯Â¼ÅÃ¨Â¿âºÃ¨Â¡ÅÃ§Â±Â»Ã¤Â¼Â¼perror(char *s)Ã§Å¡âÃ¦âÂÃ¤Â½ÅÃ¯Â¼ÅÃ¦â°âÃ¥ÂÂ?s, Ã¥Â¹Â¶Ã¨Â¾âÃ¥â¡ÂºÃ¤Â¿Â¡Ã¥ÂÂ?sig Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ÂÂÃ§Â¤ÂºÃ¯Â¼ÅÃ¥â¦Â¶Ã¤Â¸Â?			 *  sig = 5 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?Trace/breakpoint trap
+			 *  sig = 11 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?Segmentation fault
+			 *  sig = 25 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?File size limit exceeded
 			 *
-			 *  WTERMSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹ç»“æŸè¿›ç¨‹çš„ä¿¡å�?			 *  */
+			 *  WTERMSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã§Â»âÃ¦ÂÅ¸Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?			 *  */
 			sig = WTERMSIG(status);
 			if (DEBUG) {
 				printf("WTERMSIG=%d\n", sig);
@@ -1297,8 +1364,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		/*     commited from http://www.felix021.com/blog/index.php?go=category_13
 
 
-		 WIFSTOPPED: å¦‚æžœè¿›ç¨‹åœ¨è¢«ptraceè°ƒç”¨ç›‘æŽ§çš„æ—¶å€™è¢«ä¿¡å·æš‚å�?åœæ­¢ï¼Œè¿”å›žTrue
-		 WSTOPSIG: è¿”å›žåœ¨ä¸Šè¿°æƒ…å†µä¸‹æš‚å�?åœæ­¢è¿›ç¨‹çš„ä¿¡å�?
+		 WIFSTOPPED: Ã¥Â¦âÃ¦Å¾ÅÃ¨Â¿âºÃ§Â¨â¹Ã¥ÅÂ¨Ã¨Â¢Â«ptraceÃ¨Â°ÆÃ§âÂ¨Ã§âºâÃ¦Å½Â§Ã§Å¡âÃ¦âÂ¶Ã¥â¬â¢Ã¨Â¢Â«Ã¤Â¿Â¡Ã¥ÂÂ·Ã¦Å¡âÃ¥ÂÅ?Ã¥ÂÅÃ¦Â­Â¢Ã¯Â¼ÅÃ¨Â¿âÃ¥âºÅ¾True
+		 WSTOPSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã¦Å¡âÃ¥ÂÅ?Ã¥ÂÅÃ¦Â­Â¢Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?
 		 */
 
 		// check the system calls

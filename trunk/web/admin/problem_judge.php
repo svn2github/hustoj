@@ -84,6 +84,15 @@ if (!(isset($_SESSION['http_judge']))){
 	$sql="INSERT INTO compileinfo VALUES($sid,'$ceinfo')";
 	mysql_query($sql);
 	
+}else if(isset($_POST['addreinfo'])){
+	
+	$sid=intval($_POST['sid']);
+	$sql="DELETE FROM runtimeinfo WHERE solution_id=$sid ";
+	mysql_query($sql);
+	$reinfo=mysql_real_escape_string($_POST['reinfo']);
+	$sql="INSERT INTO runtimeinfo VALUES($sid,'$reinfo')";
+	mysql_query($sql);
+	
 }else if(isset($_POST['updateuser'])){
 	
 	$user_id=mysql_real_escape_string($_POST['user_id']);

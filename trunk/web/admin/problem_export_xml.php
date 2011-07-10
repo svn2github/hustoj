@@ -1,4 +1,5 @@
-<?@session_start ();
+<?php
+@session_start ();
 require_once ("../include/db_info.inc.php");
 
 if(isset($OJ_LANG)){
@@ -169,23 +170,23 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		header ( 'Content-Type:   text/xml' );
 	else {
 		header ( "content-type:   application/file" );
-		header ( "content-disposition:   attachment;   filename=fps-".$_SESSION['user_id'].$filename.".xml" );
+		header ( "content-disposition:   attachment;   filename=\"fps-".$_SESSION['user_id'].$filename.".xml\"" );
 	}
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	?>
  
 <fps version="1.1" url="http://code.google.com/p/freeproblemset/">
 	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
-	<?
+	<?php
 	while ( $row = mysql_fetch_object ( $result ) ) {
 		
 		?>
 <item>
-<title><![CDATA[<?=$row->title?>]]></title>
-<time_limit unit="s"><![CDATA[<?=$row->time_limit?>]]></time_limit>
-<memory_limit unit="mb"><![CDATA[<?=$row->memory_limit?>]]></memory_limit>
+<title><![CDATA[<?php echo $row->title?>]]></title>
+<time_limit unit="s"><![CDATA[<?php echo $row->time_limit?>]]></time_limit>
+<memory_limit unit="mb"><![CDATA[<?php echo $row->memory_limit?>]]></memory_limit>
 
-<? 
+<?php
 	$did=array();
 	fixImageURL($row->description,$did);
 	fixImageURL($row->input,$did);
@@ -193,27 +194,27 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	fixImageURL($row->hint,$did);
 	
 ?>
-<description><![CDATA[<?=$row->description?>]]></description>
-<input><![CDATA[<?=$row->input?>]]></input> 
-<output><![CDATA[<?=$row->output?>]]></output>
-<sample_input><![CDATA[<?=$row->sample_input?>]]></sample_input>
-<sample_output><![CDATA[<?=$row->sample_output?>]]></sample_output>
+<description><![CDATA[<?php echo $row->description?>]]></description>
+<input><![CDATA[<?php echo $row->input?>]]></input> 
+<output><![CDATA[<?php echo $row->output?>]]></output>
+<sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
+<sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
 <?php printTestCases($row->problem_id,$OJ_DATA)?>
-<hint><![CDATA[<?=$row->hint?>]]></hint>
-<source><![CDATA[<?=fixcdata($row->source)?>]]></source>
-<?
+<hint><![CDATA[<?php echo $row->hint?>]]></hint>
+<source><![CDATA[<?php echo fixcdata($row->source)?>]]></source>
+<?php
 require("../include/const.inc.php");
 for ($lang=0;$lang<count($language_name);$lang++){
 
 	$solution=getSolution($row->problem_id,$lang);
 	if ($solution->language){?>
-	<solution language="<?=$solution->language?>"><![CDATA[<?=fixcdata($solution->source_code)?>]]></solution>
-	<?}
+	<solution language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata($solution->source_code)?>]]></solution>
+	<?php }
 
 
 }
 ?>
-<?
+<?php
  if($row->spj!=0){
  	$filec="$OJ_DATA/".$row->problem_id."/spj.c";
  	$filecc="$OJ_DATA/".$row->problem_id."/spj.cc";

@@ -100,7 +100,7 @@ if ($language!=-1){
 <form id=simform action="status.php" method="get">
 <?php echo $MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
 <?php echo $MSG_USER?>:<input type=text size=4 name=user_id value='<?php echo $user_id?>'>
-<?if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
+<?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 <?php echo $MSG_LANG?>:<select size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;

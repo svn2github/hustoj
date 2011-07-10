@@ -1,4 +1,4 @@
-<?session_start();?>
+<?php session_start();?>
 <title>Submit Code</title>
 <?php if (!isset($_SESSION['user_id'])){
 	require_once("oj-header.php");
@@ -44,11 +44,11 @@ editAreaLoader.init({
 
 </script>
 <form action="submit.php" method="post" 
-<?if($OJ_LANG=="cn"){?>
+<?php if($OJ_LANG=="cn"){?>
  onsubmit="return checksource(document.getElementById('source').value);"
 <?php }?> 
  >
-<?if (isset($id)){?>
+<?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span><br>
 <input type='hidden' value='<?php echo $id?>' name="id">
 <?php }else{

@@ -50,17 +50,17 @@ root密码freeproblemset
 下载地址: 
 r1065
 
-ftp://59.53.88.226/hustoj-FPS.r1065.iso
+ftp://59.53.88.226/hustoj-FPS.r1105.iso
 
-http://oj.zjicm.acm.zj.cn:8090/hustoj-FPS.r1065.iso
+http://oj.zjicm.acm.zj.cn:8090/hustoj-FPS.r1105.iso
 
 {{{
-文件: D:\hustoj-FPS.r1065.iso
-大小: 719007744 字节
-修改时间: 2011年6月16日, 16:13:11
-MD5: BD0F615D261576A3E1DD786C887314BA
-SHA1: 82F269372742D5C173F90F2AE4BDC0C91F533399
-CRC32: 846BC77E
+文件: D:\hustoj-FPS.r1105.iso
+大小: 721727488 字节
+修改时间: 2011年7月9日, 17:44:58
+MD5: 41D72F4559915257FEA5A68222F0D94F
+SHA1: B621B1E59DA5D78781BBC1E9F88F0FFE7C7CD39C
+CRC32: 27B8602A
 }}}
 
 

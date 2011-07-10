@@ -21,7 +21,7 @@
 <table style="width:100%; clear:both">
 <tr align=center class='toprow'>
 	<td style="text-align:left">
-	<a href="discuss.php<?if ($row->pid!=0 && $row->cid!=null) echo "?pid=".$row->pid."&cid=".$row->cid;
+	<a href="discuss.php<?php if ($row->pid!=0 && $row->cid!=null) echo "?pid=".$row->pid."&cid=".$row->cid;
 	else if ($row->pid!=0) echo"?pid=".$row->pid; else if ($row->cid!=null) echo"?cid=".$row->cid;?>">
 	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlspecialchars($row->title));?></td>
 </tr>
@@ -42,9 +42,9 @@
 	<td>
 		
 		<a name=post<?php echo $row->rid;?>></a>
-		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?echo $row->author_id?>"><?php echo $row->author_id; ?> </a> @ <?php echo $row->time; ?></div>
+		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row->author_id?>"><?php echo $row->author_id; ?> </a> @ <?php echo $row->time; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
-			<?if (isset($_SESSION['administrator'])) {?>  
+			<?php if (isset($_SESSION['administrator'])) {?>  
 			<span>[ <a href="
 				<?php if ($row->status==0) echo $url."disable\">Disable";
 				else echo $url."resume\">Resume";

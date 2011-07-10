@@ -71,7 +71,7 @@
 		<div class=menu_item >
 		<a href="../<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?php echo $MSG_FAQ?></a>
 		</div>
-		<?if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
+		<?php if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
 		<span style="color:1a5cc8" id="dict_status"></span></div>
 		<?php }?>
 </div><!--end menu-->

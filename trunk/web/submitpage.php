@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php @session_start();?>
 <title>Submit Code</title>
 <?php if (!isset($_SESSION['user_id'])){
 	require_once("oj-header.php");

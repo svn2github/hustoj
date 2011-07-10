@@ -79,6 +79,13 @@ $csql[7]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,
 
 $tsql[8]="whatever;";
 $csql[8]="ALTER TABLE `contest` MODIFY COLUMN `langmask` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask';";
+$tsql[9]="select 1 from runtimeinfo limit 1";
+$csql[9]="CREATE TABLE  `runtimeinfo` (
+  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `error` text,
+  PRIMARY KEY (`solution_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

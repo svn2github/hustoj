@@ -171,7 +171,7 @@ void init_mysql_conf() {
 
 
 void run_client(int runid,int clientid){
-    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
+    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE],err[BUFFER_SIZE];
         struct rlimit LIM;
 		LIM.rlim_max=300;
 		LIM.rlim_cur=300;
@@ -186,9 +186,13 @@ void run_client(int runid,int clientid){
 		setrlimit(RLIMIT_AS,&LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;
-	sprintf(buf,"%d",clientid);
 	sprintf(runidstr,"%d",runid);
+	sprintf(buf,"%d",clientid);
+	
 	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
+	sprintf(err,"%s/run%d/error.out",oj_home,clientid);
+	freopen(err,"a+",stderr);
+	
 	if (!DEBUG)
 		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);
 	else
@@ -449,6 +453,7 @@ int daemon_init(void)
 
  return(0); 
 }
+/*
 void daemonize(){
 	int i,fd0,fd1,fd2;
 	pid_t pid;
@@ -464,7 +469,7 @@ void daemonize(){
 		printf("Could not daemonize!\n");
 		exit(1);
 	}
-	else if (pid != 0) /* parent */
+	else if (pid != 0) // parent 
 		exit(0);
 	setsid();
 
@@ -492,6 +497,7 @@ void daemonize(){
 	fd1 = dup(0);
 	fd2 = dup(0);
 }
+*/
 
 int main(int argc, char** argv){
     DEBUG=(argc>2);
@@ -501,7 +507,7 @@ int main(int argc, char** argv){
 	   strcpy(oj_home,"/home/judge");
 	chdir(oj_home);// change the dir
 
-	if (!DEBUG) daemonize();
+	if (!DEBUG) daemon_init();
 	if ( strcmp(oj_home,"/home/judge")==0&&already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
 		return 1;

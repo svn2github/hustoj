@@ -1066,31 +1066,11 @@ void copy_mono_runtime(char * work_dir) {
         execute_cmd("mkdir %s/usr", work_dir);
         execute_cmd("mkdir %s/proc", work_dir);
         execute_cmd("mkdir -p %s/usr/lib/mono/2.0", work_dir);
-        /*execute_cmd("mkdir %s/usr/lib/mono/1.0", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/3.5", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/compat-1.0", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/compat-2.0", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/gac", work_dir);
-        execute_cmd("mkdir %s/usr/lib/mono/monodoc", work_dir);*/
+     
         execute_cmd("cp -a /usr/lib/mono %s/usr/lib/", work_dir);
-        /*
-        execute_cmd("ln /usr/lib/mono/1.0/* %s/usr/lib/mono/1.0/", work_dir);
-        execute_cmd("ln /usr/lib/mono/3.5/* %s/usr/lib/mono/3.5/", work_dir);
-        execute_cmd("ln /usr/lib/mono/compat-1.0/* %s/usr/lib/mono/compat-1.0/", work_dir);
-        execute_cmd("ln /usr/lib/mono/compat-2.0/* %s/usr/lib/mono/compat-2.0/", work_dir);
-        execute_cmd("cp /usr/lib/mono/monodoc/* %s/usr/lib/mono/monodoc/", work_dir);
-        */
+        
         execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
-        //execute_cmd("ln /usr/lib/mono/2.0/* %s/usr/lib/mono/2.0/", work_dir);
-        //execute_cmd("ln /usr/lib/mono/* %s/usr/lib/mono/", work_dir);
-        /*execute_cmd("cp /usr/lib/libc* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libglib* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/bin/mono* %s/bin/", work_dir);
-        execute_cmd("cp /usr/lib/libmono* %s/usr/lib/", work_dir);
-        //execute_cmd("cp /lib/libc* %s/lib/", work_dir);
-
-
-        execute_cmd("cp /usr/lib/mono/ %s/usr/lib/mono", work_dir);*/
+        
         execute_cmd("mount -o bind /proc %s/proc", work_dir);
         execute_cmd("cp /usr/bin/mono* %s/", work_dir);
 
@@ -1141,7 +1121,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// open the files
 	freopen("data.in", "r", stdin);
 	freopen("user.out", "w", stdout);
-	freopen("error.out", "w", stderr);
+	freopen("error.out", "a+", stderr);
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
@@ -1276,6 +1256,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		int & PEflg, char * work_dir) {
 	// parent
 	int tempmemory;
+	
 	if (DEBUG)
 		printf("pid=%d judging %s\n", pidApp, infile);
 
@@ -1311,10 +1292,12 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			//go on and on
 			;
 		else {
+			
 			if (DEBUG) {
 				printf("status>>8=%d\n", exitcode);
-				psignal(exitcode, NULL);
+				
 			}
+			psignal(exitcode, NULL);
 			if (ACflg == OJ_AC)
 				switch (exitcode) {
 				case SIGXCPU:
@@ -1340,6 +1323,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			 *
 			 *  WTERMSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã§Â»âÃ¦ÂÅ¸Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?			 *  */
 			sig = WTERMSIG(status);
+			
 			if (DEBUG) {
 				printf("WTERMSIG=%d\n", sig);
 				psignal(sig, NULL);
@@ -1464,7 +1448,7 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
-	char cmd[BUFFER_SIZE];
+	//char cmd[BUFFER_SIZE];
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
@@ -1480,10 +1464,7 @@ int main(int argc, char** argv) {
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	chdir(work_dir);
-	// clear the work dir
-	sprintf(cmd, "rm -Rf %s/*", work_dir);
-	if (!DEBUG)
-		system(cmd);
+	
 
     if(http_judge)
 		system("ln -s ../cookie ./");
@@ -1514,7 +1495,7 @@ int main(int argc, char** argv) {
 
 	if (DEBUG)
 		printf("time: %d mem: %d\n", time_lmt, mem_lmt);
-
+ 
 	// compile
 	//	printf("%s\n",cmd);
 	// set the result to compiling
@@ -1528,9 +1509,8 @@ int main(int argc, char** argv) {
 		update_problem(p_id);
 		if(!http_judge)
 			mysql_close(conn);
-		sprintf(cmd, "rm -Rf %s/*", work_dir);
 		if (!DEBUG)
-			system(cmd);
+			clean_workdir(work_dir);
 		else
 			write_log("compile error");
 		exit(0);
@@ -1554,10 +1534,12 @@ int main(int argc, char** argv) {
 			mysql_close(conn);
 		exit(-1);
 	}
+	
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
+	
 	//create chroot for ruby bash python
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
@@ -1577,20 +1559,27 @@ int main(int argc, char** argv) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-
+   
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
 		init_syscalls_limits(lang);
+		    
 		pid_t pidApp = fork();
+		
 		if (pidApp == 0) {
+			
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
 		} else {
+			
+			
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 					solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 					p_id, PEflg, work_dir);
+			
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,
 					mem_lmt, solution_id);
+			
 		}
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)

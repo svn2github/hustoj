@@ -190,8 +190,8 @@ void run_client(int runid,int clientid){
 	sprintf(buf,"%d",clientid);
 	
 	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
-	sprintf(err,"%s/run%d/error.out",oj_home,clientid);
-	freopen(err,"a+",stderr);
+	//sprintf(err,"%s/run%d/error.out",oj_home,clientid);
+	//freopen(err,"a+",stderr);
 	
 	if (!DEBUG)
 		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);

@@ -1249,7 +1249,11 @@ int get_page_fault_mem(struct rusage & ruse, pid_t & pidApp) {
 	}
 	return m_minflt;
 }
-
+void print_runtimeerror(char * err){
+	FILE *ferr=fopen("error.out","a+");
+	fprintf(ferr,"Runtime Error:%s\n",err);
+	fclose(ferr);
+}
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		char * userfile, char * outfile, int solution_id, int lang,
 		int & topmemory, int mem_lmt, int & usedtime, int time_lmt, int & p_id,
@@ -1297,7 +1301,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				printf("status>>8=%d\n", exitcode);
 				
 			}
-			psignal(exitcode, NULL);
+			//psignal(exitcode, NULL);
+			print_runtimeerror(strsignal(exitcode));
 			if (ACflg == OJ_AC)
 				switch (exitcode) {
 				case SIGXCPU:

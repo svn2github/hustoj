@@ -1293,7 +1293,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		if ((lang < 4 || lang == 9) && get_file_size("error.out")) {
 			ACflg = OJ_RE;
-			addreinfo(solution_id);
+			//addreinfo(solution_id);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			break;
 		}
@@ -1600,7 +1600,7 @@ int main(int argc, char** argv) {
 	}else{
 	    sim = 0;
     }
-
+    if(ACflg == OJ_RE)addreinfo(solution_id);
 	update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
 			sim_s_id);
 	update_user(user_id);

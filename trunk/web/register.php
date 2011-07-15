@@ -10,7 +10,7 @@ $school=trim($_POST['school']);
 $vcode=trim($_POST['vcode']);
 if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
 	$_SESSION["vcode"]=null;
-	$err_str=$err_str."Vcode Wrong!\\n";
+	$err_str=$err_str."Verification Code Wrong!\\n";
 	$err_cnt++;
 }
 if($len>20){

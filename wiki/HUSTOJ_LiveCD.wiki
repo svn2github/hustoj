@@ -48,11 +48,14 @@ OJ管理员admin初始密码为admin. administrator of OJ is admin, password adm
 root密码freeproblemset
 
 下载地址: 
-r1065
-
+r1105 (not available)
 ftp://59.53.88.226/hustoj-FPS.r1105.iso
-
 http://oj.zjicm.acm.zj.cn:8090/hustoj-FPS.r1105.iso
+
+r1065
+ftp://59.53.88.226/hustoj-FPS.r1065.iso
+
+
 
 {{{
 文件: D:\hustoj-FPS.r1105.iso

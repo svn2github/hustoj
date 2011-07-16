@@ -12,8 +12,8 @@
 	//	echo $starttime;
 	//	echo $endtime;
 
-	$title=mysql_real_escape_string($_POST['title']);
-	$private=mysql_real_escape_string($_POST['private']);
+	$title=$_POST['title'];
+	$private=$_POST['private'];
 	if (get_magic_quotes_gpc ()){
 		$title = stripslashes ($title);
 		$private = stripslashes ($private);

@@ -8,5 +8,6 @@ $judge_result=Array($MSG_Pending,$MSG_Pending_Rejudging,$MSG_Compiling,$MSG_Runn
 $jresult=Array($MSG_PD,$MSG_PR,$MSG_CI,$MSG_RJ,$MSG_AC,$MSG_PE,$MSG_WA,$MSG_TLE,$MSG_MLE,$MSG_OLE,$MSG_RE,$MSG_CE,$MSG_CO);
 $judge_color=Array("gray","gray","orange","orange","green","red","red","red","red","red","red","navy ","navy");
 $language_name=Array("C","C++","Pascal","Java","Ruby","Bash","Python","PHP","Perl","C#","Other Language");
+$language_ext=Array( "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs" );
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 ?>

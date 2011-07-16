@@ -20,7 +20,7 @@ static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has AC
 static  $OJ_CSS="hoj.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=true;
-
+static  $OJ_APPENDCODE=false;
 
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 

@@ -73,6 +73,7 @@
 	$MSG_SCHOOL="소속";
 	$MSG_EMAIL="이메일";
 	$MSG_REG_INFO="등록 정보";
+	$MSG_VCODE="Verify Code";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="해당 문제를 열람할 수 없습니다!";

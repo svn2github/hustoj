@@ -73,6 +73,7 @@
 	$MSG_SCHOOL="School";
 	$MSG_EMAIL="Email";
 	$MSG_REG_INFO="Register Information";
+	$MSG_VCODE="Verify Code";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="Problem is not Available!";

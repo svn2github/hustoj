@@ -27,8 +27,8 @@ require_once("include/db_info.inc.php");
 			<td><input name="email" size=30 type=text></td>
 		</tr>
 		<?php if($OJ_VCODE){?>
-		<tr><td>Verify Code::<img src=vcode.php></td>
-			<td><input name="vcode" size=4 type=text>*</td>
+		<tr><td><?php echo $MSG_VCODE?>:</td>
+			<td><input name="vcode" size=4 type=text><img src=vcode.php>*</td>
 		</tr>
 		<?php }?>
 		<tr><td></td>

@@ -1,4 +1,13 @@
 <?php require_once("./include/db_info.inc.php");
+    $vcode=trim($_POST['vcode']);
+    if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
+		echo "<script language='javascript'>\n";
+		echo "alert('Verify Code Wrong!');\n";
+		echo "history.go(-1);\n";
+		echo "</script>";
+		exit(0);
+    }
+
 	$user_id=mysql_escape_string($_POST['user_id']);
 	$password=MD5($_POST['password']);
 	session_destroy();

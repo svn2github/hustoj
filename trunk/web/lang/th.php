@@ -73,6 +73,7 @@
 	$MSG_SCHOOL="สถาบัน";
 	$MSG_EMAIL="อีเมล์";
 	$MSG_REG_INFO="ข้อมูล";
+	$MSG_VCODE="Verify Code";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="ไม่พบโจทย์นี้";

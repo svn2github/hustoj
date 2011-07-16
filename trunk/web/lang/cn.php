@@ -66,12 +66,13 @@
 	$MSG_RATIO="比率";
 	
 	//registerpage.php
-	$MSG_USER_ID="用户名";
+	$MSG_USER_ID="用户名（学号）";
 	$MSG_PASSWORD="密码";
 	$MSG_REPEAT_PASSWORD="重复密码";
 	$MSG_SCHOOL="学校";
 	$MSG_EMAIL="电子邮件";
 	$MSG_REG_INFO="注册信息";
+	$MSG_VCODE="验证码";
 
 		//problem.php
 	$MSG_NO_SUCH_PROBLEM="题目不可用!";

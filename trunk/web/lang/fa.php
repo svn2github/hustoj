@@ -141,6 +141,7 @@
 	$MSG_EMAIL="ایمیل";
 
 	$MSG_REG_INFO="اطلاعات عضویت";
+	$MSG_VCODE="Verify Code";
 
 
 	//problem.php

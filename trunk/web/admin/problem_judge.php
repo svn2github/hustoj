@@ -104,12 +104,15 @@ if (!(isset($_SESSION['http_judge']))){
 	
 }else if(isset($_POST['updateproblem'])){
 	
-	$pid=mysql_real_escape_string($_POST['pid']);
-	$sql="UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'$pid\' AND `result`=\'4\') WHERE `problem_id`=\'$pid\'";
+	 $pid=intval($_POST['pid']);
+	$sql="UPDATE `problem` SET `accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=$pid AND `result`=4) WHERE `problem_id`=$pid";
+	//echo $sql;
 	mysql_query($sql);
 	
-	$sql="UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'$pid\') WHERE `problem_id`=\'$pid\'";
+	$sql="UPDATE `problem` SET `submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=$pid) WHERE `problem_id`=$pid";
+	//echo $sql;
 	mysql_query($sql);
+	
 	
 }else if(isset($_POST['checklogin'])){
 	echo "1";

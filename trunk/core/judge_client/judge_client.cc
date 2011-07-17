@@ -1302,19 +1302,23 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				
 			}
 			//psignal(exitcode, NULL);
-			print_runtimeerror(strsignal(exitcode));
-			if (ACflg == OJ_AC)
+
+			if (ACflg == OJ_AC){
 				switch (exitcode) {
-				case SIGXCPU:
-					ACflg = OJ_TL;
-					break;
-				case SIGXFSZ:
-					ACflg = OJ_OL;
-					break;
-				case SIGALRM:
-				default:
-					ACflg = OJ_RE;
+					case SIGCHLD:
+					case SIGALRM:
+					case SIGKILL:
+					case SIGXCPU:
+						ACflg = OJ_TL;
+						break;
+					case SIGXFSZ:
+						ACflg = OJ_OL;
+						break;
+					default:
+						ACflg = OJ_RE;
 				}
+				print_runtimeerror(strsignal(exitcode));			
+			}
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 
 			break;
@@ -1333,7 +1337,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				printf("WTERMSIG=%d\n", sig);
 				psignal(sig, NULL);
 			}
-			if (ACflg == OJ_AC)
+			if (ACflg == OJ_AC){
 				switch (sig) {
 				case SIGCHLD:
 				case SIGALRM:
@@ -1348,6 +1352,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				default:
 					ACflg = OJ_RE;
 				}
+				print_runtimeerror(strsignal(sig));
+			}
 			break;
 		}
 		/*     commited from http://www.felix021.com/blog/index.php?go=category_13
@@ -1362,9 +1368,12 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
-			write_log(
-					"[ERROR] A Not allowed system call: runid:%d callid:%d\n",
+			
+			char error[BUFFER_SIZE];
+			sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n",
 					solution_id, reg.REG_SYSCALL);
+			write_log(error);		
+			print_runtimeerror(error);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		} else {
 			if (sub == 1)

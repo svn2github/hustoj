@@ -23,12 +23,12 @@
 
 	$MSG_ADMIN="ادمین";
 
-	$MSG_STANDING="STANDING";
+	$MSG_STANDING="جایگاه ها";
 
 	$MSG_STATISTICS="آمار";
 
 	$MSG_USERINFO="اصلاح اطلاعات";
-	$MSG_MAIL="Mail";
+	$MSG_MAIL="پست الکترونیکی";
 	//status.php
 
 	
@@ -141,7 +141,7 @@
 	$MSG_EMAIL="ایمیل";
 
 	$MSG_REG_INFO="اطلاعات عضویت";
-	$MSG_VCODE="Verify Code";
+	$MSG_VCODE="کد امنیتی";
 
 
 	//problem.php
@@ -166,19 +166,19 @@
 
 	$MSG_Memory_Limit="محدودیت حجمی";
 //admin menu
-	$MSG_SEEOJ="SeeOJ";
-	$MSG_ADD="Add";
-	$MSG_LIST="List";
-	$MSG_NEWS="News";
-	$MSG_TEAMGENERATOR="TeamGenerator";
-	$MSG_SETMESSAGE="SetMessage";
-	$MSG_SETPASSWORD="ChangePassWD";
-	$MSG_REJUDGE="Rejudge";
-	$MSG_PRIVILEGE="Privilege";
-	$MSG_GIVESOURCE="GiveSource";
-	$MSG_IMPORT="Import";
-	$MSG_EXPORT="Export";
-	$MSG_UPDATE_DATABASE="UpdateDatabase";
-	$MSG_ONLINE="Online";
+	$MSG_SEEOJ="نمایش";
+	$MSG_ADD="ایجاد ";
+	$MSG_LIST="لیست";
+	$MSG_NEWS="خبرها";
+	$MSG_TEAMGENERATOR="ساخت تیم";
+	$MSG_SETMESSAGE="تنظیم پیام";
+	$MSG_SETPASSWORD="تغییر رمز";
+	$MSG_REJUDGE="داوری مجدد";
+	$MSG_PRIVILEGE="امتیاز";
+	$MSG_GIVESOURCE="دادن منبع";
+	$MSG_IMPORT="وارد کردن";
+	$MSG_EXPORT="صادر کردن";
+	$MSG_UPDATE_DATABASE="به روز رسانی پایگاه داد";
+	$MSG_ONLINE="بر خط";
 
 ?>

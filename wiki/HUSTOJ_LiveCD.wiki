@@ -54,7 +54,7 @@ http://oj.zjicm.acm.zj.cn:8090/hustoj-FPS.r1105.iso
 
 r1065
 ftp://59.53.88.226/hustoj-FPS.r1065.iso
-
+http://dl.dbank.com/c0uhwzhuc0#
 
 
 {{{

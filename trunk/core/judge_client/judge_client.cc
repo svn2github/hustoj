@@ -1446,6 +1446,12 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 
 		execute_cmd("mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
 				lang_ext[lang]);
+		//c cpp will 
+		if(lang==0)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
+				lang_ext[lang], pid, solution_id,lang_ext[lang+1]);
+		if(lang==1)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
+				lang_ext[lang], pid, solution_id,lang_ext[lang-1]);
+		
 
 	} else {
 

@@ -19,4 +19,13 @@ Copy from acm.pku.edu.cn
   <input type=submit>
 </form>
 </li>
+
+<li>
+Copy from acm.hdu.edu.cn
+<form method=POST action=problem_add_page_hdu.php>
+  <input name=url type=text size=100>
+  <input type=submit>
+</form>
+</li>
+
 </ol>

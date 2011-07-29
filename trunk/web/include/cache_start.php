@@ -2,7 +2,7 @@
         require_once("./include/db_info.inc.php");
         //cache head start
         $cache_time=2;
-        $file="cache/index.html";
+        $file="cache/".$_SERVER["REQUEST_URI"]."index.html";
         $sid="";
         if (isset($_SESSION['user_id'])){
                 $sid=session_id().$_SERVER['REMOTE_ADDR'];

@@ -3,53 +3,7 @@ header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
         @session_start();
         require_once("./include/db_info.inc.php");
-        //cache head start
-        $cache_time=20;
-        $file="cache/index.html";
-        $sid="";
-        if (isset($_SESSION['user_id'])){
-                $sid=session_id().$_SERVER['REMOTE_ADDR'];
-        }
-        if (isset($_SERVER['QUERY_STRING'])){
-                $sid.=$_SERVER['QUERY_STRING'];
-        }
-        $sid=md5($sid);
-        $file = "cache/status_$sid.html";
-        
-        if($OJ_MEMCACHE ){
-                $mem = new Memcache;
-                if($OJ_SAE)
-                        $mem=memcache_init();
-                else{
-                        $mem->connect($OJ_MEMSERVER,  $OJ_MEMPORT);
-                }
-                $content=$mem->get($file);
-                if($content){
-                         echo $content;
-                         exit();
-                }else{
-                        $use_cache=false;
-                        $write_cache=true;
-                }
-        }else{
-                
-                if (file_exists ( $file ))
-                        $last = filemtime ( $file );
-                else
-                        $last =0;
-                $write_cache=$_SERVER['QUERY_STRING']==""||
-                                         (isset($_GET['cid'])&&$_SERVER['QUERY_STRING']==("cid=".$_GET['cid']));
-                $use_cache=(time () - $last < $cache_time)&&$write_cache;
-                $write_cache=(!$use_cache)&&$write_cache;
-        }
-        if ($use_cache) {
-                //header ( "Location: $file" );
-                include ($file);
-                exit ();
-        } else if($write_cache){
-                ob_start ();
-        }
-//cache head stop
+        require_once("./include/cache_start.php");
         
 require_once("./include/my_func.inc.php");
 require_once("./include/db_info.inc.php");
@@ -299,18 +253,5 @@ else
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
 
-<?php require_once("oj-footer.php");
-?>
-<?php
-        //cache foot start      
-                if($write_cache){
-                        if($OJ_SAE){
-                                $mem->set($file,ob_get_contents(),0,$cache_time);
-                        }else{
-                                if(!file_exists("cache")) mkdir("cache");
-                                file_put_contents($file,ob_get_contents());
-                        }
-                }
-        //cache foot stop
-?>
-<!--not cached-->
+<?php require_once("oj-footer.php");?>
+<?php require_once("./include/cache_end.php");?>

@@ -7,8 +7,8 @@
         if (isset($_SESSION['user_id'])){
                 $sid=session_id().$_SERVER['REMOTE_ADDR'];
         }
-        if (isset($_SERVER['QUERY_STRING'])){
-                $sid.=$_SERVER['QUERY_STRING'];
+        if (isset($_SERVER["REQUEST_URI"])){
+                $sid.=$_SERVER["REQUEST_URI"];
         }
         $sid=md5($sid);
         $file = "cache/status_$sid.html";

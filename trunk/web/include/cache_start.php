@@ -1,7 +1,7 @@
 <?php
         require_once("./include/db_info.inc.php");
         //cache head start
-        $cache_time=2;
+        if(!isset($cache_time)) $cache_time=2;
         $file="cache/".$_SERVER["REQUEST_URI"]."index.html";
         $sid="";
         if (isset($_SESSION['user_id'])){

@@ -11,7 +11,7 @@
                 $sid.=$_SERVER["REQUEST_URI"];
         }
         $sid=md5($sid);
-        $file = "cache/status_$sid.html";
+        $file = "cache/cache_$sid.html";
         
         if($OJ_MEMCACHE ){
                 $mem = new Memcache;

@@ -1,5 +1,5 @@
 <?php
-	$now = time ();
+	
 	$scope="";
 	if(isset($_GET['scope']))
 		$scope=$_GET['scope'];
@@ -10,19 +10,6 @@
 	if(isset( $_GET ['start'] ))
 		$rank = intval ( $_GET ['start'] );
 
-	   
-	$file = "cache/ranklist$scope$rank.html";
-	if (file_exists ( $file ))
-		$last = filemtime ( $file );
-	else
-		$last =0;
-	if ($now - $last < 10) {
-		//header ( "Location: $file" );
-		include ($file);
-		exit ();
-	} else {
-		ob_start ();
-		
 		
 		?>
 		<?php require_once ("oj-header.php");
@@ -128,13 +115,4 @@
 		mysql_free_result ( $result );
 		?>
 		
-		<?php require_once ("oj-footer.php");
-		?>
-		<?php
-		
-		if(!file_exists("cache")) mkdir("cache");
-		file_put_contents($file,ob_get_contents ());
-		
-	}
-	
-?>
+<?php require_once ("oj-footer.php");?>

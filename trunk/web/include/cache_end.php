@@ -1,7 +1,7 @@
 <?php
  //cache foot start      
-                if($write_cache){
-                        if($OJ_SAE){
+                if($file){
+                        if($OJ_MEMCACHE){
                                 $mem->set($file,ob_get_contents(),0,$cache_time);
                         }else{
                                 if(!file_exists("cache")) mkdir("cache");

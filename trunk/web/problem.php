@@ -1,4 +1,7 @@
-<?php require_once("./include/db_info.inc.php");
+<?php 
+$cache_time=120; 
+$OJ_CACHE_SHARE=1;
+require_once("./include/db_info.inc.php");
 
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -12,7 +15,7 @@ $co_flag=false;
 if (isset($_GET['id'])){
 	// practice
 	$id=intval($_GET['id']);
-	require_once("oj-header.php");
+	require("oj-header.php");
 	if (!isset($_SESSION['administrator']) && $id!=1000)
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
@@ -145,4 +148,4 @@ if (mysql_num_rows($result)!=1){
 }
 mysql_free_result($result);
 ?>
-<?php require_once("oj-footer.php")?>
+<?php require("oj-footer.php")?>

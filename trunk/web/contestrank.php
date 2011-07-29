@@ -1,19 +1,4 @@
-<?php
-	$now = time ();
-	$cid=intval($_GET['cid']);
-	$file = "cache/contestrank$cid.html";
-	if (file_exists ( $file ))
-		$last = filemtime ( $file );
-	else
-		$last =0;
-	if ($now - $last < 10) {
-		//header ( "Location: $file" );
-		include ($file);
-		exit ();
-	} else {
-		ob_start ();
-		
-		?>
+
 <?php require_once("./include/db_info.inc.php");
 
 if(isset($OJ_LANG)){
@@ -161,9 +146,4 @@ echo "</table>";
 
 ?>
 <?php require_once("oj-footer.php")?>
-<?php
-		if(!file_exists("cache")) mkdir("cache");
-		file_put_contents($file,ob_get_contents ());
-	}
-	
-	?>
+

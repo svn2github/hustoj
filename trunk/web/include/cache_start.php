@@ -2,14 +2,15 @@
         require_once("./include/db_info.inc.php");
         //cache head start
         if(!isset($cache_time)) $cache_time=2;
-        $file="cache/".$_SERVER["REQUEST_URI"]."index.html";
+        $file="cache/cache_".$_SERVER["REQUEST_URI"].".html";
         $sid="";
-        if (isset($_SESSION['user_id'])){
-                $sid=session_id().$_SERVER['REMOTE_ADDR'];
+        if (!$OJ_CACHE_SHARE&&isset($_SESSION['user_id'])){
+                $sid.=session_id().$_SERVER['REMOTE_ADDR'];
         }
         if (isset($_SERVER["REQUEST_URI"])){
                 $sid.=$_SERVER["REQUEST_URI"];
         }
+        
         $sid=md5($sid);
         $file = "cache/cache_$sid.html";
         
@@ -34,16 +35,14 @@
                         $last = filemtime ( $file );
                 else
                         $last =0;
-                $write_cache=$_SERVER['QUERY_STRING']==""||
-                                         (isset($_GET['cid'])&&$_SERVER['QUERY_STRING']==("cid=".$_GET['cid']));
-                $use_cache=(time () - $last < $cache_time)&&$write_cache;
-                $write_cache=(!$use_cache)&&$write_cache;
+                $use_cache=(time () - $last < $cache_time);
+                
         }
         if ($use_cache) {
                 //header ( "Location: $file" );
                 include ($file);
                 exit ();
-        } else if($write_cache){
+        } else {
                 ob_start ();
         }
 //cache head stop

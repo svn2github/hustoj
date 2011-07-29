@@ -1,4 +1,6 @@
-<?php require_once("oj-header.php");
+<?php 
+$cache_time=120;
+require_once("oj-header.php");
 require_once("./include/db_info.inc.php");
 ?>
 <script src="include/sortTable.js"></script>

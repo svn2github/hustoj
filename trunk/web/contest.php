@@ -105,9 +105,7 @@ echo "</table></center>";
 mysql_free_result($result);
 ?>
 
-<?php }
-require_once("oj-footer.php");
-?>
+<?php }?>
 <script>
 var diff=new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
 //alert(diff);
@@ -131,3 +129,4 @@ function clock()
     } 
     clock();
 </script>
+<?php require_once("oj-footer.php");?>

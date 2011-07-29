@@ -1,18 +1,6 @@
 <?php
-	$now = time ();
-	$cid=intval($_GET['cid']);
-	$file = "cache/conteststatistics$cid.html";
-	if (file_exists ( $file ))
-		$last = filemtime ( $file );
-	else
-		$last = 0;
-	if ($now - $last < 10) {
-		//header ( "Location: $file" );
-		include ($file);
-		exit ();
-	} else {
-		ob_start ();
-		
+	$OJ_CACHE_SHARE=1;
+	$cache_time=30;
 		?><?php require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
 require_once("./include/my_func.inc.php");
@@ -99,10 +87,3 @@ echo "</tr>";
 echo "<table></center>";
 ?>
 <?php require_once("oj-footer.php")?>
-<?php
-		
-		if(!file_exists("cache")) mkdir("cache");
-		file_put_contents($file,ob_get_contents ());
-	}
-	
-	?>

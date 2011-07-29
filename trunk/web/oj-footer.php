@@ -27,3 +27,4 @@
 </div><!--end main-->
 </body>
 </html>
+<?php require_once('./include/cache_end.php');?>

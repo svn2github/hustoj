@@ -1,5 +1,5 @@
 <?php 
-	require('./include/db_info.inc.php');
+	require('./include/cache_start.php');
 
 ?>
 <html>

@@ -43,28 +43,29 @@ while ($row=mysql_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
 
+if(isset($_GET['search'])){
+	$search=mysql_real_escape_string($_GET['search']);
+    $filter_sql=" ( title like '%$search%' or source like '%$search%')";
+    
+}else{
+     $filter_sql="  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
+}
+
 if (isset($_SESSION['administrator'])){
 	
-	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE ";
+	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE $filter_sql ";
 	
 }
 else{
 	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
-	"WHERE `defunct`='N' AND `problem_id` NOT IN(
+	"WHERE `defunct`='N' and $filter_sql AND `problem_id` NOT IN(
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
 			(`end_time`>NOW() or private=1)and `defunct`='N'
 			
 		)
-	) AND";
+	) ";
 
-}
-if(isset($_GET['search'])){
-	$search=mysql_real_escape_string($_GET['search']);
-    $sql.=" ( title like '%$search%' or source like '%$search%')";
-    
-}else{
-	$sql.="  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 $sql.=" ORDER BY `problem_id`";
 ?>

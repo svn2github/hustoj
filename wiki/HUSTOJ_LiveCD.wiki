@@ -50,6 +50,7 @@ root密码freeproblemset
 下载地址: 
 r1141 (not available)
 ftp://59.53.88.226/hustoj-FPS.r1141.iso
+http://www.newsclan.com/hustoj/hustoj-FPS.r1141.iso
 
 r1065
 ftp://59.53.88.226/hustoj-FPS.r1065.iso

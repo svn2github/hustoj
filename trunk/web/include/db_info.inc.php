@@ -21,7 +21,7 @@ static  $OJ_CSS="hoj.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=true;
 static  $OJ_APPENDCODE=false;
-static  $OJ_MEMCACHE=true;
+static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
 

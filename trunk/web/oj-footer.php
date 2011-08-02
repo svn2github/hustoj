@@ -1,6 +1,5 @@
-
 <div id=foot>
-﻿<!--<br>
+ <!--<br>
 
 <a href="./"><span class=red>HOME</span></a>
 <a href="javascript:history.go(-1)"><span class=red>Back</span></a>
@@ -27,4 +26,4 @@
 </div><!--end main-->
 </body>
 </html>
-<?php require_once('./include/cache_end.php');?>
+<?php if(file_exists('./include/cache_end.php'))require_once('./include/cache_end.php');?>

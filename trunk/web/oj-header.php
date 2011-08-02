@@ -89,7 +89,7 @@
 		      <span style="color:1a5cc8" id="dict_status"></span>
       </div>
       <script src="include/underlineTranslation.js" type="text/javascript"></script> 
-
+      <script type="text/javascript">dictInit();</script> 
 		<?php }?>
 </div><!--end menu-->
 <div id=profile >
@@ -123,6 +123,5 @@
 
 ?>
 
-<script src="include/underlineTranslation.js" type="text/javascript"></script> 
-<script type="text/javascript">dictInit();</script> 
+
 <div id=main>

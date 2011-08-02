@@ -1,7 +1,7 @@
 <?php
         require_once("./include/db_info.inc.php");
         //cache head start
-        if(!isset($cache_time)) $cache_time=2;
+        if(!isset($cache_time)) $cache_time=10;
         $file="cache/cache_".$_SERVER["REQUEST_URI"].".html";
         $sid="";
         if (!$OJ_CACHE_SHARE&&isset($_SESSION['user_id'])){

@@ -1,4 +1,9 @@
-<?php require_once("oj-header.php")?>
+<?php
+
+$cache_time=5;
+require_once("oj-header.php");
+
+?>
 <?php $to_user="";
 $title="";
 if (isset($_GET['to_user'])){

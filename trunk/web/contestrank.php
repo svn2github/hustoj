@@ -1,5 +1,5 @@
 <?php require_once("./include/db_info.inc.php");
-$OJ_CACHE_SHARE=1;
+$OJ_CACHE_SHARE=true;
 	$cache_time=30;
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");

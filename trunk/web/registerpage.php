@@ -1,4 +1,5 @@
 <?php 
+$cache_time=1;
 require_once("oj-header.php");
 require_once("include/db_info.inc.php");
 

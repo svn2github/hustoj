@@ -1,4 +1,6 @@
 <?php
+$cache_time=30;
+$OJ_CACHE_SHARE=true;
 	$debug = true;
 	require_once('./oj-header.php');
 	require_once('./include/db_info.inc.php');

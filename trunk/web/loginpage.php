@@ -1,4 +1,6 @@
-<?php require_once("oj-header.php");?>
+<?php
+$cache_time=1;
+ require_once("oj-header.php");?>
 <title>LOGIN</title>
 <br><br>
 <?php if (isset($_SESSION['user_id'])){

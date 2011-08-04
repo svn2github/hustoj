@@ -6,9 +6,10 @@
 	require_once("oj-footer.php");
 	exit(0);
 }
+   $cache_time=1; 
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
-   $cache_time=1; 
+
 	require_once("oj-header.php");
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
 	require_once("contest-header.php");

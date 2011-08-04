@@ -1,4 +1,7 @@
-<?php require_once("oj-header.php")?>
+<?php
+ $cache_time=600; 
+ $OJ_CACHE_SHARE=1;
+ require_once("oj-header.php")?>
 <?php require_once("./include/db_info.inc.php");
 if(isset($OJ_LANG))
 		require_once("./lang/$OJ_LANG.php");

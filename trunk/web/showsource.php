@@ -1,4 +1,6 @@
-<?php require_once("oj-header.php")?>
+<?php
+ $cache_time=60;
+ require_once("oj-header.php")?>
 <title>Source Code</title>
 
 <link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/> 

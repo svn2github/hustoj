@@ -4,7 +4,7 @@
         if(!isset($cache_time)) $cache_time=10;
         $file="cache/cache_".$_SERVER["REQUEST_URI"].".html";
         $sid="";
-        if (!$OJ_CACHE_SHARE&&isset($_SESSION['user_id'])){
+        if (isset($_SESSION['user_id'])){
                 $sid.=session_id().$_SERVER['REMOTE_ADDR'];
         }
         if (isset($_SERVER["REQUEST_URI"])){

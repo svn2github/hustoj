@@ -163,19 +163,32 @@ mysql_query($sql);
 //echo $sql;
 
 
-	$file="cache/index.html";
-	if (isset($_SESSION['user_id'])){
-		$sid=session_id().$_SERVER['REMOTE_ADDR'];
-		if (isset($_GET['cid'])){
-			$sid.=intval($_GET['cid']);
-		}
-		$sid=md5($sid);
-		$file = "cache/status_$sid.html";
-	}
-	if (file_exists($file)) unlink($file);
+	 $statusURI=strstr($_SERVER['REQUEST_URI'],"submit",1)."status.php";
+        $sid="";
+        if (isset($_SESSION['user_id'])){
+                $sid.=session_id().$_SERVER['REMOTE_ADDR'];
+        }
+        if (isset($_SERVER["REQUEST_URI"])){
+                $sid.=$statusURI;
+        }
+        
+        $sid=md5($sid);
+        $file = "cache/cache_$sid.html";
+        
+    if($OJ_MEMCACHE){
+		$mem = new Memcache;
+                if($OJ_SAE)
+                        $mem=memcache_init();
+                else{
+                        $mem->connect($OJ_MEMSERVER,  $OJ_MEMPORT);
+                }
+        $mem->delete($file);
+    }
+	else if(file_exists($file)) 
+	     unlink($file);
 
 if (!isset($cid)) 
-	header("Location: ./status.php?");
+	header("Location: ./status.php");
 else 
 	header("Location: ./status.php?cid=$cid");
 ?>

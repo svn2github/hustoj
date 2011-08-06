@@ -1,5 +1,5 @@
 <?php 
-	require('./include/cache_start.php');
+	require_once('./include/cache_start.php');
 
 ?>
 <html>

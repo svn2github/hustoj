@@ -175,7 +175,7 @@ mysql_query($sql);
 	if (file_exists($file)) unlink($file);
 
 if (!isset($cid)) 
-	header("Location: ./status.php?"."user_id=".$_SESSION['user_id']);
+	header("Location: ./status.php?");
 else 
-	header("Location: ./status.php?cid=$cid"."&user_id=".$_SESSION['user_id']);
+	header("Location: ./status.php?cid=$cid");
 ?>

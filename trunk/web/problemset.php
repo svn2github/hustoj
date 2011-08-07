@@ -1,5 +1,6 @@
+<title>Problem Set</title>
 <?php 
-$OJ_CACHE_SHARE=false;
+$OJ_CACHE_SHARE=true;
 $cache_time=300;
 require_once("oj-header.php");
 require_once("./include/db_info.inc.php");
@@ -70,7 +71,7 @@ else{
 }
 $sql.=" ORDER BY `problem_id`";
 ?>
-<title>Problem Set</title>
+
 
 <?php $result=mysql_query($sql) or die(mysql_error());
 echo "<h3 align='center'>";

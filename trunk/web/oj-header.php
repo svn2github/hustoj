@@ -16,17 +16,7 @@
 		mysql_free_result($result);
 		return $retmsg;
 	}
-	function checkmail(){
-		require_once("./include/db_info.inc.php");
-		$sql="SELECT count(1) FROM `mail` WHERE 
-				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
-		$result=mysql_query($sql);
-		if(!$result) return false;
-		$row=mysql_fetch_row($result);
-		$retmsg="<span id=red>(".$row[0].")</span>";
-		mysql_free_result($result);
-		return $retmsg;
-	}
+	
 	
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -93,27 +83,7 @@
 		<?php }?>
 </div><!--end menu-->
 <div id=profile >
-
-<?php if (isset($_SESSION['user_id'])){
-				$sid=$_SESSION['user_id'];
-				print "&nbsp;<a href=./modifypage.php>$MSG_USERINFO
-					</a>&nbsp;<a href='./userinfo.php?user=$sid'>
-				<span id=red>$sid</span></a>&nbsp;";
-				$mail=checkmail();
-				if ($mail)
-					print "<a href=./mail.php>$mail</a>&nbsp;";
-				print "<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
-			}else{
-				print "<a href=./loginpage.php>$MSG_LOGIN</a>&nbsp;";
-				print "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
-			}
-			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
-				print "<a href=./admin>$MSG_ADMIN</a>&nbsp;";
-			
-			}
-		?>
-
-
+<script src="include/profile.php" ></script>
 </div><!--end profile-->
 </div><!--end subhead-->
 

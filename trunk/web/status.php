@@ -22,7 +22,7 @@ require_once("./include/const.inc.php");
 
 <?php $str2="";
 
-$sql="SELECT * FROM `solution` WHERE 1 ";
+$sql="SELECT solution_id,user_id,problem_id,result,memory,time,language,code_length,in_date FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' ";
@@ -181,66 +181,66 @@ if ($start_first){
 
 //for ($i=0;$i<$rows_cnt;$i++){
 //      mysql_data_seek($result,$row_start+$row_add*$i);
-while(  $row=mysql_fetch_object($result)){
-        if ($top==-1) $top=$row->solution_id;
-        $bottom=$row->solution_id;
+while(  $row=mysql_fetch_array($result)){
+        if ($top==-1) $top=$row[0];
+        $bottom=$row[0];
         if ($cnt) echo "<tr align=center class='oddrow'>";
         else echo "<tr align=center class='evenrow'>";
         $flag=(!is_running(intval($row->contest_id))) ||
                         isset($_SESSION['source_browser']) ||
                         isset($_SESSION['administrator']) || 
-                        (isset($_SESSION['user_id'])&&!strcmp($row->user_id,$_SESSION['user_id']));
+                        (isset($_SESSION['user_id'])&&!strcmp($row[1],$_SESSION['user_id']));
         $cnt=1-$cnt;
-        echo "<td>".$row->solution_id;
-        echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
+        echo "<td>".$row[0];
+        echo "<td><a href='userinfo.php?user=".$row[1]."'>".$row[1]."</a>";
         if (isset($cid)) 
                 echo "<td><a href='problem.php?cid=$cid&pid=$row->num'>".$PID[$row->num]."</a>";
         else 
-                echo "<td><a href='problem.php?id=".$row->problem_id."'>".$row->problem_id."</a>";
-        if (intval($row->result)==11 && ((isset($_SESSION['user_id'])&&$row->user_id==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                echo "<td><a href='ceinfo.php?sid=$row->solution_id' class=".$judge_color[$row->result].">".$judge_result[$row->result]."</a>";
-        }else if (intval($row->result)==10 && ((isset($_SESSION['user_id'])&&$row->user_id==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                echo "<td><a href='reinfo.php?sid=$row->solution_id' class=".$judge_color[$row->result].">".$judge_result[$row->result]."</a></td>";
+                echo "<td><a href='problem.php?id=".$row[2]."'>".$row[2]."</a>";
+        if (intval($row[3])==11 && ((isset($_SESSION['user_id'])&&$row[1]==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                echo "<td><a href='ceinfo.php?sid=$row[0]' class=".$judge_color[$row[3]].">".$judge_result[$row[3]]."</a>";
+        }else if (intval($row[3])==10 && ((isset($_SESSION['user_id'])&&$row[1]==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                echo "<td><a href='reinfo.php?sid=$row[0]' class=".$judge_color[$row[3]].">".$judge_result[$row[3]]."</a></td>";
         }else{
-                if($OJ_SIM&&$row->sim&&$row->sim_s_id!=$row->s_id) {
-                        echo "<td><span class=".$judge_color[$row->result].">*".$judge_result[$row->result]."</span>-<span class=red>";
+                if($OJ_SIM&&$row[11]&&$row[10]!=$row[9]) {
+                        echo "<td><span class=".$judge_color[$row[3]].">*".$judge_result[$row[3]]."</span>-<span class=red>";
                         if( isset($_SESSION['source_browser'])){
-                                        echo "<a href=showsource.php?id=".$row->sim_s_id." target=original>".$row->sim_s_id."(".$row->sim."%)</a>";
+                                        echo "<a href=showsource.php?id=".$row[10]." target=original>".$row[10]."(".$row[11]."%)</a>";
                         }else{
-                                        echo $row->sim_s_id;
+                                        echo $row[10];
                         }
-                        if(isset($_GET['showsim'])&&isset($row->old_user_id)){
-                                        echo "$row->old_user_id";
+                        if(isset($_GET['showsim'])&&isset($row[13])){
+                                        echo "$row[13]";
                                 
                         }
                         echo     "</span>";
                 }else{
-                        echo "<td class=".$judge_color[$row->result].">".$judge_result[$row->result];
+                        echo "<td class=".$judge_color[$row[3]].">".$judge_result[$row[3]];
                 }
                 
         }
         if ($flag){
 
-                if ($row->result>=4){
-                        echo "<td class=red>".$row->memory;
-                        echo "<td class=red>".$row->time;
+                if ($row[3]>=4){
+                        echo "<td class=red>".$row[4];
+                        echo "<td class=red>".$row[5];
                 }else{
                         echo "<td>------<td>------";
                 }
-                if (!(isset($_SESSION['user_id'])&&strtolower($row->user_id)==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                        echo "<td>".$language_name[$row->language];
+                if (!(isset($_SESSION['user_id'])&&strtolower($row[1])==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                        echo "<td>".$language_name[$row[6]];
                 }else{
-                        echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>/";
+                        echo "<td><a target=_blank href=showsource.php?id=".$row[0].">".$language_name[$row[6]]."</a>/";
                         if (isset($cid)) {
-                                echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=$row->num&sid=".$row->solution_id."\">Edit</a>";
+                                echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=$row->num&sid=".$row[0]."\">Edit</a>";
                         }else{
-                                echo "<a target=_self href=\"submitpage.php?id=".$row->problem_id."&sid=".$row->solution_id."\">Edit</a>";
+                                echo "<a target=_self href=\"submitpage.php?id=".$row[2]."&sid=".$row[0]."\">Edit</a>";
                         }
                 }
-                echo "<td>".$row->code_length." B";
+                echo "<td>".$row[7]." B";
                 
-        }else echo "<td>------<td>------<td>".$language_name[$row->language]."<td>------";
-        echo "<td>".$row->in_date;
+        }else echo "<td>------<td>------<td>".$language_name[$row[6]]."<td>------";
+        echo "<td>".$row[8];
         echo "</tr>";
 }
 mysql_free_result($result);

@@ -1,6 +1,6 @@
 <?php
 $cache_time=60;
-$OJ_CACHE_SHARE=true;
+$OJ_CACHE_SHARE=false;
  require_once("oj-header.php");
 	require_once("./include/db_info.inc.php");
 	echo "<title>Welcome To Online Judge</title>";

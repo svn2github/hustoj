@@ -1,5 +1,5 @@
 <?php
-	$OJ_CACHE_SHARE=1;
+	$OJ_CACHE_SHARE=false;
 	$cache_time=30;
 	$scope="";
 	if(isset($_GET['scope']))

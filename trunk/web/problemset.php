@@ -1,6 +1,7 @@
 <title>Problem Set</title>
 <?php 
-$OJ_CACHE_SHARE=true;
+@session_start();
+$OJ_CACHE_SHARE=!isset($_SESSION['administrator']);
 $cache_time=300;
 require_once("oj-header.php");
 require_once("./include/db_info.inc.php");

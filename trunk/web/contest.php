@@ -1,5 +1,5 @@
 <?php
-
+	$OJ_CACHE_SHARE=true;
 require_once("./include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -11,7 +11,7 @@ require_once("./include/db_info.inc.php");
 <?php if (isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
 //	print $cid;
-	$OJ_CACHE_SHARE=true;
+
 	require_once("contest-header.php");
 	// check contest valid
 	$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `defunct`='N' ";
@@ -76,7 +76,7 @@ require_once("./include/db_info.inc.php");
 	echo "[<a href='conteststatistics.php?cid=$cid'>Statistics</a>]";
 	echo "</center>";
 }else{
-$OJ_CACHE_SHARE=false;
+
 require_once("oj-header.php");
 ?>
 <title>Contest List</title>

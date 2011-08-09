@@ -111,7 +111,7 @@ mysql_free_result($result);
 $sql="SELECT 
 	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
 		FROM 
-			(select * from solution where solution.contest_id='$cid') solution 
+			(select * from solution where solution.contest_id='$cid' and num>=0) solution 
 		left join users 
 		on users.user_id=solution.user_id 
 	ORDER BY users.user_id,in_date";

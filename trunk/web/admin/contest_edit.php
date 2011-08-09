@@ -22,7 +22,7 @@ if (isset($_POST['syear']))
 	$cid=intval($_POST['cid']);
 	
 	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
-	echo $sql;
+	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	mysql_query($sql);
@@ -33,6 +33,10 @@ if (isset($_POST['syear']))
 			VALUES ('$cid','$pieces[0]',0)";
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
+		for ($i=0;$i<count($pieces);$i++){
+			$sql_2="update solution set num='$i' where contest_id='$cid' and problem_id='$pieces[$i]';";
+			mysql_query($sql_2);
+		}
 		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";

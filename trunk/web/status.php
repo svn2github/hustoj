@@ -25,7 +25,7 @@ require_once("./include/const.inc.php");
 $sql="SELECT solution_id,user_id,problem_id,result,memory,time,language,code_length,in_date FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
-        $sql=$sql." AND `contest_id`='$cid' ";
+        $sql=$sql." AND `contest_id`='$cid' and num>=0";
         $str2=$str2."&cid=$cid";
         require_once("contest-header.php");
 }else{

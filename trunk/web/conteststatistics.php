@@ -28,7 +28,7 @@ $row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
 mysql_free_result($result);
 
-$sql="SELECT `result`,`num`,`language` FROM `solution` WHERE `contest_id`='$cid'"; 
+$sql="SELECT `result`,`num`,`language` FROM `solution` WHERE `contest_id`='$cid' and num>=0"; 
 $result=mysql_query($sql);
 $R=array();
 while ($row=mysql_fetch_object($result)){

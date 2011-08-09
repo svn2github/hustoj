@@ -4,13 +4,15 @@
 		$pid=intval($_REQUEST['pid']); 
 	else
 		$pid=0;
-	if(isset($_REQUEST['pid']))
+	if(isset($_REQUEST['cid']))
 		$cid=intval($_REQUEST['cid']);
 	else
 		$cid=0;
 	$prob_exist = problem_exist($pid, $cid);
-	if ($cid!='' && $cid!=null && $prob_exist) require_once("contest-header.php");
-	else require_once("oj-header.php");
+	if ($cid!='' && $cid!=null && $prob_exist) 
+		require_once("contest-header.php");
+	else 
+		require_once("oj-header.php");
 	echo "<title>HUST Online Judge WebBoard</title>";
 ?>
 
@@ -85,7 +87,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	if ($row->pid!=0) echo"<a href=\"discuss.php?pid={$row->pid}&cid={$row->cid}\">{$row->pid}</a>";
 	echo "</td>";
 	echo "<td><a href=\"../userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
-	echo "<td><a href=\"thread.php?tid={$row->tid}\">".nl2br(htmlspecialchars($row->title))."</a></td>";
+	echo "<td><a href=\"thread.php?tid={$row->tid}&cid={$row->cid}\">".nl2br(htmlspecialchars($row->title))."</a></td>";
 	echo "<td>{$row->posttime}</td>";
 	echo "<td>{$row->lastupdate}</td>";
 	echo "<td>".($row->count-1)."</td>";

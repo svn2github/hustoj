@@ -110,7 +110,7 @@ if (mysql_num_rows($result)!=1){
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-	echo "[<a href='bbs.php?id=".$row->problem_id."'>$MSG_BBS</a>]";
+	echo "[<a href='bbs.php?pid=".$row->problem_id."'>$MSG_BBS</a>]";
 	
 	echo "</center>";
 	
@@ -143,7 +143,7 @@ if (mysql_num_rows($result)!=1){
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-	echo "[<a href='bbs.php?id=".$row->problem_id."'>$MSG_BBS</a>]";
+	echo "[<a href='bbs.php?pid=".$row->problem_id."'>$MSG_BBS</a>]";
 	echo "</center>";
 }
 mysql_free_result($result);

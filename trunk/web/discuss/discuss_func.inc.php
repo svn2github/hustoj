@@ -1,14 +1,14 @@
 <?php
 function problem_exist($pid,$cid){
-	require_once("../include/db_info.inc.php");
+	require("../include/db_info.inc.php");
 	if ($pid=='') $pid=0;
 	if ($cid!='')
-		$cid="'".mysql_escape_string($cid)."'";
+		$cid=intval($cid);
 	else
 		$cid='NULL';
 	if($pid!=0)
 		if($cid!='NULL')
-			$sql="SELECT 1 FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".mysql_escape_string($pid)."'";
+			$sql="SELECT 1 FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".intval($pid)."'";
 		else
 			$sql="SELECT 1 FROM `problem` WHERE `problem_id` = ".intval($pid)."";
 	else if($cid!='NULL')
@@ -16,7 +16,8 @@ function problem_exist($pid,$cid){
 	else
 		return true;
 	$sql.=" LIMIT 1";
-	$result=mysql_query($sql) or die(mysql_error());
+	//echo $sql;
+	$result=mysql_query($sql) or print "db error";
 	return mysql_num_rows($result)>0;
 }
 function err_msg($msg){

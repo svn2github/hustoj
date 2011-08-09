@@ -1,6 +1,7 @@
 <?php 
 $cache_time=300; 
 $OJ_CACHE_SHARE=true;
+if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 require_once("./include/db_info.inc.php");
 
 	if(isset($OJ_LANG)){
@@ -110,7 +111,7 @@ if (mysql_num_rows($result)!=1){
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-	echo "[<a href='bbs.php?pid=".$row->problem_id."'>$MSG_BBS</a>]";
+	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
 	
 	echo "</center>";
 	
@@ -143,7 +144,8 @@ if (mysql_num_rows($result)!=1){
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-	echo "[<a href='bbs.php?pid=".$row->problem_id."'>$MSG_BBS</a>]";
+
+	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
 	echo "</center>";
 }
 mysql_free_result($result);

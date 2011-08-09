@@ -22,10 +22,10 @@ require_once("./include/const.inc.php");
 
 <?php $str2="";
 
-$sql="SELECT solution_id,user_id,problem_id,result,memory,time,language,code_length,in_date FROM `solution` WHERE 1 ";
+$sql="SELECT solution_id,user_id,problem_id,result,memory,time,language,code_length,in_date,num FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
-        $sql=$sql." AND `contest_id`='$cid' and num>=0";
+        $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
         require_once("contest-header.php");
 }else{
@@ -208,7 +208,7 @@ else
         echo "<td><a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
         if (isset($cid)) 
-                echo "<td><a href='problem.php?cid=$cid&pid=$row->num'>".$PID[$row->num]."</a>";
+                echo "<td><a href='problem.php?cid=$cid&pid=".$row['num']."'>".$PID[$row['num']]."</a>";
         else 
 
                 echo "<td><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";

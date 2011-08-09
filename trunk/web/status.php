@@ -44,12 +44,21 @@ if (isset($_GET['top'])){
 // check the problem arg
 $problem_id="";
 if (isset($_GET['problem_id'])){
+	
+	if(isset($_GET['cid'])){
+		$problem_id=$_GET['problem_id'];
+		$num=strpos($PID,$problem_id);
+		$sql=$sql."AND `num`='".$num."' ";
+        $str2=$str2."&problem_id=".$problem_id;
+        
+	}else{
         $problem_id=strval(intval($_GET['problem_id']));
         if ($problem_id!='0'){
                 $sql=$sql."AND `problem_id`='".$problem_id."' ";
                 $str2=$str2."&problem_id=".$problem_id;
         }
         else $problem_id="";
+	}
 }
 // check the user_id arg
 $user_id="";

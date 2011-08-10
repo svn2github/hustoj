@@ -11,7 +11,7 @@ if(isset($_GET['cid']))
 else
 	$cid=0;
 if($OJ_BBS=="discuss"){
-   header("Location:discuss/discuss.php?pid=".$pid."&cid=".$cid);
+   header("Location:discuss/discuss.php?".$_SERVER["QUERY_STRING"]);
 
 }else{
 

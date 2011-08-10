@@ -72,7 +72,10 @@
 		<a href="../<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?php echo $MSG_FAQ?></a>
 		</div>
 		<?php if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
-		<span style="color:1a5cc8" id="dict_status"></span></div>
+		<span style="color:1a5cc8" id="dict_status"></span>
+       <script src="../include/underlineTranslation.js" type="text/javascript"></script>
+<script type="text/javascript">dictInit();</script> 
+      </div>
 		<?php }?>
 </div><!--end menu-->
 <div id=profile >
@@ -109,6 +112,5 @@
 
 ?>
 </div><!--end broadcast-->
-<script src="include/underlineTranslation.js" type="text/javascript"></script> 
-<script type="text/javascript">dictInit();</script> 
+ 
 <div id=main>

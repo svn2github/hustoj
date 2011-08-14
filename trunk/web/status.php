@@ -268,7 +268,7 @@ else
 
                         if (isset($cid)) {
 
-                                echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=$row->num&sid=".$row['solution_id']."\">Edit</a>";
+                                echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
 
                         }else{
 

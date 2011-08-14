@@ -190,10 +190,10 @@ mysql_query($sql);
     }
 	else if(file_exists($file)) 
 	     unlink($file);
+    echo $file;
+    
 
-if (!isset($cid)) 
-	header("Location: ./status.php");
-else 
-	header("Location: ./status.php?cid=$cid");
+	header("Location: $statusURI");
+
 	
 ?>

@@ -174,11 +174,11 @@ mysql_query($sql);
         if (isset($_SERVER["REQUEST_URI"])){
                 $sid.=$statusURI;
         }
-    echo $statusURI."<br>";
+   // echo $statusURI."<br>";
   
         $sid=md5($sid);
         $file = "cache/cache_$sid.html";
-    echo $file;  
+    //echo $file;  
     if($OJ_MEMCACHE){
 		$mem = new Memcache;
                 if($OJ_SAE)
@@ -190,7 +190,7 @@ mysql_query($sql);
     }
 	else if(file_exists($file)) 
 	     unlink($file);
-    echo $file;
+    //echo $file;
     
 
 	header("Location: $statusURI");

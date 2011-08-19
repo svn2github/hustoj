@@ -23,7 +23,7 @@
   * GCC 4.3.0+
   * MySQL 5.0+
   * Apache2.0+
-  * PHP   5.0+
+  * PHP   5.3+
    
 
 = LiveCD版 =

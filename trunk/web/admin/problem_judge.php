@@ -11,7 +11,8 @@ if (!(isset($_SESSION['http_judge']))){
 	$memory=intval($_POST['memory']);
 	$sim=intval($_POST['sim']);
 	$simid=intval($_POST['simid']);
-	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW() WHERE solution_id=$sid LIMIT 1";
+	$pass_rate=floatval($_POST['pass_rate']);
+	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW(),pass_rate=$pass_rate WHERE solution_id=$sid LIMIT 1";
 	echo $sql;
 	mysql_query($sql);
 	

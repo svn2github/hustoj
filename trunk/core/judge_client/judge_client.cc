@@ -93,6 +93,7 @@ static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
+static int oi_mode=0;
 static int http_judge=0;
 static char http_baseurl[BUFFER_SIZE];
 
@@ -248,7 +249,8 @@ void init_mysql_conf() {
 		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
 		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
 		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
-
+		read_int(buf , "OJ_OI_MODE", &oi_mode);
+		
 	}
 }
 
@@ -452,12 +454,19 @@ void login(){
 }
 /* write result back to database */
 void _update_solution_mysql(int solution_id, int result, int time, int memory,
-		int sim, int sim_s_id) {
+		int sim, int sim_s_id,double pass_rate) {
 	char sql[BUFFER_SIZE];
-	sprintf(
+	if(oi_mode){
+		   sprintf(
+			sql,
+			"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW(),pass_rate=%f WHERE solution_id=%d LIMIT 1%c",
+			result, time, memory, pass_rate,solution_id, 0);
+	}else{
+			sprintf(
 			sql,
 			"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c",
 			result, time, memory, solution_id, 0);
+		}
 	//	printf("sql= %s\n",sql);
 	if (mysql_real_query(conn, sql, strlen(sql))) {
 		//		printf("..update failed! %s\n",mysql_error(conn));
@@ -475,17 +484,17 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 	}
 
 }
-void _update_solution_http(int solution_id, int result, int time, int memory,int sim, int sim_s_id) {
-	const char  * cmd=" wget --post-data=\"update_solution=1&sid=%d&result=%d&time=%d&memory=%d&sim=%d&simid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE * fjobs=read_cmd_output(cmd,solution_id,result,  time,  memory, sim, sim_s_id,http_baseurl);
+void _update_solution_http(int solution_id, int result, int time, int memory,int sim, int sim_s_id,double pass_rate) {
+	const char  * cmd=" wget --post-data=\"update_solution=1&sid=%d&result=%d&time=%d&memory=%d&sim=%d&simid=%d&pass_rate=%f\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	FILE * fjobs=read_cmd_output(cmd,solution_id,result,  time,  memory, sim, sim_s_id,pass_rate,http_baseurl);
 		//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
-void update_solution(int solution_id, int result, int time, int memory,int sim, int sim_s_id) {
+void update_solution(int solution_id, int result, int time, int memory,int sim, int sim_s_id,double pass_rate) {
 	if(http_judge){
-		_update_solution_http( solution_id,  result,  time,  memory, sim, sim_s_id);
+		_update_solution_http( solution_id,  result,  time,  memory, sim, sim_s_id,pass_rate);
 	}else{
-		_update_solution_mysql( solution_id,  result,  time,  memory, sim, sim_s_id);
+		_update_solution_mysql( solution_id,  result,  time,  memory, sim, sim_s_id,pass_rate);
 	}
 }
 /* write compile error message back to database */
@@ -1523,7 +1532,7 @@ int main(int argc, char** argv) {
 
 	Compile_OK = compile(lang);
 	if (Compile_OK != 0) {
-		update_solution(solution_id, OJ_CE, 0, 0, 0, 0);
+		update_solution(solution_id, OJ_CE, 0, 0, 0,0, 0.0);
 		addceinfo(solution_id);
 		update_user(user_id);
 		update_problem(p_id);
@@ -1535,7 +1544,7 @@ int main(int argc, char** argv) {
 			write_log("compile error");
 		exit(0);
 	} else {
-		update_solution(solution_id, OJ_RI, 0, 0, 0, 0);
+		update_solution(solution_id, OJ_RI, 0, 0, 0,0, 0.0);
 	}
 	//exit(0);
 	// run
@@ -1575,7 +1584,10 @@ int main(int argc, char** argv) {
                 copy_mono_runtime(work_dir);
 
 	// read files and run
-	for (; ACflg == OJ_AC && (dirp = readdir(dp)) != NULL;) {
+	double pass_rate=0.0;
+	int num_of_test=0;
+	int finalACflg=ACflg;
+	for (;(oi_mode|| ACflg == OJ_AC )&& (dirp = readdir(dp)) != NULL;) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
@@ -1601,17 +1613,40 @@ int main(int argc, char** argv) {
 					mem_lmt, solution_id);
 			
 		}
+		if(oi_mode){
+		    if(ACflg == OJ_AC && PEflg != OJ_PE){
+					pass_rate++;				
+			}else{
+				if (ACflg == OJ_AC && PEflg == OJ_PE){
+					ACflg = OJ_PE;
+					PEflg=false;
+				}
+				if(ACflg == OJ_RE)addreinfo(solution_id);
+			    finalACflg=ACflg;
+			    ACflg=OJ_AC;
+			}
+			num_of_test++;
+			ACflg = OJ_AC;
+		}
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)
 		ACflg = OJ_PE;
-	if (sim_enable && ACflg == OJ_AC && lang < 5) {//bash don't supported
+	if (sim_enable && ACflg == OJ_AC &&(!oi_mode||finalACflg==OJ_AC)&& lang < 5) {//bash don't supported
 		sim = get_sim(solution_id, lang, p_id, sim_s_id);
 	}else{
 	    sim = 0;
     }
     if(ACflg == OJ_RE)addreinfo(solution_id);
-	update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
-			sim_s_id);
+    
+    if(oi_mode){
+		if(num_of_test>0) pass_rate/=num_of_test;
+		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
+			sim_s_id,pass_rate);
+	}else{
+		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
+			sim_s_id,0);
+	}
+		
 	update_user(user_id);
 	update_problem(p_id);
 	clean_workdir(work_dir);
@@ -1624,5 +1659,6 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+
 
 

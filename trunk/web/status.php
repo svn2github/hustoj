@@ -22,7 +22,7 @@ require_once("./include/const.inc.php");
 
 <?php $str2="";
 
-$sql="SELECT solution_id,user_id,problem_id,result,memory,time,language,code_length,in_date,num FROM `solution` WHERE 1 ";
+$sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
@@ -43,7 +43,7 @@ if (isset($_GET['top'])){
 
 // check the problem arg
 $problem_id="";
-if (isset($_GET['problem_id'])){
+if (isset($_GET['problem_id'])&&$_GET['problem_id']!=""){
 	
 	if(isset($_GET['cid'])){
 		$problem_id=$_GET['problem_id'];
@@ -224,12 +224,13 @@ else
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 echo "<td><a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
         }else if (intval($row['result'])==10 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                echo "<td><a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a></td>";
+                echo "<td><a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
 
         }else{
 
                 if($OJ_SIM&&$row['sim']&&$row['sim_s_id']!=$row->s_id) {
                         echo "<td><span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
+                       
                         if( isset($_SESSION['source_browser'])){
 
                                         echo "<a href=showsource.php?id=".$row['sim_s_id']." target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
@@ -249,6 +250,7 @@ else
                 }
                 
         }
+        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) echo ($row['pass_rate']*100)."%";
         if ($flag){
 
 
@@ -282,7 +284,7 @@ else
 
         }else echo "<td>------<td>------<td>".$language_name[$row['language']]."<td>------";
         echo "<td>".$row['in_date'];
-        echo "</tr>";
+        echo "</tr>\n";
 }
 mysql_free_result($result);
 ?>

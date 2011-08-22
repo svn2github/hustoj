@@ -131,6 +131,7 @@ CREATE TABLE  `jol`.`solution` (
   `num` tinyint(4) NOT NULL DEFAULT '-1',
   `code_length` int(11) NOT NULL DEFAULT '0',
   `judgetime` datetime DEFAULT NULL,
+  `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`solution_id`),
   KEY `uid` (`user_id`),
   KEY `pid` (`problem_id`),
@@ -184,4 +185,12 @@ CREATE TABLE `online` (
   PRIMARY KEY  (`hash`),
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE  `runtimeinfo` (
+  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `error` text,
+  PRIMARY KEY (`solution_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 

@@ -50,17 +50,15 @@ root密码freeproblemset
 下载地址: 
 r1202
 http://www.newsclan.com/hustoj/hustoj-FPS.r1202.iso
-
-r1141 
-ftp://59.53.88.226/hustoj-FPS.r1141.iso
-
-http://www.newsclan.com/hustoj/hustoj-FPS.r1141.iso
+ftp://59.53.88.226/hustoj-FPS.r1202.iso
 
 r1065
 ftp://59.53.88.226/hustoj-FPS.r1065.iso
 
 http://dl.dbank.com/c0uhwzhuc0#
 
+集成LiveCD的windows绿色版
+http://www.newsclan.com/hustoj/hustoj-win32.exe
 
 最低配置实测：
 LiveCD System on k6-2 System

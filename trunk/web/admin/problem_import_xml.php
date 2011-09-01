@@ -116,18 +116,19 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			mkdir ( $basedir );
 			if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
 			if(strlen($sample_output)) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
-			$testinputs=$searchNode->children()->test_input;
-			$testno=0;
 			if(!isset($OJ_SAE)||!$OJ_SAE){
+				$testinputs=$searchNode->children()->test_input;
+				$testno=0;
+			
 				foreach($testinputs as $testNode){
 					//if($testNode->nodeValue)
-					mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
+					mkdata($pid,"test".$testno++.".in",$testNode,$OJ_DATA);
 				}
 				$testinputs=$searchNode->children()->test_output;
 				$testno=0;
 				foreach($testinputs as $testNode){
 					//if($testNode->nodeValue)
-					mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
+					mkdata($pid,"test".$testno++.".out",$testNode,$OJ_DATA);
 				}
 			}
 			$images=($searchNode->children()->img);

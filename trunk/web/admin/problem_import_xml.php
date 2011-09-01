@@ -49,21 +49,10 @@ Import Free Problem Set ... <br>
 <?php
 function getValue($Node, $TagName) {
 	
-	$children = $Node->getElementsByTagName ( $TagName );
-	if ($children->length > 0)
-		$ret = $children->item ( 0 )->nodeValue;
-	else
-		$ret = "";
-	return $ret;
+	return $Node->$TagName;
 }
 function getAttribute($Node, $TagName,$attribute) {
-	
-	$children = $Node->getElementsByTagName ( $TagName );
-	if ($children->length > 0)
-		$ret = $children->item ( 0 )->getAttribute($attribute);
-	else
-		$ret = "";
-	return $ret;
+	return $Node->children()->$TagName->attributes()->$attribute;
 }
 function hasProblem($title){
 	require("../include/db_info.inc.php");
@@ -86,16 +75,20 @@ if ($_FILES ["fps"] ["error"] > 0) {
 //	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
 //	echo "Stored in: " . $tempfile;
 	
-	$xmlDoc = new DOMDocument ();
-	$xmlDoc->load ( $tempfile );
-	
-	$searchNodes = $xmlDoc->getElementsByTagName ( "item" );
+	//$xmlDoc = new DOMDocument ();
+	//$xmlDoc->load ( $tempfile );
+	//$xmlcontent=file_get_contents($tempfile );
+	$xmlDoc=simplexml_load_file($tempfile);
+	$searchNodes = $xmlDoc->xpath ( "/fps/item" );
 	$spid=0;
-	foreach ( $searchNodes as $searchNode ) {
-		$title = getValue ( $searchNode, 'title' );
+	foreach($searchNodes as $searchNode) {
+		//echo $searchNode->title,"\n";
+
+		$title =$searchNode->title;
 		
-		$time_limit = getValue ( $searchNode, 'time_limit' );
-		$unit=getAttribute($searchNode,'time_limit','unit');
+		$time_limit = $searchNode->time_limit;
+    	$unit=getAttribute($searchNode,'time_limit','unit');
+    	//echo $unit;
 		if($unit=='ms') $time_limit/=1000;
 		
 		$memory_limit = getValue ( $searchNode, 'memory_limit' );
@@ -111,7 +104,8 @@ if ($_FILES ["fps"] ["error"] > 0) {
 //		$test_output = getValue ( $searchNode, 'test_output' );
 		$hint = getValue ( $searchNode, 'hint' );
 		$source = getValue ( $searchNode, 'source' );
-		$solutions = $searchNode->getElementsByTagName("solution");
+		
+		$solutions = $searchNode->children()->solution;
 		
 		$spjcode = getValue ( $searchNode, 'spj' );
 		$spj = trim($spjcode)?1:0;
@@ -122,21 +116,21 @@ if ($_FILES ["fps"] ["error"] > 0) {
 			mkdir ( $basedir );
 			if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
 			if(strlen($sample_output)) mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
-			$testinputs=$searchNode->getElementsByTagName("test_input");
+			$testinputs=$searchNode->children()->test_input;
 			$testno=0;
 			if(!isset($OJ_SAE)||!$OJ_SAE){
 				foreach($testinputs as $testNode){
 					//if($testNode->nodeValue)
 					mkdata($pid,"test".$testno++.".in",$testNode->nodeValue,$OJ_DATA);
 				}
-				$testinputs=$searchNode->getElementsByTagName("test_output");
+				$testinputs=$searchNode->children()->test_output;
 				$testno=0;
 				foreach($testinputs as $testNode){
 					//if($testNode->nodeValue)
 					mkdata($pid,"test".$testno++.".out",$testNode->nodeValue,$OJ_DATA);
 				}
 			}
-			$images=($searchNode->getElementsByTagName("img"));
+			$images=($searchNode->children()->img);
 			$did=array();
 			$testno=0;
 			foreach($images as $img){
@@ -193,13 +187,14 @@ if ($_FILES ["fps"] ["error"] > 0) {
 				}
 			}
 			foreach($solutions as $solution) {
-				$language =$solution->getAttribute("language");
-				submitSolution($pid,$solution->nodeValue,$language);
+				$language =$solution->attributes()->language;
+				submitSolution($pid,$solution,$language);
 			
 			}
 		}else{
 			echo "<br><span class=red>$title is already in this OJ</span>";		
 		}
+		
 	}
 	unlink ( $tempfile );
 	if($spid>0){
@@ -207,4 +202,5 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION['getkey'].">Use these problems to create a contest.</a>";
 	 }
 }
+
 ?>

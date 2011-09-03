@@ -25,7 +25,7 @@ if (!(isset($_SESSION['http_judge']))){
 	
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
-	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and result<2 LIMIT 1";
+	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and (result<2 or (result<4 and NOW()-judgetime>60)) LIMIT 1";
 	mysql_query($sql);
 	if(mysql_affected_rows()>0)
 		echo "1";
@@ -33,7 +33,7 @@ if (!(isset($_SESSION['http_judge']))){
 		echo "0";
 }else if(isset($_POST['getpending'])){
 	$max_running=intval($_POST['max_running']);
-	$sql="SELECT solution_id FROM solution WHERE result<2  ORDER BY result ASC,solution_id ASC limit $max_running";
+	$sql="SELECT solution_id FROM solution WHERE result<2 or (result<4 and NOW()-judgetime>60) ORDER BY result ASC,solution_id ASC limit $max_running";
 	$result=mysql_query($sql);
 	while ($row=mysql_fetch_object($result)){
 		echo $row->solution_id."\n";

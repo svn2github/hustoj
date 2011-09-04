@@ -2,6 +2,7 @@
 $cache_time=300; 
 $OJ_CACHE_SHARE=true;
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
+else $ucid="";
 require_once("./include/db_info.inc.php");
 
 	if(isset($OJ_LANG)){

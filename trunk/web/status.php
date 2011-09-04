@@ -201,7 +201,7 @@ if($OJ_MEMCACHE)
 	$row=$result[$i];
 else
 	$row=mysql_fetch_array($result);
-        if ($top==-1) $top=$row[solution_id];
+        if ($top==-1) $top=$row['solution_id'];
         $bottom=$row['solution_id'];
         if ($cnt) echo "<tr align=center class='oddrow'>";
         else echo "<tr align=center class='evenrow'>";

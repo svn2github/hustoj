@@ -9,11 +9,6 @@ CREATE TABLE  `jol`.`compileinfo` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`runtimeinfo` (
-  `solution_id` int(11) NOT NULL DEFAULT '0',
-  `error` text,
-  PRIMARY KEY (`solution_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `jol`.`contest` (
   `contest_id` int(11) NOT NULL AUTO_INCREMENT,

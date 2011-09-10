@@ -3,3 +3,24 @@
 
 
 [http://code.google.com/p/hustoj/downloads/detail?name=OnlineJudge%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96.pdf&can=2&q= 论文1]
+
+该文所述SIEOJ其中相当数量的代码基于HUSTOJ,而其论文中却没有任何提及。
+
+文中 judged judge_client 为HUSTOJ判题核心主体程序，题目转换XML为FreeProblemSet格式。
+
+Online Judge系统的优化①
+ 
+庄奇东1,3
+，王键闻2
+，张 楠1,3
+，张 爽4
+，任 娜1
+ 
+1
+(沈阳工程学院 信息工程系，沈阳 110136) 
+2
+(沈阳工程学院 基础部，沈阳 110136) 
+3
+(沈阳工程学院 电力系统信息安全重点实验室，沈阳 110136) 
+4
+(昌兴建筑工程有限公司 ERP软件事业部，东莞 523750)

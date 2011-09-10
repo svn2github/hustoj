@@ -6,7 +6,7 @@
 
 该文所述SIEOJ其中相当数量的代码基于HUSTOJ,而其论文中却没有任何提及。
 
-文中 judged judge_client 为HUSTOJ判题核心主体程序，题目转换XML为FreeProblemSet格式。
+文中 judged judge_client 为HUSTOJ判题核心主体程序，题目转换XML为FreeProblemSet格式。基于SIM的抄袭检测也是属于HUSTOJ所创。
 
 Online Judge系统的优化①
  

@@ -24,3 +24,5 @@ Online Judge系统的优化①
 (沈阳工程学院 电力系统信息安全重点实验室，沈阳 110136) 
 4
 (昌兴建筑工程有限公司 ERP软件事业部，东莞 523750)
+sieoj目前不能访问，下面是百度快照
+[http://hustoj.googlecode.com/files/sie-hustoj.png]

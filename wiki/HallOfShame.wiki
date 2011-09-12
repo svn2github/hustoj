@@ -11,6 +11,6 @@
 Online Judge系统的优化①
  
 
-*鉴于作者来信致歉，并且表明杂志社因篇幅原因删去原有的包含hustoj的致谢内容，此处暂隐去作者姓名*
+*鉴于作者来信致歉，并且表明杂志社因篇幅原因删去原有的包含hustoj的致谢内容，此处暂隐去作者姓名* [issue38]
 
 [http://hustoj.googlecode.com/files/sie-hustoj.png]

@@ -45,7 +45,7 @@ while ($row=mysql_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
 
-if(isset($_GET['search'])){
+if(isset($_GET['search'])&&trim($_GET['search'])!=""){
 	$search=mysql_real_escape_string($_GET['search']);
     $filter_sql=" ( title like '%$search%' or source like '%$search%')";
     

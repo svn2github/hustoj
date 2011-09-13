@@ -49,8 +49,7 @@ root密码freeproblemset
 
 下载地址: 
 r1202
-http://www.newsclan.com/hustoj/hustoj-FPS.r1202.iso
-ftp://59.53.88.226/hustoj-FPS.r1202.iso
+http://115.com/file/e65yuvhy#
 
 r1065
 ftp://59.53.88.226/hustoj-FPS.r1065.iso

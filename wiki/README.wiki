@@ -29,7 +29,7 @@ http://hustoj.googlecode.com/files/install.641.tar.gz
         cp -R web /var/www/html/JudgeOnline
 注册用户
 	http://127.0.0.1/JudgeOnline/registerpage.php
-	注册一个普通帐号
+	注册一个普通帐号zhblue
 创建管理员
     insert into privilege(user_id,rightstr) values('zhblue','administrator');
     zhblue 为需要加管理员权限的帐号

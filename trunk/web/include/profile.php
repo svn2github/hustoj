@@ -16,7 +16,7 @@
 		mysql_free_result($result);
 		return $retmsg;
 	}
-	
+	$profile="";
 		if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
 				$profile.= "&nbsp;<a href=./modifypage.php>$MSG_USERINFO</a>&nbsp;<a href='./userinfo.php?user=$sid'><span id=red>$sid</span></a>&nbsp;";

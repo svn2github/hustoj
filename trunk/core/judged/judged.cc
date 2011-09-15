@@ -171,7 +171,7 @@ void init_mysql_conf() {
 
 
 void run_client(int runid,int clientid){
-    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE],err[BUFFER_SIZE];
+    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
         struct rlimit LIM;
 		LIM.rlim_max=300;
 		LIM.rlim_cur=300;
@@ -521,7 +521,11 @@ int main(int argc, char** argv){
 	signal(SIGTERM,call_for_exit);
 	while (!STOP){			// start to run
 	    if(http_judge||!init_mysql()){
-	        int j=work();
+			int j=0;
+			do{
+				j=work();
+			}
+	        while(j);
 	        //mysql_close(conn);	//keep connection if possible to save resource
             if (j==0){	// if nothing done
                 sleep(sleep_time);	// sleep

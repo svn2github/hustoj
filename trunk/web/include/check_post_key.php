@@ -1,4 +1,4 @@
 <?php
-if ($_SESSION['postkey']!=$_POST['postkey'])
+if (!isset($_SESSION['postkey'])||$_SESSION['postkey']!=$_POST['postkey'])
 	exit(1);
 ?>

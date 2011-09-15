@@ -1472,6 +1472,7 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 		}
 
 	}
+	if(solution_id<=sim_s_id) sim=0;
 	return sim;
 }
 int main(int argc, char** argv) {

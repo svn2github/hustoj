@@ -527,13 +527,9 @@ int main(int argc, char** argv){
 			}
 	        while(j);
 	        //mysql_close(conn);	//keep connection if possible to save resource
-            if (j==0){	// if nothing done
-                sleep(sleep_time);	// sleep
-                syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
-            }
-
+          
 		}else{
-			sleep(sleep_time*2);
+			sleep(sleep_time);
 		}
 	}
 	return 0;

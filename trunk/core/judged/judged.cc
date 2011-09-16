@@ -171,7 +171,7 @@ void init_mysql_conf() {
 
 
 void run_client(int runid,int clientid){
-    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
+    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE],err[BUFFER_SIZE];
         struct rlimit LIM;
 		LIM.rlim_max=300;
 		LIM.rlim_cur=300;
@@ -510,7 +510,7 @@ int main(int argc, char** argv){
 	if (!DEBUG) daemon_init();
 	if ( strcmp(oj_home,"/home/judge")==0&&already_running()){
 		syslog(LOG_ERR|LOG_DAEMON, "This daemon program is already running!\n");
-		return 1;
+		return 1; 
 	}
 //	struct timespec final_sleep;
 //	final_sleep.tv_sec=0;
@@ -521,17 +521,17 @@ int main(int argc, char** argv){
 	signal(SIGTERM,call_for_exit);
 	while (!STOP){			// start to run
 	    if(http_judge||!init_mysql()){
-			int j=0;
-			do{
-				j=work();
-			}
-	        while(j);
+	        int j=work();
 	        //mysql_close(conn);	//keep connection if possible to save resource
-          
+            if (j==0){	// if nothing done
+                sleep(sleep_time);	// sleep
+                syslog(LOG_ERR|LOG_DAEMON,"No WORK -- sleeping once");
+            }
+
 		}else{
-			sleep(sleep_time);
+			sleep(sleep_time*2);
 		}
-	} 
+	}
 	return 0;
 }
 

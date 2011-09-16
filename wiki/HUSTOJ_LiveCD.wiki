@@ -49,18 +49,14 @@ root密码freeproblemset
 
 下载地址: 
 r1248
+http://115.com/file/e65dfvwr#hustoj-1248.iso
+
 http://down.newsclan.com/hustoj-1248.iso
 
 r1235
 http://115.com/file/e65ku7yc#hustoj-1235.iso
 
-r1202
-http://115.com/file/e65yuvhy#
 
-r1065
-ftp://59.53.88.226/hustoj-FPS.r1065.iso
-
-http://dl.dbank.com/c0uhwzhuc0#
 
 集成LiveCD的windows绿色版
 http://www.newsclan.com/hustoj/hustoj-win32.zip

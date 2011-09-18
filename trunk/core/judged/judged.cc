@@ -214,17 +214,7 @@ int executesql(const char * sql){
 
 
 int init_mysql(){
-	if(conn!=NULL){
-	  try{
-			executesql("commit;");
-		}catch(int i){
-			
-			conn=NULL;
-	  }
-	}
-	
     if(conn==NULL){
-		
 		conn=mysql_init(NULL);		// init the database connection
 		/* connect the database */
 		const char timeout=30;
@@ -374,32 +364,29 @@ int work(){
 		if(DEBUG)write_log("Judging solution %d",runid);
 		if (workcnt>=max_running){		// if no more client can running
 			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
-			workcnt--;retcnt++;
 			for (i=0;i<max_running;i++)	// get the client id
 				if (ID[i]==tmp_pid) break; // got the client id
-			ID[i]=0;
 		}else{							// have free client
-			
+			workcnt++;
 			for (i=0;i<max_running;i++)	// find the client id
 				if (ID[i]==0) break;	// got the client id
 		}
-		if(workcnt<max_running&&check_out(runid,OJ_CI)){
-			workcnt++;
+		if(i<max_running&&check_out(runid,OJ_CI)){
 			ID[i]=fork();					// start to fork
 			if (ID[i]==0){
 				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
 				run_client(runid,i);	// if the process is the son, run it
 				exit(0);
 			}
-			
-		}else{
-			ID[i]=0;
+			retcnt++;
 		}
 	}
-	while (workcnt>0){
-			waitpid(-1,NULL,0);
+	if (retcnt==0){
+		while (workcnt>0){
 			workcnt--;
-			retcnt++;
+			waitpid(-1,NULL,0);
+
+		}
 	}
 	if(!http_judge){
 		mysql_free_result(res);				// free the memory
@@ -533,8 +520,8 @@ int main(int argc, char** argv){
 	signal(SIGKILL,call_for_exit);
 	signal(SIGTERM,call_for_exit);
 	while (!STOP){			// start to run
-	    if(http_judge||!init_mysql()){
-	        while(work());
+	    if(http_judge||!init_mysql()){ 
+	        int j=work();
 	        //mysql_close(conn);	//keep connection if possible to save resource
            
 		}else{

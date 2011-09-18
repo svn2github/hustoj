@@ -171,7 +171,7 @@ void init_mysql_conf() {
 
 
 void run_client(int runid,int clientid){
-    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE],err[BUFFER_SIZE];
+    char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
         struct rlimit LIM;
 		LIM.rlim_max=300;
 		LIM.rlim_cur=300;
@@ -340,15 +340,14 @@ bool check_out(int solution_id,int result){
 }
 int work(){
 //	char buf[1024];
-	int retcnt;
+	int retcnt=0;
 	int i=0;
-	pid_t * ID=(pid_t *)malloc(sizeof(pid_t)*max_running);
+	pid_t ID[max_running];
 	static int workcnt=0;
-	int runid;
-	int * jobs=(int *)malloc(sizeof(int)*max_running*2+1);;
-	pid_t tmp_pid;
+	int runid=0;
+	int  jobs[max_running*2+1];
+	pid_t tmp_pid=0;
 
-	retcnt=0;
 	
 	for(i=0;i<max_running;i++){
 		ID[i]=0;
@@ -364,40 +363,42 @@ int work(){
 		if(DEBUG)write_log("Judging solution %d",runid);
 		if (workcnt>=max_running){		// if no more client can running
 			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
+			workcnt--;retcnt++;
 			for (i=0;i<max_running;i++)	// get the client id
 				if (ID[i]==tmp_pid) break; // got the client id
+			ID[i]=0;
 		}else{							// have free client
-			workcnt++;
+			
 			for (i=0;i<max_running;i++)	// find the client id
 				if (ID[i]==0) break;	// got the client id
 		}
-		if(i<max_running&&check_out(runid,OJ_CI)){
+		if(workcnt<max_running&&check_out(runid,OJ_CI)){
+			workcnt++;
 			ID[i]=fork();					// start to fork
 			if (ID[i]==0){
 				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
 				run_client(runid,i);	// if the process is the son, run it
 				exit(0);
 			}
-			retcnt++;
+			
+		}else{
+			ID[i]=0;
 		}
 	}
-	if (retcnt==0){
-		while (workcnt>0){
-			workcnt--;
+	while (workcnt>0){
 			waitpid(-1,NULL,0);
-
-		}
+			workcnt--;
+			retcnt++;
 	}
 	if(!http_judge){
 		mysql_free_result(res);				// free the memory
 		executesql("commit");
 	}
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
-    free(ID);
-    free(jobs);
+    //free(ID);
+    //free(jobs);
 	return retcnt;
 }
-
 int lockfile(int fd)
 {
 	struct flock fl;
@@ -453,51 +454,6 @@ int daemon_init(void)
 
  return(0); 
 }
-/*
-void daemonize(){
-	int i,fd0,fd1,fd2;
-	pid_t pid;
-	struct rlimit rl;
-	struct sigaction sa;
-	umask(0);
-	if (getrlimit(RLIMIT_NOFILE, &rl)<0){
-		syslog(LOG_DAEMON|LOG_ERR,"can't get file limit");
-		exit(1);
-	}
-	if ((pid = fork()) < 0){
-		syslog(LOG_ERR|LOG_DAEMON, "Can't fork!");
-		printf("Could not daemonize!\n");
-		exit(1);
-	}
-	else if (pid != 0) // parent 
-		exit(0);
-	setsid();
-
-	sa.sa_handler = SIG_IGN;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	if (sigaction(SIGHUP, &sa, NULL) < 0){
-		syslog(LOG_ERR|LOG_DAEMON, "can't ignore SIGHUP");
-		exit(1);
-	}
-
-	if ((pid = fork()) < 0){
-		syslog(LOG_ERR|LOG_DAEMON,"Can't fork(2)!");
-		exit(1);
-	}else if (pid != 0) exit(0);
-
-	if (chdir(oj_home) < 0){
-		syslog(LOG_ERR|LOG_DAEMON,"can't change dirctory to /");
-		exit(1);
-	}
-	//if (rl.rlim_max == RLIM_INFINITY) rl.rlim_max=1024;
-	//if (rl.rlim_max>1024) rl.rlim_max=1024;
-	for (i=0; i < 1024; i++) close(i);
-	fd0 = open("/dev/null", O_RDWR);
-	fd1 = dup(0);
-	fd2 = dup(0);
-}
-*/
 
 int main(int argc, char** argv){
     DEBUG=(argc>2);
@@ -519,14 +475,17 @@ int main(int argc, char** argv){
 	signal(SIGQUIT,call_for_exit);
 	signal(SIGKILL,call_for_exit);
 	signal(SIGTERM,call_for_exit);
+	int j=1;
 	while (!STOP){			// start to run
-	    if(http_judge||!init_mysql()){ 
-	        int j=work();
-	        //mysql_close(conn);	//keep connection if possible to save resource
-           
-		}else{
-			sleep(sleep_time);
+	    while(j&&(http_judge||!init_mysql())){ 
+	
+	       
+			    j=work();
+			    
+		    
 		}
+		sleep(sleep_time);
+		j=1;
 	}
 	return 0;
 }

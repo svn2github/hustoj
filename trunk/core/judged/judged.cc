@@ -216,7 +216,7 @@ int executesql(const char * sql){
 int init_mysql(){
 	if(conn!=NULL){
 	  try{
-			executesql("select 1");
+			executesql("commit;");
 		}catch(int i){
 			
 			conn=NULL;

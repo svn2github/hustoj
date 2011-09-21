@@ -55,9 +55,6 @@ http://115.com/file/e65gs27r#hustoj-1253.iso
 r1235
 http://115.com/file/e65ku7yc#hustoj-1235.iso
 
-集成LiveCD的windows绿色版
-http://www.newsclan.com/hustoj/hustoj-win32.zip
-
 最低配置实测：
 LiveCD System on k6-2 System
 *K6-2-450 320M 1G-CF*

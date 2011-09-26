@@ -723,8 +723,7 @@ int compile(int lang) {
 			"--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-O2", "-Wall",
 			"-lm", "--static", "-DONLINE_JUDGE", NULL };
-	const char * CP_P[] = { "fpc", "Main.pas", "-oMain", "-O1","-Co", "-Cr", "-Ct",
-			"-Ci", NULL };
+	const char * CP_P[] = { "fpc", "Main.pas", "-O2","-Co", "-Ct","-Ci", NULL };
 	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
 			NULL };
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };

@@ -1,6 +1,9 @@
 /*
  * Copyright 2008 sempr <iamsempr@gmail.com>
  *
+ * Refacted and modified by zhblue<newsclan@gmail.com> 
+ * Bug report email newsclan@gmail.com
+ * 
  * This file is part of HUSTOJ.
  *
  * HUSTOJ is free software; you can redistribute it and/or modify

@@ -16,6 +16,7 @@ echo "<title>Problem $id Status</title>";
 ?>
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
+<script src="include/sortTable.js"></script>
 <?php echo "<h1>Problem $id Status</h1>";
 
 echo "<center><table><tr><td>";
@@ -132,8 +133,15 @@ LIMIT  $start, $sz";
 $result=mysql_query($sql);
 
 echo "<td>";
-echo "<table>";
-echo "<tr class=toprow><td>$MSG_Number<td>RunID<td>$MSG_USER<td>$MSG_MEMORY<td>$MSG_TIME<td>$MSG_LANG<td>$MSG_CODE_LENGTH<td>$MSG_SUBMIT_TIME</tr>";
+echo "<table id=problemstatus><thead>";
+echo "<tr class=toprow><td style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 0, 'int');\">$MSG_Number
+<td>RunID
+<td>$MSG_USER
+<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 3, 'int');\">$MSG_MEMORY
+<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 4, 'int');\">$MSG_TIME
+<td>$MSG_LANG
+<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 6, 'int');\">$MSG_CODE_LENGTH
+<td>$MSG_SUBMIT_TIME</tr></thead><tbody>";
 for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	$sscore=strval($row->score);
 	$s_time=intval(substr($sscore,1,8));
@@ -162,9 +170,9 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	if ($flag) echo "$s_cl B";
 	else echo "------";
 	echo "<td>$row->in_date";
-	echo "<tr>";
+	echo "</tr>";
 }
-echo "</table>";
+echo "</tbody></table>";
 mysql_free_result($result);
 echo "<a href='problemstatus.php?id=$id'>[TOP]</a>";
 echo "&nbsp;&nbsp;<a href='status.php?problem_id=$id'>[STATUS]</a>";

@@ -1126,8 +1126,8 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	}
 	setrlimit(RLIMIT_NPROC, &LIM);
 	// set the stack
-	LIM.rlim_cur = STD_MB << 3;
-	LIM.rlim_max = STD_MB << 3;
+	LIM.rlim_cur = STD_MB << 6;
+	LIM.rlim_max = STD_MB << 6;
 	setrlimit(RLIMIT_STACK, &LIM);
 	chdir(work_dir);
 	// open the files

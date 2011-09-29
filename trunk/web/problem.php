@@ -102,7 +102,7 @@ if (mysql_num_rows($result)!=1){
 	}
 	echo "<span class=green>$MSG_Time_Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
 	echo "<span class=green>$MSG_Memory_Limit: </span>".$row->memory_limit." MB";
-	if ($row->spj) echo "Sec&nbsp;&nbsp;<span class=red>Special Judge</span>";
+	if ($row->spj) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row->submit."&nbsp;&nbsp;";
 	echo "<span class=green>$MSG_SOVLED: </span>".$row->accepted."<br>"; 
 	

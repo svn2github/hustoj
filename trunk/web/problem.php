@@ -1,5 +1,5 @@
 <?php 
-$cache_time=300; 
+$cache_time=30; 
 $OJ_CACHE_SHARE=true;
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 else $ucid="";

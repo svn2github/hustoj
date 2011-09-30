@@ -1221,7 +1221,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	//usedtime-=1000;
 	int comp_res;
         if(!oi_mode) pass_rate=1.0;
-	if (ACflg == OJ_AC && usedtime > time_lmt * 1000*pass_rate)
+	if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(pass_rate+1.0))
 		ACflg = OJ_TL;
 	// compare
 	if (ACflg == OJ_AC) {

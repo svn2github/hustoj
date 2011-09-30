@@ -1107,7 +1107,10 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// set the limit
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
-	LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
+	if(oi_mode)
+		LIM.rlim_cur = time_lmt;
+        else
+ 		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
@@ -1214,10 +1217,11 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
 
 void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 		int p_id, char * infile, char * outfile, char * userfile, int & PEflg,
-		int lang, char * work_dir, int & topmemory, int mem_lmt, int solution_id )  {
+		int lang, char * work_dir, int & topmemory, int mem_lmt, int solution_id ,double pass_rate)  {
 	//usedtime-=1000;
 	int comp_res;
-	if (ACflg == OJ_AC && usedtime > time_lmt * 1000)
+        if(!oi_mode) pass_rate=1.0;
+	if (ACflg == OJ_AC && usedtime > time_lmt * 1000*pass_rate)
 		ACflg = OJ_TL;
 	// compare
 	if (ACflg == OJ_AC) {
@@ -1614,7 +1618,7 @@ int main(int argc, char** argv) {
 			
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,
-					mem_lmt, solution_id);
+					mem_lmt, solution_id,pass_rate);
 			
 		}
 		if(oi_mode){

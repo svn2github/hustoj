@@ -1292,7 +1292,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		if (WIFEXITED(status))
 			break;
-		if ((lang < 4 || lang == 9) && get_file_size("error.out")) {
+		if ((lang < 4 || lang == 9) && get_file_size("error.out")&&!oi_mode) {
 			ACflg = OJ_RE;
 			//addreinfo(solution_id);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);

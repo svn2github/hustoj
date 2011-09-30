@@ -2,15 +2,14 @@ set names utf8;
 create database jol;
 use jol;
 
-
-CREATE TABLE  `jol`.`compileinfo` (
+CREATE TABLE  `compileinfo` (
   `solution_id` int(11) NOT NULL DEFAULT '0',
   `error` text,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `jol`.`contest` (
+CREATE TABLE  `contest` (
   `contest_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
@@ -22,7 +21,7 @@ CREATE TABLE  `jol`.`contest` (
   PRIMARY KEY (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`contest_problem` (
+CREATE TABLE  `contest_problem` (
   `problem_id` int(11) NOT NULL DEFAULT '0',
   `contest_id` int(11) DEFAULT NULL,
   `title` char(200) NOT NULL DEFAULT '',
@@ -30,14 +29,14 @@ CREATE TABLE  `jol`.`contest_problem` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `jol`.`loginlog` (
+CREATE TABLE  `loginlog` (
   `user_id` varchar(20) NOT NULL DEFAULT '',
   `password` varchar(40) DEFAULT NULL,
   `ip` varchar(100) DEFAULT NULL,
   `time` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`mail` (
+CREATE TABLE  `mail` (
   `mail_id` int(11) NOT NULL AUTO_INCREMENT,
   `to_user` varchar(20) NOT NULL DEFAULT '',
   `from_user` varchar(20) NOT NULL DEFAULT '',
@@ -51,7 +50,7 @@ CREATE TABLE  `jol`.`mail` (
   KEY `uid` (`to_user`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1013 DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`news` (
+CREATE TABLE  `news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL DEFAULT '',
   `title` varchar(200) NOT NULL DEFAULT '',
@@ -63,13 +62,13 @@ CREATE TABLE  `jol`.`news` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `jol`.`privilege` (
+CREATE TABLE  `privilege` (
   `user_id` char(20) NOT NULL DEFAULT '',
   `rightstr` char(30) NOT NULL DEFAULT '',
   `defunct` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`problem` (
+CREATE TABLE  `problem` (
   `problem_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL DEFAULT '',
   `description` text,
@@ -90,7 +89,7 @@ CREATE TABLE  `jol`.`problem` (
   PRIMARY KEY (`problem_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`reply` (
+CREATE TABLE  `reply` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,
   `author_id` varchar(20) NOT NULL,
   `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -103,7 +102,7 @@ CREATE TABLE  `jol`.`reply` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `jol`.`sim` (
+CREATE TABLE  `sim` (
   `s_id` int(11) NOT NULL,
   `sim_s_id` int(11) DEFAULT NULL,
   `sim` int(11) DEFAULT NULL,
@@ -111,7 +110,7 @@ CREATE TABLE  `jol`.`sim` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `jol`.`solution` (
+CREATE TABLE  `solution` (
   `solution_id` int(11) NOT NULL AUTO_INCREMENT,
   `problem_id` int(11) NOT NULL DEFAULT '0',
   `user_id` char(20) NOT NULL,
@@ -134,13 +133,13 @@ CREATE TABLE  `jol`.`solution` (
   KEY `cid` (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`source_code` (
+CREATE TABLE  `source_code` (
   `solution_id` int(11) NOT NULL,
   `source` text NOT NULL,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`topic` (
+CREATE TABLE  `topic` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varbinary(60) NOT NULL,
   `status` int(2) NOT NULL DEFAULT '0',
@@ -152,7 +151,7 @@ CREATE TABLE  `jol`.`topic` (
   KEY `cid` (`cid`,`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `jol`.`users` (
+CREATE TABLE  `users` (
   `user_id` varchar(20) NOT NULL DEFAULT '',
   `email` varchar(100) DEFAULT NULL,
   `submit` int(11) DEFAULT '0',
@@ -186,6 +185,4 @@ CREATE TABLE  `runtimeinfo` (
   `error` text,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
 

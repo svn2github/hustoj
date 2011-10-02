@@ -103,7 +103,7 @@ public class Main{
   <li><font color=blue>main</font> 函数必须返回<font color=blue>int</font>, <font color=blue>void main</font> 的函数声明会报编译错误。<br> 
   <li><font color=green>i</font> 在循环外失去定义 "<font color=blue>for</font>(<font color=blue>int</font> <font color=green>i</font>=0...){...}"<br>
   <li><font color=green>itoa</font> 不是ansi标准函数.<br>
-  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>
+  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>如果用了__int64,试试提交前加一句#define __int64 long long
 </ul>
 <hr>
 <font color=green>Q</font>:系统返回信息都是什么意思?<br>
@@ -126,7 +126,7 @@ public class Main{
   <br>
   <font color=blue>Output Limit Exceeded</font>: 输出超过限制，你的输出比正确答案长了两倍.<br>
   <br>
-  <font color=blue>Runtime Error</font> : 运行时错误，非法的内存访问，数组越界，指针漂移，调用禁用的系统函数。<br>
+  <font color=blue>Runtime Error</font> : 运行时错误，非法的内存访问，数组越界，指针漂移，调用禁用的系统函数。请点击后获得详细输出。<br>
 </p>
 <p>  <font color=blue>Compile Error</font> : 编译错误，请点击后获得编译器的详细输出。<br>
   <br>
@@ -145,7 +145,7 @@ public class Main{
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R650+</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R1281</font></a></td>
     </tr>
   </table>
 </center>

@@ -17,3 +17,4 @@ after enabled OI mode:
   * all test cases will be tested no matter if any test is fail
   * non-Accepted result will be followed by a percentage of pass-rate if parts of tests has been passed.
   * Contest ranks and exercise ranks will not change by OI mode, pass-rate is only promoted in status.php.
+  * Time limit in problem is case-time-limit for each test case rather than total time limit.

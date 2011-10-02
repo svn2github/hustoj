@@ -100,7 +100,7 @@ public class Main{
   <li><font color=blue>main</font> must be declared as <font color=blue>int</font>, <font color=blue>void main</font> will end up with a Compile Error.<br> 
   <li><font color=green>i</font> is out of definition after block "<font color=blue>for</font>(<font color=blue>int</font> <font color=green>i</font>=0...){...}"<br>
   <li><font color=green>itoa</font> is not an ANSI function.<br>
-  <li><font color=green>__int64</font> of VC is not ANSI, but you can use <font color=blue>long long</font> for 64-bit integer.<br>
+  <li><font color=green>__int64</font> of VC is not ANSI, but you can use <font color=blue>long long</font> for 64-bit integer.<br>try use #define __int64 long long when submit codes from MSVC6.0
 </ul>
 <hr>
 <font color=green>Q</font>:What is the meaning of the judge's reply XXXXX?<br>
@@ -143,7 +143,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R500+</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R1280</font></a></td>
     </tr>
   </table>
 </center>

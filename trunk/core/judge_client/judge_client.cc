@@ -1108,7 +1108,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
 	if(oi_mode)
-		LIM.rlim_cur = time_lmt;
+		LIM.rlim_cur = time_lmt+1;
         else
  		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;

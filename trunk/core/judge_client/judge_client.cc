@@ -4,11 +4,11 @@
 // refacted by zhblue
 /*
  * Copyright 2008 sempr <iamsempr@gmail.com>
- * 
- * Refacted and modified by zhblue<newsclan@gmail.com> 
+ *
+ * Refacted and modified by zhblue<newsclan@gmail.com>
  * Bug report email newsclan@gmail.com
- * 
- * 
+ *
+ *
  * This file is part of HUSTOJ.
  *
  * HUSTOJ is free software; you can redistribute it and/or modify
@@ -254,7 +254,7 @@ void init_mysql_conf() {
 		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
 		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
 		read_int(buf , "OJ_OI_MODE", &oi_mode);
-		
+
 	}
 }
 
@@ -1078,11 +1078,11 @@ void copy_mono_runtime(char * work_dir) {
         execute_cmd("mkdir %s/usr", work_dir);
         execute_cmd("mkdir %s/proc", work_dir);
         execute_cmd("mkdir -p %s/usr/lib/mono/2.0", work_dir);
-     
+
         execute_cmd("cp -a /usr/lib/mono %s/usr/lib/", work_dir);
-        
+
         execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
-        
+
         execute_cmd("mount -o bind /proc %s/proc", work_dir);
         execute_cmd("cp /usr/bin/mono* %s/", work_dir);
 
@@ -1109,7 +1109,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// time limit
 	if(oi_mode)
 		LIM.rlim_cur = time_lmt+1;
-        else
+    else
  		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
@@ -1217,11 +1217,11 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
 
 void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 		int p_id, char * infile, char * outfile, char * userfile, int & PEflg,
-		int lang, char * work_dir, int & topmemory, int mem_lmt, int solution_id ,double pass_rate)  {
+		int lang, char * work_dir, int & topmemory, int mem_lmt, int solution_id ,double num_of_test)  {
 	//usedtime-=1000;
 	int comp_res;
-        if(!oi_mode) pass_rate=1.0;
-	if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(pass_rate+1.0))
+        if(!oi_mode) num_of_test=1.0;
+	if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(num_of_test+1.0))
 		ACflg = OJ_TL;
 	// compare
 	if (ACflg == OJ_AC) {
@@ -1276,7 +1276,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		int & PEflg, char * work_dir) {
 	// parent
 	int tempmemory;
-	
+
 	if (DEBUG)
 		printf("pid=%d judging %s\n", pidApp, infile);
 
@@ -1312,10 +1312,10 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			//go on and on
 			;
 		else {
-			
+
 			if (DEBUG) {
 				printf("status>>8=%d\n", exitcode);
-				
+
 			}
 			//psignal(exitcode, NULL);
 
@@ -1333,7 +1333,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 					default:
 						ACflg = OJ_RE;
 				}
-				print_runtimeerror(strsignal(exitcode));			
+				print_runtimeerror(strsignal(exitcode));
 			}
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 
@@ -1348,7 +1348,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			 *
 			 *  WTERMSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã§Â»âÃ¦ÂÅ¸Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?			 *  */
 			sig = WTERMSIG(status);
-			
+
 			if (DEBUG) {
 				printf("WTERMSIG=%d\n", sig);
 				psignal(sig, NULL);
@@ -1384,11 +1384,11 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
-			
+
 			char error[BUFFER_SIZE];
 			sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n",
 					solution_id, reg.REG_SYSCALL);
-			write_log(error);		
+			write_log(error);
 			print_runtimeerror(error);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		} else {
@@ -1425,7 +1425,7 @@ void clean_workdir(char * work_dir ) {
 	} else {
 		execute_cmd("umount %s/proc", work_dir);
 		execute_cmd("rm -Rf %s/*", work_dir);
-		
+
 	}
 
 }
@@ -1462,12 +1462,12 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 
 		execute_cmd("mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
 				lang_ext[lang]);
-		//c cpp will 
+		//c cpp will
 		if(lang==0)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
 				lang_ext[lang], pid, solution_id,lang_ext[lang+1]);
 		if(lang==1)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
 				lang_ext[lang], pid, solution_id,lang_ext[lang-1]);
-		
+
 
 	} else {
 
@@ -1501,7 +1501,7 @@ int main(int argc, char** argv) {
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	chdir(work_dir);
-	
+
 
     if(http_judge)
 		system("ln -s ../cookie ./");
@@ -1532,7 +1532,7 @@ int main(int argc, char** argv) {
 
 	if (DEBUG)
 		printf("time: %d mem: %d\n", time_lmt, mem_lmt);
- 
+
 	// compile
 	//	printf("%s\n",cmd);
 	// set the result to compiling
@@ -1571,12 +1571,12 @@ int main(int argc, char** argv) {
 			mysql_close(conn);
 		exit(-1);
 	}
-	
+
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
-	
+
 	//create chroot for ruby bash python
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
@@ -1599,31 +1599,31 @@ int main(int argc, char** argv) {
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-   
+
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
 		init_syscalls_limits(lang);
-		    
+
 		pid_t pidApp = fork();
-		
+
 		if (pidApp == 0) {
-			
+
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
 		} else {
-			
-			
+
+
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 					solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 					p_id, PEflg, work_dir);
-			
+
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,
-					mem_lmt, solution_id,pass_rate);
-			
+					mem_lmt, solution_id,num_of_test);
+
 		}
 		if(oi_mode){
 		    if(ACflg == OJ_AC && PEflg != OJ_PE){
-					pass_rate++;				
+					pass_rate++;
 			}else{
 				if (ACflg == OJ_AC && PEflg == OJ_PE){
 					ACflg = OJ_PE;
@@ -1645,7 +1645,7 @@ int main(int argc, char** argv) {
 	    sim = 0;
     }
     if(ACflg == OJ_RE)addreinfo(solution_id);
-    
+
     if(oi_mode){
 		if(num_of_test>0) pass_rate/=num_of_test;
 		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
@@ -1654,7 +1654,7 @@ int main(int argc, char** argv) {
 		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
 			sim_s_id,0);
 	}
-		
+
 	update_user(user_id);
 	update_problem(p_id);
 	clean_workdir(work_dir);

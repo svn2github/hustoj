@@ -228,7 +228,7 @@ else
 
         }else{
 
-                if($OJ_SIM&&$row['sim']&&$row['sim_s_id']!=$row['s_id']) {
+                if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
                         echo "<td><span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
                        
                         if( isset($_SESSION['source_browser'])){

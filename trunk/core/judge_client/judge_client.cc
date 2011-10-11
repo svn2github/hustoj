@@ -1660,7 +1660,7 @@ int main(int argc, char** argv) {
 	clean_workdir(work_dir);
 
 	if (DEBUG)
-		write_log("result=%d", ACflg);
+		write_log("result=%d", oi_mode?finalACflg:ACflg);
 	if(!http_judge)
 		mysql_close(conn);
 

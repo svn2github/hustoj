@@ -1155,8 +1155,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 3:
 		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
 		sprintf(java_p2, "-Xmx%dM", mem_lmt);
-		if (DEBUG)
-			write_log("java_parameter:%s %s", java_p1, java_p2);
+	
 		execl("/usr/bin/java", "/usr/bin/java", java_p1, java_p2,
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", NULL);

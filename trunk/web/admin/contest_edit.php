@@ -3,6 +3,7 @@
 if (isset($_POST['syear']))
 {
 	require_once("../include/check_post_key.php");
+	
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 //	echo $starttime;
@@ -20,7 +21,7 @@ if (isset($_POST['syear']))
 	echo $langmask;	
 
 	$cid=intval($_POST['cid']);
-	
+	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
 	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
 	//echo $sql;
 	mysql_query($sql) or die(mysql_error());

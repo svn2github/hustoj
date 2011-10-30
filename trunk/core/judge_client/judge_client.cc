@@ -1305,9 +1305,9 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		}
 
 		exitcode = WEXITSTATUS(status);
-		/*exitcode == 5 Ã¦ËÂ¯Ã¦Â­Â£Ã¥Â¸Â¸Ã¦Å¡âÃ¥ÂÅ?		 * ruby using system to run,exit 17 ok
+		/*exitcode == 5 waiting for next CPU allocation 	 * ruby using system to run,exit 17 ok
 		 *  */
-		if ((lang >= 4 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
+		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
 			//go on and on
 			;
 		else {

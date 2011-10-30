@@ -1132,6 +1132,11 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_cur = STD_MB << 6;
 	LIM.rlim_max = STD_MB << 6;
 	setrlimit(RLIMIT_STACK, &LIM);
+	// set the memory
+	LIM.rlim_cur = STD_MB *mem_lmt*1.5;
+	LIM.rlim_max = STD_MB *mem_lmt*2;
+	setrlimit(RLIMIT_AS, &LIM);
+	
 	chdir(work_dir);
 	// open the files
 	freopen("data.in", "r", stdin);
@@ -1500,7 +1505,7 @@ int main(int argc, char** argv) {
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	chdir(work_dir);
-
+	execute_cmd("rm %s/*",work_dir);
 
     if(http_judge)
 		system("ln -s ../cookie ./");

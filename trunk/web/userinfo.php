@@ -55,7 +55,7 @@ $Rank=intval($row[0])+1;
 <table id=statics width=70%>
 <caption>
 <?php echo $user."--".htmlspecialchars($nick)?>
-<?php if($mail)
+<?php
 	echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 ?>
 </caption>

@@ -1348,13 +1348,13 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		}
 		if (WIFSIGNALED(status)) {
-			/*  WIFSIGNALED: Ã¥Â¦âÃ¦Å¾ÅÃ¨Â¿âºÃ§Â¨â¹Ã¦ËÂ¯Ã¨Â¢Â«Ã¤Â¿Â¡Ã¥ÂÂ·Ã§Â»âÃ¦ÂÅ¸Ã§Å¡âÃ¯Â¼ÅÃ¨Â¿âÃ¥âºÅ¾True
+			/*  WIFSIGNALED: if the process is terminated by signal
 			 *
-			 *  Ã¥ÂÂ¦ psignal(int sig, char *s)Ã¯Â¼ÅÃ¨Â¿âºÃ¨Â¡ÅÃ§Â±Â»Ã¤Â¼Â¼perror(char *s)Ã§Å¡âÃ¦âÂÃ¤Â½ÅÃ¯Â¼ÅÃ¦â°âÃ¥ÂÂ?s, Ã¥Â¹Â¶Ã¨Â¾âÃ¥â¡ÂºÃ¤Â¿Â¡Ã¥ÂÂ?sig Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ÂÂÃ§Â¤ÂºÃ¯Â¼ÅÃ¥â¦Â¶Ã¤Â¸Â?			 *  sig = 5 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?Trace/breakpoint trap
-			 *  sig = 11 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?Segmentation fault
-			 *  sig = 25 Ã¥Â¯Â¹Ã¥ÂºâÃ§Å¡âÃ¦ËÂ?File size limit exceeded
-			 *
-			 *  WTERMSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã§Â»âÃ¦ÂÅ¸Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?			 *  */
+			 *  psignal(int sig, char *s)，like perror(char *s)，print out s, with error msg from system of sig  
+       * sig = 5 means Trace/breakpoint trap
+       * sig = 11 means Segmentation fault
+       * sig = 25 means File size limit exceeded
+       */
 			sig = WTERMSIG(status);
 
 			if (DEBUG) {
@@ -1380,11 +1380,10 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			}
 			break;
 		}
-		/*     commited from http://www.felix021.com/blog/index.php?go=category_13
+		/*     comment from http://www.felix021.com/blog/read.php?1662
 
-
-		 WIFSTOPPED: Ã¥Â¦âÃ¦Å¾ÅÃ¨Â¿âºÃ§Â¨â¹Ã¥ÅÂ¨Ã¨Â¢Â«ptraceÃ¨Â°ÆÃ§âÂ¨Ã§âºâÃ¦Å½Â§Ã§Å¡âÃ¦âÂ¶Ã¥â¬â¢Ã¨Â¢Â«Ã¤Â¿Â¡Ã¥ÂÂ·Ã¦Å¡âÃ¥ÂÅ?Ã¥ÂÅÃ¦Â­Â¢Ã¯Â¼ÅÃ¨Â¿âÃ¥âºÅ¾True
-		 WSTOPSIG: Ã¨Â¿âÃ¥âºÅ¾Ã¥ÅÂ¨Ã¤Â¸Å Ã¨Â¿Â°Ã¦Æâ¦Ã¥â ÂµÃ¤Â¸â¹Ã¦Å¡âÃ¥ÂÅ?Ã¥ÂÅÃ¦Â­Â¢Ã¨Â¿âºÃ§Â¨â¹Ã§Å¡âÃ¤Â¿Â¡Ã¥ÂÂ?
+  WIFSTOPPED: return true if the process is paused or stopped while ptrace is watching on it
+  WSTOPSIG: get the signal if it was stopped by signal
 		 */
 
 		// check the system calls

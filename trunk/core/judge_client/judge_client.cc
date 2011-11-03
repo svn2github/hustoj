@@ -1165,7 +1165,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
 		sprintf(java_p2, "-Xmx%dM", mem_lmt);
 	
-		execl("/usr/bin/java", "/usr/bin/java", java_p1, java_p2,
+		execl("/usr/bin/java", "/usr/bin/java", 
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", NULL);
 		break;

@@ -1495,7 +1495,8 @@ void mk_shm_workdir(char * work_dir){
 	execute_cmd("mkdir -p %s",shm_path);
 	execute_cmd("rm -rf %s",work_dir);
 	execute_cmd("ln -s %s %s/",shm_path,oj_home);
-
+  execute_cmd("chown judge %s %s",shm_path,oj_home);
+  execute_cmd("chmod 775 %s %s",shm_path,oj_home);
 }
 
 int main(int argc, char** argv) {

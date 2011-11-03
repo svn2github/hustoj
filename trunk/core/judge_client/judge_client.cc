@@ -98,11 +98,14 @@ static int java_memory_bonus = 512;
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
 static int oi_mode=0;
+
 static int http_judge=0;
 static char http_baseurl[BUFFER_SIZE];
 
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
+
+static int shm_run=0;
 
 //static int sleep_tmp;
 #define ZOJ_COM
@@ -254,6 +257,7 @@ void init_mysql_conf() {
 		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
 		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
 		read_int(buf , "OJ_OI_MODE", &oi_mode);
+		read_int(buf , "OJ_SHM_RUN", &shm_run);
 
 	}
 }
@@ -1486,6 +1490,15 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 	if(solution_id<=sim_s_id) sim=0;
 	return sim;
 }
+void mk_shm_workdir(char * work_dir){
+	char shm_path[BUFFER_SIZE];
+	sprintf(shm_path,"/dev/shm/hustoj/%s",work_dir);
+	execute_cmd("mkdir -p %s",shm_path);
+	execute_cmd("rm -rf %s",work_dir);
+	execute_cmd("ln -s %s %s/",shm_path,oj_home);
+
+}
+
 int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
@@ -1504,6 +1517,9 @@ int main(int argc, char** argv) {
 	}
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
+	
+	if(shm_run) mk_shm_workdir(work_dir);
+	
 	chdir(work_dir);
 	execute_cmd("rm %s/*",work_dir);
 

@@ -1216,7 +1216,7 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
 	comp_res = execute_cmd("grep 'Could not create'  %s/error.out", work_dir);
 
 	if (!comp_res) {
-		printf("jvm need more resource,tweak -Xmx Settings");
+		printf("jvm need more resource,tweak -Xmx(OJ_JAVA_BONUS) Settings");
 		ACflg = OJ_RE;
 		//topmemory=0;
 	}

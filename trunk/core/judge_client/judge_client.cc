@@ -1139,7 +1139,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// set the memory
 	LIM.rlim_cur = STD_MB *mem_lmt*1.5;
 	LIM.rlim_max = STD_MB *mem_lmt*2;
-	setrlimit(RLIMIT_AS, &LIM);
+	if(lang<3)setrlimit(RLIMIT_AS, &LIM);
 	
 	chdir(work_dir);
 	// open the files

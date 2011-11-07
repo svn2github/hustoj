@@ -216,11 +216,20 @@ else
         echo "<td>".$row['solution_id'];
         echo "<td><a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
-        if (isset($cid)) 
-                echo "<td><a href='problem.php?cid=$cid&pid=".$row['num']."'>".$PID[$row['num']]."</a>";
-        else 
 
+       if ($row['contest_id']>0) {
+                echo "<td><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+                if(isset($cid)){
+                         echo $PID[$row['num']]."</a>";
+                }else{
+                        echo $row['problem_id']."</a>";
+                }
+
+        }else{
                 echo "<td><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
+        }
+
+       
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 echo "<td><a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
         }else if (intval($row['result'])==10 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){

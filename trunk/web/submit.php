@@ -163,7 +163,7 @@ mysql_query($sql);
 //echo $sql;
 
 
-	 $statusURI=strstr($_SERVER['REQUEST_URI'],"submit",1)."status.php";
+	 $statusURI=strstr($_SERVER['REQUEST_URI'],"submit")."status.php";
 	 if (isset($cid)) 
 	    $statusURI.="?cid=$cid";
 	    

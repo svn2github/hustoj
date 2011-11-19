@@ -1,5 +1,5 @@
 <?php require("admin-header.php");
-
+include_once("../fckeditor/fckeditor.php") ;
 if (isset($_POST['syear']))
 {
 	require_once("../include/check_post_key.php");
@@ -8,8 +8,9 @@ if (isset($_POST['syear']))
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 //	echo $starttime;
 //	echo $endtime;
-	
+	 
 	$title=mysql_real_escape_string($_POST['title']);
+	$description=mysql_real_escape_string($_POST['description']);
 	$private=mysql_real_escape_string($_POST['private']);
 	
    $lang=$_POST['lang'];
@@ -22,7 +23,7 @@ if (isset($_POST['syear']))
 
 	$cid=intval($_POST['cid']);
 	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
-	$sql="UPDATE `contest` set `title`='$title',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
+	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
 	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
@@ -76,6 +77,7 @@ if (isset($_POST['syear']))
 	$endtime=$row['end_time'];
 	$private=$row['private'];
 	$langmask=$row['langmask'];
+	$description=$row['description'];
 	$title=htmlspecialchars($row['title']);
 	mysql_free_result($result);
 	$plist="";
@@ -108,7 +110,7 @@ if (isset($_POST['syear']))
 Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=7 >
 Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=7 >
 Day:<input type=text name=sday size=7 value='<?php echo substr($starttime,8,2)?>'>
-Hour:<input type=text name=shour size=7 value='<?php echo substr($starttime,11,2)?>'>;
+Hour:<input type=text name=shour size=7 value='<?php echo substr($starttime,11,2)?>'>
 Minute:<input type=text name=sminute size=7 value=<?php echo substr($starttime,14,2)?>></p>
 <p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
 
@@ -152,7 +154,20 @@ $S_select=($lang&512)>0?"selected":"";
 	
 
 <br>
-Users:<textarea name="ulist" rows="10" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
+<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+
+<?php
+$fck_description = new FCKeditor('description') ;
+$fck_description->BasePath = '../fckeditor/' ;
+$fck_description->Height = 300 ;
+$fck_description->Width=600;
+
+$fck_description->Value = $description ;
+$fck_description->Create() ;
+
+?>
+
+Users:<textarea name="ulist" rows="20" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 
 </form>

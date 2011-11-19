@@ -7,6 +7,7 @@
 	
 	require_once("../include/db_info.inc.php");
 	require_once("../include/check_post_key.php");
+	
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 	//	echo $starttime;
@@ -20,6 +21,7 @@
 	}
 	$title=mysql_real_escape_string($title);
 	$private=mysql_real_escape_string($private);
+	$description=mysql_real_escape_string($_POST['description']);
 	
     $lang=$_POST['lang'];
     $langmask=$OJ_LANGMASK;
@@ -29,8 +31,8 @@
 	$langmask=1023&(~$langmask);
 	//echo $langmask;	
 	
-	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`)
-		VALUES('$title','$starttime','$endtime','$private',$langmask)";
+	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`)
+		VALUES('$title','$starttime','$endtime','$private',$langmask,'$description')";
 //	echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$cid=mysql_insert_id();
@@ -44,7 +46,7 @@
 		for ($i=1;$i<count($pieces);$i++){
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		}
-		echo $sql_1;
+		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
 		mysql_query($sql) or die(mysql_error());
@@ -63,8 +65,10 @@
 		//echo $sql_1;
 		mysql_query($sql_1) or die(mysql_error());
 	}
+	echo "<script>window.location.href=\"contest_list.php\";</script>";
 }
 else{
+	
    if(isset($_GET['cid'])){
 		   $cid=intval($_GET['cid']);
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
@@ -106,7 +110,7 @@ else if(isset($_POST['problem2contest'])){
 			}
 			mysql_free_result($result);
 }  
-  
+  include_once("../fckeditor/fckeditor.php") ;
 ?>
 	
 	<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
@@ -141,7 +145,19 @@ else if(isset($_POST['problem2contest'])){
 	<?php require_once("../include/set_post_key.php");?>
 	<br>Problems:<input type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>
-	Users:<textarea name="ulist" rows="10" cols="20"></textarea>
+	<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+
+<?php
+$fck_description = new FCKeditor('description') ;
+$fck_description->BasePath = '../fckeditor/' ;
+$fck_description->Height = 300 ;
+$fck_description->Width=600;
+
+$fck_description->Value = $description ;
+$fck_description->Create() ;
+
+?>
+	Users:<textarea name="ulist" rows="20" cols="20"></textarea>
 	<br />
 	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。
 	<p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>

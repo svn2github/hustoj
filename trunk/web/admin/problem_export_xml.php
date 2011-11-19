@@ -175,10 +175,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   
 	?>
-<!DOCTYPE fps PUBLIC
-       "-//FreeProblemSet//EN"
-       "http://freeproblemset.googlecode.com/svn/trunk/fps.current.dtd">
-       
+   
 <fps version="1.1" url="http://code.google.com/p/freeproblemset/">
 	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
 	<?php

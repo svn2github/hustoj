@@ -60,8 +60,7 @@ if (isset($_POST['syear']))
 		mysql_query($sql_1) or die(mysql_error());
 	}
 	
-	
-	require_once("../oj-footer.php");
+	echo "<script>window.location.href=\"contest_list.php\";</script>";
 	exit();
 }else{
 	$cid=intval($_GET['cid']);

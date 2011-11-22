@@ -1,13 +1,14 @@
 <?php
+ini_set("display_errors","On");
 		ob_start();
 		header ( "content-type:   application/excel" );
 		
 ?>
 <?php require_once("./include/db_info.inc.php");
 global $mark_base,$mark_per_problem,$mark_per_punish;
- $mark_base=60;
- $mark_per_problem=10;
- $mark_per_punish=2;
+ $mark_start=60;
+ $mark_end=100;
+ $mark_sigma=10;
 if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 }
@@ -64,6 +65,58 @@ function s_cmp($A,$B){
 	if ($A->solved!=$B->solved) return $A->solved<$B->solved;
 	else return $A->time>$B->time;
 }
+
+function normalDistribution( $x,  $u,  $s) {
+
+		$ret = 1 / ($s * sqrt(2 *  M_PI))
+				* pow( M_E, -pow($x - $u, 2) / (2 * $s * $s));
+
+		return $ret;
+
+	}
+
+function  getMark($users,  $start,  $end, $s) {
+	 $accum = 0;
+		 $p=0;
+		 $ret = 0;
+		 $cn=count($users);
+		
+		
+		for ( $i = $end; $i > $start; $i--) {
+			
+		    $prob = $cn
+					* normalDistribution($i, ($start + $end) / 2, ($end - $start)
+							/ $s);
+			$accum += $prob;
+			
+		
+		}
+		
+		$p=$accum/$cn;
+		$accum=0;
+		$i=0;
+	
+		for ($i = $end; $i > $start; $i--) {
+			$prob = $cn
+					* normalDistribution($i, ($start + $end) / 2, ($end - $start)
+							/ $s);
+			$accum += $prob;
+			while ($accum > $p/2) {
+				if ($ret<$cn) 
+				$users[$ret]->mark=$i;
+				$accum -= $p;
+				$ret++;
+			}
+		}
+		while($ret<$cn){
+			$users[$ret]->mark=$users[$ret-1]->mark;
+			$ret++;
+		}
+		return $ret;
+		
+	}
+
+
 
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
@@ -142,6 +195,8 @@ echo "<table border=1><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td>$PID[$i]";
 echo "</tr>";
+getMark($U,$mark_start,$mark_end,$mark_sigma);
+
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>";
 	else echo "<tr class=evenrow align=center>";
@@ -157,18 +212,8 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
 	echo "<td>";
-	if($pid_cnt>1)
-		$rank_punish=intval(pow($rank,log((100-$mark_base)/4,$user_cnt)));
-	else
-		$rank_punish=intval(pow($rank,log(10,$user_cnt)));
-	if($U[$i]->mark>$mark_base+$rank_punish||$pid_cnt==1)
-		$U[$i]->mark-=$rank_punish;
-        
-	if($U[$i]->mark<($mark_base+100)/2&&$usolved==$pid_cnt&&$pid_cnt>1)
-                $U[$i]->mark=($mark_base+100)/2;
-        
-	if($U[$i]->mark<$mark_base&&$usolved&&$pid_cnt>1)
-		$U[$i]->mark=$mark_base;
+	
+	
 	echo $U[$i]->mark>0?intval($U[$i]->mark):0;
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";

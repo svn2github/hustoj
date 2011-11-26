@@ -1022,6 +1022,7 @@ void copy_bash_runtime(char * work_dir) {
 	execute_cmd("ln -s /bin/busybox %s/bin/grep", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/awk", work_dir);
 	execute_cmd("cp /bin/sed %s/bin/sed", work_dir);
+	execute_cmd("ln -s /bin/busybox %s/bin/cut", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/sort", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/join", work_dir);
 	execute_cmd("ln -s /bin/busybox %s/bin/wc", work_dir);

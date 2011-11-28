@@ -67,8 +67,8 @@ int LANG_PC[256]={-1,       -1,                  -1,      -1,       -1,        -
 int LANG_RV[256]={4,126,SYS_access,SYS_arch_prctl,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fstat,SYS_futex,SYS_getegid,SYS_geteuid,SYS_getgid,SYS_getuid,SYS_getrlimit,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_tid_address,SYS_write,0};
 int LANG_RC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
-int LANG_BV[256]={79,158,117,60,39,102,191,183,SYS_access,SYS_arch_prctl,SYS_brk,SYS_close,SYS_dup2,SYS_execve,SYS_exit_group,SYS_fcntl,SYS_fstat,SYS_getegid,SYS_geteuid,SYS_getgid,SYS_getpgrp,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_getuid,SYS_ioctl,SYS_lseek,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_stat,SYS_uname,SYS_write,14,0};
-int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
+int LANG_BV[256]={22,61,56,42,41,79,158,117,60,39,102,191,183,SYS_access,SYS_arch_prctl,SYS_brk,SYS_close,SYS_dup2,SYS_execve,SYS_exit_group,SYS_fcntl,SYS_fstat,SYS_getegid,SYS_geteuid,SYS_getgid,SYS_getpgrp,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_getuid,SYS_ioctl,SYS_lseek,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_stat,SYS_uname,SYS_write,14,0};
+int LANG_BC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};
 
 int LANG_YV[256]={158,117,60,39,102,191,SYS_access,SYS_arch_prctl,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fcntl,SYS_fstat,SYS_futex,SYS_getcwd,SYS_getdents,SYS_getegid,SYS_geteuid,SYS_getgid,SYS_getrlimit,SYS_getuid,SYS_ioctl,SYS_lseek,SYS_lstat,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_readlink,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_tid_address,SYS_stat,SYS_write,0};
 int LANG_YC[256]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0};

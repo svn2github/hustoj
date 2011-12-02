@@ -1,6 +1,6 @@
 <title>Problem Set</title>
 <?php 
-$OJ_CACHE_SHARE=true;
+$OJ_CACHE_SHARE=false;
 $cache_time=10;
 require_once("oj-header.php");
 require_once("./include/db_info.inc.php");

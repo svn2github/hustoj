@@ -98,6 +98,7 @@ static int java_memory_bonus = 512;
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
 static int oi_mode=0;
+static int use_max_time=0;
 
 static int http_judge=0;
 static char http_baseurl[BUFFER_SIZE];
@@ -258,6 +259,7 @@ void init_mysql_conf() {
 		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
 		read_int(buf , "OJ_OI_MODE", &oi_mode);
 		read_int(buf , "OJ_SHM_RUN", &shm_run);
+		read_int(buf , "OJ_USE_MAX_TIME", &use_max_time);
 
 	}
 }
@@ -1514,7 +1516,7 @@ int main(int argc, char** argv) {
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id;
+	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id,max_case_time;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -1638,16 +1640,22 @@ int main(int argc, char** argv) {
 
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
 		} else {
-
+			
+			
+			
 
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 					solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 					p_id, PEflg, work_dir);
-
+			
+			
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,
 					mem_lmt, solution_id,num_of_test);
-
+			if(use_max_time){
+				max_case_time=usedtime>max_case_time?usedtime:max_case_time;
+				usedtime=0;
+			}
 		}
 		if(oi_mode){
 		    if(ACflg == OJ_AC && PEflg != OJ_PE){
@@ -1676,6 +1684,9 @@ int main(int argc, char** argv) {
 
     if(oi_mode){
 		if(num_of_test>0) pass_rate/=num_of_test;
+		if(use_max_time){
+				usedtime=max_case_time;
+			}
 		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
 			sim_s_id,pass_rate);
 	}else{

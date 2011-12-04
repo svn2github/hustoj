@@ -286,6 +286,8 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
 				continue;
 			} else if ((c1 == '\r' && c2 == '\n')) {
 				c1 = fgetc(f1);
+			} else if ((c2 == '\r' && c1 == '\n')) {
+				c2 = fgetc(f2);
 			} else {
 				if (DEBUG)
 					printf("%d=%c\t%d=%c", c1, c1, c2, c2);

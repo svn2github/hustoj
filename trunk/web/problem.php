@@ -1,6 +1,6 @@
 <?php 
 $cache_time=30; 
-$OJ_CACHE_SHARE=true;
+$OJ_CACHE_SHARE=false;
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 else $ucid="";
 require_once("./include/db_info.inc.php");

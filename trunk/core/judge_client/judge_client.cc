@@ -1132,7 +1132,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// proc limit
   switch(lang){
     case 3:  //java
-        LIM.rlim_cur=LIM.rlim_max=8;
+        LIM.rlim_cur=LIM.rlim_max=50;
         break;
     case 5: //ruby
     case 9: //C#

@@ -1131,8 +1131,8 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
 	if (lang < 3) { //java ruby bash python need more threads/processes
-		LIM.rlim_cur = 10;
-		LIM.rlim_max = 10;
+		LIM.rlim_cur = 1;
+		LIM.rlim_max = 1;
 	} else {
 		LIM.rlim_cur = 100;
 		LIM.rlim_max = 100;

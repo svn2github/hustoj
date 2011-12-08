@@ -1130,13 +1130,18 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_cur = STD_F_LIM;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-	if (lang !=3&&lang!=5&&lang!=9) { //java ruby bash python need more threads/processes
-		LIM.rlim_cur = 1;
-		LIM.rlim_max = 1;
-	} else {
-		LIM.rlim_cur = 100;
-		LIM.rlim_max = 100;
-	}
+  switch(lang){
+    case 3:  //java
+        LIM.rlim_cur=LIM.rlim_max=8;
+        break;
+    case 5: //ruby
+    case 9: //C#
+       LIM.rlim_cur=LIM.rlim_max=3;
+       break;
+    default:
+      LIM.rlim_cur=LIM.rlim_max=1;
+  }
+	
 	setrlimit(RLIMIT_NPROC, &LIM);
 	// set the stack
 	LIM.rlim_cur = STD_MB << 6;

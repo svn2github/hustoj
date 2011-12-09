@@ -1290,6 +1290,17 @@ void print_runtimeerror(char * err){
 	fprintf(ferr,"Runtime Error:%s\n",err);
 	fclose(ferr);
 }
+void clean_session(pid_t p){
+	char cmd[BUFFER_SIZE];
+	sprintf(cmd,"ps -o sid -p %d",p);
+	FILE * pf=popen(cmd,"r");
+	pid_t sid=p;
+	fscanf(pf,"%s",cmd);
+	fscanf(pf,"%d",&sid);
+	pclose(pf);
+	if (DEBUG) printf("pkill -9 -s %d\n",sid);
+	execute_cmd("pkill -9 -s %d",sid);
+}
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		char * userfile, char * outfile, int solution_id, int lang,
 		int & topmemory, int mem_lmt, int & usedtime, int time_lmt, int & p_id,
@@ -1436,7 +1447,9 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
-
+	
+	clean_session(pidApp);
+	
 }
 void clean_workdir(char * work_dir ) {
 	if (DEBUG) {
@@ -1643,17 +1656,15 @@ int main(int argc, char** argv) {
 		pid_t pidApp = fork();
 
 		if (pidApp == 0) {
-
+			setsid();
+			
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
+			
 		} else {
 			
-			
-			
-
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 					solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 					p_id, PEflg, work_dir);
-			
 			
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,

@@ -147,7 +147,7 @@ if (mysql_num_rows($res)==1){
 }
 
 
-if((~OJ_LANGMASK)&(1<<$language)){
+if((~$OJ_LANGMASK)&(1<<$language)){
 
 	if (!isset($pid)){
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)

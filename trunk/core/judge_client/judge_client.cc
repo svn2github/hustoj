@@ -1537,6 +1537,8 @@ int main(int argc, char** argv) {
 	int runner_id = 0;
 	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id,max_case_time;
 
+	nice(19);
+
 	init_parameters(argc, argv, solution_id, runner_id);
 
 	init_mysql_conf();

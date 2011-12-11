@@ -12,7 +12,10 @@ if (isset($_POST['syear']))
 	$title=mysql_real_escape_string($_POST['title']);
 	$description=mysql_real_escape_string($_POST['description']);
 	$private=mysql_real_escape_string($_POST['private']);
-	
+	if (get_magic_quotes_gpc ()) {
+        $title = stripslashes ( $title);
+        $description = stripslashes ( $description);
+  }
    $lang=$_POST['lang'];
    $langmask=0;
    foreach($lang as $t){

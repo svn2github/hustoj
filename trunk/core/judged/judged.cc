@@ -176,8 +176,8 @@ void init_mysql_conf() {
 void run_client(int runid,int clientid){
     char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
         struct rlimit LIM;
-		LIM.rlim_max=30;
-		LIM.rlim_cur=30;
+		LIM.rlim_max=80;
+		LIM.rlim_cur=80;
 		setrlimit(RLIMIT_CPU,&LIM);
 
 		LIM.rlim_max=80*STD_MB;

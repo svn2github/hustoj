@@ -749,15 +749,15 @@ int compile(int lang) {
 		struct rlimit LIM;
 		LIM.rlim_max = 60;
 		LIM.rlim_cur = 60;
-		////setrlimit(RLIMIT_CPU, &LIM);
+		setrlimit(RLIMIT_CPU, &LIM);
 
 		LIM.rlim_max = 8 * STD_MB;
 		LIM.rlim_cur = 8 * STD_MB;
-		////setrlimit(RLIMIT_FSIZE, &LIM);
+		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		LIM.rlim_max = 1024 * STD_MB;
 		LIM.rlim_cur = 1024 * STD_MB;
-		////setrlimit(RLIMIT_AS, &LIM);
+		setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2) {
 			freopen("ce.txt", "w", stderr);
 			//freopen("/dev/null", "w", stdout);
@@ -1123,29 +1123,38 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
  		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
-	//setrlimit(RLIMIT_CPU, &LIM);
+	setrlimit(RLIMIT_CPU, &LIM);
 	if(!oi_mode)alarm(LIM.rlim_cur * 2 + 3);
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
 	LIM.rlim_cur = STD_F_LIM;
-	//setrlimit(RLIMIT_FSIZE, &LIM);
+	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-	if (lang < 3) { //java ruby bash python need more threads/processes
-		LIM.rlim_cur = 10;
-		LIM.rlim_max = 10;
-	} else {
-		LIM.rlim_cur = 100;
-		LIM.rlim_max = 100;
+	switch(lang){
+    case 3:  //java
+        LIM.rlim_cur=LIM.rlim_max=50;
+        break;
+    case 5: //bash
+                LIM.rlim_cur=LIM.rlim_max=20;
+                break;
+    case 9: //C#
+       LIM.rlim_cur=LIM.rlim_max=3;
+       break;
+    default:
+      LIM.rlim_cur=LIM.rlim_max=1;
 	}
-	//setrlimit(RLIMIT_NPROC, &LIM);
+        
+        setrlimit(RLIMIT_NPROC, &LIM);
+
 	// set the stack
 	LIM.rlim_cur = STD_MB << 6;
 	LIM.rlim_max = STD_MB << 6;
-	//setrlimit(RLIMIT_STACK, &LIM);
+	setrlimit(RLIMIT_STACK, &LIM);
 	// set the memory
 	LIM.rlim_cur = STD_MB *mem_lmt*1.5;
 	LIM.rlim_max = STD_MB *mem_lmt*2;
-	if(lang<3)//setrlimit(RLIMIT_AS, &LIM);
+	if(lang<3)
+		setrlimit(RLIMIT_AS, &LIM);
 	
 	chdir(work_dir);
 	// open the files

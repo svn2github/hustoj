@@ -262,7 +262,6 @@ void init_mysql_conf() {
 		read_int(buf , "OJ_USE_MAX_TIME", &use_max_time);
 
 	}
-   fclose(fp);
 }
 
 int isInFile(const char fname[]) {
@@ -750,15 +749,15 @@ int compile(int lang) {
 		struct rlimit LIM;
 		LIM.rlim_max = 60;
 		LIM.rlim_cur = 60;
-		setrlimit(RLIMIT_CPU, &LIM);
+		////setrlimit(RLIMIT_CPU, &LIM);
 
-		LIM.rlim_max = 60 * STD_MB;
-		LIM.rlim_cur = 60 * STD_MB;
-		setrlimit(RLIMIT_FSIZE, &LIM);
+		LIM.rlim_max = 8 * STD_MB;
+		LIM.rlim_cur = 8 * STD_MB;
+		////setrlimit(RLIMIT_FSIZE, &LIM);
 
-		LIM.rlim_max = 1000 * STD_MB;
-		LIM.rlim_cur = 1000 * STD_MB;
-		setrlimit(RLIMIT_AS, &LIM);
+		LIM.rlim_max = 1024 * STD_MB;
+		LIM.rlim_cur = 1024 * STD_MB;
+		////setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2) {
 			freopen("ce.txt", "w", stderr);
 			//freopen("/dev/null", "w", stdout);
@@ -801,8 +800,8 @@ int compile(int lang) {
 		}
 		if (DEBUG)
 			printf("compile end!\n");
-		exit(!system("cat ce.txt"));
-		//exit(0);
+		//exit(!system("cat ce.txt"));
+		exit(0);
 	} else {
 		int status=0;
 
@@ -1114,9 +1113,7 @@ void copy_mono_runtime(char * work_dir) {
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
-	// set children new session to killall them later
-	setsid();
-	
+	// child
 	// set the limit
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
@@ -1126,41 +1123,29 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
  		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
-	setrlimit(RLIMIT_CPU, &LIM);
+	//setrlimit(RLIMIT_CPU, &LIM);
 	if(!oi_mode)alarm(LIM.rlim_cur * 2 + 3);
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
 	LIM.rlim_cur = STD_F_LIM;
-	setrlimit(RLIMIT_FSIZE, &LIM);
+	//setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
-  switch(lang){
-    case 0:  //c
-    case 1:  //cpp
-    case 2:  //pascal
-        LIM.rlim_cur=LIM.rlim_max=50;
-        break;
-    case 3:  //java
-        LIM.rlim_cur=LIM.rlim_max=50;
-        break;
-    case 5: //bash
-		LIM.rlim_cur=LIM.rlim_max=20;
-		break;
-    case 9: //C#
-       LIM.rlim_cur=LIM.rlim_max=3;
-       break;
-    default:
-      LIM.rlim_cur=LIM.rlim_max=100;
-  }
-	
-	setrlimit(RLIMIT_NPROC, &LIM);
+	if (lang < 3) { //java ruby bash python need more threads/processes
+		LIM.rlim_cur = 10;
+		LIM.rlim_max = 10;
+	} else {
+		LIM.rlim_cur = 100;
+		LIM.rlim_max = 100;
+	}
+	//setrlimit(RLIMIT_NPROC, &LIM);
 	// set the stack
 	LIM.rlim_cur = STD_MB << 6;
 	LIM.rlim_max = STD_MB << 6;
-	setrlimit(RLIMIT_STACK, &LIM);
+	//setrlimit(RLIMIT_STACK, &LIM);
 	// set the memory
 	LIM.rlim_cur = STD_MB *mem_lmt*1.5;
 	LIM.rlim_max = STD_MB *mem_lmt*2;
-	if(lang<3)setrlimit(RLIMIT_AS, &LIM);
+	if(lang<3)//setrlimit(RLIMIT_AS, &LIM);
 	
 	chdir(work_dir);
 	// open the files
@@ -1298,17 +1283,6 @@ void print_runtimeerror(char * err){
 	FILE *ferr=fopen("error.out","a+");
 	fprintf(ferr,"Runtime Error:%s\n",err);
 	fclose(ferr);
-}
-void clean_session(pid_t p){
-	char cmd[BUFFER_SIZE];
-	sprintf(cmd,"ps -o sid -p %d",p);
-	FILE * pf=popen(cmd,"r");
-	pid_t sid=p;
-	fscanf(pf,"%s",cmd);
-	fscanf(pf,"%d",&sid);
-	pclose(pf);
-	if (DEBUG) printf("pkill -9 -s %d\n",sid);
-	execute_cmd("pkill -9 -s %d",sid);
 }
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		char * userfile, char * outfile, int solution_id, int lang,
@@ -1456,8 +1430,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
-	
-	clean_session(pidApp);
+
 	
 }
 void clean_workdir(char * work_dir ) {
@@ -1532,7 +1505,7 @@ void mk_shm_workdir(char * work_dir){
   execute_cmd("chown judge %s %s",shm_path,oj_home);
   execute_cmd("chmod 775 %s %s",shm_path,oj_home);
   //sim need a soft link in shm_dir to work correctly
-  sprintf(shm_path,"/dev/shm/hustoj/%s/",oj_home);
+  sprintf(shm_path,"/dev/shm/hustoj/%s/data",oj_home);
   execute_cmd("ln -s %s/data %s",oj_home,shm_path);
 
 }
@@ -1545,8 +1518,6 @@ int main(int argc, char** argv) {
 	int solution_id = 1000;
 	int runner_id = 0;
 	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id,max_case_time;
-
-	nice(19);
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -1667,15 +1638,17 @@ int main(int argc, char** argv) {
 		pid_t pidApp = fork();
 
 		if (pidApp == 0) {
-			
-			
+
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
-			
 		} else {
 			
+			
+			
+
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 					solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 					p_id, PEflg, work_dir);
+			
 			
             judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 					outfile, userfile, PEflg, lang, work_dir, topmemory,
@@ -1684,6 +1657,7 @@ int main(int argc, char** argv) {
 				max_case_time=usedtime>max_case_time?usedtime:max_case_time;
 				usedtime=0;
 			}
+			//clean_session(pidApp);
 		}
 		if(oi_mode){
 		    if(ACflg == OJ_AC && PEflg != OJ_PE){

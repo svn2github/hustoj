@@ -114,7 +114,7 @@ echo "</select>";
 ?>
 </select>
 
-<?php if(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+<?php if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])){
         if(isset($_GET['showsim']))
                 $showsim=intval($_GET['showsim']);
         else

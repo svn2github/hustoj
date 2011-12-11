@@ -751,8 +751,8 @@ int compile(int lang) {
 		LIM.rlim_cur = 60;
 		setrlimit(RLIMIT_CPU, &LIM);
 
-		LIM.rlim_max = 8 * STD_MB;
-		LIM.rlim_cur = 8 * STD_MB;
+		LIM.rlim_max = 60 * STD_MB;
+		LIM.rlim_cur = 60 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		LIM.rlim_max = 1024 * STD_MB;

@@ -13,15 +13,18 @@
 	//	echo $starttime;
 	//	echo $endtime;
 
-	$title=$_POST['title'];
-	$private=$_POST['private'];
-	if (get_magic_quotes_gpc ()){
-		$title = stripslashes ($title);
-		$private = stripslashes ($private);
-	}
+        $title=$_POST['title'];
+        $private=$_POST['private'];
+        $description=$_POST['description'];
+        if (get_magic_quotes_gpc ()){
+                $title = stripslashes ($title);
+                $private = stripslashes ($private);
+                $description = stripslashes ($description);
+        }
+
 	$title=mysql_real_escape_string($title);
 	$private=mysql_real_escape_string($private);
-	$description=mysql_real_escape_string($_POST['description']);
+	$description=mysql_real_escape_string($description);
 	
     $lang=$_POST['lang'];
     $langmask=$OJ_LANGMASK;

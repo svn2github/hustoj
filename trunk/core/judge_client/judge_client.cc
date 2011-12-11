@@ -1284,6 +1284,18 @@ void print_runtimeerror(char * err){
 	fprintf(ferr,"Runtime Error:%s\n",err);
 	fclose(ferr);
 }
+void clean_session(pid_t p){
+        char cmd[BUFFER_SIZE];
+        sprintf(cmd,"ps -o sid -p %d",p);
+        FILE * pf=popen(cmd,"r");
+        pid_t sid=p;
+        fscanf(pf,"%s",cmd);
+        fscanf(pf,"%d",&sid);
+        pclose(pf);
+        if (DEBUG) printf("pkill -9 -s %d\n",sid);
+        execute_cmd("pkill -9 -s %d",sid);
+}
+
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		char * userfile, char * outfile, int solution_id, int lang,
 		int & topmemory, int mem_lmt, int & usedtime, int time_lmt, int & p_id,
@@ -1431,7 +1443,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 
-	
+	clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
 	if (DEBUG) {
@@ -1657,7 +1669,7 @@ int main(int argc, char** argv) {
 				max_case_time=usedtime>max_case_time?usedtime:max_case_time;
 				usedtime=0;
 			}
-			//clean_session(pidApp);
+			clean_session(pidApp);
 		}
 		if(oi_mode){
 		    if(ACflg == OJ_AC && PEflg != OJ_PE){

@@ -1112,6 +1112,7 @@ void copy_mono_runtime(char * work_dir) {
 
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
+	nice(19);
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
 	// child
 	// set the limit
@@ -1144,7 +1145,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
       LIM.rlim_cur=LIM.rlim_max=1;
 	}
         
-        setrlimit(RLIMIT_NPROC, &LIM);
+    setrlimit(RLIMIT_NPROC, &LIM);
 
 	// set the stack
 	LIM.rlim_cur = STD_MB << 6;

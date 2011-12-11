@@ -1525,7 +1525,7 @@ void mk_shm_workdir(char * work_dir){
   execute_cmd("chown judge %s %s",shm_path,oj_home);
   execute_cmd("chmod 775 %s %s",shm_path,oj_home);
   //sim need a soft link in shm_dir to work correctly
-  sprintf(shm_path,"/dev/shm/hustoj/%s/data",oj_home);
+  sprintf(shm_path,"/dev/shm/hustoj/%s/",oj_home);
   execute_cmd("ln -s %s/data %s",oj_home,shm_path);
 
 }

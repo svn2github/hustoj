@@ -1134,6 +1134,11 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
   switch(lang){
+    case 0:  //c
+    case 1:  //cpp
+    case 2:  //pascal
+        LIM.rlim_cur=LIM.rlim_max=50;
+        break;
     case 3:  //java
         LIM.rlim_cur=LIM.rlim_max=50;
         break;
@@ -1144,7 +1149,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
        LIM.rlim_cur=LIM.rlim_max=3;
        break;
     default:
-      LIM.rlim_cur=LIM.rlim_max=1;
+      LIM.rlim_cur=LIM.rlim_max=100;
   }
 	
 	setrlimit(RLIMIT_NPROC, &LIM);

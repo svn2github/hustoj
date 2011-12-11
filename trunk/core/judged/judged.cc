@@ -176,17 +176,17 @@ void init_mysql_conf() {
 void run_client(int runid,int clientid){
     char buf[BUFFER_SIZE],runidstr[BUFFER_SIZE];
         struct rlimit LIM;
-		LIM.rlim_max=300;
-		LIM.rlim_cur=300;
-		//setrlimit(RLIMIT_CPU,&LIM);
+		LIM.rlim_max=80;
+		LIM.rlim_cur=80;
+		setrlimit(RLIMIT_CPU,&LIM);
 
 		LIM.rlim_max=80*STD_MB;
 		LIM.rlim_cur=80*STD_MB;
-		//setrlimit(RLIMIT_FSIZE,&LIM);
+		setrlimit(RLIMIT_FSIZE,&LIM);
 
 		LIM.rlim_max=STD_MB<<11;
 		LIM.rlim_cur=STD_MB<<11;
-		//setrlimit(RLIMIT_AS,&LIM);
+		setrlimit(RLIMIT_AS,&LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;
 	sprintf(runidstr,"%d",runid);

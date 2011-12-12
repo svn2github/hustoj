@@ -262,6 +262,7 @@ void init_mysql_conf() {
 		read_int(buf , "OJ_USE_MAX_TIME", &use_max_time);
 
 	}
+  fclose(fp);
 }
 
 int isInFile(const char fname[]) {

@@ -138,7 +138,7 @@ void read_int(char * buf,const char * key,int * value){
 }
 // read the configue file
 void init_mysql_conf() {
-	FILE *fp;
+	FILE *fp=NULL;
 	char buf[BUFFER_SIZE];
 	host_name[0]=0;
 	user_name[0]=0;
@@ -150,27 +150,29 @@ void init_mysql_conf() {
 	oj_tot=1;
 	oj_mod=0;
 	fp = fopen("./etc/judge.conf", "r");
-	while (fgets(buf, BUFFER_SIZE - 1, fp)) {
-		read_buf(buf,"OJ_HOST_NAME",host_name);	
-		read_buf(buf, "OJ_USER_NAME",user_name);
-		read_buf(buf, "OJ_PASSWORD",password);
-		read_buf(buf, "OJ_DB_NAME",db_name);
-		read_int(buf , "OJ_PORT_NUMBER", &port_number);
-		read_int(buf, "OJ_RUNNING", &max_running);
-		read_int(buf, "OJ_SLEEP_TIME", &sleep_time);
-		read_int(buf , "OJ_TOTAL", &oj_tot);
+	if(fp!=NULL){
+		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
+			read_buf(buf,"OJ_HOST_NAME",host_name);	
+			read_buf(buf, "OJ_USER_NAME",user_name);
+			read_buf(buf, "OJ_PASSWORD",password);
+			read_buf(buf, "OJ_DB_NAME",db_name);
+			read_int(buf , "OJ_PORT_NUMBER", &port_number);
+			read_int(buf, "OJ_RUNNING", &max_running);
+			read_int(buf, "OJ_SLEEP_TIME", &sleep_time);
+			read_int(buf , "OJ_TOTAL", &oj_tot);
 
-		read_int(buf,"OJ_MOD",&oj_mod);
-		
-		read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
-		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
-		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
-		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
-		
-	}
-	sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
-	sleep_tmp=sleep_time;
-  fclose(fp);
+			read_int(buf,"OJ_MOD",&oj_mod);
+			
+			read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
+			read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
+			read_buf(buf,"OJ_HTTP_USERNAME",http_username);
+			read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
+			
+		}
+		sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
+		sleep_tmp=sleep_time;
+	//	fclose(fp);
+    }
 }
 
 

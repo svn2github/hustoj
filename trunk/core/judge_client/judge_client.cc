@@ -243,26 +243,28 @@ void init_mysql_conf() {
 	sleep_time = 3;
 	strcpy(java_xmx, "-Xmx256M");
 	fp = fopen("./etc/judge.conf", "r");
-	while (fgets(buf, BUFFER_SIZE - 1, fp)) {
-		read_buf(buf,"OJ_HOST_NAME",host_name);
-		read_buf(buf, "OJ_USER_NAME",user_name);
-		read_buf(buf, "OJ_PASSWORD",password);
-		read_buf(buf, "OJ_DB_NAME",db_name);
-		read_int(buf , "OJ_PORT_NUMBER", &port_number);
-		read_int(buf, "OJ_JAVA_TIME_BONUS", &java_time_bonus);
-		read_int(buf, "OJ_JAVA_MEMORY_BONUS", &java_memory_bonus);
-		read_int(buf , "OJ_SIM_ENABLE", &sim_enable);
-		read_buf(buf,"OJ_JAVA_XMX",java_xmx);
-		read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
-		read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
-		read_buf(buf,"OJ_HTTP_USERNAME",http_username);
-		read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
-		read_int(buf , "OJ_OI_MODE", &oi_mode);
-		read_int(buf , "OJ_SHM_RUN", &shm_run);
-		read_int(buf , "OJ_USE_MAX_TIME", &use_max_time);
+	if(fp!=NULL){
+		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
+			read_buf(buf,"OJ_HOST_NAME",host_name);
+			read_buf(buf, "OJ_USER_NAME",user_name);
+			read_buf(buf, "OJ_PASSWORD",password);
+			read_buf(buf, "OJ_DB_NAME",db_name);
+			read_int(buf , "OJ_PORT_NUMBER", &port_number);
+			read_int(buf, "OJ_JAVA_TIME_BONUS", &java_time_bonus);
+			read_int(buf, "OJ_JAVA_MEMORY_BONUS", &java_memory_bonus);
+			read_int(buf , "OJ_SIM_ENABLE", &sim_enable);
+			read_buf(buf,"OJ_JAVA_XMX",java_xmx);
+			read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
+			read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
+			read_buf(buf,"OJ_HTTP_USERNAME",http_username);
+			read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
+			read_int(buf , "OJ_OI_MODE", &oi_mode);
+			read_int(buf , "OJ_SHM_RUN", &shm_run);
+			read_int(buf , "OJ_USE_MAX_TIME", &use_max_time);
 
+		}
+		fclose(fp);
 	}
-  fclose(fp);
 }
 
 int isInFile(const char fname[]) {

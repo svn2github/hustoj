@@ -232,7 +232,7 @@ void read_int(char * buf,const char * key,int * value){
 }
 // read the configue file
 void init_mysql_conf() {
-	FILE *fp;
+	FILE *fp=NULL;
 	char buf[BUFFER_SIZE];
 	host_name[0] = 0;
 	user_name[0] = 0;
@@ -242,6 +242,7 @@ void init_mysql_conf() {
 	max_running = 3;
 	sleep_time = 3;
 	strcpy(java_xmx, "-Xmx256M");
+	sprintf(buf,"%s/etc/judge.conf",oj_home);
 	fp = fopen("./etc/judge.conf", "r");
 	if(fp!=NULL){
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {

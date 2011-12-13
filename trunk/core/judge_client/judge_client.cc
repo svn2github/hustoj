@@ -1457,7 +1457,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 
-	clean_session(pidApp);
+	//clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
 	if (DEBUG) {
@@ -1683,7 +1683,7 @@ int main(int argc, char** argv) {
 				max_case_time=usedtime>max_case_time?usedtime:max_case_time;
 				usedtime=0;
 			}
-			clean_session(pidApp);
+			//clean_session(pidApp);
 		}
 		if(oi_mode){
 		    if(ACflg == OJ_AC && PEflg != OJ_PE){

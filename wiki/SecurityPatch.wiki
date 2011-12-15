@@ -1,3 +1,4 @@
+#labels Featured,Phase-Support
 #for situation described by issue60 
 
 = Introduction =
@@ -13,6 +14,9 @@ use this line
 iptables -A OUTPUT -m owner --uid-owner judge -j DROP
 }}}
 to block any network out going ip package from judge_client(not include PING)
+REMEMBER to save it using
+http://www.cyberciti.biz/faq/how-do-i-save-iptables-rules-or-settings/
+
 ==Update all code to at least r1371==
 for livecd users try
 {{{

@@ -1,5 +1,7 @@
-<?php require_once("./include/db_info.inc.php");
+<?php 
+require_once("./include/db_info.inc.php");
 require_once("./include/check_post_key.php");
+require_once("./include/my_func.inc.php");
 
 
 $err_str="";
@@ -14,10 +16,12 @@ if ($len>100){
 	$err_str=$err_str."Nick Name Too Long!\n";
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
-$password=MD5($_POST['opassword']);
-$sql="SELECT `user_id` FROM `users` WHERE `user_id`='".$user_id."' AND `password`='".$password."'";
+$password=$_POST['opassword'];
+$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."'";
 $result=mysql_query($sql);
-$rows_cnt=mysql_num_rows($result);
+$row=mysql_fetch_array($result);
+if ($row && pwCheck($password,$row['password'])) $rows_cnt = 1;
+else $rows_cnt = 0;
 mysql_free_result($result);
 if ($rows_cnt==0){
 	$err_str=$err_str."Old Password Wrong";
@@ -49,10 +53,8 @@ if ($err_cnt>0){
 	exit(0);
 	
 }
-if (strlen($_POST['npassword'])==0) 
-	$password=MD5($_POST['opassword']);
-else 
-	$password=MD5($_POST['npassword']);
+if (strlen($_POST['npassword'])==0) $password=pwGen($_POST['opassword']);
+else $password=pwGen($_POST['npassword']);
 $nick=mysql_real_escape_string(htmlspecialchars ($nick));
 $school=mysql_real_escape_string(htmlspecialchars ($school));
 $email=mysql_real_escape_string(htmlspecialchars ($email));

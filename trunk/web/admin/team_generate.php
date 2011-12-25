@@ -22,7 +22,7 @@ if (!(isset($_SESSION['administrator']))){
 			$password=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));
 			echo "<tr><td>$user_id</td><td>$password</td></tr>";
 			
-			$password=MD5($password);
+			$password=pwGen($password);
 			$email="your_own_email@internet";
 			$nick="your_own_nick";
 			$school="your_own_school";

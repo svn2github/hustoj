@@ -1,4 +1,41 @@
-<?php function is_valid_user_name($user_name){
+<?
+function pwGen($password,$md5ed=False) 
+{
+	if (!$md5) $password=md5($password);
+	$salt = sha1(rand());
+	$salt = substr($salt, 0, 4);
+	$hash = base64_encode( sha1($password . $salt, true) . $salt ); 
+	return $hash; 
+}
+
+function pwCheck($password,$saved)
+{
+	if (isOldPW($saved)){
+		$mpw = md5($password);
+		if ($mpw==$saved) return True;
+		else return False;
+	}
+	$svd=base64_decode($saved);
+	$salt=substr($svd,20);
+	$hash = base64_encode( sha1(md5($password) . $salt, true) . $salt );
+	if (strcmp($hash,$saved)==0) return True;
+	else return False;
+}
+
+function isOldPW($password)
+{
+	for ($i=strlen($password)-1;$i>=0;$i--)
+	{
+		$c = $password[$i];
+		if ('0'<=$c && $c<='9') continue;
+		if ('a'<=$c && $c<='f') continue;
+		if ('A'<=$c && $c<='F') continue;
+		return False;
+	}
+	return True;
+}
+
+function is_valid_user_name($user_name){
 	$len=strlen($user_name);
 	for ($i=0;$i<$len;$i++){
 		if (

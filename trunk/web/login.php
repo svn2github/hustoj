@@ -1,4 +1,6 @@
-<?php require_once("./include/db_info.inc.php");
+<?php 
+    require_once("./include/db_info.inc.php");
+	require_once("./include/my_func.inc.php");
     $vcode=trim($_POST['vcode']);
     if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
 		echo "<script language='javascript'>\n";
@@ -9,25 +11,24 @@
     }
 
 	$user_id=mysql_escape_string($_POST['user_id']);
-	$password=MD5($_POST['password']);
+	$password=$_POST['password'];
+	$pass2 = 'No Saved';
 	session_destroy();
 	session_start();
-	$sql="INSERT INTO `loginlog` VALUES('$user_id','$password','".$_SERVER['REMOTE_ADDR']."',NOW())";
+	$sql="INSERT INTO `loginlog` VALUES('$user_id','$pass2','".$_SERVER['REMOTE_ADDR']."',NOW())";
 	@mysql_query($sql) or die(mysql_error());
-	$sql="SELECT `user_id` FROM `users` WHERE `user_id`='".$user_id."' AND `password`='".$password."'";
+	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."'";
 	$result=mysql_query($sql);
-	$cnt_row=mysql_num_rows($result);
-	if ($cnt_row==1){
-		$row=mysql_fetch_object($result);
-		$_SESSION['user_id']=$row->user_id;
+	$row = mysql_fetch_array($result);
+	if ($row && pwCheck($password,$row['password']))
+    {
+		$_SESSION['user_id']=$row['user_id'];
 		mysql_free_result($result);
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
 		$result=mysql_query($sql);
 		echo mysql_error();
 		while ($row=mysql_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
-//		$_SESSION['ac']=Array();
-//		$_SESSION['sub']=Array();
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";
 		echo "</script>";

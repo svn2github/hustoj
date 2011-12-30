@@ -1,7 +1,7 @@
 <?
-exit;
-require_once("./include/db_info.inc.php");
-require_once("./include/my_func.inc.php");
+require_once("admin-header.php");
+require_once("../include/db_info.inc.php");
+require_once("../include/my_func.inc.php");
 
 function update_for_user($user_id){
 	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."'";
@@ -24,5 +24,5 @@ while ($row=mysql_fetch_array($result)){
 	$uid = $row['user_id'];
 	echo $uid.">".update_for_user($uid)."\n";
 }
-
+unlink("update_pw.php");
 ?>

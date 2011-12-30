@@ -111,7 +111,7 @@ if(isset($_POST['do'])){
 		<input type=submit value=Update>
 	</form>
 	
-<?php if file_exists("update_pw.php") {?>
+<?php if (file_exists("update_pw.php")) {	?>
    <a href="update_pw.php">Upgrade all users password storage form to get more security.</a>
    * only do once !
 <?php }?>

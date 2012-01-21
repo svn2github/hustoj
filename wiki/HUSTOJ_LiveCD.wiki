@@ -49,6 +49,8 @@ root密码freeproblemset
 
 下载地址:
 
+http://www.newsclan.com/hustoj1378.iso
+
 hustoj-1320.iso
 http://115.com/file/bhy3mtcx#
 
@@ -56,9 +58,6 @@ hustoj-1292.iso
 
 http://115.com/file/aqaxjf2h
 
-
-r1281
-http://115.com/file/e6vk4ior#hustoj-1281.iso
 
 
 

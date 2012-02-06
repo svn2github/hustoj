@@ -46,7 +46,14 @@ if ($ok==true){
    exps[3]="函数或变量没有声明过就进行调用，检查下是否导入了正确的头文件";
    pats[4]=/printf.*was not declared in this scope/;
    exps[4]="printf函数没有声明过就进行调用，检查下是否导入了stdio.h或cstdio头文件";
-   
+   pats[5]=/ warning: ignoring return value of/;
+   exps[5]="警告：忽略了函数的返回值，可能是函数用错或者没有考虑到返回值异常的情况";
+   pats[6]=/:.*__int64’ undeclared/;
+   exps[6]="__int64没有声明，在标准C/C++中不支持微软VC中的__int64,请使用long long来声明64位变量";
+   pats[7]=/:.*expected ‘;’ before/;
+   exps[7]="前一行缺少分号";
+   pats[8]=/ .* undeclared \(first use in this function\)/;
+   exps[8]="变量使用前必须先进行声明，也有可能是拼写错误，注意大小写区分。";
    function explain(){
      //alert("asdf");
        var errmsg=document.getElementById("errtxt").innerHTML;

@@ -84,13 +84,15 @@ if ($ok==true){
    exps[22]="不要将C++语言程序提交为C,提交前注意选择语言类型。";
    pats[23]=/stray ‘\\[0123456789]*’ in program/;
    exps[23]="中文空格、标点等不能出现在程序中注释和字符串以外的部分。";
-   pats[24]=/stray ‘\\[:num:]*’ in program/;
-   exps[24]="中文空格、标点等不能出现在程序中注释和字符串以外的部分。";
+   pats[24]=/division by zero/;
+   exps[24]="除以零将导致浮点溢出。";
+   pats[25]=/cannot be used as a function/;
+   exps[25]="变量不能当成函数用，检查变量名和函数名重复的情况，也可能是拼写错误。";
    
    function explain(){
      //alert("asdf");
        var errmsg=document.getElementById("errtxt").innerHTML;
-	   var expmsg="";
+	   var expmsg="辅助解释：<br>";
 	   for(var i=0;i<pats.length;i++){
 		   var pat=pats[i];
 		   var exp=exps[i];

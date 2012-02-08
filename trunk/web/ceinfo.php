@@ -88,6 +88,8 @@ if ($ok==true){
    exps[24]="除以零将导致浮点溢出。";
    pats[25]=/cannot be used as a function/;
    exps[25]="变量不能当成函数用，检查变量名和函数名重复的情况，也可能是拼写错误。";
+   pats[26]=/format .* expects type .* but argument .* has type .*/;
+   exps[26]="scanf/printf的格式描述和后面的参数表不一致，检查是否多了或少了取址符“&”，也可能是拼写错误。";
    
    function explain(){
      //alert("asdf");

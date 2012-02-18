@@ -29,5 +29,6 @@ OJ_HTTP_USERNAME=admin      #account in db that has http_judge privilege
 OJ_HTTP_PASSWORD=admin      #password of this account
 OJ_OI_MODE=0               #using oi (Olympiad in Informatics) mode
 OJ_SHM_RUN=0               #using /dev/shm for fast running & low harddisk wear
+OJ_USE_MAX_TIME=0          #use the max time of all testcase rather than total time
 
 }}}

@@ -1543,7 +1543,7 @@ int main(int argc, char** argv) {
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id,max_case_time;
+	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id,max_case_time=0;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 

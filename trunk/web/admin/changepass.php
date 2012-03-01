@@ -4,9 +4,19 @@
 	exit(1);
 }
 if(isset($_POST['do'])){
+	//echo $_POST['user_id'];
 	require_once("../include/check_post_key.php");
-	$user_id=mysql_real_escape_string($_POST['user_id']);
-    $passwd =pwGen($_POST['passwd']);
+	//echo $_POST['passwd'];
+	require_once("../include/my_func.inc.php");
+	
+	$user_id=$_POST['user_id'];
+    $passwd =$_POST['passwd'];
+    if (get_magic_quotes_gpc ()) {
+		$user_id = stripslashes ( $user_id);
+		$passwd = stripslashes ( $passwd);
+	}
+	$user_id=mysql_real_escape_string($user_id);
+	$passwd=pwGen($passwd);
 	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'";
 	mysql_query($sql);
 	if (mysql_affected_rows()==1) echo "Password Changed!";

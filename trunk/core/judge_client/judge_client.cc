@@ -1431,7 +1431,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			print_runtimeerror(error);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		} else {
-			if (sub == 1)
+			if (sub == 1 && call_counter[reg.REG_SYSCALL] > 0)
 				call_counter[reg.REG_SYSCALL]--;
 		}
 		sub = 1 - sub;

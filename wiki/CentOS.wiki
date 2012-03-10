@@ -12,7 +12,7 @@ Here is something for those users:
 
  * 默认web目录在/var/www/html，需要调整install.sh中的设置
 
- * SELinux会影响PHP的运行，可能需要关闭才能web编辑测试数据。
+ * SELinux会影响PHP的运行，可能需要关闭(/etc/selinux/config and setenforce 0)才能web编辑测试数据。
    或者执行 chcon -R -t httpd_sys_content_t /home
 
  * PHP.ini的位置在/etc/php.ini
@@ -29,7 +29,7 @@ Here is something for those users:
    yum install php httpd php-mysql mysql-server php-xml php-gd gcc-c++
  * the default web site root directory is different from debian/ubuntu
    /var/www/html  you gonna need to adjust it in install.sh before running "sudo ./install.sh"
- * SELinux settings will stop php when it trying to make file I/O, so if you don't know how to make SELinux working with HUSTOJ, just disable it for a moment, and find the right way later.
+ * SELinux settings will stop php when it trying to make file I/O, so if you don't know how to make SELinux working with HUSTOJ, just disable it for a moment(/etc/selinux/config and setenforce 0), and find the right way later.
 this line should works
 {{{
 chcon -R -t httpd_sys_content_t /home

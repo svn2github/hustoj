@@ -206,9 +206,9 @@ void run_client(int runid,int clientid){
 	//freopen(err,"a+",stderr);
 	
 	if (!DEBUG)
-		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,NULL);
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,(char *)NULL);
 	else
-		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,"debug",NULL);
+		execl("/usr/bin/judge_client","/usr/bin/judge_client",runidstr,buf,oj_home,"debug",(char *)NULL);
 
 
 	//exit(0);

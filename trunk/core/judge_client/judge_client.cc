@@ -1179,7 +1179,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 0:
 	case 1:
 	case 2:
-		execl("./Main", "./Main", NULL);
+		execl("./Main", "./Main", (char *)NULL);
 		break;
 	case 3:
 		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
@@ -1187,26 +1187,26 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	
 		execl("/usr/bin/java", "/usr/bin/java", 
 				"-Djava.security.manager",
-				"-Djava.security.policy=./java.policy", "Main", NULL);
+				"-Djava.security.policy=./java.policy", "Main", (char *)NULL);
 		break;
 	case 4:
 		//system("/ruby Main.rb<data.in");
-		execl("/ruby","/ruby", "Main.rb", NULL);
+		execl("/ruby","/ruby", "Main.rb", (char *)NULL);
 		break;
 	case 5: //bash
-		execl("/bin/bash","/bin/bash" ,"Main.sh",NULL);
+		execl("/bin/bash","/bin/bash" ,"Main.sh",(char *)NULL);
 		break;
 	case 6: //Python
-		execl("/python","/python","Main.py",NULL);
+		execl("/python","/python","Main.py",(char *)NULL);
 		break;
 	case 7: //php
-		execl("/php","/php","Main.php",NULL);
+		execl("/php","/php","Main.php",(char *)NULL);
 		break;
 	case 8: //perl
-		execl("/perl","/perl","Main.pl",NULL);
+		execl("/perl","/perl","Main.pl",(char *)NULL);
 		break;
 	case 9: //Mono C#
-		execl("/mono","/mono","--debug","Main.exe",NULL);
+		execl("/mono","/mono","--debug","Main.exe",(char *)NULL);
         break;
 	}
 	//sleep(1);

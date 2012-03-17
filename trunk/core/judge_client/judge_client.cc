@@ -1704,12 +1704,12 @@ int main(int argc, char** argv) {
 	    sim = 0;
     }
     if(ACflg == OJ_RE)addreinfo(solution_id);
-
+    if(use_max_time){
+				usedtime=max_case_time;
+		 }
     if(oi_mode){
 		if(num_of_test>0) pass_rate/=num_of_test;
-		if(use_max_time){
-				usedtime=max_case_time;
-			}
+		
 		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
 			sim_s_id,pass_rate);
 	}else{

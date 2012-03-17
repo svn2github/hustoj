@@ -1299,15 +1299,10 @@ void print_runtimeerror(char * err){
 	fclose(ferr);
 }
 void clean_session(pid_t p){
-        char cmd[BUFFER_SIZE];
-        sprintf(cmd,"ps -o sid -p %d",p);
-        FILE * pf=popen(cmd,"r");
-        pid_t sid=p;
-        fscanf(pf,"%s",cmd);
-        fscanf(pf,"%d",&sid);
-        pclose(pf);
-        if (DEBUG) printf("pkill -9 -s %d\n",sid);
-        execute_cmd("pkill -9 -s %d",sid);
+        //char cmd[BUFFER_SIZE];
+        const char *pre = "ps awx -o \"\%p \%P\"|grep -w ";
+        const char *post = " | awk \'{ print $1  }\'|xargs kill -9";
+        execute_cmd("%s %d %s",pre,p,post);
 }
 
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,

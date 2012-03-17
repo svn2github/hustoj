@@ -39,8 +39,8 @@ h2 {
 }
 body {
     background-color: #000000;
-    background-image: url("../image/background.jpg");
-    color: #ffffff;
+    //background-image: url("../image/background.jpg");
+    color: #aaaaaa;
 }
 .hd {
     color: #FFFFFF;

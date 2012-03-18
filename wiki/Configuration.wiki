@@ -32,3 +32,26 @@ OJ_SHM_RUN=0               #using /dev/shm for fast running & low harddisk wear
 OJ_USE_MAX_TIME=0          #use the max time of all testcase rather than total time
 
 }}}
+
+
+{{{
+OJ_HOST_NAME=127.0.0.1     如果用mysql连接读取数据库，数据库的主机地址
+OJ_USER_NAME=root             数据库帐号
+OJ_PASSWORD=root              数据库密码
+OJ_DB_NAME=jol                    数据库名称
+OJ_PORT_NUMBER=3306       数据库端口
+OJ_RUNNING=4                      judged会启动judge_client判题，这里规定最多同时运行几个judge_client
+OJ_SLEEP_TIME=5                 judged通过轮询数据库发现新任务，轮询间隔的休息时间，单位秒
+OJ_TOTAL=1                           老式并发处理中总的judged数量
+OJ_MOD=0                              老式并发处理中，本judged负责处理solution_id按照TOTAL取模后余数为几的任务。
+OJ_JAVA_TIME_BONUS=2      Java等虚拟机语言获得的额外运行时间。
+OJ_JAVA_MEMORY_BONUS=512    Java等虚拟机语言获得的额外内存。
+OJ_SIM_ENABLE=0                 是否使用sim进行代码相似度的检测
+OJ_HTTP_JUDGE=0                 是否使用HTTP方式连接数据库，如果启用，则前面的HOST_NAME等设置忽略。
+OJ_HTTP_BASEURL=http://127.0.0.1/JudgeOnline  使用HTTP方式连接数据库的基础地址，就是OJ的首页地址。
+OJ_HTTP_USERNAME=admin          使用HTTP方式所用的用户帐号（HTTP_JUDGE权限），该帐号登录时不能启用VCODE图形验证码，但可以登录成功后启用。
+OJ_HTTP_PASSWORD=admin          密码
+OJ_OI_MODE=0                                是否启用OI模式，即无论是否出错都继续判剩余的数据，在ACM比赛中一旦出错就停止运行。
+OJ_SHM_RUN=0                              是否使用/dev/shm的共享内存虚拟磁盘来运行答案，如果启用能提高判题速度，但需要较多内存。
+OJ_USE_MAX_TIME=1                     是否使用所有测试数据中最大的运行时间作为最后运行时间，如果不启用则以所有测试数据的总时间作为超时判断依据。
+}}}

@@ -16,36 +16,20 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 [http://v.youku.com/v_show/id_XMTk5NTAyOTgw.html]
 
 = Details =
-* 本光盘是一张LiveCD，即无需安装、无需硬盘，只需要有光驱、内存大于256的x86-32bit系统即可以光盘启动方式运行。*启动时看到“键盘=人形”提示，按下人任意键进入菜单选试用
-* 如果没有按下任意键，进入安装界面，选择试用后进入黑屏，可以按下Ctrl+Alt+F1进入终端，输入startx即可进入图形界面。
+* 本光盘是一张LiveCD，即无需安装、无需硬盘，只需要有光驱、内存大于256的x86-32bit系统即可以光盘启动方式运行。*启动时看到“键盘=人形”提示，按下人任意键进入菜单选
+* 虚拟机选第一项-试用，直接进入图形登录界面，以root/ubuntu用户登录，密码freeproblemset
+* 物理机选第二项-安装,按照提示输入Alt+F1进入命令行，startx进入图形界面。
 
-* 进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含1道题目，更多题目在/fps,也可以在线下载。局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。ubuntu用户有sudo权限。
+* 进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含1道题目，更多题目在/fps,也可以在线下载。管理员可以导入/fps下的FPS格式的xml文件。
+
+* 局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。ubuntu用户有sudo权限。
+
+* administrator of OJ is admin, password admin.
+
+* 在图形终端中运行sudo ubiquity可启动图形化安装界面，将LiveCD安装至硬盘系统，适合不了解Linux的用户进行HUSTOJ的初次安装。请参考[InstallGuide]
 
 
-  * 基于Ubuntu10.04 LTS Desktop
-  * 无须硬盘，不影响现有系统
-  * CDROM 256M内存 32bit x86即可运行
-  * 内置5道题目，可以导入FPS题目
-  * 内置FPS样例 /fps
-  * 内置C/C++IDE(Codeblocks)
-
-启动后以root/ubuntu用户登录，密码freeproblemset,可进入图形界面。 
-最新版本可能自动以ubuntu登录，但执行sudo时仍需密码。
-user root's password is freeproblemset
-
-启动Firefox访问[http://127.0.0.1/]可进入OJ界面。after booting apache is serving at 80
-
-运行ifconfig查得IP后,其他电脑可通过网络访问。
-
-OJ管理员admin初始密码为admin. administrator of OJ is admin, password admin.
-
-*启动时不按任何键*或在终端中运行sudo ubiquity可启动图形化安装界面，将LiveCD安装至硬盘系统，适合不了解Linux的用户进行HUSTOJ的初次安装。请参考[InstallGuide]
-
-管理员可以导入/fps下的FPS格式的xml文件。
-
-*使用时如果已经联网，可以用sudo update-hustoj进行程序更新，获得最新版本。*
-
-root密码freeproblemset
+*使用时如果已经联网，可以用sudo update-hustoj进行程序更新，获得最新版本。提示sudo密码freeproblemset
 
 下载地址:
 http://115.com/file/bexuygmw#hustoj-1409.iso

@@ -10,10 +10,10 @@ $OJ_CACHE_SHARE=true;
 <?php endif;?>
 <div align="center">
 <?php
-$local_file = 'contests.json';//local file of contests.json
+  $local_file = 'cache/contests.json';//local file of contests.json
 $last_modified = filemtime($local_file);
 if (time() - $last_modified > 1*60*60) {
-    $json = @file_get_contents('http://202.113.25.50/contests.json');
+    $json = @file_get_contents('http://contests.acmicpc.info/contests.json');
     if ($json) {
         file_put_contents($local_file, $json);
     }
@@ -29,7 +29,7 @@ else {
 $rows = json_decode($json, true);
 ?>
 
-<table>
+<table width=80% >
 <thead>
 	<tr>
 		<th class="column-1">OJ</th><th class="column-2">Name</th><th class="column-3">Start Time</th><th class="column-4">Week</th><th class="column-5">Access</th>
@@ -44,5 +44,5 @@ $rows = json_decode($json, true);
 </tbody>
 </table>
 </div>
-数据来源：http://contests.acmicpc.info/contests.json
+DataSource:http://contests.acmicpc.info/contests.json
 <?php require('oj-footer.php');?>

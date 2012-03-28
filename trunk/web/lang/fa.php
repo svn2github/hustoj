@@ -1,4 +1,4 @@
-﻿<?php
+ <?php
 
 	//oj-header.php
 	$MSG_FAQ="F.A.Qs";
@@ -14,7 +14,9 @@
 	$MSG_RANKLIST="رتبه بندی";
 
 	$MSG_CONTEST="مسابقه ها";
-
+   
+$MSG_RECENT_CONTEST="Recent";
+	
 	$MSG_LOGOUT="خروج";
 
 	$MSG_LOGIN="ورود";

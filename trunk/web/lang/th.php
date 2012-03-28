@@ -7,6 +7,8 @@
 	$MSG_STATUS="สถานะ";
 	$MSG_RANKLIST="จัดอันดับ";
 	$MSG_CONTEST="การแข่งขัน";
+   $MSG_RECENT_CONTEST="Recent";
+	
 	$MSG_LOGOUT="ออกจากระบบ";
 	$MSG_LOGIN="เข้าสู่ระบบ";
 	$MSG_REGISTER="ลงทะเบียน";

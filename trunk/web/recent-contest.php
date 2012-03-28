@@ -5,9 +5,7 @@ $OJ_CACHE_SHARE=true;
 	require_once("./include/db_info.inc.php");
 	echo "<title>Recent Contests from Naikai-contest-spider</title>";
 ?>
-<?php if(function_exists('apc_cache_info')): ?>
-<?php $_apc_cache_info = apc_cache_info(); ?>
-<?php endif;?>
+
 <div align="center">
 <?php
   $local_file = 'cache/contests.json';//local file of contests.json

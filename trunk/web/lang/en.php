@@ -7,6 +7,7 @@
 	$MSG_STATUS="Status";
 	$MSG_RANKLIST="Ranklist";
 	$MSG_CONTEST="Contest";
+  $MSG_RECENT_CONTEST="Recent";
 	$MSG_LOGOUT="Logout";
 	$MSG_LOGIN="Login";
 	$MSG_REGISTER="Register";

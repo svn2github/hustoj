@@ -7,6 +7,8 @@
 	$MSG_STATUS="채점 상황 열람";
 	$MSG_RANKLIST="순위";
 	$MSG_CONTEST="대회";
+   $MSG_RECENT_CONTEST="Recent";
+	
 	$MSG_LOGOUT="LOGOUT";
 	$MSG_LOGIN="LOGIN";
 	$MSG_REGISTER="가입하기";

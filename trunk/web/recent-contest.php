@@ -44,5 +44,5 @@ $rows = json_decode($json, true);
 </tbody>
 </table>
 </div>
-DataSource:http://contests.acmicpc.info/contests.json
+<div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
 <?php require('oj-footer.php');?>

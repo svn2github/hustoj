@@ -120,18 +120,18 @@ else if(isset($_POST['problem2contest'])){
 	<p align=center><font size=4 color=#333399>Add a Contest</font></p>
 	<p align=left>Title:<input type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
 	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
-	Year:<input type=text name=syear value=<?php echo date('Y')?> size=7 >
-	Month:<input type=text name=smonth value=<?php echo date('m')?> size=7 >
-	Day:<input type=text name=sday size=7 value=<?php echo date('d')?> >&nbsp;
-	Hour:<input type=text name=shour size=7 value=<?php echo date('H')?>>&nbsp;
-	Minute:<input type=text name=sminute value=00 size=7 ></p>
+	Year:<input type=text name=syear value=<?php echo date('Y')?> size=4 >
+	Month:<input type=text name=smonth value=<?php echo date('m')?> size=2 >
+	Day:<input type=text name=sday size=2 value=<?php echo date('d')?> >&nbsp;
+	Hour:<input type=text name=shour size=2 value=<?php echo date('H')?>>&nbsp;
+	Minute:<input type=text name=sminute value=00 size=2 ></p>
 	<p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
-	Year:<input type=text name=eyear value=<?php echo date('Y')?> size=7 >
-	Month:<input type=text name=emonth value=<?php echo date('m')?> size=7 >
+	Year:<input type=text name=eyear value=<?php echo date('Y')?> size=4 >
+	Month:<input type=text name=emonth value=<?php echo date('m')?> size=2 >
 	
-	Day:<input type=text name=eday size=7 value=<?php echo date('d')+(date('H')+4>23?1:0)?>>&nbsp;
-	Hour:<input type=text name=ehour size=7 value=<?php echo (date('H')+4)%24?>>&nbsp;
-	Minute:<input type=text name=eminute value=00 size=7 ></p>
+	Day:<input type=text name=eday size=2 value=<?php echo date('d')+(date('H')+4>23?1:0)?>>&nbsp;
+	Hour:<input type=text name=ehour size=2 value=<?php echo (date('H')+4)%24?>>&nbsp;
+	Minute:<input type=text name=eminute value=00 size=2 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>
 		<option value=0 selected>C</option>

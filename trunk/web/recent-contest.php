@@ -25,6 +25,8 @@ else {
 }
 
 $rows = json_decode($json, true);
+
+$odd=true;
 ?>
 
 <table width=80% >

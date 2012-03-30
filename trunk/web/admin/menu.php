@@ -93,8 +93,8 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 </ol>
 <?php if (isset($_SESSION['administrator'])&&!$OJ_SAE){
 ?>
-	<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a>
-	<a href="problem_changeid.php" target="main"><font color="eeeeee">ReOrderProblem</font></a>
+	<a href="problem_copy.php" target="main"><font color="eeeeee">CopyProblem</font></a> <br>
+	<a href="problem_changeid.php" target="main" title="Danger,Use it on your own risk"><font color="eeeeee">ReOrderProblem</font></a>
 <?php }
 ?>
 </body>

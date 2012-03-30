@@ -110,7 +110,7 @@ if (isset($_POST['syear']))
 <p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
 <p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
 Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=4 >
-Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=4 >
+Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=2 >
 Day:<input type=text name=sday size=2 value='<?php echo substr($starttime,8,2)?>'>
 Hour:<input type=text name=shour size=2 value='<?php echo substr($starttime,11,2)?>'>
 Minute:<input type=text name=sminute size=2 value=<?php echo substr($starttime,14,2)?>></p>

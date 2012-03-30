@@ -118,8 +118,8 @@ Minute:<input type=text name=sminute size=2 value=<?php echo substr($starttime,1
 
 Year:<input type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=4 >
 Month:<input type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=2 >
-Day:<input type=text name=eday size=2 value=<?php echo substr($endtime,8,2)?>>&nbsp;
-Hour:<input type=text name=ehour size=2 value=<?php echo substr($endtime,11,2)?>> &nbsp;
+Day:<input type=text name=eday size=2 value=<?php echo substr($endtime,8,2)?>>
+Hour:<input type=text name=ehour size=2 value=<?php echo substr($endtime,11,2)?>> 
 Minute:<input type=text name=eminute size=2 value=<?php echo substr($endtime,14,2)?>></p>
 
 Public/Private:<select name=private>

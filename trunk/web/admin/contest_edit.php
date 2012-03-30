@@ -109,18 +109,18 @@ if (isset($_POST['syear']))
 <input type=hidden name='cid' value=<?php echo $cid?>>
 <p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
 <p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
-Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=7 >
-Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=7 >
-Day:<input type=text name=sday size=7 value='<?php echo substr($starttime,8,2)?>'>
-Hour:<input type=text name=shour size=7 value='<?php echo substr($starttime,11,2)?>'>
-Minute:<input type=text name=sminute size=7 value=<?php echo substr($starttime,14,2)?>></p>
+Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=4 >
+Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=4 >
+Day:<input type=text name=sday size=2 value='<?php echo substr($starttime,8,2)?>'>
+Hour:<input type=text name=shour size=2 value='<?php echo substr($starttime,11,2)?>'>
+Minute:<input type=text name=sminute size=2 value=<?php echo substr($starttime,14,2)?>></p>
 <p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
 
-Year:<input type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=7 >
-Month:<input type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=7 >
-Day:<input type=text name=eday size=7 value=<?php echo substr($endtime,8,2)?>>&nbsp;
-Hour:<input type=text name=ehour size=7 value=<?php echo substr($endtime,11,2)?>> &nbsp;
-Minute:<input type=text name=eminute size=7 value=<?php echo substr($endtime,14,2)?>></p>
+Year:<input type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=4 >
+Month:<input type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=2 >
+Day:<input type=text name=eday size=2 value=<?php echo substr($endtime,8,2)?>>&nbsp;
+Hour:<input type=text name=ehour size=2 value=<?php echo substr($endtime,11,2)?>> &nbsp;
+Minute:<input type=text name=eminute size=2 value=<?php echo substr($endtime,14,2)?>></p>
 
 Public/Private:<select name=private>
 	<option value=0 <?php echo $private=='0'?'selected=selected':''?>>Public</option>

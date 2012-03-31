@@ -18,7 +18,7 @@ require_once("./include/const.inc.php");
 
 <meta http-equiv='refresh' content='60'>
 <title>Submission Status</title>
-<center>
+
 
 <?php $str2="";
 
@@ -146,7 +146,7 @@ echo "</select>";
 echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
 </div>
-<table>
+<table align=center width=80%>
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
 <td ><?php echo $MSG_USER?>
@@ -298,6 +298,7 @@ else
 mysql_free_result($result);
 ?>
 </table>
+<div>
 <?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
         echo "[<a href=status.php?".$str2."&top=".$_GET['prevtop'].">Previous Page</a>]&nbsp;&nbsp;";
@@ -305,6 +306,7 @@ else
         echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
+</div>
 
 <?php require_once("oj-footer.php");?>
 <?php require_once("./include/cache_end.php");?>

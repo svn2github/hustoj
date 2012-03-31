@@ -70,7 +70,7 @@ div.content {
 
 #menu{
 position:absolute; 
-left:0px; top:120px;width:215px; height:54px;z-index:1; visibility:visible;
+left:20px; top:120px;width:215px; height:54px;z-index:1; visibility:visible;
 text-align:left;
 }
 .menu_item{
@@ -97,13 +97,17 @@ color:red;
 }
 #broadcast{
 position:absolute; 
-left:163px; top:20px;width:expression(documentElement.clientWidth-163); height:120px;z-index:6; visibility:visible;
+left:120px; top:20px;width:expression(documentElement.clientWidth-120); height:120px;z-index:6; visibility:visible;
 //background:#eeeeff;
 }
 
 #main{
 position:absolute; 
-left:163px; top:163px;width:expression(documentElement.clientWidth-163); height:600px;z-index:4; visibility:visible;
+left:120px; top:163px;width:expression(documentElement.clientWidth-120); height:600px;z-index:4; visibility:visible;
+text-align:left;
+}
+#main table{
+   text-align:left;
 }
 #submenu{
 position:absolute; 

@@ -146,7 +146,7 @@ echo "</select>";
 echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
 </div>
-<table align=center>
+<table>
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
 <td ><?php echo $MSG_USER?>

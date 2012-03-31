@@ -69,6 +69,11 @@
 		<a href="../contest.php"><?php echo checkcontest($MSG_CONTEST)?></a>
 		</div>
 		<div class=menu_item >
+		<a href="../recent-contest.php"><?php if ($url=="recent-contest.php") echo "<span style='color:orange'>";?>
+		<?php echo $MSG_RECENT_CONTEST?><?php if ($url=="recent-contest.php") echo "</span>";?></a>
+		</div>
+		
+		<div class=menu_item >
 		<a href="../<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?php echo $MSG_FAQ?></a>
 		</div>
 		<?php if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >

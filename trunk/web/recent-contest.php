@@ -29,7 +29,7 @@ $rows = json_decode($json, true);
 $odd=true;
 ?>
 
-<table width=80% >
+<table width=80% align=center>
 <thead class=toprow>
 	<tr>
 		<th class="column-1">OJ</th><th class="column-2">Name</th><th class="column-3">Start Time</th><th class="column-4">Week</th><th class="column-5">Access</th>

@@ -97,28 +97,29 @@ color:red;
 }
 #broadcast{
 position:absolute; 
-left:120px; top:20px;width:expression(documentElement.clientWidth-120); height:120px;z-index:6; visibility:visible;
+left:150px; top:20px;width:expression(documentElement.clientWidth-150); height:120px;z-index:6; visibility:visible;
 //background:#eeeeff;
 }
 
 #main{
 position:absolute; 
-left:120px; top:163px;width:expression(documentElement.clientWidth-120); height:600px;z-index:4; visibility:visible;
+left:150px; top:163px;width:expression(documentElement.clientWidth-150); height:600px;z-index:4; visibility:visible;
 text-align:left;
 }
-#main table{
-   text-align:left;
+
+#main div{
+	text-align:center;
 }
 #submenu{
 position:absolute; 
-left:0px; top:120px;width:163px; height:169px;z-index:5; visibility:visible;
+left:0px; top:120px;width:150px; height:169px;z-index:5; visibility:visible;
 }
 
 #foot{
 	position:relative; 
 	left:0px; 
 	top:auto;
-	width:1019px; 
+	width:width:expression(documentElement.clientWidth-150); 
 	z-index:7; 
 	visibility:visible
 	text-align:center;

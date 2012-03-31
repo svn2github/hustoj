@@ -144,6 +144,9 @@ div.content {
 	visibility:visible
 	text-align:center;
 }
+#main div{
+	text-align:center;
+}
 #foot{
 	position:static; 
 //	left:0px; 

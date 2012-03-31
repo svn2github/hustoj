@@ -96,18 +96,18 @@ for ($i=0;$i<10;$i++){
 ?>
 </select>
 <?php echo $MSG_RESULT?>:<select size="1" name="jresult">
-<?php if (isset($_GET['jresult'])) $jresult=intval($_GET['jresult']);
-else $jresult=-1;
-if ($jresult>=12||$jresult<0) $jresult=-1;
-if ($jresult!=-1){
-        $sql=$sql."AND `result`='".strval($jresult)."' ";
-        $str2=$str2."&jresult=".strval($jresult);
+<?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
+else $jresult_get=-1;
+if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
+if ($jresult_get!=-1){
+        $sql=$sql."AND `result`='".strval($jresult_get)."' ";
+        $str2=$str2."&jresult=".strval($jresult_get);
 }
-if ($jresult==-1) echo "<option value='-1' selected>All</option>";
+if ($jresult_get==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
 for ($j=0;$j<12;$j++){
         $i=($j+4)%12;
-        if ($i==$jresult) echo "<option value='".strval($jresult)."' selected>".$judge_result[$i]."</option>";
+        if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$judge_result[$i]."</option>";
         else echo "<option value='".strval($i)."'>".$judge_result[$i]."</option>"; 
 }
 echo "</select>";

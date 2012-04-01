@@ -29,7 +29,20 @@
 	$MSG_Runtime_Error="运行错误";
 	$MSG_Compile_Error="编译错误";
 	$MSG_Compile_OK="编译成功";
-	
+	//fool's day
+if(date('m')==4&&date('d')==1&&rand(0,100)<10){
+        $MSG_Accepted="人品问题-愚人节快乐";
+$MSG_Presentation_Error="人品问题-愚人节快乐";
+$MSG_Wrong_Answer="人品问题-愚人节快乐";
+$MSG_Time_Limit_Exceed="人品问题-愚人节快乐";
+$MSG_Memory_Limit_Exceed="人品问题-愚人节快乐";
+$MSG_Output_Limit_Exceed="人品问题-愚人节快乐";
+$MSG_Runtime_Error="人品问题-愚人节快乐";
+$MSG_Compile_Error="人品问题-愚人节快乐";
+$MSG_Compile_OK="人品问题-愚人节快乐";
+}
+    
+
 	$MSG_PD="等待";
 	$MSG_PR="等待重判";
 	$MSG_CI="编译中";

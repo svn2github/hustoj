@@ -32,7 +32,7 @@ if (isset($_GET['cid'])){
         require_once("oj-header.php");
 }
 ?>
-<div>
+<div id=center>
 <?php $order_str=" ORDER BY `solution_id` DESC ";
 $start_first=1;
 // check the top arg
@@ -298,7 +298,7 @@ else
 mysql_free_result($result);
 ?>
 </table>
-<div>
+<div id=center>
 <?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
         echo "[<a href=status.php?".$str2."&top=".$_GET['prevtop'].">Previous Page</a>]&nbsp;&nbsp;";

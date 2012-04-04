@@ -259,7 +259,7 @@ else
                 }
                 
         }
-        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) echo ($row['pass_rate']*100)."%";
+        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) echo (100-$row['pass_rate']*100)."%";
         if ($flag){
 
 

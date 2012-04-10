@@ -755,8 +755,8 @@ int compile(int lang) {
 		LIM.rlim_cur = 60;
 		setrlimit(RLIMIT_CPU, &LIM);
 
-		LIM.rlim_max = 60 * STD_MB;
-		LIM.rlim_cur = 60 * STD_MB;
+		LIM.rlim_max = 90 * STD_MB;
+		LIM.rlim_cur = 90 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		LIM.rlim_max = 1024 * STD_MB;
@@ -1115,7 +1115,7 @@ void copy_mono_runtime(char * work_dir) {
 }
 
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
-		int & mem_lmt) {
+		int & mem_lmt, int in_files) {
 	nice(19);
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
 	// child
@@ -1130,7 +1130,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	if(oi_mode) 
-        alarm(LIM.rlim_cur * 20 + 3);
+        alarm(LIM.rlim_cur * in_files + 3);
   else
         alarm(LIM.rlim_cur * 2 + 3);
 	// file limit
@@ -1337,7 +1337,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			break;
 		}
 
-		if (!isspj && get_file_size(userfile) > get_file_size(outfile) * 10+1024) {
+		if (!isspj && get_file_size(userfile) > get_file_size(outfile) * 2+1024) {
 			ACflg = OJ_OL;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			break;
@@ -1533,6 +1533,15 @@ void mk_shm_workdir(char * work_dir){
   execute_cmd("ln -s %s/data %s",oj_home,shm_path);
 
 }
+int count_in_files(char * dirpath){
+        const char  * cmd="ls -l %si/*.in|wc -l";
+        int ret=0;
+        FILE * fjobs=read_cmd_output(cmd,dirpath);
+        fscanf(fjobs,"%d",&ret);
+        pclose(fjobs);
+
+        return ret;
+}
 
 int main(int argc, char** argv) {
 
@@ -1650,7 +1659,9 @@ int main(int argc, char** argv) {
 	double pass_rate=0.0;
 	int num_of_test=0;
 	int finalACflg=ACflg;
+        int total_in=count_in_files(fullpath);
 	for (;(oi_mode|| ACflg == OJ_AC )&& (dirp = readdir(dp)) != NULL;) {
+                
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
@@ -1663,7 +1674,7 @@ int main(int argc, char** argv) {
 
 		if (pidApp == 0) {
 
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,total_in);
 		} else {
 			
 			
@@ -1735,3 +1746,4 @@ int main(int argc, char** argv) {
 
 
 
+zhblue@nmc:/home/judge/src/core/judge_client$ 

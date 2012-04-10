@@ -1360,6 +1360,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				switch (exitcode) {
 					case SIGCHLD:
 					case SIGALRM:
+               alarm(0);
 					case SIGKILL:
 					case SIGXCPU:
 						ACflg = OJ_TL;
@@ -1394,6 +1395,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				switch (sig) {
 				case SIGCHLD:
 				case SIGALRM:
+             alarm(0);
 				case SIGKILL:
 				case SIGXCPU:
 					ACflg = OJ_TL;
@@ -1453,7 +1455,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
-  if(ACflg == OJ_TL) usedtime=time_lmt*1000;
+  
 	//clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
@@ -1658,7 +1660,6 @@ int main(int argc, char** argv) {
 	double pass_rate=0.0;
 	int num_of_test=0;
 	int finalACflg=ACflg;
-  //      int total_in=count_in_files(fullpath);
 	for (;(oi_mode|| ACflg == OJ_AC )&& (dirp = readdir(dp)) != NULL;) {
                 
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
@@ -1720,10 +1721,12 @@ int main(int argc, char** argv) {
     if(use_max_time){
 				usedtime=max_case_time;
 		 }
-    if(oi_mode){
+  if(ACflg == OJ_TL){
+        usedtime=time_lmt*1000;
+  }
+  if(oi_mode){
 		if(num_of_test>0) pass_rate/=num_of_test;
-		
-		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
+		update_solution(solution_id, finalACflg, usedtime*num_of_test, topmemory >> 10, sim,
 			sim_s_id,pass_rate);
 	}else{
 		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,

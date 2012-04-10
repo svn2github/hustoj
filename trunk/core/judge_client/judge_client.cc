@@ -1534,7 +1534,7 @@ void mk_shm_workdir(char * work_dir){
 
 }
 int count_in_files(char * dirpath){
-        const char  * cmd="ls -l %si/*.in|wc -l";
+        const char  * cmd="ls -l %s/*.in|wc -l";
         int ret=0;
         FILE * fjobs=read_cmd_output(cmd,dirpath);
         fscanf(fjobs,"%d",&ret);

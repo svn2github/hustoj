@@ -1,4 +1,7 @@
 <?php
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Cache-Control: no-cache");
+header("Pragma: no-cache");
 	require_once("./db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("../lang/$OJ_LANG.php");

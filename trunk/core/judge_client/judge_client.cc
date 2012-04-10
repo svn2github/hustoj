@@ -1745,5 +1745,3 @@ int main(int argc, char** argv) {
 }
 
 
-
-zhblue@nmc:/home/judge/src/core/judge_client$ 

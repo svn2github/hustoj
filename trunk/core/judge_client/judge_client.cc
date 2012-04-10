@@ -1115,7 +1115,7 @@ void copy_mono_runtime(char * work_dir) {
 }
 
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
-		int & mem_lmt, int in_files) {
+		int & mem_lmt) {
 	nice(19);
 	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
 	// child
@@ -1129,10 +1129,9 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
-	if(oi_mode) 
-        alarm(LIM.rlim_cur * in_files + 3);
-  else
-        alarm(LIM.rlim_cur * 2 + 3);
+  alarm(0);
+	alarm(LIM.rlim_cur);
+  
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
 	LIM.rlim_cur = STD_F_LIM;
@@ -1674,7 +1673,7 @@ int main(int argc, char** argv) {
 
 		if (pidApp == 0) {
 
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,total_in);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
 		} else {
 			
 			

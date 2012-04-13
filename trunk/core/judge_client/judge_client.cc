@@ -243,7 +243,7 @@ void init_mysql_conf() {
 	port_number = 3306;
 	max_running = 3;
 	sleep_time = 3;
-	strcpy(java_xmx, "-Xms32m");
+	strcpy(java_xms, "-Xms32m");
 	strcpy(java_xmx, "-Xmx256m");
 	sprintf(buf,"%s/etc/judge.conf",oj_home);
 	fp = fopen("./etc/judge.conf", "r");
@@ -755,7 +755,7 @@ int compile(int lang) {
         
     char javac_buf[4][16];
     char *CP_J[5];
-    for(int i=0;i<4;i++) CP_J[0]=javac_buf[i];
+    for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
 	sprintf(CP_J[0],"javac");
 	sprintf(CP_J[1],"-J%s",java_xms);
 	sprintf(CP_J[2],"-J%s",java_xmx);

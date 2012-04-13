@@ -95,6 +95,7 @@ static int max_running;
 static int sleep_time;
 static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
+static char java_xms[BUFFER_SIZE];
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
 static int oi_mode=0;
@@ -129,7 +130,7 @@ void write_log(const char *fmt, ...) {
 	va_list ap;
 	char buffer[4096];
 	//	time_t          t = time(NULL);
-	int l;
+	//int l;
 	sprintf(buffer,"%s/log/client.log",oj_home);
 	FILE *fp = fopen(buffer, "a+");
 	if (fp == NULL) {
@@ -137,7 +138,8 @@ void write_log(const char *fmt, ...) {
 		system("pwd");
 	}
 	va_start(ap, fmt);
-	l = vsprintf(buffer, fmt, ap);
+	//l = 
+	vsprintf(buffer, fmt, ap);
 	fprintf(fp, "%s\n", buffer);
 	if (DEBUG)
 		printf("%s\n", buffer);
@@ -241,7 +243,8 @@ void init_mysql_conf() {
 	port_number = 3306;
 	max_running = 3;
 	sleep_time = 3;
-	strcpy(java_xmx, "-Xmx256M");
+	strcpy(java_xmx, "-Xms32m");
+	strcpy(java_xmx, "-Xmx256m");
 	sprintf(buf,"%s/etc/judge.conf",oj_home);
 	fp = fopen("./etc/judge.conf", "r");
 	if(fp!=NULL){
@@ -254,6 +257,7 @@ void init_mysql_conf() {
 			read_int(buf, "OJ_JAVA_TIME_BONUS", &java_time_bonus);
 			read_int(buf, "OJ_JAVA_MEMORY_BONUS", &java_memory_bonus);
 			read_int(buf , "OJ_SIM_ENABLE", &sim_enable);
+			read_buf(buf,"OJ_JAVA_XMS",java_xms);
 			read_buf(buf,"OJ_JAVA_XMX",java_xmx);
 			read_int(buf,"OJ_HTTP_JUDGE",&http_judge);
 			read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
@@ -740,14 +744,24 @@ int compile(int lang) {
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-O2", "-Wall",
 			"-lm", "--static", "-DONLINE_JUDGE", NULL };
 	const char * CP_P[] = { "fpc", "Main.pas", "-O2","-Co", "-Ct","-Ci", NULL };
-	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",
-			NULL };
+//	const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",NULL };
+
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
 	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
 	const char * CP_Y[] = { "python","-c","import py_compile; py_compile.compile(r'Main.py')", NULL };
 	const char * CP_PH[] = { "php", "-l","Main.php", NULL };
-        const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
-        const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
+    const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
+    const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
+        
+    char javac_buf[4][16];
+    char *CP_J[5];
+    for(int i=0;i<4;i++) CP_J[0]=javac_buf[i];
+	sprintf(CP_J[0],"javac");
+	sprintf(CP_J[1],"-J%s",java_xms);
+	sprintf(CP_J[2],"-J%s",java_xmx);
+	sprintf(CP_J[3],"Main.java");
+	CP_J[4]=(char *)NULL;
+    
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
@@ -1117,7 +1131,7 @@ void copy_mono_runtime(char * work_dir) {
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	nice(19);
-	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
+//	char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
 	// child
 	// set the limit
 	struct rlimit LIM; // time limit, file limit& memory limit
@@ -1184,10 +1198,10 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		execl("./Main", "./Main", (char *)NULL);
 		break;
 	case 3:
-		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
-		sprintf(java_p2, "-Xmx%dM", mem_lmt);
+//		sprintf(java_p1, "-Xms%dM", mem_lmt / 2);
+//		sprintf(java_p2, "-Xmx%dM", mem_lmt);
 	
-		execl("/usr/bin/java", "/usr/bin/java", 
+		execl("/usr/bin/java", "/usr/bin/java", java_xms,java_xmx,
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", (char *)NULL);
 		break;

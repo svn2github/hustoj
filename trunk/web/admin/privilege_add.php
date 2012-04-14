@@ -20,7 +20,7 @@ if(isset($_POST['do'])){
 	Privilege:
 	<select name="rightstr">
 <?php
-$rightarray=array("administrator","source_browser","contest_creator","http_judge" );
+$rightarray=array("administrator","problem_editor","source_browser","contest_creator","http_judge" );
 while(list($key, $val)=each($rightarray)) {
 	if (isset($rightstr) && ($rightstr == $val)) {
 		echo '<option value="'.$val.'" selected>'.$val.'</option>';

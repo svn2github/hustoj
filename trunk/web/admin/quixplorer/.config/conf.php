@@ -1,7 +1,10 @@
 <?php
 @session_start();
  if (!(   isset($_SESSION['administrator'])
-		||isset($_SESSION['problem_editor'])
+		||
+		    (isset($_SESSION['problem_editor'])
+		     &&isset($_SESSION["p".intval($_GET["dir"])])
+		     )
 		)){
 	echo "<a href='../../loginpage.php'>Please Login First!</a>";
 	exit(1);

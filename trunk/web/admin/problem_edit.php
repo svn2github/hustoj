@@ -108,7 +108,8 @@ Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>><
 <?php require_once("../oj-footer.php");?>
 <?php }else{
 require_once("../include/check_post_key.php");
-$id=$_POST['problem_id'];
+$id=intval($_POST['problem_id']);
+if(!(isset($_SESSION["p$id"])||isset($_SESSION['administrator']))) exit();	
 $title=$_POST['title'];
 $time_limit=$_POST['time_limit'];
 $memory_limit=$_POST['memory_limit'];

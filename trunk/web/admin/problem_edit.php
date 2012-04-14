@@ -8,7 +8,9 @@
 <?php require_once("../include/db_info.inc.php");?>
 <?php require_once("admin-header.php");
 
-if (!(isset($_SESSION['administrator']))){
+if (!(isset($_SESSION['administrator'])
+      ||isset($_SESSION['problem_editor'])
+     )){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }

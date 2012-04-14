@@ -1,6 +1,9 @@
 <?php require("admin-header.php");
 require_once("../include/set_get_key.php");
-if (!(isset($_SESSION['administrator'])||isset($_SESSION['contest_creator']))){
+if (!(isset($_SESSION['administrator'])
+		||isset($_SESSION['contest_creator'])
+		||isset($_SESSION['problem_editor'])
+		)){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
@@ -34,8 +37,9 @@ echo "<center><table width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=6><input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "<tr><td>PID<td>Title<td>Date";
-if(isset($_SESSION['administrator'])){
-	echo "<td>Status<td>Edit<td>TestData</tr>";
+if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
+	if(isset($_SESSION['administrator'])) 	echo "<td>Status";
+	echo "<td>Edit<td>TestData</tr>";
 }
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
@@ -43,9 +47,11 @@ for (;$row=mysql_fetch_object($result);){
 	echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";
 	echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
 	echo "<td>".$row->in_date;
-	if(isset($_SESSION['administrator'])){
-		echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
-		.($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
+	if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
+		if(isset($_SESSION['administrator'])){
+			echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
+			.($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
+		}
 		echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
 		echo "<td><a href=quixplorer/index.php?action=list&dir=$row->problem_id&order=name&srt=yes>TestData</a>";
 	}

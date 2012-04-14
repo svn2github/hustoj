@@ -22,10 +22,14 @@
 		<a href="news_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_NEWS?></b></a>
 	<li>
 		<a href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a>
+		
+<?php }
+if (isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
+?>
 	<li>
 		<a href="problem_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_PROBLEM?></b></a>
 <?php }
-if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])){
+if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])||isset($_SESSION['problem_editor'])){
 ?>
 	<li>
 		<a href="problem_list.php" target="main"><b><?php echo $MSG_PROBLEM.$MSG_LIST?></b></a>

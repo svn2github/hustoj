@@ -1,6 +1,6 @@
 <?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
-if (!(isset($_SESSION['administrator']))){
+if (!(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }

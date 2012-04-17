@@ -1,4 +1,4 @@
-<?
+<?php
 function pwGen($password,$md5ed=False) 
 {
 	if (!$md5ed) $password=md5($password);

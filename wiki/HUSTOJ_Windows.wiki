@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Based on CoLinux, with Ubuntu12.04.
+Based on [http://www.colinux.org/ CoLinux], with Ubuntu12.04.
 
 
 = Details =

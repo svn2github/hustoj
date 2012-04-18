@@ -52,7 +52,7 @@ for (;$row=mysql_fetch_object($result);){
 			echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
 			.($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
 		}
-		if(isset($_SESSION["p".$row->problem_id])){
+		if(isset($_SESSION['administrator'])||isset($_SESSION["p".$row->problem_id])){
 			echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
 			echo "<td><a href=quixplorer/index.php?action=list&dir=$row->problem_id&order=name&srt=yes>TestData</a>";
 		}

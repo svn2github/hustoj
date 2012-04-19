@@ -35,7 +35,7 @@ CREATE TABLE `reply` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ";
 $tsql[2]="
-ALTER TABLE `jol`.`problem` DROP COLUMN `sample_Program`,
+ALTER TABLE `problem` DROP COLUMN `sample_Program`,
  DROP COLUMN `ratio`,
  DROP COLUMN `error`,
  DROP COLUMN `difficulty`,

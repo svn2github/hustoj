@@ -60,6 +60,7 @@ static char user_name[BUFFER_SIZE];
 static char password [BUFFER_SIZE];
 static char db_name  [BUFFER_SIZE];
 static char oj_home  [BUFFER_SIZE];
+static char oj_lang_set  [BUFFER_SIZE];
 static int port_number;
 static int max_running;
 static int sleep_time;
@@ -149,6 +150,7 @@ void init_mysql_conf() {
 	sleep_time=3;
 	oj_tot=1;
 	oj_mod=0;
+	oj_lang_set="0,1,2,3,4,5,6,7,8,9";
 	fp = fopen("./etc/judge.conf", "r");
 	if(fp!=NULL){
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
@@ -167,9 +169,10 @@ void init_mysql_conf() {
 			read_buf(buf,"OJ_HTTP_BASEURL",http_baseurl);
 			read_buf(buf,"OJ_HTTP_USERNAME",http_username);
 			read_buf(buf,"OJ_HTTP_PASSWORD",http_password);
+			read_buf(buf,"OJ_LANG_SET",oj_lang_set);
 			
 		}
-		sprintf(query,"SELECT solution_id FROM solution WHERE result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_tot,oj_mod,max_running*2);
+		sprintf(query,"SELECT solution_id FROM solution WHERE language in (%s) result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",oj_lang_set,oj_tot,oj_mod,max_running*2);
 		sleep_tmp=sleep_time;
 	//	fclose(fp);
     }

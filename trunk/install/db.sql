@@ -118,7 +118,7 @@ CREATE TABLE  `solution` (
   `memory` int(11) NOT NULL DEFAULT '0',
   `in_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `result` smallint(6) NOT NULL DEFAULT '0',
-  `language` tinyint(4) NOT NULL DEFAULT '0',
+  `language` INT UNSIGNED NOT NULL DEFAULT '0',
   `ip` char(15) NOT NULL,
   `contest_id` int(11) DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1',

@@ -35,6 +35,7 @@
 ?>
 </head>
 <body>
+<div id="wrapper">
 <div id=head>
 <h2><img id=logo src=./image/logo.png><span id="red">Welcome To <?php echo $OJ_NAME?> ACM-ICPC Online Judge</span></h2>
 </div><!--end head-->

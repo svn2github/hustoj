@@ -49,6 +49,7 @@
 </center>
 </div><!--end foot-->
 </div><!--end main-->
+</div><!--end wrapper-->
 </body>
 </html>
 <?php if(file_exists('./include/cache_end.php'))require_once('./include/cache_end.php');?>

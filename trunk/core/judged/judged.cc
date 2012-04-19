@@ -91,14 +91,14 @@ void write_log(const char *fmt, ...)
 	va_list         ap;
 	char            buffer[4096];
 //	time_t          t = time(NULL);
-	int             l;
+//	int             l;
 	sprintf(buffer,"%s/log/client.log",oj_home);
 	FILE *fp = fopen(buffer, "a+");
 	if (fp==NULL){
 		 fprintf(stderr,"openfile error!\n");
 		 system("pwd");
 	}va_start(ap, fmt);
-	l = vsprintf(buffer, fmt, ap);
+	vsprintf(buffer, fmt, ap);
 	fprintf(fp,"%s\n",buffer);
 	if (DEBUG) printf("%s\n",buffer);
 	va_end(ap);

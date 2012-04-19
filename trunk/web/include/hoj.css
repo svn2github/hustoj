@@ -9,6 +9,12 @@ a:hover {
 h2 {
     color: blue;
 }
+#wrapper {
+    width: 95%;
+    position: relative;
+    left: 2.5%;
+}
+
 .toprow {
     background-color: #1A5CC8;
     color: #FFFFFF;

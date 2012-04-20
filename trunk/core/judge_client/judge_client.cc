@@ -1189,8 +1189,8 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		chroot(work_dir);
 
 	// now the user is "judger"
-	if(setuid(1536)!=0) exit(42);
 	if(setgid(1536)!=0) exit(43);
+	if(setuid(1536)!=0) exit(42);
 	if(setresuid(1536, 1536, 1536)!=0) exit(44);
 	
 	switch (lang) {

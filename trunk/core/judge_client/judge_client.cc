@@ -1028,6 +1028,7 @@ void copy_shell_runtime(char * work_dir) {
         execute_cmd("mkdir %s/lib64", work_dir);
         execute_cmd("mkdir %s/bin", work_dir);
         execute_cmd("cp /lib/* %s/lib/", work_dir);
+        execute_cmd("cp /lib/i386-linux-gnu/* %s/lib/", work_dir);
         execute_cmd("cp /lib64/* %s/lib64/", work_dir);
         execute_cmd("cp -a /lib32 %s/", work_dir);
         execute_cmd("cp /bin/busybox %s/bin/", work_dir);
@@ -1321,6 +1322,7 @@ void clean_session(pid_t p){
         const char *pre = "ps awx -o \"\%p \%P\"|grep -w ";
         const char *post = " | awk \'{ print $1  }\'|xargs kill -9";
         execute_cmd("%s %d %s",pre,p,post);
+		execute_cmd("ps aux |grep \\^judge|awk '{print $2}'|xargs kill");
 }
 
 void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,

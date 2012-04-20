@@ -50,10 +50,13 @@ for (;$row=mysql_fetch_object($result);){
         if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
                 if(isset($_SESSION['administrator'])){
                         echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
-                        .($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
-                        ?>
-<td><a href=# onclick='javascript:if(confirm("Delete?")) location.href="problem_del.php?id=<?php echo $row->problem_id?>&getkey=<?php echo $_SESSION['getkey']?>";'>
-                        <?php echo "Delete"."</a>";
+                        .($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a><td>";
+                        if(function_exists("system")){
+                              ?>
+                              <a href=# onclick='javascript:if(confirm("Delete?")) location.href="problem_del.php?id=<?php echo $row->problem_id?>&getkey=<?php echo $_SESSION['getkey']?>";'>
+                              Delete</a>
+                              <?php
+                        }
                 }
                 if(isset($_SESSION['administrator'])||isset($_SESSION["p".$row->problem_id])){
                         echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";

@@ -50,6 +50,19 @@ if ($ok==true){
 <script>
    var pats=new Array();
    var exps=new Array();
+    <?php
+   $sql = "select * from ErrFeature where type=1;";
+   $result = mysql_query($sql);
+   $ix = 0;
+   while($row = mysql_fetch_object($result))
+   {
+        $pat = $row->regex;
+        echo "\npats[$ix]=new RegExp(\"$pat\");";
+        $exp = $row->info;
+        echo "\nexps[$ix]=\"$exp\";";
+        $ix++;
+   }
+   ?>
    pats[0]=/A Not allowed system call.* /;
    exps[0]="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源";
    pats[1]=/Segmentation fault/;

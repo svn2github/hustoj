@@ -38,7 +38,7 @@ if ($ok==true){
    var exps=new Array();
    
    <?php
-   $sql = "select * from ErrFeature;";
+   $sql = "select * from ErrFeature where type=1;";
    $result = mysql_query($sql);
    $ix = 0;
    while($row = mysql_fetch_object($result))

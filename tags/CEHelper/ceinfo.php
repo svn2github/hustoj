@@ -44,7 +44,7 @@ if ($ok==true){
    while($row = mysql_fetch_object($result))
    {
         $pat = $row->regex;
-        echo "\npats[$ix]=new RegExp($pat);";
+        echo "\npats[$ix]=new RegExp(\"$pat\");";
         $exp = $row->info;
         echo "\nexps[$ix]=\"$exp\";";
         $ix++;

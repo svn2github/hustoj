@@ -1,4 +1,4 @@
-<?php require_once("admin-header.php");
+ï»¿<?php require_once("admin-header.php");
 
 	if(isset($OJ_LANG)){
 		require_once("../lang/$OJ_LANG.php");
@@ -73,7 +73,7 @@ if (isset($_SESSION['administrator'])){
 <?php }
 if (isset($_SESSION['administrator'])){
 ?><li>
-	<a href="CEREhelp" target="main"><b><?php echo "¸¨Öú³ý´í¹ÜÀí"?></b></a>
+	<a href="CEREhelp" target="main"><b><?php echo "è¾…åŠ©é™¤é”™ç‰¹å¾ç®¡ç†"?></b></a>
 <?php }
 if (isset($_SESSION['administrator'])){
 ?><li>

@@ -36,6 +36,22 @@ if ($ok==true){
 <script>
    var pats=new Array();
    var exps=new Array();
+   
+   <?php
+   $sql = "select * from ErrFeature;";
+   $result = mysql_query($sql);
+   $ix = 0;
+   while($row = mysql_fetch_object($result))
+   {
+        $pat = $row->regex;
+        echo "\npats[$ix]=new RegExp($pat);";
+        $exp = $row->info;
+        echo "\nexps[$ix]=\"$exp\";";
+        $ix++;
+   }
+   ?>
+   if(0)
+   {
    pats[0]=/warning.*declaration of 'main' with no type/;
    exps[0]="C++标准中，main函数必须有返回值";
    pats[1]=/'.*' was not declared in this scope/;
@@ -90,7 +106,7 @@ if ($ok==true){
    exps[25]="变量不能当成函数用，检查变量名和函数名重复的情况，也可能是拼写错误。";
    pats[26]=/format .* expects type .* but argument .* has type .*/;
    exps[26]="scanf/printf的格式描述和后面的参数表不一致，检查是否多了或少了取址符“&”，也可能是拼写错误。";
-   
+   }
    function explain(){
      //alert("asdf");
        var errmsg=document.getElementById("errtxt").innerHTML;

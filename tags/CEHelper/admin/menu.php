@@ -73,12 +73,17 @@ if (isset($_SESSION['administrator'])){
 <?php }
 if (isset($_SESSION['administrator'])){
 ?><li>
+	<a href="CEREhelp" target="main"><b><?php echo "¸¨Öú³ý´í¹ÜÀí"?></b></a>
+<?php }
+if (isset($_SESSION['administrator'])){
+?><li>
 	<a href="problem_export.php" target="main"><b><?php echo $MSG_EXPORT.$MSG_PROBLEM?></b></a>
 <?php }
 if (isset($_SESSION['administrator'])){
 ?><li>
 	<a href="problem_import.php" target="main"><b><?php echo $MSG_IMPORT.$MSG_PROBLEM?></b></a>
 <?php }
+
 if (isset($_SESSION['administrator'])){
 ?><li>
 	<a href="update_db.php" target="main"><b><?php echo $MSG_UPDATE_DATABASE?></b></a>

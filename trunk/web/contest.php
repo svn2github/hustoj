@@ -1,5 +1,5 @@
 <?php
-	$OJ_CACHE_SHARE=false;
+	$OJ_CACHE_SHARE=!isset($_GET['cid']);
 require_once("./include/db_info.inc.php");
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
@@ -62,7 +62,7 @@ require_once("./include/db_info.inc.php");
 //	echo "<br>";
 	$result=mysql_query($sql);
 	$cnt=0;
-	echo "<table width=60%><tr class=toprow><td width=5><td width=34%><b>Problem ID</b><td width=65%><b>Title</b></tr>";
+	echo "<table id=problemset  width=80%><tr class=toprow><td width=5><td width=34%><b>Problem ID</b><td width=65%><b>Title</b></tr>";
 	while ($row=mysql_fetch_object($result)){
 		if ($cnt&1) echo "<tr class=oddrow>";
 		else echo "<tr class=evenrow>";

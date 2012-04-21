@@ -23,7 +23,7 @@ header("content-Type: text/html; charset=utf-8");
     }
     else if($action=='update')
     {
-        $id = $_REQUEST['id'];
+        $id = intval($_REQUEST['id']);
         $mysql = MySql::getInstance();
         $regex = mysql_real_escape_string($regex);
         $info = mysql_real_escape_string($info);

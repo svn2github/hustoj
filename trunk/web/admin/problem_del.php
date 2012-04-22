@@ -12,7 +12,10 @@ if (!(isset($_SESSION['administrator']))){
         $id=intval($_GET['id']);
         
         $basedir = "$OJ_DATA/$id";
-        system("rm -rf $basedir");
+        if($OJ_SAE)
+			;//need more code to delete files
+		else
+			system("rm -rf $basedir");
         $sql="delete FROM `problem` WHERE `problem_id`=$id";
         mysql_query($sql) or die(mysql_error());
         $sql="select max(problem_id) FROM `problem`" ;

@@ -6,9 +6,9 @@ if (!(isset($_SESSION['administrator']))){
         echo "<a href='../loginpage.php'>Please Login First!</a>";
         exit(1);
 }
-?>
+?> 
 <?php
-  if(function_exists('system')){
+  if($OJ_SAE||function_exists('system')){
         $id=intval($_GET['id']);
         
         $basedir = "$OJ_DATA/$id";

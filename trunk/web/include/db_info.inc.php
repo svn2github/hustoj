@@ -24,6 +24,7 @@ static  $OJ_APPENDCODE=false;
 static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
+static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 

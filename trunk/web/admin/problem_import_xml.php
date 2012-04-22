@@ -151,7 +151,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 						 
 						image_save_file($newpath,$base64);
 						$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
-						if($OJ_SAE) $newpath="http://hustoj-web.stor.sinaapp.com/upload/pimg".$pid."_".$testno.".".$ext;
+						if($OJ_SAE) $newpath=$SAE_STORAGE_ROOT."upload/pimg".$pid."_".$testno.".".$ext;
 						
 						$src=mysql_real_escape_string($src);
 						$newpath=mysql_real_escape_string($newpath);

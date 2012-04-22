@@ -39,9 +39,9 @@ $Config['Enabled'] = true ;
 
 $TARGETPATH="upload/".date("Ym")."/";
 $OJ_SAE=false;
-
+$SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 $Config['UserFilesPath'] = strstr($_SERVER['REQUEST_URI'],"fckeditor",1).$TARGETPATH ;
-if($OJ_SAE) $Config['UserFilesPath'] = "http://hustoj-web.stor.sinaapp.com/".$TARGETPATH ;
+if($OJ_SAE) $Config['UserFilesPath'] = $SAE_STORAGE_ROOT.$TARGETPATH ;
 
 // Fill the following value it you prefer to specify the absolute path for the
 // user files directory. Useful if you are using a virtual directory, symbolic

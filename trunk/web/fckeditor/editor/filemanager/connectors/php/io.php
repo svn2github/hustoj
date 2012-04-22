@@ -82,6 +82,7 @@ function ServerMapFolder( $resourceType, $folderPath, $sCommand )
 
 function GetParentFolder( $folderPath )
 {
+    if ($folderPath=="saestor://web") return $folderPath;
 	$sPattern = "-[/\\\\][^/\\\\]+[/\\\\]?$-" ;
 	return preg_replace( $sPattern, '', $folderPath ) ;
 }
@@ -92,13 +93,13 @@ function CreateServerFolder( $folderPath, $lastFolder = null )
 	$sParent = GetParentFolder( $folderPath ) ;
 
 	// Ensure the folder path has no double-slashes, or mkdir may fail on certain platforms
-	while ( strpos($folderPath, '//') !== false )
+	while (!$OJ_SAE&& strpos($folderPath, '//') !== false )
 	{
 		$folderPath = str_replace( '//', '/', $folderPath ) ;
 	}
 
 	// Check if the parent exists, or create it.
-	if ( !empty($sParent) && !file_exists( $sParent ) )
+	if ( !empty($sParent) && !file_exists( $sParent ) &&$sParent!="saestor://web")
 	{
 		//prevents agains infinite loop when we can't create root folder
 		if ( !is_null( $lastFolder ) && $lastFolder === $sParent) {

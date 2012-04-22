@@ -36,13 +36,19 @@ global $Config ;
 $Config['Enabled'] = true ;
 
 // Path to user files relative to the document root.
-$Config['UserFilesPath'] = strstr($_SERVER['REQUEST_URI'],"fckeditor",1)."upload/".date("Ym")."/"  ;
+
+$TARGETPATH="upload/".date("Ym")."/";
+$OJ_SAE=false;
+
+$Config['UserFilesPath'] = strstr($_SERVER['REQUEST_URI'],"fckeditor",1).$TARGETPATH ;
+if($OJ_SAE) $Config['UserFilesPath'] = "http://hustoj-web.stor.sinaapp.com/".$TARGETPATH ;
 
 // Fill the following value it you prefer to specify the absolute path for the
 // user files directory. Useful if you are using a virtual directory, symbolic
 // link or alias. Examples: 'C:\\MySite\\userfiles\\' or '/root/mysite/userfiles/'.
 // Attention: The above 'UserFilesPath' must point to the same directory.
-$Config['UserFilesAbsolutePath'] = '' ;
+$Config['UserFilesAbsolutePath'] = "" ;
+if($OJ_SAE) $Config['UserFilesAbsolutePath'] = "saestor://web/" .$TARGETPATH ;
 
 // Due to security issues with Apache modules, it is recommended to leave the
 // following setting enabled.

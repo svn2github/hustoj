@@ -146,8 +146,12 @@ if ($_FILES ["fps"] ["error"] > 0) {
 							exit(1);
 						}
 						$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
+						if($OJ_SAE) $newpath="saestor://web/upload/pimg".$pid."_".++$testno.".".$ext;
+						
 						image_save_file($newpath,$base64);
 						$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
+						if($OJ_SAE) $newpath="http://hustoj-web.stor.sinaapp.com/upload/pimg".$pid."_".++$testno.".".$ext;
+						
 						$src=mysql_real_escape_string($src);
 						$newpath=mysql_real_escape_string($newpath);
 						$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  

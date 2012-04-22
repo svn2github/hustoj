@@ -28,7 +28,8 @@ if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 
 	if($OJ_SAE)	{
-	// for sae.sina.com.cn
+		$OJ_DATA="saestor://data/";
+	//  for sae.sina.com.cn
 		mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
 		$DB_NAME=SAE_MYSQL_DB;
 	}else{

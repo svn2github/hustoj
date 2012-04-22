@@ -94,18 +94,8 @@
 </div><!--end subhead-->
 
 <?php echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250 onMouseOver='this.stop()' onMouseOut='this.start()';>";
-	
-	if($OJ_SAE&&$OJ_MEMCACHE){
-		$mem = new Memcache;
-        	$mem=memcache_init();
-        	echo $mem->get("msg");
-        	
-    }else{
-		require('./admin/msg.txt');
-	}
-	
-	echo "</marquee>";
+		echo	file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
+      echo "</marquee>";
 ?>
-
 
 <div id=main>

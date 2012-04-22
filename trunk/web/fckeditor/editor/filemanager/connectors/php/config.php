@@ -1,6 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['administrator'])){
+if (!(isset($_SESSION['administrator'])||
+      isset($_SESSION['problem_editor'])
+	  )){
 	exit(1);
 }
 /*

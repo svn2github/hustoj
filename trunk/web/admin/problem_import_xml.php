@@ -145,12 +145,13 @@ if ($_FILES ["fps"] ["error"] > 0) {
 							$ext="bad";
 							exit(1);
 						}
-						$newpath="../upload/pimg".$pid."_".++$testno.".".$ext;
-						if($OJ_SAE) $newpath="saestor://web/upload/pimg".$pid."_".++$testno.".".$ext;
-						
+						$testno++;
+						$newpath="../upload/pimg".$pid."_".$testno.".".$ext;
+						if($OJ_SAE) $newpath="saestor://web/upload/pimg".$pid."_".$testno.".".$ext;
+						 
 						image_save_file($newpath,$base64);
 						$newpath=dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
-						if($OJ_SAE) $newpath="http://hustoj-web.stor.sinaapp.com/upload/pimg".$pid."_".++$testno.".".$ext;
+						if($OJ_SAE) $newpath="http://hustoj-web.stor.sinaapp.com/upload/pimg".$pid."_".$testno.".".$ext;
 						
 						$src=mysql_real_escape_string($src);
 						$newpath=mysql_real_escape_string($newpath);

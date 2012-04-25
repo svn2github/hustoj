@@ -113,7 +113,7 @@ static int shm_run=0;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[10][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs" };
+static char lang_ext[11][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs" ,"java"};
 //static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -196,6 +196,9 @@ void init_syscalls_limits(int lang) {
     }else if (lang == 9) { // mono c#
             for (i = 0; LANG_CSC[i]; i++)
                     call_counter[LANG_CSV[i]] = LANG_CSC[i];
+    }else if (lang == 10) { // java with jdbc c#
+            for (i = 0; LANG_CSC[i]; i++)
+                    call_counter[LANG_JDV[i]] = LANG_JDC[i];
     }
 
 
@@ -754,7 +757,7 @@ int compile(int lang) {
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
         
     char javac_buf[4][16];
-    char *CP_J[5];
+    char *CP_J[6];
     for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
 	sprintf(CP_J[0],"javac");
 	sprintf(CP_J[1],"-J%s",java_xms);
@@ -812,6 +815,9 @@ int compile(int lang) {
 			break;
 		case 9:
 			execvp(CP_CS[0], (char * const *) CP_CS);
+			break;
+		case 10:
+			execvp(CP_J[0], (char * const *) CP_J);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -1154,7 +1160,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// proc limit
 	switch(lang){
     case 3:  //java
-        LIM.rlim_cur=LIM.rlim_max=50;
+        LIM.rlim_cur=LIM.rlim_max=500;
         break;
     case 5: //bash
                 LIM.rlim_cur=LIM.rlim_max=20;
@@ -1227,7 +1233,16 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 9: //Mono C#
 		execl("/mono","/mono","--debug","Main.exe",(char *)NULL);
         break;
+    case 10:
+		if(DEBUG) printf("%s,%s\n",java_xms,java_xmx);
+		execl("/usr/bin/java", "/usr/bin/java", java_xms,java_xmx,
+				"-cp","mysql.jar:.",
+	//			"-Djava.security.manager",
+	//			"-Djava.security.policy=./java.policy",
+	 "Main", (char *)NULL);
+		break;
 	}
+	//if(DEBUG) printf("%s,%s",java_xms,java_xmx);
 	//sleep(1);
 	exit(0);
 }
@@ -1391,7 +1406,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				}
 				print_runtimeerror(strsignal(exitcode));
 			}
-			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+			ptrace(PTRACE_KILL, pidApp, NULL, NULL); 
 
 			break;
 		}
@@ -1438,7 +1453,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 
-		if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
+		if (call_counter[reg.REG_SYSCALL] == 0&&lang!=10) { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 
 			char error[BUFFER_SIZE];
@@ -1622,8 +1637,12 @@ int main(int argc, char** argv) {
 		// the limit for java
 		time_lmt = time_lmt + java_time_bonus;
 		mem_lmt = mem_lmt + java_memory_bonus;
-		// copy java.policy
-		execute_cmd( "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
+		if(lang<10)// copy java.policy
+			execute_cmd( "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
+		else
+			execute_cmd( "cp %s/etc/java-mysql.policy %sjava.policy", oj_home, work_dir);
+		
+		execute_cmd( "cp %s/etc/mysql.jar %s/mysql.jar", oj_home, work_dir);
 
 	}
 

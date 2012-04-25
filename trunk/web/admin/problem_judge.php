@@ -139,7 +139,7 @@ if(isset($_POST['update_solution'])){
 
         } else{
         
-            $dir=opendir($OJ_DATA."$pid");
+            $dir=opendir($OJ_DATA."/$pid");
             while (($file = readdir($dir)) != "")
             {
               if(!is_dir($file)){

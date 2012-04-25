@@ -1562,6 +1562,26 @@ int count_in_files(char * dirpath){
         return ret;
 }
 
+int get_test_file(char* work_dir,int p_id){
+        char filename[BUFFER_SIZE];
+        char localfile[BUFFER_SIZE];
+	int ret=0;
+	const char  * cmd=" wget --post-data=\"gettestdatalist=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	FILE * fjobs=read_cmd_output(cmd,p_id,http_baseurl);
+	while(fgets(filename,BUFFER_SIZE-1,fjobs)!=NULL){
+  		sscanf(filename,"%s",filename);
+        	sprintf(localfile,"%s/data/%d/%s",oj_home,p_id,filename);
+		if(DEBUG) printf("localfile[%s]\n",localfile);
+	        if(access(localfile,0)==-1){	
+                        execute_cmd("mkdir -p %s/data/%d",oj_home,p_id);
+			const char * cmd2=" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s/admin/problem_judge.php\"";
+			execute_cmd(cmd2,p_id,filename,localfile,http_baseurl);
+                        ret++;
+		}
+	}
+	pclose(fjobs);
+	return ret;
+}
 int main(int argc, char** argv) {
 
 	char work_dir[BUFFER_SIZE];
@@ -1648,7 +1668,11 @@ int main(int argc, char** argv) {
 	// open DIRs
 	DIR *dp;
 	dirent *dirp;
+        // using http to get remote test data files
+	if (http_judge)
+                get_test_file(work_dir,p_id);
 	if ((dp = opendir(fullpath)) == NULL) {
+		
 		write_log("No such dir:%s!\n", fullpath);
 		if(!http_judge)
 			mysql_close(conn);
@@ -1673,7 +1697,6 @@ int main(int argc, char** argv) {
                 copy_perl_runtime(work_dir);
         if (lang == 9)
                 copy_mono_runtime(work_dir);
-
 	// read files and run
 	double pass_rate=0.0;
 	int num_of_test=0;

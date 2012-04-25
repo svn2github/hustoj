@@ -1573,13 +1573,32 @@ int get_test_file(char* work_dir,int p_id){
                 sprintf(localfile,"%s/data/%d/%s",oj_home,p_id,filename);
                 if(DEBUG) printf("localfile[%s]\n",localfile);
                 if(access(localfile,0)==-1){    
+                        if(strcmp(filename,"spj")==0) continue;
                         execute_cmd("mkdir -p %s/data/%d",oj_home,p_id);
                         const char * cmd2=" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s/admin/problem_judge.php\"";
                         execute_cmd(cmd2,p_id,filename,localfile,http_baseurl);
                         ret++;
+                        
+                        if(strcmp(filename,"spj.c")==0){
+                         //   sprintf(localfile,"%s/data/%d/spj.c",oj_home,p_id);
+                            if(access(localfile,0)==0){
+                                const char * cmd3="gcc -o %s/data/%d/spj %s/data/%d/spj.c";
+                                execute_cmd(cmd3,oj_home,p_id,oj_home,p_id);
+                            }
+                        
+                        }
+                        if(strcmp(filename,"spj.cc")==0){
+                        //     sprintf(localfile,"%s/data/%d/spj.cc",oj_home,p_id);
+                            if(access(localfile,0)==0){
+                                const char * cmd4="g++ -o %s/data/%d/spj %s/data/%d/spj.cc";
+                                execute_cmd(cmd4,oj_home,p_id,oj_home,p_id);
+                            }
+                        }
                 }
+                
         }
         pclose(fjobs);
+        
         return ret;
 }
 int main(int argc, char** argv) {

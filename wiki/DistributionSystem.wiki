@@ -66,9 +66,10 @@ OJ_TOTAL都设为3，OJ_MOD分别设为0,1,2~~
 
 *从r784开始不必设置OJ_TOTAL和OJ_MOD,所有judged会自动分配任务。*
 
-第四，复制测试数据目录到各判题机。
+~~第四，复制测试数据目录到各判题机。~~
 
 *从r1520开始，使用HTTP_JUDGE方式不必单独复制数据，数据将从web服务器按需下载。
+
 从主机向判题机复制
 {{{
    scp -r /home/judge/data  root@判题机ip:/home/judge/

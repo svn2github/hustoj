@@ -2,8 +2,8 @@
 if (!(isset($_SESSION['http_judge']))){
 	echo "0";
 	exit(1);
-}?>
-<?php if(isset($_POST['update_solution'])){
+}
+if(isset($_POST['update_solution'])){
 	//require_once("../include/check_post_key.php");
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
@@ -105,7 +105,7 @@ if (!(isset($_SESSION['http_judge']))){
 	
 }else if(isset($_POST['updateproblem'])){
 	
-	 $pid=intval($_POST['pid']);
+	$pid=intval($_POST['pid']);
 	$sql="UPDATE `problem` SET `accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=$pid AND `result`=4) WHERE `problem_id`=$pid";
 	//echo $sql;
 	mysql_query($sql);
@@ -117,21 +117,71 @@ if (!(isset($_SESSION['http_judge']))){
 	
 }else if(isset($_POST['checklogin'])){
 	echo "1";
+}else if(isset($_POST['gettestdatalist'])){
+
+
+	$pid=intval($_POST['pid']);
+      
+  	if($OJ_SAE){
+          //echo $OJ_DATA."$pid";
+         
+           $store = new SaeStorage();
+           $ret = $store->getList("data", "$pid" );
+            foreach($ret as $file) {
+              if(!strstr($file,"sae-dir-tag")){
+                     $file=pathinfo($file);
+                     $file=$file['basename'];
+                    		 echo $file."\n";   
+              }
+                    
+            }
+
+
+        } else{
+        
+            $dir=opendir($OJ_DATA."$pid");
+            while (($file = readdir($dir)) != "")
+            {
+              if(!is_dir($file)){
+               	    $file=pathinfo($file);
+                    $file=$file['basename'];
+                    echo "$file\n";
+              }
+            }
+            closedir($dir);
+        }
+        
+	
+}else if(isset($_POST['gettestdata'])){
+	$file=$_POST['filename'];
+        if($OJ_SAE){ 
+		$store = new SaeStorage();
+                if($store->fileExists("data",$file)){
+                       
+                		echo $store->read("data",$file);
+                }
+                
+        }else{
+          	echo file_get_contents($OJ_DATA.'/'.$file);
+        }
+           
 }else{
 ?>
 
 <form action='problem_judge.php' method=post>
 	<b>HTTP Judge:</b><br />
 	sid:<input type=text size=10 name="sid" value=1244><br />
+	pid:<input type=text size=10 name="pid" value=1000><br />
 	result:<input type=text size=10 name="result" value=4><br />
 	time:<input type=text size=10 name="time" value=500><br />
 	memory:<input type=text size=10 name="memory" value=1024><br />
 	sim:<input type=text size=10 name="sim" value=100><br />
 	simid:<input type=text size=10 name="simid" value=0><br />
+  	gettestdata:<input type=text size=10 name="filename" value="1000/test.in"><br />
 	
-	<input type='hidden' name='update_solution' value='do'>
-	<?php require_once("../include/set_post_key.php");?>
+        <input type='hidden' name='gettestdatalist' value='do'>
 	<input type=submit value='Judge'>
 </form>
-<?php }
+<?php 
+}
 ?>

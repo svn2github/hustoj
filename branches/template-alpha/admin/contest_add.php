@@ -2,7 +2,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Add a contest</title>
 
-<?php if (isset($_POST['syear']))
+<?php
+$description="";
+ if (isset($_POST['syear']))
 {
 	
 	require_once("../include/db_info.inc.php");
@@ -155,7 +157,6 @@ $fck_description = new FCKeditor('description') ;
 $fck_description->BasePath = '../fckeditor/' ;
 $fck_description->Height = 300 ;
 $fck_description->Width=600;
-
 $fck_description->Value = $description ;
 $fck_description->Create() ;
 

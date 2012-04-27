@@ -1,5 +1,3 @@
-<?php require_once('oj-header.php');?>
-<title>Export All AC Source</title>
 <?php if (!isset($_SESSION['user_id'])){
 	echo "<a href=./loginpage.php>Please LogIn First!</a>";
 	require_once('oj-footer.php');
@@ -12,10 +10,9 @@ $sql="select distinct source,problem_id from source_code right join
 
 $result=mysql_query($sql);
 while($row=mysql_fetch_object($result)){
-	echo "<h2>Problem".$row->problem_id."</h2>";
-	echo "<pre>".htmlspecialchars($row->source)."</pre>";
+	echo "Problem".$row->problem_id.":";
+	echo "$row->source;
 	
 }
 mysql_free_result($result);
 ?>
-<?php require_once('oj-footer.php');?>

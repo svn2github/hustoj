@@ -1,6 +1,11 @@
 <?php
 	$OJ_CACHE_SHARE=false;
 	$cache_time=30;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= $MSG_RANKLIST;
+	
 	$scope="";
 	if(isset($_GET['scope']))
 		$scope=$_GET['scope'];
@@ -15,7 +20,7 @@
 		?>
 		<?php require_once ("oj-header.php");
 		?>
-	<title>Rank List</title>
+	
 
 	<?php require_once ("./include/db_info.inc.php");
 		

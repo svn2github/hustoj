@@ -158,7 +158,7 @@ else
                 }
 				$view_status[$i][2].="</div></a>";
         }else{
-                $view_status[$i][2]= "<a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
+                $view_status[$i][2]= "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
         }
 
        

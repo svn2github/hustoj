@@ -51,8 +51,9 @@ if (isset($_GET['id'])){
 	mysql_free_result($result);
 	if ($ok_cnt!=1){
 		// not started
-		echo "No such Contest!";
-		require_once("oj-footer.php");
+		$view_errors=  "No such Contest!";
+	
+		require("template/".$OJ_TEMPLATE."/error.html");
 		exit(0);
 	}else{
 		// started
@@ -62,14 +63,15 @@ if (isset($_GET['id'])){
 	}
 	// public
 	if (!$contest_ok){
-		echo "Not Invited!";
-		require_once("oj-footer.php");
-		exit(1);
+	
+		$view_errors= "Not Invited!";
+		require("template/".$OJ_TEMPLATE."/error.html");
+		exit(0);
 	}
 	$co_flag=true;
 }else{
-	echo "<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
-	require_once("oj-footer.php");
+	$view_errors=  "<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
+	require("template/".$OJ_TEMPLATE."/error.html");
 	exit(0);
 }
 $result=mysql_query($sql) or die(mysql_error());

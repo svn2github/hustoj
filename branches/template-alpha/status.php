@@ -137,26 +137,26 @@ else
 	
 		if ($top==-1) $top=$row['solution_id'];
         $bottom=$row['solution_id'];
-        $flag=(!is_running(intval($row['contest_id']))) ||
+		$flag=(!is_running(intval($row['contest_id']))) ||
                         isset($_SESSION['source_browser']) ||
                         isset($_SESSION['administrator']) || 
-
                         (isset($_SESSION['user_id'])&&!strcmp($row['user_id'],$_SESSION['user_id']));
 
         $cnt=1-$cnt;
-
+	
+        
         $view_status[$i][0]= $row['solution_id'];
         $view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
 
        if ($row['contest_id']>0) {
-                $view_status[$i][2]= "<a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+                $view_status[$i][2]= "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
                 if(isset($cid)){
-                         $view_status[$i][2].= $PID[$row['num']]."</a>";
+                        $view_status[$i][2].= $PID[$row['num']];
                 }else{
-                        $view_status[$i][2].= $row['problem_id']."</a>";
+                        $view_status[$i][2].= $row['problem_id'];
                 }
-
+				$view_status[$i][2].="</div></a>";
         }else{
                 $view_status[$i][2]= "<a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
         }
@@ -197,15 +197,15 @@ else
 
 
                 if ($row['result']>=4){
-                        $view_status[$i][4]= "<span class=red>".$row['memory'];
-                        $view_status[$i][5]= "<span class=red>".$row['time'];
-						
+                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']."</div>";
+                        $view_status[$i][5]= "<div id=center class=red>".$row['time']."</div>";
+						//echo "=========".$row['memory']."========";
                 }else{
                         $view_status[$i][4]= "---";
                         $view_status[$i][5]= "---";
 						
                 }
-
+				//echo $row['result'];
                 if (!(isset($_SESSION['user_id'])&&strtolower($row['user_id'])==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                         $view_status[$i][6]=$language_name[$row['language']];
                 }else{
@@ -221,11 +221,12 @@ else
                 $view_status[$i][7]= $row['code_length']." B";
 				
         }else
-			
-		$view_status[$i][4]="----";
-        $view_status[$i][5]="----";
-        $view_status[$i][6]="----";
-        $view_status[$i][7]="----";
+		{
+			$view_status[$i][4]="----";
+			$view_status[$i][5]="----";
+			$view_status[$i][6]="----";
+			$view_status[$i][7]="----";
+		}
         $view_status[$i][8]= $row['in_date'];
         
    

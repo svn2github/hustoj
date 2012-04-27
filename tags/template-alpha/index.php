@@ -1,9 +1,15 @@
 <?php
-$cache_time=60;
-$OJ_CACHE_SHARE=false;
- require_once("oj-header.php");
-	require_once("./include/db_info.inc.php");
-	echo "<title>Welcome To Online Judge</title>";
+////////////////////////////Common head
+	$cache_time=10;
+	$OJ_CACHE_SHARE=false;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= "Welcome To Online Judge";
+	
+///////////////////////////MAIN	
+	
+	$view_news="";
 	$sql=	"SELECT * "
 			."FROM `news` "
 			."WHERE `defunct`!='Y'"
@@ -11,35 +17,29 @@ $OJ_CACHE_SHARE=false;
 			."LIMIT 5";
 	$result=mysql_query($sql);//mysql_escape_string($sql));
 	if (!$result){
-		echo "<h3>No News Now!</h3>";
-		echo mysql_error();
+		$view_news= "<h3>No News Now!</h3>";
+		$view_news.= mysql_error();
 	}else{
-		echo "<table width=96%>";
+		$view_news.= "<table width=96%>";
 		
 		while ($row=mysql_fetch_object($result)){
-			echo "<tr><td><td><big><b>".$row->title."</b></big>-<small>[".$row->user_id."]</small></tr>";
-			echo "<tr><td><td>".$row->content."</tr>";
+			$view_news.= "<tr><td><td><big><b>".$row->title."</b></big>-<small>[".$row->user_id."]</small></tr>";
+			$view_news.= "<tr><td><td>".$row->content."</tr>";
 		}
 		mysql_free_result($result);
-		echo "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a></tr>";
-		echo "</table>";
+		$view_news.= "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a></tr>";
+		$view_news.= "</table>";
 	}
-?>
-<?php if(function_exists('apc_cache_info')): ?>
-<?php $_apc_cache_info = apc_cache_info(); ?>
-<div style="text-align:center">
-<div style="margin: auto; width:400px; text-align:left">
-<h4>Alternative PHP Cache:<strong>ACTIVE</strong></h4>
-<strong>Performace Data<strong>
-<ul id="apc">
-	<li><span>Hits: </span><?php echo $_apc_cache_info['num_hits']?></li>
-	<li><span>Misses: </span><?php echo $_apc_cache_info['num_misses']?></li>
-	<li><span>Entries: </span><?php echo $_apc_cache_info['num_entries']?></li>
-	<li><span>Inserts: </span><?php echo $_apc_cache_info['num_inserts']?></li>
-	<li><span>Cached Files: </span><?php echo $_apc_cache_info['mem_size']/1024?>KB</li>
-</ul>
-</div>
-</div>
-<?php endif;?>
+$view_apc_info="";
 
-<?php require('oj-footer.php');?>
+if(function_exists('apc_cache_info')){
+	 $_apc_cache_info = apc_cache_info(); 
+		$view_apc_info =_apc_cache_info;
+}
+
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/index.html");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
+?>

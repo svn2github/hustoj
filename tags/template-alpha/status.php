@@ -1,26 +1,25 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-        @session_start();
-        require_once("./include/db_info.inc.php");
-  $cache_time=2;
-        require_once("./include/cache_start.php");
+
+////////////////////////////Common head
+	$cache_time=2;
+	$OJ_CACHE_SHARE=false;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= "$MSG_STATUS";
+	
+
         
 require_once("./include/my_func.inc.php");
-require_once("./include/db_info.inc.php");
+
 if(isset($OJ_LANG)){
                 require_once("./lang/$OJ_LANG.php");
         }
 require_once("./include/const.inc.php");
 
-?>
-
-
-<meta http-equiv='refresh' content='60'>
-<title>Submission Status</title>
-
-
-<?php $str2="";
+$str2="";
 
 $sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
@@ -146,7 +145,7 @@ echo "</select>";
 echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
 </div>
-<table align=center width=80%>
+<table class=content-box-header align=center width=80%>
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
 <td ><?php echo $MSG_USER?>
@@ -308,5 +307,11 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 ?>
 </div>
 
-<?php require_once("oj-footer.php");?>
-<?php require_once("./include/cache_end.php");?>
+<?php
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/status.html");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
+?>
+

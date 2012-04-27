@@ -1,12 +1,12 @@
-<title>Problem Set</title>
 <?php 
-$OJ_CACHE_SHARE=false;
-$cache_time=10;
-require_once("oj-header.php");
-require_once("./include/db_info.inc.php");
-?>
-<script src="include/sortTable.js"></script>
-<?php $sql="SELECT max(`problem_id`) as upid FROM `problem`";
+	$OJ_CACHE_SHARE=false;
+	$cache_time=10;
+	require_once('./include/db_info.inc.php');
+	require_once('./include/cache_start.php');
+	require_once('./include/setlang.php');
+    $view_title= "Problem Set";
+    
+$sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
 $result=mysql_query($sql);
 echo mysql_error();
@@ -89,48 +89,38 @@ else{
 
 }
 $sql.=" ORDER BY `problem_id`";
-?>
 
 
-<?php $result=mysql_query($sql) or die(mysql_error());
-echo "<h3 align='center'>";
-for ($i=1;$i<=$cnt+1;$i++){
-	if ($i>1) echo '&nbsp;';
-	if ($i==$page) echo "<span class=red>$i</span>";
-	else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
-}
-echo "</h3>";
-echo "<center><table id='problemset' width='90%'>";
-echo "<thead><tr align='center' class='evenrow'><td width='5'></td>";
-echo "<td width='10%' colspan='1'><form action=problem.php>Problem ID<input type='text' name='id' size=5><input type='submit' value='GO' ></form></td>";
-echo "<td width='90%' colspan='4'><form>$MSG_SEARCH<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td>";
-echo "</tr><tr align=center class='toprow'>";
-echo "<td width='5'><td style=\"cursor:hand\" onclick=\"sortTable('problemset', 1, 'int');\" width=10%><A>$MSG_PROBLEM_ID</A>";
-echo "<td width='60%'>$MSG_TITLE</td><td width='10%'>$MSG_SOURCE</td>";
-echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 4, 'int');\" width='5%'><A>$MSG_AC</A></td>";
-echo "<td style=\"cursor:hand\" onclick=\"sortTable('problemset', 5, 'int');\" width='5%'><A>$MSG_SUBMIT</A></td></tr>";
-echo "</thead><tbody>";
+$result=mysql_query($sql) or die(mysql_error());
+
+$view_total_page=$cnt+1;
+
 $cnt=0;
+$view_problemset=Array();
+$i=0;
 while ($row=mysql_fetch_object($result)){
-	if ($cnt) echo "<tr class='oddrow'>";
-	else echo "<tr class='evenrow'>";
-	echo "<td>";
+	
+	
+	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row->problem_id])){
-		if (isset($acc_arr[$row->problem_id])) echo "<span class=yes>Y</span>";
-		else echo "<span class=no>N</span>";
+		if (isset($acc_arr[$row->problem_id])) 
+			$view_problemset[$i][0]="<span class=yes>Y</span>";
+		else 
+			$view_problemset[$i][0]= "<span class=no>N</span>";
 	}
-	echo "</td>";
-	echo "<td align='center'>".$row->problem_id."</td>";
-	echo "<td align='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></td>";
-	echo "<td align='center'><nobr>".mb_substr($row->source,0,8,'utf8')."</nobr></td>";
-	echo "<td align='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>"
-		.$row->accepted."</a></td><td align='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></td>";
-	echo "</tr>";
-	$cnt=1-$cnt;
+	$view_problemset[$i][1]=$row->problem_id;
+	$view_problemset[$i][2]=$row->title;
+	$view_problemset[$i][3]=$row->source;
+	$view_problemset[$i][4]=$row->accepted;
+	$view_problemset[$i][5]=$row->submit;
+	
+	
+	$i++;
 }
 mysql_free_result($result);
-echo "</tbody>";
 
-echo "</table></center>";
+
+require("template/".$OJ_TEMPLATE."/problemset.html");
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
 ?>
-<?php require_once("oj-footer.php")?>

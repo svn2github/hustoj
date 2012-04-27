@@ -1,31 +1,28 @@
 <?php
-$cache_time=10;
-$OJ_CACHE_SHARE=false;
- require_once("./include/db_info.inc.php");
-if(isset($OJ_LANG)){
-		require_once("./lang/$OJ_LANG.php");
-	}
+	$cache_time=10;
+	$OJ_CACHE_SHARE=false;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= "Welcome To Online Judge";
 require_once("./include/const.inc.php");
-require_once("oj-header.php");
+
 $id=strval(intval($_GET['id']));
 if (isset($_GET['page']))
 	$page=strval(intval($_GET['page']));
 else $page=0;
 
-echo "<title>Problem $id Status</title>";
 ?>
-<script type="text/javascript" src="include/wz_jsgraphics.js"></script>
-<script type="text/javascript" src="include/pie.js"></script>
-<script src="include/sortTable.js"></script>
-<?php echo "<h1>Problem $id Status</h1>";
 
-echo "<center><table><tr><td>";
-echo "<table id=statics >";
+<?php 
+$view_problem=array();
+
 // total submit
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql) or die(mysql_error());
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=#D7EBFF><td>$MSG_SUBMIT<td>".$row[0]."</tr>";
+$view_problem[0][0]=$MSG_SUBMIT;
+$view_problem[0][1]=$row[0];
 $total=intval($row[0]);
 mysql_free_result($result);
 
@@ -33,7 +30,9 @@ mysql_free_result($result);
 $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id'";
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
-echo "<tr bgcolor=#D7EBFF><td>$MSG_USER($MSG_SUBMIT)<td>".$row[0]."</tr>";
+
+$view_problem[1][0]="$MSG_USER($MSG_SUBMIT)";
+$view_problem[1][1]=$row[0];
 mysql_free_result($result);
 
 // ac users
@@ -41,43 +40,27 @@ $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id' AND re
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 $acuser=intval($row[0]);
-echo "<tr bgcolor=#D7EBFF><td>$MSG_USER($MSG_SOVLED)<td>".$row[0]."</tr>";
+
+$view_problem[2][0]="$MSG_USER($MSG_SOVLED)";
+$view_problem[2][1]=$row[0];
 mysql_free_result($result);
 
 //for ($i=4;$i<12;$i++){
-	//$i=0;
+	$i=3;
 	$sql="SELECT result,count(1) FROM solution WHERE problem_id='$id' AND result>=4 group by result order by result";
 	$result=mysql_query($sql);
 	while($row=mysql_fetch_array($result)){
 		
-		//i++;
-		echo "<tr bgcolor=#D7EBFF><td>".$jresult[$row[0]]."<td><a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a></tr>";
+		$view_problem[$i][0] =$jresult[$row[0]];
+		$view_problem[$i][1] ="<a href=status.php?problem_id=$id&jresult=".$row[0]." >".$row[1]."</a>";
+		$i++;
 	}
 	mysql_free_result($result);
 	
 //}
-echo "<tr id=pie bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>";
-echo "</table>";
-?>
-<script language="javascript">
-	var y= new Array ();
-	var x = new Array ();
-	var dt=document.getElementById("statics");
-	var data=dt.rows;
-	var n;
-	for(var i=3;dt.rows[i].id!="pie";i++){
-			x.push(dt.rows[i].cells[0].innerHTML);
-			n=dt.rows[i].cells[1].firstChild;
-			n=n.innerText || n.textContent;
-			//alert(n);
-			n=parseInt(n);
-			y.push(n);
-	}
-	var mypie=  new Pie("PieDiv");
-	mypie.drawPie(y,x);
-	//mypie.clearPie();
 
-</script> 
+?>
+
 
 <?php $pagemin=0; $pagemax=intval(($acuser-1)/20);
 
@@ -132,62 +115,48 @@ LIMIT  $start, $sz";
 
 $result=mysql_query($sql);
 
-echo "<td>";
-echo "<table id=problemstatus><thead>";
-echo "<tr class=toprow><td style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 0, 'int');\">$MSG_Number
-<td>RunID
-<td>$MSG_USER
-<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 3, 'int');\">$MSG_MEMORY
-<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 4, 'int');\">$MSG_TIME
-<td>$MSG_LANG
-<td  style=\"cursor:hand\" onclick=\"sortTable('problemstatus', 6, 'int');\">$MSG_CODE_LENGTH
-<td>$MSG_SUBMIT_TIME</tr></thead><tbody>";
+
+$view_solution=array();
+$j=0;
 for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
 	$sscore=strval($row->score);
 	$s_time=intval(substr($sscore,1,8));
 	$s_memory=intval(substr($sscore,9,6));
 	$s_cl=intval(substr($sscore,15,5));
-	if ($i&1) echo "<tr class=oddrow>";
-	else echo "<tr class=evenrow>";
-	echo "<td>$i";
-	echo "<td>$row->solution_id";
-	if (intval($row->att)>1) echo "(".$row->att.")";
-	echo "<td><a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
+	
+	$view_solution[$j][0]= "$i";
+	$view_solution[$j][1]=  "$row->solution_id";
+	if (intval($row->att)>1) $view_solution[$j][1].=  "(".$row->att.")";
+	$view_solution[$j][2]=  "<a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
 	echo "<td>";
-	if ($flag) echo "$s_memory KB";
-	else echo "------";
-	echo "<td>";
-	if ($flag) echo "$s_time MS";
-	else echo "------";
+	if ($flag) $view_solution[$j][3]=  "$s_memory KB";
+	else $view_solution[$j][3]=  "------";
+	
+	if ($flag) $view_solution[$j][4]=  "$s_time MS";
+	else $view_solution[$j][4]=  "------";
 	
 	if (!(isset($_SESSION['user_id'])&&!strcasecmp($row->user_id,$_SESSION['user_id']) ||
 		isset($_SESSION['source_browser'])||
 		(isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&$AC))){
-		echo "<td>".$language_name[$row->language];
+		$view_solution[$j][5]= $language_name[$row->language];
 	}else{
-		echo "<td><a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";
-	}echo "<td>";
-	if ($flag) echo "$s_cl B";
-	else echo "------";
-	echo "<td>$row->in_date";
-	echo "</tr>";
-}
-echo "</tbody></table>";
-mysql_free_result($result);
-echo "<a href='problemstatus.php?id=$id'>[TOP]</a>";
-echo "&nbsp;&nbsp;<a href='status.php?problem_id=$id'>[STATUS]</a>";
-if ($page>$pagemin){
-	$page--;
-	echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[PREV]</a>";
-	$page++;
-}
-if ($page<$pagemax){
-	$page++;
-	echo "&nbsp;&nbsp;<a href='problemstatus.php?id=$id&page=$page'>[NEXT]</a>";
-	$page--;
+		$view_solution[$j][5]=  "<a target=_blank href=showsource.php?id=".$row->solution_id.">".$language_name[$row->language]."</a>";
+	}
+	if ($flag) $view_solution[$j][6]=  "$s_cl B";
+	else $view_solution[$j][6]=  "------";
+	$view_solution[$j][7]=  "$row->in_date";
+	$j++;
 }
 
+mysql_free_result($result);
+
+
 echo "</tr></table></center>";
-require_once("oj-footer.php");
+
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/problemstatus.html");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
 ?>
 

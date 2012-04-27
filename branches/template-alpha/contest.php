@@ -41,24 +41,21 @@
 				
 				
 				if (!isset($_SESSION['administrator']) && $now<$start_time){
-					echo "</center>";
-					require_once("oj-footer.php");
+					$view_errors=  "<h2>Private Contest is used as Exam, problem can't view after finished.</h2>";
+					require("template/".$OJ_TEMPLATE."/error.html");
 					exit(0);
 				}
 			}
 			if (!$contest_ok){
-				echo "<br><h1>Not Invited!</h1>";
-				require_once("oj-footer.php");
-				exit(1);
+				$view_errors=  "<h2>Not invited or not login!</h2>";
+				require("template/".$OJ_TEMPLATE."/error.html");
+				exit(0);
 			}
 			$sql="SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,problem.source as source, problem.accepted as accepted, problem.submit as submit
 				FROM `contest_problem`,`problem`
 				WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` AND `problem`.`defunct`='N'
 				AND `contest_problem`.`contest_id`='$cid' ORDER BY `contest_problem`.`num`";
-		//	echo $cid;
-		//	echo "<br>";
-		//	echo $sql;
-		//	echo "<br>";
+		
 			$result=mysql_query($sql);
 			$view_problemset=Array();
 			
@@ -75,10 +72,9 @@
 				$view_problemset[$cnt][5]=$row->submit ;
 				$cnt++;
 			}
-			echo "</table><br>";
+		
 			mysql_free_result($result);
 
-			echo "</center>";
 }else{
 
 		    $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC";

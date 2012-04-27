@@ -7,37 +7,38 @@
 
 	if (isset($_GET['cid'])){
 			$cid=intval($_GET['cid']);
+			$view_cid=$cid;
 		//	print $cid;
-
-			require_once("contest-header.php");
+			
+			
 			// check contest valid
-			$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `defunct`='N' ";
+			$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' ";
 			$result=mysql_query($sql);
 			$rows_cnt=mysql_num_rows($result);
-			echo "<center>";
+			$contest_ok=true;
+			
+			
 			if ($rows_cnt==0){
 				mysql_free_result($result);
-				echo "<h2>No Such Contest!</h2>";
-				require_once("oj-footer.php");
-				exit(0);
+				$view_title= "No Such Contest!";
+				
 			}else{
 				$row=mysql_fetch_object($result);
+				$view_private=$row->private;
+				if ($row->private && !isset($_SESSION['c'.$cid])) $contest_ok=false;
+				if ($row->defunct=='Y') $contest_ok=false;
+				if (isset($_SESSION['administrator'])) $contest_ok=true;
+									
 				$now=time();
 				$start_time=strtotime($row->start_time);
 				$end_time=strtotime($row->end_time);
-				$description=$row->description;
-				echo "<title>Contest - $row->title</title>";
-				echo "<h3>Contest - $row->title</h3>
-					
-						<p>$description</p>
-						<br>Start Time: <font color=#993399>$row->start_time</font> ";
-				echo "End Time: <font color=#993399>$row->end_time</font><br>";
-				echo "Current Time: <font color=#993399><span id=nowdate >".date("Y-m-d H:i:s")."</span></font> Status:";
-				if ($now>$end_time) echo "<font color=red>Ended</font>";
-				else if ($now<$start_time) echo "<font color=red>Not Started</font>";
-				else echo "<font color=red>Running</font>";
-				if ($row->private=='0') echo "&nbsp;&nbsp;<font color=blue>Public</font>";
-				else echo "&nbsp;&nbsp;<font color=red>Private</font>"; 
+				$view_description=$row->description;
+				$view_title= $row->title;
+				$view_start_time=$row->start_time;
+				$view_end_time=$row->end_time;
+				
+				
+				
 				if (!isset($_SESSION['administrator']) && $now<$start_time){
 					echo "</center>";
 					require_once("oj-footer.php");
@@ -49,7 +50,7 @@
 				require_once("oj-footer.php");
 				exit(1);
 			}
-			$sql="SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`
+			$sql="SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,problem.source as source, problem.accepted as accepted, problem.submit as submit
 				FROM `contest_problem`,`problem`
 				WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` AND `problem`.`defunct`='N'
 				AND `contest_problem`.`contest_id`='$cid' ORDER BY `contest_problem`.`num`";
@@ -58,23 +59,24 @@
 		//	echo $sql;
 		//	echo "<br>";
 			$result=mysql_query($sql);
+			$view_problemset=Array();
+			
 			$cnt=0;
-			echo "<table id=problemset  width=80%><tr class=toprow><td width=5><td width=34%><b>Problem ID</b><td width=65%><b>Title</b></tr>";
 			while ($row=mysql_fetch_object($result)){
-				if ($cnt&1) echo "<tr class=oddrow>";
-				else echo "<tr class=evenrow>";
-				echo "<td>";
-				if (isset($_SESSION['user_id'])) echo check_ac($cid,$cnt);
-				echo "<td>$row->pid Problem $PID[$cnt]
-					<td><a href='problem.php?cid=$cid&pid=$cnt'>$row->title</a>
-					</tr>";
+				
+				$view_problemset[$cnt][0]="";
+				if (isset($_SESSION['user_id'])) 
+					$view_problemset[$cnt][0]=check_ac($cid,$cnt);
+				$view_problemset[$cnt][1]= "$row->pid Problem &nbsp;".(chr($cnt+ord('A')));
+				$view_problemset[$cnt][2]= "<a href='problem.php?cid=$cid&pid=$cnt'>$row->title</a>";
+				$view_problemset[$cnt][3]=$row->source ;
+				$view_problemset[$cnt][4]=$row->accepted ;
+				$view_problemset[$cnt][5]=$row->submit ;
 				$cnt++;
 			}
 			echo "</table><br>";
 			mysql_free_result($result);
-			echo "[<a href='status.php?cid=$cid'>Status</a>]";
-			echo "[<a href='contestrank.php?cid=$cid'>Standing</a>]";
-			echo "[<a href='conteststatistics.php?cid=$cid'>Statistics</a>]";
+
 			echo "</center>";
 }else{
 

@@ -107,6 +107,8 @@ while ($row=mysql_fetch_object($result)){
 			$view_problemset[$i][0]="<span class=yes>Y</span>";
 		else 
 			$view_problemset[$i][0]= "<span class=no>N</span>";
+	}else{
+		$view_problemset[$i][0]= "<span class=none> </span>";
 	}
 	$view_problemset[$i][1]=$row->problem_id;
 	$view_problemset[$i][2]=$row->title;

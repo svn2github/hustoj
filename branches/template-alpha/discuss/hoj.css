@@ -1,0 +1,62 @@
+a:link{color:blue;text-decoration:none;}
+a:visited{color:blue;text-decoration:none;}
+a:hover{color:cyan;}
+h2{
+	color:blue;
+}
+.toprow{
+	background-color:#8080FF;
+	color:#FFFFFF;
+    font-weight:bold;
+}
+.toprow td{font-size:80%;}
+.toprow a:link{color:white;text-decoration:none;}
+.toprow a:visited{color:white;text-decoration:none;}
+.toprow a:hover{color:cyan;}
+
+.oddrow{background-color:#F3F9FF;}
+.oddrow td{font-size:80%;}
+.evenrow{background-color:#F0FFF0;}
+.evenrow td{font-size:80%;}
+
+.top3 {color:orange;}
+.top2 {color:green;}
+.top1 {color:#0DF;}
+.hot {color:red;}
+.lock {color:grey;}
+
+.mono span{width:3em;display:inline-block; text-align:center}
+
+blockquote td {font-size:75%}
+
+body{background-color:#FFFFFF;}
+.hd{
+	background-color:#FFFFFF;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.time{
+	text-align: right;
+}
+.ip{
+	text-align: right;
+	padding-right: 5px;
+}
+tr.userinfo{
+	background-color:#FFFFF0;
+	font-size: 16px;
+}
+span.yes{
+color:green;
+font-weight: bolder; 
+}
+span.no{
+color:red;
+font-weight: bolder;
+}
+
+span.exadmin{
+color:gray;
+}
+

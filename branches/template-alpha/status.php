@@ -241,7 +241,7 @@ else
    
 
 }
-mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysql_free_result($result);
 
 
 

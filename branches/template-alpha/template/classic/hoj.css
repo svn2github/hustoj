@@ -93,6 +93,7 @@ span.exadmin {
     color: gray;
 }
 .center,#center {
+	width=100%;
     text-align: center;
 }
 div.content {

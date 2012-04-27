@@ -110,11 +110,11 @@ while ($row=mysql_fetch_object($result)){
 	}else{
 		$view_problemset[$i][0]= "<span class=none> </span>";
 	}
-	$view_problemset[$i][1]=$row->problem_id;
-	$view_problemset[$i][2]=$row->title;
-	$view_problemset[$i][3]=$row->source;
-	$view_problemset[$i][4]=$row->accepted;
-	$view_problemset[$i][5]=$row->submit;
+	$view_problemset[$i][1]="<span class='center'>".$row->problem_id."</span>";;
+	$view_problemset[$i][2]="<span class='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></span>";;
+	$view_problemset[$i][3]="<span class='center'><nobr>".mb_substr($row->source,0,8,'utf8')."</nobr></span>";
+	$view_problemset[$i][4]="<span class='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>".$row->accepted."</a></span>";
+	$view_problemset[$i][5]="<span class='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></span>";
 	
 	
 	$i++;

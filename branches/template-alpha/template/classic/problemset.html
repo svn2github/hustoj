@@ -44,19 +44,17 @@
 			<tbody>
 			<?php 
 			$cnt=0;
-			foreach($view_problemset as $problem){
+			foreach($view_problemset as $row){
 				if ($cnt) 
 					echo "<tr class='oddrow'>";
 				else
 					echo "<tr class='evenrow'>";
-				echo "<td>";
-				echo $problem[0];
-				echo "</td>";
-				echo "<td align='center'>".$problem[1]."</td>";
-				echo "<td align='left'><a href='problem.php?id=".$problem[1]."'>".$problem[2]."</a></td>";
-				echo "<td align='center'><nobr>".mb_substr($problem[3],0,8,'utf8')."</nobr></td>";
-				echo "<td align='center'><a href='status.php?problem_id=".$problem[1]."&jresult=4'>"
-					.$problem[4]."</a></td><td align='center'><a href='status.php?problem_id=".$problem[1]."'>".$problem[5]."</a></td>";
+				foreach($row as $table_cell){
+					echo "<td>";
+					echo "\t".$table_cell;
+					echo "</td>";
+				}
+				
 				echo "</tr>";
 				
 				$cnt=1-$cnt;

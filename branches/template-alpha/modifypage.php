@@ -7,7 +7,7 @@
 	if (!isset($_SESSION['user_id'])){
 		$view_errors= "<a href=./loginpage.php>Please LogIn First!</a>";
 		
-		require("template/".$OJ_TEMPLATE."/error.html");
+		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	}
 
@@ -17,7 +17,7 @@ $row=mysql_fetch_object($result);
 
 mysql_free_result($result);
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/modifypage.html");
+require("template/".$OJ_TEMPLATE."/modifypage.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

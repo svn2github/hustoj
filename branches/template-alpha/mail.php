@@ -97,7 +97,7 @@ mysql_free_result($result);
 
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/mail.html");
+require("template/".$OJ_TEMPLATE."/mail.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

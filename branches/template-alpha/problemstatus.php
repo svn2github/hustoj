@@ -154,7 +154,7 @@ mysql_free_result($result);
 echo "</tr></table></center>";
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/problemstatus.html");
+require("template/".$OJ_TEMPLATE."/problemstatus.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

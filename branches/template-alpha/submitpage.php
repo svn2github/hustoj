@@ -8,7 +8,7 @@
  if (!isset($_SESSION['user_id'])){
 
 	$view_errors= "<a href=loginpage.php>Please Login First</a>";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 if (isset($_GET['id'])){
@@ -17,7 +17,7 @@ if (isset($_GET['id'])){
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
 }else{
 	$view_errors=  "<h2>No Such Problem!</h2>";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
@@ -44,7 +44,7 @@ if (isset($_GET['id'])){
 
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/submitpage.html");
+require("template/".$OJ_TEMPLATE."/submitpage.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

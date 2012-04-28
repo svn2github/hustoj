@@ -19,6 +19,6 @@
 
 	$url=basename($_SERVER['REQUEST_URI']);
 	$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
-	require("template/".$OJ_TEMPLATE."/oj-header.html");
+	require("template/".$OJ_TEMPLATE."/oj-header.php");
 ?>
 

@@ -46,13 +46,13 @@ if ($ok==true){
 }else{
 	mysql_free_result($result);
 	$view_errors= "I am sorry, You could not view this message!";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 	
 }
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/reinfo.html");
+require("template/".$OJ_TEMPLATE."/reinfo.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

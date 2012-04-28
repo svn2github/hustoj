@@ -122,7 +122,7 @@ while ($row=mysql_fetch_object($result)){
 mysql_free_result($result);
 
 
-require("template/".$OJ_TEMPLATE."/problemset.html");
+require("template/".$OJ_TEMPLATE."/problemset.php");
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');
 ?>

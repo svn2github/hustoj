@@ -38,7 +38,7 @@ if(function_exists('apc_cache_info')){
 }
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/registerpage.html");
+require("template/".$OJ_TEMPLATE."/registerpage.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

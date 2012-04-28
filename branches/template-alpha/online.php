@@ -49,7 +49,7 @@ if (isset($_SESSION['administrator'])){
 
 }
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/online.html");
+require("template/".$OJ_TEMPLATE."/online.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

@@ -2,7 +2,7 @@
 @session_start();
 if (!isset($_SESSION['user_id'])){
 	$view_errors= "<a href=./loginpage.php>Please LogIn First!</a>";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 require_once('./include/db_info.inc.php');

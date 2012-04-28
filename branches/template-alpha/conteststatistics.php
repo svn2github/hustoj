@@ -14,7 +14,7 @@ $result=mysql_query($sql);
 $num=mysql_num_rows($result);
 if ($num==0){
 	$view_errors= "Not Started!";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 mysql_free_result($result);
@@ -62,7 +62,7 @@ while ($row=mysql_fetch_object($result)){
 }
 mysql_free_result($result);
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/conteststatistics.html");
+require("template/".$OJ_TEMPLATE."/conteststatistics.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

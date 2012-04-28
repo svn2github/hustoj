@@ -42,13 +42,13 @@
 				
 				if (!isset($_SESSION['administrator']) && $now<$start_time){
 					$view_errors=  "<h2>Private Contest is used as Exam, problem can't view after finished.</h2>";
-					require("template/".$OJ_TEMPLATE."/error.html");
+					require("template/".$OJ_TEMPLATE."/error.php");
 					exit(0);
 				}
 			}
 			if (!$contest_ok){
 				$view_errors=  "<h2>Not invited or not login!</h2>";
-				require("template/".$OJ_TEMPLATE."/error.html");
+				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}
 			$sql="SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,problem.source as source, problem.accepted as accepted, problem.submit as submit
@@ -115,9 +115,9 @@
 
 /////////////////////////Template
 if(isset($_GET['cid']))
-	require("template/".$OJ_TEMPLATE."/contest.html");
+	require("template/".$OJ_TEMPLATE."/contest.php");
 else
-	require("template/".$OJ_TEMPLATE."/contestset.html");
+	require("template/".$OJ_TEMPLATE."/contestset.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

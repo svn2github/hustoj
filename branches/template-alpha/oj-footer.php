@@ -1,3 +1,3 @@
 <?php 
-	require("template/".$OJ_TEMPLATE."/oj-footer.html");
+	require("template/".$OJ_TEMPLATE."/oj-footer.php");
 	?>

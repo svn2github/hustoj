@@ -255,9 +255,9 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
 <?php
 /////////////////////////Template
 if (isset($_GET['cid']))
-	require("template/".$OJ_TEMPLATE."/conteststatus.html");
+	require("template/".$OJ_TEMPLATE."/conteststatus.php");
 else
-	require("template/".$OJ_TEMPLATE."/status.html");
+	require("template/".$OJ_TEMPLATE."/status.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

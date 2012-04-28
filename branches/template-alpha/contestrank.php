@@ -63,13 +63,13 @@ if ($rows_cnt>0){
 mysql_free_result($result);
 if ($start_time==0){
 	$view_errors= "No Such Contest";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
 if ($start_time>time()){
 	$view_errors= "Contest Not Started!";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
@@ -107,7 +107,7 @@ mysql_free_result($result);
 usort($U,"s_cmp");
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/contestrank.html");
+require("template/".$OJ_TEMPLATE."/contestrank.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

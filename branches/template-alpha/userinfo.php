@@ -19,7 +19,7 @@ $result=mysql_query($sql);
 $row_cnt=mysql_num_rows($result);
 if ($row_cnt==0){ 
 	$view_errors= "No such User!";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
@@ -69,7 +69,7 @@ $sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND re
 	mysql_free_result($result);
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/userinfo.html");
+require("template/".$OJ_TEMPLATE."/userinfo.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

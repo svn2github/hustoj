@@ -53,7 +53,7 @@ if (isset($_GET['id'])){
 		// not started
 		$view_errors=  "No such Contest!";
 	
-		require("template/".$OJ_TEMPLATE."/error.html");
+		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	}else{
 		// started
@@ -65,13 +65,13 @@ if (isset($_GET['id'])){
 	if (!$contest_ok){
 	
 		$view_errors= "Not Invited!";
-		require("template/".$OJ_TEMPLATE."/error.html");
+		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	}
 	$co_flag=true;
 }else{
 	$view_errors=  "<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
-	require("template/".$OJ_TEMPLATE."/error.html");
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 $result=mysql_query($sql) or die(mysql_error());
@@ -108,7 +108,7 @@ if (mysql_num_rows($result)!=1){
 mysql_free_result($result);
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/problem.html");
+require("template/".$OJ_TEMPLATE."/problem.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

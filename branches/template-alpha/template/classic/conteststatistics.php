@@ -10,7 +10,7 @@
 	<?php require_once("contest-header.php");?>
 <div id=main>
 <center><h3>Contest Statistics</h3>
-<table width=60%>
+<table width=90%>
 <tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java<td>Ruby<td>Bash<td>Python<td>PHP<td>Perl<td>C#</td></tr>
 <?php
 for ($i=0;$i<$pid_cnt;$i++){

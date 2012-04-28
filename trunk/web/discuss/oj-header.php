@@ -111,7 +111,7 @@
 <div id=broadcast>
 <?php echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250>";
 	echo "<font color=red>";
-	echo file_get_contenta('../admin/msg.txt');
+	echo file_get_contents('../admin/msg.txt');
 	echo "</font>";
 	echo "</marquee>";
 

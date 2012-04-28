@@ -18,10 +18,10 @@ static  $OJ_LANGMASK=1008; //1mC 2mCPP 4mPascal 8mJava 16mRuby 32mBash 1008 for 
 static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="hoj.css";
-static  $OJ_SAE=true; //using sina application engine
+static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=true;
 static  $OJ_APPENDCODE=false;
-static  $OJ_MEMCACHE=true;
+static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
@@ -32,8 +32,8 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	if($OJ_SAE)	{
 		$OJ_DATA="saestor://data/";
 	//  for sae.sina.com.cn
-		mysql_connect('w.rdc.sae.sina.com.cn'.':3307','xn2nwxl3jk','4lhww3w212yx1mz33hhil25yh1y21lkki02lwzm1');
-		$DB_NAME='app_hustoj';
+		mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+		$DB_NAME=SAE_MYSQL_DB;
 	}else{
 		//for normal install
 		if(!mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS)) 

@@ -1,6 +1,11 @@
 <?php
 	$OJ_CACHE_SHARE=false;
 	$cache_time=30;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= $MSG_RANKLIST;
+	
 	$scope="";
 	if(isset($_GET['scope']))
 		$scope=$_GET['scope'];
@@ -10,15 +15,7 @@
 	$rank = 0;
 	if(isset( $_GET ['start'] ))
 		$rank = intval ( $_GET ['start'] );
-
-		
-		?>
-		<?php require_once ("oj-header.php");
-		?>
-	<title>Rank List</title>
-
-	<?php require_once ("./include/db_info.inc.php");
-		
+	
 		if(isset($OJ_LANG)){
 			require_once("./lang/$OJ_LANG.php");
 		}
@@ -59,61 +56,38 @@
 		
 		
 		$result = mysql_query ( $sql ); //mysql_error();
-		echo "<center><table width=90%>";
-		echo "<tr><td colspan=3 align=left>
-			<form action=userinfo.php>
-				$MSG_USER<input name=user>
-				<input type=submit value=Go>
-			</form></td><td colspan=3 align=right>
-			<a href=ranklist.php?scope=d>Day</a>
-			<a href=ranklist.php?scope=w>Week</a>
-			<a href=ranklist.php?scope=m>Month</a>
-			<a href=ranklist.php?scope=y>Year</a>
-			</td></tr>";
-		echo "<tr class='toprow'>
-				<td width=5% align=center><b>$MSG_Number</b>
-				<td width=10% align=center><b>$MSG_USER</b>
-				<td width=55% align=center><b>$MSG_NICK</b>
-				<td width=10% align=center><b>$MSG_AC</b>
-				<td width=10% align=center><b>$MSG_SUBMIT</b>
-				<td width=10% align=center><b>$MSG_RATIO</b></tr>";
+		
+		$view_rank=Array();
+		$i=0;
 		while ( $row = mysql_fetch_object ( $result ) ) {
 			$rank ++;
-			if ($rank % 2 == 1)
-				echo "<tr class='oddrow'>";
-			else
-				echo "<tr class='evenrow'>";
-			echo "<td align=center>" . $rank;
-			echo "<td align=center><a href='userinfo.php?user=" . $row->user_id . "'>" . $row->user_id . "</a>";
-			echo "<td align=center>" . htmlspecialchars ( $row->nick );
-			echo "<td align=center><a href='status.php?user_id=" . $row->user_id . "&jresult=4'>" . $row->solved . "</a>";
-			echo "<td align=center><a href='status.php?user_id=" . $row->user_id . "'>" . $row->submit . "</a>";
-			//		echo "<td align=center>".$row->submit;
-			echo "<td align=center>";
+			
+			$view_rank[$i][0]= $rank;
+			$view_rank[$i][1]=  "<div class=center><a href='userinfo.php?user=" . $row->user_id . "'>" . $row->user_id . "</a>" ."</div>";
+			$view_rank[$i][2]=  "<div class=center>" . htmlspecialchars ( $row->nick ) ."</div>";
+			$view_rank[$i][3]=  "<div class=center><a href='status.php?user_id=" . $row->user_id . "&jresult=4'>" . $row->solved . "</a>" ."</div>";
+			$view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . $row->user_id . "'>" . $row->submit . "</a>" ."</div>";
+			
 			if ($row->submit == 0)
-				echo "0.000%";
+				$view_rank[$i][5]= "0.000%";
 			else
-				echo sprintf ( "%.03lf%%", 100 * $row->solved / $row->submit );
-			echo "</tr>";
+				$view_rank[$i][5]= sprintf ( "%.03lf%%", 100 * $row->solved / $row->submit );
+			
+			$i++;
 		}
-		echo "</table></center>";
+		
 		mysql_free_result ( $result );
-		$sql = "SELECT count(*) as `mycount` FROM `users`";
+		$sql = "SELECT count(1) as `mycount` FROM `users`";
 		$result = mysql_query ( $sql );
 		echo mysql_error ();
 		$row = mysql_fetch_object ( $result );
-		echo "<center>";
-		for($i = 0; $i < $row->mycount; $i += $page_size) {
-			echo "<a href='./ranklist.php?start=" . strval ( $i ).($scope?"&scope=$scope":"") . "'>";
-			echo strval ( $i + 1 );
-			echo "-";
-			echo strval ( $i + $page_size );
-			echo "</a>&nbsp;";
-			if ($i % 250 == 200)
-				echo "<br>";
-		}
-		echo "</center>";
-		mysql_free_result ( $result );
-		?>
+		$view_total=$row->mycount;
 		
-<?php require_once ("oj-footer.php");?>
+		mysql_free_result ( $result );
+		
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/ranklist.php");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
+?>

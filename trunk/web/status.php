@@ -1,40 +1,40 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-        @session_start();
-        require_once("./include/db_info.inc.php");
-  $cache_time=2;
-        require_once("./include/cache_start.php");
+
+////////////////////////////Common head
+	$cache_time=2;
+	$OJ_CACHE_SHARE=false;
+	require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title= "$MSG_STATUS";
+	
+
         
 require_once("./include/my_func.inc.php");
-require_once("./include/db_info.inc.php");
+
 if(isset($OJ_LANG)){
                 require_once("./lang/$OJ_LANG.php");
         }
 require_once("./include/const.inc.php");
 
-?>
-
-
-<meta http-equiv='refresh' content='60'>
-<title>Submission Status</title>
-
-
-<?php $str2="";
+$str2="";
 
 $sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
-        require_once("contest-header.php");
+        //require_once("contest-header.php");
 }else{
-        require_once("oj-header.php");
+        //require_once("oj-header.php");
 }
-?>
-<div id=center>
-<?php $order_str=" ORDER BY `solution_id` DESC ";
-$start_first=1;
+$start_first=true;
+$order_str=" ORDER BY `solution_id` DESC ";
+
+
+
 // check the top arg
 if (isset($_GET['top'])){
         $top=strval(intval($_GET['top']));
@@ -78,87 +78,18 @@ if ($language!=-1){
         $sql=$sql."AND `language`='".strval($language)."' ";
         $str2=$str2."&language=".$language;
 }
-?>
-<form id=simform action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
-<?php echo $MSG_USER?>:<input type=text size=4 name=user_id value='<?php echo $user_id?>'>
-<?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?php echo $MSG_LANG?>:<select size="1" name="language">
-<?php if (isset($_GET['language'])) $language=$_GET['language'];
-else $language=-1;
-if ($language<0||$language>9) $language=-1;
-if ($language==-1) echo "<option value='-1' selected>All</option>";
-else echo "<option value='-1'>All</option>";
-for ($i=0;$i<10;$i++){
-        if ($i==$language) echo "<option value=$i selected>$language_name[$i]</option>";
-        else echo "<option value=$i>$language_name[$i]</option>";
-}
-?>
-</select>
-<?php echo $MSG_RESULT?>:<select size="1" name="jresult">
-<?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
-else $jresult_get=-1;
-if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
-if ($jresult_get!=-1){
-        $sql=$sql."AND `result`='".strval($jresult_get)."' ";
-        $str2=$str2."&jresult=".strval($jresult_get);
-}
-if ($jresult_get==-1) echo "<option value='-1' selected>All</option>";
-else echo "<option value='-1'>All</option>";
-for ($j=0;$j<12;$j++){
-        $i=($j+4)%12;
-        if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$judge_result[$i]."</option>";
-        else echo "<option value='".strval($i)."'>".$judge_result[$i]."</option>"; 
-}
-echo "</select>";
-?>
-</select>
+if (isset($_GET['jresult'])) $result=intval($_GET['jresult']);
+else $result=-1;
 
-<?php if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])){
-        if(isset($_GET['showsim']))
-                $showsim=intval($_GET['showsim']);
-        else
-                $showsim=0;
-        echo "SIM:
-                        <select name=showsim onchange=\"document.getElementById('simform').submit();\">
-                        <option value=0 ".($showsim==0?'selected':'').">All</option>
-                        <option value=50 ".($showsim==50?'selected':'').">50</option>
-                        <option value=60 ".($showsim==60?'selected':'').">60</option>
-                        <option value=70 ".($showsim==70?'selected':'').">70</option>
-                        <option value=80 ".($showsim==80?'selected':'').">80</option>
-                        <option value=90 ".($showsim==90?'selected':'').">90</option>
-                        <option value=100 ".($showsim==100?'selected':'').">100</option>
-                  </select>";
-/*      if (isset($_GET['cid'])) 
-                echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
-        if (isset($_GET['language'])) 
-                echo "<input type=hidden name=language value='".$_GET['language']."'>";
-        if (isset($_GET['user_id'])) 
-                echo "<input type=hidden name=user_id value='".$_GET['user_id']."'>";
-        if (isset($_GET['problem_id'])) 
-                echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
-        //echo "<input type=submit>";
-*/
-        
-        
-        
+if ($result>12 || $language<0) $language=-1;
+if ($result!=-1){
+        $sql=$sql."AND `result`='".strval($result)."' ";
+        $str2=$str2."&jresult=".$result;
 }
-echo "<input type=submit value='$MSG_SEARCH'></form>";
-?>
-</div>
-<table align=center width=80%>
-<tr  class='toprow'>
-<td ><?php echo $MSG_RUNID?>
-<td ><?php echo $MSG_USER?>
-<td ><?php echo $MSG_PROBLEM?>
-<td ><?php echo $MSG_RESULT?>
-<td ><?php echo $MSG_MEMORY?>
-<td ><?php echo $MSG_TIME?>
-<td ><?php echo $MSG_LANG?>
-<td ><?php echo $MSG_CODE_LENGTH?>
-<td ><?php echo $MSG_SUBMIT_TIME?>
-</tr>
-<?php if($OJ_SIM){
+
+
+
+if($OJ_SIM){
         $old=$sql;
         $sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
         if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
@@ -173,8 +104,17 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
         //$sql=$sql.$order_str." LIMIT 20";
 }
 
+
+
+
+
+
 $sql=$sql.$order_str." LIMIT 20";
 //echo $sql;
+
+
+
+
 if($OJ_MEMCACHE){
 	require("./include/memcache.php");
 	$result = mysql_query_cache($sql) or die("Error! ".mysql_error());
@@ -194,119 +134,132 @@ if ($start_first){
         $row_add=-1;
 }
 
-
+$view_status=Array();
 
 for ($i=0;$i<$rows_cnt;$i++){
 if($OJ_MEMCACHE)
 	$row=$result[$i];
 else
 	$row=mysql_fetch_array($result);
-        if ($top==-1) $top=$row['solution_id'];
+	//$view_status[$i]=$row;
+	
+		if ($top==-1) $top=$row['solution_id'];
         $bottom=$row['solution_id'];
-        if ($cnt) echo "<tr align=center class='oddrow'>";
-        else echo "<tr align=center class='evenrow'>";
-        $flag=(!is_running(intval($row['contest_id']))) ||
+		$flag=(!is_running(intval($row['contest_id']))) ||
                         isset($_SESSION['source_browser']) ||
                         isset($_SESSION['administrator']) || 
-
                         (isset($_SESSION['user_id'])&&!strcmp($row['user_id'],$_SESSION['user_id']));
 
         $cnt=1-$cnt;
-
-        echo "<td>".$row['solution_id'];
-        echo "<td><a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
+	
+        
+        $view_status[$i][0]= $row['solution_id'];
+        $view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
 
        if ($row['contest_id']>0) {
-                echo "<td><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+                $view_status[$i][2]= "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
                 if(isset($cid)){
-                         echo $PID[$row['num']]."</a>";
+                        $view_status[$i][2].= $PID[$row['num']];
                 }else{
-                        echo $row['problem_id']."</a>";
+                        $view_status[$i][2].= $row['problem_id'];
                 }
-
+				$view_status[$i][2].="</div></a>";
         }else{
-                echo "<td><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
+                $view_status[$i][2]= "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
         }
 
        
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                echo "<td><a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
+                $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
         }else if (intval($row['result'])==10 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                echo "<td><a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
+                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
 
         }else{
 
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        echo "<td><span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
+                        $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
                        
                         if( isset($_SESSION['source_browser'])){
 
-                                        echo "<a href=showsource.php?id=".$row['sim_s_id']." target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
+                                        $view_status[$i][3].= "<a href=showsource.php?id=".$row['sim_s_id']." target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
 
-                                        echo $row['sim_s_id'];
+                                        $view_status[$i][3].= $row['sim_s_id'];
 
                         }
                         if(isset($_GET['showsim'])&&isset($row[13])){
-                                        echo "$row[13]";
+                                        $view_status[$i][3].= "$row[13]";
                                 
                         }
-                        echo     "</span>";
+                        $view_status[$i][3].="</span>";
                 }else{
 
-                        echo "<td class=".$judge_color[$row['result']].">".$judge_result[$row['result']];
+                        $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">".$judge_result[$row['result']];
                 }
                 
         }
-        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) echo (100-$row['pass_rate']*100)."%";
+        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) 
+				$view_status[$i][3].= (100-$row['pass_rate']*100)."%";
         if ($flag){
 
 
                 if ($row['result']>=4){
-                        echo "<td class=red>".$row['memory'];
-                        echo "<td class=red>".$row['time'];
-
+                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']."</div>";
+                        $view_status[$i][5]= "<div id=center class=red>".$row['time']."</div>";
+						//echo "=========".$row['memory']."========";
                 }else{
-                        echo "<td>------<td>------";
+                        $view_status[$i][4]= "---";
+                        $view_status[$i][5]= "---";
+						
                 }
-
+				//echo $row['result'];
                 if (!(isset($_SESSION['user_id'])&&strtolower($row['user_id'])==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                        echo "<td>".$language_name[$row['language']];
+                        $view_status[$i][6]=$language_name[$row['language']];
                 }else{
 
-                        echo "<td><a target=_blank href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>/";
+                        $view_status[$i][6]= "<a target=_blank href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>/";
 
                         if (isset($cid)) {
-
-                                echo "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
-
+                                $view_status[$i][6].= "<a target=_self href=\"submitpage.php?cid=".$cid."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
                         }else{
-
-                                echo "<a target=_self href=\"submitpage.php?id=".$row['problem_id']."&sid=".$row['solution_id']."\">Edit</a>";
-
+                                $view_status[$i][6].= "<a target=_self href=\"submitpage.php?id=".$row['problem_id']."&sid=".$row['solution_id']."\">Edit</a>";
                         }
                 }
+                $view_status[$i][7]= $row['code_length']." B";
+				
+        }else
+		{
+			$view_status[$i][4]="----";
+			$view_status[$i][5]="----";
+			$view_status[$i][6]="----";
+			$view_status[$i][7]="----";
+		}
+        $view_status[$i][8]= $row['in_date'];
+        
+   
+   
 
-                echo "<td>".$row['code_length']." B";
-                
-
-        }else echo "<td>------<td>------<td>".$language_name[$row['language']]."<td>------";
-        echo "<td>".$row['in_date'];
-        echo "</tr>\n";
 }
-mysql_free_result($result);
-?>
-</table>
-<div id=center>
-<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
-if (isset($_GET['prevtop']))
-        echo "[<a href=status.php?".$str2."&top=".$_GET['prevtop'].">Previous Page</a>]&nbsp;&nbsp;";
-else
-        echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
-?>
-</div>
+if(!$OJ_MEMCACHE)mysql_free_result($result);
 
-<?php require_once("oj-footer.php");?>
-<?php require_once("./include/cache_end.php");?>
+
+
+
+
+
+
+
+?>
+
+<?php
+/////////////////////////Template
+if (isset($_GET['cid']))
+	require("template/".$OJ_TEMPLATE."/conteststatus.php");
+else
+	require("template/".$OJ_TEMPLATE."/status.php");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
+?>
+

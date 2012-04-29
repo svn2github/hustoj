@@ -70,8 +70,7 @@
 		<a href="../contest.php"><?php echo checkcontest($MSG_CONTEST)?></a>
 		</div>
 		<div class=menu_item >
-		<a href="../recent-contest.php"><?php if ($url=="recent-contest.php") echo "<span style='color:orange'>";?>
-		<?php echo $MSG_RECENT_CONTEST?><?php if ($url=="recent-contest.php") echo "</span>";?></a>
+		<a href="../recent-contest.php"><?php echo $MSG_RECENT_CONTEST?></span></a>
 		</div>
 		
 		<div class=menu_item >

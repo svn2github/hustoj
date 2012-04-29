@@ -33,13 +33,3 @@ if (isset($_GET['pid']))
 
 ?>
 </div><!--end broadcast-->
-<?php
-$contest_ok=true;
-$str_private="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' && `private`='1'";
-$result=mysql_query($str_private);
-$row=mysql_fetch_row($result);
-mysql_free_result($result);
-if ($row[0]=='1' && !isset($_SESSION['c'.$cid])) $contest_ok=false;
-if (isset($_SESSION['administrator'])) $contest_ok=true;
-?>
-<div id=main>

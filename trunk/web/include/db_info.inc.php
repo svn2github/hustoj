@@ -1,9 +1,9 @@
 <?php @session_start();
-	ini_set("display_errors","Off");
+	ini_set("display_errors","On");
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
 static 	$DB_USER="root";
-static 	$DB_PASS="root";
+static 	$DB_PASS="";
 	// connect db 
 static 	$OJ_NAME="HUSTOJ";
 static 	$OJ_HOME="./";
@@ -25,7 +25,8 @@ static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
-if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
+static  $OJ_TEMPLATE="mario";
+//if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 
 	if($OJ_SAE)	{
@@ -42,8 +43,8 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	mysql_query("set names utf8");
 	if(!$OJ_SAE)mysql_set_charset("utf8");
 	
-	if(mysql_select_db($DB_NAME));
-	else die('Can\'t use foo : ' . mysql_error());
+	if(!mysql_select_db($DB_NAME))
+		die('Can\'t use foo : ' . mysql_error());
 	//sychronize php and mysql server
 	date_default_timezone_set("PRC");
 	mysql_query("SET time_zone ='+8:00'");

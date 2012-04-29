@@ -1,10 +1,11 @@
 <?php
-
-$cache_time=5;
-require_once("oj-header.php");
-
-?>
-<?php $to_user="";
+	$cache_time=10;
+	$OJ_CACHE_SHARE=false;
+    require_once('./include/cache_start.php');
+    require_once('./include/db_info.inc.php');
+	require_once('./include/setlang.php');
+	$view_title=$MSG_MAIL;
+ $to_user="";
 $title="";
 if (isset($_GET['to_user'])){
 	$to_user=htmlspecialchars($_GET['to_user']);
@@ -28,6 +29,7 @@ if(isset($OJ_LANG)){
 }
 echo "<title>$MSG_MAIL</title>";
 //view mail
+$view_content=false;
 if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=".$vid."
@@ -35,40 +37,16 @@ if (isset($_GET['vid'])){
 	$result=mysql_query($sql);
 	$row=mysql_fetch_object($result);
 	$to_user=$row->from_user;
-	
-	echo "<center>
-	<table>
-			<tr>
-				<td class=blue>$to_user:".htmlspecialchars(str_replace("\n\r","\n",$row->title))." </td>
-			</tr>
-			<tr><td><pre>". htmlspecialchars(str_replace("\n\r","\n",$row->content))."</pre>		
-				</td></tr>
-    </table></center>";
+	$view_title=$row->title;
+	$view_content=$row->content;
+
 	mysql_free_result($result);
 	$sql="update `mail` set new_mail=0 WHERE `mail_id`=".$vid;
 	mysql_query($sql);
 	
 }
 //send mail page 
-
-?> 
-<center>
-   <table><form method=post action=mail.php>
-	<tr>
-		<td>  To:<input name=to_user size=10 value="<?php echo $to_user?>">
-			Title:<input name=title size=20 value="<?php echo $title?>">
-		    <input type=submit value=<?php echo $MSG_SUBMIT?>></td>
-	</tr>
-	<tr><td> 
-		<textarea name=content rows=10 cols=50></textarea>
-	  
-	 </td></tr>
-	</form>
-   </table>
-</center> 
-	 
-
-<?php //send mail
+//send mail
 if(isset($_POST['to_user'])){
 	$to_user = $_POST ['to_user'];
 	$title = $_POST ['title'];
@@ -87,7 +65,7 @@ if(isset($_POST['to_user'])){
 	$res=mysql_query($sql);
 	if ($res&&mysql_num_rows($res)<1){
 			mysql_free_result($res);
-			echo "No Such User!";
+			$view_title= "No Such User!";
 			
 	}else{
 		if($res)mysql_free_result($res);
@@ -95,9 +73,9 @@ if(isset($_POST['to_user'])){
 						values('$to_user','$from_user','$title','$content',now())";
 		
 		if(!mysql_query($sql)){
-			echo "Not Mailed!<br>";
+			$view_title=  "Not Mailed!";
 		}else{
-			echo "Mailed!<br>";
+			$view_title=  "Mailed!";
 		}
 	}
 }
@@ -105,20 +83,23 @@ if(isset($_POST['to_user'])){
 	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
 					order by mail_id desc";
 	$result=mysql_query($sql) or die(mysql_error());
-echo "<center><table border=1>";
-echo "<tr><td>Mail ID<td>From:Title<td>Date</tr>";
+$view_mail=Array();
+$i=0;
 for (;$row=mysql_fetch_object($result);){
-	echo "<tr>";
-	echo "<td class=red>".$row->mail_id;
-	if ($row->new_mail) echo "New";
-	echo "<td><a href='mail.php?vid=$row->mail_id'>".
+	$view_mail[$i][0]=$row->mail_id;
+	if ($row->new_mail) $view_mail[$i][0].= "<span class=red>New</span>";
+	$view_mail[$i][1]="<a href='mail.php?vid=$row->mail_id'>".
 			$row->from_user.":".$row->title."</a>";
-	echo "<td>".$row->in_date;
-	echo "</tr>";
+	$view_mail[$i][2]=$row->in_date;
+	$i++;
 }
 mysql_free_result($result);
-echo "</tr></form>";
-echo "</table></center>";
 
+
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/mail.php");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
 ?>
-<?php require_once("oj-footer.php")?>
+

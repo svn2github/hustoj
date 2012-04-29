@@ -1,11 +1,10 @@
 <?php
 	$OJ_CACHE_SHARE=true;
 	$cache_time=30;
-		?><?php require_once("./include/db_info.inc.php");
-require_once("./include/const.inc.php");
-require_once("./include/my_func.inc.php");
+	require_once("./include/db_info.inc.php");
+	require_once("./include/const.inc.php");
+	require_once("./include/my_func.inc.php");
 
-require_once("contest-header.php");
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
@@ -14,13 +13,13 @@ $sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<NOW()";
 $result=mysql_query($sql);
 $num=mysql_num_rows($result);
 if ($num==0){
-	echo "Not Started!";
-	require_once("oj-footer.php");
-	exit();
+	$view_errors= "Not Started!";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
 }
 mysql_free_result($result);
 
-echo "<title>Contest Statistics</title>";
+$view_title= "Contest Statistics";
 
 $sql="SELECT count(`num`) FROM `contest_problem` WHERE `contest_id`='$cid'";
 $result=mysql_query($sql);
@@ -62,28 +61,9 @@ while ($row=mysql_fetch_object($result)){
 		$R[$pid_cnt][8]++;
 }
 mysql_free_result($result);
-echo "<center><h3>Contest Statistics</h3><table width=60%>";
-echo "<tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java<td>Ruby<td>Bash<td>Python<td>PHP<td>Perl<td>C#</td></tr>";
-for ($i=0;$i<$pid_cnt;$i++){
-	if(!isset($PID[$i])) $PID[$i]="";
-	
-	if ($i&1) 
-		echo "<tr align=center class=oddrow><td>";
-	else 
-		echo "<tr align=center class=evenrow><td>";
-	echo "<a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
-	for ($j=0;$j<20;$j++) {
-		if(!isset($R[$i][$j])) $R[$i][$j]="";
-		echo "<td>".$R[$i][$j];
-	}
-	echo "</tr>";
-}
-echo "<tr align=center class=evenrow><td>Total";	
-for ($j=0;$j<15;$j++) {
-	if(!isset($R[$i][$j])) $R[$i][$j]="";
-	echo "<td>".$R[$i][$j];
-}
-echo "</tr>";
-echo "<table></center>";
+/////////////////////////Template
+require("template/".$OJ_TEMPLATE."/conteststatistics.php");
+/////////////////////////Common foot
+if(file_exists('./include/cache_end.php'))
+	require_once('./include/cache_end.php');
 ?>
-<?php require_once("oj-footer.php")?>

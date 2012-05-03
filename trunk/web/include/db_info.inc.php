@@ -1,5 +1,5 @@
 <?php @session_start();
-	ini_set("display_errors","Off");
+	ini_set("display_errors","On");
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
 static 	$DB_USER="root";
@@ -26,6 +26,7 @@ static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_TEMPLATE="classic";
+static  $OJ_LOGIN_MOD="hustoj";
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 

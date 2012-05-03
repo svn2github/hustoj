@@ -12,7 +12,7 @@
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
 <div id=main>
-<h1>Problem<<?php echo $id ?>Status</h1>
+<h1>Problem <?php echo $id ?> Status</h1>
 	<center><table><tr><td>
 	
 	
@@ -36,7 +36,21 @@
 			}
 			?>
 			<tr id=pie bgcolor=white><td colspan=2><div id='PieDiv' style='position:relative;height:150px;width:200px;'></div></tr>
+	</table><br>
+	<?php if(isset($view_recommand)){?>
+	<table  id=recommand ><tr><td>
+			Recommanded Next Problem<br>
+			<?php 
+			$cnt=1;
+			foreach($view_recommand as $row){
+				echo "<a href=problem.php?id=$row[0]>$row[0]</a>&nbsp;";
+				if($cnt%3==0) echo "<br>";
+				$cnt++;
+			}
+			?>
+			</td></tr>
 	</table>
+	<?php }?>
 	</td><td>
 	<table id=problemstatus><thead>
 		<tr class=toprow><td style="cursor:hand" onclick="sortTable('problemstatus', 0, 'int');"><?php echo $MSG_Number?>

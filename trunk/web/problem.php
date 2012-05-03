@@ -78,6 +78,7 @@ $result=mysql_query($sql) or die(mysql_error());
 
 	
 if (mysql_num_rows($result)!=1){
+   $view_errors="";
    if(isset($_GET['id'])){
       $id=intval($_GET['id']);
 	   mysql_free_result($result);
@@ -88,17 +89,21 @@ if (mysql_num_rows($result)!=1){
 	      echo "This problem is in Contest(s) below:<br>";
 		   for (;$i>0;$i--){
 				$row=mysql_fetch_row($result);
-				echo "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";
+				$view_errors.= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";
 				
 			}
+				 
+				
 		}else{
-			echo "<title>$MSG_NO_SUCH_PROBLEM!</title>";
-			echo "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
+			$view_title= "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+			$view_errors.= "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 		}
    }else{
-		echo "<title>$MSG_NO_SUCH_PROBLEM!</title>";
-		echo "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
+		$view_title= "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+		$view_errors.= "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 	}
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
 }else{
 	$row=mysql_fetch_object($result);
 	
@@ -106,6 +111,7 @@ if (mysql_num_rows($result)!=1){
 	
 }
 mysql_free_result($result);
+
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/problem.php");

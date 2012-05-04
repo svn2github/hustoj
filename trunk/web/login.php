@@ -9,21 +9,22 @@
 		exit(0);
     }
 	require_once("./include/login-".$OJ_LOGIN_MOD.".php");
-  $user_id=$_POST['user_id'];
+    $user_id=$_POST['user_id'];
 	$password=$_POST['password'];
    if (get_magic_quotes_gpc ()) {
         $user_id= stripslashes ( $user_id);
         $password= stripslashes ( $password);
    }
+    $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".mysql_real_escape_string($user_id)."'";
+    $result=mysql_query($sql);
 	$login=check_login($user_id,$password);
 	
 	if ($login)
     {
 		$_SESSION['user_id']=$login;
-		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
-		$result=mysql_query($sql);
+		
 		echo mysql_error();
-		while ($row=mysql_fetch_assoc($result))
+		while ($result&&$row=mysql_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";

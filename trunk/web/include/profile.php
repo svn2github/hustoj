@@ -28,6 +28,9 @@ header("Pragma: no-cache");
 					$profile.= "<a href=./mail.php>$mail</a>&nbsp;";
 				$profile.= "<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
 			}else{
+                if ($OJ_WEIBO_AUTH){
+				    $profile.= "<a href=./login_weibo.php>$MSG_LOGIN(WEIBO)</a>&nbsp;";
+                }
 				$profile.= "<a href=./loginpage.php>$MSG_LOGIN</a>&nbsp;";
 				$profile.= "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
 			}

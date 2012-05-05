@@ -27,6 +27,13 @@ static  $OJ_MEMPORT=11211;
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_TEMPLATE="classic";
 static  $OJ_LOGIN_MOD="hustoj";
+
+/* weibo config here */
+static  $OJ_WEIBO_AUTH=True;
+static  $OJ_WEIBO_AKEY='1124518951';
+static  $OJ_WEIBO_ASEC='df709a1253ef8878548920718085e84b';
+static  $OJ_WEIBO_CBURL='http://192.168.0.108/JudgeOnline/login_weibo.php';
+
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 

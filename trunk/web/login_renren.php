@@ -19,32 +19,22 @@ require_once("./include/my_func.inc.php");
 
 if(array_key_exists('code',$_GET)){
     $code = $_GET['code'];
-    $GURL = "https://api.weibo.com/oauth2/access_token?";
+    $GURL = "https://graph.renren.com/oauth/token?";
     $vars = array(
-        'client_id'=>$OJ_WEIBO_AKEY,
-        'client_secret'=>$OJ_WEIBO_ASEC,
+        'client_id'=>$OJ_RR_AKEY,
+        'client_secret'=>$OJ_RR_ASEC,
         'grant_type'=>'authorization_code',
-        'redirect_uri'=>$OJ_WEIBO_CBURL,
+        'redirect_uri'=>$OJ_RR_CBURL,
         'code'=>$code);
     $GURL = $GURL.http_build_query($vars);
     $ret = http_request($GURL,True);
     $data = json_decode($ret);
-    if (array_key_exists('uid',$data)){
-        $token = $data->access_token;
-        $uid = $data->uid;
-        $vars = array(
-            "access_token"=>$token,
-            "uid"=>$uid
-        );
-        $UURL = "https://api.weibo.com/2/users/show.json?".http_build_query($vars);
-        $user = json_decode(http_request($UURL,False));
-#        var_dump($user);
-#        exit(0);
+    if (array_key_exists('user',$data)){
         // register this user and login it
-        $uname = "weibo_".$uid;
-        $nick = "@".$user->screen_name;
+        $uname = "renren_".$data->user->id;
+        $nick = "Renren_".$data->user->name;
         $password = $OJ_OPENID_PWD;
-        $email = $user->screen_name."@weibo.com";
+        $email = "";
         $school = "";
         // check first
         $sql = "SELECT `user_id` FROM `users` where `user_id`='$uname'";
@@ -67,5 +57,6 @@ if(array_key_exists('code',$_GET)){
 }
 else{
     $CBURL="https://api.weibo.com/oauth2/authorize?client_id={$OJ_WEIBO_AKEY}&response_type=code&redirect_uri=$OJ_WEIBO_CBURL";
+    $CBURL="https://graph.renren.com/oauth/authorize?client_id={$OJ_RR_AKEY}&redirect_uri={$OJ_RR_CBURL}&response_type=code";
     header("Location: ".$CBURL);
 }

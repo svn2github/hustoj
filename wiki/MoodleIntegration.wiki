@@ -15,11 +15,10 @@ $OJ_LOGIN_MOD="moodle";
 
 ----
 
-add homework with title [OJ]-P1000 for OJ Promblem 1000
+add homework with title [OJ]-C1000 for OJ Contest 1000
 
 add trigger and procedue
 {{{
-
 DELIMITER $$
 DROP trigger IF EXISTS `jol`.`tri_moodle` $$
 create trigger tri_moodle
@@ -27,11 +26,18 @@ after update on solution
 for each row
 begin
    declare mark int;
+   declare total int;
+   declare ac int;
+   set mark=100;
+   select count(1) into total from contest_problem where contest_id=new.contest_id;
+   select count(distinct problem_id)into ac
+      from solution where result=4 and user_id=new.user_id and contest_id=new.contest_id;
    if new.result=4 then
-      call update_moodle(new.problem_id,new.user_id,100);
+      call update_moodle(new.contest_id,new.user_id,mark/total*ac);
    end if;
 
 end $$
+DELIMITER ;
 
 }}}
 
@@ -49,7 +55,7 @@ top:BEGIN
   set as_id=0;
   select m.id into as_id from
         moodle.mdl_assignment m
-         where m.name = concat('[OJ]-P',pid);
+         where m.name = concat('[OJ]-C',pid);
   if as_id=0 then
     leave top;
   end if;
@@ -78,8 +84,6 @@ top:BEGIN
   -- select as_id,u_id,oldmark,mark;
 
 END $$
-
-
 
 DELIMITER ;
 }}}

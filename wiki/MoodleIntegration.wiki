@@ -28,12 +28,16 @@ begin
    declare mark int;
    declare total int;
    declare ac int;
+   declare wa int;
    set mark=100;
    select count(1) into total from contest_problem where contest_id=new.contest_id;
    select count(distinct problem_id)into ac
       from solution where result=4 and user_id=new.user_id and contest_id=new.contest_id;
+   select count(distinct problem_id)into wa
+      from solution where result>4 and user_id=new.user_id and contest_id=new.contest_id;
+   set mark=mark/total*ac-wa;
    if new.result=4 then
-      call update_moodle(new.contest_id,new.user_id,mark/total*ac);
+      call update_moodle(new.contest_id,new.user_id,mark);
    end if;
 
 end $$

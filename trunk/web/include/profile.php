@@ -22,11 +22,13 @@ header("Pragma: no-cache");
 	$profile="";
 		if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
-				$profile.= "&nbsp;<a href=./modifypage.php>$MSG_USERINFO</a>&nbsp;<a href='./userinfo.php?user=$sid'><span id=red>$sid</span></a>&nbsp;";
+				$profile.= "<a href=./modifypage.php>$MSG_USERINFO</a>&nbsp;<a href='./userinfo.php?user=$sid'><span id=red>$sid</span></a>";
 				$mail=checkmail();
 				if ($mail)
-					$profile.= "<a href=./mail.php>$mail</a>&nbsp;";
-				$profile.= "<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
+					$profile.= "&nbsp;<a href=./mail.php>$mail</a>";
+        $profile.="&nbsp;<a href='./status.php?user_id=$sid'><span id=red>Recent</span></a>";
+                                
+				$profile.= "&nbsp;<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
 			}else{
                 if ($OJ_WEIBO_AUTH){
 				    $profile.= "<a href=./login_weibo.php>$MSG_LOGIN(WEIBO)</a>&nbsp;";

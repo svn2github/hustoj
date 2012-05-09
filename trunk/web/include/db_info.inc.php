@@ -31,13 +31,13 @@ static  $OJ_LOGIN_MOD="hustoj";
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';
 
 /* weibo config here */
-static  $OJ_WEIBO_AUTH=True;
+static  $OJ_WEIBO_AUTH=false;
 static  $OJ_WEIBO_AKEY='1124518951';
 static  $OJ_WEIBO_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_WEIBO_CBURL='http://192.168.0.108/JudgeOnline/login_weibo.php';
 
 /* renren config here */
-static  $OJ_RR_AUTH=True;
+static  $OJ_RR_AUTH=false;
 static  $OJ_RR_AKEY='d066ad780742404d85d0955ac05654df';
 static  $OJ_RR_ASEC='c4d2988cf5c149fabf8098f32f9b49ed';
 static  $OJ_RR_CBURL='http://192.168.0.108/JudgeOnline/login_renren.php';

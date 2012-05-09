@@ -9,9 +9,9 @@ Based on [http://www.colinux.org/ CoLinux], with Ubuntu12.04.
 = Details =
 
 Install:
-  * Unzip downloaded file http://115.com/file/e74vcojs#hustoj.zip
+  * Unzip downloaded file 
   * Click 启动hustoj.bat
   * Open http://127.0.0.1/
 
 Download:
-  add to QQ Qun share
+  http://115.com/file/e74vcojs#hustoj.zip

@@ -38,7 +38,7 @@
 
 		
 <script>
-var diff=new Date("2012/04/27 07:13:52").getTime()-new Date().getTime();
+var diff=new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
 //alert(diff);
 function clock()
     {

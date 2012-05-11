@@ -20,9 +20,9 @@
 			End Time: <font color=#993399><?php echo $view_end_time?></font><br>
 			Current Time: <font color=#993399><span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span></font>
 			Status:<?php
-				if ($now>$view_end_time) 
+				if ($now>$end_time) 
 					echo "<span class=red>Ended</span>";
-				else if ($now<$view_start_time) 
+				else if ($now<$start_time) 
 					echo "<span class=red>Not Started</span>";
 				else 
 					echo "<span class=red>Running</span>";

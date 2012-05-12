@@ -5,6 +5,7 @@
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
 	$view_title= $MSG_CONTEST.$MSG_RANKLIST;
+	$title="";
 	require_once("./include/const.inc.php");
 	require_once("./include/my_func.inc.php");
 class TM{

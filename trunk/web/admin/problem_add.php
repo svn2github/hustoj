@@ -56,6 +56,7 @@ $sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_
 mysql_query($sql);
 $_SESSION["p$pid"]=true;
 	
+echo "<a href=quixplorer/index.php?action=list&dir=$pid&order=name&srt=yes>Add More Test Data</a>";
 /*	*/
 ?>
 <?php require_once ("../oj-footer.php");

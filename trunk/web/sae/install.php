@@ -13,7 +13,7 @@
 	$lvyi_db->closeDb();
 
 	//include success template
-	
+	file_put_contents("saestor://web/msg.txt","Welcome!");
 
 function runquery($sql) {
 	global $lvyi_db;

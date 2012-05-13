@@ -117,12 +117,14 @@ $sql=$sql.$order_str." LIMIT 20";
 
 if($OJ_MEMCACHE){
 	require("./include/memcache.php");
-	$result = mysql_query_cache($sql) or die("Error! ".mysql_error());
-	$rows_cnt=count($result);
+	$result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+	if($result) $rows_cnt=count($result);
+	else $rows_cnt=0;
 }else{
 		
-	$result = mysql_query($sql) or die("Error! ".mysql_error());
-	$rows_cnt=mysql_num_rows($result);
+	$result = mysql_query($sql);// or die("Error! ".mysql_error());
+	if($result) $rows_cnt=mysql_num_rows($result);
+	else $rows_cnt=0;
 }
 $top=$bottom=-1;
 $cnt=0;

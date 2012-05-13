@@ -90,5 +90,5 @@ $_SESSION['user_id']=$user_id;
 		}
 		$_SESSION['ac']=Array();
 		$_SESSION['sub']=Array();
-header("Location: ./");
 ?>
+<script>history.go(-2);</script>

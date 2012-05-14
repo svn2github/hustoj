@@ -30,7 +30,7 @@ CREATE TABLE  `contest_problem` (
 
 
 CREATE TABLE  `loginlog` (
-  `user_id` varchar(20) NOT NULL DEFAULT '',
+  `user_id` varchar(48) NOT NULL DEFAULT '',
   `password` varchar(40) DEFAULT NULL,
   `ip` varchar(100) DEFAULT NULL,
   `time` datetime DEFAULT NULL
@@ -38,8 +38,8 @@ CREATE TABLE  `loginlog` (
 
 CREATE TABLE  `mail` (
   `mail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `to_user` varchar(20) NOT NULL DEFAULT '',
-  `from_user` varchar(20) NOT NULL DEFAULT '',
+  `to_user` varchar(48) NOT NULL DEFAULT '',
+  `from_user` varchar(48) NOT NULL DEFAULT '',
   `title` varchar(200) NOT NULL DEFAULT '',
   `content` text,
   `new_mail` tinyint(1) NOT NULL DEFAULT '1',

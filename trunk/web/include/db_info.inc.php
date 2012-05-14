@@ -41,6 +41,11 @@ static  $OJ_RR_AUTH=false;
 static  $OJ_RR_AKEY='d066ad780742404d85d0955ac05654df';
 static  $OJ_RR_ASEC='c4d2988cf5c149fabf8098f32f9b49ed';
 static  $OJ_RR_CBURL='http://192.168.0.108/JudgeOnline/login_renren.php';
+/* qq config here */
+static  $OJ_QQ_AUTH=false;
+static  $OJ_QQ_AKEY='1124518951';
+static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
+static  $OJ_QQ_CBURL='192.168.0.108';
 
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";

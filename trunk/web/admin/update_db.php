@@ -68,7 +68,7 @@ CREATE TABLE `mail` (
   PRIMARY KEY  (`mail_id`),
   KEY `uid` (`to_user`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";
-$tsql[5]="ALTER TABLE `solution` MODIFY COLUMN `user_id` CHAR(20)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,	DROP COLUMN `className`,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+$tsql[5]="ALTER TABLE `solution` MODIFY COLUMN `user_id` CHAR(48)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,	DROP COLUMN `className`,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
 $csql[5]="";
 
 $tsql[6]="select langmask from contest limit 1;";
@@ -88,6 +88,23 @@ $csql[9]="CREATE TABLE  `runtimeinfo` (
 ";
 $tsql[10]="select pass_rate from solution";
 $csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
+
+$tsql[11]="whatever;";
+$csql[11]="ALTER TABLE `users` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+
+$tsql[12]="whatever;";
+$csql[12]="ALTER TABLE `topic` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+
+$tsql[13]="whatever;";
+$csql[13]="ALTER TABLE `mail` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+
+$tsql[14]="whatever;";
+$csql[14]="ALTER TABLE `reply` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+
+$tsql[15]="whatever;";
+$csql[15]="ALTER TABLE `privilege` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

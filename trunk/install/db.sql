@@ -52,7 +52,7 @@ CREATE TABLE  `mail` (
 
 CREATE TABLE  `news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL DEFAULT '',
+  `user_id` varchar(48) NOT NULL DEFAULT '',
   `title` varchar(200) NOT NULL DEFAULT '',
   `content` text NOT NULL,
   `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -63,7 +63,7 @@ CREATE TABLE  `news` (
 
 
 CREATE TABLE  `privilege` (
-  `user_id` char(20) NOT NULL DEFAULT '',
+  `user_id` char(48) NOT NULL DEFAULT '',
   `rightstr` char(30) NOT NULL DEFAULT '',
   `defunct` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -91,7 +91,7 @@ CREATE TABLE  `problem` (
 
 CREATE TABLE  `reply` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,
-  `author_id` varchar(20) NOT NULL,
+  `author_id` varchar(48) NOT NULL,
   `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `content` text NOT NULL,
   `topic_id` int(11) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE  `sim` (
 CREATE TABLE  `solution` (
   `solution_id` int(11) NOT NULL AUTO_INCREMENT,
   `problem_id` int(11) NOT NULL DEFAULT '0',
-  `user_id` char(20) NOT NULL,
+  `user_id` char(48) NOT NULL,
   `time` int(11) NOT NULL DEFAULT '0',
   `memory` int(11) NOT NULL DEFAULT '0',
   `in_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -146,13 +146,13 @@ CREATE TABLE  `topic` (
   `top_level` int(2) NOT NULL DEFAULT '0',
   `cid` int(11) DEFAULT NULL,
   `pid` int(11) NOT NULL,
-  `author_id` varchar(20) NOT NULL,
+  `author_id` varchar(48) NOT NULL,
   PRIMARY KEY (`tid`),
   KEY `cid` (`cid`,`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `users` (
-  `user_id` varchar(20) NOT NULL DEFAULT '',
+  `user_id` varchar(48) NOT NULL DEFAULT '',
   `email` varchar(100) DEFAULT NULL,
   `submit` int(11) DEFAULT '0',
   `solved` int(11) DEFAULT '0',

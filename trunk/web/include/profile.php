@@ -36,6 +36,9 @@ header("Pragma: no-cache");
                 if ($OJ_RR_AUTH){
 				    $profile.= "<a href=./login_renren.php>$MSG_LOGIN(RENREN)</a>&nbsp;";
                 }
+                if ($OJ_QQ_AUTH){
+            $profile.= "<a href=./login_qq.php>$MSG_LOGIN(QQ)</a>&nbsp;";
+                }
 				$profile.= "<a href=./loginpage.php>$MSG_LOGIN</a>&nbsp;";
 				$profile.= "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
 			}

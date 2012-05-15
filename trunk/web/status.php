@@ -154,8 +154,12 @@ else
 
         $cnt=1-$cnt;
 	
+        if( isset($_SESSION['source_browser'])){
+          $view_status[$i][0]="<a href=showsource.php?id=".$row['solution_id']." target=original>".$row['solution_id']."</a>";
+        }else{
+        	$view_status[$i][0]=$row['solution_id'];
+        }
         
-        $view_status[$i][0]= $row['solution_id'];
         $view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
 

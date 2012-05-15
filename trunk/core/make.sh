@@ -13,6 +13,7 @@ cp sim_java /usr/bin/sim_java
 cp sim_pasc /usr/bin/sim_pas
 cd ..
 cp sim.sh /usr/bin
+chmod +x /usr/bin/sim.sh
 ln -s /usr/bin/sim_c /usr/bin/sim_cc
 ln -s /usr/bin/sim_c /usr/bin/sim_rb
 ln -s /usr/bin/sim_c /usr/bin/sim_sh

@@ -40,7 +40,9 @@ header("Pragma: no-cache");
             $profile.= "<a href=./login_qq.php>$MSG_LOGIN(QQ)</a>&nbsp;";
                 }
 				$profile.= "<a href=./loginpage.php>$MSG_LOGIN</a>&nbsp;";
-				$profile.= "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
+				if($OJ_LOGIN_MOD=="hustoj"){
+					$profile.= "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
+				}
 			}
 			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])||isset($_SESSION['problem_editor'])){
 				$profile.= "<a href=./admin>$MSG_ADMIN</a>&nbsp;";

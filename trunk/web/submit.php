@@ -28,9 +28,8 @@ if (isset($_POST['cid'])){
 $res=mysql_query($sql);
 if ($res&&mysql_num_rows($res)<1){
 		mysql_free_result($res);
-		require_once('oj-header.php');
-		echo "Where do find this link? No such problem.<br>";
-		require_once('oj-footer.php');
+		$view_errors=  "Where do find this link? No such problem.<br>";
+		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 }
 mysql_free_result($res);
@@ -63,9 +62,8 @@ if (isset($_POST['id'])) {
 			$ccnt=intval($row[0]);
 			mysql_free_result($result);
 			if ($ccnt==0){
-				require_once("contest-header.php");
-				echo "You are not invited!\n";
-				require_once("oj-footer.php");
+				$view_errors= "You are not invited!\n";
+				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}
 		}
@@ -74,9 +72,8 @@ if (isset($_POST['id'])) {
 	$result=mysql_query($sql);
 	$rows_cnt=mysql_num_rows($result);
 	if ($rows_cnt!=1){
-		require_once("contest-header.php");
-		echo "<h2>No Such Problem!</h2>";
-		require_once("oj-footer.php");
+		$view_errors= "No Such Problem!\n";
+		require("template/".$OJ_TEMPLATE."/error.php");
 		mysql_free_result($result);
 		exit(0);
 	}else{
@@ -85,7 +82,8 @@ if (isset($_POST['id'])) {
 		mysql_free_result($result);
 	}
 }else{
-	echo "<h2>No Such Problem!</h2>";
+	$view_errors= "No Such Problem!\n";
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
@@ -118,15 +116,13 @@ setcookie('lastlang',$language,time()+360000);
 $ip=$_SERVER['REMOTE_ADDR'];
 
 if ($len<2){
-	require_once("oj-header.php");
-	echo "Source Code Too Short!";
-	require_once("oj-footer.php");
+	$view_errors="Code too short!<br>";
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 if ($len>65536){
-	require_once("oj-header.php");
-	echo "Source Code Too Long!";
-	require_once("oj-footer.php");
+	$view_errors="Code too long!<br>";
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
@@ -139,9 +135,8 @@ if (mysql_num_rows($res)==1){
 	//$last=strtotime($row[0]);
 	//$cur=time();
 	//if ($cur-$last<10){
-		require_once('oj-header.php');
-		echo "You should not submit more than twice in 10 seconds.....<br>";
-		require_once('oj-footer.php');
+		$view_errors="You should not submit more than twice in 10 seconds.....<br>";
+		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	//}
 }

@@ -8,9 +8,10 @@
 	
 require_once("./include/const.inc.php");
 if (!isset($_GET['sid'])){
-	echo "No such code!\n";
-	require_once("oj-footer.php");
+	$view_errors= "No such code!\n";
+	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
+	
 }
 function is_valid($str2){
     $n=strlen($str2);

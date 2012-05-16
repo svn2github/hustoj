@@ -14,6 +14,11 @@ if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
 	$err_str=$err_str."Verification Code Wrong!\\n";
 	$err_cnt++;
 }
+if($OJ_LOGIN_MOD!="hustoj"){
+	$err_str=$err_str."System do not allow register.\\n";
+	$err_cnt++;
+}
+
 if($len>20){
 	$err_str=$err_str."User ID Too Long!\\n";
 	$err_cnt++;

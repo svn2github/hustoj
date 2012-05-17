@@ -1,5 +1,5 @@
 <?php @session_start();
-	ini_set("display_errors","On");
+	ini_set("display_errors","Off");
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
 static 	$DB_USER="root";

@@ -22,42 +22,38 @@ include_once("../fckeditor/fckeditor.php") ;
     $url=$_POST ['url'];
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
-	echo "Please Input like http://poj.org/problem?id=1000";
+	echo "Please Input like http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1001";
 	exit(1);
   } 
   if (get_magic_quotes_gpc ()) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);
-//  echo $baseurl;
   $html = file_get_html($url);
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
         
-  $element=$html->find('div[class=ptt]',0);
+  $element=$html->find('span[class=bigProblemTitle]',0);
   $title=$element->plaintext;
   
-  $element=$html->find('div[class=plm]',0);
-  $tlimit=$element->find('td',0);//->next_sibling();
-  $tlimit=substr($tlimit->plaintext,11);
-  $tlimit=substr($tlimit,0,strlen($tlimit)-2);
-  $mlimit=$element->find('td',2);//->nextSibling();
-  $mlimit=substr($mlimit->plaintext,13);
-  $mlimit=substr($mlimit,0,strlen($mlimit)-1);
-  $tlimit/=1000;
-  $mlimit/=1000;
+  $element=$html->find('center',1);
+  $tlimit=substr($element->plaintext,strpos($element->plaintext,": ")+2,3);
+  $mlimit=substr($element->plaintext,strrpos($element->plaintext,": ")+2,7);
+  $mlimit/=1024;
   
-  $element=$html->find('div[class=ptx]',0);
-  $descriptionHTML=$element->outertext;
-  $element=$html->find('div[class=ptx]',1);
-  $inputHTML=$element->outertext;
-  $element=$html->find('div[class=ptx]',2);
-  $outputHTML=$element->outertext;
+  $element=$html->find('div[id=content_body]',0);
+  $descriptionHTML=$element->innertext;
   
-  $element=$html->find('pre[class=sio]',0);
-  $sample_input=$element->innertext;
-  $element=$html->find('pre[class=sio]',1);
-  $sample_output=$element->innertext;
+  //$tlimit=substr($html,'Time Limit: </font> ([\\s\\S]*?) Second');
+  //$mlimit=substr($html,'Memory Limit: </font> ([\\s\\S]*?) KB');
+  //$descriptionHTML=$html->find('KB[\\s\\S]*?</center>[\\s\\S]*?<hr>([\\s\\S]*?)>[\\s]*Input',0);
+  //$inputHTML=$html->pre_grep(">[\\s]*Input([\\s\\S]*?)>[\\s]*Out?put",$html->outertext);
+  //$outputHTML=$html->find('>[\\s]*Out?put([\\s\\S]*?)>[\\s]*Sample Input',0);
+  //$sample_input=pre_grep(">[\\s]*Sample Input([\\s\\S]*?)>[\\s]*Sample Out?put",$html->outertext);
+  //$sample_output=$html->find(">[\\s]*Sample Out?put([\\s\\S]*?)<hr",0);
+  
+  //能力和时间有限，想用正则表达式做成功能好一点的，实现不了，留给有兴趣的改进吧！
+  
 ?>
 <form method=POST action=problem_add.php>
 <p align=center><font size=4 color=#333399>Add a Problem</font></p>

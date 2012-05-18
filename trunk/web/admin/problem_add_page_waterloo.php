@@ -31,8 +31,14 @@ include_once("../fckeditor/fckeditor.php") ;
 <hr>
 <h1>Add New problem</h1>
 <?php require_once("../include/simple_html_dom.php");
-  //$url='http://plg1.cs.uwaterloo.ca/~acm00/020921/A.html';
   $url=$_POST ['url'];
+
+  if (!$url) $url=$_GET['url'];
+  if (strpos($url, "http") === false){
+	echo "Please Input like http://plg1.cs.uwaterloo.ca/~acm00/020921/A.html";
+	exit(1);
+  }   
+    
   if (get_magic_quotes_gpc ()) {
 	$url = stripslashes ( $url);
   }

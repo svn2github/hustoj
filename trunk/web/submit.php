@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once("include/db_info.inc.php");
 require_once("include/const.inc.php");
-$now=strftime("%Y-%m-%d %H:%M",time());
+$now=strftime("%Y-%m-%d %X",time());
 $user_id=$_SESSION['user_id'];
 
 if (isset($_POST['cid'])){

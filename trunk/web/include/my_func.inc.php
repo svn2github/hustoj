@@ -55,7 +55,8 @@ function sec2str($sec){
 
 function is_running($cid){
 	require_once("./include/db_info.inc.php");
-	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' AND `end_time`>NOW()";
+   $now=strftime("%Y-%m-%d %H:%M",time());
+	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' AND `end_time`>'$now'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_array($result);
 	$cnt=intval($row[0]);

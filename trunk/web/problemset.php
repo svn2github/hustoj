@@ -78,11 +78,12 @@ if (isset($_SESSION['administrator'])){
 	
 }
 else{
+	$now=strftime("%Y-%m-%d %H:%M",time());
 	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
 	"WHERE `defunct`='N' and $filter_sql AND `problem_id` NOT IN(
 		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>NOW() or private=1)and `defunct`='N'
+			(`end_time`>'$now' or private=1)and `defunct`='N'
 			
 		)
 	) ";

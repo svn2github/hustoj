@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once("include/db_info.inc.php");
 require_once("include/const.inc.php");
+$now=strftime("%Y-%m-%d %H:%M",time());
 $user_id=$_SESSION['user_id'];
 
 if (isset($_POST['cid'])){
@@ -18,7 +19,7 @@ if (isset($_POST['cid'])){
 	$id=intval($_POST['id']);
 	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>NOW() or private=1)and `defunct`='N'
+			(`end_time`>'$now' or private=1)and `defunct`='N'
 			))";
 	if(!isset($_SESSION['administrator']))
 		$sql.=" and defunct='N'";
@@ -43,7 +44,7 @@ if (isset($_POST['id'])) {
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
 	// check user if private
-	$sql="SELECT `private` FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<=NOW() AND `end_time`>NOW()";
+	$sql="SELECT `private` FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<=$now AND `end_time`>$now";
 	$result=mysql_query($sql);
 	$rows_cnt=mysql_num_rows($result);
 	if ($rows_cnt!=1){
@@ -127,8 +128,8 @@ if ($len>65536){
 }
 
 // last submit
-
-$sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>now()-10 order by `in_date` desc limit 1";
+$now=strftime("%Y-%m-%d %X",time()-10);
+$sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>'$now' order by `in_date` desc limit 1";
 $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
 	//$row=mysql_fetch_row($res);

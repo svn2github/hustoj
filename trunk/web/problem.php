@@ -4,7 +4,7 @@ $OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
-	
+	$now=strftime("%Y-%m-%d %H:%M",time());
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 else $ucid="";
 require_once("./include/db_info.inc.php");
@@ -22,7 +22,7 @@ if (isset($_GET['id'])){
 	if (!isset($_SESSION['administrator']) && $id!=1000)
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
-						SELECT `contest_id` FROM `contest` WHERE `end_time`>NOW() or `private`='1'))
+						SELECT `contest_id` FROM `contest` WHERE `end_time`>'$now' or `private`='1'))
                                 ";
 	else
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
@@ -34,7 +34,7 @@ if (isset($_GET['id'])){
 	$pid=intval($_GET['pid']);
 
 	if (!isset($_SESSION['administrator']))
-		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<NOW()";
+		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<'$now'";
 	else
 		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
 	$result=mysql_query($sql);

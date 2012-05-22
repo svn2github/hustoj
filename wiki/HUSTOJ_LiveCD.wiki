@@ -1,6 +1,12 @@
 #labels Featured,LiveCD,Phase-Deploy
 #演示和安装一体化的光盘版 a all in one CD is on the way
 
+下载地址:
+http://115.com/file/bexuygmw#hustoj-1409.iso
+
+http://pan.baidu.com/netdisk/singlepublic?fid=241719_3088787629
+
+
 = Introduction =
 
 
@@ -30,11 +36,6 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
 
 *使用时如果已经联网，可以用sudo update-hustoj进行程序更新，获得最新版本。提示sudo密码freeproblemset
-
-下载地址:
-http://115.com/file/bexuygmw#hustoj-1409.iso
-
-
 
 
 

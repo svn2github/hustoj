@@ -109,6 +109,13 @@ $csql[15]="ALTER TABLE `loginlog` MODIFY COLUMN `user_id` varchar(48) NOT NULL D
 
 $tsql[15]="whatever;";
 $csql[15]="ALTER TABLE `news` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$tsql[16]="ALTER TABLE `sim` ADD INDEX `Index_sim_id`(`sim_s_id`);";
+$tsql[16]="";
+$tsql[17]="ALTER TABLE `contest_problem` ADD INDEX `Index_contest_id`(`contest_id`);";
+$tsql[17]="";
+$tsql[18]="ALTER TABLE `contest_problem` ADD INDEX `Index_problem_id`(`problem_id`);";
+$tsql[18]="";
+
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

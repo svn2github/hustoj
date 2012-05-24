@@ -1133,9 +1133,9 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 int & mem_lmt) {
         nice(19);
                 // now the user is "judger"
-        while(setgid(1536)!=0) ;
-        while(setuid(1536)!=0) ;
-        while(setresuid(1536, 1536, 1536)!=0) ;
+        while(setgid(1536)!=0) sleep(1);
+        while(setuid(1536)!=0) sleep(1);
+        while(setresuid(1536, 1536, 1536)!=0) sleep(1);
 //      char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
         // child
         // set the limit
@@ -1149,7 +1149,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         //if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
         setrlimit(RLIMIT_CPU, &LIM);
         alarm(0);
-        alarm(LIM.rlim_cur);
+        //alarm(LIM.rlim_cur);
   
         // file limit
         LIM.rlim_max = STD_F_LIM + STD_MB;

@@ -29,6 +29,10 @@
 	$MSG_Output_Limit_Exceed="Output Limit Exceed";
 	$MSG_Runtime_Error="Runtime Error";
 	$MSG_Compile_Error="Compile Error";
+   
+  $MSG_Runtime_Click="Runtime Error(Click)";
+	$MSG_Compile_Click="Compile Error(Click)";
+	 
 	$MSG_Compile_OK="Compile OK";
 	$MSG_RUNID="RunID";
 	$MSG_USER="User";

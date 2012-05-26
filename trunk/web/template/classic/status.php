@@ -43,8 +43,8 @@ if ($jresult_get==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
 for ($j=0;$j<12;$j++){
         $i=($j+4)%12;
-        if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$judge_result[$i]."</option>";
-        else echo "<option value='".strval($i)."'>".$judge_result[$i]."</option>"; 
+        if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$jresult[$i]."</option>";
+        else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>"; 
 }
 echo "</select>";
 ?>

@@ -36,13 +36,14 @@
 		if(isset($_SESSION['administrator'])){
 		
 			echo "<tr><td width='100%' colspan='5'><form>IP<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td></tr>";
-			echo "<tr  class=toprow align=center ><td>UserID<td>Password<td>IP<td>Time</tr>";
+	  
 			
 			?>
 			</tbody>
 			</table>
 			<table>
 			<tbody>
+         <tr  class=toprow align=center ><td>UserID<td>Password<td>IP<td>Time</tr>
 				<?php 
 				$cnt=0;
 				foreach($view_online as $row){

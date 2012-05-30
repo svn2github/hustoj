@@ -29,7 +29,7 @@
 	$MSG_Runtime_Error="运行错误";
 	$MSG_Compile_Error="编译错误";
 	$MSG_Runtime_Click="运行错误(点击看详细)";
-	$MSG_Compile_Click="编译错误（点击看详细）";
+	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
 	//fool's day
 if(date('m')==4&&date('d')==1&&rand(0,100)<10){

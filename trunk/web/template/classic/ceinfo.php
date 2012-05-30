@@ -16,6 +16,9 @@
    var i=0;
    var pats=new Array();
    var exps=new Array();
+   
+   pats[i]=/invalid conversion from ‘.*’ to ‘.*’/;
+   exps[i++]="隐含的类型转换无效，尝试用显示的强制类型转换如(int *)malloc(....)";
    pats[i]=/warning.*declaration of 'main' with no type/;
    exps[i++]="C++标准中，main函数必须有返回值";
    pats[i]=/'.*' was not declared in this scope/;

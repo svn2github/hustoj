@@ -16,7 +16,9 @@
    var i=0;
    var pats=new Array();
    var exps=new Array();
-   
+  
+   pats[i]=/expected ‘.*’ at end of input/;
+   exps[i++]="代码没有结束，缺少匹配的括号或分号，检查复制时是否选中了全部代码。";
    pats[i]=/invalid conversion from ‘.*’ to ‘.*’/;
    exps[i++]="隐含的类型转换无效，尝试用显示的强制类型转换如(int *)malloc(....)";
    pats[i]=/warning.*declaration of 'main' with no type/;

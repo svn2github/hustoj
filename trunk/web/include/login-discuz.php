@@ -12,7 +12,7 @@
 		$discuz_conn=mysql_connect($discuz_host.":".$discuz_port,$discuz_user,$discuz_pass);
 
 		$ret=false;
-		
+		mysql_query("set names utf8");
 		$sql="select password,salt,username from ".$discuz_db.".uc_members where username='$user_id'";
 		$result=mysql_query($sql);
 		$row = mysql_fetch_array($result);

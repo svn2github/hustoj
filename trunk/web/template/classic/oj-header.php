@@ -1,5 +1,4 @@
 
-
 <div id=head>
 <h2><img id=logo src=<?php echo "template/".$OJ_TEMPLATE?>/image/logo.png><span id="red">Welcome To <?php echo $OJ_NAME?> Online Judge</span></h2>
 </div><!--end head-->
@@ -47,7 +46,7 @@
 		<?php }?>
 	</div><!--end menu-->
 <div id=profile >
-<script src="include/profile.php" ></script>
+<script src="include/profile.php?<?php echo rand();?>" ></script>
 </div><!--end profile-->
 </div><!--end subhead-->
 <div id=broadcast>

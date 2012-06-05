@@ -18,7 +18,7 @@ $co_flag=false;
 if (isset($_GET['id'])){
 	// practice
 	$id=intval($_GET['id']);
-	require("oj-header.php");
+  //require("oj-header.php");
 	if (!isset($_SESSION['administrator']) && $id!=1000)
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(

@@ -20,7 +20,7 @@ sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mys
 sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
 
 #create user and homedir
-sudo useradd -m -u 1536 judge
+sudo  /usr/sbin/useradd -m -u 1536 judge
 
 
 

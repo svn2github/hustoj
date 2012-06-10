@@ -9,7 +9,9 @@ HUST JOL安装说明
 
 1、下载安装程序
 {{{
-sudo apt-get install subversion
+debian/ubuntu用户:sudo apt-get install subversion 
+redhat/centos用户:yum install subversion.i386
+
 svn checkout http://hustoj.googlecode.com/svn/trunk/install hustoj
 cd hustoj
 编辑install.sh，设定数据库用户名密码后

@@ -1177,7 +1177,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         LIM.rlim_max = STD_MB << 6;
         setrlimit(RLIMIT_STACK, &LIM);
         // set the memory
-        LIM.rlim_cur = STD_MB *mem_lm/2*3;
+        LIM.rlim_cur = STD_MB *mem_lmt/2*3;
         LIM.rlim_max = STD_MB *mem_lmt*2;
         if(lang<3)
                 setrlimit(RLIMIT_AS, &LIM);

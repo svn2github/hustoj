@@ -155,8 +155,8 @@ if(isset($_SESSION['user_id'])&&isset($_GET['id'])){
 	$user_id=mysql_real_escape_string($_SESSION['user_id']);
 	$sql="select problem_id,count(1) people from solution where 
 				problem_id!=$id and result=4 
-				and user_id in(select distinct user_id from solution where result=4 and problem_id=$id) 
-				and problem_id not in (select distinct problem_id from solution where user_id='$user_id') 
+				and user_id in(select distinct user_id from solution where result=4 and problem_id=$id limit 100) 
+				and problem_id not in (select distinct problem_id from solution where user_id='$user_id'limit 100) 
 				group by `problem_id` order by people desc limit 12";
 	$result=mysql_query($sql);
 	$i=0;

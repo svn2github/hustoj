@@ -29,3 +29,5 @@ OJ_HTTP_BASEURL give the URL of the OJ-web
 OJ_HTTP_USERNAME is the new user mentioned above with http_judge authorize
 
 OJ_HTTP_PASSWORD is the password
+
+*disable vcode in db_info.inc.php on SAE ,to let judge client login with http. you can enable it after the judge working, but need to disable it every time judged reboot or reinstall*

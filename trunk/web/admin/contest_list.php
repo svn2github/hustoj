@@ -22,9 +22,9 @@ for (;$row=mysql_fetch_object($result);){
 		if(isset($_SESSION['administrator'])){
 			echo "<td><a href=\"problem_export_xml.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Export</a>";
 		}else{
-		echo "<td>";
+		  echo "<td>";
 		}
-	 
+     echo "<a href=\"../export_contest_code.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Logs</a>";
 	}else{
 		echo "<td colspan=4 align=right><a href=contest_add.php?cid=$row->contest_id>Copy</a><td>";
 		

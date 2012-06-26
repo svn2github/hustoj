@@ -5,7 +5,7 @@ require_once("../include/set_get_key.php");
 $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` order by `contest_id` desc";
 $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
-echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export"; 
+echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs"; 
 echo "</tr>";
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
@@ -24,9 +24,9 @@ for (;$row=mysql_fetch_object($result);){
 		}else{
 		  echo "<td>";
 		}
-     echo "<a href=\"../export_contest_code.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Logs</a>";
+     echo "<td> <a href=\"../export_contest_code.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Logs</a>";
 	}else{
-		echo "<td colspan=4 align=right><a href=contest_add.php?cid=$row->contest_id>Copy</a><td>";
+		echo "<td colspan=5 align=right><a href=contest_add.php?cid=$row->contest_id>Copy</a><td>";
 		
 	}
 		

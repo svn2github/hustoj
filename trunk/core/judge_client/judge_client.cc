@@ -511,7 +511,7 @@ void _update_solution_http(int solution_id, int result, int time, int memory,int
         pclose(fjobs);
 }
 void update_solution(int solution_id, int result, int time, int memory,int sim, int sim_s_id,double pass_rate) {
-        if(result==OJ_TL&&memory==0&&time==0) result=OJ_ML;
+        if(result==OJ_TL&&memory==0) result=OJ_ML;
         if(http_judge){
                 _update_solution_http( solution_id,  result,  time,  memory, sim, sim_s_id,pass_rate);
         }else{

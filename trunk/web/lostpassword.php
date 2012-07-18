@@ -26,7 +26,7 @@ $lost_email=$_POST['email'];
    $_SESSION['lost_user_id']=$lost_user_id;
    $_SESSION['lost_key']=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,16));
    
-   mail($lost_email,"Reset Password",'Your online judge password reset key is:'.$_SESSION['lost_key'], 'From: webmaster@hustoj.googlecode.com\r\n' );
+   mail($lost_email,"Reset Password",'Your online judge password reset key is:'.$_SESSION['lost_key'], 'From: webmaster@hustoj.googlecode.com' );
    require("template/".$OJ_TEMPLATE."/lostpassword2.php");
 
  }else{

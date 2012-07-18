@@ -25,7 +25,7 @@ $lost_email=$_POST['email'];
  if($row && $row['email']==$lost_email&&strpos($lost_email,'@')){
    $_SESSION['lost_user_id']=$lost_user_id;
    $_SESSION['lost_key']=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,16));;;
-   mail($lost_email,"Reset Password",$_SESSION['lost_key']);
+   mail($lost_email,"Reset Password",$_SESSION['lost_key'], 'From: webmaster@hustoj.googlecode.com\r\n' );
    require("template/".$OJ_TEMPLATE."/lostpassword2.php");
 
  }else{

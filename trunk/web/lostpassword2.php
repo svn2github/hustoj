@@ -26,7 +26,7 @@ $lost_key=$_POST['lost_key'];
    $_SESSION['lost_key']==$lost_key
   ){
          $result=mysql_query($sql);
-    $view_errors="Password Reseted to the key you've just inputed.Click <a href=loginpage.php>Here</a> to login!";
+    $view_errors="Password Reseted to the key you've just inputed.Click <a href=index.php>Here</a> to login!";
   }else{
          $view_errors="Password Reset Fail";
   }

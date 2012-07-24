@@ -1,3 +1,4 @@
+#!/bin/bash
 cd judged
 make
 cp judged /usr/bin

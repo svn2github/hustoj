@@ -4,7 +4,7 @@ cp judged /usr/bin
 cd ../judge_client
 make
 cp judge_client /usr/bin
-cd ../sim/sim_2_26
+cd ../sim/sim_2_67
 make sim_c
 make sim_java
 make sim_pasc

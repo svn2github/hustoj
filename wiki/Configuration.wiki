@@ -1,5 +1,5 @@
+#summary config file usage
 #labels Featured,Phase-Support
-#config file usage
 = Introduction =
 there are two files that can be used for oj behavior control
 

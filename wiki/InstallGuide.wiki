@@ -1,5 +1,5 @@
+#summary 安装 指南
 #labels Featured,Phase-Deploy,Phase-Implementation
-#安装 指南
 
 = Introduction =
 

@@ -1,4 +1,4 @@
-#summary Login with Moodle account
+#summary Moodle system Integation 集成Moodle线下活动自动给分
 #labels Featured
 
 = Introduction =

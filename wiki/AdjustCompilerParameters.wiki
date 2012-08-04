@@ -1,3 +1,4 @@
+#summary modify Compiler Parameters
 #labels Featured,Phase-Support
 Because we are using GPL, you can easily modify complier parameters with judge_client.cc.
 

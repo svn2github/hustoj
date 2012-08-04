@@ -1,5 +1,5 @@
+#summary how to add programming language to hustoj.
 #labels Featured,Phase-Implementation
-#how to add programming language to hustoj.
 
 = Introduction =
 

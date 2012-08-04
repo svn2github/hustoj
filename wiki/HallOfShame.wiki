@@ -1,5 +1,5 @@
+#summary 公布那些基于HUSTOJ却没有明确表明的论文与系统
 #labels Featured
-#公布那些基于HUSTOJ却没有明确表明的论文与系统
 
 
 [http://hustoj.googlecode.com/files/OnlineJudge%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96-mask.pdf 论文1]

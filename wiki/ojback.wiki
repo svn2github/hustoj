@@ -1,3 +1,4 @@
+#summary hustoj simple sandbox
 #labels 评测后台的机制
 = HUSTOJ评测后台的机制 =
 

@@ -1,5 +1,5 @@
+#summary 多重启动。
 #labels Featured,Phase-Support
-  # 多重启动。
 {{{
     单个主机运行多个judged，分别负责不同的OJ判题。
     judged 可以接受一个参数作为自己的主目录，默认是/home/judge/。

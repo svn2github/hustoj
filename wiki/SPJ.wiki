@@ -1,5 +1,5 @@
+#summary Special Judger usage in hustoj
 #labels Featured,Phase-Support,Special-Judge
-#Special Judger usage in hustoj
 
 = Introduction =
 

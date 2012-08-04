@@ -1,3 +1,4 @@
+#summary replace fckeditor with KindEditor
 #labels kindeditor,web,edit
 ==更改编辑器为KindEditor==
 

@@ -1,5 +1,5 @@
+#summary Olympics-Information Mode usage
 #labels Featured
-#OIMode usage
 = Introduction =
 
 Olympics-Information is a game like ACM/ICPC, Oi-mode is designed to adjust hustoj for OI exercise.

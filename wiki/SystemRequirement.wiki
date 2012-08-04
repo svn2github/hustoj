@@ -1,5 +1,5 @@
+#summary 系统软硬件需求
 #labels Featured,Phase-Requirements,Phase-Support
-#系统软硬件需求
 
 = 系统安装软硬件需求 =
 

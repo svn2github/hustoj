@@ -1,4 +1,4 @@
-#labels Featured,Phase-Support
+#labels Featured,Phase-Support,Special-Judge
 #Special Judger usage in hustoj
 
 = Introduction =
@@ -30,6 +30,6 @@ spj.c 或 spj.cc 应放置于对应题目测试数据目录下，导出题目时
 
 spj的退出值决定判断结果，成功退出(0)表示AC,其余表示WA.
 
-把spj本身看做一道题目，输入是前述三个文件，输出是程序退出时的返回值。
+把spj本身看做一道题目，输入是前述三个文件，输出是程序退出时的返回值,返回值是0表示AC,非零表示WA。
 
 可以到freepeoblemset找到标有Spj的题目下载

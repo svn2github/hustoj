@@ -1,5 +1,5 @@
+#summary 这个页面是关于在CentOS x86_64环境下使用hustoj的修改提示：
 #labels centos,x64
-这个页面是关于在CentOS x86_64环境下使用hustoj的修改提示：
 
 = Introduction =
   * 安装Hustoj参考Wiki中[CentOS]节

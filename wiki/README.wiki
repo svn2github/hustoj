@@ -1,3 +1,4 @@
+#summary 自动、手动安装说明 installation manual
 #labels Featured
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)

@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How to enable anti-cheat with SIM
 
 = Introduction =
 

@@ -1,5 +1,5 @@
+#summary how to use judge.conf OJ_RUNNING
 #labels Featured,Phase-Support
-#how to use judge.conf OJ_RUNNING 
 
 = Introduction =
 

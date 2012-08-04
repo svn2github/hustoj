@@ -1,5 +1,5 @@
+#summary Windows version of HUSTOJ.
 #labels Featured,Phase-Deploy
-#Windows version of HUSTOJ.
 
 = Introduction =
 

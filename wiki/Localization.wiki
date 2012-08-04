@@ -1,5 +1,5 @@
+#summary How to Localize hustoj
 #labels Featured
-#How to Localize hustoj
 
 = Introduction =
 
@@ -16,4 +16,3 @@ for example your language is GL(Greate Language)
   * copy /faqs.php to /faqs.gl.php
   * Translate gl.php and faqs.gl.php
   * set $LANG="gl" in /include/db_info.inc.php
-

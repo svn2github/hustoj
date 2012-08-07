@@ -61,3 +61,10 @@ for Chinese user ,QQ-qun group IM is recomended.
 if(!$OJ_SAE)mysql_set_charset("utf8");
 }}}
  * 打开题目列表页面不完全，yum install php-mbstring。
+
+关于Java，如果Java提示编译失败，可以尝试：
+1、卸载Java，安装官方jdk
+2、测试（应该继续失败）
+3、卸载官方jdk，安装java-1.6.0-openjdk-devel
+4、测试（貌似就没有问题了，原因不明）
+PS:在CentOS 6下测试通过。

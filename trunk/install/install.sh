@@ -5,7 +5,7 @@
 #	and down here
 #and run this with root
 
-#CENTOS/REDHAT/FEDERA WEBBASE=/var/www/html APACHEUSER=apache 
+#CENTOS/REDHAT/FEDORA WEBBASE=/var/www/html APACHEUSER=apache 
 WEBBASE=/var/www/
 APACHEUSER=www-data
 DBUSER=root

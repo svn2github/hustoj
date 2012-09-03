@@ -13,7 +13,7 @@ $sql="select distinct source,problem_id from source_code right join
 $result=mysql_query($sql);
 while($row=mysql_fetch_object($result)){
 	echo "Problem".$row->problem_id.":";
-	echo "$row->source;
+	echo $row->source;
 	echo "------------------------------------------------------";
 }
 mysql_free_result($result);

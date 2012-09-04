@@ -2,7 +2,26 @@
 echo "<title>Problem List</title>";
 echo "<center><h2>Contest List</h2></center>";
 require_once("../include/set_get_key.php");
-$sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` order by `contest_id` desc";
+$sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";
+$page_cnt=50;
+$result=mysql_query($sql);
+echo mysql_error();
+$row=mysql_fetch_object($result);
+$base=intval($row->btid);
+$cnt=intval($row->upid)-$base;
+$cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
+if (isset($_GET['page'])){
+        $page=intval($_GET['page']);
+}else $page=$cnt;
+$pstart=$base+$page_cnt*intval($page-1);
+$pend=$pstart+$page_cnt;
+for ($i=1;$i<=$cnt;$i++){
+        if ($i>1) echo '&nbsp;';
+        if ($i==$page) echo "<span class=red>$i</span>";
+        else echo "<a href='contest_list.php?page=".$i."'>".$i."</a>";
+}
+$sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where contest_id>=$pstart and contest_id <=$pend order by `contest_id` desc";
+
 $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs"; 

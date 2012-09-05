@@ -16,7 +16,21 @@
    var i=0;
    var pats=new Array();
    var exps=new Array();
-  
+   pats[i]=/package .* does not exist/;
+   exps[i++]="检测拼写，如：系统对象System为大写S开头";
+   pats[i]=/possible loss of precision/;
+   exps[i++]="赋值将会失去精度，检测数据类型，如确定无误可以使用强制类型转换";
+   pats[i]=/incompatible types/;
+   exps[i++]="Java中不同类型的数据不能互相赋值，整数不能用作布尔值";
+   pats[i]=/illegal start of expression/;
+   exps[i++]="字符串应用英文双引号(\")引起";
+   pats[i]=/cannot find symbol/;
+   exps[i++]="拼写错误或者缺少调用函数所需的对象如println()需对System.out调用";
+   pats[i]=/';' expected/;
+   exps[i++]="缺少分号。";
+   pats[i]=/should be declared in a file named/;
+   exps[i++]="Java必须使用public class Main。";
+
    pats[i]=/expected ‘.*’ at end of input/;
    exps[i++]="代码没有结束，缺少匹配的括号或分号，检查复制时是否选中了全部代码。";
    pats[i]=/invalid conversion from ‘.*’ to ‘.*’/;

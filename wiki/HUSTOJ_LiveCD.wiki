@@ -2,6 +2,7 @@
 #labels Featured,LiveCD,Phase-Deploy
 
 下载地址:
+http://hz.wkjsj.org/hustoj/hustoj1725.iso
 
 http://pan.baidu.com/share/link?shareid=23135&uk=2838456172
 

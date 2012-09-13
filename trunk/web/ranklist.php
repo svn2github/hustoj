@@ -24,7 +24,7 @@
                 if ($rank < 0)
                         $rank = 0;
 
-                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
+                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_                                                            time  LIMIT  " . strval ( $rank ) . ",$page_size";
 
                 if($scope){
                         $s="";
@@ -33,7 +33,7 @@
                                         $s=date('Y').'-'.date('m').'-'.date('d');
                                         break;
                                 case 'w':
-                                        $monday=mktime(0, 0, 0, date("m"),date("d")-(date("w")+7)%8+1, date("Y"));
+                                        $monday=mktime(0, 0, 0, date("m"),date("d")-(date("w")+7)%8+1, date("Y"))                                                            ;
                                         //$monday->subDays(date('w'));
                                         $s=strftime("%Y-%m-%d",$monday);
                                         break;
@@ -46,9 +46,9 @@
                         //echo $s."<-------------------------";
                         $sql="SELECT users.`user_id`,`nick`,s.`solved`,t.`submit` FROM `users`
                                         right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>'$s' and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
+                                        (select count(distinct problem_id) solved ,user_id from solution where in                                                            _date>'$s' and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on use                                                            rs.user_id=s.user_id
                                         left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>'$s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
+                                        (select count( problem_id) submit ,user_id from solution where in_date>'$                                                            s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.                                                            user_id
                                 ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
                          ";
                          //echo $sql;
@@ -77,12 +77,12 @@
                         $rank ++;
 
                         $view_rank[$i][0]= $rank;
-                        $view_rank[$i][1]=  "<div class=center><a href='userinfo.php?user=" . $row['user_id'] . "'>" . $row['user_id'] . "</a>" ."</div>";
+                        $view_rank[$i][1]=  "<div class=center><a href='userinfo.php?user=" . $row['user_id'] . "                                                            '>" . $row['user_id'] . "</a>" ."</div>";
                         $view_rank[$i][2]=  "<div class=center>" . htmlspecialchars ( $row['nick'] ) ."</div>";
-                        $view_rank[$i][3]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] . "&jresult=4'>" . $row['solved'] . "</a>" ."</div>";
-                        $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] . "'>" . $row['submit'] . "</a>" ."</div>";
+                        $view_rank[$i][3]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] .                                                             "&jresult=4'>" . $row['solved'] . "</a>" ."</div>";
+                        $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] .                                                             "'>" . $row['submit'] . "</a>" ."</div>";
 
-                        if ($row->submit == 0)
+                        if ($row['submit'] == 0)
                                 $view_rank[$i][5]= "0.000%";
                         else
                                 $view_rank[$i][5]= sprintf ( "%.03lf%%", 100 * $row['solved'] / $row['submit'] );
@@ -91,7 +91,7 @@
                 }
 
 if(!$OJ_MEMCACHE)mysql_free_result($result);
-               
+
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
                 $result = mysql_query ( $sql );
         if($OJ_MEMCACHE){
@@ -105,10 +105,10 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
                 if($result) $rows_cnt=mysql_num_rows($result);
                 else $rows_cnt=0;
         }
-                
+
                 echo mysql_error ();
   //$row = mysql_fetch_object ( $result );
-                $view_total=$row['mycount'];
+                $view_total=$row[0];
 
   //              mysql_free_result ( $result );
 

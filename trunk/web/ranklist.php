@@ -1,6 +1,6 @@
 <?php
         $OJ_CACHE_SHARE=false;
-        $cache_time=30;
+        $cache_time=3;
         require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
         require_once('./include/setlang.php');
@@ -24,7 +24,7 @@
                 if ($rank < 0)
                         $rank = 0;
 
-                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_                                                            time  LIMIT  " . strval ( $rank ) . ",$page_size";
+                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
 
                 if($scope){
                         $s="";
@@ -51,11 +51,11 @@
                                         (select count( problem_id) submit ,user_id from solution where in_date>'$                                                            s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.                                                            user_id
                                 ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
                          ";
-                         //echo $sql;
+                         echo $sql;
                 }
 
 
-                $result = mysql_query ( $sql ); //mysql_error();
+       //         $result = mysql_query ( $sql ); //mysql_error();
         if($OJ_MEMCACHE){
                 require("./include/memcache.php");
                 $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
@@ -63,7 +63,7 @@
                 else $rows_cnt=0;
         }else{
 
-                $result = mysql_query($sql);// or die("Error! ".mysql_error());
+                $result = mysql_query($sql) or die("Error! ".mysql_error());
                 if($result) $rows_cnt=mysql_num_rows($result);
                 else $rows_cnt=0;
         }
@@ -93,7 +93,7 @@
 if(!$OJ_MEMCACHE)mysql_free_result($result);
 
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
-                $result = mysql_query ( $sql );
+        //        $result = mysql_query ( $sql );
         if($OJ_MEMCACHE){
           // require("./include/memcache.php");
                 $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
@@ -105,10 +105,13 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
                 if($result) $rows_cnt=mysql_num_rows($result);
                 else $rows_cnt=0;
         }
-
+        if($OJ_MEMCACHE)
+                $row=$result[0];
+        else
+                $row=mysql_fetch_array($result);
                 echo mysql_error ();
   //$row = mysql_fetch_object ( $result );
-                $view_total=$row[0];
+                $view_total=$row['mycount'];
 
   //              mysql_free_result ( $result );
 

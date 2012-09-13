@@ -1,51 +1,51 @@
-<?php 
-	$OJ_CACHE_SHARE=true;
-	$cache_time=60;
-	require_once('./include/cache_start.php');
+<?php
+        $OJ_CACHE_SHARE=true;
+        $cache_time=5;
+        require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
-	require_once('./include/setlang.php');
-	$view_title= $MSG_CONTEST.$MSG_RANKLIST;
-	$title="";
-	require_once("./include/const.inc.php");
-	require_once("./include/my_func.inc.php");
+        require_once('./include/setlang.php');
+        $view_title= $MSG_CONTEST.$MSG_RANKLIST;
+        $title="";
+        require_once("./include/const.inc.php");
+        require_once("./include/my_func.inc.php");
 class TM{
-	var $solved=0;
-	var $time=0;
-	var $p_wa_num;
-	var $p_ac_sec;
-	var $user_id;
+        var $solved=0;
+        var $time=0;
+        var $p_wa_num;
+        var $p_ac_sec;
+        var $user_id;
         var $nick;
-	function TM(){
-		$this->solved=0;
-		$this->time=0;
-		$this->p_wa_num=array(0);
-		$this->p_ac_sec=array(0);
-	}
-	function Add($pid,$sec,$res){
-//		echo "Add $pid $sec $res<br>";
-		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
-			return;
-		if ($res!=4){
-			if(isset($this->p_wa_num[$pid])){
-				$this->p_wa_num[$pid]++;
-			}else{
-				$this->p_wa_num[$pid]=1;
-			}
-		}else{
-			$this->p_ac_sec[$pid]=$sec;
-			$this->solved++;
-			if(!isset($this->p_wa_num[$pid])) $this->p_wa_num[$pid]=0;
-			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
-//			echo "Time:".$this->time."<br>";
-//			echo "Solved:".$this->solved."<br>";
-		}
-	}
+        function TM(){
+                $this->solved=0;
+                $this->time=0;
+                $this->p_wa_num=array(0);
+                $this->p_ac_sec=array(0);
+        }
+        function Add($pid,$sec,$res){
+//              echo "Add $pid $sec $res<br>";
+                if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
+                        return;
+                if ($res!=4){
+                        if(isset($this->p_wa_num[$pid])){
+                                $this->p_wa_num[$pid]++;
+                        }else{
+                                $this->p_wa_num[$pid]=1;
+                        }
+                }else{
+                        $this->p_ac_sec[$pid]=$sec;
+                        $this->solved++;
+                        if(!isset($this->p_wa_num[$pid])) $this->p_wa_num[$pid]=0;
+                        $this->time+=$sec+$this->p_wa_num[$pid]*1200;
+//                      echo "Time:".$this->time."<br>";
+//                      echo "Solved:".$this->solved."<br>";
+                }
+        }
 }
 
 function s_cmp($A,$B){
-//	echo "Cmp....<br>";
-	if ($A->solved!=$B->solved) return $A->solved<$B->solved;
-	else return $A->time>$B->time;
+//      echo "Cmp....<br>";
+        if ($A->solved!=$B->solved) return $A->solved<$B->solved;
+        else return $A->time>$B->time;
 }
 
 // contest start time
@@ -53,63 +53,116 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
-$result=mysql_query($sql) or die(mysql_error());
-$rows_cnt=mysql_num_rows($result);
+//$result=mysql_query($sql) or die(mysql_error());
+//$rows_cnt=mysql_num_rows($result);
+if($OJ_MEMCACHE){
+        require("./include/memcache.php");
+        $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=count($result);
+        else $rows_cnt=0;
+}else{
+
+        $result = mysql_query($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysql_num_rows($result);
+        else $rows_cnt=0;
+}
+
+
 $start_time=0;
 if ($rows_cnt>0){
-	$row=mysql_fetch_array($result);
-	$start_time=strtotime($row[0]);
-	$title=$row[1];
+//      $row=mysql_fetch_array($result);
+
+        if($OJ_MEMCACHE)
+                $row=$result[$i];
+        else
+                $row=mysql_fetch_array($result);
+        $start_time=strtotime($row[0]);
+        $title=$row[1];
 }
-mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysql_free_result($result);
 if ($start_time==0){
-	$view_errors= "No Such Contest";
-	require("template/".$OJ_TEMPLATE."/error.php");
-	exit(0);
+        $view_errors= "No Such Contest";
+        require("template/".$OJ_TEMPLATE."/error.php");
+        exit(0);
 }
 
 if ($start_time>time()){
-	$view_errors= "Contest Not Started!";
-	require("template/".$OJ_TEMPLATE."/error.php");
-	exit(0);
+        $view_errors= "Contest Not Started!";
+        require("template/".$OJ_TEMPLATE."/error.php");
+        exit(0);
 }
 
 $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=mysql_query($sql);
-$row=mysql_fetch_array($result);
+//$result=mysql_query($sql);
+if($OJ_MEMCACHE){
+//        require("./include/memcache.php");
+        $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=count($result);
+        else $rows_cnt=0;
+}else{
+
+        $result = mysql_query($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysql_num_rows($result);
+        else $rows_cnt=0;
+}
+
+if($OJ_MEMCACHE)
+        $row=$result[0];
+else
+        $row=mysql_fetch_array($result);
+
+//$row=mysql_fetch_array($result);
 $pid_cnt=intval($row[0]);
 mysql_free_result($result);
 
-$sql="SELECT 
-	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
-		FROM 
-			(select * from solution where solution.contest_id='$cid' and num>=0) solution 
-		left join users 
-		on users.user_id=solution.user_id 
-	ORDER BY users.user_id,in_date";
+$sql="SELECT
+        users.user_id,users.nick,solution.result,solution.num,solution.in_date
+                FROM
+                        (select * from solution where solution.contest_id='$cid' and num>=0) solution
+                left join users
+                on users.user_id=solution.user_id
+        ORDER BY users.user_id,in_date";
 //echo $sql;
-$result=mysql_query($sql);
+//$result=mysql_query($sql);
+if($OJ_MEMCACHE){
+   //     require("./include/memcache.php");
+        $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=count($result);
+        else $rows_cnt=0;
+}else{
+
+        $result = mysql_query($sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysql_num_rows($result);
+        else $rows_cnt=0;
+}
+
 $user_cnt=0;
 $user_name='';
 $U=array();
-while ($row=mysql_fetch_object($result)){
-	$n_user=$row->user_id;
-	if (strcmp($user_name,$n_user)){
-		$user_cnt++;
-		$U[$user_cnt]=new TM();
-		$U[$user_cnt]->user_id=$row->user_id;
-                $U[$user_cnt]->nick=$row->nick;
+for ($i=0;$i<$rows_cnt;$i++){
+        if($OJ_MEMCACHE)
+                $row=$result[$i];
+        else
+                $row=mysql_fetch_array($result);
 
-		$user_name=$n_user;
-	}
-	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));
+        $n_user=$row['user_id'];
+        if (strcmp($user_name,$n_user)){
+                $user_cnt++;
+                $U[$user_cnt]=new TM();
+
+                $U[$user_cnt]->user_id=$row['user_id'];
+                $U[$user_cnt]->nick=$row['nick'];
+
+                $user_name=$n_user;
+        }
+        $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
 }
-mysql_free_result($result);
+if(!$OJ_MEMCACHE) mysql_free_result($result);
 usort($U,"s_cmp");
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/contestrank.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
-	require_once('./include/cache_end.php');
+        require_once('./include/cache_end.php');
 ?>

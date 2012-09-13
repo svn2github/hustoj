@@ -90,14 +90,30 @@
 //                      $i++;
                 }
 
-                mysql_free_result ( $result );
+if(!$OJ_MEMCACHE)mysql_free_result($result);
+               
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
                 $result = mysql_query ( $sql );
-                echo mysql_error ();
-                $row = mysql_fetch_object ( $result );
-                $view_total=$row->mycount;
+        if($OJ_MEMCACHE){
+          // require("./include/memcache.php");
+                $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+                if($result) $rows_cnt=count($result);
+                else $rows_cnt=0;
+        }else{
 
-                mysql_free_result ( $result );
+                $result = mysql_query($sql);// or die("Error! ".mysql_error());
+                if($result) $rows_cnt=mysql_num_rows($result);
+                else $rows_cnt=0;
+        }
+                
+                echo mysql_error ();
+  //$row = mysql_fetch_object ( $result );
+                $view_total=$row['mycount'];
+
+  //              mysql_free_result ( $result );
+
+if(!$OJ_MEMCACHE)  mysql_free_result($result);
+
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/ranklist.php");

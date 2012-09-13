@@ -73,11 +73,11 @@ if ($rows_cnt>0){
 //      $row=mysql_fetch_array($result);
 
         if($OJ_MEMCACHE)
-                $row=$result[$i];
+                $row=$result[0];
         else
                 $row=mysql_fetch_array($result);
-        $start_time=strtotime($row[0]);
-        $title=$row[1];
+        $start_time=strtotime($row['start_time']);
+        $title=$row['title'];
 }
 if(!$OJ_MEMCACHE)mysql_free_result($result);
 if ($start_time==0){
@@ -92,7 +92,7 @@ if ($start_time>time()){
         exit(0);
 }
 
-$sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
+$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //$result=mysql_query($sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
@@ -112,8 +112,8 @@ else
         $row=mysql_fetch_array($result);
 
 //$row=mysql_fetch_array($result);
-$pid_cnt=intval($row[0]);
-mysql_free_result($result);
+$pid_cnt=intval($row['pbc']);
+if(!$OJ_MEMCACHE)mysql_free_result($result);
 
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,solution.in_date

@@ -46,19 +46,19 @@
                         //echo $s."<-------------------------";
                         $sql="SELECT users.`user_id`,`nick`,s.`solved`,t.`submit` FROM `users`
                                         right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in                                                            _date>'$s' and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on use                                                            rs.user_id=s.user_id
+                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
                                         left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>'$                                                            s' group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.                                                            user_id
+                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
                                 ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
                          ";
-                         echo $sql;
+//                      echo $sql;
                 }
 
 
        //         $result = mysql_query ( $sql ); //mysql_error();
         if($OJ_MEMCACHE){
                 require("./include/memcache.php");
-                $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+                $result = mysql_query_cache($sql) ;//or die("Error! ".mysql_error());
                 if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
         }else{

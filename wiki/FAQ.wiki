@@ -13,6 +13,10 @@ When people asked question, we put the answer here
     不要钱，我们是GPL的。
   * 管理员如何添加，如何管理？
     查看安装说明[README],管理员登录后有Admin菜单。
+
+ * 为什么我提交的答案始终在pending？
+    判题程序judged需要用root帐号启动，请重启服务器或手动执行sudo judged。如果无效，请检查/home/judge/etc/judge.conf中的数据库账号配置,参考[Configuration]，修正后再次重启服务器或执行sudo pkill -9 judged等待一会儿再执行sudo judged
+
   * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
     您需要修改系统php.ini,给予php操作数据目录的权限。
     以下是推荐修改的设置
@@ -32,8 +36,7 @@ When people asked question, we put the answer here
     
   * 为什么我添加的题目普通用户看不到？
     题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中的Resume启用题目。
-  * 为什么我提交的答案始终在pending？
-    判题程序judged需要用root帐号启动，请重启服务器或手动执行sudo judged。如果无效，请检查/home/judge/etc/judge.conf中的数据库账号配置，修正后再次重启服务器或执行sudo pkill -9 judged等待一会儿再执行sudo judged
+ 
   * 为何我的C/C++都能用，唯独Java总是CE/RE？
 　　目前只支持sun原版jdk和openjdk，其他jdk暂不能保证支持。如果你用的是64位系统，你可能需要自己调整一下源代码。请联系我。
   * 我是管理员，为什么不能查看别人的源码？  

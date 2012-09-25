@@ -73,7 +73,7 @@ Language:
  $L_=($lang&256)>0;
  $S_=($lang&512)>0;
  if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
- else $lastlang=1;
+ else $lastlang=0;
  
  if($C_) echo"	    <option value=0 ".( $lastlang==0?"selected":"").">C</option>";
  if($CPP_) echo"	<option value=1 ".( $lastlang==1?"selected":"").">C++</option>";

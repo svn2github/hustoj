@@ -33,8 +33,8 @@
 	 </td></tr>
 	</form>
    </table>
-   <table border=1>";
-   <tr><td>Mail ID<td>From:Title<td>Date</tr>";
+   <table border=1>
+   <tr><td>Mail ID<td>From:Title<td>Date</tr>
    <tbody>
 			<?php 
 			$cnt=0;

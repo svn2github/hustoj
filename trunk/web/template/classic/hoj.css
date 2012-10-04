@@ -140,6 +140,10 @@ div.content {
     font-size: 20px;
     top: 2px;
 }
+.menu_item_selected{
+    color:orange;
+}
+
 #profile {
     font-weight: bold;
     height: 32px;

@@ -81,7 +81,7 @@ if ($language!=-1){
 if (isset($_GET['jresult'])) $result=intval($_GET['jresult']);
 else $result=-1;
 
-if ($result>12 || $language<0) $language=-1;
+if ($result>12 || $result<0) $result=-1;
 if ($result!=-1){
         $sql=$sql."AND `result`='".strval($result)."' ";
         $str2=$str2."&jresult=".$result;

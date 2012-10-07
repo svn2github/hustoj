@@ -1272,6 +1272,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
         if(!oi_mode) num_of_test=1.0;
         if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(num_of_test+1.0))
                 ACflg = OJ_TL;
+        if(topmemory>mem_lmt) ACflg=OJ_ML; //issues79
         // compare
         if (ACflg == OJ_AC) {
                 if (isspj) {

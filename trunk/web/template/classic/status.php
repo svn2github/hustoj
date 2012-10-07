@@ -35,10 +35,10 @@ for ($i=0;$i<10;$i++){
 <?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
 else $jresult_get=-1;
 if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
-if ($jresult_get!=-1){
+     /*if ($jresult_get!=-1){
         $sql=$sql."AND `result`='".strval($jresult_get)."' ";
         $str2=$str2."&jresult=".strval($jresult_get);
-}
+     }*/
 if ($jresult_get==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
 for ($j=0;$j<12;$j++){

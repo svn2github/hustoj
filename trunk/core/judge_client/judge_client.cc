@@ -1758,19 +1758,14 @@ int main(int argc, char** argv) {
                         //clean_session(pidApp);
                 }
                 if(oi_mode){
-                    if(ACflg == OJ_AC && PEflg != OJ_PE){
-                                        pass_rate++;
-                        }else{
-                                if (ACflg == OJ_AC && PEflg == OJ_PE){
-                                        ACflg = OJ_PE;
-                                        PEflg=false;
-                                }
-                                if(ACflg == OJ_RE)addreinfo(solution_id);
-                            finalACflg=ACflg;
-                            ACflg=OJ_AC;
-                        }
-                        num_of_test++;
-                        ACflg = OJ_AC;
+                     if(ACflg == OJ_AC){
+                       ++ pass_rate;
+                     }
+                     if (finalACflg < ACflg){
+                       finalACflg = ACflg;
+                     }
+                     num_of_test++;
+                     ACflg = OJ_AC;
                 }
         }
         if (ACflg == OJ_AC && PEflg == OJ_PE)

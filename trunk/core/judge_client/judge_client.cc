@@ -1346,7 +1346,25 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                 // check the usage
 
                 wait4(pidApp, &status, 0, &ruse);
-                //sig = status >> 8;/*status >> 8 Ã¥Â·Â®Ã¤Â¸ÂÃ¥Â¤Å¡Ã¦ËÂ¯EXITCODE*/
+                  
+
+//jvm gc ask VM before need,so used kernel page fault times and page size
+                if (lang == 3) {
+                        tempmemory = get_page_fault_mem(ruse, pidApp);
+                } else {//other use VmPeak
+                        tempmemory = get_proc_status(pidApp, "VmPeak:") << 10;
+                }
+                if (tempmemory > topmemory)
+                        topmemory = tempmemory;
+                if (topmemory > mem_lmt * STD_MB) {
+                        if (DEBUG)
+                                printf("out of memory %d\n", topmemory);
+                        if (ACflg == OJ_AC)
+                                ACflg = OJ_ML;
+                        ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+                        break;
+                }
+                  //sig = status >> 8;/*status >> 8 Ã¥Â·Â®Ã¤Â¸ÂÃ¥Â¤Å¡Ã¦ËÂ¯EXITCODE*/
 
                 if (WIFEXITED(status))
                         break;
@@ -1456,22 +1474,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                 }
                 sub = 1 - sub;
 
-                //jvm gc ask VM before need,so used kernel page fault times and page size
-                if (lang == 3) {
-                        tempmemory = get_page_fault_mem(ruse, pidApp);
-                } else {//other use VmPeak
-                        tempmemory = get_proc_status(pidApp, "VmPeak:") << 10;
-                }
-                if (tempmemory > topmemory)
-                        topmemory = tempmemory;
-                if (topmemory > mem_lmt * STD_MB) {
-                        if (DEBUG)
-                                printf("out of memory %d\n", topmemory);
-                        if (ACflg == OJ_AC)
-                                ACflg = OJ_ML;
-                        ptrace(PTRACE_KILL, pidApp, NULL, NULL);
-                        break;
-                }
+                
                 ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
         }
         usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);

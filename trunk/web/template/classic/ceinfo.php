@@ -16,6 +16,8 @@
    var i=0;
    var pats=new Array();
    var exps=new Array();
+   pats[i]=/asm.*java/;
+   exps[i++]="请不要将java程序提交为C语言";
    pats[i]=/package .* does not exist/;
    exps[i++]="检测拼写，如：系统对象System为大写S开头";
    pats[i]=/possible loss of precision/;

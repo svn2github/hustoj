@@ -17,6 +17,9 @@
    var pats=new Array();
    var exps=new Array();
 
+
+   pats[i]=/not a statement/;
+   exps[i++]="检查大括号{}匹配情况，eclipse整理代码快捷键Ctrl+Shift+F";
    pats[i]=/class, interface, or enum expected/;
    exps[i++]="请不要将java函数（方法）放置在类声明外部，注意大括号的结束位置}";
    pats[i]=/asm.*java/;

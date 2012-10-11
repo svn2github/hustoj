@@ -52,7 +52,7 @@ for Chinese user ,QQ-qun group IM is recomended.
 
 刚刚在全新的CentOS 5.6中安装了OJ，主要遇到问题和解决方法如下：
  * 安装时候提示找不到www-data用户，修改web的用户为apache
- * 运行/etc/init.d/judged出错，修改这个文件,内容为:
+ * 运行/etc/init.d/judged出错，提示/lib/init/vars.sh找不到，修改/etc/init.d/judged,删除原有内容，修改内容为:
 {{{
 /usr/bin/judged
 }}}

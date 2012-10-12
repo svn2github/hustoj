@@ -103,7 +103,7 @@ if (isset($_POST['syear']))
 }
 ?>
 
-<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
+<form method=POST >
 <?php require_once("../include/set_post_key.php");?>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
 <input type=hidden name='cid' value=<?php echo $cid?>>

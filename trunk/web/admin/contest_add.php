@@ -118,7 +118,7 @@ else if(isset($_POST['problem2contest'])){
   include_once("../fckeditor/fckeditor.php") ;
 ?>
 	
-	<form method=POST action='<?php echo $_SERVER['PHP_SELF']?>'>
+	<form method=POST >
 	<p align=center><font size=4 color=#333399>Add a Contest</font></p>
 	<p align=left>Title:<input type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
 	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;

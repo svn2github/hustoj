@@ -29,7 +29,7 @@ $description="";
 	$description=mysql_real_escape_string($description);
 	
     $lang=$_POST['lang'];
-    $langmask=$OJ_LANGMASK;
+    $langmask=0;
     foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 

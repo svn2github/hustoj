@@ -1,5 +1,5 @@
 <?php require_once("admin-header.php");?>
-<?php if (!(isset($_SESSION['administrator']))){
+<?php if (!(isset($_SESSION['administrator'])|| isset($_SESSION['password_setter']) )){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }

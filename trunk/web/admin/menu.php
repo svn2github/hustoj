@@ -51,7 +51,7 @@ if (isset($_SESSION['administrator'])){
 <li>
 	<a href="setmsg.php" target="main"><b><?php echo $MSG_SETMESSAGE?></b></a>
 <?php }
-if (isset($_SESSION['administrator'])){
+if (isset($_SESSION['administrator'])||isset( $_SESSION['password_setter'] )){
 ?><li>
 	<a href="changepass.php" target="main"><b><?php echo $MSG_SETPASSWORD?></b></a>
 <?php }

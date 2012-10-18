@@ -4,7 +4,7 @@ require_once("../include/db_info.inc.php");
 require_once("../include/my_func.inc.php");
 if(!(isset($_SESSION['password_setter'])|| isset($_SESSION['administrator'])  )) return;
 function update_for_user($user_id){
-	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."' and user_id not in( select user_id from privilege where right_str='administrator')";
+	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."' and user_id not in( select user_id from privilege where rightstr='administrator')";
 	$result=mysql_query($sql);
 	$row = mysql_fetch_array($result);
 	if ($row){

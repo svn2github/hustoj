@@ -17,10 +17,10 @@ if(isset($_POST['do'])){
 	}
 	$user_id=mysql_real_escape_string($user_id);
 	$passwd=pwGen($passwd);
-	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'";
+	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'  and user_id not in( select user_id from privilege where rightstr='administrator') ";
 	mysql_query($sql);
 	if (mysql_affected_rows()==1) echo "Password Changed!";
-	else echo "No such user!";
+  else echo "No such user! or He/Her is an administrator!";
 }
 ?>
 <form action='changepass.php' method=post>

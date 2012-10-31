@@ -104,6 +104,7 @@ div.content {
     margin: 0;
     padding: 0 20px;
     text-align: left;
+    white-space:normal;
 }
 .sampledata {
     background: none repeat scroll 0 0 #8DB8FF;

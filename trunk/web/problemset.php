@@ -5,13 +5,14 @@
 	require_once('./include/cache_start.php');
 	require_once('./include/setlang.php');
     $view_title= "Problem Set";
-    
+$first=1000;
+if($OJ_SAE) $first=1;
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
 $result=mysql_query($sql);
 echo mysql_error();
 $row=mysql_fetch_object($result);
-$cnt=intval($row->upid)-1000;
+$cnt=intval($row->upid)-$first;
 $cnt=$cnt/$page_cnt;
 
   //remember page
@@ -36,7 +37,7 @@ if (isset($_GET['page'])){
 
 
 
-$pstart=1000+$page_cnt*intval($page)-$page_cnt;
+$pstart=$first+$page_cnt*intval($page)-$page_cnt;
 $pend=$pstart+$page_cnt;
 
 $sub_arr=Array();

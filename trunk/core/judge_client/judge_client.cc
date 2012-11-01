@@ -1015,7 +1015,7 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
         strncpy(fname, filename, namelen);
         fname[namelen] = 0;
         sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-        execute_cmd("cp %s %sdata.in", infile, work_dir);
+        execute_cmd("cp %s %s/data.in", infile, work_dir);
         execute_cmd("cp %s/data/%d/*.dic %s/", oj_home, p_id,work_dir);
 
         sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);

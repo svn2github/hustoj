@@ -96,12 +96,14 @@ if(isset($_POST['update_solution'])){
 	
 }else if(isset($_POST['updateuser'])){
 	
-	$user_id=mysql_real_escape_string($_POST['user_id']);
-	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=\'$user_id\' AND `result`=\'4\') WHERE `user_id`=\'$user_id\'";
+  	$user_id=mysql_real_escape_string($_POST['user_id']);
+	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`='$user_id' AND `result`=4) WHERE `user_id`='$user_id'";
 	mysql_query($sql);
+  //  echo $sql;
 	
-	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=\'$user_id\') WHERE `user_id`=\'$user_id\'";
+	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`='$user_id') WHERE `user_id`='$user_id'";
 	mysql_query($sql);
+  //	echo $sql;
 	
 }else if(isset($_POST['updateproblem'])){
 	

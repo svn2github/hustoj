@@ -22,6 +22,10 @@ password:freeproblemset
 username:root
 password:root
 }}}
+  * To update code to latest svn version
+{{{
+sudo update-hustoj
+}}}
 Download:
   
   http://hz.wkjsj.org/hustoj/hustoj-windows.zip

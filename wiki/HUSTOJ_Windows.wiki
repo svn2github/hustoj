@@ -14,7 +14,8 @@ Install:
   * Open http://127.0.0.1/
 
 Download:
-  http://115.com/file/e74vcojs#hustoj.zip
+  
+  http://hz.wkjsj.org/hustoj/hustoj-windows.zip
 
   http://pan.baidu.com/share/link?shareid=97657&uk=2634188741
 

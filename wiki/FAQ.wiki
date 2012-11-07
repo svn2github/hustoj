@@ -8,6 +8,12 @@ When people asked question, we put the answer here
 这里是常见问答。
 
 = Details =
+  * 为何页面总是需要刷新才能显示？
+    如果您使用的是ie6浏览器，请禁用服务器上的deflate模块，在ubuntu下的命令是
+{{{
+sudo rm /etc/apache2/mods-enabled/deflate.*
+sudo /etc/init.d/apache2 restart
+}}}
   * CentOS 用户，点击[CentOS]
   * 使用HUSTOJ要花多少钱？
     不要钱，我们是GPL的。

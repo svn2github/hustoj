@@ -12,7 +12,16 @@ Install:
   * Unzip downloaded file 
   * Click 启动hustoj.bat
   * Open http://127.0.0.1/
-
+  * admin for OJ :
+{{{
+username:hustoj
+password:freeproblemset
+}}}
+  * admin for OS :
+{{{
+username:root
+password:root
+}}}
 Download:
   
   http://hz.wkjsj.org/hustoj/hustoj-windows.zip

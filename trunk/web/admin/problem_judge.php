@@ -128,7 +128,7 @@ if(isset($_POST['update_solution'])){
           //echo $OJ_DATA."$pid";
          
            $store = new SaeStorage();
-           $ret = $store->getList("data", "$pid" );
+           $ret = $store->getList("data", "$pid" ,100,1);
             foreach($ret as $file) {
               if(!strstr($file,"sae-dir-tag")){
                      $file=pathinfo($file);

@@ -21,10 +21,10 @@ echo "</tr>";
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>";
 	else echo "<tr class=evenrow align=center>";
-	echo "<td>$rank";
-	
+	echo "<td>";
 	$uuid=$U[$i]->user_id;
-  if(substr($uuid,0,1)!="*") $rank++;      
+  if(substr($uuid,0,1)!="*") echo $rank++;
+      
 	$usolved=$U[$i]->solved;
 	echo "<td><a href=userinfo.php?user=$uuid>$uuid</a>";
 	echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";

@@ -32,15 +32,25 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td>".sec2str($U[$i]->time);
 	for ($j=0;$j<$pid_cnt;$j++){
 		$bg_color="eeeeee";
-		if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0){
-			$bg_color="aaffaa";
-        /////////////first blood color blue   
-      if($uuid==$first_blood[$j]){
+		 if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0){
+                	$aa=0x33+$U[$i]->p_wa_num[$j]*32;
+                        $aa=$aa>0xaa?0xaa:$aa;
+                	$aa=dechex($aa);
+			$bg_color="$aa"."ff"."$aa";
+                
+                
+                  //$bg_color="aaffaa";
+                        if($uuid==$first_blood[$j]){
                                 $bg_color="aaaaff";
                         }
-
+			
+                        
+                        
 		}else if(isset($U[$i]->p_wa_num[$j])&&$U[$i]->p_wa_num[$j]>0) {
-			$bg_color="ffaaaa";
+                        $aa=0xaa-$U[$i]->p_wa_num[$j]*10;
+                        $aa=$aa>16?$aa:16;
+                	$aa=dechex($aa);
+			$bg_color="ff$aa$aa";
 		}
 		
 		

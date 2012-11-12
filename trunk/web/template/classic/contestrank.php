@@ -23,7 +23,10 @@ for ($i=0;$i<$user_cnt;$i++){
 	else echo "<tr class=evenrow align=center>";
 	echo "<td>";
 	$uuid=$U[$i]->user_id;
-  if(substr($uuid,0,1)!="*") echo $rank++;
+  if(substr($uuid,0,1)!="*") 
+        echo $rank++;
+  else 
+        echo "*";
       
 	$usolved=$U[$i]->solved;
 	echo "<td><a href=userinfo.php?user=$uuid>$uuid</a>";

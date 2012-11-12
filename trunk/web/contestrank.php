@@ -160,6 +160,22 @@ for ($i=0;$i<$rows_cnt;$i++){
 if(!$OJ_MEMCACHE) mysql_free_result($result);
 usort($U,"s_cmp");
 
+////firstblood
+$first_blood=array();
+for($i=0;$i<$pid_cnt;$i++){
+   $sql="select user_id from solution where contest_id=$cid and result=4 and num=$i order by in_date limit 1";
+   $result=mysql_query($sql);
+   $row_cnt=mysql_num_rows($result);
+   $row=mysql_fetch_array($result);
+   if($row_cnt==1){
+      $first_blood[$i]=$row['user_id'];
+   }else{
+      $first_blood[$i]="";
+   }
+
+}
+
+
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/contestrank.php");
 /////////////////////////Common foot

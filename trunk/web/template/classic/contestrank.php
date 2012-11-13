@@ -23,7 +23,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	else echo "<tr class=evenrow align=center>";
 	echo "<td>";
 	$uuid=$U[$i]->user_id;
-  if($uuid[0]=="*") 
+  if($uuid[0]!="*") 
         echo $rank++;
   else 
         echo "*";

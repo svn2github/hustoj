@@ -1270,7 +1270,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
         //usedtime-=1000;
         int comp_res;
         if(!oi_mode) num_of_test=1.0;
-        if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(num_of_test+1.0))
+        if (ACflg == OJ_AC && usedtime > time_lmt * 1000*(num_of_test))
                 ACflg = OJ_TL;
         if(topmemory>mem_lmt * STD_MB) ACflg=OJ_ML; //issues79
         // compare
@@ -1787,7 +1787,7 @@ int main(int argc, char** argv) {
   }
   if(oi_mode){
                 if(num_of_test>0) pass_rate/=num_of_test;
-                update_solution(solution_id, finalACflg, usedtime*num_of_test, topmemory >> 10, sim,
+                update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
                         sim_s_id,pass_rate);
         }else{
                 update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,

@@ -158,7 +158,7 @@ else
         $view_status[$i][0]=$row['solution_id'];
        
         if ($row['contest_id']>0) {
-                $view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
+                $view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user=".$row['user_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
         }else{
                 $view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
         }

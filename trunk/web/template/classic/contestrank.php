@@ -29,7 +29,7 @@ for ($i=0;$i<$user_cnt;$i++){
         echo "*";
       
 	$usolved=$U[$i]->solved;
-  if($uuid==$_GET['user_id']) echo "<td bgcolor=#ffffaa>";
+  if($uuid==$_GET['user_id']) echo "<td bgcolor=#ffff77>";
   else echo"<td>";
 	echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
 	echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";

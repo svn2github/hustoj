@@ -29,7 +29,9 @@ for ($i=0;$i<$user_cnt;$i++){
         echo "*";
       
 	$usolved=$U[$i]->solved;
-	echo "<td><a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
+  if($uuid==$_GET['user_id']) echo "<td bgcolor=#ffffaa>";
+  else echo"<td>";
+	echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
 	echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";
 	echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
 	echo "<td>".sec2str($U[$i]->time);

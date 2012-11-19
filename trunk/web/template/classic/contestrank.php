@@ -13,14 +13,14 @@
 $rank=1;
 ?>
 <center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
-<table><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty
+<table id=rank><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
-echo "</tr>";
+echo "</tr>\n";
 for ($i=0;$i<$user_cnt;$i++){
-	if ($i&1) echo "<tr class=oddrow align=center>";
-	else echo "<tr class=evenrow align=center>";
+	if ($i&1) echo "<tr class=oddrow align=center>\n";
+	else echo "<tr class=evenrow align=center>\n";
 	echo "<td>";
 	$uuid=$U[$i]->user_id;
   if($uuid[0]!="*") 
@@ -67,10 +67,45 @@ for ($i=0;$i<$user_cnt;$i++){
 				echo "(-".$U[$i]->p_wa_num[$j].")";
 		}
 	}
-	echo "</tr>";
+	echo "</tr>\n";
 }
 echo "</table>";
 ?>
+
+<script>
+function metal(){
+  var tb=window.document.getElementById('rank');
+  var rows=tb.rows;
+  try{
+  var total=parseInt(rows[rows.length-1].cells[0].innerHTML);
+  //alert(total);
+	  for(var i=1;i<rows.length;i++){
+	  	var cell=rows[i].cells[0];
+	  	if(cell.innerHTML!="*"){
+	  	     var r=parseInt(cell.innerHTML);
+	  	     
+	  	     if(r==1){
+	  	       cell.innerHTML="Winner";
+                       cell.style.cssText="background-color:gold;color:red";
+	  	     }
+	  	     if(r>1&&r<=total*.05+1)
+	  	        cell.style.cssText="background-color:gold";
+	  	     if(r>total*.05+1&&r<=total*.20+1)
+	  	        cell.style.cssText="background-color:silver";
+	  	     if(r>total*.20+1&&r<=total*.45+1)
+	  	        cell.style.cssText="background-color:firebrick";
+	  	        
+	  	}
+	  }
+  }catch(e){
+     //alert(e);
+  }
+}
+metal();
+
+
+</script>
+
 <div id=foot>
 	<?php require_once("oj-footer.php");?>
 

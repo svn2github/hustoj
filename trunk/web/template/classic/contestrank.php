@@ -78,6 +78,7 @@ echo "</table>";
     for(var i=0;i<rows.length&&total==0;i++){
       try{
          total=parseInt(rows[rows.length-i].cells[0].innerHTML);
+          if(isNaN(total)) total=0;
       }catch(e){
       
       }

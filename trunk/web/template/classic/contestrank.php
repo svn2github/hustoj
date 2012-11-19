@@ -73,11 +73,23 @@ echo "</table>";
 ?>
 
 <script>
+  function getTotal(rows){
+    var total=0;
+    for(var i=0;i<rows.length&&total==0;i++){
+      try{
+         total=parseInt(rows[rows.length-i].cells[0].innerHTML);
+      }catch(e){
+      
+      }
+    }
+    return total;
+  
+  }
 function metal(){
   var tb=window.document.getElementById('rank');
   var rows=tb.rows;
   try{
-  var total=parseInt(rows[rows.length-1].cells[0].innerHTML);
+  var total=getTotal(rows);
   //alert(total);
 	  for(var i=1;i<rows.length;i++){
 	  	var cell=rows[i].cells[0];

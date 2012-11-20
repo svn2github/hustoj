@@ -112,9 +112,9 @@ function metal(){
 	  	     if(r>total*.05+1&&r<=total*.20+1)
 	  	        cell.style.cssText="background-color:silver";
 	  	     if(r>total*.20+1&&r<=total*.45+1)
-	  	        cell.style.cssText="background-color:saddlebrown";
+	  	        cell.style.cssText="background-color:saddlebrown;color:white";
 	  	     if(r>total*.45+1&&ac>0)
-              cell.style.cssText="background-color:black;color:white";
+              cell.style.cssText="background-color:steelblue;color:white";
 	  	}
 	  }
   }catch(e){

@@ -94,7 +94,13 @@ function metal(){
   //alert(total);
 	  for(var i=1;i<rows.length;i++){
 	  	var cell=rows[i].cells[0];
-	  	if(cell.innerHTML!="*"){
+      var acc=rows[i].cells[3];
+      var ac=parseInt(acc.innerText);
+      if (isNaN(ac)) ac=parseInt(acc.textContent);
+                
+                
+	  	if(cell.innerHTML!="*"&&ac>0){
+	 
 	  	     var r=parseInt(cell.innerHTML);
 	  	     
 	  	     if(r==1){

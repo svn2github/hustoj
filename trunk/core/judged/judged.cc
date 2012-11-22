@@ -283,42 +283,49 @@ void login(){
 	}
 	
 }
-void _get_jobs_http(int * jobs){
-	login();
-	int i=0;
-	char buf[BUFFER_SIZE];
-	const char * cmd="wget --post-data=\"getpending=1&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE * fjobs=read_cmd_output(cmd,max_running,http_baseurl);
-	while(fscanf(fjobs,"%s",buf) != EOF){
-		 //puts(buf);
-		 int sid=atoi(buf);
-		 if (sid>0)
-			jobs[i++]=sid;
-		 //i++;
-	 }
-	pclose(fjobs);
-	while(i<=max_running*2) jobs[i++]=0;
+int  _get_jobs_http(int * jobs){
+        login();
+        int ret=0;
+        int i=0;
+        char buf[BUFFER_SIZE];
+        const char * cmd="wget --post-data=\"getpending=1&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+        FILE * fjobs=read_cmd_output(cmd,max_running,http_baseurl);
+        while(fscanf(fjobs,"%s",buf) != EOF){
+                 //puts(buf);
+                 int sid=atoi(buf);
+                 if (sid>0)
+                        jobs[i++]=sid;
+                 //i++;
+         }
+        pclose(fjobs);
+        ret=i;
+        while(i<=max_running*2) jobs[i++]=0;
+        return ret;
 }
-void _get_jobs_mysql(int * jobs){
-	if (mysql_real_query(conn,query,strlen(query))){
-		if(DEBUG)write_log("%s", mysql_error(conn));
-		sleep(20);
-		return ;
-	}
-	res=mysql_store_result(conn);
-	int i=0;
-	while((row=mysql_fetch_row(res))!=NULL){
-		jobs[i++]=atoi(row[0]);
-	}
-	while(i<=max_running*2) jobs[i++]=0;
+int  _get_jobs_mysql(int * jobs){
+        if (mysql_real_query(conn,query,strlen(query))){
+                if(DEBUG)write_log("%s", mysql_error(conn));
+                sleep(20);
+                return 0;
+        }
+        res=mysql_store_result(conn);
+        int i=0;
+        int ret=0;
+        while((row=mysql_fetch_row(res))!=NULL){
+                jobs[i++]=atoi(row[0]);
+        }
+        ret=i;
+        while(i<=max_running*2) jobs[i++]=0;
+        return ret;
 }
-void get_jobs(int * jobs){
-	if (http_judge){
-		return _get_jobs_http(jobs);
-	}else
-		return _get_jobs_mysql(jobs);
+int get_jobs(int * jobs){
+        if (http_judge){
+                return _get_jobs_http(jobs);
+        }else
+                return _get_jobs_mysql(jobs);
 
 }
+
 bool _check_out_mysql(int solution_id,int result){
 	char sql[BUFFER_SIZE];
 	sprintf(sql,"UPDATE solution SET result=%d,time=0,memory=0,judgetime=NOW() WHERE solution_id=%d and result<2 LIMIT 1"
@@ -354,66 +361,67 @@ bool check_out(int solution_id,int result){
 
 }
 int work(){
-//	char buf[1024];
-	int retcnt=0;
-	int i=0;
-	pid_t ID[max_running];
-	static int workcnt=0;
-	int runid=0;
-	int  jobs[max_running*2+1];
-	pid_t tmp_pid=0;
+//      char buf[1024];
+        static  int retcnt=0;
+        int i=0;
+        static pid_t ID[100];
+        static int workcnt=0;
+        int runid=0;
+        int  jobs[max_running*2+1];
+        pid_t tmp_pid=0;
 
-	
-	for(i=0;i<max_running;i++){
-		ID[i]=0;
-	}
-    
-	//sleep_time=sleep_tmp;
-	/* get the database info */
-	get_jobs(jobs);
-	/* exec the submit */
-	for (int j=0;jobs[j]>0;j++){
-		runid=jobs[j];
-		if (runid%oj_tot!=oj_mod) continue;
-		if(DEBUG)write_log("Judging solution %d",runid);
-		if (workcnt>=max_running){		// if no more client can running
-			tmp_pid=waitpid(-1,NULL,0);	// wait 4 one child exit
-			workcnt--;retcnt++;
-			for (i=0;i<max_running;i++)	// get the client id
-				if (ID[i]==tmp_pid) break; // got the client id
-			ID[i]=0;
-		}else{							// have free client
-			
-			for (i=0;i<max_running;i++)	// find the client id
-				if (ID[i]==0) break;	// got the client id
-		}
-		if(workcnt<max_running&&check_out(runid,OJ_CI)){
-			workcnt++;
-			ID[i]=fork();					// start to fork
-			if (ID[i]==0){
-				if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
-				run_client(runid,i);	// if the process is the son, run it
-				exit(0);
-			}
-			
-		}else{
-			ID[i]=0;
-		}
-	}
-	while (workcnt>0){
-			waitpid(-1,NULL,0);
-			workcnt--;
-			retcnt++;
-	}
-	if(!http_judge){
-		mysql_free_result(res);				// free the memory
-		executesql("commit");
-	}
+        
+        //for(i=0;i<max_running;i++){
+        //      ID[i]=0;
+        //}
+
+        //sleep_time=sleep_tmp;
+        /* get the database info */
+        if(!get_jobs(jobs)) retcnt=0;
+        /* exec the submit */
+        for (int j=0;jobs[j]>0;j++){
+                runid=jobs[j];
+                if (runid%oj_tot!=oj_mod) continue;
+                if(DEBUG)write_log("Judging solution %d",runid);
+                if (workcnt>=max_running){              // if no more client can running
+                        tmp_pid=waitpid(-1,NULL,0);     // wait 4 one child exit
+                        workcnt--;retcnt++;
+                        for (i=0;i<max_running;i++)     // get the client id
+                                if (ID[i]==tmp_pid) break; // got the client id
+                        ID[i]=0;
+                }else{                                                  // have free client
+
+                        for (i=0;i<max_running;i++)     // find the client id
+                                if (ID[i]==0) break;    // got the client id
+                }
+                if(workcnt<max_running&&check_out(runid,OJ_CI)){
+                        workcnt++;
+                        ID[i]=fork();                                   // start to fork
+                        if (ID[i]==0){
+                                if(DEBUG)write_log("<<=sid=%d===clientid=%d==>>\n",runid,i);
+                                run_client(runid,i);    // if the process is the son, run it
+                                exit(0);
+                        }
+
+                }else{
+                        ID[i]=0;
+                }
+        }
+/*      while (workcnt>0){
+                        waitpid(-1,NULL,0);
+                        workcnt--;
+                        retcnt++;
+        }
+*/      if(!http_judge){
+                mysql_free_result(res);                         // free the memory
+                executesql("commit");
+        }
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
     //free(ID);
     //free(jobs);
-	return retcnt;
+        return retcnt;
 }
+
 int lockfile(int fd)
 {
 	struct flock fl;

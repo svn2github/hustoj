@@ -1134,7 +1134,21 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 int & mem_lmt) {
         nice(19);
                 // now the user is "judger"
-       
+        chdir(work_dir);
+        // open the files
+        freopen("data.in", "r", stdin);
+        freopen("user.out", "w", stdout);
+        freopen("error.out", "a+", stderr);
+        // trace me
+        ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+        // run me
+        if (lang != 3)
+                chroot(work_dir);
+
+        while(setgid(1536)!=0) sleep(1);
+        while(setuid(1536)!=0) sleep(1);
+        while(setresuid(1536, 1536, 1536)!=0) sleep(1);
+
 //      char java_p1[BUFFER_SIZE], java_p2[BUFFER_SIZE];
         // child
         // set the limit
@@ -1181,20 +1195,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         if(lang<3)
                 setrlimit(RLIMIT_AS, &LIM);
         
-        chdir(work_dir);
-        // open the files
-        freopen("data.in", "r", stdin);
-        freopen("user.out", "w", stdout);
-        freopen("error.out", "a+", stderr);
-        // trace me
-        ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-        // run me
-        if (lang != 3)
-                chroot(work_dir);
 
-        while(setgid(1536)!=0) sleep(1);
-        while(setuid(1536)!=0) sleep(1);
-        while(setresuid(1536, 1536, 1536)!=0) sleep(1);
         
         switch (lang) {
         case 0:

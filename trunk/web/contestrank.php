@@ -95,12 +95,9 @@ if ($start_time>time()){
         exit(0);
 }
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
-$time_sql="";
+
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
-if(time()>$lock&&time()<$end_time){
-   $time_sql="and in_date<'".date("Y-m-d H:i:s",$lock)."'";
-  //echo $time_sql;
-}
+
 
 $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //$result=mysql_query($sql);
@@ -128,7 +125,7 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,solution.in_date
                 FROM
-                        (select * from solution where solution.contest_id='$cid' and num>=0 $time_sql) solution
+                        (select * from solution where solution.contest_id='$cid' and num>=0 ) solution
                 left join users
                 on users.user_id=solution.user_id
         ORDER BY users.user_id,in_date";
@@ -165,7 +162,11 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                 $user_name=$n_user;
         }
-        $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
+        if(time()<$end_time&&$lock<strtotime($row->in_date))
+        	   $U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,0);
+        else
+        	   $U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));
+       
 }
 if(!$OJ_MEMCACHE) mysql_free_result($result);
 usort($U,"s_cmp");

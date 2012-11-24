@@ -94,7 +94,7 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-$lock=$start_time+($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
+$lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 $time_sql="";
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
 if(time()>$lock&&time()<$end_time){

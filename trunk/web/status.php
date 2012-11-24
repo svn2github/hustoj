@@ -20,12 +20,35 @@ if(isset($OJ_LANG)){
 require_once("./include/const.inc.php");
 
 $str2="";
-
+$lock=false;
 $sql="SELECT * FROM `solution` WHERE 1 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
+          $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
+        $result=mysql_query($sql_lock) or die(mysql_error());
+        $rows_cnt=mysql_num_rows($result);
+        $start_time=0;
+        $end_time=0;
+        if ($rows_cnt>0){
+                $row=mysql_fetch_array($result);
+                $start_time=strtotime($row[0]);
+                $title=$row[1];
+                $end_time=strtotime($row[2]);       
+        }
+        $lock_time=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
+        $lock_time=date("Y-m-d H:i:s",$lock_time);
+        $time_sql="";
+        //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
+        if(time()>$lock_time&&time()<$end_time){
+          //$lock_time=date("Y-m-d H:i:s",$lock_time);
+          //echo $time_sql;
+           $lock=true;
+        }else{
+           $lock=false;
+        }
+        
         //require_once("contest-header.php");
 }else{
         //require_once("oj-header.php");
@@ -82,7 +105,7 @@ if (isset($_GET['jresult'])) $result=intval($_GET['jresult']);
 else $result=-1;
 
 if ($result>12 || $result<0) $result=-1;
-if ($result!=-1){
+if ($result!=-1&&!$lock){
         $sql=$sql."AND `result`='".strval($result)."' ";
         $str2=$str2."&jresult=".$result;
 }
@@ -182,7 +205,7 @@ else
                 $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$MSG_Runtime_Click."</a>";
 
         }else{
-
+              if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
                         $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
                        
@@ -203,6 +226,9 @@ else
 
                         $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">".$judge_result[$row['result']];
                 }
+          }else{
+              echo "<td>----";
+          }
                 
         }
         if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) 

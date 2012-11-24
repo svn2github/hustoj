@@ -163,7 +163,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                 $user_name=$n_user;
         }
-        if(time()<$end_time&&$lock<strtotime($row->in_date))
+        if(time()<$end_time&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,0);
         else
         	   $U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result));

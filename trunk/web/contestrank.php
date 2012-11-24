@@ -52,7 +52,7 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
+$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
 //$result=mysql_query($sql) or die(mysql_error());
 //$rows_cnt=mysql_num_rows($result);
 if($OJ_MEMCACHE){
@@ -69,6 +69,7 @@ if($OJ_MEMCACHE){
 
 
 $start_time=0;
+$end_time=0;
 if ($rows_cnt>0){
 //      $row=mysql_fetch_array($result);
 
@@ -77,7 +78,9 @@ if ($rows_cnt>0){
         else
                 $row=mysql_fetch_array($result);
         $start_time=strtotime($row['start_time']);
+        $end_time=strtotime($row['end_time']);
         $title=$row['title'];
+        
 }
 if(!$OJ_MEMCACHE)mysql_free_result($result);
 if ($start_time==0){
@@ -90,6 +93,13 @@ if ($start_time>time()){
         $view_errors= "Contest Not Started!";
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
+}
+$lock=$start_time+($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
+$time_sql="";
+//echo $lock.'-'.date("Y-m-d H:i:s",$lock);
+if(time()>$lock&&time()<$end_time){
+   $time_sql="and in_date<'".date("Y-m-d H:i:s",$lock)."'";
+  //echo $time_sql;
 }
 
 $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
@@ -118,7 +128,7 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,solution.in_date
                 FROM
-                        (select * from solution where solution.contest_id='$cid' and num>=0) solution
+                        (select * from solution where solution.contest_id='$cid' and num>=0 $time_sql) solution
                 left join users
                 on users.user_id=solution.user_id
         ORDER BY users.user_id,in_date";

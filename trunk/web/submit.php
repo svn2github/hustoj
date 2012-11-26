@@ -161,9 +161,9 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 }
 
 
-	 $statusURI=strstr($_SERVER['REQUEST_URI'],"submit",true)."status.php";
+	 $statusURI=strstr($_SERVER['REQUEST_URI'],"submit",true)."status.php?user_id=".$_SESSION['user_id'];
 	 if (isset($cid)) 
-	    $statusURI.="?cid=$cid";
+	    $statusURI.="&cid=$cid";
 	    
         $sid="";
         if (isset($_SESSION['user_id'])){

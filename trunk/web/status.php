@@ -163,12 +163,15 @@ if ($start_first){
 
 $view_status=Array();
 
+$last=0;
 for ($i=0;$i<$rows_cnt;$i++){
 if($OJ_MEMCACHE)
-	$row=$result[$i];
+        $row=$result[$i];
 else
-	$row=mysql_fetch_array($result);
-	//$view_status[$i]=$row;
+        $row=mysql_fetch_array($result);
+        //$view_status[$i]=$row;
+        if($i==0&&$row['result']<4) $last=$row['solution_id'];
+
 	
 		if ($top==-1) $top=$row['solution_id'];
         $bottom=$row['solution_id'];

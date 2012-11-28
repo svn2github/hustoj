@@ -84,7 +84,7 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 </div>
 
 <div id=center>
-<table class=content-box-header align=center width=80%>
+<table id=result-tab class=content-box-header align=center width=80%>
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
 <td ><?php echo $MSG_USER?>
@@ -139,5 +139,62 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 </div><!--end foot-->
 </div><!--end main-->
 </div><!--end wrapper-->
+<script type="text/javascript">
+  var i=0;
+  var judge_result=[<?php
+  foreach($judge_result as $result){
+    echo "'$result',";
+  }
+?>''];
+//alert(judge_result[0]);
+function findRow(solution_id){
+    var tb=window.document.getElementById('result-tab');
+     var rows=tb.rows;
+
+      for(var i=1;i<rows.length;i++){
+                var cell=rows[i].cells[0];
+//              alert(cell.innerHTML+solution_id);
+        if(cell.innerHTML==solution_id) return rows[i];
+      }
+}
+
+function fresh_result(solution_id)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+     var tb=window.document.getElementById('result-tab');
+     var row=findRow(solution_id);
+     //alert(row);
+     var r=xmlhttp.responseText;
+     var ra=r.split(",");
+//     alert(r);
+//     alert(judge_result[r]);
+     row.cells[3].innerHTML=judge_result[ra[0]];
+     row.cells[4].innerHTML=ra[1];
+     row.cells[5].innerHTML=ra[2];
+     if(ra[0]<4)
+        window.setInterval("fresh_result("+solution_id+")",1000);
+     else
+        window.location.reload();
+
+    }
+  }
+xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
+xmlhttp.send();
+}
+<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+</script>
+
 </body>
 </html>

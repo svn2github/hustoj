@@ -180,7 +180,8 @@ xmlhttp.onreadystatechange=function()
      var ra=r.split(",");
 //     alert(r);
 //     alert(judge_result[r]);
-     row.cells[3].innerHTML=judge_result[ra[0]];
+      var loader="<img width=18 src=image/loader.gif>";
+     row.cells[3].innerHTML=judge_result[ra[0]]+loader;
      row.cells[4].innerHTML=ra[1];
      row.cells[5].innerHTML=ra[2];
      if(ra[0]<4)

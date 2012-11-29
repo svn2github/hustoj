@@ -53,7 +53,10 @@ if (isset($_GET['cid'])){
         //require_once("contest-header.php");
 }else{
         //require_once("oj-header.php");
-        $sql="SELECT * FROM `solution` WHERE contest_id is null ";
+  if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])||$_GET['user_id']==$_SESSION['user_id']){
+  }else{
+      $sql="SELECT * FROM `solution` WHERE contest_id is null ";
+  }
 }
 $start_first=true;
 $order_str=" ORDER BY `solution_id` DESC ";

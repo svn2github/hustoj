@@ -9,6 +9,8 @@ with this new feature, any web space supported mysql+php can be used as the web 
 
 and a side effect is by using the http mode a set of loadage is moved from the mysql server to the http server (apache) and share the pool-like pconnect system with php.
 
+judge_client will fork wget to access web/admin/problem_judge.php,if you are trying to implement web UI with language and databases other than php/mysql, it's a good idea to implement problem_judge.php with your JSP/.NET application and process all requests from wget.
+
 Even more, the latest hustoj is now possible running on SAE(sina application Engine).
 
 = Details =

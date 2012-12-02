@@ -52,11 +52,14 @@
 		$ie6s="<pre>";
 		$ie6e="</pre>";
 	}
-	
+	$sinput=str_replace("<","&lt;",$row->sample_input);
+  $sinput=str_replace(">","&gt;",$sinput);
+	$soutput=str_replace("<","&lt;",$row->sample_output);
+  $soutput=str_replace(">","&gt;",$soutput);
 	echo "<h2>$MSG_Sample_Input</h2>
-			<div class=content><span class=sampledata>".$ie6s.($row->sample_input).$ie6e."</span></div>";
+			<div class=content><span class=sampledata>".$ie6s.($sinput).$ie6e."</span></div>";
 	echo "<h2>$MSG_Sample_Output</h2>
-			<div class=content><span class=sampledata>".$ie6s.($row->sample_output).$ie6e."</span></div>";
+			<div class=content><span class=sampledata>".$ie6s.($soutput).$ie6e."</span></div>";
 	if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";

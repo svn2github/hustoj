@@ -1037,13 +1037,45 @@ void copy_shell_runtime(char * work_dir) {
         execute_cmd("mkdir %s/lib64", work_dir);
         execute_cmd("mkdir %s/bin", work_dir);
         execute_cmd("cp /lib/* %s/lib/", work_dir);
-        execute_cmd("cp /lib/i386-linux-gnu/* %s/lib/", work_dir);
+        execute_cmd("cp -a /lib/i386-linux-gnu %s/lib/", work_dir);
         execute_cmd("cp /lib64/* %s/lib64/", work_dir);
         execute_cmd("cp -a /lib32 %s/", work_dir);
         execute_cmd("cp /bin/busybox %s/bin/", work_dir);
         execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
         execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
 
+
+}
+void copy_objc_runtime(char * work_dir){
+      copy_shell_runtime(work_dir);
+        execute_cmd("mkdir -p %s/proc",work_dir);
+        execute_cmd("mount -o bind /proc %s/proc", work_dir);
+	execute_cmd("mkdir -p %s/lib/i386-linux-gnu",work_dir);
+      execute_cmd("mkdir -p %s/usr/lib/i386-linux-gnu",work_dir);
+execute_cmd("cp -a /lib/i386-linux-gnu/libc.so.*                      %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /lib/i386-linux-gnu/libdbus-1.so.*                %s/lib/i386-linux-gnu/", work_dir);         
+execute_cmd("cp -a /lib/i386-linux-gnu/libdl.so.*                     %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /lib/i386-linux-gnu/libgcc_s.so.*                  %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /lib/i386-linux-gnu/libgcrypt.so.*                %s/lib/i386-linux-gnu/", work_dir);         
+execute_cmd("cp -a /lib/i386-linux-gnu/libgpg-error.so.*             %s/lib/i386-linux-gnu/", work_dir);         
+execute_cmd("cp -a /lib/i386-linux-gnu/libm.so.*                      %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /lib/i386-linux-gnu/libpthread.so.*                %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /lib/i386-linux-gnu/librt.so.*                    %s/lib/i386-linux-gnu/", work_dir);         
+execute_cmd("cp -a /lib/i386-linux-gnu/libz.so.*                      %s/lib/i386-linux-gnu/", work_dir);        
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libavahi-client.so.*       %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libavahi-common.so.*       %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libffi.so.*                %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libgnutls.so.*            %s/usr/lib/i386-linux-gnu/  ", work_dir);   
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libobjc.so.*               %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libp11-kit.so.*            %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libstdc++.so.*             %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libtasn1.so.*              %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libxml2.so.*               %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/i386-linux-gnu/libxslt.so.*               %s/usr/lib/i386-linux-gnu/  ", work_dir);  
+execute_cmd("cp -a /usr/lib/libgnustep-base.so.*                   %s/usr/lib/", work_dir);                      
+execute_cmd("cp -a /usr/lib/libicudata.so.*                          %s/usr/lib/                    ", work_dir);
+execute_cmd("cp -a /usr/lib/libicui18n.so.*                          %s/usr/lib/                    ", work_dir);
+execute_cmd("cp -a /usr/lib/libicuuc.so.*                           %s/usr/lib/                    ", work_dir); 
 
 }
 void copy_bash_runtime(char * work_dir) {
@@ -1732,6 +1764,9 @@ int main(int argc, char** argv) {
                 copy_perl_runtime(work_dir);
         if (lang == 9)
                 copy_mono_runtime(work_dir);
+        if (lang == 10)
+                copy_objc_runtime(work_dir);
+        // read files and run
         // read files and run
         double pass_rate=0.0;
         int num_of_test=0;

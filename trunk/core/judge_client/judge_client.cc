@@ -1050,8 +1050,7 @@ void copy_objc_runtime(char * work_dir){
       copy_shell_runtime(work_dir);
         execute_cmd("mkdir -p %s/proc",work_dir);
         execute_cmd("mount -o bind /proc %s/proc", work_dir);
-	    execute_cmd("mkdir -p %s/lib/i386-linux-gnu",work_dir);
-      execute_cmd("mkdir -p %s/usr/lib/i386-linux-gnu",work_dir);
+	    execute_cmd("mkdir -p %s/lib/",work_dir);
 execute_cmd("cp -aL /lib/libdbus-1.so.3                          %s/lib/ ", work_dir);   
 execute_cmd("cp -aL /lib/libgcc_s.so.1                           %s/lib/ ", work_dir);   
 execute_cmd("cp -aL /lib/libgcrypt.so.11                         %s/lib/ ", work_dir);   
@@ -1063,16 +1062,16 @@ execute_cmd("cp -aL /lib/tls/i686/cmov/libm.so.6                 %s/lib/ ", work
 execute_cmd("cp -aL /lib/tls/i686/cmov/libnsl.so.1               %s/lib/ ", work_dir);   
 execute_cmd("cp -aL /lib/tls/i686/cmov/libpthread.so.0           %s/lib/ ", work_dir);   
 execute_cmd("cp -aL /lib/tls/i686/cmov/librt.so.1                %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libavahi-client.so.3                %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libavahi-common.so.3                %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libdns_sd.so.1                      %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libffi.so.5                         %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libgnustep-base.so.1.19             %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libgnutls.so.26                     %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libobjc.so.2                        %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libtasn1.so.3                       %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libxml2.so.2                        %s/usr/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libxslt.so.1                        %s/usr/ ", work_dir); 
+execute_cmd("cp -aL /usr/lib/libavahi-client.so.3                %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libavahi-common.so.3                %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libdns_sd.so.1                      %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libffi.so.5                         %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libgnustep-base.so.1.19             %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libgnutls.so.26                     %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libobjc.so.2                        %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libtasn1.so.3                       %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libxml2.so.2                        %s/lib/ ", work_dir);   
+execute_cmd("cp -aL /usr/lib/libxslt.so.1                        %s/lib/ ", work_dir);    
 
 }
 void copy_bash_runtime(char * work_dir) {

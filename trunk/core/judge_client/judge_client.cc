@@ -756,7 +756,8 @@ int compile(int lang) {
         const char * CP_PH[] = { "php", "-l","Main.php", NULL };
     const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
-    const char * CP_OC[]={"gcc","-I","/usr/include/GNUstep","-L","/usr/lib/GNUstep","-lobjc","-lgnustep-base","-fconstant-string-class=NSConstantString","-static","-o","Main","Main.m",NULL};   
+    const char * CP_OC[]={"gcc","-o","Main","Main.m","-fconstant-string-class=NSConstantString","-I","/usr/include/GNUstep/","-L","/usr/lib/GNUstep/Libraries/","-lobjc","-lgnustep-base",NULL};
+ 
     char javac_buf[4][16];
     char *CP_J[5];
     for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];

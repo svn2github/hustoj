@@ -89,7 +89,7 @@ if (isset($_POST['id'])) {
 }
 
 $language=intval($_POST['language']);
-if ($language>9 || $language<0) $language=0;
+if ($language>count($language_name) || $language<0) $language=0;
 $language=strval($language);
 
 

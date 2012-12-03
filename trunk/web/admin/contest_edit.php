@@ -1,5 +1,6 @@
 <?php require("admin-header.php");
 include_once("../fckeditor/fckeditor.php") ;
+include_once("../include/const.inc.php");
 if (isset($_POST['syear']))
 {
 	require_once("../include/check_post_key.php");
@@ -21,7 +22,7 @@ if (isset($_POST['syear']))
    foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 
-	$langmask=1023&(~$langmask);
+	$langmask=((1<<count($language_ext))-1)&(~$langmask);
 	echo $langmask;	
 
 	$cid=intval($_POST['cid']);
@@ -127,32 +128,25 @@ Public/Private:<select name=private>
 	<option value=1 <?php echo $private=='1'?'selected=selected':''?>>Private</option>
 </select>
 <br>Problems:<input type=text size=60 name=cproblem value='<?php echo $plist?>'>
-<?php $lang=(~((int)$langmask))&1023;
- $C_select=($lang&1)>0?"selected":"";
- $CPP_select=($lang&2)>0?"selected":"";
- $P_select=($lang&4)>0?"selected":"";
- $J_select=($lang&8)>0?"selected":"";
- $R_select=($lang&16)>0?"selected":"";
- $B_select=($lang&32)>0?"selected":"";
- $Y_select=($lang&64)>0?"selected":"";
-$P_select=($lang&128)>0?"selected":"";
-$L_select=($lang&256)>0?"selected":"";
-$S_select=($lang&512)>0?"selected":"";
-// echo $lang;
-?>
 
  Language:<select name="lang[]" multiple>
-		<option value=0 <?php echo $C_select?>>C</option>
-		<option value=1 <?php echo $CPP_select?>>C++</option>
-		<option value=2 <?php echo $P_select?>>Pascal</option>
-		<option value=3 <?php echo $J_select?>>Java</option>	
-		<option value=4 <?php echo $R_select?>>Ruby</option>	
-		<option value=5 <?php echo $B_select?>>Bash</option>	
-	    <option value=6 <?php echo $Y_select?>>Python</option>	
-		<option value=7 <?php echo $P_select?>>PHP</option>	
-		<option value=8 <?php echo $L_select?>>Perl</option>	
-		<option value=9 <?php echo $S_select?>>C#</option>	
-	</select>
+<?php
+$lang_count=count($language_ext);
+
+
+  $lang=(~((int)$langmask))&((1<<$lang_count)-1);
+if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
+ else $lastlang=0;
+ for($i=0;$i<$lang_count;$i++){
+               
+                 echo  "<option value=$i ".( $lang&(1<<$i)?"selected":"").">
+                        ".$language_name[$i]."
+                 </option>";
+  }
+
+?>
+	
+   </select>
 	
 
 <br>

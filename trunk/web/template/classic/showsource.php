@@ -35,6 +35,7 @@ SyntaxHighlighter.all();
 			echo "<a href='mail.php?to_user=$view_user_id&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 		$brush=strtolower($language_name[$slanguage]);
 		if ($brush=='pascal') $brush='delphi';
+		if ($brush=='obj-c') $brush='c';
 		echo "<pre class=\"brush:".$brush.";\">";
 		ob_start();
 		echo "/**************************************************************\n";

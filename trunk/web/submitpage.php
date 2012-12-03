@@ -3,6 +3,7 @@
 	$OJ_CACHE_SHARE=false;
     require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
+    require_once('./include/const.inc.php');
 	require_once('./include/setlang.php');
 	$view_title=$MSG_SUBMIT;
  if (!isset($_SESSION['user_id'])){

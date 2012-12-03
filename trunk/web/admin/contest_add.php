@@ -3,6 +3,8 @@
 <title>Add a contest</title>
 
 <?php
+
+	require_once("../include/const.inc.php");
 $description="";
  if (isset($_POST['syear']))
 {
@@ -136,17 +138,21 @@ else if(isset($_POST['problem2contest'])){
 	Minute:<input type=text name=eminute value=00 size=2 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>
-		<option value=0 selected>C</option>
-		<option value=1 selected>C++</option>
-		<option value=2 selected>Pascal</option>
-		<option value=3 selected>Java</option>	
-		<option value=4 selected>Ruby</option>	
-		<option value=5 selected>Bash</option>	
-		<option value=6 selected>Python</option>	
-		<option value=7 selected>PHP</option>	
-		<option value=8 selected>Perl</option>	
-		<option value=9 selected>C#</option>	
-	</select>
+	<?php
+$lang_count=count($language_name);
+
+ $langmask=$OJ_LANGMASK;
+
+ for($i=0;$i<$lang_count;$i++){
+                 echo "<option value=$i selected>
+                        ".$language_name[$i]."
+                 </option>";
+  }
+
+?>
+
+
+        </select>
 	<?php require_once("../include/set_post_key.php");?>
 	<br>Problems:<input type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>

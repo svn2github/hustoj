@@ -22,12 +22,16 @@
 <?php echo $MSG_LANG?>:<select size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
-if ($language<0||$language>9) $language=-1;
+if ($language<0||$language>=count($language_name)) $language=-1;
 if ($language==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
-for ($i=0;$i<10;$i++){
-        if ($i==$language) echo "<option value=$i selected>$language_name[$i]</option>";
-        else echo "<option value=$i>$language_name[$i]</option>";
+$i=0;
+foreach ($language_name as $lang){
+        if ($i==$language) 
+		echo "<option value=$i selected>$language_name[$i]</option>";
+        else 
+		echo "<option value=$i>$language_name[$i]</option>";
+        $i++;
 }
 ?>
 </select>

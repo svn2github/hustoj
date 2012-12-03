@@ -101,7 +101,7 @@ if (isset($_GET['user_id'])){
 if (isset($_GET['language'])) $language=intval($_GET['language']);
 else $language=-1;
 
-if ($language>9 || $language<0) $language=-1;
+if ($language>count($language_ext) || $language<0) $language=-1;
 if ($language!=-1){
         $sql=$sql."AND `language`='".strval($language)."' ";
         $str2=$str2."&language=".$language;
@@ -209,8 +209,8 @@ else
        
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$MSG_Compile_Click."</a>";
-        }else if (intval($row['result'])==10 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$MSG_Runtime_Click."</a>";
+        }else if (intval($row['result'])!=4 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){

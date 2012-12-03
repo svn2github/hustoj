@@ -56,36 +56,24 @@ Problem <span class=blue><b><?php echo $PID[$pid]?></b></span> of Contest <span 
 <?php }?>
 Language:
 <select id="language" name="language">
-<?php if(isset($_GET['langmask']))
+<?php 
+$lang_count=count($language_ext);
+
+  if(isset($_GET['langmask']))
 	$langmask=$_GET['langmask'];
   else
 	$langmask=$OJ_LANGMASK;
 	
-  $lang=(~((int)$langmask))&1023;
- $C_=($lang&1)>0;
- $CPP_=($lang&2)>0;
- $P_=($lang&4)>0;
- $J_=($lang&8)>0;
- $R_=($lang&16)>0;
- $B_=($lang&32)>0;
- $Y_=($lang&64)>0;
- $H_=($lang&128)>0;
- $L_=($lang&256)>0;
- $S_=($lang&512)>0;
- if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
+  $lang=(~((int)$langmask))&((1<<($lang_count))-1);
+if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
  else $lastlang=0;
- 
- if($C_) echo"	    <option value=0 ".( $lastlang==0?"selected":"").">C</option>";
- if($CPP_) echo"	<option value=1 ".( $lastlang==1?"selected":"").">C++</option>";
- if($P_) echo"		<option value=2 ".( $lastlang==2?"selected":"").">Pascal</option>";
- if($J_) echo"		<option value=3 ".( $lastlang==3?"selected":"").">Java</option>";
- if($R_) echo"		<option value=4 ".( $lastlang==4?"selected":"").">Ruby</option>";
- if($B_) echo"		<option value=5 ".( $lastlang==5?"selected":"").">Bash</option>";
- if($Y_) echo"		<option value=6 ".( $lastlang==6?"selected":"").">Python</option>";
- if($H_) echo"		<option value=7 ".( $lastlang==7?"selected":"").">PHP</option>";
- if($L_) echo"		<option value=8 ".( $lastlang==8?"selected":"").">Perl</option>";
- if($S_) echo"		<option value=9 ".( $lastlang==9?"selected":"").">C-Sharp</option>";
- 
+ for($i=0;$i<$lang_count;$i++){ 
+ 		if($lang&(1<<$i))
+		 echo"<option value=$i ".( $lastlang==$i?"selected":"").">
+			".$language_name[$i]."
+		 </option>";
+  }
+
 ?>
 </select>
 <br>

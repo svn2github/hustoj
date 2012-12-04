@@ -28,3 +28,7 @@ sudo apt-get install ruby
 {{{
 sudo apt-get install python
 }}}
+  * Objective C
+{{{
+sudo apt-get install gnustep gnustep-devel gobjc
+}}}

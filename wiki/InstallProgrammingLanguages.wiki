@@ -32,3 +32,6 @@ sudo apt-get install python
 {{{
 sudo apt-get install gnustep gnustep-devel gobjc
 }}}
+  * FreeBasic32bits
+
+http://www.freebasic.net

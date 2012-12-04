@@ -113,7 +113,7 @@ static int shm_run=0;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[11][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m" };
+static char lang_ext[12][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas" };
 //static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -199,6 +199,9 @@ void init_syscalls_limits(int lang) {
     }else if (lang==10){//objective c
 	    for (i = 0; LANG_OC[i]; i++)
                     call_counter[LANG_OV[i]] = LANG_OC[i];
+    }else if (lang==11){//free basic
+	    for (i = 0; LANG_BASICC[i]; i++)
+                    call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
     }
 
 
@@ -757,7 +760,7 @@ int compile(int lang) {
     const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
     const char * CP_OC[]={"gcc","-o","Main","Main.m","-fconstant-string-class=NSConstantString","-I","/usr/include/GNUstep/","-L","/usr/lib/GNUstep/Libraries/","-lobjc","-lgnustep-base",NULL};
- 
+    const char * CP_BS[]={"fbc","-static","Main.bas",NULL}; 
     char javac_buf[4][16];
     char *CP_J[5];
     for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
@@ -821,6 +824,9 @@ int compile(int lang) {
                 
                 case 10:
                         execvp(CP_OC[0], (char * const *) CP_OC);
+                        break;
+                case 11:
+                        execvp(CP_BS[0], (char * const *) CP_BS);
                         break;
 		default:
                         printf("nothing to do!\n");
@@ -1238,6 +1244,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         case 1:
         case 2:
 	case 10:
+	case 11:
                 execl("./Main", "./Main", (char *)NULL);
                 break;
         case 3:

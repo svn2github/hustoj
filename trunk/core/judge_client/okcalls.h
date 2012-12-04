@@ -140,12 +140,12 @@ int LANG_BASICV[256]={191,SYS_access
 ,SYS_close
 ,SYS_execve
 ,SYS_exit_group
-,SYS_fstat64
+,SYS_fstat
 ,SYS_futex
 ,SYS_getrlimit
 ,SYS_ioctl
 ,SYS_ioperm
-,SYS_mmap2
+,SYS_mmap
 ,SYS_open
 ,SYS_read
 ,SYS_rt_sigaction
@@ -153,7 +153,7 @@ int LANG_BASICV[256]={191,SYS_access
 ,SYS_set_robust_list
 ,SYS_set_thread_area
 ,SYS_set_tid_address
-,SYS_stat64
+,SYS_stat
 ,SYS_uname
 ,SYS_write
 ,0};

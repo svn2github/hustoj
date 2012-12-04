@@ -139,7 +139,7 @@ else if(isset($_POST['problem2contest'])){
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
 	Language:<select name="lang[]" multiple>
 	<?php
-$lang_count=count($language_name);
+$lang_count=count($language_ext);
 
  $langmask=$OJ_LANGMASK;
 

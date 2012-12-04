@@ -22,6 +22,7 @@
 <script src='highlight/scripts/shBrushPhp.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushPerl.js' type='text/javascript'></script> 
 <script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script> 
+<script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
 
 <script language='javascript'> 
 SyntaxHighlighter.config.bloggerMode = false;
@@ -36,6 +37,7 @@ SyntaxHighlighter.all();
 		$brush=strtolower($language_name[$slanguage]);
 		if ($brush=='pascal') $brush='delphi';
 		if ($brush=='obj-c') $brush='c';
+		if ($brush=='freebasic') $brush='vb';
 		echo "<pre class=\"brush:".$brush.";\">";
 		ob_start();
 		echo "/**************************************************************\n";

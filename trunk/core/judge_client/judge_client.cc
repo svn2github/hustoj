@@ -333,6 +333,23 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
 
  }
  */
+void make_diff_out(FILE *f1,FILE *f2,int c1,int c2){
+   FILE *out;
+   char buf[1025];
+   out=fopen("diff.out","a+");
+   fprintf(out,"=================\n");
+   fprintf(out,"Right:\n%c",c1);
+   if(fgets(buf,1024,f1)){
+	fprintf(out,"%s",buf);
+   } 
+   fprintf(out,"\n-----------------\n");
+   fprintf(out,"Your:\n%c",c2);
+   if(fgets(buf,1024,f2)){
+	fprintf(out,"%s",buf);
+   }
+   fprintf(out,"\n=================\n");
+   fclose(out);
+}
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
@@ -340,7 +357,8 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
  */
 int compare_zoj(const char *file1, const char *file2) {
         int ret = OJ_AC;
-        FILE * f1, *f2;
+	int c1,c2;
+        FILE * f1, *f2 ;
         f1 = fopen(file1, "r");
         f2 = fopen(file2, "r");
         if (!f1 || !f2) {
@@ -349,8 +367,8 @@ int compare_zoj(const char *file1, const char *file2) {
                 for (;;) {
                         // Find the first non-space character at the beginning of line.
                         // Blank lines are skipped.
-                        int c1 = fgetc(f1);
-                        int c2 = fgetc(f2);
+                        c1 = fgetc(f1);
+                        c2 = fgetc(f2);
                         find_next_nonspace(c1, c2, f1, f2, ret);
                         // Compare the current line.
                         for (;;) {
@@ -384,7 +402,9 @@ int compare_zoj(const char *file1, const char *file2) {
                                 }
                         }
                 }
-        end: if (f1)
+        end: 
+       if(ret==OJ_WA)make_diff_out(f1,f2,c1,c2);
+	if (f1)
                 fclose(f1);
         if (f2)
                 fclose(f2);
@@ -685,6 +705,73 @@ void addreinfo(int solution_id) {
                 _addreinfo_mysql(solution_id);
         }
 }
+
+void _adddiffinfo_mysql(int solution_id) {
+        char sql[(1 << 16)], *end;
+        char reinfo[(1 << 16)], *rend;
+        FILE *fp = fopen("diff.out", "r");
+        snprintf(sql, (1 << 16) - 1,
+                        "DELETE FROM runtimeinfo WHERE solution_id=%d", solution_id);
+        mysql_real_query(conn, sql, strlen(sql));
+        rend = reinfo;
+        while (fgets(rend, 1024, fp)) {
+                rend += strlen(rend);
+                if (rend - reinfo > 40000)
+                        break;
+        }
+        rend = 0;
+        end = sql;
+        strcpy(end, "INSERT INTO runtimeinfo VALUES(");
+        end += strlen(sql);
+        *end++ = '\'';
+        end += sprintf(end, "%d", solution_id);
+        *end++ = '\'';
+        *end++ = ',';
+        *end++ = '\'';
+        end += mysql_real_escape_string(conn, end, reinfo, strlen(reinfo));
+        *end++ = '\'';
+        *end++ = ')';
+        *end = 0;
+        if(DEBUG)  printf("DIFFINFO=%s\n",reinfo);
+        if (mysql_real_query(conn, sql, end - sql))
+                printf("%s\n", mysql_error(conn));
+        fclose(fp);
+}
+
+void _adddiffinfo_http(int solution_id) {
+
+        char reinfo[(1 << 16)], *rend;
+        char * reinfo_encode;
+        FILE *fp = fopen("diff.out", "r");
+
+        rend = reinfo;
+        while (fgets(rend, 1024, fp)) {
+                rend += strlen(rend);
+                if (rend - reinfo > 40000)
+                        break;
+        }
+        fclose(fp);
+        reinfo_encode=url_encode(reinfo);
+        FILE * re=fopen("re.post","w");
+        fprintf(re,"addreinfo=1&sid=%d&reinfo=%s",solution_id,reinfo_encode);
+        fclose(re);
+        free(reinfo_encode);
+
+        const char  * cmd=" wget --post-file=\"re.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+        FILE * fjobs=read_cmd_output(cmd,http_baseurl);
+                //fscanf(fjobs,"%d",&ret);
+        pclose(fjobs);
+
+
+}
+void adddiffinfo(int solution_id) {
+        if(http_judge){
+                _adddiffinfo_http(solution_id);
+        }else{
+                _adddiffinfo_mysql(solution_id);
+        }
+}
+
 void _update_user_mysql(char * user_id) {
         char sql[BUFFER_SIZE];
         sprintf(
@@ -1841,7 +1928,10 @@ int main(int argc, char** argv) {
                 update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
                         sim_s_id,0);
         }
-
+ if((oi_mode&&finalACflg==OJ_WA)||ACflg==OJ_WA){ 
+	if(DEBUG) printf("add diff info of %d..... \n",solution_id);
+	adddiffinfo(solution_id);
+ }
         update_user(user_id);
         update_problem(p_id);
         clean_workdir(work_dir);

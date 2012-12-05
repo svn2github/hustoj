@@ -335,16 +335,16 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
  */
 void make_diff_out(FILE *f1,FILE *f2,int c1,int c2){
    FILE *out;
-   char buf[1025];
+   char buf[45];
    out=fopen("diff.out","a+");
    fprintf(out,"=================\n");
    fprintf(out,"Right:\n%c",c1);
-   if(fgets(buf,1024,f1)){
+   if(fgets(buf,44,f1)){
 	fprintf(out,"%s",buf);
    } 
    fprintf(out,"\n-----------------\n");
    fprintf(out,"Your:\n%c",c2);
-   if(fgets(buf,1024,f2)){
+   if(fgets(buf,44,f2)){
 	fprintf(out,"%s",buf);
    }
    fprintf(out,"\n=================\n");

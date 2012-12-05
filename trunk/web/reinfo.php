@@ -38,7 +38,7 @@ if ($ok==true){
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`='".$id."'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_object($result);
-	if($row&&is_valid($row->error))	
+	if($row&&($OJ_SHOW_DIFF||is_valid($row->error)))	
 		$view_reinfo= htmlspecialchars(str_replace("\n\r","\n",$row->error));
 	
         

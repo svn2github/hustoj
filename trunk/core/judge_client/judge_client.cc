@@ -1913,7 +1913,12 @@ int main(int argc, char** argv) {
         }else{
             sim = 0;
     }
-    if(ACflg == OJ_RE)addreinfo(solution_id);
+    //if(ACflg == OJ_RE)addreinfo(solution_id);
+    
+    if((oi_mode&&finalACflg==OJ_RE)||ACflg==OJ_RE){
+       if(DEBUG) printf("add RE info of %d..... \n",solution_id);
+       addreinfo(solution_id);
+    }
     if(use_max_time){
                                 usedtime=max_case_time;
                  }

@@ -58,8 +58,9 @@ sudo /etc/init.d/apache2 restart
 
   *   如何获得管理员帐号？
 在mysql执行
-    insert into privilege(user_id,rightstr) values('zhblue','administrator');
-zhblue 为需要加管理员权限的帐号
+{{{insert into privilege(user_id,rightstr) values('zhblue','administrator');
+}}}
+其中zhblue 为需要加管理员权限的帐号,然后退出重新登录
 
   * 如何进入后台？
 以管理员身份登录，点击Admin/管理进入后台。

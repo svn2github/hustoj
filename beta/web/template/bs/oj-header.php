@@ -1,4 +1,3 @@
-<link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <div id=head>
 <h2><img id=logo src="<?php echo "template/".$OJ_TEMPLATE?>/image/logo.png"><span class="red">Welcome To <?php echo $OJ_NAME?> Online Judge</span></h2>
 </div><!--end head-->

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel=stylesheet href='../include/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
+<link rel=stylesheet href='../template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
 <?php function checkcontest($MSG_CONTEST){
 		require_once("../include/db_info.inc.php");
 		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
@@ -51,37 +51,49 @@
 </div><!--end head-->
 <div id=subhead>
 <div id=menu >
-		<div class=menu_item >
-		<a href="../"><?php echo $MSG_HOME?></a>
+
+<div class='btn' >
+		<a  href="../<?php echo $OJ_HOME?>"><?php if ($url=="JudgeOnline") echo "<span class='_selected'>";?>
+								<?php echo $MSG_HOME?>
+								<?php if ($url=="JudgeOnline") echo "</span>";?>
+		</a>
 		</div>
-		<div class=menu_item >
-		<a href="../bbs.php" style="color:orange"><?php echo $MSG_BBS?></a>
+		<div class='btn' >
+		<a  href="../bbs.php"><?php if ($url==$OJ_BBS.".php") echo "<span class='_selected'>";?>
+		<?php echo $MSG_BBS?><?php if ($url==$OJ_BBS.".php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="../problemset.php"><?php echo $MSG_PROBLEMS?></a>
+		<div class='btn' >
+		<a  href="../problemset.php"><?php if ($url=="problemset.php") echo "<span class='_selected'>";?>
+		<?php echo $MSG_PROBLEMS?><?php if ($url=="problemset.php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="../status.php"><?php echo $MSG_STATUS?></a>
+		<div class='btn' >
+		<a  href="../status.php"><?php if ($url=="status.php") echo "<span class='_selected'>";?>
+		<?php echo $MSG_STATUS?><?php if ($url=="status.php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="../ranklist.php"><?php echo $MSG_RANKLIST?></a>
+		<div class='btn' >
+		<a  href="../ranklist.php"><?php if ($url=="ranklist.php") echo "<span class='_selected'>";?>
+		<?php echo $MSG_RANKLIST?><?php if ($url=="ranklist.php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="../contest.php"><?php echo checkcontest($MSG_CONTEST)?></a>
+		<div class='btn' >
+		<a  href="../contest.php"><?php if ($url=="contest.php") echo "<span class='_selected'>";?>
+		<?php echo checkcontest($MSG_CONTEST)?><?php if ($url=="contest.php") echo "</span>";?></a>
 		</div>
-		<div class=menu_item >
-		<a href="../recent-contest.php"><?php echo $MSG_RECENT_CONTEST?></span></a>
+        <div class='btn' >
+		<a  href="../recent-contest.php"><?php if ($url=="recent-contest.php") echo "<span class='_selected'>";?>
+		<?php echo $MSG_RECENT_CONTEST?><?php if ($url=="recent-contest.php") echo "</span>";?></a>
 		</div>
-		
-		<div class=menu_item >
-		<a href="../<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?php echo $MSG_FAQ?></a>
+		<div class='btn' ><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "<span class='_selected'>";?>
+		<a  href="../<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>"><?php echo $MSG_FAQ?><?php if ($url==isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php") echo "</span>";?></a>
 		</div>
-		<?php if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?><div class=menu_item >
-		<span style="color:1a5cc8" id="dict_status"></span>
-       <script src="../include/underlineTranslation.js" type="text/javascript"></script>
-<script type="text/javascript">dictInit();</script> 
-      </div>
+		<?php if(isset($OJ_DICT)&&$OJ_DICT&&$OJ_LANG=="cn"){?>
+					  <div class='btn' >
+							  <span  style="color:1a5cc8" id="dict_status"></span>
+					  </div>
+					  <script src="../include/underlineTranslation.js" type="text/javascript"></script>
+					  <script type="text/javascript">dictInit();</script>
 		<?php }?>
+
+
 </div><!--end menu-->
 <div id=profile >
 

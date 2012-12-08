@@ -15,6 +15,9 @@ h2 {
     position: relative;
     left: 2.5%;
 }
+input{
+   height:24px;
+}
 
 .toprow {
     background-color: #1A5CC8;

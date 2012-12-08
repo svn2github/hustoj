@@ -13,11 +13,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
         
 require_once("./include/my_func.inc.php");
-
 if(isset($OJ_LANG)){
                 require_once("./lang/$OJ_LANG.php");
         }
 require_once("./include/const.inc.php");
+
+//if(isset($_GET['tp'])) 
+$judge_color=Array("btn gray","btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-danger","btn btn-danger","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning");
 
 $str2="";
 $lock=false;
@@ -208,31 +210,30 @@ else
 
        
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$MSG_Compile_Click."</a>";
+                $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$MSG_Compile_Click."</a>";
         }else if ((intval($row['result'])==6||$row['result']==10) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class=".$judge_color[$row['result']].">".$judge_result[$row['result']]."</a>";
+                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">*".$judge_result[$row['result']]."</span>-<span class=red>";
+                        $view_status[$i][3]= "<span class='".$judge_color[$row['result']]."'>*".$judge_result[$row['result']]."</span>";
                        
                         if( isset($_SESSION['source_browser'])){
 
-                                        $view_status[$i][3].= "<a href=showsource.php?id=".$row['sim_s_id']." target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
+                                        $view_status[$i][3].= "<a href=showsource.php?id=".$row['sim_s_id']."  class='btn btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
 
-                                        $view_status[$i][3].= $row['sim_s_id'];
+                                        $view_status[$i][3].= "<span class='btn btn-info'>".$row['sim_s_id']."</span";
 
                         }
                         if(isset($_GET['showsim'])&&isset($row[13])){
                                         $view_status[$i][3].= "$row[13]";
                                 
                         }
-                        $view_status[$i][3].="</span>";
                 }else{
 
-                        $view_status[$i][3]= "<span class=".$judge_color[$row['result']].">".$judge_result[$row['result']];
+                        $view_status[$i][3]= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</span>";
                 }
           }else{
               echo "<td>----";
@@ -240,7 +241,7 @@ else
                 
         }
         if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) 
-				$view_status[$i][3].= (100-$row['pass_rate']*100)."%";
+				$view_status[$i][3].="<span class='btn btn-info'>". (100-$row['pass_rate']*100)."%</span>";
         if ($flag){
 
 

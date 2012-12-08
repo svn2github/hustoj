@@ -1,0 +1,2 @@
+修改OJ基本信息请看include/db_info.inc.php HUSTOJ用户交流qq群23361372 
+

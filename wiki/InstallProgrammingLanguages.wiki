@@ -34,4 +34,7 @@ sudo apt-get install gnustep gnustep-devel gobjc
 }}}
   * FreeBasic32bits
 
-http://www.freebasic.net
+http://www.freebasic.net/get
+{{{
+FreeBASIC-0.24.0-linux.tar.gz (or as .tar.xz): FB in a .tar.gz - can be extracted anywhere. Run sudo ./install.sh -i to install into /usr/local. Built on OpenSUSE; should work on all current distros.
+}}}

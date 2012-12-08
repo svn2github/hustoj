@@ -16,8 +16,8 @@
 <?php 
 ?>
 <form id=simform action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input class="input-mini" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
-<?php echo $MSG_USER?>:<input class="input-mini" type=text size=4 name=user_id value='<?php echo $user_id?>'>
+<?php echo $MSG_PROBLEM_ID?>:<input class="input-mini" style="height:24px" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
+<?php echo $MSG_USER?>:<input class="input-mini" style="height:24px" type=text size=4 name=user_id value='<?php echo $user_id?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 <?php echo $MSG_LANG?>:<select class="input-small" size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
@@ -83,7 +83,7 @@ echo "</select>";
         
         
 }
-echo "<input type=submit value='$MSG_SEARCH'></form>";
+echo "<input type=submit class='btn'  value='$MSG_SEARCH'></form>";
 ?>
 </div>
 

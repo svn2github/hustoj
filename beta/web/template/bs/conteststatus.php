@@ -16,10 +16,10 @@
 <?php 
 ?>
 <form id=simform action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
-<?php echo $MSG_USER?>:<input type=text size=4 name=user_id value='<?php echo $user_id?>'>
+<?php echo $MSG_PROBLEM_ID?>:<input class="input-small" style="height:24px" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
+<?php echo $MSG_USER?>:<input  class="input-mini" style="height:24px" type=text size=4 name=user_id value='<?php echo $user_id?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?php echo $MSG_LANG?>:<select size="1" name="language">
+<?php echo $MSG_LANG?>:<select  class="input-small"  size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
 if ($language<0||$language>9) $language=-1;
@@ -31,7 +31,7 @@ for ($i=0;$i<10;$i++){
 }
 ?>
 </select>
-<?php echo $MSG_RESULT?>:<select size="1" name="jresult">
+<?php echo $MSG_RESULT?>:<select class="input-small"  size="1" name="jresult">
 <?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
 else $jresult_get=-1;
 if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
@@ -79,7 +79,7 @@ echo "</select>";
         
         
 }
-echo "<input type=submit value='$MSG_SEARCH'></form>";
+echo "<input class=btn type=submit value='$MSG_SEARCH' /></form>";
 ?>
 </div>
 

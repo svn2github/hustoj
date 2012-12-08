@@ -25,12 +25,14 @@
 		<thead>
 			<tr align='center' class='evenrow'><td width='5'></td>
 			<td width='10%' colspan='1'>
-				<form action=problem.php>
-					Problem ID<input type='text' name='id' size=5><input type='submit' value='GO' ></form>
+				<form class=form-search action=problem.php>
+					Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px"><input class=input type='submit' value='GO' ></form>
 			</td>
 			<td width='90%' colspan='4'>
-				<form><?php echo $MSG_SEARCH?>
-				<input type='text' name='search'><input type='submit' value='<?php echo $MSG_SEARCH?>' ></form>
+			<form class="form-search">
+				<input style="height:24px" type="text" name=search class="input-large search-query">
+				<button type="submit" class="btn"><?php echo $MSG_SEARCH?></button>
+			</form>
 			</td></tr>
 			<tr align=center class='toprow'>
 				<td width='5'>

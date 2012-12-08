@@ -12,7 +12,7 @@
 
 
 
-<div id=center>
+<div id=center class="input-append">
 <?php 
 ?>
 <form id=simform action="status.php" method="get">
@@ -60,7 +60,7 @@ echo "</select>";
         else
                 $showsim=0;
         echo "SIM:
-                        <select  class=\"input-mini\" name=showsim onchange=\"document.getElementById('simform').submit();\">
+                        <select id=\"appendedInputButton\"  class=\"input-mini\" name=showsim onchange=\"document.getElementById('simform').submit();\">
                         <option value=0 ".($showsim==0?'selected':'').">All</option>
                         <option value=50 ".($showsim==50?'selected':'').">50</option>
                         <option value=60 ".($showsim==60?'selected':'').">60</option>
@@ -83,7 +83,7 @@ echo "</select>";
         
         
 }
-echo "<input type=submit class='btn'  value='$MSG_SEARCH'></form>";
+echo "<input type=submit class='input'  value='$MSG_SEARCH'></form>";
 ?>
 </div>
 
@@ -187,7 +187,7 @@ xmlhttp.onreadystatechange=function()
 //     alert(r);
 //     alert(judge_result[r]);
       var loader="<img width=18 src=image/loader.gif>";
-     row.cells[3].innerHTML=judge_result[ra[0]]+loader;
+     row.cells[3].innerHTML="<span class='btn btn-warning'>"+judge_result[ra[0]]+"</span>"+loader;
      row.cells[4].innerHTML=ra[1];
      row.cells[5].innerHTML=ra[2];
      if(ra[0]<4)

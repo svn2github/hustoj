@@ -78,7 +78,7 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 </select>
 <br>
 
-<textarea cols=80 rows=20 id="source" name="source"><?php echo $view_src?></textarea><br>
+<textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo $view_src?></textarea><br>
 
 <input type=submit value="Submit">
 <input type=reset value="Reset">

@@ -288,8 +288,8 @@ int  _get_jobs_http(int * jobs){
         int ret=0;
         int i=0;
         char buf[BUFFER_SIZE];
-        const char * cmd="wget --post-data=\"getpending=1&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-        FILE * fjobs=read_cmd_output(cmd,max_running,http_baseurl);
+        const char * cmd="wget --post-data=\"getpending=1&oj_lang_set=%s&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+        FILE * fjobs=read_cmd_output(cmd,oj_lang_set,max_running,http_baseurl);
         while(fscanf(fjobs,"%s",buf) != EOF){
                  //puts(buf);
                  int sid=atoi(buf);

@@ -84,28 +84,26 @@ echo "<input class=btn type=submit value='$MSG_SEARCH' /></form>";
 </div>
 
 <div id=center>
-<table id=result-tab class=content-box-header align=center width=80%>
-<tr  class='toprow'>
-<td ><?php echo $MSG_RUNID?>
-<td ><?php echo $MSG_USER?>
-<td ><?php echo $MSG_PROBLEM?>
-<td ><?php echo $MSG_RESULT?>
-<td ><?php echo $MSG_MEMORY?>
-<td ><?php echo $MSG_TIME?>
-<td ><?php echo $MSG_LANG?>
-<td ><?php echo $MSG_CODE_LENGTH?>
-<td ><?php echo $MSG_SUBMIT_TIME?>
+<table id=result-tab class="table table-striped content-box-header" align=center width=80%>
+<thead>
+<tr  class='success toprow'>
+<th ><?php echo $MSG_RUNID?>
+<th ><?php echo $MSG_USER?>
+<th ><?php echo $MSG_PROBLEM?>
+<th ><?php echo $MSG_RESULT?>
+<th ><?php echo $MSG_MEMORY?>
+<th ><?php echo $MSG_TIME?>
+<th ><?php echo $MSG_LANG?>
+<th ><?php echo $MSG_CODE_LENGTH?>
+<th ><?php echo $MSG_SUBMIT_TIME?>
 </tr>
-
+</thead>
 
 <tbody>
 			<?php 
 			$cnt=0;
 			foreach($view_status as $row){
-				if ($cnt) 
-					echo "<tr class='oddrow'>";
-				else
-					echo "<tr class='evenrow'>";
+				echo "<tr>";
 				foreach($row as $table_cell){
 					echo "<td>";
 					echo "\t".$table_cell;

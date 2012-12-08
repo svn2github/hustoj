@@ -15,7 +15,7 @@
 <div id=main>
 
 <center>
-<table id=statics width=70%>
+<table class="table table-striped" id=statics width=70%>
 <caption>
 <?php echo $user."--".htmlspecialchars($nick)?>
 <?php

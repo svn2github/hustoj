@@ -10,15 +10,15 @@
 <div id=main>
         <form action=login.php method=post>
         <center>
-        <table width=400 algin=center>
-        <tr><td width=200><?php echo $MSG_USER_ID?>:<td width=200><input name="user_id" type="text" size=20></tr>
-        <tr><td><?php echo $MSG_PASSWORD?>:<td><input name="password" type="password" size=20></tr>
+        <table width=480 algin=center>
+        <tr><td width=240><?php echo $MSG_USER_ID?>:<td width=200><input style="height:24px" name="user_id" type="text" size=20></tr>
+        <tr><td><?php echo $MSG_PASSWORD?>:<td><input name="password" type="password" size=20 style="height:24px"></tr>
         <?php if($OJ_VCODE){?>
                 <tr><td><?php echo $MSG_VCODE?>:</td>
-                        <td><input name="vcode" size=4 type=text><img alt="click to change" src=vcode.php onclick="this.src='vcode.php#'+Math.random()">*</td>
+                        <td><input name="vcode" size=4 type=text style="height:24px"><img alt="click to change" src=vcode.php onclick="this.src='vcode.php#'+Math.random()">*</td>
                 </tr>
                 <?php }?>
-        <tr><td><td><input name="submit" type="submit" size=10 value="Submit">
+        <tr><td colspan=3><input name="submit" type="submit" size=10 value="Submit">
         <a href="lostpassword.php">Lost Password</a>
 </tr>
         </table>

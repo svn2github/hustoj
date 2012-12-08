@@ -1,4 +1,5 @@
 #summary Install More Programming Language Support other than C/CPP
+#labels Featured
 = Introduction =
 
 After standard installation C/CPP should already installed, because the core itself is using gcc/g++.
@@ -33,8 +34,9 @@ sudo apt-get install python
 sudo apt-get install gnustep gnustep-devel gobjc
 }}}
   * FreeBasic32bits
-
+install follow 
 http://www.freebasic.net/get
+and then
 {{{
-FreeBASIC-0.24.0-linux.tar.gz (or as .tar.xz): FB in a .tar.gz - can be extracted anywhere. Run sudo ./install.sh -i to install into /usr/local. Built on OpenSUSE; should work on all current distros.
+sudo apt-get install libncurses5-dev
 }}}

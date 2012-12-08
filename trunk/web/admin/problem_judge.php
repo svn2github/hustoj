@@ -33,7 +33,8 @@ if(isset($_POST['update_solution'])){
 		echo "0";
 }else if(isset($_POST['getpending'])){
 	$max_running=intval($_POST['max_running']);
-	$sql="SELECT solution_id FROM solution WHERE result<2 or (result<4 and NOW()-judgetime>60) ORDER BY result ASC,solution_id ASC limit $max_running";
+	$oj_lang_set=mysql_real_escape_string($_POST['oj_lang_set']);
+	$sql="SELECT solution_id FROM solution WHERE language in ($oj_lang_set) and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit $max_running";
 	$result=mysql_query($sql);
 	while ($row=mysql_fetch_object($result)){
 		echo $row->solution_id."\n";

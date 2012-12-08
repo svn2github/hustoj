@@ -18,8 +18,8 @@ if(isset($OJ_LANG)){
         }
 require_once("./include/const.inc.php");
 
-//if(isset($_GET['tp'])) 
-$judge_color=Array("btn gray","btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning");
+if($OJ_TEMPLATE=="bs") 
+	$judge_color=Array("btn gray","btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning");
 
 $str2="";
 $lock=false;

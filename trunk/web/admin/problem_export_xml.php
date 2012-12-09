@@ -18,6 +18,41 @@ function getTestFileOut($pid, $testfile,$OJ_DATA) {
 		return "";
 }
 function printTestCases($pid,$OJ_DATA){
+
+if(strstr($OJ_DATA,"saestor:"))     {
+  // echo "<debug>$pid</debug>";
+       $store = new SaeStorage();
+           $ret = $store->getList("data", "$pid",100,0 );
+            foreach($ret as $file) {
+              //          echo "<debug>$file</debug>";
+              
+              if(!strstr($file,"sae-dir-tag")){
+                    
+                    $pinfo = pathinfo ( $file );
+		if (isset($pinfo ['extension'])
+			&&$pinfo ['extension'] == "in" 
+			&& $pinfo ['basename'] != "sample.in") {
+			$f = basename ( $pinfo ['basename'], "." . $pinfo ['extension'] );
+			
+			$outfile="$pid/" . $f . ".out";
+			$infile="$pid/" . $f . ".in";
+			if( $store->fileExists ("data",$infile)){
+				echo "<test_input><![CDATA[".$store->read ("data",$infile)."]]></test_input>\n";
+			}if($store->fileExists ("data",$outfile)){
+				echo "<test_input><![CDATA[".$store->read ("data",$outfile)."]]></test_input>\n";
+			}
+//			break;
+		}
+                    
+                    
+                    
+              }
+                    
+            }
+
+}else{
+
+
 	$ret = "";
 	$pdir = opendir ( "$OJ_DATA/$pid/" );
 	while ( $file = readdir ( $pdir ) ) {
@@ -40,6 +75,7 @@ function printTestCases($pid,$OJ_DATA){
 	closedir ( $pdir );
 	return $ret;
 }
+}
 class Solution{
   var $language="";
   var $source_code="";	
@@ -51,10 +87,20 @@ function getSolution($pid,$lang){
 			require("../lang/$OJ_LANG.php");
 	}
 	require("../include/const.inc.php");
-	$con = mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS);
+         $con=false;
+	if($OJ_SAE)     {
+                $OJ_DATA="saestor://data/";
+        //  for sae.sina.com.cn
+               $con= mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+               
+        }else{
+                //for normal install
+                $con=mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS);
+                        
+        }
 	if (!$con)
     {
-  	    die('Could not connect: ' . mysql_error());
+      //  die('Could not connect: ' . mysql_error());
     }
 	mysql_query("set names utf8",$con);
 	mysql_set_charset("utf8",$con);
@@ -200,7 +246,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <output><![CDATA[<?php echo $row->output?>]]></output>
 <sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
-<?php printTestCases($row->problem_id,$OJ_DATA)?>
+  <?php printTestCases($row->problem_id,$OJ_DATA)?>
 <hint><![CDATA[<?php echo $row->hint?>]]></hint>
 <source><![CDATA[<?php echo fixcdata($row->source)?>]]></source>
 <?php

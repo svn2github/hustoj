@@ -7,67 +7,68 @@
 	$view_title= $MSG_CONTEST;
   function formatTimeLength($length)
 {
-	$hour = 0;
-	$minute = 0;
-	$second = 0;
-	$result = '';
-	
-	if ($length >= 60)
-	{
-		$second = $length % 60;
-		if ($second > 0)
-		{
-			$result = $second . 'seconds';
-		}
-		$length = floor($length / 60);
-		if ($length >= 60)
-		{
-			$minute = $length % 60;
-			if ($minute == 0)
-			{
-				if ($result != '')
-				{
-					$result = '0min' . $result;
-				}
-			}
-			else
-			{
-				$result = $minute . 'mins' . $result;
-			}
-			$length = floor($length / 60);
-			if ($length >= 24)
-			{
-				$hour = $length % 24;
-				if ($hour == 0)
-				{
-					if ($result != '')
-					{
-						$result = '0hour' . $result;
-					}
-				}
-				else
-				{
-					$result = $minute . 'hours' . $result;
-				}
-				$length = floor($length / 24);
-				$result = $length . 'days' . $result;
-			}
-			else
-			{
-				$result = $length . 'hours' . $result;
-			}
-		}
-		else
-		{
-			$result = $length . 'mins' . $result;
-		}
-	}
-	else
-	{
-		$result = $length . 'seconds';
-	}
-	return $result;
+        $hour = 0;
+        $minute = 0;
+        $second = 0;
+        $result = '';
+
+        if ($length >= 60)
+        {
+                $second = $length % 60;
+                if ($second > 0)
+                {
+                        $result = $second . ' ';
+                }
+                $length = floor($length / 60);
+                if ($length >= 60)
+                {
+                        $minute = $length % 60;
+                        if ($minute == 0)
+                        {
+                                if ($result != '')
+                                {
+                                        $result = '0:' . $result;
+                                }
+                        }
+                        else
+                        {
+                                $result = $minute . ':' . $result;
+                        }
+                        $length = floor($length / 60);
+                        if ($length >= 24)
+                        {
+                                $hour = $length % 24;
+                                if ($hour == 0)
+                                {
+                                        if ($result != '')
+                                        {
+                                                $result = '0:' . $result;
+                                        }
+                                }
+                                else
+                                {
+                                        $result = $hour . ':' . $result;
+                                }
+                                $length = floor($length / 24);
+                                $result = $length . 'days ' . $result;
+                        }
+                        else
+                        {
+                                $result = $length . ':' . $result;
+                        }
+                }
+                else
+                {
+                        $result = $length . ':' . $result;
+                }
+        }
+        else
+        {
+                $result = $length . 'seconds';
+        }
+        return $result;
 }
+
 
 	if (isset($_GET['cid'])){
 			$cid=intval($_GET['cid']);
@@ -174,12 +175,12 @@
 
   }else if ($now<$start_time){
   	$view_contest[$i][2]= "<span class=blue>Start@$row->start_time</span>&nbsp;";
-    $view_contest[$i][2].= "<span class=green> go for ".formatTimeLength($length)."</span>";
+    $view_contest[$i][2].= "<span class=green>»¸ ± ".formatTimeLength($length)."</span>";
 	// running
 
   }else{
   	$view_contest[$i][2]= "<span class=red> Running </font>&nbsp;";
-    $view_contest[$i][2].= "<span class=green> ".formatTimeLength($left)." left </span>";
+    $view_contest[$i][2].= "<span class=green>  £”‡ ".formatTimeLength($left)." </span>";
   }
                                 
                                 

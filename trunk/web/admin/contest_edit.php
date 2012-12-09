@@ -108,26 +108,26 @@ if (isset($_POST['syear']))
 <?php require_once("../include/set_post_key.php");?>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
 <input type=hidden name='cid' value=<?php echo $cid?>>
-<p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
+<p align=left>Title:<input class=input-xxlarge type=text name=title size=71 value='<?php echo $title?>'></p>
 <p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
-Year:<input type=text name=syear value=<?php echo substr($starttime,0,4)?> size=4 >
-Month:<input type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=2 >
-Day:<input type=text name=sday size=2 value='<?php echo substr($starttime,8,2)?>'>
-Hour:<input type=text name=shour size=2 value='<?php echo substr($starttime,11,2)?>'>
-Minute:<input type=text name=sminute size=2 value=<?php echo substr($starttime,14,2)?>></p>
+Year:<input class=input-mini  type=text name=syear value=<?php echo substr($starttime,0,4)?> size=4 >
+Month:<input class=input-mini  type=text name=smonth value='<?php echo substr($starttime,5,2)?>' size=2 >
+Day:<input class=input-mini  type=text name=sday size=2 value='<?php echo substr($starttime,8,2)?>'>
+Hour:<input class=input-mini  type=text name=shour size=2 value='<?php echo substr($starttime,11,2)?>'>
+Minute:<input class=input-mini  type=text name=sminute size=2 value=<?php echo substr($starttime,14,2)?>></p>
 <p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
 
-Year:<input type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=4 >
-Month:<input type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=2 >
-Day:<input type=text name=eday size=2 value=<?php echo substr($endtime,8,2)?>>
-Hour:<input type=text name=ehour size=2 value=<?php echo substr($endtime,11,2)?>> 
-Minute:<input type=text name=eminute size=2 value=<?php echo substr($endtime,14,2)?>></p>
+Year:<input class=input-mini  type=text name=eyear value=<?php echo substr($endtime,0,4)?> size=4 >
+Month:<input class=input-mini  type=text name=emonth value=<?php echo substr($endtime,5,2)?> size=2 >
+Day:<input class=input-mini  type=text name=eday size=2 value=<?php echo substr($endtime,8,2)?>>
+Hour:<input class=input-mini  type=text name=ehour size=2 value=<?php echo substr($endtime,11,2)?>> 
+Minute:<input class=input-mini  type=text name=eminute size=2 value=<?php echo substr($endtime,14,2)?>></p>
 
 Public/Private:<select name=private>
 	<option value=0 <?php echo $private=='0'?'selected=selected':''?>>Public</option>
 	<option value=1 <?php echo $private=='1'?'selected=selected':''?>>Private</option>
 </select>
-<br>Problems:<input type=text size=60 name=cproblem value='<?php echo $plist?>'>
+<br>Problems:<input class=input-xxlarge type=text size=60 name=cproblem value='<?php echo $plist?>'>
 
  Language:<select name="lang[]" multiple>
 <?php

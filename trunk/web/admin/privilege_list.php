@@ -8,8 +8,8 @@ echo "<title>Privilege List</title>";
 echo "<center><h2>Privilege List</h2></center>";
 $sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor') ";
 $result=mysql_query($sql) or die(mysql_error());
-echo "<center><table width=90% border=1>";
-echo "<tr><td>user<td>right<td>defunc</tr>";
+echo "<center><table class='table table-striped' width=60% border=1>";
+echo "<thead><tr><td>user<td>right<td>defunc</tr></thead>";
 for (;$row=mysql_fetch_object($result);){
 	echo "<tr>";
 	echo "<td>".$row->user_id;

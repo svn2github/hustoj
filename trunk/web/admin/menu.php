@@ -15,7 +15,7 @@
 <hr>
 <ol>
 	<li>
-		<a href="../status.php" target="main"><b><?php echo $MSG_SEEOJ?></b></a>
+		<a href="watch.php" target="main"><b><?php echo $MSG_SEEOJ?></b></a>
 <?php if (isset($_SESSION['administrator'])){
 	?>
 	<li>

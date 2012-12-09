@@ -1,3 +1,7 @@
+@import url(../bootstrap/css/bootstrap.css);
+input{
+   height:24px;
+}
 a {
     color: #1A5CC8;
     text-decoration: none;
@@ -47,6 +51,8 @@ h2 {
 body {
     background-color: #FFFFFF;
     background-image: url("../image/background.jpg");
+    font-size:24px;
+    line-height:48px;
 }
 .hd {
     color: #FFFFFF;

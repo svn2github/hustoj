@@ -59,7 +59,7 @@ for ($i=0;$i<$user_cnt;$i++){
 		}
 		
 		
-		 echo "<td class=well style='background-color:$bg_color'>";
+		 echo "<td class=well style='padding:1px;background-color:$bg_color'>";
 		if(isset($U[$i])){
 			if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0)
 				echo sec2str($U[$i]->p_ac_sec[$j]);

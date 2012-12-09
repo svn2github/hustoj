@@ -5,6 +5,69 @@
 	require_once('./include/my_func.inc.php');
 	require_once('./include/setlang.php');
 	$view_title= $MSG_CONTEST;
+  function formatTimeLength($length)
+{
+	$hour = 0;
+	$minute = 0;
+	$second = 0;
+	$result = '';
+	
+	if ($length >= 60)
+	{
+		$second = $length % 60;
+		if ($second > 0)
+		{
+			$result = $second . '秒';
+		}
+		$length = floor($length / 60);
+		if ($length >= 60)
+		{
+			$minute = $length % 60;
+			if ($minute == 0)
+			{
+				if ($result != '')
+				{
+					$result = '0分' . $result;
+				}
+			}
+			else
+			{
+				$result = $minute . '分' . $result;
+			}
+			$length = floor($length / 60);
+			if ($length >= 24)
+			{
+				$hour = $length % 24;
+				if ($hour == 0)
+				{
+					if ($result != '')
+					{
+						$result = '0小时' . $result;
+					}
+				}
+				else
+				{
+					$result = $minute . '小时' . $result;
+				}
+				$length = floor($length / 24);
+				$result = $length . '天' . $result;
+			}
+			else
+			{
+				$result = $length . '小时' . $result;
+			}
+		}
+		else
+		{
+			$result = $length . '分' . $result;
+		}
+	}
+	else
+	{
+		$result = $length . '秒';
+	}
+	return $result;
+}
 
 	if (isset($_GET['cid'])){
 			$cid=intval($_GET['cid']);
@@ -98,15 +161,31 @@
 				$start_time=strtotime($row->start_time);
 				$end_time=strtotime($row->end_time);
 				$now=time();
-				// past
-				if ($now>$end_time) 
-					$view_contest[$i][2]= "<span class=green>Ended@$row->end_time</span>";
-				// pending
-				else if ($now<$start_time) 
-					$view_contest[$i][2]=  "<span class=blue>Start@$row->start_time</span>";
-				// running
-				else 
-					$view_contest[$i][3]= "<span class=red> Running </span>";
+                                
+                                
+        $length=$end_time-$start_time;
+        $left=$end_time-$now;
+	// past
+
+  if ($now>$end_time) {
+  	$view_contest[$i][2]= "<span class=green>Ended@$row->end_time</span>";
+	
+	// pending
+
+  }else if ($now<$start_time){
+  	$view_contest[$i][2]= "<span class=blue>Start@$row->start_time</span>&nbsp;";
+    $view_contest[$i][2].= "<span class=green>赛时 ".formatTimeLength($length)."</span>";
+	// running
+
+  }else{
+  	$view_contest[$i][2]= "<span class=red> Running </font>&nbsp;";
+    $view_contest[$i][2].= "<span class=green> 剩余 ".formatTimeLength($left)." </span>";
+  }
+                                
+                                
+                                
+                                
+				
 				$private=intval($row->private);
 				if ($private==0) 
 					$view_contest[$i][4]= "<span class=blue>Public</span>";

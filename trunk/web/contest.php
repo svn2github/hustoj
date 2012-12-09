@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	$OJ_CACHE_SHARE=!isset($_GET['cid']);
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
@@ -7,68 +7,67 @@
 	$view_title= $MSG_CONTEST;
   function formatTimeLength($length)
 {
-        $hour = 0;
-        $minute = 0;
-        $second = 0;
-        $result = '';
-
-        if ($length >= 60)
-        {
-                $second = $length % 60;
-                if ($second > 0)
-                {
-                        $result = $second . ' ';
-                }
-                $length = floor($length / 60);
-                if ($length >= 60)
-                {
-                        $minute = $length % 60;
-                        if ($minute == 0)
-                        {
-                                if ($result != '')
-                                {
-                                        $result = '0:' . $result;
-                                }
-                        }
-                        else
-                        {
-                                $result = $minute . ':' . $result;
-                        }
-                        $length = floor($length / 60);
-                        if ($length >= 24)
-                        {
-                                $hour = $length % 24;
-                                if ($hour == 0)
-                                {
-                                        if ($result != '')
-                                        {
-                                                $result = '0:' . $result;
-                                        }
-                                }
-                                else
-                                {
-                                        $result = $hour . ':' . $result;
-                                }
-                                $length = floor($length / 24);
-                                $result = $length . 'days ' . $result;
-                        }
-                        else
-                        {
-                                $result = $length . ':' . $result;
-                        }
-                }
-                else
-                {
-                        $result = $length . ':' . $result;
-                }
-        }
-        else
-        {
-                $result = $length . 'seconds';
-        }
-        return $result;
+	$hour = 0;
+	$minute = 0;
+	$second = 0;
+	$result = '';
+	
+	if ($length >= 60)
+	{
+		$second = $length % 60;
+		if ($second > 0)
+		{
+			$result = $second . '秒';
+		}
+		$length = floor($length / 60);
+		if ($length >= 60)
+		{
+			$minute = $length % 60;
+			if ($minute == 0)
+			{
+				if ($result != '')
+				{
+					$result = '0分' . $result;
+				}
+			}
+			else
+			{
+				$result = $minute . '分' . $result;
+			}
+			$length = floor($length / 60);
+			if ($length >= 24)
+			{
+				$hour = $length % 24;
+				if ($hour == 0)
+				{
+					if ($result != '')
+					{
+						$result = '0小时' . $result;
+					}
+				}
+				else
+				{
+					$result = $hour . '小时' . $result;
+				}
+				$length = floor($length / 24);
+				$result = $length . '天' . $result;
+			}
+			else
+			{
+				$result = $length . '小时' . $result;
+			}
+		}
+		else
+		{
+			$result = $length . '分' . $result;
+		}
+	}
+	else
+	{
+		$result = $length . '秒';
+	}
+	return $result;
 }
-
 
 	if (isset($_GET['cid'])){
 			$cid=intval($_GET['cid']);
@@ -175,12 +174,12 @@
 
   }else if ($now<$start_time){
   	$view_contest[$i][2]= "<span class=blue>Start@$row->start_time</span>&nbsp;";
-    $view_contest[$i][2].= "<span class=green>��ʱ ".formatTimeLength($length)."</span>";
+    $view_contest[$i][2].= "<span class=green>赛时 ".formatTimeLength($length)."</span>";
 	// running
 
   }else{
   	$view_contest[$i][2]= "<span class=red> Running </font>&nbsp;";
-    $view_contest[$i][2].= "<span class=green> ʣ�� ".formatTimeLength($left)." </span>";
+    $view_contest[$i][2].= "<span class=green> 剩余 ".formatTimeLength($left)." </span>";
   }
                                 
                                 

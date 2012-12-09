@@ -17,7 +17,7 @@
 		$second = $length % 60;
 		if ($second > 0)
 		{
-			$result = $second . '秒';
+			$result = $second . 'seconds';
 		}
 		$length = floor($length / 60);
 		if ($length >= 60)
@@ -27,12 +27,12 @@
 			{
 				if ($result != '')
 				{
-					$result = '0分' . $result;
+					$result = '0min' . $result;
 				}
 			}
 			else
 			{
-				$result = $minute . '分' . $result;
+				$result = $minute . 'mins' . $result;
 			}
 			$length = floor($length / 60);
 			if ($length >= 24)
@@ -42,29 +42,29 @@
 				{
 					if ($result != '')
 					{
-						$result = '0小时' . $result;
+						$result = '0hour' . $result;
 					}
 				}
 				else
 				{
-					$result = $minute . '小时' . $result;
+					$result = $minute . 'hours' . $result;
 				}
 				$length = floor($length / 24);
-				$result = $length . '天' . $result;
+				$result = $length . 'days' . $result;
 			}
 			else
 			{
-				$result = $length . '小时' . $result;
+				$result = $length . 'hours' . $result;
 			}
 		}
 		else
 		{
-			$result = $length . '分' . $result;
+			$result = $length . 'mins' . $result;
 		}
 	}
 	else
 	{
-		$result = $length . '秒';
+		$result = $length . 'seconds';
 	}
 	return $result;
 }
@@ -174,12 +174,12 @@
 
   }else if ($now<$start_time){
   	$view_contest[$i][2]= "<span class=blue>Start@$row->start_time</span>&nbsp;";
-    $view_contest[$i][2].= "<span class=green>赛时 ".formatTimeLength($length)."</span>";
+    $view_contest[$i][2].= "<span class=green> go for ".formatTimeLength($length)."</span>";
 	// running
 
   }else{
   	$view_contest[$i][2]= "<span class=red> Running </font>&nbsp;";
-    $view_contest[$i][2].= "<span class=green> 剩余 ".formatTimeLength($left)." </span>";
+    $view_contest[$i][2].= "<span class=green> ".formatTimeLength($left)." left </span>";
   }
                                 
                                 

@@ -125,9 +125,9 @@ if($OJ_SIM){
         if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
                 $showsim=intval($_GET['showsim']);
                 $sql="select * from ($old ) solution 
-                     left join `sim` on solution.solution_id=sim.s_id WHERE result=4 and sim>=$showsim";
+                     left join `sim` on solution.solution_id=sim.s_id WHERE result=4 and sim>=$showsim limit 1000";
                 $sql="SELECT * FROM ($sql) `solution`
-                        left join(select solution_id old_s_id,user_id old_user_id from solution) old
+                        left join(select solution_id old_s_id,user_id old_user_id from solution limit 1000) old
                         on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id ";
                 $str2.="&showsim=$showsim";
         }

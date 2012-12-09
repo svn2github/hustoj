@@ -102,19 +102,19 @@ function metal(){
 	  	if(cell.innerHTML!="*"&&ac>0){
 	 
 	  	     var r=parseInt(cell.innerHTML);
-	  	     
 	  	     if(r==1){
 	  	       cell.innerHTML="Winner";
-                       cell.style.cssText="background-color:gold;color:red";
+                       //cell.style.cssText="background-color:gold;color:red";
+                       cell.className="btn btn-warning";
 	  	     }
 	  	     if(r>1&&r<=total*.05+1)
-	  	        cell.style.cssText="background-color:gold";
+	  	        cell.className="btn btn-warning";
 	  	     if(r>total*.05+1&&r<=total*.20+1)
-	  	        cell.style.cssText="background-color:silver";
+	  	        cell.className="btn ";
 	  	     if(r>total*.20+1&&r<=total*.45+1)
-	  	        cell.style.cssText="background-color:saddlebrown;color:white";
+	  	        cell.className="btn btn-danger";
 	  	     if(r>total*.45+1&&ac>0)
-              cell.style.cssText="background-color:steelblue;color:white";
+              		cell.className="btn btn-info";
 	  	}
 	  }
   }catch(e){

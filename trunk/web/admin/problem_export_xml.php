@@ -39,7 +39,7 @@ if(strstr($OJ_DATA,"saestor:"))     {
 			if( $store->fileExists ("data",$infile)){
 				echo "<test_input><![CDATA[".$store->read ("data",$infile)."]]></test_input>\n";
 			}if($store->fileExists ("data",$outfile)){
-				echo "<test_input><![CDATA[".$store->read ("data",$outfile)."]]></test_input>\n";
+				echo "<test_output><![CDATA[".$store->read ("data",$outfile)."]]></test_output>\n";
 			}
 //			break;
 		}

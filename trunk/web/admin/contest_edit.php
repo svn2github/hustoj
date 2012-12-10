@@ -129,7 +129,7 @@ Public/Private:<select name=private>
 </select>
 <br>Problems:<input class=input-xxlarge type=text size=60 name=cproblem value='<?php echo $plist?>'>
 
- Language:<select name="lang[]" multiple>
+ Language:<select name="lang[]"  multiple="multiple"    style="height:220px">
 <?php
 $lang_count=count($language_ext);
 

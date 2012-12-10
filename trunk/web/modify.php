@@ -18,7 +18,7 @@ $school=trim($_POST['school']);
 $nick=trim($_POST['nick']);
 $len=strlen($nick);
 if ($len>100){
-	$err_str=$err_str."Nick Name Too Long!\n";
+	$err_str=$err_str."Nick Name Too Long!";
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
 $password=$_POST['opassword'];
@@ -37,23 +37,23 @@ if ($len<6 && $len>0){
 	$err_cnt++;
 	$err_str=$err_str."Password should be Longer than 6!\n";
 }else if (strcmp($_POST['npassword'],$_POST['rptpassword'])!=0){
-	$err_str=$err_str."Two Passwords Not Same!\n";
+	$err_str=$err_str."Two Passwords Not Same!";
 	$err_cnt++;
 }
 $len=strlen($_POST['school']);
 if ($len>100){
-	$err_str=$err_str."School Name Too Long!\n";
+	$err_str=$err_str."School Name Too Long!";
 	$err_cnt++;
 }
 $len=strlen($_POST['email']);
 if ($len>100){
-	$err_str=$err_str."Email Too Long!\n";
+	$err_str=$err_str."Email Too Long!";
 	$err_cnt++;
 }
 if ($err_cnt>0){
 	print "<script language='javascript'>\n";
-	print "alert('";
-	print $err_str;
+	echo "alert('";
+	echo $err_str;
 	print "');\n history.go(-1);\n</script>";
 	exit(0);
 	

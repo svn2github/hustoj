@@ -137,7 +137,7 @@ else if(isset($_POST['problem2contest'])){
 	Hour:<input class=input-mini  type=text name=ehour size=2 value=<?php echo (date('H')+4)%24?>>&nbsp;
 	Minute:<input class=input-mini  type=text name=eminute value=00 size=2 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
-	Language:<select name="lang[]" multiple>
+	Language:<select name="lang[]" multiple="multiple"    style="height:220px">
 	<?php
 $lang_count=count($language_ext);
 

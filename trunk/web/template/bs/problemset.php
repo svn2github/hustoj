@@ -21,28 +21,33 @@
         ?>
 
 </h3><center>
-	<table id='problemset' width='90%'>
-		<thead>
-			<tr align='center' class='evenrow'><td width='5'></td>
-			<td width='10%' colspan='1'>
+	<table>
+  <tr align='center' class='evenrow'><td width='5'></td>
+			<td width='50%' colspan='1'>
 				<form class=form-search action=problem.php>
 					Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px"><input class=input type='submit' value='GO' ></form>
 			</td>
-			<td width='90%' colspan='4'>
+			<td width='50%' colspan='1'>
 			<form class="form-search">
 				<input style="height:24px" type="text" name=search class="input-large search-query">
 				<button type="submit" class="btn"><?php echo $MSG_SEARCH?></button>
 			</form>
 			</td></tr>
+  </table>
+
+	<table id='problemset' width='90%'>
+		<thead>
+			
 			<tr align=center class='toprow'>
-				<td width='5'>
-				<td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" width=10%><A><?php echo $MSG_PROBLEM_ID?></A>
-				<td width='60%'><?php echo $MSG_TITLE?></td>
+				<td width='5'></td>
+				<td width='5' style="cursor:hand" onclick="sortTable('problemset', 1, 'int');"><A><?php echo $MSG_PROBLEM_ID?></A>
+				<td><?php echo $MSG_TITLE?></td>
 				<td width='10%'><?php echo $MSG_SOURCE?></td>
 				<td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><A><?php echo $MSG_AC?></A></td>
 				<td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><A><?php echo $MSG_SUBMIT?></A></td>
 			</tr>
 			</thead>
+		  
 			<tbody>
 			<?php 
 			$cnt=0;

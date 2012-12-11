@@ -26,7 +26,7 @@
 			<td width='50%' colspan='1'>
 				<form class=form-search action=problem.php>
 					Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px">
-                                  <input class="btn btn-mini" type='submit' value='GO'  ></form>
+                                  <button class="btn btn-mini" type='submit'  >Go</button></form>
 			</td>
 			<td width='50%' colspan='1'>
 			<form class="form-search">

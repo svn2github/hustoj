@@ -106,17 +106,17 @@ while ($row=mysql_fetch_object($result)){
 	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row->problem_id])){
 		if (isset($acc_arr[$row->problem_id])) 
-			$view_problemset[$i][0]="<span class=yes>Y</span>";
+			$view_problemset[$i][0]="<div class=yes>Y</div>";
 		else 
-			$view_problemset[$i][0]= "<span class=no>N</span>";
+			$view_problemset[$i][0]= "<div class=no>N</div>";
 	}else{
-		$view_problemset[$i][0]= "<span class=none> </span>";
+		$view_problemset[$i][0]= "<div class=none> </div>";
 	}
-	$view_problemset[$i][1]="<span class='center'>".$row->problem_id."</span>";;
-	$view_problemset[$i][2]="<span class='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></span>";;
-	$view_problemset[$i][3]="<span class='center'><nobr>".mb_substr($row->source,0,8,'utf8')."</nobr></span>";
-	$view_problemset[$i][4]="<span class='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>".$row->accepted."</a></span>";
-	$view_problemset[$i][5]="<span class='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></span>";
+	$view_problemset[$i][1]="<div class='center'>".$row->problem_id."</div>";;
+	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></div>";;
+	$view_problemset[$i][3]="<div class='center'><nobr>".mb_substr($row->source,0,8,'utf8')."</nobr></div >";
+	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>".$row->accepted."</a></div>";
+	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></div>";
 	
 	
 	$i++;

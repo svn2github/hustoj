@@ -21,16 +21,17 @@
         ?>
 
 </h3><center>
-	<table>
+  <table>
   <tr align='center' class='evenrow'><td width='5'></td>
 			<td width='50%' colspan='1'>
 				<form class=form-search action=problem.php>
-					Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px"><input class=input type='submit' value='GO' ></form>
+					Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px">
+                                  <input class="btn btn-mini" type='submit' value='GO'  ></form>
 			</td>
 			<td width='50%' colspan='1'>
 			<form class="form-search">
 				<input style="height:24px" type="text" name=search class="input-large search-query">
-				<button type="submit" class="btn"><?php echo $MSG_SEARCH?></button>
+				<button type="submit" class="btn btn-mini"><?php echo $MSG_SEARCH?></button>
 			</form>
 			</td></tr>
   </table>

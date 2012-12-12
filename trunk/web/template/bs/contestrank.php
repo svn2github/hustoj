@@ -113,7 +113,7 @@ function metal(){
 	  	     if(r>total*.05+1&&r<=total*.20+1)
 	  	        cell.className="label ";
 	  	     if(r>total*.20+1&&r<=total*.45+1)
-	  	        cell.className="label label-danger";
+	  	        cell.className="label label-important";
 	  	     if(r>total*.45+1&&ac>0)
               		cell.className="label label-info";
 	  	}

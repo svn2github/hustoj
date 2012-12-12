@@ -106,9 +106,9 @@ while ($row=mysql_fetch_object($result)){
 	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row->problem_id])){
 		if (isset($acc_arr[$row->problem_id])) 
-			$view_problemset[$i][0]="<div class=yes>Y</div>";
+			$view_problemset[$i][0]="<div class='btn btn-success'>Y</div>";
 		else 
-			$view_problemset[$i][0]= "<div class=no>N</div>";
+			$view_problemset[$i][0]= "<div class='btn btn-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}

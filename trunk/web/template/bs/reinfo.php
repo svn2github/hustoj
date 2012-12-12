@@ -9,7 +9,7 @@
 	<?php require_once("oj-header.php");?>
 <div id=main>
 	
-<pre id='errtxt'><?php echo $view_reinfo?></div>
+<pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo?></pre>
 <div id='errexp'>Explain:</div>
 
 <script>

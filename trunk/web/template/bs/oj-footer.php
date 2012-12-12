@@ -1,4 +1,3 @@
-
 <center>
 	<p>
 	<?php if(file_exists("setlang.php")){?>
@@ -45,3 +44,4 @@
 	
 	</p>
 </center>
+<script src=bootstrap/js/bootstrap.js></script>

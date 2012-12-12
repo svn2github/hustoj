@@ -109,13 +109,13 @@ function metal(){
                        cell.className="badge badge-warning";
 	  	     }
 	  	     if(r>1&&r<=total*.05+1)
-	  	        cell.className="label label-warning";
+	  	        cell.className="badge badge-warning";
 	  	     if(r>total*.05+1&&r<=total*.20+1)
-	  	        cell.className="label ";
+	  	        cell.className="badge";
 	  	     if(r>total*.20+1&&r<=total*.45+1)
-	  	        cell.className="label label-important";
+	  	        cell.className="badge badge-important";
 	  	     if(r>total*.45+1&&ac>0)
-              		cell.className="label label-info";
+              		cell.className="badge badge-info";
 	  	}
 	  }
   }catch(e){

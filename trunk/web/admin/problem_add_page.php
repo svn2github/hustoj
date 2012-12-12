@@ -23,7 +23,7 @@ include_once("../fckeditor/fckeditor.php") ;
 <form method=POST action=problem_add.php>
 <input type=hidden name=problem_id value="New Problem">
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71></p>
+<p align=left>Title:<input class="input input-xxlarge" type=text name=title size=71></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
@@ -67,10 +67,10 @@ $output->Create() ;
 ?>
 
 </p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80></textarea></p>
-<p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
-<p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
+<p align=left>Sample Input:<br><textarea  class="input input-xxlarge"  rows=13 name=sample_input cols=80></textarea></p>
+<p align=left>Sample Output:<br><textarea  class="input input-xxlarge"  rows=13 name=sample_output cols=80></textarea></p>
+<p align=left>Test Input:<br><textarea  class="input input-xxlarge" rows=13 name=test_input cols=80></textarea></p>
+<p align=left>Test Output:<br><textarea  class="input input-xxlarge"  rows=13 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br>
 <?php
 $output = new FCKeditor('hint') ;

@@ -106,16 +106,16 @@ function metal(){
 	  	     if(r==1){
 	  	       cell.innerHTML="Winner";
                        //cell.style.cssText="background-color:gold;color:red";
-                       cell.className="btn btn-warning";
+                       cell.className="label label-warning";
 	  	     }
 	  	     if(r>1&&r<=total*.05+1)
-	  	        cell.className="btn btn-warning";
+	  	        cell.className="label label-warning";
 	  	     if(r>total*.05+1&&r<=total*.20+1)
-	  	        cell.className="btn ";
+	  	        cell.className="label ";
 	  	     if(r>total*.20+1&&r<=total*.45+1)
-	  	        cell.className="btn btn-danger";
+	  	        cell.className="label label-danger";
 	  	     if(r>total*.45+1&&ac>0)
-              		cell.className="btn btn-info";
+              		cell.className="label label-info";
 	  	}
 	  }
   }catch(e){

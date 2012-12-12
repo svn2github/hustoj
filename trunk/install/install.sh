@@ -57,3 +57,6 @@ sudo chmod +x  /etc/init.d/judged
 sudo ln -s /etc/init.d/judged /etc/rc3.d/S93judged
 sudo ln -s /etc/init.d/judged /etc/rc2.d/S93judged
 sudo /etc/init.d/judged start
+sudo /etc/init.d/apache2 restart
+sudo /etc/init.d/httpd restart
+

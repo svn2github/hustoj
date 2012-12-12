@@ -36,18 +36,19 @@
 			</td></tr>
   </table>
 
-	<table id='problemset' width='90%'>
-		<thead>
-			
-			<tr align=center class='toprow'>
-				<td width='5'></td>
-				<td width='5' style="cursor:hand" onclick="sortTable('problemset', 1, 'int');"><A><?php echo $MSG_PROBLEM_ID?></A>
-				<td><?php echo $MSG_TITLE?></td>
-				<td width='10%'><?php echo $MSG_SOURCE?></td>
-				<td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><A><?php echo $MSG_AC?></A></td>
-				<td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><A><?php echo $MSG_SUBMIT?></A></td>
-			</tr>
-			</thead>
+	<table id='problemset' width='90%'class='table table-striped'>
+                <thead>
+
+                          <tr class='toprow'>
+                                <td ></td>
+                          <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');"><?php echo $MSG_PROBLEM_ID?></td>
+                                <td><?php echo $MSG_TITLE?></td>
+                                <td width='10%'><?php echo $MSG_SOURCE?></td>
+                                <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><?php echo $MSG_AC?></td>
+                                <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
+                          </tr>
+                </thead>
+
 		  
 			<tbody>
 			<?php 

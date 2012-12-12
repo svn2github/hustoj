@@ -106,7 +106,7 @@ function metal(){
 	  	     if(r==1){
 	  	       cell.innerHTML="Winner";
                        //cell.style.cssText="background-color:gold;color:red";
-                       cell.className="label label-warning";
+                       cell.className="badge badge-warning";
 	  	     }
 	  	     if(r>1&&r<=total*.05+1)
 	  	        cell.className="label label-warning";

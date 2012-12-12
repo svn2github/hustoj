@@ -1,4 +1,4 @@
-#summary 多重启动。
+#summary 多重启动 调试模式
 #labels Featured,Phase-Support
 {{{
     单个主机运行多个judged，分别负责不同的OJ判题。

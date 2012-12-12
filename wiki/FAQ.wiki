@@ -8,6 +8,11 @@ When people asked question, we put the answer here
 这里是常见问答。
 
 = Details =
+
+ * 多组数据怎么上传？
+加好题目后在题目列表找TestData，点击上传。
+主文件名一样的*.in *.out，如test1.in test1.out
+
   * 通过.tar.gz源码安装的应该怎么升级？
 {{{
 到安装文件目录找到hustoj-read-only目录

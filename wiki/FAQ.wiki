@@ -16,6 +16,7 @@ cd hustoj-read-only/core
 sudo ./make.sh
 sudo svn up /var/www/JudgeOnline
 }}}
+遇到问题，回答mc
    
   * 为何页面总是需要刷新才能显示？
     如果您使用的是ie6浏览器，请禁用服务器上的deflate模块，在ubuntu下的命令是

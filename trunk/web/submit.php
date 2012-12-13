@@ -62,7 +62,7 @@ if (isset($_POST['id'])) {
 			$row=mysql_fetch_array($result);
 			$ccnt=intval($row[0]);
 			mysql_free_result($result);
-			if ($ccnt==0){
+			if ($ccnt==0&&!isset($_SESSION['administrator'])){
 				$view_errors= "You are not invited!\n";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);

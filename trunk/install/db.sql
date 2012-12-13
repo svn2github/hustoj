@@ -186,3 +186,9 @@ CREATE TABLE  `runtimeinfo` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE  `custominput` (
+  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `input_text` text,
+  PRIMARY KEY (`solution_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

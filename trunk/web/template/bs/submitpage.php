@@ -16,6 +16,13 @@
 <div id=main>
 	<center>
 <?php
+if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
+{
+   $OJ_EDITE_AREA=false;
+}
+
+
+
 if($OJ_EDITE_AREA){
 ?>
 <script language="Javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>

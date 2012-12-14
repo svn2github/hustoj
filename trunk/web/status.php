@@ -19,7 +19,7 @@ if(isset($OJ_LANG)){
 require_once("./include/const.inc.php");
 
 if($OJ_TEMPLATE=="bs") 
-	$judge_color=Array("btn gray","btn btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning");
+	$judge_color=Array("btn gray","btn btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-info");
 
 $str2="";
 $lock=false;
@@ -211,7 +211,7 @@ else
        
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$MSG_Compile_Click."</a>";
-        }else if ((intval($row['result'])==6||$row['result']==10) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+        }else if ((intval($row['result'])==6||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</a>";
 
         }else{

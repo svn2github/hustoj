@@ -40,7 +40,7 @@ mysql_free_result($res);
 if (isset($_POST['id'])) {
 	$id=intval($_POST['id']);
 	
-}else if (isset($_POST['pid']) && isset($_POST['cid'])){
+}else if (isset($_POST['pid']) && isset($_POST['cid'])&&$_POST['cid']!=0){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
 	// check user if private
@@ -83,9 +83,12 @@ if (isset($_POST['id'])) {
 		mysql_free_result($result);
 	}
 }else{
+       $id=0;
+/*
 	$view_errors= "No Such Problem!\n";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
+*/
 }
 
 $language=intval($_POST['language']);
@@ -94,9 +97,14 @@ $language=strval($language);
 
 
 $source=$_POST['source'];
-if(get_magic_quotes_gpc())
+$input_text=$_POST['input_text'];
+if(get_magic_quotes_gpc()){
 	$source=stripslashes($source);
+	$input_text=stripslashes($input_text);
+
+}
 $source=mysql_real_escape_string($source);
+$input_text=mysql_real_escape_string($input_text);
 //$source=trim($source);
 //use append Main code
 $append_file="$OJ_DATA/$id/append.$language_ext[$language]";
@@ -157,6 +165,11 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);
+
+	if(!isset($pid)&&$id==0){
+		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
+		mysql_query($sql);
+	}
 	//echo $sql;
 }
 
@@ -194,7 +207,12 @@ if((~$OJ_LANGMASK)&(1<<$language)){
   if (isset($cid))
 	    $statusURI.="&cid=$cid";
 	 
+   if($id!=0||$cid!=0)	
 	header("Location: $statusURI");
-
+   else{
+	?>
+	<script>window.parent.setTimeout("fresh_result('<?php echo $insert_id;?>')",2000);</script>
+	<?php
 	
+   }
 ?>

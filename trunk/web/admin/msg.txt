@@ -1,2 +1,1 @@
-修改OJ基本信息请看include/db_info.inc.php HUSTOJ用户交流qq群23361372 
-
+<a href=submitpage.php?id=0&sid=1016>IDE测试</a>

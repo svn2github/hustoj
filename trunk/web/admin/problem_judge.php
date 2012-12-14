@@ -64,6 +64,16 @@ if(isset($_POST['update_solution'])){
 	}
 	mysql_free_result($result);
 	
+}else if(isset($_POST['getcustominput'])){
+	
+	$sid=intval($_POST['sid']);
+	$sql="SELECT input_text FROM custominput WHERE solution_id=$sid ";
+	$result=mysql_query($sql);
+	if ($row=mysql_fetch_object($result)){
+		echo $row->input_text."\n";
+	}
+	mysql_free_result($result);
+	
 }else if(isset($_POST['getprobleminfo'])){
 	
 	$pid=intval($_POST['pid']);

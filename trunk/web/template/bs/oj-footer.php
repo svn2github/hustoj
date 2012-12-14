@@ -44,4 +44,3 @@
 	
 	</p>
 </center>
-<script src=bootstrap/js/bootstrap.js></script>

@@ -28,6 +28,7 @@
 	$MSG_Memory_Limit_Exceed="Memory Limit Exceed";
 	$MSG_Output_Limit_Exceed="Output Limit Exceed";
 	$MSG_Runtime_Error="Runtime Error";
+$MSG_TEST_RUN="Test Running Done";
 	$MSG_Compile_Error="Compile Error";
    
   $MSG_Runtime_Click="Runtime Error(Click)";
@@ -57,7 +58,7 @@
 	$MSG_RE="RE";
 	$MSG_CE="CE";
 	$MSG_CO="CO";
-	
+	$MSG_TR="TR";
 	//problemset.php
 	$MSG_SEARCH="Search";
 	$MSG_PROBLEM_ID="Problem ID";

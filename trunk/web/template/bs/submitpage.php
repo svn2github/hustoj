@@ -179,6 +179,10 @@ function getSID(){
   return ret+"";
 }
      function do_submit(){
+
+if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
+
+
 	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 	var problem_id=document.getElementById(mark);
 	
@@ -192,7 +196,8 @@ function getSID(){
      }
      function do_test_run(){
 
-	eAL.toggle("source");eAL.toggle("source");
+  if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
+
 
 	var mark="<?php echo isset($id)?'problem_id':'';?>";
 	var problem_id=document.getElementById(mark);

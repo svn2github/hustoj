@@ -52,6 +52,8 @@ if (isset($_GET['solution_id'])){
 		$row=mysql_fetch_array($result);
 		if($row)	
 			echo htmlspecialchars(str_replace("\n\r","\n",$row['error']));
+    $sql="delete from custominput where solution_id=".$solution_id;
+    mysql_query($sql);     
 		//echo $sql.$res;
 	}else{
 		echo $row['result'].",".$row['memory'].",".$row['time'];

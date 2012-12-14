@@ -27,7 +27,7 @@ if (isset($_POST['cid'])){
 //echo $sql;	
 
 $res=mysql_query($sql);
-if ($res&&mysql_num_rows($res)<1&&!isset($_SESSION['administrator'])){
+if ($res&&mysql_num_rows($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid==0)||(isset($id)&&$id==0))){
 		mysql_free_result($res);
 		$view_errors=  "Where do find this link? No such problem.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");

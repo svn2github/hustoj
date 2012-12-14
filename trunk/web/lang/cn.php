@@ -43,7 +43,8 @@ $MSG_Runtime_Error="人品问题-愚人节快乐";
 $MSG_Compile_Error="人品问题-愚人节快乐";
 $MSG_Compile_OK="人品问题-愚人节快乐";
 }
-    
+    $MSG_TEST_RUN="运行完成";
+	$MSG_TR="运行完成";
 
 	$MSG_PD="等待";
 	$MSG_PR="等待重判";

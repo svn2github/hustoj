@@ -202,7 +202,9 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 	document.getElementById("frmSolution").submit();
      }
      function do_test_run(){
-
+          var loader="<img width=18 src=image/loader.gif>";
+          var tb=window.document.getElementById('result');
+          tb.innerHTML=loader;
   if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 
 

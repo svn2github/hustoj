@@ -1306,7 +1306,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         LIM.rlim_cur=LIM.rlim_max=50;
         break;
     case 5: //bash
-                LIM.rlim_cur=LIM.rlim_max=20;
+                LIM.rlim_cur=LIM.rlim_max=3;
                 break;
     case 9: //C#
        LIM.rlim_cur=LIM.rlim_max=3;

@@ -159,7 +159,7 @@ xmlhttp.onreadystatechange=function()
      tb.innerHTML="<span class='badge badge-info'>"+judge_result[ra[0]]+"</span>";
      if(ra[0]<4)tb.innerHTML+=loader;
      tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
-     tb.innerHTML+="Time:"+ra[2]+"secends";
+     tb.innerHTML+="Time:"+ra[2]+"ms";
      if(ra[0]<4)
         window.setTimeout("fresh_result("+solution_id+")",2000);
      else

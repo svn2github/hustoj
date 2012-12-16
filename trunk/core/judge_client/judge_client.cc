@@ -1687,7 +1687,7 @@ void mk_shm_workdir(char * work_dir){
         execute_cmd("rm -rf %s",work_dir);
         execute_cmd("ln -s %s %s/",shm_path,oj_home);
   execute_cmd("chown root %s ",shm_path);
-  execute_cmd("chmod 755 %s ",shm_path);
+  execute_cmd("chmod 050 %s ",shm_path);
   //sim need a soft link in shm_dir to work correctly
   sprintf(shm_path,"/dev/shm/hustoj/%s/",oj_home);
   execute_cmd("ln -s %s/data %s",oj_home,shm_path);

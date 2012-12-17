@@ -155,15 +155,18 @@ xmlhttp.onreadystatechange=function()
      var ra=r.split(",");
 //     alert(r);
 //     alert(judge_result[r]);
-      var loader="<img width=18 src=image/loader.gif>";
-     tb.innerHTML="<span class='badge badge-info'>"+judge_result[ra[0]]+"</span>";
+      var loader="<img width=18 src=image/loader.gif>";  
+     var tag="span";
+     if(ra[0]<4) tag="span";
+     else tag="a";
+     tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
      if(ra[0]<4)tb.innerHTML+=loader;
      tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
      tb.innerHTML+="Time:"+ra[2]+"ms";
      if(ra[0]<4)
         window.setTimeout("fresh_result("+solution_id+")",2000);
      else
-        print_result(solution_id);
+        window.setTimeout("print_result("+solution_id+")",2000);
     }
   }
 xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);

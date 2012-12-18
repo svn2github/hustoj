@@ -58,7 +58,7 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_RE="RE";
 	$MSG_CE="CE";
 	$MSG_CO="CO";
-	$MSG_TR="TR";
+	$MSG_TR="Test";
 	//problemset.php
 	$MSG_SEARCH="Search";
 	$MSG_PROBLEM_ID="Problem ID";

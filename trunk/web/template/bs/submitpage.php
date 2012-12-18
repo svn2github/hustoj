@@ -86,16 +86,15 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 <br>
 
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo $view_src?></textarea><br>
-INPUT:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" >1 2</textarea>
-
-OUTPUT:
+<?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" >1 2</textarea>
+<?php echo $MSG_Output?>:
 <textarea style="width:30%" cols=40 rows=5 id="out" name="out" ></textarea>
 
 <br>
 
-<input id=Submit class="btn btn-info" type=button value="Submit"  onclick=do_submit();>
-<input id=TestRun class="btn btn-info"  type=button value="TestRun" onclick=do_test_run();><span  class="btn"  id=result>Status</span>
-<input type=reset  class="btn btn-danger" value="Reset">
+<input id=Submit class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>"  onclick=do_submit();>
+<input id=TestRun class="btn btn-info"  type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span  class="btn"  id=result>状态</span>
+<input type=reset  class="btn btn-danger" value="重置">
 </form>
 
 <iframe name=testRun width=0 height=0 src="about:blank"></iframe>
@@ -157,7 +156,7 @@ xmlhttp.onreadystatechange=function()
 //     alert(judge_result[r]);
       var loader="<img width=18 src=image/loader.gif>";  
      var tag="span";
-     if(ra[0]<4) tag="span";
+     if(ra[0]<4) tag="span disabled=true";
      else tag="a";
      tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
      if(ra[0]<4)tb.innerHTML+=loader;
@@ -187,7 +186,9 @@ function getSID(){
         ret=ie.innerText;
     }
   return ret+"";
-}
+} 
+
+var count=0;
      function do_submit(){
 
 if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
@@ -209,7 +210,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
           var tb=window.document.getElementById('result');
           tb.innerHTML=loader;
   if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
-
+        
 
         var mark="<?php echo isset($id)?'problem_id':'';?>";
         var problem_id=document.getElementById(mark);
@@ -217,11 +218,28 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         document.getElementById("frmSolution").target="testRun";
         document.getElementById("frmSolution").submit();
         document.getElementById("TestRun").disabled=true;
-        window.setTimeout(" document.getElementById('TestRun').disabled=false;",15000);
         document.getElementById("Submit").disabled=true;
-        window.setTimeout(" document.getElementById('Submit').disabled=false;",15000);
+        count=20;
+        window.setInterval("resume();",1000);
        
      }
+     
+  function resume(){
+  	count--;
+        var s=document.getElementById('Submit');
+        var t=document.getElementById('TestRun');
+        if(count<0){
+  		s.disabled=false;
+  		t.disabled=false; 
+                s.value="<?php echo $MSG_SUBMIT?>";
+        	t.value="<?php echo $MSG_TR?>";
+                window.cleanInterval();
+        }else{
+        	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
+        	t.value="<?php echo $MSG_TR?>("+count+")";
+        
+        }
+  }
 </script>
 <div id=foot>
         <?php require_once("oj-footer.php");?>

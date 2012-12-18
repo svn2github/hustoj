@@ -57,7 +57,7 @@ if (isset($_GET['cid'])){
         //require_once("oj-header.php");
   if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])||$_GET['user_id']==$_SESSION['user_id']){
   }else{
-      $sql="SELECT * FROM `solution` WHERE contest_id is null ";
+      $sql="SELECT * FROM `solution` WHERE problem_id>0 and contest_id is null ";
   }
 }
 $start_first=true;

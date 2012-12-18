@@ -24,7 +24,7 @@ if($OJ_TEMPLATE=="bs")
 $str2="";
 $lock=false;
 $lock_time=date("Y-m-d H:i:s",time());
-$sql="SELECT * FROM `solution` WHERE 1 ";
+$sql="SELECT * FROM `solution` WHERE problem_id>0 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";

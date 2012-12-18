@@ -55,7 +55,9 @@ if (isset($_GET['cid'])){
         //require_once("contest-header.php");
 }else{
         //require_once("oj-header.php");
-  if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])||$_GET['user_id']==$_SESSION['user_id']){
+  if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])||(isset($_SESSION['user_id'])&&$_GET['user_id']==$_SESSION['user_id'])){
+      if ($_SESSION['user_id']!="guest")
+      		$sql="SELECT * FROM `solution` WHERE contest_id is null ";
   }else{
       $sql="SELECT * FROM `solution` WHERE problem_id>0 and contest_id is null ";
   }

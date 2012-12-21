@@ -8,8 +8,15 @@
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
 <div id=main>
-<script src="include/sortTable.js"></script>
-
+<script type="text/javascript" src="include/jquery-latest.js"></script> 
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#problemset").tablesorter(); 
+    } 
+); 
+</script>
 
 <h3 align='center'>
         <?php

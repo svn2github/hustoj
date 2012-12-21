@@ -4,14 +4,26 @@
 	<meta http-equiv='refresh' content='60'>
 	<title><?php echo $view_title?></title>
 	<link rel=stylesheet href='./template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
+   <script type="text/javascript" src="include/jquery-latest.js"></script> 
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#cs").tablesorter(); 
+    } 
+); 
+</script>
 </head>
 <body>
 <div id="wrapper">
 	<?php require_once("contest-header.php");?>
 <div id=main>
 <center><h3>Contest Statistics</h3>
-<table width=90%>
-<tr align=center class=toprow><td><td>AC<td>PE<td>WA<td>TLE<td>MLE<td>OLE<td>RE<td>CE<td>Total<td><td>C<td>C++<td>Pascal<td>Java<td>Ruby<td>Bash<td>Python<td>PHP<td>Perl<td>C#<td>Obj-c</tr>
+<table id=cs width=90%>
+<thead>
+<tr align=center class=toprow><th><th>AC<th>PE<th>WA<th>TLE<th>MLE<th>OLE<th>RE<th>CE<th>Total<th><th>C<th>C++<th>Pascal<th>Java<th>Ruby<th>Bash<th>Python<th>PHP<th>Perl<th>C#<th>Obj-c<th>FreeBasic</tr>
+  </thead>
+  <tbody>
 <?php
 for ($i=0;$i<$pid_cnt;$i++){
 	if(!isset($PID[$i])) $PID[$i]="";
@@ -34,6 +46,7 @@ for ($j=0;$j<15;$j++) {
 }
 echo "</tr>";
 ?>
+  </tbody>
 <table></center>;
 
 <div id=foot>

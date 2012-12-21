@@ -4,6 +4,15 @@
 	<meta http-equiv='refresh' content='60'>
 	<title><?php echo $view_title?></title>
 	<link rel=stylesheet href='./template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
+   <script type="text/javascript" src="include/jquery-latest.js"></script> 
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#rank").tablesorter(); 
+    } 
+); 
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -13,11 +22,11 @@
 $rank=1;
 ?>
 <center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
-<table id=rank><tr class=toprow align=center><td width=5%>Rank<td width=10%>User<td width=10%>Nick<td width=5%>Solved<td width=5%>Penalty
+<table id=rank><thead><tr class=toprow align=center><th width=5%>Rank<th width=10%>User<th width=10%>Nick<th width=5%>Solved<th width=5%>Penalty
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
-	echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
-echo "</tr>\n";
+	echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+     echo "</tr></thead>\n<tbody>";
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>\n";
 	else echo "<tr class=evenrow align=center>\n";
@@ -70,7 +79,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	}
 	echo "</tr>\n";
 }
-echo "</table>";
+     echo "</tbody></table>";
 ?>
 
 <script>

@@ -7,7 +7,15 @@
 <body>
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
-<script src="include/sortTable.js"></script>
+<script type="text/javascript" src="include/jquery-latest.js"></script> 
+<script type="text/javascript" src="include/jquery.tablesorter.js"></script> 
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#problemstatus").tablesorter(); 
+    } 
+); 
+</script>
  
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
@@ -53,14 +61,14 @@
 	<?php }?>
 	</td><td>
 	<table id=problemstatus><thead>
-		<tr class=toprow><td style="cursor:hand" onclick="sortTable('problemstatus', 0, 'int');"><?php echo $MSG_Number?>
-			<td>RunID
-			<td><?php echo $MSG_USER?>
-			<td  style="cursor:hand" onclick="sortTable('problemstatus', 3, 'int');"><?php echo $MSG_MEMORY?>
-			<td  style="cursor:hand" onclick="sortTable('problemstatus', 4, 'int');"><?php echo $MSG_TIME?>
-			<td><?php echo $MSG_LANG?>
-			<td  style="cursor:hand" onclick="sortTable('problemstatus', 6, 'int');"><?php echo $MSG_CODE_LENGTH?>
-			<td><?php echo $MSG_SUBMIT_TIME?></tr></thead><tbody>
+		<tr class=toprow><th style="cursor:hand" onclick="sortTable('problemstatus', 0, 'int');"><?php echo $MSG_Number?>
+			<th>RunID
+			<th><?php echo $MSG_USER?>
+			<th ><?php echo $MSG_MEMORY?>
+			<th  ><?php echo $MSG_TIME?>
+			<th><?php echo $MSG_LANG?>
+			<th ><?php echo $MSG_CODE_LENGTH?>
+			<th><?php echo $MSG_SUBMIT_TIME?></tr></thead><tbody>
 			<?php 
 			$cnt=0;
 			foreach($view_solution as $row){

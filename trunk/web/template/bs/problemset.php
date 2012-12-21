@@ -47,12 +47,12 @@ $(document).ready(function()
                 <thead>
 
                           <tr class='toprow'>
-                                <td ></td>
-                          <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');"><?php echo $MSG_PROBLEM_ID?></td>
-                                <td><?php echo $MSG_TITLE?></td>
-                                <td width='10%'><?php echo $MSG_SOURCE?></td>
-                                <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><?php echo $MSG_AC?></td>
-                                <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
+                            <th width='5'></th>
+                          	<th width='120'  ><A><?php echo $MSG_PROBLEM_ID?></A></th>
+                            <th><?php echo $MSG_TITLE?></th>
+                            <th width='10%'><?php echo $MSG_SOURCE?></th>
+                            <th style="cursor:hand"  width=60 ><?php echo $MSG_AC?></th>
+                            <th style="cursor:hand" width=60 ><?php echo $MSG_SUBMIT?></th>
                           </tr>
                 </thead>
 

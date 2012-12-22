@@ -16,8 +16,8 @@ if (!(isset($_SESSION['administrator']))){
 	
 	if ($teamnumber>0){
 		echo "<table border=1>";
-		echo "<tr><td colspan=2>Copy these accounts to distribute</td></tr>";
-		echo "<tr><td>login_id</td><td>password</td></tr>";
+		echo "<tr><td colspan=3>Copy these accounts to distribute</td></tr>";
+		echo "<tr><td>team_name<td>login_id</td><td>password</td></tr>";
 		for($i=1;$i<=$teamnumber;$i++){
 			
 			$user_id=$prefix.$i;

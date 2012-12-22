@@ -22,7 +22,7 @@ $(document).ready(function()
 	    var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,''); 
 	    //alert(v);
 	    v=parseFloat('0'+v);
-	    return v>1?v:v+99999999999;
+	    return v>1?v:v+Number.MAX_VALUE-1;
         }, 
         // set type, either numeric or text 
         type: 'numeric' 

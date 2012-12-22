@@ -9,7 +9,40 @@
 <script type="text/javascript">
 $(document).ready(function() 
     { 
-        $("#rank").tablesorter(); 
+
+ $.tablesorter.addParser({ 
+        // set a unique id 
+        id: 'punish', 
+        is: function(s) { 
+            // return false so this parser is not auto detected 
+            return false; 
+        }, 
+        format: function(s) { 
+            // format your data for normalization 
+	    var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,''); 
+	    //alert(v);
+	    v=parseFloat('0'+v);
+	    return v>1?v:v+99999999999;
+        }, 
+        // set type, either numeric or text 
+        type: 'numeric' 
+    }); 
+
+        $("#rank").tablesorter({ 
+            headers: { 
+                4: { 
+                    sorter:'punish' 
+                }
+		
+<?php
+for ($i=0;$i<$pid_cnt;$i++){
+                echo ",".($i+5).": { ";
+                echo "    sorter:'punish' ";
+                echo "}";
+}
+?>
+            } 
+        }); 
     } 
 ); 
 </script>
@@ -22,10 +55,10 @@ $(document).ready(function()
 $rank=1;
 ?>
 <center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
-<table id=rank><thead><tr class=toprow align=center><th width=5%>Rank<th width=10%>User<th width=10%>Nick<th width=5%>Solved<th width=5%>Penalty
+<table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User<th width=10%>Nick<th width=5%>Solved<th width=5%>Penalty
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
-	echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+	echo "<th class=\"{sorter:'punish'}\"><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
      echo "</tr></thead>\n<tbody>";
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>\n";

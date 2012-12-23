@@ -150,7 +150,7 @@ public class Main{
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R1281</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=1981"><font color=red>R1981+</font></a></td>
     </tr>
   </table>
 </center>

@@ -86,7 +86,7 @@ if (mysql_num_rows($result)!=1){
 	   //echo $sql;
            $result=mysql_query($sql);
 	   if($i=mysql_num_rows($result)){
-	      echo "This problem is in Contest(s) below:<br>";
+	      $view_errors.= "This problem is in Contest(s) below:<br>";
 		   for (;$i>0;$i--){
 				$row=mysql_fetch_row($result);
 				$view_errors.= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";

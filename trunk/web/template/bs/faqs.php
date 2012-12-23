@@ -147,7 +147,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red>HUSTOJ</font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R1842+</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=1980"><font color=red>R1980+</font></a></td>
     </tr>
   </table>
 </center>

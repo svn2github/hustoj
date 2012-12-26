@@ -62,16 +62,17 @@ while ($row=mysql_fetch_object($result)){
 }
 mysql_free_result($result);
 
+$res=3600;
 
-$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND result>=4 group by result order by result";
+$sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=$cid ";
         $result=mysql_query($sql);
         $view_userstat=array();
-        while($row=mysql_fetch_array($result)){
-                $view_userstat[$i++]=$row;
+        if($row=mysql_fetch_array($result)){
+              $res=$row[0];
         }
         mysql_free_result($result);
 
-$sql=   "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid'   group by md order by md desc ";
+$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid'   group by md order by md desc ";
         $result=mysql_query($sql);//mysql_escape_string($sql));
         $chart_data_all= array();
 //echo $sql;
@@ -80,7 +81,7 @@ $sql=   "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`
                 $chart_data_all[$row['md']]=$row['c'];
     }
    
-$sql=   "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid' and result=4 group by md order by md desc ";
+$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid' and result=4 group by md order by md desc ";
         $result=mysql_query($sql);//mysql_escape_string($sql));
         $chart_data_ac= array();
 //echo $sql;

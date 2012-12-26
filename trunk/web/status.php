@@ -123,7 +123,7 @@ if ($result!=-1&&!$lock){
 
 if($OJ_SIM){
         $old=$sql;
-        $sql="select * from ($sql order by solution_id desc limit 20) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+        $sql="select * from ($sql order by solution_id desc limit 1000) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
         if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
                 $showsim=intval($_GET['showsim']);
                 $sql="select * from ($old ) solution 

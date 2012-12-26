@@ -1,66 +1,59 @@
-<?php
-////////////////////////////Common head
-	$cache_time=10;
-	$OJ_CACHE_SHARE=false;
-	require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
-	require_once('./include/setlang.php');
-	$view_title= "Welcome To Online Judge";
-	
-///////////////////////////MAIN	
-	
-	$view_news="";
-	$sql=	"SELECT * "
-			."FROM `news` "
-			."WHERE `defunct`!='Y'"
-			."ORDER BY `importance` ASC,`time` DESC "
-			."LIMIT 5";
-	$result=mysql_query($sql);//mysql_escape_string($sql));
-	if (!$result){
-		$view_news= "<h3>No News Now!</h3>";
-		$view_news.= mysql_error();
-	}else{
-		$view_news.= "<table width=96%>";
-		
-		while ($row=mysql_fetch_object($result)){
-			$view_news.= "<tr><td><td><big><b>".$row->title."</b></big>-<small>[".$row->user_id."]</small></tr>";
-			$view_news.= "<tr><td><td>".$row->content."</tr>";
-		}
-		mysql_free_result($result);
-		$view_news.= "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=http://code.google.com/p/hustoj>hustoj</a></tr>";
-		$view_news.= "</table>";
-	}
-$view_apc_info="";
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title><?php echo $view_title?></title>
+	<link rel=stylesheet href='./template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
+	<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+    <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
+    <script type="text/javascript">
+$(function () {
+    var d1 = [];
+    var d2 = [];
+    <?php 
+       foreach($chart_data_all as $k=>$d){
+    ?>
+        d1.push([<?php echo $k?>, <?php echo $d?>]);
+	<?php }?>
+    <?php 
+       foreach($chart_data_ac as $k=>$d){
+    ?>
+        d2.push([<?php echo $k?>, <?php echo $d?>]);
+	<?php }?>
+          //var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
 
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`  group by md order by md desc ";
-	$result=mysql_query($sql);//mysql_escape_string($sql));
-	$chart_data_all= array();
-//echo $sql;
+    // a null signifies separate line segments
+    var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
     
-	while ($row=mysql_fetch_array($result)){
-		$chart_data_all[$row['md']]=$row['c'];
-    }
-    
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where result=4 group by md order by md desc ";
-	$result=mysql_query($sql);//mysql_escape_string($sql));
-	$chart_data_ac= array();
-//echo $sql;
-    
-	while ($row=mysql_fetch_array($result)){
-		$chart_data_ac[$row['md']]=$row['c'];
-    }
-    
-	
+  $.plot($("#submission"), [ 
+   {label:"<?php echo $MSG_SUBMIT?>",data:d1,lines: { show: true }},
+    {label:"<?php echo $MSG_AC?>",data:d2,bars:{show:true}} ],{
+   grid: {
+backgroundColor: { colors: ["#fff", "#eee"] }
+},   
+        
+            xaxis: {
+              mode: "time",
+                      max:(new Date()).getTime(),
+              min:(new Date()).getTime()-100*24*3600*1000
+            }
+        });
+});
+      //alert((new Date()).getTime());
+</script>
+</head>
+<body>
+<div id="wrapper">
+	<?php require_once("oj-header.php");?>
+<div id=main>
+	<center>
+	<div id=submission style="width:600px;height:300px" ></div>
+	</center>
+	<?php echo $view_news?>
+<div id=foot>
+	<?php require_once("oj-footer.php");?>
 
-
-if(function_exists('apc_cache_info')){
-	 $_apc_cache_info = apc_cache_info(); 
-		$view_apc_info =_apc_cache_info;
-}
-
-/////////////////////////Template
-require("template/".$OJ_TEMPLATE."/index.php");
-/////////////////////////Common foot
-if(file_exists('./include/cache_end.php'))
-	require_once('./include/cache_end.php');
-?>
+</div><!--end foot-->
+</div><!--end main-->
+</div><!--end wrapper-->
+</body>
+</html>

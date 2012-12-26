@@ -1,4 +1,4 @@
-﻿<?php
+ <?php
 	$OJ_CACHE_SHARE=!isset($_GET['cid']);
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
@@ -110,7 +110,7 @@
 				}
 			}
 			if (!$contest_ok){
-				$view_errors=  "<h2>Not invited or not login!</h2>";
+           $view_errors=  "<h2>Not invited or not login! <a href=contestrank.php?cid=$cid>See RANK</a></h2>";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}

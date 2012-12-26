@@ -68,6 +68,26 @@ $sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND re
 	}
 	mysql_free_result($result);
 
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`='$user_mysql'   group by md order by md desc ";
+	$result=mysql_query($sql);//mysql_escape_string($sql));
+	$chart_data_all= array();
+//echo $sql;
+    
+	while ($row=mysql_fetch_array($result)){
+		$chart_data_all[$row['md']]=$row['c'];
+    }
+    
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`='$user_mysql' and result=4 group by md order by md desc ";
+	$result=mysql_query($sql);//mysql_escape_string($sql));
+	$chart_data_ac= array();
+//echo $sql;
+    
+	while ($row=mysql_fetch_array($result)){
+		$chart_data_ac[$row['md']]=$row['c'];
+    }
+  
+  mysql_free_result($result);
+    
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/userinfo.php");
 /////////////////////////Common foot

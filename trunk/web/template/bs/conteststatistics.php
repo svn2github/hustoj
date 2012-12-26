@@ -91,7 +91,7 @@ echo "</tr>";
 <table>
 <div id=submission style="width:600px;height:300px" ></div>
 
-</center>;
+</center>
 
 <div id=foot>
 	<?php require_once("oj-footer.php");?>

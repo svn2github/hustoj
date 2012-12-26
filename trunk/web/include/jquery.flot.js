@@ -1182,28 +1182,28 @@
                     var step = tickSize * timeUnitSize[unit];
 
                     if (unit == "second")
-                        d.setUTCSeconds(floorInBase(d.getUTCSeconds(), tickSize));
+                        d.setSeconds(floorInBase(d.getSeconds(), tickSize));
                     if (unit == "minute")
-                        d.setUTCMinutes(floorInBase(d.getUTCMinutes(), tickSize));
+                        d.setMinutes(floorInBase(d.getMinutes(), tickSize));
                     if (unit == "hour")
-                        d.setUTCHours(floorInBase(d.getUTCHours(), tickSize));
+                        d.setHours(floorInBase(d.getHours(), tickSize));
                     if (unit == "month")
-                        d.setUTCMonth(floorInBase(d.getUTCMonth(), tickSize));
+                        d.setMonth(floorInBase(d.getMonth(), tickSize));
                     if (unit == "year")
-                        d.setUTCFullYear(floorInBase(d.getUTCFullYear(), tickSize));
+                        d.setFullYear(floorInBase(d.getFullYear(), tickSize));
                     
                     // reset smaller components
-                    d.setUTCMilliseconds(0);
+                    d.setMilliseconds(0);
                     if (step >= timeUnitSize.minute)
-                        d.setUTCSeconds(0);
+                        d.setSeconds(0);
                     if (step >= timeUnitSize.hour)
-                        d.setUTCMinutes(0);
+                        d.setMinutes(0);
                     if (step >= timeUnitSize.day)
-                        d.setUTCHours(0);
+                        d.setHours(0);
                     if (step >= timeUnitSize.day * 4)
-                        d.setUTCDate(1);
+                        d.setDate(1);
                     if (step >= timeUnitSize.year)
-                        d.setUTCMonth(0);
+                        d.setMonth(0);
 
 
                     var carry = 0, v = Number.NaN, prev;
@@ -1216,19 +1216,19 @@
                                 // a bit complicated - we'll divide the month
                                 // up but we need to take care of fractions
                                 // so we don't end up in the middle of a day
-                                d.setUTCDate(1);
+                                d.setDate(1);
                                 var start = d.getTime();
-                                d.setUTCMonth(d.getUTCMonth() + 1);
+                                d.setMonth(d.getMonth() + 1);
                                 var end = d.getTime();
                                 d.setTime(v + carry * timeUnitSize.hour + (end - start) * tickSize);
-                                carry = d.getUTCHours();
-                                d.setUTCHours(0);
+                                carry = d.getHours();
+                                d.setHours(0);
                             }
                             else
-                                d.setUTCMonth(d.getUTCMonth() + tickSize);
+                                d.setMonth(d.getMonth() + tickSize);
                         }
                         else if (unit == "year") {
-                            d.setUTCFullYear(d.getUTCFullYear() + tickSize);
+                            d.setFullYear(d.getFullYear() + tickSize);
                         }
                         else
                             d.setTime(v + step);
@@ -2544,7 +2544,7 @@
         
         var r = [];
         var escape = false, padNext = false;
-        var hours = d.getUTCHours();
+        var hours = d.getHours();
         var isAM = hours < 12;
         if (monthNames == null)
             monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -2563,12 +2563,12 @@
                 switch (c) {
                 case 'h': c = "" + hours; break;
                 case 'H': c = leftPad(hours); break;
-                case 'M': c = leftPad(d.getUTCMinutes()); break;
-                case 'S': c = leftPad(d.getUTCSeconds()); break;
-                case 'd': c = "" + d.getUTCDate(); break;
-                case 'm': c = "" + (d.getUTCMonth() + 1); break;
-                case 'y': c = "" + d.getUTCFullYear(); break;
-                case 'b': c = "" + monthNames[d.getUTCMonth()]; break;
+                case 'M': c = leftPad(d.getMinutes()); break;
+                case 'S': c = leftPad(d.getSeconds()); break;
+                case 'd': c = "" + d.getDate(); break;
+                case 'm': c = "" + (d.getMonth() + 1); break;
+                case 'y': c = "" + d.getFullYear(); break;
+                case 'b': c = "" + monthNames[d.getMonth()]; break;
                 case 'p': c = (isAM) ? ("" + "am") : ("" + "pm"); break;
                 case 'P': c = (isAM) ? ("" + "AM") : ("" + "PM"); break;
                 case '0': c = ""; padNext = true; break;

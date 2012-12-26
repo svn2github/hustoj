@@ -32,6 +32,27 @@
 	}
 $view_apc_info="";
 
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`  group by md order by md desc ";
+	$result=mysql_query($sql);//mysql_escape_string($sql));
+	$chart_data_all= array();
+//echo $sql;
+    
+	while ($row=mysql_fetch_array($result)){
+		$chart_data_all[$row['md']]=$row['c'];
+    }
+    
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where result=4 group by md order by md desc ";
+	$result=mysql_query($sql);//mysql_escape_string($sql));
+	$chart_data_ac= array();
+//echo $sql;
+    
+	while ($row=mysql_fetch_array($result)){
+		$chart_data_ac[$row['md']]=$row['c'];
+    }
+    
+	
+
+
 if(function_exists('apc_cache_info')){
 	 $_apc_cache_info = apc_cache_info(); 
 		$view_apc_info =_apc_cache_info;

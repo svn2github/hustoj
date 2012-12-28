@@ -31,10 +31,9 @@ SyntaxHighlighter.all();
 </script>
 
 <!-- Requires jQuery -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-	<!-- Optional jquery.corner for rounded buttons -->
-	<script src="jquery.corner.js" type="text/javascript"></script>
-	
+  <script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+
+	  
 	<!-- Requires CodeMirror 2.16 -->
 	<script type="text/javascript" src="mergely/codemirror.js"></script>
 	<link type="text/css" rel="stylesheet" href="mergely/codemirror.css" />

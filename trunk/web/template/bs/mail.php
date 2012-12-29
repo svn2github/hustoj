@@ -28,7 +28,7 @@
 		    <input type=submit value=<?php echo $MSG_SUBMIT?>></td>
 	</tr>
 	<tr><td> 
-		<textarea name=content rows=10 cols=100></textarea>
+		<textarea name=content rows=10 cols=80 class="input input-xxlarge"></textarea>
 	  
 	 </td></tr>
 	</form>

@@ -1208,7 +1208,7 @@ void copy_python_runtime(char * work_dir) {
         execute_cmd("mkdir %s/usr", work_dir);
         execute_cmd("mkdir %s/usr/lib", work_dir);
         execute_cmd("cp /usr/bin/python* %s/", work_dir);
-
+        execute_cmd("cp /usr/lib/libpython* %s/usr/lib/", work_dir);
 }
 void copy_php_runtime(char * work_dir) {
 

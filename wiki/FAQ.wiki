@@ -94,7 +94,7 @@ insert into privilege(user_id,rightstr) values('zhblue','administrator');
 后台中点击ProblemList,找到需要编辑的题目，点击Edit。编辑时不能修改测试数据，测试数据请使用ftp工具修改。
 
   * 如何启用题目？
-题目添加后，默认是停用状态，以防比赛提前漏题，后台中点击ProblemList，找到题目，点击Resume启用题目，或者组织比赛，比赛中的题目将自动启用。
+题目添加后，默认是停用状态，以防比赛提前漏题，后台中点击ProblemList，找到题目，点击Reserved 切换为Available启用题目，或者组织比赛，比赛中的题目将自动启用。
 
   * 如何组织比赛？
 在题目列表ProblemList中选择使用的题目，在PID一栏打钩，点击CheckToNewContest按钮，进入到比赛添加页面，输入比赛名称，设定比赛时间，语言类型，访问权限提交即可。

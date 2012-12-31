@@ -9,7 +9,7 @@ When people asked question, we put the answer here
 
 = Details =
  * 配置文件里的字段什么含义?
- 详见 Configuration
+ 详见 [Configuration]
  * 多组数据怎么上传？
 加好题目后在题目列表找TestData，点击上传。
 主文件名一样的*.in *.out，如test1.in test1.out

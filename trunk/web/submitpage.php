@@ -14,8 +14,11 @@
 }
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
+        $sample_sql="select sample_input,sample_output from problem where problem_id=$id";
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
+        $sample_sql="select sample_input,sample_output from problem where problem_id in (select problem_id from contest_problem where contest_id=$cid and num=$pid)";
+        
 }else{
 	$view_errors=  "<h2>No Such Problem!</h2>";
 	require("template/".$OJ_TEMPLATE."/error.php");
@@ -42,6 +45,19 @@ if (isset($_GET['id'])){
 	}
 	
  }
+$view_sample_input="1 2";
+$view_sample_output="3";
+ if(isset($sample_sql)){
+   //echo $sample_sql;
+	$result=mysql_query($sample_sql);
+	$row=mysql_fetch_array($result);
+	$view_sample_input=$row[0];
+	$view_sample_output=$row[1];
+	mysql_free_result($result);
+	
+	
+ }
+ 
 
 
 /////////////////////////Template

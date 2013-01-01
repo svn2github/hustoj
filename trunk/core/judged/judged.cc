@@ -409,12 +409,14 @@ int work(){
                         ID[i]=0;
                 }
         }
-/*      while (workcnt>0){
-                        waitpid(-1,NULL,0);
-                        workcnt--;
-                        retcnt++;
+        while ( (tmp_pid = waitpid(-1,NULL,WNOHANG) )>0){
+                        workcnt--;retcnt++;
+                        for (i=0;i<max_running;i++)     // get the client id
+                                if (ID[i]==tmp_pid) break; // got the client id
+                        ID[i]=0;
+                        printf("tmp_pid = %d\n",tmp_pid);
         }
-*/      if(!http_judge){
+        if(!http_judge){
                 mysql_free_result(res);                         // free the memory
                 executesql("commit");
         }

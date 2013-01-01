@@ -222,7 +222,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         document.getElementById("TestRun").disabled=true;
         document.getElementById("Submit").disabled=true;
         count=20;
-        window.setInterval("resume();",1000);
+        window.setTimeout("resume();",1000);
        
      }
      
@@ -232,13 +232,14 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         var t=document.getElementById('TestRun');
         if(count<0){
   		s.disabled=false;
-  		t.disabled=false;
+  		t.disabled=false; 
                 s.value="<?php echo $MSG_SUBMIT?>";
         	t.value="<?php echo $MSG_TR?>";
-                window.cleanInterval();
+                window.cleanTimeout();
         }else{
         	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
         	t.value="<?php echo $MSG_TR?>("+count+")";
+                window.setTimeout("resume();",1000);
         
         }
   }

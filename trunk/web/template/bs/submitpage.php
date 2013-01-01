@@ -86,9 +86,11 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 <br>
 
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo $view_src?></textarea><br>
-<?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" >1 2</textarea>
+<?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
-<textarea style="width:30%" cols=40 rows=5 id="out" name="out" ></textarea>
+  <textarea style="width:30%" cols=40 rows=5 id="out" name="out" >SHOULD BE:
+<?php echo $view_sample_output?>
+</textarea>
 
 <br>
 
@@ -186,7 +188,7 @@ function getSID(){
         ret=ie.innerText;
     }
   return ret+"";
-} 
+}
 
 var count=0;
      function do_submit(){
@@ -230,7 +232,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         var t=document.getElementById('TestRun');
         if(count<0){
   		s.disabled=false;
-  		t.disabled=false; 
+  		t.disabled=false;
                 s.value="<?php echo $MSG_SUBMIT?>";
         	t.value="<?php echo $MSG_TR?>";
                 window.cleanInterval();

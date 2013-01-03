@@ -1,7 +1,10 @@
 <?php  
     require_once('./include/cache_start.php');
 
-	if(isset($OJ_LANG)){
+  
+	require_once('./include/db_info.inc.php');
+
+  if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
 ?>
@@ -23,13 +26,12 @@ if (isset($_GET['pid']))
 	<td width=15%><a class=hd href='./status.php?cid=<?php echo $cid?>'><?php echo $MSG_STATUS?></a>
 	<td width=15%><a class=hd href='./conteststatistics.php?cid=<?php echo $cid?>'><?php echo $MSG_STATISTICS?></a>
 </tr></table>
-
-<div id=broadcast>
-<?php
-
-	echo "<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250 onMouseOver='this.stop()' onMouseOut='this.start()';>";
-	require('./admin/msg.txt');
-	echo "</marquee>";
-
+<?php 
+$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
+   
 ?>
+<div id=broadcast>
+<marquee id=broadcast scrollamount=1 direction=up scrolldelay=250 onMouseOver='this.stop()' onMouseOut='this.start()';>
+  <?php echo $view_marquee_msg?>
+</marquee>
 </div><!--end broadcast-->

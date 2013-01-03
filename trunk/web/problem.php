@@ -19,7 +19,7 @@ if (isset($_GET['id'])){
 	// practice
 	$id=intval($_GET['id']);
   //require("oj-header.php");
-	if (!isset($_SESSION['administrator']) && $id!=1000)
+	if (!isset($_SESSION['administrator']) && $id!=1000&&!isset($_SESSION['contest_creator']))
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
 						SELECT `contest_id` FROM `contest` WHERE `end_time`>'$now' or `private`='1'))

@@ -43,7 +43,7 @@
 <script src="include/profile.php?<?php echo rand();?>" ></script>
 </div><!--end profile-->
 </div><!--end subhead-->
-<div id=broadcast class="container span8 offset2">
+<div id=broadcast class="container">
 <marquee id=broadcast scrollamount=1 direction=up scrolldelay=250 onMouseOver='this.stop()' onMouseOut='this.start()';>
   <?php echo $view_marquee_msg?>
 </marquee>

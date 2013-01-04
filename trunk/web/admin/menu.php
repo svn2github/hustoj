@@ -90,15 +90,15 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 ?>
 
 <li>
-	<a class='btn btn-primary' href="http://code.google.com/p/hustoj/" target="main"><b>HUSTOJ</b></a>
+	<a class='btn btn-primary' href="http://code.google.com/p/hustoj/" target="_blank"><b>HUSTOJ</b></a>
 <li>
-	<a class='btn btn-primary' href="http://code.google.com/p/freeproblemset/" target="main"><b>FreeProblemSet</b></a>
+	<a class='btn btn-primary' href="http://code.google.com/p/freeproblemset/" target="_blank"><b>FreeProblemSet</b></a>
 
 </ol>
 <?php if (isset($_SESSION['administrator'])&&!$OJ_SAE){
 ?>
-	<a class='btn btn-primary' href="problem_copy.php" target="main" title="Create your own data"><font color="eeeeee">CopyProblem</font></a> <br>
-	<a class='btn btn-primary' href="problem_changeid.php" target="main" title="Danger,Use it on your own risk"><font color="eeeeee">ReOrderProblem</font></a>
+	<a href="problem_copy.php" target="main" title="Create your own data"><font color="eeeeee">CopyProblem</font></a> <br>
+	<a href="problem_changeid.php" target="main" title="Danger,Use it on your own risk"><font color="eeeeee">ReOrderProblem</font></a>
 <?php }
 ?>
 </body>

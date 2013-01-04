@@ -20,7 +20,7 @@ if (!(isset($_SESSION['administrator']))){
 		echo "<tr><td>team_name<td>login_id</td><td>password</td></tr>";
 		for($i=1;$i<=$teamnumber;$i++){
 			
-			$user_id=$prefix.$i;
+        $user_id=$prefix.($i<10?('0'.$i):$i);
 			$password=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));
                         if(isset($pieces[$i-1]))
                         	$nick=$pieces[$i-1];

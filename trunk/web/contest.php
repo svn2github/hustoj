@@ -149,7 +149,7 @@
 
 }else{
 
-  $sql="SELECT * FROM `contest` WHERE `defunct`='N' and (end_time-now())/10000000>-60 ORDER BY `contest_id` DESC";
+  $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 50";
 			$result=mysql_query($sql);
 			
 			$view_contest=Array();

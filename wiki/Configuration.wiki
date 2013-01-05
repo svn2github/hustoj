@@ -82,4 +82,6 @@ static  $OJ_APPENDCODE=false; 是否启用自动添加代码，启用的话，�
 static  $OJ_MEMCACHE=false;是否使用memcache作为页面缓存，如果不启用则用/cache目录
 static  $OJ_MEMSERVER="127.0.0.1"; memcached的服务器地址
 static  $OJ_MEMPORT=11211;  memcached的端口
+static  $OJ_RANK_LOCK_PERCENT=0;  //比赛封榜时间的比率，如5小时比赛设为0.2则最后1小时封榜。
+
 }}}

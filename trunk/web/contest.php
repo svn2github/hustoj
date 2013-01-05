@@ -149,7 +149,7 @@
 
 }else{
 
-  $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 50";
+  $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 100";
 			$result=mysql_query($sql);
 			
 			$view_contest=Array();

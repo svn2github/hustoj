@@ -45,7 +45,7 @@ header("Pragma: no-cache");
 				}
 			}
 			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])||isset($_SESSION['problem_editor'])){
-				$profile.= "<a href=./admin>$MSG_ADMIN</a>&nbsp;";
+           $profile.= "<a href=./admin/>$MSG_ADMIN</a>&nbsp;";
 			
 			}
 		?>

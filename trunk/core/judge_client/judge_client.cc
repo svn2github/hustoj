@@ -814,16 +814,16 @@ int compile(int lang) {
         pid = fork();
         if (pid == 0) {
                 struct rlimit LIM;
-                LIM.rlim_max = 60;
-                LIM.rlim_cur = 60;
+                LIM.rlim_max = 600;
+                LIM.rlim_cur = 600;
                 setrlimit(RLIMIT_CPU, &LIM);
 
-                LIM.rlim_max = 90 * STD_MB;
-                LIM.rlim_cur = 90 * STD_MB;
+                LIM.rlim_max = 900 * STD_MB;
+                LIM.rlim_cur = 900 * STD_MB;
                 setrlimit(RLIMIT_FSIZE, &LIM);
 
-                LIM.rlim_max = 1024 * STD_MB;
-                LIM.rlim_cur = 1024 * STD_MB;
+                LIM.rlim_max = 2048 * STD_MB;
+                LIM.rlim_cur = 2048 * STD_MB;
                 setrlimit(RLIMIT_AS, &LIM);
                 if (lang != 2) {
                         freopen("ce.txt", "w", stderr);

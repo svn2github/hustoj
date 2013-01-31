@@ -1240,8 +1240,9 @@ void copy_mono_runtime(char * work_dir) {
         execute_cmd("mkdir %s/usr", work_dir);
         execute_cmd("mkdir %s/proc", work_dir);
         execute_cmd("mkdir -p %s/usr/lib/mono/2.0", work_dir);
-
         execute_cmd("cp -a /usr/lib/mono %s/usr/lib/", work_dir);
+        execute_cmd("mkdir -p %s/usr/lib64/mono/2.0", work_dir);
+        execute_cmd("cp -a /usr/lib64/mono %s/usr/lib64/", work_dir);
 
         execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 

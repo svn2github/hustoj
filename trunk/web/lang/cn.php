@@ -117,5 +117,8 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_EXPORT="导出";
 	$MSG_UPDATE_DATABASE="更新数据库";
 	$MSG_ONLINE="在线";
+  //contest
+  $MSG_PRIVATE_WARNING="私有比赛或考试作业，您无权查看题目。";
+  $MSG_WATCH_RANK="点击这里查看做题排名。";
 
 ?>

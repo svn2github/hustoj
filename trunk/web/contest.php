@@ -104,13 +104,13 @@
 				
 				
 				if (!isset($_SESSION['administrator']) && $now<$start_time){
-					$view_errors=  "<h2>Private Contest is used as Exam, problem can't view after finished.</h2>";
+					$view_errors=  "<h2>$MSG_PRIVATE_WARNING</h2>";
 					require("template/".$OJ_TEMPLATE."/error.php");
 					exit(0);
 				}
 			}
 			if (!$contest_ok){
-           $view_errors=  "<h2>Not invited or not login! <a href=contestrank.php?cid=$cid>See RANK</a></h2>";
+             $view_errors=  "<h2>$MSG_PRIVATE_WARNING <a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}

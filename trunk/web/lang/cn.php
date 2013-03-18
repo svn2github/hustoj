@@ -126,5 +126,5 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_Start="开始于";
   $MSG_TotalTime="总赛时";
   $MSG_LeftTime="剩余";
-
+  $MSG_Ended="已结束";
 ?>

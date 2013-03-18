@@ -120,5 +120,11 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   //contest
   $MSG_PRIVATE_WARNING="私有比赛或考试作业，您无权查看题目。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
+  $MSG_Public="公开";
+  $MSG_Private="私有";
+  $MSG_Running="运行中";
+  $MSG_Start="开始于";
+  $MSG_TotalTime="总赛时";
+  $MSG_LeftTime="剩余";
 
 ?>

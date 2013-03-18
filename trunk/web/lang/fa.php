@@ -182,5 +182,9 @@ $MSG_RECENT_CONTEST="Recent";
 	$MSG_EXPORT="صادر کردن";
 	$MSG_UPDATE_DATABASE="به روز رسانی پایگاه داد";
 	$MSG_ONLINE="بر خط";
+   //someone please translate these
+  $MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
+  $MSG_WATCH_RANK="Click HERE to watch contest rank.";
+
 
 ?>

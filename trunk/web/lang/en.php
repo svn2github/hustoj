@@ -108,4 +108,12 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_EXPORT="Export";
 	$MSG_UPDATE_DATABASE="UpdateDatabase";
 	$MSG_ONLINE="Online";
+   
+  //contest.php
+  $MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
+  $MSG_WATCH_RANK="Click HERE to watch contest rank.";
+
+  
+  
+  
 ?>

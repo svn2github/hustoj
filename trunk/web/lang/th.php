@@ -104,4 +104,9 @@
 	$MSG_EXPORT="ส่งออก";
 	$MSG_UPDATE_DATABASE="ปรับปรุงฐานข้อมูล";
 	$MSG_ONLINE="ผู้ที่อยู่ในระบบ";
+   
+     //someone please translate these
+  $MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
+  $MSG_WATCH_RANK="Click HERE to watch contest rank.";
+
 ?>

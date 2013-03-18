@@ -120,6 +120,6 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_TotalTime="Total";
   $MSG_LeftTime="Left";
 
-  
+  $MSG_Ended="Finished";
   
 ?>

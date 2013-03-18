@@ -168,7 +168,7 @@
 	// past
 
   if ($now>$end_time) {
-  	$view_contest[$i][2]= "<span class=green>Ended@$row->end_time</span>";
+  	$view_contest[$i][2]= "<span class=green>$MSG_Ended@$row->end_time</span>";
 	
 	// pending
 

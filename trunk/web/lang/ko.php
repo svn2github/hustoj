@@ -113,5 +113,7 @@
   $MSG_Start="Start";
   $MSG_TotalTime="Total";
   $MSG_LeftTime="Left";
+  $MSG_Ended="Finished";
+
 
 ?>

@@ -173,13 +173,13 @@
 	// pending
 
   }else if ($now<$start_time){
-  	$view_contest[$i][2]= "<span class=blue>Start@$row->start_time</span>&nbsp;";
-    $view_contest[$i][2].= "<span class=green>赛时 ".formatTimeLength($length)."</span>";
+  	$view_contest[$i][2]= "<span class=blue>$MSG_Start@$row->start_time</span>&nbsp;";
+    $view_contest[$i][2].= "<span class=green>$MSG_TotalTime".formatTimeLength($length)."</span>";
 	// running
 
   }else{
-  	$view_contest[$i][2]= "<span class=red> Running </font>&nbsp;";
-    $view_contest[$i][2].= "<span class=green> 剩余 ".formatTimeLength($left)." </span>";
+  	$view_contest[$i][2]= "<span class=red> $MSG_Running</font>&nbsp;";
+    $view_contest[$i][2].= "<span class=green> $MSG_LeftTime ".formatTimeLength($left)." </span>";
   }
                                 
                                 
@@ -187,11 +187,12 @@
                                 
 				
 				$private=intval($row->private);
-				if ($private==0) 
-					$view_contest[$i][4]= "<span class=blue>Public</span>";
-				else 
-					$view_contest[$i][5]= "<span class=red>Private</span>";
-				
+				if ($private==0)
+                                        $view_contest[$i][4]= "<span class=blue>$MSG_Public</span>";
+                                else
+                                        $view_contest[$i][5]= "<span class=red>$MSG_Private</span>";
+
+
 			
 				$i++;
 			}

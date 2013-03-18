@@ -108,5 +108,12 @@
      //someone please translate these
   $MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
+  $MSG_Public="public";
+  $MSG_Private="private";
+  $MSG_Running="running";
+  $MSG_Start="start";
+  $MSG_TotalTime="total";
+  $MSG_LeftTime="left";
+  $MSG_Ended="Finished";
 
 ?>

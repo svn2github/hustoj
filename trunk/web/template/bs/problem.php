@@ -47,7 +47,14 @@
 	}
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
 	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
-	
+	  if(isset($_SESSION['administrator'])){
+      require_once("include/set_get_key.php");
+      ?>
+      [<a href=admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?> >Edit</a>]
+      <?php
+
+    }
+
 	echo "</center>";
 	
 	echo "<h2>$MSG_Description</h2><div class=content>".$row->description."</div>";

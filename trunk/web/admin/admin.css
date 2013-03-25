@@ -1,0 +1,52 @@
+/*!
+ * author slixurd
+ * For the Online Judge Admin page
+ */
+
+ @import url(../bootstrap/css/bootstrap.css);
+
+.menu-btn{
+	text-decoration: none;
+	padding: 5px 10px;
+    display: inline;
+    background: #242a2f;
+    border: none;
+    color: #faf7f9;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: -0.8px 0.5px 0.4px #333;
+    margin-top: 3px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 4px 0 #242a2f;
+    -webkit-box-shadow: 0 0 4px 0 #242a2f;
+    -moz-box-shadow: 0 0 4px 0 #242a2f;
+    background-image: -webkit-linear-gradient(bottom, #242a2f, #1a1f1b);
+
+}
+
+.top-space{
+	margin-top: 52px;
+}
+
+body{
+	background-image: url("../image/back.png");
+	opacity: 0.95;
+}
+
+.menu-group{
+	padding-top: 15px;
+}
+
+.col{
+	background:#f9f9f9;
+	-webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow: 0 0 18px 0 #242a2f;
+    -webkit-box-shadow: 0 0 18px 0 #242a2f;
+    -moz-box-shadow: 0 0 18px 0 #242a2f;
+    min-width: 240px;
+}

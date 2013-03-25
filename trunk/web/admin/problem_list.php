@@ -1,4 +1,4 @@
-<?php require("admin-header.php");
+<?php //require("admin-header.php");
 require_once("../include/set_get_key.php");
 if (!(isset($_SESSION['administrator'])
                 ||isset($_SESSION['contest_creator'])
@@ -21,7 +21,6 @@ if (isset($_GET['page'])){
 $pstart=1000+$page_cnt*intval($page-1);
 $pend=$pstart+$page_cnt;
 
-echo "<title>Problem List</title>";
 echo "<center><h2>Problem List</h2></center>";
 
 for ($i=1;$i<=$cnt;$i++){

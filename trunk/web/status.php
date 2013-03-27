@@ -18,7 +18,7 @@ if(isset($OJ_LANG)){
         }
 require_once("./include/const.inc.php");
 
-if($OJ_TEMPLATE=="bs") 
+if($OJ_TEMPLATE!="classic") 
 	$judge_color=Array("btn gray","btn btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-info");
 
 $str2="";

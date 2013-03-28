@@ -12,6 +12,7 @@ make clean
 make sim_c
 make sim_java
 make sim_pasc
+chmod +x sim*
 cp sim_c /usr/bin
 cp sim_java /usr/bin/sim_java
 cp sim_pasc /usr/bin/sim_pas

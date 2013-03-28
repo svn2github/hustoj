@@ -122,7 +122,7 @@
 
 		AND `contest_problem`.`contest_id`=$cid ORDER BY `contest_problem`.`num` 
                 ) problem
-                left join (select problem_id pid,count(1) accepted from solution where result=4 and contest_id=$cid group by pid) p1 on problem.pid=p1.pid
+                left join (select problem_id pid1,count(1) accepted from solution where result=4 and contest_id=$cid group by pid1) p1 on problem.pid=p1.pid1
                 left join (select problem_id pid2,count(1) submit from solution where contest_id=$cid  group by pid2) p2 on problem.pid=p2.pid2
                 
                 ";

@@ -18,7 +18,7 @@ if(isset($OJ_LANG)){
         }
 require_once("./include/const.inc.php");
 
-if($OJ_TEMPLATE=="bs") 
+if($OJ_TEMPLATE!="classic") 
 	$judge_color=Array("btn gray","btn btn-info","btn btn-warning","btn btn-warning","btn btn-success","btn btn-danger","btn btn-danger","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-warning","btn btn-info");
 
 $str2="";
@@ -226,7 +226,7 @@ else
                                         $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
 
-                                        $view_status[$i][3].= "<span class='btn btn-info'>".$row['sim_s_id']."</span";
+                                        $view_status[$i][3].= "<span class='btn btn-info'>".$row['sim_s_id']."</span>";
 
                         }
                         if(isset($_GET['showsim'])&&isset($row[13])){

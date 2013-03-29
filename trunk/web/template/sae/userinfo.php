@@ -49,10 +49,10 @@ $(function () {
 </script>
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
-<div id=main>
-
+<div id=main class="span8 offset0">
+<br>
 <center>
-<table class="table table-striped" id=statics width=70%>
+<table class="table table-striped" id=statics width=90%>
 <caption>
 <?php echo $user."--".htmlspecialchars($nick)?>
 <?php
@@ -85,7 +85,7 @@ mysql_free_result($result);
 	
 	
 //}
-echo "<tr id=pie bgcolor=#D7EBFF><td>$MSG_STATISTICS<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
+echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
 
 ?>
 <script language="javascript">
@@ -111,8 +111,8 @@ echo "<tr id=pie bgcolor=#D7EBFF><td>$MSG_STATISTICS<td><div id='PieDiv' style='
 </script> 
 
 
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_SCHOOL?>:<td align=center><?php echo $school?></tr>
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_EMAIL?>:<td align=center><?php echo $email?></tr>
+<tr bgcolor=#D7EBFF><td>School:<td align=center><?php echo $school?></tr>
+<tr bgcolor=#D7EBFF><td>Email:<td align=center><?php echo $email?></tr>
 </table>
 <?php
  if(isset($_SESSION['administrator'])){

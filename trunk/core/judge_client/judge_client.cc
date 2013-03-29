@@ -1134,6 +1134,7 @@ void copy_shell_runtime(char * work_dir) {
         execute_cmd("mkdir %s/bin", work_dir);
         execute_cmd("cp /lib/* %s/lib/", work_dir);
         execute_cmd("cp -a /lib/i386-linux-gnu %s/lib/", work_dir);
+        execute_cmd("cp -a /lib/x86_64-linux-gnu %s/lib/", work_dir);
         execute_cmd("cp /lib64/* %s/lib64/", work_dir);
         execute_cmd("cp -a /lib32 %s/", work_dir);
         execute_cmd("cp /bin/busybox %s/bin/", work_dir);

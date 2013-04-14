@@ -1762,7 +1762,14 @@ int main(int argc, char** argv) {
         //set work directory to start running & judging
         sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
         
-        if(shm_run) mk_shm_workdir(work_dir);
+        if(shm_if(shm_run){
+             mk_shm_workdir(work_dir);
+        }else{
+             execute_cmd("mkdir -p %s",work_dir);
+             execute_cmd("chmod 755 -R %s",work_dir);
+             execute_cmd("chown judge -R %s",work_dir);
+        }
+       
         
         chdir(work_dir);
         execute_cmd("rm %s/*",work_dir);

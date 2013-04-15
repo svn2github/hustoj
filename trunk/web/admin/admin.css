@@ -6,10 +6,12 @@
  @import url(../bootstrap/css/bootstrap.css);
 
 .menu-btn{
+
 	text-decoration: none;
 	padding: 5px 10px;
-    display: inline;
+    display: list-item;
     background: #242a2f;
+    min-width: 168px;
     border: none;
     color: #faf7f9;
     font-weight: bold;
@@ -279,4 +281,17 @@ button a:hover{
 }
 .changeid input{
     margin-bottom: 0;
+}
+
+.menu-btn a:hover{
+    color: red;
+    text-decoration: none;
+}
+.menu-btn .a-color{
+     width: 120px;
+}
+
+.return{
+    font-size: 20px;
+    float: right;
 }

@@ -33,3 +33,42 @@ spj的退出值决定判断结果，成功退出(0)表示AC,其余表示WA.
 把spj本身看做一道题目，输入是前述三个文件，输出是程序退出时的返回值,返回值是0表示AC,非零表示WA。
 
 可以到freepeoblemset找到标有Spj的题目下载
+
+
+
+example: spj.c for the classic A+B problem
+{{{
+#include <stdio.h>
+int main(int argc,char *args[]){
+   FILE * f_in=fopen(args[1],"r");
+   FILE * f_out=fopen(args[2],"r");
+   FILE * f_user=fopen(args[3],"r");
+   int ret=0;
+   int a,b,c;
+   while(fscanf(f_in,"%d %d",&a, &b) != EOF){
+     fscanf(f_user,"%d",&c);
+     if(a+b!=c) {
+        ret=1;
+        break;
+     }
+   }
+   fclose(f_in);
+   fclose(f_out);
+   fclose(f_user);
+   return ret;
+}
+
+}}}
+test with samples
+{{{
+zhblue@nmc:/home/judge/data/1000$ sudo vim spj.c
+zhblue@nmc:/home/judge/data/1000$ sudo gcc -o spj spj.c
+zhblue@nmc:/home/judge/data/1000$ ./spj sample.in sample.out sample.out
+zhblue@nmc:/home/judge/data/1000$ echo $?
+0
+zhblue@nmc:/home/judge/data/1000$ ./spj sample.in sample.out sample.in
+zhblue@nmc:/home/judge/data/1000$ echo $?
+1
+}}}
+
+*remember to set SpecialJudge: Y in problem_edit *

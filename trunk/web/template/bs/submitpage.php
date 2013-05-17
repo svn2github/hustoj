@@ -214,7 +214,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
   if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         
 
-        var mark="<?php echo isset($id)?'problem_id':'';?>";
+        var mark="<?php echo isset($id)?'problem_id':'cid';?>";
         var problem_id=document.getElementById(mark);
         problem_id.value=0;
         document.getElementById("frmSolution").target="testRun";

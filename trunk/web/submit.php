@@ -166,7 +166,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);
 
-	if(!isset($pid)&&$id==0){
+	if($id==0&&(!isset($cid)||$cid==0)){
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
 		mysql_query($sql);
 	}

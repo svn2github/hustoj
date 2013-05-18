@@ -3,11 +3,23 @@
 
 = Introduction =
 
+
 When people asked question, we put the answer here
 
 这里是常见问答。
 
 = Details =
+ * colinux的win版如何升级
+{{{
+svn up /var/www/JudgeOnline
+cd /home/judge/install/hustoj-read-only/core
+svn up .
+pkill -9 judged
+./make.sh
+judged
+}}} 
+admin登陆后台，执行update-database
+
  * Could not connect: Access denied for user 'root'@'localhost' (using password: YES)
  检查/var/www/JudgeOnline/include/db_info.inc.php中的数据库密码是否正确。
 

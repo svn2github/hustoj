@@ -9,7 +9,7 @@ When people asked question, we put the answer here
 这里是常见问答。
 
 = Details =
- * hustoj  能安装在windows server 2003上吗
+ * hustoj  能安装在windows上吗
    可以，
    方法1：虚拟机vbox+liveCD。
    方法2：下载群共享的colinux版本。

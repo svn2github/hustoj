@@ -189,7 +189,8 @@ else if(isset($_POST['problem2contest'])){
 				    </select>
 					</div>
 					<div class="span6" style="text-align:left;width:45%">
-						<p style="text-align:left;padding-left:3%;">Users:</p><textarea name="ulist" rows="20" cols="20"></textarea>
+						<p style="text-align:left;padding-left:3%;">Users:</p><textarea name="ulist" rows="20" cols="20"
+						title="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"></textarea>
 					</div>
 					</div>
 				</div>
@@ -207,7 +208,7 @@ else if(isset($_POST['problem2contest'])){
 				?>
 				
 
-				<div class="align-center">*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。</div>
+				<div class="align-center"></div>
 				<p class="btn-group" style="text-align:center;"><input class="btn" type="submit" value="Submit" name="submit"><input type="reset" class="btn" value="Reset" name="reset"></p>
 				</form>
 			<?php }

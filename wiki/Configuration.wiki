@@ -30,7 +30,7 @@ OJ_HTTP_PASSWORD=admin      #password of this account
 OJ_OI_MODE=0               #using oi (Olympiad in Informatics) mode
 OJ_SHM_RUN=0               #using /dev/shm for fast running & low harddisk wear
 OJ_USE_MAX_TIME=0          #use the max time of all testcase rather than total time
-
+OJ_LANG_SET=0,1,2,3,4     #selective judge solution of languages
 }}}
 
 
@@ -54,6 +54,7 @@ OJ_HTTP_PASSWORD=admin          密码
 OJ_OI_MODE=0                                是否启用OI模式，即无论是否出错都继续判剩余的数据，在ACM比赛中一旦出错就停止运行。
 OJ_SHM_RUN=0                              是否使用/dev/shm的共享内存虚拟磁盘来运行答案，如果启用能提高判题速度，但需要较多内存。
 OJ_USE_MAX_TIME=1                     是否使用所有测试数据中最大的运行时间作为最后运行时间，如果不启用则以所有测试数据的总时间作为超时判断依据。
+OJ_LANG_SET=0,1,2,3,4     #判哪些语言的题目
 }}}
 
 db_info.inc.php

@@ -38,6 +38,7 @@ sudo /etc/init.d/mysqld start
 WEBBASE=/var/www/html
 APACHEUSER=apache
 HTTP_START="sudo /etc/init.d/httpd restart"
+echo "/usr/bin/judged" > judged
 fi
 
 sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only

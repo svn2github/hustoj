@@ -191,7 +191,7 @@ function getSID(){
 }
 
 var count=0;
-     function do_submit(){
+function do_submit(){
 
 if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 
@@ -205,6 +205,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
                 problem_id.value='<?php echo $cid?>';
        
         document.getElementById("frmSolution").target="_self";
+        <?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
         document.getElementById("frmSolution").submit();
      }
      function do_test_run(){

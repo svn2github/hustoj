@@ -92,5 +92,13 @@ sudo /etc/init.d/judged start
 
 $HTTP_START
 
+if uname -a | grep 'Ubuntu\|Debian'
+then
+   echo "Debian is better :P"
+else
+   chcon -R -t httpd_sys_content_t /home/judge/
+   chcon -R -t httpd_sys_content_t /var/www/html/
+fi
+
 echo "Browse http://127.0.0.1/JudgeOnline to check if the installation is working" 
 

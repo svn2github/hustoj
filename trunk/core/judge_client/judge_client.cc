@@ -45,7 +45,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <mysql/mysql.h>
-
+#include <assert.h>
 #include "okcalls.h"
 
 #define STD_MB 1048576
@@ -1400,7 +1400,50 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
         }
         return comp_res;
 }
+int special_judge(char* oj_home,int problem_id, char *infile, char *outfile, char *userfile){
+	
+   pid_t pid;
+   printf("pid=%d\n",problem_id);
+   pid=fork();
+   int ret=0;
+   if (pid==0){
+	   
+	    while(setgid(1536)!=0) sleep(1);
+        while(setuid(1536)!=0) sleep(1);
+        while(setresuid(1536, 1536, 1536)!=0) sleep(1);
 
+        struct rlimit LIM; // time limit, file limit& memory limit
+       
+        LIM.rlim_cur = 5;
+        LIM.rlim_max = LIM.rlim_cur;
+         setrlimit(RLIMIT_CPU, &LIM);
+        alarm(0);
+        alarm(10);
+  
+        // file limit
+        LIM.rlim_max = STD_F_LIM + STD_MB;
+        LIM.rlim_cur = STD_F_LIM;
+        setrlimit(RLIMIT_FSIZE, &LIM);
+	   
+	  
+	  ret=execute_cmd("%s/data/%d/spj %s %s %s", oj_home,
+                                        problem_id, infile, outfile, userfile);
+	  if(DEBUG)printf("spj1=%d\n",ret);
+      if (ret)
+		exit(1);
+	  else
+	    exit(0);
+   }else{
+      int status;
+     
+      waitpid(pid,&status,0);
+      ret=WEXITSTATUS(status);
+      if(DEBUG)printf("spj2=%d\n",ret);
+   }
+   return ret;
+   
+   
+}
 void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
                 int p_id, char * infile, char * outfile, char * userfile, int & PEflg,
                 int lang, char * work_dir, int & topmemory, int mem_lmt, int solution_id ,double num_of_test)  {
@@ -1413,8 +1456,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
         // compare
         if (ACflg == OJ_AC) {
                 if (isspj) {
-                        comp_res = execute_cmd("%s/data/%d/spj %s %s %s", oj_home,
-                                        p_id, infile, outfile, userfile);
+                        comp_res = special_judge( oj_home,p_id, infile, outfile, userfile);
 
                         if (comp_res == 0)
                                 comp_res = OJ_AC;

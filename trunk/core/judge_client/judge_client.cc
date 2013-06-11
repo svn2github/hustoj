@@ -801,7 +801,7 @@ int compile(int lang) {
     const char * CP_PL[] = { "perl","-c", "Main.pl", NULL };
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
     const char * CP_OC[]={"gcc","-o","Main","Main.m","-fconstant-string-class=NSConstantString","-I","/usr/include/GNUstep/","-L","/usr/lib/GNUstep/Libraries/","-lobjc","-lgnustep-base",NULL};
-    const char * CP_BS[]={"fbc","-static","Main.bas",NULL}; 
+    const char * CP_BS[]={"fbc","Main.bas",NULL}; 
     char javac_buf[4][16];
     char *CP_J[5];
     for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
@@ -1234,6 +1234,14 @@ void copy_perl_runtime(char * work_dir) {
         execute_cmd("cp /usr/lib/libperl* %s/usr/lib/", work_dir);
         execute_cmd("cp /usr/bin/perl* %s/", work_dir);
 
+}
+void copy_freebasic_runtime(char * work_dir) {
+
+        copy_shell_runtime(work_dir);
+        execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
+        execute_cmd("mkdir -p %s/usr/local/bin", work_dir);
+        execute_cmd("cp /usr/local/lib/freebasic %s/usr/local/lib/", work_dir);
+        execute_cmd("cp /usr/local/bin/fbc %s/", work_dir);
 }
 void copy_mono_runtime(char * work_dir) {
 
@@ -1909,6 +1917,9 @@ int main(int argc, char** argv) {
                 copy_mono_runtime(work_dir);
         if (lang == 10)
                 copy_objc_runtime(work_dir);
+        if (lang == 11)
+                copy_freebasic_runtime(work_dir);
+        // read files and run
         // read files and run
         // read files and run
         double pass_rate=0.0;

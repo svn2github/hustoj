@@ -825,7 +825,7 @@ int compile(int lang) {
                 LIM.rlim_max =  STD_MB<<11;
                 LIM.rlim_cur =  STD_MB<<11;
                 setrlimit(RLIMIT_AS, &LIM);
-                if (lang != 2) {
+                if (lang != 2&& lang != 11) {
                         freopen("ce.txt", "w", stderr);
                         //freopen("/dev/null", "w", stdout);
                 } else {

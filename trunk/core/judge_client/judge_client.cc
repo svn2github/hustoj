@@ -1088,7 +1088,7 @@ void _get_problem_info_mysql(int p_id, int & time_lmt, int & mem_lmt, int & issp
         row = mysql_fetch_row(res);
         time_lmt = atoi(row[0]);
         mem_lmt = atoi(row[1]);
-        isspj = (row[2][0] == '0');
+        isspj = (row[2][0] == '1');
         mysql_free_result(res);
 }
 

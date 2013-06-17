@@ -9,6 +9,13 @@ When people asked question, we put the answer here
 这里是常见问答。
 
 = Details =
+ * 如何让判题程序忽略行尾空格？
+  http://code.google.com/p/hustoj/source/browse/trunk/core/judge_client/judge_client.cc#303
+  303 305分别改成
+  ((c1 == '\r'||isspace(c1)) && c2 == '\n')
+  ((c2 == '\r'||isspace(c2)) && c1 == '\n')
+
+
  * hustoj  能安装在windows上吗
    可以，
    方法1：虚拟机vbox+liveCD。

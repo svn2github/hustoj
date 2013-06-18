@@ -1,19 +1,20 @@
+
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv='refresh' content='60'>
-	<title><?php echo $view_title?></title>
-	<link rel=stylesheet href='./template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv='refresh' content='60'>
+        <title><?php echo $view_title?></title>
+        <link rel=stylesheet href='./template/<?php echo $OJ_TEMPLATE?>/<?php echo isset($OJ_CSS)?$OJ_CSS:"hoj.css" ?>' type='text/css'>
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once("oj-header.php");?>
+        <?php require_once("oj-header.php");?>
 <div id=main>
 
 
 
 <div id=center class="input-append">
-<?php 
+<?php
 ?>
 <form id=simform action="status.php" method="get">
 <?php echo $MSG_PROBLEM_ID?>:<input class="input-mini" style="height:24px" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
@@ -27,10 +28,10 @@ if ($language==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
 $i=0;
 foreach ($language_name as $lang){
-        if ($i==$language) 
-		echo "<option value=$i selected>$language_name[$i]</option>";
-        else 
-		echo "<option value=$i>$language_name[$i]</option>";
+        if ($i==$language)
+                echo "<option value=$i selected>$language_name[$i]</option>";
+        else
+                echo "<option value=$i>$language_name[$i]</option>";
         $i++;
 }
 ?>
@@ -48,7 +49,7 @@ else echo "<option value='-1'>All</option>";
 for ($j=0;$j<12;$j++){
         $i=($j+4)%12;
         if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$jresult[$i]."</option>";
-        else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>"; 
+        else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>";
 }
 echo "</select>";
 ?>
@@ -69,19 +70,19 @@ echo "</select>";
                         <option value=90 ".($showsim==90?'selected':'').">90</option>
                         <option value=100 ".($showsim==100?'selected':'').">100</option>
                   </select>";
-/*      if (isset($_GET['cid'])) 
+/*      if (isset($_GET['cid']))
                 echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
-        if (isset($_GET['language'])) 
+        if (isset($_GET['language']))
                 echo "<input type=hidden name=language value='".$_GET['language']."'>";
-        if (isset($_GET['user_id'])) 
+        if (isset($_GET['user_id']))
                 echo "<input type=hidden name=user_id value='".$_GET['user_id']."'>";
-        if (isset($_GET['problem_id'])) 
+        if (isset($_GET['problem_id']))
                 echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
         //echo "<input type=submit>";
 */
-        
-        
-        
+
+
+
 }
 echo "<input type=submit class='input'  value='$MSG_SEARCH'></form>";
 ?>
@@ -104,25 +105,25 @@ echo "<input type=submit class='input'  value='$MSG_SEARCH'></form>";
 </thead>
 
 <tbody>
-			<?php 
-			$cnt=0;
-			foreach($view_status as $row){
-				if ($cnt) 
-					echo "<tr class='oddrow'>";
-				else
-					echo "<tr class='evenrow'>";
-				foreach($row as $table_cell){
-					echo "<td>";
-					echo "\t".$table_cell;
-					echo "</td>";
-				}
-				
-				echo "</tr>";
-				
-				$cnt=1-$cnt;
-			}
-			?>
-			</tbody>
+                        <?php
+                        $cnt=0;
+                        foreach($view_status as $row){
+                                if ($cnt)
+                                        echo "<tr class='oddrow'>";
+                                else
+                                        echo "<tr class='evenrow'>";
+                                foreach($row as $table_cell){
+                                        echo "<td>";
+                                        echo "\t".$table_cell;
+                                        echo "</td>";
+                                }
+
+                                echo "</tr>";
+
+                                $cnt=1-$cnt;
+                        }
+                        ?>
+                        </tbody>
 </table>
 
 </div>
@@ -139,7 +140,7 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 
 
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+        <?php require_once("oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->
@@ -153,6 +154,19 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
   }
 ?>''];
 //alert(judge_result[0]);
+function auto_refresh(){
+        var tb=window.document.getElementById('result-tab');
+                // alert(tb);
+        var rows=tb.rows;
+        for(var  i=1;i<rows.length;i++){
+                var cell=rows[i].cells[3].innerHTML;
+                var sid=rows[i].cells[0].innerHTML;
+                if(cell.indexOf('等待')!=-1||cell.indexOf('编译中')!=-1||cell.indexOf('运行并评判')!=-1){
+        //alert(sid);
+                fresh_result(sid);
+                }
+        }
+}
 function findRow(solution_id){
     var tb=window.document.getElementById('result-tab');
      var rows=tb.rows;
@@ -200,7 +214,9 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 xmlhttp.send();
 }
-<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+//<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+
+auto_refresh();
 </script>
 
 </html>

@@ -1942,13 +1942,14 @@ int main(int argc, char** argv) {
                 if(ACflg == OJ_TL){
 						usedtime=time_lmt*1000;
 				}
-				update_solution(solution_id, OJ_TR, usedtime, topmemory >> 10, 0,0,0);
-        if(ACflg==OJ_RE){
+				if(ACflg==OJ_RE){
              if(DEBUG) printf("add RE info of %d..... \n",solution_id);
             addreinfo(solution_id);
         }else{   
            addcustomout(solution_id);
         }
+        update_solution(solution_id, OJ_TR, usedtime, topmemory >> 10, 0,0,0);
+        
 			    exit(0);
 		}
         

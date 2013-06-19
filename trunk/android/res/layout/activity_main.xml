@@ -20,7 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.59"
             android:inputType="textMultiLine"
-            android:text="@string/default_source"            >
+            android:scrollHorizontally="true"
+            android:scrollbars="vertical"
+            android:text="@string/default_source" >
 
             <requestFocus />
         </EditText>
@@ -55,6 +57,7 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:text="@string/default_input" />
 
             <EditText
@@ -63,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:editable="false"
                 android:ems="10"
+                android:scrollbars="vertical"
                 android:inputType="textMultiLine" />
 
         </LinearLayout>

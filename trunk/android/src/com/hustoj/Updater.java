@@ -1,5 +1,6 @@
 package com.hustoj;
 
+import android.widget.Button;
 import android.widget.EditText;
 
 public class Updater implements Runnable {
@@ -17,7 +18,9 @@ public class Updater implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		EditText console=(EditText) activity.findViewById(R.id.editOut);
-		console.append(text);
+		Button run=(Button) activity.findViewById(R.id.btRun);
+		run.setEnabled(true);
+		console.setText(text);
 	}
 
 }

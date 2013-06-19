@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -89,6 +90,7 @@ class RunCode implements OnClickListener, Runnable {
 		params.add(new BasicNameValuePair("input_text", console.getText()
 				.toString()));
 		new Thread(this).start();
+		this.activity.findViewById(R.id.btRun).setEnabled(false);
 	}
 
 	private String httpPost(List<NameValuePair> params) {
@@ -171,6 +173,7 @@ class RunCode implements OnClickListener, Runnable {
 
 			{
 				try {
+					httpResponse.setLocale(Locale.CHINA);
 					ret = EntityUtils.toString(httpResponse.getEntity());
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block

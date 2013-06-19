@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">hustoj</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">HUSTOJ代码狂</string>
+    <string name="default_input">1 2</string>
+    <string name="default_source" formatted="false">#include &lt;stdio.h&gt;     
+\nint main()
+\n{
+\n  int a,b;
+\n  scanf(\"%d %d\",&amp;a, &amp;b);
+\n  printf(\"%d\\n\",a+b);
+\n  return 0;
+\n}
+</string>
+
+</resources>

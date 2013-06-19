@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
@@ -40,22 +41,24 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		Button btRun = (Button) findViewById(R.id.btRun);
 		btRun.setOnClickListener(new RunCode(this));
-	   spinner = (Spinner) findViewById(R.id.spLang);  
-	        String[] m=new String[]{"C","C++","Pascal","Java","Ruby","Bash","Python","PHP","Perl","C#","Obj-C","FreeBasic"};
-			//将可选内容与ArrayAdapter连接起来  
-	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);  
-	          
-	        //设置下拉列表的风格   
-	        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
-	          
-	        //将adapter 添加到spinner中  
-	        spinner.setAdapter(adapter);  
-	          
-	        //添加事件Spinner事件监听    
-	        spinner.setOnItemSelectedListener(new SpinnerSelectedListener());  
-	          
-	        //设置默认值  
-	        spinner.setVisibility(View.VISIBLE);  
+		spinner = (Spinner) findViewById(R.id.spLang);
+		String[] m = new String[] { "C", "C++", "Pascal", "Java", "Ruby",
+				"Bash", "Python", "PHP", "Perl", "C#", "Obj-C", "FreeBasic" };
+		// 将可选内容与ArrayAdapter连接起来
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, m);
+
+		// 设置下拉列表的风格
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		// 将adapter 添加到spinner中
+		spinner.setAdapter(adapter);
+
+		// 添加事件Spinner事件监听
+		spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
+
+		// 设置默认值
+		spinner.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -67,11 +70,16 @@ public class MainActivity extends Activity {
 
 class RunCode implements OnClickListener, Runnable {
 
+	private static final String[] msg = { "等待", "等待重判", "编译中", "运行并评判", "正确",
+			"格式错误", "答案错误(点击看对比)", "时间超限", "内存超限", "输出超限", "运行错误", "编译错误",
+			"编译成功", "运行完成" };
 	private MainActivity activity;
 	private EditText source;
 	private EditText console;
 	private List<NameValuePair> params;
-	private static Handler handler=new Handler();
+	private int last;
+	private static Handler handler = new Handler();
+
 	public RunCode(MainActivity mainActivity) {
 		// TODO Auto-generated constructor stub
 		this.activity = mainActivity;
@@ -82,7 +90,7 @@ class RunCode implements OnClickListener, Runnable {
 
 	@Override
 	public void onClick(View v) {
-		int lang=this.activity.spinner.getSelectedItemPosition();
+		int lang = this.activity.spinner.getSelectedItemPosition();
 		params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("problem_id", "0"));
 		params.add(new BasicNameValuePair("language", String.valueOf(lang)));
@@ -141,22 +149,37 @@ class RunCode implements OnClickListener, Runnable {
 			int sid = parseSID(ret);
 			System.out.println(sid);
 			String resultURL = "http://hustoj.sinaapp.com/status-ajax.php?solution_id="
-					+sid;
+					+ sid;
 			int result = 0;
+			last = -1;
 			do {
 				ret = HttpGet(resultURL);
 				if (ret.indexOf(",") != -1) {
 					String[] reta = ret.split(",");
 					result = Integer.parseInt(reta[0]);
+					if (result > last) {
+						last = result;
+						handler.post(new Runnable() {
+							
+							public void run() {
+								try {
+									Toast.makeText(RunCode.this.activity, RunCode.this.msg[RunCode.this.last],
+											Toast.LENGTH_LONG).show();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
 				}
 				Thread.sleep(1000);
 			} while (result < 4);
-			
+
 			String outURL = "http://hustoj.sinaapp.com/status-ajax.php?tr=&solution_id="
 					+ sid;
 			ret = HttpGet(outURL);
-			handler.post(new Updater(activity,ret));
-			
+			handler.post(new Updater(activity, ret));
+
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}

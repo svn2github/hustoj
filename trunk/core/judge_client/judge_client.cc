@@ -1224,9 +1224,16 @@ void copy_php_runtime(char * work_dir) {
         execute_cmd("cp /usr/lib/libgssapi_krb5* %s/usr/lib/", work_dir);
         execute_cmd("cp /usr/lib/libkrb5* %s/usr/lib/", work_dir);
         execute_cmd("cp /usr/lib/libk5crypto* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libedit* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libdb* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libgssapi_krb5* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libkrb5* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
         execute_cmd("cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
         execute_cmd("cp /usr/bin/php* %s/", work_dir);
         execute_cmd("chmod +rx %s/Main.php", work_dir);
+
+
 
 }
 void copy_perl_runtime(char * work_dir) {

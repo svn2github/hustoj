@@ -1329,7 +1329,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 LIM.rlim_cur=LIM.rlim_max=3;
                 break;
     case 9: //C#
-       LIM.rlim_cur=LIM.rlim_max=3;
+       LIM.rlim_cur=LIM.rlim_max=30;
        break;
     default:
       LIM.rlim_cur=LIM.rlim_max=1;

@@ -3,6 +3,8 @@
 
 = Introduction =
 
+
+
 Python for example
 
 
@@ -34,6 +36,18 @@ int LANG_YC[256]={-1,-1,......,0};
 int LANG_YV[256]={};
 int LANG_YC[256]={0};
 }}}
+ * new way*
+ {{{
+do follow steps first then run command line like
+sudo ./judge_client 2028 0 /home/judge/ debug Y
+}}}
+ will get 
+ {{{
+int LANG_YV[256]={3,4,5,6,11,33,45,54,85,91,122,125,140,174,175,183,191,192,195,196,197,199,200,201,202,220,240,243,252,258,295,311,0};
+int LANG_YC[256]={HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,0};
+}}}
+ use these lines for corresponding section (i386/x_64)
+
 
  * edit judge_client.cc
    * lang_ext add new ext for lang , "py" for python,r749

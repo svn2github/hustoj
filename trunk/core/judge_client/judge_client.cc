@@ -163,7 +163,7 @@ int execute_cmd(const char * fmt, ...) {
 
 const int call_array_size=512;
 int call_counter[call_array_size]={0};
-
+static char LANG_NAME[BUFFER_SIZE];
 void init_syscalls_limits(int lang) {
         int i;
         memset(call_counter, 0, sizeof(call_counter));
@@ -172,6 +172,10 @@ void init_syscalls_limits(int lang) {
         if (record_call) { // C & C++
                 for (i = 0; i<call_array_size; i++) {
                         call_counter[i] = 0;
+                }
+        } else if (lang <= 1) { // C & C++
+                for (i = 0; LANG_CC[i]; i++) {
+                        call_counter[LANG_CV[i]] = 0;
                 }
         } else if (lang <= 1) { // C & C++
                 for (i = 0; LANG_CC[i]; i++) {
@@ -1709,6 +1713,9 @@ void init_parameters(int argc, char ** argv, int & solution_id,int & runner_id) 
         }
         DEBUG = (argc > 4);
         record_call=(argc > 5);
+        if(argc > 5){
+			strcpy(LANG_NAME,argv[5]);
+		}
         if (argc > 3)
                 strcpy(oj_home, argv[3]);
         else
@@ -1813,7 +1820,7 @@ int get_test_file(char* work_dir,int p_id){
         return ret;
 }
 void print_call_array(){
-	printf("int LANG_xxV[256]={");
+	printf("int LANG_%sV[256]={",LANG_NAME);
 	int i=0;
 	for (i = 0; i<call_array_size; i++){
          if(call_counter[i]){		 
@@ -1822,7 +1829,7 @@ void print_call_array(){
 	}
 	printf("0};\n");
 	
-	printf("int LANG_xxC[256]");
+	printf("int LANG_%sC[256]={",LANG_NAME);
 	for (i = 0; i<call_array_size; i++){
          if(call_counter[i]){		 
 	          printf("HOJ_MAX_LIMIT,");	 

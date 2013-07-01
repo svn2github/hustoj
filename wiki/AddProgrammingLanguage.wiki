@@ -37,9 +37,10 @@ int LANG_YV[256]={};
 int LANG_YC[256]={0};
 }}}
  * new way*
+update judge_client to r2122+ 
  {{{
 do follow steps first then run command line like
-sudo ./judge_client 2028 0 /home/judge/ debug Y
+sudo judge_client 2028 0 /home/judge/ debug Y
 }}}
  will get 
  {{{

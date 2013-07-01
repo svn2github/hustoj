@@ -162,7 +162,7 @@ int execute_cmd(const char * fmt, ...) {
 }
 
 const int call_array_size=512;
-int call_counter[call_array_size];
+int call_counter[call_array_size]={0};
 
 void init_syscalls_limits(int lang) {
         int i;
@@ -170,8 +170,8 @@ void init_syscalls_limits(int lang) {
         if (DEBUG)
                 write_log("init_call_counter:%d", lang);
         if (record_call) { // C & C++
-                for (i = 0; LANG_CC[i]; i++) {
-                        call_counter[LANG_CV[i]] = 0;
+                for (i = 0; i<call_array_size; i++) {
+                        call_counter[i] = 0;
                 }
         } else if (lang <= 1) { // C & C++
                 for (i = 0; LANG_CC[i]; i++) {

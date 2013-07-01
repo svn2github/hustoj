@@ -106,8 +106,9 @@ static char http_baseurl[BUFFER_SIZE];
 
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
-
 static int shm_run=0;
+
+static char record_call=0;
 
 //static int sleep_tmp;
 #define ZOJ_COM
@@ -160,15 +161,19 @@ int execute_cmd(const char * fmt, ...) {
         return ret;
 }
 
-
-int call_counter[512];
+const int call_array_size=512;
+int call_counter[call_array_size];
 
 void init_syscalls_limits(int lang) {
         int i;
         memset(call_counter, 0, sizeof(call_counter));
         if (DEBUG)
                 write_log("init_call_counter:%d", lang);
-        if (lang <= 1) { // C & C++
+        if (record_call) { // C & C++
+                for (i = 0; LANG_CC[i]; i++) {
+                        call_counter[LANG_CV[i]] = 0;
+                }
+        } else if (lang <= 1) { // C & C++
                 for (i = 0; LANG_CC[i]; i++) {
                         call_counter[LANG_CV[i]] = LANG_CC[i];
                 }
@@ -204,6 +209,7 @@ void init_syscalls_limits(int lang) {
                     call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
     }
 
+    
 
 }
 
@@ -1656,15 +1662,16 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                 // check the system calls
                 ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 
-                if (call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
+                if (!record_call&&call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
                         ACflg = OJ_RE;
-
                         char error[BUFFER_SIZE];
                         sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n",
                                         solution_id, reg.REG_SYSCALL);
                         write_log(error);
                         print_runtimeerror(error);
                         ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+                }else if(record_call){
+					    call_counter[reg.REG_SYSCALL]=1;
                 } else {
                         if (sub == 1 && call_counter[reg.REG_SYSCALL] > 0)
                                 call_counter[reg.REG_SYSCALL]--;
@@ -1701,6 +1708,7 @@ void init_parameters(int argc, char ** argv, int & solution_id,int & runner_id) 
                 exit(1);
         }
         DEBUG = (argc > 4);
+        record_call=(argc > 5);
         if (argc > 3)
                 strcpy(oj_home, argv[3]);
         else
@@ -1803,6 +1811,26 @@ int get_test_file(char* work_dir,int p_id){
         pclose(fjobs);
         
         return ret;
+}
+void print_call_array(){
+	printf("int LANG_xxV[256]={");
+	int i=0;
+	for (i = 0; i<call_array_size; i++){
+         if(call_counter[i]){		 
+	          printf("%d,",i);	 
+	     }
+	}
+	printf("0};\n");
+	
+	printf("int LANG_xxC[256]");
+	for (i = 0; i<call_array_size; i++){
+         if(call_counter[i]){		 
+	          printf("HOJ_MAX_LIMIT,");	 
+	     }
+	}
+	printf("0};\n");
+	
+	
 }
 int main(int argc, char** argv) {
 
@@ -2047,7 +2075,9 @@ int main(int argc, char** argv) {
                 write_log("result=%d", oi_mode?finalACflg:ACflg);
         if(!http_judge)
                 mysql_close(conn);
-
+        if(record_call){
+			print_call_array();		
+		}
 
         return 0;
 }

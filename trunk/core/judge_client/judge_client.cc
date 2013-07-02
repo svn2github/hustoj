@@ -173,11 +173,7 @@ void init_syscalls_limits(int lang) {
                 for (i = 0; i<call_array_size; i++) {
                         call_counter[i] = 0;
                 }
-        } else if (lang <= 1) { // C & C++
-                for (i = 0; LANG_CC[i]; i++) {
-                        call_counter[LANG_CV[i]] = 0;
-                }
-        } else if (lang <= 1) { // C & C++
+        }else if (lang <= 1) { // C & C++
                 for (i = 0; LANG_CC[i]; i++) {
                         call_counter[LANG_CV[i]] = LANG_CC[i];
                 }

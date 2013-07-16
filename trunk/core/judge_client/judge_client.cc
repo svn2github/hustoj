@@ -1857,7 +1857,9 @@ int main(int argc, char** argv) {
         if(shm_run) mk_shm_workdir(work_dir);
         
         chdir(work_dir);
-        execute_cmd("rm %s/*",work_dir);
+        if (!DEBUG)
+            clean_workdir(work_dir);
+
 
     if(http_judge)
                 system("ln -s ../cookie ./");

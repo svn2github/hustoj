@@ -339,23 +339,31 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
 
  }
  */
-void make_diff_out(FILE *f1,FILE *f2,int c1,int c2){
+const char * getFileNameFromPath(const char * path){
+   for(int i=strlen(path);i>=0;i--){
+        if(path[i]=='/')
+                return &path[i];
+   }
+   return path;
+}
+void make_diff_out(FILE *f1,FILE *f2,int c1,int c2,const char * path){
    FILE *out;
    char buf[45];
    out=fopen("diff.out","a+");
-   fprintf(out,"=================\n");
+   fprintf(out,"=================%s\n",getFileNameFromPath(path));
    fprintf(out,"Right:\n%c",c1);
    if(fgets(buf,44,f1)){
-	fprintf(out,"%s",buf);
-   } 
+        fprintf(out,"%s",buf);
+   }
    fprintf(out,"\n-----------------\n");
    fprintf(out,"Your:\n%c",c2);
    if(fgets(buf,44,f2)){
-	fprintf(out,"%s",buf);
+        fprintf(out,"%s",buf);
    }
    fprintf(out,"\n=================\n");
    fclose(out);
 }
+
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
@@ -409,7 +417,7 @@ int compare_zoj(const char *file1, const char *file2) {
                         }
                 }
         end: 
-       if(ret==OJ_WA)make_diff_out(f1,f2,c1,c2);
+       if(ret==OJ_WA)make_diff_out(f1,f2,c1,c2,file1);
 	if (f1)
                 fclose(f1);
         if (f2)

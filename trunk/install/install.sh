@@ -12,7 +12,7 @@ DBUSER=root
 DBPASS=root
 
 #try install tools
-sudo apt-get install flex g++ libmysql++-dev php5 apache2 mysql-server php5-mysql php5-gd php5-cli mono-gmcs subversion
+sudo apt-get install make flex g++ libmysql++-dev php5 apache2 mysql-server php5-mysql php5-gd php5-cli mono-gmcs subversion
 sudo /etc/init.d/mysql start
 
 sudo yum -y update

@@ -103,6 +103,7 @@ if(get_magic_quotes_gpc()){
 	$input_text=stripslashes($input_text);
 
 }
+$input_text=preg_replace ( "(\r\n)", "\n", $input_text );
 $source=mysql_real_escape_string($source);
 $input_text=mysql_real_escape_string($input_text);
 //$source=trim($source);

@@ -33,7 +33,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
-
+#include <sys/resource.h>
 static int DEBUG=0;
 #define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"

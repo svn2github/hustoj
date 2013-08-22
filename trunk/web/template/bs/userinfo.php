@@ -85,7 +85,7 @@ mysql_free_result($result);
 	
 	
 //}
-echo "<tr id=pie bgcolor=#D7EBFF><td>$MSG_STATISTICS<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
+echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
 
 ?>
 <script language="javascript">
@@ -111,8 +111,8 @@ echo "<tr id=pie bgcolor=#D7EBFF><td>$MSG_STATISTICS<td><div id='PieDiv' style='
 </script> 
 
 
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_SCHOOL?>:<td align=center><?php echo $school?></tr>
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_EMAIL?>:<td align=center><?php echo $email?></tr>
+<tr bgcolor=#D7EBFF><td>School:<td align=center><?php echo $school?></tr>
+<tr bgcolor=#D7EBFF><td>Email:<td align=center><?php echo $email?></tr>
 </table>
 <?php
  if(isset($_SESSION['administrator'])){

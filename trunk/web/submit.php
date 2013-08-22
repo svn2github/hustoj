@@ -103,6 +103,7 @@ if(get_magic_quotes_gpc()){
 	$input_text=stripslashes($input_text);
 
 }
+$input_text=preg_replace ( "(\r\n)", "\n", $input_text );
 $source=mysql_real_escape_string($source);
 $input_text=mysql_real_escape_string($input_text);
 //$source=trim($source);
@@ -166,7 +167,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);
 
-	if($id==0&&(!isset($cid)||$cid==0){
+	if($id==0&&(!isset($cid)||$cid==0)){
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
 		mysql_query($sql);
 	}

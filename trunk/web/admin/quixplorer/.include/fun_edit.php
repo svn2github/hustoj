@@ -39,19 +39,18 @@ Comment:
 ------------------------------------------------------------------------------*/
 require_once("./.include/permissions.php");
 //------------------------------------------------------------------------------
-function savefile($file_name) {                 // save edited file
-        $code = ($GLOBALS['__POST']["code"]);
+function savefile($file_name) {			// save edited file
+	$code = ($GLOBALS['__POST']["code"]);
   if(get_magic_quotes_gpc()){
      $code =stripslashes($code );
   }
   $code =preg_replace ( "(\r\n)", "\n", $code );
- 
-        $fp = @fopen($file_name, "w");
-        if($fp===false) show_error(basename($file_name).": ".$GLOBALS["error_msg"]["savefile"]);
-        fputs($fp, $code);
-        @fclose($fp);
+  
+	$fp = @fopen($file_name, "w");
+	if($fp===false) show_error(basename($file_name).": ".$GLOBALS["error_msg"]["savefile"]);
+	fputs($fp, $code);
+	@fclose($fp);
 }
-
 //------------------------------------------------------------------------------
 // edit file
 function edit_file($dir, $item)

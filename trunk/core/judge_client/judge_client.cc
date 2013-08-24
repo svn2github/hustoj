@@ -1377,7 +1377,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         
                 execl("/usr/bin/java", "/usr/bin/java", java_xms,java_xmx,
                                 "-Djava.security.manager",
-                                "-Djava.security.policy=./java.policy", "Main", (char *)NULL);
+                                "-Djava.security.policy=../etc/java0.policy", "Main", (char *)NULL);
                 break;
         case 4:
                 //system("/ruby Main.rb<data.in");

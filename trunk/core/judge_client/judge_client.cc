@@ -801,9 +801,9 @@ void update_problem(int pid) {
 int compile(int lang) {
         int pid;
 
-        const char * CP_C[] = { "gcc", "Main.c", "-o", "Main","-Wall", "-lm",
+        const char * CP_C[] = { "gcc", "Main.c", "-o", "Main","-fno-asm","-Wall", "-lm",
                         "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
-        const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-Wall",
+        const char * CP_X[] = { "g++", "Main.cc", "-o", "Main","-fno-asm", "-Wall",
                         "-lm", "--static","-std=c++0x", "-DONLINE_JUDGE", NULL };
         const char * CP_P[] = { "fpc", "Main.pas", "-O2","-Co", "-Ct","-Ci", NULL };
 //      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",NULL };

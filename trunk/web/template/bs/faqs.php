@@ -19,11 +19,11 @@
 <table border="1">
   <tr>
     <td>C:</td>
-    <td><font color=blue>gcc Main.c -o Main -O2 -Wall -lm --static -std=c99 -DONLINE_JUDGE</font></td>
+    <td><font color=blue>gcc Main.c -o Main -fno-asm -O2 -Wall -lm --static -std=c99 -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ Main.cc -o Main -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
+    <td><font color=blue>g++ Main.cc -o Main -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>

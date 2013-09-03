@@ -35,7 +35,7 @@ $description="";
     foreach($lang as $t){
 			$langmask+=1<<$t;
 	} 
-	$langmask=1023&(~$langmask);
+  // $langmask=1023&(~$langmask);
 	//echo $langmask;	
 	
 	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`)

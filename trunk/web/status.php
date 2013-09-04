@@ -230,7 +230,7 @@ else
                                         $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
 
-                                        $view_status[$i][3].= "<span class='btn btn-info'>".$row['sim_s_id']."</span";
+                                        $view_status[$i][3].= "<span class='btn btn-info'>".$row['sim_s_id']."</span>";
 
                         }
                         if(isset($_GET['showsim'])&&isset($row[13])){

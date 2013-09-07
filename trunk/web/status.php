@@ -41,7 +41,7 @@ if (isset($_GET['cid'])){
                 $end_time=strtotime($row[2]);       
         }
         $lock_time=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
-        $lock_time=date("Y-m-d H:i:s",$lock_time);
+  //$lock_time=date("Y-m-d H:i:s",$lock_time);
         $time_sql="";
         //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
         if(time()>$lock_time&&time()<$end_time){

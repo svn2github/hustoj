@@ -13,6 +13,7 @@
 
 <body>
 <hr>
+<h4>
 <ol>
 	<li>
 		<a class='btn btn-primary' href="watch.php" target="main"><b><?php echo $MSG_SEEOJ?></b></a>
@@ -101,5 +102,6 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 	<a href="problem_changeid.php" target="main" title="Danger,Use it on your own risk"><font color="eeeeee">ReOrderProblem</font></a>
 <?php }
 ?>
+<h4>
 </body>
 </html>

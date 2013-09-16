@@ -11,6 +11,13 @@ if(isset($_POST['manual'])){
           $sql="UPDATE solution SET result=$result WHERE solution_id=$sid LIMIT 1";
           mysql_query($sql);
         }
+        if(isset($_POST['explain'])){
+             $sql="DELETE FROM runtimeinfo WHERE solution_id=$sid ";
+             mysql_query($sql);
+             $reinfo=mysql_real_escape_string($_POST['explain']);
+             $sql="INSERT INTO runtimeinfo VALUES($sid,'$reinfo')";
+             mysql_query($sql);
+        }
         echo "<script>history.go(-1);</script>";
 }
 

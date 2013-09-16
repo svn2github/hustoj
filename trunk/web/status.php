@@ -255,6 +255,7 @@ else
                   $view_status[$i][3].="<option value=4>AC</a>";
                   $view_status[$i][3].="<option value=6>WA</a>";
                   $view_status[$i][3].="</select>";
+                  $view_status[$i][3].="<input class='btn input-small'  type='text' name='explain'>";
                   $view_status[$i][3].="<input class='btn'  type=submit name=manual value='OK'>";
                   $view_status[$i][3].="</form>";
         }

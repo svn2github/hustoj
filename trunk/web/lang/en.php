@@ -46,7 +46,7 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_SUBMIT_TIME="Submit Time";
    $MSG_Manual="Manual Judge";
    $MSG_OK="OK";
-   
+   $MSG_Explain="Type reason or explaination";
 	//problemstatistics.php
 	$MSG_PD="PD";
 	$MSG_PR="PR";

@@ -216,9 +216,9 @@ else
                   $view_status[$i][3].="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
         }
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$MSG_Compile_Click."</a>";
+                $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Click_Detail'>".$MSG_Compile_Error."</a>";
         }else if ((intval($row['result'])==6||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</a>";
+                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."' title='$MSG_Click_Detail'>".$judge_result[$row['result']]."</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
@@ -251,12 +251,12 @@ else
         if(isset($_SESSION['http_judge'])) {
        //           $view_status[$i][3].="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
                   $view_status[$i][3].="<select class='btn input-small' length=4 name=result>";
-                  $view_status[$i][3].="<option value=0>Manual</a>";
-                  $view_status[$i][3].="<option value=4>AC</a>";
-                  $view_status[$i][3].="<option value=6>WA</a>";
+                  $view_status[$i][3].="<option value=0>$MSG_Manual</a>";
+                  $view_status[$i][3].="<option value=4>$MSG_AC</a>";
+                  $view_status[$i][3].="<option value=6>$MSG_WA</a>";
                   $view_status[$i][3].="</select>";
-                  $view_status[$i][3].="<input class='btn input-small'  type='text' name='explain'>";
-                  $view_status[$i][3].="<input class='btn'  type=submit name=manual value='OK'>";
+                  $view_status[$i][3].="<input class='btn input-small' title='$MSG_Explain' type='text' name='explain'>";
+                  $view_status[$i][3].="<input class='btn'  type=submit name=manual value='$MSG_OK'>";
                   $view_status[$i][3].="</form>";
         }
                                                         

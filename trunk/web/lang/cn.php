@@ -34,8 +34,7 @@
   $MSG_Click_Detail="点击看详细";
    $MSG_Manual="人工判题";
    $MSG_OK="确定";
- 
-  
+  $MSG_Explain="输入判定原因与提示";
   
 	//fool's day
 if(date('m')==4&&date('d')==1&&rand(0,100)<10){

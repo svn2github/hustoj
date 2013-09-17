@@ -44,6 +44,9 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_LANG="Language";
 	$MSG_CODE_LENGTH="Code Length";
 	$MSG_SUBMIT_TIME="Submit Time";
+   $MSG_Manual="Manual Judge";
+   $MSG_OK="OK";
+   
 	//problemstatistics.php
 	$MSG_PD="PD";
 	$MSG_PR="PR";

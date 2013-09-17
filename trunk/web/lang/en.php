@@ -33,7 +33,7 @@ $MSG_TEST_RUN="Test Running Done";
    
   $MSG_Runtime_Click="Runtime Error(Click)";
 	$MSG_Compile_Click="Compile Error(Click)";
-	 
+	$MSG_Click_Detail="Click To View Detail";
 	$MSG_Compile_OK="Compile OK";
 	$MSG_RUNID="RunID";
 	$MSG_USER="User";

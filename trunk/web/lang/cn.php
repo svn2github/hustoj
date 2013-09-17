@@ -31,6 +31,7 @@
 	$MSG_Runtime_Click="运行错误(点击看详细)";
 	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
+  $MSG_Click_Detail="点击看详细";
 	//fool's day
 if(date('m')==4&&date('d')==1&&rand(0,100)<10){
         $MSG_Accepted="人品问题-愚人节快乐";

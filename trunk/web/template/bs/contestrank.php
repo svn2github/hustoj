@@ -58,7 +58,7 @@ $rank=1;
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User<th width=10%>Nick<th width=5%>Solved<th width=5%>Penalty
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
-	echo "<th class=\"{sorter:'punish'}\"><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+  echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></th>";
      echo "</tr></thead>\n<tbody>";
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>\n";

@@ -36,7 +36,7 @@ $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where probl
 if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
 $result=mysql_query($sql) or die(mysql_error());
 ?>
-<form action=problem_list.php>关键词<input name=keyword><input type=submit value=查找><form>
+<form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
 <?php
 echo "<center><table width=90% border=1>";

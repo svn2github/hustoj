@@ -1,4 +1,10 @@
 <?php require("admin-header.php");
+
+        if(isset($OJ_LANG)){
+                require_once("../lang/$OJ_LANG.php");
+        }
+
+
 echo "<title>Problem List</title>";
 echo "<center><h2>Contest List</h2></center>";
 require_once("../include/set_get_key.php");
@@ -26,7 +32,7 @@ $keyword=mysql_real_escape_string($keyword);
 if($keyword) $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where title like '%$keyword%' ";
 $result=mysql_query($sql) or die(mysql_error());
 ?>
-<form action=contest_list.php>关键词<input name=keyword><input type=submit value=查找><form>
+<form action=contest_list.php class=center><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
 
 <?php

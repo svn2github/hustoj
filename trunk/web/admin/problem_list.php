@@ -45,7 +45,7 @@ $result=mysql_query($sql) or die(mysql_error());
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
 <?php
-echo "<center><table width=90% border=1>";
+echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "<tr><td>PID<td>Title<td>Date";

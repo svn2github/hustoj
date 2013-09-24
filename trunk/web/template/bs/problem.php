@@ -61,21 +61,16 @@
 	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
 	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
 	
-	$ie6s="";
-	$ie6e="";
-	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-	{
-		$ie6s="<pre>";
-		$ie6e="</pre>";
-	}
+  
+	
 	$sinput=str_replace("<","&lt;",$row->sample_input);
   $sinput=str_replace(">","&gt;",$sinput);
 	$soutput=str_replace("<","&lt;",$row->sample_output);
   $soutput=str_replace(">","&gt;",$soutput);
 	echo "<h2>$MSG_Sample_Input</h2>
-			<div class=content><span class=sampledata>".$ie6s.($sinput).$ie6e."</span></div>";
+			<pre class=content><span class=sampledata>".($sinput)."</span></pre>";
 	echo "<h2>$MSG_Sample_Output</h2>
-			<div class=content><span class=sampledata>".$ie6s.($soutput).$ie6e."</span></div>";
+			<pre class=content><span class=sampledata>".($soutput)."</span></pre>";
 	if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";

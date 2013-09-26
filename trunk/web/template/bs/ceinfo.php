@@ -8,7 +8,7 @@
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
 <div id=main>
-	
+ <div id='source'></div>
 <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo?></pre>
 <div id='errexp'>Explain:</div>
 
@@ -119,6 +119,11 @@
  </script>
 <div id=foot>
 	<?php require_once("oj-footer.php");?>
+<script src=include/jquery-latest.js></script>
+<script>
+ $("#source").load("showsource.php?id=<?php echo $id?> #main");
+
+</script>
 
 </div><!--end foot-->
 </div><!--end main-->

@@ -1910,8 +1910,8 @@ int main(int argc, char** argv) {
 
         Compile_OK = compile(lang);
         if (Compile_OK != 0) {
-                update_solution(solution_id, OJ_CE, 0, 0, 0,0, 0.0);
                 addceinfo(solution_id);
+                update_solution(solution_id, OJ_CE, 0, 0, 0,0, 0.0);
                 update_user(user_id);
                 update_problem(p_id);
                 if(!http_judge)

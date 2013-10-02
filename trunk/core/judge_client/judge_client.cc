@@ -2091,6 +2091,6 @@ int main(int argc, char** argv) {
         if(record_call){
 			print_call_array();		
 		}
-
+        closedir(dp);
         return 0;
 }

@@ -5,6 +5,9 @@
 
 Based on [http://www.colinux.org/ CoLinux], with Ubuntu12.04.
 
+Tested under WindowsXP.
+
+Win7/8 may NOT working.
 
 = Details =
 

@@ -67,6 +67,9 @@ CPU时间、文件大小等类似。
 manpage:man 2 setrlimit
 
 === java policy ===
+Java有原生的安全机制，用一个java.policy文件定义黑白名单。
+hustoj用的这个文件在/home/etc/judge0.policy
+
 搜索关键词：java.policy
 
 

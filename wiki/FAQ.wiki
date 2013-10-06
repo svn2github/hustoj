@@ -12,6 +12,10 @@ When people asked question, we put the answer here
  * HUSTOJ是如何取得程序运行的内存、时间参数，如何避免恶意代码损坏系统的？
  请移步[ojback]  
 
+ * Running&Judging stucking
+
+Running & Judging stucked has many posible reasons. check the ownership of directories and files: /home/judge/etc/judge.conf /home/judge/run0 /home/judge/data or give more details 
+
  * /bin/ld: cannot find -lm /bin/ld: cannot find -lc collect2: error: ld returned 1 exit status 
    安装glibc-static库
 

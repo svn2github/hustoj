@@ -7,13 +7,16 @@
 Linux在每次给进程分配新的内存时，会触发"页错误"，并进行计数。这个计数可以用wait的返回值struct rusage & ruse中的.ru_minflt字段读取到，页的大小可以用getpagesize得到，通常为4k,因此内存通常为4k的整数倍。
 相关代码在get_page_fault_mem函数中。
 因为Linux的内存写时分配计数，用这种方式计算的内存不包含未经写入的内存，因此更加宽松，在早期版本中均使用这个方式，在最新代码中只对Java使用这种方式。
+
 搜索关键词：wait rusage
+
 manpage:man 2 wait
 
 2、proc文件系统
 文件系统中的/proc目录不是放置在磁盘中的实际文件，而是整个系统运行状态的文件形式的接口。其中/proc/数字/目录下放置着相对应进程号的进程信息。在get_proc_status函数中，读取其中的内容可以得到称之为VmSize的内存信息。这个大小是进程试图获取的内存，不管是否真的写入使用，因此比页错误方式更严格，可以限制c语言使用者随意申请超大数组的行为。目前Java以外的语言都使用这种方式计算内存。
 
 搜索关键词：proc文件系统
+
 manpage:man 5 proc
 
 
@@ -22,6 +25,7 @@ manpage:man 5 proc
 时间的精度跟Linux内核设定的tick大小有关，通常最小单位4ms。
 
 谷歌百度关键词: linux HZ Tick Jiffies 
+
 manpage: tickadj [http://linux.die.net/man/8/tickadj]
 
 相关代码在约1692行
@@ -36,9 +40,11 @@ usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 === chroot ===
 所有用户程序被放置在runX目录下运行，并进行chroot.
 细心的用户会发现Java没有做chroot，不是不能做，而是考虑到java已经有policy机制，并且jvm的大小太大，平衡考虑没有chroot。
+
 manpage:man 8 chroot
 === rlimit ===
 再调用用户程序覆盖进程前，先用setrlimit设定最大内存限制，为了不致用户争议，通常会允许多给一些最后再判MLE。
+
 manpage:man 2 setrlimit
 
 === java policy ===

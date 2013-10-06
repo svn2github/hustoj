@@ -42,6 +42,18 @@ usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 细心的用户会发现Java没有做chroot，不是不能做，而是考虑到java已经有policy机制，并且jvm的大小太大，平衡考虑没有chroot。
 
 manpage:man 8 chroot
+
+=== setuid ===
+setuid setgid setresuid等函数可以切换为judge用户的身份，通过身份限制其权限。
+
+因为单个用户进程数量限制，setuid可能失败，因此需要检查返回值。
+
+{{{
+while(setgid(1536)!=0) sleep(1);
+while(setuid(1536)!=0) sleep(1);
+while(setresuid(1536, 1536, 1536)!=0) sleep(1);
+}}}
+
 === rlimit ===
 再调用用户程序覆盖进程前，先用setrlimit设定最大内存限制，为了不致用户争议，通常会允许多给一些最后再判MLE。
 CPU时间、文件大小等类似。

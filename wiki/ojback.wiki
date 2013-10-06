@@ -40,6 +40,7 @@ usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 === chroot ===
 所有用户程序被放置在runX目录下运行，并进行chroot.
 细心的用户会发现Java没有做chroot，不是不能做，而是考虑到java已经有policy机制，并且jvm的大小太大，平衡考虑没有chroot。
+有很多copy_XXX_runtime函数，他们的用途是给chroot环境准备必须的运行库和程序。
 
 manpage:man 8 chroot
 

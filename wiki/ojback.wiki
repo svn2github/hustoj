@@ -44,6 +44,7 @@ usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
 manpage:man 8 chroot
 === rlimit ===
 再调用用户程序覆盖进程前，先用setrlimit设定最大内存限制，为了不致用户争议，通常会允许多给一些最后再判MLE。
+CPU时间、文件大小等类似。
 
 manpage:man 2 setrlimit
 

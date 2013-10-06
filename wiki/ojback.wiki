@@ -53,6 +53,11 @@ while(setgid(1536)!=0) sleep(1);
 while(setuid(1536)!=0) sleep(1);
 while(setresuid(1536, 1536, 1536)!=0) sleep(1);
 }}}
+同时使用
+{{{
+iptables -A OUTPUT -m owner --uid-owner judge -j DROP
+}}}
+可以限制网络通信，避免可能的信息泄露。
 
 === rlimit ===
 再调用用户程序覆盖进程前，先用setrlimit设定最大内存限制，为了不致用户争议，通常会允许多给一些最后再判MLE。

@@ -50,7 +50,8 @@
 	  if(isset($_SESSION['administrator'])){
       require_once("include/set_get_key.php");
       ?>
-      [<a href=admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?> >Edit</a>]
+      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
       <?php
 
     }
@@ -89,9 +90,10 @@
 	
 	if(isset($_SESSION['administrator'])){
       require_once("include/set_get_key.php");
-      ?>
-      [<a href=admin/problem_edit.php?id=<?php echo $row->problem_id?>&getkey=<?php echo $_SESSION['getkey']?> >Edit</a>]
-  <?php
+  ?>
+     [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+     <?php
   }	
   echo "</center>";
 	?>

@@ -77,8 +77,10 @@ class online{
          if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
 
                     $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                    
+                    $tmp_ip=explode(',',$REMOTE_ADDR);
 
-                    $this->ip =$REMOTE_ADDR;// $tmp_ip[0];
+                    $this->ip =$tmp_ip[0];
 
         }
 

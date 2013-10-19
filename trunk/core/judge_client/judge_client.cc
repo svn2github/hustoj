@@ -1794,7 +1794,18 @@ int get_test_file(char* work_dir,int p_id){
                 sscanf(filename,"%s",filename);
                 sprintf(localfile,"%s/data/%d/%s",oj_home,p_id,filename);
                 if(DEBUG) printf("localfile[%s]\n",localfile);
-                if(access(localfile,0)==-1){    
+                
+                  const char * check_file_cmd=" wget --post-data=\"gettestdatadate=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O -  \"%s/admin/problem_judge.php\"";
+                FILE * rcop=read_cmd_output(check_file_cmd,p_id,filename,http_baseurl);        
+                time_t remote_date,local_date;
+                fscanf(rcop,"%ld",&remote_date);
+                fclose(rcop);
+                struct stat fst;
+                stat(localfile,&fst);
+                local_date=fst.st_mtime;
+                
+                if(access(localfile,0)==-1||local_date<remote_date){    
+                
                         if(strcmp(filename,"spj")==0) continue;
                         execute_cmd("mkdir -p %s/data/%d",oj_home,p_id);
                         const char * cmd2=" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s/admin/problem_judge.php\"";

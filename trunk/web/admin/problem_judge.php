@@ -199,6 +199,14 @@ if(isset($_POST['update_solution'])){
           	echo file_get_contents($OJ_DATA.'/'.$file);
         }
            
+}
+else if(isset($_POST['gettestdatadate'])){
+	$file=$_POST['filename'];
+        
+		
+    echo filemtime($OJ_DATA.'/'.$file);
+        
+           
 }else{
 ?>
 

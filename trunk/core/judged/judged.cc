@@ -147,7 +147,7 @@ void init_mysql_conf() {
 	db_name[0]=0;
 	port_number=3306;
 	max_running=3;
-	sleep_time=3;
+	sleep_time=1;
 	oj_tot=1;
 	oj_mod=0;
 	strcpy(oj_lang_set,"0,1,2,3,4,5,6,7,8,9,10");

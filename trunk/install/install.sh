@@ -16,7 +16,7 @@ sudo apt-get install make flex g++ libmysql++-dev php5 apache2 mysql-server php5
 sudo /etc/init.d/mysql start
 
 sudo yum -y update
-sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static
+sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static flex
 sudo /etc/init.d/mysqld start
 
 sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only

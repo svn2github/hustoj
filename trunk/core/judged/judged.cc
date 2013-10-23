@@ -423,7 +423,7 @@ int work(){
     if(DEBUG&&retcnt)write_log("<<%ddone!>>",retcnt);
     //free(ID);
     //free(jobs);
-        return retcnt;
+        return retcnt+workcnt;
 }
 
 int lockfile(int fd)

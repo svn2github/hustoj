@@ -191,7 +191,9 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         <?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
         document.getElementById("frmSolution").submit();
      }
-     function do_test_run(){
+     var  handler_interval;
+function do_test_run(){ 
+     if( handler_interval) window.clearInterval( handler_interval);
           var loader="<img width=18 src=image/loader.gif>";
           var tb=window.document.getElementById('result');
           tb.innerHTML=loader;
@@ -206,9 +208,9 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         document.getElementById("TestRun").disabled=true;
         document.getElementById("Submit").disabled=true;
         count=20;
-        window.setTimeout("resume();",1000);
+         handler_interval= window.setTimeout("resume();",1000);
        
-     }
+}
      
   function resume(){
   	count--;
@@ -219,7 +221,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
   		t.disabled=false; 
                 s.value="<?php echo $MSG_SUBMIT?>";
         	t.value="<?php echo $MSG_TR?>";
-                window.cleanTimeout();
+                if( handler_interval) window.clearInterval( handler_interval);
         }else{
         	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
         	t.value="<?php echo $MSG_TR?>("+count+")";

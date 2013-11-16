@@ -153,11 +153,14 @@ $view_recommand=Array();
 if(isset($_SESSION['user_id'])&&isset($_GET['id'])){
   $id=intval($_GET['id']);
 	$user_id=mysql_real_escape_string($_SESSION['user_id']);
-	$sql="select problem_id,count(1) people from solution where 
-				problem_id!=$id and result=4 
-				and user_id in(select distinct user_id from solution where result=4 and problem_id=$id ) 
-				and problem_id not in (select distinct problem_id from solution where user_id='$user_id') 
-				group by `problem_id` order by people desc limit 12";
+	$sql="select problem_id,count(1) people from  (
+                                SELECT * FROM solution ORDER BY solution_id DESC LIMIT 10000 )solution
+                                 where
+                                problem_id!=$id and result=4
+                                and user_id in(select distinct user_id from solution where result=4 and problem_id=$id )
+                                and problem_id not in (select distinct problem_id from solution where user_id='$user_id' )
+                                group by `problem_id` order by people desc limit 12";
+
 	$result=mysql_query($sql);
 	$i=0;
 	while($row=mysql_fetch_object($result)){

@@ -29,11 +29,12 @@ CREATE TABLE  `contest_problem` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE  `loginlog` (
+CREATE TABLE `loginlog` (
   `user_id` varchar(48) NOT NULL DEFAULT '',
   `password` varchar(40) DEFAULT NULL,
   `ip` varchar(100) DEFAULT NULL,
-  `time` datetime DEFAULT NULL
+  `time` datetime DEFAULT NULL,
+  KEY `user_log_index` (`user_id`,`time`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `mail` (

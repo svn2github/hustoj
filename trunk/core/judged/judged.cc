@@ -503,7 +503,7 @@ int main(int argc, char** argv){
 	signal(SIGKILL,call_for_exit);
 	signal(SIGTERM,call_for_exit);
 	int j=1;
-	while (!STOP){			// start to run
+	while (1){			// start to run
 	    while(j&&(http_judge||!init_mysql())){ 
 	
 	       

@@ -72,3 +72,8 @@ zhblue@nmc:/home/judge/data/1000$ echo $?
 }}}
 
 *remember to set SpecialJudge: Y in problem_edit *
+
+another sample of using spj with diff to get all PE to AC
+{{{
+diff -q -B --ignore-all-space --strip-trailing-cr $2 $3
+}}}

@@ -224,7 +224,7 @@ int executesql(const char * sql){
 		conn=NULL;
 		return 1;
 	}else
-	    return 0;
+	  return 0;
 }
 
 
@@ -238,13 +238,14 @@ int init_mysql(){
 		if(!mysql_real_connect(conn,host_name,user_name,password,
 				db_name,port_number,0,0)){
 			if(DEBUG)write_log("%s", mysql_error(conn));
-			sleep(20);
+			sleep(2);
 			return 1;
-		}
-	}
-	if (executesql("set names utf8"))
-        return 1;
-	return 0;
+		}else{
+      return 0;
+    }
+	}else{
+	    return executesql("set names utf8");
+  }
 }
 FILE * read_cmd_output(const char * fmt, ...) {
 	char cmd[BUFFER_SIZE];

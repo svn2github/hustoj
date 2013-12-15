@@ -1407,6 +1407,12 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
         int comp_res = OJ_AC;
         if (DEBUG)
                 execute_cmd("cat %s/error.out", work_dir);
+        comp_res = execute_cmd("grep 'Exception'  %s/error.out", work_dir);
+        if (!comp_res) {
+                printf("Exception reported\n");
+                ACflg = OJ_RE;
+        }        
+                
         comp_res = execute_cmd("grep 'java.lang.OutOfMemoryError'  %s/error.out",
                         work_dir);
 
@@ -1424,7 +1430,6 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
                 topmemory = mem_lmt * STD_MB;
         }
         comp_res = execute_cmd("grep 'Could not create'  %s/error.out", work_dir);
-
         if (!comp_res) {
                 printf("jvm need more resource,tweak -Xmx(OJ_JAVA_BONUS) Settings");
                 ACflg = OJ_RE;
@@ -1509,7 +1514,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
                 ACflg = comp_res;
         }
         //jvm popup messages, if don't consider them will get miss-WrongAnswer
-        if (lang == 3 && ACflg != OJ_AC) {
+        if (lang == 3) {
                 comp_res = fix_java_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
         }
 }

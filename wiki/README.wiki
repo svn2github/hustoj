@@ -16,7 +16,7 @@ redhat/centos用户:sudo yum update;sudo yum install subversion.i386
 svn checkout http://hustoj.googlecode.com/svn/trunk/install hustoj
 cd hustoj
 编辑install.sh和web/include/db_info.inc.php，设定数据库用户名密码后
-sudo ./install.sh
+sudo ./install-interactive.sh
 }}}
 自动安装使用install.sh，运行前阅读脚本头部说明设置数据库帐号，使用root运行。
 

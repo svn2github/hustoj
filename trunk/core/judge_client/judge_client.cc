@@ -114,7 +114,7 @@ static char record_call=0;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[12][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas" };
+static char lang_ext[13][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas","scm" };
 //static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -207,7 +207,11 @@ void init_syscalls_limits(int lang) {
     }else if (lang==11){//free basic
 	    for (i = 0; LANG_BASICC[i]; i++)
                     call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
+    }else if (lang==12){//free basic
+	    for (i = 0; LANG_SC[i]; i++)
+                    call_counter[LANG_SV[i]] = LANG_SC[i];
     }
+
 
     
 
@@ -1217,6 +1221,26 @@ void copy_ruby_runtime(char * work_dir) {
         execute_cmd("cp /usr/bin/ruby* %s/", work_dir);
 
 }
+void copy_guile_runtime(char * work_dir) {
+
+        copy_shell_runtime(work_dir);
+        execute_cmd("mkdir -p %s/proc",work_dir);
+        execute_cmd("mount -o bind /proc %s/proc", work_dir);
+        execute_cmd("mkdir -p %s/usr/lib", work_dir);
+        execute_cmd("mkdir -p %s/usr/share", work_dir);
+        execute_cmd("cp -a /usr/share/guile %s/usr/share/", work_dir);
+        execute_cmd("cp /usr/lib/libguile* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/libgc* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/i386-linux-gnu/libffi* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/i386-linux-gnu/libunistring* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libgmp* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/libgmp* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
+        execute_cmd("cp /usr/bin/guile* %s/", work_dir);
+
+}
+
 void copy_python_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
@@ -1337,6 +1361,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         // proc limit
         switch(lang){
     case 3:  //java
+    case 12:
         LIM.rlim_cur=LIM.rlim_max=50;
         break;
     case 5: //bash
@@ -1397,7 +1422,11 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 break;
         case 9: //Mono C#
                 execl("/mono","/mono","--debug","Main.exe",(char *)NULL);
-        break;
+                break;
+        case 12: //guile
+                execl("/guile","/guile","Main.scm",(char *)NULL);
+                break;
+
         }
         //sleep(1);
         exit(0);
@@ -1700,10 +1729,10 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
         //clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
+        execute_cmd("umount %s/proc", work_dir);
         if (DEBUG) {
                 execute_cmd("mv %s/* %slog/", work_dir, work_dir);
         } else {
-                execute_cmd("umount %s/proc", work_dir);
                 execute_cmd("rm -Rf %s/*", work_dir);
 
         }
@@ -1986,11 +2015,13 @@ int main(int argc, char** argv) {
                 copy_objc_runtime(work_dir);
         if (lang == 11)
                 copy_freebasic_runtime(work_dir);
+        if (lang == 12)
+                copy_guile_runtime(work_dir);
         // read files and run
         // read files and run
         // read files and run
         double pass_rate=0.0;
-        int num_of_test=0;
+        int num_of_test=1;
         int finalACflg=ACflg;
         if(p_id==0){  //custom input running
 				printf("running a custom input...\n");

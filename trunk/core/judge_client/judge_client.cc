@@ -2021,7 +2021,7 @@ int main(int argc, char** argv) {
         // read files and run
         // read files and run
         double pass_rate=0.0;
-        int num_of_test=1;
+        int num_of_test=0;
         int finalACflg=ACflg;
         if(p_id==0){  //custom input running
 				printf("running a custom input...\n");

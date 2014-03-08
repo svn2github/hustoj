@@ -1731,7 +1731,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
         //clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
-        execute_cmd("umount %s/proc", work_dir);
+        execute_cmd("/bin/umount %s/proc", work_dir);
         if (DEBUG) {
                 execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
         } else {

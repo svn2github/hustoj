@@ -1733,9 +1733,9 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 void clean_workdir(char * work_dir ) {
         execute_cmd("umount %s/proc", work_dir);
         if (DEBUG) {
-                execute_cmd("mv %s/* %slog/", work_dir, work_dir);
+                execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
         } else {
-                execute_cmd("rm -Rf %s/*", work_dir);
+                execute_cmd("/bin/rm -Rf %s/*", work_dir);
 
         }
 
@@ -1771,11 +1771,11 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
         //char cmd[BUFFER_SIZE];
         sprintf(src_pth, "Main.%s", lang_ext[lang]);
 
-        int sim = execute_cmd("sim.sh %s %d", src_pth, pid);
+        int sim = execute_cmd("/usr/bin/sim.sh %s %d", src_pth, pid);
         if (!sim) {
                 execute_cmd("/bin/mkdir ../data/%d/ac/", pid);
 
-                execute_cmd("mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
+                execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
                                 lang_ext[lang]);
                 //c cpp will
                 if(lang==0)execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
@@ -1801,7 +1801,7 @@ void mk_shm_workdir(char * work_dir){
         char shm_path[BUFFER_SIZE];
         sprintf(shm_path,"/dev/shm/hustoj/%s",work_dir);
         execute_cmd("/bin/mkdir -p %s",shm_path);
-        execute_cmd("rm -rf %s",work_dir);
+        execute_cmd("/bin/rm -rf %s",work_dir);
         execute_cmd("/bin/ln -s %s %s/",shm_path,oj_home);
   execute_cmd("/bin/chown judge %s ",shm_path);
   execute_cmd("chmod 755 %s ",shm_path);

@@ -8,7 +8,7 @@ This OJ is used on these site:
 
 = Details =
 
-发源地：http://acm.hust.edu.cn/thx/ 华中科技大学
+发源地：http://acm.hust.edu.cn/ 华中科技大学
 
   * http://acm.ajou.ac.kr/JudgeOnline/ 韩国京畿道大学
   * http://www.acmicpc.net/JudgeOnline  韩国西江大学

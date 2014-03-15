@@ -207,9 +207,6 @@ void init_syscalls_limits(int lang) {
     }else if (lang==11){//free basic
 	    for (i = 0; LANG_BASICC[i]; i++)
                     call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
-    }else if (lang==12){//free basic
-	    for (i = 0; LANG_SC[i]; i++)
-                    call_counter[LANG_SV[i]] = LANG_SC[i];
     }
 
 

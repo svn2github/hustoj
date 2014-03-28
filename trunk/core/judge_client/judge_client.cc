@@ -1265,6 +1265,7 @@ void copy_php_runtime(char * work_dir) {
         execute_cmd("/bin/cp /usr/lib/*/libkrb5* %s/usr/lib/", work_dir);
         execute_cmd("/bin/cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
         execute_cmd("/bin/cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/", work_dir);
         execute_cmd("/bin/cp /usr/bin/php* %s/", work_dir);
         execute_cmd("chmod +rx %s/Main.php", work_dir);
 

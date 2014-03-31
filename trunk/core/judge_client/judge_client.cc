@@ -1322,18 +1322,7 @@ void copy_mono_runtime(char * work_dir) {
 
 
 }
-void copy_guile_runtime(char * work_dir) {
 
-        copy_shell_runtime(work_dir);
-        execute_cmd("mkdir -p %s/usr/lib", work_dir);
-        execute_cmd("mkdir -p %s/usr/share", work_dir);
-        execute_cmd("cp -a /usr/share/guile %s/usr/share/", work_dir);
-        execute_cmd("cp /usr/lib/libguile* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libgmp* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/bin/guile* %s/", work_dir);
-
-}
 
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 int & mem_lmt) {

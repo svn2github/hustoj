@@ -22,6 +22,11 @@
 	}
 	
 	session_start();
+   header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pramga: no-cache");
+
 	
 	/* 输出图片类型，字符长度，类型 */
 	$imgtype = 'gif';

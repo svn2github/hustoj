@@ -810,7 +810,7 @@ int compile(int lang) {
         const char * CP_X[] = { "g++", "Main.cc", "-o", "Main","-fno-asm", "-Wall",
                         "-lm", "--static","-std=c++0x", "-DONLINE_JUDGE", NULL };
         const char * CP_P[] = { "fpc", "Main.pas", "-O2","-Co", "-Ct","-Ci", NULL };
-//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",NULL };
+//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
 
         const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
         const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };

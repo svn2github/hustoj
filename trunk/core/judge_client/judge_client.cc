@@ -820,14 +820,16 @@ int compile(int lang) {
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
     const char * CP_OC[]={"gcc","-o","Main","Main.m","-fconstant-string-class=NSConstantString","-I","/usr/include/GNUstep/","-L","/usr/lib/GNUstep/Libraries/","-lobjc","-lgnustep-base",NULL};
     const char * CP_BS[]={"fbc","Main.bas",NULL}; 
-    char javac_buf[4][16];
+    char javac_buf[6][16];
     char *CP_J[5];
     for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
         sprintf(CP_J[0],"javac");
         sprintf(CP_J[1],"-J%s",java_xms);
         sprintf(CP_J[2],"-J%s",java_xmx);
-        sprintf(CP_J[3],"Main.java");
-        CP_J[4]=(char *)NULL;
+        sprintf(CP_J[3],"-encoding");
+         sprintf(CP_J[4],"UTF-8");
+         sprintf(CP_J[5],"Main.java");
+        CP_J[6]=(char *)NULL;
     
         pid = fork();
         if (pid == 0) {

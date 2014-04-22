@@ -4,15 +4,15 @@ $OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
-	$now=strftime("%Y-%m-%d %H:%M",time());
+	$now=time();//修改的第一个地方
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 else $ucid="";
 require_once("./include/db_info.inc.php");
-
+ 
 	if(isset($OJ_LANG)){
 		require_once("./lang/$OJ_LANG.php");
 	}
-
+ 
 $pr_flag=false;
 $co_flag=false;
 if (isset($_GET['id'])){
@@ -26,15 +26,15 @@ if (isset($_GET['id'])){
                                 ";
 	else
 		$sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
-
+ 
 	$pr_flag=true;
 }else if (isset($_GET['cid']) && isset($_GET['pid'])){
 	// contest
 	$cid=intval($_GET['cid']);
 	$pid=intval($_GET['pid']);
-
+	
 	if (!isset($_SESSION['administrator']))
-		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<'$now'";
+		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid ";
 	else
 		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
 	$result=mysql_query($sql);
@@ -49,7 +49,15 @@ if (isset($_GET['id'])){
     $ok_cnt=$rows_cnt==1;		
 	$langmask=$row[0];
 	mysql_free_result($result);
-	if ($ok_cnt!=1){
+	
+	//修改的第二个地方
+	$sql="SELECT `start_time` FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid ";
+	$result=mysql_query($sql);
+	$row2=mysql_fetch_object($result);
+	$start_time = strtotime($row2->start_time);
+	mysql_free_result($result);
+	
+	if (!isset($_SESSION['administrator']) && ($now<$start_time)){
 		// not started
 		$view_errors=  "No such Contest!";
 	
@@ -75,7 +83,7 @@ if (isset($_GET['id'])){
 	exit(0);
 }
 $result=mysql_query($sql) or die(mysql_error());
-
+ 
 	
 if (mysql_num_rows($result)!=1){
    $view_errors="";
@@ -95,11 +103,11 @@ if (mysql_num_rows($result)!=1){
 				 
 				
 		}else{
-			$view_title= "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+			$view_title= "$MSG_NO_SUCH_PROBLEM!";
 			$view_errors.= "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 		}
    }else{
-		$view_title= "<title>$MSG_NO_SUCH_PROBLEM!</title>";
+		$view_title= "$MSG_NO_SUCH_PROBLEM!";
 		$view_errors.= "<h2>$MSG_NO_SUCH_PROBLEM!</h2>";
 	}
 	require("template/".$OJ_TEMPLATE."/error.php");
@@ -111,8 +119,7 @@ if (mysql_num_rows($result)!=1){
 	
 }
 mysql_free_result($result);
-
-
+ 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/problem.php");
 /////////////////////////Common foot

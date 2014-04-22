@@ -1411,7 +1411,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         
                 execl("/usr/bin/java", "/usr/bin/java", java_xms,java_xmx,
                                 "-Djava.security.manager",
-                                "-Djava.security.policy=../etc/java0.policy", "Main", (char *)NULL);
+                                "-Djava.security.policy=./java.policy", "Main", (char *)NULL);
                 break;
         case 4:
                 //system("/ruby Main.rb<data.in");
@@ -1944,7 +1944,7 @@ int main(int argc, char** argv) {
                 time_lmt = time_lmt + java_time_bonus;
                 mem_lmt = mem_lmt + java_memory_bonus;
                 // copy java.policy
-                execute_cmd( "/bin/cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
+                execute_cmd( "/bin/cp %s/etc/java0.policy %s/java.policy", oj_home, work_dir);
 
         }
 

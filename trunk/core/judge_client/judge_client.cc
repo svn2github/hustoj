@@ -2134,7 +2134,7 @@ int main(int argc, char** argv) {
         }
  if((oi_mode&&finalACflg==OJ_WA)||ACflg==OJ_WA){ 
 	if(DEBUG) printf("add diff info of %d..... \n",solution_id);
-	adddiffinfo(solution_id);
+	  if(!isspj) adddiffinfo(solution_id);
  }
         update_user(user_id);
         update_problem(p_id);

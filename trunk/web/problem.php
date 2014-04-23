@@ -4,7 +4,7 @@ $OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
-	$now=time();//修改的第一个地方
+  $now=strftime("%Y-%m-%d %H:%M",time());
 if (isset($_GET['cid'])) $ucid="&cid=".intval($_GET['cid']);
 else $ucid="";
 require_once("./include/db_info.inc.php");
@@ -34,7 +34,7 @@ if (isset($_GET['id'])){
 	$pid=intval($_GET['pid']);
 	
 	if (!isset($_SESSION['administrator']))
-		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid ";
+		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid and AND `start_time`<'$now'";
 	else
 		$sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
 	$result=mysql_query($sql);
@@ -57,7 +57,7 @@ if (isset($_GET['id'])){
 	$start_time = strtotime($row2->start_time);
 	mysql_free_result($result);
 	
-	if (!isset($_SESSION['administrator']) && ($now<$start_time)){
+	if (!isset($_SESSION['administrator']) && (time()<$start_time)){
 		// not started
 		$view_errors=  "No such Contest!";
 	

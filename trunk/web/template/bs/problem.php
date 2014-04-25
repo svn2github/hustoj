@@ -68,11 +68,15 @@
   $sinput=str_replace(">","&gt;",$sinput);
 	$soutput=str_replace("<","&lt;",$row->sample_output);
   $soutput=str_replace(">","&gt;",$soutput);
-	echo "<h2>$MSG_Sample_Input</h2>
+  if($sinput) {
+      echo "<h2>$MSG_Sample_Input</h2>
 			<pre class=content><span class=sampledata>".($sinput)."</span></pre>";
+  }
+  if($soutput){
 	echo "<h2>$MSG_Sample_Output</h2>
 			<pre class=content><span class=sampledata>".($soutput)."</span></pre>";
-	if ($pr_flag||true) 
+  }
+  if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";
 	if ($pr_flag) 

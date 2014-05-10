@@ -175,41 +175,41 @@ void init_syscalls_limits(int lang) {
                 }
         }else if (lang <= 1) { // C & C++
                 for (i = 0; LANG_CC[i]; i++) {
-                        call_counter[LANG_CV[i]] = LANG_CC[i];
+                        call_counter[LANG_CV[i]] = HOJ_MAX_LIMIT;
                 }
         } else if (lang == 2) { // Pascal
                 for (i = 0; LANG_PC[i]; i++)
-                        call_counter[LANG_PV[i]] = LANG_PC[i];
+                        call_counter[LANG_PV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 3) { // Java
                 for (i = 0; LANG_JC[i]; i++)
-                        call_counter[LANG_JV[i]] = LANG_JC[i];
+                        call_counter[LANG_JV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 4) { // Ruby
                 for (i = 0; LANG_RC[i]; i++)
-                        call_counter[LANG_RV[i]] = LANG_RC[i];
+                        call_counter[LANG_RV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 5) { // Bash
                 for (i = 0; LANG_BC[i]; i++)
-                        call_counter[LANG_BV[i]] = LANG_BC[i];
+                        call_counter[LANG_BV[i]] = HOJ_MAX_LIMIT;
         }else if (lang == 6) { // Python
                 for (i = 0; LANG_YC[i]; i++)
-                        call_counter[LANG_YV[i]] = LANG_YC[i];
+                        call_counter[LANG_YV[i]] = HOJ_MAX_LIMIT;
         }else if (lang == 7) { // php
             for (i = 0; LANG_PHC[i]; i++)
-                    call_counter[LANG_PHV[i]] = LANG_PHC[i];
+                    call_counter[LANG_PHV[i]] = HOJ_MAX_LIMIT;
     }else if (lang == 8) { // perl
             for (i = 0; LANG_PLC[i]; i++)
-                    call_counter[LANG_PLV[i]] = LANG_PLC[i];
+                    call_counter[LANG_PLV[i]] = HOJ_MAX_LIMIT;
     }else if (lang == 9) { // mono c#
             for (i = 0; LANG_CSC[i]; i++)
-                    call_counter[LANG_CSV[i]] = LANG_CSC[i];
+                    call_counter[LANG_CSV[i]] = HOJ_MAX_LIMIT;
     }else if (lang==10){//objective c
 	    for (i = 0; LANG_OC[i]; i++)
-                    call_counter[LANG_OV[i]] = LANG_OC[i];
+                    call_counter[LANG_OV[i]] = HOJ_MAX_LIMIT;
     }else if (lang==11){//free basic
 	    for (i = 0; LANG_BASICC[i]; i++)
-                    call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
+                    call_counter[LANG_BASICV[i]] = HOJ_MAX_LIMIT;
     }else if (lang==12){//scheme guile
            for (i = 0; LANG_SC[i]; i++)
-                    call_counter[LANG_SV[i]] = LANG_SC[i];
+                    call_counter[LANG_SV[i]] = HOJ_MAX_LIMIT;
     }
 
 

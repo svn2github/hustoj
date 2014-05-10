@@ -1716,7 +1716,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                 if (!record_call&&call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
                         ACflg = OJ_RE;
                         char error[BUFFER_SIZE];
-                        sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n",
+                        sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,and recompile judge_client",
                                         solution_id, reg.REG_SYSCALL);
                         write_log(error);
                         print_runtimeerror(error);

@@ -72,6 +72,18 @@ class online{
 	function __construct()
 	{
 		$this->ip = mysql_real_escape_string($_SERVER['REMOTE_ADDR']);
+      
+      
+         if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
+
+                    $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                    
+                    $tmp_ip=explode(',',$REMOTE_ADDR);
+
+                    $this->ip =$tmp_ip[0];
+
+        }
+
 		$this->ua = mysql_real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 		$this->uri = mysql_real_escape_string($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){

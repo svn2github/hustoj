@@ -1,4 +1,10 @@
 <?php require("admin-header.php");
+
+        if(isset($OJ_LANG)){
+                require_once("../lang/$OJ_LANG.php");
+        }
+
+
 require_once("../include/set_get_key.php");
 if (!(isset($_SESSION['administrator'])
                 ||isset($_SESSION['contest_creator'])
@@ -7,7 +13,8 @@ if (!(isset($_SESSION['administrator'])
         echo "<a href='../loginpage.php'>Please Login First!</a>";
         exit(1);
 }
-
+$keyword=$_GET['keyword'];
+$keyword=mysql_real_escape_string($keyword);
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=50;
 $result=mysql_query($sql);
@@ -32,8 +39,13 @@ for ($i=1;$i<=$cnt;$i++){
 
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
 //echo $sql;
+if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
 $result=mysql_query($sql) or die(mysql_error());
-echo "<center><table width=90% border=1>";
+?>
+<form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
+
+<?php
+echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "<tr><td>PID<td>Title<td>Date";
@@ -70,5 +82,3 @@ echo "</tr></form>";
 echo "</table></center>";
 require("../oj-footer.php");
 ?>
-									 
-									 

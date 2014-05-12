@@ -33,7 +33,7 @@ $MSG_TEST_RUN="Test Running Done";
    
   $MSG_Runtime_Click="Runtime Error(Click)";
 	$MSG_Compile_Click="Compile Error(Click)";
-	 
+	$MSG_Click_Detail="Click To View Detail";
 	$MSG_Compile_OK="Compile OK";
 	$MSG_RUNID="RunID";
 	$MSG_USER="User";
@@ -44,6 +44,9 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_LANG="Language";
 	$MSG_CODE_LENGTH="Code Length";
 	$MSG_SUBMIT_TIME="Submit Time";
+   $MSG_Manual="Manual Judge";
+   $MSG_OK="OK";
+   $MSG_Explain="Type reason or explaination";
 	//problemstatistics.php
 	$MSG_PD="PD";
 	$MSG_PR="PR";

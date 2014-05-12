@@ -1,4 +1,3 @@
-
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -161,7 +160,7 @@ function auto_refresh(){
         for(var  i=1;i<rows.length;i++){
                 var cell=rows[i].cells[3].innerHTML;
                 var sid=rows[i].cells[0].innerHTML;
-                if(cell.indexOf('等待')!=-1||cell.indexOf('编译中')!=-1||cell.indexOf('运行并评判')!=-1){
+          if(cell.indexOf(judge_result[0])!=-1||cell.indexOf(judge_result[2])!=-1||cell.indexOf(judge_result[3])!=-1){
         //alert(sid);
                 fresh_result(sid);
                 }

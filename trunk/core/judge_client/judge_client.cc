@@ -114,7 +114,7 @@ static char record_call=0;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[12][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas" };
+static char lang_ext[13][8] = { "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas","scm" };
 //static char buf[BUFFER_SIZE];
 
 long get_file_size(const char * filename) {
@@ -174,40 +174,44 @@ void init_syscalls_limits(int lang) {
                         call_counter[i] = 0;
                 }
         }else if (lang <= 1) { // C & C++
-                for (i = 0; LANG_CC[i]; i++) {
-                        call_counter[LANG_CV[i]] = LANG_CC[i];
+                for (i = 0; LANG_CV[i]; i++) {
+                        call_counter[LANG_CV[i]] = HOJ_MAX_LIMIT;
                 }
         } else if (lang == 2) { // Pascal
-                for (i = 0; LANG_PC[i]; i++)
-                        call_counter[LANG_PV[i]] = LANG_PC[i];
+                for (i = 0; LANG_PV[i]; i++)
+                        call_counter[LANG_PV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 3) { // Java
-                for (i = 0; LANG_JC[i]; i++)
-                        call_counter[LANG_JV[i]] = LANG_JC[i];
+                for (i = 0; LANG_JV[i]; i++)
+                        call_counter[LANG_JV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 4) { // Ruby
-                for (i = 0; LANG_RC[i]; i++)
-                        call_counter[LANG_RV[i]] = LANG_RC[i];
+                for (i = 0; LANG_RV[i]; i++)
+                        call_counter[LANG_RV[i]] = HOJ_MAX_LIMIT;
         } else if (lang == 5) { // Bash
-                for (i = 0; LANG_BC[i]; i++)
-                        call_counter[LANG_BV[i]] = LANG_BC[i];
+                for (i = 0; LANG_BV[i]; i++)
+                        call_counter[LANG_BV[i]] = HOJ_MAX_LIMIT;
         }else if (lang == 6) { // Python
-                for (i = 0; LANG_YC[i]; i++)
-                        call_counter[LANG_YV[i]] = LANG_YC[i];
+                for (i = 0; LANG_YV[i]; i++)
+                        call_counter[LANG_YV[i]] = HOJ_MAX_LIMIT;
         }else if (lang == 7) { // php
-            for (i = 0; LANG_PHC[i]; i++)
-                    call_counter[LANG_PHV[i]] = LANG_PHC[i];
+            for (i = 0; LANG_PHV[i]; i++)
+                    call_counter[LANG_PHV[i]] = HOJ_MAX_LIMIT;
     }else if (lang == 8) { // perl
-            for (i = 0; LANG_PLC[i]; i++)
-                    call_counter[LANG_PLV[i]] = LANG_PLC[i];
+            for (i = 0; LANG_PLV[i]; i++)
+                    call_counter[LANG_PLV[i]] = HOJ_MAX_LIMIT;
     }else if (lang == 9) { // mono c#
-            for (i = 0; LANG_CSC[i]; i++)
-                    call_counter[LANG_CSV[i]] = LANG_CSC[i];
+            for (i = 0; LANG_CSV[i]; i++)
+                    call_counter[LANG_CSV[i]] = HOJ_MAX_LIMIT;
     }else if (lang==10){//objective c
-	    for (i = 0; LANG_OC[i]; i++)
-                    call_counter[LANG_OV[i]] = LANG_OC[i];
+	    for (i = 0; LANG_OV[i]; i++)
+                    call_counter[LANG_OV[i]] = HOJ_MAX_LIMIT;
     }else if (lang==11){//free basic
-	    for (i = 0; LANG_BASICC[i]; i++)
-                    call_counter[LANG_BASICV[i]] = LANG_BASICC[i];
+	    for (i = 0; LANG_BASICV[i]; i++)
+                    call_counter[LANG_BASICV[i]] = HOJ_MAX_LIMIT;
+    }else if (lang==12){//scheme guile
+           for (i = 0; LANG_SV[i]; i++)
+                    call_counter[LANG_SV[i]] = HOJ_MAX_LIMIT;
     }
+
 
     
 
@@ -801,12 +805,12 @@ void update_problem(int pid) {
 int compile(int lang) {
         int pid;
 
-        const char * CP_C[] = { "gcc", "Main.c", "-o", "Main","-Wall", "-lm",
+        const char * CP_C[] = { "gcc", "Main.c", "-o", "Main","-fno-asm","-Wall", "-lm",
                         "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
-        const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-Wall",
+        const char * CP_X[] = { "g++", "Main.cc", "-o", "Main","-fno-asm", "-Wall",
                         "-lm", "--static","-std=c++0x", "-DONLINE_JUDGE", NULL };
         const char * CP_P[] = { "fpc", "Main.pas", "-O2","-Co", "-Ct","-Ci", NULL };
-//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m", "Main.java",NULL };
+//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
 
         const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
         const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
@@ -816,22 +820,27 @@ int compile(int lang) {
     const char * CP_CS[] = { "gmcs","-warn:0", "Main.cs", NULL };
     const char * CP_OC[]={"gcc","-o","Main","Main.m","-fconstant-string-class=NSConstantString","-I","/usr/include/GNUstep/","-L","/usr/lib/GNUstep/Libraries/","-lobjc","-lgnustep-base",NULL};
     const char * CP_BS[]={"fbc","Main.bas",NULL}; 
-    char javac_buf[4][16];
-    char *CP_J[5];
-    for(int i=0;i<4;i++) CP_J[i]=javac_buf[i];
-        sprintf(CP_J[0],"javac");
-        sprintf(CP_J[1],"-J%s",java_xms);
-        sprintf(CP_J[2],"-J%s",java_xmx);
-        sprintf(CP_J[3],"Main.java");
-        CP_J[4]=(char *)NULL;
-    
+    char javac_buf[7][16];
+    char *CP_J[7];
+   
+    for(int i=0;i<7;i++) 
+        CP_J[i]=javac_buf[i];
+        
+    sprintf(CP_J[0],"javac");
+    sprintf(CP_J[1],"-J%s",java_xms);
+    sprintf(CP_J[2],"-J%s",java_xmx);
+    sprintf(CP_J[3],"-encoding");
+    sprintf(CP_J[4],"UTF-8");
+    sprintf(CP_J[5],"Main.java");
+    CP_J[6]=(char *)NULL;
+
         pid = fork();
         if (pid == 0) {
                 struct rlimit LIM;
-                LIM.rlim_max = 600;
-                LIM.rlim_cur = 600;
+                LIM.rlim_max = 60;
+                LIM.rlim_cur = 60;
                 setrlimit(RLIMIT_CPU, &LIM);
-
+                alarm(60);
                 LIM.rlim_max = 900 * STD_MB;
                 LIM.rlim_cur = 900 * STD_MB;
                 setrlimit(RLIMIT_FSIZE, &LIM);
@@ -1133,8 +1142,8 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
         strncpy(fname, filename, namelen);
         fname[namelen] = 0;
         sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-        execute_cmd("cp %s %s/data.in", infile, work_dir);
-        execute_cmd("cp %s/data/%d/*.dic %s/", oj_home, p_id,work_dir);
+        execute_cmd("/bin/cp %s %s/data.in", infile, work_dir);
+        execute_cmd("/bin/cp %s/data/%d/*.dic %s/", oj_home, p_id,work_dir);
 
         sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
         sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
@@ -1143,108 +1152,129 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 void copy_shell_runtime(char * work_dir) {
 
 
-        execute_cmd("mkdir %s/lib", work_dir);
-        execute_cmd("mkdir %s/lib64", work_dir);
-        execute_cmd("mkdir %s/bin", work_dir);
-        execute_cmd("cp /lib/* %s/lib/", work_dir);
-        execute_cmd("cp -a /lib/i386-linux-gnu %s/lib/", work_dir);
-        execute_cmd("cp -a /lib/x86_64-linux-gnu %s/lib/", work_dir);
-        execute_cmd("cp /lib64/* %s/lib64/", work_dir);
-        execute_cmd("cp -a /lib32 %s/", work_dir);
-        execute_cmd("cp /bin/busybox %s/bin/", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/sh", work_dir);
-        execute_cmd("cp /bin/bash %s/bin/bash", work_dir);
+        execute_cmd("/bin/mkdir %s/lib", work_dir);
+        execute_cmd("/bin/mkdir %s/lib64", work_dir);
+        execute_cmd("/bin/mkdir %s/bin", work_dir);
+        execute_cmd("/bin/cp /lib/* %s/lib/", work_dir);
+        execute_cmd("/bin/cp -a /lib/i386-linux-gnu %s/lib/", work_dir);
+        execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu %s/lib/", work_dir);
+        execute_cmd("/bin/cp /lib64/* %s/lib64/", work_dir);
+        execute_cmd("/bin/cp -a /lib32 %s/", work_dir);
+        execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/sh", work_dir);
+        execute_cmd("/bin/cp /bin/bash %s/bin/bash", work_dir);
 
 
 }
 void copy_objc_runtime(char * work_dir){
       copy_shell_runtime(work_dir);
-        execute_cmd("mkdir -p %s/proc",work_dir);
-        execute_cmd("mount -o bind /proc %s/proc", work_dir);
-	    execute_cmd("mkdir -p %s/lib/",work_dir);
-execute_cmd("cp -aL /lib/libdbus-1.so.3                          %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/libgcc_s.so.1                           %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/libgcrypt.so.11                         %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/libgpg-error.so.0                       %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/libz.so.1                               %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/libc.so.6                 %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/libdl.so.2                %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/libm.so.6                 %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/libnsl.so.1               %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/libpthread.so.0           %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /lib/tls/i686/cmov/librt.so.1                %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libavahi-client.so.3                %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libavahi-common.so.3                %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libdns_sd.so.1                      %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libffi.so.5                         %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libgnustep-base.so.1.19             %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libgnutls.so.26                     %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libobjc.so.2                        %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libtasn1.so.3                       %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libxml2.so.2                        %s/lib/ ", work_dir);   
-execute_cmd("cp -aL /usr/lib/libxslt.so.1                        %s/lib/ ", work_dir);    
+        execute_cmd("/bin/mkdir -p %s/proc",work_dir);
+        execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
+	    execute_cmd("/bin/mkdir -p %s/lib/",work_dir);
+execute_cmd("/bin/cp -aL /lib/libdbus-1.so.3                          %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/libgcc_s.so.1                           %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/libgcrypt.so.11                         %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/libgpg-error.so.0                       %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/libz.so.1                               %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/libc.so.6                 %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/libdl.so.2                %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/libm.so.6                 %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/libnsl.so.1               %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/libpthread.so.0           %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /lib/tls/i686/cmov/librt.so.1                %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libavahi-client.so.3                %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libavahi-common.so.3                %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libdns_sd.so.1                      %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libffi.so.5                         %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libgnustep-base.so.1.19             %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libgnutls.so.26                     %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libobjc.so.2                        %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libtasn1.so.3                       %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libxml2.so.2                        %s/lib/ ", work_dir);   
+execute_cmd("/bin/cp -aL /usr/lib/libxslt.so.1                        %s/lib/ ", work_dir);    
 
 }
 void copy_bash_runtime(char * work_dir) {
         //char cmd[BUFFER_SIZE];
         //const char * ruby_run="/usr/bin/ruby";
         copy_shell_runtime(work_dir);
-        execute_cmd("cp `which bc`  %s/bin/", work_dir);
+        execute_cmd("/bin/cp `which bc`  %s/bin/", work_dir);
         execute_cmd("busybox dos2unix Main.sh", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/grep", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/awk", work_dir);
-        execute_cmd("cp /bin/sed %s/bin/sed", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/cut", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/sort", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/join", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/wc", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/tr", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/dc", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/dd", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/cat", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/tail", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/head", work_dir);
-        execute_cmd("ln -s /bin/busybox %s/bin/xargs", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/grep", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/awk", work_dir);
+        execute_cmd("/bin/cp /bin/sed %s/bin/sed", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/cut", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/sort", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/join", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/wc", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/tr", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/dc", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/dd", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/cat", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/tail", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/head", work_dir);
+        execute_cmd("/bin/ln -s /bin/busybox %s/bin/xargs", work_dir);
     execute_cmd("chmod +rx %s/Main.sh", work_dir);
 
 }
 void copy_ruby_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir %s/usr", work_dir);
-        execute_cmd("mkdir %s/usr/lib", work_dir);
-        execute_cmd("cp /usr/lib/libruby* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/bin/ruby* %s/", work_dir);
+        execute_cmd("/bin/mkdir %s/usr", work_dir);
+        execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libruby* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/bin/ruby* %s/", work_dir);
 
 }
+void copy_guile_runtime(char * work_dir) {
+
+        copy_shell_runtime(work_dir);
+        execute_cmd("/bin/mkdir -p %s/proc",work_dir);
+        execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/share", work_dir);
+        execute_cmd("/bin/cp -a /usr/share/guile %s/usr/share/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libguile* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libgc* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libffi* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libunistring* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libgmp* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libgmp* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/bin/guile* %s/", work_dir);
+
+}
+
 void copy_python_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir -p %s/usr/include", work_dir);
-        execute_cmd("mkdir -p %s/usr/lib", work_dir);
-        execute_cmd("cp /usr/bin/python* %s/", work_dir);
-        execute_cmd("cp -a /usr/lib/python* %s/usr/lib/", work_dir);
-        execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
-        execute_cmd("cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/include", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
+        execute_cmd("/bin/cp /usr/bin/python* %s/", work_dir);
+        execute_cmd("/bin/cp -a /usr/lib/python* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp -a /usr/include/python* %s/usr/include/", work_dir);
+        execute_cmd("/bin/cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
 
 }
 void copy_php_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir %s/usr", work_dir);
-        execute_cmd("mkdir %s/usr/lib", work_dir);
-        execute_cmd("cp /usr/lib/libedit* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libdb* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libgssapi_krb5* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libkrb5* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libk5crypto* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/*/libedit* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/*/libdb* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/*/libgssapi_krb5* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/*/libkrb5* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/bin/php* %s/", work_dir);
+        execute_cmd("/bin/mkdir %s/usr", work_dir);
+        execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libedit* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libdb* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libgssapi_krb5* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libkrb5* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libk5crypto* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libedit* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libdb* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libgssapi_krb5* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libkrb5* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/bin/php* %s/", work_dir);
         execute_cmd("chmod +rx %s/Main.php", work_dir);
 
 
@@ -1253,48 +1283,51 @@ void copy_php_runtime(char * work_dir) {
 void copy_perl_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir %s/usr", work_dir);
-        execute_cmd("mkdir %s/usr/lib", work_dir);
-        execute_cmd("cp /usr/lib/libperl* %s/usr/lib/", work_dir);
-        execute_cmd("cp /usr/bin/perl* %s/", work_dir);
+        execute_cmd("/bin/mkdir %s/usr", work_dir);
+        execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libperl* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/bin/perl* %s/", work_dir);
 
 }
 void copy_freebasic_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
-        execute_cmd("mkdir -p %s/usr/local/bin", work_dir);
-        execute_cmd("cp /usr/local/lib/freebasic %s/usr/local/lib/", work_dir);
-        execute_cmd("cp /usr/local/bin/fbc %s/", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/local/lib", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/local/bin", work_dir);
+        execute_cmd("/bin/cp /usr/local/lib/freebasic %s/usr/local/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/local/bin/fbc %s/", work_dir);
+		execute_cmd("/bin/cp -a /lib32/* %s/lib/", work_dir);
+		
 }
 void copy_mono_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
-        execute_cmd("mkdir %s/usr", work_dir);
-        execute_cmd("mkdir %s/proc", work_dir);
-        execute_cmd("mkdir -p %s/usr/lib/mono/2.0", work_dir);
-        execute_cmd("cp -a /usr/lib/mono %s/usr/lib/", work_dir);
-        execute_cmd("mkdir -p %s/usr/lib64/mono/2.0", work_dir);
-        execute_cmd("cp -a /usr/lib64/mono %s/usr/lib64/", work_dir);
+        execute_cmd("/bin/mkdir %s/usr", work_dir);
+        execute_cmd("/bin/mkdir %s/proc", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/lib/mono/2.0", work_dir);
+        execute_cmd("/bin/cp -a /usr/lib/mono %s/usr/lib/", work_dir);
+        execute_cmd("/bin/mkdir -p %s/usr/lib64/mono/2.0", work_dir);
+        execute_cmd("/bin/cp -a /usr/lib64/mono %s/usr/lib64/", work_dir);
 
-        execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 
-        execute_cmd("mount -o bind /proc %s/proc", work_dir);
-        execute_cmd("cp /usr/bin/mono* %s/", work_dir);
+        execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
+        execute_cmd("/bin/cp /usr/bin/mono* %s/", work_dir);
 
-        execute_cmd("cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
-        execute_cmd("cp /lib/libglib* %s/lib/", work_dir);
-        execute_cmd("cp /lib/tls/i686/cmov/lib* %s/lib/tls/i686/cmov/", work_dir);
-        execute_cmd("cp /lib/libpcre* %s/lib/", work_dir);
-        execute_cmd("cp /lib/ld-linux* %s/lib/", work_dir);
-        execute_cmd("cp /lib64/ld-linux* %s/lib64/", work_dir);
-        execute_cmd("mkdir -p %s/home/judge", work_dir);
-        execute_cmd("chown judge %s/home/judge", work_dir);
-        execute_cmd("mkdir -p %s/etc", work_dir);
-        execute_cmd("grep judge /etc/passwd>%s/etc/passwd", work_dir);
+        execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/cp /lib/libglib* %s/lib/", work_dir);
+        execute_cmd("/bin/cp /lib/tls/i686/cmov/lib* %s/lib/tls/i686/cmov/", work_dir);
+        execute_cmd("/bin/cp /lib/libpcre* %s/lib/", work_dir);
+        execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
+        execute_cmd("/bin/cp /lib64/ld-linux* %s/lib64/", work_dir);
+        execute_cmd("/bin/mkdir -p %s/home/judge", work_dir);
+        execute_cmd("/bin/chown judge %s/home/judge", work_dir);
+        execute_cmd("/bin/mkdir -p %s/etc", work_dir);
+        execute_cmd("/bin/grep judge /etc/passwd>%s/etc/passwd", work_dir);
 
 
 }
+
 
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 int & mem_lmt) {
@@ -1337,6 +1370,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
         // proc limit
         switch(lang){
     case 3:  //java
+    case 12:
         LIM.rlim_cur=LIM.rlim_max=50;
         break;
     case 5: //bash
@@ -1397,7 +1431,11 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
                 break;
         case 9: //Mono C#
                 execl("/mono","/mono","--debug","Main.exe",(char *)NULL);
-        break;
+                break;
+        case 12: //guile
+                execl("/guile","/guile","Main.scm",(char *)NULL);
+                break;
+
         }
         //sleep(1);
         exit(0);
@@ -1407,7 +1445,13 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
         int comp_res = OJ_AC;
         if (DEBUG)
                 execute_cmd("cat %s/error.out", work_dir);
-        comp_res = execute_cmd("grep 'java.lang.OutOfMemoryError'  %s/error.out",
+        comp_res = execute_cmd("/bin/grep 'Exception'  %s/error.out", work_dir);
+        if (!comp_res) {
+                printf("Exception reported\n");
+                ACflg = OJ_RE;
+        }        
+                
+        comp_res = execute_cmd("/bin/grep 'java.lang.OutOfMemoryError'  %s/error.out",
                         work_dir);
 
         if (!comp_res) {
@@ -1415,7 +1459,7 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
                 ACflg = OJ_ML;
                 topmemory = mem_lmt * STD_MB;
         }
-        comp_res = execute_cmd("grep 'java.lang.OutOfMemoryError'  %s/user.out",
+        comp_res = execute_cmd("/bin/grep 'java.lang.OutOfMemoryError'  %s/user.out",
                         work_dir);
 
         if (!comp_res) {
@@ -1423,8 +1467,7 @@ int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
                 ACflg = OJ_ML;
                 topmemory = mem_lmt * STD_MB;
         }
-        comp_res = execute_cmd("grep 'Could not create'  %s/error.out", work_dir);
-
+        comp_res = execute_cmd("/bin/grep 'Could not create'  %s/error.out", work_dir);
         if (!comp_res) {
                 printf("jvm need more resource,tweak -Xmx(OJ_JAVA_BONUS) Settings");
                 ACflg = OJ_RE;
@@ -1509,7 +1552,7 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
                 ACflg = comp_res;
         }
         //jvm popup messages, if don't consider them will get miss-WrongAnswer
-        if (lang == 3 && ACflg != OJ_AC) {
+        if (lang == 3) {
                 comp_res = fix_java_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
         }
 }
@@ -1673,7 +1716,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                 if (!record_call&&call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
                         ACflg = OJ_RE;
                         char error[BUFFER_SIZE];
-                        sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n",
+                        sprintf(error,"[ERROR] A Not allowed system call: runid:%d callid:%ld\n TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,and recompile judge_client",
                                         solution_id, reg.REG_SYSCALL);
                         write_log(error);
                         print_runtimeerror(error);
@@ -1695,11 +1738,11 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
         //clean_session(pidApp);
 }
 void clean_workdir(char * work_dir ) {
+        execute_cmd("/bin/umount %s/proc", work_dir);
         if (DEBUG) {
-                execute_cmd("mv %s/* %slog/", work_dir, work_dir);
+                execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
         } else {
-                execute_cmd("umount %s/proc", work_dir);
-                execute_cmd("rm -Rf %s/*", work_dir);
+                execute_cmd("/bin/rm -Rf %s/*", work_dir);
 
         }
 
@@ -1735,16 +1778,16 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
         //char cmd[BUFFER_SIZE];
         sprintf(src_pth, "Main.%s", lang_ext[lang]);
 
-        int sim = execute_cmd("sim.sh %s %d", src_pth, pid);
+        int sim = execute_cmd("/usr/bin/sim.sh %s %d", src_pth, pid);
         if (!sim) {
-                execute_cmd("mkdir ../data/%d/ac/", pid);
+                execute_cmd("/bin/mkdir ../data/%d/ac/", pid);
 
-                execute_cmd("mv %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
+                execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
                                 lang_ext[lang]);
                 //c cpp will
-                if(lang==0)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
+                if(lang==0)execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
                                 lang_ext[lang], pid, solution_id,lang_ext[lang+1]);
-                if(lang==1)execute_cmd("ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
+                if(lang==1)execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid, solution_id,
                                 lang_ext[lang], pid, solution_id,lang_ext[lang-1]);
 
 
@@ -1764,14 +1807,14 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 void mk_shm_workdir(char * work_dir){
         char shm_path[BUFFER_SIZE];
         sprintf(shm_path,"/dev/shm/hustoj/%s",work_dir);
-        execute_cmd("mkdir -p %s",shm_path);
-        execute_cmd("rm -rf %s",work_dir);
-        execute_cmd("ln -s %s %s/",shm_path,oj_home);
-  execute_cmd("chown judge %s ",shm_path);
+        execute_cmd("/bin/mkdir -p %s",shm_path);
+        execute_cmd("/bin/rm -rf %s",work_dir);
+        execute_cmd("/bin/ln -s %s %s/",shm_path,oj_home);
+  execute_cmd("/bin/chown judge %s ",shm_path);
   execute_cmd("chmod 755 %s ",shm_path);
   //sim need a soft link in shm_dir to work correctly
   sprintf(shm_path,"/dev/shm/hustoj/%s/",oj_home);
-  execute_cmd("ln -s %s/data %s",oj_home,shm_path);
+  execute_cmd("/bin/ln -s %s/data %s",oj_home,shm_path);
 
 }
 int count_in_files(char * dirpath){
@@ -1794,9 +1837,20 @@ int get_test_file(char* work_dir,int p_id){
                 sscanf(filename,"%s",filename);
                 sprintf(localfile,"%s/data/%d/%s",oj_home,p_id,filename);
                 if(DEBUG) printf("localfile[%s]\n",localfile);
-                if(access(localfile,0)==-1){    
+                
+                  const char * check_file_cmd=" wget --post-data=\"gettestdatadate=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O -  \"%s/admin/problem_judge.php\"";
+                FILE * rcop=read_cmd_output(check_file_cmd,p_id,filename,http_baseurl);        
+                time_t remote_date,local_date;
+                fscanf(rcop,"%ld",&remote_date);
+                fclose(rcop);
+                struct stat fst;
+                stat(localfile,&fst);
+                local_date=fst.st_mtime;
+                
+                if(access(localfile,0)==-1||local_date<remote_date){    
+                
                         if(strcmp(filename,"spj")==0) continue;
-                        execute_cmd("mkdir -p %s/data/%d",oj_home,p_id);
+                        execute_cmd("/bin/mkdir -p %s/data/%d",oj_home,p_id);
                         const char * cmd2=" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s/admin/problem_judge.php\"";
                         execute_cmd(cmd2,p_id,filename,localfile,http_baseurl);
                         ret++;
@@ -1870,7 +1924,7 @@ int main(int argc, char** argv) {
 
 
     if(http_judge)
-                system("ln -s ../cookie ./");
+                system("/bin/ln -s ../cookie ./");
         get_solution_info(solution_id, p_id, user_id, lang);
         //get the limit
 
@@ -1890,7 +1944,7 @@ int main(int argc, char** argv) {
                 time_lmt = time_lmt + java_time_bonus;
                 mem_lmt = mem_lmt + java_memory_bonus;
                 // copy java.policy
-                execute_cmd( "cp %s/etc/java0.policy %sjava.policy", oj_home, work_dir);
+                execute_cmd( "/bin/cp %s/etc/java0.policy %s/java.policy", oj_home, work_dir);
 
         }
 
@@ -1910,8 +1964,8 @@ int main(int argc, char** argv) {
 
         Compile_OK = compile(lang);
         if (Compile_OK != 0) {
-                update_solution(solution_id, OJ_CE, 0, 0, 0,0, 0.0);
                 addceinfo(solution_id);
+                update_solution(solution_id, OJ_CE, 0, 0, 0,0, 0.0);
                 update_user(user_id);
                 update_problem(p_id);
                 if(!http_judge)
@@ -1970,6 +2024,8 @@ int main(int argc, char** argv) {
                 copy_objc_runtime(work_dir);
         if (lang == 11)
                 copy_freebasic_runtime(work_dir);
+        if (lang == 12)
+                copy_guile_runtime(work_dir);
         // read files and run
         // read files and run
         // read files and run
@@ -2078,7 +2134,7 @@ int main(int argc, char** argv) {
         }
  if((oi_mode&&finalACflg==OJ_WA)||ACflg==OJ_WA){ 
 	if(DEBUG) printf("add diff info of %d..... \n",solution_id);
-	adddiffinfo(solution_id);
+	  if(!isspj) adddiffinfo(solution_id);
  }
         update_user(user_id);
         update_problem(p_id);
@@ -2091,6 +2147,6 @@ int main(int argc, char** argv) {
         if(record_call){
 			print_call_array();		
 		}
-
+        closedir(dp);
         return 0;
 }

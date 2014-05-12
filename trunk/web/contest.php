@@ -114,19 +114,16 @@
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}
-			$sql="select * from (SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,source as source
 
-		FROM `contest_problem`,`problem`
-
-		WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` AND `problem`.`defunct`='N'
-
-		AND `contest_problem`.`contest_id`=$cid ORDER BY `contest_problem`.`num` 
+       $sql="select * from (SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,source as source, `contest_problem`.`num` as pnum
+  FROM `contest_problem`,`problem`
+  WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` AND `problem`.`defunct`='N'
+  AND `contest_problem`.`contest_id`=$cid
                 ) problem
                 left join (select problem_id pid1,count(1) accepted from solution where result=4 and contest_id=$cid group by pid1) p1 on problem.pid=p1.pid1
                 left join (select problem_id pid2,count(1) submit from solution where contest_id=$cid  group by pid2) p2 on problem.pid=p2.pid2
-                
+                order by pnum
                 ";
-
 		
 			$result=mysql_query($sql);
 			$view_problemset=Array();

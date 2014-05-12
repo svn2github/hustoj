@@ -41,7 +41,7 @@ if (isset($_GET['cid'])){
                 $end_time=strtotime($row[2]);       
         }
         $lock_time=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
-        $lock_time=date("Y-m-d H:i:s",$lock_time);
+  //$lock_time=date("Y-m-d H:i:s",$lock_time);
         $time_sql="";
         //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
         if(time()>$lock_time&&time()<$end_time){
@@ -211,16 +211,20 @@ else
         }
 
        
+       
+        if(isset($_SESSION['http_judge'])) {
+                  $view_status[$i][3].="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
+        }
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3]= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$MSG_Compile_Click."</a>";
-        }else if (($OJ_SHOW_DIFF&&intval($row['result']==6)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3]= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</a>";
+                $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Click_Detail'>".$MSG_Compile_Error."</a>";
+        }else if (((intval($row['result'])==6&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."' title='$MSG_Click_Detail'>".$judge_result[$row['result']]."</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        $view_status[$i][3]= "<span class='".$judge_color[$row['result']]."'>*".$judge_result[$row['result']]."</span>";
-                       
+                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'>*".$judge_result[$row['result']]."</span>";
+
                         if( isset($_SESSION['source_browser'])){
 
                                         $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
@@ -231,19 +235,34 @@ else
                         }
                         if(isset($_GET['showsim'])&&isset($row[13])){
                                         $view_status[$i][3].= "$row[13]";
-                                
+
                         }
                 }else{
 
-                        $view_status[$i][3]= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</span>";
+                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."</span>";
                 }
           }else{
               echo "<td>----";
           }
-                
+
         }
-        if (isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98) 
-				$view_status[$i][3].="<span class='btn btn-info'>". (100-$row['pass_rate']*100)."%</span>";
+        if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
+                                $view_status[$i][3].="<span class='btn btn-info'>". (100-$row['pass_rate']*100)."%</span>";
+        if(isset($_SESSION['http_judge'])) {
+       //           $view_status[$i][3].="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
+                  $view_status[$i][3].="<select class='btn input-small' length=4 name=result>";
+                  $view_status[$i][3].="<option value=0>$MSG_Manual</a>";
+                  $view_status[$i][3].="<option value=4>$MSG_AC</a>";
+                  $view_status[$i][3].="<option value=6>$MSG_WA</a>";
+                  $view_status[$i][3].="</select>";
+                  $view_status[$i][3].="<input class='btn input-small' title='$MSG_Explain' type='text' name='explain'>";
+                  $view_status[$i][3].="<input class='btn'  type=submit name=manual value='$MSG_OK'>";
+                  $view_status[$i][3].="</form>";
+        }
+                                                        
+       
+       
+       
         if ($flag){
 
 

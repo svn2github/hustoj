@@ -50,7 +50,8 @@
 	  if(isset($_SESSION['administrator'])){
       require_once("include/set_get_key.php");
       ?>
-      [<a href=admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?> >Edit</a>]
+      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
       <?php
 
     }
@@ -61,22 +62,21 @@
 	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
 	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
 	
-	$ie6s="";
-	$ie6e="";
-	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-	{
-		$ie6s="<pre>";
-		$ie6e="</pre>";
-	}
+  
+	
 	$sinput=str_replace("<","&lt;",$row->sample_input);
   $sinput=str_replace(">","&gt;",$sinput);
 	$soutput=str_replace("<","&lt;",$row->sample_output);
   $soutput=str_replace(">","&gt;",$soutput);
-	echo "<h2>$MSG_Sample_Input</h2>
-			<div class=content><span class=sampledata>".$ie6s.($sinput).$ie6e."</span></div>";
+  if($sinput) {
+      echo "<h2>$MSG_Sample_Input</h2>
+			<pre class=content><span class=sampledata>".($sinput)."</span></pre>";
+  }
+  if($soutput){
 	echo "<h2>$MSG_Sample_Output</h2>
-			<div class=content><span class=sampledata>".$ie6s.($soutput).$ie6e."</span></div>";
-	if ($pr_flag||true) 
+			<pre class=content><span class=sampledata>".($soutput)."</span></pre>";
+  }
+  if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
 			<div class=content><p>".nl2br($row->hint)."</p></div>";
 	if ($pr_flag) 
@@ -91,9 +91,15 @@
 	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
 
 	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
-	echo "</center>";
 	
-	
+	if(isset($_SESSION['administrator'])){
+      require_once("include/set_get_key.php");
+  ?>
+     [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+     <?php
+  }	
+  echo "</center>";
 	?>
 <div id=foot>
 	<?php require_once("oj-footer.php");?>

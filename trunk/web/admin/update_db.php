@@ -119,6 +119,9 @@ $csql[18]="";
 $tsql[18]="select 1 from custominput limit 1;";
 $csql[18]="CREATE TABLE  `custominput` (  `solution_id` int(11) NOT NULL DEFAULT '0',  `input_text` text,  PRIMARY KEY (`solution_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
+$tsql[19]="ALTER TABLE `loginlog` ADD INDEX `user_time_index`(`user_id`, `time`);";
+$csql[19]="";
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

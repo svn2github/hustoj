@@ -36,11 +36,7 @@ int LANG_PLV[256]={96,78,158,117,60,39,102,191,SYS_access,SYS_brk,SYS_close,SYS_
 
 int LANG_CSV[256]={257,141,95,64,65,66,83,24,42,41,158,117,60,39,102,191,SYS_access,SYS_brk,SYS_chmod,SYS_clock_getres,SYS_clock_gettime,SYS_clone,SYS_close,SYS_execve,SYS_exit_group,SYS_fcntl,SYS_fstat,SYS_ftruncate,SYS_futex,SYS_getcwd,SYS_getdents,SYS_geteuid,SYS_getpid,SYS_getppid,SYS_getrlimit,SYS_gettimeofday,SYS_getuid,SYS_ioctl,SYS_lseek,SYS_lstat,SYS_mmap,SYS_mprotect,SYS_mremap,SYS_munmap,SYS_open,SYS_read,SYS_readlink,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_sched_getaffinity,SYS_sched_getparam,SYS_sched_get_priority_max,SYS_sched_get_priority_min,SYS_sched_getscheduler,SYS_set_robust_list,SYS_set_thread_area,SYS_set_tid_address,SYS_sigaltstack,SYS_stat,SYS_statfs,SYS_tgkill,SYS_time,SYS_uname,SYS_unlink,SYS_write,0};
 
-
-
 int LANG_OV[256]={158,4,102,191,SYS_access,SYS_brk,SYS_close,SYS_execve,SYS_exit_group,SYS_fstat,SYS_futex,SYS_getcwd,SYS_getrlimit,SYS_gettimeofday,SYS_mmap,SYS_mprotect,SYS_munmap,SYS_open,SYS_read,SYS_readlink,SYS_rt_sigaction,SYS_rt_sigprocmask,SYS_set_robust_list,SYS_set_thread_area,SYS_set_tid_address,SYS_uname,SYS_write,0};
-int LANG_OC[256]={HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,0};
-
 
 int LANG_BASICV[256]={101,54,122,175,174,240,311,258,243,6,197,252,146,195,192,33,45,125,191,SYS_access
 ,SYS_brk
@@ -65,47 +61,4 @@ int LANG_BASICV[256]={101,54,122,175,174,240,311,258,243,6,197,252,146,195,192,3
 ,SYS_write
 ,0};
 
-int LANG_BASICC[256]={HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-HOJ_MAX_LIMIT,
-0};
 int LANG_SV[256]={1,23,100,61,22,6,33,8,13,16,111,110,39,79,SYS_fcntl,SYS_getdents64 , SYS_getrlimit, SYS_rt_sigprocmask, SYS_futex, SYS_read, SYS_mmap, SYS_stat, SYS_open, SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_readlink, SYS_munmap, SYS_close, SYS_uname, SYS_clone, SYS_uname, SYS_mprotect, SYS_rt_sigaction, SYS_getrlimit, SYS_fstat, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_set_thread_area, SYS_set_tid_address, SYS_set_robust_list, SYS_exit_group,158, 0};
-int LANG_SC[256]={HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,         HOJ_MAX_LIMIT,              HOJ_MAX_LIMIT,            HOJ_MAX_LIMIT,                 HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,       HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,         HOJ_MAX_LIMIT,       HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,          HOJ_MAX_LIMIT,         HOJ_MAX_LIMIT,      HOJ_MAX_LIMIT,           HOJ_MAX_LIMIT,         HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,         HOJ_MAX_LIMIT,        HOJ_MAX_LIMIT,           HOJ_MAX_LIMIT,                             HOJ_MAX_LIMIT,            HOJ_MAX_LIMIT,          HOJ_MAX_LIMIT,           HOJ_MAX_LIMIT,           HOJ_MAX_LIMIT,            HOJ_MAX_LIMIT,            HOJ_MAX_LIMIT,                  HOJ_MAX_LIMIT,                  HOJ_MAX_LIMIT,                  HOJ_MAX_LIMIT,HOJ_MAX_LIMIT,              0};
-
-int LANG_SV[256]={1,23,100,61,22,6,33,8,13,16,111,110,39,79,SYS_fcntl,SYS_getdents64 , SYS_getrlimit, SYS_rt_sigprocmask, SYS_futex, SYS_read, SYS_mmap, SYS_stat, SYS_open, SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_readlink, SYS_munmap, SYS_close, SYS_uname, SYS_clone, SYS_uname, SYS_mprotect, SYS_rt_sigaction, SYS_getrlimit, SYS_fstat, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_set_thread_area, SYS_set_tid_address, SYS_set_robust_list, SYS_exit_group,158, 0};
-

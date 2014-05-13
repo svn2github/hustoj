@@ -19,7 +19,7 @@ sudo yum -y update
 sudo yum -y install php httpd php-mysql mysql-server php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static flex
 sudo /etc/init.d/mysqld start
 
-sudo svn checkout http://hustoj.googlecode.com/svn/trunk/ hustoj-read-only
+sudo svn checkout https://github.com/zhblue/hustoj/trunk/trunk hustoj-read-only
 
 #create user and homedir
 sudo  /usr/sbin/useradd -m -u 1536 judge

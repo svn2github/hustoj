@@ -17,7 +17,7 @@
  * along with HUSTOJ. if not, see <http://www.gnu.org/licenses/>.
  */
 
-int LANG_CV[256] = {59, 89, 8, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
+int LANG_CV[256] = {12,63,59, 89, 8, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
 		SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
 		SYS_mmap, SYS_fstat, SYS_set_thread_area, 252, SYS_arch_prctl, 231, 0 };
 

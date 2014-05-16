@@ -854,6 +854,7 @@ int compile(int lang) {
                 } else {
                         freopen("ce.txt", "w", stdout);
                 }
+                 execute_cmd("chown judge *")
                 while(setgid(1536)!=0) sleep(1);
                 while(setuid(1536)!=0) sleep(1);
                 while(setresuid(1536, 1536, 1536)!=0) sleep(1);

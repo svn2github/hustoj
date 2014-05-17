@@ -1661,7 +1661,6 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	int status, sig, exitcode;
 	struct user_regs_struct reg;
 	struct rusage ruse;
-	int sub = 0;
 	while (1) {
 		// check the usage
 
@@ -1779,8 +1778,12 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-
-		if (!record_call && call_counter[reg.REG_SYSCALL] == 0) { //do not limit JVM syscall for using different JVM
+		if (call_counter[reg.REG_SYSCALL] ){
+			//call_counter[reg.REG_SYSCALL]--;
+		}else if (record_call) {
+			call_counter[reg.REG_SYSCALL] = 1;
+		
+		}else { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 			char error[BUFFER_SIZE];
 			sprintf(error,
@@ -1789,13 +1792,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			write_log(error);
 			print_runtimeerror(error);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
-		} else if (record_call) {
-			call_counter[reg.REG_SYSCALL] = 1;
-		} else {
-			if (sub == 1 && call_counter[reg.REG_SYSCALL] > 0)
-				call_counter[reg.REG_SYSCALL]--;
 		}
-		sub = 1 - sub;
+		
 
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 	}

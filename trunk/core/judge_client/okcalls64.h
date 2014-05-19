@@ -21,12 +21,13 @@ int LANG_CV[256] = {0,1,5,9,12,21,59,63,89,158,231, 8, SYS_time, SYS_read, SYS_u
 		SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
 		SYS_mmap, SYS_fstat, SYS_set_thread_area, 252, SYS_arch_prctl, 231, 0 };
 
-int LANG_PV[256] = { SYS_open, SYS_set_thread_area, SYS_brk, SYS_read,
+int LANG_PV[256] = { 0,1,13,16,59,89,97,231,SYS_open, SYS_set_thread_area, SYS_brk, SYS_read,
 		SYS_uname, SYS_write, SYS_execve, SYS_ioctl, SYS_readlink, SYS_mmap,
 		SYS_rt_sigaction, SYS_getrlimit, 252, 191, 158, 231, SYS_close,
 		SYS_exit_group, SYS_munmap, SYS_time, 4, 0 };
 
-int LANG_JV[256] = { 257, 61, 22, 6, 33, 8, 13, 16, 111, 110, 39, 79, SYS_fcntl,
+int LANG_JV[256] = { 0,2,3,4,5,9,10,11,12,13,14,21,56,59,89,97,158,202,218,231,273,257, 
+		61, 22, 6, 33, 8, 13, 16, 111, 110, 39, 79, SYS_fcntl,
 		SYS_getdents64, SYS_getrlimit, SYS_rt_sigprocmask, SYS_futex, SYS_read,
 		SYS_mmap, SYS_stat, SYS_open, SYS_close, SYS_execve, SYS_access,
 		SYS_brk, SYS_readlink, SYS_munmap, SYS_close, SYS_uname, SYS_clone,
@@ -41,7 +42,8 @@ int LANG_RV[256] = { 96, 340, 4, 126, SYS_access, SYS_arch_prctl, SYS_brk,
 		SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_set_robust_list,
 		SYS_set_tid_address, SYS_write, 0 };
 
-int LANG_BV[256] = { 96, 22, 61, 56, 42, 41, 79, 158, 117, 60, 39, 102, 191,
+int LANG_BV[256] = { 0,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,102,104,107,108,110,111,158,231,
+		96, 22, 61, 56, 42, 41, 79, 158, 117, 60, 39, 102, 191,
 		183, SYS_access, SYS_arch_prctl, SYS_brk, SYS_close, SYS_dup2,
 		SYS_execve, SYS_exit_group, SYS_fcntl, SYS_fstat, SYS_getegid,
 		SYS_geteuid, SYS_getgid, SYS_getpgrp, SYS_getpid, SYS_getppid,
@@ -58,7 +60,8 @@ int LANG_YV[256] = { 257, 41, 42, 146, SYS_mremap, 158, 117, 60, 39, 102, 191,
 		SYS_rt_sigprocmask, SYS_set_robust_list, SYS_set_tid_address, SYS_stat,
 		SYS_write, 0 };
 
-int LANG_PHV[256] = { 257, 20, 146, 78, 158, 117, 60, 39, 102, 191, SYS_access,
+int LANG_PHV[256] = { 0,1,2,3,4,5,6,8,9,10,11,12,13,14,16,21,59,79,97,158,202,218,231,257,273,
+		257, 20, 146, 78, 158, 117, 60, 39, 102, 191, SYS_access,
 		SYS_brk, SYS_clone, SYS_close, SYS_execve, SYS_exit_group, SYS_fcntl,
 		SYS_fstat, SYS_futex, SYS_getcwd, SYS_getdents64, SYS_getrlimit,
 		SYS_gettimeofday, SYS_ioctl, SYS_lseek, SYS_lstat, SYS_mmap,

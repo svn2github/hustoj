@@ -856,8 +856,13 @@ int compile(int lang) {
 		LIM.rlim_cur = 100 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
-		LIM.rlim_max = STD_MB << 10;
-		LIM.rlim_cur = STD_MB << 10;
+		if(lang==3){
+		   LIM.rlim_max = STD_MB << 11;
+		   LIM.rlim_cur = STD_MB << 11;	
+                }else{
+		   LIM.rlim_max = STD_MB << 10;
+		   LIM.rlim_cur = STD_MB << 10;
+		}
 		setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2 && lang != 11) {
 			freopen("ce.txt", "w", stderr);

@@ -6,26 +6,23 @@ HUSTOJ is an GPL FreeSoftware?.
 
 HUSTOJ 是采用GPL的自由软件。
 
-    本项目参加评选，请同志们支持转发 http://www.oschina.net/project/top_cn_2012 
-
-捐助本项目请拍 淘宝物品或服务,注明捐助。 淘宝网店http://hustoj.taobao.com/
-
-感谢项目的支持者Sponsor 捐助者名单
-
-    浙江传媒学院 《浙江省动画与数字技术实践教学示范中心》项目
-    浙江传媒学院 《程序设计类教学辅导平台设计与开发》教改项目
-    九度互动社区
-    北京信息科技大学 周同学
-    山东工商学院 肖老师
-    浙江金融职业学院 王老师
-    浙江工商大学 陈同学 
-
 注意：基于本项目源码从事科研、论文、系统开发，必须在文中或系统中表明来自于本项目的内容和创意，否则请勿使用本项目源码。
 
 使用本项目源码和freeproblemset题库请尊重程序员职业和劳动
 
 新用户必看 README 和 FAQ
 
+    快速安装指南：
+    1、安装Ubuntu
+    2、执行如下命令
+        sudo apt-get update
+        sudo apt-get install subversion
+        sudo svn co https://github.com/zhblue/hustoj/trunk/trunk/install hustoj
+        cd hustoj
+        sudo bash install-interactive.sh
+    3、安装后访问服务器80端口上的web服务JudgeOnline目录
+        例如 w3m http://127.0.0.1/JudgeOnline
+        
 使用上需要帮助，请访问用户论坛 或 购买在线服务。
 
 Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php

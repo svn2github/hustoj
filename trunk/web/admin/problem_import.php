@@ -27,7 +27,9 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 					you can't use import function at this time.<br>"; 
 			$show_form=false;
 	   }
+	   mkdir("../upload");
 	   if(!writable("../upload")){
+	   	 
 		   echo "../upload is not writable, <b>chmod 770</b> to it.<br>";
 		   $show_form=false;
 	   }

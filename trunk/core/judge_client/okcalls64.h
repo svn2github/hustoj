@@ -80,7 +80,9 @@ int LANG_PLV[256] = {0,1,2,3,4,5,8,9,10,12,13,14,16,21,59,72,89,97,102,104,107,1
 		SYS_set_robust_list, SYS_set_thread_area, SYS_set_tid_address, SYS_stat,
 		SYS_time, SYS_uname, SYS_write, 0 };
 
-int LANG_CSV[256] = { 257, 141, 95, 64, 65, 66, 83, 24, 42, 41, 158, 117, 60,
+int LANG_CSV[256] = {0,1,2,3,4,5,8,9,10,11,12,13,14,16,21,24,41,42,56,59,63,72,78,79,89,97
+		,102,131,137,158,202,204,218,229,231,234,257,273, 257, 141, 95, 64, 65, 66
+		, 83, 24, 42, 41, 158, 117, 60,
 		39, 102, 191, SYS_access, SYS_brk, SYS_chmod, SYS_clock_getres,
 		SYS_clock_gettime, SYS_clone, SYS_close, SYS_execve, SYS_exit_group,
 		SYS_fcntl, SYS_fstat, SYS_ftruncate, SYS_futex, SYS_getcwd,

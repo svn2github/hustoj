@@ -35,7 +35,8 @@ int LANG_JV[256] = { 0,2,3,4,5,9,10,11,12,13,14,21,56,59,89,97,158,202,218,231,2
 		SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_set_thread_area,
 		SYS_set_tid_address, SYS_set_robust_list, SYS_exit_group, 158, 0 };
 
-int LANG_RV[256] = { 96, 340, 4, 126, SYS_access, SYS_arch_prctl, SYS_brk,
+int LANG_RV[256] = { 0,1,2,3,4,5,9,10,12,13,14,16,21,22,56,59,72,97,98,107,108,131,158,202,218,231,273
+		,96, 340, 4, 126, SYS_access, SYS_arch_prctl, SYS_brk,
 		SYS_close, SYS_execve, SYS_exit_group, SYS_fstat, SYS_futex,
 		SYS_getegid, SYS_geteuid, SYS_getgid, SYS_getuid, SYS_getrlimit,
 		SYS_mmap, SYS_mprotect, SYS_munmap, SYS_open, SYS_read,

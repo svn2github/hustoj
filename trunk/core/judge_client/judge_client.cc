@@ -1284,6 +1284,7 @@ void copy_ruby_runtime(char * work_dir) {
 	execute_cmd("/bin/mkdir %s/usr", work_dir);
 	execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libruby* %s/usr/lib/", work_dir);
+	execute_cmd("/bin/cp -a /usr/lib/ruby %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/bin/ruby* %s/", work_dir);
 
 }

@@ -619,7 +619,7 @@ select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
-  height: 18px;
+  height: 25px;
   padding: 4px;
   margin-bottom: 9px;
   font-size: 13px;

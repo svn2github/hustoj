@@ -78,7 +78,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	//$xmlDoc = new DOMDocument ();
 	//$xmlDoc->load ( $tempfile );
 	//$xmlcontent=file_get_contents($tempfile );
-	$xmlDoc=simplexml_load_file($tempfile);
+	$xmlDoc=simplexml_load_file($tempfile, 'SimpleXMLElement', LIBXML_PARSEHUGE);
 	$searchNodes = $xmlDoc->xpath ( "/fps/item" );
 	$spid=0;
 	foreach($searchNodes as $searchNode) {

@@ -56,9 +56,9 @@ Problem <span class=blue><b><?php echo $id?></b></span>
 <input id=problem_id type='hidden'  value='<?php echo $id?>' name="id" ><br>
 <?php }else{
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-if ($pid>25) $pid=25;
+//if ($pid>25) $pid=25;
 ?>
-Problem <span class=blue><b><?php echo $PID[$pid]?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>

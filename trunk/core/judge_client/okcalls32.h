@@ -91,7 +91,7 @@ int LANG_CSV[256] = {3,4,5,6,11,13,33,45,54,78,85,91,99,102,120,122,125,140,141,
 		SYS_set_tid_address, SYS_sigaltstack, SYS_stat64, SYS_statfs,
 		SYS_tgkill, SYS_time, SYS_uname, SYS_unlink, SYS_write, 0 };
 
-int LANG_OV[256] = { 102, 191, SYS_access, SYS_brk, SYS_close, SYS_execve,
+int LANG_OV[256] = {3,221,102, 191, SYS_access, SYS_brk, SYS_close, SYS_execve,
 		SYS_exit_group, SYS_fstat64, SYS_futex, SYS_getcwd, SYS_geteuid32,
 		SYS_getrlimit, SYS_gettimeofday, SYS_getuid32, SYS__llseek, SYS_lstat64,
 		SYS_mmap2, SYS_mprotect, SYS_munmap, SYS_open, SYS_read, SYS_readlink,

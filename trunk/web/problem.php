@@ -34,7 +34,7 @@ if (isset($_GET['id'])){
         $pid=intval($_GET['pid']);
 
         if (!isset($_SESSION['administrator']))
-                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<'$now'";
+                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<='$now'";
         else
                 $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
         $result=mysql_query($sql);

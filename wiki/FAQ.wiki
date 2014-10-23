@@ -76,9 +76,9 @@ sudo /etc/init.d/apache2 restart
 
   *   如何获得管理员帐号？
 在mysql执行
-{{{
+
 insert into privilege(user_id,rightstr) values('zhblue','administrator');
-}}}
+
 其中zhblue 为需要加管理员权限的帐号,然后退出重新登录
 
   * 如何进入后台？
@@ -127,10 +127,10 @@ Addprivilege, administrator为管理员，source_browser为代码审查，contes
 访问FreeProblemSet,查看Downloads列表。
   * 为何fckeditor上传的图片在题目中无法显示？
 如果web安装位置不在/JudgeOnline，需要手工修改
-{{{
+
 /fckeditor/editor/filemanager/connectors/php/config.php37行
 $Config['UserFilesPath'] = '/JudgeOnline/upload/'.date("Ym")."/"  ;
-}}}
+
 将JudgeOnline修改为对应的OJ web路径,如oj。
 
   * Why the added problem don't show up to non-admin users?

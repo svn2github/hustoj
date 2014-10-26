@@ -834,7 +834,7 @@ int compile(int lang) {
 	const char * CP_CLANG[]={"clang", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
 	         		"-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_CLANG_CPP[]={"clang++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
-	         		"-lm", "--static", "-DONLINE_JUDGE", NULL };
+	         		"-lm", "--static", "-std=c++0x",  "-DONLINE_JUDGE", NULL };
 
 	char javac_buf[7][16];
 	char *CP_J[7];

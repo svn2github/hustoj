@@ -1323,13 +1323,17 @@ void copy_guile_runtime(char * work_dir) {
 
 void copy_python_runtime(char * work_dir) {
 
-	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/mkdir -p %s/usr/include", work_dir);
-	execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
-	execute_cmd("/bin/cp /usr/bin/python* %s/", work_dir);
-	execute_cmd("/bin/cp -a /usr/lib/python* %s/usr/lib/", work_dir);
-	execute_cmd("/bin/cp -a /usr/include/python* %s/usr/include/", work_dir);
-	execute_cmd("/bin/cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
+        copy_shell_runtime(work_dir);
+        execute_cmd("mkdir -p %s/usr/include", work_dir);
+        execute_cmd("mkdir -p %s/usr/lib", work_dir);
+        execute_cmd("mkdir -p %s/usr/lib64", work_dir);
+        execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
+        execute_cmd("cp /usr/bin/python* %s/", work_dir);
+        execute_cmd("cp -a /usr/lib/python* %s/usr/lib/", work_dir);
+        execute_cmd("cp -a /usr/lib64/python* %s/usr/lib64/", work_dir);
+        execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
+        execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
+        execute_cmd("cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
 
 }
 void copy_php_runtime(char * work_dir) {

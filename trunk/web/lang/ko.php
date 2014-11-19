@@ -7,7 +7,7 @@
 	$MSG_STATUS="채점 상황 열람";
 	$MSG_RANKLIST="순위";
 	$MSG_CONTEST="대회";
-   $MSG_RECENT_CONTEST="Recent";
+	$MSG_RECENT_CONTEST="Recent";
 	
 	$MSG_LOGOUT="LOGOUT";
 	$MSG_LOGIN="LOGIN";
@@ -17,6 +17,7 @@
 	$MSG_STATISTICS="통계";
 	$MSG_USERINFO="정보 수정";
 	$MSG_MAIL="Mail";
+	
 	//status.php
 	$MSG_Pending="Pending";
 	$MSG_Pending_Rejudging="Pending Rejudging";
@@ -29,6 +30,7 @@
 	$MSG_Memory_Limit_Exceed="Memory Limit Exceed";
 	$MSG_Output_Limit_Exceed="Output Limit Exceed";
 	$MSG_Runtime_Error="Runtime Error";
+	$MSG_TEST_RUN="Test Running Done";
 	$MSG_Compile_Error="Compile Error";
 	$MSG_Compile_OK="Compile OK";
 	$MSG_RUNID="제출 번호";
@@ -54,6 +56,7 @@
 	$MSG_RE="RE";
 	$MSG_CE="CE";
 	$MSG_CO="CO";
+	$MSG_TR="TEST";
 	
 	//problemset.php
 	$MSG_SEARCH="Search";
@@ -104,16 +107,16 @@
 	$MSG_EXPORT="Export";
 	$MSG_UPDATE_DATABASE="UpdateDatabase";
 	$MSG_ONLINE="Online";
-     //someone please translate these
-  $MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
-  $MSG_WATCH_RANK="Click HERE to watch contest rank.";
-  $MSG_Public="Public";
-  $MSG_Private="Private";
-  $MSG_Running="Running";
-  $MSG_Start="Start";
-  $MSG_TotalTime="Total";
-  $MSG_LeftTime="Left";
-  $MSG_Ended="Finished";
 
-
+	//someone please translate these
+	$MSG_PRIVATE_WARNING="This is a private contest which you don't have privilege。";
+	$MSG_WATCH_RANK="Click HERE to watch contest rank.";
+	$MSG_Public="Public";
+	$MSG_Private="Private";
+	$MSG_Running="Running";
+	$MSG_Start="Start";
+	$MSG_TotalTime="Total";
+	$MSG_LeftTime="Left";
+	$MSG_Ended="Finished";
+	
 ?>

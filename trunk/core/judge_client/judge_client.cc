@@ -2189,7 +2189,7 @@ int main(int argc, char** argv) {
 		if (namelen == 0)
 			continue;
 
-		if(!data_list_has(dirp->d_name)) 
+		if(http_judge&&(!data_list_has(dirp->d_name))) 
 			continue;
 	
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,

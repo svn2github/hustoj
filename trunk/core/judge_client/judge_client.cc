@@ -1951,7 +1951,7 @@ int get_test_file(char* work_dir, int p_id) {
 	FILE * fjobs = read_cmd_output(cmd, p_id, http_baseurl);
 	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL) {
 		sscanf(filename, "%s", filename);
-		if(!data_list_has(filename)) data_list_add(filename);
+		if(http_judge&&(!data_list_has(filename))) data_list_add(filename);
 		sprintf(localfile, "%s/data/%d/%s", oj_home, p_id, filename);
 		if (DEBUG)
 			printf("localfile[%s]\n", localfile);

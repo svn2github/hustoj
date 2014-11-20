@@ -15,21 +15,21 @@ When people asked question, we put the answer here
 主文件名一样的*.in *.out，如test1.in test1.out
 
   * 通过.tar.gz源码安装的应该怎么升级？
-{{{
+
 到安装文件目录找到hustoj-read-only目录
 sudo svn up hustoj-read-only
 cd hustoj-read-only/core
 sudo ./make.sh
 sudo svn up /var/www/JudgeOnline
-}}}
+
 遇到问题，回答mc
    
   * 为何页面总是需要刷新才能显示？
     如果您使用的是ie6浏览器，请禁用服务器上的deflate模块，在ubuntu下的命令是
-{{{
+
 sudo rm /etc/apache2/mods-enabled/deflate.*
 sudo /etc/init.d/apache2 restart
-}}}
+
   * CentOS 用户，点击[CentOS]
   * 使用HUSTOJ要花多少钱？
     不要钱，我们是GPL的。
@@ -42,7 +42,7 @@ sudo /etc/init.d/apache2 restart
   * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
     您需要修改系统php.ini,给予php操作数据目录的权限。
     以下是推荐修改的设置
-    {{{
+    
        sudo gedit /etc/php5/apache2/php.ini 
        open_basedir =/home/judge/data:/var/www/JudgeOnline:/tmp  
        
@@ -53,7 +53,7 @@ sudo /etc/init.d/apache2 restart
        upload_tmp_dir =/tmp
        upload_max_filesize = 64M
       
-    }}}
+    
      修改php.ini后apache需重启
     
   * 为什么我添加的题目普通用户看不到？

@@ -1182,6 +1182,8 @@ void get_problem_info(int p_id, int & time_lmt, int & mem_lmt, int & isspj) {
 	} else {
 		_get_problem_info_mysql(p_id, time_lmt, mem_lmt, isspj);
 	}
+	if(time_lmt<=0) time_lmt=1;
+	
 }
 
 void prepare_files(char * filename, int namelen, char * infile, int & p_id,

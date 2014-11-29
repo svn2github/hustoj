@@ -14,29 +14,28 @@ HUSTOJ support more programming languages :
 = Details =
 
   * Pascal
-{{{
+
 sudo apt-get install fpc
-}}}
+
   * Java
-{{{
+
 sudo apt-get install openjdk-6-jdk
-}}}
+
   * Ruby
-{{{
+
 sudo apt-get install ruby
-}}}
+
   * Python
-{{{
+
 sudo apt-get install python
-}}}
+
   * Objective C
-{{{
+
 sudo apt-get install gnustep gnustep-devel gobjc
-}}}
+
   * FreeBasic32bits
 install follow 
 http://www.freebasic.net/get
 and then
-{{{
+
 sudo apt-get install libncurses5-dev
-}}}

@@ -546,11 +546,11 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 	char sql[BUFFER_SIZE];
 	if (oi_mode) {
 		sprintf(sql,
-				"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW(),pass_rate=%f WHERE solution_id=%d LIMIT 1%c",
+				"UPDATE solution SET result=%d,time=%d,memory=%d,pass_rate=%f WHERE solution_id=%d LIMIT 1%c",
 				result, time, memory, pass_rate, solution_id, 0);
 	} else {
 		sprintf(sql,
-				"UPDATE solution SET result=%d,time=%d,memory=%d,judgetime=NOW() WHERE solution_id=%d LIMIT 1%c",
+				"UPDATE solution SET result=%d,time=%d,memory=%d WHERE solution_id=%d LIMIT 1%c",
 				result, time, memory, solution_id, 0);
 	}
 	//      printf("sql= %s\n",sql);

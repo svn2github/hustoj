@@ -125,7 +125,7 @@ CREATE TABLE  `solution` (
   `valid` tinyint(4) NOT NULL DEFAULT '1',
   `num` tinyint(4) NOT NULL DEFAULT '-1',
   `code_length` int(11) NOT NULL DEFAULT '0',
-  `judgetime` datetime DEFAULT NULL,
+  `judgetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`solution_id`),
   KEY `uid` (`user_id`),

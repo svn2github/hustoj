@@ -22,7 +22,7 @@
         <a href="lostpassword.php">Lost Password</a>
 </tr>
         </table>
-        <center>
+        </center>
 </form>
 
 <div id=foot>

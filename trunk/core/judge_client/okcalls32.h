@@ -114,4 +114,4 @@ int LANG_SV[256] = { 100, 295, SYS_fcntl64, SYS_getdents64, SYS_ugetrlimit,
 		SYS_getuid32, SYS_getgid32, SYS_geteuid32, SYS_getegid32,
 		SYS_set_thread_area, SYS_set_tid_address, SYS_set_robust_list,
 		SYS_exit_group, 0 };
-
+int LANG_LUAV[256]={0,0};

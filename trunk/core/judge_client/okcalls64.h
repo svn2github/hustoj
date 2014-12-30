@@ -119,3 +119,4 @@ int LANG_SV[256] = { 1, 23, 100, 61, 22, 6, 33, 8, 13, 16, 111, 110, 39, 79,
 		SYS_set_thread_area, SYS_set_tid_address, SYS_set_robust_list,
 		SYS_exit_group, 158, 0 };
 
+int LANG_LUAV[256]={0,1,2,3,4,5,9,10,11,12,13,21,59,158,231,292,0};

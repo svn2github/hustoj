@@ -53,7 +53,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
-
+static char lock_file[BUFFER_SIZE]=LOCKFILE;
 static char host_name[BUFFER_SIZE];
 static char user_name[BUFFER_SIZE];
 static char password[BUFFER_SIZE];
@@ -461,7 +461,7 @@ int lockfile(int fd) {
 int already_running() {
 	int fd;
 	char buf[16];
-	fd = open(LOCKFILE, O_RDWR | O_CREAT, LOCKMODE);
+	fd = open(lock_file, O_RDWR | O_CREAT, LOCKMODE);
 	if (fd < 0) {
 		syslog(LOG_ERR | LOG_DAEMON, "can't open %s: %s", LOCKFILE,
 				strerror(errno));
@@ -518,11 +518,13 @@ int main(int argc, char** argv) {
 		strcpy(oj_home, "/home/judge");
 	chdir(oj_home);    // change the dir
 
+	sprintf(lock_file,"%s/etc/judge.pid",oj_home);
 	if (!DEBUG)
 		daemon_init();
-	if (strcmp(oj_home, "/home/judge") == 0 && already_running()) {
+	if ( already_running()) {
 		syslog(LOG_ERR | LOG_DAEMON,
 				"This daemon program is already running!\n");
+		printf("%s already has one judged on it!\n",oj_home);
 		return 1;
 	}
 //	struct timespec final_sleep;

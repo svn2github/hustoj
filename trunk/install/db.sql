@@ -18,6 +18,7 @@ CREATE TABLE  `contest` (
   `description` text,
   `private` tinyint(4) NOT NULL DEFAULT '0',
   `langmask` int NOT NULL DEFAULT '0' COMMENT 'bits for LANG to mask',
+  `password` CHAR( 16 ) NOT NULL DEFAULT '',
   PRIMARY KEY (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 

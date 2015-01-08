@@ -56,7 +56,7 @@ if (isset($_POST['id'])) {
 		$row=mysql_fetch_array($result);
 		$isprivate=intval($row[0]);
 		mysql_free_result($result);
-		if ($isprivate==1){
+		if ($isprivate==1&&!isset($_SESSION['c'.$cid])){
 			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`='$user_id' AND `rightstr`='c$cid'";
 			$result=mysql_query($sql) or die (mysql_error()); 
 			$row=mysql_fetch_array($result);
@@ -153,13 +153,15 @@ if (mysql_num_rows($res)==1){
 
 
 if((~$OJ_LANGMASK)&(1<<$language)){
+$store_id=0;
+if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 
 	if (!isset($pid)){
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len')";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,store_id)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len',$store_id)";
 	}else{
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid')";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,store_id)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid',$store_id)";
 	}
 	mysql_query($sql);
 	$insert_id=mysql_insert_id();

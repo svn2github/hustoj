@@ -42,7 +42,7 @@ if (isset($_GET['solution_id'])){
 		$row=mysql_fetch_array($result);
 
 	if(isset($_GET['tr'])){
-	$res=$row['result'];
+        	$res=$row['result'];
 		if($res==11){
 			$sql="SELECT `error` FROM `compileinfo` WHERE `solution_id`='".$solution_id."'";
 		}else{
@@ -52,13 +52,14 @@ if (isset($_GET['solution_id'])){
 		$row=mysql_fetch_array($result);
 		if($row){
                        if(strpos($_SERVER['HTTP_USER_AGENT'], "MSIE"))
-                        echo str_replace("\n","<br>",htmlspecialchars(str_replace("\n\r","\n",$row['error'])));
+                             echo str_replace("\n","<br>",htmlspecialchars(str_replace("\n\r","\n",$row['error'])));
                        else
-                        echo htmlspecialchars(str_replace("\n\r","\n",$row['error']));
+                             echo htmlspecialchars(str_replace("\n\r","\n",$row['error']));
+                        $sql="delete from custominput where solution_id=".$solution_id;
+    			mysql_query($sql);     
                 }
 
-    $sql="delete from custominput where solution_id=".$solution_id;
-    mysql_query($sql);     
+    
 		//echo $sql.$res;
 	}else{
 		echo $row['result'].",".$row['memory'].",".$row['time'];

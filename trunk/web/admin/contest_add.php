@@ -3,13 +3,13 @@
 <title>Add a contest</title>
 
 <?php
-
+	require_once("../include/db_info.inc.php");
 	require_once("../include/const.inc.php");
+
 $description="";
  if (isset($_POST['syear']))
 {
 	
-	require_once("../include/db_info.inc.php");
 	require_once("../include/check_post_key.php");
 	
 	$starttime=intval($_POST['syear'])."-".intval($_POST['smonth'])."-".intval($_POST['sday'])." ".intval($_POST['shour']).":".intval($_POST['sminute']).":00";
@@ -19,17 +19,21 @@ $description="";
 
         $title=$_POST['title'];
         $private=$_POST['private'];
+        $password=$_POST['password'];
         $description=$_POST['description'];
         if (get_magic_quotes_gpc ()){
                 $title = stripslashes ($title);
                 $private = stripslashes ($private);
+                $password = stripslashes ($password);
                 $description = stripslashes ($description);
         }
 
-	$title=mysql_real_escape_string($title);
-	$private=mysql_real_escape_string($private);
-	$description=mysql_real_escape_string($description);
-	
+        $title=mysql_real_escape_string($title);
+        $private=mysql_real_escape_string($private);
+        $password=mysql_real_escape_string($password);
+        $description=mysql_real_escape_string($description);
+
+
     $lang=$_POST['lang'];
     $langmask=0;
     foreach($lang as $t){
@@ -38,9 +42,9 @@ $description="";
 $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	//echo $langmask;	
 	
-	$sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`)
-		VALUES('$title','$starttime','$endtime','$private',$langmask,'$description')";
-//	echo $sql;
+        $sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
+                VALUES('$title','$starttime','$endtime','$private',$langmask,'$description','$password')";
+	echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$cid=mysql_insert_id();
 	echo "Add Contest ".$cid;
@@ -137,6 +141,7 @@ else if(isset($_POST['problem2contest'])){
 	Hour:<input class=input-mini  type=text name=ehour size=2 value=<?php echo (date('H')+4)%24?>>&nbsp;
 	Minute:<input class=input-mini  type=text name=eminute value=00 size=2 ></p>
 	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
+	Password:<input type=text name=password value="">
 	Language:<select name="lang[]" multiple="multiple"    style="height:220px">
 	<?php
 $lang_count=count($language_ext);

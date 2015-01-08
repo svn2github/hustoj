@@ -81,14 +81,18 @@
 			$rows_cnt=mysql_num_rows($result);
 			$contest_ok=true;
 			
-			
+		        if(isset($_POST['password'])) $password=$_POST['password'];
+			if (get_magic_quotes_gpc ()) {
+			        $password = stripslashes ( $password);
+			}
 			if ($rows_cnt==0){
 				mysql_free_result($result);
-				$view_title= "No Such Contest!";
+				$view_title= "比赛已经关闭!";
 				
 			}else{
 				$row=mysql_fetch_object($result);
 				$view_private=$row->private;
+				if($password!=""&&$password==$row->password) $_SESSION['c'.$cid]=true;
 				if ($row->private && !isset($_SESSION['c'.$cid])) $contest_ok=false;
 				if ($row->defunct=='Y') $contest_ok=false;
 				if (isset($_SESSION['administrator'])) $contest_ok=true;
@@ -110,20 +114,25 @@
 				}
 			}
 			if (!$contest_ok){
-             $view_errors=  "<h2>$MSG_PRIVATE_WARNING <a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
+            			 $view_errors=  "<h2>$MSG_PRIVATE_WARNING <a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
+            			 $view_errors.=  "<form method=post action='contest.php?cid=$cid'>输入密码进入比赛:<input class=input-mini type=password name=password><input class=btn type=submit></form>";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}
+			$sql="select * from (SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,source as source,contest_problem.num as pnum
 
-       $sql="select * from (SELECT `problem`.`title` as `title`,`problem`.`problem_id` as `pid`,source as source, `contest_problem`.`num` as pnum
-  FROM `contest_problem`,`problem`
-  WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` AND `problem`.`defunct`='N'
-  AND `contest_problem`.`contest_id`=$cid
+		FROM `contest_problem`,`problem`
+
+		WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` 
+
+		AND `contest_problem`.`contest_id`=$cid ORDER BY `contest_problem`.`num` 
                 ) problem
                 left join (select problem_id pid1,count(1) accepted from solution where result=4 and contest_id=$cid group by pid1) p1 on problem.pid=p1.pid1
                 left join (select problem_id pid2,count(1) submit from solution where contest_id=$cid  group by pid2) p2 on problem.pid=p2.pid2
-                order by pnum
-                ";
+		order by pnum
+                
+                ";//AND `problem`.`defunct`='N'
+
 		
 			$result=mysql_query($sql);
 			$view_problemset=Array();
@@ -145,8 +154,13 @@
 			mysql_free_result($result);
 
 }else{
-
-  $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 100";
+  $keyword="";
+  if(isset($_POST['keyword'])){
+      $keyword=mysql_real_escape_string($_POST['keyword']);
+  }
+  //echo "$keyword";
+  $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 1000";
+  $sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like '%$keyword%'  order by contest_id desc limit 1000;";
 			$result=mysql_query($sql);
 			
 			$view_contest=Array();
@@ -188,6 +202,7 @@
                                         $view_contest[$i][4]= "<span class=blue>$MSG_Public</span>";
                                 else
                                         $view_contest[$i][5]= "<span class=red>$MSG_Private</span>";
+				$view_contest[$i][6]=$row->user_id;
 
 
 			

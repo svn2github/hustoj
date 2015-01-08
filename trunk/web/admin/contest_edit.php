@@ -10,13 +10,16 @@ if (isset($_POST['syear']))
 //	echo $starttime;
 //	echo $endtime;
 	 
-	$title=mysql_real_escape_string($_POST['title']);
-	$description=mysql_real_escape_string($_POST['description']);
-	$private=mysql_real_escape_string($_POST['private']);
-	if (get_magic_quotes_gpc ()) {
-        $title = stripslashes ( $title);
+        $title=mysql_real_escape_string($_POST['title']);
+        $password=mysql_real_escape_string($_POST['password']);
+        $description=mysql_real_escape_string($_POST['description']);
+        $private=mysql_real_escape_string($_POST['private']);
+        if (get_magic_quotes_gpc ()) {
+      		  $title = stripslashes ( $title);
+	          $password = stripslashes ( $password);
         //$description = stripslashes ( $description);
-  }
+        }
+
    $lang=$_POST['lang'];
    $langmask=0;
    foreach($lang as $t){
@@ -27,7 +30,7 @@ if (isset($_POST['syear']))
 
 	$cid=intval($_POST['cid']);
 	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
-	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask WHERE `contest_id`=$cid";
+	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask  ,password='$password' WHERE `contest_id`=$cid";
 	//echo $sql;
 	mysql_query($sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
@@ -79,6 +82,7 @@ if (isset($_POST['syear']))
 	$starttime=$row['start_time'];
 	$endtime=$row['end_time'];
 	$private=$row['private'];
+	$password=$row['password'];
 	$langmask=$row['langmask'];
 	$description=$row['description'];
 	$title=htmlspecialchars($row['title']);
@@ -127,6 +131,7 @@ Public/Private:<select name=private>
 	<option value=0 <?php echo $private=='0'?'selected=selected':''?>>Public</option>
 	<option value=1 <?php echo $private=='1'?'selected=selected':''?>>Private</option>
 </select>
+Password:<input type=text name=password value="<?php echo htmlentities($password,ENT_QUOTES,'utf-8')?>">
 <br>Problems:<input class=input-xxlarge type=text size=60 name=cproblem value='<?php echo $plist?>'>
 
  Language:<select name="lang[]"  multiple="multiple"    style="height:220px">

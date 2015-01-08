@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <sys/resource.h>
-static int DEBUG = 0;
+
 #define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
@@ -72,7 +72,8 @@ static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
 
 static bool STOP = false;
-
+static int DEBUG = 0;
+static int ONCE = 0;
 static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
@@ -510,6 +511,7 @@ int daemon_init(void)
 
 int main(int argc, char** argv) {
 	DEBUG = (argc > 2);
+	ONCE = (argc > 3);
 	if (argc > 1)
 		strcpy(oj_home, argv[1]);
 	else
@@ -537,6 +539,7 @@ int main(int argc, char** argv) {
 			j = work();
 
 		}
+		if(ONCE) break;
 		sleep(sleep_time);
 		j = 1;
 	}

@@ -157,11 +157,11 @@ $store_id=0;
 if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 
 	if (!isset($pid)){
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,store_id)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len',$store_id)";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len')";
 	}else{
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,store_id)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid',$store_id)";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid')";
 	}
 	mysql_query($sql);
 	$insert_id=mysql_insert_id();

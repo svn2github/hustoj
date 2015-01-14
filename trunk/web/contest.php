@@ -80,7 +80,7 @@
 			$result=mysql_query($sql);
 			$rows_cnt=mysql_num_rows($result);
 			$contest_ok=true;
-			
+		        $password="";	
 		        if(isset($_POST['password'])) $password=$_POST['password'];
 			if (get_magic_quotes_gpc ()) {
 			        $password = stripslashes ( $password);

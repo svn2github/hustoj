@@ -63,6 +63,7 @@ mysql_free_result($result);
 $sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND result>=4 group by result order by result";
 	$result=mysql_query($sql);
 	$view_userstat=array();
+	$i=0;
 	while($row=mysql_fetch_array($result)){
 		$view_userstat[$i++]=$row;
 	}

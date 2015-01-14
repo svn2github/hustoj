@@ -20,6 +20,24 @@
               <li <?php if ($url=="status.php") echo " $ACTIVE";?>><a href="status.php"><?php echo $MSG_STATUS?></a></li>
               <li <?php if ($url=="ranklist.php") echo " $ACTIVE";?>><a href="ranklist.php"><?php echo $MSG_RANKLIST?></a></li>
               <li <?php if ($url=="contest.php") echo " $ACTIVE";?>><a href="contest.php"><?php echo $MSG_CONTEST?></a></li>
+<?php if(isset($_GET['cid'])){
+	$cid=intval($_GET['cid']);
+?>
+	      <li><a>[</a></li>
+              <li class="active" ><a href="contest.php?cid=<?php echo $cid?>">
+			<?php echo $MSG_PROBLEMS?>
+	      </a></li>
+               <li  class="active" ><a href="status.php?cid=<?php echo $cid?>">
+			<?php echo $MSG_STATUS?>
+	      </a></li>
+              <li  class="active" ><a href="contestrank.php?cid=<?php echo $cid?>">
+			<?php echo $MSG_RANKLIST?>
+	      </a></li>
+              <li  class="active" ><a href="conteststatistics.php?cid=<?php echo $cid?>">
+			<?php echo $MSG_STATISTICS?>
+	      </a></li>
+	      <li><a>]</a></li>
+<?php }?>
               <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">

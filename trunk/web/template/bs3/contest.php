@@ -46,6 +46,7 @@ echo "<span class=blue>Public</font>";
 else
 echo "&nbsp;&nbsp;<span class=red>Private</font>";
 ?>
+<br>
 [<a href='status.php?cid=<?php echo $view_cid?>'>Status</a>]
 [<a href='contestrank.php?cid=<?php echo $view_cid?>'>Standing</a>]
 [<a href='conteststatistics.php?cid=<?php echo $view_cid?>'>Statistics</a>]

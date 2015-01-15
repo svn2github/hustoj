@@ -114,8 +114,8 @@
 				}
 			}
 			if (!$contest_ok){
-            			 $view_errors=  "<h2>$MSG_PRIVATE_WARNING <a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
-            			 $view_errors.=  "<form method=post action='contest.php?cid=$cid'>输入密码进入比赛:<input class=input-mini type=password name=password><input class=btn type=submit></form>";
+            			 $view_errors=  "<h2>$MSG_PRIVATE_WARNING <br><a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
+            			 $view_errors.=  "<form method=post action='contest.php?cid=$cid'>$MSG_CONTEST $MSG_PASSWORD:<input class=input-mini type=password name=password><input class=btn type=submit></form>";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
 			}

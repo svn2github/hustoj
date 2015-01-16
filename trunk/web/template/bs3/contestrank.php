@@ -155,14 +155,14 @@ var r=parseInt(cell.innerHTML);
 if(r==1){
 cell.innerHTML="Winner";
 //cell.style.cssText="background-color:gold;color:red";
-cell.className="badge badge-warning";
+cell.className="badge btn-warning";
 }
 if(r>1&&r<=total*.05+1)
-cell.className="badge badge-warning";
+cell.className="badge btn-warning";
 if(r>total*.05+1&&r<=total*.20+1)
 cell.className="badge";
 if(r>total*.20+1&&r<=total*.45+1)
-cell.className="badge badge-error";
+cell.className="badge btn-danger";
 if(r>total*.45+1&&ac>0)
 cell.className="badge badge-info";
 }

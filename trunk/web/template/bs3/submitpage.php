@@ -67,7 +67,7 @@ Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contes
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
 Language:
-<select id="language" name="language">
+<select id="language" name="language" onchange="reloadtemplate(this);" >
 <?php
 $lang_count=count($language_ext);
 if(isset($_GET['langmask']))
@@ -220,6 +220,12 @@ s.value="<?php echo $MSG_SUBMIT?>("+count+")";
 t.value="<?php echo $MSG_TR?>("+count+")";
 window.setTimeout("resume();",1000);
 }
+}
+function reloadtemplate(lang){
+   document.cookie="lastlang="+lang.value;
+   //alert(document.cookie);
+   if(confirm("Do you want to reload template?\n You may lost all code that you've typed here!"))
+	document.location.reload();
 }
 </script>
   </body>

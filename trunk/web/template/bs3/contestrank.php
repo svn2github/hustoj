@@ -68,7 +68,7 @@ $aa=$aa>16?$aa:16;
 $aa=dechex($aa);
 $bg_color="ff$aa$aa";
 }
-echo "<td class=well style='padding:1px;background-color:$bg_color'>";
+echo "<td class=well style='background-color:#$bg_color'>";
 if(isset($U[$i])){
 if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0)
 echo sec2str($U[$i]->p_ac_sec[$j]);
@@ -173,5 +173,11 @@ cell.className="badge badge-info";
 }
 metal();
 </script>
+<style>
+.well{
+   background-image:none;
+   padding:1px;
+}
+</style>
   </body>
 </html>

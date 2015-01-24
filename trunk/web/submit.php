@@ -9,7 +9,6 @@ require_once("include/db_info.inc.php");
 require_once("include/const.inc.php");
   $now=strftime("%Y-%m-%d %H:%M",time());
 $user_id=$_SESSION['user_id'];
-
 if (isset($_POST['cid'])){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
@@ -37,9 +36,10 @@ mysql_free_result($res);
 
 
 
+$test_run=false;
 if (isset($_POST['id'])) {
 	$id=intval($_POST['id']);
-	
+        $test_run=($id<=0);
 }else if (isset($_POST['pid']) && isset($_POST['cid'])&&$_POST['cid']!=0){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
@@ -89,8 +89,8 @@ if (isset($_POST['id'])) {
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 */
+       $test_run=true;
 }
-
 $language=intval($_POST['language']);
 if ($language>count($language_name) || $language<0) $language=0;
 $language=strval($language);
@@ -107,6 +107,7 @@ $input_text=preg_replace ( "(\r\n)", "\n", $input_text );
 $source=mysql_real_escape_string($source);
 $input_text=mysql_real_escape_string($input_text);
 //$source=trim($source);
+if($test_run) $id=-$id;
 //use append Main code
 $prepend_file="$OJ_DATA/$id/prepend.$language_ext[$language]";
 if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($prepend_file)){
@@ -118,6 +119,7 @@ if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($append_file)){
 }
 //end of append 
 
+if($test_run) $id=0;
 
 $len=strlen($source);
 //echo $source;
@@ -173,7 +175,7 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);
 
-	if($id==0&&(!isset($cid)||$cid==0)){
+	if($test_run&&(!isset($cid)||$cid==0)){
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
 		mysql_query($sql);
 	}
@@ -214,7 +216,7 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
   if (isset($cid))
 	    $statusURI.="&cid=$cid";
 	 
-   if($id!=0||$cid!=0)	
+   if($id>0||$cid!=0)	
 	header("Location: $statusURI");
    else{
 	?>

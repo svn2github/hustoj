@@ -197,7 +197,7 @@ tb.innerHTML=loader;
 if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
 var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 var problem_id=document.getElementById(mark);
-problem_id.value=0;
+problem_id.value=-problem_id.value;
 document.getElementById("frmSolution").target="testRun";
 document.getElementById("frmSolution").submit();
 document.getElementById("TestRun").disabled=true;

@@ -108,6 +108,10 @@ $source=mysql_real_escape_string($source);
 $input_text=mysql_real_escape_string($input_text);
 //$source=trim($source);
 //use append Main code
+$prepend_file="$OJ_DATA/$id/prepend.$language_ext[$language]";
+if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($prepend_file)){
+     $source=mysql_real_escape_string(file_get_contents($prepend_file)."\n").$source;
+}
 $append_file="$OJ_DATA/$id/append.$language_ext[$language]";
 if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($append_file)){
      $source.=mysql_real_escape_string("\n".file_get_contents($append_file));

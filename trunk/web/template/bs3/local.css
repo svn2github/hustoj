@@ -1,0 +1,17 @@
+.toprow{
+   background-color:#9bc7ea;
+   color:#fff;
+}
+.navbar .navbar-nav li a{
+  color:#fff;
+}
+.navbar-header .navbar-brand{
+  color:#fff;
+}
+.dropdown-menu,.navbar-default{
+   background-color:#9bc7ea;
+   background-image: linear-gradient(to bottom, #e0e0ff 0px, #9bc7ea 100%);
+   background-repeat: repeat-x;
+   border-radius: 4px;
+   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);
+}

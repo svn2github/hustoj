@@ -52,7 +52,7 @@ Problem ID<input class="input-small search-query" type='text' name='id' size=5 s
 <thead>
 <tr class='toprow'>
 <th width='5'></th>
-<th width='120' ><A><?php echo $MSG_PROBLEM_ID?></A></th>
+<th width='120' ><?php echo $MSG_PROBLEM_ID?></th>
 <th><?php echo $MSG_TITLE?></th>
 <th width='10%'><?php echo $MSG_SOURCE?></th>
 <th style="cursor:hand" width=60 ><?php echo $MSG_AC?></th>

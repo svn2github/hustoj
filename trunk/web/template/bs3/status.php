@@ -98,7 +98,7 @@ echo "<input type=submit class='input' value='$MSG_SEARCH'></form>";
 <div id=center>
 <table id=result-tab class="table table-striped content-box-header" align=center width=80%>
 <thead>
-<tr class='success toprow' >
+<tr class='toprow' >
 <th ><?php echo $MSG_RUNID?>
 <th ><?php echo $MSG_USER?>
 <th ><?php echo $MSG_PROBLEM?>

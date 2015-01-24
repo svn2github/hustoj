@@ -19,7 +19,7 @@ header("Pragma: no-cache");
 		mysql_free_result($result);
 		return $retmsg;
 	}
-	$profile="";
+	$profile='';
 		if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
 				$profile.= "<i class=icon-user></i><li><a href=./modifypage.php>$MSG_USERINFO</a></li>&nbsp;<li><a href='./userinfo.php?user=$sid'><span id=red>$sid</span></a></li>";
@@ -48,5 +48,7 @@ header("Pragma: no-cache");
            $profile.= "<li><a href=./admin/>$MSG_ADMIN</a></li>&nbsp;";
 			
 			}
+	 //  $profile.="</ul></li>";
 		?>
 document.write("<?php echo ( $profile);?>");
+document.getElementById("profile").innerHTML="<?php echo  $sid?$sid:$MSG_LOGIN  ?>";

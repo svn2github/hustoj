@@ -1,6 +1,6 @@
 <?php $url=basename($_SERVER['REQUEST_URI']);?>
       <!-- Static navbar -->
-      <nav class="navbar navbar-default" role="navigation">
+      <nav class="navbar navbar-default" role="navigation" >
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -52,9 +52,14 @@
               </li>
 	-->
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+	    <ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="profile">Login</span><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
 <script src="<?php echo "template/$OJ_TEMPLATE/profile.php?".rand();?>" ></script>
               <!--<li><a href="../navbar-fixed-top/">Fixed top</a></li>-->
+	    </ul>
+	    </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

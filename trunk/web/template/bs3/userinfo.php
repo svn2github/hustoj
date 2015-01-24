@@ -70,8 +70,8 @@ backgroundColor: { colors: ["#fff", "#333"] }
 echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 ?>
 </caption>
-<tr bgcolor=#D7EBFF><td width=15%><?php echo $MSG_Number?><td width=25% align=center><?php echo $Rank?><td width=70% align=center>Solved Problems List</tr>
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></a>
+<tr ><td width=15%><?php echo $MSG_Number?><td width=25% align=center><?php echo $Rank?><td width=70% align=center>Solved Problems List</tr>
+<tr ><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></a>
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
@@ -85,14 +85,14 @@ mysql_free_result($result);
 <div id=submission style="width:600px;height:300px" ></div>
 </td>
 </tr>
-<tr bgcolor=#D7EBFF><td><?php echo $MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?php echo $user?>'><?php echo $Submit?></a></tr>
+<tr ><td><?php echo $MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?php echo $user?>'><?php echo $Submit?></a></tr>
 <?php
 foreach($view_userstat as $row){
 //i++;
-echo "<tr bgcolor=#D7EBFF><td>".$jresult[$row[0]]."<td align=center><a href=status.php?user_id=$user&jresult=".$row[0]." >".$row[1]."</a></tr>";
+echo "<tr ><td>".$jresult[$row[0]]."<td align=center><a href=status.php?user_id=$user&jresult=".$row[0]." >".$row[1]."</a></tr>";
 }
 //}
-echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
+echo "<tr id=pie ><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
 ?>
 <script language="javascript">
 var y= new Array ();
@@ -114,8 +114,8 @@ var mypie= new Pie("PieDiv");
 mypie.drawPie(y,x);
 //mypie.clearPie();
 </script>
-<tr bgcolor=#D7EBFF><td>School:<td align=center><?php echo $school?></tr>
-<tr bgcolor=#D7EBFF><td>Email:<td align=center><?php echo $email?></tr>
+<tr ><td>School:<td align=center><?php echo $school?></tr>
+<tr ><td>Email:<td align=center><?php echo $email?></tr>
 </table>
 <?php
 if(isset($_SESSION['administrator'])){

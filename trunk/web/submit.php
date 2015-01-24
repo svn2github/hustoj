@@ -43,7 +43,7 @@ if (isset($_POST['id'])) {
 }else if (isset($_POST['pid']) && isset($_POST['cid'])&&$_POST['cid']!=0){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
-        $test_run=($cid<=0);
+        $test_run=($cid<0);
 	if($test_run) $cid=-$cid;
 	// check user if private
 	$sql="SELECT `private` FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<='$now' AND `end_time`>'$now'";
@@ -82,6 +82,7 @@ if (isset($_POST['id'])) {
 	}else{
 		$row=mysql_fetch_object($result);
 		$id=intval($row->problem_id);
+		if($test_run) $id=-$id;
 		mysql_free_result($result);
 	}
 }else{

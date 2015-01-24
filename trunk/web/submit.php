@@ -26,7 +26,7 @@ if (isset($_POST['cid'])){
 //echo $sql;	
 
 $res=mysql_query($sql);
-if ($res&&mysql_num_rows($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid==0)||(isset($id)&&$id<=0))){
+if ($res&&mysql_num_rows($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
 		mysql_free_result($res);
 		$view_errors=  "Where do find this link? No such problem.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");
@@ -43,6 +43,8 @@ if (isset($_POST['id'])) {
 }else if (isset($_POST['pid']) && isset($_POST['cid'])&&$_POST['cid']!=0){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
+        $test_run=($cid<=0);
+	if($test_run) $cid=-$cid;
 	// check user if private
 	$sql="SELECT `private` FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<='$now' AND `end_time`>'$now'";
 	$result=mysql_query($sql);
@@ -216,7 +218,7 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
   if (isset($cid))
 	    $statusURI.="&cid=$cid";
 	 
-   if($id>0||$cid!=0)	
+   if(!$test_run)	
 	header("Location: $statusURI");
    else{
 	?>

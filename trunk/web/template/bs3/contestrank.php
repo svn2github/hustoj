@@ -178,6 +178,10 @@ metal();
    background-image:none;
    padding:1px;
 }
+td{
+   white-space:nowrap;
+
+}
 </style>
   </body>
 </html>

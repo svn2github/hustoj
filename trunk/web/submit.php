@@ -146,7 +146,7 @@ if ($len>65536){
 }
 
 // last submit
-$now=strftime("%Y-%m-%d %X",time()-10);
+$now=strftime("%Y-%m-%d %X",time()-1);
 $sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>'$now' order by `in_date` desc limit 1";
 $res=mysql_query($sql);
 if (mysql_num_rows($res)==1){
@@ -178,7 +178,7 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);
 
-	if($test_run&&(!isset($cid)||$cid==0)){
+	if($test_run){
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
 		mysql_query($sql);
 	}

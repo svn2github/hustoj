@@ -146,7 +146,13 @@ var loader="<img width=18 src=image/loader.gif>";
 var tag="span";
 if(ra[0]<4) tag="span disabled=true";
 else tag="a";
-tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+{
+	if(ra[0]==11)
+	
+	tb.innerHTML="<"+tag+" href='ceinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+	else
+	tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+}
 if(ra[0]<4)tb.innerHTML+=loader;
 tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
 tb.innerHTML+="Time:"+ra[2]+"ms";

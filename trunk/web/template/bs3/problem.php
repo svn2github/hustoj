@@ -46,7 +46,7 @@ echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 }
 echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-//echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
+echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
 if(isset($_SESSION['administrator'])){
 require_once("include/set_get_key.php");
 ?>

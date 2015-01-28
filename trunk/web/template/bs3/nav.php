@@ -1,4 +1,9 @@
-<?php $url=basename($_SERVER['REQUEST_URI']);?>
+<?php 
+	$url=basename($_SERVER['REQUEST_URI']);
+	$dir=basename(getcwd());
+	if($dir=="discuss3") $path_fix="../";
+	else $path_fix="";
+?>
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation" >
         <div class="container-fluid">
@@ -14,12 +19,11 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 	      <?php $ACTIVE="class='active'"?>
-<!--              <li <?php if ($url=="discus.php") echo " $ACTIVE";?>><a href="bbs.php"><?php echo $MSG_BBS?></a></li>
--->
-              <li <?php if ($url=="problemset.php") echo " $ACTIVE";?>><a href="problemset.php"><?php echo $MSG_PROBLEMS?></a></li>
-              <li <?php if ($url=="status.php") echo " $ACTIVE";?>><a href="status.php"><?php echo $MSG_STATUS?></a></li>
-              <li <?php if ($url=="ranklist.php") echo " $ACTIVE";?>><a href="ranklist.php"><?php echo $MSG_RANKLIST?></a></li>
-              <li <?php if ($url=="contest.php") echo " $ACTIVE";?>><a href="contest.php"><?php echo $MSG_CONTEST?></a></li>
+              <li <?php if ($dir=="discuss") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php"><?php echo $MSG_BBS?></a></li>
+              <li <?php if ($url=="problemset.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>problemset.php"><?php echo $MSG_PROBLEMS?></a></li>
+              <li <?php if ($url=="status.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>status.php"><?php echo $MSG_STATUS?></a></li>
+              <li <?php if ($url=="ranklist.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>ranklist.php"><?php echo $MSG_RANKLIST?></a></li>
+              <li <?php if ($url=="contest.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>contest.php"><?php echo $MSG_CONTEST?></a></li>
 <?php if(isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
 ?>

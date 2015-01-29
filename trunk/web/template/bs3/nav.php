@@ -28,16 +28,16 @@
 	$cid=intval($_GET['cid']);
 ?>
 	      <li><a>[</a></li>
-              <li class="active" ><a href="contest.php?cid=<?php echo $cid?>">
+              <li class="active" ><a href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_PROBLEMS?>
 	      </a></li>
-               <li  class="active" ><a href="status.php?cid=<?php echo $cid?>">
+               <li  class="active" ><a href="<?php echo $path_fix?>status.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_STATUS?>
 	      </a></li>
-              <li  class="active" ><a href="contestrank.php?cid=<?php echo $cid?>">
+              <li  class="active" ><a href="<?php echo $path_fix?>contestrank.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_RANKLIST?>
 	      </a></li>
-              <li  class="active" ><a href="conteststatistics.php?cid=<?php echo $cid?>">
+              <li  class="active" ><a href="<?php echo $path_fix?>conteststatistics.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_STATISTICS?>
 	      </a></li>
 	      <li><a>]</a></li>

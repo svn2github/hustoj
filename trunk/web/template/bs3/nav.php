@@ -60,7 +60,7 @@
 	    <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="profile">Login</span><span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-<script src="<?php echo "template/$OJ_TEMPLATE/profile.php?".rand();?>" ></script>
+<script src="<?php echo $path_fix."template/$OJ_TEMPLATE/profile.php?".rand();?>" ></script>
               <!--<li><a href="../navbar-fixed-top/">Fixed top</a></li>-->
 	    </ul>
 	    </li>

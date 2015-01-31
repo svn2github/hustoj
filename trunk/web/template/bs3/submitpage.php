@@ -208,6 +208,7 @@ document.getElementById("frmSolution").target="testRun";
 document.getElementById("frmSolution").submit();
 document.getElementById("TestRun").disabled=true;
 document.getElementById("Submit").disabled=true;
+problem_id.value=-problem_id.value;
 count=20;
 handler_interval= window.setTimeout("resume();",1000);
 }

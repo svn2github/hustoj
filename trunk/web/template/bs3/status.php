@@ -25,7 +25,7 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<div id=center class="input-append">
+<div align=center class="input-append">
 <?php
 ?>
 <form id=simform action="status.php" method="get">

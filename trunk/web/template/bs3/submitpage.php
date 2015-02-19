@@ -231,9 +231,13 @@ window.setTimeout("resume();",1000);
 function reloadtemplate(lang){
    document.cookie="lastlang="+lang.value;
    //alert(document.cookie);
+   var url=window.location.href;
+   var i=url.indexOf("sid=");
+   if(i!=-1) url=url.substring(0,i-1);
    if(confirm("Do you want to reload template?\n You may lost all code that you've typed here!"))
-	document.location.reload();
+        document.location.href=url;
 }
+
 </script>
   </body>
 </html>

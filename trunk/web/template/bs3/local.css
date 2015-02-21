@@ -1,17 +1,18 @@
 .toprow{
-   background-color:#9bc7ea;
-   color:#fff;
+   background-color:#79a3d5;
+   color:#ddd;
 }
 .navbar .navbar-nav li a{
-  color:#fff;
+  color:#ddd;
 }
 .navbar-header .navbar-brand{
-  color:#fff;
+  color:#ddd;
 }
 .dropdown-menu,.navbar-default{
-   background-color:#9bc7ea;
-   background-image: linear-gradient(to bottom, #e0e0ff 0px, #9bc7ea 100%);
+   background-color:#79a3d5;
+   background-image: linear-gradient(to bottom, #323a81 0px, #79a3d5 100%);
    background-repeat: repeat-x;
    border-radius: 4px;
    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);
 }
+

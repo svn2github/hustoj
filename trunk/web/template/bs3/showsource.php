@@ -53,6 +53,7 @@ $brush=strtolower($language_name[$slanguage]);
 if ($brush=='pascal') $brush='delphi';
 if ($brush=='obj-c') $brush='c';
 if ($brush=='freebasic') $brush='vb';
+if ($brush=='swift') $brush='csharp';
 echo "<pre class=\"brush:".$brush.";\">";
 ob_start();
 echo "/**************************************************************\n";

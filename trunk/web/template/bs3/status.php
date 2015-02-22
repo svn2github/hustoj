@@ -158,17 +158,21 @@ echo "'$result',";
 ?>''];
 //alert(judge_result[0]);
 function auto_refresh(){
-var tb=window.document.getElementById('result-tab');
+	var tb=window.document.getElementById('result-tab');
 //alert(tb);
-var rows=tb.rows;
-for(var i=1;i<rows.length;i++){
-var cell=rows[i].cells[3].innerHTML;
-var sid=rows[i].cells[0].innerHTML;
-if(cell.indexOf(judge_result[0])!=-1||cell.indexOf(judge_result[2])!=-1||cell.indexOf(judge_result[3])!=-1){
-//alert(sid);
-fresh_result(sid);
-}
-}
+	var rows=tb.rows;
+	for(var i=1;i<rows.length;i++){
+		var cell=rows[i].cells[3].children[0].innerHTML;
+		rows[i].cells[3].className="td_result";
+	//	alert(cell);
+		var sid=rows[i].cells[0].innerHTML;
+	        for(var j=0;j<4;j++){
+			if(cell.indexOf(judge_result[j])!=-1){
+//			   alert(sid);
+			   fresh_result(sid);
+			}
+		}
+	}
 }
 function findRow(solution_id){
 var tb=window.document.getElementById('result-tab');
@@ -216,8 +220,29 @@ xmlhttp.send();
 }
 //<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
 //alert(123);
-auto_refresh();
-</script>
+   var hj_ss="<select class='http_judge input-mini' length='2' name='result'>";
+	for(var i=0;i<10;i++){
+   		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
+	}
+   hj_ss+="</select>";
+   hj_ss+="<input name='manual' type='hidden'>";
+   hj_ss+="<input class='http_judge input-mini' size=5 title='输入判定原因与提示' name='explain' type='text'>";
+   hj_ss+="<input class='http_judge btn' name='manual' value='确定' type='submit'>";
 
+auto_refresh();
+$(".http_judge_form").append(hj_ss);
+$(".http_judge_form").submit(function (){
+   var sid=this.children[0].value;
+   $.post("admin/problem_judge.php",$(this).serialize(),function(data,textStatus){
+   		if(textStatus=="success")window.setTimeout("fresh_result("+sid+")",1000);
+	})
+   return false;
+});
+$(".td_result").mouseover(function (){
+//   $(this).children(".btn").hide(300);
+   $(this).children(".http_judge_form").show(600);
+});
+$(".http_judge_form").hide();
+</script>
   </body>
 </html>

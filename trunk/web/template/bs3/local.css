@@ -1,12 +1,9 @@
 .toprow{
    background-color:#79a3d5;
-   color:#ddd;
+   white-space:nowrap;
 }
-.navbar .navbar-nav li a{
-  color:#ddd;
-}
-.navbar-header .navbar-brand{
-  color:#ddd;
+.toprow,.navbar .navbar-nav li a,.navbar-header .navbar-brand{
+  color:#fff;
 }
 .dropdown-menu,.navbar-default{
    background-color:#79a3d5;
@@ -14,5 +11,8 @@
    background-repeat: repeat-x;
    border-radius: 4px;
    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);
+}
+.http_judge_form{
+   white-space:nowrap;
 }
 

@@ -212,9 +212,7 @@ else
 
        
        
-        if(isset($_SESSION['http_judge'])) {
-                  $view_status[$i][3]="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
-        }
+	$view_status[$i][3]="";
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Click_Detail'>".$MSG_Compile_Error."</a>";
         }else if (((intval($row['result'])==6&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
@@ -249,18 +247,12 @@ else
         if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].="<span class='btn btn-info'>". (100-$row['pass_rate']*100)."%</span>";
         if(isset($_SESSION['http_judge'])) {
-       //           $view_status[$i][3].="<form method=post action=admin/problem_judge.php><input type=hidden name=sid value='".$row['solution_id']."'>";
-                  $view_status[$i][3].="<select class='btn input-small' length=4 name=result>";
-                  $view_status[$i][3].="<option value=0>$MSG_Manual</a>";
-                  $view_status[$i][3].="<option value=4>$MSG_AC</a>";
-                  $view_status[$i][3].="<option value=6>$MSG_WA</a>";
-                  $view_status[$i][3].="</select>";
-                  $view_status[$i][3].="<input class='btn input-small' title='$MSG_Explain' type='text' name='explain'>";
-                  $view_status[$i][3].="<input class='btn'  type=submit name=manual value='$MSG_OK'>";
-                  $view_status[$i][3].="</form>";
+		 $view_status[$i][3].="<form class='http_judge_form' >
+					<input type=hidden name=sid value='".$row['solution_id']."'>";
+                 $view_status[$i][3].="</form>";
         }
-                                                        
-       
+	            
+
        
        
         if ($flag){

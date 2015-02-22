@@ -32,6 +32,7 @@ echo "<title>$MSG_PROBLEM $row->problem_id. -- $row->title</title>";
 echo "<center><h2>$id: $row->title</h2>";
 }else{
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+$id=$row->problem_id;
 echo "<title>$MSG_PROBLEM $PID[$pid]: $row->title </title>";
 echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row->title</h2>";
 }

@@ -1,7 +1,7 @@
 <?php session_start();
 if (!isset($_SESSION['user_id'])){
 	require_once("oj-header.php");
-	echo "<a href='loginpage.php'>Please Login First!</a>";
+	echo "<a href='loginpage.php'>$MSG_Login</a>";
 	require_once("oj-footer.php");
 	exit(0);
 }
@@ -149,7 +149,7 @@ if ($len>65536){
 $now=strftime("%Y-%m-%d %X",time()-1);
 $sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>'$now' order by `in_date` desc limit 1";
 $res=mysql_query($sql);
-if (mysql_num_rows($res)==1){
+if (0&&mysql_num_rows($res)==1){
 	//$row=mysql_fetch_row($res);
 	//$last=strtotime($row[0]);
 	//$cur=time();

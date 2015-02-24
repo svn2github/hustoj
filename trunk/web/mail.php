@@ -17,7 +17,7 @@ if (isset($_GET['title'])){
 }
 
 if (!isset($_SESSION['user_id'])){
-	echo "<a href=loginpage.php>Please Login First</a>";
+	echo "<a href=loginpage.php>$MSG_Login</a>";
 	require_once("oj-footer.php");
 	exit(0);
 }

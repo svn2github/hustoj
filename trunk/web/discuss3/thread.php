@@ -36,7 +36,8 @@
 		mysql_data_seek($result,$i);
 		$row=mysql_fetch_object($result);
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$_REQUEST['tid']}&action=";
-		$isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
+		if(isset($_SESSION['user_id'])) $isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
+		else $isuser=false;
 ?>
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
 	<td>

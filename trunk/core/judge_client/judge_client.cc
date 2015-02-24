@@ -152,7 +152,7 @@ void write_log(const char *fmt, ...) {
 	//      time_t          t = time(NULL);
 	//int l;
 	sprintf(buffer, "%s/log/client.log", oj_home);
-	FILE *fp = fopen(buffer, "a+");
+	FILE *fp = fopen(buffer, "ae+");
 	if (fp == NULL) {
 		fprintf(stderr, "openfile error!\n");
 		system("pwd");
@@ -285,7 +285,7 @@ void init_mysql_conf() {
 	strcpy(java_xms, "-Xms32m");
 	strcpy(java_xmx, "-Xmx256m");
 	sprintf(buf, "%s/etc/judge.conf", oj_home);
-	fp = fopen("./etc/judge.conf", "r");
+	fp = fopen("./etc/judge.conf", "re");
 	if (fp != NULL) {
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
 			read_buf(buf, "OJ_HOST_NAME", host_name);
@@ -376,7 +376,7 @@ const char * getFileNameFromPath(const char * path) {
 void make_diff_out(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 	FILE *out;
 	char buf[45];
-	out = fopen("diff.out", "a+");
+	out = fopen("diff.out", "ae+");
 	fprintf(out, "=================%s\n", getFileNameFromPath(path));
 	fprintf(out, "Right:\n%c", c1);
 	if (fgets(buf, 44, f1)) {
@@ -400,8 +400,8 @@ int compare_zoj(const char *file1, const char *file2) {
 	int ret = OJ_AC;
 	int c1, c2;
 	FILE * f1, *f2;
-	f1 = fopen(file1, "r");
-	f2 = fopen(file2, "r");
+	f1 = fopen(file1, "re");
+	f2 = fopen(file2, "re");
 	if (!f1 || !f2) {
 		ret = OJ_RE;
 	} else
@@ -472,12 +472,12 @@ int compare(const char *file1, const char *file2) {
 	int PEflg;
 	s1=new char[STD_F_LIM+512];
 	s2=new char[STD_F_LIM+512];
-	if (!(f1=fopen(file1,"r")))
+	if (!(f1=fopen(file1,"re")))
 	return OJ_AC;
 	for (p1=s1;EOF!=fscanf(f1,"%s",p1);)
 	while (*p1) p1++;
 	fclose(f1);
-	if (!(f2=fopen(file2,"r")))
+	if (!(f2=fopen(file2,"re")))
 	return OJ_RE;
 	for (p2=s2;EOF!=fscanf(f2,"%s",p2);)
 	while (*p2) p2++;
@@ -489,8 +489,8 @@ int compare(const char *file1, const char *file2) {
 
 		return OJ_WA;
 	} else {
-		f1=fopen(file1,"r");
-		f2=fopen(file2,"r");
+		f1=fopen(file1,"re");
+		f2=fopen(file2,"re");
 		PEflg=0;
 		while (PEflg==0 && fgets(s1,STD_F_LIM,f1) && fgets(s2,STD_F_LIM,f2)) {
 			delnextline(s1);
@@ -597,7 +597,7 @@ void update_solution(int solution_id, int result, int time, int memory, int sim,
 void _addceinfo_mysql(int solution_id) {
 	char sql[(1 << 16)], *end;
 	char ceinfo[(1 << 16)], *cend;
-	FILE *fp = fopen("ce.txt", "r");
+	FILE *fp = fopen("ce.txt", "re");
 	snprintf(sql, (1 << 16) - 1, "DELETE FROM compileinfo WHERE solution_id=%d",
 			solution_id);
 	mysql_real_query(conn, sql, strlen(sql));
@@ -660,7 +660,7 @@ void _addceinfo_http(int solution_id) {
 
 	char ceinfo[(1 << 16)], *cend;
 	char * ceinfo_encode;
-	FILE *fp = fopen("ce.txt", "r");
+	FILE *fp = fopen("ce.txt", "re");
 
 	cend = ceinfo;
 	while (fgets(cend, 1024, fp)) {
@@ -670,7 +670,7 @@ void _addceinfo_http(int solution_id) {
 	}
 	fclose(fp);
 	ceinfo_encode = url_encode(ceinfo);
-	FILE * ce = fopen("ce.post", "w");
+	FILE * ce = fopen("ce.post", "we");
 	fprintf(ce, "addceinfo=1&sid=%d&ceinfo=%s", solution_id, ceinfo_encode);
 	fclose(ce);
 	free(ceinfo_encode);
@@ -693,7 +693,7 @@ void addceinfo(int solution_id) {
 void _addreinfo_mysql(int solution_id, const char * filename) {
 	char sql[(1 << 16)], *end;
 	char reinfo[(1 << 16)], *rend;
-	FILE *fp = fopen(filename, "r");
+	FILE *fp = fopen(filename, "re");
 	snprintf(sql, (1 << 16) - 1, "DELETE FROM runtimeinfo WHERE solution_id=%d",
 			solution_id);
 	mysql_real_query(conn, sql, strlen(sql));
@@ -726,7 +726,7 @@ void _addreinfo_http(int solution_id, const char * filename) {
 
 	char reinfo[(1 << 16)], *rend;
 	char * reinfo_encode;
-	FILE *fp = fopen(filename, "r");
+	FILE *fp = fopen(filename, "re");
 
 	rend = reinfo;
 	while (fgets(rend, 1024, fp)) {
@@ -736,7 +736,7 @@ void _addreinfo_http(int solution_id, const char * filename) {
 	}
 	fclose(fp);
 	reinfo_encode = url_encode(reinfo);
-	FILE * re = fopen("re.post", "w");
+	FILE * re = fopen("re.post", "we");
 	fprintf(re, "addreinfo=1&sid=%d&reinfo=%s", solution_id, reinfo_encode);
 	fclose(re);
 	free(reinfo_encode);
@@ -851,7 +851,7 @@ int compile(int lang) {
 			"-fconstant-string-class=NSConstantString", "-I",
 			"/usr/include/GNUstep/", "-L", "/usr/lib/GNUstep/Libraries/",
 			"-lobjc", "-lgnustep-base", NULL };
-	const char * CP_BS[] = { "fbc", "Main.bas", NULL };
+	const char * CP_BS[] = { "fbc","-lang","qb", "Main.bas", NULL };
 	const char * CP_CLANG[]={"clang", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
 	         		"-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_CLANG_CPP[]={"clang++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
@@ -985,7 +985,7 @@ int get_proc_status(int pid, const char * mark) {
 	char fn[BUFFER_SIZE], buf[BUFFER_SIZE];
 	int ret = 0;
 	sprintf(fn, "/proc/%d/status", pid);
-	pf = fopen(fn, "r");
+	pf = fopen(fn, "re");
 	int m = strlen(mark);
 	while (pf && fgets(buf, BUFFER_SIZE - 1, pf)) {
 
@@ -1032,7 +1032,7 @@ void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	if (DEBUG)
 		printf("Main=%s", src_pth);
-	FILE *fp_src = fopen(src_pth, "w");
+	FILE *fp_src = fopen(src_pth, "we");
 	fprintf(fp_src, "%s", row[0]);
 	mysql_free_result(res);
 	fclose(fp_src);

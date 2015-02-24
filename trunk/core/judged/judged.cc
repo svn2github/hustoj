@@ -91,7 +91,7 @@ void write_log(const char *fmt, ...) {
 //	time_t          t = time(NULL);
 //	int             l;
 	sprintf(buffer, "%s/log/client.log", oj_home);
-	FILE *fp = fopen(buffer, "a+");
+	FILE *fp = fopen(buffer, "ae+");
 	if (fp == NULL) {
 		fprintf(stderr, "openfile error!\n");
 		system("pwd");
@@ -155,7 +155,7 @@ void init_mysql_conf() {
 	oj_tot = 1;
 	oj_mod = 0;
 	strcpy(oj_lang_set, "0,1,2,3,4,5,6,7,8,9,10");
-	fp = fopen("./etc/judge.conf", "r");
+	fp = fopen("./etc/judge.conf", "re");
 	if (fp != NULL) {
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
 			read_buf(buf, "OJ_HOST_NAME", host_name);

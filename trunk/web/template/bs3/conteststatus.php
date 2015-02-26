@@ -25,39 +25,43 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<div id=center>
+<div align=center class="input-append">
 <?php
 ?>
-<form id=simform action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input class="input-small" style="height:24px" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
-<?php echo $MSG_USER?>:<input class="input-mini" style="height:24px" type=text size=4 name=user_id value='<?php echo $user_id?>'>
+<form id=simform class=form-inline action="status.php" method="get">
+<?php echo $MSG_PROBLEM_ID?>:<input class="form-control" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
+<?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo $user_id?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?php echo $MSG_LANG?>:<select class="input-small" size="1" name="language">
+<?php echo $MSG_LANG?>:<select class="form-control" size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
-if ($language<0||$language>9) $language=-1;
+if ($language<0||$language>=count($language_name)) $language=-1;
 if ($language==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
-for ($i=0;$i<10;$i++){
-if ($i==$language) echo "<option value=$i selected>$language_name[$i]</option>";
-else echo "<option value=$i>$language_name[$i]</option>";
+$i=0;
+foreach ($language_name as $lang){
+if ($i==$language)
+echo "<option value=$i selected>$language_name[$i]</option>";
+else
+echo "<option value=$i>$language_name[$i]</option>";
+$i++;
 }
 ?>
 </select>
-<?php echo $MSG_RESULT?>:<select class="input-small" size="1" name="jresult">
+<?php echo $MSG_RESULT?>:<select class="form-control" size="1" name="jresult">
 <?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
 else $jresult_get=-1;
 if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
-if ($jresult_get!=-1){
+/*if ($jresult_get!=-1){
 $sql=$sql."AND `result`='".strval($jresult_get)."' ";
 $str2=$str2."&jresult=".strval($jresult_get);
-}
+}*/
 if ($jresult_get==-1) echo "<option value='-1' selected>All</option>";
 else echo "<option value='-1'>All</option>";
 for ($j=0;$j<12;$j++){
 $i=($j+4)%12;
-if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$judge_result[$i]."</option>";
-else echo "<option value='".strval($i)."'>".$judge_result[$i]."</option>";
+if ($i==$jresult_get) echo "<option value='".strval($jresult_get)."' selected>".$jresult[$i]."</option>";
+else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>";
 }
 echo "</select>";
 ?>
@@ -68,7 +72,7 @@ $showsim=intval($_GET['showsim']);
 else
 $showsim=0;
 echo "SIM:
-<select name=showsim onchange=\"document.getElementById('simform').submit();\">
+<select id=\"appendedInputButton\" class=\"form-control\" name=showsim onchange=\"document.getElementById('simform').submit();\">
 <option value=0 ".($showsim==0?'selected':'').">All</option>
 <option value=50 ".($showsim==50?'selected':'').">50</option>
 <option value=60 ".($showsim==60?'selected':'').">60</option>
@@ -88,13 +92,13 @@ echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
 //echo "<input type=submit>";
 */
 }
-echo "<input class=btn type=submit value='$MSG_SEARCH' /></form>";
+echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 ?>
 </div>
 <div id=center>
 <table id=result-tab class="table table-striped content-box-header" align=center width=80%>
 <thead>
-<tr class='success toprow'>
+<tr class='toprow' >
 <th ><?php echo $MSG_RUNID?>
 <th ><?php echo $MSG_USER?>
 <th ><?php echo $MSG_PROBLEM?>
@@ -110,7 +114,10 @@ echo "<input class=btn type=submit value='$MSG_SEARCH' /></form>";
 <?php
 $cnt=0;
 foreach($view_status as $row){
-echo "<tr>";
+if ($cnt)
+echo "<tr class='oddrow'>";
+else
+echo "<tr class='evenrow'>";
 foreach($row as $table_cell){
 echo "<td>";
 echo "\t".$table_cell;
@@ -132,11 +139,16 @@ echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&n
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
 </div>
-<div id=foot>
-<?php require_once("oj-footer.php");?>
-</div><!--end foot-->
-</div><!--end main-->
-</div><!--end wrapper-->
+
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
 <script type="text/javascript">
 var i=0;
 var judge_result=[<?php
@@ -145,6 +157,23 @@ echo "'$result',";
 }
 ?>''];
 //alert(judge_result[0]);
+function auto_refresh(){
+	var tb=window.document.getElementById('result-tab');
+//alert(tb);
+	var rows=tb.rows;
+	for(var i=1;i<rows.length;i++){
+		var cell=rows[i].cells[3].children[0].innerHTML;
+		rows[i].cells[3].className="td_result";
+	//	alert(cell);
+		var sid=rows[i].cells[0].innerHTML;
+	        for(var j=0;j<4;j++){
+			if(cell.indexOf(judge_result[j])!=-1){
+//			   alert(sid);
+			   fresh_result(sid);
+			}
+		}
+	}
+}
 function findRow(solution_id){
 var tb=window.document.getElementById('result-tab');
 var rows=tb.rows;
@@ -189,16 +218,31 @@ window.location.reload();
 xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 xmlhttp.send();
 }
-<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+//<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+//alert(123);
+   var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
+	for(var i=0;i<10;i++){
+   		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
+	}
+   hj_ss+="</select>";
+   hj_ss+="<input name='manual' type='hidden'>";
+   hj_ss+="<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
+   hj_ss+="<input class='http_judge btn' name='manual' value='确定' type='submit'>";
+
+auto_refresh();
+$(".http_judge_form").append(hj_ss);
+$(".http_judge_form").submit(function (){
+   var sid=this.children[0].value;
+   $.post("admin/problem_judge.php",$(this).serialize(),function(data,textStatus){
+   		if(textStatus=="success")window.setTimeout("fresh_result("+sid+")",1000);
+	})
+   return false;
+});
+$(".td_result").mouseover(function (){
+//   $(this).children(".btn").hide(300);
+   $(this).children(".http_judge_form").show(600);
+});
+$(".http_judge_form").hide();
 </script>
-      </div>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
   </body>
 </html>

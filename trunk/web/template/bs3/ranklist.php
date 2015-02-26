@@ -28,9 +28,9 @@
 	<table align=center width=90%>
 <thead>
 <tr><td colspan=3 align=left>
-<form action=userinfo.php>
-<?php echo $MSG_USER?><input name=user>
-<input type=submit value=Go>
+<form class="form-inline" action=userinfo.php>
+<?php echo $MSG_USER?><input class="form-control" name=user>
+<input type=submit class="form-control" value=Go>
 </form></td><td colspan=3 align=right>
 <a href=ranklist.php?scope=d>Day</a>
 <a href=ranklist.php?scope=w>Week</a>

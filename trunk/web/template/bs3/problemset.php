@@ -37,14 +37,14 @@ else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
 <table>
 <tr align='center' class='evenrow'><td width='5'></td>
 <td  colspan='1'>
-<form class=form-search action=problem.php>
-Problem ID<input class="input-small search-query" type='text' name='id' size=5 style="height:24px">
-<button class="btn btn-mini" type='submit' >Go</button></form>
+<form class=form-inline action=problem.php>
+<input class="form-control search-query" type='text' name='id'  placeholder="Problem ID">
+<button class="form-control" type='submit' >Go</button></form>
 </td>
 <td  colspan='1'>
-<form class="form-search">
-<input style="height:24px" type="text" name=search class="input-large search-query">
-<button type="submit" class="btn btn-mini"><?php echo $MSG_SEARCH?></button>
+<form class="form-search form-inline">
+<input type="text" name=search class="form-control search-query" placeholder="Keywords Title or Source">
+<button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 </form>
 </td></tr>
 </table>

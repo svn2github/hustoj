@@ -43,7 +43,7 @@ id: "source"
 ,word_wrap: true
 ,language: "en"
 ,syntax: "cpp"
-,font_size: "8"
+,font_size: "12"
 ,syntax_selection_allow: "basic,c,cpp,java,pas,perl,php,python,ruby"
 ,toolbar: "search, go_to_line, fullscreen, |, undo, redo, |, select_font,syntax_selection,|, change_smooth_selection, highlight, reset_highlight, word_wrap, |, help"
 });

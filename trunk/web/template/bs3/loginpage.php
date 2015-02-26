@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>  
+    <title>Login</title>  
     <?php include("template/$OJ_TEMPLATE/css.php");?>	    
 
 
@@ -25,22 +25,26 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-	 <form action=login.php method=post>
-<center>
-<table width=480 algin=center>
-<tr><td width=240><?php echo $MSG_USER_ID?>:<td width=200><input style="height:24px" name="user_id" type="text" size=20></tr>
-<tr><td><?php echo $MSG_PASSWORD?>:<td><input name="password" type="password" size=20 style="height:24px"></tr>
+
+<form action="login.php" method="post" role="form" class="form-horizontal">
+	<div class="form-group">
+	<label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label><div class="col-sm-8"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>" type="text"></div>						</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label><div class="col-sm-8"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>" type="password"></div>						</div>
 <?php if($OJ_VCODE){?>
-<tr><td><?php echo $MSG_VCODE?>:</td>
-<td><input name="vcode" size=4 type=text style="height:24px"><img alt="click to change" src=vcode.php onclick="this.src='vcode.php?<?php echo rand();?>#'+Math.random()">*</td>
-</tr>
+
+	<div class="form-group">
+	<label class="col-sm-4 control-label"><?php echo $MSG_VCODE?></label><div class="col-sm-4"><input name="vcode" class="form-control" type="text"></div><div class="col-sm-4"><img alt="click to change" src="vcode.php" onclick="this.src='vcode.php#'+Math.random()" height="30px">*</div>						</div>
 <?php }?>
-<tr><td colspan=3><input name="submit" type="submit" size=10 value="Submit">
-<a href="lostpassword.php">Lost Password</a>
-</tr>
-</table>
-<center>
-</form>
+	<div class="form-group">
+	<div class="col-sm-offset-4 col-sm-4">
+	<button name="submit" type="submit" class="btn btn-default btn-block">Submit</button>
+	</div>
+	<div class="col-sm-4">
+	<a class="btn btn-default btn-block" href="lostpassword.php">Lost Password</a>
+	</div>
+	</div>
+</form>					
       </div>
 
 

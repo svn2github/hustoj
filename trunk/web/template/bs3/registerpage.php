@@ -30,16 +30,16 @@
 <center><table>
 <tr><td colspan=2 height=40 width=500>&nbsp;&nbsp;&nbsp;<?php echo $MSG_REG_INFO?></td></tr>
 <tr><td width=25%><?php echo $MSG_USER_ID?>:</td>
-<td width=75%><input name="user_id" size=20 type=text>*</td>
+<td width=75%><input name="user_id" size=20 type=text placeholder="*"></td>
 </tr>
 <tr><td><?php echo $MSG_NICK?>:</td>
 <td><input name="nick" size=50 type=text></td>
 </tr>
 <tr><td><?php echo $MSG_PASSWORD?>:</td>
-<td><input name="password" size=20 type=password>*</td>
+<td><input name="password" size=20 type=password placeholder="*"></td>
 </tr>
 <tr><td><?php echo $MSG_REPEAT_PASSWORD?>:</td>
-<td><input name="rptpassword" size=20 type=password>*</td>
+<td><input name="rptpassword" size=20 type=passwordi placeholder="*"></td>
 </tr>
 <tr><td><?php echo $MSG_SCHOOL?>:</td>
 <td><input name="school" size=30 type=text></td>
@@ -53,9 +53,7 @@
 </tr>
 <?php }?>
 <tr><td></td>
-<td><input value="Submit" name="submit" type="submit">
-&nbsp; &nbsp;
-<input value="Reset" name="reset" type="reset"></td>
+<td><input value="Submit" name="submit" type="submit"><input value="Reset" name="reset" type="reset"></td>
 </tr>
 </table></center>
 <br><br>
@@ -70,5 +68,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
+   <script>
+         $("input").attr("class","form-control");
+   </script>
   </body>
 </html>

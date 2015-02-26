@@ -28,11 +28,11 @@
 <div align=center class="input-append">
 <?php
 ?>
-<form id=simform action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input class="input-mini" style="height:24px" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
-<?php echo $MSG_USER?>:<input class="input-mini" style="height:24px" type=text size=4 name=user_id value='<?php echo $user_id?>'>
+<form id=simform class=form-inline action="status.php" method="get">
+<?php echo $MSG_PROBLEM_ID?>:<input class="form-control" type=text size=4 name=problem_id value='<?php echo $problem_id?>'>
+<?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo $user_id?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?php echo $MSG_LANG?>:<select class="input-small" size="1" name="language">
+<?php echo $MSG_LANG?>:<select class="form-control" size="1" name="language">
 <?php if (isset($_GET['language'])) $language=$_GET['language'];
 else $language=-1;
 if ($language<0||$language>=count($language_name)) $language=-1;
@@ -48,7 +48,7 @@ $i++;
 }
 ?>
 </select>
-<?php echo $MSG_RESULT?>:<select class="input-small" size="1" name="jresult">
+<?php echo $MSG_RESULT?>:<select class="form-control" size="1" name="jresult">
 <?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
 else $jresult_get=-1;
 if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
@@ -72,7 +72,7 @@ $showsim=intval($_GET['showsim']);
 else
 $showsim=0;
 echo "SIM:
-<select id=\"appendedInputButton\" class=\"input-mini\" name=showsim onchange=\"document.getElementById('simform').submit();\">
+<select id=\"appendedInputButton\" class=\"form-control\" name=showsim onchange=\"document.getElementById('simform').submit();\">
 <option value=0 ".($showsim==0?'selected':'').">All</option>
 <option value=50 ".($showsim==50?'selected':'').">50</option>
 <option value=60 ".($showsim==60?'selected':'').">60</option>
@@ -92,7 +92,7 @@ echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
 //echo "<input type=submit>";
 */
 }
-echo "<input type=submit class='input' value='$MSG_SEARCH'></form>";
+echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 ?>
 </div>
 <div id=center>
@@ -220,13 +220,13 @@ xmlhttp.send();
 }
 //<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
 //alert(123);
-   var hj_ss="<select class='http_judge input-mini' length='2' name='result'>";
+   var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
 	for(var i=0;i<10;i++){
    		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
 	}
    hj_ss+="</select>";
    hj_ss+="<input name='manual' type='hidden'>";
-   hj_ss+="<input class='http_judge input-mini' size=5 title='输入判定原因与提示' name='explain' type='text'>";
+   hj_ss+="<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
    hj_ss+="<input class='http_judge btn' name='manual' value='确定' type='submit'>";
 
 auto_refresh();

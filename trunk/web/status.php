@@ -247,7 +247,7 @@ else
         if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].="<span class='btn btn-info'>". (100-$row['pass_rate']*100)."%</span>";
         if(isset($_SESSION['http_judge'])) {
-		 $view_status[$i][3].="<form class='http_judge_form' >
+		 $view_status[$i][3].="<form class='http_judge_form form-inline' >
 					<input type=hidden name=sid value='".$row['solution_id']."'>";
                  $view_status[$i][3].="</form>";
         }

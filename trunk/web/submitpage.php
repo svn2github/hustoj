@@ -8,10 +8,10 @@
 	$view_title=$MSG_SUBMIT;
  if (!isset($_SESSION['user_id'])){
 
-	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
-	require("template/".$OJ_TEMPLATE."/error.php");
-	exit(0);
-//	$_SESSION['user_id']="Guest";
+//	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+//	require("template/".$OJ_TEMPLATE."/error.php");
+//	exit(0);
+	$_SESSION['user_id']="Guest";
 }
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
@@ -37,7 +37,7 @@ if (isset($_GET['id'])){
 	if (isset($_SESSION['source_browser'])) $ok=true;
 	mysql_free_result($result);
 	if ($ok==true){
-		$sql="SELECT `source` FROM `source_code` WHERE `solution_id`='".$sid."'";
+		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`='".$sid."'";
 		$result=mysql_query($sql);
 		$row=mysql_fetch_object($result);
 		if($row)

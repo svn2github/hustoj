@@ -109,7 +109,7 @@ if(get_magic_quotes_gpc()){
 $input_text=preg_replace ( "(\r\n)", "\n", $input_text );
 $source=mysql_real_escape_string($source);
 $input_text=mysql_real_escape_string($input_text);
-//$source=trim($source);
+$source_user=$source;
 if($test_run) $id=-$id;
 //use append Main code
 $prepend_file="$OJ_DATA/$id/prepend.$language_ext[$language]";
@@ -174,6 +174,8 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 	}
 	mysql_query($sql);
 	$insert_id=mysql_insert_id();
+	$sql="INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES('$insert_id','$source_user')";
+	mysql_query($sql);
 
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$source')";
 	mysql_query($sql);

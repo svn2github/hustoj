@@ -37,7 +37,7 @@ $view_source="No source code available!";
 if (isset($_SESSION['user_id'])&&$row && $row->user_id==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 
-		$sql="SELECT `source` FROM `source_code` WHERE `solution_id`=".$id;
+		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=".$id;
 		$result=mysql_query($sql);
 		$row=mysql_fetch_object($result);
 		if($row)

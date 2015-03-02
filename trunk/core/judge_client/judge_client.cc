@@ -102,6 +102,7 @@ static char java_xms[BUFFER_SIZE];
 static char java_xmx[BUFFER_SIZE];
 static int sim_enable = 0;
 static int oi_mode = 0;
+static int full_diff = 0;
 static int use_max_time = 0;
 
 static int http_judge = 0;
@@ -303,6 +304,7 @@ void init_mysql_conf() {
 			read_buf(buf, "OJ_HTTP_USERNAME", http_username);
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
 			read_int(buf, "OJ_OI_MODE", &oi_mode);
+			read_int(buf, "OJ_FULL_DIFF", &full_diff);
 			read_int(buf, "OJ_SHM_RUN", &shm_run);
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 
@@ -373,22 +375,22 @@ const char * getFileNameFromPath(const char * path) {
 	}
 	return path;
 }
-void make_diff_out(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
-	FILE *out;
-	char buf[45];
-	out = fopen("diff.out", "ae+");
-	fprintf(out, "=================%s\n", getFileNameFromPath(path));
-	fprintf(out, "Right:\n%c", c1);
-	if (fgets(buf, 44, f1)) {
-		fprintf(out, "%s", buf);
-	}
-	fprintf(out, "\n-----------------\n");
-	fprintf(out, "Your:\n%c", c2);
-	if (fgets(buf, 44, f2)) {
-		fprintf(out, "%s", buf);
-	}
-	fprintf(out, "\n=================\n");
-	fclose(out);
+
+void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
+	execute_cmd("echo '------test in 10 lines------'>>diff.out");
+	execute_cmd("head -10 data.in>>diff.out");
+	execute_cmd("echo '------test out 10 lines-----'>>diff.out");
+	execute_cmd("head -10 '%s'>>diff.out",path);
+	execute_cmd("echo '------user out 10 lines-----'>>diff.out");
+	execute_cmd("head -10 user.out>>diff.out");
+	execute_cmd("echo '------diff out 10 lines-----'>>diff.out");
+	execute_cmd("diff '%s' user.out|head -10>>diff.out",path);
+	execute_cmd("echo '=============================='>>diff.out");
+
+}
+void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
+	execute_cmd("echo '=======diff out 100 lines====='>>diff.out");
+	execute_cmd("diff '%s' user.out|head -100>>diff.out",path);
 }
 
 /*
@@ -443,8 +445,13 @@ int compare_zoj(const char *file1, const char *file2) {
 				}
 			}
 		}
-	end: if (ret == OJ_WA)
-		make_diff_out(f1, f2, c1, c2, file1);
+	end: 
+	if (ret == OJ_WA||ret==OJ_PE){
+		if(full_diff)
+			make_diff_out_full(f1, f2, c1, c2, file1);
+		else
+			make_diff_out_simple(f1, f2, c1, c2, file1);
+	}
 	if (f1)
 		fclose(f1);
 	if (f2)

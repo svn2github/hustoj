@@ -141,6 +141,7 @@ CREATE TABLE  `source_code` (
   `source` text NOT NULL,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+create table source_code_user like source_code;
 
 CREATE TABLE  `topic` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,

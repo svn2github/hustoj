@@ -147,6 +147,7 @@ if($OJ_MEMCACHE){
 $user_cnt=0;
 $user_name='';
 $U=array();
+$U[$user_cnt]=new TM();
 for ($i=0;$i<$rows_cnt;$i++){
         if($OJ_MEMCACHE)
                 $row=$result[$i];

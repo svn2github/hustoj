@@ -12,7 +12,8 @@ else
 	$cid=0;
 if($OJ_BBS=="discuss"){
   echo ("<script>location.href='discuss/discuss.php?".$_SERVER["QUERY_STRING"]."';</script>");
-
+}else if ($OJ_BBS=="discuss3"){
+   echo ("<script>location.href='discuss3/discuss.php?".$_SERVER["QUERY_STRING"]."';</script>");
 }else{
 	$url="";
 	if(isset($_GET['pid'])){

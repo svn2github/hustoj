@@ -39,7 +39,7 @@
 <td><input name="password" size=20 type=password placeholder="*"></td>
 </tr>
 <tr><td><?php echo $MSG_REPEAT_PASSWORD?>:</td>
-<td><input name="rptpassword" size=20 type=passwordi placeholder="*"></td>
+<td><input name="rptpassword" size=20 type=password placeholder="*"></td>
 </tr>
 <tr><td><?php echo $MSG_SCHOOL?>:</td>
 <td><input name="school" size=30 type=text></td>

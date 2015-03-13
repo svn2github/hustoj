@@ -33,6 +33,7 @@
 		$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		echo "<title>$MSG_PROBLEM $PID[$pid]: $row->title </title>";
 		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row->title</h2>";
+		$id=$row->problem_id;
 	}
 	echo "<span class=green>$MSG_Time_Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
 	echo "<span class=green>$MSG_Memory_Limit: </span>".$row->memory_limit." MB";

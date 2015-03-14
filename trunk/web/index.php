@@ -14,7 +14,7 @@
 			."FROM `news` "
 			."WHERE `defunct`!='Y'"
 			."ORDER BY `importance` ASC,`time` DESC "
-			."LIMIT 5";
+			."LIMIT 50";
 	$result=mysql_query($sql);//mysql_escape_string($sql));
 	if (!$result){
 		$view_news= "<h3>No News Now!</h3>";

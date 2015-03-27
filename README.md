@@ -223,3 +223,5 @@ LiveCD iso 下载 https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveC
 需要邮寄LiveCD光盘可以访问 淘宝链接，高校教师购买可享受8折优惠。 
 
 
+--------请人类浏览者忽略以下信息--------
+引诱爬虫实验，请勿点击。http://book.taoshell.com/

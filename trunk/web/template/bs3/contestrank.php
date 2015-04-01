@@ -28,7 +28,17 @@
 <?php
 $rank=1;
 ?>
-<center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
+<center><h3>Contest RankList -- <?php echo $title?></h3>
+<a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
+<?php
+if($OJ_MEMCACHE){
+  ?>
+<a href="contestrank2.php?cid=<?php echo $cid?>" >Replay</a>
+
+<?php
+}
+ ?>
+</center>
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User</th><th width=10%>Nick</th><th width=5%>Solved</th><th width=5%>Penalty</th>
 <?php
 for ($i=0;$i<$pid_cnt;$i++)

@@ -210,6 +210,13 @@ function sec2str(sec){
    ret+=parseInt(sec%60);
    return ret;
 }
+function str2sec(str){
+   var s=str.split(":");
+   var h=parseInt(s[0]);
+   var m=parseInt(s[1]);
+   var s=parseInt(s[2]);
+   return h*3600+m*60+s;
+}
 function update(tab,row,solution){
  var col=parseInt(solution["num"])+5;
  var old=row.cells[col].innerHTML;
@@ -221,9 +228,9 @@ function update(tab,row,solution){
 		var pt=time;
 		time= parseInt(solution["in_date"])-time*1200;
 
-        	penalty=parseInt(row.cells[4].innerHTML);
+        	penalty=str2sec(row.cells[4].innerHTML);
  		penalty+=time;
- 		row.cells[4].innerHTML=penalty;
+ 		row.cells[4].innerHTML=sec2str(penalty);
  		row.cells[col].innerHTML=sec2str( parseInt(solution["in_date"]));
 		if(pt!=0)
 	 		row.cells[col].innerHTML+="("+pt+")";
@@ -295,7 +302,7 @@ function newrow(tab,solution){
   }
   row+="</td>";
   var n=tab[0].rows[0].cells.length;
-  row+="<td>"+time+"</td>";
+  row+="<td>"+sec2str(time)+"</td>";
 
   for(var i=5;i<n;i++) {
 	if(i-5==solution['num'])

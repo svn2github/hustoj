@@ -117,178 +117,185 @@ for ($i=0;$i<$user_cnt;$i++){
 ?>
 
 <script>
-  function getTotal(rows){
-    var total=0;
-    return rows.length-1;
-    for(var i=0;i<rows.length&&total==0;i++){
-      try{
-         total=parseInt(rows[rows.length-i].cells[0].innerHTML);
-          if(isNaN(total)) total=0;
-      }catch(e){
-
-      }
-    }
-    return total;
-
-  }
+ function getTotal(rows){
+var total=0;
+return rows.length-1;
+for(var i=0;i<rows.length&&total==0;i++){
+try{
+total=parseInt(rows[rows.length-i].cells[0].innerHTML);
+if(isNaN(total)) total=0;
+}catch(e){
+}
+}
+return total;
+}
 function metal(){
-  var tb=window.document.getElementById('rank');
-  var rows=tb.rows;
-  try{
-  var total=getTotal(rows);
-  //alert(total);
-          for(var i=1;i<rows.length;i++){
-                var cell=rows[i].cells[0];
-      var acc=rows[i].cells[3];
-      var ac=parseInt(acc.innerHTML);
-      if (isNaN(ac)) ac=parseInt(acc.textContent);
-
-
-                if(cell.innerHTML!="*"&&ac>0){
-
-                     var r=i;
-                     if(r==1){
-                       cell.innerHTML="Winner";
-                       //cell.style.cssText="background-color:gold;color:red";
-                       cell.className="badge badge-warning";
-                     }else{
-                       cell.innerHTML=r;
-                     }
-                     if(r>1&&r<=total*.05+1)
-                        cell.className="badge badge-warning";
-                     if(r>total*.05+1&&r<=total*.20+1)
-                        cell.className="badge";
-                     if(r>total*.20+1&&r<=total*.45+1)
-                        cell.className="badge badge-error";
-                     if(r>total*.45+1&&ac>0)
-                        cell.className="badge badge-info";
-                }
-          }
-  }catch(e){
-     alert(e);
-  }
+var tb=window.document.getElementById('rank');
+var rows=tb.rows;
+try{
+var total=getTotal(rows);
+//alert(total);
+for(var i=1;i<rows.length;i++){
+var cell=rows[i].cells[0];
+var acc=rows[i].cells[3];
+var ac=parseInt(acc.innerHTML);
+if (isNaN(ac)) ac=parseInt(acc.textContent);
+if(cell.innerHTML!="*"&&ac>0){
+var r=i;
+if(r==1){
+cell.innerHTML="Winner";
+//cell.style.cssText="background-color:gold;color:red";
+cell.className="badge btn-warning";
+}else{
+cell.innerHTML=r;
+}
+if(r>1&&r<=total*.05+1)
+cell.className="badge btn-warning";
+if(r>total*.05+1&&r<=total*.20+1)
+cell.className="badge";
+if(r>total*.20+1&&r<=total*.45+1)
+cell.className="badge btn-danger";
+if(r>total*.45+1&&ac>0)
+cell.className="badge badge-info";
+}
+}
+}catch(e){
+alert(e);
+}
 }
 metal();
 replay();
-
 <?php if (isset($solution_json)) echo "var solutions=$solution_json;"?>
-
 var replay_index=0;
 function replay(){
-  replay_index=0;
-  window.setTimeout("add()",1000);
+replay_index=0;
+window.setTimeout("add()",1000);
 }
 function add(){
-  if(replay_index>=solutions.length) return metal();
-  var solution=solutions[replay_index];
-  var tab=$("#rank");
-  var row=findrow(tab,solution);
-  if(row==null)
-        tab.append(newrow(tab,solution));
-  else
-        update(tab,row,solution);
-  replay_index++;
-  sort(tab[0].rows);
-  metal();
-  window.setTimeout("add()",100);
+if(replay_index>=solutions.length) return metal();
+var solution=solutions[replay_index];
+var tab=$("#rank");
+var row=findrow(tab,solution);
+if(row==null)
+tab.append(newrow(tab,solution));
+else
+update(tab,row,solution);
+replay_index++;
+sort(tab[0].rows);
+metal();
+window.setTimeout("add()",500);
+}
+function sec2str(sec){
+var ret="";
+ret+=parseInt(sec/3600);
+ret+=":";
+ret+=parseInt(sec%3600/60);
+ret+=":";
+ret+=parseInt(sec%60);
+return ret;
+}
+function str2sec(str){
+var s=str.split(":");
+var h=parseInt(s[0]);
+var m=parseInt(s[1]);
+var s=parseInt(s[2]);
+return h*3600+m*60+s;
 }
 function update(tab,row,solution){
- var col=parseInt(solution["num"])+5;
- var old=row.cells[col].innerHTML;
- var time=0;
- if(old!="") time=parseInt(old);
- if(row.cells[col].className=="well green") return;
- if(parseInt(solution["result"])==4){
-        if(row.cells[col].className!="well green") {
-                time= parseInt(solution["in_date"])-time*1200;
-
-                penalty=parseInt(row.cells[4].innerHTML);
-                penalty+=time;
-                row.cells[4].innerHTML=penalty;
-        }
- }else{
-                time--;
- }
- row.cells[col].innerHTML=time;
-
- if(parseInt(solution["result"])==4){
-        if(row.cells[col].className!="well green"){
-                row.cells[3].innerHTML=parseInt(row.cells[3].innerHTML)+1;
-        }
-        row.cells[col].className="well green";
- }else{
-        if(row.cells[col].className!="well green")
-                row.cells[col].className="well red";
- }
+var col=parseInt(solution["num"])+5;
+var old=row.cells[col].innerHTML;
+var time=0;
+if(old!="") time=parseInt(old);
+if(row.cells[col].className=="well green") return;
+if(parseInt(solution["result"])==4){
+if(row.cells[col].className!="well green") {
+var pt=time;
+time= parseInt(solution["in_date"])-time*1200;
+penalty=str2sec(row.cells[4].innerHTML);
+penalty+=time;
+row.cells[4].innerHTML=sec2str(penalty);
+row.cells[col].innerHTML=sec2str( parseInt(solution["in_date"]));
+if(pt!=0)
+row.cells[col].innerHTML+="("+pt+")";
+}
+}else{
+time--;
+row.cells[col].innerHTML=time;
+}
+if(parseInt(solution["result"])==4){
+if(row.cells[col].className!="well green"){
+row.cells[3].innerHTML=parseInt(row.cells[3].innerHTML)+1;
+}
+row.cells[col].className="well green";
+}else{
+if(row.cells[col].className!="well green")
+row.cells[col].className="well red";
+}
 }
 function sort(rows){
-   for(var i=1;i<rows.length;i++){
-       for(var j=1;j<i;j++){
-           if(cmp(rows[i],rows[j])){
-                swapNode(rows[i],rows[j]);
-           }
-       }
-
-   }
-
+for(var i=1;i<rows.length;i++){
+for(var j=1;j<i;j++){
+if(cmp(rows[i],rows[j])){
+swapNode(rows[i],rows[j]);
 }
- function swapNode(node1,node2)
-        {
-          var parent = node1.parentNode;//父节点
-          var t1 = node1.nextSibling;//两节点的相对位置
-          var t2 = node2.nextSibling;
-
-          //如果是插入到最后就用appendChild
-          if(t1) parent.insertBefore(node2,t1);
-          else parent.appendChild(node2);
-          if(t2) parent.insertBefore(node1,t2);
-          else parent.appendChild(node1);
+}
+}
+}
+function swapNode(node1,node2)
+{
+var parent = node1.parentNode;//父节点
+var t1 = node1.nextSibling;//两节点的相对位置
+var t2 = node2.nextSibling;
+//如果是插入到最后就用appendChild
+if(t1) parent.insertBefore(node2,t1);
+else parent.appendChild(node2);
+if(t2) parent.insertBefore(node1,t2);
+else parent.appendChild(node1);
 }
 function cmp(a,b){
-   if(parseInt(a.cells[3].innerHTML)>parseInt(b.cells[3].innerHTML))
-        return true;
-
-   if(parseInt(a.cells[3].innerHTML)==parseInt(b.cells[3].innerHTML))
-        return parseInt(a.cells[4].innerHTML)<parseInt(b.cells[4].innerHTML);
+if(parseInt(a.cells[3].innerHTML)>parseInt(b.cells[3].innerHTML))
+return true;
+if(parseInt(a.cells[3].innerHTML)==parseInt(b.cells[3].innerHTML))
+return parseInt(a.cells[4].innerHTML)<parseInt(b.cells[4].innerHTML);
 }
+function trim(str){ //删除左右两端的空格
+　　 return str.replace(/(^\s*)|(\s*$)/g, "");
+　　 }
 function newrow(tab,solution){
-
-  var row="<tr><td></td><td>"+solution['user_id']+"</td>";
-  row+="<td>"+solution['nick']+"</td>";
-  row+="<td>";
-  var css="grey";
-  var time=0;
-  if(solution['result']==4){
-         row+="1";
-         time=solution['in_date'];
-         count=time;
-         css="well green";
-  } else{
-         row+="0";
-         css="well red";
-         count=-1;
-  }
-  row+="</td>";
-  var n=tab[0].rows[0].cells.length;
-  row+="<td>"+time+"</td>";
-
-  for(var i=5;i<n;i++) {
-        if(i-5==solution['num'])
-                row+="<td class='"+css+"'>"+count+"</td>";
-        else
-                row+="<td></td>";
-  }
-  row+="</tr>";
-  return row;
+var row="<tr><td></td><td>"+solution['user_id']+"</td>";
+row+="<td>"+trim(solution['nick'])+"</td>";
+row+="<td>";
+var css="grey";
+var time=0;
+if(solution['result']==4){
+row+="1";
+time=solution['in_date'];
+count=sec2str( time);
+css="well green";
+} else{
+row+="0";
+css="well red";
+count=-1;
+}
+row+="</td>";
+var n=tab[0].rows[0].cells.length;
+row+="<td>"+sec2str(time)+"</td>";
+for(var i=5;i<n;i++) {
+if(i-5==solution['num'])
+row+="<td class='"+css+"'>"+count+"</td>";
+else
+row+="<td></td>";
+}
+row+="</tr>";
+return row;
 }
 function findrow(tab,solution){
-  var rows=tab[0].rows;
-  for(var i=0;i<rows.length;i++){
-     if(rows[i].cells[1].innerHTML==solution['user_id'])
-        return rows[i];
-
-  }
-  return null;
+var rows=tab[0].rows;
+for(var i=0;i<rows.length;i++){
+if(rows[i].cells[1].innerHTML==solution['user_id'])
+return rows[i];
+}
+return null;
 }
 </script>
 <style>

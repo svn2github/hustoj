@@ -25,7 +25,15 @@ if (!(isset($_SESSION['administrator']))){
 		$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
 		echo "<script>location.href='$url';</script>";
+	}else if (isset($_POST['rjcid'])){
+		$rjcid=intval($_POST['rjcid']);
+		$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=".$rjcid;
+		mysql_query($sql) or die(mysql_error());
+		$url="../status.php?cid=".($rjcid);
+		echo "Rejudged Contest id :".$rjcid;
+		echo "<script>location.href='$url';</script>";
 	}
+
 }
 ?>
 <b>Rejudge</b>
@@ -39,6 +47,12 @@ if (!(isset($_SESSION['administrator']))){
 	<li>Solution
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjsid'>	<input type='hidden' name='do' value='do'>
+		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
+		<input type=submit value=submit>
+	</form>
+	<li>Contest
+	<form action='rejudge.php' method=post>
+		<input type=input name='rjcid'>	<input type='hidden' name='do' value='do'>
 		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
 		<input type=submit value=submit>
 	</form>

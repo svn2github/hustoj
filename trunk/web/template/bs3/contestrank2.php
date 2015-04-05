@@ -266,12 +266,15 @@ function sort(rows){
           var parent = node1.parentNode;//父节点
           var t1 = node1.nextSibling;//两节点的相对位置
           var t2 = node2.nextSibling;
-          
+$(t1).fadeToggle("slow");          
           //如果是插入到最后就用appendChild
           if(t1) parent.insertBefore(node2,t1);
           else parent.appendChild(node2);
+$(t1).fadeToggle("slow");          
+$(t2).fadeToggle("slow");          
           if(t2) parent.insertBefore(node1,t2);
           else parent.appendChild(node1);
+$(t2).fadeToggle("slow");          
 }    
 function cmp(a,b){
    if(parseInt(a.cells[3].innerHTML)>parseInt(b.cells[3].innerHTML))

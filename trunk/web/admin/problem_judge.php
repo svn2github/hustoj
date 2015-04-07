@@ -33,7 +33,8 @@ if(isset($_POST['update_solution'])){
 	$sim=intval($_POST['sim']);
 	$simid=intval($_POST['simid']);
 	$pass_rate=floatval($_POST['pass_rate']);
-	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW(),pass_rate=$pass_rate WHERE solution_id=$sid LIMIT 1";
+        $judger=mysql_real_escape_string($_SESSION['user_id']);
+	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW(),pass_rate=$pass_rate,judger='$judger' WHERE solution_id=$sid LIMIT 1";
 	echo $sql;
 	mysql_query($sql);
 	

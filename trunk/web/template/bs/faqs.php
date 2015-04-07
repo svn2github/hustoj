@@ -14,7 +14,7 @@
 </center>
 <hr>
 <p><font color=green>Q</font>:What is the compiler the judge is using and what are the compiler options?<br>
-  <font color=red>A</font>:The online judge system is running on <a href="http://www.debian.org/">Debian Linux</a>. We are using <a href="http://gcc.gnu.org/">GNU GCC/G++</a> for C/C++ compile, <a href="http://www.freepascal.org">Free Pascal</a> for pascal compile and <a href="http://www.oracle.com/technetwork/java/index.html">sun-java-jdk1.6</a> for Java. The compile options are:<br>
+  <font color=red>A</font>:The online judge system is running on <a href="http://www.debian.org/">Debian Linux</a>. We are using <a href="http://gcc.gnu.org/">GNU GCC/G++</a> for C/C++ compile, <a href="http://www.freepascal.org">Free Pascal</a> for pascal compile and <a href="http://openjdk.java.net">openjdk-7-jdk</a> for Java. The compile options are:<br>
 </p>
 <table border="1">
   <tr>
@@ -41,7 +41,7 @@
   <font color=blue>gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5</font><br>
   <font color=blue>glibc 2.3.6</font><br>
 <font color=blue>Free Pascal Compiler version 2.4.0-2 [2010/03/06] for i386<br>
-java version "1.6.0_22"<br>
+java version "1.7"<br>
 </font></p>
 <hr>
 <font color=green>Q</font>:Where is the input and the output?<br>

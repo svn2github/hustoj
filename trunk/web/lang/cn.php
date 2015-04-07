@@ -133,4 +133,5 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_LeftTime="剩余";
   $MSG_Ended="已结束";
   $MSG_Login="请登录后继续操作";
+  $MSG_JUDGER="判题机";
 ?>

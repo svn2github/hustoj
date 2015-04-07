@@ -126,4 +126,5 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_Ended="Finished";
   
   $MSG_Login="Please Login";
+  $MSG_JUDGER="Judger";
 ?>

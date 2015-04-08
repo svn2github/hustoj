@@ -15,7 +15,7 @@
         <tr><td><?php echo $MSG_PASSWORD?>:<td><input name="password" type="password" size=20></tr>
         <?php if($OJ_VCODE){?>
                 <tr><td><?php echo $MSG_VCODE?>:</td>
-                        <td><input name="vcode" size=4 type=text><img alt="click to change" src=vcode.php onclick="this.src='vcode.php#'+Math.random()">*</td>
+                        <td><input name="vcode" size=4 type=text><img alt="click to change" src=vcode.php onclick="this.src='vcode.php?'+Math.random()">*</td>
                 </tr>
                 <?php }?>
         <tr><td><td><input name="submit" type="submit" size=10 value="Submit">

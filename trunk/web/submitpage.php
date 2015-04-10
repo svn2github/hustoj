@@ -8,10 +8,10 @@
 	$view_title=$MSG_SUBMIT;
  if (!isset($_SESSION['user_id'])){
 
-//	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
-//	require("template/".$OJ_TEMPLATE."/error.php");
-//	exit(0);
-	$_SESSION['user_id']="Guest";
+	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+//	$_SESSION['user_id']="Guest";
 }
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);

@@ -371,26 +371,30 @@ void find_next_nonspace(int & c1, int & c2, FILE *& f1, FILE *& f2, int & ret) {
 const char * getFileNameFromPath(const char * path) {
 	for (int i = strlen(path); i >= 0; i--) {
 		if (path[i] == '/')
-			return &path[i];
+			return &path[i+1];
 	}
 	return path;
 }
 
 void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
-	execute_cmd("echo '------test in 10 lines------'>>diff.out");
-	execute_cmd("head -10 data.in>>diff.out");
-	execute_cmd("echo '------test out 10 lines-----'>>diff.out");
-	execute_cmd("head -10 '%s'>>diff.out",path);
-	execute_cmd("echo '------user out 10 lines-----'>>diff.out");
-	execute_cmd("head -10 user.out>>diff.out");
-	execute_cmd("echo '------diff out 10 lines-----'>>diff.out");
-	execute_cmd("diff '%s' user.out|head -10>>diff.out",path);
+	
+	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
+	execute_cmd("echo '------test in top 100 lines------'>>diff.out");
+	execute_cmd("head -100 data.in>>diff.out");
+	execute_cmd("echo '------test out top 100 lines-----'>>diff.out");
+	execute_cmd("head -100 '%s'>>diff.out",path);
+	execute_cmd("echo '------user out top 100 lines-----'>>diff.out");
+	execute_cmd("head -100 user.out>>diff.out");
+	execute_cmd("echo '------diff out 200 lines-----'>>diff.out");
+	execute_cmd("diff '%s' user.out|head -200>>diff.out",path);
 	execute_cmd("echo '=============================='>>diff.out");
 
 }
 void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
+	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
 	execute_cmd("echo '=======diff out 100 lines====='>>diff.out");
 	execute_cmd("diff '%s' user.out|head -100>>diff.out",path);
+	execute_cmd("echo '=============================='>>diff.out");
 }
 
 /*

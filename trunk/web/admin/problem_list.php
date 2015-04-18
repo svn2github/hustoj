@@ -16,7 +16,7 @@ if (!(isset($_SESSION['administrator'])
 $keyword=$_GET['keyword'];
 $keyword=mysql_real_escape_string($keyword);
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
-$page_cnt=50;
+$page_cnt=100;
 $result=mysql_query($sql);
 echo mysql_error();
 $row=mysql_fetch_object($result);
@@ -31,11 +31,16 @@ $pend=$pstart+$page_cnt;
 echo "<title>Problem List</title>";
 echo "<center><h2>Problem List</h2></center>";
 
+echo "<form action=problem_list.php>";
+echo "<select class='input-mini' onchange=\"location.href='problem_list.php?page='+this.value;\">";
 for ($i=1;$i<=$cnt;$i++){
         if ($i>1) echo '&nbsp;';
-        if ($i==$page) echo "<span class=red>$i</span>";
-        else echo "<a href='problem_list.php?page=".$i."'>".$i."</a>";
+        if ($i==$page) echo "<option value='$i' selected>";
+        else  echo "<option value='$i'>";
+        echo $i+9;
+        echo "**</option>";
 }
+echo "</select>";
 
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
 //echo $sql;

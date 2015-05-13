@@ -81,6 +81,15 @@ $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
 ."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
 mysql_query($sql);// or die("Insert Error!\n");
+
+if( mysql_insert_id()==0) {
+       	print "<script language='javascript'>\n";
+	print "alert('Username robbed!\\n');\n";
+	print "history.go(-1);\n</script>";
+	exit(0);
+}
+
+
 $sql="INSERT INTO `loginlog` VALUES('$user_id','$password','$ip',NOW())";
 mysql_query($sql);
 $_SESSION['user_id']=$user_id;

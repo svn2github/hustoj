@@ -5,10 +5,11 @@ function judge_round(){
      etc=`dirname "$config"`
      home=`dirname "$etc"`
      sudo judgeonce "$home" debug 1
-     sleep 3
+     sleep 1
   done
 }
 while [ 1 ]
 do
         judge_round $1
+        sleep 2
 done

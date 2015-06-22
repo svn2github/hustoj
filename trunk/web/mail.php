@@ -1,11 +1,17 @@
 <?php
 	$cache_time=10;
 	$OJ_CACHE_SHARE=false;
-    require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
-    require_once('./include/my_func.inc.php');
+	require_once('./include/cache_start.php');
+	require_once('./include/db_info.inc.php');
+	require_once('./include/my_func.inc.php');
+	require_once('./include/setlang.php');
+	 
+	if(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0){
+		header("Content-type: text/html; charset=utf-8");
+		echo $MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
+		exit ();
+	}
 
-	 require_once('./include/setlang.php');
 	$view_title=$MSG_MAIL;
  $to_user="";
 $title="";

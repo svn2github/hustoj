@@ -127,4 +127,9 @@ $MSG_TEST_RUN="Test Running Done";
   
   $MSG_Login="Please Login";
   $MSG_JUDGER="Judger";
+  
+  $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM="You can't browse early code during examing 。";
+  $MSG_BBS_NOT_ALLOWED_FOR_EXAM="You can't use bbs during examing 。";
+  $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="You can't use mail during examing 。";
+  
 ?>

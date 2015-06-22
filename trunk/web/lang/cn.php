@@ -134,4 +134,5 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_Ended="已结束";
   $MSG_Login="请登录后继续操作";
   $MSG_JUDGER="判题机";
+  $OJ_SOURCE_NOT_ALLOWED_FOR_EXAM="考试期间，不能查阅以前提交的代码。";
 ?>

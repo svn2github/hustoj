@@ -23,8 +23,17 @@ $stime=$row->time;
 $smemory=$row->memory;
 $sproblem_id=$row->problem_id;
 $view_user_id=$suser_id=$row->user_id;
+$contest_id=$row->contest_id;
+
 mysql_free_result($result);
 
+if(isset($OJ_EXAM_CONTEST_ID)){
+	if($contest_id<$OJ_EXAM_CONTEST_ID&&!isset($_SESSION['source_browser'])){
+	header("Content-type: text/html; charset=utf-8");
+	 echo $OJ_SOURCE_NOT_ALLOWED_FOR_EXAM;
+	 exit();
+	}
+}
 
 if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 	$sql="SELECT 1 FROM solution where 

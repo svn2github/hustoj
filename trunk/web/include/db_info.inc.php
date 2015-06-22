@@ -31,6 +31,10 @@ static  $OJ_LOGIN_MOD="hustoj";
 static  $OJ_RANK_LOCK_PERCENT=0;
 static  $OJ_SHOW_DIFF=false;
 static  $OJ_TEST_RUN=true;
+static  $OJ_EXAM_CONTEST_ID=0;
+
+
+
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';
 
 /* weibo config here */

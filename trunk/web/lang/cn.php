@@ -136,4 +136,5 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_JUDGER="判题机";
   $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM="考试期间，不能查阅以前提交的代码。";
   $MSG_BBS_NOT_ALLOWED_FOR_EXAM="考试期间,讨论版禁用。";
+  $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="考试期间,内邮禁用。";
 ?>

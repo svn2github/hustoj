@@ -30,7 +30,7 @@ mysql_free_result($result);
 if(isset($OJ_EXAM_CONTEST_ID)){
 	if($contest_id<$OJ_EXAM_CONTEST_ID&&!isset($_SESSION['source_browser'])){
 	header("Content-type: text/html; charset=utf-8");
-	 echo $OJ_SOURCE_NOT_ALLOWED_FOR_EXAM;
+	 echo $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM;
 	 exit();
 	}
 }

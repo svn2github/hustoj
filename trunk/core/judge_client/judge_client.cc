@@ -2215,7 +2215,7 @@ int main(int argc, char** argv) {
 		exit(0);
 	}
 
-	for (; (oi_mode || ACflg == OJ_AC) && (dirp = readdir(dp)) != NULL;) {
+	for (; (oi_mode || ACflg == OJ_AC|| ACflg == OJ_PE) && (dirp = readdir(dp)) != NULL;) {
 
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)

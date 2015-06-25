@@ -1,6 +1,6 @@
 hustoj
 ======
-Introduction 简介
+微信服务号:hustoj
 
 HUSTOJ is an GPL FreeSoftware?.
 

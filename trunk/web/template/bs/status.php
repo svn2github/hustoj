@@ -100,6 +100,7 @@ echo "<input type=submit class='input'  value='$MSG_SEARCH'></form>";
 <th ><?php echo $MSG_LANG?>
 <th ><?php echo $MSG_CODE_LENGTH?>
 <th ><?php echo $MSG_SUBMIT_TIME?>
+<th ><?php echo $MSG_JUDGER?>
 </tr>
 </thead>
 

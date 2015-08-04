@@ -82,7 +82,7 @@ $sql="INSERT INTO `users`("
 ."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
 mysql_query($sql);// or die("Insert Error!\n");
 
-if( mysql_insert_id()==0) {
+if( mysql_affected_rows()==0) {
        	print "<script language='javascript'>\n";
 	print "alert('Username robbed!\\n');\n";
 	print "history.go(-1);\n</script>";

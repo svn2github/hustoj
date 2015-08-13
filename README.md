@@ -1,7 +1,7 @@
 hustoj
 ======
 微信公众号:hustoj
-[image](http://hustoj.com/wx.jpg)
+![image](http://hustoj.com/wx.jpg)
 
 HUSTOJ is an GPL FreeSoftware?.
 

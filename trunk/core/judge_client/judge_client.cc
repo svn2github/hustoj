@@ -113,6 +113,7 @@ static char http_password[BUFFER_SIZE];
 static int shm_run = 0;
 
 static char record_call = 0;
+static int use_ptrace = 1;
 
 //static int sleep_tmp;
 #define ZOJ_COM
@@ -307,6 +308,7 @@ void init_mysql_conf() {
 			read_int(buf, "OJ_FULL_DIFF", &full_diff);
 			read_int(buf, "OJ_SHM_RUN", &shm_run);
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
+			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
 
 		}
 		//fclose(fp);
@@ -1465,7 +1467,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
-	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+	if(use_ptrace) ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3)
 		chroot(work_dir);
@@ -1736,6 +1738,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	int status, sig, exitcode;
 	struct user_regs_struct reg;
 	struct rusage ruse;
+	if(topmemory==0) 
+			topmemory= get_proc_status(pidApp, "VmRSS:") << 10;
 	while (1) {
 		// check the usage
 
@@ -1874,7 +1878,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
-
+	
 	//clean_session(pidApp);
 }
 void clean_workdir(char * work_dir) {

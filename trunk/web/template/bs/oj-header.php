@@ -41,6 +41,7 @@
 	</div><!--end menu-->
 <div id=profile >
 <script src="include/profile.php?<?php echo rand();?>" ></script>
+
 </div><!--end profile-->
 </div><!--end subhead-->
 <div id=broadcast class="container">
@@ -49,3 +50,6 @@
 </marquee>
 </div>
 <br>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>

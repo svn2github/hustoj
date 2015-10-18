@@ -3,6 +3,7 @@
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
 	require_once('./include/my_func.inc.php');
+	require_once('./include/const.inc.php');
 	require_once('./include/setlang.php');
 	$view_title= $MSG_CONTEST;
   function formatTimeLength($length)
@@ -143,7 +144,7 @@
 				$view_problemset[$cnt][0]="";
 				if (isset($_SESSION['user_id'])) 
 					$view_problemset[$cnt][0]=check_ac($cid,$cnt);
-				$view_problemset[$cnt][1]= "$row->pid Problem &nbsp;".(chr($cnt+ord('A')));
+				$view_problemset[$cnt][1]= "$row->pid Problem &nbsp;".$PID[$cnt];
 				$view_problemset[$cnt][2]= "<a href='problem.php?cid=$cid&pid=$cnt'>$row->title</a>";
 				$view_problemset[$cnt][3]=$row->source ;
 				$view_problemset[$cnt][4]=$row->accepted ;

@@ -59,7 +59,7 @@ onsubmit="return checksource(document.getElementById('source').value);"
 Problem <span class=blue><b><?php echo $id?></b></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
 <?php }else{
-$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
 ?>
 Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>

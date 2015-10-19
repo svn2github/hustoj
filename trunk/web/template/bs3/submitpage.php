@@ -97,7 +97,6 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input id=TestRun class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
 <input type=reset class="btn btn-danger" value="重置">
 </form>
-<iframe name=testRun width=0 height=0 src="about:blank"></iframe>
 </center>
      </div>
 
@@ -205,7 +204,8 @@ var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 var problem_id=document.getElementById(mark);
 problem_id.value=-problem_id.value;
 document.getElementById("frmSolution").target="testRun";
-document.getElementById("frmSolution").submit();
+//document.getElementById("frmSolution").submit();
+$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
 document.getElementById("TestRun").disabled=true;
 document.getElementById("Submit").disabled=true;
 problem_id.value=-problem_id.value;

@@ -100,7 +100,7 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 <input type=reset  class="btn btn-danger" value="重置">
 </form>
 
-<iframe name=testRun width=0 height=0 src="about:blank"></iframe>
+
 </center>
 <script>
  var sid=0;
@@ -204,7 +204,8 @@ function do_test_run(){
         var problem_id=document.getElementById(mark);
         problem_id.value=0;
         document.getElementById("frmSolution").target="testRun";
-        document.getElementById("frmSolution").submit();
+       // document.getElementById("frmSolution").submit();
+        $.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
         document.getElementById("TestRun").disabled=true;
         document.getElementById("Submit").disabled=true;
         count=20;

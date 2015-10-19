@@ -224,9 +224,10 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
    if(!$test_run)	
 	header("Location: $statusURI");
    else{
-	?>
-	<script>window.parent.setTimeout("fresh_result('<?php echo $insert_id;?>')",2000);</script>
-	<?php
-	
+   	if(isset($_GET['ajax'])){
+                echo $insert_id;
+        }else{
+		?><script>window.parent.setTimeout("fresh_result('<?php echo $insert_id;?>')",1000);</script><?php
+        }
    }
 ?>

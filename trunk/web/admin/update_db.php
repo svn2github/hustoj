@@ -125,8 +125,11 @@ $tsql[20]="select `password` from contest limit 1 ";
 $csql[20]="ALTER TABLE `contest` ADD `password` CHAR( 16 ) NOT NULL DEFAULT '' AFTER `langmask` ";
 $tsql[21]="select * from source_code_user limit 1 ";
 $csql[21]="create TABLE `source_code_user` like source_code ";
-$tsql[22]="select judger from solution limit 1 ";
-$csql[22]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
+$tsql[22]="select * from source_code where solution_id not in (select solution_id from source_code_user)  ";
+$csql[22]="insert into source_code_user select * from source_code where solution_id not in (select solution_id from source_code_user)  ";
+
+$tsql[23]="select judger from solution limit 1 ";
+$csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

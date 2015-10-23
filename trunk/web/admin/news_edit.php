@@ -30,7 +30,8 @@ $user_id=mysql_real_escape_string($user_id);
 	
 	
 	
-	require_once("../oj-footer.php");
+
+	header("location:news_list.php");
 	exit();
 }else{
 	$news_id=intval($_GET['id']);
@@ -49,23 +50,14 @@ $user_id=mysql_real_escape_string($user_id);
 		
 }
 ?>
-
+<?php include("kindeditor.php")?>
 <form method=POST action='news_edit.php'>
 <p align=center><font size=4 color=#333399>Edit a Contest</font></p>
 <input type=hidden name='news_id' value=<?php echo $news_id?>>
 <p align=left>Title:<input type=text name=title size=71 value='<?php echo $title?>'></p>
 
 <p align=left>Content:<br>
-<?php
-include_once("../fckeditor/fckeditor.php") ;
-$description = new FCKeditor('content') ;
-$description->BasePath = '../fckeditor/' ;
-$description->Height = 450 ;
-$description->Width=800;
-
-$description->Value = $content ;
-$description->Create() ;
-?>
+<textarea class=kindeditor name=content ><?php echo htmlentities($content,ENT_QUOTES,"UTF-8")?></textarea>
 </p>
 <?php require_once("../include/set_post_key.php");?>
 <input type=submit>

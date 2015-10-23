@@ -16,7 +16,7 @@ if (!(isset($_SESSION['administrator']))){
 }
 ?>
 <?php
-include_once("../fckeditor/fckeditor.php") ;
+include_once("kindeditor.php") ;
 ?>
 <form method=POST action=news_add.php>
 
@@ -24,18 +24,10 @@ include_once("../fckeditor/fckeditor.php") ;
 <p align=left>Title:<input type=text name=title size=71></p>
 
 <p align=left>Content:<br>
-<?php
-$description = new FCKeditor('content') ;
-$description->BasePath = '../fckeditor/' ;
-$description->Height = 450 ;
-$description->Width=800;
-
-$description->Value = '<p></p>' ;
-$description->Create() ;
-?>
+<textarea class=kindeditor name=content ></textarea>
 </p>
-<?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
+<?php require_once("../include/set_post_key.php");?>
 </div></form>
 <p>
 <?php require_once("../oj-footer.php");?>

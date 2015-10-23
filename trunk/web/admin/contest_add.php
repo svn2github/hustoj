@@ -121,7 +121,7 @@ else if(isset($_POST['problem2contest'])){
 			}
 			mysql_free_result($result);
 }  
-  include_once("../fckeditor/fckeditor.php") ;
+  include_once("kindeditor.php") ;
 ?>
 	
 	<form method=POST >
@@ -161,17 +161,9 @@ $lang_count=count($language_ext);
 	<?php require_once("../include/set_post_key.php");?>
 	<br>Problems:<input class=input-xxlarge type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>
-	<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+	<p align=left>Description:<br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
 
-<?php
-$fck_description = new FCKeditor('description') ;
-$fck_description->BasePath = '../fckeditor/' ;
-$fck_description->Height = 300 ;
-$fck_description->Width=600;
-$fck_description->Value = $description ;
-$fck_description->Create() ;
 
-?>
 	Users:<textarea name="ulist" rows="20" cols="20"></textarea>
 	<br />
 	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。

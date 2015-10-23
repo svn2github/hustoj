@@ -1,5 +1,5 @@
 <?php require("admin-header.php");
-include_once("../fckeditor/fckeditor.php") ;
+include_once("kindeditor.php") ;
 include_once("../include/const.inc.php");
 if (isset($_POST['syear']))
 {
@@ -155,18 +155,8 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 	
 
 <br>
-<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+<p align=left>Description:<br><textarea class="kindeditor" rows=13 name=description cols=80><?php echo htmlspecialchars($description)?></textarea>
 
-<?php
-$fck_description = new FCKeditor('description') ;
-$fck_description->BasePath = '../fckeditor/' ;
-$fck_description->Height = 300 ;
-$fck_description->Width=600;
-
-$fck_description->Value = $description ;
-$fck_description->Create() ;
-
-?>
 
 Users:<textarea name="ulist" rows="20" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
 <p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>

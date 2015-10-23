@@ -16,7 +16,7 @@ if (!(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor']))){
 }
 ?>
 <?php
-include_once("../fckeditor/fckeditor.php") ;
+include_once("kindeditor.php") ;
 ?>
 <h1 >Add New problem</h1>
 
@@ -26,45 +26,21 @@ include_once("../fckeditor/fckeditor.php") ;
 <p align=left>Title:<input class="input input-xxlarge" type=text name=title size=71></p>
 <p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
 <p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
-<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+<p align=left>Description:<br>
+<textarea class="kindeditor" rows=13 name=description cols=80></textarea>
 
-<?php
-$description = new FCKeditor('description') ;
-$description->BasePath = '../fckeditor/' ;
-$description->Height = 250 ;
-$description->Width=800;
-
-$description->Value = '<p></p>' ;
-$description->Create() ;
-?>
 </p>
 
-<p align=left>Input:<br><!--<textarea rows=13 name=input cols=80></textarea>-->
+<p align=left>Input:<br>
+<textarea  class="kindeditor" rows=13 name=input cols=80></textarea>
 
-<?php
-$input = new FCKeditor('input') ;
-$input->BasePath = '../fckeditor/' ;
-$input->Height = 250 ;
-$input->Width=800;
-
-$input->Value = '<p></p>' ;
-$input->Create() ;
-?>
 </p>
 
 </p>
-<p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
+<p align=left>Output:<br>
+<textarea  class="kindeditor" rows=13 name=output cols=80></textarea>
 
 
-<?php
-$output = new FCKeditor('output') ;
-$output->BasePath = '../fckeditor/' ;
-$output->Height = 250 ;
-$output->Width=800;
-
-$output->Value = '<p></p>' ;
-$output->Create() ;
-?>
 
 </p>
 <p align=left>Sample Input:<br><textarea  class="input input-xxlarge"  rows=13 name=sample_input cols=80></textarea></p>
@@ -72,15 +48,7 @@ $output->Create() ;
 <p align=left>Test Input:<br><textarea  class="input input-xxlarge" rows=13 name=test_input cols=80></textarea></p>
 <p align=left>Test Output:<br><textarea  class="input input-xxlarge"  rows=13 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br>
-<?php
-$output = new FCKeditor('hint') ;
-$output->BasePath = '../fckeditor/' ;
-$output->Height = 250 ;
-$output->Width=800;
-
-$output->Value = '<p></p>' ;
-$output->Create() ;
-?>
+<textarea class="kindeditor" rows=13 name=hint cols=80></textarea>
 </p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>

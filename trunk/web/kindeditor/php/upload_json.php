@@ -6,6 +6,14 @@
  * 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。
  *
  */
+if (!(isset($_SESSION['administrator'])
+      ||isset($_SESSION['problem_editor'])
+      ||isset($_SESSION['contest_creator'])
+     )){
+        echo "<a href='../loginpage.php'>Please Login First!</a>";^M
+        exit(1);
+}
+
 
 require_once 'JSON.php';
 

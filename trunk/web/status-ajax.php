@@ -52,9 +52,9 @@ if (isset($_GET['solution_id'])){
 		$row=mysql_fetch_array($result);
 		if($row){
                        if(strpos($_SERVER['HTTP_USER_AGENT'], "MSIE"))
-                             echo str_replace("\n","<br>",htmlspecialchars(str_replace("\n\r","\n",$row['error'])));
+                             echo str_replace("\n","<br>",htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8"));
                        else
-                             echo htmlspecialchars(str_replace("\n\r","\n",$row['error']));
+                             echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
                         $sql="delete from custominput where solution_id=".$solution_id;
     			mysql_query($sql);     
                 }

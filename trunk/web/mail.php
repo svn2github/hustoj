@@ -16,10 +16,10 @@
  $to_user="";
 $title="";
 if (isset($_GET['to_user'])){
-	$to_user=htmlspecialchars($_GET['to_user']);
+	$to_user=htmlentities($_GET['to_user'],ENT_QUOTES,"UTF-8");
 }
 if (isset($_GET['title'])){
-	$title=htmlspecialchars($_GET['title']);
+	$title=htmlentities($_GET['title'],ENT_QUOTES,"UTF-8");
 }
 
 if (!isset($_SESSION['user_id'])){

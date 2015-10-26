@@ -73,9 +73,9 @@ if ($rows_cnt == 1){
 	print "history.go(-1);\n</script>";
 	exit(0);
 }
-$nick=mysql_real_escape_string(htmlspecialchars ($nick));
-$school=mysql_real_escape_string(htmlspecialchars ($school));
-$email=mysql_real_escape_string(htmlspecialchars ($email));
+$nick=mysql_real_escape_string(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
+$school=mysql_real_escape_string(htmlentities ($school,ENT_QUOTES,"UTF-8"));
+$email=mysql_real_escape_string(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip=$_SERVER['REMOTE_ADDR'];
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"

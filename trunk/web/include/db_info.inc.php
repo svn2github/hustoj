@@ -32,8 +32,7 @@ static  $OJ_RANK_LOCK_PERCENT=0;
 static  $OJ_SHOW_DIFF=false;
 static  $OJ_TEST_RUN=true;
 static  $OJ_EXAM_CONTEST_ID=0;
-
-
+static  $OJ_CSRF=false;
 
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';
 
@@ -77,5 +76,8 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 	//sychronize php and mysql server
 	date_default_timezone_set("PRC");
 	mysql_query("SET time_zone ='+8:00'");
+	
+	if($OJ_CSRF&&$OJ_TEMPLATE=="bs3")
+		 require_once('csrf_check.php');
 	
 ?>

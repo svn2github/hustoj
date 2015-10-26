@@ -51,7 +51,7 @@ SyntaxHighlighter.all();
 		$auth=ob_get_contents();
 		ob_end_clean();
 
-		echo htmlspecialchars(str_replace("\n\r","\n",$view_source))."\n".$auth."</pre>";
+		echo htmlentities(str_replace("\n\r","\n",$view_source),ENT_QUOTES,"UTF-8")."\n".$auth."</pre>";
 		
 	}else{
 		

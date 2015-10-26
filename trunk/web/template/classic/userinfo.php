@@ -17,7 +17,7 @@
 <center>
 <table id=statics width=70%>
 <caption>
-<?php echo $user."--".htmlspecialchars($nick)?>
+<?php echo $user."--".htmlentities($nick,ENT_QUOTES,"UTF-8")?>
 <?php
 	echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 ?>

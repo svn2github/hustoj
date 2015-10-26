@@ -14,9 +14,9 @@
 	echo "<center>
 	<table>
 			<tr>
-				<td class=blue>$to_user:".htmlspecialchars(str_replace("\n\r","\n",$view_title))." </td>
+				<td class=blue>$to_user:".htmlentities(str_replace("\n\r","\n",$view_title),ENT_QUOTES,"UTF-8")." </td>
 			</tr>
-			<tr><td><pre>". htmlspecialchars(str_replace("\n\r","\n",$view_content))."</pre>		
+			<tr><td><pre>". htmlentities(str_replace("\n\r","\n",$view_content),ENT_QUOTES,"UTF-8")."</pre>		
 				</td></tr>
     </table></center>";
 	

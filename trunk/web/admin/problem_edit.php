@@ -34,22 +34,22 @@ $row=mysql_fetch_object($result);
 ?>
 <p>Problem Id: <?php echo $row->problem_id?></p>
 <input type=hidden name=problem_id value='<?php echo $row->problem_id?>'>
-<p>Title:<input type=text name=title size=71 value='<?php echo htmlspecialchars($row->title)?>'></p>
+<p>Title:<input type=text name=title size=71 value='<?php echo htmlentities($row->title,ENT_QUOTES,"UTF-8")?>'></p>
 <p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row->time_limit?>'>S</p>
 <p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row->memory_limit?>'>MByte</p>
-<p>Description:<br><textarea class="kindeditor" rows=13 name=description cols=120><?php echo htmlspecialchars($row->description)?></textarea></p>
-<p>Input:<br><textarea class="kindeditor" rows=13 name=input cols=120><?php echo htmlspecialchars($row->input)?></textarea></p>
-<p>Output:<br><textarea class="kindeditor" rows=13 name=output cols=120><?php echo htmlspecialchars($row->output)?></textarea></p>
+<p>Description:<br><textarea class="kindeditor" rows=13 name=description cols=120><?php echo htmlentities($row->description,ENT_QUOTES,"UTF-8")?></textarea></p>
+<p>Input:<br><textarea class="kindeditor" rows=13 name=input cols=120><?php echo htmlentities($row->input,ENT_QUOTES,"UTF-8")?></textarea></p>
+<p>Output:<br><textarea class="kindeditor" rows=13 name=output cols=120><?php echo htmlentities($row->output,ENT_QUOTES,"UTF-8")?></textarea></p>
 
-<p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?php echo htmlspecialchars($row->sample_input)?></textarea></p>
-<p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?php echo htmlspecialchars($row->sample_output)?></textarea></p>
+<p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?php echo htmlentities($row->sample_input,ENT_QUOTES,"UTF-8")?></textarea></p>
+<p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?php echo htmlentities($row->sample_output,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Hint:<br>
-<textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlspecialchars($row->output)?></textarea></p>
+<textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlentities($row->output,ENT_QUOTES,"UTF-8")?></textarea></p>
 </p>
 <p>SpecialJudge: 
 N<input type=radio name=spj value='0' <?php echo $row->spj=="0"?"checked":""?>>
 Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>></p>
-<p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlspecialchars($row->source)?></textarea></p>
+<p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlentities($row->source,ENT_QUOTES,"UTF-8")?></textarea></p>
 <div align=center>
 <?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>

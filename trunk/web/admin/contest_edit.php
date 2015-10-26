@@ -85,7 +85,7 @@ if (isset($_POST['syear']))
 	$password=$row['password'];
 	$langmask=$row['langmask'];
 	$description=$row['description'];
-	$title=htmlspecialchars($row['title']);
+	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
 	mysql_free_result($result);
 	$plist="";
 	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
@@ -155,7 +155,7 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
 	
 
 <br>
-<p align=left>Description:<br><textarea class="kindeditor" rows=13 name=description cols=80><?php echo htmlspecialchars($description)?></textarea>
+<p align=left>Description:<br><textarea class="kindeditor" rows=13 name=description cols=80><?php echo htmlentities($description,ENT_QUOTES,"UTF-8")?></textarea>
 
 
 Users:<textarea name="ulist" rows="20" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>

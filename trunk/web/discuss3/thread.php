@@ -23,7 +23,7 @@
 	<td style="text-align:left">
 	<a href="discuss.php<?php if ($row->pid!=0 && $row->cid!=null) echo "?pid=".$row->pid."&cid=".$row->cid;
 	else if ($row->pid!=0) echo"?pid=".$row->pid; else if ($row->cid!=null) echo"?cid=".$row->cid;?>">
-	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlspecialchars($row->title));?></td>
+	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row->title,ENT_QUOTES,"UTF-8"));?></td>
 </tr>
 
 <?php
@@ -62,10 +62,10 @@
 			<?php echo $i+1;?>#</span>
 		</div>
 		<div class=content style="text-align:left; clear:both; margin:10px 30px">
-			<?php	if ($row->status == 0) echo nl2br(htmlspecialchars($row->content));
+			<?php	if ($row->status == 0) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
 					else {
 						if (!$isuser || $isadmin)echo "<div style=\"border-left:10px solid gray\"><font color=red><i>Notice : <br>This reply is blocked by administrator.</i></font></div>";
-						if ($isuser || $isadmin) echo nl2br(htmlspecialchars($row->content));
+						if ($isuser || $isadmin) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
 					}
 			?>
 		</div>

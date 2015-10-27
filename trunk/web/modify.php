@@ -60,9 +60,9 @@ if ($err_cnt>0){
 }
 if (strlen($_POST['npassword'])==0) $password=pwGen($_POST['opassword']);
 else $password=pwGen($_POST['npassword']);
-$nick=mysql_real_escape_string(htmlspecialchars ($nick));
-$school=mysql_real_escape_string(htmlspecialchars ($school));
-$email=mysql_real_escape_string(htmlspecialchars ($email));
+$nick=mysql_real_escape_string(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
+$school=mysql_real_escape_string(htmlentities ($school,ENT_QUOTES,"UTF-8"));
+$email=mysql_real_escape_string(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $sql="UPDATE `users` SET"
 ."`password`='".($password)."',"
 ."`nick`='".($nick)."',"

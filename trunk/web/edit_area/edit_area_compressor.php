@@ -163,7 +163,7 @@
 						$jsContent	= $this->file_get_contents( $reg_path.$file );
 						if( preg_match( '@(\'|")DISPLAY_NAME\1\s*:\s*(\'|")(.*)\2@', $jsContent, $match ) )
 						{
-							$a_displayName[] = "'". substr( $file, 0, $pos ) ."':'". htmlspecialchars( $match[3], ENT_QUOTES ) ."'";
+							$a_displayName[] = "'". substr( $file, 0, $pos ) ."':'". htmlentities( $match[3], ENT_QUOTES ,"UTF-8") ."'";
 						}
 					}
 				}

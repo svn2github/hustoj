@@ -155,7 +155,7 @@ class FCKeditor
 	 */
 	public function CreateHtml()
 	{
-		$HtmlValue = htmlspecialchars( $this->Value ) ;
+		$HtmlValue = htmlentities( $this->Value ,ENT_QUOTES,"UTF-8") ;
 
 		$Html = '' ;
 

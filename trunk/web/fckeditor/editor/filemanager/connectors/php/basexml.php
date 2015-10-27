@@ -92,7 +92,7 @@ function SendError( $number, $text )
 function SendErrorNode(  $number, $text )
 {
 	if ($text)
-		echo '<Error number="' . $number . '" text="' . htmlspecialchars( $text ) . '" />' ;
+		echo '<Error number="' . $number . '" text="' . htmlentities( $text ,ENT_QUOTES,"UTF-8") . '" />' ;
 	else
 		echo '<Error number="' . $number . '" />' ;
 }

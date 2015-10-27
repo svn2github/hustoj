@@ -70,11 +70,11 @@ function ConvertToXmlAttribute( $value )
 
 	if ( strtoupper( substr( $os, 0, 3 ) ) === 'WIN' || FindBadUtf8( $value ) )
 	{
-		return ( utf8_encode( htmlspecialchars( $value ) ) ) ;
+		return ( utf8_encode( htmlentities( $value ,ENT_QUOTES,"UTF-8") ) ) ;
 	}
 	else
 	{
-		return ( htmlspecialchars( $value ) ) ;
+		return ( htmlentities( $value ,ENT_QUOTES,"UTF-8") ) ;
 	}
 }
 

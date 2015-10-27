@@ -125,7 +125,7 @@ function getSolution($pid,$lang){
 	return $ret;
 }
 function fixurl($img_url){
-   $img_url=htmlspecialchars_decode( $img_url);
+   $img_url= html_entity_decode( $img_url,ENT_QUOTES,"UTF-8");
    
 	if (substr($img_url,0,7)!="http://"){
 	  if(substr($img_url,0,1)=="/"){

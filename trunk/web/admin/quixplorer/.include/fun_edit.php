@@ -105,7 +105,7 @@ function edit_file($dir, $item)
 		$buffer .= fgets($fp, 4096);
 	}
 	@fclose($fp);
-	echo htmlspecialchars($buffer);
+	echo htmlentities($buffer,ENT_QUOTES,"UTF-8");
 	
 	echo "</TEXTAREA><BR>\n<TABLE><TR><TD>Wordwrap: (IE only)</TD><TD><INPUT type=\"checkbox\" name=\"wrap\" ";
 	echo "onClick=\"javascript:chwrap();\" value=\"1\"></TD></TR></TABLE><BR>\n";

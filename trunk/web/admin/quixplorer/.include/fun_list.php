@@ -162,7 +162,7 @@ function print_table($dir, $list)
 		} //else $link = "";
 		
 		echo "<TR class=\"rowdata\"><TD><INPUT TYPE=\"checkbox\" name=\"selitems[]\" value=\"";
-		echo htmlspecialchars($item)."\" onclick=\"javascript:Toggle(this);\"></TD>\n";
+		echo htmlentities($item,ENT_QUOTES,"UTF-8")."\" onclick=\"javascript:Toggle(this);\"></TD>\n";
 	// Icon + Link
 		echo "<TD nowrap>";
 		if (permissions_grant($dir, $item, "read"))
@@ -171,7 +171,7 @@ function print_table($dir, $list)
 		echo "<IMG border=\"0\" width=\"16\" height=\"16\" ";
 		echo "align=\"ABSMIDDLE\" src=\"_img/".get_mime_type($dir, $item, "img")."\" ALT=\"\">&nbsp;";
 		$s_item=$item;	if(strlen($s_item)>50) $s_item=substr($s_item,0,47)."...";
-		echo htmlspecialchars($s_item);
+		echo htmlentities($s_item,ENT_QUOTES,"UTF-8");
 		if (permissions_grant($dir, $item, "read"))
 			echo "</A>";
 		echo "</TD>\n";	// ...$extra...

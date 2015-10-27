@@ -84,10 +84,10 @@ class online{
 
         }
 
-		$this->ua = mysql_real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
+		$this->ua = mysql_real_escape_string(htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
 		$this->uri = mysql_real_escape_string($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
-			$this->refer = mysql_real_escape_string(htmlspecialchars($_SERVER['HTTP_REFERER']));
+			$this->refer = mysql_real_escape_string(htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
 	    }
 		$this->hash = mysql_real_escape_string(session_id());
 		//$this->db = new mysqli(DBHOST, DBUSER, DBPASSWORD, )

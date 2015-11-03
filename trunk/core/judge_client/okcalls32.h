@@ -115,3 +115,5 @@ int LANG_SV[256] = { 100, 295, SYS_fcntl64, SYS_getdents64, SYS_ugetrlimit,
 		SYS_set_thread_area, SYS_set_tid_address, SYS_set_robust_list,
 		SYS_exit_group, 0 };
 int LANG_LUAV[256]={0,0};
+int LANG_JSV[256]={3,4,5,6,11,13,33,45,54,77,78,91,120,122,125,174,175,191,192,195,197,224,240,243,252,258,311,0};
+

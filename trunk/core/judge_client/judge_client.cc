@@ -119,8 +119,8 @@ static int use_ptrace = 1;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[16][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
-		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua" };
+static char lang_ext[17][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
+		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js" };
 //static char buf[BUFFER_SIZE];
 int data_list_has(char * file){
    for(int i=0;i<data_list_len;i++){
@@ -231,9 +231,12 @@ void init_syscalls_limits(int lang) {
 	} else if (lang == 12) { //scheme guile
 		for (i = 0; i==0||LANG_SV[i]; i++)
 			call_counter[LANG_SV[i]] = HOJ_MAX_LIMIT;
-	} else if (lang == 15) { //scheme guile
+	} else if (lang == 15) { //lua
 		for (i = 0; i==0||LANG_LUAV[i]; i++)
 			call_counter[LANG_LUAV[i]] = HOJ_MAX_LIMIT;
+	} else if (lang == 16) { //JS24
+		for (i = 0; i==0||LANG_JSV[i]; i++)
+			call_counter[LANG_JSV[i]] = HOJ_MAX_LIMIT;
 	}
 
 }
@@ -870,6 +873,7 @@ int compile(int lang) {
 	const char * CP_CLANG_CPP[]={"clang++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
 	         		"-lm", "--static", "-std=c++0x",  "-DONLINE_JUDGE", NULL };
 	const char * CP_LUA[] = { "luac","-o","Main", "Main.lua", NULL };
+	const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 
 	char javac_buf[7][16];
 	char *CP_J[7];
@@ -961,6 +965,9 @@ int compile(int lang) {
 			break;
 		case 15:
 			execvp(CP_LUA[0], (char * const *) CP_LUA);
+			break;
+		case 16:
+			execvp(CP_JS[0], (char * const *) CP_JS);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -1457,6 +1464,22 @@ void copy_lua_runtime(char * work_dir) {
 	execute_cmd("/bin/cp /usr/bin/lua %s/", work_dir);
 
 }
+void copy_js_runtime(char * work_dir) {
+
+	copy_shell_runtime(work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/lib /lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libpthread.so.0  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libnspr4.so  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libffi.so.6  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libstdc++.so.6  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libm.so.6  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libgcc_s.so.1  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libc.so.6  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libdl.so.2  %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/librt.so.1   %s/lib/i386-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/js24 %s/", work_dir);
+
+}
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	nice(19);
@@ -1501,6 +1524,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// proc limit
 	switch (lang) {
 	case 3:  //java
+	case 16:
 	case 12:
 		LIM.rlim_cur = LIM.rlim_max = 50;
 		break;
@@ -1568,6 +1592,9 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		break;
 	case 15: //guile
 		execl("/lua", "/lua", "Main", (char *) NULL);
+		break;
+	case 16: //SpiderMonkey
+		execl("/js24", "/js24", "Main.js", (char *) NULL);
 		break;
 
 	}
@@ -2184,6 +2211,8 @@ int main(int argc, char** argv) {
 		copy_guile_runtime(work_dir);
 	if (lang == 15)
 		copy_lua_runtime(work_dir);
+	if (lang == 16)
+		copy_js_runtime(work_dir);
 	// read files and run
 	// read files and run
 	// read files and run

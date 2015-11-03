@@ -44,7 +44,7 @@ $row=mysql_fetch_object($result);
 <p>Sample Input:<br><textarea rows=13 name=sample_input cols=120><?php echo htmlentities($row->sample_input,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Sample Output:<br><textarea rows=13 name=sample_output cols=120><?php echo htmlentities($row->sample_output,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Hint:<br>
-<textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlentities($row->output,ENT_QUOTES,"UTF-8")?></textarea></p>
+<textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlentities($row->hint,ENT_QUOTES,"UTF-8")?></textarea></p>
 </p>
 <p>SpecialJudge: 
 N<input type=radio name=spj value='0' <?php echo $row->spj=="0"?"checked":""?>>

@@ -1477,6 +1477,20 @@ void copy_js_runtime(char * work_dir) {
 	execute_cmd("/bin/cp /lib/i386-linux-gnu/libc.so.6  %s/lib/i386-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib/i386-linux-gnu/libdl.so.2  %s/lib/i386-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib/i386-linux-gnu/librt.so.1   %s/lib/i386-linux-gnu/", work_dir);
+	
+	execute_cmd("/bin/mkdir -p %s/usr/lib /lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libpthread.so.0  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libnspr4.so  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libffi.so.6  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libm.so.6  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libgcc_s.so.1  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libc.so.6  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libdl.so.2  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/librt.so.1  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libgcc_s.so.1  %s/lib/x86_64-linux-gnu/", work_dir);
+        execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.2  %s/lib/x86_64-linux-gnu/", work_dir);
+
 	execute_cmd("/bin/cp /usr/bin/js24 %s/", work_dir);
 
 }

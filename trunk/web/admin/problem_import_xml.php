@@ -34,12 +34,14 @@ function submitSolution($pid,$solution,$language)
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
 	VALUES('$pid','".$_SESSION['user_id']."',NOW(),'$language','127.0.0.1','$len')";
-	
 	mysql_query ( $sql );
+
 	$insert_id = mysql_insert_id ();
 	$solution=mysql_real_escape_string($solution);
 	//echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
+	mysql_query ( $sql );
+	$sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
 	mysql_query ( $sql );
 
 }

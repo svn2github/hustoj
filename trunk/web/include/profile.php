@@ -28,7 +28,7 @@ header("Pragma: no-cache");
 					$profile.= "&nbsp;<i class=icon-envelope></i><a href=./mail.php>$mail</a>";
         $profile.="&nbsp;<a href='./status.php?user_id=$sid'><span id=red>Recent</span></a>";
                                 
-				$profile.= "&nbsp;<a href=./logout.php>$MSG_LOGOUT</a>&nbsp;";
+				$profile.= "&nbsp;<a href='./logout.php' target='_top' >$MSG_LOGOUT</a>&nbsp;";
 			}else{
                 if ($OJ_WEIBO_AUTH){
 				    $profile.= "<a href=./login_weibo.php>$MSG_LOGIN(WEIBO)</a>&nbsp;";

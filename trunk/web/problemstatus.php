@@ -130,7 +130,6 @@ for ($i=$start+1;$row=mysql_fetch_object($result);$i++){
         $view_solution[$j][1]=  "$row->solution_id";
         if (intval($row->att)>1) $view_solution[$j][1].=  "(".$row->att.")";
         $view_solution[$j][2]=  "<a href='userinfo.php?user=".$row->user_id."'>".$row->user_id."</a>";
-        echo "<td>";
         if ($flag) $view_solution[$j][3]=  "$s_memory KB";
         else $view_solution[$j][3]=  "------";
 

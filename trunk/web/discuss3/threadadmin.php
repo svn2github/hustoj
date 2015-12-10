@@ -38,7 +38,7 @@
                         $sql = "UPDATE topic SET top_level = $toplevel WHERE `tid` = '$tid'";
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
                 mysqli_query($mysqli,$sql) or die(mysql_error());
-                if (mysqli_affected_rows()>0) {
+                if (mysqli_affected_rows($mysqli)>0) {
                         if ($stat!=2) header('Location: thread.php?tid='.$tid);
                         else header('Location: discuss.php');
                 }

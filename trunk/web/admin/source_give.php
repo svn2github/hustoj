@@ -12,7 +12,7 @@ if (!(isset($_SESSION['administrator']))){
 	$sql="update `solution` set `user_id`='$to' where `user_id`='$from' and problem_id>=$start and problem_id<=$end and result=4";
 	echo $sql;
 	mysqli_query($mysqli,$sql);
-	echo mysqli_affected_rows()." source file given!";
+	echo mysqli_affected_rows($mysqli)." source file given!";
 	
 }
 ?>

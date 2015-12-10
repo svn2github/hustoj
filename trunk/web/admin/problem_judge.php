@@ -49,7 +49,7 @@ if(isset($_POST['update_solution'])){
 	$result=intval($_POST['result']);
 	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and (result<2 or (result<4 and NOW()-judgetime>60)) LIMIT 1";
 	mysqli_query($mysqli,$sql);
-	if(mysqli_affected_rows()>0)
+	if(mysqli_affected_rows($mysqli)>0)
 		echo "1";
 	else
 		echo "0";

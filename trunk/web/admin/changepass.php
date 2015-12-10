@@ -19,7 +19,7 @@ if(isset($_POST['do'])){
 	$passwd=pwGen($passwd);
 	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'  and user_id not in( select user_id from privilege where rightstr='administrator') ";
 	mysqli_query($mysqli,$sql);
-	if (mysqli_affected_rows()==1) echo "Password Changed!";
+	if (mysqli_affected_rows($mysqli)==1) echo "Password Changed!";
   else echo "No such user! or He/Her is an administrator!";
 }
 ?>

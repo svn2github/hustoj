@@ -9,7 +9,7 @@ if(isset($_POST['do'])){
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values('$user_id','$rightstr','N')";
 	mysqli_query($mysqli,$sql);
-	if (mysqli_affected_rows()==1) echo "$user_id $rightstr added!";
+	if (mysqli_affected_rows($mysqli)==1) echo "$user_id $rightstr added!";
 	else echo "No such user!";
 }
 ?>

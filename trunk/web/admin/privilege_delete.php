@@ -9,7 +9,7 @@ if(isset($_GET['uid'])){
 	$rightstr =mysqli_real_escape_string($mysqli,$_GET['rightstr']);
 	$sql="delete from `privilege` where user_id='$user_id' and rightstr='$rightstr'";
 	mysqli_query($mysqli,$sql);
-	if (mysqli_affected_rows()==1) echo "$user_id $rightstr deleted!";
+	if (mysqli_affected_rows($mysqli)==1) echo "$user_id $rightstr deleted!";
 	else echo "No such privilege!";
 }
 ?>

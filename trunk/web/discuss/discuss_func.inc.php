@@ -17,8 +17,8 @@ function problem_exist($pid,$cid){
 		return true;
 	$sql.=" LIMIT 1";
 	//echo $sql;
-	$result=mysql_query($sql) or print "db error";
-	return mysql_num_rows($result)>0;
+	$result=mysqli_query($mysqli,$sql) or print "db error";
+	return mysqli_num_rows($result)>0;
 }
 function err_msg($msg){
 	require_once("oj-header.php");

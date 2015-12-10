@@ -9,9 +9,9 @@ if (!(isset($_SESSION['administrator']))){
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$rjpid;
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=".$rjpid.")";
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 		$url="../status.php?problem_id=".$rjpid;
 		echo "Rejudged Problem ".$rjpid;
 		echo "<script>location.href='$url';</script>";
@@ -19,16 +19,16 @@ if (!(isset($_SESSION['administrator']))){
 	else if (isset($_POST['rjsid'])){
 		$rjsid=intval($_POST['rjsid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=".$rjsid;
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 		$sql="delete from `sim` WHERE `s_id`=".$rjsid;
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 		$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
 		echo "<script>location.href='$url';</script>";
 	}else if (isset($_POST['rjcid'])){
 		$rjcid=intval($_POST['rjcid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=".$rjcid;
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 		$url="../status.php?cid=".($rjcid);
 		echo "Rejudged Contest id :".$rjcid;
 		echo "<script>location.href='$url';</script>";

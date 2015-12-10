@@ -10,10 +10,10 @@ if (isset($_POST['syear']))
 //	echo $starttime;
 //	echo $endtime;
 	 
-        $title=mysql_real_escape_string($_POST['title']);
-        $password=mysql_real_escape_string($_POST['password']);
-        $description=mysql_real_escape_string($_POST['description']);
-        $private=mysql_real_escape_string($_POST['private']);
+        $title=mysqli_real_escape_string($mysqli,$_POST['title']);
+        $password=mysqli_real_escape_string($mysqli,$_POST['password']);
+        $description=mysqli_real_escape_string($mysqli,$_POST['description']);
+        $private=mysqli_real_escape_string($mysqli,$_POST['private']);
         if (get_magic_quotes_gpc ()) {
       		  $title = stripslashes ( $title);
 	          $password = stripslashes ( $password);
@@ -32,9 +32,9 @@ if (isset($_POST['syear']))
 	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
 	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask  ,password='$password' WHERE `contest_id`=$cid";
 	//echo $sql;
-	mysql_query($sql) or die(mysql_error());
+	mysqli_query($mysqli,$sql) or die(mysql_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
-	mysql_query($sql);
+	mysqli_query($mysqli,$sql);
 	$plist=trim($_POST['cproblem']);
 	$pieces = explode(',', $plist);
 	if (count($pieces)>0 && strlen($pieces[0])>0){
@@ -42,21 +42,21 @@ if (isset($_POST['syear']))
 			VALUES ('$cid','$pieces[0]',0)";
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
-		mysql_query("update solution set num=-1 where contest_id=$cid");
+		mysqli_query($mysqli,"update solution set num=-1 where contest_id=$cid");
 		for ($i=0;$i<count($pieces);$i++){
 			$sql_2="update solution set num='$i' where contest_id='$cid' and problem_id='$pieces[$i]';";
-			mysql_query($sql_2);
+			mysqli_query($mysqli,$sql_2);
 		}
 		//echo $sql_1;
 		
-		mysql_query($sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysql_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 	
 	}
 	
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	mysql_query($sql);
+	mysqli_query($mysqli,$sql);
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
@@ -64,7 +64,7 @@ if (isset($_POST['syear']))
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
 		//echo $sql_1;
-		mysql_query($sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysql_error());
 	}
 	
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
@@ -72,9 +72,9 @@ if (isset($_POST['syear']))
 }else{
 	$cid=intval($_GET['cid']);
 	$sql="SELECT * FROM `contest` WHERE `contest_id`=$cid";
-	$result=mysql_query($sql);
-	if (mysql_num_rows($result)!=1){
-		mysql_free_result($result);
+	$result=mysqli_query($mysqli,$sql);
+	if (mysqli_num_rows($result)!=1){
+		mysqli_free_result($result);
 		echo "No such Contest!";
 		exit(0);
 	}
@@ -86,20 +86,20 @@ if (isset($_POST['syear']))
 	$langmask=$row['langmask'];
 	$description=$row['description'];
 	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	$plist="";
 	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-	$result=mysql_query($sql) or die(mysql_error());
-	for ($i=mysql_num_rows($result);$i>0;$i--){
-		$row=mysql_fetch_row($result);
+	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+	for ($i=mysqli_num_rows($result);$i>0;$i--){
+		$row=mysqli_fetch_row($result);
 		$plist=$plist.$row[0];
 		if ($i>1) $plist=$plist.',';
 	}
 	$ulist="";
 	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`='c$cid' order by user_id";
-	$result=mysql_query($sql) or die(mysql_error());
-	for ($i=mysql_num_rows($result);$i>0;$i--){
-		$row=mysql_fetch_row($result);
+	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+	for ($i=mysqli_num_rows($result);$i>0;$i--){
+		$row=mysqli_fetch_row($result);
 		$ulist=$ulist.$row[0];
 		if ($i>1) $ulist=$ulist."\n";
 	}

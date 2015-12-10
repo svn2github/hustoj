@@ -78,8 +78,8 @@
 			
 			// check contest valid
 			$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' ";
-			$result=mysql_query($sql);
-			$rows_cnt=mysql_num_rows($result);
+			$result=mysqli_query($mysqli,$sql);
+			$rows_cnt=mysqli_num_rows($result);
 			$contest_ok=true;
 		        $password="";	
 		        if(isset($_POST['password'])) $password=$_POST['password'];
@@ -87,11 +87,11 @@
 			        $password = stripslashes ( $password);
 			}
 			if ($rows_cnt==0){
-				mysql_free_result($result);
+				mysqli_free_result($result);
 				$view_title= "比赛已经关闭!";
 				
 			}else{
-				$row=mysql_fetch_object($result);
+				$row=mysqli_fetch_object($result);
 				$view_private=$row->private;
 				if($password!=""&&$password==$row->password) $_SESSION['c'.$cid]=true;
 				if ($row->private && !isset($_SESSION['c'.$cid])) $contest_ok=false;
@@ -135,11 +135,11 @@
                 ";//AND `problem`.`defunct`='N'
 
 		
-			$result=mysql_query($sql);
+			$result=mysqli_query($mysqli,$sql);
 			$view_problemset=Array();
 			
 			$cnt=0;
-			while ($row=mysql_fetch_object($result)){
+			while ($row=mysqli_fetch_object($result)){
 				
 				$view_problemset[$cnt][0]="";
 				if (isset($_SESSION['user_id'])) 
@@ -152,21 +152,21 @@
 				$cnt++;
 			}
 		
-			mysql_free_result($result);
+			mysqli_free_result($result);
 
 }else{
   $keyword="";
   if(isset($_POST['keyword'])){
-      $keyword=mysql_real_escape_string($_POST['keyword']);
+      $keyword=mysqli_real_escape_string($mysqli,$_POST['keyword']);
   }
   //echo "$keyword";
   $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 1000";
   $sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like '%$keyword%'  order by contest_id desc limit 1000;";
-			$result=mysql_query($sql);
+			$result=mysqli_query($mysqli,$sql);
 			
 			$view_contest=Array();
 			$i=0;
-			while ($row=mysql_fetch_object($result)){
+			while ($row=mysqli_fetch_object($result)){
 				
 				$view_contest[$i][0]= $row->contest_id;
 				$view_contest[$i][1]= "<a href='contest.php?cid=$row->contest_id'>$row->title</a>";
@@ -210,7 +210,7 @@
 				$i++;
 			}
 			
-			mysql_free_result($result);
+			mysqli_free_result($result);
 
 }
 

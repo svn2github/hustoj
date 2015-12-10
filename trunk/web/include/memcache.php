@@ -25,8 +25,9 @@
         return ($memcache) ? $memcache->set($key,$object,MEMCACHE_COMPRESSED,$timeout) : false;
     }
 
-    # Caching version of mysql_query()
+    # Caching version of mysqli_query($mysqli,)
     function mysql_query_cache($sql, $linkIdentifier = false,$timeout = 4) {
+	$mysqli=$GLOBALS['mysqli'];
 
 //首先调用上面的getCache函数，如果返回值不为false的话，就说明是从memcached服务器获取的数据
 //如果返回false，此时就需要直接从数据库中获取数据了。
@@ -37,29 +38,27 @@
 
             $cache = false;
 
-            $r = ($linkIdentifier != false) ? mysql_query($sql,$linkIdentifier) : mysql_query($sql);
+            $r = mysqli_query($mysqli,$sql);
 
+            $fields = mysqli_fetch_fields($r);
    //读取数据库，并将结果放入$cache数组中
-            if (is_resource($r) && (($rows = mysql_num_rows($r)) != 0)) {
-                for ($i=0;$i<$rows;$i++) {
-                    $fields = mysql_num_fields($r);
-                    $row = mysql_fetch_array($r);
-                    for ($j=0;$j<$fields;$j++) {
-                        if ($i == 0) {
-                            $columns[$j] = mysql_field_name($r,$j);
-                        }
-                        $cache[$i][$columns[$j]] = $row[$j];
-                    }
+                for ($i=0;$row = mysqli_fetch_array($r);$i++) {
+		    $j=0;
+		    foreach($fields as $val){
+			$cache[$i][$val->name]=$row[$j];
+			$j++;	
+		    }
                 }
 
     //将数据放入memcached服务器中，如果memcached服务器没有开的话，此语句什么也不会做
     //如果开启了服务器的话，数据将会被缓存到memcached服务器中
                 if (!setCache(md5("mysql_query" . $sql), $cache, $timeout)) {
                     # If we get here, there isn’t a memcache daemon running or responding
+		  echo "apt-get install memcached";
                 }
 
-            }
         }
+	
         return $cache;
     }
 ?>

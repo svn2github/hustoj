@@ -9,22 +9,22 @@
 <?php function checkcontest($MSG_CONTEST){
 		require_once("../include/db_info.inc.php");
 		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>NOW() AND `defunct`='N'";
-		$result=mysql_query($sql);
-		$row=mysql_fetch_row($result);
+		$result=mysqli_query($mysqli,$sql);
+		$row=mysqli_fetch_row($result);
 		if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
 		else $retmsg=$row[0]."<font color=red>&nbsp;$MSG_CONTEST</font>";
-		mysql_free_result($result);
+		mysqli_free_result($result);
 		return $retmsg;
 	}
 	function checkmail(){
 		require_once("../include/db_info.inc.php");
 		$sql="SELECT count(1) FROM `mail` WHERE 
 				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
-		$result=mysql_query($sql);
+		$result=mysqli_query($mysqli,$sql);
 		if(!$result) return false;
-		$row=mysql_fetch_row($result);
+		$row=mysqli_fetch_row($result);
 		$retmsg="<font color=red>(".$row[0].")</font>";
-		mysql_free_result($result);
+		mysqli_free_result($result);
 		return $retmsg;
 	}
 	

@@ -5,11 +5,11 @@
 }
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
-	$user_id=mysql_real_escape_string($_POST['user_id']);
+	$user_id=mysqli_real_escape_string($mysqli,$_POST['user_id']);
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values('$user_id','$rightstr','N')";
-	mysql_query($sql);
-	if (mysql_affected_rows()==1) echo "$user_id $rightstr added!";
+	mysqli_query($mysqli,$sql);
+	if (mysqli_affected_rows()==1) echo "$user_id $rightstr added!";
 	else echo "No such user!";
 }
 ?>

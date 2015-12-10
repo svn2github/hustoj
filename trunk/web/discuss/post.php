@@ -30,23 +30,23 @@
                         else
                                 $pid=0;
                         if(array_key_exists('cid',$_REQUEST)&&$_REQUEST['cid']!='')
-                                $cid="'".mysql_real_escape_string($_REQUEST['cid'])."'";
+                                $cid="'".mysqli_real_escape_string($mysqli,$_REQUEST['cid'])."'";
                         else
                                 $cid='NULL';
-                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) SELECT '".mysql_real_escape_string($_POST['title'])."', '".mysql_real_escape_string($_SESSION['user_id'])."', $cid, '".mysql_real_escape_string($pid)."'";
+                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) SELECT '".mysqli_real_escape_string($mysqli,$_POST['title'])."', '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', $cid, '".mysqli_real_escape_string($mysqli,$pid)."'";
                         if($pid!=0)
                                 if($cid!='NULL')
-                                        $sql.=" FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".mysql_real_escape_string($pid)."'";
+                                        $sql.=" FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".mysqli_real_escape_string($mysqli,$pid)."'";
                                 else
-                                        $sql.=" FROM `problem` WHERE `problem_id` = '".mysql_real_escape_string($pid)."'";
+                                        $sql.=" FROM `problem` WHERE `problem_id` = '".mysqli_real_escape_string($mysqli,$pid)."'";
                         else if($cid!='NULL')
                                 $sql.=" FROM `contest` WHERE `contest_id` = $cid";
                         $sql.=" LIMIT 1";
-                        mysql_query($sql) or die (mysql_error());
-                        if(mysql_affected_rows()<=0)
+                        mysqli_query($mysqli,$sql) or die (mysql_error());
+                        if(mysqli_affected_rows()<=0)
                                 echo('Unable to post.');
                         else
-                                $tid=mysql_insert_id();
+                                $tid=mysqli_insert_id($mysqli);
                 }
                 else
                         echo('Error!');
@@ -54,10 +54,10 @@
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=$_POST['tid'];
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT '".mysql_real_escape_string($_SESSION['user_id'])."', NOW(), '".mysql_real_escape_string($_POST['content'])."', '".mysql_real_escape_string($tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".mysql_real_escape_string($tid)."' AND `status` = 0 ";
+                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', NOW(), '".mysqli_real_escape_string($mysqli,$_POST['content'])."', '".mysqli_real_escape_string($mysqli,$tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".mysqli_real_escape_string($mysqli,$tid)."' AND `status` = 0 ";
                         
-                        mysql_query($sql) or die (mysql_error());
-                        if(mysql_affected_rows()>0)
+                        mysqli_query($mysqli,$sql) or die (mysql_error());
+                        if(mysqli_affected_rows()>0)
                         {
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);

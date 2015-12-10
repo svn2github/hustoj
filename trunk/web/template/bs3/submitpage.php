@@ -188,7 +188,7 @@ var problem_id=document.getElementById(mark);
 if(mark=='problem_id')
 problem_id.value='<?php echo $id?>';
 else
-problem_id.value='<?php echo $cid?>';
+problem_id.value='<?php if (isset($cid))echo $cid?>';
 document.getElementById("frmSolution").target="_self";
 <?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
 document.getElementById("frmSolution").submit();

@@ -1,6 +1,7 @@
 <?php 
     require_once("./include/db_info.inc.php");
-	$vcode=trim($_POST['vcode']);
+    $vcode="";
+    if(isset($_POST['vcode']))	$vcode=trim($_POST['vcode']);
     if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
 		echo "<script language='javascript'>\n";
 		echo "alert('Verify Code Wrong!');\n";
@@ -15,16 +16,15 @@
         $user_id= stripslashes ( $user_id);
         $password= stripslashes ( $password);
    }
-    $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".mysql_real_escape_string($user_id)."'";
-    $result=mysql_query($sql);
+    $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".mysqli_real_escape_string($mysqli,$user_id)."'";
+    $result=mysqli_query($mysqli,$sql);
 	$login=check_login($user_id,$password);
 	
 	if ($login)
     {
 		$_SESSION['user_id']=$login;
 		
-		echo mysql_error();
-		while ($result&&$row=mysql_fetch_assoc($result))
+		while ($result&&$row=mysqli_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";

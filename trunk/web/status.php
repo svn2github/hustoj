@@ -30,12 +30,12 @@ if (isset($_GET['cid'])){
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
           $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-        $result=mysql_query($sql_lock) or die(mysql_error());
-        $rows_cnt=mysql_num_rows($result);
+        $result=mysqli_query($mysqli,$sql_lock) or die(mysql_error());
+        $rows_cnt=mysqli_num_rows($result);
         $start_time=0;
         $end_time=0;
         if ($rows_cnt>0){
-                $row=mysql_fetch_array($result);
+                $row=mysqli_fetch_array($result);
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
@@ -55,7 +55,11 @@ if (isset($_GET['cid'])){
         //require_once("contest-header.php");
 }else{
         //require_once("oj-header.php");
-  if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])||(isset($_SESSION['user_id'])&&$_GET['user_id']==$_SESSION['user_id'])){
+  if(isset($_SESSION['administrator'])
+	||isset($_SESSION['source_browser'])
+	||(isset($_SESSION['user_id'])
+	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION['user_id']))
+  ){
       if ($_SESSION['user_id']!="guest")
       		$sql="SELECT * FROM `solution` WHERE contest_id is null ";
   }else{
@@ -154,8 +158,8 @@ if($OJ_MEMCACHE){
 	else $rows_cnt=0;
 }else{
 		
-	$result = mysql_query($sql);// or die("Error! ".mysql_error());
-	if($result) $rows_cnt=mysql_num_rows($result);
+	$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+	if($result) $rows_cnt=mysqli_num_rows($result);
 	else $rows_cnt=0;
 }
 $top=$bottom=-1;
@@ -175,7 +179,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 if($OJ_MEMCACHE)
         $row=$result[$i];
 else
-        $row=mysql_fetch_array($result);
+        $row=mysqli_fetch_array($result);
         //$view_status[$i]=$row;
         if($i==0&&$row['result']<4) $last=$row['solution_id'];
 
@@ -297,7 +301,7 @@ else
    
 
 }
-if(!$OJ_MEMCACHE)mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysqli_free_result($result);
 
 
 

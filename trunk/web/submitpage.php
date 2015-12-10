@@ -31,18 +31,18 @@ if (isset($_GET['id'])){
  if(isset($_GET['sid'])){
 	$sid=intval($_GET['sid']);
 	$sql="SELECT * FROM `solution` WHERE `solution_id`=".$sid;
-	$result=mysql_query($sql);
-	$row=mysql_fetch_object($result);
+	$result=mysqli_query($mysqli,$sql);
+	$row=mysqli_fetch_object($result);
 	if ($row && $row->user_id==$_SESSION['user_id']) $ok=true;
 	if (isset($_SESSION['source_browser'])) $ok=true;
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	if ($ok==true){
 		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`='".$sid."'";
-		$result=mysql_query($sql);
-		$row=mysql_fetch_object($result);
+		$result=mysqli_query($mysqli,$sql);
+		$row=mysqli_fetch_object($result);
 		if($row)
 			$view_src=$row->source;
-		mysql_free_result($result);
+		mysqli_free_result($result);
 	}
 	
  }
@@ -51,12 +51,12 @@ $view_sample_input="1 2";
 $view_sample_output="3";
  if(isset($sample_sql)){
    //echo $sample_sql;
-	$result=mysql_query($sample_sql);
-	$row=mysql_fetch_array($result);
+	$result=mysqli_query($mysqli,$sample_sql);
+	$row=mysqli_fetch_array($result);
 	$view_sample_input=$row[0];
 	$view_sample_output=$row[1];
 	$problem_id=$row[2];
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	
 	
  }

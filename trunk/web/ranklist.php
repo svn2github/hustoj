@@ -63,8 +63,8 @@
                 else $rows_cnt=0;
         }else{
 
-                $result = mysql_query($sql) or die("Error! ".mysql_error());
-                if($result) $rows_cnt=mysql_num_rows($result);
+                $result = mysqli_query($mysqli,$sql) or die("Error! ".mysql_error());
+                if($result) $rows_cnt=mysqli_num_rows($result);
                 else $rows_cnt=0;
         }
                 $view_rank=Array();
@@ -73,7 +73,7 @@
                         if($OJ_MEMCACHE)
                                 $row=$result[$i];
                         else
-                                $row=mysql_fetch_array($result);
+                                $row=mysqli_fetch_array($result);
                         $rank ++;
 
                         $view_rank[$i][0]= $rank;
@@ -90,7 +90,7 @@
 //                      $i++;
                 }
 
-if(!$OJ_MEMCACHE)mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysqli_free_result($result);
 
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
         //        $result = mysql_query ( $sql );
@@ -101,21 +101,21 @@ if(!$OJ_MEMCACHE)mysql_free_result($result);
                 else $rows_cnt=0;
         }else{
 
-                $result = mysql_query($sql);// or die("Error! ".mysql_error());
-                if($result) $rows_cnt=mysql_num_rows($result);
+                $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+                if($result) $rows_cnt=mysqli_num_rows($result);
                 else $rows_cnt=0;
         }
         if($OJ_MEMCACHE)
                 $row=$result[0];
         else
-                $row=mysql_fetch_array($result);
+                $row=mysqli_fetch_array($result);
                 echo mysql_error ();
   //$row = mysql_fetch_object ( $result );
                 $view_total=$row['mycount'];
 
   //              mysql_free_result ( $result );
 
-if(!$OJ_MEMCACHE)  mysql_free_result($result);
+if(!$OJ_MEMCACHE)  mysqli_free_result($result);
 
 
 /////////////////////////Template

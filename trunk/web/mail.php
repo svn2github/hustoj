@@ -45,15 +45,15 @@ if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=".$vid."
 								and to_user='".$_SESSION['user_id']."'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_object($result);
+	$result=mysqli_query($mysqli,$sql);
+	$row=mysqli_fetch_object($result);
 	$to_user=$row->from_user;
 	$view_title=$row->title;
 	$view_content=$row->content;
 
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	$sql="update `mail` set new_mail=0 WHERE `mail_id`=".$vid;
-	mysql_query($sql);
+	mysqli_query($mysqli,$sql);
 
 }
 //send mail page
@@ -69,22 +69,22 @@ if(isset($_POST['to_user'])){
 		$content = stripslashes ( $content );
 	}
 	$title = RemoveXSS( $title);
-	$to_user=mysql_real_escape_string($to_user);
-	$title=mysql_real_escape_string($title);
-	$content=mysql_real_escape_string($content);
-	$from_user=mysql_real_escape_string($from_user);
+	$to_user=mysqli_real_escape_string($mysqli,$to_user);
+	$title=mysqli_real_escape_string($mysqli,$title);
+	$content=mysqli_real_escape_string($mysqli,$content);
+	$from_user=mysqli_real_escape_string($mysqli,$from_user);
 	$sql="select 1 from users where user_id='$to_user' ";
-	$res=mysql_query($sql);
-	if ($res&&mysql_num_rows($res)<1){
-			mysql_free_result($res);
+	$res=mysqli_query($mysqli,$sql);
+	if ($res&&mysqli_num_rows($res)<1){
+			mysqli_free_result($res);
 			$view_title= "No Such User!";
 
 	}else{
-		if($res)mysql_free_result($res);
+		if($res)mysqli_free_result($res);
 		$sql="insert into mail(to_user,from_user,title,content,in_date)
 						values('$to_user','$from_user','$title','$content',now())";
 
-		if(!mysql_query($sql)){
+		if(!mysqli_query($mysqli,$sql)){
 			$view_title=  "Not Mailed!";
 		}else{
 			$view_title=  "Mailed!";
@@ -94,10 +94,10 @@ if(isset($_POST['to_user'])){
 //list mail
 	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
 					order by mail_id desc";
-	$result=mysql_query($sql) or die(mysql_error());
+	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 $view_mail=Array();
 $i=0;
-for (;$row=mysql_fetch_object($result);){
+for (;$row=mysqli_fetch_object($result);){
 	$view_mail[$i][0]=$row->mail_id;
 	if ($row->new_mail) $view_mail[$i][0].= "<span class=red>New</span>";
 	$view_mail[$i][1]="<a href='mail.php?vid=$row->mail_id'>".
@@ -105,7 +105,7 @@ for (;$row=mysql_fetch_object($result);){
 	$view_mail[$i][2]=$row->in_date;
 	$i++;
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 
 /////////////////////////Template

@@ -102,24 +102,24 @@ function getSolution($pid,$lang){
     {
       //  die('Could not connect: ' . mysql_error());
     }
-	mysql_query("set names utf8",$con);
+	mysqli_query($mysqli,"set names utf8",$con);
 	mysql_set_charset("utf8",$con);
 	mysql_select_db($DB_NAME,$con);
 	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
 //	echo $sql;
-	$result = mysql_query($sql,$con ) ;
+	$result = mysqli_query($mysqli,$sql,$con ) ;
 	if($result&&$row = mysql_fetch_row ( $result) ){
 		$solution_id=$row[0];
 		$ret->language=$language_name[$row[1]];
 		
-		mysql_free_result($result);
+		mysqli_free_result($result);
 		$sql = "select source from source_code where solution_id=$solution_id";
 		$result = mysql_query ( $sql ) or die ( mysql_error () );
 		if($row = mysql_fetch_object ( $result) ){
 			$ret->source_code=$row->source;
 			
 		}
-		mysql_free_result($result);
+		mysqli_free_result($result);
 	}
     mysql_close($con);
 	return $ret;

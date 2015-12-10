@@ -20,11 +20,11 @@ $sql="select user_id,problem_id,result,source   from source_code right join
                 on source_code.solution_id=S.solution_id order by S.solution_id";
 require_once("./include/const.inc.php");
 #echo $sql;
-$result=mysql_query($sql);
-while($row=mysql_fetch_object($result)){
+$result=mysqli_query($mysqli,$sql);
+while($row=mysqli_fetch_object($result)){
         echo "$row->user_id:Problem".$row->problem_id.":".$judge_result[$row->result];
         echo "\r\n$row->source";
         echo "\r\n------------------------------------------------------\r\n";
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 ?>

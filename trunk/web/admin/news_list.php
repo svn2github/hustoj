@@ -7,11 +7,11 @@ if (!isset($_SESSION['administrator'])){
 echo "<title>Problem List</title>";
 echo "<center><h2>Problem List</h2></center>";
 $sql="select `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` order by `news_id` desc";
-$result=mysql_query($sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 echo "<center><table width=90% border=1>";
 
 echo "<tr><td>PID<td>Title<td>Date<td>Status<td>Edit</tr>";
-for (;$row=mysql_fetch_object($result);){
+for (;$row=mysqli_fetch_object($result);){
 	echo "<tr>";
 	echo "<td>".$row->news_id;
 	//echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";

@@ -50,8 +50,8 @@ else
 $sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`reply`.`time`) DESC";
 $sql.=" LIMIT 30";
 //echo $sql;
-$result = mysql_query($sql) or die("Error! ".mysql_error());
-$rows_cnt = mysql_num_rows($result);
+$result = mysqli_query($mysqli,$sql) or die("Error! ".mysql_error());
+$rows_cnt = mysqli_num_rows($result);
 $cnt=0;
 $isadmin = isset($_SESSION['administrator']);
 ?>
@@ -69,8 +69,8 @@ $isadmin = isset($_SESSION['administrator']);
 <?php if ($rows_cnt==0) echo("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">No thread here.</td></tr>");
 
 for ($i=0;$i<$rows_cnt;$i++){
-	mysql_data_seek($result,$i);
-	$row=mysql_fetch_object($result);
+	mysqli_data_seek($result,$i);
+	$row=mysqli_fetch_object($result);
 	if ($cnt) echo "<tr align=center class='oddrow'>";
 	else echo "<tr align=center class='evenrow'>";
 	$cnt=1-$cnt;
@@ -93,7 +93,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	echo "<td>".($row->count-1)."</td>";
 	echo "</tr>";
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 ?>
 

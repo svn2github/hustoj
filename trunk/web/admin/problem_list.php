@@ -14,12 +14,12 @@ if (!(isset($_SESSION['administrator'])
         exit(1);
 }
 $keyword=$_GET['keyword'];
-$keyword=mysql_real_escape_string($keyword);
+$keyword=mysqli_real_escape_string($mysqli,$keyword);
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
-$result=mysql_query($sql);
+$result=mysqli_query($mysqli,$sql);
 echo mysql_error();
-$row=mysql_fetch_object($result);
+$row=mysqli_fetch_object($result);
 $cnt=intval($row->upid)-1000;
 $cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
 if (isset($_GET['page'])){
@@ -45,7 +45,7 @@ echo "</select>";
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
 //echo $sql;
 if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
-$result=mysql_query($sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 ?>
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
@@ -58,7 +58,7 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
         if(isset($_SESSION['administrator']))   echo "<td>Status<td>Delete";
         echo "<td>Edit<td>TestData</tr>";
 }
-for (;$row=mysql_fetch_object($result);){
+for (;$row=mysqli_fetch_object($result);){
         echo "<tr>";
         echo "<td>".$row->problem_id;
         echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";

@@ -17,15 +17,15 @@ if (!(isset($_SESSION['administrator']))){
 		else
 			system("rm -rf $basedir");
         $sql="delete FROM `problem` WHERE `problem_id`=$id";
-        mysql_query($sql) or die(mysql_error());
+        mysqli_query($mysqli,$sql) or die(mysql_error());
         $sql="select max(problem_id) FROM `problem`" ;
-        $result=mysql_query($sql);
-        $row=mysql_fetch_row($result);
+        $result=mysqli_query($mysqli,$sql);
+        $row=mysqli_fetch_row($result);
         $max_id=$row[0];
         $max_id++;
-        mysql_free_result($result);
+        mysqli_free_result($result);
         $sql="ALTER TABLE problem AUTO_INCREMENT = $max_id;";
-        mysql_query($sql);
+        mysqli_query($mysqli,$sql);
         ?>
         <script language=javascript>
                 history.go(-1);

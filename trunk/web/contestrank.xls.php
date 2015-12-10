@@ -123,11 +123,11 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
-$result=mysql_query($sql) or die(mysql_error());
-$rows_cnt=mysql_num_rows($result);
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$rows_cnt=mysqli_num_rows($result);
 $start_time=0;
 if ($rows_cnt>0){
-	$row=mysql_fetch_array($result);
+	$row=mysqli_fetch_array($result);
 	$start_time=strtotime($row[0]);
 	$title=$row[1];
 	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')){
@@ -135,7 +135,7 @@ if ($rows_cnt>0){
 	}
 	header ( "content-disposition:   attachment;   filename=contest".$cid."_".$title.".xls" );
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 if ($start_time==0){
 	echo "No Such Contest";
 	//require_once("oj-footer.php");
@@ -149,8 +149,8 @@ if ($start_time>time()){
 }
 
 $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=mysql_query($sql);
-$row=mysql_fetch_array($result);
+$result=mysqli_query($mysqli,$sql);
+$row=mysqli_fetch_array($result);
 $pid_cnt=intval($row[0]);
 if($pid_cnt==1) {
 	$mark_base=100;
@@ -159,7 +159,7 @@ if($pid_cnt==1) {
 	$mark_per_problem=(100-$mark_base)/($pid_cnt-1);
 }
 $mark_per_punish=$mark_per_problem/5;
-mysql_free_result($result);
+mysqli_free_result($result);
 
 $sql="SELECT 
 	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
@@ -169,11 +169,11 @@ $sql="SELECT
 		on users.user_id=solution.user_id 
 	ORDER BY users.user_id,in_date";
 //echo $sql;
-$result=mysql_query($sql);
+$result=mysqli_query($mysqli,$sql);
 $user_cnt=0;
 $user_name='';
 $U=array();
-while ($row=mysql_fetch_object($result)){
+while ($row=mysqli_fetch_object($result)){
 	$n_user=$row->user_id;
 	if (strcmp($user_name,$n_user)){
 		$user_cnt++;
@@ -185,7 +185,7 @@ while ($row=mysql_fetch_object($result)){
 	}
 	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result),$mark_base,$mark_per_problem,$mark_per_punish);
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 usort($U,"s_cmp");
 $rank=1;
 //echo "<style> td{font-size:14} </style>";

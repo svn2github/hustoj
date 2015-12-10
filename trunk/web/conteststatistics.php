@@ -10,27 +10,27 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
 $sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<NOW()";
-$result=mysql_query($sql);
-$num=mysql_num_rows($result);
+$result=mysqli_query($mysqli,$sql);
+$num=mysqli_num_rows($result);
 if ($num==0){
 	$view_errors= "Not Started!";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 $view_title= "Contest Statistics";
 
 $sql="SELECT count(`num`) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=mysql_query($sql);
-$row=mysql_fetch_array($result);
+$result=mysqli_query($mysqli,$sql);
+$row=mysqli_fetch_array($result);
 $pid_cnt=intval($row[0]);
-mysql_free_result($result);
+mysqli_free_result($result);
 
 $sql="SELECT `result`,`num`,`language` FROM `solution` WHERE `contest_id`='$cid' and num>=0"; 
-$result=mysql_query($sql);
+$result=mysqli_query($mysqli,$sql);
 $R=array();
-while ($row=mysql_fetch_object($result)){
+while ($row=mysqli_fetch_object($result)){
 	$res=intval($row->result)-4;
 	if ($res<0) $res=8;
 	$num=intval($row->num);
@@ -60,37 +60,37 @@ while ($row=mysql_fetch_object($result)){
 	else
 		$R[$pid_cnt][8]++;
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 $res=3600;
 
 $sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=$cid ";
-        $result=mysql_query($sql);
+        $result=mysqli_query($mysqli,$sql);
         $view_userstat=array();
-        if($row=mysql_fetch_array($result)){
+        if($row=mysqli_fetch_array($result)){
               $res=$row[0];
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
 
 $sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid'   group by md order by md desc ";
-        $result=mysql_query($sql);//mysql_escape_string($sql));
+        $result=mysqli_query($mysqli,$sql);//mysql_escape_string($sql));
         $chart_data_all= array();
 //echo $sql;
    
-        while ($row=mysql_fetch_array($result)){
+        while ($row=mysqli_fetch_array($result)){
                 $chart_data_all[$row['md']]=$row['c'];
     }
    
 $sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid' and result=4 group by md order by md desc ";
-        $result=mysql_query($sql);//mysql_escape_string($sql));
+        $result=mysqli_query($mysqli,$sql);//mysql_escape_string($sql));
         $chart_data_ac= array();
 //echo $sql;
    
-        while ($row=mysql_fetch_array($result)){
+        while ($row=mysqli_fetch_array($result)){
                 $chart_data_ac[$row['md']]=$row['c'];
     }
  
-  mysql_free_result($result);
+  mysqli_free_result($result);
 
 
 /////////////////////////Template

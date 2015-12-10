@@ -5,6 +5,7 @@
 <script src="<?php echo $path_fix."template/$OJ_TEMPLATE/"?>bootstrap.min.js"></script>
 
 <?php
+if(file_exists("./admin/msg.txt"))
 $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
 
 ?>

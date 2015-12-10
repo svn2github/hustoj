@@ -30,8 +30,8 @@ if (isset($_GET['solution_id'])){
 		else $rows_cnt=0;
 	}else{
 
-		$result = mysql_query($sql);// or die("Error! ".mysql_error());
-		if($result) $rows_cnt=mysql_num_rows($result);
+		$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+		if($result) $rows_cnt=mysqli_num_rows($result);
 		else $rows_cnt=0;
 	}
 
@@ -39,7 +39,7 @@ if (isset($_GET['solution_id'])){
 	if($OJ_MEMCACHE)
 		$row=$result[$i];
 	else
-		$row=mysql_fetch_array($result);
+		$row=mysqli_fetch_array($result);
 
 	if(isset($_GET['tr'])){
         	$res=$row['result'];
@@ -48,15 +48,15 @@ if (isset($_GET['solution_id'])){
 		}else{
 			$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`='".$solution_id."'";
 		}
-		$result=mysql_query($sql);
-		$row=mysql_fetch_array($result);
+		$result=mysqli_query($mysqli,$sql);
+		$row=mysqli_fetch_array($result);
 		if($row){
                        if(strpos($_SERVER['HTTP_USER_AGENT'], "MSIE"))
                              echo str_replace("\n","<br>",htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8"));
                        else
                              echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
                         $sql="delete from custominput where solution_id=".$solution_id;
-    			mysql_query($sql);     
+    			mysqli_query($mysqli,$sql);     
                 }
 
     
@@ -66,7 +66,7 @@ if (isset($_GET['solution_id'])){
 	}
 }
 
-if(!$OJ_MEMCACHE)mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysqli_free_result($result);
 
 ?>
 

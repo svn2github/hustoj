@@ -37,9 +37,9 @@ if (isset($_GET['id'])){
                 $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<='$now'";
         else
                 $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
-        $result=mysql_query($sql);
-        $rows_cnt=mysql_num_rows($result);
-        $row=mysql_fetch_row($result);
+        $result=mysqli_query($mysqli,$sql);
+        $rows_cnt=mysqli_num_rows($result);
+        $row=mysqli_fetch_row($result);
         $contest_ok=true;
         if ($row[1] && !isset($_SESSION['c'.$cid])) $contest_ok=false;
         if ($row[2]=='Y') $contest_ok=false;
@@ -48,7 +48,7 @@ if (isset($_GET['id'])){
        
     $ok_cnt=$rows_cnt==1;              
         $langmask=$row[0];
-        mysql_free_result($result);
+        mysqli_free_result($result);
         if ($ok_cnt!=1){
                 // not started
                 $view_errors=  "No such Contest!";
@@ -74,21 +74,21 @@ if (isset($_GET['id'])){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-$result=mysql_query($sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 
        
-if (mysql_num_rows($result)!=1){
+if (mysqli_num_rows($result)!=1){
    $view_errors="";
    if(isset($_GET['id'])){
       $id=intval($_GET['id']);
-           mysql_free_result($result);
+           mysqli_free_result($result);
            $sql="SELECT  contest.`contest_id` , contest.`title`,contest_problem.num FROM `contest_problem`,`contest` WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=$id and defunct='N'  ORDER BY `num`";
            //echo $sql;
-           $result=mysql_query($sql);
-           if($i=mysql_num_rows($result)){
+           $result=mysqli_query($mysqli,$sql);
+           if($i=mysqli_num_rows($result)){
               $view_errors.= "This problem is in Contest(s) below:<br>";
                    for (;$i>0;$i--){
-                                $row=mysql_fetch_row($result);
+                                $row=mysqli_fetch_row($result);
                                 $view_errors.= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";
                                
                         }
@@ -105,12 +105,12 @@ if (mysql_num_rows($result)!=1){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }else{
-        $row=mysql_fetch_object($result);
+        $row=mysqli_fetch_object($result);
        
         $view_title= $row->title;
        
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 
 /////////////////////////Template

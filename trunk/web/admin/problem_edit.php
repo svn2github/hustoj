@@ -29,8 +29,8 @@ include_once("kindeditor.php") ;
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
 <?php $sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
-$result=mysql_query($sql);
-$row=mysql_fetch_object($result);
+$result=mysqli_query($mysqli,$sql);
+$row=mysqli_fetch_object($result);
 ?>
 <p>Problem Id: <?php echo $row->problem_id?></p>
 <input type=hidden name=problem_id value='<?php echo $row->problem_id?>'>
@@ -100,25 +100,25 @@ echo "Sample data file in $basedir Updated!<br>";
 		fputs($fp,preg_replace("(\r\n)","\n",$sample_output));
 		fclose($fp);
 	}
-	$title=mysql_real_escape_string($title);
-	$time_limit=mysql_real_escape_string($time_limit);
-	$memory_limit=mysql_real_escape_string($memory_limit);
-	$description=mysql_real_escape_string($description);
-	$input=mysql_real_escape_string($input);
-	$output=mysql_real_escape_string($output);
-	$sample_input=mysql_real_escape_string($sample_input);
-	$sample_output=mysql_real_escape_string($sample_output);
+	$title=mysqli_real_escape_string($mysqli,$title);
+	$time_limit=mysqli_real_escape_string($mysqli,$time_limit);
+	$memory_limit=mysqli_real_escape_string($mysqli,$memory_limit);
+	$description=mysqli_real_escape_string($mysqli,$description);
+	$input=mysqli_real_escape_string($mysqli,$input);
+	$output=mysqli_real_escape_string($mysqli,$output);
+	$sample_input=mysqli_real_escape_string($mysqli,$sample_input);
+	$sample_output=mysqli_real_escape_string($mysqli,$sample_output);
 //	$test_input=($test_input);
 //	$test_output=($test_output);
-	$hint=mysql_real_escape_string($hint);
-	$source=mysql_real_escape_string($source);
+	$hint=mysqli_real_escape_string($mysqli,$hint);
+	$source=mysqli_real_escape_string($mysqli,$source);
 //	$spj=($spj);
 	
 $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_limit`='$memory_limit',
 	`description`='$description',`input`='$input',`output`='$output',`sample_input`='$sample_input',`sample_output`='$sample_output',`hint`='$hint',`source`='$source',`spj`=$spj,`in_date`=NOW()
 	WHERE `problem_id`=$id";
 
-@mysql_query($sql) or die(mysql_error());
+@mysqli_query($mysqli,$sql) or die(mysql_error());
 echo "Edit OK!";
 
 

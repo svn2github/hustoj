@@ -53,8 +53,8 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
 $sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-//$result=mysql_query($sql) or die(mysql_error());
-//$rows_cnt=mysql_num_rows($result);
+//$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+//$rows_cnt=mysqli_num_rows($result);
 if($OJ_MEMCACHE){
         require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
@@ -62,8 +62,8 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysql_query($sql);// or die("Error! ".mysql_error());
-        if($result) $rows_cnt=mysql_num_rows($result);
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
 
@@ -71,18 +71,18 @@ if($OJ_MEMCACHE){
 $start_time=0;
 $end_time=0;
 if ($rows_cnt>0){
-//      $row=mysql_fetch_array($result);
+//      $row=mysqli_fetch_array($result);
 
         if($OJ_MEMCACHE)
                 $row=$result[0];
         else
-                $row=mysql_fetch_array($result);
+                $row=mysqli_fetch_array($result);
         $start_time=strtotime($row['start_time']);
         $end_time=strtotime($row['end_time']);
         $title=$row['title'];
         
 }
-if(!$OJ_MEMCACHE)mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysqli_free_result($result);
 if ($start_time==0){
         $view_errors= "No Such Contest";
         require("template/".$OJ_TEMPLATE."/error.php");
@@ -101,7 +101,7 @@ $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 
 $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
-//$result=mysql_query($sql);
+//$result=mysqli_query($mysqli,$sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
@@ -109,19 +109,19 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysql_query($sql);// or die("Error! ".mysql_error());
-        if($result) $rows_cnt=mysql_num_rows($result);
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
 
 if($OJ_MEMCACHE)
         $row=$result[0];
 else
-        $row=mysql_fetch_array($result);
+        $row=mysqli_fetch_array($result);
 
-//$row=mysql_fetch_array($result);
+//$row=mysqli_fetch_array($result);
 $pid_cnt=intval($row['pbc']);
-if(!$OJ_MEMCACHE)mysql_free_result($result);
+if(!$OJ_MEMCACHE)mysqli_free_result($result);
 
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
@@ -131,7 +131,7 @@ $sql="SELECT
                 on users.user_id=solution.user_id
         ORDER BY in_date";
 //echo $sql;
-//$result=mysql_query($sql);
+//$result=mysqli_query($mysqli,$sql);
 if($OJ_MEMCACHE){
    //     require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
@@ -139,8 +139,8 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysql_query($sql);// or die("Error! ".mysql_error());
-        if($result) $rows_cnt=mysql_num_rows($result);
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+        if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
 
@@ -151,7 +151,7 @@ for ($i=0;$i<$rows_cnt;$i++){
         if($OJ_MEMCACHE)
                 $row=$result[$i];
         else
-                $row=mysql_fetch_array($result);
+                $row=mysqli_fetch_array($result);
 
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){
@@ -171,16 +171,16 @@ for ($i=0;$i<$rows_cnt;$i++){
 }
 $solution_json= json_encode($result);
 
-if(!$OJ_MEMCACHE) mysql_free_result($result);
+if(!$OJ_MEMCACHE) mysqli_free_result($result);
 usort($U,"s_cmp");
 
 ////firstblood
 $first_blood=array();
 for($i=0;$i<$pid_cnt;$i++){
    $sql="select user_id from solution where contest_id=$cid and result=4 and num=$i order by in_date limit 1";
-   $result=mysql_query($sql);
-   $row_cnt=mysql_num_rows($result);
-   $row=mysql_fetch_array($result);
+   $result=mysqli_query($mysqli,$sql);
+   $row_cnt=mysqli_num_rows($result);
+   $row=mysqli_fetch_array($result);
    if($row_cnt==1){
       $first_blood[$i]=$row['user_id'];
    }else{

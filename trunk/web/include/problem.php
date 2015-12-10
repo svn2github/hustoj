@@ -1,18 +1,18 @@
 <?php
 
 function addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj,$OJ_DATA) {
-	$title=mysql_real_escape_string($title);
-	$time_limit=mysql_real_escape_string($time_limit);
-	$memory_limit=mysql_real_escape_string($memory_limit);
-	$description=mysql_real_escape_string($description);
-	$input=mysql_real_escape_string($input);
-	$output=mysql_real_escape_string($output);
-	$sample_input=mysql_real_escape_string($sample_input);
-	$sample_output=mysql_real_escape_string($sample_output);
+	$title=mysqli_real_escape_string($mysqli,$title);
+	$time_limit=mysqli_real_escape_string($mysqli,$time_limit);
+	$memory_limit=mysqli_real_escape_string($mysqli,$memory_limit);
+	$description=mysqli_real_escape_string($mysqli,$description);
+	$input=mysqli_real_escape_string($mysqli,$input);
+	$output=mysqli_real_escape_string($mysqli,$output);
+	$sample_input=mysqli_real_escape_string($mysqli,$sample_input);
+	$sample_output=mysqli_real_escape_string($mysqli,$sample_output);
 //	$test_input=($test_input);
 //	$test_output=($test_output);
-	$hint=mysql_real_escape_string($hint);
-	$source=mysql_real_escape_string($source);
+	$hint=mysqli_real_escape_string($mysqli,$hint);
+	$source=mysqli_real_escape_string($mysqli,$source);
 //	$spj=($spj);
 	
 	$sql = "INSERT into `problem` (`title`,`time_limit`,`memory_limit`,

@@ -23,11 +23,11 @@ if ($len>100){
 }else if ($len==0) $nick=$user_id;
 $password=$_POST['opassword'];
 $sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."'";
-$result=mysql_query($sql);
-$row=mysql_fetch_array($result);
+$result=mysqli_query($mysqli,$sql);
+$row=mysqli_fetch_array($result);
 if ($row && pwCheck($password,$row['password'])) $rows_cnt = 1;
 else $rows_cnt = 0;
-mysql_free_result($result);
+mysqli_free_result($result);
 if ($rows_cnt==0){
 	$err_str=$err_str."Old Password Wrong";
 	$err_cnt++;
@@ -60,18 +60,18 @@ if ($err_cnt>0){
 }
 if (strlen($_POST['npassword'])==0) $password=pwGen($_POST['opassword']);
 else $password=pwGen($_POST['npassword']);
-$nick=mysql_real_escape_string(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
-$school=mysql_real_escape_string(htmlentities ($school,ENT_QUOTES,"UTF-8"));
-$email=mysql_real_escape_string(htmlentities ($email,ENT_QUOTES,"UTF-8"));
+$nick=mysqli_real_escape_string($mysqli,htmlentities ($nick,ENT_QUOTES,"UTF-8"));
+$school=mysqli_real_escape_string($mysqli,htmlentities ($school,ENT_QUOTES,"UTF-8"));
+$email=mysqli_real_escape_string($mysqli,htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $sql="UPDATE `users` SET"
 ."`password`='".($password)."',"
 ."`nick`='".($nick)."',"
 ."`school`='".($school)."',"
 ."`email`='".($email)."' "
-."WHERE `user_id`='".mysql_real_escape_string($user_id)."'"
+."WHERE `user_id`='".mysqli_real_escape_string($mysqli,$user_id)."'"
 ;
 //echo $sql;
 //exit(0);
-mysql_query($sql);// or die("Insert Error!\n");
+mysqli_query($mysqli,$sql);// or die("Insert Error!\n");
 header("Location: ./");
 ?>

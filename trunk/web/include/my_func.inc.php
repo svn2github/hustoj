@@ -55,29 +55,31 @@ function sec2str($sec){
 }
 
 function is_running($cid){
-	require_once("./include/db_info.inc.php");
+	$mysqli=$GLOBALS['mysqli'];
+	//require_once("./include/db_info.inc.php");
    $now=strftime("%Y-%m-%d %H:%M",time());
 	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' AND `end_time`>'$now'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
+	$result=mysqli_query($mysqli,$sql);
+	$row=mysqli_fetch_array($result);
 	$cnt=intval($row[0]);
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	return $cnt>0;
 }
 
 function check_ac($cid,$pid){
-	require_once("./include/db_info.inc.php");
+	//require_once("./include/db_info.inc.php");
+	$mysqli=$GLOBALS['mysqli'];
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`='$cid' AND `num`='$pid' AND `result`='4' AND `user_id`='".$_SESSION['user_id']."'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
+	$result=mysqli_query($mysqli,$sql);
+	$row=mysqli_fetch_array($result);
 	$ac=intval($row[0]);
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	if ($ac>0) return "<font color=green>Y</font>";
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`='$cid' AND `num`='$pid' AND `user_id`='".$_SESSION['user_id']."'";
-	$result=mysql_query($sql);
-	$row=mysql_fetch_array($result);
+	$result=mysqli_query($mysqli,$sql);
+	$row=mysqli_fetch_array($result);
 	$sub=intval($row[0]);
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	if ($sub>0) return "<font color=red>N</font>";
 	else return "";
 }

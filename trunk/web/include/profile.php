@@ -12,11 +12,11 @@ header("Pragma: no-cache");
 		
 		$sql="SELECT count(1) FROM `mail` WHERE 
 				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
-		$result=mysql_query($sql);
+		$result=mysqli_query($mysqli,$sql);
 		if(!$result) return false;
-		$row=mysql_fetch_row($result);
+		$row=mysqli_fetch_row($result);
 		$retmsg="<span id=red>(".$row[0].")</span>";
-		mysql_free_result($result);
+		mysqli_free_result($result);
 		return $retmsg;
 	}
 	$profile="";

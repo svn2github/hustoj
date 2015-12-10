@@ -9,9 +9,9 @@ $first=1000;
   //if($OJ_SAE) $first=1;
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
-$result=mysql_query($sql);
+$result=mysqli_query($mysqli,$sql);
 echo mysql_error();
-$row=mysql_fetch_object($result);
+$row=mysqli_fetch_object($result);
 $cnt=intval($row->upid)-$first;
 $cnt=$cnt/$page_cnt;
 
@@ -21,13 +21,13 @@ if (isset($_GET['page'])){
     $page=intval($_GET['page']);
     if(isset($_SESSION['user_id'])){
          $sql="update users set volume=$page where user_id='".$_SESSION['user_id']."'";
-         mysql_query($sql);
+         mysqli_query($mysqli,$sql);
     }
 }else{
     if(isset($_SESSION['user_id'])){
             $sql="select volume from users where user_id='".$_SESSION['user_id']."'";
-            $result=@mysql_query($sql);
-            $row=mysql_fetch_array($result);
+            $result=@mysqli_query($mysqli,$sql);
+            $row=mysqli_fetch_array($result);
             $page=intval($row[0]);
     }
     if(!is_numeric($page)||$page<0)
@@ -47,8 +47,8 @@ $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id'
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        // " AND `problem_id`<'$pend'".
 	" group by `problem_id`";
-$result=@mysql_query($sql) or die(mysql_error());
-while ($row=mysql_fetch_array($result))
+$result=@mysqli_query($mysqli,$sql) or die(mysql_error());
+while ($row=mysqli_fetch_array($result))
 	$sub_arr[$row[0]]=true;
 }
 
@@ -60,13 +60,13 @@ $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id'
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=@mysql_query($sql) or die(mysql_error());
-while ($row=mysql_fetch_array($result))
+$result=@mysqli_query($mysqli,$sql) or die(mysql_error());
+while ($row=mysqli_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
 
 if(isset($_GET['search'])&&trim($_GET['search'])!=""){
-	$search=mysql_real_escape_string($_GET['search']);
+	$search=mysqli_real_escape_string($mysqli,$_GET['search']);
     $filter_sql=" ( title like '%$search%' or source like '%$search%')";
     
 }else{
@@ -93,14 +93,14 @@ else{
 $sql.=" ORDER BY `problem_id`";
 
 
-$result=mysql_query($sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 
 $view_total_page=$cnt+1;
 
 $cnt=0;
 $view_problemset=Array();
 $i=0;
-while ($row=mysql_fetch_object($result)){
+while ($row=mysqli_fetch_object($result)){
 	
 	
 	$view_problemset[$i]=Array();
@@ -121,7 +121,7 @@ while ($row=mysql_fetch_object($result)){
 	
 	$i++;
 }
-mysql_free_result($result);
+mysqli_free_result($result);
 
 
 require("template/".$OJ_TEMPLATE."/problemset.php");

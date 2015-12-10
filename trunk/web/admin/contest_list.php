@@ -10,9 +10,9 @@ echo "<center><h2>Contest List</h2></center>";
 require_once("../include/set_get_key.php");
 $sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";
 $page_cnt=50;
-$result=mysql_query($sql);
+$result=mysqli_query($mysqli,$sql);
 echo mysql_error();
-$row=mysql_fetch_object($result);
+$row=mysqli_fetch_object($result);
 $base=intval($row->btid);
 $cnt=intval($row->upid)-$base;
 $cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
@@ -28,9 +28,9 @@ for ($i=1;$i<=$cnt;$i++){
 }
 $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where contest_id>=$pstart and contest_id <=$pend order by `contest_id` desc";
 $keyword=$_GET['keyword'];
-$keyword=mysql_real_escape_string($keyword);
+$keyword=mysqli_real_escape_string($mysqli,$keyword);
 if($keyword) $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where title like '%$keyword%' ";
-$result=mysql_query($sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 ?>
 <form action=contest_list.php class=center><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
@@ -39,7 +39,7 @@ $result=mysql_query($sql) or die(mysql_error());
 echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs";
 echo "</tr>";
-for (;$row=mysql_fetch_object($result);){
+for (;$row=mysqli_fetch_object($result);){
         echo "<tr>";
         echo "<td>".$row->contest_id;
         echo "<td><a href='../contest.php?cid=$row->contest_id'>".$row->title."</a>";

@@ -64,25 +64,25 @@ if ($err_cnt>0){
 }
 $password=pwGen($_POST['password']);
 $sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = '".$user_id."'";
-$result=mysql_query($sql);
-$rows_cnt=mysql_num_rows($result);
-mysql_free_result($result);
+$result=mysqli_query($mysqli,$sql);
+$rows_cnt=mysqli_num_rows($result);
+mysqli_free_result($result);
 if ($rows_cnt == 1){
 	print "<script language='javascript'>\n";
 	print "alert('User Existed!\\n');\n";
 	print "history.go(-1);\n</script>";
 	exit(0);
 }
-$nick=mysql_real_escape_string(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
-$school=mysql_real_escape_string(htmlentities ($school,ENT_QUOTES,"UTF-8"));
-$email=mysql_real_escape_string(htmlentities ($email,ENT_QUOTES,"UTF-8"));
+$nick=mysqli_real_escape_string($mysqli,htmlentities ($nick,ENT_QUOTES,"UTF-8"));
+$school=mysqli_real_escape_string($mysqli,htmlentities ($school,ENT_QUOTES,"UTF-8"));
+$email=mysqli_real_escape_string($mysqli,htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip=$_SERVER['REMOTE_ADDR'];
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
 ."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
-mysql_query($sql);// or die("Insert Error!\n");
+mysqli_query($mysqli,$sql);// or die("Insert Error!\n");
 
-if( mysql_affected_rows()==0) {
+if( mysqli_affected_rows()==0) {
        	print "<script language='javascript'>\n";
 	print "alert('Username robbed!\\n');\n";
 	print "history.go(-1);\n</script>";
@@ -91,12 +91,12 @@ if( mysql_affected_rows()==0) {
 
 
 $sql="INSERT INTO `loginlog` VALUES('$user_id','$password','$ip',NOW())";
-mysql_query($sql);
+mysqli_query($mysqli,$sql);
 $_SESSION['user_id']=$user_id;
 
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
 		//echo $sql."<br />";
-		$result=mysql_query($sql);
+		$result=mysqli_query($mysqli,$sql);
 		echo mysql_error();
 		while ($row=mysql_fetch_assoc($result)){
 			$_SESSION[$row['rightstr']]=true;

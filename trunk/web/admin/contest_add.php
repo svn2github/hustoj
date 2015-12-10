@@ -28,10 +28,10 @@ $description="";
                 $description = stripslashes ($description);
         }
 
-        $title=mysql_real_escape_string($title);
-        $private=mysql_real_escape_string($private);
-        $password=mysql_real_escape_string($password);
-        $description=mysql_real_escape_string($description);
+        $title=mysqli_real_escape_string($mysqli,$title);
+        $private=mysqli_real_escape_string($mysqli,$private);
+        $password=mysqli_real_escape_string($mysqli,$password);
+        $description=mysqli_real_escape_string($mysqli,$description);
 
 
     $lang=$_POST['lang'];
@@ -45,8 +45,8 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
         $sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
                 VALUES('$title','$starttime','$endtime','$private',$langmask,'$description','$password')";
 	echo $sql;
-	mysql_query($sql) or die(mysql_error());
-	$cid=mysql_insert_id();
+	mysqli_query($mysqli,$sql) or die(mysql_error());
+	$cid=mysqli_insert_id($mysqli,);
 	echo "Add Contest ".$cid;
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	$plist=trim($_POST['cproblem']);
@@ -58,14 +58,14 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		}
 		//echo $sql_1;
-		mysql_query($sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysql_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysql_query($sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysql_error());
 	}
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	mysql_query($sql);
+	mysqli_query($mysqli,$sql);
 	$sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_id']."','m$cid')";
-	mysql_query($sql);
+	mysqli_query($mysqli,$sql);
 	$_SESSION["m$cid"]=true;
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
@@ -74,7 +74,7 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
 		//echo $sql_1;
-		mysql_query($sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysql_error());
 	}
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
 }
@@ -83,19 +83,19 @@ else{
    if(isset($_GET['cid'])){
 		   $cid=intval($_GET['cid']);
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
-		   $result=mysql_query($sql) or die(mysql_error());
-		   $row=mysql_fetch_object($result);
+		   $result=mysqli_query($mysqli,$sql) or die(mysql_error());
+		   $row=mysqli_fetch_object($result);
 		   $title=$row->title;
-		   mysql_free_result($result);
+		   mysqli_free_result($result);
 			$plist="";
 			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-			$result=mysql_query($sql) or die(mysql_error());
-			for ($i=mysql_num_rows($result);$i>0;$i--){
-				$row=mysql_fetch_row($result);
+			$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+			for ($i=mysqli_num_rows($result);$i>0;$i--){
+				$row=mysqli_fetch_row($result);
 				$plist=$plist.$row[0];
 				if ($i>1) $plist=$plist.',';
 			}
-			mysql_free_result($result);
+			mysqli_free_result($result);
    }
 else if(isset($_POST['problem2contest'])){
 	   $plist="";
@@ -113,13 +113,13 @@ else if(isset($_POST['problem2contest'])){
 		 
 			$plist="";
 			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=$spid ";
-			$result=mysql_query($sql) or die(mysql_error());
-			for ($i=mysql_num_rows($result);$i>0;$i--){
-				$row=mysql_fetch_row($result);
+			$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+			for ($i=mysqli_num_rows($result);$i>0;$i--){
+				$row=mysqli_fetch_row($result);
 				$plist=$plist.$row[0];
 				if ($i>1) $plist=$plist.',';
 			}
-			mysql_free_result($result);
+			mysqli_free_result($result);
 }  
   include_once("kindeditor.php") ;
 ?>

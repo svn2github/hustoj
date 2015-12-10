@@ -24,17 +24,17 @@ if (isset($_SESSION['administrator'])){
 		if(isset($_GET['search'])){
 
 			$sql="SELECT * FROM `loginlog`";
-			$search=trim(mysql_real_escape_string($_GET['search']));
+			$search=trim(mysqli_real_escape_string($mysqli,$_GET['search']));
 			if ($search!='')
 				$sql=$sql." WHERE ip like '%$search%' ";
 			 else
 				$sql=$sql." where user_id<>'".$_SESSION['user_id']."' ";
 			$sql=$sql."  order by `time` desc LIMIT 0,50";
 
-		$result=mysql_query($sql) or die(mysql_error());
+		$result=mysqli_query($mysqli,$sql) or die(mysql_error());
 		$i=0;
 	
-		for (;$row=mysql_fetch_row($result);){
+		for (;$row=mysqli_fetch_row($result);){
 				
 				$view_online[$i][0]= "<a href='userinfo.php?user=".$row[0]."'>".$row[0]."</a>";
 				$view_online[$i][1]=$row[1];
@@ -44,7 +44,7 @@ if (isset($_SESSION['administrator'])){
 				$i++;
 		}
 	
-		mysql_free_result($result);
+		mysqli_free_result($result);
 		}
 
 }

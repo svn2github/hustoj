@@ -76,10 +76,10 @@ echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
 <?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";
-if (!($result=mysql_query($sql))) echo mysql_error();
-while ($row=mysql_fetch_array($result))
+if (!($result=mysqli_query($mysqli,$sql))) echo mysql_error();
+while ($row=mysqli_fetch_array($result))
 echo "p($row[0]);";
-mysql_free_result($result);
+mysqli_free_result($result);
 ?>
 </script>
 <div id=submission style="width:600px;height:300px" ></div>

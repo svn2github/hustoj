@@ -2,9 +2,9 @@
 	require_once("oj-header.php");
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <= 1";
-	$result=mysql_query($sql) or die("Error! ".mysql_error());
-	$rows_cnt = mysql_num_rows($result) or die("Error! ".mysql_error());
-	$row= mysql_fetch_object($result);
+	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysql_error());
+	$rows_cnt = mysqli_num_rows($result) or die("Error! ".mysql_error());
+	$row= mysqli_fetch_object($result);
 	$isadmin = isset($_SESSION['administrator']);
 ?>
 
@@ -28,13 +28,13 @@
 
 <?php
 	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
-	$result=mysql_query($sql) or die("Error! ".mysql_error());
-	$rows_cnt = mysql_num_rows($result);
+	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysql_error());
+	$rows_cnt = mysqli_num_rows($result);
 	$cnt=0;
 
 	for ($i=0;$i<$rows_cnt;$i++){
-		mysql_data_seek($result,$i);
-		$row=mysql_fetch_object($result);
+		mysqli_data_seek($result,$i);
+		$row=mysqli_fetch_object($result);
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$_REQUEST['tid']}&action=";
 		$isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
 ?>

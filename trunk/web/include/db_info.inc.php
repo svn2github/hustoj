@@ -6,7 +6,7 @@ static 	$DB_USER="root";
 static 	$DB_PASS="root";
 	// connect db 
 static 	$OJ_NAME="HUSTOJ";
-static 	$OJ_HOME="../";
+static 	$OJ_HOME="./";
 static 	$OJ_ADMIN="root@localhost";
 static 	$OJ_DATA="/home/judge/data";
 static 	$OJ_BBS="discuss3";//"bbs" for phpBB3 bridge or "discuss" for mini-forum
@@ -72,6 +72,8 @@ global $mysqli;
 		die('Can\'t use foo : ' . mysqli_error());
 	//sychronize php and mysql server
 	date_default_timezone_set("PRC");
+	if($OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
+		 require_once('csrf_check.php');
 	mysqli_query($mysqli,"SET time_zone ='+8:00'");
 	
 ?>

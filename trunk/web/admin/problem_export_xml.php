@@ -82,46 +82,40 @@ class Solution{
 }
 function getSolution($pid,$lang){
 	$ret=new Solution();
-	require("../include/db_info.inc.php");
-	if(isset($OJ_LANG)){
-			require("../lang/$OJ_LANG.php");
-	}
+	$mysqli=$GLOBALS['mysqli'];
 	require("../include/const.inc.php");
          $con=false;
 	if($OJ_SAE)     {
                 $OJ_DATA="saestor://data/";
         //  for sae.sina.com.cn
-               $con= mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+               $con= mysqli_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
                
         }else{
                 //for normal install
-                $con=mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS);
                         
         }
 	if (!$con)
     {
-      //  die('Could not connect: ' . mysql_error());
+      //  die('Could not connect: ' . mysqli_error());
     }
 	mysqli_query($mysqli,"set names utf8",$con);
-	mysql_set_charset("utf8",$con);
-	mysql_select_db($DB_NAME,$con);
 	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
 //	echo $sql;
 	$result = mysqli_query($mysqli,$sql,$con ) ;
-	if($result&&$row = mysql_fetch_row ( $result) ){
+	if($result&&$row = mysqli_fetch_row ( $result) ){
 		$solution_id=$row[0];
 		$ret->language=$language_name[$row[1]];
 		
 		mysqli_free_result($result);
 		$sql = "select source from source_code where solution_id=$solution_id";
-		$result = mysql_query ( $sql ) or die ( mysql_error () );
-		if($row = mysql_fetch_object ( $result) ){
+		$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error () );
+		if($row = mysqli_fetch_object ( $result) ){
 			$ret->source_code=$row->source;
 			
 		}
 		mysqli_free_result($result);
 	}
-    mysql_close($con);
+    mysqli_close($con);
 	return $ret;
 }
 function fixurl($img_url){
@@ -187,17 +181,17 @@ if (! isset ( $_SESSION ['administrator'] )) {
 if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
 	require_once("../include/check_post_key.php");
-   	$in=mysql_real_escape_string ( $_POST ['in'] );
+   	$in=mysqli_real_escape_string ( $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
    	  $filename="-$in";
    }else if (isset($_GET['cid'])){
 	  require_once("../include/check_get_key.php");
 	  $cid=intval( $_GET['cid'] );
       $sql= "select title from contest where contest_id='$cid'";
-      $result = mysql_query ( $sql ) or die ( mysql_error () );
-      $row = mysql_fetch_object ( $result );
+      $result = mysqli_query($mysqli, $sql ) or die ( mysqli_error () );
+      $row = mysqli_fetch_object ( $result );
       $filename='-'.$row->title;
-      mysql_free_result ( $result );
+      mysqli_free_result ( $result );
       $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
 	  
    }else{
@@ -210,7 +204,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 
 	
 	//echo $sql;
-	$result = mysql_query ( $sql ) or die ( mysql_error () );
+	$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error () );
 	
 	if (isset($_POST ['submit'])&&$_POST ['submit'] == "Export")
 		header ( 'Content-Type:   text/xml' );
@@ -225,7 +219,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <fps version="1.1" url="http://code.google.com/p/freeproblemset/">
 	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
 	<?php
-	while ( $row = mysql_fetch_object ( $result ) ) {
+	while ( $row = mysqli_fetch_object ( $result ) ) {
 		
 		?>
 <item>
@@ -280,7 +274,7 @@ for ($lang=0;$lang<count($language_name);$lang++){
 ?>
 </item>
 <?php }
-	mysql_free_result ( $result );
+	mysqli_free_result ( $result );
 	
 	echo "</fps>";
 

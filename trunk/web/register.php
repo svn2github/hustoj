@@ -98,7 +98,7 @@ $_SESSION['user_id']=$user_id;
 		//echo $sql."<br />";
 		$result=mysqli_query($mysqli,$sql);
 		echo mysql_error();
-		while ($row=mysql_fetch_assoc($result)){
+		while ($row=mysqli_fetch_assoc($result)){
 			$_SESSION[$row['rightstr']]=true;
 			//echo $_SESSION[$row['rightstr']]."<br />";
 		}

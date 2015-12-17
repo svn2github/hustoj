@@ -11,11 +11,11 @@ if (!(isset($_SESSION['administrator']))){
 	fclose($fp);
 }
 require_once ("../include/problem.php");
+require ("../include/db_info.inc.php");
 
 function submitSolution($pid,$solution,$language)
 {
-	
-	require ("../include/db_info.inc.php");
+	$mysqli=$GLOBALS['mysqli'];
 	if(isset($OJ_LANG)){
 		require("../lang/$OJ_LANG.php");
 	}	
@@ -34,15 +34,15 @@ function submitSolution($pid,$solution,$language)
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
 	VALUES('$pid','".$_SESSION['user_id']."',NOW(),'$language','127.0.0.1','$len')";
-	mysql_query ( $sql );
+	mysqli_query($mysqli, $sql );
 
-	$insert_id = mysql_insert_id ();
+	$insert_id = mysqli_insert_id ($mysqli);
 	$solution=mysqli_real_escape_string($mysqli,$solution);
 	//echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
-	mysql_query ( $sql );
+	mysqli_query($mysqli, $sql );
 	$sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES('$insert_id','$solution')";
-	mysql_query ( $sql );
+	mysqli_query($mysqli, $sql );
 
 }
 ?>
@@ -57,10 +57,10 @@ function getAttribute($Node, $TagName,$attribute) {
 	return $Node->children()->$TagName->attributes()->$attribute;
 }
 function hasProblem($title){
-	require("../include/db_info.inc.php");
+	$mysqli=$GLOBALS['mysqli'];
 	$md5=md5($title);
 	$sql="select 1 from problem where md5(title)='$md5'";  
-	$result=mysql_query ( $sql );
+	$result=mysqli_query($mysqli, $sql );
 	$rows_cnt=mysqli_num_rows($result);		
 	mysqli_free_result($result);
 	//echo "row->$rows_cnt";			
@@ -158,13 +158,13 @@ if ($_FILES ["fps"] ["error"] > 0) {
 						$src=mysqli_real_escape_string($mysqli,$src);
 						$newpath=mysqli_real_escape_string($mysqli,$newpath);
 						$sql="update problem set description=replace(description,'$src','$newpath') where problem_id=$pid";  
-						mysql_query ( $sql );
+						mysqli_query($mysqli, $sql );
 						$sql="update problem set input=replace(input,'$src','$newpath') where problem_id=$pid";  
-						mysql_query ( $sql );
+						mysqli_query($mysqli, $sql );
 						$sql="update problem set output=replace(output,'$src','$newpath') where problem_id=$pid";  
-						mysql_query ( $sql );
+						mysqli_query($mysqli, $sql );
 						$sql="update problem set hint=replace(hint,'$src','$newpath') where problem_id=$pid";  
-						mysql_query ( $sql );
+						mysqli_query($mysqli, $sql );
 						array_push($did,$src);
 				}
 				

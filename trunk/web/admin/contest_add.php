@@ -46,7 +46,7 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
                 VALUES('$title','$starttime','$endtime','$private',$langmask,'$description','$password')";
 	echo $sql;
 	mysqli_query($mysqli,$sql) or die(mysql_error());
-	$cid=mysqli_insert_id($mysqli,);
+	$cid=mysqli_insert_id($mysqli);
 	echo "Add Contest ".$cid;
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	$plist=trim($_POST['cproblem']);
@@ -83,7 +83,7 @@ else{
    if(isset($_GET['cid'])){
 		   $cid=intval($_GET['cid']);
 		   $sql="select * from contest WHERE `contest_id`='$cid'";
-		   $result=mysqli_query($mysqli,$sql) or die(mysql_error());
+		   $result=mysqli_query($mysqli,$sql);
 		   $row=mysqli_fetch_object($result);
 		   $title=$row->title;
 		   mysqli_free_result($result);

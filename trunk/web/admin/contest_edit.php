@@ -78,7 +78,7 @@ if (isset($_POST['syear']))
 		echo "No such Contest!";
 		exit(0);
 	}
-	$row=mysql_fetch_assoc($result);
+	$row=mysqli_fetch_assoc($result);
 	$starttime=$row['start_time'];
 	$endtime=$row['end_time'];
 	$private=$row['private'];

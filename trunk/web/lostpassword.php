@@ -26,8 +26,23 @@ $lost_email=$_POST['email'];
    $_SESSION['lost_user_id']=$lost_user_id;
    $_SESSION['lost_key']=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,16));
 
-   mail($lost_email,"DON'T REPLY THIS MAIL:Reset Password",'Your online judge password reset key is:'.$_SESSION['lost_key'], 'From: do-not-reply@hustoj.googlecode.com' );
-   require("template/".$OJ_TEMPLATE."/lostpassword2.php");
+  
+	require_once "include/email.class.php";
+	//******************** 配置信息 ********************************
+	$smtpserver = "smtp.126.com";//SMTP服务器
+	$smtpserverport =25;//SMTP服务器端口
+	$smtpusermail = "account@126.com";//SMTP服务器的用户邮箱
+	$smtpemailto = $row['email'];//发送给谁
+	$smtpuser = "account@126.com";//SMTP服务器的用户帐号
+	$smtppass = "password";//SMTP服务器的用户密码
+	$mailtitle = "OJ系统密码重置激活";//邮件主题
+	$mailcontent = "$lost_user_id:\n您好！\n您在OJ系统选择了找回密码服务,为了验证您的身份,请将下面字串输入口令重置页面以确认身份:".$_SESSION['lost_key']."\n\n\n浙江传媒学院在线评测系统";//邮件内容
+	$mailtype = "TXT";//邮件格式（HTML/TXT）,TXT为文本邮件
+	//************************ 配置信息 ****************************
+	$smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
+	$smtp->debug =false;//是否显示发送的调试信息
+	$state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+        require("template/".$OJ_TEMPLATE."/lostpassword2.php");
 
  }else{
 

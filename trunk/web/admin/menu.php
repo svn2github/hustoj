@@ -95,7 +95,7 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 <li>
 	<a class='btn btn-primary' href="http://code.google.com/p/freeproblemset/" target="_blank"><b>FreeProblemSet</b></a>
 <li>
-	<a class='btn btn-primary' href="http://acmclub.com" target="_blank"><b>ACM俱乐部免费开通校级OJ服务器</b></a>
+	<a class='btn btn-primary' href="http://codeup.cn" target="_blank"><b>CodeUP.cn</b></a>
 
 </ol>
 <?php if (isset($_SESSION['administrator'])&&!$OJ_SAE){

@@ -10,7 +10,7 @@ and
 
 = judge.conf =
 DON'T COPY THIS TO YOUR judge.conf, judged/judge_client CAN'T process these comments.
-{{{
+
 OJ_HOST_NAME=127.0.0.1     #mysql host ip
 OJ_USER_NAME=root          #mysql host username
 OJ_PASSWORD=root           #mysql host password
@@ -31,10 +31,8 @@ OJ_OI_MODE=0               #using oi (Olympiad in Informatics) mode
 OJ_SHM_RUN=0               #using /dev/shm for fast running & low harddisk wear
 OJ_USE_MAX_TIME=0          #use the max time of all testcase rather than total time
 
-}}}
 
 
-{{{
 OJ_HOST_NAME=127.0.0.1     如果用mysql连接读取数据库，数据库的主机地址
 OJ_USER_NAME=root             数据库帐号
 OJ_PASSWORD=root              数据库密码
@@ -54,10 +52,10 @@ OJ_HTTP_PASSWORD=admin          密码
 OJ_OI_MODE=0                                是否启用OI模式，即无论是否出错都继续判剩余的数据，在ACM比赛中一旦出错就停止运行。
 OJ_SHM_RUN=0                              是否使用/dev/shm的共享内存虚拟磁盘来运行答案，如果启用能提高判题速度，但需要较多内存。
 OJ_USE_MAX_TIME=1                     是否使用所有测试数据中最大的运行时间作为最后运行时间，如果不启用则以所有测试数据的总时间作为超时判断依据。
-}}}
 
 db_info.inc.php
-{{{
+
+
 static  $DB_HOST="localhost";  数据库的服务器地址
 static  $DB_NAME="jol";        数据库名
 static  $DB_USER="root";       数据库用户名
@@ -84,4 +82,3 @@ static  $OJ_MEMSERVER="127.0.0.1"; memcached的服务器地址
 static  $OJ_MEMPORT=11211;  memcached的端口
 static  $OJ_RANK_LOCK_PERCENT=0;  //比赛封榜时间的比率，如5小时比赛设为0.2则最后1小时封榜。
 
-}}}

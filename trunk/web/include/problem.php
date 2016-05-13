@@ -21,18 +21,18 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	VALUES('$title','$time_limit','$memory_limit','$description','$input','$output',
 			'$sample_input','$sample_output','$hint','$source','$spj',NOW(),'Y')";
 	//echo $sql;
-	@mysqli_query($mysqli, $sql ) or die ( mysql_error () );
+	@mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
 	$pid = mysqli_insert_id ($mysqli);
 	echo "<br>Add $pid  ";
 	if (isset ( $_POST ['contest_id'] )) {
 		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=" . strval ( intval ( $_POST ['contest_id'] ) );
-		$result = @mysqli_query($mysqli, $sql ) or die ( mysql_error () );
-		$row = mysql_fetch_row ( $result );
+		$result = @mysqli_query($mysqli, $sql ) or die ( mysqli_error($mysqli) );
+		$row = mysqli_fetch_row ( $result );
 		$cid = $_POST ['contest_id'];
 		$num = $row [0];
 		echo "Num=" . $num . ":";
 		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES('$pid','$cid','$num')";
-		mysql_free_result ( $result );
+		mysqli_free_result ($result);
 		mysqli_query($mysqli, $sql );
 	}
 	$basedir = "$OJ_DATA/$pid";

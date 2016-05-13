@@ -19,7 +19,7 @@ $view_problem=array();
 
 // total submit
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $row=mysqli_fetch_array($result);
 $view_problem[0][0]=$MSG_SUBMIT;
 $view_problem[0][1]=$row[0];

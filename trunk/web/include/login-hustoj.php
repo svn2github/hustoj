@@ -3,7 +3,7 @@
     
 	function check_login($user_id,$password){
 		$mysqli=$GLOBALS['mysqli'];
-		$user_id=mysql_escape_string($user_id);
+		$user_id=mysqli_escape_string($mysqli,$user_id);
 		$pass2 = 'No Saved';
 		session_destroy();
 		session_start();

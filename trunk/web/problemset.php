@@ -10,7 +10,7 @@ $first=1000;
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
 $result=mysqli_query($mysqli,$sql);
-echo mysql_error();
+echo mysqli_error($mysqli);
 $row=mysqli_fetch_object($result);
 $cnt=intval($row->upid)-$first;
 $cnt=$cnt/$page_cnt;
@@ -47,7 +47,7 @@ $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id'
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        // " AND `problem_id`<'$pend'".
 	" group by `problem_id`";
-$result=@mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=@mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 while ($row=mysqli_fetch_array($result))
 	$sub_arr[$row[0]]=true;
 }
@@ -60,7 +60,7 @@ $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id'
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=@mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=@mysqli_query($mysqli,$sql) or die(mysqli_error());
 while ($row=mysqli_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
@@ -93,7 +93,7 @@ else{
 $sql.=" ORDER BY `problem_id`";
 
 
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 
 $view_total_page=$cnt+1;
 

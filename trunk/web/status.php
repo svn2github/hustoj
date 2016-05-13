@@ -30,7 +30,7 @@ if (isset($_GET['cid'])){
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
           $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-        $result=mysqli_query($mysqli,$sql_lock) or die(mysql_error());
+        $result=mysqli_query($mysqli,$sql_lock) or die(mysqli_error($mysqli));
         $rows_cnt=mysqli_num_rows($result);
         $start_time=0;
         $end_time=0;
@@ -153,12 +153,12 @@ $sql=$sql.$order_str." LIMIT 20";
 
 if($OJ_MEMCACHE){
 	require("./include/memcache.php");
-	$result = mysql_query_cache($sql);// or die("Error! ".mysql_error());
+	$result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
 	if($result) $rows_cnt=count($result);
 	else $rows_cnt=0;
 }else{
 		
-	$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysql_error());
+	$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
 	if($result) $rows_cnt=mysqli_num_rows($result);
 	else $rows_cnt=0;
 }
@@ -301,7 +301,7 @@ else
    
 
 }
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
+if(!$OJ_MEMCACHE && $result)mysqli_free_result($result);
 
 
 

@@ -74,7 +74,7 @@ if (isset($_GET['id'])){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 
        
 if (mysqli_num_rows($result)!=1){

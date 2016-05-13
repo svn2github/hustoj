@@ -30,13 +30,13 @@ $nick=$row->nick;
 mysqli_free_result($result);
 // count solved
 $sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`='".$user_mysql."' AND `result`=4";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $row=mysqli_fetch_object($result);
 $AC=$row->ac;
 mysqli_free_result($result);
 // count submission
 $sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$user_mysql."'";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $row=mysqli_fetch_object($result);
 $Submit=$row->Submit;
 mysqli_free_result($result);
@@ -50,7 +50,7 @@ $Rank=intval($row[0])+1;
 
  if (isset($_SESSION['administrator'])){
 $sql="SELECT * FROM `loginlog` WHERE `user_id`='$user_mysql' order by `time` desc LIMIT 0,10";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $view_userinfo=array();
 $i=0;
 for (;$row=mysqli_fetch_row($result);){

@@ -123,7 +123,7 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $rows_cnt=mysqli_num_rows($result);
 $start_time=0;
 if ($rows_cnt>0){

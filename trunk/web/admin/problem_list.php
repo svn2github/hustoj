@@ -13,12 +13,15 @@ if (!(isset($_SESSION['administrator'])
         echo "<a href='../loginpage.php'>Please Login First!</a>";
         exit(1);
 }
-$keyword=$_GET['keyword'];
+if(isset($_GET['keyword']))
+	$keyword=$_GET['keyword'];
+else
+	$keyword="";
 $keyword=mysqli_real_escape_string($mysqli,$keyword);
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
 $result=mysqli_query($mysqli,$sql);
-echo mysql_error();
+echo mysqli_error($mysqli);
 $row=mysqli_fetch_object($result);
 $cnt=intval($row->upid)-1000;
 $cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
@@ -45,7 +48,7 @@ echo "</select>";
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
 //echo $sql;
 if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 ?>
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 

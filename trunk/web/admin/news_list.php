@@ -7,7 +7,7 @@ if (!isset($_SESSION['administrator'])){
 echo "<title>Problem List</title>";
 echo "<center><h2>Problem List</h2></center>";
 $sql="select `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` order by `news_id` desc";
-$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 echo "<center><table width=90% border=1>";
 
 echo "<tr><td>PID<td>Title<td>Date<td>Status<td>Edit</tr>";

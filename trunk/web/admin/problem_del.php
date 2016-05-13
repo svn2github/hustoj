@@ -17,7 +17,7 @@ if (!(isset($_SESSION['administrator']))){
 		else
 			system("rm -rf $basedir");
         $sql="delete FROM `problem` WHERE `problem_id`=$id";
-        mysqli_query($mysqli,$sql) or die(mysql_error());
+        mysqli_query($mysqli,$sql) or die(mysqli_error());
         $sql="select max(problem_id) FROM `problem`" ;
         $result=mysqli_query($mysqli,$sql);
         $row=mysqli_fetch_row($result);

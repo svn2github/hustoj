@@ -94,7 +94,7 @@ if(isset($_POST['to_user'])){
 //list mail
 	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
 					order by mail_id desc";
-	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+	$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 $view_mail=Array();
 $i=0;
 for (;$row=mysqli_fetch_object($result);){

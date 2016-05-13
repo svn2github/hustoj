@@ -32,7 +32,7 @@ if (isset($_POST['syear']))
 	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
 	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask  ,password='$password' WHERE `contest_id`=$cid";
 	//echo $sql;
-	mysqli_query($mysqli,$sql) or die(mysql_error());
+	mysqli_query($mysqli,$sql) or die(mysqli_error());
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	mysqli_query($mysqli,$sql);
 	$plist=trim($_POST['cproblem']);
@@ -49,9 +49,9 @@ if (isset($_POST['syear']))
 		}
 		//echo $sql_1;
 		
-		mysqli_query($mysqli,$sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysqli_error());
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysqli_query($mysqli,$sql) or die(mysql_error());
+		mysqli_query($mysqli,$sql) or die(mysqli_error());
 	
 	}
 	
@@ -64,7 +64,7 @@ if (isset($_POST['syear']))
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
 		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysql_error());
+		mysqli_query($mysqli,$sql_1) or die(mysqli_error());
 	}
 	
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
@@ -89,7 +89,7 @@ if (isset($_POST['syear']))
 	mysqli_free_result($result);
 	$plist="";
 	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+	$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 	for ($i=mysqli_num_rows($result);$i>0;$i--){
 		$row=mysqli_fetch_row($result);
 		$plist=$plist.$row[0];
@@ -97,7 +97,7 @@ if (isset($_POST['syear']))
 	}
 	$ulist="";
 	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`='c$cid' order by user_id";
-	$result=mysqli_query($mysqli,$sql) or die(mysql_error());
+	$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
 	for ($i=mysqli_num_rows($result);$i>0;$i--){
 		$row=mysqli_fetch_row($result);
 		$ulist=$ulist.$row[0];

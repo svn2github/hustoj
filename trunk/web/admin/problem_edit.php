@@ -118,7 +118,7 @@ $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_l
 	`description`='$description',`input`='$input',`output`='$output',`sample_input`='$sample_input',`sample_output`='$sample_output',`hint`='$hint',`source`='$source',`spj`=$spj,`in_date`=NOW()
 	WHERE `problem_id`=$id";
 
-@mysqli_query($mysqli,$sql) or die(mysql_error());
+@mysqli_query($mysqli,$sql) or die(mysqli_error());
 echo "Edit OK!";
 
 

@@ -42,7 +42,7 @@
                         else if($cid!='NULL')
                                 $sql.=" FROM `contest` WHERE `contest_id` = $cid";
                         $sql.=" LIMIT 1";
-                        mysqli_query($mysqli,$sql) or die (mysql_error());
+                        mysqli_query($mysqli,$sql) or die (mysqli_error());
                         if(mysqli_affected_rows($mysqli)<=0)
                                 echo('Unable to post.');
                         else
@@ -56,7 +56,7 @@
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
                         $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', NOW(), '".mysqli_real_escape_string($mysqli,$_POST['content'])."', '".mysqli_real_escape_string($mysqli,$tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".mysqli_real_escape_string($mysqli,$tid)."' AND `status` = 0 ";
                         
-                        mysqli_query($mysqli,$sql) or die (mysql_error());
+                        mysqli_query($mysqli,$sql) or die (mysqli_error());
                         if(mysqli_affected_rows($mysqli)>0)
                         {
                                 header('Location: thread.php?tid='.$tid);

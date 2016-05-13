@@ -22,7 +22,7 @@ $title=mysqli_real_escape_string($mysqli,$title);
 $content=mysqli_real_escape_string($mysqli,$content);
 $user_id=mysqli_real_escape_string($mysqli,$user_id);
 $sql="insert into news(`user_id`,`title`,`content`,`time`) values('$user_id','$title','$content',now())";
-mysqli_query($mysqli,$sql) 
+mysqli_query($mysqli,$sql);
 echo "<script>window.location.href=\"news_list.php\";</script>";
 ?>
 

@@ -3,7 +3,7 @@ create database jol;
 use jol;
 
 CREATE TABLE  `compileinfo` (
-  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `solution_id` int(11) NOT NULL DEFAULT 0,
   `error` text,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -23,10 +23,10 @@ CREATE TABLE  `contest` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `contest_problem` (
-  `problem_id` int(11) NOT NULL DEFAULT '0',
+  `problem_id` int(11) NOT NULL DEFAULT 0,
   `contest_id` int(11) DEFAULT NULL,
   `title` char(200) NOT NULL DEFAULT '',
-  `num` int(11) NOT NULL DEFAULT '0'
+  `num` int(11) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -57,7 +57,7 @@ CREATE TABLE  `news` (
   `user_id` varchar(48) NOT NULL DEFAULT '',
   `title` varchar(200) NOT NULL DEFAULT '',
   `content` text NOT NULL,
-  `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',
   `importance` tinyint(4) NOT NULL DEFAULT '0',
   `defunct` char(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`news_id`)
@@ -82,8 +82,8 @@ CREATE TABLE  `problem` (
   `hint` text,
   `source` varchar(100) DEFAULT NULL,
   `in_date` datetime DEFAULT NULL,
-  `time_limit` int(11) NOT NULL DEFAULT '0',
-  `memory_limit` int(11) NOT NULL DEFAULT '0',
+  `time_limit` int(11) NOT NULL DEFAULT 0,
+  `memory_limit` int(11) NOT NULL DEFAULT 0,
   `defunct` char(1) NOT NULL DEFAULT 'N',
   `accepted` int(11) DEFAULT '0',
   `submit` int(11) DEFAULT '0',
@@ -94,7 +94,7 @@ CREATE TABLE  `problem` (
 CREATE TABLE  `reply` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,
   `author_id` varchar(48) NOT NULL,
-  `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',
   `content` text NOT NULL,
   `topic_id` int(11) NOT NULL,
   `status` int(2) NOT NULL DEFAULT '0',
@@ -114,18 +114,18 @@ CREATE TABLE  `sim` (
 
 CREATE TABLE  `solution` (
   `solution_id` int(11) NOT NULL AUTO_INCREMENT,
-  `problem_id` int(11) NOT NULL DEFAULT '0',
+  `problem_id` int(11) NOT NULL DEFAULT 0,
   `user_id` char(48) NOT NULL,
-  `time` int(11) NOT NULL DEFAULT '0',
-  `memory` int(11) NOT NULL DEFAULT '0',
-  `in_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `time` int(11) NOT NULL DEFAULT 0,
+  `memory` int(11) NOT NULL DEFAULT 0,
+  `in_date` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',
   `result` smallint(6) NOT NULL DEFAULT '0',
   `language` INT UNSIGNED NOT NULL DEFAULT '0',
   `ip` char(15) NOT NULL,
   `contest_id` int(11) DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1',
   `num` tinyint(4) NOT NULL DEFAULT '-1',
-  `code_length` int(11) NOT NULL DEFAULT '0',
+  `code_length` int(11) NOT NULL DEFAULT 0,
   `judgetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0,
   `lint_error` int UNSIGNED NOT NULL DEFAULT 0,
@@ -185,13 +185,13 @@ CREATE TABLE `online` (
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE  `runtimeinfo` (
-  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `solution_id` int(11) NOT NULL DEFAULT 0,
   `error` text,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `custominput` (
-  `solution_id` int(11) NOT NULL DEFAULT '0',
+  `solution_id` int(11) NOT NULL DEFAULT 0,
   `input_text` text,
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

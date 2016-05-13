@@ -80,7 +80,7 @@ class online{
                     
                     $tmp_ip=explode(',',$REMOTE_ADDR);
 
-                    $this->ip =$tmp_ip[0];
+                    $this->ip =mysqli_real_escape_string($mysqli,htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 
         }
 

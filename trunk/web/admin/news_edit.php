@@ -42,7 +42,7 @@ $user_id=mysqli_real_escape_string($mysqli,$user_id);
 		echo "No such Contest!";
 		exit(0);
 	}
-	$row=mysql_fetch_assoc($result);
+	$row=mysqli_fetch_assoc($result);
 	
 	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
 	$content=$row['content'];

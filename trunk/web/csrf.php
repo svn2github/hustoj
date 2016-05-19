@@ -1,6 +1,7 @@
 <?php
   @session_start();
-  $token = md5(uniqid(rand(), true));
+  require_once("include/my_func.inc.php");
+  $token = getToken();
   if(!isset($_SESSION['csrf_keys'])){
 	$_SESSION['csrf_keys']=array();
   }

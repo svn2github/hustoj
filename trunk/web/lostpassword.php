@@ -24,7 +24,7 @@ $lost_email=$_POST['email'];
                 $row = mysqli_fetch_array($result);
  if($row && $row['email']==$lost_email&&strpos($lost_email,'@')){
    $_SESSION['lost_user_id']=$lost_user_id;
-   $_SESSION['lost_key']=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,16));
+   $_SESSION['lost_key']=getToken(16);
 
   
 	require_once "include/email.class.php";

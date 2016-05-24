@@ -1385,6 +1385,12 @@ void copy_python_runtime(char * work_dir) {
         execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
         execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
         execute_cmd("cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
+        execute_cmd("/bin/mkdir -p %s/home/judge", work_dir);
+	execute_cmd("/bin/chown judge %s/home/judge", work_dir);
+	execute_cmd("/bin/mkdir -p %s/etc", work_dir);
+	execute_cmd("/bin/grep judge /etc/passwd>%s/etc/passwd", work_dir);
+	execute_cmd("/bin/mount -o bind /dev %s/dev", work_dir);
+
 
 }
 void copy_php_runtime(char * work_dir) {
@@ -1929,6 +1935,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 }
 void clean_workdir(char * work_dir) {
 	execute_cmd("/bin/umount %s/proc", work_dir);
+	execute_cmd("/bin/umount %s/dev", work_dir);
 	if (DEBUG) {
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {

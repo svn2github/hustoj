@@ -1,6 +1,10 @@
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)
-自动安装使用install.sh，运行前阅读脚本头部说明设置数据库帐号。使用root运行。
+自动安装使用
+
+```sudo bash install-interactive.sh
+```
+   运行前阅读脚本头部说明设置数据库帐号。使用root运行。
 
 
 手动安装顺序如下：

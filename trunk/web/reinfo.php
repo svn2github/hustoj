@@ -39,7 +39,7 @@ if ($ok==true){
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`='".$id."'";
 	$result=mysqli_query($mysqli,$sql);
 	$row=mysqli_fetch_object($result);
-	if($row&&($OJ_SHOW_DIFF||$OJ_TEST_RUN||is_valid($row->error)))	
+	if($row&&$OJ_SHOW_DIFF&&($OJ_TEST_RUN||is_valid($row->error)))	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row->error),ENT_QUOTES,"UTF-8");
 	
         

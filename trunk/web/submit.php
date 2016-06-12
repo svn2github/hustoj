@@ -146,10 +146,10 @@ if ($len>65536){
 }
 
 // last submit
-$now=strftime("%Y-%m-%d %X",time()-1);
+$now=strftime("%Y-%m-%d %X",time()-10);
 $sql="SELECT `in_date` from `solution` where `user_id`='$user_id' and in_date>'$now' order by `in_date` desc limit 1";
 $res=mysqli_query($mysqli,$sql);
-if (0&&mysqli_num_rows($res)==1){
+if (mysqli_num_rows($res)==1){
 	//$row=mysqli_fetch_row($res);
 	//$last=strtotime($row[0]);
 	//$cur=time();

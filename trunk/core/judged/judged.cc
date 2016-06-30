@@ -330,7 +330,6 @@ int _get_jobs_mysql(int * jobs) {
 	while (i <= max_running * 2)
 		jobs[i++] = 0;
 	return ret;
-	return ret;
 }
 int get_jobs(int * jobs) {
 	if (http_judge) {

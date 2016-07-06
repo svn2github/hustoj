@@ -311,7 +311,6 @@ int _get_jobs_http(int * jobs) {
 	while (i <= max_running * 2)
 		jobs[i++] = 0;
 	return ret;
-	return ret;
 }
 int _get_jobs_mysql(int * jobs) {
 	if (mysql_real_query(conn, query, strlen(query))) {

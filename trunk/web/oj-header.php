@@ -1,6 +1,10 @@
-<?php function checkcontest($MSG_CONTEST){
-		require_once("./include/db_info.inc.php");
-      $now=strftime("%Y-%m-%d %H:%M",time());
+<?php
+
+require_once("./include/db_info.inc.php");
+
+function checkcontest($MSG_CONTEST){
+	global $mysqli;
+        $now=strftime("%Y-%m-%d %H:%M",time());
 		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>'$now' AND `defunct`='N'";
 		$result=mysqli_query($mysqli,$sql);
 		$row=mysqli_fetch_row($result);
@@ -8,7 +12,7 @@
 		else $retmsg=$row[0]."<span class=red>&nbsp;$MSG_CONTEST</span>";
 		mysqli_free_result($result);
 		return $retmsg;
-	}
+}
 	
 	 $OJ_FAQ_LINK="faqs.php";
    if(isset($OJ_LANG)){

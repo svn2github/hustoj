@@ -27,7 +27,7 @@
       <div class="jumbotron">
         <p>
 <center>
-<div id=submission style="width:80%;height:50%" ></div>
+<div id=submission style="width:80%;height:300px" ></div>
 </center>
         </p>
 	<?php echo $view_news?>

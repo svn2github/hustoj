@@ -26,6 +26,8 @@ if (!(isset($_SESSION['administrator']))){
                         	$nick=$pieces[$i-1];
                         else
 				$nick="your_own_nick";
+			if($teamnumber==1) $user_id=$prefix;
+
 			echo "<tr><td>$nick<td>$user_id</td><td>$password</td></tr>";
 			
 			$password=pwGen($password);

@@ -71,6 +71,7 @@ class online{
 	 */
 	function __construct()
 	{
+		global $mysqli;
 		$this->ip = mysqli_real_escape_string($mysqli,$_SERVER['REMOTE_ADDR']);
       
       
@@ -114,6 +115,7 @@ class online{
 	{
 		$ret = array();
 		
+		global $mysqli;
 		$sql = 'SELECT * FROM online';
 		$res = mysqli_query($mysqli,$sql);
 		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
@@ -151,6 +153,7 @@ class online{
 	 */
 	function get_num()
 	{
+		global $mysqli;
 		$sql = 'SELECT count(ip) as nums FROM online';
 		$res = mysqli_query($mysqli,$sql);
 		$ret = 0;
@@ -168,6 +171,7 @@ class online{
 	 */
 	function exist()
 	{
+		global $mysqli;
 		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
 		$res = mysqli_query($mysqli,$sql);
 		if($res&&mysqli_num_rows($res) == 0)
@@ -183,6 +187,7 @@ class online{
 	 */
 	function addRecord()
 	{
+		global $mysqli;
 		$now = time();
 		$sql = "INSERT INTO online(hash, ip, ua, uri, refer, firsttime, lastmove)
 				VALUES ('$this->hash', '$this->ip', '$this->ua', '$this->uri', '$this->refer', '$now', '$now')";
@@ -196,6 +201,7 @@ class online{
 	 */
 	function update()
 	{
+		global $mysqli;
 		$sql = "UPDATE online
 				SET
 					ua = '$this->ua',
@@ -215,6 +221,7 @@ class online{
 	 */
 	function clean()
 	{
+		global $mysqli;
 		$sql = 'DELETE FROM online WHERE lastmove<'.(time()-ONLINE_DURATION);
 		mysqli_query($mysqli,$sql);
 	}

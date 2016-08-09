@@ -73,7 +73,6 @@ sudo chown -R judge /home/judge
 sudo chgrp -R $APACHEUSER /home/judge/data
 sudo chgrp -R root /home/judge/etc /home/judge/run?
 sudo chmod 775 /home/judge /home/judge/data /home/judge/run?
-sudo chmod -R 000 /home/judge/etc
 
 #update database account
 SED_CMD="s/OJ_USER_NAME=root/OJ_USER_NAME=$DBUSER/g"
@@ -84,6 +83,8 @@ SED_CMD="s/DB_USER=\\\"root\\\"/DB_USER=\\\"$DBUSER\\\"/g"
 SED_CMD2="s/DB_PASS=\\\"root\\\"/DB_PASS=\\\"$DBPASS\\\"/g"
 
 sed $SED_CMD hustoj-read-only/web/include/db_info.inc.php|sed $SED_CMD2 >$WEBBASE/JudgeOnline/include/db_info.inc.php
+
+sudo chmod -R 000 /home/judge/etc
 
 
 #boot up judged

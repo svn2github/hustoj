@@ -17,13 +17,13 @@
         $password= stripslashes ( $password);
    }
     $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".mysqli_real_escape_string($mysqli,$user_id)."'";
-    $result=mysqli_query($mysqli,$sql);
-	$login=check_login($user_id,$password);
+    	$login=check_login($user_id,$password);
 	
 	if ($login)
     {
 		$_SESSION['user_id']=$login;
-		
+		$result=mysqli_query($mysqli,$sql);
+
 		while ($result&&$row=mysqli_fetch_assoc($result))
 			$_SESSION[$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";

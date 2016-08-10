@@ -915,13 +915,15 @@ int compile(int lang,char * work_dir) {
 			freopen("ce.txt", "w", stdout);
 		}
 		execute_cmd("chown judge *");
-		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives");
+		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc");
                 execute_cmd("mount -o bind /bin bin");
                 execute_cmd("mount -o bind /usr usr");
                 execute_cmd("mount -o bind /lib lib");
                 execute_cmd("mount -o bind /lib64 lib64");
                 execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
-                if (lang != 3)
+                execute_cmd("mount -o bind /proc proc");
+                
+                if (lang != 3 && lang != 9)
                         chroot(work_dir);
  
 		while(setgid(1536)!=0) sleep(1);
@@ -993,6 +995,9 @@ int compile(int lang,char * work_dir) {
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
+		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc");
+ 		execute_cmd("/bin/umount *");
+ 
 		return status;
 	}
 
@@ -1950,7 +1955,10 @@ void clean_workdir(char * work_dir) {
         execute_cmd("/bin/umount %s/etc/alternatives", work_dir);
         execute_cmd("/bin/umount %s/usr", work_dir);
         execute_cmd("/bin/umount %s/bin", work_dir);
-        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives");
+        execute_cmd("/bin/umount %s/proc", work_dir);
+        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc");
+        execute_cmd("/bin/umount *");
+ 
  	if (DEBUG) {
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {

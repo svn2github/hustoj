@@ -845,7 +845,7 @@ void update_problem(int pid) {
 		_update_problem_mysql(pid);
 	}
 }
-int compile(int lang) {
+int compile(int lang,char * work_dir) {
 	int pid;
 
 	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
@@ -915,9 +915,18 @@ int compile(int lang) {
 			freopen("ce.txt", "w", stdout);
 		}
 		execute_cmd("chown judge *");
+		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives");
+                execute_cmd("mount -o bind /bin bin");
+                execute_cmd("mount -o bind /usr usr");
+                execute_cmd("mount -o bind /lib lib");
+                execute_cmd("mount -o bind /lib64 lib64");
+                execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
+                if (lang != 3)
+                        chroot(work_dir);
+ 
 		while(setgid(1536)!=0) sleep(1);
-        while(setuid(1536)!=0) sleep(1);
-        while(setresuid(1536, 1536, 1536)!=0) sleep(1);
+                while(setuid(1536)!=0) sleep(1);
+                while(setresuid(1536, 1536, 1536)!=0) sleep(1);
 
 		switch (lang) {
 		case 0:
@@ -1934,9 +1943,15 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	//clean_session(pidApp);
 }
 void clean_workdir(char * work_dir) {
-	execute_cmd("/bin/umount %s/proc", work_dir);
-	execute_cmd("/bin/umount %s/dev", work_dir);
-	if (DEBUG) {
+        execute_cmd("/bin/umount %s/proc", work_dir);
+        execute_cmd("/bin/umount %s/dev", work_dir);
+        execute_cmd("/bin/umount %s/lib", work_dir);
+        execute_cmd("/bin/umount %s/lib64", work_dir);
+        execute_cmd("/bin/umount %s/etc/alternatives", work_dir);
+        execute_cmd("/bin/umount %s/usr", work_dir);
+        execute_cmd("/bin/umount %s/bin", work_dir);
+        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives");
+ 	if (DEBUG) {
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {
 		execute_cmd("/bin/rm -Rf %s/*", work_dir);
@@ -2173,7 +2188,7 @@ int main(int argc, char** argv) {
 	// set the result to compiling
 	int Compile_OK;
 
-	Compile_OK = compile(lang);
+	Compile_OK = compile(lang,work_dir);
 	if (Compile_OK != 0) {
 		addceinfo(solution_id);
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0, 0.0);

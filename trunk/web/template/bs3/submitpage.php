@@ -198,8 +198,10 @@ function do_test_run(){
 if( handler_interval) window.clearInterval( handler_interval);
 var loader="<img width=18 src=image/loader.gif>";
 var tb=window.document.getElementById('result');
-tb.innerHTML=loader;
 if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
+if($("#source").val().length<10) return alert("too short!");
+tb.innerHTML=loader;
+
 var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 var problem_id=document.getElementById(mark);
 problem_id.value=-problem_id.value;

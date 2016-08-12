@@ -26,7 +26,7 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
- <pre class="brush:c" id='source' name="source"></pre>
+ <div class="brush:c" id='source' name="source"></div>
 <pre class="brush:c;" id='errtxt' ><?php echo $view_reinfo?></pre>
 <div id='errexp'>Explain:</div>
 
@@ -148,6 +148,8 @@ pats[55]=/expected expression before ‘%’ token/
 exps[55]="scanf的格式部分需要用双引号引起";
 pats[56]=/ expected expression before ‘.*’ token/
 exps[56]="参数或表达式没写完";
+pats[57]=/expected but/
+exps[57]="错误的标点或符号";
 function explain(){
 //alert("asdf");
 var errmsg=document.getElementById("errtxt").innerHTML;

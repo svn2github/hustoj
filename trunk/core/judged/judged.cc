@@ -501,8 +501,12 @@ int daemon_init(void)
 	close(0); /* close stdin */
 
 	close(1); /* close stdout */
-
+	
 	close(2); /* close stderr */
+	
+        freopen("/dev/null", "r", stdin);
+        freopen("/dev/null", "w", stdout);
+        freopen("/dev/null", "w", stderr);
 
 	return (0);
 }

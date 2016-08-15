@@ -504,9 +504,13 @@ int daemon_init(void)
 	
 	close(2); /* close stderr */
 	
-        freopen("/dev/null", "r", stdin);
-        freopen("/dev/null", "w", stdout);
-        freopen("/dev/null", "w", stderr);
+	int fd = open( "/dev/null", O_RDWR );
+	dup2( fd, 0 );
+	dup2( fd, 1 );
+	dup2( fd, 2 );
+	if ( fd > 2 ){
+		close( fd );
+	}
 
 	return (0);
 }

@@ -1635,6 +1635,22 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	//sleep(1);
 	exit(0);
 }
+int fix_python_mis_judge(char *work_dir, int & ACflg, int & topmemory,
+                int mem_lmt) {
+        int comp_res = OJ_AC;
+
+        comp_res = execute_cmd(
+                        "/bin/grep 'MemoryError'  %s/error.out", work_dir);
+
+        if (!comp_res) {
+                printf("Python need more Memory!");
+                ACflg = OJ_ML;
+                topmemory = mem_lmt * STD_MB;
+        }
+
+        return comp_res;
+}
+
 int fix_java_mis_judge(char *work_dir, int & ACflg, int & topmemory,
 		int mem_lmt) {
 	int comp_res = OJ_AC;
@@ -1758,6 +1774,9 @@ void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 	//jvm popup messages, if don't consider them will get miss-WrongAnswer
 	if (lang == 3) {
 		comp_res = fix_java_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
+	}
+	if (lang == 6) {
+		comp_res = fix_python_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
 	}
 }
 

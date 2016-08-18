@@ -533,7 +533,8 @@ int main(int argc, char** argv) {
 		printf("%s already has one judged on it!\n",oj_home);
 		return 1;
 	}
-	system("/sbin/iptables -A OUTPUT -m owner --uid-owner judge -j DROP");
+	if(!DEBUG)
+		system("/sbin/iptables -A OUTPUT -m owner --uid-owner judge -j DROP");
 //	struct timespec final_sleep;
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;

@@ -3,7 +3,7 @@
         require_once("../include/db_info.inc.php");
         require_once("discuss_func.inc.php");
         if ($_REQUEST['target']=='reply'){
-                $rid = $_REQUEST['rid']; $tid = $_REQUEST['tid'];
+                $rid = intval($_REQUEST['rid']); $tid = intval($_REQUEST['tid']);
                 $stat = -1;
                 if ($_REQUEST['action']=='resume') $stat = 0;
                 if ($_REQUEST['action']=='disable') $stat = 1;
@@ -19,11 +19,11 @@
                 else err_msg("Reply not exist or no permission.");
         }
         if ($_REQUEST['target']=='thread'){
-                $tid = $_REQUEST['tid'];
+                $tid = intval($_REQUEST['tid']);
                 $toplevel = -1; $stat = -1;
                 if ($_REQUEST['action']=='sticky') 
                         if(array_key_exists('level',$_REQUEST)&&is_numeric($_REQUEST['level']) &&$_REQUEST['level']>=0 &&$_REQUEST['level']<4)
-                                $toplevel = $_REQUEST['level'];
+                                $toplevel = intval($_REQUEST['level']);
                         else
                                 err_msg("Invalid sticky level.");
                 if ($_REQUEST['action']=='resume') $stat = 0;

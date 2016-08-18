@@ -1,7 +1,8 @@
 <?php
 	require_once("oj-header.php");
+	$tid=intval($_REQUEST['tid']);
 	echo "<title>HUST Online Judge WebBoard</title>";
-	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <= 1";
+	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".$tid."' AND `status` <= 1";
 	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error());
 	$rows_cnt = mysqli_num_rows($result) or die("Error! ".mysqli_error());
 	$row= mysqli_fetch_object($result);
@@ -12,7 +13,7 @@
 <div style="width:90%; margin:0 auto; text-align:left;"> 
 <div style="text-align:left;font-size:80%;float:left;">[ <a href="newpost.php">New Thread</a> ]</div>
 <?php if ($isadmin){
-	?><div style="font-size:80%; float:right"> Change sticky level to<?php $adminurl = "threadadmin.php?target=thread&tid={$_REQUEST['tid']}&action=";
+	?><div style="font-size:80%; float:right"> Change sticky level to<?php $adminurl = "threadadmin.php?target=thread&tid={$tid}&action=";
 	if ($row->top_level == 0) echo "[ <a href=\"{$adminurl}sticky&level=3\">Level Top</a> ] [ <a href=\"{$adminurl}sticky&level=2\">Level Mid</a> ] [ <a href=\"{$adminurl}sticky&level=1\">Level Low</a> ]"; else echo "[ <a href=\"{$adminurl}sticky&level=0\">Standard</a> ]";
 	?> | <?php if ($row->status != 1) echo (" [ <a  href=\"{$adminurl}lock\">Lock</a> ]"); else echo(" [ <a href=\"{$adminurl}resume\">Resume</a> ]");
 	?> | <?php echo (" [ <a href=\"{$adminurl}delete\">Delete</a> ]");
@@ -27,7 +28,7 @@
 </tr>
 
 <?php
-	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".mysql_escape_string($_REQUEST['tid'])."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
+	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".$tid."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
 	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error());
 	$rows_cnt = mysqli_num_rows($result);
 	$cnt=0;
@@ -35,7 +36,7 @@
 	for ($i=0;$i<$rows_cnt;$i++){
 		mysqli_data_seek($result,$i);
 		$row=mysqli_fetch_object($result);
-		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$_REQUEST['tid']}&action=";
+		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
 		$isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
 ?>
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
@@ -79,7 +80,7 @@
 <?php if (isset($_SESSION['user_id'])){?>
 <div style="font-size:80%;"><div style="margin:0 10px">New Reply:</div></div>
 <form action="post.php?action=reply" method=post>
-<input type=hidden name=tid value=<?php echo $_REQUEST['tid'];?>>
+<input type=hidden name=tid value=<?php echo $tid;?>>
 <div><textarea name=content style="border:1px dashed #8080FF; width:700px; height:200px; font-size:75%;margin:0 10px; padding:10px"></textarea></div>
 <div><input type="submit" style="margin:5px 10px" value="Submit"></input></div>
 </form>

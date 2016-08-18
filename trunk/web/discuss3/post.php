@@ -26,11 +26,11 @@
         if ($_REQUEST['action']=='new'){
                 if (array_key_exists('title',$_POST) && array_key_exists('content', $_POST) && $_POST['title']!='' && $_POST['content']!=''){
                         if(array_key_exists('pid',$_REQUEST)&&$_REQUEST['pid']!='')
-                                $pid=$_REQUEST['pid'];
+                                $pid=intval($_REQUEST['pid']);
                         else
                                 $pid=0;
                         if(array_key_exists('cid',$_REQUEST)&&$_REQUEST['cid']!='')
-                                $cid="'".mysqli_real_escape_string($mysqli,$_REQUEST['cid'])."'";
+                                $cid=intval($_REQUEST['cid']);
                         else
                                 $cid='NULL';
                         $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) SELECT '".mysqli_real_escape_string($mysqli,$_POST['title'])."', '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', $cid, '".mysqli_real_escape_string($mysqli,$pid)."'";

@@ -401,39 +401,46 @@ int work() {
 			write_log("Judging solution %d", runid);
 		if (workcnt >= max_running) {           // if no more client can running
 			tmp_pid = waitpid(-1, NULL, 0);     // wait 4 one child exit
-			workcnt--;
-			retcnt++;
-			for (i = 0; i < max_running; i++)     // get the client id
-				if (ID[i] == tmp_pid)
+			for (i = 0; i < max_running; i++){     // get the client id
+				if (ID[i] == tmp_pid){
+					workcnt--;
+					retcnt++;
+					ID[i] = 0;
 					break; // got the client id
-			ID[i] = 0;
+				}
+			}
 		} else {                                             // have free client
 
 			for (i = 0; i < max_running; i++)     // find the client id
 				if (ID[i] == 0)
 					break;    // got the client id
 		}
-		if (workcnt < max_running && check_out(runid, OJ_CI)) {
-			workcnt++;
-			ID[i] = fork();                                   // start to fork
-			if (ID[i] == 0) {
-				if (DEBUG)
-					write_log("<<=sid=%d===clientid=%d==>>\n", runid, i);
-				run_client(runid, i);    // if the process is the son, run it
-				exit(0);
-			}
+		if(i<max_running){
+			if (workcnt < max_running && check_out(runid, OJ_CI)) {
+				workcnt++;
+				ID[i] = fork();                                   // start to fork
+				if (ID[i] == 0) {
+					if (DEBUG)
+						write_log("<<=sid=%d===clientid=%d==>>\n", runid, i);
+					run_client(runid, i);    // if the process is the son, run it
+					exit(0);
+				}
 
-		} else {
-			ID[i] = 0;
+			} else {
+				ID[i] = 0;
+			}
 		}
 	}
 	while ((tmp_pid = waitpid(-1, NULL, WNOHANG)) > 0) {
-		workcnt--;
-		retcnt++;
-		for (i = 0; i < max_running; i++)     // get the client id
-			if (ID[i] == tmp_pid)
+		for (i = 0; i < max_running; i++){     // get the client id
+			if (ID[i] == tmp_pid){
+			
+				workcnt--;
+				retcnt++;
+				ID[i] = 0;
 				break; // got the client id
-		ID[i] = 0;
+			}
+		}
 		printf("tmp_pid = %d\n", tmp_pid);
 	}
 	if (!http_judge) {
@@ -499,7 +506,6 @@ int daemon_init(void)
 	umask(0); /* clear file mode creation mask */
 
 	close(0); /* close stdin */
-
 	close(1); /* close stdout */
 	
 	close(2); /* close stderr */

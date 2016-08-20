@@ -916,7 +916,7 @@ int compile(int lang,char * work_dir) {
 			freopen("ce.txt", "w", stdout);
 		}
 		execute_cmd("chown judge *");
-		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc");
+		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp ");
                 execute_cmd("mount -o bind /bin bin");
                 execute_cmd("mount -o bind /usr usr");
                 execute_cmd("mount -o bind /lib lib");

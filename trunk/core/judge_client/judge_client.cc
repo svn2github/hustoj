@@ -876,7 +876,7 @@ int compile(int lang,char * work_dir) {
 	const char * CP_LUA[] = { "luac","-o","Main", "Main.lua", NULL };
 	const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 
-	char javac_buf[7][16];
+	char javac_buf[7][32];
 	char *CP_J[7];
 
 	for (int i = 0; i < 7; i++)

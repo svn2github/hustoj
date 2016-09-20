@@ -23,6 +23,7 @@ if (!(isset($_SESSION['administrator']))){
         $row=mysqli_fetch_row($result);
         $max_id=$row[0];
         $max_id++;
+        if($max_id<1000)$max_id=1000;
         mysqli_free_result($result);
         $sql="ALTER TABLE problem AUTO_INCREMENT = $max_id;";
         mysqli_query($mysqli,$sql);

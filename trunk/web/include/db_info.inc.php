@@ -1,10 +1,14 @@
 <?php @session_start();
-	ini_set("display_errors","Off");
+	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
+	
+//for people using hustoj out of China , be careful of the last two line of this file !
+
+// connect db 
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
 static 	$DB_USER="root";
 static 	$DB_PASS="root";
-	// connect db 
+
 static 	$OJ_NAME="HUSTOJ";
 static 	$OJ_HOME="./";
 static 	$OJ_ADMIN="root@localhost";
@@ -70,10 +74,11 @@ global $mysqli;
 	
 	if(!mysqli_select_db($mysqli,$DB_NAME))
 		die('Can\'t use foo : ' . mysqli_error());
-	//sychronize php and mysql server
-	date_default_timezone_set("PRC");
+		
 	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
 		 require_once('csrf_check.php');
-	mysqli_query($mysqli,"SET time_zone ='+8:00'");
-	
-?>
+
+	//sychronize php and mysql server with timezone settings, dafault setting for China
+	//if you are not from China, comment out these two lines or modify them.
+	date_default_timezone_set("PRC");
+	mysqli_query($mysqli,"SET time_zone ='+8:00'");?>

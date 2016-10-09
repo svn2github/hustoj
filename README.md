@@ -17,7 +17,7 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 新用户必看 README 和 FAQ
 
     快速安装指南：
-    1、安装Ubuntu
+    1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)
     2、执行如下命令
         sudo apt-get update
         sudo apt-get install subversion

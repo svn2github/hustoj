@@ -1,25 +1,9 @@
 #summary 演示和安装一体化的光盘版 a all in one CD is on the way
 #labels Featured,LiveCD,Phase-Deploy
 
-下载地址:
-http://hustoj-web.stor.sinaapp.com/hustoj2000.iso
-
-http://hz.wkjsj.org/hustoj/hustoj2000.iso
-
-md5sum:a599d9680212bc4be7338eece3ea9659
-
-http://hz.wkjsj.org/hustoj/hustoj-forever.iso
-md5sum:0da915af922fd3f08d1ba0a8031e402e
-
-http://hz.wkjsj.org/hustoj/hustoj1725.iso
-
-http://pan.baidu.com/share/link?shareid=23135&uk=2838456172
-
-http://115.com/file/beafdwqk#hustoj-1716.iso 
-
-http://115.com/file/bevd4wb8#hustoj-1655.iso
-
-http://pan.baidu.com/netdisk/singlepublic?fid=241719_3088787629
+Download:
+* http://pan.baidu.com/share/link?shareid=23135&uk=2838456172
+* http://pan.baidu.com/netdisk/singlepublic?fid=241719_3088787629
 
 
 = Introduction =

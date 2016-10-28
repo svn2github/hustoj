@@ -134,7 +134,7 @@ if(isset($_POST['update_solution'])){
 	mysqli_query($mysqli,$sql);
   //  echo $sql;
 	
-	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`='$user_id') WHERE `user_id`='$user_id'";
+	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`='$user_id' and problem_id>0) WHERE `user_id`='$user_id'";
 	mysqli_query($mysqli,$sql);
   //	echo $sql;
 	

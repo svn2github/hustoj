@@ -798,7 +798,7 @@ void _update_user_mysql(char * user_id) {
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 	sprintf(sql,
-			"UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=\'%s\') WHERE `user_id`=\'%s\'",
+			"UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=\'%s\' and problem_id>0) WHERE `user_id`=\'%s\'",
 			user_id, user_id);
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
@@ -902,8 +902,8 @@ int compile(int lang,char * work_dir) {
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		if(lang==3){
-		   LIM.rlim_max = STD_MB *2048;
-		   LIM.rlim_cur = STD_MB *2048;	
+		   LIM.rlim_max = STD_MB <<11;
+		   LIM.rlim_cur = STD_MB <<11;	
                 }else{
 		   LIM.rlim_max = STD_MB *256 ;
 		   LIM.rlim_cur = STD_MB *256 ;

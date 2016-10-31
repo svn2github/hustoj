@@ -7,14 +7,13 @@
     不指定参数将自动以单进程运行。
     当指定的参数不为/home/judge时，就会有多个进程出现。
     每个主目录可以有自己的etc/judge.conf 数据目录可以共享，runX目录需要独立。
-
-  # judged调试模式。
+# judged调试模式。
    
 judged 接受参数指定目录的情况下，还可以再接受一个debug作为调试模式开关。
      如：sudo judged /home/judge/local debug
     调试模式的judged将不会进入后台，并且将输出大量调试信息，其调用的judge_client也工作在debug模式。
 
-  # judge_client调试模式
+# judge_client调试模式
 judge_client接受参数
 
 judge_client <solution_id> <run目录id> [工作主目录] [调试]

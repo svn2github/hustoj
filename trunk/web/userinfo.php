@@ -30,13 +30,13 @@ $nick=$row->nick;
 mysqli_free_result($result);
 // count solved
 $sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`='".$user_mysql."' AND `result`=4";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 $row=mysqli_fetch_object($result);
 $AC=$row->ac;
 mysqli_free_result($result);
 // count submission
-$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$user_mysql."' and  and problem_id>0";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$user_mysql."' and  problem_id>0";
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 $row=mysqli_fetch_object($result);
 $Submit=$row->Submit;
 mysqli_free_result($result);

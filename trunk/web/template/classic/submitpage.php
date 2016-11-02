@@ -109,7 +109,7 @@ if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
     echo "'$result',";
   }
 ?>''];
-
+var intervalId=0;
 function print_result(solution_id)
 {
 sid=solution_id;
@@ -222,7 +222,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         document.getElementById("TestRun").disabled=true;
         document.getElementById("Submit").disabled=true;
         count=20;
-        window.setInterval("resume();",1000);
+       intervalId=window.setInterval("resume();",1000);
        
      }
      
@@ -235,7 +235,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
   		t.disabled=false; 
                 s.value="<?php echo $MSG_SUBMIT?>";
         	t.value="<?php echo $MSG_TR?>";
-                window.cleanInterval();
+                window.clearInterval(intervalId);
         }else{
         	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
         	t.value="<?php echo $MSG_TR?>("+count+")";

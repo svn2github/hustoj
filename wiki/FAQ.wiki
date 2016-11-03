@@ -32,7 +32,7 @@ When people asked question, we put the answer here
 	在judge_client.cc头部增加宏定义 IGNORE_ESOL
 
 * 配置文件里的字段什么含义?
-	 详见 [https://github.com/zhblue/hustoj/edit/master/wiki/Configuration.wiki]
+	 详见 [https://github.com/zhblue/hustoj/blob/master/wiki/Configuration.wiki]
 * 多组数据怎么上传？
 加好题目后在题目列表找TestData，点击上传。
 主文件名一样的*.in *.out，如test1.in test1.out

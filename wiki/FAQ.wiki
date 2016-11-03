@@ -11,11 +11,12 @@ When people asked question, we put the answer here
 * Runtime Error:[ERROR] A Not allowed system call: runid:10735 CALLID:20 如何解决？
 编辑okcalls64.h或okcalls32.h（取决于您使用的Linux版本uname -a出现x64字样则64位，i686字样则32位），在对应的语言数组里增加内容。
 如C或C++：
-```c
+
 	int LANG_CV[256] = { 85, 8,140, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
 		SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
 		SYS_mmap2, SYS_fstat64, SYS_set_thread_area, 252, 0 };
-```
+
+
 将上述报错中CALLID:后的数字，增加到数组中非末尾的位置，如果这个数字是0，请加在首位。
 
 	int LANG_CV[256] = { 20, 85, 8,140, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
@@ -28,10 +29,10 @@ When people asked question, we put the answer here
 
 * 如何让判题程序忽略行尾的空白字符
 
-在judge_client.cc头部增加宏定义 IGNORE_ESOL
+	在judge_client.cc头部增加宏定义 IGNORE_ESOL
 
 * 配置文件里的字段什么含义?
- 详见 [Configuration]
+	 详见 [https://github.com/zhblue/hustoj/edit/master/wiki/Configuration.wiki]
 * 多组数据怎么上传？
 加好题目后在题目列表找TestData，点击上传。
 主文件名一样的*.in *.out，如test1.in test1.out

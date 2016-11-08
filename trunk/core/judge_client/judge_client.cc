@@ -861,7 +861,7 @@ int compile(int lang,char * work_dir) {
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
 			"-lm", "--static", "-std=c++0x", "-DONLINE_JUDGE", NULL };
 	const char * CP_P[] =
-			{ "fpc", "Main.pas","-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL };
+			{ "fpc", "Main.pas","-Cs32000000","-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL };
 //      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
 
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };

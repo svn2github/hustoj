@@ -121,10 +121,10 @@ else
 echo "<tr class='evenrow'>";
 foreach($row as $table_cell){
 echo "<td>";
-echo "\t".$table_cell;
+echo $table_cell;
 echo "</td>";
 }
-echo "</tr>";
+echo "</tr>\n";
 $cnt=1-$cnt;
 }
 ?>

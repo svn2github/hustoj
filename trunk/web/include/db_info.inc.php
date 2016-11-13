@@ -54,8 +54,10 @@ static  $OJ_QQ_AKEY='1124518951';
 static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
-
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
+if( strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {
+        $OJ_LANG="cn";
+}
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 global $mysqli;
 	if($OJ_SAE)	{

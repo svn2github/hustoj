@@ -2230,10 +2230,8 @@ int main(int argc, char** argv) {
 		update_problem(p_id);
 		if (!http_judge)
 			mysql_close(conn);
-		if (!DEBUG)
-			clean_workdir(work_dir);
-		else
-			write_log("compile error");
+		clean_workdir(work_dir);
+		write_log("compile error");
 		exit(0);
 	} else {
 		update_solution(solution_id, OJ_RI, 0, 0, 0, 0, 0.0);

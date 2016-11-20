@@ -1990,7 +1990,7 @@ void clean_workdir(char * work_dir) {
  	if (DEBUG) {
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {
-		execute_cmd("/bin/rm -Rf %s/*", work_dir);
+		execute_cmd("/bin/rm -rf %s/*", work_dir);
 
 	}
 
@@ -2061,7 +2061,6 @@ void mk_shm_workdir(char * work_dir) {
 	char shm_path[BUFFER_SIZE];
 	sprintf(shm_path, "/dev/shm/hustoj/%s", work_dir);
 	execute_cmd("/bin/mkdir -p %s", shm_path);
-	execute_cmd("/bin/rm -rf %s", work_dir);
 	execute_cmd("/bin/ln -s %s %s/", shm_path, oj_home);
 	execute_cmd("/bin/chown judge %s ", shm_path);
 	execute_cmd("chmod 755 %s ", shm_path);

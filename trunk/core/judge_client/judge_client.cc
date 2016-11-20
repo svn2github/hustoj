@@ -2176,13 +2176,12 @@ int main(int argc, char** argv) {
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 
+	clean_workdir(work_dir);
 	if (shm_run)
 		mk_shm_workdir(work_dir);
 
 	chdir(work_dir);
-	if (!DEBUG)
-		clean_workdir(work_dir);
-
+	
 	if (http_judge)
 		system("/bin/ln -s ../cookie ./");
 	get_solution_info(solution_id, p_id, user_id, lang);

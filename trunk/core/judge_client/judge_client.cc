@@ -1990,8 +1990,7 @@ void clean_workdir(char * work_dir) {
  	if (DEBUG) {
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {
-		execute_cmd("/bin/rm -rf %s/*", work_dir);
-
+		execute_cmd("/bin/rm -f %s/*", work_dir);
 	}
 
 }
@@ -2317,7 +2316,7 @@ int main(int argc, char** argv) {
 			addcustomout(solution_id);
 		}
 		update_solution(solution_id, OJ_TR, usedtime, topmemory >> 10, 0, 0, 0);
-
+		clean_workdir(work_dir);
 		exit(0);
 	}
 

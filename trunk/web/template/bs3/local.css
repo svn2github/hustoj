@@ -18,3 +18,9 @@
 .center{
    text-align: center
 }
+.sampledata {
+    background: none repeat scroll 0 0 #8DB8FF;
+    font-family: Monospace;
+    font-size: 18px;
+    white-space: pre;
+}

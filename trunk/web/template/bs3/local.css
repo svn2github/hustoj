@@ -19,8 +19,9 @@
    text-align: center
 }
 .sampledata {
-    background: none repeat scroll 0 0 #8DB8FF;
+    background: none repeat scroll 0 0 #ccccFF;
     font-family: Monospace;
     font-size: 18px;
+    line-height:2px;
     white-space: pre;
 }

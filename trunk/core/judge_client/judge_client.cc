@@ -1975,7 +1975,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	
 	//clean_session(pidApp);
 }
-void clean_workdir(char * work_dir) {
+void umount(char * work_dir){
         execute_cmd("/bin/umount %s/proc", work_dir);
         execute_cmd("/bin/umount %s/dev", work_dir);
         execute_cmd("/bin/umount %s/lib", work_dir);
@@ -1986,8 +1986,11 @@ void clean_workdir(char * work_dir) {
         execute_cmd("/bin/umount %s/proc", work_dir);
         execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc");
         execute_cmd("/bin/umount *");
- 
+}
+void clean_workdir(char * work_dir) {
+	umount(work_dir);
  	if (DEBUG) {
+		execute_cmd("mkdir %s/log/", work_dir);
 		execute_cmd("/bin/mv %s/* %slog/", work_dir, work_dir);
 	} else {
 		execute_cmd("/bin/rm -f %s/*", work_dir);
@@ -2234,6 +2237,7 @@ int main(int argc, char** argv) {
 		exit(0);
 	} else {
 		update_solution(solution_id, OJ_RI, 0, 0, 0, 0, 0.0);
+		umount(work_dir);
 	}
 	//exit(0);
 	// run

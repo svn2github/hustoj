@@ -927,7 +927,9 @@ int compile(int lang,char * work_dir) {
                 execute_cmd("mount -o bind /bin bin");
                 execute_cmd("mount -o bind /usr usr");
                 execute_cmd("mount -o bind /lib lib");
+#ifndef __i386
                 execute_cmd("mount -o bind /lib64 lib64");
+#endif
                 execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 execute_cmd("mount -o bind /proc proc");
                 

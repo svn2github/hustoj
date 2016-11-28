@@ -179,6 +179,7 @@ Who Used the System
     Rutgers新泽西州立大学(US) cs111 http://edsvc.cs.rutgers.edu/JudgeOnline/
     香港理工大学 http://oj.zloop.net
     长沙理工大学 http://acmore.net/ 
+    江西理工大学 http://oj.jxust.edu.cn/
 
 内网用户：
 

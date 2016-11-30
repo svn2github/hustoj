@@ -1410,7 +1410,7 @@ void copy_python_runtime(char * work_dir) {
         execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
         execute_cmd("cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);
         execute_cmd("/bin/mkdir -p %s/home/judge", work_dir);
-	execute_cmd("/bin/chown judge %s/home/judge", work_dir);
+	execute_cmd("/bin/chown judge %s", work_dir);
 	execute_cmd("/bin/mkdir -p %s/etc", work_dir);
 	execute_cmd("/bin/grep judge /etc/passwd>%s/etc/passwd", work_dir);
 	execute_cmd("/bin/mount -o bind /dev %s/dev", work_dir);

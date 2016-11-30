@@ -933,7 +933,7 @@ int compile(int lang,char * work_dir) {
                 execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 execute_cmd("mount -o bind /proc proc");
                 
-                if (lang != 3 && lang != 9)
+                if (lang != 3 && lang != 9 && lang != 6)
                         chroot(work_dir);
  
 		while(setgid(1536)!=0) sleep(1);
@@ -1400,6 +1400,7 @@ void copy_python_runtime(char * work_dir) {
 
         copy_shell_runtime(work_dir);
         execute_cmd("mkdir -p %s/usr/include", work_dir);
+        execute_cmd("mkdir -p %s/dev", work_dir);
         execute_cmd("mkdir -p %s/usr/lib", work_dir);
         execute_cmd("mkdir -p %s/usr/lib64", work_dir);
         execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
@@ -1986,7 +1987,7 @@ void umount(char * work_dir){
         execute_cmd("/bin/umount %s/usr", work_dir);
         execute_cmd("/bin/umount %s/bin", work_dir);
         execute_cmd("/bin/umount %s/proc", work_dir);
-        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc");
+        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
         execute_cmd("/bin/umount *");
 }
 void clean_workdir(char * work_dir) {

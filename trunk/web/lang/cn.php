@@ -6,9 +6,10 @@
 	$MSG_STATUS="状态";
 	$MSG_RANKLIST="排名";
 	$MSG_CONTEST="竞赛&作业";
-  $MSG_RECENT_CONTEST="名校联赛";
+  	$MSG_RECENT_CONTEST="名校联赛";
 	$MSG_LOGOUT="注销";
 	$MSG_LOGIN="登录";
+	$MSG_LOST_PASSWORD="忘记密码";
 	$MSG_REGISTER="注册";
 	$MSG_ADMIN="管理";
 	$MSG_STANDING="名次";

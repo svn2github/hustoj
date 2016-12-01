@@ -11,6 +11,7 @@
 	
 	$MSG_LOGOUT="LOGOUT";
 	$MSG_LOGIN="LOGIN";
+	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="가입하기";
 	$MSG_ADMIN="관리자";
 	$MSG_STANDING="순위";

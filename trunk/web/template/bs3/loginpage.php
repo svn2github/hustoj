@@ -41,7 +41,7 @@
 	<button name="submit" type="submit" class="btn btn-default btn-block">$MSG_LOGIN</button>
 	</div>
 	<div class="col-sm-4">
-	<a class="btn btn-default btn-block" href="lostpassword.php">Lost Password</a>
+	<a class="btn btn-default btn-block" href="lostpassword.php">$MSG_LOST_PASSWORD</a>
 	</div>
 	</div>
 </form>					

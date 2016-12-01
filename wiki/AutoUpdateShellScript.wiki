@@ -4,9 +4,10 @@
 
 There is a shell script in the liveCD for auto update, put it here so someone can make use of it
 
+no longer works because googlecode dead.
 
 = Details =
-{{{
+
 
 #!/bin/bash
 mkdir /fps
@@ -21,5 +22,3 @@ sudo svn up .
 apt-get clean
 history -c
 
-
-}}}

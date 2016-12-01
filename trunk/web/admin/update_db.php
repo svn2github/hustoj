@@ -139,7 +139,7 @@ if(isset($_POST['do'])){
 				echo $csql[$i]."<br>";
 				mysqli_query($mysqli,$csql[$i]);
 		}else{
-				echo mysqli_error()."<br>";
+				echo mysqli_error($mysqli)."<br>";
 		}
 		
 	}

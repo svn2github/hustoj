@@ -11,6 +11,7 @@
 	
 	$MSG_LOGOUT="ออกจากระบบ";
 	$MSG_LOGIN="เข้าสู่ระบบ";
+	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="ลงทะเบียน";
 	$MSG_ADMIN="จัดการระบบ";
 	$MSG_STANDING="STANDING";

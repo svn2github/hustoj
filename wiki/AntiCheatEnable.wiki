@@ -8,15 +8,15 @@ if you want to enable AntiCheat on hustoj, follow the steps
 = Details =
   # update web and core using svn or the [AutoUpdateShellScript]
   # add in judge.conf
-{{{
+
 OJ_SIM_ENABLE=1 
-}}}
+
   # add in db_info.inc.php
-{{{
+
   $OJ_SIM=true;
-}}}
+
   # create table in mysql
-{{{
+
 CREATE TABLE `sim` (
 
 
@@ -37,6 +37,5 @@ CREATE TABLE `sim` (
 
 
 
-}}}
 
  * THIS FUNCTION REQUEST A LARGE MOUNT OF FILE STORAGE IN LONG TERM RUNNING *

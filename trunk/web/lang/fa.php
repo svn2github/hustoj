@@ -20,7 +20,7 @@ $MSG_RECENT_CONTEST="Recent";
 	$MSG_LOGOUT="خروج";
 
 	$MSG_LOGIN="ورود";
-
+	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="عضویت";
 
 	$MSG_ADMIN="ادمین";

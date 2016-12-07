@@ -115,7 +115,7 @@ function getSolution($pid,$lang){
 		}
 		mysqli_free_result($result);
 	}
-    mysqli_close($con);
+        if($con)mysqli_close($con);
 	return $ret;
 }
 function fixurl($img_url){

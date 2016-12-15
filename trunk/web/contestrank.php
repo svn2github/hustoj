@@ -174,19 +174,29 @@ if(!$OJ_MEMCACHE) mysqli_free_result($result);
 usort($U,"s_cmp");
 
 ////firstblood
-$first_blood=array();
-for($i=0;$i<$pid_cnt;$i++){
-   $sql="select user_id from solution where contest_id=$cid and result=4 and num=$i order by in_date limit 1";
-   $result=mysqli_query($mysqli,$sql);
-   $row_cnt=mysqli_num_rows($result);
-   $row=mysqli_fetch_array($result);
-   if($row_cnt==1){
-      $first_blood[$i]=$row['user_id'];
-   }else{
-      $first_blood[$i]="";
-   }
+$sql="select num,user_id from
+        (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
+        group by num";
+if($OJ_MEMCACHE){
+//        require("./include/memcache.php");
+        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
+}else{
 
+        $fb = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
+        if($fb) $rows_cnt=mysqli_num_rows($fb);
+        else $rows_cnt=0;
 }
+
+for ($i=0;$i<$rows_cnt;$i++){
+        if($OJ_MEMCACHE)
+                $row=$fb[$i];
+        else
+                $row=mysqli_fetch_array($fb);
+         $first_blood[$row['num']]=$row['user_id'];
+}
+
 
 
 /////////////////////////Template

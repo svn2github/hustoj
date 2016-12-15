@@ -174,6 +174,11 @@ if(!$OJ_MEMCACHE) mysqli_free_result($result);
 usort($U,"s_cmp");
 
 ////firstblood
+$first_blood=array();
+for($i=0;$i<$pid_cnt;$i++){
+      $first_blood[$i]="";
+}
+
 $sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";

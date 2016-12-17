@@ -185,6 +185,13 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 		mysqli_query($mysqli,$sql);
 	}
 	//echo $sql;
+	//using redis task queue
+        if($OJ_REDIS){
+           $redis = new Redis();
+           $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
+           $redis->lpush($OJ_REDISQNAME,$insert_id);
+        }
+
 }
 
 

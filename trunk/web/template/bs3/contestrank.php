@@ -103,37 +103,38 @@ echo "</tbody></table>";
 <script type="text/javascript">
 $(document).ready(function()
 {
-$.tablesorter.addParser({
-// set a unique id
-id: 'punish',
-is: function(s) {
-// return false so this parser is not auto detected
-return false;
-},
-format: function(s) {
-// format your data for normalization
-var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,'');
-//alert(v);
-v=parseFloat('0'+v);
-return v>1?v:v+Number.MAX_VALUE-1;
-},
-// set type, either numeric or text
-type: 'numeric'
-});
-$("#rank").tablesorter({
-headers: {
-4: {
-sorter:'punish'
-}
-<?php
-for ($i=0;$i<$pid_cnt;$i++){
-echo ",".($i+5).": { ";
-echo " sorter:'punish' ";
-echo "}";
-}
-?>
-}
-});
+        $.tablesorter.addParser({
+              // set a unique id
+              id: 'punish',
+              is: function(s) {
+              // return false so this parser is not auto detected
+              return false;
+              },
+              format: function(s) {
+              // format your data for normalization
+              var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,'');
+              //alert(v);
+              v=parseFloat('0'+v);
+              return v>1?v:v+Number.MAX_VALUE-1;
+              },
+              // set type, either numeric or text
+              type: 'numeric'
+              });
+              $("#rank").tablesorter({
+              headers: {
+              4: {
+              sorter:'punish'
+              }
+              <?php
+              for ($i=0;$i<$pid_cnt;$i++){
+              echo ",".($i+5).": { ";
+              echo " sorter:'punish' ";
+              echo "}";
+              }
+              ?>
+              }
+        });
+  metal();
 }
 );
 </script>
@@ -181,7 +182,7 @@ cell.className="badge badge-info";
 //alert(e);
 }
 }
-metal();
+
 </script>
 <style>
 .well{

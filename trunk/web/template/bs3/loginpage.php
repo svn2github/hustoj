@@ -38,10 +38,10 @@
 <?php }?>
 	<div class="form-group">
 	<div class="col-sm-offset-4 col-sm-4">
-	<button name="submit" type="submit" class="btn btn-default btn-block">$MSG_LOGIN</button>
+	<button name="submit" type="submit" class="btn btn-default btn-block"><?php echo $MSG_LOGIN; ?></button>
 	</div>
 	<div class="col-sm-4">
-	<a class="btn btn-default btn-block" href="lostpassword.php">$MSG_LOST_PASSWORD</a>
+	<a class="btn btn-default btn-block" href="lostpassword.php"><?php echo $MSG_LOST_PASSWORD; ?></a>
 	</div>
 	</div>
 </form>					

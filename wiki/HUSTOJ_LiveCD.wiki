@@ -2,6 +2,9 @@
 #labels Featured,LiveCD,Phase-Deploy
 
 Download:
+14.04 LTS 版本
+* http://pan.baidu.com/s/1jIjYGeU
+12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172
 * http://pan.baidu.com/netdisk/singlepublic?fid=241719_3088787629
 

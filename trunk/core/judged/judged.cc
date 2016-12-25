@@ -71,6 +71,13 @@ static char http_baseurl[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
 
+static int  oj_redis = 0;
+static char oj_redisserver[BUFFER_SIZE];
+static int  oj_redisport;
+static char oj_redisauth[BUFFER_SIZE];
+static char oj_redisqname[BUFFER_SIZE];
+
+
 static bool STOP = false;
 static int DEBUG = 0;
 static int ONCE = 0;
@@ -174,6 +181,13 @@ void init_mysql_conf() {
 			read_buf(buf, "OJ_HTTP_USERNAME", http_username);
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
 			read_buf(buf, "OJ_LANG_SET", oj_lang_set);
+			
+			read_int(buf, "OJ_REDISENABLE", &oj_redis);
+                        read_buf(buf, "OJ_REDISSERVER", oj_redisserver);
+                        read_int(buf, "OJ_REDISPORT", &oj_redisport);
+                        read_buf(buf, "OJ_REDISAUTH", oj_redisauth);
+                        read_buf(buf, "OJ_REDISQNAME", oj_redisqname);
+
 
 		}
 		sprintf(query,
@@ -330,12 +344,38 @@ int _get_jobs_mysql(int * jobs) {
 		jobs[i++] = 0;
 	return ret;
 }
+
+int _get_jobs_redis(int * jobs){
+        int ret=0;
+        const char * cmd="redis-cli -h %s -p %d -a %s --raw rpop %s";
+        while(ret<=max_running){
+                FILE * fjobs = read_cmd_output(cmd,oj_redisserver,oj_redisport,oj_redisauth,oj_redisqname);
+                if(fscanf(fjobs,"%d",&jobs[ret])==1){
+                        ret++;
+                        pclose(fjobs);
+                }else{
+                        pclose(fjobs);
+                        break;
+                }
+
+        }
+        int i=ret;
+        while (i <= max_running * 2)
+                jobs[i++] = 0;
+        if(DEBUG) printf("redis return %d jobs",ret);
+        return ret;
+}
+
 int get_jobs(int * jobs) {
 	if (http_judge) {
 		return _get_jobs_http(jobs);
-	} else
-		return _get_jobs_mysql(jobs);
-
+	} else {		
+		if(oj_redis){
+                        return _get_jobs_redis(jobs);
+                }else{
+                        return _get_jobs_mysql(jobs);
+                }
+	}
 }
 
 bool _check_out_mysql(int solution_id, int result) {
@@ -367,7 +407,7 @@ bool _check_out_http(int solution_id, int result) {
 	return ret;
 }
 bool check_out(int solution_id, int result) {
-
+        if(oj_redis) return true;
 	if (http_judge) {
 		return _check_out_http(solution_id, result);
 	} else
@@ -561,4 +601,3 @@ int main(int argc, char** argv) {
 	}
 	return 0;
 }
-

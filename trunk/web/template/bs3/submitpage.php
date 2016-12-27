@@ -95,7 +95,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <br>
 <input id=Submit class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick=do_submit();>
 <input id=TestRun class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
-<input type=reset class="btn btn-danger" value="重置">
+<input type=reset class="btn btn-danger" >
 </form>
 </center>
      </div>

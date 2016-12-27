@@ -35,7 +35,7 @@ Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows进行安装
 
 livecd下载: 
 https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveCD.wiki
-http://pan.baidu.com/s/1jIjYGeU
+http://pan.baidu.com/s/1pLyHG6J
 
 用户交流qq群23361372,验证信息freeproblemset； 缺少Linux知识的请加高级服务收费群http://t.cn/SyNZhV
 

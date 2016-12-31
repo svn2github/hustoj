@@ -126,7 +126,7 @@ if(!$OJ_MEMCACHE)mysqli_free_result($result);
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
                 FROM
-                        (select * from solution where solution.contest_id='$cid' and num>=0 ) solution
+                        (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
                 left join users
                 on users.user_id=solution.user_id
         ORDER BY in_date";

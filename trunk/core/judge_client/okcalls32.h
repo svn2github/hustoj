@@ -48,7 +48,7 @@ int LANG_BV[256] = { 7, 120, 42, 158, 117, 60, 39, 102, 191, 183, SYS_access,
 		SYS_getpid, SYS_getppid, SYS_getrlimit, SYS_gettimeofday, SYS_getuid32,
 		SYS_ioctl, SYS__llseek, SYS_mmap2, SYS_mprotect, SYS_munmap, SYS_open,
 		SYS_read, SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_set_thread_area,
-		SYS_stat64, SYS_time, SYS_uname, SYS_write };
+		SYS_stat64, SYS_time, SYS_uname, SYS_write,0 };
 
 int LANG_YV[256] = { 146, SYS_mremap, 158, 117, 60, 39, 102, 191, SYS_access,
 		SYS_brk, SYS_close, SYS_execve, SYS_exit_group, SYS_fcntl64,
@@ -57,7 +57,7 @@ int LANG_YV[256] = { 146, SYS_mremap, 158, 117, 60, 39, 102, 191, SYS_access,
 		SYS__llseek, SYS_lstat64, SYS_mmap2, SYS_mprotect, SYS_munmap, SYS_open,
 		SYS_read, SYS_readlink, SYS_rt_sigaction, SYS_rt_sigprocmask,
 		SYS_set_robust_list, SYS_set_thread_area, SYS_set_tid_address,
-		SYS_stat64, SYS_uname, SYS_write };
+		SYS_stat64, SYS_uname, SYS_write,0 };
 
 int LANG_PHV[256] = { 146, 78, 158, 117, 60, 39, 102, 191, SYS_access, SYS_brk,
 		SYS_clone, SYS_close, SYS_execve, SYS_exit_group, SYS_fcntl64,

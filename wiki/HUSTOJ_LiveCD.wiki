@@ -51,8 +51,8 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 LiveCD System on k6-2 System
 *K6-2-450 320M 1G-CF*
 
-![system](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-system.JPG)
+![image](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-system.jpg)
 
-![image](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-status.JPG)
+![image](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-status.jpg)
 
-![image](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-HustOJ.JPG)
+![image](https://github.com/zhblue/hustoj/raw/master/wiki/k6-2-HustOJ.jpg)

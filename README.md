@@ -225,7 +225,7 @@ Who Used the System
     宁波职业技术学院
     香港中文大学 
 
-LiveCD iso 下载 https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveCD.wiki
+LiveCD iso 下载 https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md
 
 需要邮寄LiveCD光盘可以访问 淘宝链接，高校教师购买可享受8折优惠。 
 

@@ -113,3 +113,4 @@ sudo ./make.sh
     修改php.ini后apache需重启 
 
 CentOS用户请看 [CentOS](https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md)
+	[x64](https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md)

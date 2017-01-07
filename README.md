@@ -37,7 +37,7 @@ livecd下载:
 http://pan.baidu.com/s/1o78D4x0
 
 使用说明见iso中README,也可以参考wiki页
-https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveCD.wiki
+https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md
 
 
 用户交流qq群23361372,验证信息freeproblemset； 缺少Linux知识的请加高级服务收费群http://t.cn/SyNZhV

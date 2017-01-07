@@ -31,16 +31,16 @@ Here is something for those users:
    /var/www/html  you gonna need to adjust it in install.sh before running "sudo ./install.sh"
  * SELinux settings will stop php when it trying to make file I/O, so if you don't know how to make SELinux working with HUSTOJ, just disable it for a moment(/etc/selinux/config and setenforce 0), and find the right way later.
 this line should works
-{{{
+```
 chcon -R -t httpd_sys_content_t /home
-}}}
+```
  * PHP.ini is located at /etc/php.ini
  * You need to change php.ini
-{{{
+```
 short_open_tag=On
 register_globals=Off
 open_basedir=/var/www/html:/var/www/html/JudgeOnline:/tmp:/home/judge/data
-}}}
+```
  *  change makefiles in core/judged and core/judge_client
    change -L/usr/local/mysql/lib/mysql to -L/usr/lib/mysql
         -I/usr/local/mysql/include/mysql to -I/usr/include/mysql
@@ -53,13 +53,13 @@ for Chinese user ,QQ-qun group IM is recomended.
 刚刚在全新的CentOS 5.6中安装了OJ，主要遇到问题和解决方法如下：
  * 安装时候提示找不到www-data用户，修改web的用户为apache
  * 运行/etc/init.d/judged出错，提示/lib/init/vars.sh找不到，修改/etc/init.d/judged,删除原有内容，修改内容为:
-{{{
+```
 /usr/bin/judged
-}}}
+```
  * 打开页面空白，这是由于CentOS默认带的php版本为5.1，不支持mysql_set_charset函数，这个函数需要5.2.3的支持，打开include/db_info.inc.php，注释掉第37行:
-{{{
+```
 if(!$OJ_SAE)mysql_set_charset("utf8");
-}}}
+```
  * 打开题目列表页面不完全，yum install php-mbstring。
 
 关于Java，如果Java提示编译失败，可以尝试：

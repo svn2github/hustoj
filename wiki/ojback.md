@@ -11,6 +11,6 @@
 限制非法系统调用，最好的办法是使用白名单机制，只允许程序使用一个小集合里的调用，对于其它调用，即使它是安全的，也不会被允许，比如mkdir。
 由于Pascal,Java,C/C++的机制有些区别，因此，三种不同语言的白名单各不相同。
 
-相关代码见[http://code.google.com/p/hustoj/source/browse/trunk/core/judge_client/okcalls.h#3]
+相关代码见[https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/okcalls64.h]
 -------------
 未完待续

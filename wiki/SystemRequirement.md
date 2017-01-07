@@ -29,7 +29,7 @@
 = LiveCD版 =
 
 最低配置:
-   * K6-2-450 
+   * P4+ (PAE enabled)
    * 256M  
    * CDROM
    * 无须硬盘

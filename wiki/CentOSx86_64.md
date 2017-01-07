@@ -9,7 +9,7 @@
   * 如果需要python,perl,ruby等支持，请使用yum install安装相应的软件
   * 如果需要Java支持，请使用yum install java-1.6.0-openjdk java-1.6.0-openjdk-devel，建议不要使用官方的jdk，已证实不可用。
   * 修改core/judge_client/judge_client.cc文件，大约985行左右，参考修改代码如下（请注意修改对应的函数）：
-<pre>
+```
 void copy_shell_runtime(char `*` work_dir) {
         execute_cmd("mkdir %s/lib", work_dir);
         execute_cmd("mkdir %s/lib64", work_dir);
@@ -90,4 +90,4 @@ void copy_mono_runtime(char `*` work_dir) {
         execute_cmd("mkdir -p %s/etc", work_dir);
         execute_cmd("grep judge /etc/passwd>%s/etc/passwd", work_dir);
 }
-</pre>
+```

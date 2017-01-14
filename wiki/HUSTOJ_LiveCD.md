@@ -34,7 +34,13 @@ In order to help people trying HUSTOJ, here is annoucing a LiveCD
 
 * 物理机选第二项-安装,按照提示输入Alt+F1进入命令行，startx进入图形界面。
 
-* 进入系统后OJ自动启动，运行Firefox即可看到入口，OJ管理员帐号密码均为admin。启动后系统包含1道题目，可在官方群共享下载fps文件导入。
+* 进入系统后OJ自动启动，运行Firefox即可看到入口
+
+* 2016版OJ管理员帐号admin密码hustoj
+
+* 2017版直接注册admin账号获得管理员权限。
+
+* 启动后系统包含1道题目，可在官方群共享下载fps文件导入。
 
 * 局域网可以访问和使用OJ，网络地址可用ifconfig在 lxterminal中查询。ubuntu用户有sudo权限。
 

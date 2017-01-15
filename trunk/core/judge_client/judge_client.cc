@@ -1569,6 +1569,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// proc limit
 	switch (lang) {
 	case 3:  //java
+	case 4:  //ruby
 	case 16:
 	case 12:
 		LIM.rlim_cur = LIM.rlim_max = 50;

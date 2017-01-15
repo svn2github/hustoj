@@ -205,6 +205,18 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		
 	}
 	unlink ( $tempfile );
+	if($OJ_REDIS){
+           $redis = new Redis();
+           $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
+                $sql="select solution_id from solution where result=0 and problem_id>0";
+                 $result=mysqli_query($mysqli,$sql);
+                while ($row=mysqli_fetch_object($result)){
+                        echo $row->solution_id."\n";
+                        $redis->lpush($OJ_REDISQNAME,$row->solution_id);
+                }
+                mysqli_free_result($result);
+        }
+
 	if($spid>0){
 		require_once("../include/set_get_key.php");
 		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION['getkey'].">Use these problems to create a contest.</a>";

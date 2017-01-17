@@ -167,7 +167,7 @@ function auto_refresh(){
 	var tb=window.document.getElementById('result-tab');
 //alert(tb);
 	var rows=tb.rows;
-	for(var i=1;i<rows.length;i++){
+	for(var i=1;i<rows.length&&i<5;i++){
 		var cell=rows[i].cells[3].children[0].innerHTML;
 		rows[i].cells[3].className="td_result";
 	//	alert(cell);

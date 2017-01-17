@@ -52,9 +52,9 @@ else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
 <thead>
 <tr class='toprow'>
 <th width='5'></th>
-<th width='120' ><?php echo $MSG_PROBLEM_ID?></th>
+<th width='20'  class='hidden-xs' ><?php echo $MSG_PROBLEM_ID?></th>
 <th><?php echo $MSG_TITLE?></th>
-<th width='10%'><?php echo $MSG_SOURCE?></th>
+<th class='hidden-xs' width='10%'><?php echo $MSG_SOURCE?></th>
 <th style="cursor:hand" width=60 ><?php echo $MSG_AC?></th>
 <th style="cursor:hand" width=60 ><?php echo $MSG_SUBMIT?></th>
 </tr>
@@ -67,10 +67,13 @@ if ($cnt)
 echo "<tr class='oddrow'>";
 else
 echo "<tr class='evenrow'>";
+$i=0;
 foreach($row as $table_cell){
-echo "<td>";
-echo "\t".$table_cell;
-echo "</td>";
+	if($i==1||$i==3)echo "<td  class='hidden-xs'>";
+	else echo "<td>";
+	echo "\t".$table_cell;
+	echo "</td>";
+	$i++;
 }
 echo "</tr>";
 $cnt=1-$cnt;

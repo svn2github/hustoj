@@ -69,11 +69,11 @@
   $sinput=str_replace(">","&gt;",$sinput);
 	$soutput=str_replace("<","&lt;",$row->sample_output);
   $soutput=str_replace(">","&gt;",$soutput);
-  if($sinput) {
+  if(strlen($sinput)) {
       echo "<h2>$MSG_Sample_Input</h2>
 			<pre class=content><span class=sampledata>".($sinput)."</span></pre>";
   }
-  if($soutput){
+  if(strlen($soutput)){
 	echo "<h2>$MSG_Sample_Output</h2>
 			<pre class=content><span class=sampledata>".($soutput)."</span></pre>";
   }

@@ -25,3 +25,15 @@
     line-height:2px;
     white-space: pre;
 }
+
+.navbar{
+    position: fixed;
+    width: 100%;
+    padding: 0 auto;
+    top: 0;
+    left: 0;
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
+    z-index: 9999;
+}

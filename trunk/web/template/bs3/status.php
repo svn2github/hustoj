@@ -167,12 +167,13 @@ function auto_refresh(){
 	var tb=window.document.getElementById('result-tab');
 //alert(tb);
 	var rows=tb.rows;
-	for(var i=1;i<rows.length&&i<5;i++){
+	for(var i=1;i<rows.length;i++){
 		var cell=rows[i].cells[3].children[0].innerHTML;
 		rows[i].cells[3].className="td_result";
 	//	alert(cell);
 		var sid=rows[i].cells[0].innerHTML;
-	        for(var j=0;j<4;j++){
+		
+	        for(var j=0;i<5&&j<4;j++){
 			if(cell.indexOf(judge_result[j])!=-1){
 //			   alert(sid);
 			   fresh_result(sid);

@@ -37,3 +37,28 @@
     opacity: 0.9;
     z-index: 9999;
 }
+/* funny color*/
+
+.dropdown-menu,.navbar-default{
+   background-color:#006600;
+   background-image: linear-gradient(to bottom, #006600 0px, #66cc66 100%);
+   background-repeat: repeat-x;
+   border-radius: 4px;
+   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);
+}
+.btn-warning{
+    background-color:#ff8000;
+}
+.btn-success{
+    background-color:#33cc99;
+}
+.jumbotron{
+    background-color:#efefef;
+}
+.btn-danger{
+    background-color:#d3406d;
+}
+.toprow{
+   background-color:#66cc66;
+   white-space:nowrap;
+}

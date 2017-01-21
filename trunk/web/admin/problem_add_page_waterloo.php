@@ -35,7 +35,7 @@ include_once("../fckeditor/fckeditor.php") ;
 
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
-	echo "Please Input like http://plg1.cs.uwaterloo.ca/~acm00/020921/A.html";
+	echo "Please Input like http://acm.student.cs.uwaterloo.ca/~acm00";
 	exit(1);
   }   
     

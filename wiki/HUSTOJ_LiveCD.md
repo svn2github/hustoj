@@ -3,11 +3,7 @@
 
 Download:
 14.04 LTS 版本(OJ管理员admin密码hustoj)
-* http://pan.baidu.com/s/1o78D4x0
-* http://zjjr.hustoj.com/vjudge.iso 第N+1次打包,集成vjudge
-* http://zjjr.hustoj.com/hustoj2017.iso 第N次打包
-* http://zjjr.hustoj.com/hustoj2016.iso 第3次打包
-* http://pan.baidu.com/s/1pLyHG6J  第2次打包
+* http://pan.baidu.com/s/1o78D4x0 
 
 12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172

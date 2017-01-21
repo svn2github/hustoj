@@ -6,7 +6,7 @@ if (!(isset($_SESSION['administrator']))){
 ?>
 <ol>
 <li>
-Copy from http://plg1.cs.uwaterloo.ca/~acm00/
+Copy from http://acm.student.cs.uwaterloo.ca/~acm00
 <form method=POST action=problem_add_page_waterloo.php>
   <input name=url type=text size=100>
   <input type=submit>

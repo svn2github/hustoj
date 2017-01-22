@@ -16,11 +16,9 @@ Download:
 为了帮助不了解HUSTOJ的用户快速获得使用体验，发布一张LiveCD.
 
 
-没有刻录机？请看[http://hustoj.5d6d.com/thread-7-1-1.html 虚拟机使用帮助]
+没有刻录机？请看[http://mp.weixin.qq.com/s/GOH2BQIkvNRhHoexL-3KXQ  如何将LiveCD做成U盘]
 
 In order to help people trying HUSTOJ, here is annoucing a LiveCD
-
-[http://hustoj.googlecode.com/files/HUSTOJ-Live2.0.png]
 
 [http://v.youku.com/v_show/id_XMTk5NTAyOTgw.html]
 

@@ -881,7 +881,7 @@ int compile(int lang,char * work_dir) {
 	const char * CP_CLANG_CPP[]={"clang++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
 	         		"-lm", "--static", "-std=c++0x",  "-DONLINE_JUDGE", NULL };
 	const char * CP_LUA[] = { "luac","-o","Main", "Main.lua", NULL };
-	const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
+	//const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 
 	char javac_buf[7][32];
 	char *CP_J[7];
@@ -987,9 +987,9 @@ int compile(int lang,char * work_dir) {
 		case 15:
 			execvp(CP_LUA[0], (char * const *) CP_LUA);
 			break;
-		case 16:
-			execvp(CP_JS[0], (char * const *) CP_JS);
-			break;
+		//case 16:
+		//	execvp(CP_JS[0], (char * const *) CP_JS);
+		//	break;
 		default:
 			printf("nothing to do!\n");
 		}

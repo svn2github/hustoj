@@ -959,9 +959,9 @@ int compile(int lang,char * work_dir) {
 		case 5:
 			execvp(CP_B[0], (char * const *) CP_B);
 			break;
-		case 6:
-			execvp(CP_Y[0], (char * const *) CP_Y);
-			break;
+		//case 6:
+		//	execvp(CP_Y[0], (char * const *) CP_Y);
+		//	break;
 		case 7:
 			execvp(CP_PH[0], (char * const *) CP_PH);
 			break;
@@ -1996,7 +1996,7 @@ void umount(char * work_dir){
         execute_cmd("/bin/umount %s/bin", work_dir);
         execute_cmd("/bin/umount %s/proc", work_dir);
         execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
-        execute_cmd("/bin/umount *");
+        execute_cmd("/bin/umount %s/*",work_dir);
 }
 void clean_workdir(char * work_dir) {
 	umount(work_dir);

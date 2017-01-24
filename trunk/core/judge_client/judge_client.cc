@@ -1758,7 +1758,7 @@ int special_judge(char* oj_home, int problem_id, char *infile, char *outfile,
 void judge_solution(int & ACflg, int & usedtime, int time_lmt, int isspj,
 		int p_id, char * infile, char * outfile, char * userfile, int & PEflg,
 		int lang, char * work_dir, int & topmemory, int mem_lmt,
-		int solution_id, double num_of_test) {
+		int solution_id, int num_of_test) {
 	//usedtime-=1000;
 	int comp_res;
 	if (!oi_mode)

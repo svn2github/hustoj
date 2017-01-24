@@ -1846,7 +1846,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		wait4(pidApp, &status, 0, &ruse);
 
 //jvm gc ask VM before need,so used kernel page fault times and page size
-		if (lang == 3 || lang == 7 || lang == 16) {
+		if (lang == 3 || lang == 7 || lang == 16 || lang==9) {
 			tempmemory = get_page_fault_mem(ruse, pidApp);
 		} else {        //other use VmPeak
 			tempmemory = get_proc_status(pidApp, "VmPeak:") << 10;

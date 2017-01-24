@@ -866,8 +866,8 @@ int compile(int lang,char * work_dir) {
 
 	const char * CP_R[] = { "ruby", "-c", "Main.rb", NULL };
 	const char * CP_B[] = { "chmod", "+rx", "Main.sh", NULL };
-	const char * CP_Y[] = { "python", "-c",
-			"import py_compile; py_compile.compile(r'Main.py')", NULL };
+	//const char * CP_Y[] = { "python", "-c",
+	//		"import py_compile; py_compile.compile(r'Main.py')", NULL };
 	const char * CP_PH[] = { "php", "-l", "Main.php", NULL };
 	const char * CP_PL[] = { "perl", "-c", "Main.pl", NULL };
 	const char * CP_CS[] = { "gmcs", "-warn:0", "Main.cs", NULL };

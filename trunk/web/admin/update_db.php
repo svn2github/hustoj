@@ -131,6 +131,11 @@ $csql[22]="";
 
 $tsql[23]="select judger from solution limit 1 ";
 $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
+
+$tsql[24]="whatever";
+$csql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0,";
+
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

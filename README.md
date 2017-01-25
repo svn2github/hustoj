@@ -13,6 +13,8 @@ HUSTOJ 是采用GPL的自由软件。
 使用本项目源码和freeproblemset题库请尊重程序员职业和劳动
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
+
+
 Ubuntu14.04快速安装指南：
 (16.04见https://github.com/zhblue/hustoj/tree/php7)
 

@@ -18,7 +18,7 @@
 	$result=mysqli_query($mysqli,$sql);//mysql_escape_string($sql));
 	if (!$result){
 		$view_news= "<h3>No News Now!</h3>";
-		$view_news.= mysqli_error();
+		$view_news.= mysqli_error($mysqli);
 	}else{
 		$view_news.= "<table width=96%>";
 		

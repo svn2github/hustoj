@@ -53,16 +53,16 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
 $sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-//$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+//$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 //$rows_cnt=mysqli_num_rows($result);
 if($OJ_MEMCACHE){
         require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
@@ -104,12 +104,12 @@ $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //$result=mysqli_query($mysqli,$sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
@@ -134,12 +134,12 @@ $sql="SELECT
 //$result=mysqli_query($mysqli,$sql);
 if($OJ_MEMCACHE){
    //     require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
+        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
         if($result) $rows_cnt=mysqli_num_rows($result);
         else $rows_cnt=0;
 }
@@ -186,12 +186,12 @@ $sql="select num,user_id from
         group by num";
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
-        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
+        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }else{
 
-        $fb = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error());
+        $fb = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
         if($fb) $rows_cnt=mysqli_num_rows($fb);
         else $rows_cnt=0;
 }

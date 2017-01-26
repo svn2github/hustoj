@@ -72,14 +72,14 @@ global $mysqli;
 	}else{
 		//for normal install
 		if(($mysqli=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS))==null) 
-			die('Could not connect: ' . mysqli_error());
+			die('Could not connect: ' . mysqli_error($mysqli));
 	}
 	// use db
 	mysqli_query($mysqli,"set names utf8");
   //if(!$OJ_SAE)mysqli_set_charset("utf8");
 	
 	if(!mysqli_select_db($mysqli,$DB_NAME))
-		die('Can\'t use foo : ' . mysqli_error());
+		die('Can\'t use foo : ' . mysqli_error($mysqli));
 		
 	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
 		 require_once('csrf_check.php');

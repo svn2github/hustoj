@@ -3,8 +3,8 @@
 	$tid=intval($_REQUEST['tid']);
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".$tid."' AND `status` <= 1";
-	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error());
-	$rows_cnt = mysqli_num_rows($result) or die("Error! ".mysqli_error());
+	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
+	$rows_cnt = mysqli_num_rows($result) or die("Error! ".mysqli_error($mysqli));
 	$row= mysqli_fetch_object($result);
 	$isadmin = isset($_SESSION['administrator']);
 ?>
@@ -29,7 +29,7 @@
 
 <?php
 	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".$tid."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
-	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error());
+	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
 	$rows_cnt = mysqli_num_rows($result);
 	$cnt=0;
 

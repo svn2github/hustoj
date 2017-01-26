@@ -97,7 +97,7 @@ $_SESSION['user_id']=$user_id;
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
 		//echo $sql."<br />";
 		$result=mysqli_query($mysqli,$sql);
-		echo mysqli_error();
+		echo mysqli_error($mysqli);
 		while ($row=mysqli_fetch_assoc($result)){
 			$_SESSION[$row['rightstr']]=true;
 			//echo $_SESSION[$row['rightstr']]."<br />";

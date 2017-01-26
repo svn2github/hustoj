@@ -60,7 +60,7 @@ if (isset($_POST['id'])) {
 		mysqli_free_result($result);
 		if ($isprivate==1&&!isset($_SESSION['c'.$cid])){
 			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`='$user_id' AND `rightstr`='c$cid'";
-			$result=mysqli_query($mysqli,$sql) or die (mysqli_error()); 
+			$result=mysqli_query($mysqli,$sql) or die (mysqli_error($mysqli)); 
 			$row=mysqli_fetch_array($result);
 			$ccnt=intval($row[0]);
 			mysqli_free_result($result);

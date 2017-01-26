@@ -54,7 +54,7 @@ else
 $sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`reply`.`time`) DESC";
 $sql.=" LIMIT 30";
 //echo $sql;
-$result = mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error());
+$result = mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
 $rows_cnt = mysqli_num_rows($result);
 $cnt=0;
 $isadmin = isset($_SESSION['administrator']);

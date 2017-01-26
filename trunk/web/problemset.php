@@ -60,7 +60,7 @@ $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id'
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=@mysqli_query($mysqli,$sql) or die(mysqli_error());
+$result=@mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 while ($row=mysqli_fetch_array($result))
 	$acc_arr[$row[0]]=true;
 }
@@ -93,7 +93,7 @@ else{
 $sql.=" ORDER BY `problem_id`";
 
 
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 
 $view_total_page=$cnt+1;
 

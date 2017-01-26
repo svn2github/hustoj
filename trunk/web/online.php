@@ -32,7 +32,7 @@ if (isset($_SESSION['administrator'])){
 				$sql=$sql." where user_id<>'".$_SESSION['user_id']."' ";
 			$sql=$sql."  order by `time` desc LIMIT 0,50";
 
-		$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+		$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 		$i=0;
 	
 		for (;$row=mysqli_fetch_row($result);){

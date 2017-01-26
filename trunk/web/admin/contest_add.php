@@ -45,7 +45,7 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
         $sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
                 VALUES('$title','$starttime','$endtime','$private',$langmask,'$description','$password')";
 	echo $sql;
-	mysqli_query($mysqli,$sql) or die(mysqli_error());
+	mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 	$cid=mysqli_insert_id($mysqli);
 	echo "Add Contest ".$cid;
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
@@ -58,9 +58,9 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		}
 		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error());
+		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysqli_query($mysqli,$sql) or die(mysqli_error());
+		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 	}
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
 	mysqli_query($mysqli,$sql);
@@ -74,7 +74,7 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
 		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error());
+		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
 	}
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
 }
@@ -89,7 +89,7 @@ else{
 		   mysqli_free_result($result);
 			$plist="";
 			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-			$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+			$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 			for ($i=mysqli_num_rows($result);$i>0;$i--){
 				$row=mysqli_fetch_row($result);
 				$plist=$plist.$row[0];
@@ -113,7 +113,7 @@ else if(isset($_POST['problem2contest'])){
 		 
 			$plist="";
 			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=$spid ";
-			$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+			$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 			for ($i=mysqli_num_rows($result);$i>0;$i--){
 				$row=mysqli_fetch_row($result);
 				$plist=$plist.$row[0];

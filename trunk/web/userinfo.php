@@ -50,7 +50,7 @@ $Rank=intval($row[0])+1;
 
  if (isset($_SESSION['administrator'])){
 $sql="SELECT * FROM `loginlog` WHERE `user_id`='$user_mysql' order by `time` desc LIMIT 0,10";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 $view_userinfo=array();
 $i=0;
 for (;$row=mysqli_fetch_row($result);){

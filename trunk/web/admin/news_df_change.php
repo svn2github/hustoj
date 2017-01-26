@@ -14,7 +14,7 @@ echo $defunct;
 mysqli_free_result($result);
 if ($defunct=='Y') $sql="update `news` set `defunct`='N' where `news_id`=$id";
 else $sql="update `news` set `defunct`='Y' where `news_id`=$id";
-mysqli_query($mysqli,$sql) or die(mysqli_error());
+mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 ?>
 <script language=javascript>
 	history.go(-1);

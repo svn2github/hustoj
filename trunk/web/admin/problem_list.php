@@ -48,7 +48,7 @@ echo "</select>";
 $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
 //echo $sql;
 if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error());
+$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 ?>
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 

@@ -181,14 +181,14 @@ if (! isset ( $_SESSION ['administrator'] )) {
 if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
 	require_once("../include/check_post_key.php");
-   	$in=mysqli_real_escape_string ( $_POST ['in'] );
+   	$in=mysqli_real_escape_string ($mysqli, $_POST ['in'] );
    	$sql = "select * from problem where problem_id in($in)";
    	  $filename="-$in";
    }else if (isset($_GET['cid'])){
 	  require_once("../include/check_get_key.php");
 	  $cid=intval( $_GET['cid'] );
       $sql= "select title from contest where contest_id='$cid'";
-      $result = mysqli_query($mysqli, $sql ) or die ( mysqli_error () );
+      $result = mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
       $row = mysqli_fetch_object ( $result );
       $filename='-'.$row->title;
       mysqli_free_result ( $result );
@@ -204,7 +204,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 
 	
 	//echo $sql;
-	$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error () );
+	$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
 	
 	if (isset($_POST ['submit'])&&$_POST ['submit'] == "Export")
 		header ( 'Content-Type:   text/xml' );

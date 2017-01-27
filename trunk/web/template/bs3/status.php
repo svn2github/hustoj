@@ -243,13 +243,14 @@ $(".http_judge_form").submit(function (){
 	})
    return false;
 });
+auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
    $(this).children(".http_judge_form").show(600);
 });
 $(".http_judge_form").hide();
 
-auto_refresh();
+
 </script>
   </body>
 </html>

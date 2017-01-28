@@ -155,7 +155,19 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
-<script src="template/<?php echo $OJ_TEMPLATE?>/js.php" type="text/javascript">
-</script>
+	<script>var i=0;
+		var judge_result=[<?php
+		foreach($judge_result as $result){
+		echo "'$result',";
+		}
+		?>''];
+
+		var judge_color=[<?php
+		 foreach($judge_color as $result){
+		 echo "'$result',";
+		 }
+		?>''];
+	</script>
+	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js" ></script>
   </body>
 </html>

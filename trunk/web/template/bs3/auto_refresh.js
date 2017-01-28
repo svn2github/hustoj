@@ -8,7 +8,7 @@ function auto_refresh(){
 		var cell=rows[i].cells[3].children[0].innerHTML;
 		rows[i].cells[3].className="td_result";
 		var sid=rows[i].cells[0].innerHTML;
-	        for(var j=0;i<5&&j<4;j++){
+	        for(var j=0;j<4;j++){
 			if(cell.indexOf(judge_result[j])!=-1){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");

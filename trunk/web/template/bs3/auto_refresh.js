@@ -4,7 +4,7 @@ function auto_refresh(){
 	interval=800;
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
-	for(var i=1;i<rows.length;i++){
+	for(var i=rows.length-1;i>0;i--){
 		var cell=rows[i].cells[3].children[0].innerHTML;
 		rows[i].cells[3].className="td_result";
 		var sid=rows[i].cells[0].innerHTML;

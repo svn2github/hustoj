@@ -1,15 +1,4 @@
 var i=0;
-var judge_result=[<?php
-foreach($judge_result as $result){
-echo "'$result',";
-}
-?>''];
-
-var judge_color=[<?php
- foreach($judge_color as $result){
- echo "'$result',";
- }
-?>''];
 var interval=800;
 function auto_refresh(){
 	interval=800;

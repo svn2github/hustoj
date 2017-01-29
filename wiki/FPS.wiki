@@ -27,4 +27,4 @@ For now it's designed for hustoj (on googlecode),but it should be usable for oth
 
 https://github.com/zhblue/freeproblemset/
 
-* 官方群共享中有大量fps格式的题库，可以直接导入hustoj系统使用。
+* 官方群23361372群共享中有大量fps格式的题库，可以直接导入hustoj系统使用。

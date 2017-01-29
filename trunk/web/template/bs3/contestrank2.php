@@ -48,7 +48,7 @@ $usolved=$U[$i]->solved;
 if(isset($_GET['user_id'])&&$uuid==$_GET['user_id']) echo "<td bgcolor=#ffff77>";
 else echo"<td>";
 echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";
-echo "<td><a href=userinfo.php?user=$uuid>".htmlentities($U[$i]->nick,ENT_QUOTES,"UTF-8")."</a>";
+echo "<td><a href=userinfo.php?user=$uuid>".$U[$i]->nick."</a>";
 echo "<td><a href=status.php?user_id=$uuid&cid=$cid>$usolved</a>";
 echo "<td>".sec2str($U[$i]->time);
 for ($j=0;$j<$pid_cnt;$j++){
@@ -93,39 +93,37 @@ echo "</tbody></table>";
 <script type="text/javascript">
 $(document).ready(function()
 {
-		$.tablesorter.addParser({
-		// set a unique id
-		id: 'punish',
-		is: function(s) {
-		// return false so this parser is not auto detected
-		return false;
-		},
-		format: function(s) {
-		// format your data for normalization
-		var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,'');
-		//alert(v);
-		v=parseFloat('0'+v);
-		return v>1?v:v+Number.MAX_VALUE-1;
-		},
-		// set type, either numeric or text
-		type: 'numeric'
-		});
-		$("#rank").tablesorter({
-		headers: {
-		4: {
-		sorter:'punish'
-		}
-		<?php
-		for ($i=0;$i<$pid_cnt;$i++){
-		echo ",".($i+5).": { ";
-		echo " sorter:'punish' ";
-		echo "}";
-		}
-		?>
-		}
-		});
-	metal();
-	replay();
+$.tablesorter.addParser({
+// set a unique id
+id: 'punish',
+is: function(s) {
+// return false so this parser is not auto detected
+return false;
+},
+format: function(s) {
+// format your data for normalization
+var v=s.toLowerCase().replace(/\:/,'').replace(/\:/,'').replace(/\(-/,'.').replace(/\)/,'');
+//alert(v);
+v=parseFloat('0'+v);
+return v>1?v:v+Number.MAX_VALUE-1;
+},
+// set type, either numeric or text
+type: 'numeric'
+});
+$("#rank").tablesorter({
+headers: {
+4: {
+sorter:'punish'
+}
+<?php
+for ($i=0;$i<$pid_cnt;$i++){
+echo ",".($i+5).": { ";
+echo " sorter:'punish' ";
+echo "}";
+}
+?>
+}
+});
 }
 );
 </script>
@@ -181,7 +179,8 @@ function metal(){
      alert(e);
   }
 }
-
+metal();
+replay();
 <?php if (isset($solution_json)) echo "var solutions=$solution_json;"?>
 var replay_index=0;
 function replay(){
@@ -195,19 +194,22 @@ function add(){
   var row=findrow(tab,solution);
   if(row==null)
 	tab.append(newrow(tab,solution));
-  else
-	update(tab,row,solution);
+  row=findrow(tab,solution);
+  update(tab,row,solution);
   replay_index++;
   sort(tab[0].rows);
   metal();
-  window.setTimeout("add()",500);
+  window.setTimeout("add()",5);
 }
 function sec2str(sec){
    var ret="";
+   if(sec<36000) ret="0" ;
    ret+=parseInt(sec/3600);
    ret+=":";
+   if(sec%3600/60<10) ret+="0" ;
    ret+=parseInt(sec%3600/60);
    ret+=":";
+   if(sec%60<10) ret+="0";
    ret+=parseInt(sec%60);
    return ret;
 }
@@ -218,14 +220,27 @@ function str2sec(str){
    var s=parseInt(s[2]);
    return h*3600+m*60+s;
 }
+function colorful(td,ac,num){
+  if(num<0) num=-num;else num=0;
+  num*=10
+  if(num>255) num=255;
+  if(ac&&num>200) num=200;
+  var rb=ac?num:255-num;
+  if(ac){
+//	td.className="well green";
+	td.style="background-color: rgb("+rb+",255,"+rb+");";
+  }else{
+	td.style="background-color: rgb(255,"+rb+","+rb+");";
+  }
+}
 function update(tab,row,solution){
  var col=parseInt(solution["num"])+5;
  var old=row.cells[col].innerHTML;
  var time=0;
  if(old!="") time=parseInt(old);
- if(row.cells[col].className=="well green") return;
+ if(!(old.charAt(0)=='-'||old=='')) return;
  if(parseInt(solution["result"])==4){
- 	if(row.cells[col].className!="well green") {
+ 	if(old.charAt(0)=='-'||old=='') {
 		var pt=time;
 		time= parseInt(solution["in_date"])-time*1200;
 
@@ -235,21 +250,26 @@ function update(tab,row,solution){
  		row.cells[col].innerHTML=sec2str( parseInt(solution["in_date"]));
 		if(pt!=0)
 	 		row.cells[col].innerHTML+="("+pt+")";
+ 		colorful(row.cells[col],true,pt);
+	}else{
+		if(row.cells[col].className=="well green");
 	}
+	row.cells[3].innerHTML=parseInt(row.cells[3].innerHTML)+1;
  }else{
         	time--;
  		row.cells[col].innerHTML=time;
+ 	colorful(row.cells[col],false,time);
  }
- 
+ /*
  if(parseInt(solution["result"])==4){
  	if(row.cells[col].className!="well green"){
-		row.cells[3].innerHTML=parseInt(row.cells[3].innerHTML)+1;
 	}
 	row.cells[col].className="well green";
  }else{
  	if(row.cells[col].className!="well green") 
 		row.cells[col].className="well red";
  }
+*/
 }
 function sort(rows){
    for(var i=1;i<rows.length;i++){
@@ -282,7 +302,7 @@ function cmp(a,b){
 	return true;
    
    if(parseInt(a.cells[3].innerHTML)==parseInt(b.cells[3].innerHTML))
-	return parseInt(a.cells[4].innerHTML)<parseInt(b.cells[4].innerHTML);
+	return str2sec(a.cells[4].innerHTML)<str2sec(b.cells[4].innerHTML);
 }
  function trim(str){ //删除左右两端的空格
 　　     return str.replace(/(^\s*)|(\s*$)/g, "");

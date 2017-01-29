@@ -119,8 +119,8 @@ static int use_ptrace = 1;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[17][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
-		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js" };
+static char lang_ext[18][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
+		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js","go" };
 //static char buf[BUFFER_SIZE];
 int data_list_has(char * file){
    for(int i=0;i<data_list_len;i++){
@@ -234,9 +234,12 @@ void init_syscalls_limits(int lang) {
 	} else if (lang == 15) { //lua
 		for (i = 0; i==0||LANG_LUAV[i]; i++)
 			call_counter[LANG_LUAV[i]] = HOJ_MAX_LIMIT;
-	} else if (lang == 16) { //JS24
+	} else if (lang == 16) { //nodejs
 		for (i = 0; i==0||LANG_JSV[i]; i++)
 			call_counter[LANG_JSV[i]] = HOJ_MAX_LIMIT;
+	} else if (lang == 17) { //go
+		for (i = 0; i==0||LANG_GOV[i]; i++)
+			call_counter[LANG_GOV[i]] = HOJ_MAX_LIMIT;
 	}
 
 }
@@ -882,6 +885,7 @@ int compile(int lang,char * work_dir) {
 	         		"-lm", "--static", "-std=c++0x",  "-DONLINE_JUDGE", NULL };
 	const char * CP_LUA[] = { "luac","-o","Main", "Main.lua", NULL };
 	//const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
+	const char * CP_GO[] = { "go","build","-o","Main","Main.go", NULL };
 
 	char javac_buf[7][32];
 	char *CP_J[7];
@@ -922,8 +926,8 @@ int compile(int lang,char * work_dir) {
 		} else {
 			freopen("ce.txt", "w", stdout);
 		}
+		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 		execute_cmd("chown judge *");
-		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp ");
                 execute_cmd("mount -o bind /bin bin");
                 execute_cmd("mount -o bind /usr usr");
                 execute_cmd("mount -o bind /lib lib");
@@ -932,6 +936,7 @@ int compile(int lang,char * work_dir) {
 #endif
                 execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 execute_cmd("mount -o bind /proc proc");
+                execute_cmd("mount -o bind /dev dev");
                 
                 if (lang != 3 && lang != 9 && lang != 6)
                         chroot(work_dir);
@@ -990,6 +995,9 @@ int compile(int lang,char * work_dir) {
 		//case 16:
 		//	execvp(CP_JS[0], (char * const *) CP_JS);
 		//	break;
+		case 17:
+			execvp(CP_GO[0], (char * const *) CP_GO);
+			break;
 		default:
 			printf("nothing to do!\n");
 		}
@@ -1005,8 +1013,8 @@ int compile(int lang,char * work_dir) {
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
-		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc");
- 		execute_cmd("/bin/umount *");
+		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
+ 		execute_cmd("/bin/umount %s/*",work_dir);
  
 		return status;
 	}
@@ -1577,15 +1585,14 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	switch (lang) {
 	case 3:  //java
 	case 4:  //ruby
-	case 16:
+	case 9: //C#
 	case 12:
+	case 16:
+	case 17:
 		LIM.rlim_cur = LIM.rlim_max = 50;
 		break;
 	case 5: //bash
 		LIM.rlim_cur = LIM.rlim_max = 3;
-		break;
-	case 9: //C#
-		LIM.rlim_cur = LIM.rlim_max = 50;
 		break;
 	default:
 		LIM.rlim_cur = LIM.rlim_max = 1;
@@ -1611,6 +1618,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 11:
 	case 13:
 	case 14:
+	case 17:
 		execl("./Main", "./Main", (char *) NULL);
 		break;
 	case 3:

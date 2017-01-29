@@ -161,7 +161,7 @@ void init_mysql_conf() {
 	sleep_time = 1;
 	oj_tot = 1;
 	oj_mod = 0;
-	strcpy(oj_lang_set, "0,1,2,3,4,5,6,7,8,9,10");
+	strcpy(oj_lang_set, "0,1,2,3");
 	fp = fopen("./etc/judge.conf", "r");
 	if (fp != NULL) {
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {

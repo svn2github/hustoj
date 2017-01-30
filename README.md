@@ -32,9 +32,9 @@ Ubuntu14.04快速安装指南：
 
 Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php  
 
-Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows进行安装  
+Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows（仅支持XP）进行安装见qq群23361372共享文件。
 
-livecd下载: http://pan.baidu.com/s/1o78D4x0  无vjudge，含vjudge版见qq群23361372共享文件。
+LiveCD下载: http://pan.baidu.com/s/1o78D4x0  无vjudge，含vjudge版见qq群23361372共享文件。
 
 使用说明见iso中README,也可以参考wiki页  
 https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md   

@@ -67,7 +67,7 @@ Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contes
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
 Language:
-<select id="language" name="language" onchange="reloadtemplate(this);" >
+<select id="language" name="language" onChange="reloadtemplate(this);" >
 <?php
 $lang_count=count($language_ext);
 if(isset($_GET['langmask']))
@@ -236,7 +236,7 @@ function reloadtemplate(lang){
    var url=window.location.href;
    var i=url.indexOf("sid=");
    if(i!=-1) url=url.substring(0,i-1);
-   if(confirm("Do you want to reload template?\n You may lost all code that you've typed here!"))
+   if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
         document.location.href=url;
 }
 

@@ -15,42 +15,33 @@ HUSTOJ 是采用GPL的自由软件。
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
 
-Ubuntu14.04快速安装指南：
-(16.04见https://github.com/zhblue/hustoj/tree/php7)
+Ubuntu14.04快速安装指南：  
+(16.04见https://github.com/zhblue/hustoj/tree/php7)  
 
-    1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)
-    2、执行如下命令
-        sudo apt-get update
-        sudo apt-get install subversion
-        sudo svn co https://github.com/zhblue/hustoj/trunk/trunk/install hustoj
-        cd hustoj
-        sudo bash install-interactive.sh
-    3、安装后访问服务器80端口上的web服务JudgeOnline目录
-        例如 w3m http://127.0.0.1/JudgeOnline
+    1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)  
+    2、执行如下命令  
+        sudo apt-get update  
+        sudo apt-get install subversion  
+        sudo svn co https://github.com/zhblue/hustoj/trunk/trunk/install hustoj  
+        cd hustoj  
+        sudo bash install-interactive.sh  
+    3、安装后访问服务器80端口上的web服务JudgeOnline目录  
+        例如 w3m http://127.0.0.1/JudgeOnline  
         
-使用上需要帮助，请访问用户论坛 或 购买在线服务。
+使用上需要帮助，请访问用户论坛 或 购买在线服务。  
 
-Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php
+Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php  
 
-Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows进行安装
+Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows进行安装  
 
-livecd下载: 
+livecd下载: http://pan.baidu.com/s/1o78D4x0  无vjudge，含vjudge版见qq群23361372共享文件。
 
-http://pan.baidu.com/s/1o78D4x0  无vjudge，含vjudge版见qq群23361372共享文件。
+使用说明见iso中README,也可以参考wiki页  
+https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md   
 
+用户交流qq群23361372，仅限QQ手机加群，费用5元。  
 
-
-使用说明见iso中README,也可以参考wiki页
-https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md
-
-
-用户交流qq群23361372,验证信息freeproblemset； 缺少Linux知识的请加高级服务收费群http://t.cn/SyNZhV
-
-或者使用GoogleGroups?(需要某种特殊程序) nonChina users forum : http://groups.google.com/group/hustoj
-
-提供hustoj判题服务的虚拟主机，只需10元每月。
-
-Any Question check wiki first.有问题请先查阅Wiki或使用搜索。
+Any Question check wiki first.有问题请先查阅Wiki或使用搜索。  
 
 目前维护者 newsclan@gmail.com http://blog.csdn.net/zhblue/
 最新更新
@@ -70,7 +61,7 @@ Any Question check wiki first.有问题请先查阅Wiki或使用搜索。
     附加代码模式：可以给指定语言的提交指定附加代码，用于要求学生编写指定函数、类供附加代码调用。
     OiMode 支持OI模式，显示测试数据通过率
     memcached/file cache all pages
-    http判题端，移植到新浪云http://hustoj.sinaapp.com/
+    http判题端，移植到新浪云http://hustoj.sinaapp.com/ （因新浪云停止发放云豆，现已下线）
     分时段排名 日周月年
     status防刷缓存
     简单内部邮件系统
@@ -81,7 +72,7 @@ Any Question check wiki first.有问题请先查阅Wiki或使用搜索。
     比赛队帐号批量生成工具
     首页新闻编辑管理
     系统级语言掩码，可系统级屏蔽答题语言。
-    Ruby、Bash、Python、Perl、C#、PHP 答题功能测试中 http://hustoj.sinaapp.com/
+    Ruby、Bash、Python、Perl、C#、PHP 答题功能测试中 http://hustoj.com/oj
     多语言 MultiLanguage? 한국어 中文 فارسی English ไทย 
 
 HUSTOJ特性
@@ -111,10 +102,6 @@ Who Used the System
 发源地：
 
     华中科技大学 上线时间 2008年5月14日 
-
-LiveCD iso 下载 https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md
-
-需要邮寄LiveCD光盘可以访问 淘宝链接，高校教师购买可享受8折优惠。 
 
 
 --------请人类浏览者忽略以下信息--------

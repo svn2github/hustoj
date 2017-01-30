@@ -28,18 +28,17 @@ Ubuntu14.04快速安装指南：
     3、安装后访问服务器80端口上的web服务JudgeOnline目录  
         例如 w3m http://127.0.0.1/JudgeOnline  
         
-使用上需要帮助，请访问用户论坛 或 购买在线服务。  
+使用上需要帮助，请访问用户论坛 或 购买在线服务hustoj.taobao.com。  
 
-Linux新手请看鸟哥的私房菜http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php  
+Linux新手请看[鸟哥的私房菜](http://vbird.dic.ksu.edu.tw/linux_basic/linux_basic.php)
 
-Linux不熟悉的用户推荐使用HUSTOJ_LiveCD或HUSTOJ_Windows（仅支持XP）进行安装见qq群23361372共享文件。
-
-LiveCD下载: http://pan.baidu.com/s/1o78D4x0  无vjudge，含vjudge版见qq群23361372共享文件。
+Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](http://pan.baidu.com/s/1o78D4x0)
+或HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 
 使用说明见iso中README,也可以参考wiki页  
 https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md   
 
-用户交流qq群23361372，仅限QQ手机加群，费用5元。  
+用户交流QQ群23361372，仅限QQ手机加群，费用5元。  
 
 有问题请先查阅Wiki https://github.com/zhblue/hustoj/tree/master/wiki 或使用搜索引擎。  
 

@@ -6,7 +6,7 @@ if(!isset($OJ_LANG)){
 	$OJ_LANG="en";
 }
 require_once("../lang/$OJ_LANG.php");
-require("../include/const.inc.php");
+require_once("../include/const.inc.php");
 function fixcdata($content){
     return str_replace("]]>","]]]]><![CDATA[>",$content);
 }
@@ -219,8 +219,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
   
 	?>
    
-<fps version="1.1" url="http://code.google.com/p/freeproblemset/">
-	<generator name="HUSTOJ" url="http://code.google.com/p/hustoj/"/>
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
+	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
 	<?php
 	while ( $row = mysqli_fetch_object ( $result ) ) {
 		
@@ -247,20 +247,20 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <hint><![CDATA[<?php echo $row->hint?>]]></hint>
 <source><![CDATA[<?php echo fixcdata($row->source)?>]]></source>
 <?php
-require("../include/const.inc.php");
-for ($lang=0;$lang<count($language_name);$lang++){
+$pid=$row->problem_id;
+for ($lang=0;$lang<count($language_ext);$lang++){
 
-	$solution=getSolution($row->problem_id,$lang);
+	$solution=getSolution($pid,$lang);
 	if ($solution->language){?>
 		<solution language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata($solution->source_code)?>]]></solution>
 	<?php 
 	}
 	$pta=array("prepend","template","append");
 	foreach($pta as $pta_file){
-		$append_file="$OJ_DATA/$row->problem_id/$pta_file.".$language_ext[$lang];
-//		echo "<$append_file/>";
+		$append_file="$OJ_DATA/$pid/$pta_file.".$language_ext[$lang];
+//		echo "<filename value=\"$lang  $append_file $language_ext[$lang]\"/>";
 		if (file_exists($append_file)){?>
-			<<?php echo $pta_file?> language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata(file_get_contents($append_file))?>]]></<?php echo $pta_file?>>
+			<<?php echo $pta_file?> language="<?php echo $language_name[$lang]?>"><![CDATA[<?php echo fixcdata(file_get_contents($append_file))?>]]></<?php echo $pta_file?>>
 		<?php 
 		}
 	}

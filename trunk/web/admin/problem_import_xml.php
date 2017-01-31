@@ -4,6 +4,10 @@ if (!(isset($_SESSION['administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
+if(isset($OJ_LANG)){
+		require_once("../lang/$OJ_LANG.php");
+	}	
+	require_once ("../include/const.inc.php");
 ?>
 <?php function image_save_file($filepath ,$base64_encoded_img){
 	$fp=fopen($filepath ,"wb");
@@ -11,25 +15,26 @@ if (!(isset($_SESSION['administrator']))){
 	fclose($fp);
 }
 require_once ("../include/problem.php");
-require ("../include/db_info.inc.php");
-
-function submitSolution($pid,$solution,$language)
-{
-	$mysqli=$GLOBALS['mysqli'];
-	if(isset($OJ_LANG)){
-		require("../lang/$OJ_LANG.php");
-	}	
-	require ("../include/const.inc.php");
-
+require_once ("../include/db_info.inc.php");
+function getLang($language){
+	$language_name=$GLOBALS['language_name'];
+	
 	for($i=0;$i<count($language_name);$i++){
 		//echo "$language=$language_name[$i]=".($language==$language_name[$i]);
 		if($language==$language_name[$i]){
-			$language=$i;
+			//$language=$i;
 			//echo $language;
-			break;
+			return $i;
 		}
-		
 	}
+	return $i;
+}
+function submitSolution($pid,$solution,$language)
+{
+	$mysqli=$GLOBALS['mysqli'];
+	
+	$language=getLang($language);
+	
 	
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
@@ -66,6 +71,18 @@ function hasProblem($title){
 	//echo "row->$rows_cnt";			
 	return  ($rows_cnt>0);
 
+}
+function mkpta($pid,$prepends,$node){
+	$language_ext=$GLOBALS['language_ext'];
+        $OJ_DATA=$GLOBALS['OJ_DATA'];	
+	foreach($prepends as $prepend) {
+		$language =$prepend->attributes()->language;
+		$lang=getLang($language);
+		$file_ext=$language_ext[$lang];
+		$basedir = "$OJ_DATA/$pid";
+		$file_name="$basedir/$node.$file_ext";
+		file_put_contents($file_name,$prepend);
+	}
 }
 
 if ($_FILES ["fps"] ["error"] > 0) {
@@ -107,7 +124,6 @@ if ($_FILES ["fps"] ["error"] > 0) {
 		$hint = getValue ( $searchNode, 'hint' );
 		$source = getValue ( $searchNode, 'source' );
 		
-		$solutions = $searchNode->children()->solution;
 		
 		$spjcode = getValue ( $searchNode, 'spj' );
 		$spj = trim($spjcode)?1:0;
@@ -126,12 +142,14 @@ if ($_FILES ["fps"] ["error"] > 0) {
 					//if($testNode->nodeValue)
 					mkdata($pid,"test".$testno++.".in",$testNode,$OJ_DATA);
 				}
+				unset($testinputs);
 				$testinputs=$searchNode->children()->test_output;
 				$testno=0;
 				foreach($testinputs as $testNode){
 					//if($testNode->nodeValue)
 					mkdata($pid,"test".$testno++.".out",$testNode,$OJ_DATA);
 				}
+				unset($testinputs);
        // }
 			$images=($searchNode->children()->img);
 			$did=array();
@@ -194,18 +212,28 @@ if ($_FILES ["fps"] ["error"] > 0) {
 					}
 				}
 			}
+			
+			$solutions = $searchNode->children()->solution;
 			foreach($solutions as $solution) {
 				$language =$solution->attributes()->language;
 				submitSolution($pid,$solution,$language);
-			
 			}
+			unset($solutions);
+			$prepends = $searchNode->children()->prepend;
+			mkpta($pid,$prepends,"prepend");
+			$prepends = $searchNode->children()->template;
+			mkpta($pid,$prepends,"template");
+			$prepends = $searchNode->children()->append;
+			mkpta($pid,$prepends,"append");
+			
+			
 		}else{
 			echo "<br><span class=red>$title is already in this OJ</span>";		
 		}
 		
 	}
 	unlink ( $tempfile );
-	if($OJ_REDIS){
+	if(isset($OJ_REDIS)&&$OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
                 $sql="select solution_id from solution where result=0 and problem_id>0";
@@ -224,3 +252,4 @@ if ($_FILES ["fps"] ["error"] > 0) {
 }
 
 ?>
+

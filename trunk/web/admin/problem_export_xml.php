@@ -2,8 +2,13 @@
 @session_start ();
 require_once ("../include/db_info.inc.php");
 
-if(isset($OJ_LANG)){
-		require_once("../lang/$OJ_LANG.php");
+if(!isset($OJ_LANG)){
+	$OJ_LANG="en";
+}
+require_once("../lang/$OJ_LANG.php");
+require("../include/const.inc.php");
+function fixcdata($content){
+    return str_replace("]]>","]]]]><![CDATA[>",$content);
 }
 function getTestFileIn($pid, $testfile,$OJ_DATA) {
 	if ($testfile != "")
@@ -37,9 +42,9 @@ if(strstr($OJ_DATA,"saestor:"))     {
 			$outfile="$pid/" . $f . ".out";
 			$infile="$pid/" . $f . ".in";
 			if( $store->fileExists ("data",$infile)){
-				echo "<test_input><![CDATA[".$store->read ("data",$infile)."]]></test_input>\n";
+				echo "<test_input><![CDATA[".fixcdata($store->read ("data",$infile))."]]></test_input>\n";
 			}if($store->fileExists ("data",$outfile)){
-				echo "<test_output><![CDATA[".$store->read ("data",$outfile)."]]></test_output>\n";
+				echo "<test_output><![CDATA[".fixcdata($store->read ("data",$outfile))."]]></test_output>\n";
 			}
 //			break;
 		}
@@ -65,9 +70,9 @@ if(strstr($OJ_DATA,"saestor:"))     {
 			$outfile="$OJ_DATA/$pid/" . $ret . ".out";
 			$infile="$OJ_DATA/$pid/" . $ret . ".in";
 			if(file_exists($infile)){
-				echo "<test_input><![CDATA[".file_get_contents ($infile)."]]></test_input>\n";
+				echo "<test_input><![CDATA[".fixcdata(file_get_contents ($infile))."]]></test_input>\n";
 			}if(file_exists($outfile)){
-				echo "<test_output><![CDATA[".file_get_contents ($outfile)."]]></test_output>\n";
+				echo "<test_output><![CDATA[".fixcdata(file_get_contents ($outfile))."]]></test_output>\n";
 			}
 //			break;
 		}
@@ -83,9 +88,9 @@ class Solution{
 function getSolution($pid,$lang){
 	$ret=new Solution();
 	$mysqli=$GLOBALS['mysqli'];
-	require("../include/const.inc.php");
-         $con=false;
-	if($OJ_SAE)     {
+	$language_name=$GLOBALS['language_name'];
+        $con=false;
+	if(isset($OJ_SAE)&&$OJ_SAE)     {
                 $OJ_DATA="saestor://data/";
         //  for sae.sina.com.cn
                $con= mysqli_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
@@ -148,9 +153,7 @@ function getImages($content){
     preg_match_all("<[iI][mM][gG][^<>]+[sS][rR][cC]=\"?([^ \"\>]+)/?>",$content,$images);
     return $images;
 }
-function fixcdata($content){
-    return str_replace("]]>","]]]]><![CDATA[>",$content);
-}
+
 function fixImageURL(&$html,&$did){
    $images=getImages($html);
    $imgs=array_unique($images[1]);
@@ -249,10 +252,18 @@ for ($lang=0;$lang<count($language_name);$lang++){
 
 	$solution=getSolution($row->problem_id,$lang);
 	if ($solution->language){?>
-	<solution language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata($solution->source_code)?>]]></solution>
-	<?php }
-
-
+		<solution language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata($solution->source_code)?>]]></solution>
+	<?php 
+	}
+	$pta=array("prepend","template","append");
+	foreach($pta as $pta_file){
+		$append_file="$OJ_DATA/$row->problem_id/$pta_file.".$language_ext[$lang];
+//		echo "<$append_file/>";
+		if (file_exists($append_file)){?>
+			<<?php echo $pta_file?> language="<?php echo $solution->language?>"><![CDATA[<?php echo fixcdata(file_get_contents($append_file))?>]]></<?php echo $pta_file?>>
+		<?php 
+		}
+	}
 }
 ?>
 <?php
@@ -280,3 +291,4 @@ for ($lang=0;$lang<count($language_name);$lang++){
 
 }
 ?>
+

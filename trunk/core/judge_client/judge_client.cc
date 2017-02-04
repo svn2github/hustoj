@@ -926,21 +926,20 @@ int compile(int lang,char * work_dir) {
 		} else {
 			freopen("ce.txt", "w", stdout);
 		}
-		execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
-		execute_cmd("chown judge *");
-                execute_cmd("mount -o bind /bin bin");
-                execute_cmd("mount -o bind /usr usr");
-                execute_cmd("mount -o bind /lib lib");
+		if (lang != 3 && lang != 9 && lang != 6 && lang != 11){
+			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
+			execute_cmd("chown judge *");
+                	execute_cmd("mount -o bind /bin bin");
+                	execute_cmd("mount -o bind /usr usr");
+                	execute_cmd("mount -o bind /lib lib");
 #ifndef __i386
-                execute_cmd("mount -o bind /lib64 lib64");
+                	execute_cmd("mount -o bind /lib64 lib64");
 #endif
-                execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
-                execute_cmd("mount -o bind /proc proc");
-                execute_cmd("mount -o bind /dev dev");
-                
-                if (lang != 3 && lang != 9 && lang != 6)
+                	execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
+                	execute_cmd("mount -o bind /proc proc");
+                	execute_cmd("mount -o bind /dev dev");
                         chroot(work_dir);
- 
+		}
 		while(setgid(1536)!=0) sleep(1);
                 while(setuid(1536)!=0) sleep(1);
                 while(setresuid(1536, 1536, 1536)!=0) sleep(1);

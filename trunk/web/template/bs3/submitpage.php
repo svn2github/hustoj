@@ -66,7 +66,7 @@ Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contes
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
-Language:
+<span id="language_span">Language:
 <select id="language" name="language" onChange="reloadtemplate(this);" >
 <?php
 $lang_count=count($language_ext);
@@ -86,6 +86,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 ?>
 </select>
 <br>
+</span>
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
@@ -93,9 +94,13 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php echo $view_sample_output?>
 </textarea>
 <br>
-<input id=Submit class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
-<input id=TestRun class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
-<input type=reset class="btn btn-danger" >
+<input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
+<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
+<?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
+	<input type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
+	<input type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="color:white;background-color:rgb(90,164,139)">
+<div id="blockly" class="center">Blockly</div>
+<?php }?>
 </form>
 </center>
      </div>
@@ -157,8 +162,10 @@ tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
 tb.innerHTML+="Time:"+ra[2]+"ms";
 if(ra[0]<4)
 window.setTimeout("fresh_result("+solution_id+")",2000);
-else
-window.setTimeout("print_result("+solution_id+")",2000);
+else{
+	window.setTimeout("print_result("+solution_id+")",2000);
+	count=1;
+}
 }
 }
 xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
@@ -239,7 +246,30 @@ function reloadtemplate(lang){
    if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
         document.location.href=url;
 }
-
+function openBlockly(){
+   $("#frame_source").hide();
+   $("#TestRun").hide();
+   $("#language").val(6).hide();
+   $("#language_span").hide();
+   $("#EditAreaArroundInfos_source").hide();
+   $('#blockly').html('<iframe name=\'frmBlockly\' width=90% height=580 src=\'blockly/demos/code/index.html\'></iframe>'); 
+}
+function loadFromBlockly(){
+  var source=$("#source");
+  var editor=$(window.frames['frame_source'].document).find('textarea[id=textarea]');
+  var blockly=$(window.frames['frmBlockly'].document);
+  var tb=blockly.find('td[id=tab_python]');
+  var python=blockly.find('pre[id=content_python]');
+  tb.click();
+  blockly.find('td[id=tab_blocks]').click();
+  eAL.toggle("source");
+  source.val(python.text());
+  eAL.toggle("source");
+  $("#language").val(6);
+  do_test_run();
+  $("#frame_source").hide();
+}
 </script>
+
   </body>
 </html>

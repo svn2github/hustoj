@@ -134,5 +134,6 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_BBS_NOT_ALLOWED_FOR_EXAM="You can't use bbs during examing 。";
   $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="You can't use mail during examing 。";
   $MSG_LOAD_TEMPLATE_CONFIRM="Do you want to reload template?\\n You may lost all code that you've typed here!";
-  
-?>
+  $MSG_BLOCKLY_OPEN="Blockly"; 
+  $MSG_BLOCKLY_TEST="Blockly Test Run"; 
+ ?>

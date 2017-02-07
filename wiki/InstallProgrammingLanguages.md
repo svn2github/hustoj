@@ -42,6 +42,6 @@ sudo apt-get install libncurses5-dev
 
 finally you need to change $OJ_LANGMASK
 
-https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L17
+https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L21
 
 each bit is used for disabling certain language.

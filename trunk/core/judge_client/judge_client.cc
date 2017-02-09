@@ -1,4 +1,5 @@
 //
+#define IGNORE_ESOL
 // File:   main.cc
 // Author: sempr
 // refacted by zhblue
@@ -1582,13 +1583,15 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
 	switch (lang) {
+	case 17:  
+		LIM.rlim_cur = LIM.rlim_max = 280;
+		break;
 	case 3:  //java
 	case 4:  //ruby
 	case 9: //C#
 	case 12:
 	case 16:
-	case 17:
-		LIM.rlim_cur = LIM.rlim_max = 50;
+		LIM.rlim_cur = LIM.rlim_max = 80;
 		break;
 	case 5: //bash
 		LIM.rlim_cur = LIM.rlim_max = 3;

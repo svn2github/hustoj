@@ -863,7 +863,7 @@ int compile(int lang,char * work_dir) {
 	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
 			"-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
 	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
-			"-lm", "--static", "-std=c++0x", "-DONLINE_JUDGE", NULL };
+			"-lm", "--static", "-std=c++11 ", "-DONLINE_JUDGE", NULL };
 	const char * CP_P[] =
 			{ "fpc", "Main.pas","-Cs32000000","-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL };
 //      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };

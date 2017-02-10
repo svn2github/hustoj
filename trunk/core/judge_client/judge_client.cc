@@ -862,8 +862,8 @@ int compile(int lang,char * work_dir) {
 
 	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
 			"-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
-	const char * CP_X[] = { "g++", "Main.cc", "-o", "Main", "-fno-asm", "-Wall",
-			"-lm", "--static", "-std=c++0x ", "-DONLINE_JUDGE", NULL };
+	const char * CP_X[] = { "g++", "-fno-asm", "-Wall",
+			"-lm", "--static", "-std=c++11", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL };
 	const char * CP_P[] =
 			{ "fpc", "Main.pas","-Cs32000000","-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL };
 //      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
@@ -927,7 +927,7 @@ int compile(int lang,char * work_dir) {
 		} else {
 			freopen("ce.txt", "w", stdout);
 		}
-		if (lang != 3 && lang != 9 && lang != 6 && lang != 11){
+		if (lang!=1 && lang != 3 && lang != 9 && lang != 6 && lang != 11){
 			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 			execute_cmd("chown judge *");
                 	execute_cmd("mount -o bind /bin bin");
@@ -939,7 +939,7 @@ int compile(int lang,char * work_dir) {
                 	execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");
                 	execute_cmd("mount -o bind /dev dev");
-                        chroot(work_dir);
+                        //chroot(work_dir);
 		}
 		while(setgid(1536)!=0) sleep(1);
                 while(setuid(1536)!=0) sleep(1);

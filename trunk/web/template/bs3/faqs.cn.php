@@ -43,7 +43,7 @@
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ Main.cc -o Main  -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
+    <td><font color=blue>g++ -fno-asm -Wall -lm --static -std=c++11 -DONLINE_JUDGE -o Main Main.cc</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>

@@ -25,7 +25,11 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<center>ServerTime:<span id=nowdate></span>
+<center><form method=post action=contest.php >
+	<?php echo $MSG_SEARCH;?>
+	<input name=keyword type=text >
+	<input type=submit>
+</form>ServerTime:<span id=nowdate></span>
 <table class='table table-striped' width=90%>
 <thead>
 <tr class=toprow align=center><td width=10%>ID<td width=50%>Name<td width=30%>Status<td width=10%>Private<td>Creator</tr>

@@ -142,4 +142,6 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   
   $MSG_BLOCKLY_OPEN="可视化"; 
   $MSG_BLOCKLY_TEST="翻译运行"; 
+  $MSG_MY_SUBMISSIONS="我的提交"; 
+  $MSG_MY_CONTESTS="我的$MSG_CONTEST"; 
 ?>

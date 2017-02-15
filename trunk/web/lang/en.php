@@ -136,4 +136,7 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_LOAD_TEMPLATE_CONFIRM="Do you want to reload template?\\n You may lost all code that you've typed here!";
   $MSG_BLOCKLY_OPEN="Blockly"; 
   $MSG_BLOCKLY_TEST="Blockly Test Run"; 
+
+  $MSG_MY_SUBMISSIONS="My Submissions"; 
+  $MSG_MY_CONTESTS="My Contests"; 
  ?>

@@ -30,7 +30,9 @@ header("Pragma: no-cache");
 				$mail=checkmail();
 				if ($mail)
 					$profile.= "&nbsp;<i class=icon-envelope></i><li><a href=".$path_fix."mail.php>$mail</a></li>";
-        $profile.="&nbsp;<li><a href='".$path_fix."status.php?user_id=$sid'><span id=red>Recent</span></a></li>";
+        			$profile.="&nbsp;<li><a href='".$path_fix."contest.php?my'><span id=red>$MSG_CONTEST</span></a></li>";
+        			$profile.="&nbsp;<li><a href='".$path_fix."status.php?user_id=$sid'><span id=red>Recent</span></a></li>";
+                                
                                 
 				$profile.= "&nbsp;<li><a href=".$path_fix."logout.php>$MSG_LOGOUT</a></li>&nbsp;";
 			}else{

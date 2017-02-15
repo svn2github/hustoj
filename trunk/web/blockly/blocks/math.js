@@ -368,6 +368,36 @@ Blockly.Blocks['math_round'] = {
     });
   }
 };
+Blockly.Blocks['math_to_number'] = {
+  /**
+   * Block for rounding functions.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 %2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "OP",
+          "options": [
+            [Blockly.Msg.MATH_ROUND_OPERATOR_FLOAT, 'FLOAT'],
+            [Blockly.Msg.MATH_ROUND_OPERATOR_INT, 'INT'],
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "NUM",
+          "check": "String"
+        }
+      ],
+      "output": "Number",
+      "colour": Blockly.Blocks.math.HUE,
+      "tooltip": Blockly.Msg.MATH_TO_NUMBER_TOOLTIP
+      
+    });
+  }
+};
 
 Blockly.Blocks['math_on_list'] = {
   /**

@@ -102,6 +102,12 @@ Blockly.PHP['math_single'] = function(block) {
     case 'ROUND':
       code = 'round(' + arg + ')';
       break;
+    case 'FLOAT':
+      code = 'floatval(' + arg + ')';
+      break;
+    case 'INT':
+      code = 'intval(' + arg + ')';
+      break;
     case 'ROUNDUP':
       code = 'ceil(' + arg + ')';
       break;
@@ -224,6 +230,8 @@ Blockly.PHP['math_change'] = function(block) {
 
 // Rounding functions have a single operand.
 Blockly.PHP['math_round'] = Blockly.PHP['math_single'];
+Blockly.PHP['math_to_number'] = Blockly.PHP['math_single'];
+
 // Trigonometry functions have a single operand.
 Blockly.PHP['math_trig'] = Blockly.PHP['math_single'];
 

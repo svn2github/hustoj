@@ -434,6 +434,10 @@ Blockly.Msg.MATH_ROUND_OPERATOR_ROUNDUP = 'round up';
 /// dropdown - This rounds its input down to the nearest whole number.  For example, if the input was 3.8, the result would be 3.
 Blockly.Msg.MATH_ROUND_OPERATOR_ROUNDDOWN = 'round down';
 
+Blockly.Msg.MATH_ROUND_OPERATOR_FLOAT = 'cast to float';
+
+Blockly.Msg.MATH_ROUND_OPERATOR_INT = 'cast to int';
+Blockly.Msg.MATH_TO_NUMBER_TOOLTIP='cast text to number for calculation';
 /// url - Information about applying a function to a list of numbers.  (We were unable to find such information in English.  Feel free to skip this and any other URLs that are difficult.)
 Blockly.Msg.MATH_ONLIST_HELPURL = '';
 /// dropdown - This computes the sum of the numeric elements in the list.  For example, the sum of the list {1, 4} is 5.

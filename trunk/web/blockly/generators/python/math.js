@@ -115,6 +115,12 @@ Blockly.Python['math_single'] = function(block) {
     case 'ROUND':
       code = 'round(' + arg + ')';
       break;
+    case 'INT':
+      code = 'int(' + arg + ')';
+      break;
+    case 'FLOAT':
+      code = 'float(' + arg + ')';
+      break;
     case 'ROUNDUP':
       code = 'math.ceil(' + arg + ')';
       break;
@@ -248,6 +254,8 @@ Blockly.Python['math_change'] = function(block) {
 
 // Rounding functions have a single operand.
 Blockly.Python['math_round'] = Blockly.Python['math_single'];
+// Rounding functions have a single operand.
+Blockly.Python['math_to_number'] = Blockly.Python['math_single'];
 // Trigonometry functions have a single operand.
 Blockly.Python['math_trig'] = Blockly.Python['math_single'];
 

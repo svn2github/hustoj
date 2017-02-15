@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2016-11-11 17:20:20.186308",
+		"lastupdated": "2017-02-15 13:34:55.939000",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -163,6 +163,9 @@
 	"MATH_ROUND_OPERATOR_ROUND": "round",
 	"MATH_ROUND_OPERATOR_ROUNDUP": "round up",
 	"MATH_ROUND_OPERATOR_ROUNDDOWN": "round down",
+	"MATH_ROUND_OPERATOR_FLOAT": "cast to float",
+	"MATH_ROUND_OPERATOR_INT": "cast to int",
+	"MATH_TO_NUMBER_TOOLTIP": "cast text to number for calculation",
 	"MATH_ONLIST_HELPURL": "",
 	"MATH_ONLIST_OPERATOR_SUM": "sum of list",
 	"MATH_ONLIST_TOOLTIP_SUM": "Return the sum of all the numbers in the list.",

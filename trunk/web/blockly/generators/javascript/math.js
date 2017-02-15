@@ -100,6 +100,12 @@ Blockly.JavaScript['math_single'] = function(block) {
     case 'POW10':
       code = 'Math.pow(10,' + arg + ')';
       break;
+    case 'FLOAT':
+      code = 'parseFloat(' + arg + ')';
+      break;
+    case 'INT':
+      code = 'parseInt(' + arg + ')';
+      break;
     case 'ROUND':
       code = 'Math.round(' + arg + ')';
       break;
@@ -227,6 +233,7 @@ Blockly.JavaScript['math_change'] = function(block) {
 
 // Rounding functions have a single operand.
 Blockly.JavaScript['math_round'] = Blockly.JavaScript['math_single'];
+Blockly.JavaScript['math_to_number'] = Blockly.JavaScript['math_single'];
 // Trigonometry functions have a single operand.
 Blockly.JavaScript['math_trig'] = Blockly.JavaScript['math_single'];
 

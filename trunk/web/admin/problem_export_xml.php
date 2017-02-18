@@ -126,8 +126,8 @@ function getSolution($pid,$lang){
 function fixurl($img_url){
    $img_url= html_entity_decode( $img_url,ENT_QUOTES,"UTF-8");
    
-	if (substr($img_url,0,7)!="http://"){
-	  if(substr($img_url,0,1)=="/"){
+   if (substr($img_url,0,7)!="http://"){
+     if(substr($img_url,0,1)=="/"){
 	     	$ret='http://'.$_SERVER['HTTP_HOST'].':'.$_SERVER["SERVER_PORT"].$img_url;
      }else{
      		$path= dirname($_SERVER['PHP_SELF']);
@@ -140,6 +140,7 @@ function fixurl($img_url){
 } 
 function image_base64_encode($img_url){
     $img_url=fixurl($img_url);
+    if (substr($img_url,0,7)!="http://") return false;
 	$handle = @fopen($img_url, "rb");
 	if($handle){
 		$contents = stream_get_contents($handle);

@@ -27,7 +27,7 @@
       <div class="jumbotron">
 <hr>
 <center>
-  <font size="+3">HUSTOJ Online Judge FAQ</font>
+  <font size="+3"><?php echo $OJ_NAME?>  FAQ</font>
 </center>
 <hr>
 <p><font color=green>Q</font>:What is the compiler the judge is using and what are the compiler options?<br>

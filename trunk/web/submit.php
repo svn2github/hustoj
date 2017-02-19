@@ -121,7 +121,8 @@ if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($append_file)){
      $source.=mysqli_real_escape_string($mysqli,"\n".file_get_contents($append_file));
 }
 //end of append 
-
+if($language==6)
+   $source="# coding=utf-8\n".$source;
 if($test_run) $id=0;
 
 $len=strlen($source);

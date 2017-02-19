@@ -115,6 +115,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
  <script>
 var sid=0;
 var i=0;
+var using_blockly=false;
 var judge_result=[<?php
 foreach($judge_result as $result){
 echo "'$result',";
@@ -189,6 +190,8 @@ return ret+"";
 }
 var count=0;
 function do_submit(){
+if(using_blockly) 
+ translate();
 if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
 var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 var problem_id=document.getElementById(mark);
@@ -257,9 +260,10 @@ function openBlockly(){
   $("#blockly_loader").hide();
   $("#transrun").show();
   $("#Submit").prop('disabled', true);
+  using_blockly=true;
   
 }
-function loadFromBlockly(){
+function translate(){
   var source=$("#source");
   var editor=$(window.frames['frame_source'].document).find('textarea[id=textarea]');
   var blockly=$(window.frames['frmBlockly'].document);
@@ -271,7 +275,11 @@ function loadFromBlockly(){
   source.val(python.text());
   eAL.toggle("source");
   $("#language").val(6);
-  do_test_run();
+ 
+}
+function loadFromBlockly(){
+ translate();
+ do_test_run();
   $("#frame_source").hide();
 //  $("#Submit").prop('disabled', false);
 }

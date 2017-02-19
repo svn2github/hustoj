@@ -90,7 +90,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
-<textarea style="width:30%" cols=40 rows=5 id="out" name="out" >SHOULD BE:
+<textarea style="width:30%" cols=10 rows=5 id="out" name="out" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
 <br>
@@ -249,6 +249,7 @@ function reloadtemplate(lang){
 function openBlockly(){
    $("#frame_source").hide();
    $("#TestRun").hide();
+   $("#language")[0].scrollIntoView();
    $("#language").val(6).hide();
    $("#language_span").hide();
    $("#EditAreaArroundInfos_source").hide();
@@ -256,6 +257,7 @@ function openBlockly(){
   $("#blockly_loader").hide();
   $("#transrun").show();
   $("#Submit").prop('disabled', true);
+  
 }
 function loadFromBlockly(){
   var source=$("#source");
@@ -271,7 +273,7 @@ function loadFromBlockly(){
   $("#language").val(6);
   do_test_run();
   $("#frame_source").hide();
-  $("#Submit").prop('disabled', false);
+//  $("#Submit").prop('disabled', false);
 }
 </script>
 

@@ -97,8 +97,8 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
-	<input type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
-	<input type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="color:white;background-color:rgb(90,164,139)">
+	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
+	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
 <div id="blockly" class="center">Blockly</div>
 <?php }?>
 </form>
@@ -253,6 +253,9 @@ function openBlockly(){
    $("#language_span").hide();
    $("#EditAreaArroundInfos_source").hide();
    $('#blockly').html('<iframe name=\'frmBlockly\' width=90% height=580 src=\'blockly/demos/code/index.html\'></iframe>'); 
+  $("#blockly_loader").hide();
+  $("#transrun").show();
+  $("#Submit").prop('disabled', true);
 }
 function loadFromBlockly(){
   var source=$("#source");
@@ -268,6 +271,7 @@ function loadFromBlockly(){
   $("#language").val(6);
   do_test_run();
   $("#frame_source").hide();
+  $("#Submit").prop('disabled', false);
 }
 </script>
 

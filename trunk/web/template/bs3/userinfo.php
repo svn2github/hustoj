@@ -26,42 +26,6 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 	
-<script type="text/javascript" src="include/wz_jsgraphics.js"></script>
-<script type="text/javascript" src="include/pie.js"></script>
-<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
-<script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
-<script type="text/javascript">
-$(function () {
-var d1 = [];
-var d2 = [];
-<?php
-foreach($chart_data_all as $k=>$d){
-?>
-d1.push([<?php echo $k?>, <?php echo $d?>]);
-<?php }?>
-<?php
-foreach($chart_data_ac as $k=>$d){
-?>
-d2.push([<?php echo $k?>, <?php echo $d?>]);
-<?php }?>
-//var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
-// a null signifies separate line segments
-var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
-$.plot($("#submission"), [
-{label:"<?php echo $MSG_SUBMIT?>",data:d1,lines: { show: true }},
-{label:"<?php echo $MSG_AC?>",data:d2,bars:{show:true}} ],{
-xaxis: {
-mode: "time"
-//, max:(new Date()).getTime()
-//,min:(new Date()).getTime()-100*24*3600*1000
-},
-grid: {
-backgroundColor: { colors: ["#fff", "#333"] }
-}
-});
-});
-//alert((new Date()).getTime());
-</script>
 <center>
 <table class="table table-striped" id=statics width=70%>
 <caption>
@@ -94,6 +58,8 @@ echo "<tr ><td>".$jresult[$row[0]]."<td align=center><a href=status.php?user_id=
 //}
 echo "<tr id=pie ><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
 ?>
+<script type="text/javascript" src="include/wz_jsgraphics.js"></script>
+<script type="text/javascript" src="include/pie.js"></script>
 <script language="javascript">
 var y= new Array ();
 var x = new Array ();
@@ -152,5 +118,39 @@ $cnt=1-$cnt;
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
-  </body>
+<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+<script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
+<script type="text/javascript">
+$(function () {
+var d1 = [];
+var d2 = [];
+<?php
+foreach($chart_data_all as $k=>$d){
+?>
+d1.push([<?php echo $k?>, <?php echo $d?>]);
+<?php }?>
+<?php
+foreach($chart_data_ac as $k=>$d){
+?>
+d2.push([<?php echo $k?>, <?php echo $d?>]);
+<?php }?>
+//var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+// a null signifies separate line segments
+var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+$.plot($("#submission"), [
+{label:"<?php echo $MSG_SUBMIT?>",data:d1,lines: { show: true }},
+{label:"<?php echo $MSG_AC?>",data:d2,bars:{show:true}} ],{
+xaxis: {
+mode: "time"
+//, max:(new Date()).getTime()
+//,min:(new Date()).getTime()-100*24*3600*1000
+},
+grid: {
+backgroundColor: { colors: ["#fff", "#333"] }
+}
+});
+});
+//alert((new Date()).getTime());
+</script>
+ </body>
 </html>

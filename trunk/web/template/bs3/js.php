@@ -23,6 +23,7 @@ $(document).ready(function(){
   $(".jumbotron").prepend(msg);
   $("form").append("<div id='csrf' />");
   $("#csrf").load("csrf.php");
+  $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
 });
 
 </script>

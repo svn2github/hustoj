@@ -12,10 +12,13 @@ if (!(isset($_SESSION['administrator']))){
         $id=intval($_GET['id']);
         
         $basedir = "$OJ_DATA/$id";
-        if($OJ_SAE)
+        if($OJ_SAE){
 			;//need more code to delete files
-		else
+	}else{
+	    if(strlen($basedir)>16){
 			system("rm -rf $basedir");
+	    }
+	}
         $sql="delete FROM `problem` WHERE `problem_id`=$id";
         mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
         $sql="select max(problem_id) FROM `problem`" ;

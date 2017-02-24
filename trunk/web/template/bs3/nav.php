@@ -38,9 +38,9 @@
               <li  class="active" ><a href="<?php echo $path_fix?>contestrank.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_RANKLIST?>
 	      </a></li>
-              <li  class="active" ><a href="<?php echo $path_fix?>contestrank-oi.php?cid=<?php echo $cid?>">
+              <!--<li  class="active" ><a href="<?php echo $path_fix?>contestrank-oi.php?cid=<?php echo $cid?>">
 			OI<?php echo $MSG_RANKLIST?>
-	      </a></li>
+	      </a></li>-->
               <li  class="active" ><a href="<?php echo $path_fix?>conteststatistics.php?cid=<?php echo $cid?>">
 			<?php echo $MSG_STATISTICS?>
 	      </a></li>

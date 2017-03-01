@@ -25,22 +25,23 @@
     从windows的d:\data复制所有数据到/home/judge/data/
     执行
     
-before 9.10  
+before 9.10 
+```
  apt-get install tofrodos
  find . -name *.in -exec dos2unix {} \;
  find . -name *.out -exec dos2unix {} \;
-
+```
 after 10.04  
-
+```
  apt-get install tofrodos
  find . -name *.in -exec fromdos -d {} \;
  find . -name *.out -exec fromdos -d {} \;
-
+```
   * 配置
-
+```
   /var/www/JudgeOnline/include/db_info.inc.php 
   /home/judge/etc/judge.conf
-
+```
   连接到转换后的judgeonline数据库
 
   * 进行简单测试

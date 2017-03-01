@@ -24,14 +24,17 @@
   * 测试数据迁移
     从windows的d:\data复制所有数据到/home/judge/data/
     执行
-before 9.10  apt-get install tofrodos
-find . -name *.in -exec dos2unix {} \;
-find . -name *.out -exec dos2unix {} \;
+    
+before 9.10  
+ apt-get install tofrodos
+ find . -name *.in -exec dos2unix {} \;
+ find . -name *.out -exec dos2unix {} \;
 
-after 10.04  apt-get install tofrodos
+after 10.04  
 
-   find . -name *.in -exec fromdos -d {} \;
-   find . -name *.out -exec fromdos -d {} \;
+ apt-get install tofrodos
+ find . -name *.in -exec fromdos -d {} \;
+ find . -name *.out -exec fromdos -d {} \;
 
   * 配置
 

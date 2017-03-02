@@ -28,7 +28,21 @@
 <center><h3>Contest Statistics</h3>
 <table id=cs width=90%>
 <thead>
-<tr align=center class=toprow><th><th>AC<th>PE<th>WA<th>TLE<th>MLE<th>OLE<th>RE<th>CE<th>Total<th>TR<th>C<th>C++<th>Pascal<th>Java<th>Ruby<th>Bash<th>Python<th>PHP<th>Perl<th>C#<th>Obj-c<th>FreeBasic</tr>
+<tr class=toprow><th><th>AC<th>PE<th>WA<th>TLE<th>MLE<th>OLE<th>RE<th>CE<th><th>TR<th>Total
+<?php 
+  $i=0;
+  foreach ($language_name as $lang){
+	if(isset($R[$pid_cnt][$i+11]))	
+		echo "<th class='center'>$language_name[$i]</th>";
+	else
+		echo "<th>";
+	$i++;
+  }
+
+
+?>
+
+</tr>
 </thead>
 <tbody>
 <?php
@@ -39,14 +53,14 @@ echo "<tr align=center class=oddrow><td>";
 else
 echo "<tr align=center class=evenrow><td>";
 echo "<a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
-for ($j=0;$j<22;$j++) {
+for ($j=0;$j<count($language_name)+11;$j++) {
 if(!isset($R[$i][$j])) $R[$i][$j]="";
 echo "<td>".$R[$i][$j];
 }
 echo "</tr>";
 }
 echo "<tr align=center class=evenrow><td>Total";
-for ($j=0;$j<22;$j++) {
+for ($j=0;$j<count($language_name)+11;$j++) {
 if(!isset($R[$i][$j])) $R[$i][$j]="";
 echo "<td>".$R[$i][$j];
 }

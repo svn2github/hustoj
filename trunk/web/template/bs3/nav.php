@@ -46,6 +46,7 @@
 	      </a></li>
 	      <li><a>]</a></li>
 <?php }?>
+              <li <?php if ($url=="recent-contest.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>recent-contest.php"><?php echo $MSG_RECENT_CONTEST?></a></li>
               <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">

@@ -11,13 +11,13 @@ $parm="";
 
 if(isset($_GET['pid'])){
 	$pid=intval($_GET['pid']);
-	$parm="pid="+$pid;
+	$parm="pid=".$pid;
 }else{
 	$pid=0;
 }
 if(isset($_GET['cid'])){
 	$cid=intval($_GET['cid']);
-	$parm.="&cid="+$cid;
+	$parm.="&cid=".$cid;
 }else{
 	$cid=0;
 }

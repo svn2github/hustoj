@@ -89,4 +89,8 @@ global $mysqli;
 	//sychronize php and mysql server with timezone settings, dafault setting for China
 	//if you are not from China, comment out these two lines or modify them.
 	date_default_timezone_set("PRC");
-	mysqli_query($mysqli,"SET time_zone ='+8:00'");?>
+	mysqli_query($mysqli,"SET time_zone ='+8:00'");
+
+	header('X-Frame-Options:SAMEORIGIN');
+
+?>

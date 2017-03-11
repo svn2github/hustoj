@@ -1,15 +1,20 @@
 <?php
 ob_start();
         require_once("discuss_func.inc.php");
-        if(isset($_REQUEST['pid']))
-                $pid=intval($_REQUEST['pid']);
-        else
-                $pid=0;
-        if(isset($_REQUEST['cid']))
-                $cid=intval($_REQUEST['cid']);
-        else
-                $cid=0;
-        $prob_exist = problem_exist($pid, $cid);
+$parm="";
+if(isset($_GET['pid'])){
+	$pid=intval($_GET['pid']);
+	$parm="pid=".$pid;
+}else{
+	$pid=0;
+}
+if(isset($_GET['cid'])){
+	$cid=intval($_GET['cid']);
+	$parm.="&cid=".$cid;
+}else{
+	$cid=0;
+}
+       $prob_exist = problem_exist($pid, $cid);
                 require_once("oj-header.php");
         echo "<title>HUST Online Judge WebBoard</title>";
 ?>
@@ -88,8 +93,14 @@ for ($i=0;$i<$rows_cnt;$i++){
                 else if ($row->count>20) echo"<b class=\"Hot\">Hot</b>";
         echo "</td>";
         echo "<td>";
-        if ($row->pid!=0) echo"<a href=\"discuss.php?pid={$row->pid}&cid={$row->cid}\">{$row->pid}</a>";
-        echo "</td>";
+        if ($row->pid!=0) {
+		if($row->cid)	
+			echo "<a href=\"discuss.php?pid={$row->pid}"."&cid={$row->cid}\">";
+		else
+			echo "<a href=\"discuss.php?pid={$row->pid}\">";
+		echo "{$row->pid}</a>";
+        }
+	echo "</td>";
         echo "<td><a href=\"../userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
         if($row->cid)echo "<td><a href=\"thread.php?tid={$row->tid}&cid={$row->cid}\">".htmlentities($row->title,ENT_QUOTES,"UTF-8")."</a></td>";
         else echo "<td><a href=\"thread.php?tid={$row->tid}\">".htmlentities($row->title,ENT_QUOTES,"UTF-8")."</a></td>";

@@ -83,7 +83,7 @@ echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckTo
 echo "</tr></form>";
 echo "</table></center>";
 ?>
-<script src=../template/bs3/jquery.min.js></script>
+<script src='../template/bs3/jquery.min.js' ></script>
 <script>
 function phpfm(pid){
         //alert(pid);

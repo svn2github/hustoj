@@ -38,11 +38,15 @@ echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 <tr ><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></a>
 <td rowspan=14 align=center>
 <script language='javascript'>
-function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
-<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";
+function p(id,c){
+	document.write("<a href=problem.php?id="+id+">"+id+" </a>(<a href='status.php?user_id=<?php echo $user?>&problem_id="+id+"'>"+c+"</a>)");
+
+}
+<?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`='$user_mysql' 
+		AND problem_id in (select distinct problem_id from solution where `user_id`='$user_mysql' and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
 if (!($result=mysqli_query($mysqli,$sql))) echo mysqli_error($mysqli);
 while ($row=mysqli_fetch_array($result))
-echo "p($row[0]);";
+echo "p($row[0],$row[1]);";
 mysqli_free_result($result);
 ?>
 </script>

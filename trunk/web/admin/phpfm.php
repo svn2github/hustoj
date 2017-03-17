@@ -2263,7 +2263,7 @@ function download(){
     if(file_exists($file)){
         $is_denied = false;
         foreach($download_ext_filter as $key=>$ext){
-            if (eregi($ext,$filename)){
+            if (preg_match($ext,$filename)){
                 $is_denied = true;
                 break;
             }
@@ -2288,7 +2288,7 @@ function save_upload($temp_file,$filename,$dir_dest) {
     $filesize = filesize($temp_file);
     $is_denied = false;
     foreach($upload_ext_filter as $key=>$ext){
-        if (eregi($ext,$filename)){
+        if (preg_match($ext,$filename)){
             $is_denied = true;
             break;
         }
@@ -3876,7 +3876,7 @@ function view(){
 	    if(file_exists($file)){
 	        $is_denied = false;
 	        foreach($download_ext_filter as $key=>$ext){
-	            if (eregi($ext,$filename)){
+	            if (preg_match($ext,$filename)){
 	                $is_denied = true;
 	                break;
 	            }

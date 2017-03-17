@@ -1622,7 +1622,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		break;
 	case 3:
               sprintf(java_xms, "-Xmx%dM", mem_lmt);
-              sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
+              //sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
 		execl("/usr/bin/java", "/usr/bin/java", java_xms, java_xmx,
 				"-Djava.security.manager",

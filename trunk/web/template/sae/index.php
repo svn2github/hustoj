@@ -7,22 +7,8 @@
     <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
     <script type="text/javascript">
 $(function () {
-    var d1 = [];
-    var d2 = [];
-    <?php 
-       foreach($chart_data_all as $k=>$d){
-    ?>
-        d1.push([<?php echo $k?>, <?php echo $d?>]);
-	<?php }?>
-    <?php 
-       foreach($chart_data_ac as $k=>$d){
-    ?>
-        d2.push([<?php echo $k?>, <?php echo $d?>]);
-	<?php }?>
-          //var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
-
-    // a null signifies separate line segments
-    var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+    var d1 = <?php echo json_encode($chart_data_all)?>;
+	var d2 = <?php echo json_encode($chart_data_ac)?>;
     
   $.plot($("#submission"), [ 
    {label:"<?php echo $MSG_SUBMIT?>",data:d1,lines: { show: true }},

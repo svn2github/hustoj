@@ -38,7 +38,7 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`  
 //echo $sql;
     
 	while ($row=mysqli_fetch_array($result)){
-		$chart_data_all[$row['md']]=$row['c'];
+		array_push($chart_data_all,array($row['md'],$row['c']));
     }
     
 $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where result=4 group by md order by md desc limit 100";
@@ -47,7 +47,7 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` w
 //echo $sql;
     
 	while ($row=mysqli_fetch_array($result)){
-		$chart_data_ac[$row['md']]=$row['c'];
+		array_push($chart_data_ac,array($row['md'],$row['c']));
     }
     
 	

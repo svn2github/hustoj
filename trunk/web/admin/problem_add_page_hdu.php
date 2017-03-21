@@ -72,9 +72,7 @@ include_once("kindeditor.php") ;
 <p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
 <p align=left>Description:<br>
 <textarea class="kindeditor" rows=13 name=description cols=80><?php echo $descriptionHTML;?></textarea>
-
 </p>
-
 <p align=left>Input:<br>
 <textarea class="kindeditor" rows=13 name=input cols=80><?php echo $inputHTML;?></textarea>
 </p>

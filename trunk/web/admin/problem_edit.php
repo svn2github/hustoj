@@ -90,7 +90,7 @@ if (get_magic_quotes_gpc ()) {
 $basedir=$OJ_DATA."/$id";
 echo "Sample data file in $basedir Updated!<br>";
 
-	if($sample_input){
+	if($sample_input&&file_exists($basedir."/sample.in")){
 		//mkdir($basedir);
 		$fp=fopen($basedir."/sample.in","w");
 		fputs($fp,preg_replace("(\r\n)","\n",$sample_input));

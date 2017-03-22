@@ -191,7 +191,7 @@ void init_syscalls_limits(int lang) {
 	memset(call_counter, 0, sizeof(call_counter));
 	if (DEBUG)
 		write_log("init_call_counter:%d", lang);
-	if (record_call) { // C & C++
+	if (record_call) { // recording for debuging
 		for (i = 0; i < call_array_size; i++) {
 			call_counter[i] = 0;
 		}

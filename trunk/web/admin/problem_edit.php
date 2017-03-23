@@ -112,7 +112,7 @@ echo "Sample data file in $basedir Updated!<br>";
 //	$test_output=($test_output);
 	$hint=mysqli_real_escape_string($mysqli,$hint);
 	$source=mysqli_real_escape_string($mysqli,$source);
-//	$spj=($spj);
+	$spj=intval($spj);
 	
 $sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_limit`='$memory_limit',
 	`description`='$description',`input`='$input',`output`='$output',`sample_input`='$sample_input',`sample_output`='$sample_output',`hint`='$hint',`source`='$source',`spj`=$spj,`in_date`=NOW()

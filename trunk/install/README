@@ -64,4 +64,4 @@ sudo ./make.sh
    with root or sudo
    echo "/usr/bin/judged" > /etc/init.d/judged
    chmod +x  /etc/init.d/judged
-   ln -s /etc/init.d/judged /etc/rc3.d/S99judged
+   ln -s /etc/init.d/judged /etc/rc2.d/S99judged

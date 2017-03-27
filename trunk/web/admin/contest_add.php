@@ -160,7 +160,7 @@ $lang_count=count($language_ext);
 
         </select>
 	<?php require_once("../include/set_post_key.php");?>
-	<br>Problems:<input class=input-xxlarge type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
+	<br>Problems:<input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>
 	<p align=left>Description:<br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
 

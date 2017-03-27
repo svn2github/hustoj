@@ -1661,7 +1661,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 15: //guile
 		execl("/lua", "/lua", "Main", (char *) NULL);
 		break;
-	case 16: //SpiderMonkey
+	case 16: //Node.js
 		execl("/nodejs", "/nodejs", "Main.js", (char *) NULL);
 		break;
 

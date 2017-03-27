@@ -54,4 +54,5 @@ Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](http://pan.baidu.com/s/1o78D4
 
 Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linux_basic.php)
 
-[FPS题库](http://tk.hustoj.com/)
+
+建好系统需要题目，请访问[FPS题库](http://tk.hustoj.com/)

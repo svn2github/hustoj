@@ -1268,7 +1268,7 @@ void copy_shell_runtime(char * work_dir) {
 	execute_cmd("/bin/mkdir %s/bin", work_dir);
 
 #ifdef __i386
-        execute_cmd("/bin/cp /lib/* %s/lib/", work_dir);
+        execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
         execute_cmd("/bin/cp -a /lib/i386-linux-gnu  %s/lib/", work_dir);
         execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
 #endif
@@ -1593,6 +1593,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		break;
 	case 3:  //java
 	case 4:  //ruby
+	//case 6:  //python
 	case 9: //C#
 	case 12:
 	case 16:
@@ -2016,10 +2017,13 @@ void umount(char * work_dir){
 void clean_workdir(char * work_dir) {
 	umount(work_dir);
  	if (DEBUG) {
+		execute_cmd("/bin/rm  -rf %s/log/", work_dir);
 		execute_cmd("mkdir %s/log/", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
 	} else {
-		execute_cmd("/bin/rm -f %s/*", work_dir);
+		execute_cmd("mkdir %s/log/", work_dir);
+		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
+		execute_cmd("/bin/rm  -rf %s/log/", work_dir);
 	}
 
 }

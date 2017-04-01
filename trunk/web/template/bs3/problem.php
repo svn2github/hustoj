@@ -52,7 +52,7 @@ if(isset($_SESSION['administrator'])){
 require_once("include/set_get_key.php");
 ?>
 [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
-[<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+[<a href="admin/phpfm.php?frame=3&pid=<?php echo $row->problem_id?>" >TestData</a>]
 <?php
 }
 echo "</center>";
@@ -89,7 +89,7 @@ if(isset($_SESSION['administrator'])){
 require_once("include/set_get_key.php");
 ?>
 [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
-[<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+[<a href='javascript:phpfm(<?php echo $row->problem_id;?>)'>TestData</a>]
 <?php
 }
 echo "</center>";
@@ -102,6 +102,16 @@ echo "</center>";
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	
+<script>
+function phpfm(pid){
+        //alert(pid);
+        $.post("admin/phpfm.php",{'frame':3,'pid':pid,'pass':''},function(data,status){
+                if(status=="success"){
+                        document.location.href="phpfm.php?frame=3&pid="+pid;
+                }
+        });
+}
+</script>	  
   </body>
 </html>

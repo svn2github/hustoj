@@ -1,5 +1,7 @@
 <?php 
 @session_start();
+         header ( "content-type:   application/file" );
+         header ( "content-disposition:   attachment;   filename=\"ac-".$_SESSION['user_id'].".txt" );
 if (!isset($_SESSION['user_id'])){
 	$view_errors= "<a href=./loginpage.php>$MSG_Login</a>";
 	require("template/".$OJ_TEMPLATE."/error.php");
@@ -12,9 +14,9 @@ $sql="select distinct source,problem_id from source_code right join
 
 $result=mysqli_query($mysqli,$sql);
 while($row=mysqli_fetch_object($result)){
-	echo "Problem".$row->problem_id.":";
-	echo $row->source;
-	echo "------------------------------------------------------";
+	echo "Problem".$row->problem_id.":\r\n";
+	echo preg_replace("(\n)","\r\n",$row->source);
+	echo "\r\n------------------------------------------------------\r\n";
 }
 mysqli_free_result($result);
 ?>

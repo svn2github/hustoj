@@ -52,7 +52,7 @@ if(isset($_SESSION['administrator'])){
 require_once("include/set_get_key.php");
 ?>
 [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
-[<a href="admin/phpfm.php?frame=3&pid=<?php echo $row->problem_id?>" >TestData</a>]
+[<a href='javascript:phpfm(<?php echo $row->problem_id;?>)'>TestData</a>]
 <?php
 }
 echo "</center>";

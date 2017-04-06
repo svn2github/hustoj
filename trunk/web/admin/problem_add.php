@@ -56,9 +56,20 @@ $sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_
 mysqli_query($mysqli,$sql);
 $_SESSION["p$pid"]=true;
 	
-echo "<a href=quixplorer/index.php?action=list&dir=$pid&order=name&srt=yes>Add More Test Data</a>";
+echo "<a href='javascript:phpfm($pid);'>Add more TestData now !</a>";
 /*	*/
 ?>
+<script src='../template/bs3/jquery.min.js' ></script>
+<script>
+function phpfm(pid){
+        //alert(pid);
+        $.post("phpfm.php",{'frame':3,'pid':pid,'pass':''},function(data,status){
+                if(status=="success"){
+                        document.location.href="phpfm.php?frame=3&pid="+pid;
+                }
+        });
+}
+</script>
 <?php require_once ("../oj-footer.php");
 
 ?>

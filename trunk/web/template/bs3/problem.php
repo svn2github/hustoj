@@ -108,7 +108,7 @@ function phpfm(pid){
         //alert(pid);
         $.post("admin/phpfm.php",{'frame':3,'pid':pid,'pass':''},function(data,status){
                 if(status=="success"){
-                        document.location.href="phpfm.php?frame=3&pid="+pid;
+                        document.location.href="admin/phpfm.php?frame=3&pid="+pid;
                 }
         });
 }

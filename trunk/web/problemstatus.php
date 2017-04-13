@@ -19,7 +19,7 @@ $view_problem=array();
 
 // total submit
 $sql="SELECT count(*) FROM solution WHERE problem_id='$id'";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+$result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT) or die(mysqli_error($mysqli));
 $row=mysqli_fetch_array($result);
 $view_problem[0][0]=$MSG_SUBMIT;
 $view_problem[0][1]=$row[0];
@@ -28,7 +28,7 @@ mysqli_free_result($result);
 
 // total users
 $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id'";
-$result=mysqli_query($mysqli,$sql);
+$result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
 $row=mysqli_fetch_array($result);
 
 $view_problem[1][0]="$MSG_USER($MSG_SUBMIT)";
@@ -37,7 +37,7 @@ mysqli_free_result($result);
 
 // ac users
 $sql="SELECT count(DISTINCT user_id) FROM solution WHERE problem_id='$id' AND result='4'";
-$result=mysqli_query($mysqli,$sql);
+$result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
 $row=mysqli_fetch_array($result);
 $acuser=intval($row[0]);
 
@@ -48,7 +48,7 @@ mysqli_free_result($result);
 //for ($i=4;$i<12;$i++){
         $i=3;
         $sql="SELECT result,count(1) FROM solution WHERE problem_id='$id' AND result>=4 group by result order by result";
-        $result=mysqli_query($mysqli,$sql);
+        $result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
         while($row=mysqli_fetch_array($result)){
 
                 $view_problem[$i][0] =$jresult[$row[0]];
@@ -84,37 +84,29 @@ $AC=false;
 if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
         $sql="SELECT 1 FROM solution where
                         result=4 and problem_id=$id and user_id='".$_SESSION['user_id']."'";
-        $rrs=mysqli_query($mysqli,$sql);
+        $rrs=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
         $AC=(intval(mysqli_num_rows($rrs))>0);
         mysqli_free_result($rrs);
 }
 
-$sql=" select * from
-(
-
-SELECT count(*) att ,user_id, min(10000000000000000000+time *100000000000 + memory *100000 + code_length ) score
-FROM solution
-WHERE problem_id =$id
-AND result =4
-GROUP BY user_id
-ORDER BY score, in_date
-
+$sql="SELECT * FROM (
+  SELECT COUNT(*) att, user_id, min(10000000000000000000 + time*100000000000 + memory*100000 + code_length) score
+  FROM solution
+  WHERE problem_id =$id AND result =4
+  GROUP BY user_id
+  ORDER BY score, in_date DESC
 )c
-left join
-(
-SELECT solution_id ,user_id,language,10000000000000000000+time *100000000000 + memory *100000 + code_length  score, in_date
-FROM solution
-WHERE problem_id =$id
-AND result =4
+LEFT JOIN (
+  SELECT solution_id, user_id, language, 10000000000000000000 + time*100000000000 + memory*100000 + code_length score, in_date
+  FROM solution 
+  WHERE problem_id =$id AND result =4  
+  ORDER BY score, in_date DESC
+)b ON b.user_id=c.user_id AND b.score=c.score
+ORDER BY c.score, in_date ASC
+LIMIT $start,100;";
 
-ORDER BY score, in_date
-)b
-on b.user_id=c.user_id and b.score=c.score
-order by c.score,in_date
- limit $start,100";
-
-$result=mysqli_query($mysqli,$sql);
-
+$result=mysqli_query($mysqli, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+$result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
 
 $view_solution=array();
 $j=0;
@@ -163,7 +155,7 @@ if(isset($_SESSION['user_id'])&&isset($_GET['id'])){
                                 and problem_id not in (select distinct problem_id from solution where user_id='$user_id' )
                                 group by `problem_id` order by people desc limit 12";
 
-        $result=mysqli_query($mysqli,$sql);
+        $result=mysqli_query($mysqli, $sql, MYSQLI_USE_RESULT);
         $i=0;
         while($row=mysqli_fetch_object($result)){
                 $view_recommand[$i][0]=$row->problem_id;

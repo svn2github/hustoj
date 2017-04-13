@@ -68,7 +68,9 @@ while ($row=mysqli_fetch_array($result))
 if(isset($_GET['search'])&&trim($_GET['search'])!=""){
 	$search=mysqli_real_escape_string($mysqli,$_GET['search']);
     $filter_sql=" ( title like '%$search%' or source like '%$search%')";
-    
+    $pstart=0;
+    $pend=100;
+
 }else{
      $filter_sql="  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }

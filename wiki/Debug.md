@@ -10,8 +10,9 @@
 # judged调试模式。
    
 judged 接受参数指定目录的情况下，还可以再接受一个debug作为调试模式开关。
+
      如：sudo judged /home/judge/local debug
-    调试模式的judged将不会进入后台，并且将输出大量调试信息，其调用的judge_client也工作在debug模式。
+     调试模式的judged将不会进入后台，并且将输出大量调试信息，其调用的judge_client也工作在debug模式。
 
 # judge_client调试模式
 judge_client接受参数

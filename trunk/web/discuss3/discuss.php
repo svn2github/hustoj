@@ -47,11 +47,11 @@ if ($pid!=null && $pid!=0){
 </div>
 <?php }
 $sql = "SELECT `tid`, `title`, `top_level`, `topic`.`status`, `cid`, `pid`, CONVERT(MIN(`reply`.`time`),DATE) `posttime`, MAX(`reply`.`time`) `lastupdate`, `topic`.`author_id`, COUNT(`rid`) `count` FROM `topic`, `reply` WHERE `topic`.`status`!=2 AND `reply`.`status`!=2 AND `tid` = `topic_id`";
-if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".mysql_escape_string($_REQUEST['cid'])."'";
+if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".mysqli_escape_string($mysqli,$_REQUEST['cid'])."'";
 else $sql.=" AND ( ISNULL(`cid`)";
 $sql.=" OR `top_level` = 3 )";
 if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
-  $sql.=" AND ( `pid` = '".mysql_escape_string($_REQUEST['pid'])."' OR `top_level` >= 2 )";
+  $sql.=" AND ( `pid` = '".mysqli_escape_string($mysqli,$_REQUEST['pid'])."' OR `top_level` >= 2 )";
   $level="";
 }
 else

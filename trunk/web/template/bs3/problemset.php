@@ -25,15 +25,23 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<h3 align='center'>
+<center>
+<nav class="center"><ul class="pagination">
+<li class="page-item"><a href="problemset.php?page=1">&lt;&lt;</a></li>
 <?php
-for ($i=1;$i<=$view_total_page;$i++){
-if ($i>1) echo '&nbsp;';
-if ($i==$page) echo "<span class=red>$i</span>";
-else echo "<a href='problemset.php?page=".$i."'>".$i."</a>";
+if(!isset($page)) $page=1;
+$page=intval($page);
+$section=8;
+$start=$page>$section?$page-$section:1;
+$end=$page+$section>$view_total_page?$view_total_page:$page+$section;
+for ($i=$start;$i<=$end;$i++){
+ echo "<li class='".($page==$i?"active ":"")."page-item'>
+        <a href='problemset.php?page=".$i."'>".$i."</a></li>";
 }
 ?>
-</h3><center>
+<li class="page-item"><a href="problemset.php?page=<?php echo $view_total_page?>">&gt;&gt;</a></li>
+</ul></nav>
+
 <table>
 <tr align='center' class='evenrow'><td width='5'></td>
 <td  colspan='1'>

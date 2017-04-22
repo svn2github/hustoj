@@ -225,10 +225,10 @@ void run_client(int runid, int clientid) {
 	//freopen(err,"a+",stderr);
 
 	if (!DEBUG)
-		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
+		execl("/usr/bin/codeup_judge_client", "/usr/bin/codeup_judge_client", runidstr, buf,
 				oj_home, (char *) NULL);
 	else
-		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
+		execl("/usr/bin/codeup_judge_client", "/usr/bin/codeup_judge_client", runidstr, buf,
 				oj_home, "debug", (char *) NULL);
 
 	//exit(0);
@@ -594,6 +594,7 @@ int main(int argc, char** argv) {
 
 			j = work();
 
+			if(ONCE) break;
 		}
 		if(ONCE) break;
 		sleep(sleep_time);

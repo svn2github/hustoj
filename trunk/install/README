@@ -21,5 +21,8 @@ HUST JOL安装说明
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     chmod +x install-ubuntu14.04.sh
     sudo ./install-ubuntu14.04.sh
+    
+方法三、
 
+参考视频  https://v.qq.com/x/page/c03955kvowx.html
 

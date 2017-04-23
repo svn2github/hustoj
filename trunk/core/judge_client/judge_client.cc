@@ -2013,6 +2013,7 @@ void umount(char * work_dir){
         execute_cmd("/bin/umount %s/proc", work_dir);
         execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
         execute_cmd("/bin/umount %s/*",work_dir);
+	execute_cmd("/bin/umount %s/log/*",work_dir);
 	execute_cmd("/bin/umount %s/log/etc/alternatives", work_dir);
 }
 void clean_workdir(char * work_dir) {

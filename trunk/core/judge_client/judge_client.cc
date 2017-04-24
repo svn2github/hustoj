@@ -857,6 +857,20 @@ void update_problem(int pid) {
 		_update_problem_mysql(pid);
 	}
 }
+void umount(char * work_dir){
+        execute_cmd("/bin/umount %s/proc 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/dev 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/lib 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/lib64 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/etc/alternatives 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/usr 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/bin 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount %s/proc 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
+        execute_cmd("/bin/umount %s/* 2>&1 >/dev/null",work_dir);
+	execute_cmd("/bin/umount %s/log/* 2>&1 >/dev/null",work_dir);
+	execute_cmd("/bin/umount %s/log/etc/alternatives 2>&1 >/dev/null", work_dir);
+}
 int compile(int lang,char * work_dir) {
 	int pid;
 
@@ -1014,8 +1028,9 @@ int compile(int lang,char * work_dir) {
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
-		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
- 		execute_cmd("/bin/umount %s/*",work_dir);
+		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
+ 		execute_cmd("/bin/umount %s/* 2>&1 >/dev/null",work_dir);
+		umount(work_dir);
  
 		return status;
 	}
@@ -2002,30 +2017,17 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	
 	//clean_session(pidApp);
 }
-void umount(char * work_dir){
-        execute_cmd("/bin/umount %s/proc", work_dir);
-        execute_cmd("/bin/umount %s/dev", work_dir);
-        execute_cmd("/bin/umount %s/lib", work_dir);
-        execute_cmd("/bin/umount %s/lib64", work_dir);
-        execute_cmd("/bin/umount %s/etc/alternatives", work_dir);
-        execute_cmd("/bin/umount %s/usr", work_dir);
-        execute_cmd("/bin/umount %s/bin", work_dir);
-        execute_cmd("/bin/umount %s/proc", work_dir);
-        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev");
-        execute_cmd("/bin/umount %s/*",work_dir);
-	execute_cmd("/bin/umount %s/log/*",work_dir);
-	execute_cmd("/bin/umount %s/log/etc/alternatives", work_dir);
-}
+
 void clean_workdir(char * work_dir) {
 	umount(work_dir);
  	if (DEBUG) {
-		execute_cmd("/bin/rm -f %s/log/*", work_dir);
+		execute_cmd("/bin/rm -rf %s/log/*", work_dir);
 		execute_cmd("mkdir %s/log/", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
 	} else {
 		execute_cmd("mkdir %s/log/", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
-		execute_cmd("/bin/rm -f %s/log/*", work_dir);
+		execute_cmd("/bin/rm -rf %s/log/*", work_dir);
 	}
 
 }

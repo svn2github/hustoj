@@ -213,7 +213,7 @@ void run_client(int runid, int clientid) {
 	LIM.rlim_cur = STD_MB << 11;
 	setrlimit(RLIMIT_AS, &LIM);
 
-	LIM.rlim_cur = LIM.rlim_max = 200;
+	LIM.rlim_cur = LIM.rlim_max = 300;
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;
@@ -225,10 +225,10 @@ void run_client(int runid, int clientid) {
 	//freopen(err,"a+",stderr);
 
 	if (!DEBUG)
-		execl("/usr/bin/codeup_judge_client", "/usr/bin/codeup_judge_client", runidstr, buf,
+		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, (char *) NULL);
 	else
-		execl("/usr/bin/codeup_judge_client", "/usr/bin/codeup_judge_client", runidstr, buf,
+		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, "debug", (char *) NULL);
 
 	//exit(0);

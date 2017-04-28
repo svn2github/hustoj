@@ -121,7 +121,7 @@ CREATE TABLE  `solution` (
   `in_date` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',
   `result` smallint(6) NOT NULL DEFAULT '0',
   `language` INT UNSIGNED NOT NULL DEFAULT '0',
-  `ip` char(15) NOT NULL,
+  `ip` char(46) NOT NULL,
   `contest_id` int(11) DEFAULT NULL,
   `valid` tinyint(4) NOT NULL DEFAULT '1',
   `num` tinyint(4) NOT NULL DEFAULT '-1',

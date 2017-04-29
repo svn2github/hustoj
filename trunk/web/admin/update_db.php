@@ -135,6 +135,9 @@ $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL'
 $tsql[24]="whatever";
 $csql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
 
+$tsql[25]="whatever";
+$csql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
+
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

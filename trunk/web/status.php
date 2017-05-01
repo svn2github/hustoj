@@ -24,7 +24,7 @@ if($OJ_TEMPLATE!="classic")
 $str2="";
 $lock=false;
 $lock_time=date("Y-m-d H:i:s",time());
-$sql="SELECT * FROM `solution` WHERE problem_id>0 ";
+$sql="WHERE problem_id>0 ";
 if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
@@ -61,9 +61,9 @@ if (isset($_GET['cid'])){
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION['user_id']))
   ){
       if ($_SESSION['user_id']!="guest")
-      		$sql="SELECT * FROM `solution` WHERE contest_id is null ";
+      		$sql="WHERE contest_id is null ";
   }else{
-      $sql="SELECT * FROM `solution` WHERE problem_id>0 and contest_id is null ";
+      $sql="WHERE problem_id>0 and contest_id is null ";
   }
 }
 $start_first=true;
@@ -126,19 +126,19 @@ if ($result!=-1&&!$lock){
 
 
 if($OJ_SIM){
-        $old=$sql;
-        $sql="select * from ($sql order by solution_id desc limit 1000) solution left join `sim` on solution.solution_id=sim.s_id WHERE 1 ";
+       // $old=$sql;
+        $sql="select * from solution solution left join `sim` sim on solution.solution_id=sim.s_id ".$sql;
         if(isset($_GET['showsim'])&&intval($_GET['showsim'])>0){
                 $showsim=intval($_GET['showsim']);
-                $sql="select * from ($old ) solution 
-                     left join `sim` on solution.solution_id=sim.s_id WHERE result=4 and sim>=$showsim limit 1000";
-                $sql="SELECT * FROM ($sql) `solution`
-                        left join(select solution_id old_s_id,user_id old_user_id from solution limit 1000) old
-                        on old.old_s_id=sim_s_id WHERE  old_user_id!=user_id and sim_s_id!=solution_id ";
+        	$sql.=" and sim.sim>=$showsim";
                 $str2.="&showsim=$showsim";
         }
+	
         //$sql=$sql.$order_str." LIMIT 20";
+}else{
+ 	$sql="select * from `solution` ".$sql;
 }
+	//echo $sql;
 
 
 

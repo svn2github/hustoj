@@ -197,3 +197,20 @@ CREATE TABLE  `custominput` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
+delimiter //
+drop trigger if exists simfilter//
+create trigger simfilter
+before insert on sim
+for each row
+begin
+ declare new_user_id varchar(64);
+ declare old_user_id varchar(64);
+ select user_id from solution where solution_id=new.s_id into new_user_id;
+ select user_id from solution where solution_id=new.sim_s_id into old_user_id;
+ if old_user_id=new_user_id then
+	set new.s_id=0;
+ end if;
+ 
+end;//
+delimiter ;

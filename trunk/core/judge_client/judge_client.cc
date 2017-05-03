@@ -1563,6 +1563,7 @@ void copy_js_runtime(char * work_dir) {
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	nice(19);
+	int py2=execute_cmd("/bin/grep 'python2' Main.py");
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files
@@ -1660,7 +1661,11 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		execl("/bin/bash", "/bin/bash", "Main.sh", (char *) NULL);
 		break;
 	case 6: //Python
-		execl("/python", "/python", "Main.py", (char *) NULL);
+		if(!py2){	
+			execl("/python2", "/python2", "Main.py", (char *) NULL);
+		}else{
+			execl("/python3", "/python3", "Main.py", (char *) NULL);
+		}
 		break;
 	case 7: //php
 		execl("/php", "/php", "Main.php", (char *) NULL);

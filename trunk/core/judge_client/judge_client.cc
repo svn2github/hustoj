@@ -2006,7 +2006,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
                                         " TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
                                         "and recompile judge_client. \n"
                                         "if you are admin and you don't know what to do ,\n"
-                                        " tech support can be found on http://hustoj.taobao.com\n",
+                                        "chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
                                         solution_id, (long)reg.REG_SYSCALL);
  
 			write_log(error);

@@ -13,6 +13,8 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 Ubuntu14.04快速安装指南：  
 (16.04见https://github.com/zhblue/hustoj/tree/php7)  
 
+参考视频  https://v.qq.com/x/page/c03955kvowx.html
+
     1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)  
     2、执行如下命令  
         sudo apt-get update  

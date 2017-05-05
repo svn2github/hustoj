@@ -33,6 +33,8 @@ Ubuntu14.04快速安装指南：
   
 推荐用干净的Ubuntu安装，不推荐使用外挂的LAMP或LNMP打包程序，会与安装脚本冲突。
 
+[更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
+
 有问题请先查阅
 <b>[FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)</b> 和
 <b>[Wiki](https://github.com/zhblue/hustoj/tree/master/wiki)</b> 或使用搜索引擎。  

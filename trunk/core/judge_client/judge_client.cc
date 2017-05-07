@@ -1102,7 +1102,10 @@ void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 		printf("Main=%s", src_pth);
 	FILE *fp_src = fopen(src_pth, "we");
 	fprintf(fp_src, "%s", row[0]);
-	mysql_free_result(res);
+	if(res!=NULL) {
+		mysql_free_result(res);                         // free the memory
+		res=NULL;
+	}
 	fclose(fp_src);
 }
 void _get_solution_http(int solution_id, char * work_dir, int lang) {
@@ -1150,7 +1153,10 @@ void _get_custominput_mysql(int solution_id, char * work_dir) {
 		fclose(fp_src);
 
 	}
-	mysql_free_result(res);
+	if(res!=NULL) {
+		mysql_free_result(res);                         // free the memory
+		res=NULL;
+	}
 }
 void _get_custominput_http(int solution_id, char * work_dir) {
 	char src_pth[BUFFER_SIZE];
@@ -1193,7 +1199,10 @@ void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
 	p_id = atoi(row[0]);
 	strcpy(user_id, row[1]);
 	lang = atoi(row[2]);
-	mysql_free_result(res);
+	if(res!=NULL) {
+		mysql_free_result(res);                         // free the memory
+		res=NULL;
+	}
 }
 
 void _get_solution_info_http(int solution_id, int & p_id, char * user_id,
@@ -1235,7 +1244,10 @@ void _get_problem_info_mysql(int p_id, int & time_lmt, int & mem_lmt,
 	time_lmt = atoi(row[0]);
 	mem_lmt = atoi(row[1]);
 	isspj = (row[2][0] == '1');
-	mysql_free_result(res);
+	if(res!=NULL) {
+		mysql_free_result(res);                         // free the memory
+		res=NULL;
+	}
 }
 
 void _get_problem_info_http(int p_id, int & time_lmt, int & mem_lmt,

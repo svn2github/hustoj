@@ -163,15 +163,13 @@ if (mysqli_num_rows($res)==1){
 
 
 if((~$OJ_LANGMASK)&(1<<$language)){
-$store_id=0;
-if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 
 	if (!isset($pid)){
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len')";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len',14)";
 	}else{
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num)
-		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid')";
+	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,result)
+		VALUES('$id','$user_id',NOW(),'$language','$ip','$len','$cid','$pid',14)";
 	}
 	mysqli_query($mysqli,$sql);
 	$insert_id=mysqli_insert_id($mysqli);
@@ -185,6 +183,8 @@ if(isset($_SESSION['store_id'])) $store_id=$_SESSION['store_id'];
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES('$insert_id','$input_text')";
 		mysqli_query($mysqli,$sql);
 	}
+	$sql="update solution set result=0 where solution_id='$insert_id'";
+	mysqli_query($mysqli,$sql);
 	//echo $sql;
 	//using redis task queue
         if($OJ_REDIS){

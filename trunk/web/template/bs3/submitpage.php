@@ -95,7 +95,10 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </textarea>
 <br>
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
-<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
+<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
+<?php }?>
+<span class="btn" id=result>状态</span>
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
 	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
@@ -205,40 +208,40 @@ document.getElementById("frmSolution").submit();
 }
 var handler_interval;
 function do_test_run(){
-if( handler_interval) window.clearInterval( handler_interval);
-var loader="<img width=18 src=image/loader.gif>";
-var tb=window.document.getElementById('result');
-if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
-if($("#source").val().length<10) return alert("too short!");
-tb.innerHTML=loader;
+	if( handler_interval) window.clearInterval( handler_interval);
+	var loader="<img width=18 src=image/loader.gif>";
+	var tb=window.document.getElementById('result');
+	if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
+	if($("#source").val().length<10) return alert("too short!");
+	if(tb!=null)tb.innerHTML=loader;
 
-var mark="<?php echo isset($id)?'problem_id':'cid';?>";
-var problem_id=document.getElementById(mark);
-problem_id.value=-problem_id.value;
-document.getElementById("frmSolution").target="testRun";
-//document.getElementById("frmSolution").submit();
-$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
-document.getElementById("TestRun").disabled=true;
-document.getElementById("Submit").disabled=true;
-problem_id.value=-problem_id.value;
-count=20;
-handler_interval= window.setTimeout("resume();",1000);
+	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+	var problem_id=document.getElementById(mark);
+	problem_id.value=-problem_id.value;
+	document.getElementById("frmSolution").target="testRun";
+	//document.getElementById("frmSolution").submit();
+	$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
+	document.getElementById("Submit").disabled=true;
+	problem_id.value=-problem_id.value;
+	count=20;
+	handler_interval= window.setTimeout("resume();",1000);
+	document.getElementById("TestRun").disabled=true;
 }
 function resume(){
-count--;
-var s=document.getElementById('Submit');
-var t=document.getElementById('TestRun');
-if(count<0){
-s.disabled=false;
-t.disabled=false;
-s.value="<?php echo $MSG_SUBMIT?>";
-t.value="<?php echo $MSG_TR?>";
-if( handler_interval) window.clearInterval( handler_interval);
-}else{
-s.value="<?php echo $MSG_SUBMIT?>("+count+")";
-t.value="<?php echo $MSG_TR?>("+count+")";
-window.setTimeout("resume();",1000);
-}
+	count--;
+	var s=document.getElementById('Submit');
+	var t=document.getElementById('TestRun');
+	if(count<0){
+	s.disabled=false;
+	t.disabled=false;
+	s.value="<?php echo $MSG_SUBMIT?>";
+	t.value="<?php echo $MSG_TR?>";
+	if( handler_interval) window.clearInterval( handler_interval);
+	}else{
+	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
+	t.value="<?php echo $MSG_TR?>("+count+")";
+	window.setTimeout("resume();",1000);
+	}
 }
 function reloadtemplate(lang){
    document.cookie="lastlang="+lang.value;

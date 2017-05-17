@@ -95,9 +95,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </textarea>
 <br>
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
-<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
-	<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-<?php }?><span class="btn" id=result>状态</span>
+<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();><span class="btn" id=result>状态</span>
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
 	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
@@ -261,7 +259,7 @@ function openBlockly(){
    $('#blockly').html('<iframe name=\'frmBlockly\' width=90% height=580 src=\'blockly/demos/code/index.html\'></iframe>'); 
   $("#blockly_loader").hide();
   $("#transrun").show();
-  //$("#Submit").prop('disabled', true);
+  $("#Submit").prop('disabled', true);
   using_blockly=true;
   
 }

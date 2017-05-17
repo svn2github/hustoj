@@ -261,7 +261,7 @@ function openBlockly(){
    $('#blockly').html('<iframe name=\'frmBlockly\' width=90% height=580 src=\'blockly/demos/code/index.html\'></iframe>'); 
   $("#blockly_loader").hide();
   $("#transrun").show();
-  $("#Submit").prop('disabled', true);
+  //$("#Submit").prop('disabled', true);
   using_blockly=true;
   
 }

@@ -193,18 +193,18 @@ return ret+"";
 }
 var count=0;
 function do_submit(){
-if(using_blockly) 
- translate();
-if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
-var mark="<?php echo isset($id)?'problem_id':'cid';?>";
-var problem_id=document.getElementById(mark);
-if(mark=='problem_id')
-problem_id.value='<?php if (isset($id))echo $id?>';
-else
-problem_id.value='<?php if (isset($cid))echo $cid?>';
-document.getElementById("frmSolution").target="_self";
-<?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
-document.getElementById("frmSolution").submit();
+	if(using_blockly) 
+		 translate();
+	if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
+	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+	var problem_id=document.getElementById(mark);
+	if(mark=='problem_id')
+	problem_id.value='<?php if (isset($id))echo $id?>';
+	else
+	problem_id.value='<?php if (isset($cid))echo $cid?>';
+	document.getElementById("frmSolution").target="_self";
+	<?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
+	document.getElementById("frmSolution").submit();
 }
 var handler_interval;
 function do_test_run(){
@@ -221,26 +221,26 @@ function do_test_run(){
 	document.getElementById("frmSolution").target="testRun";
 	//document.getElementById("frmSolution").submit();
 	$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
-	document.getElementById("Submit").disabled=true;
+  	$("#Submit").prop('disabled', true);
+  	$("#TestRub").prop('disabled', true);
 	problem_id.value=-problem_id.value;
 	count=20;
 	handler_interval= window.setTimeout("resume();",1000);
-	document.getElementById("TestRun").disabled=true;
 }
 function resume(){
 	count--;
-	var s=document.getElementById('Submit');
-	var t=document.getElementById('TestRun');
+	var s=$("#Submit")[0];
+	var t=$("#TestRub")[0];
 	if(count<0){
-	s.disabled=false;
-	t.disabled=false;
-	s.value="<?php echo $MSG_SUBMIT?>";
-	t.value="<?php echo $MSG_TR?>";
-	if( handler_interval) window.clearInterval( handler_interval);
+		s.disabled=false;
+		if(t!=null)t.disabled=false;
+		s.value="<?php echo $MSG_SUBMIT?>";
+		if(t!=null)t.value="<?php echo $MSG_TR?>";
+		if( handler_interval) window.clearInterval( handler_interval);
 	}else{
-	s.value="<?php echo $MSG_SUBMIT?>("+count+")";
-	t.value="<?php echo $MSG_TR?>("+count+")";
-	window.setTimeout("resume();",1000);
+		s.value="<?php echo $MSG_SUBMIT?>("+count+")";
+		if(t!=null)t.value="<?php echo $MSG_TR?>("+count+")";
+		window.setTimeout("resume();",1000);
 	}
 }
 function reloadtemplate(lang){

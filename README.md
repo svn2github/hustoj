@@ -13,25 +13,10 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 Ubuntu14.04快速安装指南：  
 (16.04见https://github.com/zhblue/hustoj/tree/php7)  
 
-参考视频  https://v.qq.com/x/page/c03955kvowx.html
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
+    chmod +x install-ubuntu14.04.sh
+    sudo ./install-ubuntu14.04.sh
 
-    1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)  
-    2、执行如下命令  
-        sudo apt-get update  
-        sudo apt-get install subversion  
-        sudo svn co https://github.com/zhblue/hustoj/trunk/trunk/install hustoj  
-        cd hustoj  
-        sudo bash install-interactive.sh  
-    3、安装后访问服务器80端口上的web服务JudgeOnline目录  
-        例如 w3m http://127.0.0.1/JudgeOnline  
-
-安装过程首先会询问您数据库的<b>账号和密码</b>
-
-如果您提前安装了数据库，或使用其他服务提供的数据库服务，您应该<b>已经</b>获得了数据库的账号密码，那么请您确保输入正确。
-
-如果您没有预先mysql服务器，安装安装过程中会自动安装，并触发root账户密码设置操作。这种情况下，第一次询问您数据库账号，请输入<b>root</b>,然后会有<b>三次</b>询问数据库密码的提示，请确保输入<b>完全相同的三次密码</b>，并自行<b>记录下来</b>，以做将来备份迁移时使用。
-  
-推荐用干净的Ubuntu安装，不推荐使用外挂的LAMP或LNMP打包程序，会与安装脚本冲突。
 
 [更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
 

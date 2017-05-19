@@ -11,12 +11,22 @@ HUSTOJ 是采用GPL的自由软件。
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
 Ubuntu14.04快速安装指南：  
-(16.04见https://github.com/zhblue/hustoj/tree/php7)  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     chmod +x install-ubuntu14.04.sh
     sudo ./install-ubuntu14.04.sh
 
+ubuntu16.04，可以使用下面脚本
+
+    wget https://raw.githubusercontent.com/zhblue/hustoj/php7/trunk/install/install-ubuntu16.04.sh
+    chmod +x install-ubuntu16.04.sh
+    sudo ./install-ubuntu16.04.sh
+
+REDHAT / CENTOS 用户请浏览 
+
+https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md
+
+https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 [更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
 

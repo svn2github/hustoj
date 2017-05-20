@@ -2,8 +2,8 @@
 #labels Featured,LiveCD,Phase-Deploy
 
 Download:
-14.04 LTS 版本(OJ管理员admin密码hustoj)
-* http://pan.baidu.com/s/1o78D4x0 
+14.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员)
+* http://pan.baidu.com/s/1nvUbEkD
 
 12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172

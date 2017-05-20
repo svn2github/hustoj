@@ -36,7 +36,7 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 使用上需要帮助，请加用户交流QQ群23361372，仅限QQ手机加群(费用5元)或购买在线服务hustoj.taobao.com。  
 
-Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](http://pan.baidu.com/s/1o78D4x0)或HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
+Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](http://pan.baidu.com/s/1nvUbEkD)或HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 
 使用说明见iso中README,也可以参考[LiveCD简介](https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md)  
 

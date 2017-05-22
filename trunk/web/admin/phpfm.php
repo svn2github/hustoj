@@ -3127,7 +3127,7 @@ function dir_list_form() {
             return true;
         }
         function download(arg){
-            parent.frame1.location.href='".addslashes($path_info["basename"])."?action=3&current_dir=".addslashes($current_dir)."&filename='+escape(arg);
+            location.href='".addslashes($path_info["basename"])."?action=3&current_dir=".addslashes($current_dir)."&filename='+escape(arg);
         }
         function upload(){
             var w = 400;

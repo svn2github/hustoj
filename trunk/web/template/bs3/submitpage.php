@@ -85,6 +85,11 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 }
 ?>
 </select>
+<?php if($OJ_VCODE){?>
+<?php echo $MSG_VCODE?>:
+<input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
+<?php }?>
+
 <br>
 </span>
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
@@ -131,49 +136,54 @@ $("#out").load("status-ajax.php?tr=1&solution_id="+solution_id);
 }
 function fresh_result(solution_id)
 {
-sid=solution_id;
-var xmlhttp;
-if (window.XMLHttpRequest)
-{// code for IE7+, Firefox, Chrome, Opera, Safari
-xmlhttp=new XMLHttpRequest();
-}
-else
-{// code for IE6, IE5
-xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-}
-xmlhttp.onreadystatechange=function()
-{
-if (xmlhttp.readyState==4 && xmlhttp.status==200)
-{
-var tb=window.document.getElementById('result');
-var r=xmlhttp.responseText;
-var ra=r.split(",");
-// alert(r);
-// alert(judge_result[r]);
-var loader="<img width=18 src=image/loader.gif>";
-var tag="span";
-if(ra[0]<4) tag="span disabled=true";
-else tag="a";
-{
-	if(ra[0]==11)
-	
-	tb.innerHTML="<"+tag+" href='ceinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+	var tb=window.document.getElementById('result');
+	if(solution_id==undefined){
+		tb.innerHTML="Vcode Error!";		
+		if($("#vcode")!=null) $("#vcode").click();
+		return ;
+	}
+	sid=solution_id;
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+	xmlhttp=new XMLHttpRequest();
+	}
 	else
-	tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
-}
-if(ra[0]<4)tb.innerHTML+=loader;
-tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
-tb.innerHTML+="Time:"+ra[2]+"ms";
-if(ra[0]<4)
-window.setTimeout("fresh_result("+solution_id+")",2000);
-else{
-	window.setTimeout("print_result("+solution_id+")",2000);
-	count=1;
-}
-}
-}
-xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
-xmlhttp.send();
+	{// code for IE6, IE5
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{
+	var r=xmlhttp.responseText;
+	var ra=r.split(",");
+	// alert(r);
+	// alert(judge_result[r]);
+	var loader="<img width=18 src=image/loader.gif>";
+	var tag="span";
+	if(ra[0]<4) tag="span disabled=true";
+	else tag="a";
+	{
+		if(ra[0]==11)
+		
+		tb.innerHTML="<"+tag+" href='ceinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+		else
+		tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
+	}
+	if(ra[0]<4)tb.innerHTML+=loader;
+	tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
+	tb.innerHTML+="Time:"+ra[2]+"ms";
+	if(ra[0]<4)
+	window.setTimeout("fresh_result("+solution_id+")",2000);
+	else{
+		window.setTimeout("print_result("+solution_id+")",2000);
+		count=1;
+	}
+	}
+	}
+	xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
+	xmlhttp.send();
 }
 function getSID(){
 var ofrm1 = document.getElementById("testRun").document;
@@ -237,6 +247,7 @@ function resume(){
 		s.value="<?php echo $MSG_SUBMIT?>";
 		if(t!=null)t.value="<?php echo $MSG_TR?>";
 		if( handler_interval) window.clearInterval( handler_interval);
+		if($("#vcode")!=null) $("#vcode").click();
 	}else{
 		s.value="<?php echo $MSG_SUBMIT?>("+count+")";
 		if(t!=null)t.value="<?php echo $MSG_TR?>("+count+")";

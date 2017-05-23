@@ -2258,7 +2258,8 @@ int main(int argc, char** argv) {
 		// copy java.policy
 		if(lang==3){
 			execute_cmd("/bin/cp %s/etc/java0.policy %s/java.policy", oj_home,work_dir);
-			execute_cmd("chmod 744 %s/java.policy", work_dir);
+			execute_cmd("chmod 755 %s/java.policy", work_dir);
+			execute_cmd("chown judge %s/java.policy", work_dir);
 		}
 
 	}

@@ -15,7 +15,7 @@
 		pdo_query("set names utf8");
 		$sql="select password,salt,username from ".$discuz_db.".uc_members where username='$user_id'";
 		$result=pdo_query($sql);
-		$row = mysqli_fetch_array($result);
+		$row = $result[0];
 		if($discuz_conn){
 			mysql_select_db($discuz_db,$discuz_conn);
 			$result=pdo_query($sql,$discuz_conn);

@@ -67,7 +67,7 @@ if( strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {
         $OJ_LANG="cn";
 }
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
-global $mysqli;
+
 	if($OJ_SAE)	{
 		$OJ_DATA="saestor://data/";
 	//  for sae.sina.com.cn

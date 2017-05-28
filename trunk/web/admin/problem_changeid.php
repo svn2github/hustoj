@@ -47,7 +47,7 @@ function writable($path){
 			}
 			$sql="select max(problem_id) from problem";
 			if($result=pdo_query($sql)){
-				$f=mysqli_fetch_array($result);
+				$f=$result[0];
 				$nextid=$f[0]+1;
 				
 				$sql="ALTER TABLE problem AUTO_INCREMENT = $nextid";

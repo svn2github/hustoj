@@ -71,8 +71,8 @@ class online{
 	 */
 	function __construct()
 	{
-		global $mysqli;
-		$this->ip = mysqli_real_escape_string($mysqli,$_SERVER['REMOTE_ADDR']);
+		
+		$this->ip = ($_SERVER['REMOTE_ADDR']);
       
       
          if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
@@ -81,16 +81,16 @@ class online{
                     
                     $tmp_ip=explode(',',$REMOTE_ADDR);
 
-                    $this->ip =mysqli_real_escape_string($mysqli,htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+                    $this->ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 
         }
 
-		$this->ua = mysqli_real_escape_string($mysqli,htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
-		$this->uri = mysqli_real_escape_string($mysqli,$_SERVER['PHP_SELF']);
+		$this->ua = (htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
+		$this->uri = ($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
-			$this->refer = mysqli_real_escape_string($mysqli,htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
+			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
 	    }
-		$this->hash = mysqli_real_escape_string($mysqli,session_id());
+		$this->hash = (session_id());
 		//$this->db = new mysqli(DBHOST, DBUSER, DBPASSWORD, )
 
 		//check user existed!
@@ -115,7 +115,7 @@ class online{
 	{
 		$ret = array();
 		
-		global $mysqli;
+		
 		$sql = 'SELECT * FROM online';
 		$res = pdo_query($sql);
 		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
@@ -153,7 +153,7 @@ class online{
 	 */
 	function get_num()
 	{
-		global $mysqli;
+		
 		$sql = 'SELECT count(ip) as nums FROM online';
 		$res = pdo_query($sql);
 		$ret = 0;
@@ -171,7 +171,7 @@ class online{
 	 */
 	function exist()
 	{
-		global $mysqli;
+		
 		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
 		$res = pdo_query($sql);
 		if($res&&count($res) == 0)
@@ -187,7 +187,7 @@ class online{
 	 */
 	function addRecord()
 	{
-		global $mysqli;
+		
 		$now = time();
 		$sql = "INSERT INTO online(hash, ip, ua, uri, refer, firsttime, lastmove)
 				VALUES ('$this->hash', '$this->ip', '$this->ua', '$this->uri', '$this->refer', '$now', '$now')";
@@ -201,7 +201,7 @@ class online{
 	 */
 	function update()
 	{
-		global $mysqli;
+		
 		$sql = "UPDATE online
 				SET
 					ua = '$this->ua',
@@ -221,7 +221,7 @@ class online{
 	 */
 	function clean()
 	{
-		global $mysqli;
+		
 		$sql = 'DELETE FROM online WHERE lastmove<'.(time()-ONLINE_DURATION);
 		pdo_query($sql);
 	}

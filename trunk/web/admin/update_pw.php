@@ -6,7 +6,7 @@ if(!(isset($_SESSION['password_setter'])|| isset($_SESSION['administrator'])  ))
 function update_for_user($user_id){
 	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."' ";
 	$result=pdo_query($sql);
-	$row = mysqli_fetch_array($result);
+	$row = $result[0];
 	if ($row){
 		$oldpw = $row['password'];
 		if (!isOldPW($oldpw)) return False;

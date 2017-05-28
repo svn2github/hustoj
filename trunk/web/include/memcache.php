@@ -40,7 +40,10 @@
 
             $r = mysqli_query($mysqli,$sql);
 
-            $fields = mysqli_fetch_fields($r);
+            $fields =array();
+	    while ($finfo = mysqli_fetch_field($r)) {
+		array_push($fields,$finfo);
+    	    }
    //读取数据库，并将结果放入$cache数组中
                 for ($i=0;$row = mysqli_fetch_array($r);$i++) {
 		    $j=0;

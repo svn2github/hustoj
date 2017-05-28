@@ -185,22 +185,11 @@ $sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
 if($OJ_MEMCACHE){
-//        require("./include/memcache.php");
         $fb = mysql_query_cache($sql);
-        if($fb) $rows_cnt=count($fb);
-        else $rows_cnt=0;
 }else{
-
         $fb = pdo_query($sql);
-        if($fb) $rows_cnt=count($fb);
-        else $rows_cnt=0;
 }
-
-for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$fb[$i];
-        else
-                $row=mysqli_fetch_array($fb);
+foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];
 }
 

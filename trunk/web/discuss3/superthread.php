@@ -3,9 +3,9 @@
 	$tid=intval($_REQUEST['tid']);
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".$tid."' AND `status` <= 1";
-	$result=pdo_query($sql) or die("Error! ".mysqli_error($mysqli));
-	$rows_cnt = count($result) or die("Error! ".mysqli_error($mysqli));
-	$row= mysqli_fetch_object($result);
+	$result=pdo_query($sql) ;
+	$rows_cnt = count($result) ;
+	$row= $result[0];
 	$isadmin = isset($_SESSION['administrator']);
 ?>
 
@@ -29,13 +29,12 @@
 
 <?php
 	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".$tid."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
-	$result=pdo_query($sql) or die("Error! ".mysqli_error($mysqli));
+	$result=pdo_query($sql) ;
 	$rows_cnt = count($result);
 	$cnt=0;
-
-	for ($i=0;$i<$rows_cnt;$i++){
-		mysqli_data_seek($result,$i);
-		 $row=$result[0];
+	$i=0;
+	foreach($result as $row ){
+		
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
 		$isuser = strtolower($row['author_id'])==strtolower($_SESSION['user_id']);
 ?>
@@ -73,6 +72,7 @@
 	</td>
 </tr>
 <?php
+	$i++;
 	}
 ?>
 </table>

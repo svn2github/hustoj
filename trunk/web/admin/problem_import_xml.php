@@ -31,7 +31,7 @@ function getLang($language){
 }
 function submitSolution($pid,$solution,$language)
 {
-	$mysqli=$GLOBALS['mysqli'];
+	
 	
 	$language=getLang($language);
 	
@@ -59,7 +59,7 @@ function getAttribute($Node, $TagName,$attribute) {
 	return $Node->children()->$TagName->attributes()->$attribute;
 }
 function hasProblem($title){
-	$mysqli=$GLOBALS['mysqli'];
+	
 	$md5=md5($title);
 	$sql="select 1 from problem where md5(title)='$md5'";  
 	$result=pdo_query( $sql );

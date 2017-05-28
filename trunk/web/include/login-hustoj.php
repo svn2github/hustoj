@@ -2,7 +2,7 @@
 	require_once("./include/my_func.inc.php");
     
 	function check_login($user_id,$password){
-		$mysqli=$GLOBALS['mysqli'];
+		
 		$pass2 = 'No Saved';
 		session_destroy();
 		session_start();

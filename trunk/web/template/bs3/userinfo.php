@@ -44,7 +44,7 @@ function p(id,c){
 }
 <?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`='$user_mysql' 
 		AND problem_id in (select distinct problem_id from solution where `user_id`='$user_mysql' and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
-if (!($result=pdo_query($sql))) echo mysqli_error($mysqli);
+if (!($result=pdo_query($sql))) 
  foreach($result as $row)
 echo "p($row[0],$row[1]);";
 

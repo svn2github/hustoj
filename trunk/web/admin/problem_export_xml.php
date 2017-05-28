@@ -87,7 +87,7 @@ class Solution{
 }
 function getSolution($pid,$lang){
 	$ret=new Solution();
-	$mysqli=$GLOBALS['mysqli'];
+	
 	$language_name=$GLOBALS['language_name'];
         $con=false;
 	if(isset($OJ_SAE)&&$OJ_SAE)     {
@@ -101,7 +101,7 @@ function getSolution($pid,$lang){
         }
 	if (!$con)
     {
-      //  die('Could not connect: ' . mysqli_error($mysqli));
+     
     }
 	pdo_query("set names utf8",$con);
 	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";

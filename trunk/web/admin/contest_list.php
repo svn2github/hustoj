@@ -11,7 +11,7 @@ require_once("../include/set_get_key.php");
 $sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";
 $page_cnt=50;
 $result=pdo_query($sql);
-echo mysqli_error($mysqli);
+
  $row=$result[0];
 $base=intval($row['btid']);
 $cnt=intval($row['upid'])-$base;

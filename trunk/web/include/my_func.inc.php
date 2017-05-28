@@ -80,7 +80,7 @@ function sec2str($sec){
 }
 
 function is_running($cid){
-	$mysqli=$GLOBALS['mysqli'];
+	
 	//require_once("./include/db_info.inc.php");
    $now=strftime("%Y-%m-%d %H:%M",time());
 	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' AND `end_time`>'$now'";
@@ -93,7 +93,7 @@ function is_running($cid){
 
 function check_ac($cid,$pid){
 	//require_once("./include/db_info.inc.php");
-	$mysqli=$GLOBALS['mysqli'];
+	
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`='$cid' AND `num`='$pid' AND `result`='4' AND `user_id`='".$_SESSION['user_id']."'";
 	$result=pdo_query($sql);
 	 $row=$result[0];

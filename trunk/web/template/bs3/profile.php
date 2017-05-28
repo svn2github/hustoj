@@ -13,7 +13,7 @@ header("Pragma: no-cache");
 		require_once("../../lang/en.php");
 	}
     function checkmail(){
-	$mysqli=$GLOBALS['mysqli'];		
+			
 		$sql="SELECT count(1) FROM `mail` WHERE 
 				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
 		$result=pdo_query($sql);

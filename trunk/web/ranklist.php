@@ -94,9 +94,9 @@
         //        $result = mysql_query ( $sql );
         if($OJ_MEMCACHE){
           // require("./include/memcache.php");
-                $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+                $result = mysql_query_cache($sql);
         }else{
-                $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+                $result = pdo_query($sql);
         }
                  $row=$result[0];
                 $view_total=$row['mycount'];

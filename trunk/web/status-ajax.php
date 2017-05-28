@@ -25,12 +25,12 @@ if (isset($_GET['solution_id'])){
 
 	if($OJ_MEMCACHE){
 		require("./include/memcache.php");
-		$result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+		$result = mysql_query_cache($sql);
 		if($result) $rows_cnt=count($result);
 		else $rows_cnt=0;
 	}else{
 
-		$result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+		$result = pdo_query($sql);
 		if($result) $rows_cnt=count($result);
 		else $rows_cnt=0;
 	}

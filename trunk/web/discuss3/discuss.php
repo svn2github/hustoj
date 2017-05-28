@@ -59,8 +59,8 @@ else
 $sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`reply`.`time`) DESC";
 $sql.=" LIMIT 30";
 //echo $sql;
-$result = mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
-$rows_cnt = mysqli_num_rows($result);
+$result = pdo_query($sql);
+$rows_cnt = count($result);
 $cnt=0;
 $isadmin = isset($_SESSION['administrator']);
 ?>
@@ -79,7 +79,7 @@ $isadmin = isset($_SESSION['administrator']);
 
 for ($i=0;$i<$rows_cnt;$i++){
         mysqli_data_seek($result,$i);
-        $row=mysqli_fetch_object($result);
+         $row=$result[0];
         if ($cnt) echo "<tr align=center class='oddrow'>";
         else echo "<tr align=center class='evenrow'>";
         $cnt=1-$cnt;
@@ -102,14 +102,14 @@ for ($i=0;$i<$rows_cnt;$i++){
         }
 	echo "</td>";
         echo "<td><a href=\"../userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
-        if($row->cid)echo "<td><a href=\"thread.php?tid={$row->tid}&cid={$row->cid}\">".htmlentities($row->title,ENT_QUOTES,"UTF-8")."</a></td>";
-        else echo "<td><a href=\"thread.php?tid={$row->tid}\">".htmlentities($row->title,ENT_QUOTES,"UTF-8")."</a></td>";
+        if($row->cid)echo "<td><a href=\"thread.php?tid={$row->tid}&cid={$row->cid}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
+        else echo "<td><a href=\"thread.php?tid={$row->tid}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
         echo "<td>{$row->posttime}</td>";
         echo "<td>{$row->lastupdate}</td>";
         echo "<td>".($row->count-1)."</td>";
         echo "</tr>";
 }
-mysqli_free_result($result);
+
 
 ?>
 

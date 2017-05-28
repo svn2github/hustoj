@@ -13,81 +13,74 @@ if (!is_valid_user_name($user)){
 	exit(0);
 }
 $view_title=$user ."@".$OJ_NAME;
-$user_mysql=mysqli_real_escape_string($mysqli,$user);
-$sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`='$user_mysql'";
-$result=mysqli_query($mysqli,$sql);
-$row_cnt=mysqli_num_rows($result);
+$sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`=?";
+$result=pdo_query($sql,$user);
+$row_cnt=count($result);
 if ($row_cnt==0){ 
 	$view_errors= "No such User!";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 
-$row=mysqli_fetch_object($result);
-$school=$row->school;
-$email=$row->email;
-$nick=$row->nick;
-mysqli_free_result($result);
+ $row=$result[0];
+$school=$row['school'];
+$email=$row['email'];
+$nick=$row['nick'];
+
 // count solved
-$sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`='".$user_mysql."' AND `result`=4";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-$row=mysqli_fetch_object($result);
-$AC=$row->ac;
-mysqli_free_result($result);
+$sql="SELECT count(DISTINCT problem_id) as `ac` FROM `solution` WHERE `user_id`=? AND `result`=4";
+$result=pdo_query($sql,$user) ;
+ $row=$result[0];
+$AC=$row['ac'];
+
 // count submission
-$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`='".$user_mysql."' and  problem_id>0";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-$row=mysqli_fetch_object($result);
-$Submit=$row->Submit;
-mysqli_free_result($result);
+$sql="SELECT count(solution_id) as `Submit` FROM `solution` WHERE `user_id`=? and  problem_id>0";
+$result=pdo_query($sql,$user) ;
+ $row=$result[0];
+$Submit=$row['Submit'];
+
 // update solved 
-$sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`='".$user_mysql."'";
-$result=mysqli_query($mysqli,$sql);
+$sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`=?";
+$result=pdo_query($sql,$user);
 $sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>$AC";
-$result=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_array($result);
+$result=pdo_query($sql);
+ $row=$result[0];
 $Rank=intval($row[0])+1;
 
  if (isset($_SESSION['administrator'])){
-$sql="SELECT * FROM `loginlog` WHERE `user_id`='$user_mysql' order by `time` desc LIMIT 0,10";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-$view_userinfo=array();
-$i=0;
-for (;$row=mysqli_fetch_row($result);){
-	$view_userinfo[$i]=$row;
-	$i++;
-}
+$sql="SELECT user_id,password,ip,`time` FROM `loginlog` WHERE `user_id`=? order by `time` desc LIMIT 0,10";
+$view_userinfo=pdo_query($sql,$user) ;
 echo "</table>";
-mysqli_free_result($result);
+
 }
-$sql="SELECT result,count(1) FROM solution WHERE `user_id`='$user_mysql'  AND result>=4 group by result order by result";
-	$result=mysqli_query($mysqli,$sql);
+$sql="SELECT result,count(1) FROM solution WHERE `user_id`=? AND result>=4 group by result order by result";
+	$result=pdo_query($sql,$user);
 	$view_userstat=array();
 	$i=0;
-	while($row=mysqli_fetch_array($result)){
+	 foreach($result as $row){
 		$view_userstat[$i++]=$row;
 	}
-	mysqli_free_result($result);
+	
 
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`='$user_mysql'   group by md order by md desc ";
-	$result=mysqli_query($mysqli,$sql);//mysql_escape_string($sql));
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`=?  group by md order by md desc ";
+	$result=pdo_query($sql,$user);//mysql_escape_string($sql));
 	$chart_data_all= array();
 //echo $sql;
     
-	while ($row=mysqli_fetch_array($result)){
+	 foreach($result as $row){
 		$chart_data_all[$row['md']]=$row['c'];
     }
     
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`='$user_mysql' and result=4 group by md order by md desc ";
-	$result=mysqli_query($mysqli,$sql);//mysql_escape_string($sql));
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where  `user_id`=? and result=4 group by md order by md desc ";
+	$result=pdo_query($sql,$user);//mysql_escape_string($sql));
 	$chart_data_ac= array();
 //echo $sql;
     
-	while ($row=mysqli_fetch_array($result)){
+	 foreach($result as $row){
 		$chart_data_ac[$row['md']]=$row['c'];
     }
   
-  mysqli_free_result($result);
+  
     
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/userinfo.php");

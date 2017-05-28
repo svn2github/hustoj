@@ -7,14 +7,14 @@ if (!(isset($_SESSION['administrator']))){
 ?>
 <?php $id=intval($_GET['id']);
 $sql="SELECT `defunct` FROM `news` WHERE `news_id`=$id";
-$result=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_row($result);
+$result=pdo_query($sql);
+$row=$result[0];
 $defunct=$row[0];
 echo $defunct;
-mysqli_free_result($result);
+
 if ($defunct=='Y') $sql="update `news` set `defunct`='N' where `news_id`=$id";
 else $sql="update `news` set `defunct`='Y' where `news_id`=$id";
-mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+pdo_query($sql) ;
 ?>
 <script language=javascript>
 	history.go(-1);

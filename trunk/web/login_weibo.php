@@ -48,14 +48,14 @@ if(array_key_exists('code',$_GET)){
         $school = "";
         // check first
         $sql = "SELECT `user_id` FROM `users` where `user_id`='$uname'";
-        $res = mysqli_query($mysqli,$sql);
-        $row_num = mysqli_num_rows($res);
+        $res = pdo_query($sql);
+        $row_num = count($res);
         if ($row_num == 0){
             $sql="INSERT INTO `users`("
                     ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
             ."VALUES('".$uname."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
            // reg it
-           mysqli_query($mysqli,$sql);
+           pdo_query($sql);
         }
         // login it
 		$_SESSION['user_id']=$uname;

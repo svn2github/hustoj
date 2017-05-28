@@ -36,9 +36,9 @@ if (isset($_GET['pid']))
 <?php
 $contest_ok=true;
 $str_private="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' && `private`='1'";
-$result=mysqli_query($mysqli,$str_private);
-$row=mysqli_fetch_row($result);
-mysqli_free_result($result);
+$result=pdo_query($str_private);
+$row=$result[0];
+
 if ($row[0]=='1' && !isset($_SESSION['c'.$cid])) $contest_ok=false;
 if (isset($_SESSION['administrator'])) $contest_ok=true;
 ?>

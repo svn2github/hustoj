@@ -19,13 +19,13 @@ $lost_key=$_POST['lost_key'];
         $lost_user_id=stripslashes($lost_user_id);
         $lost_key=stripslashes($lost_key);
   }
-  $sql=" update `users` set password='".pwGen($lost_key)."'WHERE `user_id`='".mysqli_real_escape_string($mysqli,$lost_user_id)."'";
+  $sql=" update `users` set password='".pwGen($lost_key)."'WHERE `user_id`=?";
   if(
 
    $_SESSION['lost_user_id']==$lost_user_id &&
    $_SESSION['lost_key']==$lost_key
   ){
-         $result=mysqli_query($mysqli,$sql);
+         $result=pdo_query($sql,$lost_user_id);
     $view_errors="Password Reseted to the key you've just inputed.Click <a href=index.php>Here</a> to login!";
   }else{
          $view_errors="Password Reset Fail";

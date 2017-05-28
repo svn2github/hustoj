@@ -117,12 +117,12 @@ class online{
 		
 		global $mysqli;
 		$sql = 'SELECT * FROM online';
-		$res = mysqli_query($mysqli,$sql);
+		$res = pdo_query($sql);
 		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
-		//$res = mysqli_query($mysqli,$sql);
+		//$res = pdo_query($sql);
 		if($res ){
 			while($rt = mysqli_fetch_object($res)) $ret[] = $rt;
-			mysqli_free_result($res);
+			
 		}
 		return $ret;
 	}
@@ -135,13 +135,13 @@ class online{
 	function getRecord($ip)
 	{
 		$sql = "SELECT * FROM online WHERE ip = '$ip'";
-		$res = mysqli_query($mysqli,$sql);
-		if(mysqli_num_rows($res)){
+		$res = pdo_query($sql);
+		if(count($res)){
 			$ret = mysqli_fetch_object($res);
 		}else{
 			return false;
 		}
-		mysqli_free_result($res);
+		
 		return $ret;
 	}
 	
@@ -155,12 +155,12 @@ class online{
 	{
 		global $mysqli;
 		$sql = 'SELECT count(ip) as nums FROM online';
-		$res = mysqli_query($mysqli,$sql);
+		$res = pdo_query($sql);
 		$ret = 0;
 		if($res){
 			$ret = mysqli_fetch_object($res);
 			$ret = $ret->nums;
-			mysqli_free_result($res);
+			
 	    }
 		return $ret;
 	}
@@ -173,8 +173,8 @@ class online{
 	{
 		global $mysqli;
 		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
-		$res = mysqli_query($mysqli,$sql);
-		if($res&&mysqli_num_rows($res) == 0)
+		$res = pdo_query($sql);
+		if($res&&count($res) == 0)
 			return false;
 		else
 			return true;
@@ -191,7 +191,7 @@ class online{
 		$now = time();
 		$sql = "INSERT INTO online(hash, ip, ua, uri, refer, firsttime, lastmove)
 				VALUES ('$this->hash', '$this->ip', '$this->ua', '$this->uri', '$this->refer', '$now', '$now')";
-		mysqli_query($mysqli,$sql);
+		pdo_query($sql);
 	}
 
 	/**
@@ -212,7 +212,7 @@ class online{
 				WHERE
 					hash = '$this->hash'
 				";
-		mysqli_query($mysqli,$sql);
+		pdo_query($sql);
 	}
 	/**
 	 * clean the duration user
@@ -223,6 +223,6 @@ class online{
 	{
 		global $mysqli;
 		$sql = 'DELETE FROM online WHERE lastmove<'.(time()-ONLINE_DURATION);
-		mysqli_query($mysqli,$sql);
+		pdo_query($sql);
 	}
 }

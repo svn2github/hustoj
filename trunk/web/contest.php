@@ -78,8 +78,8 @@
 			
 			// check contest valid
 			$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' ";
-			$result=mysqli_query($mysqli,$sql);
-			$rows_cnt=mysqli_num_rows($result);
+			$result=pdo_query($sql);
+			$rows_cnt=count($result);
 			$contest_ok=true;
 		        $password="";	
 		        if(isset($_POST['password'])) $password=$_POST['password'];
@@ -87,24 +87,24 @@
 			        $password = stripslashes ( $password);
 			}
 			if ($rows_cnt==0){
-				mysqli_free_result($result);
+				
 				$view_title= "比赛已经关闭!";
 				
 			}else{
-				$row=mysqli_fetch_object($result);
-				$view_private=$row->private;
-				if($password!=""&&$password==$row->password) $_SESSION['c'.$cid]=true;
-				if ($row->private && !isset($_SESSION['c'.$cid])) $contest_ok=false;
-				if ($row->defunct=='Y') $contest_ok=false;
+				 $row=$result[0];
+				$view_private=$row['private'];
+				if($password!=""&&$password==$row['password']) $_SESSION['c'.$cid]=true;
+				if ($row['private'] && !isset($_SESSION['c'.$cid])) $contest_ok=false;
+				if ($row['defunct']=='Y') $contest_ok=false;
 				if (isset($_SESSION['administrator'])) $contest_ok=true;
 									
 				$now=time();
-				$start_time=strtotime($row->start_time);
-				$end_time=strtotime($row->end_time);
-				$view_description=$row->description;
-				$view_title= $row->title;
-				$view_start_time=$row->start_time;
-				$view_end_time=$row->end_time;
+				$start_time=strtotime($row['start_time']);
+				$end_time=strtotime($row['end_time']);
+				$view_description=$row['description'];
+				$view_title= $row['title'];
+				$view_start_time=$row['start_time'];
+				$view_end_time=$row['end_time'];
 				
 				
 				
@@ -135,29 +135,29 @@
                 ";//AND `problem`.`defunct`='N'
 
 		
-			$result=mysqli_query($mysqli,$sql);
+			$result=pdo_query($sql);
 			$view_problemset=Array();
 			
 			$cnt=0;
-			while ($row=mysqli_fetch_object($result)){
+			 foreach($result as $row){
 				
 				$view_problemset[$cnt][0]="";
 				if (isset($_SESSION['user_id'])) 
 					$view_problemset[$cnt][0]=check_ac($cid,$cnt);
-				$view_problemset[$cnt][1]= "$row->pid Problem &nbsp;".$PID[$cnt];
-				$view_problemset[$cnt][2]= "<a href='problem.php?cid=$cid&pid=$cnt'>$row->title</a>";
-				$view_problemset[$cnt][3]=$row->source ;
-				$view_problemset[$cnt][4]=$row->accepted ;
-				$view_problemset[$cnt][5]=$row->submit ;
+				$view_problemset[$cnt][1]= $row['pid']." Problem &nbsp;".$PID[$cnt];
+				$view_problemset[$cnt][2]= "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
+				$view_problemset[$cnt][3]=$row['source'] ;
+				$view_problemset[$cnt][4]=$row['accepted'] ;
+				$view_problemset[$cnt][5]=$row['submit'] ;
 				$cnt++;
 			}
 		
-			mysqli_free_result($result);
+			
 
 }else{
   $keyword="";
   if(isset($_POST['keyword'])){
-      $keyword=mysqli_real_escape_string($mysqli,$_POST['keyword']);
+      $keyword="%".$_POST['keyword']."%";
   }
   //echo "$keyword";
   $mycontests="";
@@ -174,17 +174,16 @@
 
 
   $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 1000";
-  $sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like '%$keyword%' $wheremy  order by contest_id desc limit 1000;";
-			$result=mysqli_query($mysqli,$sql);
-			
+  $sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like ? $wheremy  order by contest_id desc limit 1000;";
+  $result=pdo_query($sql,$keyword);
 			$view_contest=Array();
 			$i=0;
-			while ($row=mysqli_fetch_object($result)){
+			 foreach($result as $row){
 				
-				$view_contest[$i][0]= $row->contest_id;
-				$view_contest[$i][1]= "<a href='contest.php?cid=$row->contest_id'>$row->title</a>";
-				$start_time=strtotime($row->start_time);
-				$end_time=strtotime($row->end_time);
+				$view_contest[$i][0]= $row['contest_id'];
+				$view_contest[$i][1]= "<a href='contest.php?cid=".$row['contest_id']."'>".$row['title']."</a>";
+				$start_time=strtotime($row['start_time']);
+				$end_time=strtotime($row['end_time']);
 				$now=time();
                                 
                                 
@@ -193,12 +192,12 @@
 	// past
 
   if ($now>$end_time) {
-  	$view_contest[$i][2]= "<span class=green>$MSG_Ended@$row->end_time</span>";
+  	$view_contest[$i][2]= "<span class=green>$MSG_Ended@".$row['end_time']."</span>";
 	
 	// pending
 
   }else if ($now<$start_time){
-  	$view_contest[$i][2]= "<span class=blue>$MSG_Start@$row->start_time</span>&nbsp;";
+  	$view_contest[$i][2]= "<span class=blue>$MSG_Start@".$row['start_time']."</span>&nbsp;";
     $view_contest[$i][2].= "<span class=green>$MSG_TotalTime".formatTimeLength($length)."</span>";
 	// running
 
@@ -211,19 +210,19 @@
                                 
                                 
 				
-				$private=intval($row->private);
+				$private=intval($row['private']);
 				if ($private==0)
                                         $view_contest[$i][4]= "<span class=blue>$MSG_Public</span>";
                                 else
                                         $view_contest[$i][5]= "<span class=red>$MSG_Private</span>";
-				$view_contest[$i][6]=$row->user_id;
+				$view_contest[$i][6]=$row['user_id'];
 
 
 			
 				$i++;
 			}
 			
-			mysqli_free_result($result);
+			
 
 }
 

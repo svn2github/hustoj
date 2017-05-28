@@ -29,14 +29,14 @@ include_once("kindeditor.php") ;
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
 <?php $sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
-$result=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_object($result);
+$result=pdo_query($sql);
+ $row=$result[0];
 ?>
-<p>Problem Id: <?php echo $row->problem_id?></p>
-<input type=hidden name=problem_id value='<?php echo $row->problem_id?>'>
-<p>Title:<input type=text name=title size=71 value='<?php echo htmlentities($row->title,ENT_QUOTES,"UTF-8")?>'></p>
-<p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row->time_limit?>'>S</p>
-<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row->memory_limit?>'>MByte</p>
+<p>Problem Id: <?php echo $row['problem_id']?></p>
+<input type=hidden name=problem_id value='<?php echo $row['problem_id']?>'>
+<p>Title:<input type=text name=title size=71 value='<?php echo htmlentities($row['title'],ENT_QUOTES,"UTF-8")?>'></p>
+<p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row['time']_limit?>'>S</p>
+<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row['memory']_limit?>'>MByte</p>
 <p>Description:<br><textarea class="kindeditor" rows=13 name=description cols=120><?php echo htmlentities($row->description,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Input:<br><textarea class="kindeditor" rows=13 name=input cols=120><?php echo htmlentities($row->input,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Output:<br><textarea class="kindeditor" rows=13 name=output cols=120><?php echo htmlentities($row->output,ENT_QUOTES,"UTF-8")?></textarea></p>
@@ -49,7 +49,7 @@ $row=mysqli_fetch_object($result);
 <p>SpecialJudge: 
 N<input type=radio name=spj value='0' <?php echo $row->spj=="0"?"checked":""?>>
 Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>></p>
-<p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlentities($row->source,ENT_QUOTES,"UTF-8")?></textarea></p>
+<p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlentities($row['source'],ENT_QUOTES,"UTF-8")?></textarea></p>
 <div align=center>
 <?php require_once("../include/set_post_key.php");?>
 <input type=submit value=Submit name=submit>
@@ -100,25 +100,14 @@ echo "Sample data file in $basedir Updated!<br>";
 		fputs($fp,preg_replace("(\r\n)","\n",$sample_output));
 		fclose($fp);
 	}
-	$title=mysqli_real_escape_string($mysqli,$title);
-	$time_limit=mysqli_real_escape_string($mysqli,$time_limit);
-	$memory_limit=mysqli_real_escape_string($mysqli,$memory_limit);
-	$description=mysqli_real_escape_string($mysqli,$description);
-	$input=mysqli_real_escape_string($mysqli,$input);
-	$output=mysqli_real_escape_string($mysqli,$output);
-	$sample_input=mysqli_real_escape_string($mysqli,$sample_input);
-	$sample_output=mysqli_real_escape_string($mysqli,$sample_output);
-//	$test_input=($test_input);
-//	$test_output=($test_output);
-	$hint=mysqli_real_escape_string($mysqli,$hint);
-	$source=mysqli_real_escape_string($mysqli,$source);
+
 	$spj=intval($spj);
 	
-$sql="UPDATE `problem` set `title`='$title',`time_limit`='$time_limit',`memory_limit`='$memory_limit',
-	`description`='$description',`input`='$input',`output`='$output',`sample_input`='$sample_input',`sample_output`='$sample_output',`hint`='$hint',`source`='$source',`spj`=$spj,`in_date`=NOW()
-	WHERE `problem_id`=$id";
+$sql="UPDATE `problem` set `title`=?,`time_limit`=?,`memory_limit`=?,
+	`description`=?,`input`=?,`output`=?,`sample_input`=?,`sample_output`=?,`hint`=?,`source`=?,`spj`=?,`in_date`=NOW()
+	WHERE `problem_id`=?";
 
-@mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+@pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint$source,$spj,$id) ;
 echo "Edit OK!";
 
 

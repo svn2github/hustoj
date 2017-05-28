@@ -13,11 +13,11 @@ if (!(isset($_SESSION['http_judge']))){
 	$simid=intval($_POST['simid']);
 	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW() WHERE solution_id=$sid LIMIT 1";
 	echo $sql;
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql);
 	
     if ($sim) {
 		$sql="insert into sim(s_id,sim_s_id,sim) values($sid,$simid,$sim) on duplicate key update  sim_s_id=$simid,sim=$sim";
-		mysqli_query($mysqli,$sql);
+		pdo_query($sql);
 	}
 	
 }else if(isset($_POST['checkout'])){
@@ -25,7 +25,7 @@ if (!(isset($_SESSION['http_judge']))){
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
 	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and result<2 LIMIT 1";
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql);
 	if(mysqli_affected_rows($mysqli)>0)
 		echo "1";
 	else
@@ -33,74 +33,74 @@ if (!(isset($_SESSION['http_judge']))){
 }else if(isset($_POST['getpending'])){
 	$max_running=intval($_POST['max_running']);
 	$sql="SELECT solution_id FROM solution WHERE result<2  ORDER BY result ASC,solution_id ASC limit $max_running";
-	$result=mysqli_query($mysqli,$sql);
-	while ($row=mysqli_fetch_object($result)){
-		echo $row->solution_id."\n";
+	$result=pdo_query($sql);
+	 foreach($result as $row){
+		echo $row['solution_id']."\n";
 	}
-	mysqli_free_result($result);
+	
 	
 }else if(isset($_POST['getsolutioninfo'])){
 	
 	$sid=intval($_POST['sid']);
 	$sql="select problem_id, user_id, language from solution WHERE solution_id=$sid ";
-	$result=mysqli_query($mysqli,$sql);
-	if ($row=mysqli_fetch_object($result)){
-		echo $row->problem_id."\n";
-		echo $row->user_id."\n";
-		echo $row->language."\n";
+	$result=pdo_query($sql);
+	if ( $row=$result[0]){
+		echo $row['problem_id']."\n";
+		echo $row['user_id']."\n";
+		echo $row['language']."\n";
 		
 	}
-	mysqli_free_result($result);
+	
 	
 }else if(isset($_POST['getsolution'])){
 	
 	$sid=intval($_POST['sid']);
 	$sql="SELECT source FROM source_code WHERE solution_id=$sid ";
-	$result=mysqli_query($mysqli,$sql);
-	if ($row=mysqli_fetch_object($result)){
-		echo $row->source."\n";
+	$result=pdo_query($sql);
+	if ( $row=$result[0]){
+		echo $row['source']."\n";
 	}
-	mysqli_free_result($result);
+	
 	
 }else if(isset($_POST['getprobleminfo'])){
 	
 	$pid=intval($_POST['pid']);
 	$sql="SELECT time_limit,memory_limit,spj FROM problem where problem_id=$pid ";
-	$result=mysqli_query($mysqli,$sql);
-	if ($row=mysqli_fetch_object($result)){
-		echo $row->time_limit."\n";
-		echo $row->memory_limit."\n";
+	$result=pdo_query($sql);
+	if ( $row=$result[0]){
+		echo $row['time']_limit."\n";
+		echo $row['memory']_limit."\n";
 		echo $row->spj."\n";
 		
 	}
-	mysqli_free_result($result);
+	
 	
 }else if(isset($_POST['addceinfo'])){
 	
 	$sid=intval($_POST['sid']);
 	$sql="DELETE FROM compileinfo WHERE solution_id=$sid ";
-	mysqli_query($mysqli,$sql);
-	$ceinfo=mysqli_real_escape_string($mysqli,$_POST['ceinfo']);
-	$sql="INSERT INTO compileinfo VALUES($sid,'$ceinfo')";
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql);
+	
+	$sql="INSERT INTO compileinfo VALUES($sid,?)";
+	pdo_query($sql,$ceinfo);
 	
 }else if(isset($_POST['updateuser'])){
 	
-	$user_id=mysqli_real_escape_string($mysqli,$_POST['user_id']);
-	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=\'$user_id\' AND `result`=\'4\') WHERE `user_id`=\'$user_id\'";
-	mysqli_query($mysqli,$sql);
 	
-	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=\'$user_id\') WHERE `user_id`=\'$user_id\'";
-	mysqli_query($mysqli,$sql);
+	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=? AND `result`=\'4\') WHERE `user_id`=?";
+	pdo_query($sql,$user_id,$user_id);
+	
+	$sql="UPDATE `users` SET `submit`=(SELECT count(*) FROM `solution` WHERE `user_id`=?) WHERE `user_id`=?";
+	pdo_query($sql,$user_id,$user_id);
 	
 }else if(isset($_POST['updateproblem'])){
 	
-	$pid=mysqli_real_escape_string($mysqli,$_POST['pid']);
-	$sql="UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'$pid\' AND `result`=\'4\') WHERE `problem_id`=\'$pid\'";
-	mysqli_query($mysqli,$sql);
+	$pid=intval($_POST['pid']);
+	$sql="UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=? AND `result`=\'4\') WHERE `problem_id`=?";
+	pdo_query($sql,$pid,$pid);
 	
-	$sql="UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=\'$pid\') WHERE `problem_id`=\'$pid\'";
-	mysqli_query($mysqli,$sql);
+	$sql="UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=?) WHERE `problem_id`=?";
+	pdo_query($sql,$pid,$pid);
 	
 }else if(isset($_POST['checklogin'])){
 	echo "1";

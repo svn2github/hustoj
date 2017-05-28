@@ -1,5 +1,6 @@
 <?php require("admin-header.php");
 include_once("kindeditor.php") ;
+include_once("../lang/$OJ_LANG.php");
 include_once("../include/const.inc.php");
 if (isset($_POST['syear']))
 {
@@ -10,14 +11,11 @@ if (isset($_POST['syear']))
 //	echo $starttime;
 //	echo $endtime;
 	 
-        $title=mysqli_real_escape_string($mysqli,$_POST['title']);
-        $password=mysqli_real_escape_string($mysqli,$_POST['password']);
-        $description=mysqli_real_escape_string($mysqli,$_POST['description']);
-        $private=mysqli_real_escape_string($mysqli,$_POST['private']);
+       
         if (get_magic_quotes_gpc ()) {
       		  $title = stripslashes ( $title);
 	          $password = stripslashes ( $password);
-        //$description = stripslashes ( $description);
+			  $description = stripslashes ( $description);
         }
 
    $lang=$_POST['lang'];
@@ -30,33 +28,33 @@ if (isset($_POST['syear']))
 
 	$cid=intval($_POST['cid']);
 	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
-	$sql="UPDATE `contest` set `title`='$title',description='$description',`start_time`='$starttime',`end_time`='$endtime',`private`='$private',`langmask`=$langmask  ,password='$password' WHERE `contest_id`=$cid";
+	$sql="UPDATE `contest` set `title`=?,description=?,`start_time`=?,`end_time`=?,`private`=?,`langmask`=? ,password=? WHERE `contest_id`=?";
 	//echo $sql;
-	mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql,$title,$description,$starttime,$endtime,$private,$langmask,$password, $cid) ;
+	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=?";
+	pdo_query($sql,$cid);
 	$plist=trim($_POST['cproblem']);
 	$pieces = explode(',', $plist);
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
-			VALUES ('$cid','$pieces[0]',0)";
+			VALUES ('$cid','".intval($pieces[0])."',0)";
 		for ($i=1;$i<count($pieces);$i++)
-			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
-		mysqli_query($mysqli,"update solution set num=-1 where contest_id=$cid");
+			$sql_1=$sql_1.",('$cid','".intval($pieces[0])."',$i)";
+		pdo_query("update solution set num=-1 where contest_id=?",$cid);
 		for ($i=0;$i<count($pieces);$i++){
-			$sql_2="update solution set num='$i' where contest_id='$cid' and problem_id='$pieces[$i]';";
-			mysqli_query($mysqli,$sql_2);
+			$sql_2="update solution set num=? where contest_id=? and problem_id=?;";
+			pdo_query($sql_2,$i,$cid,$pieces[$i]);
 		}
 		//echo $sql_1;
 		
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
+		pdo_query($sql_1) ;
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 	
 	}
 	
 	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql);
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
@@ -64,21 +62,20 @@ if (isset($_POST['syear']))
 		for ($i=1;$i<count($pieces);$i++)
 			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
 		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
+		pdo_query($sql_1) ;
 	}
 	
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
 	exit();
 }else{
 	$cid=intval($_GET['cid']);
-	$sql="SELECT * FROM `contest` WHERE `contest_id`=$cid";
-	$result=mysqli_query($mysqli,$sql);
-	if (mysqli_num_rows($result)!=1){
-		mysqli_free_result($result);
+	$sql="SELECT * FROM `contest` WHERE `contest_id`=?";
+	$result=pdo_query($sql,$cid);
+	if (count($result)!=1){
 		echo "No such Contest!";
 		exit(0);
 	}
-	$row=mysqli_fetch_assoc($result);
+	$row=$result[0];
 	$starttime=$row['start_time'];
 	$endtime=$row['end_time'];
 	$private=$row['private'];
@@ -86,22 +83,20 @@ if (isset($_POST['syear']))
 	$langmask=$row['langmask'];
 	$description=$row['description'];
 	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
-	mysqli_free_result($result);
+	
 	$plist="";
-	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-	$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-	for ($i=mysqli_num_rows($result);$i>0;$i--){
-		$row=mysqli_fetch_row($result);
-		$plist=$plist.$row[0];
-		if ($i>1) $plist=$plist.',';
+	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? ORDER BY `num`";
+	$result=pdo_query($sql,$cid);
+	foreach($result as $row){
+		if($plist) $plist.=",";
+		$plist.=$row[0];
 	}
 	$ulist="";
 	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`='c$cid' order by user_id";
-	$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-	for ($i=mysqli_num_rows($result);$i>0;$i--){
-		$row=mysqli_fetch_row($result);
-		$ulist=$ulist.$row[0];
-		if ($i>1) $ulist=$ulist."\n";
+	$result=pdo_query($sql);
+	foreach($result as $row){
+		if ($ulist) $ulist.="\n";
+		$ulist.=$row[0];
 	}
 	
 	

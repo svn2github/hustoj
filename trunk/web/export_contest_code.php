@@ -20,11 +20,11 @@ $sql="select user_id,problem_id,result,source   from source_code right join
                 on source_code.solution_id=S.solution_id order by S.solution_id";
 require_once("./include/const.inc.php");
 #echo $sql;
-$result=mysqli_query($mysqli,$sql);
-while($row=mysqli_fetch_object($result)){
-        echo "$row->user_id:Problem".$row->problem_id.":".$judge_result[$row->result];
-        echo "\r\n$row->source";
+$result=pdo_query($sql);
+ foreach($result as $row){
+        echo "$row['user_id']:Problem".$row['problem_id'].":".$judge_result[$row['result']];
+        echo "\r\n$row['source']";
         echo "\r\n------------------------------------------------------\r\n";
 }
-mysqli_free_result($result);
+
 ?>

@@ -9,9 +9,9 @@ if (!(isset($_SESSION['administrator']))){
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=".$rjpid;
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=".$rjpid.")";
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 		$url="../status.php?problem_id=".$rjpid;
 		echo "Rejudged Problem ".$rjpid;
 		echo "<script>location.href='$url';</script>";
@@ -19,16 +19,16 @@ if (!(isset($_SESSION['administrator']))){
 	else if (isset($_POST['rjsid'])){
 		$rjsid=intval($_POST['rjsid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=".$rjsid;
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 		$sql="delete from `sim` WHERE `s_id`=".$rjsid;
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 		$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
 		echo "<script>location.href='$url';</script>";
 	}else if (isset($_POST['rjcid'])){
 		$rjcid=intval($_POST['rjcid']);
 		$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=".$rjcid;
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 		$url="../status.php?cid=".($rjcid);
 		echo "Rejudged Contest id :".$rjcid;
 		echo "<script>location.href='$url';</script>";
@@ -38,12 +38,12 @@ if (!(isset($_SESSION['administrator']))){
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
 
                 $sql="select solution_id from solution where result=1 and problem_id>0";
-                 $result=mysqli_query($mysqli,$sql);
-                while ($row=mysqli_fetch_object($result)){
-                        echo $row->solution_id."\n";
-                        $redis->lpush($OJ_REDISQNAME,$row->solution_id);
+                 $result=pdo_query($sql);
+                 foreach($result as $row){
+                        echo $row['solution_id']."\n";
+                        $redis->lpush($OJ_REDISQNAME,$row['solution_id']);
                 }
-                mysqli_free_result($result);
+                
         }
 
 }

@@ -13,29 +13,46 @@ class TM{
         var $time=0;
         var $p_wa_num;
         var $p_ac_sec;
+        var $p_pass_rate;
         var $user_id;
         var $nick;
+	var $total;
         function TM(){
                 $this->solved=0;
                 $this->time=0;
                 $this->p_wa_num=array(0);
                 $this->p_ac_sec=array(0);
+                $this->p_pass_rate=array(0);
+		$this->total=0;
         }
         function Add($pid,$sec,$res){
 //              echo "Add $pid $sec $res<br>";
                 if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
                         return;
-                if ($res!=4){
-                        if(isset($this->p_wa_num[$pid])){
-                                $this->p_wa_num[$pid]++;
+                if ($res*100<99){
+                        if(isset($this->p_pass_rate[$pid])){
+                                if($res>$this->p_pass_rate[$pid]){
+					$this->total-=$this->p_pass_rate[$pid]*100;
+					$this->p_pass_rate[$pid]=$res;
+					$this->total+=$this->p_pass_rate[$pid]*100;
+				}
                         }else{
-                                $this->p_wa_num[$pid]=1;
+                                $this->p_pass_rate[$pid]=$res;
+				$this->total+=$res*100;
                         }
+			if(isset($this->p_wa_num[$pid])){
+	                        $this->p_wa_num[$pid]++;
+        	        }else{
+                	        $this->p_wa_num[$pid]=1;
+                       	}
+
                 }else{
                         $this->p_ac_sec[$pid]=$sec;
                         $this->solved++;
                         if(!isset($this->p_wa_num[$pid])) $this->p_wa_num[$pid]=0;
-                        $this->time+=$sec+$this->p_wa_num[$pid]*1200;
+                        if(isset($this->p_pass_rate[$pid]))$this->total-=$this->p_pass_rate[$pid]*100;
+			$this->total+=100;
+			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
 //                      echo "Time:".$this->time."<br>";
 //                      echo "Solved:".$this->solved."<br>";
                 }
@@ -45,24 +62,29 @@ class TM{
 function s_cmp($A,$B){
 //      echo "Cmp....<br>";
         if ($A->solved!=$B->solved) return $A->solved<$B->solved;
-        else return $A->time>$B->time;
+        else {
+		if($A->total!=$B->total)
+			return $A->total<$B->total;
+		else
+			return $A->time>$B->time;
+	}
 }
 
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=$cid";
-//$result=pdo_query($sql) ;
+$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
+//$result=pdo_query($sql) or die(mysqli_error());
 //$rows_cnt=count($result);
 if($OJ_MEMCACHE){
         require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -82,7 +104,6 @@ if ($rows_cnt>0){
         $title=$row['title'];
         
 }
-if(!$OJ_MEMCACHE)
 if ($start_time==0){
         $view_errors= "No Such Contest";
         require("template/".$OJ_TEMPLATE."/error.php");
@@ -94,7 +115,8 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
+if(!isset($OJ_RANK_LOCK_PERCENT)) 
+$OJ_RANK_LOCK_PERCENT=1;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
@@ -104,12 +126,12 @@ $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //$result=pdo_query($sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -123,21 +145,22 @@ else
 $pid_cnt=intval($row['pbc']);
 
 $sql="SELECT
-        users.user_id,users.nick,solution.result,solution.num,solution.in_date
+        users.user_id,users.nick,solution.result,solution.num,solution.in_date,solution.pass_rate
                 FROM
                         (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
                 left join users
-                on users.user_id=solution.user_id 
+                on users.user_id=solution.user_id
         ORDER BY users.user_id,in_date";
+//echo $sql;
 //$result=pdo_query($sql);
 if($OJ_MEMCACHE){
    //     require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
 
-        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error());
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -145,9 +168,12 @@ if($OJ_MEMCACHE){
 $user_cnt=0;
 $user_name='';
 $U=array();
-//$U[$user_cnt]=new TM();
 for ($i=0;$i<$rows_cnt;$i++){
-        $row=$result[$i];
+        if($OJ_MEMCACHE)
+                $row=$result[$i];
+        else
+                 $row=$result[0];
+
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){
                 $user_cnt++;
@@ -161,7 +187,7 @@ for ($i=0;$i<$rows_cnt;$i++){
         if(time()<$end_time&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
         else
-        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
+        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);
        
 }
 usort($U,"s_cmp");
@@ -171,18 +197,17 @@ $first_blood=array();
 for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
-
 $sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
-        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error());
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }else{
 
-        $fb = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        $fb = pdo_query($sql);// or die("Error! ".mysqli_error());
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }
@@ -198,7 +223,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/contestrank.php");
+require("template/".$OJ_TEMPLATE."/contestrank-oi.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
         require_once('./include/cache_end.php');

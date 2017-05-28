@@ -143,9 +143,9 @@ if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
-		if(!$res=mysqli_query($mysqli,$tsql[$i])){
+		if(!$res=pdo_query($tsql[$i])){
 				echo $csql[$i]."<br>";
-				mysqli_query($mysqli,$csql[$i]);
+				pdo_query($csql[$i]);
 		}else{
 				echo mysqli_error($mysqli)."<br>";
 		}

@@ -123,11 +123,11 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
 $sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-$rows_cnt=mysqli_num_rows($result);
+$result=pdo_query($sql) ;
+$rows_cnt=count($result);
 $start_time=0;
 if ($rows_cnt>0){
-	$row=mysqli_fetch_array($result);
+	 $row=$result[0];
 	$start_time=strtotime($row[0]);
 	$title=$row[1];
 	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')){
@@ -135,7 +135,7 @@ if ($rows_cnt>0){
 	}
 	header ( "content-disposition:   attachment;   filename=contest".$cid."_".$title.".xls" );
 }
-mysqli_free_result($result);
+
 if ($start_time==0){
 	echo "No Such Contest";
 	//require_once("oj-footer.php");
@@ -149,8 +149,8 @@ if ($start_time>time()){
 }
 
 $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_array($result);
+$result=pdo_query($sql);
+ $row=$result[0];
 $pid_cnt=intval($row[0]);
 if($pid_cnt==1) {
 	$mark_base=100;
@@ -159,7 +159,7 @@ if($pid_cnt==1) {
 	$mark_per_problem=(100-$mark_base)/($pid_cnt-1);
 }
 $mark_per_punish=$mark_per_problem/5;
-mysqli_free_result($result);
+
 
 $sql="SELECT 
 	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
@@ -169,23 +169,23 @@ $sql="SELECT
 		on users.user_id=solution.user_id 
 	ORDER BY users.user_id,in_date";
 //echo $sql;
-$result=mysqli_query($mysqli,$sql);
+$result=pdo_query($sql);
 $user_cnt=0;
 $user_name='';
 $U=array();
-while ($row=mysqli_fetch_object($result)){
-	$n_user=$row->user_id;
+ foreach($result as $row){
+	$n_user=$row['user_id'];
 	if (strcmp($user_name,$n_user)){
 		$user_cnt++;
 		$U[$user_cnt]=new TM();
-		$U[$user_cnt]->user_id=$row->user_id;
-                $U[$user_cnt]->nick=$row->nick;
+		$U[$user_cnt]->user_id=$row['user_id'];
+                $U[$user_cnt]->nick=$row['nick'];
 
 		$user_name=$n_user;
 	}
-	$U[$user_cnt]->Add($row->num,strtotime($row->in_date)-$start_time,intval($row->result),$mark_base,$mark_per_problem,$mark_per_punish);
+	$U[$user_cnt]->Add($row->num,strtotime($row['in_date'])-$start_time,intval($row['result']),$mark_base,$mark_per_problem,$mark_per_punish);
 }
-mysqli_free_result($result);
+
 usort($U,"s_cmp");
 $rank=1;
 //echo "<style> td{font-size:14} </style>";

@@ -63,8 +63,8 @@
                 else $rows_cnt=0;
         }else{
 
-                $result = mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=mysqli_num_rows($result);
+                $result = pdo_query($sql) or die("Error! ".mysqli_error($mysqli));
+                if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
         }
                 $view_rank=Array();
@@ -73,7 +73,7 @@
                         if($OJ_MEMCACHE)
                                 $row=$result[$i];
                         else
-                                $row=mysqli_fetch_array($result);
+                                 $row=$result[0];
                         $rank ++;
 
                         $view_rank[$i][0]= $rank;
@@ -90,32 +90,18 @@
 //                      $i++;
                 }
 
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
-
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
         //        $result = mysql_query ( $sql );
         if($OJ_MEMCACHE){
           // require("./include/memcache.php");
                 $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=count($result);
-                else $rows_cnt=0;
         }else{
-
-                $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=mysqli_num_rows($result);
-                else $rows_cnt=0;
+                $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
         }
-        if($OJ_MEMCACHE)
-                $row=$result[0];
-        else
-                $row=mysqli_fetch_array($result);
-                echo mysqli_error($mysqli);
-  //$row = mysql_fetch_object ( $result );
+                 $row=$result[0];
                 $view_total=$row['mycount'];
 
-  //              mysql_free_result ( $result );
 
-if(!$OJ_MEMCACHE)  mysqli_free_result($result);
 
 
 /////////////////////////Template

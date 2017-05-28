@@ -35,7 +35,7 @@ if (!(isset($_SESSION['administrator']))){
                        
 			$school="your_own_school";
 			$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')on DUPLICATE KEY UPDATE `email`='".$email."',`ip`='".$_SERVER['REMOTE_ADDR']."',`accesstime`=NOW(),`password`='".$password."',`reg_time`=now(),nick='".$nick."',`school`='".$school."'";
-			mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+			pdo_query($sql) ;
 		}
 		echo  "</table>";
 		

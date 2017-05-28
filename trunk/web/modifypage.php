@@ -12,10 +12,10 @@
 	}
 
 $sql="SELECT `school`,`nick`,`email` FROM `users` WHERE `user_id`='".$_SESSION['user_id']."'";
-$result=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_object($result);
+$result=pdo_query($sql);
+ $row=$result[0];
 
-mysqli_free_result($result);
+
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/modifypage.php");
 /////////////////////////Common foot

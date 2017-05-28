@@ -15,10 +15,9 @@ if(isset($_POST['do'])){
 		$user_id = stripslashes ( $user_id);
 		$passwd = stripslashes ( $passwd);
 	}
-	$user_id=mysqli_real_escape_string($mysqli,$user_id);
 	$passwd=pwGen($passwd);
-	$sql="update `users` set `password`='$passwd' where `user_id`='$user_id'  and user_id not in( select user_id from privilege where rightstr='administrator') ";
-	mysqli_query($mysqli,$sql);
+	$sql="update `users` set `password`=? where `user_id`=?  and user_id not in( select user_id from privilege where rightstr='administrator') ";
+	pdo_query($sql,$passwd,$user_id);
 	if (mysqli_affected_rows($mysqli)==1) echo "Password Changed!";
   else echo "No such user! or He/Her is an administrator!";
 }

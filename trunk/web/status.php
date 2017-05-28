@@ -30,12 +30,12 @@ if (isset($_GET['cid'])){
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
           $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-        $result=mysqli_query($mysqli,$sql_lock) or die(mysqli_error($mysqli));
-        $rows_cnt=mysqli_num_rows($result);
+        $result=pdo_query($sql_lock) ;
+        $rows_cnt=count($result);
         $start_time=0;
         $end_time=0;
         if ($rows_cnt>0){
-                $row=mysqli_fetch_array($result);
+                 $row=$result[0];
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
@@ -158,8 +158,8 @@ if($OJ_MEMCACHE){
 	else $rows_cnt=0;
 }else{
 		
-	$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-	if($result) $rows_cnt=mysqli_num_rows($result);
+	$result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+	if($result) $rows_cnt=count($result);
 	else $rows_cnt=0;
 }
 $top=$bottom=-1;
@@ -179,7 +179,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 if($OJ_MEMCACHE)
         $row=$result[$i];
 else
-        $row=mysqli_fetch_array($result);
+         $row=$result[0];
         //$view_status[$i]=$row;
         if($i==0&&$row['result']<4) $last=$row['solution_id'];
 
@@ -301,7 +301,7 @@ else
    
 
 }
-if(!$OJ_MEMCACHE && $result)mysqli_free_result($result);
+if(!$OJ_MEMCACHE && $result)
 
 
 

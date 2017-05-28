@@ -19,9 +19,9 @@ $lost_email=$_POST['email'];
         $lost_user_id=stripslashes($lost_user_id);
         $lost_email=stripslashes($lost_email);
   }
-  $sql="SELECT `email` FROM `users` WHERE `user_id`='".mysqli_real_escape_string($mysqli,$lost_user_id)."'";
-                $result=mysqli_query($mysqli,$sql);
-                $row = mysqli_fetch_array($result);
+  $sql="SELECT `email` FROM `users` WHERE `user_id`=?";
+                $result=pdo_query($sql,$lost_user_id);
+                $row = $result[0];
  if($row && $row['email']==$lost_email&&strpos($lost_email,'@')){
    $_SESSION['lost_user_id']=$lost_user_id;
    $_SESSION['lost_key']=getToken(16);

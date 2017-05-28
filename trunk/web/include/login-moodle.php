@@ -17,8 +17,8 @@
 		$sql="select password from ".$moodle_pre."user where username='".mysqli_real_escape_string($mysqli,$user_id)."'";
 		if($moodle_conn){
 			mysql_select_db($moodle_db,$moodle_conn);
-			$result=mysqli_query($mysqli,$sql,$moodle_conn);
-			$row=mysqli_fetch_row($result);
+			$result=pdo_query($sql,$moodle_conn);
+			$row=$result[0];
 			if($row&&$password==$row[0]){
 				$ret=$user_id;
 			}

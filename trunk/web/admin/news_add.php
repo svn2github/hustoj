@@ -18,11 +18,9 @@ if (get_magic_quotes_gpc ()) {
 	$title = stripslashes ( $title);
 	$content = stripslashes ( $content );
 }
-$title=mysqli_real_escape_string($mysqli,$title);
-$content=mysqli_real_escape_string($mysqli,$content);
-$user_id=mysqli_real_escape_string($mysqli,$user_id);
-$sql="insert into news(`user_id`,`title`,`content`,`time`) values('$user_id','$title','$content',now())";
-mysqli_query($mysqli,$sql);
+
+$sql="insert into news(`user_id`,`title`,`content`,`time`) values(?,?,?,now())";
+pdo_query($sql,$user_id,$title,$content);
 echo "<script>window.location.href=\"news_list.php\";</script>";
 ?>
 

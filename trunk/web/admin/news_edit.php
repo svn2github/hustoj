@@ -20,13 +20,11 @@ if (get_magic_quotes_gpc ()) {
 	$title = stripslashes ( $title);
 	$content = stripslashes ( $content );
 }
-$title=mysqli_real_escape_string($mysqli,$title);
-$content=mysqli_real_escape_string($mysqli,$content);
-$user_id=mysqli_real_escape_string($mysqli,$user_id);
 
-	$sql="UPDATE `news` set `title`='$title',`time`=now(),`content`='$content',user_id='$user_id' WHERE `news_id`=$news_id";
+
+	$sql="UPDATE `news` set `title`=?,`time`=now(),`content`=?,user_id=? WHERE `news_id`=?";
 	//echo $sql;
-	mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+	pdo_query($sql,$title,$content,$user_id,$news_id) ;
 	
 	
 	
@@ -36,17 +34,17 @@ $user_id=mysqli_real_escape_string($mysqli,$user_id);
 }else{
 	$news_id=intval($_GET['id']);
 	$sql="SELECT * FROM `news` WHERE `news_id`=$news_id";
-	$result=mysqli_query($mysqli,$sql);
-	if (mysqli_num_rows($result)!=1){
-		mysqli_free_result($result);
+	$result=pdo_query($sql);
+	if (count($result)!=1){
+		
 		echo "No such Contest!";
 		exit(0);
 	}
-	$row=mysqli_fetch_assoc($result);
+	$row=$result[0]
 	
 	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
 	$content=$row['content'];
-	mysqli_free_result($result);
+	
 		
 }
 ?>

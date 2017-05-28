@@ -10,11 +10,11 @@ echo "<center><h2>Contest List</h2></center>";
 require_once("../include/set_get_key.php");
 $sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";
 $page_cnt=50;
-$result=mysqli_query($mysqli,$sql);
+$result=pdo_query($sql);
 echo mysqli_error($mysqli);
-$row=mysqli_fetch_object($result);
-$base=intval($row->btid);
-$cnt=intval($row->upid)-$base;
+ $row=$result[0];
+$base=intval($row['btid']);
+$cnt=intval($row['upid'])-$base;
 $cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
 if (isset($_GET['page'])){
         $page=intval($_GET['page']);
@@ -27,10 +27,15 @@ for ($i=1;$i<=$cnt;$i++){
         else echo "<a href='contest_list.php?page=".$i."'>".$i."</a>";
 }
 $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where contest_id>=$pstart and contest_id <=$pend order by `contest_id` desc";
-$keyword=$_GET['keyword'];
-$keyword=mysqli_real_escape_string($mysqli,$keyword);
-if($keyword) $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where title like '%$keyword%' ";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+if(isset($_GET['keyword'])){
+	$keyword=$_GET['keyword'];
+	$keyword="%$keyword%";
+	 $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where title like ? ";
+	 $result=pdo_query($sql,$keyword);
+}else{
+     
+	 $result=pdo_query($sql);
+}
 ?>
 <form action=contest_list.php class=center><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
@@ -39,26 +44,26 @@ $result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
 echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs";
 echo "</tr>";
-for (;$row=mysqli_fetch_object($result);){
+foreach($result as $row){
         echo "<tr>";
-        echo "<td>".$row->contest_id;
-        echo "<td><a href='../contest.php?cid=$row->contest_id'>".$row->title."</a>";
-        echo "<td>".$row->start_time;
-        echo "<td>".$row->end_time;
-        $cid=$row->contest_id;
+        echo "<td>".$row['contest_id'];
+        echo "<td><a href='../contest.php?cid=".$row['contest_id']."'>".$row['title']."</a>";
+        echo "<td>".$row['start_time'];
+        echo "<td>".$row['end_time'];
+        $cid=$row['contest_id'];
         if(isset($_SESSION['administrator'])||isset($_SESSION["m$cid"])){
-                echo "<td><a href=contest_pr_change.php?cid=$row->contest_id&getkey=".$_SESSION['getkey'].">".($row->private=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a>";
-                echo "<td><a href=contest_df_change.php?cid=$row->contest_id&getkey=".$_SESSION['getkey'].">".($row->defunct=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
-                echo "<td><a href=contest_edit.php?cid=$row->contest_id>Edit</a>";
-                echo "<td><a href=contest_add.php?cid=$row->contest_id>Copy</a>";
+                echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey'].">".($row['private']=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a>";
+                echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
+                echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">Edit</a>";
+                echo "<td><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a>";
                 if(isset($_SESSION['administrator'])){
-                        echo "<td><a href=\"problem_export_xml.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Export</a>";
+                        echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey']."\">Export</a>";
                 }else{
                   echo "<td>";
                 }
-     echo "<td> <a href=\"../export_contest_code.php?cid=$row->contest_id&getkey=".$_SESSION['getkey']."\">Logs</a>";
+     echo "<td> <a href=\"../export_contest_code.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey']."\">Logs</a>";
         }else{
-                echo "<td colspan=5 align=right><a href=contest_add.php?cid=$row->contest_id>Copy</a><td>";
+                echo "<td colspan=5 align=right><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a><td>";
 
         }
 

@@ -30,8 +30,8 @@ if (isset($_GET['solution_id'])){
 		else $rows_cnt=0;
 	}else{
 
-		$result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-		if($result) $rows_cnt=mysqli_num_rows($result);
+		$result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+		if($result) $rows_cnt=count($result);
 		else $rows_cnt=0;
 	}
 
@@ -39,7 +39,7 @@ if (isset($_GET['solution_id'])){
 	if($OJ_MEMCACHE)
 		$row=$result[$i];
 	else
-		$row=mysqli_fetch_array($result);
+		 $row=$result[0];
 
 	if(isset($_GET['tr'])){
         	$res=$row['result'];
@@ -48,12 +48,12 @@ if (isset($_GET['solution_id'])){
 		}else{
 			$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`='".$solution_id."'";
 		}
-		$result=mysqli_query($mysqli,$sql);
-		$row=mysqli_fetch_array($result);
+		$result=pdo_query($sql);
+		 $row=$result[0];
 		if($row){
                         echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
                         $sql="delete from custominput where solution_id=".$solution_id;
-    			mysqli_query($mysqli,$sql);     
+    			pdo_query($sql);     
                 }
 
     
@@ -63,7 +63,7 @@ if (isset($_GET['solution_id'])){
 	}
 }
 
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
+if(!$OJ_MEMCACHE)
 
 ?>
 

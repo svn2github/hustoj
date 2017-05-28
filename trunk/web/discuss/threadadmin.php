@@ -14,7 +14,7 @@
                 if (!isset($_SESSION['administrator']))
                         if ($stat!=2) err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
                         else $sql.=" AND author_id='".mysql_escape_string($_SESSION['user_id'])."'";
-                mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+                pdo_query($sql) ;
                 if (mysqli_affected_rows($mysqli)>0) header('Location: thread.php?tid='.$tid);
                 else err_msg("Reply not exist or no permission.");
         }
@@ -37,7 +37,7 @@
                 if ($stat == -1) 
                         $sql = "UPDATE topic SET top_level = $toplevel WHERE `tid` = '$tid'";
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
-                mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+                pdo_query($sql) ;
                 if (mysqli_affected_rows($mysqli)>0) {
                         if ($stat!=2) header('Location: thread.php?tid='.$tid);
                         else header('Location: discuss.php');

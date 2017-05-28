@@ -45,15 +45,15 @@ if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=".$vid."
 								and to_user='".$_SESSION['user_id']."'";
-	$result=mysqli_query($mysqli,$sql);
-	$row=mysqli_fetch_object($result);
+	$result=pdo_query($sql);
+	 $row=$result[0];
 	$to_user=$row->from_user;
-	$view_title=$row->title;
+	$view_title=$row['title'];
 	$view_content=$row->content;
 
-	mysqli_free_result($result);
+	
 	$sql="update `mail` set new_mail=0 WHERE `mail_id`=".$vid;
-	mysqli_query($mysqli,$sql);
+	pdo_query($sql);
 
 }
 //send mail page
@@ -69,22 +69,19 @@ if(isset($_POST['to_user'])){
 		$content = stripslashes ( $content );
 	}
 	$title = RemoveXSS( $title);
-	$to_user=mysqli_real_escape_string($mysqli,$to_user);
-	$title=mysqli_real_escape_string($mysqli,$title);
-	$content=mysqli_real_escape_string($mysqli,$content);
-	$from_user=mysqli_real_escape_string($mysqli,$from_user);
+	
 	$sql="select 1 from users where user_id='$to_user' ";
-	$res=mysqli_query($mysqli,$sql);
-	if ($res&&mysqli_num_rows($res)<1){
-			mysqli_free_result($res);
+	$res=pdo_query($sql);
+	if ($res&&count($res)<1){
+			
 			$view_title= "No Such User!";
 
 	}else{
-		if($res)mysqli_free_result($res);
+		if($res)
 		$sql="insert into mail(to_user,from_user,title,content,in_date)
-						values('$to_user','$from_user','$title','$content',now())";
+						values(?,?,?,?,now())";
 
-		if(!mysqli_query($mysqli,$sql)){
+		if(!pdo_query($sql,$to_user,$from_user,$title,$content)){
 			$view_title=  "Not Mailed!";
 		}else{
 			$view_title=  "Mailed!";
@@ -94,18 +91,18 @@ if(isset($_POST['to_user'])){
 //list mail
 	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
 					order by mail_id desc";
-	$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+	$result=pdo_query($sql) ;
 $view_mail=Array();
 $i=0;
-for (;$row=mysqli_fetch_object($result);){
+foreach($result as $row){
 	$view_mail[$i][0]=$row->mail_id;
 	if ($row->new_mail) $view_mail[$i][0].= "<span class=red>New</span>";
 	$view_mail[$i][1]="<a href='mail.php?vid=$row->mail_id'>".
-			$row->from_user.":".$row->title."</a>";
-	$view_mail[$i][2]=$row->in_date;
+			$row->from_user.":".$row['title']."</a>";
+	$view_mail[$i][2]=$row['in_date'];
 	$i++;
 }
-mysqli_free_result($result);
+
 
 
 /////////////////////////Template

@@ -3,8 +3,8 @@
 	$tid=intval($_REQUEST['tid']);
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".$tid."' AND `status` <= 1";
-	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
-	$rows_cnt = mysqli_num_rows($result) or die("Error! ".mysqli_error($mysqli));
+	$result=pdo_query($sql) or die("Error! ".mysqli_error($mysqli));
+	$rows_cnt = count($result) or die("Error! ".mysqli_error($mysqli));
 	$row= mysqli_fetch_object($result);
 	$isadmin = isset($_SESSION['administrator']);
 ?>
@@ -24,18 +24,18 @@
 	<td style="text-align:left">
 	<a href="discuss.php<?php if ($row->pid!=0 && $row->cid!=null) echo "?pid=".$row->pid."&cid=".$row->cid;
 	else if ($row->pid!=0) echo"?pid=".$row->pid; else if ($row->cid!=null) echo"?cid=".$row->cid;?>">
-	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row->title ,ENT_QUOTES,"UTF-8"));?></td>
+	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row['title'] ,ENT_QUOTES,"UTF-8"));?></td>
 </tr>
 
 <?php
 	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".$tid."' AND `status` <=2 ORDER BY `rid` LIMIT 30";
-	$result=mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
-	$rows_cnt = mysqli_num_rows($result);
+	$result=pdo_query($sql) or die("Error! ".mysqli_error($mysqli));
+	$rows_cnt = count($result);
 	$cnt=0;
 
 	for ($i=0;$i<$rows_cnt;$i++){
 		mysqli_data_seek($result,$i);
-		$row=mysqli_fetch_object($result);
+		 $row=$result[0];
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
 		$isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
 ?>
@@ -43,7 +43,7 @@
 	<td>
 		
 		<a name=post<?php echo $row->rid;?>></a>
-		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row->author_id?>"><?php echo $row->author_id; ?> </a> @ <?php echo $row->time; ?></div>
+		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row->author_id?>"><?php echo $row->author_id; ?> </a> @ <?php echo $row['time']; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
 			<?php if (isset($_SESSION['administrator'])) {?>  
 			<span>[ <a href="

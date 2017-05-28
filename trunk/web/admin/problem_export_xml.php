@@ -103,22 +103,22 @@ function getSolution($pid,$lang){
     {
       //  die('Could not connect: ' . mysqli_error($mysqli));
     }
-	mysqli_query($mysqli,"set names utf8",$con);
+	pdo_query("set names utf8",$con);
 	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
 //	echo $sql;
-	$result = mysqli_query($mysqli,$sql,$con ) ;
+	$result = pdo_query($sql,$con ) ;
 	if($result&&$row = mysqli_fetch_row ( $result) ){
 		$solution_id=$row[0];
 		$ret->language=$language_name[$row[1]];
 		
-		mysqli_free_result($result);
+		
 		$sql = "select source from source_code where solution_id=$solution_id";
-		$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error($mysqli) );
+		$result = pdo_query( $sql ) or die ( mysqli_error($mysqli) );
 		if($row = mysqli_fetch_object ( $result) ){
-			$ret->source_code=$row->source;
+			$ret->source_code=$row['source'];
 			
 		}
-		mysqli_free_result($result);
+		
 	}
         if($con)mysqli_close($con);
 	return $ret;
@@ -185,17 +185,23 @@ if (! isset ( $_SESSION ['administrator'] )) {
 if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
 	require_once("../include/check_post_key.php");
-   	$in=mysqli_real_escape_string ($mysqli, $_POST ['in'] );
+   	$in= $_POST ['in'] ;
+	$ins=explode(","$in);
+	$in="";
+	foreach($ins as $pid){
+		$pid=intval($pid);
+		if($in)$in.=",";
+		$in.=$pid;
+	}
    	$sql = "select * from problem where problem_id in($in)";
-   	  $filename="-$in";
+   	$filename="-$in";
    }else if (isset($_GET['cid'])){
 	  require_once("../include/check_get_key.php");
 	  $cid=intval( $_GET['cid'] );
-      $sql= "select title from contest where contest_id='$cid'";
-      $result = mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
-      $row = mysqli_fetch_object ( $result );
-      $filename='-'.$row->title;
-      mysqli_free_result ( $result );
+      $sql= "select title from contest where contest_id=?";
+      $result = pdo_query( $sql,$cid );
+      $row = $result[0];
+      $filename='-'.$row['title'];
       $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
 	  
    }else{
@@ -208,7 +214,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 
 	
 	//echo $sql;
-	$result = mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
+	$result = pdo_query( $sql );
 	
 	if (isset($_POST ['submit'])&&$_POST ['submit'] == "Export")
 		header ( 'Content-Type:   text/xml' );
@@ -227,9 +233,9 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		
 		?>
 <item>
-<title><![CDATA[<?php echo $row->title?>]]></title>
-<time_limit unit="s"><![CDATA[<?php echo $row->time_limit?>]]></time_limit>
-<memory_limit unit="mb"><![CDATA[<?php echo $row->memory_limit?>]]></memory_limit>
+<title><![CDATA[<?php echo $row['title']?>]]></title>
+<time_limit unit="s"><![CDATA[<?php echo $row['time']_limit?>]]></time_limit>
+<memory_limit unit="mb"><![CDATA[<?php echo $row['memory']_limit?>]]></memory_limit>
 
 <?php
 	$did=array();
@@ -244,11 +250,11 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <output><![CDATA[<?php echo $row->output?>]]></output>
 <sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
-  <?php printTestCases($row->problem_id,$OJ_DATA)?>
+  <?php printTestCases($row['problem_id'],$OJ_DATA)?>
 <hint><![CDATA[<?php echo $row->hint?>]]></hint>
-<source><![CDATA[<?php echo fixcdata($row->source)?>]]></source>
+<source><![CDATA[<?php echo fixcdata($row['source'])?>]]></source>
 <?php
-$pid=$row->problem_id;
+$pid=$row['problem_id'];
 for ($lang=0;$lang<count($language_ext);$lang++){
 
 	$solution=getSolution($pid,$lang);
@@ -269,8 +275,8 @@ for ($lang=0;$lang<count($language_ext);$lang++){
 ?>
 <?php
  if($row->spj!=0){
- 	$filec="$OJ_DATA/".$row->problem_id."/spj.c";
- 	$filecc="$OJ_DATA/".$row->problem_id."/spj.cc";
+ 	$filec="$OJ_DATA/".$row['problem_id']."/spj.c";
+ 	$filecc="$OJ_DATA/".$row['problem_id']."/spj.cc";
  	
  	if(file_exists( $filec )){
 		echo "<spj language=\"C\"><![CDATA[";
@@ -286,7 +292,7 @@ for ($lang=0;$lang<count($language_ext);$lang++){
 ?>
 </item>
 <?php }
-	mysqli_free_result ( $result );
+	
 	
 	echo "</fps>";
 

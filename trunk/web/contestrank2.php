@@ -53,8 +53,8 @@ if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
 $sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-//$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-//$rows_cnt=mysqli_num_rows($result);
+//$result=pdo_query($sql) ;
+//$rows_cnt=count($result);
 if($OJ_MEMCACHE){
         require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
@@ -62,8 +62,8 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
@@ -71,18 +71,18 @@ if($OJ_MEMCACHE){
 $start_time=0;
 $end_time=0;
 if ($rows_cnt>0){
-//      $row=mysqli_fetch_array($result);
+//       $row=$result[0];
 
         if($OJ_MEMCACHE)
                 $row=$result[0];
         else
-                $row=mysqli_fetch_array($result);
+                 $row=$result[0];
         $start_time=strtotime($row['start_time']);
         $end_time=strtotime($row['end_time']);
         $title=$row['title'];
         
 }
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
+if(!$OJ_MEMCACHE)
 if ($start_time==0){
         $view_errors= "No Such Contest";
         require("template/".$OJ_TEMPLATE."/error.php");
@@ -101,7 +101,7 @@ $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 
 $sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
-//$result=mysqli_query($mysqli,$sql);
+//$result=pdo_query($sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
@@ -109,19 +109,19 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
 if($OJ_MEMCACHE)
         $row=$result[0];
 else
-        $row=mysqli_fetch_array($result);
+         $row=$result[0];
 
-//$row=mysqli_fetch_array($result);
+// $row=$result[0];
 $pid_cnt=intval($row['pbc']);
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
+if(!$OJ_MEMCACHE)
 
 $sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
@@ -131,7 +131,7 @@ $sql="SELECT
                 on users.user_id=solution.user_id
         ORDER BY in_date";
 //echo $sql;
-//$result=mysqli_query($mysqli,$sql);
+//$result=pdo_query($sql);
 if($OJ_MEMCACHE){
    //     require("./include/memcache.php");
         $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
@@ -139,8 +139,8 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+        $result = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
@@ -151,7 +151,7 @@ for ($i=0;$i<$rows_cnt;$i++){
         if($OJ_MEMCACHE)
                 $row=$result[$i];
         else
-                $row=mysqli_fetch_array($result);
+                 $row=$result[0];
 
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){
@@ -171,7 +171,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 }
 $solution_json= json_encode($result);
 
-if(!$OJ_MEMCACHE) mysqli_free_result($result);
+if(!$OJ_MEMCACHE) 
 usort($U,"s_cmp");
 
 ////firstblood
@@ -191,8 +191,8 @@ if($OJ_MEMCACHE){
         else $rows_cnt=0;
 }else{
 
-        $fb = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($fb) $rows_cnt=mysqli_num_rows($fb);
+        $fb = pdo_query($sql);// or die("Error! ".mysqli_error($mysqli));
+        if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }
 

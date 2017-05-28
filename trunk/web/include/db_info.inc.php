@@ -68,16 +68,6 @@ if( strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {
 }
 if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 
-	if($OJ_SAE)	{
-		$OJ_DATA="saestor://data/";
-	//  for sae.sina.com.cn
-		$mysqli=mysqli_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
-		$DB_NAME=SAE_MYSQL_DB;
-	}else{
-		//for normal install
-		if(($mysqli=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS))==null) 
-			die('Could not connect: ' . mysqli_error($mysqli));
-	}
 
 function pdo_query($sql){
     $num_args = func_num_args();
@@ -85,9 +75,19 @@ function pdo_query($sql){
     $args=array_slice($args,1,--$num_args);
     
     global $DB_HOST,$DB_NAME,$DB_USER,$DB_PASS,$dbh;
-    if(!$dbh)
-	$dbh=new PDO("mysql:host=".$DB_HOST.';dbname='.$DB_NAME, $DB_USER, $DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
-    if(stripos($sql,"select") === 0&&!stripos($sql,"limit")){
+    if(!$dbh){
+			
+		if($OJ_SAE)	{
+			$OJ_DATA="saestor://data/";
+		//  for sae.sina.com.cn
+			$DB_NAME=SAE_MYSQL_DB;
+			$dbh=new PDO("mysql:host=".SAE_MYSQL_HOST_M.';dbname='.SAE_MYSQL_DB, SAE_MYSQL_USER, SAE_MYSQL_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
+		}else{
+			$dbh=new PDO("mysql:host=".$DB_HOST.';dbname='.$DB_NAME, $DB_USER, $DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
+		}
+		
+    }
+	if(stripos($sql,"select") === 0&&!stripos($sql,"limit")){
 	$sql.=" limit 10";
     }
     $sth = $dbh->prepare($sql);
@@ -105,9 +105,7 @@ function pdo_query($sql){
     return $result;
 }
 		// use db
-	pdo_query("set names utf8");
-  //if(!$OJ_SAE)mysqli_set_charset("utf8");
-	
+	//pdo_query("set names utf8");	
 		
 	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
 		 require_once('csrf_check.php');

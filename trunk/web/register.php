@@ -80,9 +80,9 @@ $ip=$_SERVER['REMOTE_ADDR'];
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
 ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
-pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);// or die("Insert Error!\n");
+$rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);// or die("Insert Error!\n");
 
-if( mysqli_affected_rows($mysqli)==0) {
+if( $rows==0) {
        	print "<script language='javascript'>\n";
 	print "alert('Username robbed!\\n');\n";
 	print "history.go(-1);\n</script>";
@@ -97,7 +97,7 @@ $_SESSION['user_id']=$user_id;
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 		//echo $sql."<br />";
 		$result=pdo_query($sql,$_SESSION['user_id']);
-		while ($row=mysqli_fetch_assoc($result)){
+		foreach ($result as $row){
 			$_SESSION[$row['rightstr']]=true;
 			//echo $_SESSION[$row['rightstr']]."<br />";
 		}

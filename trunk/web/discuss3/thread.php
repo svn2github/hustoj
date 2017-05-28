@@ -32,10 +32,9 @@
 	$result=pdo_query($sql) ;
 	$rows_cnt = count($result);
 	$cnt=0;
-
-	for ($i=0;$i<$rows_cnt;$i++){
-		mysqli_data_seek($result,$i);
-		 $row=$result[0];
+$i=0;
+	foreach ($result as $row){
+		
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
 		if(isset($_SESSION['user_id'])) $isuser = strtolower($row['author_id'])==strtolower($_SESSION['user_id']);
 		else $isuser=false;
@@ -74,6 +73,7 @@
 	</td>
 </tr>
 <?php
+$i++;
 	}
 ?>
 </table>

@@ -83,8 +83,8 @@ $flag=count($rrs)==0;
 $AC=false;
 if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
         $sql="SELECT 1 FROM solution where
-                        result=4 and problem_id=$id and user_id='".$_SESSION['user_id']."'";
-        $rrs=pdo_query( $sql, MYSQLI_USE_RESULT);
+                        result=4 and problem_id=$id and user_id=?";
+        $rrs=pdo_query( $sql, $_SESSION['user_id']);
         $AC=(intval(count($rrs))>0);
         
 }
@@ -106,7 +106,7 @@ ORDER BY c.score, in_date ASC
 LIMIT $start,100;";
 
 $result=pdo_query( "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-$result=pdo_query( $sql, MYSQLI_USE_RESULT);
+$result=pdo_query( $sql);
 
 $view_solution=array();
 $j=0;

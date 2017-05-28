@@ -55,7 +55,7 @@
                 }
 
 
-       //         $result = mysql_query ( $sql ); //mysqli_error($mysqli);
+      
         if($OJ_MEMCACHE){
                 require("./include/memcache.php");
                 $result = mysql_query_cache($sql) ;//;

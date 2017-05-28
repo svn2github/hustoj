@@ -73,8 +73,8 @@ if (isset($_POST['id'])) {
 		$isprivate=intval($row[0]);
 		
 		if ($isprivate==1&&!isset($_SESSION['c'.$cid])){
-			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`='$user_id' AND `rightstr`='c$cid'";
-			$result=pdo_query($sql) or die (mysqli_error($mysqli)); 
+			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`='c$cid'";
+			$result=pdo_query($sql,$user_id) ; 
 			 $row=$result[0];
 			$ccnt=intval($row[0]);
 			

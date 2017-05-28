@@ -91,8 +91,7 @@ class online{
 			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
 	    }
 		$this->hash = (session_id());
-		//$this->db = new mysqli(DBHOST, DBUSER, DBPASSWORD, )
-
+		
 		//check user existed!
 		if($this->exist()){
 			//update databse
@@ -121,8 +120,8 @@ class online{
 		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
 		//$res = pdo_query($sql);
 		if($res ){
-			while($rt = mysqli_fetch_object($res)) $ret[] = $rt;
 			
+				$ret =$res;
 		}
 		return $ret;
 	}
@@ -137,7 +136,7 @@ class online{
 		$sql = "SELECT * FROM online WHERE ip = '$ip'";
 		$res = pdo_query($sql);
 		if(count($res)){
-			$ret = mysqli_fetch_object($res);
+			$ret = ($res[0]);
 		}else{
 			return false;
 		}
@@ -158,9 +157,8 @@ class online{
 		$res = pdo_query($sql);
 		$ret = 0;
 		if($res){
-			$ret = mysqli_fetch_object($res);
-			$ret = $ret->nums;
-			
+			$ret = $res[0];
+			$ret = $ret['nums'];
 	    }
 		return $ret;
 	}

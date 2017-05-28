@@ -9,13 +9,13 @@
                 if ($_REQUEST['action']=='disable') $stat = 1;
                 if ($_REQUEST['action']=='delete') $stat = 2;
                 if ($stat == -1) err_msg("Wrong action.");
-                $rid = mysql_escape_string($rid);
+                $rid = intval($rid);
                 $sql = "UPDATE reply SET status = $stat WHERE `rid` = '$rid'";
                 if (!isset($_SESSION['administrator']))
                         if ($stat!=2) err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
-                        else $sql.=" AND author_id='".mysql_escape_string($_SESSION['user_id'])."'";
-                pdo_query($sql) ;
-                if (mysqli_affected_rows($mysqli)>0) header('Location: thread.php?tid='.$tid);
+                        else $sql.=" AND author_id=?";
+                
+                if (pdo_query($sql,$_SESSION['user_id'])>0) header('Location: thread.php?tid='.$tid);
                 else err_msg("Reply not exist or no permission.");
         }
         if ($_REQUEST['target']=='thread'){
@@ -37,8 +37,8 @@
                 if ($stat == -1) 
                         $sql = "UPDATE topic SET top_level = $toplevel WHERE `tid` = '$tid'";
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
-                pdo_query($sql) ;
-                if (mysqli_affected_rows($mysqli)>0) {
+               
+                if ( pdo_query($sql) >0) {
                         if ($stat!=2) header('Location: thread.php?tid='.$tid);
                         else header('Location: discuss.php');
                 }

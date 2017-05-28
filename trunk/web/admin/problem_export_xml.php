@@ -89,38 +89,25 @@ function getSolution($pid,$lang){
 	$ret=new Solution();
 	
 	$language_name=$GLOBALS['language_name'];
-        $con=false;
-	if(isset($OJ_SAE)&&$OJ_SAE)     {
-                $OJ_DATA="saestor://data/";
-        //  for sae.sina.com.cn
-               $con= mysqli_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
-               
-        }else{
-                //for normal install
-                        
-        }
-	if (!$con)
-    {
-     
-    }
-	pdo_query("set names utf8",$con);
+   
+	
 	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
 //	echo $sql;
 	$result = pdo_query($sql,$con ) ;
-	if($result&&$row = mysqli_fetch_row ( $result) ){
+	if($result&&$row = $result[0] ){
 		$solution_id=$row[0];
 		$ret->language=$language_name[$row[1]];
 		
 		
 		$sql = "select source from source_code where solution_id=$solution_id";
-		$result = pdo_query( $sql ) or die ( mysqli_error($mysqli) );
-		if($row = mysqli_fetch_object ( $result) ){
+		$result = pdo_query( $sql ) ;
+		if($row = $result[0] ){
 			$ret->source_code=$row['source'];
 			
 		}
 		
 	}
-        if($con)mysqli_close($con);
+       
 	return $ret;
 }
 function fixurl($img_url){
@@ -229,7 +216,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
 	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
 	<?php
-	while ( $row = mysqli_fetch_object ( $result ) ) {
+	foreach ( $result as  $row ) {
 		
 		?>
 <item>

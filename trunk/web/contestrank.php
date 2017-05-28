@@ -188,10 +188,8 @@ if($OJ_MEMCACHE){
 }
 
 for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$fb[$i];
-        else
-                $row=mysqli_fetch_array($fb);
+       
+         $row=$fb[$i];
          $first_blood[$row['num']]=$row['user_id'];
 }
 

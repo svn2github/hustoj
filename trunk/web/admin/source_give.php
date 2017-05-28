@@ -6,7 +6,7 @@ if (!(isset($_SESSION['administrator']))){
 <?php if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	$from=$_POST['from'];
-	$to=$mysqli,$_POST['to'];
+	$to=$_POST['to'];
 	$start=intval($_POST['start']);
 	$end=intval($_POST['end']);
 	$sql="update `solution` set `user_id`=? where `user_id`=? and problem_id>=? and problem_id<=? and result=4";

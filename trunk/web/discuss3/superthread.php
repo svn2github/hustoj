@@ -14,17 +14,17 @@
 <div style="text-align:left;font-size:80%;float:left;">[ <a href="newpost.php">New Thread</a> ]</div>
 <?php if ($isadmin){
 	?><div style="font-size:80%; float:right"> Change sticky level to<?php $adminurl = "threadadmin.php?target=thread&tid={$tid}&action=";
-	if ($row->top_level == 0) echo "[ <a href=\"{$adminurl}sticky&level=3\">Level Top</a> ] [ <a href=\"{$adminurl}sticky&level=2\">Level Mid</a> ] [ <a href=\"{$adminurl}sticky&level=1\">Level Low</a> ]"; else echo "[ <a href=\"{$adminurl}sticky&level=0\">Standard</a> ]";
-	?> | <?php if ($row->status != 1) echo (" [ <a  href=\"{$adminurl}lock\">Lock</a> ]"); else echo(" [ <a href=\"{$adminurl}resume\">Resume</a> ]");
+	if ($row['top_level'] == 0) echo "[ <a href=\"{$adminurl}sticky&level=3\">Level Top</a> ] [ <a href=\"{$adminurl}sticky&level=2\">Level Mid</a> ] [ <a href=\"{$adminurl}sticky&level=1\">Level Low</a> ]"; else echo "[ <a href=\"{$adminurl}sticky&level=0\">Standard</a> ]";
+	?> | <?php if ($row['status'] != 1) echo (" [ <a  href=\"{$adminurl}lock\">Lock</a> ]"); else echo(" [ <a href=\"{$adminurl}resume\">Resume</a> ]");
 	?> | <?php echo (" [ <a href=\"{$adminurl}delete\">Delete</a> ]");
 	?></div><?php }
 ?>
 <table style="width:100%; clear:both">
 <tr align=center class='toprow'>
 	<td style="text-align:left">
-	<a href="discuss.php<?php if ($row->pid!=0 && $row->cid!=null) echo "?pid=".$row->pid."&cid=".$row->cid;
-	else if ($row->pid!=0) echo"?pid=".$row->pid; else if ($row->cid!=null) echo"?cid=".$row->cid;?>">
-	<?php if ($row->pid!=0) echo "Problem ".$row->pid; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row['title'] ,ENT_QUOTES,"UTF-8"));?></td>
+	<a href="discuss.php<?php if ($row['pid']!=0 && $row['cid']!=null) echo "?pid=".$row['pid']."&cid=".$row['cid'];
+	else if ($row['pid']!=0) echo"?pid=".$row['pid']; else if ($row['cid']!=null) echo"?cid=".$row['cid'];?>">
+	<?php if ($row['pid']!=0) echo "Problem ".$row['pid']; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row['title'] ,ENT_QUOTES,"UTF-8"));?></td>
 </tr>
 
 <?php
@@ -37,17 +37,17 @@
 		mysqli_data_seek($result,$i);
 		 $row=$result[0];
 		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
-		$isuser = strtolower($row->author_id)==strtolower($_SESSION['user_id']);
+		$isuser = strtolower($row['author_id'])==strtolower($_SESSION['user_id']);
 ?>
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
 	<td>
 		
 		<a name=post<?php echo $row->rid;?>></a>
-		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row->author_id?>"><?php echo $row->author_id; ?> </a> @ <?php echo $row['time']; ?></div>
+		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row['author_id']?>"><?php echo $row['author_id']; ?> </a> @ <?php echo $row['time']; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
 			<?php if (isset($_SESSION['administrator'])) {?>  
 			<span>[ <a href="
-				<?php if ($row->status==0) echo $url."disable\">Disable";
+				<?php if ($row['status']==0) echo $url."disable\">Disable";
 				else echo $url."resume\">Resume";
 				?> </a> ]</span>
 			<span>[ <a href="#">Reply</a> ]</span> 
@@ -62,7 +62,7 @@
 			<?php echo $i+1;?>#</span>
 		</div>
 		<div style="text-align:left; clear:both; margin:10px 30px">
-			<?php	if ($row->status == 0) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
+			<?php	if ($row['status'] == 0) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
 					else {
 						if (!$isuser || $isadmin)echo "<div style=\"border-left:10px solid gray\"><font color=red><i>Notice : <br>This reply is blocked by administrator.</i></font></div>";
 						if ($isuser || $isadmin) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));

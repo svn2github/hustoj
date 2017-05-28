@@ -56,8 +56,8 @@
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
                         $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT ?, NOW(),?, '".($tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".($tid)."' AND `status` = 0 ";
                         
-                        pdo_query($sql, $_SESSION['user_id'],$_POST['content']);
-                        if(mysqli_affected_rows($mysqli)>0)
+                        
+                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'])>0)
                         {
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);

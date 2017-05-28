@@ -147,7 +147,7 @@ if(isset($_POST['do'])){
 				echo $csql[$i]."<br>";
 				pdo_query($csql[$i]);
 		}else{
-				echo mysqli_error($mysqli)."<br>";
+				echo "DB Error";
 		}
 		
 	}

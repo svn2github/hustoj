@@ -47,11 +47,11 @@ if ($pid!=null && $pid!=0){
 </div>
 <?php }
 $sql = "SELECT `tid`, `title`, `top_level`, `topic`.`status`, `cid`, `pid`, CONVERT(MIN(`reply`.`time`),DATE) `posttime`, MAX(`reply`.`time`) `lastupdate`, `topic`.`author_id`, COUNT(`rid`) `count` FROM `topic`, `reply` WHERE `topic`.`status`!=2 AND `reply`.`status`!=2 AND `tid` = `topic_id`";
-if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".mysqli_escape_string($mysqli,$_REQUEST['cid'])."'";
+if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
 else $sql.=" AND ( ISNULL(`cid`)";
 $sql.=" OR `top_level` = 3 )";
 if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
-  $sql.=" AND ( `pid` = '".mysqli_escape_string($mysqli,$_REQUEST['pid'])."' OR `top_level` >= 2 )";
+  $sql.=" AND ( `pid` = '".intval($_REQUEST['pid'])."' OR `top_level` >= 2 )";
   $level="";
 }
 else
@@ -76,38 +76,39 @@ $isadmin = isset($_SESSION['administrator']);
         <td width="3%">Re</td>
 </tr>
 <?php if ($rows_cnt==0) echo("<tr class=\"evenrow\"><td colspan=4></td><td style=\"text-align:center\">No thread here.</td></tr>");
-
-for ($i=0;$i<$rows_cnt;$i++){
-        mysqli_data_seek($result,$i);
-         $row=$result[0];
+$i=0;
+foreach ( $result as $row){
+        
+        
         if ($cnt) echo "<tr align=center class='oddrow'>";
         else echo "<tr align=center class='evenrow'>";
         $cnt=1-$cnt;
         if ($isadmin) echo "<td><input type=checkbox></td>"; else echo("<td></td>");
         echo "<td>";
-                if ($row->top_level!=0){
-                        if ($row->top_level!=1||$row->pid==($pid==''?0:$pid))
-                        echo"<b class=\"Top{$row->top_level}\">Top</b>";
+                if ($row['top_level']!=0){
+                        if ($row['top_level']!=1||$row['pid']==($pid==''?0:$pid))
+                        echo"<b class=\"Top{$row['top_level']}\">Top</b>";
                 }
-                else if ($row->status==1) echo"<b class=\"Lock\">Lock</b>";
-                else if ($row->count>20) echo"<b class=\"Hot\">Hot</b>";
+                else if ($row['status']==1) echo"<b class=\"Lock\">Lock</b>";
+                else if ($row['count']>20) echo"<b class=\"Hot\">Hot</b>";
         echo "</td>";
         echo "<td>";
-        if ($row->pid!=0) {
-		if($row->cid)	
-			echo "<a href=\"discuss.php?pid={$row->pid}"."&cid={$row->cid}\">";
+        if ($row['pid']!=0) {
+		if($row['cid'])	
+			echo "<a href=\"discuss.php?pid={$row['pid']}"."&cid={$row['cid']}\">";
 		else
-			echo "<a href=\"discuss.php?pid={$row->pid}\">";
-		echo "{$row->pid}</a>";
+			echo "<a href=\"discuss.php?pid={$row['pid']}\">";
+		echo "{$row['pid']}</a>";
         }
 	echo "</td>";
-        echo "<td><a href=\"../userinfo.php?user={$row->author_id}\">{$row->author_id}</a></td>";
-        if($row->cid)echo "<td><a href=\"thread.php?tid={$row->tid}&cid={$row->cid}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
-        else echo "<td><a href=\"thread.php?tid={$row->tid}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
-        echo "<td>{$row->posttime}</td>";
-        echo "<td>{$row->lastupdate}</td>";
-        echo "<td>".($row->count-1)."</td>";
+        echo "<td><a href=\"../userinfo.php?user={$row['author_id']}\">{$row['author_id']}</a></td>";
+        if($row['cid'])echo "<td><a href=\"thread.php?tid={$row['tid']}&cid={$row['cid']}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
+        else echo "<td><a href=\"thread.php?tid={$row['tid']}\">".htmlentities($row['title'],ENT_QUOTES,"UTF-8")."</a></td>";
+        echo "<td>{$row['posttime']}</td>";
+        echo "<td>{$row['lastupdate']}</td>";
+        echo "<td>".($row['count']-1)."</td>";
         echo "</tr>";
+	$i++;
 }
 
 

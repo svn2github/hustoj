@@ -10,7 +10,11 @@ if (isset($_POST['syear']))
 	$endtime=intval($_POST['eyear'])."-".intval($_POST['emonth'])."-".intval($_POST['eday'])." ".intval($_POST['ehour']).":".intval($_POST['eminute']).":00";
 //	echo $starttime;
 //	echo $endtime;
-	 
+    $title=($_POST['title']);
+    $password=$_POST['password'];
+    $description=$_POST['description'];
+    $private=$_POST['private'];
+ 
        
         if (get_magic_quotes_gpc ()) {
       		  $title = stripslashes ( $title);

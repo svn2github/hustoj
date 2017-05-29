@@ -64,8 +64,8 @@ $(function () {
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
-<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";	
-if (!($result=pdo_query($sql))) 
+<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`=? AND `result`=4 ORDER BY `problem_id` ASC";	
+if (!($result=pdo_query($sql,$user))) 
  foreach($result as $row)
 	echo "p($row[0]);";
 

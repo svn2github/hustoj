@@ -44,7 +44,7 @@ if (isset($_POST['syear']))
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
 			VALUES (?,?,?)";
 		for ($i=0;$i<count($pieces);$i++){
-			pdo_query($sql_1,$cid,intval($pieces[0]),$i) ;
+			pdo_query($sql_1,$cid,intval($pieces[$i]),$i) ;
 		}
 		pdo_query("update solution set num=-1 where contest_id=?",$cid);
 		$plist="";

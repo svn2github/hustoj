@@ -19,29 +19,29 @@ function writable($path){
 		$from=intval($_POST['from']);
 		$to=intval($_POST['to']);
 		$row=0;
-		if($result=pdo_query("select 1 from problem where problem_id=$to")){
+		if($result=pdo_query("select 1 from problem where problem_id=?",$to)){
 			$row=count($result);
 			
 		}
 		
 		if($row==0&&rename("$OJ_DATA/$from","$OJ_DATA/$to")){
-			$sql="UPDATE `problem` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!pdo_query($sql)){
+			$sql="UPDATE `problem` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `solution` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!pdo_query($sql)){
+			$sql="UPDATE `solution` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `contest_problem` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!pdo_query($sql)){
+			$sql="UPDATE `contest_problem` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `topic` SET `pid`=$to WHERE `pid`=".$from;
-			if(!pdo_query($sql)){
+			$sql="UPDATE `topic` SET `pid`=? WHERE `pid`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
@@ -49,9 +49,8 @@ function writable($path){
 			if($result=pdo_query($sql)){
 				$f=$result[0];
 				$nextid=$f[0]+1;
-				
-				$sql="ALTER TABLE problem AUTO_INCREMENT = $nextid";
-				pdo_query($sql);
+				$sql="ALTER TABLE problem AUTO_INCREMENT = ?";
+				pdo_query($sql,$nextid);
 			}
 			
 			echo "done!";

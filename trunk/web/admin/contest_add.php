@@ -47,20 +47,23 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	$pieces = explode(",",$plist );
 	if (count($pieces)>0 && intval($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
-			VALUES ('$cid','$pieces[0]',0)";
-		for ($i=1;$i<count($pieces);$i++){
+			VALUES (?,?,?)";
+		$plist="";
+		for ($i=0;$i<count($pieces);$i++){
 			$pieces[0]=intval($pieces[0]);
-			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
+			if($plist)$plist.=",";
+			$plist.=$pieces[0];
+			pdo_query($sql_1,$cid,$pieces[$i],$i);
 		}
 		//echo $sql_1;
-		pdo_query($sql_1) ;
+		
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
 		pdo_query($sql) ;
 	}
-	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	pdo_query($sql);
-	$sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_id']."','m$cid')";
-	pdo_query($sql);
+	$sql="DELETE FROM `privilege` WHERE `rightstr`=?";
+	pdo_query($sql,"c$cid");
+	$sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
+	pdo_query($sql,$_SESSION['user_id'],"m$cid");
 	$_SESSION["m$cid"]=true;
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
@@ -77,14 +80,14 @@ else{
 	
    if(isset($_GET['cid'])){
 		   $cid=intval($_GET['cid']);
-		   $sql="select * from contest WHERE `contest_id`='$cid'";
-		   $result=pdo_query($sql);
+		   $sql="select * from contest WHERE `contest_id`=?";
+		   $result=pdo_query($sql,$cid);
 		    $row=$result[0];
 		   $title=$row['title'];
 		   
 			$plist="";
-			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-			$result=pdo_query($sql) ;
+			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? ORDER BY `num`";
+			$result=pdo_query($sql,$cid) ;
 			for ($i=count($result);$i>0;$i--){
 				$row=$result[0];
 				$plist=$plist.$row[0];
@@ -107,12 +110,11 @@ else if(isset($_POST['problem2contest'])){
 		   $spid=intval($_GET['spid']);
 		 
 			$plist="";
-			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=$spid ";
-			$result=pdo_query($sql) ;
-			for ($i=count($result);$i>0;$i--){
-				$row=$result[0];
-				$plist=$plist.$row[0];
-				if ($i>1) $plist=$plist.',';
+			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=? ";
+			$result=pdo_query($sql,$spid) ;
+			foreach ($result as $row){
+				if ($plist) $plist.=',';
+				$plist.=$row[0];
 			}
 			
 }  

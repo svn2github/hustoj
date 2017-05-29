@@ -11,29 +11,29 @@ if (!(isset($_SESSION['http_judge']))){
 	$memory=intval($_POST['memory']);
 	$sim=intval($_POST['sim']);
 	$simid=intval($_POST['simid']);
-	$sql="UPDATE solution SET result=$result,time=$time,memory=$memory,judgetime=NOW() WHERE solution_id=$sid LIMIT 1";
+	$sql="UPDATE solution SET result=?,time=?,memory=?,judgetime=NOW() WHERE solution_id=? LIMIT 1";
 	echo $sql;
-	pdo_query($sql);
+	pdo_query($sql,$result,$time,$memory,$sid);
 	
     if ($sim) {
-		$sql="insert into sim(s_id,sim_s_id,sim) values($sid,$simid,$sim) on duplicate key update  sim_s_id=$simid,sim=$sim";
-		pdo_query($sql);
+		$sql="insert into sim(s_id,sim_s_id,sim) values(?,?,?) on duplicate key update  sim_s_id=?,sim=?";
+		pdo_query($sql,$sid,$simid,$sim,$simid,$sim);
 	}
 	
 }else if(isset($_POST['checkout'])){
 	
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
-	$sql="UPDATE solution SET result=$result,time=0,memory=0,judgetime=NOW() WHERE solution_id=$sid and result<2 LIMIT 1";
+	$sql="UPDATE solution SET result=?,time=0,memory=0,judgetime=NOW() WHERE solution_id=? and result<2 LIMIT 1";
 	
-	if(pdo_query($sql)>0)
+	if(pdo_query($sql,$result,$sid)>0)
 		echo "1";
 	else
 		echo "0";
 }else if(isset($_POST['getpending'])){
 	$max_running=intval($_POST['max_running']);
-	$sql="SELECT solution_id FROM solution WHERE result<2  ORDER BY result ASC,solution_id ASC limit $max_running";
-	$result=pdo_query($sql);
+	$sql="SELECT solution_id FROM solution WHERE result<2  ORDER BY result ASC,solution_id ASC limit ?";
+	$result=pdo_query($sql,$max_running);
 	 foreach($result as $row){
 		echo $row['solution_id']."\n";
 	}
@@ -42,8 +42,8 @@ if (!(isset($_SESSION['http_judge']))){
 }else if(isset($_POST['getsolutioninfo'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="select problem_id, user_id, language from solution WHERE solution_id=$sid ";
-	$result=pdo_query($sql);
+	$sql="select problem_id, user_id, language from solution WHERE solution_id=? ";
+	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
 		echo $row['problem_id']."\n";
 		echo $row['user_id']."\n";
@@ -78,8 +78,8 @@ if (!(isset($_SESSION['http_judge']))){
 }else if(isset($_POST['addceinfo'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="DELETE FROM compileinfo WHERE solution_id=$sid ";
-	pdo_query($sql);
+	$sql="DELETE FROM compileinfo WHERE solution_id=? ";
+	pdo_query($sql,$sid);
 	
 	$sql="INSERT INTO compileinfo VALUES($sid,?)";
 	pdo_query($sql,$ceinfo);

@@ -74,16 +74,16 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
 
 if($OJ_MEMCACHE){
+		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
         require("./include/memcache.php");
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -120,17 +120,16 @@ $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
 
-
-$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //$result=pdo_query($sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
+		$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+		$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`=?";
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -143,23 +142,29 @@ else
 // $row=$result[0];
 $pid_cnt=intval($row['pbc']);
 
-$sql="SELECT
+
+//echo $sql;
+//$result=pdo_query($sql);
+if($OJ_MEMCACHE){
+		$sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,solution.in_date,solution.pass_rate
                 FROM
                         (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
                 left join users
                 on users.user_id=solution.user_id
         ORDER BY users.user_id,in_date";
-//echo $sql;
-//$result=pdo_query($sql);
-if($OJ_MEMCACHE){
-   //     require("./include/memcache.php");
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+		$sql="SELECT
+        users.user_id,users.nick,solution.result,solution.num,solution.in_date,solution.pass_rate
+                FROM
+                        (select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution
+                left join users
+                on users.user_id=solution.user_id
+        ORDER BY users.user_id,in_date";
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -196,13 +201,17 @@ $first_blood=array();
 for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
-$sql="select num,user_id from
+
+if($OJ_MEMCACHE){
+	$sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
-if($OJ_MEMCACHE){
-        $fb = mysql_query_cache($sql);
+    $fb = mysql_query_cache($sql);
 }else{
-        $fb = pdo_query($sql);
+	$sql="select num,user_id from
+        (select num,user_id from solution where contest_id=? and result=4 order by solution_id ) contest
+        group by num";
+    $fb = pdo_query($sql,$cid);
 }
 foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];

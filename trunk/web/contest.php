@@ -77,8 +77,8 @@
 			
 			
 			// check contest valid
-			$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' ";
-			$result=pdo_query($sql);
+			$sql="SELECT * FROM `contest` WHERE `contest_id`=?";
+			$result=pdo_query($sql,$cid);
 			$rows_cnt=count($result);
 			$contest_ok=true;
 		        $password="";	
@@ -126,16 +126,16 @@
 
 		WHERE `contest_problem`.`problem_id`=`problem`.`problem_id` 
 
-		AND `contest_problem`.`contest_id`=$cid ORDER BY `contest_problem`.`num` 
+		AND `contest_problem`.`contest_id`=? ORDER BY `contest_problem`.`num` 
                 ) problem
-                left join (select problem_id pid1,count(distinct(user_id)) accepted from solution where result=4 and contest_id=$cid group by pid1) p1 on problem.pid=p1.pid1
-                left join (select problem_id pid2,count(1) submit from solution where contest_id=$cid  group by pid2) p2 on problem.pid=p2.pid2
+                left join (select problem_id pid1,count(distinct(user_id)) accepted from solution where result=4 and contest_id=? group by pid1) p1 on problem.pid=p1.pid1
+                left join (select problem_id pid2,count(1) submit from solution where contest_id=? group by pid2) p2 on problem.pid=p2.pid2
 		order by pnum
                 
                 ";//AND `problem`.`defunct`='N'
 
 		
-			$result=pdo_query($sql);
+			$result=pdo_query($sql,$cid,$cid,$cid);
 			$view_problemset=Array();
 			
 			$cnt=0;
@@ -174,8 +174,14 @@
 
 
   $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 1000";
-  $sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like ? $wheremy  order by contest_id desc limit 1000;";
-  $result=pdo_query($sql,$keyword);
+  if($keyword){
+	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like ? $wheremy  order by contest_id desc limit 1000;";
+	$result=pdo_query($sql,$keyword);
+  }else{
+	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' $wheremy  order by contest_id desc limit 1000;";
+	$result=pdo_query($sql);
+  }
+  
 			$view_contest=Array();
 			$i=0;
 			 foreach($result as $row){

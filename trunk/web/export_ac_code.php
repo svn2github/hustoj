@@ -9,10 +9,10 @@ if (!isset($_SESSION['user_id'])){
 }
 require_once('./include/db_info.inc.php');
 $sql="select distinct source,problem_id from source_code right join 
-		(select solution_id,problem_id from solution where user_id='".$_SESSION['user_id']."' and result=4) S 
+		(select solution_id,problem_id from solution where user_id=? and result=4) S 
 		on source_code.solution_id=S.solution_id order by problem_id";
 
-$result=pdo_query($sql);
+$result=pdo_query($sql,$_SESSION['user_id']);
  foreach($result as $row){
 	echo "Problem".$row['problem_id'].":\r\n";
 	echo preg_replace("(\n)","\r\n",$row['source']);

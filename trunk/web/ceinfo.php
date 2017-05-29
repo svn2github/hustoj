@@ -34,7 +34,7 @@ if (isset($_SESSION['source_browser'])) $ok=true;
 $view_reinfo="";
 if ($ok==true){
 	if($row['user_id']!=$_SESSION['user_id'])
-		$view_mail_link= "<a href='mail.php?to_user=$row['user_id']&title=$MSG_SUBMIT $id'>Mail the auther</a>";
+		$view_mail_link= "<a href='mail.php?to_user={$row['user_id']}&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	
 	$sql="SELECT `error` FROM `compileinfo` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$id);

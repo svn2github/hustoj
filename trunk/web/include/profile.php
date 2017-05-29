@@ -11,8 +11,8 @@ header("Pragma: no-cache");
     function checkmail(){
 		
 		$sql="SELECT count(1) FROM `mail` WHERE 
-				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
-		$result=pdo_query($sql);
+				new_mail=1 AND `to_user`=?";
+		$result=pdo_query($sql,$_SESSION['user_id']);
 		if(!$result) return false;
 		$row=$result[0];
 		$retmsg="<span id=red>(".$row[0].")</span>";

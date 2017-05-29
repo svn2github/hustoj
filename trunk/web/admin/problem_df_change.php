@@ -6,15 +6,15 @@ if (!(isset($_SESSION['administrator']))){
 }
 ?>
 <?php $id=intval($_GET['id']);
-$sql="SELECT `defunct` FROM `problem` WHERE `problem_id`=$id";
-$result=pdo_query($sql);
+$sql="SELECT `defunct` FROM `problem` WHERE `problem_id`=?";
+$result=pdo_query($sql,$id);
 $row=$result[0];
 $defunct=$row[0];
 echo $defunct;
 
-if ($defunct=='Y') $sql="update `problem` set `defunct`='N' where `problem_id`=$id";
-else $sql="update `problem` set `defunct`='Y' where `problem_id`=$id";
-pdo_query($sql) ;
+if ($defunct=='Y') $sql="update `problem` set `defunct`='N' where `problem_id`=?";
+else $sql="update `problem` set `defunct`='Y' where `problem_id`=?";
+pdo_query($sql,$id) ;
 ?>
 <script language=javascript>
 	history.go(-1);

@@ -19,8 +19,8 @@ if (!(isset($_SESSION['administrator']))){
 			system("rm -rf $basedir");
 	    }
 	}
-        $sql="delete FROM `problem` WHERE `problem_id`=$id";
-        pdo_query($sql) ;
+        $sql="delete FROM `problem` WHERE `problem_id`=?";
+        pdo_query($sql,$id) ;
         $sql="select max(problem_id) FROM `problem`" ;
         $result=pdo_query($sql);
         $row=$result[0];
@@ -28,8 +28,8 @@ if (!(isset($_SESSION['administrator']))){
         $max_id++;
         if($max_id<1000)$max_id=1000;
         
-        $sql="ALTER TABLE problem AUTO_INCREMENT = $max_id;";
-        pdo_query($sql);
+        $sql="ALTER TABLE problem AUTO_INCREMENT = ?";
+        pdo_query($sql,$max_id);
         ?>
         <script language=javascript>
                 history.go(-1);

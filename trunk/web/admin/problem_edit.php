@@ -28,8 +28,8 @@ include_once("kindeditor.php") ;
 <h1>Edit problem</h1>
 <form method=POST action=problem_edit.php>
 <input type=hidden name=problem_id value=New Problem>
-<?php $sql="SELECT * FROM `problem` WHERE `problem_id`=".intval($_GET['id']);
-$result=pdo_query($sql);
+<?php $sql="SELECT * FROM `problem` WHERE `problem_id`=?";
+$result=pdo_query($sql,intval($_GET['id']));
  $row=$result[0];
 ?>
 <p>Problem Id: <?php echo $row['problem_id']?></p>

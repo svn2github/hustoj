@@ -94,8 +94,8 @@ if (isset($_POST['syear']))
 		$plist.=$row[0];
 	}
 	$ulist="";
-	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`='c$cid' order by user_id";
-	$result=pdo_query($sql);
+	$sql="SELECT `user_id` FROM `privilege` WHERE `rightstr`=? order by user_id";
+	$result=pdo_query($sql,"c$cid");
 	foreach($result as $row){
 		if ($ulist) $ulist.="\n";
 		$ulist.=$row[0];

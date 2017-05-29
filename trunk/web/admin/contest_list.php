@@ -25,19 +25,18 @@ for ($i=1;$i<=$cnt;$i++){
         if ($i==$page) echo "<span class=red>$i</span>";
         else echo "<a href='contest_list.php?page=".$i."'>".$i."</a>";
 }
-$sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where contest_id>=$pstart and contest_id <=$pend order by `contest_id` desc";
+$sql="";
 if(isset($_GET['keyword'])){
 	$keyword=$_GET['keyword'];
 	$keyword="%$keyword%";
 	 $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where title like ? ";
 	 $result=pdo_query($sql,$keyword);
 }else{
-     
-	 $result=pdo_query($sql);
+     $sql="select `contest_id`,`title`,`start_time`,`end_time`,`private`,`defunct` FROM `contest` where contest_id>=? and contest_id <=? order by `contest_id` desc";
+	 $result=pdo_query($sql,$pstart,$pend);
 }
 ?>
 <form action=contest_list.php class=center><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
-
 
 <?php
 echo "<center><table class='table table-striped' width=90% border=1>";

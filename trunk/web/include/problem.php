@@ -12,14 +12,13 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 			$sample_input,$sample_output,$hint,$source,$spj ) ;
 	echo "<br>Add $pid  ";
 	if (isset ( $_POST ['contest_id'] )) {
-		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=?";
-		$result = pdo_query( $sql,intval ( $_POST ['contest_id'] )  ) ;
-		$row =$result[0];
 		$cid =intval($_POST ['contest_id']);
+		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=?";
+		$result = pdo_query( $sql,$cid ) ;
+		$row =$result[0];
 		$num = $row [0];
 		echo "Num=" . $num . ":";
-		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES(?,?,?)";
-		
+		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES(?,?,?)";	
 		pdo_query($sql,$pid,$cid,$num);
 	}
 	$basedir = "$OJ_DATA/$pid";

@@ -122,8 +122,8 @@ function  getMark($users,  $start,  $end, $s) {
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
-$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`='$cid'";
-$result=pdo_query($sql) ;
+$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`=?";
+$result=pdo_query($sql,$cid) ;
 $rows_cnt=count($result);
 $start_time=0;
 if ($rows_cnt>0){
@@ -148,8 +148,8 @@ if ($start_time>time()){
 	exit(0);
 }
 
-$sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=pdo_query($sql);
+$sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`=?";
+$result=pdo_query($sql,$cid);
  $row=$result[0];
 $pid_cnt=intval($row[0]);
 if($pid_cnt==1) {
@@ -164,12 +164,12 @@ $mark_per_punish=$mark_per_problem/5;
 $sql="SELECT 
 	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
 		FROM 
-			(select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution 
+			(select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution 
 		left join users 
 		on users.user_id=solution.user_id 
 	ORDER BY users.user_id,in_date";
 //echo $sql;
-$result=pdo_query($sql);
+$result=pdo_query($sql,$cid);
 $user_cnt=0;
 $user_name='';
 $U=array();

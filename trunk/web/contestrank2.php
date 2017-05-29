@@ -52,17 +52,15 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-//$result=pdo_query($sql) ;
-//$rows_cnt=count($result);
 if($OJ_MEMCACHE){
+		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
         require("./include/memcache.php");
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }

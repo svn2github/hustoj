@@ -37,14 +37,14 @@ for ($i=1;$i<=$cnt;$i++){
         echo "**</option>";
 }
 echo "</select>";
-$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
-//echo $sql;
+$sql="";
 if($keyword) {
 	$keyword="%$keyword%";
 	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like ? or source like ?";
 	$result=pdo_query($sql,$keyword,$keyword);
 }else{
-	$result=pdo_query($sql);
+	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=? and problem_id<=? order by `problem_id` desc";
+	$result=pdo_query($sql,$pstart,$pend);
 }
 ?>
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>

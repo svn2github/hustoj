@@ -57,8 +57,8 @@ function getAttribute($Node, $TagName,$attribute) {
 function hasProblem($title){
 	
 	$md5=md5($title);
-	$sql="select 1 from problem where md5(title)='$md5'";  
-	$result=pdo_query( $sql );
+	$sql="select 1 from problem where md5(title)=?";  
+	$result=pdo_query( $sql,$md5 );
 	$rows_cnt=count($result);		
 	
 	//echo "row->$rows_cnt";			

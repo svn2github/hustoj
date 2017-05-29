@@ -79,8 +79,8 @@ if(isset($_POST['update_solution'])){
 				}
 				
                 $sql="SELECT solution_id FROM solution WHERE language in ($oj_lang_set)
-                        and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit $max_running";
-                $result=pdo_query($sql);
+                        and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit ?";
+                $result=pdo_query($sql,$max_running);
                 foreach($result as $row){
                         echo $row['solution_id']."\n";
                 }
@@ -90,8 +90,8 @@ if(isset($_POST['update_solution'])){
 }else if(isset($_POST['getsolutioninfo'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="select problem_id, user_id, language from solution WHERE solution_id=$sid ";
-	$result=pdo_query($sql);
+	$sql="select problem_id, user_id, language from solution WHERE solution_id=?";
+	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
 		echo $row['problem_id']."\n";
 		echo $row['user_id']."\n";
@@ -103,8 +103,8 @@ if(isset($_POST['update_solution'])){
 }else if(isset($_POST['getsolution'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="SELECT source FROM source_code WHERE solution_id=$sid ";
-	$result=pdo_query($sql);
+	$sql="SELECT source FROM source_code WHERE solution_id=? ";
+	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
 		echo $row['source']."\n";
 	}
@@ -113,8 +113,8 @@ if(isset($_POST['update_solution'])){
 }else if(isset($_POST['getcustominput'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="SELECT input_text FROM custominput WHERE solution_id=$sid ";
-	$result=pdo_query($sql);
+	$sql="SELECT input_text FROM custominput WHERE solution_id=? ";
+	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
 		echo $row->input_text."\n";
 	}
@@ -123,8 +123,8 @@ if(isset($_POST['update_solution'])){
 }else if(isset($_POST['getprobleminfo'])){
 	
 	$pid=intval($_POST['pid']);
-	$sql="SELECT time_limit,memory_limit,spj FROM problem where problem_id=$pid ";
-	$result=pdo_query($sql);
+	$sql="SELECT time_limit,memory_limit,spj FROM problem where problem_id=?";
+	$result=pdo_query($sql,$pid );
 	if ( $row=$result[0]){
 		echo $row['time']_limit."\n";
 		echo $row['memory']_limit."\n";

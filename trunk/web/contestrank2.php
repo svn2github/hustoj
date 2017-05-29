@@ -96,48 +96,45 @@ if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
-
-
-$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
-//$result=pdo_query($sql);
 if($OJ_MEMCACHE){
-//        require("./include/memcache.php");
+	$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+	$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`=?";
+        
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
-if($OJ_MEMCACHE)
-        $row=$result[0];
-else
-         $row=$result[0];
+$row=$result[0];
 
 // $row=$result[0];
 $pid_cnt=intval($row['pbc']);
-if(!$OJ_MEMCACHE)
 
-$sql="SELECT
+
+if($OJ_MEMCACHE){
+	$sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
                 FROM
                         (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
                 left join users
                 on users.user_id=solution.user_id
         ORDER BY in_date";
-//echo $sql;
-//$result=pdo_query($sql);
-if($OJ_MEMCACHE){
-   //     require("./include/memcache.php");
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = pdo_query($sql);
+	$sql="SELECT
+        users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
+                FROM
+                        (select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution
+                left join users
+                on users.user_id=solution.user_id
+        ORDER BY in_date";
+        $result = pdo_query($sql,$cid);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
@@ -146,11 +143,7 @@ $user_cnt=0;
 $user_name='';
 $U=array();
 for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$result[$i];
-        else
-                 $row=$result[0];
-
+        $row=$result[$i];
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){
                 $user_cnt++;

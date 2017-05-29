@@ -3,20 +3,25 @@
         require_once("../include/db_info.inc.php");
         require_once("discuss_func.inc.php");
         if ($_REQUEST['target']=='reply'){
-                $rid = intval($_REQUEST['rid']); $tid = intval($_REQUEST['tid']);
+                $rid = intval($_REQUEST['rid']); 
+				$tid = intval($_REQUEST['tid']);
                 $stat = -1;
                 if ($_REQUEST['action']=='resume') $stat = 0;
                 if ($_REQUEST['action']=='disable') $stat = 1;
                 if ($_REQUEST['action']=='delete') $stat = 2;
                 if ($stat == -1) err_msg("Wrong action.");
                 $rid = intval($rid);
-                $sql = "UPDATE reply SET status = $stat WHERE `rid` = '$rid'";
-                if (!isset($_SESSION['administrator']))
-                        if ($stat!=2) err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
-                        else $sql.=" AND author_id=?";
-                
-                if (pdo_query($sql,$_SESSION['user_id'])>0) header('Location: thread.php?tid='.$tid);
-                else err_msg("Reply not exist or no permission.");
+                $sql = "UPDATE reply SET status =? WHERE `rid` = ?";
+                if (!isset($_SESSION['administrator'])){
+                        if ($stat!=2) 
+							err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
+                        else 
+							$sql.=" AND author_id=?";
+                }
+                if (pdo_query($sql, $stat,$rid,$_SESSION['user_id'])>0) 
+					header('Location: thread.php?tid='.$tid);
+                else 
+					err_msg("Reply not exist or no permission.");
         }
         if ($_REQUEST['target']=='thread'){
                 $tid = intval($_REQUEST['tid']);

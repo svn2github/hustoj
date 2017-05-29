@@ -75,16 +75,16 @@ if ($start+$sz>$acuser) $sz=$acuser-$start;
 // check whether the problem in a contest
 $now=strftime("%Y-%m-%d %H:%M",time());
 $sql="SELECT 1 FROM `contest_problem` WHERE `problem_id`=$id AND `contest_id` IN (
-        SELECT `contest_id` FROM `contest` WHERE `start_time`<'$now' AND `end_time`>'$now')";
-$rrs=pdo_query($sql);
+        SELECT `contest_id` FROM `contest` WHERE `start_time`<? AND `end_time`>?)";
+$rrs=pdo_query($sql,$now,$now);
 $flag=count($rrs)==0;
 
 // check whether the problem is ACed by user
 $AC=false;
 if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
         $sql="SELECT 1 FROM solution where
-                        result=4 and problem_id=$id and user_id=?";
-        $rrs=pdo_query( $sql, $_SESSION['user_id']);
+                        result=4 and problem_id=? and user_id=?";
+        $rrs=pdo_query( $sql,$id, $_SESSION['user_id']);
         $AC=(intval(count($rrs))>0);
         
 }
@@ -92,21 +92,21 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 $sql="SELECT * FROM (
   SELECT COUNT(*) att, user_id, min(10000000000000000000 + time*100000000000 + memory*100000 + code_length) score
   FROM solution
-  WHERE problem_id =$id AND result =4
+  WHERE problem_id =? AND result =4
   GROUP BY user_id
   ORDER BY score, in_date DESC
 )c
 LEFT JOIN (
   SELECT solution_id, user_id, language, 10000000000000000000 + time*100000000000 + memory*100000 + code_length score, in_date
   FROM solution 
-  WHERE problem_id =$id AND result =4  
+  WHERE problem_id =? AND result =4  
   ORDER BY score, in_date DESC
 )b ON b.user_id=c.user_id AND b.score=c.score
 ORDER BY c.score, in_date ASC
 LIMIT $start,100;";
 
 $result=pdo_query( "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-$result=pdo_query( $sql);
+$result=pdo_query( $sql,$id,$id);
 
 $view_solution=array();
 $j=0;

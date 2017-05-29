@@ -45,10 +45,11 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	$plist=trim($_POST['cproblem']);
 	$pieces = explode(",",$plist );
-	if (count($pieces)>0 && strlen($pieces[0])>0){
+	if (count($pieces)>0 && intval($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
 			VALUES ('$cid','$pieces[0]',0)";
 		for ($i=1;$i<count($pieces);$i++){
+			$pieces[0]=intval($pieces[0]);
 			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
 		}
 		//echo $sql_1;

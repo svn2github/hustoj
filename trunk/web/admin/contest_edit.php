@@ -34,35 +34,37 @@ if (isset($_POST['syear']))
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=?";
 	pdo_query($sql,$cid);
 	$plist=trim($_POST['cproblem']);
+	
 	$pieces = explode(',', $plist);
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
-			VALUES ('$cid','".intval($pieces[0])."',0)";
-		for ($i=1;$i<count($pieces);$i++)
-			$sql_1=$sql_1.",('$cid','".intval($pieces[0])."',$i)";
-		pdo_query("update solution set num=-1 where contest_id=?",$cid);
+			VALUES (?,?,?)";
 		for ($i=0;$i<count($pieces);$i++){
+			pdo_query($sql_1,$cid,,intval($pieces[0]),$i) ;
+		}
+		pdo_query("update solution set num=-1 where contest_id=?",$cid);
+		$plist="";
+		for ($i=0;$i<count($pieces);$i++){
+			if($plist) $plist.=",";
+			$plist.=$pieces[$i];
 			$sql_2="update solution set num=? where contest_id=? and problem_id=?;";
 			pdo_query($sql_2,$i,$cid,$pieces[$i]);
 		}
-		//echo $sql_1;
 		
-		pdo_query($sql_1) ;
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
 		pdo_query($sql) ;
 	
 	}
 	
-	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	pdo_query($sql);
+	$sql="DELETE FROM `privilege` WHERE `rightstr`=?";
+	pdo_query($sql,"c$cid");
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
-			VALUES ('".trim($pieces[0])."','c$cid')";
-		for ($i=1;$i<count($pieces);$i++)
-			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
-		//echo $sql_1;
-		pdo_query($sql_1) ;
+			VALUES (?,?)";
+		for ($i=0;$i<count($pieces);$i++){
+			pdo_query($sql_1,trim($pieces[$i]),"c$cid") ;
+		}
 	}
 	
 	echo "<script>window.location.href=\"contest_list.php\";</script>";

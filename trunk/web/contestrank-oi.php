@@ -200,15 +200,10 @@ $sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
 if($OJ_MEMCACHE){
-//        require("./include/memcache.php");
         $fb = mysql_query_cache($sql);
-       
 }else{
-
         $fb = pdo_query($sql);
-      
 }
-
 foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];
 }

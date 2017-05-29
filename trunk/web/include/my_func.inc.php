@@ -78,31 +78,25 @@ function is_valid_user_name($user_name){
 function sec2str($sec){
 	return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
 }
-
 function is_running($cid){
-	
-	//require_once("./include/db_info.inc.php");
    $now=strftime("%Y-%m-%d %H:%M",time());
-	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`='$cid' AND `end_time`>'$now'";
-	$result=pdo_query($sql);
-	 $row=$result[0];
+	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`=? AND `end_time`>?";
+	$result=pdo_query($sql,$cid,$now);
+	$row=$result[0];
 	$cnt=intval($row[0]);
-	
 	return $cnt>0;
 }
-
 function check_ac($cid,$pid){
 	//require_once("./include/db_info.inc.php");
 	
-	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`='$cid' AND `num`='$pid' AND `result`='4' AND `user_id`='".$_SESSION['user_id']."'";
-	$result=pdo_query($sql);
+	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
+	$result=pdo_query($sql,$cid,$pid,$_SESSION['user_id']);
 	 $row=$result[0];
 	$ac=intval($row[0]);
-	
 	if ($ac>0) return "<font color=green>Y</font>";
-	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`='$cid' AND `num`='$pid' AND `user_id`='".$_SESSION['user_id']."'";
-	$result=pdo_query($sql);
-	 $row=$result[0];
+	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `user_id`=?";
+	$result=pdo_query($sql,$cid,$pid,$_SESSION['user_id']);
+	$row=$result[0];
 	$sub=intval($row[0]);
 	
 	if ($sub>0) return "<font color=red>N</font>";

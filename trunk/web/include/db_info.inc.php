@@ -112,7 +112,7 @@ function pdo_query($sql){
 
 	//sychronize php and mysql server with timezone settings, dafault setting for China
 	//if you are not from China, comment out these two lines or modify them.
-	date_default_timezone_set("PRC");
-	pdo_query("SET time_zone ='+8:00'");
+	//date_default_timezone_set("PRC");
+	//pdo_query("SET time_zone ='+8:00'");
 
 ?>

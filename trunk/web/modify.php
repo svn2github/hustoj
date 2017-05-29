@@ -22,8 +22,8 @@ if ($len>100){
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
 $password=$_POST['opassword'];
-$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`='".$user_id."'";
-$result=pdo_query($sql);
+$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`=?";
+$result=pdo_query($sql,$user_id);
  $row=$result[0];
 if ($row && pwCheck($password,$row['password'])) $rows_cnt = 1;
 else $rows_cnt = 0;
@@ -72,6 +72,6 @@ $sql="UPDATE `users` SET"
 ;
 //echo $sql;
 //exit(0);
-pdo_query($sql,$password,$nick,$school,$email,$user_id);// or die("Insert Error!\n");
+pdo_query($sql,$password,$nick,$school,$email,$user_id);
 header("Location: ./");
 ?>

@@ -89,23 +89,18 @@ function getSolution($pid,$lang){
 	$ret=new Solution();
 	
 	$language_name=$GLOBALS['language_name'];
-   
-	
-	$sql = "select `solution_id`,`language` from solution where problem_id=$pid and result=4 and language=$lang limit 1";
+
+	$sql = "select `solution_id`,`language` from solution where problem_id=? and result=4 and language=? limit 1";
 //	echo $sql;
-	$result = pdo_query($sql,$con ) ;
+	$result = pdo_query($sql,$pid, $lang) ;
 	if($result&&$row = $result[0] ){
 		$solution_id=$row[0];
 		$ret->language=$language_name[$row[1]];
-		
-		
-		$sql = "select source from source_code where solution_id=$solution_id";
-		$result = pdo_query( $sql ) ;
+		$sql = "select source from source_code where solution_id=?";
+		$result = pdo_query( $sql,$solution_id ) ;
 		if($row = $result[0] ){
 			$ret->source_code=$row['source'];
-			
 		}
-		
 	}
        
 	return $ret;
@@ -181,6 +176,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		$in.=$pid;
 	}
    	$sql = "select * from problem where problem_id in($in)";
+	$result = pdo_query( $sql );
+	
    	$filename="-$in";
    }else if (isset($_GET['cid'])){
 	  require_once("../include/check_get_key.php");
@@ -189,19 +186,22 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
       $result = pdo_query( $sql,$cid );
       $row = $result[0];
       $filename='-'.$row['title'];
-      $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=$cid)";
+      $sql = "select * from problem where problem_id in(select problem_id from contest_problem where contest_id=?)";
+	  $result = pdo_query( $sql ,$cid);
+	
 	  
    }else{
 	   require_once("../include/check_post_key.php");
 	   $start = intval ( $_POST ['start'] );
 		$end = intval ( $_POST ['end'] );
-	 	$sql = "select * from problem where problem_id>=$start and problem_id<=$end";
+	 	$sql = "select * from problem where problem_id>=? and problem_id<=?";
+		$result = pdo_query( $sql,$start ,$end);
+	
        $filename="-$start-$end";
    }
 
 	
 	//echo $sql;
-	$result = pdo_query( $sql );
 	
 	if (isset($_POST ['submit'])&&$_POST ['submit'] == "Export")
 		header ( 'Content-Type:   text/xml' );

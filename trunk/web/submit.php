@@ -37,7 +37,7 @@ if (isset($_POST['cid'])){
 	if(!isset($_SESSION['administrator']))
 		$sql.=" and defunct='N'";
 }
-echo $sql;	
+//echo $sql;	
 
 $res=pdo_query($sql);
 if ($res&&count($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
@@ -60,8 +60,8 @@ if (isset($_POST['id'])) {
         $test_run=($cid<0);
 	if($test_run) $cid=-$cid;
 	// check user if private
-	$sql="SELECT `private` FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<='$now' AND `end_time`>'$now'";
-	$result=pdo_query($sql);
+	$sql="SELECT `private` FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
+	$result=pdo_query($sql,$cid,$now,$now);
 	$rows_cnt=count($result);
 	if ($rows_cnt!=1){
 		echo "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
@@ -73,9 +73,9 @@ if (isset($_POST['id'])) {
 		$isprivate=intval($row[0]);
 		
 		if ($isprivate==1&&!isset($_SESSION['c'.$cid])){
-			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`='c$cid'";
-			$result=pdo_query($sql,$user_id) ; 
-			 $row=$result[0];
+			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
+			$result=pdo_query($sql,$user_id,"c$cid") ; 
+			$row=$result[0];
 			$ccnt=intval($row[0]);
 			
 			if ($ccnt==0&&!isset($_SESSION['administrator'])){
@@ -85,8 +85,8 @@ if (isset($_POST['id'])) {
 			}
 		}
 	}
-	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`='$cid' AND `num`='$pid'";
-	$result=pdo_query($sql);
+	$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? AND `num`=?";
+	$result=pdo_query($sql,$cid,$pid);
 	$rows_cnt=count($result);
 	if ($rows_cnt!=1){
 		$view_errors= "No Such Problem!\n";

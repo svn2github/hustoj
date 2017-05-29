@@ -29,8 +29,8 @@ if (isset($_GET['cid'])){
         $cid=intval($_GET['cid']);
         $sql=$sql." AND `contest_id`='$cid' and num>=0 ";
         $str2=$str2."&cid=$cid";
-          $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-        $result=pdo_query($sql_lock) ;
+        $sql_lock="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
+        $result=pdo_query($sql_lock,$cid) ;
         $rows_cnt=count($result);
         $start_time=0;
         $end_time=0;
@@ -101,9 +101,13 @@ $user_id="";
 if (isset($_GET['user_id'])){
         $user_id=trim($_GET['user_id']);
         if (is_valid_user_name($user_id) && $user_id!=""){
-                $sql=$sql."AND `user_id`='".$user_id."' ";
+			if($OJ_MEMCACHE){
+                $sql=$sql."AND `user_id`='".addslashes($user_id) ."' ";
+			}else{
+                $sql=$sql."AND `user_id`=? ";
+			}
                 if ($str2!="") $str2=$str2."&";
-                $str2=$str2."user_id=".$user_id;
+                $str2=$str2."user_id=".urlencode($user_id);
         }else $user_id="";
 }
 if (isset($_GET['language'])) $language=intval($_GET['language']);
@@ -111,7 +115,7 @@ else $language=-1;
 
 if ($language>count($language_ext) || $language<0) $language=-1;
 if ($language!=-1){
-        $sql=$sql."AND `language`='".strval($language)."' ";
+        $sql=$sql."AND `language`='".($language)."' ";
         $str2=$str2."&language=".$language;
 }
 if (isset($_GET['jresult'])) $result=intval($_GET['jresult']);
@@ -119,7 +123,7 @@ else $result=-1;
 
 if ($result>12 || $result<0) $result=-1;
 if ($result!=-1&&!$lock){
-        $sql=$sql."AND `result`='".strval($result)."' ";
+        $sql=$sql."AND `result`='".($result)."' ";
         $str2=$str2."&jresult=".$result;
 }
 
@@ -157,8 +161,12 @@ if($OJ_MEMCACHE){
 	if($result) $rows_cnt=count($result);
 	else $rows_cnt=0;
 }else{
-		
-	$result = pdo_query($sql);
+	if (isset($_GET['user_id'])){
+		$result = pdo_query($sql,$user_id);
+	}else{
+		$result = pdo_query($sql);
+	}
+	
 	if($result) $rows_cnt=count($result);
 	else $rows_cnt=0;
 }
@@ -176,10 +184,8 @@ $view_status=Array();
 
 $last=0;
 for ($i=0;$i<$rows_cnt;$i++){
-if($OJ_MEMCACHE)
+
         $row=$result[$i];
-else
-         $row=$result[0];
         //$view_status[$i]=$row;
         if($i==0&&$row['result']<4) $last=$row['solution_id'];
 
@@ -301,14 +307,6 @@ else
    
 
 }
-if(!$OJ_MEMCACHE && $result)
-
-
-
-
-
-
-
 
 ?>
 

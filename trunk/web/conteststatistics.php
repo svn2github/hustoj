@@ -2,6 +2,7 @@
 	$OJ_CACHE_SHARE=true;
 	$cache_time=3;
 	require_once("./include/db_info.inc.php");
+	require_once("./include/cache_start.php");
 	require_once("./include/const.inc.php");
 	require_once("./include/my_func.inc.php");
 
@@ -33,7 +34,7 @@ $R=array();
  foreach($result as $row){
 	$res=intval($row['result'])-4;
 	if ($res<0) $res=8;
-	$num=intval($row->num);
+	$num=intval($row['num']);
 	$lag=intval($row['language']);
 	if(!isset($R[$num][$res]))
 		$R[$num][$res]=1;

@@ -20,24 +20,25 @@ if (isset($_GET['id'])){
         $id=intval($_GET['id']);
   //require("oj-header.php");
         if (!isset($_SESSION['administrator']) && $id!=1000&&!isset($_SESSION['contest_creator']))
-                $sql="SELECT * FROM `problem` WHERE `problem_id`=$id AND `defunct`='N' AND `problem_id` NOT IN (
+                $sql="SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
                                 SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
                                                 SELECT `contest_id` FROM `contest` WHERE `end_time`>'$now' or `private`='1'))
                                 ";
         else
-                $sql="SELECT * FROM `problem` WHERE `problem_id`=$id";
+                $sql="SELECT * FROM `problem` WHERE `problem_id`=?";
 
         $pr_flag=true;
+		$result=pdo_query($sql,$id);
 }else if (isset($_GET['cid']) && isset($_GET['pid'])){
         // contest
         $cid=intval($_GET['cid']);
         $pid=intval($_GET['pid']);
 
         if (!isset($_SESSION['administrator']))
-                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid AND `start_time`<='$now'";
+                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=? AND `start_time`<='$now'";
         else
-                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=$cid";
-        $result=pdo_query($sql);
+                $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=?";
+        $result=pdo_query($sql,$cid);
         $rows_cnt=count($result);
         $row=($result[0]);
         $contest_ok=true;
@@ -57,8 +58,9 @@ if (isset($_GET['id'])){
         }else{
                 // started
                 $sql="SELECT * FROM `problem` WHERE `defunct`='N' AND `problem_id`=(
-                        SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid AND `num`=$pid
+                        SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? AND `num`=?
                         )";
+				$result=pdo_query($sql,$cid,$pid);
         }
         // public
         if (!$contest_ok){
@@ -73,20 +75,23 @@ if (isset($_GET['id'])){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-$result=pdo_query($sql);
+
 
        
 if (count($result)!=1){
    $view_errors="";
    if(isset($_GET['id'])){
       $id=intval($_GET['id']);
-           $sql="SELECT  contest.`contest_id` , contest.`title`,contest_problem.num FROM `contest_problem`,`contest` WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=$id and defunct='N'  ORDER BY `num`";
+           $sql="SELECT  contest.`contest_id` , contest.`title`,contest_problem.num FROM `contest_problem`,`contest` 
+				WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=? and defunct='N'  ORDER BY `num`";
            //echo $sql;
-           $result=pdo_query($sql);
+           $result=pdo_query($sql,$id);
            if($i=count($result)){
               $view_errors.= "This problem is in Contest(s) below:<br>";
                         foreach($result as $row){
-                                $view_errors.= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:$row[1]</a><br>";
+                                $view_errors.= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".
+								htmlentities($row[1],ENT_QUOTES,"utf-8")
+								."</a><br>";
                         }
                                  
                                
@@ -102,7 +107,6 @@ if (count($result)!=1){
         exit(0);
 }else{
         $row=$result[0];
-       
         $view_title= $row['title'];
        
 }

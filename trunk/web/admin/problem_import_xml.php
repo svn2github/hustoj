@@ -31,15 +31,11 @@ function getLang($language){
 }
 function submitSolution($pid,$solution,$language)
 {
-	
-	
 	$language=getLang($language);
-	
-	
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
-	VALUES('$pid','".$_SESSION['user_id']."',NOW(),'$language','127.0.0.1','$len',14)";
-	$insert_id = pdo_query( $sql );
+						VALUES(?,?,NOW(),?,'127.0.0.1',?,14)";
+	$insert_id = pdo_query( $sql,$pid,$_SESSION['user_id'],$language,$len );
 	//echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES(?,?)";
 	pdo_query( $sql ,$insert_id,$solution);

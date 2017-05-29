@@ -43,17 +43,17 @@ echo "<title>$MSG_MAIL</title>";
 $view_content=false;
 if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
-	$sql="SELECT * FROM `mail` WHERE `mail_id`=".$vid."
-								and to_user='".$_SESSION['user_id']."'";
-	$result=pdo_query($sql);
+	$sql="SELECT * FROM `mail` WHERE `mail_id`=?
+								and to_user=?";
+	$result=pdo_query($sql,$vid,$_SESSION['user_id']);
 	 $row=$result[0];
-	$to_user=$row->from_user;
+	$to_user=$row['from_user'];
 	$view_title=$row['title'];
 	$view_content=$row->content;
 
 	
-	$sql="update `mail` set new_mail=0 WHERE `mail_id`=".$vid;
-	pdo_query($sql);
+	$sql="update `mail` set new_mail=0 WHERE `mail_id`=?";
+	pdo_query($sql,$vid);
 
 }
 //send mail page
@@ -70,8 +70,8 @@ if(isset($_POST['to_user'])){
 	}
 	$title = RemoveXSS( $title);
 	
-	$sql="select 1 from users where user_id='$to_user' ";
-	$res=pdo_query($sql);
+	$sql="select 1 from users where user_id=? ";
+	$res=pdo_query($sql,$to_user);
 	if ($res&&count($res)<1){
 			
 			$view_title= "No Such User!";
@@ -89,15 +89,15 @@ if(isset($_POST['to_user'])){
 	}
 }
 //list mail
-	$sql="SELECT * FROM `mail` WHERE to_user='".$_SESSION['user_id']."'
+	$sql="SELECT * FROM `mail` WHERE to_user=?
 					order by mail_id desc";
-	$result=pdo_query($sql) ;
+	$result=pdo_query($sql,$_SESSION['user_id']) ;
 $view_mail=Array();
 $i=0;
 foreach($result as $row){
-	$view_mail[$i][0]=$row->mail_id;
+	$view_mail[$i][0]=$row['mail_id'];
 	if ($row->new_mail) $view_mail[$i][0].= "<span class=red>New</span>";
-	$view_mail[$i][1]="<a href='mail.php?vid=$row->mail_id'>".
+	$view_mail[$i][1]="<a href='mail.php?vid=".$row['mail_id']."'>".
 			$row->from_user.":".$row['title']."</a>";
 	$view_mail[$i][2]=$row['in_date'];
 	$i++;

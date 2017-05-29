@@ -26,8 +26,8 @@ function is_valid($str2){
 
 $ok=false;
 $id=strval(intval($_GET['sid']));
-$sql="SELECT * FROM `solution` WHERE `solution_id`='".$id."'";
-$result=pdo_query($sql);
+$sql="SELECT * FROM `solution` WHERE `solution_id`=?";
+$result=pdo_query($sql,$id);
  $row=$result[0];
 if ($row && $row['user_id']==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
@@ -36,8 +36,8 @@ if ($ok==true){
 	if($row['user_id']!=$_SESSION['user_id'])
 		$view_mail_link= "<a href='mail.php?to_user=$row['user_id']&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	
-	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`='".$id."'";
-	$result=pdo_query($sql);
+	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
+	$result=pdo_query($sql,$id);
 	 $row=$result[0];
 	if($row&&$OJ_SHOW_DIFF&&($OJ_TEST_RUN||is_valid($row->error)))	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row->error),ENT_QUOTES,"UTF-8");

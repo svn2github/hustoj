@@ -63,10 +63,9 @@ if ($err_cnt>0){
 	
 }
 $password=pwGen($_POST['password']);
-$sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = '".$user_id."'";
-$result=pdo_query($sql);
+$sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = ?";
+$result=pdo_query($sql,$user_id);
 $rows_cnt=count($result);
-
 if ($rows_cnt == 1){
 	print "<script language='javascript'>\n";
 	print "alert('User Existed!\\n');\n";

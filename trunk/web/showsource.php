@@ -37,8 +37,8 @@ if(isset($OJ_EXAM_CONTEST_ID)){
 
 if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
 	$sql="SELECT 1 FROM solution where 
-			result=4 and problem_id=$sproblem_id and user_id='".$_SESSION['user_id']."'";
-	$rrs=pdo_query($sql);
+			result=4 and problem_id=$sproblem_id and user_id=?";
+	$rrs=pdo_query($sql,$_SESSION['user_id']);
 	$ok=(count($rrs)>0);
 	
 }
@@ -46,8 +46,8 @@ $view_source="No source code available!";
 if (isset($_SESSION['user_id'])&&$row && $row['user_id']==$_SESSION['user_id']) $ok=true;
 if (isset($_SESSION['source_browser'])) $ok=true;
 
-		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=".$id;
-		$result=pdo_query($sql);
+		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=?";
+		$result=pdo_query($sql,$id);
 		 $row=$result[0];
 		if($row)
 			$view_source=$row['source'];

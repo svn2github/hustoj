@@ -25,25 +25,28 @@ if (isset($_SESSION['administrator'])){
 		if(isset($_GET['search'])){
 
 			$sql="SELECT * FROM `loginlog`";
-			$search="%".$_GET['search']."%";
-			if ($search!='')
+			$search=$_GET['search'];
+			if ($search!=''){
 				$sql=$sql." WHERE ip like ? ";
-			 else
-				$sql=$sql." where user_id<>'".$_SESSION['user_id']."' ";
+				$search="%$search%";
+			}else{
+				$sql=$sql." where user_id<>? ";
+				$search=$_SESSION['user_id'];
+			}
 			$sql=$sql."  order by `time` desc LIMIT 0,50";
 
-		$result=pdo_query($sql,$search) ;
-		$i=0;
-	
-		foreach($result as $row){
-				
-				$view_online[$i][0]= "<a href='userinfo.php?user=".$row[0]."'>".$row[0]."</a>";
-				$view_online[$i][1]=$row[1];
-				$view_online[$i][2]=$row[2];
-				$view_online[$i][3]=$row[3];
-				
-				$i++;
-		}
+			$result=pdo_query($sql,$search) ;
+			$i=0;
+		
+			foreach($result as $row){
+					
+					$view_online[$i][0]= "<a href='userinfo.php?user=".htmlentities($row[0],ENT_QUOTES,"UTF-8")."'>".htmlentities($row[0],ENT_QUOTES,"UTF-8")."</a>";
+					$view_online[$i][1]=htmlentities($row[1],ENT_QUOTES,"UTF-8");
+					$view_online[$i][2]=htmlentities($row[2],ENT_QUOTES,"UTF-8");
+					$view_online[$i][3]=htmlentities($row[3],ENT_QUOTES,"UTF-8");
+					
+					$i++;
+			}
 	
 		
 		}

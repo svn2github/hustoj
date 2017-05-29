@@ -11,8 +11,8 @@
 		exit(0);
 	}
 
-$sql="SELECT `school`,`nick`,`email` FROM `users` WHERE `user_id`='".$_SESSION['user_id']."'";
-$result=pdo_query($sql);
+$sql="SELECT `school`,`nick`,`email` FROM `users` WHERE `user_id`=?";
+$result=pdo_query($sql，$_SESSION['user_id']);
  $row=$result[0];
 
 

@@ -9,8 +9,8 @@
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT * FROM `contest` WHERE `contest_id`='$cid' AND `start_time`<NOW()";
-$result=pdo_query($sql);
+$sql="SELECT * FROM `contest` WHERE `contest_id`=? AND `start_time`<NOW()";
+$result=pdo_query($sql,$cid);
 $num=count($result);
 if ($num==0){
 	$view_errors= "Not Started!";
@@ -21,14 +21,14 @@ if ($num==0){
 
 $view_title= "Contest Statistics";
 
-$sql="SELECT count(`num`) FROM `contest_problem` WHERE `contest_id`='$cid'";
-$result=pdo_query($sql);
+$sql="SELECT count(`num`) FROM `contest_problem` WHERE `contest_id`=?";
+$result=pdo_query($sql,$cid);
  $row=$result[0];
 $pid_cnt=intval($row[0]);
 
 
-$sql="SELECT `result`,`num`,`language` FROM `solution` WHERE `contest_id`='$cid' and num>=0"; 
-$result=pdo_query($sql);
+$sql="SELECT `result`,`num`,`language` FROM `solution` WHERE `contest_id`=? and num>=0"; 
+$result=pdo_query($sql,$cid);
 $R=array();
  foreach($result as $row){
 	$res=intval($row['result'])-4;
@@ -64,25 +64,22 @@ $R=array();
 
 $res=3600;
 
-$sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=$cid ";
-        $result=pdo_query($sql);
+$sql="SELECT (UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time))/100 FROM contest WHERE contest_id=? ";
+        $result=pdo_query($sql,$cid);
         $view_userstat=array();
         if( $row=$result[0]){
               $res=$row[0];
         }
-        
-
-$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid'   group by md order by md desc ";
-        $result=pdo_query($sql);//mysql_escape_string($sql));
+$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`=?  group by md order by md desc ";
+        $result=pdo_query($sql,$cid);
         $chart_data_all= array();
 //echo $sql;
-   
-        foreach($result as $row){
-                $chart_data_all[$row['md']]=$row['c'];
+    foreach($result as $row){
+        $chart_data_all[$row['md']]=$row['c'];
     }
    
-$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`='$cid' and result=4 group by md order by md desc ";
-        $result=pdo_query($sql);//mysql_escape_string($sql));
+$sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FROM `solution` where  `contest_id`=? and result=4 group by md order by md desc ";
+        $result=pdo_query($sql,$cid);//mysql_escape_string($sql));
         $chart_data_ac= array();
 //echo $sql;
    

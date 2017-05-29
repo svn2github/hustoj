@@ -170,15 +170,16 @@ $first_blood=array();
 for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
-
-
-$sql="select num,user_id from
+if($OJ_MEMCACHE){
+	$sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
-if($OJ_MEMCACHE){
-        $fb = mysql_query_cache($sql);
+    $fb = mysql_query_cache($sql);
 }else{
-        $fb = pdo_query($sql);
+	$sql="select num,user_id from
+        (select num,user_id from solution where contest_id=? and result=4 order by solution_id ) contest
+        group by num";
+    $fb = pdo_query($sql,$cid);
 }
 foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];

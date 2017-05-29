@@ -42,8 +42,8 @@ $Submit=$row['Submit'];
 // update solved 
 $sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`=?";
 $result=pdo_query($sql,$user);
-$sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>$AC";
-$result=pdo_query($sql);
+$sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>?";
+$result=pdo_query($sql,$AC);
  $row=$result[0];
 $Rank=intval($row[0])+1;
 

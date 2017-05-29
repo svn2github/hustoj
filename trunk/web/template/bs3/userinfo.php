@@ -42,9 +42,9 @@ function p(id,c){
 	document.write("<a href=problem.php?id="+id+">"+id+" </a>(<a href='status.php?user_id=<?php echo $user?>&problem_id="+id+"'>"+c+"</a>)");
 
 }
-<?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`='$user_mysql' 
-		AND problem_id in (select distinct problem_id from solution where `user_id`='$user_mysql' and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
-if (!($result=pdo_query($sql))) 
+<?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`=? 
+		AND problem_id in (select distinct problem_id from solution where `user_id`=? and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
+if (!($result=pdo_query($sql,$user,$user))) 
  foreach($result as $row)
 echo "p($row[0],$row[1]);";
 

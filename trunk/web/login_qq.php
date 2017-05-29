@@ -69,20 +69,20 @@
      $email ="xx";
      $school = "xx"; 
      
-     $sql = "SELECT `user_id` FROM `users` where `user_id`=".$user_id;
-     $res = pdo_query($sql);
+     $sql = "SELECT `user_id` FROM `users` where `user_id`=?";
+     $res = pdo_query($sql,$user_id);
      $row_num = count($res);
      echo('row_num'.$row_num.'<br>');
      if ($row_num == 0)
      {
          $sql="INSERT INTO `users`("
          ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
-         ."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
+         ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
          // reg it
-         pdo_query($sql);
+         pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);
      }
 	 //login it
-	 $_SESSION['user_id']=$uname;
+	 $_SESSION['user_id']=$user_id;
 	 // redirect it
 	 header("Location: ./"); 
   }

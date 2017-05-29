@@ -17,7 +17,7 @@
         $password= stripslashes ( $password);
    }
     $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
-    	$login=check_login($user_id,$password);
+    $login=check_login($user_id,$password);
 	
 	if ($login)
     {

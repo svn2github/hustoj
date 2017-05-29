@@ -16,11 +16,11 @@ header ( "content-type:   application/file" );
                 header ( "content-disposition:   attachment;   filename=\"logs-$contest_id.txt\"" );
 require_once('./include/db_info.inc.php');
 $sql="select user_id,problem_id,result,source   from source_code right join
-                (select solution_id,problem_id,user_id,result from solution where contest_id='".$contest_id."' ) S
+                (select solution_id,problem_id,user_id,result from solution where contest_id=? ) S
                 on source_code.solution_id=S.solution_id order by S.solution_id";
 require_once("./include/const.inc.php");
 #echo $sql;
-$result=pdo_query($sql);
+$result=pdo_query($sql,$contest_id);
  foreach($result as $row){
         echo "$row['user_id']:Problem".$row['problem_id'].":".$judge_result[$row['result']];
         echo "\r\n$row['source']";

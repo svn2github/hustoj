@@ -47,15 +47,15 @@ if(array_key_exists('code',$_GET)){
         $email = $user->screen_name."@weibo.com";
         $school = "";
         // check first
-        $sql = "SELECT `user_id` FROM `users` where `user_id`='$uname'";
-        $res = pdo_query($sql);
+        $sql = "SELECT `user_id` FROM `users` where `user_id`=?";
+        $res = pdo_query($sql,$uname);
         $row_num = count($res);
         if ($row_num == 0){
             $sql="INSERT INTO `users`("
                     ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
-            ."VALUES('".$uname."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
+            ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
            // reg it
-           pdo_query($sql);
+           pdo_query($sql,$uname,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);
         }
         // login it
 		$_SESSION['user_id']=$uname;

@@ -117,8 +117,7 @@ class online{
 		
 		$sql = 'SELECT * FROM online';
 		$res = pdo_query($sql);
-		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
-		//$res = pdo_query($sql);
+		
 		if($res ){
 			
 				$ret =$res;
@@ -133,8 +132,8 @@ class online{
 	 */
 	function getRecord($ip)
 	{
-		$sql = "SELECT * FROM online WHERE ip = '$ip'";
-		$res = pdo_query($sql);
+		$sql = "SELECT * FROM online WHERE ip = ?";
+		$res = pdo_query($sql,$ip);
 		if(count($res)){
 			$ret = ($res[0]);
 		}else{
@@ -170,8 +169,8 @@ class online{
 	function exist()
 	{
 		
-		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
-		$res = pdo_query($sql);
+		$sql = "SELECT * FROM online WHERE hash = ?";
+		$res = pdo_query($sql,$this->hash);
 		if($res&&count($res) == 0)
 			return false;
 		else
@@ -188,8 +187,8 @@ class online{
 		
 		$now = time();
 		$sql = "INSERT INTO online(hash, ip, ua, uri, refer, firsttime, lastmove)
-				VALUES ('$this->hash', '$this->ip', '$this->ua', '$this->uri', '$this->refer', '$now', '$now')";
-		pdo_query($sql);
+				VALUES (?, ?,?, ?, ?, ?, ?)";
+		pdo_query($sql,$this->hash,$this->ip, $this->ua,$this->uri,$this->refer,$now,$now);
 	}
 
 	/**
@@ -202,15 +201,15 @@ class online{
 		
 		$sql = "UPDATE online
 				SET
-					ua = '$this->ua',
-					uri = '$this->uri',
-					refer = '$this->refer',
-					lastmove = '".time()."',
-					ip = '$this->ip'
+					ua = ?,
+					uri = ?,
+					refer = ?,
+					lastmove = ?,
+					ip = ?
 				WHERE
-					hash = '$this->hash'
+					hash = ?
 				";
-		pdo_query($sql);
+		pdo_query($sql,$this->ua,$this->uri,$this->refer,time(),$this->ip,$this->hash);
 	}
 	/**
 	 * clean the duration user
@@ -220,7 +219,7 @@ class online{
 	function clean()
 	{
 		
-		$sql = 'DELETE FROM online WHERE lastmove<'.(time()-ONLINE_DURATION);
-		pdo_query($sql);
+		$sql = 'DELETE FROM online WHERE lastmove<?';
+		pdo_query($sql,(time()-ONLINE_DURATION));
 	}
 }

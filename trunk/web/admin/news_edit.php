@@ -33,10 +33,9 @@ if (get_magic_quotes_gpc ()) {
 	exit();
 }else{
 	$news_id=intval($_GET['id']);
-	$sql="SELECT * FROM `news` WHERE `news_id`=$news_id";
-	$result=pdo_query($sql);
+	$sql="SELECT * FROM `news` WHERE `news_id`=?";
+	$result=pdo_query($sql,$news_id);
 	if (count($result)!=1){
-		
 		echo "No such Contest!";
 		exit(0);
 	}

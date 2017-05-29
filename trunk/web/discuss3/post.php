@@ -54,16 +54,13 @@
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=intval($_POST['tid']);
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT ?, NOW(),?, '".($tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".($tid)."' AND `status` = 0 ";
-                        
-                        
-                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'])>0)
-                        {
+                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT ?,NOW(),?,?,? FROM `topic` WHERE `tid` =  AND `status` = 0 ";
+                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$_SERVER['REMOTE_ADDR'],$tid)>0){
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);
-                        }
-                        else
+                        }else{
                                 echo('Unable to post.');
+						}
                 } else echo('Error!');
         }
         require_once("../oj-footer.php");

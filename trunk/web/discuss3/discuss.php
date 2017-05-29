@@ -46,16 +46,21 @@ if ($pid!=null && $pid!=0){
 <?php }?>
 </div>
 <?php }
-$sql = "SELECT `tid`, `title`, `top_level`, `topic`.`status`, `cid`, `pid`, CONVERT(MIN(`reply`.`time`),DATE) `posttime`, MAX(`reply`.`time`) `lastupdate`, `topic`.`author_id`, COUNT(`rid`) `count` FROM `topic`, `reply` WHERE `topic`.`status`!=2 AND `reply`.`status`!=2 AND `tid` = `topic_id`";
-if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') $sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
-else $sql.=" AND ( ISNULL(`cid`)";
+$sql = "SELECT `tid`, `title`, `top_level`, `topic`.`status`, `cid`, `pid`, CONVERT(MIN(`reply`.`time`),DATE) `posttime`,
+		MAX(`reply`.`time`) `lastupdate`, `topic`.`author_id`, COUNT(`rid`) `count`
+		FROM `topic`, `reply` 
+		WHERE `topic`.`status`!=2 AND `reply`.`status`!=2 AND `tid` = `topic_id`";
+if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') 
+	$sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
+else 
+	$sql.=" AND ( ISNULL(`cid`)";
 $sql.=" OR `top_level` = 3 )";
 if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
   $sql.=" AND ( `pid` = '".intval($_REQUEST['pid'])."' OR `top_level` >= 2 )";
   $level="";
-}
-else
+}else{
   $level=" - ( `top_level` = 1 AND `pid` != 0 )";
+}
 $sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`reply`.`time`) DESC";
 $sql.=" LIMIT 30";
 //echo $sql;

@@ -50,9 +50,9 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 			VALUES (?,?,?)";
 		$plist="";
 		for ($i=0;$i<count($pieces);$i++){
-			$pieces[0]=intval($pieces[0]);
+			
 			if($plist)$plist.=",";
-			$plist.=$pieces[0];
+			$plist.=$pieces[$i];
 			pdo_query($sql_1,$cid,$pieces[$i],$i);
 		}
 		//echo $sql_1;
@@ -68,11 +68,11 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
-			VALUES ('".trim($pieces[0])."','c$cid')";
-		for ($i=1;$i<count($pieces);$i++)
-			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
-		//echo $sql_1;
-		pdo_query($sql_1) ;
+			VALUES (?,?)";
+		for ($i=0;$i<count($pieces);$i++){
+			$sql_1=$sql_1.",('".."','c$cid')";
+			pdo_query($sql_1,trim($pieces[$i]),"c$cid") ;
+		}
 	}
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
 }

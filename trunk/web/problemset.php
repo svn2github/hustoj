@@ -19,13 +19,13 @@ $cnt=$cnt/$page_cnt;
 if (isset($_GET['page'])){
     $page=intval($_GET['page']);
     if(isset($_SESSION['user_id'])){
-         $sql="update users set volume=$page where user_id='".$_SESSION['user_id']."'";
-         pdo_query($sql);
+         $sql="update users set volume=? where user_id=?";
+         pdo_query($sql,$page,$_SESSION['user_id']);
     }
 }else{
     if(isset($_SESSION['user_id'])){
-            $sql="select volume from users where user_id='".$_SESSION['user_id']."'";
-            $result=pdo_query($sql);
+            $sql="select volume from users where user_id=?";
+            $result=pdo_query($sql,$_SESSION['user_id']);
             $row=$result[0];
             $page=intval($row[0]);
     }
@@ -42,11 +42,11 @@ $pend=$pstart+$page_cnt;
 $sub_arr=Array();
 // submit
 if (isset($_SESSION['user_id'])){
-$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id']."'".
+$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        // " AND `problem_id`<'$pend'".
 	" group by `problem_id`";
-$result=pdo_query($sql);
+$result=pdo_query($sql,$_SESSION['user_id']);
 foreach ($result as $row)
 	$sub_arr[$row[0]]=true;
 }
@@ -54,12 +54,12 @@ foreach ($result as $row)
 $acc_arr=Array();
 // ac
 if (isset($_SESSION['user_id'])){
-$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id']."'".
+$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=pdo_query($sql);
+$result=pdo_query($sql,$_SESSION['user_id']);
 foreach ($result as $row)
 	$acc_arr[$row[0]]=true;
 }

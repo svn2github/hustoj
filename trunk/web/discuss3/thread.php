@@ -2,8 +2,8 @@
 	require_once("oj-header.php");
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$tid=intval($_REQUEST['tid']);
-	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = '".$tid."' AND `status` <= 1";
-	$result=pdo_query($sql) ;
+	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = ? AND `status` <= 1";
+	$result=pdo_query($sql,$tid) ;
 	$rows_cnt = count($result) ;
 	$row= $result[0];
 	$isadmin = isset($_SESSION['administrator']);
@@ -28,21 +28,20 @@
 </tr>
 
 <?php
-	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = '".$tid."' AND `status` <=1 ORDER BY `rid` LIMIT 30";
-	$result=pdo_query($sql) ;
+	$sql="SELECT `rid`, `author_id`, `time`, `content`, `status` FROM `reply` WHERE `topic_id` = ? AND `status` <=1 ORDER BY `rid` LIMIT 30";
+	$result=pdo_query($sql,$tid) ;
 	$rows_cnt = count($result);
 	$cnt=0;
 $i=0;
 	foreach ($result as $row){
-		
-		$url = "threadadmin.php?target=reply&rid={$row->rid}&tid={$tid}&action=";
+		$url = "threadadmin.php?target=reply&rid=".$row['rid']."&tid={$tid}&action=";
 		if(isset($_SESSION['user_id'])) $isuser = strtolower($row['author_id'])==strtolower($_SESSION['user_id']);
 		else $isuser=false;
 ?>
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
 	<td>
 		
-		<a name=post<?php echo $row->rid;?>></a>
+		<a name=post<?php echo $row['rid'];?>></a>
      <div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="../userinfo.php?user=<?php echo $row['author_id']?>"><?php echo $row['author_id']; ?> </a> @ <?php echo $row['time']; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
 			<?php if (isset($_SESSION['administrator'])) {?>  

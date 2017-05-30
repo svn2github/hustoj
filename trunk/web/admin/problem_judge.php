@@ -79,8 +79,8 @@ if(isset($_POST['update_solution'])){
 				}
 				
                 $sql="SELECT solution_id FROM solution WHERE language in ($oj_lang_set)
-                        and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit ?";
-                $result=pdo_query($sql,$max_running);
+                        and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit $max_running";
+                $result=pdo_query($sql);
                 foreach($result as $row){
                         echo $row['solution_id']."\n";
                 }
@@ -116,7 +116,7 @@ if(isset($_POST['update_solution'])){
 	$sql="SELECT input_text FROM custominput WHERE solution_id=? ";
 	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
-		echo $row['input']_text."\n";
+		echo $row['input_text']."\n";
 	}
 	
 	

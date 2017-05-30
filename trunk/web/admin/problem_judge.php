@@ -74,7 +74,7 @@ if(isset($_POST['update_solution'])){
 				$oj_lang_set="";
 				foreach($langs as $lang){
 					$lang=intval($lang);
-					if($oj_lang_set) $oj_lang_set.=",";
+					if($oj_lang_set!="") $oj_lang_set.=",";
 					$oj_lang_set.=$lang;
 				}
 				

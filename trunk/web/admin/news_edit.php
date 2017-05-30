@@ -39,7 +39,7 @@ if (get_magic_quotes_gpc ()) {
 		echo "No such Contest!";
 		exit(0);
 	}
-	$row=$result[0]
+	$row=$result[0];
 	
 	$title=htmlentities($row['title'],ENT_QUOTES,"UTF-8");
 	$content=$row['content'];

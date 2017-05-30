@@ -61,10 +61,10 @@
 			<?php echo $i+1;?>#</span>
 		</div>
 		<div style="text-align:left; clear:both; margin:10px 30px">
-			<?php	if ($row['status'] == 0) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
+			<?php	if ($row['status'] == 0) echo nl2br(htmlentities($row['content'],ENT_QUOTES,"UTF-8"));
 					else {
 						if (!$isuser || $isadmin)echo "<div style=\"border-left:10px solid gray\"><font color=red><i>Notice : <br>This reply is blocked by administrator.</i></font></div>";
-						if ($isuser || $isadmin) echo nl2br(htmlentities($row->content,ENT_QUOTES,"UTF-8"));
+						if ($isuser || $isadmin) echo nl2br(htmlentities($row['content'],ENT_QUOTES,"UTF-8"));
 					}
 			?>
 		</div>

@@ -49,7 +49,7 @@ if (isset($_GET['vid'])){
 	 $row=$result[0];
 	$to_user=$row['from_user'];
 	$view_title=$row['title'];
-	$view_content=$row->content;
+	$view_content=$row['content'];
 
 	
 	$sql="update `mail` set new_mail=0 WHERE `mail_id`=?";
@@ -96,9 +96,9 @@ $view_mail=Array();
 $i=0;
 foreach($result as $row){
 	$view_mail[$i][0]=$row['mail_id'];
-	if ($row->new_mail) $view_mail[$i][0].= "<span class=red>New</span>";
+	if ($row['new_mail']) $view_mail[$i][0].= "<span class=red>New</span>";
 	$view_mail[$i][1]="<a href='mail.php?vid=".$row['mail_id']."'>".
-			$row->from_user.":".$row['title']."</a>";
+			$row['from_user'].":".$row['title']."</a>";
 	$view_mail[$i][2]=$row['in_date'];
 	$i++;
 }

@@ -1,24 +1,24 @@
 <?php
-ob_start();
-        require_once("discuss_func.inc.php");
-$parm="";
-if(isset($_GET['pid'])){
-	$pid=intval($_GET['pid']);
-	$parm="pid=".$pid;
-}else{
-	$pid=0;
-}
-if(isset($_GET['cid'])){
-	$cid=intval($_GET['cid']);
-	$parm.="&cid=".$cid;
-}else{
-	$cid=0;
-}
-       $prob_exist = problem_exist($pid, $cid);
-                require_once("oj-header.php");
-        echo "<title>HUST Online Judge WebBoard</title>";
+	ob_start();
+	require_once("../include/db_info.inc.php");
+    require_once("discuss_func.inc.php");
+	$parm="";
+	if(isset($_GET['pid'])){
+		$pid=intval($_GET['pid']);
+		$parm="pid=".$pid;
+	}else{
+		$pid=0;
+	}
+	if(isset($_GET['cid'])){
+		$cid=intval($_GET['cid']);
+		$parm.="&cid=".$cid;
+	}else{
+		$cid=0;
+	}
+    $prob_exist = problem_exist($pid, $cid);
+	require_once("oj-header.php");
+	echo "<title>HUST Online Judge WebBoard</title>";
 ?>
-
 <center>
 <div style="width:90%">
 <?php

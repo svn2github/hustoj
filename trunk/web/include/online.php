@@ -85,12 +85,12 @@ class online{
 
         }
 
-		$this->ua = (htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
+		$this->ua = (htmlentities($_SESSION['user_id']."@".$_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
 		$this->uri = ($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
 			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
 	    }
-		$this->hash = (session_id());
+		$this->hash = md5(session_id().$this->ip);
 		
 		//check user existed!
 		if($this->exist()){
@@ -112,16 +112,9 @@ class online{
 	 */
 	function getAll()
 	{
-		$ret = array();
-		
 		
 		$sql = 'SELECT * FROM online';
-		$res = pdo_query($sql);
-		
-		if($res ){
-			
-				$ret =$res;
-		}
+		$ret = pdo_query($sql);
 		return $ret;
 	}
 	/**
@@ -169,12 +162,9 @@ class online{
 	function exist()
 	{
 		
-		$sql = "SELECT * FROM online WHERE hash = ?";
+		$sql = "SELECT count(1) FROM online WHERE hash = ?";
 		$res = pdo_query($sql,$this->hash);
-		if($res&&count($res) == 0)
-			return false;
-		else
-			return true;
+		return $res[0][0];
 
 	}
 	/**

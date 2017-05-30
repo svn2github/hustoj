@@ -21,9 +21,6 @@ $view_online=Array();
 		
 if (isset($_SESSION['administrator'])){
 
-		
-		if(isset($_GET['search'])){
-
 			$sql="SELECT * FROM `loginlog`";
 			$search=$_GET['search'];
 			if ($search!=''){
@@ -37,8 +34,12 @@ if (isset($_SESSION['administrator'])){
 
 			$result=pdo_query($sql,$search) ;
 			$i=0;
-		
-			foreach($result as $row){
+}else{
+	$sql="SELECT * FROM `loginlog`";
+	$result=pdo_query($sql) ;
+}
+
+	foreach($result as $row){
 					
 					$view_online[$i][0]= "<a href='userinfo.php?user=".htmlentities($row[0],ENT_QUOTES,"UTF-8")."'>".htmlentities($row[0],ENT_QUOTES,"UTF-8")."</a>";
 					$view_online[$i][1]=htmlentities($row[1],ENT_QUOTES,"UTF-8");
@@ -48,10 +49,6 @@ if (isset($_SESSION['administrator'])){
 					$i++;
 			}
 	
-		
-		}
-
-}
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/online.php");
 /////////////////////////Common foot

@@ -3,6 +3,10 @@
 	$dir=basename(getcwd());
 	if($dir=="discuss3") $path_fix="../";
 	else $path_fix="";
+	if($OJ_ONLINE){
+		require_once('./include/online.php');
+		$on = new online();
+	}
 ?>
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation" >

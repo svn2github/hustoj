@@ -173,10 +173,9 @@ $user_cnt=0;
 $user_name='';
 $U=array();
 for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$result[$i];
-        else
-                 $row=$result[0];
+        
+        $row=$result[$i];
+      
 
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){

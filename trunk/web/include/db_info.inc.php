@@ -88,7 +88,7 @@ function pdo_query($sql){
 		
     }
 	if(stripos($sql,"select") === 0&&!stripos($sql,"limit")){
-	$sql.=" limit 10";
+	$sql.=" limit 100";
     }
     $sth = $dbh->prepare($sql);
     $sth->execute($args);

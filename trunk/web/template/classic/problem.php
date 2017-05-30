@@ -52,9 +52,9 @@
 		$ie6s="<pre>";
 		$ie6e="</pre>";
 	}
-	$sinput=str_replace("<","&lt;",$row->sample_input);
+	$sinput=str_replace("<","&lt;",$row['sample_input']);
   $sinput=str_replace(">","&gt;",$sinput);
-	$soutput=str_replace("<","&lt;",$row->sample_output);
+	$soutput=str_replace("<","&lt;",$row['sample_output']);
   $soutput=str_replace(">","&gt;",$soutput);
 	echo "<h2>$MSG_Sample_Input</h2>
 			<div class=content><span class=sampledata>".$ie6s.($sinput).$ie6e."</span></div>";

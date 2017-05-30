@@ -235,8 +235,8 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <description><![CDATA[<?php echo $row['description']?>]]></description>
 <input><![CDATA[<?php echo $row['input']?>]]></input> 
 <output><![CDATA[<?php echo $row['output']?>]]></output>
-<sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
-<sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
+<sample_input><![CDATA[<?php echo $row['sample_input']?>]]></sample_input>
+<sample_output><![CDATA[<?php echo $row['sample_output']?>]]></sample_output>
   <?php printTestCases($row['problem_id'],$OJ_DATA)?>
 <hint><![CDATA[<?php echo $row['hint']?>]]></hint>
 <source><![CDATA[<?php echo fixcdata($row['source'])?>]]></source>

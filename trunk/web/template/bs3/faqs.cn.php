@@ -182,8 +182,7 @@ public class Main{
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
- <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
-<script type="text/javascript">
+ 
 $(function () {
 var d1 = [];
 var d2 = [];

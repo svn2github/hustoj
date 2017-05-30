@@ -47,8 +47,8 @@ $result=pdo_query($sql,intval($_GET['id']));
 <textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlentities($row['hint'],ENT_QUOTES,"UTF-8")?></textarea></p>
 </p>
 <p>SpecialJudge: 
-N<input type=radio name=spj value='0' <?php echo $row->spj=="0"?"checked":""?>>
-Y<input type=radio name=spj value='1' <?php echo $row->spj=="1"?"checked":""?>></p>
+N<input type=radio name=spj value='0' <?php echo $row['spj']=="0"?"checked":""?>>
+Y<input type=radio name=spj value='1' <?php echo $row['spj']=="1"?"checked":""?>></p>
 <p>Source:<br><textarea name=source rows=1 cols=70><?php echo htmlentities($row['source'],ENT_QUOTES,"UTF-8")?></textarea></p>
 <div align=center>
 <?php require_once("../include/set_post_key.php");?>
@@ -107,7 +107,7 @@ $sql="UPDATE `problem` set `title`=?,`time_limit`=?,`memory_limit`=?,
 	`description`=?,`input`=?,`output`=?,`sample_input`=?,`sample_output`=?,`hint`=?,`source`=?,`spj`=?,`in_date`=NOW()
 	WHERE `problem_id`=?";
 
-@pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint$source,$spj,$id) ;
+@pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint,$source,$spj,$id) ;
 echo "Edit OK!";
 
 

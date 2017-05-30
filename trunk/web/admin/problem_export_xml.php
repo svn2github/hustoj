@@ -229,7 +229,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	fixImageURL($row->description,$did);
 	fixImageURL($row->input,$did);
 	fixImageURL($row->output,$did);
-	fixImageURL($row->hint,$did);
+	fixImageURL($row['hint'],$did);
 	
 ?>
 <description><![CDATA[<?php echo $row->description?>]]></description>
@@ -238,7 +238,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 <sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
   <?php printTestCases($row['problem_id'],$OJ_DATA)?>
-<hint><![CDATA[<?php echo $row->hint?>]]></hint>
+<hint><![CDATA[<?php echo $row['hint']?>]]></hint>
 <source><![CDATA[<?php echo fixcdata($row['source'])?>]]></source>
 <?php
 $pid=$row['problem_id'];

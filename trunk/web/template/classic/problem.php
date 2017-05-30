@@ -62,7 +62,7 @@
 			<div class=content><span class=sampledata>".$ie6s.($soutput).$ie6e."</span></div>";
 	if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
-			<div class=content><p>".nl2br($row->hint)."</p></div>";
+			<div class=content><p>".nl2br($row['hint'])."</p></div>";
 	if ($pr_flag) 
 		echo "<h2>$MSG_Source</h2>
 			<div class=content><p><a href='problemset.php?search=$row['source']'>".nl2br($row['source'])."</a></p></div>";

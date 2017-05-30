@@ -54,13 +54,16 @@ include_once("kindeditor.php") ;
 <p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
 <p align=left>contest:
 	<select  name=contest_id>
-<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
+<?php
+
+ $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
 $result=pdo_query($sql);
 echo "<option value=''>none</option>";
 if (count($result)==0){
 }else{
-	foreach($result as $row)
-		echo "<option value='$row['contest_id']'>$row['contest_id'] $row['title']</option>";
+	foreach($result as $row){
+		echo "<option value='{$row['contest_id']}'>{$row['contest_id']} {$row['title']}</option>";
+	}
 }
 ?>
 	</select>
@@ -70,6 +73,7 @@ if (count($result)==0){
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?php require_once("../oj-footer.php");?>
+<?php 
+require_once("../oj-footer.php");?>
 </body></html>
 

@@ -126,8 +126,8 @@ if(isset($_POST['update_solution'])){
 	$sql="SELECT time_limit,memory_limit,spj FROM problem where problem_id=?";
 	$result=pdo_query($sql,$pid );
 	if ( $row=$result[0]){
-		echo $row['time']_limit."\n";
-		echo $row['memory']_limit."\n";
+		echo $row['time_limit']."\n";
+		echo $row['memory_limit']."\n";
 		echo $row->spj."\n";
 		
 	}

@@ -35,8 +35,8 @@ $result=pdo_query($sql,intval($_GET['id']));
 <p>Problem Id: <?php echo $row['problem_id']?></p>
 <input type=hidden name=problem_id value='<?php echo $row['problem_id']?>'>
 <p>Title:<input type=text name=title size=71 value='<?php echo htmlentities($row['title'],ENT_QUOTES,"UTF-8")?>'></p>
-<p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row['time']_limit?>'>S</p>
-<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row['memory']_limit?>'>MByte</p>
+<p>Time Limit:<input type=text name=time_limit size=20 value='<?php echo $row['time_limit']?>'>S</p>
+<p>Memory Limit:<input type=text name=memory_limit size=20 value='<?php echo $row['memory_limit']?>'>MByte</p>
 <p>Description:<br><textarea class="kindeditor" rows=13 name=description cols=120><?php echo htmlentities($row->description,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Input:<br><textarea class="kindeditor" rows=13 name=input cols=120><?php echo htmlentities($row->input,ENT_QUOTES,"UTF-8")?></textarea></p>
 <p>Output:<br><textarea class="kindeditor" rows=13 name=output cols=120><?php echo htmlentities($row->output,ENT_QUOTES,"UTF-8")?></textarea></p>

@@ -35,8 +35,8 @@
 		echo "<title>$MSG_PROBLEM $PID[$pid]: $row['title'] </title>";
 		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row['title']</h2>";
 	}
-	echo "<span class=green>$MSG_Time_Limit: </span>$row['time']_limit Sec&nbsp;&nbsp;";
-	echo "<span class=green>$MSG_Memory_Limit: </span>".$row['memory']_limit." MB";
+	echo "<span class=green>$MSG_Time_Limit: </span>$row['time_limit'] Sec&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_Memory_Limit: </span>".$row['memory_limit']." MB";
 	if ($row->spj) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row->submit."&nbsp;&nbsp;";
 	echo "<span class=green>$MSG_SOVLED: </span>".$row['ac']cepted."<br>"; 

@@ -31,7 +31,7 @@ SyntaxHighlighter.all();
 </script>
 
 <!-- Requires jQuery -->
-  <script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+  
 
 	  
 	<!-- Requires CodeMirror 2.16 -->

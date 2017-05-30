@@ -14,7 +14,7 @@ $("#cs").tablesorter();
 );
 </script>
 
-<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+
 <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
 <script type="text/javascript">
 $(function () {

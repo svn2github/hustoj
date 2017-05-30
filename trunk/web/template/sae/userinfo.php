@@ -9,7 +9,7 @@
 	
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
-<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+
     <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
     <script type="text/javascript">
 $(function () {

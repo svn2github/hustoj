@@ -70,10 +70,9 @@
                 $view_rank=Array();
                 $i=0;
                 for ( $i=0;$i<$rows_cnt;$i++ ) {
-                        if($OJ_MEMCACHE)
-                                $row=$result[$i];
-                        else
-                                 $row=$result[0];
+					
+                        $row=$result[$i];
+                        
                         $rank ++;
 
                         $view_rank[$i][0]= $rank;

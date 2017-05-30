@@ -9,8 +9,8 @@ if(isset($_POST['do'])){
 	$rightstr =$_POST['rightstr'];
 	$sql="insert into `privilege` values(?,?,'N')";
 	$rows=pdo_query($sql,$user_id,$rightstr);
-	if ($rows==1) echo "$user_id $rightstr added!";
-	else echo "No such user!";
+	echo "$user_id $rightstr added!";
+	
 }
 ?>
 <form method=post>

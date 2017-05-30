@@ -81,14 +81,6 @@ $sql="INSERT INTO `users`("
 ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
 $rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);// or die("Insert Error!\n");
 
-if( $rows==0) {
-       	print "<script language='javascript'>\n";
-	print "alert('Username robbed!\\n');\n";
-	print "history.go(-1);\n</script>";
-	exit(0);
-}
-
-
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,$password,$ip);
 $_SESSION['user_id']=$user_id;

@@ -9,8 +9,7 @@ if(isset($_GET['uid'])){
 	$rightstr =$_GET['rightstr'];
 	$sql="delete from `privilege` where user_id=? and rightstr=?";
 	$rows=pdo_query($sql,$user_id,$rightstr);
-	if ($rows==1) echo "$user_id $rightstr deleted!";
-	else echo "No such privilege!";
+	echo "$user_id $rightstr deleted!";
 }
 ?>
 

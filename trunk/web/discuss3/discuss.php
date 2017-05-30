@@ -10,10 +10,10 @@
 	}
 	if(isset($_GET['cid'])){
 		$cid=intval($_GET['cid']);
-		$parm.="&cid=".$cid;
 	}else{
 		$cid=0;
 	}
+	$parm.="&cid=".$cid;
     $prob_exist = problem_exist($pid, $cid);
 	require_once("oj-header.php");
 	echo "<title>HUST Online Judge WebBoard</title>";
@@ -22,29 +22,33 @@
 <div style="width:90%">
 <?php
 if ($prob_exist){?>
-<div style="text-align:left;font-size:80%">
-[ <a href="newpost.php<?php if ($pid!=0 && $cid!=null) echo "?pid=".$pid."&cid=".$cid;
-else if ($pid!=0) echo "?pid=".$pid;
-else if ($cid!=0) echo "?cid=".$cid;?>
-">New Thread</a> ]</div>
-<div style="float:left;text-align:left;font-size:80%">
-Location :
-<?php if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";
-if ($pid!=null && $pid!=0){
-        $query="?pid=$pid";
-        if($cid!=0) $query.="&cid=$cid";
-         echo " >> <a href=\"discuss.php".$query."\">Problem ".$pid."</a>";
+		<div style="text-align:left;font-size:80%">
+		[ <a href="newpost.php<?php
+		if ($pid!=0 && $cid!=null) 
+			echo "?pid=".$pid."&cid=".$cid;
+		else if ($pid!=0) 
+			echo "?pid=".$pid;
+		else if ($cid!=0) 
+			echo "?cid=".$cid;?>
+		">New Thread</a> ]</div>
+		<div style="float:left;text-align:left;font-size:80%">
+		Location :
+		<?php if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";
+		if ($pid!=null && $pid!=0){
+				$query="?pid=$pid";
+				if($cid!=0) $query.="&cid=$cid";
+				 echo " >> <a href=\"discuss.php".$query."\">Problem ".$pid."</a>";
 
+		}
+		?>
+		</div>
+		<div style="float:right;font-size:80%;color:red;font-weight:bold">
+		<?php if ($pid!=null && $pid!=0 && ($cid=='' || $cid==null)){?>
+		<a href="../problem.php?id=<?php echo $pid?>">See the problem</a>
+		<?php }?>
+		</div>
+		<?php 
 }
-?>
-</div>
-
-<div style="float:right;font-size:80%;color:red;font-weight:bold">
-<?php if ($pid!=null && $pid!=0 && ($cid=='' || $cid==null)){?>
-<a href="../problem.php?id=<?php echo $pid?>">See the problem</a>
-<?php }?>
-</div>
-<?php }
 $sql = "SELECT `tid`, `title`, `top_level`, `t`.`status`, `cid`, `pid`, CONVERT(MIN(`r`.`time`),DATE) `posttime`,
 		MAX(`r`.`time`) `lastupdate`, `t`.`author_id`, COUNT(`rid`) `count`
 		FROM `topic` t left join `reply` r on t.tid=r.topic_id
@@ -52,13 +56,13 @@ $sql = "SELECT `tid`, `title`, `top_level`, `t`.`status`, `cid`, `pid`, CONVERT(
 if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') 
 	$sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
 else 
-	$sql.=" AND ( ISNULL(`cid`)";
+	$sql.=" AND (`cid`=0 ";
 $sql.=" OR `top_level` = 3 )";
 if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
   $sql.=" AND ( `pid` = '".intval($_REQUEST['pid'])."' OR `top_level` >= 2 )";
   $level="";
 }else{
-  $level=" - ( `top_level` = 1 AND `pid` != 0 )";
+  $level=" - ( `top_level` = 1 )";
 }
 $sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`r`.`time`) DESC";
 $sql.=" LIMIT 30";

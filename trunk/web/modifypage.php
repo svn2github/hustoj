@@ -12,7 +12,7 @@
 	}
 
 $sql="SELECT `school`,`nick`,`email` FROM `users` WHERE `user_id`=?";
-$result=pdo_query($sql，$_SESSION['user_id']);
+$result=pdo_query($sql,$_SESSION['user_id']);
  $row=$result[0];
 
 

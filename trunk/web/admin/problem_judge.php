@@ -128,7 +128,7 @@ if(isset($_POST['update_solution'])){
 	if ( $row=$result[0]){
 		echo $row['time_limit']."\n";
 		echo $row['memory_limit']."\n";
-		echo $row->spj."\n";
+		echo $row['spj']."\n";
 		
 	}
 	

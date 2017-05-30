@@ -261,7 +261,7 @@ for ($lang=0;$lang<count($language_ext);$lang++){
 }
 ?>
 <?php
- if($row->spj!=0){
+ if($row['spj']!=0){
  	$filec="$OJ_DATA/".$row['problem_id']."/spj.c";
  	$filecc="$OJ_DATA/".$row['problem_id']."/spj.cc";
  	

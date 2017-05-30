@@ -70,7 +70,7 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
 			VALUES (?,?)";
 		for ($i=0;$i<count($pieces);$i++){
-			$sql_1=$sql_1.",('".."','c$cid')";
+			
 			pdo_query($sql_1,trim($pieces[$i]),"c$cid") ;
 		}
 	}

@@ -1,4 +1,5 @@
 <?php
+require_once("../include/db_info.inc.php");
 function problem_exist($pid,$cid){
 	if ($pid=='') $pid=0;
 	if ($cid!='')

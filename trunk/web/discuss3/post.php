@@ -33,16 +33,9 @@
                                 $cid=intval($_REQUEST['cid']);
                         else
                                 $cid='NULL';
-                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) SELECT ?, ?, $cid, '".($pid)."'";
-                        if($pid!=0)
-                                if($cid!='NULL')
-                                        $sql.=" FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".$pid."'";
-                                else
-                                        $sql.=" FROM `problem` WHERE `problem_id` = '".$pid."'";
-                        else if($cid!='NULL')
-                                $sql.=" FROM `contest` WHERE `contest_id` = $cid";
-                        $sql.=" LIMIT 1";
-                        $rows=pdo_query($sql,$_POST['title'],$_SESSION['user_id']);
+                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) values(?,?,?,?)";
+						//echo $sql;
+                        $rows=pdo_query($sql,$_POST['title'],$_SESSION['user_id'],$cid,$pid);
                         if(!$rows)
                                 echo('Unable to post.');
                         else
@@ -54,8 +47,8 @@
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=intval($_POST['tid']);
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT ?,NOW(),?,?,? FROM `topic` WHERE `tid` =  AND `status` = 0 ";
-                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$_SERVER['REMOTE_ADDR'],$tid)>0){
+                        $sql="insert INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) values(?,NOW(),?,?,?)";
+                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$_SERVER['REMOTE_ADDR'])){
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);
                         }else{

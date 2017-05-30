@@ -168,7 +168,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
    if(isset($_POST ['in'])&&strlen($_POST ['in'])>0){
 	require_once("../include/check_post_key.php");
    	$in= $_POST ['in'] ;
-	$ins=explode(","$in);
+	$ins=explode(",",$in);
 	$in="";
 	foreach($ins as $pid){
 		$pid=intval($pid);
@@ -226,15 +226,15 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 
 <?php
 	$did=array();
-	fixImageURL($row->description,$did);
-	fixImageURL($row->input,$did);
-	fixImageURL($row->output,$did);
+	fixImageURL($row['description'],$did);
+	fixImageURL($row['input'],$did);
+	fixImageURL($row['output'],$did);
 	fixImageURL($row['hint'],$did);
 	
 ?>
-<description><![CDATA[<?php echo $row->description?>]]></description>
-<input><![CDATA[<?php echo $row->input?>]]></input> 
-<output><![CDATA[<?php echo $row->output?>]]></output>
+<description><![CDATA[<?php echo $row['description']?>]]></description>
+<input><![CDATA[<?php echo $row['input']?>]]></input> 
+<output><![CDATA[<?php echo $row['output']?>]]></output>
 <sample_input><![CDATA[<?php echo $row->sample_input?>]]></sample_input>
 <sample_output><![CDATA[<?php echo $row->sample_output?>]]></sample_output>
   <?php printTestCases($row['problem_id'],$OJ_DATA)?>

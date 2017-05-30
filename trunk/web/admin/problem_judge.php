@@ -116,7 +116,7 @@ if(isset($_POST['update_solution'])){
 	$sql="SELECT input_text FROM custominput WHERE solution_id=? ";
 	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
-		echo $row->input_text."\n";
+		echo $row['input']_text."\n";
 	}
 	
 	

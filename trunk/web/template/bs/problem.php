@@ -59,9 +59,9 @@
 
 	echo "</center>";
 	
-	echo "<h2>$MSG_Description</h2><div class=content>".$row->description."</div>";
-	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
-	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
+	echo "<h2>$MSG_Description</h2><div class=content>".$row['description']."</div>";
+	echo "<h2>$MSG_Input</h2><div class=content>".$row['input']."</div>";
+	echo "<h2>$MSG_Output</h2><div class=content>".$row['output']."</div>";
 	
   
 	

@@ -16,33 +16,24 @@ require_once("./include/const.inc.php");
 
 $solution_id=0;
 // check the top arg
-if(!isset($_SESSION['user_id'])){
-	
-	exit();
-}
+
 if (isset($_GET['solution_id'])){
         $solution_id=intval($_GET['solution_id']);
 }
 	if($OJ_MEMCACHE){
-		$sql="select * from solution where solution_id=$solution_id and user_id='".$_SESSION['user_id']."' LIMIT 1";
+		$sql="select * from solution where solution_id=$solution_id  LIMIT 1";
 		require("./include/memcache.php");
 		$result = mysql_query_cache($sql);
-		if($result) $rows_cnt=count($result);
-		else $rows_cnt=0;
+		
 	}else{
-		$sql="select * from solution where solution_id=? and user_id=? LIMIT 1";
-		$result = pdo_query($sql,$solution_id,$_SESSION['user_id']);
-		if($result) $rows_cnt=count($result);
-		else $rows_cnt=0;
+		$sql="select * from solution where solution_id=? LIMIT 1";
+		$result = pdo_query($sql,$solution_id);
+		
 	}
 
-	for ($i=0;$i<$rows_cnt;$i++){
-		if($OJ_MEMCACHE)
-			$row=$result[$i];
-		else
-			 $row=$result[0];
-
-		if(isset($_GET['tr'])){
+	if ($result){
+		$row=$result[0];
+		if(isset($_GET['tr'])&&isset($_SESSION['user_id'])){
 				$res=$row['result'];
 			if($res==11){
 				$sql="SELECT `error` FROM `compileinfo` WHERE `solution_id`=?";
@@ -62,8 +53,9 @@ if (isset($_GET['solution_id'])){
 		}else{
 			echo $row['result'].",".$row['memory'].",".$row['time'];
 		}
+	}else{
+		echo "0, 0, 0";
 	}
 
 
 ?>
-

@@ -1,5 +1,5 @@
 <?php @session_start();
-	ini_set("display_errors","On");  //set this to "On" for debugging  ,especially when no reason blank shows up.
+	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
 	ini_set("session.cookie_httponly", 1);   
 	header('X-Frame-Options:SAMEORIGIN');
 

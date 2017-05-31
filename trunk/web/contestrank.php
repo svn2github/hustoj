@@ -52,18 +52,16 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=$cid";
-//$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-//$rows_cnt=mysqli_num_rows($result);
 if($OJ_MEMCACHE){
+	$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=$cid";
         require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+	$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
+        $result = pdo_query($sql,$cid);
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
@@ -71,18 +69,18 @@ if($OJ_MEMCACHE){
 $start_time=0;
 $end_time=0;
 if ($rows_cnt>0){
-//      $row=mysqli_fetch_array($result);
+//       $row=$result[0];
 
         if($OJ_MEMCACHE)
                 $row=$result[0];
         else
-                $row=mysqli_fetch_array($result);
+                 $row=$result[0];
         $start_time=strtotime($row['start_time']);
         $end_time=strtotime($row['end_time']);
         $title=$row['title'];
         
 }
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
+if(!$OJ_MEMCACHE)
 if ($start_time==0){
         $view_errors= "No Such Contest";
         require("template/".$OJ_TEMPLATE."/error.php");
@@ -99,48 +97,48 @@ $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
 
-
-$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
-//$result=mysqli_query($mysqli,$sql);
 if($OJ_MEMCACHE){
+	$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
 //        require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+	$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`=?";
+        $result = pdo_query($sql,$cid);
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
 if($OJ_MEMCACHE)
         $row=$result[0];
 else
-        $row=mysqli_fetch_array($result);
+         $row=$result[0];
 
-//$row=mysqli_fetch_array($result);
+// $row=$result[0];
 $pid_cnt=intval($row['pbc']);
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
 
-$sql="SELECT
+if($OJ_MEMCACHE){
+	$sql="SELECT
         users.user_id,users.nick,solution.result,solution.num,solution.in_date
                 FROM
                         (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
                 left join users
                 on users.user_id=solution.user_id 
         ORDER BY users.user_id,in_date";
-//echo $sql;
-//$result=mysqli_query($mysqli,$sql);
-if($OJ_MEMCACHE){
-   //     require("./include/memcache.php");
-        $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }else{
-
-        $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($result) $rows_cnt=mysqli_num_rows($result);
+	$sql="SELECT
+        users.user_id,users.nick,solution.result,solution.num,solution.in_date
+                FROM
+                        (select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution
+                left join users
+                on users.user_id=solution.user_id 
+        ORDER BY users.user_id,in_date";
+        $result = pdo_query($sql,$cid);
+        if($result) $rows_cnt=count($result);
         else $rows_cnt=0;
 }
 
@@ -149,11 +147,7 @@ $user_name='';
 $U=array();
 //$U[$user_cnt]=new TM();
 for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$result[$i];
-        else
-                $row=mysqli_fetch_array($result);
-
+        $row=$result[$i];
         $n_user=$row['user_id'];
         if (strcmp($user_name,$n_user)){
                 $user_cnt++;
@@ -170,7 +164,6 @@ for ($i=0;$i<$rows_cnt;$i++){
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
        
 }
-if(!$OJ_MEMCACHE) mysqli_free_result($result);
 usort($U,"s_cmp");
 
 ////firstblood
@@ -179,30 +172,26 @@ for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
 
-$sql="select num,user_id from
+
+if($OJ_MEMCACHE){
+	$sql="select num,user_id from
         (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
         group by num";
-if($OJ_MEMCACHE){
-//        require("./include/memcache.php");
-        $fb = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
+        $fb = mysql_query_cache($sql);
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }else{
-
-        $fb = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-        if($fb) $rows_cnt=mysqli_num_rows($fb);
+	$sql="select num,user_id from
+        (select num,user_id from solution where contest_id=? and result=4 order by solution_id ) contest
+        group by num";
+        $fb = pdo_query($sql,$cid);
+        if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }
-
 for ($i=0;$i<$rows_cnt;$i++){
-        if($OJ_MEMCACHE)
-                $row=$fb[$i];
-        else
-                $row=mysqli_fetch_array($fb);
+         $row=$fb[$i];
          $first_blood[$row['num']]=$row['user_id'];
 }
-
-
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/contestrank.php");

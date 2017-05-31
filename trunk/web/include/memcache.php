@@ -25,9 +25,9 @@
         return ($memcache) ? $memcache->set($key,$object,MEMCACHE_COMPRESSED,$timeout) : false;
     }
 
-    # Caching version of mysqli_query($mysqli,)
+    # Caching version of pdo_query()
     function mysql_query_cache($sql, $linkIdentifier = false,$timeout = 4) {
-	$mysqli=$GLOBALS['mysqli'];
+	
 
 //首先调用上面的getCache函数，如果返回值不为false的话，就说明是从memcached服务器获取的数据
 //如果返回false，此时就需要直接从数据库中获取数据了。
@@ -38,20 +38,8 @@
 
             $cache = false;
 
-            $r = mysqli_query($mysqli,$sql);
+            $cache =pdo_query($sql);
 
-            $fields =array();
-	    while ($finfo = mysqli_fetch_field($r)) {
-		array_push($fields,$finfo);
-    	    }
-   //读取数据库，并将结果放入$cache数组中
-                for ($i=0;$row = mysqli_fetch_array($r);$i++) {
-		    $j=0;
-		    foreach($fields as $val){
-			$cache[$i][$val->name]=$row[$j];
-			$j++;	
-		    }
-                }
 
     //将数据放入memcached服务器中，如果memcached服务器没有开的话，此语句什么也不会做
     //如果开启了服务器的话，数据将会被缓存到memcached服务器中

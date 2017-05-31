@@ -52,8 +52,8 @@ if(strlen($test_output)&&!strlen($test_input)) $test_input="0";
 if(strlen($test_input))mkdata($pid,"test.in",$test_input,$OJ_DATA);
 if(strlen($test_output))mkdata($pid,"test.out",$test_output,$OJ_DATA);
 
-$sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_id']."','p$pid')";
-mysqli_query($mysqli,$sql);
+$sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
+pdo_query($sql,$_SESSION['user_id'],"p$pid");
 $_SESSION["p$pid"]=true;
 	
 echo "<a href='javascript:phpfm($pid);'>Add more TestData now !</a>";

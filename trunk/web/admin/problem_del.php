@@ -19,17 +19,17 @@ if (!(isset($_SESSION['administrator']))){
 			system("rm -rf $basedir");
 	    }
 	}
-        $sql="delete FROM `problem` WHERE `problem_id`=$id";
-        mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+        $sql="delete FROM `problem` WHERE `problem_id`=?";
+        pdo_query($sql,$id) ;
         $sql="select max(problem_id) FROM `problem`" ;
-        $result=mysqli_query($mysqli,$sql);
-        $row=mysqli_fetch_row($result);
+        $result=pdo_query($sql);
+        $row=$result[0];
         $max_id=$row[0];
         $max_id++;
         if($max_id<1000)$max_id=1000;
-        mysqli_free_result($result);
-        $sql="ALTER TABLE problem AUTO_INCREMENT = $max_id;";
-        mysqli_query($mysqli,$sql);
+        
+        $sql="ALTER TABLE problem AUTO_INCREMENT = ?";
+        pdo_query($sql,$max_id);
         ?>
         <script language=javascript>
                 history.go(-1);

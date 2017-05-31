@@ -7,12 +7,11 @@
     $view_title= "Problem Set";
 $first=1000;
   //if($OJ_SAE) $first=1;
-$sql="SELECT max(`problem_id`) as upid FROM `problem`";
+$sql="select max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
-$result=mysqli_query($mysqli,$sql);
-echo mysqli_error($mysqli);
-$row=mysqli_fetch_object($result);
-$cnt=intval($row->upid)-$first;
+$result=pdo_query($sql);
+$row=$result[0];
+$cnt=$row['upid']-$first;
 $cnt=$cnt/$page_cnt;
 
   //remember page
@@ -20,14 +19,14 @@ $cnt=$cnt/$page_cnt;
 if (isset($_GET['page'])){
     $page=intval($_GET['page']);
     if(isset($_SESSION['user_id'])){
-         $sql="update users set volume=$page where user_id='".$_SESSION['user_id']."'";
-         mysqli_query($mysqli,$sql);
+         $sql="update users set volume=? where user_id=?";
+         pdo_query($sql,$page,$_SESSION['user_id']);
     }
 }else{
     if(isset($_SESSION['user_id'])){
-            $sql="select volume from users where user_id='".$_SESSION['user_id']."'";
-            $result=@mysqli_query($mysqli,$sql);
-            $row=mysqli_fetch_array($result);
+            $sql="select volume from users where user_id=?";
+            $result=pdo_query($sql,$_SESSION['user_id']);
+            $row=$result[0];
             $page=intval($row[0]);
     }
     if(!is_numeric($page)||$page<0)
@@ -43,31 +42,31 @@ $pend=$pstart+$page_cnt;
 $sub_arr=Array();
 // submit
 if (isset($_SESSION['user_id'])){
-$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id']."'".
+$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        // " AND `problem_id`<'$pend'".
 	" group by `problem_id`";
-$result=@mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-while ($row=mysqli_fetch_array($result))
+$result=pdo_query($sql,$_SESSION['user_id']);
+foreach ($result as $row)
 	$sub_arr[$row[0]]=true;
 }
 
 $acc_arr=Array();
 // ac
 if (isset($_SESSION['user_id'])){
-$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`='".$_SESSION['user_id']."'".
+$sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=@mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-while ($row=mysqli_fetch_array($result))
+$result=pdo_query($sql,$_SESSION['user_id']);
+foreach ($result as $row)
 	$acc_arr[$row[0]]=true;
 }
 
 if(isset($_GET['search'])&&trim($_GET['search'])!=""){
-	$search=mysqli_real_escape_string($mysqli,$_GET['search']);
-    $filter_sql=" ( title like '%$search%' or source like '%$search%')";
+	$search="%".($_GET['search'])."%";
+    $filter_sql=" ( title like ? or source like ?)";
     $pstart=0;
     $pend=100;
 
@@ -94,36 +93,38 @@ else{
 }
 $sql.=" ORDER BY `problem_id`";
 
-
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+if(isset($_GET['search'])&&trim($_GET['search'])!=""){
+	$result=pdo_query($sql,$search,$search);
+}else{
+	$result=pdo_query($sql);
+}
 
 $view_total_page=$cnt+1;
 
 $cnt=0;
 $view_problemset=Array();
 $i=0;
-while ($row=mysqli_fetch_object($result)){
+foreach ($result as $row){
 	
 	
 	$view_problemset[$i]=Array();
-	if (isset($sub_arr[$row->problem_id])){
-		if (isset($acc_arr[$row->problem_id])) 
+	if (isset($sub_arr[$row['problem_id']])){
+		if (isset($acc_arr[$row['problem_id']])) 
 			$view_problemset[$i][0]="<div class='btn btn-success'>Y</div>";
 		else 
 			$view_problemset[$i][0]= "<div class='btn btn-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}
-	$view_problemset[$i][1]="<div class='center'>".$row->problem_id."</div>";;
-	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row->problem_id."'>".$row->title."</a></div>";;
-	$view_problemset[$i][3]="<div class='center'><nobr>".mb_substr($row->source,0,8,'utf8')."</nobr></div >";
-	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row->problem_id."&jresult=4'>".$row->accepted."</a></div>";
-	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row->problem_id."'>".$row->submit."</a></div>";
+	$view_problemset[$i][1]="<div class='center'>".$row['problem_id']."</div>";;
+	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
+	$view_problemset[$i][3]="<div class='center'><nobr>".mb_substr($row['source'],0,8,'utf8')."</nobr></div >";
+	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."&jresult=4'>".$row['accepted']."</a></div>";
+	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
 	
 	
 	$i++;
 }
-mysqli_free_result($result);
 
 
 require("template/".$OJ_TEMPLATE."/problemset.php");

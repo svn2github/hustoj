@@ -1,39 +1,25 @@
 <?php
 
 function addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj,$OJ_DATA) {
-	$mysqli=$GLOBALS['mysqli'];
-	$title=mysqli_real_escape_string($mysqli,$title);
-	$time_limit=mysqli_real_escape_string($mysqli,$time_limit);
-	$memory_limit=mysqli_real_escape_string($mysqli,$memory_limit);
-	$description=mysqli_real_escape_string($mysqli,$description);
-	$input=mysqli_real_escape_string($mysqli,$input);
-	$output=mysqli_real_escape_string($mysqli,$output);
-	$sample_input=mysqli_real_escape_string($mysqli,$sample_input);
-	$sample_output=mysqli_real_escape_string($mysqli,$sample_output);
-//	$test_input=($test_input);
-//	$test_output=($test_output);
-	$hint=mysqli_real_escape_string($mysqli,$hint);
-	$source=mysqli_real_escape_string($mysqli,$source);
+
 //	$spj=($spj);
 	
 	$sql = "INSERT into `problem` (`title`,`time_limit`,`memory_limit`,
 	`description`,`input`,`output`,`sample_input`,`sample_output`,`hint`,`source`,`spj`,`in_date`,`defunct`)
-	VALUES('$title','$time_limit','$memory_limit','$description','$input','$output',
-			'$sample_input','$sample_output','$hint','$source','$spj',NOW(),'Y')";
+	VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW(),'Y')";
 	//echo $sql;
-	@mysqli_query($mysqli, $sql ) or die ( mysqli_error ($mysqli) );
-	$pid = mysqli_insert_id ($mysqli);
+	$pid =pdo_query( $sql,$title,$time_limit,$memory_limit,$description,$input,$output,
+			$sample_input,$sample_output,$hint,$source,$spj ) ;
 	echo "<br>Add $pid  ";
 	if (isset ( $_POST ['contest_id'] )) {
-		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=" . strval ( intval ( $_POST ['contest_id'] ) );
-		$result = @mysqli_query($mysqli, $sql ) or die ( mysqli_error($mysqli) );
-		$row = mysqli_fetch_row ( $result );
-		$cid = $_POST ['contest_id'];
+		$cid =intval($_POST ['contest_id']);
+		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=?";
+		$result = pdo_query( $sql,$cid ) ;
+		$row =$result[0];
 		$num = $row [0];
 		echo "Num=" . $num . ":";
-		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES('$pid','$cid','$num')";
-		mysqli_free_result ($result);
-		mysqli_query($mysqli, $sql );
+		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES(?,?,?)";	
+		pdo_query($sql,$pid,$cid,$num);
 	}
 	$basedir = "$OJ_DATA/$pid";
 	if(!isset($OJ_SAE)||!$OJ_SAE){

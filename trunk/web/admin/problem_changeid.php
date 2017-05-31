@@ -19,39 +19,38 @@ function writable($path){
 		$from=intval($_POST['from']);
 		$to=intval($_POST['to']);
 		$row=0;
-		if($result=mysqli_query($mysqli,"select 1 from problem where problem_id=$to")){
-			$row=mysqli_num_rows($result);
-			mysqli_free_result($result);
+		if($result=pdo_query("select 1 from problem where problem_id=?",$to)){
+			$row=count($result);
+			
 		}
 		
 		if($row==0&&rename("$OJ_DATA/$from","$OJ_DATA/$to")){
-			$sql="UPDATE `problem` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!mysqli_query($mysqli,$sql)){
+			$sql="UPDATE `problem` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `solution` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!mysqli_query($mysqli,$sql)){
+			$sql="UPDATE `solution` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `contest_problem` SET `problem_id`=$to WHERE `problem_id`=".$from;
-			if(!mysqli_query($mysqli,$sql)){
+			$sql="UPDATE `contest_problem` SET `problem_id`=? WHERE `problem_id`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
-			$sql="UPDATE `topic` SET `pid`=$to WHERE `pid`=".$from;
-			if(!mysqli_query($mysqli,$sql)){
+			$sql="UPDATE `topic` SET `pid`=? WHERE `pid`=?";
+			if(!pdo_query($sql,$to,$from)){
 				 rename("$OJ_DATA/$to","$OJ_DATA/$from");
 				 exit(1);
 			}
 			$sql="select max(problem_id) from problem";
-			if($result=mysqli_query($mysqli,$sql)){
-				$f=mysqli_fetch_array($result);
+			if($result=pdo_query($sql)){
+				$f=$result[0];
 				$nextid=$f[0]+1;
-				mysqli_free_result($result);
-				$sql="ALTER TABLE problem AUTO_INCREMENT = $nextid";
-				mysqli_query($mysqli,$sql);
+				$sql="ALTER TABLE problem AUTO_INCREMENT = ?";
+				pdo_query($sql,$nextid);
 			}
 			
 			echo "done!";

@@ -55,32 +55,31 @@
                 }
 
 
-       //         $result = mysql_query ( $sql ); //mysqli_error($mysqli);
+      
         if($OJ_MEMCACHE){
                 require("./include/memcache.php");
-                $result = mysql_query_cache($sql) ;//or die("Error! ".mysqli_error($mysqli));
+                $result = mysql_query_cache($sql) ;//;
                 if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
         }else{
 
-                $result = mysqli_query($mysqli,$sql) or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=mysqli_num_rows($result);
+                $result = pdo_query($sql) ;
+                if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
         }
                 $view_rank=Array();
                 $i=0;
                 for ( $i=0;$i<$rows_cnt;$i++ ) {
-                        if($OJ_MEMCACHE)
-                                $row=$result[$i];
-                        else
-                                $row=mysqli_fetch_array($result);
+					
+                        $row=$result[$i];
+                        
                         $rank ++;
 
                         $view_rank[$i][0]= $rank;
-                        $view_rank[$i][1]=  "<div class=center><a href='userinfo.php?user=" . $row['user_id'] . "                                                            '>" . $row['user_id'] . "</a>" ."</div>";
+                        $view_rank[$i][1]=  "<div class=center><a href='userinfo.php?user=" .htmlentities ( $row['user_id'],ENT_QUOTES,"UTF-8") . "'>" . $row['user_id'] . "</a>"."</div>";
                         $view_rank[$i][2]=  "<div class=center>" . htmlentities ( $row['nick'] ,ENT_QUOTES,"UTF-8") ."</div>";
-                        $view_rank[$i][3]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] .                                                             "&jresult=4'>" . $row['solved'] . "</a>" ."</div>";
-                        $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . $row['user_id'] .                                                             "'>" . $row['submit'] . "</a>" ."</div>";
+                        $view_rank[$i][3]=  "<div class=center><a href='status.php?user_id=" .htmlentities ( $row['user_id'],ENT_QUOTES,"UTF-8") ."&jresult=4'>" . $row['solved']."</a>"."</div>";
+                        $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . htmlentities ($row['user_id'],ENT_QUOTES,"UTF-8") ."'>" . $row['submit'] . "</a>"."</div>";
 
                         if ($row['submit'] == 0)
                                 $view_rank[$i][5]= "0.000%";
@@ -90,32 +89,18 @@
 //                      $i++;
                 }
 
-if(!$OJ_MEMCACHE)mysqli_free_result($result);
-
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
         //        $result = mysql_query ( $sql );
         if($OJ_MEMCACHE){
           // require("./include/memcache.php");
-                $result = mysql_query_cache($sql);// or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=count($result);
-                else $rows_cnt=0;
+                $result = mysql_query_cache($sql);
         }else{
-
-                $result = mysqli_query($mysqli,$sql);// or die("Error! ".mysqli_error($mysqli));
-                if($result) $rows_cnt=mysqli_num_rows($result);
-                else $rows_cnt=0;
+                $result = pdo_query($sql);
         }
-        if($OJ_MEMCACHE)
-                $row=$result[0];
-        else
-                $row=mysqli_fetch_array($result);
-                echo mysqli_error($mysqli);
-  //$row = mysql_fetch_object ( $result );
+                 $row=$result[0];
                 $view_total=$row['mycount'];
 
-  //              mysql_free_result ( $result );
 
-if(!$OJ_MEMCACHE)  mysqli_free_result($result);
 
 
 /////////////////////////Template

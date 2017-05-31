@@ -27,47 +27,47 @@
 	<?php
 	
 	if ($pr_flag){
-		echo "<title>$MSG_PROBLEM $row->problem_id. -- $row->title</title>";
-		echo "<center><h2>$id: $row->title</h2>";
+		echo "<title>$MSG_PROBLEM $row['problem_id']. -- $row['title']</title>";
+		echo "<center><h2>$id: $row['title']</h2>";
 	}else{
 		$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		echo "<title>$MSG_PROBLEM $PID[$pid]: $row->title </title>";
-		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row->title</h2>";
-		$id=$row->problem_id;
+		echo "<title>$MSG_PROBLEM $PID[$pid]: $row['title'] </title>";
+		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row['title']</h2>";
+		$id=$row['problem_id'];
 	}
-	echo "<span class=green>$MSG_Time_Limit: </span>$row->time_limit Sec&nbsp;&nbsp;";
-	echo "<span class=green>$MSG_Memory_Limit: </span>".$row->memory_limit." MB";
-	if ($row->spj) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
-	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row->submit."&nbsp;&nbsp;";
-	echo "<span class=green>$MSG_SOVLED: </span>".$row->accepted."<br>"; 
+	echo "<span class=green>$MSG_Time_Limit: </span>$row['time_limit'] Sec&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_Memory_Limit: </span>".$row['memory_limit']." MB";
+	if ($row['spj']) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
+	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row['submit']."&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_SOVLED: </span>".$row['ac']cepted."<br>"; 
 	
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 	}else{
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
-	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
-	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
+	echo "[<a href='problemstatus.php?id=".$row['problem_id']."'>$MSG_STATUS</a>]";
+	echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
 	  if(isset($_SESSION['administrator'])){
       require_once("include/set_get_key.php");
       ?>
       [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
-      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
       <?php
 
     }
 
 	echo "</center>";
 	
-	echo "<h2>$MSG_Description</h2><div class=content>".$row->description."</div>";
-	echo "<h2>$MSG_Input</h2><div class=content>".$row->input."</div>";
-	echo "<h2>$MSG_Output</h2><div class=content>".$row->output."</div>";
+	echo "<h2>$MSG_Description</h2><div class=content>".$row['description']."</div>";
+	echo "<h2>$MSG_Input</h2><div class=content>".$row['input']."</div>";
+	echo "<h2>$MSG_Output</h2><div class=content>".$row['output']."</div>";
 	
   
 	
-	$sinput=str_replace("<","&lt;",$row->sample_input);
+	$sinput=str_replace("<","&lt;",$row['sample_input']);
   $sinput=str_replace(">","&gt;",$sinput);
-	$soutput=str_replace("<","&lt;",$row->sample_output);
+	$soutput=str_replace("<","&lt;",$row['sample_output']);
   $soutput=str_replace(">","&gt;",$soutput);
   if(strlen($sinput)) {
       echo "<h2>$MSG_Sample_Input</h2>
@@ -79,25 +79,25 @@
   }
   if ($pr_flag||true) 
 		echo "<h2>$MSG_HINT</h2>
-			<div class=content><p>".nl2br($row->hint)."</p></div>";
+			<div class=content><p>".nl2br($row['hint'])."</p></div>";
 	if ($pr_flag) 
 		echo "<h2>$MSG_Source</h2>
-			<div class=content><p><a href='problemset.php?search=$row->source'>".nl2br($row->source)."</a></p></div>";
+			<div class=content><p><a href='problemset.php?search=$row['source']'>".nl2br($row['source'])."</a></p></div>";
 	echo "<center>";
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 	}else{
 		echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
 	}
-	echo "[<a href='problemstatus.php?id=".$row->problem_id."'>$MSG_STATUS</a>]";
+	echo "[<a href='problemstatus.php?id=".$row['problem_id']."'>$MSG_STATUS</a>]";
 
-	echo "[<a href='bbs.php?pid=".$row->problem_id."$ucid'>$MSG_BBS</a>]";
+	echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
 	
 	if(isset($_SESSION['administrator'])){
       require_once("include/set_get_key.php");
   ?>
      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
-      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row->problem_id?>&order=name&srt=yes" >TestData</a>]
+      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
      <?php
   }	
   echo "</center>";

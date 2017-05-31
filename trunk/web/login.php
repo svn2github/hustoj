@@ -16,15 +16,15 @@
         $user_id= stripslashes ( $user_id);
         $password= stripslashes ( $password);
    }
-    $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".mysqli_real_escape_string($mysqli,$user_id)."'";
-    	$login=check_login($user_id,$password);
+    $sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
+    $login=check_login($user_id,$password);
 	
 	if ($login)
     {
 		$_SESSION['user_id']=$login;
-		$result=mysqli_query($mysqli,$sql);
+		$result=pdo_query($sql,$login);
 
-		while ($result&&$row=mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 			$_SESSION[$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";

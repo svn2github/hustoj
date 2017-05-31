@@ -71,8 +71,8 @@ class online{
 	 */
 	function __construct()
 	{
-		global $mysqli;
-		$this->ip = mysqli_real_escape_string($mysqli,$_SERVER['REMOTE_ADDR']);
+		
+		$this->ip = ($_SERVER['REMOTE_ADDR']);
       
       
          if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
@@ -81,18 +81,17 @@ class online{
                     
                     $tmp_ip=explode(',',$REMOTE_ADDR);
 
-                    $this->ip =mysqli_real_escape_string($mysqli,htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+                    $this->ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 
         }
 
-		$this->ua = mysqli_real_escape_string($mysqli,htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
-		$this->uri = mysqli_real_escape_string($mysqli,$_SERVER['PHP_SELF']);
+		$this->ua = (htmlentities($_SESSION['user_id']."@".$_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
+		$this->uri = ($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
-			$this->refer = mysqli_real_escape_string($mysqli,htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
+			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));
 	    }
-		$this->hash = mysqli_real_escape_string($mysqli,session_id());
-		//$this->db = new mysqli(DBHOST, DBUSER, DBPASSWORD, )
-
+		$this->hash = md5(session_id().$this->ip);
+		
 		//check user existed!
 		if($this->exist()){
 			//update databse
@@ -113,17 +112,9 @@ class online{
 	 */
 	function getAll()
 	{
-		$ret = array();
 		
-		global $mysqli;
 		$sql = 'SELECT * FROM online';
-		$res = mysqli_query($mysqli,$sql);
-		//$sql = 'ALTER TABLE `jol`.`online` ENGINE = MEMORY';
-		//$res = mysqli_query($mysqli,$sql);
-		if($res ){
-			while($rt = mysqli_fetch_object($res)) $ret[] = $rt;
-			mysqli_free_result($res);
-		}
+		$ret = pdo_query($sql);
 		return $ret;
 	}
 	/**
@@ -134,14 +125,14 @@ class online{
 	 */
 	function getRecord($ip)
 	{
-		$sql = "SELECT * FROM online WHERE ip = '$ip'";
-		$res = mysqli_query($mysqli,$sql);
-		if(mysqli_num_rows($res)){
-			$ret = mysqli_fetch_object($res);
+		$sql = "SELECT * FROM online WHERE ip = ?";
+		$res = pdo_query($sql,$ip);
+		if(count($res)){
+			$ret = ($res[0]);
 		}else{
 			return false;
 		}
-		mysqli_free_result($res);
+		
 		return $ret;
 	}
 	
@@ -153,14 +144,13 @@ class online{
 	 */
 	function get_num()
 	{
-		global $mysqli;
+		
 		$sql = 'SELECT count(ip) as nums FROM online';
-		$res = mysqli_query($mysqli,$sql);
+		$res = pdo_query($sql);
 		$ret = 0;
 		if($res){
-			$ret = mysqli_fetch_object($res);
-			$ret = $ret->nums;
-			mysqli_free_result($res);
+			$ret = $res[0];
+			$ret = $ret['nums'];
 	    }
 		return $ret;
 	}
@@ -171,13 +161,10 @@ class online{
 	 */
 	function exist()
 	{
-		global $mysqli;
-		$sql = "SELECT * FROM online WHERE hash = '$this->hash'";
-		$res = mysqli_query($mysqli,$sql);
-		if($res&&mysqli_num_rows($res) == 0)
-			return false;
-		else
-			return true;
+		
+		$sql = "SELECT count(1) FROM online WHERE hash = ?";
+		$res = pdo_query($sql,$this->hash);
+		return $res[0][0];
 
 	}
 	/**
@@ -187,11 +174,11 @@ class online{
 	 */
 	function addRecord()
 	{
-		global $mysqli;
+		
 		$now = time();
 		$sql = "INSERT INTO online(hash, ip, ua, uri, refer, firsttime, lastmove)
-				VALUES ('$this->hash', '$this->ip', '$this->ua', '$this->uri', '$this->refer', '$now', '$now')";
-		mysqli_query($mysqli,$sql);
+				VALUES (?, ?,?, ?, ?, ?, ?)";
+		pdo_query($sql,$this->hash,$this->ip, $this->ua,$this->uri,$this->refer,$now,$now);
 	}
 
 	/**
@@ -201,18 +188,18 @@ class online{
 	 */
 	function update()
 	{
-		global $mysqli;
+		
 		$sql = "UPDATE online
 				SET
-					ua = '$this->ua',
-					uri = '$this->uri',
-					refer = '$this->refer',
-					lastmove = '".time()."',
-					ip = '$this->ip'
+					ua = ?,
+					uri = ?,
+					refer = ?,
+					lastmove = ?,
+					ip = ?
 				WHERE
-					hash = '$this->hash'
+					hash = ?
 				";
-		mysqli_query($mysqli,$sql);
+		pdo_query($sql,$this->ua,$this->uri,$this->refer,time(),$this->ip,$this->hash);
 	}
 	/**
 	 * clean the duration user
@@ -221,8 +208,8 @@ class online{
 	 */
 	function clean()
 	{
-		global $mysqli;
-		$sql = 'DELETE FROM online WHERE lastmove<'.(time()-ONLINE_DURATION);
-		mysqli_query($mysqli,$sql);
+		
+		$sql = 'DELETE FROM online WHERE lastmove<?';
+		pdo_query($sql,(time()-ONLINE_DURATION));
 	}
 }

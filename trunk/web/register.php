@@ -63,42 +63,32 @@ if ($err_cnt>0){
 	
 }
 $password=pwGen($_POST['password']);
-$sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = '".$user_id."'";
-$result=mysqli_query($mysqli,$sql);
-$rows_cnt=mysqli_num_rows($result);
-mysqli_free_result($result);
+$sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = ?";
+$result=pdo_query($sql,$user_id);
+$rows_cnt=count($result);
 if ($rows_cnt == 1){
 	print "<script language='javascript'>\n";
 	print "alert('User Existed!\\n');\n";
 	print "history.go(-1);\n</script>";
 	exit(0);
 }
-$nick=mysqli_real_escape_string($mysqli,htmlentities ($nick,ENT_QUOTES,"UTF-8"));
-$school=mysqli_real_escape_string($mysqli,htmlentities ($school,ENT_QUOTES,"UTF-8"));
-$email=mysqli_real_escape_string($mysqli,htmlentities ($email,ENT_QUOTES,"UTF-8"));
+$nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
+$school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
+$email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip=$_SERVER['REMOTE_ADDR'];
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
-."VALUES('".$user_id."','".$email."','".$_SERVER['REMOTE_ADDR']."',NOW(),'".$password."',NOW(),'".$nick."','".$school."')";
-mysqli_query($mysqli,$sql);// or die("Insert Error!\n");
+."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
+$rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);// or die("Insert Error!\n");
 
-if( mysqli_affected_rows($mysqli)==0) {
-       	print "<script language='javascript'>\n";
-	print "alert('Username robbed!\\n');\n";
-	print "history.go(-1);\n</script>";
-	exit(0);
-}
-
-
-$sql="INSERT INTO `loginlog` VALUES('$user_id','$password','$ip',NOW())";
-mysqli_query($mysqli,$sql);
+$sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
+pdo_query($sql,$user_id,$password,$ip);
 $_SESSION['user_id']=$user_id;
 
-		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`='".$_SESSION['user_id']."'";
+		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 		//echo $sql."<br />";
-		$result=mysqli_query($mysqli,$sql);
-		echo mysqli_error($mysqli);
-		while ($row=mysqli_fetch_assoc($result)){
+		$result=pdo_query($sql,$_SESSION['user_id']);
+		foreach ($result as $row){
 			$_SESSION[$row['rightstr']]=true;
 			//echo $_SESSION[$row['rightstr']]."<br />";
 		}

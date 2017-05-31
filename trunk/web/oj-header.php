@@ -1,12 +1,12 @@
 <?php function checkcontest($MSG_CONTEST){
-	global $mysqli,$MSG_CONTEST;
+	global $MSG_CONTEST;
       $now=strftime("%Y-%m-%d %H:%M",time());
-		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>'$now' AND `defunct`='N'";
-		$result=mysqli_query($mysqli,$sql);
-		$row=mysqli_fetch_row($result);
+		$sql="SELECT count(*) FROM `contest` WHERE `end_time`>? AND `defunct`='N'";
+		$result=pdo_query($sql,$now);
+		$row=$result[0];
 		if (intval($row[0])==0) $retmsg=$MSG_CONTEST;
 		else $retmsg=$row[0]."<span class=red>&nbsp;$MSG_CONTEST</span>";
-		mysqli_free_result($result);
+		
 		return $retmsg;
 	}
 	

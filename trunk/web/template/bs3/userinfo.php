@@ -42,12 +42,12 @@ function p(id,c){
 	document.write("<a href=problem.php?id="+id+">"+id+" </a>(<a href='status.php?user_id=<?php echo $user?>&problem_id="+id+"'>"+c+"</a>)");
 
 }
-<?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`='$user_mysql' 
-		AND problem_id in (select distinct problem_id from solution where `user_id`='$user_mysql' and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
-if (!($result=mysqli_query($mysqli,$sql))) echo mysqli_error($mysqli);
-while ($row=mysqli_fetch_array($result))
+<?php $sql="SELECT `problem_id`,count(1) FROM `solution` WHERE `user_id`=? 
+		AND problem_id in (select distinct problem_id from solution where `user_id`=? and result=4) group by `problem_id` ORDER BY `problem_id` ASC";
+if (!($result=pdo_query($sql,$user,$user))) 
+ foreach($result as $row)
 echo "p($row[0],$row[1]);";
-mysqli_free_result($result);
+
 ?>
 </script>
 <div id=submission style="width:600px;height:300px" ></div>
@@ -94,17 +94,17 @@ if(isset($_SESSION['administrator'])){
 <?php
 $cnt=0;
 foreach($view_userinfo as $row){
-if ($cnt)
-echo "<tr class='oddrow'>";
-else
-echo "<tr class='evenrow'>";
-foreach($row as $table_cell){
-echo "<td>";
-echo "\t".$table_cell;
-echo "</td>";
-}
-echo "</tr>";
-$cnt=1-$cnt;
+	if ($cnt)
+		echo "<tr class='oddrow'>";
+	else
+		echo "<tr class='evenrow'>";
+	for($i=0;$i<count($row)/2;$i++){
+		echo "<td>";
+		echo "\t".$row[$i];
+		echo "</td>";
+	}
+	echo "</tr>";
+	$cnt=1-$cnt;
 }
 ?>
 </tbody>
@@ -122,7 +122,7 @@ $cnt=1-$cnt;
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
-<script language="javascript" type="text/javascript" src="include/jquery-latest.js"></script>
+
 <script language="javascript" type="text/javascript" src="include/jquery.flot.js"></script>
 <script type="text/javascript">
 $(function () {

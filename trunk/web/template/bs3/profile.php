@@ -13,14 +13,14 @@ header("Pragma: no-cache");
 		require_once("../../lang/en.php");
 	}
     function checkmail(){
-	$mysqli=$GLOBALS['mysqli'];		
+			
 		$sql="SELECT count(1) FROM `mail` WHERE 
-				new_mail=1 AND `to_user`='".$_SESSION['user_id']."'";
-		$result=mysqli_query($mysqli,$sql);
+				new_mail=1 AND `to_user`=?";
+		$result=pdo_query($sql,$_SESSION['user_id']);
 		if(!$result) return false;
-		$row=mysqli_fetch_row($result);
+		$row=$result[0];
 		$retmsg="<span id=red>(".$row[0].")</span>";
-		mysqli_free_result($result);
+		
 		return $retmsg;
 	}
 	$profile='';

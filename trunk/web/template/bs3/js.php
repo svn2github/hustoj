@@ -22,8 +22,9 @@ $(document).ready(function(){
       " onMouseOut='this.start()' class=toprow>"+<?php echo json_encode($view_marquee_msg); ?>+"</marquee>";
   $(".jumbotron").prepend(msg);
   $("form").append("<div id='csrf' />");
-  $("#csrf").load("csrf.php");
+  $("#csrf").load("<?php echo $path_fix?>csrf.php");
   $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
+  $("body").append("<div class=center ><a href='https://www.duba.com/?un_454974_116387' title='每天点击一次开发者可获得￥0.06' target='_blank'>捐助系统开发者</a></div>");
 });
 
 </script>

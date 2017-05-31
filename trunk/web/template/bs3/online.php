@@ -33,22 +33,22 @@
 		</thead>
 		<tbody>
 		<?php 
-		foreach($users as $u):
-				 if(is_object($u)){
+		foreach($users as $u){
+				 if(is_array($u)){
 				 ?>
 				<tr><td class="ip">
-				<?php $l = $ip->getlocation($u->ip);
+				<?php $l = $ip->getlocation($u['ip']);
 				   
 					echo $u->ip.'<br />';
 					if(strlen(trim($l['area']))==0)
 						echo $l['country'];
 					else
 						echo $l['area'].'@'.$l['country'];
-					?></td><td><?php echo $u->uri?></td><td><?php echo $u->refer?></td>
-				<td class="time"><?php echo sprintf("%dmin %dsec",($u->lastmove-$u->firsttime)/60,($u->lastmove-$u->firsttime) % 60)?></td><td><?php echo $u->ua?></td></tr>
+					?></td><td><?php echo $u->uri?></td><td><?php echo $u['refer']?></td>
+				<td class="time"><?php echo sprintf("%dmin %dsec",($u['lastmove']-$u['firsttime'])/60,($u['lastmove']-$u['firsttime']) % 60)?></td><td><?php echo $u['ua']?></td></tr>
 				<?php 
 				}
-		endforeach;
+		}
 		
 		if(isset($_SESSION['administrator'])){
 		

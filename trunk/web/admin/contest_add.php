@@ -29,12 +29,6 @@ $description="";
                 $description = stripslashes ($description);
         }
 
-        $title=mysqli_real_escape_string($mysqli,$title);
-        $private=mysqli_real_escape_string($mysqli,$private);
-        $password=mysqli_real_escape_string($mysqli,$password);
-        $description=mysqli_real_escape_string($mysqli,$description);
-
-
     $lang=$_POST['lang'];
     $langmask=0;
     foreach($lang as $t){
@@ -44,38 +38,41 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	//echo $langmask;	
 	
         $sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
-                VALUES('$title','$starttime','$endtime','$private',$langmask,'$description','$password')";
+                VALUES(?,?,?,?,?,?,?)";
 	echo $sql;
-	mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-	$cid=mysqli_insert_id($mysqli);
+	$cid=pdo_query($sql,$title,$starttime,$endtime,$private,$langmask,$description,$password) ;
 	echo "Add Contest ".$cid;
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
 	$plist=trim($_POST['cproblem']);
 	$pieces = explode(",",$plist );
-	if (count($pieces)>0 && strlen($pieces[0])>0){
+	if (count($pieces)>0 && intval($pieces[0])>0){
 		$sql_1="INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) 
-			VALUES ('$cid','$pieces[0]',0)";
-		for ($i=1;$i<count($pieces);$i++){
-			$sql_1=$sql_1.",('$cid','$pieces[$i]',$i)";
+			VALUES (?,?,?)";
+		$plist="";
+		for ($i=0;$i<count($pieces);$i++){
+			
+			if($plist)$plist.=",";
+			$plist.=$pieces[$i];
+			pdo_query($sql_1,$cid,$pieces[$i],$i);
 		}
 		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
+		
 		$sql="update `problem` set defunct='N' where `problem_id` in ($plist)";
-		mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+		pdo_query($sql) ;
 	}
-	$sql="DELETE FROM `privilege` WHERE `rightstr`='c$cid'";
-	mysqli_query($mysqli,$sql);
-	$sql="insert into `privilege` (`user_id`,`rightstr`)  values('".$_SESSION['user_id']."','m$cid')";
-	mysqli_query($mysqli,$sql);
+	$sql="DELETE FROM `privilege` WHERE `rightstr`=?";
+	pdo_query($sql,"c$cid");
+	$sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
+	pdo_query($sql,$_SESSION['user_id'],"m$cid");
 	$_SESSION["m$cid"]=true;
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 
-			VALUES ('".trim($pieces[0])."','c$cid')";
-		for ($i=1;$i<count($pieces);$i++)
-			$sql_1=$sql_1.",('".trim($pieces[$i])."','c$cid')";
-		//echo $sql_1;
-		mysqli_query($mysqli,$sql_1) or die(mysqli_error($mysqli));
+			VALUES (?,?)";
+		for ($i=0;$i<count($pieces);$i++){
+			
+			pdo_query($sql_1,trim($pieces[$i]),"c$cid") ;
+		}
 	}
 	echo "<script>window.location.href=\"contest_list.php\";</script>";
 }
@@ -83,20 +80,20 @@ else{
 	
    if(isset($_GET['cid'])){
 		   $cid=intval($_GET['cid']);
-		   $sql="select * from contest WHERE `contest_id`='$cid'";
-		   $result=mysqli_query($mysqli,$sql);
-		   $row=mysqli_fetch_object($result);
-		   $title=$row->title;
-		   mysqli_free_result($result);
+		   $sql="select * from contest WHERE `contest_id`=?";
+		   $result=pdo_query($sql,$cid);
+		    $row=$result[0];
+		   $title=$row['title'];
+		   
 			$plist="";
-			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=$cid ORDER BY `num`";
-			$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-			for ($i=mysqli_num_rows($result);$i>0;$i--){
-				$row=mysqli_fetch_row($result);
+			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? ORDER BY `num`";
+			$result=pdo_query($sql,$cid) ;
+			for ($i=count($result);$i>0;$i--){
+				$row=$result[0];
 				$plist=$plist.$row[0];
 				if ($i>1) $plist=$plist.',';
 			}
-			mysqli_free_result($result);
+			
    }
 else if(isset($_POST['problem2contest'])){
 	   $plist="";
@@ -113,14 +110,13 @@ else if(isset($_POST['problem2contest'])){
 		   $spid=intval($_GET['spid']);
 		 
 			$plist="";
-			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=$spid ";
-			$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-			for ($i=mysqli_num_rows($result);$i>0;$i--){
-				$row=mysqli_fetch_row($result);
-				$plist=$plist.$row[0];
-				if ($i>1) $plist=$plist.',';
+			$sql="SELECT `problem_id` FROM `problem` WHERE `problem_id`>=? ";
+			$result=pdo_query($sql,$spid) ;
+			foreach ($result as $row){
+				if ($plist) $plist.=',';
+				$plist.=$row[0];
 			}
-			mysqli_free_result($result);
+			
 }  
   include_once("kindeditor.php") ;
 ?>

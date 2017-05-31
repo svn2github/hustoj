@@ -27,11 +27,11 @@
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id){document.write("<a href=problem.php?id="+id+">"+id+" </a>");}
-<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`='$user_mysql' AND `result`=4 ORDER BY `problem_id` ASC";	
-if (!($result=mysqli_query($mysqli,$sql))) echo mysqli_error($mysqli);
-while ($row=mysqli_fetch_array($result))
+<?php $sql="SELECT DISTINCT `problem_id` FROM `solution` WHERE `user_id`=? AND `result`=4 ORDER BY `problem_id` ASC";	
+if (!($result=pdo_query($sql,$user))) 
+ foreach($result as $row)
 	echo "p($row[0]);";
-mysqli_free_result($result);
+
 ?>
 </script>
 </tr>

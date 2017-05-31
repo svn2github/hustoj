@@ -3,20 +3,25 @@
         require_once("../include/db_info.inc.php");
         require_once("discuss_func.inc.php");
         if ($_REQUEST['target']=='reply'){
-                $rid = intval($_REQUEST['rid']); $tid = intval($_REQUEST['tid']);
+                $rid = intval($_REQUEST['rid']); 
+				$tid = intval($_REQUEST['tid']);
                 $stat = -1;
                 if ($_REQUEST['action']=='resume') $stat = 0;
                 if ($_REQUEST['action']=='disable') $stat = 1;
                 if ($_REQUEST['action']=='delete') $stat = 2;
                 if ($stat == -1) err_msg("Wrong action.");
-                $rid = mysql_escape_string($rid);
-                $sql = "UPDATE reply SET status = $stat WHERE `rid` = '$rid'";
-                if (!isset($_SESSION['administrator']))
-                        if ($stat!=2) err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
-                        else $sql.=" AND author_id='".mysql_escape_string($_SESSION['user_id'])."'";
-                mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-                if (mysqli_affected_rows($mysqli)>0) header('Location: thread.php?tid='.$tid);
-                else err_msg("Reply not exist or no permission.");
+                $rid = intval($rid);
+                $sql = "UPDATE reply SET status =? WHERE `rid` = ?";
+                if (!isset($_SESSION['administrator'])){
+                        if ($stat!=2) 
+							err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
+                        else 
+							$sql.=" AND author_id=?";
+                }
+                if (pdo_query($sql, $stat,$rid,$_SESSION['user_id'])>0) 
+					header('Location: thread.php?tid='.$tid);
+                else 
+					err_msg("Reply not exist or no permission.");
         }
         if ($_REQUEST['target']=='thread'){
                 $tid = intval($_REQUEST['tid']);
@@ -37,8 +42,8 @@
                 if ($stat == -1) 
                         $sql = "UPDATE topic SET top_level = $toplevel WHERE `tid` = '$tid'";
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
-                mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
-                if (mysqli_affected_rows($mysqli)>0) {
+               
+                if ( pdo_query($sql) >0) {
                         if ($stat!=2) header('Location: thread.php?tid='.$tid);
                         else header('Location: discuss.php');
                 }

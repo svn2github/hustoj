@@ -33,37 +33,27 @@
                                 $cid=intval($_REQUEST['cid']);
                         else
                                 $cid='NULL';
-                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) SELECT '".mysqli_real_escape_string($mysqli,$_POST['title'])."', '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', $cid, '".mysqli_real_escape_string($mysqli,$pid)."'";
-                        if($pid!=0)
-                                if($cid!='NULL')
-                                        $sql.=" FROM `contest_problem` WHERE `contest_id` = $cid AND `problem_id` = '".mysqli_real_escape_string($mysqli,$pid)."'";
-                                else
-                                        $sql.=" FROM `problem` WHERE `problem_id` = '".mysqli_real_escape_string($mysqli,$pid)."'";
-                        else if($cid!='NULL')
-                                $sql.=" FROM `contest` WHERE `contest_id` = $cid";
-                        $sql.=" LIMIT 1";
-                        mysqli_query($mysqli,$sql) or die (mysqli_error($mysqli));
-                        if(mysqli_affected_rows($mysqli)<=0)
+                        $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) values(?,?,?,?)";
+						//echo $sql;
+                        $rows=pdo_query($sql,$_POST['title'],$_SESSION['user_id'],$cid,$pid);
+                        if(!$rows)
                                 echo('Unable to post.');
                         else
-                                $tid=mysqli_insert_id($mysqli);
+                                $tid=$rows;
                 }
                 else
                         echo('Error!');
         }
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
-                if(is_null($tid)) $tid=$_POST['tid'];
+                if(is_null($tid)) $tid=intval($_POST['tid']);
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $sql="INSERT INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) SELECT '".mysqli_real_escape_string($mysqli,$_SESSION['user_id'])."', NOW(), '".mysqli_real_escape_string($mysqli,$_POST['content'])."', '".mysqli_real_escape_string($mysqli,$tid)."','".$_SERVER['REMOTE_ADDR']."' FROM `topic` WHERE `tid` = '".mysqli_real_escape_string($mysqli,$tid)."' AND `status` = 0 ";
-                        
-                        mysqli_query($mysqli,$sql) or die (mysqli_error($mysqli));
-                        if(mysqli_affected_rows($mysqli)>0)
-                        {
+                        $sql="insert INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) values(?,NOW(),?,?,?)";
+                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$_SERVER['REMOTE_ADDR'])){
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);
-                        }
-                        else
+                        }else{
                                 echo('Unable to post.');
+						}
                 } else echo('Error!');
         }
         require_once("../oj-footer.php");

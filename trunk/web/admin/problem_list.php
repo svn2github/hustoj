@@ -14,13 +14,11 @@ if(isset($_GET['keyword']))
 	$keyword=$_GET['keyword'];
 else
 	$keyword="";
-$keyword=mysqli_real_escape_string($mysqli,$keyword);
 $sql="SELECT max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
-$result=mysqli_query($mysqli,$sql);
-echo mysqli_error($mysqli);
-$row=mysqli_fetch_object($result);
-$cnt=intval($row->upid)-1000;
+$result=pdo_query($sql);
+$row=$result[0];
+$cnt=intval($row['upid'])-1000;
 $cnt=intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
 if (isset($_GET['page'])){
         $page=intval($_GET['page']);
@@ -39,10 +37,15 @@ for ($i=1;$i<=$cnt;$i++){
         echo "**</option>";
 }
 echo "</select>";
-$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=$pstart and problem_id<=$pend order by `problem_id` desc";
-//echo $sql;
-if($keyword) $sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like '%$keyword%' or source like '%$keyword%'";
-$result=mysqli_query($mysqli,$sql) or die(mysqli_error($mysqli));
+$sql="";
+if($keyword) {
+	$keyword="%$keyword%";
+	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like ? or source like ?";
+	$result=pdo_query($sql,$keyword,$keyword);
+}else{
+	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=? and problem_id<=? order by `problem_id` desc";
+	$result=pdo_query($sql,$pstart,$pend);
+}
 ?>
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
@@ -55,26 +58,26 @@ if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
         if(isset($_SESSION['administrator']))   echo "<td>Status<td>Delete";
         echo "<td>Edit<td>TestData</tr>";
 }
-for (;$row=mysqli_fetch_object($result);){
+foreach($result as $row){
         echo "<tr>";
-        echo "<td>".$row->problem_id;
-        echo "<input type=checkbox name='pid[]' value='$row->problem_id'>";
-        echo "<td><a href='../problem.php?id=$row->problem_id'>".$row->title."</a>";
-        echo "<td>".$row->in_date;
-        if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
+        echo "<td>".$row['problem_id'];
+        echo "<input type=checkbox name='pid[]' value='".$row['problem_id']."'>";
+        echo "<td><a href='../problem.php?id=".$row['problem_id']."'>".$row['title']."</a>";
+        echo "<td>".$row['in_date'];
+  if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
                 if(isset($_SESSION['administrator'])){
-                        echo "<td><a href=problem_df_change.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">"
-                        .($row->defunct=="N"?"<span titlc='click to reserve it' class=green>Available</span>":"<span class=red title='click to be available'>Reserved</span>")."</a><td>";
+                        echo "<td><a href=problem_df_change.php?id=".$row['problem_id']."&getkey=".$_SESSION['getkey'].">"
+                        .($row['defunct']=="N"?"<span titlc='click to reserve it' class=green>Available</span>":"<span class=red title='click to be available'>Reserved</span>")."</a><td>";
                         if($OJ_SAE||function_exists("system")){
                               ?>
-                              <a href=# onclick='javascript:if(confirm("Delete?")) location.href="problem_del.php?id=<?php echo $row->problem_id?>&getkey=<?php echo $_SESSION['getkey']?>";'>
+                              <a href=# onclick='javascript:if(confirm("Delete?")) location.href="problem_del.php?id=<?php echo $row['problem_id']?>&getkey=<?php echo $_SESSION['getkey']?>";'>
                               Delete</a>
                               <?php
                         }
                 }
-                if(isset($_SESSION['administrator'])||isset($_SESSION["p".$row->problem_id])){
-                        echo "<td><a href=problem_edit.php?id=$row->problem_id&getkey=".$_SESSION['getkey'].">Edit</a>";
-			echo "<td><a href='javascript:phpfm($row->problem_id);'>TestData</a>";
+                if(isset($_SESSION['administrator'])||isset($_SESSION["p".$row['problem_id']])){
+                        echo "<td><a href=problem_edit.php?id=".$row['problem_id']."&getkey=".$_SESSION['getkey'].">Edit</a>";
+			echo "<td><a href='javascript:phpfm(".$row['problem_id'].");'>TestData</a>";
                 }
         }
         echo "</tr>";

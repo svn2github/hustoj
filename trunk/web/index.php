@@ -53,8 +53,7 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` w
 
 
 if(function_exists('apc_cache_info')){
-	 $_apc_cache_info = apc_cache_info(); 
-		$view_apc_info =_apc_cache_info;
+	 $view_apc_info  = apc_cache_info(); 
 }
 
 /////////////////////////Template

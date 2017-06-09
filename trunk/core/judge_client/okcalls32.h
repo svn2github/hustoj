@@ -43,7 +43,8 @@ int LANG_RV[256] = { 3,4,5,6,11,33,42,45,54,77,78,91,120,122,125,174,175,183,186
 		SYS_rt_sigprocmask, SYS_set_robust_list, SYS_set_thread_area,
 		SYS_set_tid_address, SYS_uname, SYS_write, 191, 195, 120, 7, 0 };
 
-int LANG_BV[256] = { 7, 120, 42, 158, 117, 60, 39, 102, 191, 183, SYS_access,
+int LANG_BV[256] = { 3,4,5,6,11,20,33,45,54,63,64,65,78,116,122,125,140,174,175,183,191,192,195,197,199,200,201,202,221,243,252,
+		7, 120, 42, 158, 117, 60, 39, 102, 191, 183, SYS_access,
 		SYS_brk, SYS_close, SYS_dup2, SYS_execve, SYS_exit_group, SYS_fcntl64,
 		SYS_fstat64, SYS_getegid32, SYS_geteuid32, SYS_getgid32, SYS_getpgrp,
 		SYS_getpid, SYS_getppid, SYS_getrlimit, SYS_gettimeofday, SYS_getuid32,
@@ -51,9 +52,9 @@ int LANG_BV[256] = { 7, 120, 42, 158, 117, 60, 39, 102, 191, 183, SYS_access,
 		SYS_read, SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_set_thread_area,
 		SYS_stat64, SYS_time, SYS_uname, SYS_write,0 };
 
-int LANG_YV[256]={3,4,5,6,11,13,33,41,45,54,85,91,102,122,125,140,174,175,
-		  183,186,191,192,195,196,197,199,200,201,202,220,221,
-		  240,243,252,258,295,311,0};
+int LANG_YV[256]={3,4,5,6,11,33,45,54,85,116,122,125,140,174,175,183,
+		191,192,195,196,197,199,200,201,202,220,243,252,258,
+		311,13,41,91,102,186,221,240,295,0};
 
 int LANG_PHV[256] = {3,4,5,6,11,13,33,45,54,78,91,122,125,140,174,175,183,191,192,195,
 		     196,197,240,243,252,258,295,311,146, 158, 117, 60, 39, 102, SYS_access, SYS_brk,

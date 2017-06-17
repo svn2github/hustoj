@@ -6,6 +6,13 @@ if (!(isset($_SESSION['administrator']))){
 ?>
 <ol>
 <li>
+Copy from https://loj.ac/problem/
+<form method=POST action=problem_add_page_loj.php>
+  <input name=url type=text size=100>
+  <input type=submit>
+</form>
+</li>
+<li>
 Copy from http://acm.student.cs.uwaterloo.ca/~acm00
 <form method=POST action=problem_add_page_waterloo.php>
   <input name=url type=text size=100>

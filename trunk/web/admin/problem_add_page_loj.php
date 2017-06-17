@@ -41,12 +41,12 @@ include_once("kindeditor.php") ;
 
   $element=$html->find('span',0);
   $mlimit=$element->plaintext; 
-  $mlimit=substr($mlimit, strpos($mlimit, ":"));
-  $mlimit=substr($mlimit,1,strpos($mlimit, 'MiB')-1);
+  $mlimit=substr($mlimit, strpos($mlimit, "：")+3);
+  $mlimit=substr($mlimit,0,strpos($mlimit, 'MiB')-1);
   $element=$html->find('span',1);
   $tlimit=$element->plaintext;
-  $tlimit=substr($tlimit, strpos($tlimit, ":"));
-  $tlimit=substr($tlimit,1,strpos($mlimit, ' ms')-3);
+  $tlimit=substr($tlimit, strpos($tlimit, "：")+3);
+  $tlimit=substr($tlimit,0,strpos($mlimit, ' ms')-3);
   $tlimit/=1000;
   //$mlimit/=1000;
   //echo "mlimit:$mlimit<br>";

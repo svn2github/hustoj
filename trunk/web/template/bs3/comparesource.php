@@ -55,7 +55,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <?php// include("template/$OJ_TEMPLATE/js.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
   
  	<!-- Requires CodeMirror 2.16 -->
 	<script type="text/javascript" src="mergely/codemirror.js"></script>

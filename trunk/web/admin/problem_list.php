@@ -40,10 +40,10 @@ echo "</select>";
 $sql="";
 if($keyword) {
 	$keyword="%$keyword%";
-	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where title like ? or source like ?";
+	$sql="select `problem_id`,`title`,`accepted`,`in_date`,`defunct` FROM `problem` where title like ? or source like ?";
 	$result=pdo_query($sql,$keyword,$keyword);
 }else{
-	$sql="select `problem_id`,`title`,`in_date`,`defunct` FROM `problem` where problem_id>=? and problem_id<=? order by `problem_id` desc";
+	$sql="select `problem_id`,`title`,`accepted`,`in_date`,`defunct` FROM `problem` where problem_id>=? and problem_id<=? order by `problem_id` desc";
 	$result=pdo_query($sql,$pstart,$pend);
 }
 ?>
@@ -53,7 +53,7 @@ if($keyword) {
 echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
 echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
-echo "<tr><td>PID<td>Title<td>Date";
+echo "<tr><td>PID<td>Title<td>AC<td>Date";
 if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
         if(isset($_SESSION['administrator']))   echo "<td>Status<td>Delete";
         echo "<td>Edit<td>TestData</tr>";
@@ -63,6 +63,7 @@ foreach($result as $row){
         echo "<td>".$row['problem_id'];
         echo "<input type=checkbox name='pid[]' value='".$row['problem_id']."'>";
         echo "<td><a href='../problem.php?id=".$row['problem_id']."'>".$row['title']."</a>";
+        echo "<td>".$row['accepted'];
         echo "<td>".$row['in_date'];
   if(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
                 if(isset($_SESSION['administrator'])){

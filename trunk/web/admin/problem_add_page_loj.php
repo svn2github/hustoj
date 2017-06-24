@@ -33,8 +33,8 @@ include_once("kindeditor.php") ;
   $baseurl=substr($url,0,strrpos($url,"/")+1);
   //echo $baseurl;
   $html = file_get_html($url);
-  foreach($html->find('img') as $element)
-        $element->src=$baseurl.$element->src;
+ // foreach($html->find('img') as $element)
+ //       $element->src=$baseurl.$element->src;
         
   $element=$html->find('h1',0);
   $title=trim($element->plaintext);

@@ -41,6 +41,7 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
+ $description ='<link href="https://dn-menci.qbox.me/libreoj/libs/KaTeX/katex.min.css" rel="stylesheet">'. $description ;
 //echo "->".$OJ_DATA."<-"; 
 $pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 $basedir = "$OJ_DATA/$pid";

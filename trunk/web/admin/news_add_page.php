@@ -30,6 +30,6 @@ include_once("kindeditor.php") ;
 <?php require_once("../include/set_post_key.php");?>
 </div></form>
 <p>
-<?php require_once("../oj-footer.php");?>
+
 </body></html>
 

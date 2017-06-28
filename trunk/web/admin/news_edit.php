@@ -59,5 +59,5 @@ if (get_magic_quotes_gpc ()) {
 <?php require_once("../include/set_post_key.php");?>
 <input type=submit>
 </form>
-<?php require_once("../oj-footer.php");?>
+
 

@@ -70,7 +70,5 @@ function phpfm(pid){
         });
 }
 </script>
-<?php require_once ("../oj-footer.php");
 
-?>
 

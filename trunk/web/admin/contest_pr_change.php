@@ -7,7 +7,7 @@ $result=pdo_query($sql,$cid);
 $num=count($result);
 if ($num<1){
 	echo "No Such Problem!";
-	require_once("../oj-footer.php");
+	
 	exit(0);
 }
 $row=$result[0];

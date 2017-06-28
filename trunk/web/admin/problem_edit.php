@@ -55,7 +55,7 @@ Y<input type=radio name=spj value='1' <?php echo $row['spj']=="1"?"checked":""?>
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?php require_once("../oj-footer.php");?>
+
 <?php }else{
 require_once("../include/check_post_key.php");
 $id=intval($_POST['problem_id']);

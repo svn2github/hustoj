@@ -86,7 +86,5 @@ Copy from https://loj.ac/problem/
   <input type=submit>
 </form>
 
-<?php require_once ("../oj-footer.php");
 
-?>
 

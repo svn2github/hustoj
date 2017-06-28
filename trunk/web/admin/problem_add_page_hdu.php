@@ -107,5 +107,5 @@ if (count($result)==0){
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-<?php require_once("../oj-footer.php");?>
+
 </body></html>

@@ -23,5 +23,5 @@ foreach($result as $row){
 	echo "</tr>";
 }
 echo "</table></center>";
-require("../oj-footer.php");
+
 ?>

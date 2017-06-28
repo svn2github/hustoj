@@ -98,6 +98,4 @@ function phpfm(pid){
         });
 }
 </script>
-<?php
-require("../oj-footer.php");
-?>
+

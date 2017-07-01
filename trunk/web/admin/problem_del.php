@@ -28,8 +28,8 @@ if (!(isset($_SESSION['administrator']))){
         $max_id++;
         if($max_id<1000)$max_id=1000;
         
-        $sql="ALTER TABLE problem AUTO_INCREMENT = ?";
-        pdo_query($sql,$max_id);
+        $sql="ALTER TABLE problem AUTO_INCREMENT = $max_id";
+        pdo_query($sql);
         ?>
         <script language=javascript>
                 history.go(-1);

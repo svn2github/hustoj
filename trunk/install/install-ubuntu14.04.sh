@@ -47,6 +47,10 @@ sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/ph
 service php5-fpm restart
 cd src/core
 ./make.sh
-echo "/usr/bin/judged" >> /etc/rc.local
+if grep "/usr/bin/judged" /etc/rc.local ; then
+	echo "auto start judged added!"
+else
+	echo "/usr/bin/judged" >> /etc/rc.local
+fi
 /usr/bin/judged
 

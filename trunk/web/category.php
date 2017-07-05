@@ -20,7 +20,7 @@
 		$view_category.= "<div>";
 		
 		foreach ($result as $row){
-			$view_category.= "<a href='problemset.php?search=".htmlentities($row['source'])."'><h2>".$row['source']."</h2></a>&nbsp;";
+			$view_category.= "<a href='problemset.php?search=".htmlentities($row['source'],ENT_QUOTES,'UTF-8')."'><h2>".$row['source']."</h2></a>&nbsp;";
 		}
 		
 		$view_category.= "</div>";

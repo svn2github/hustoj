@@ -68,7 +68,7 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_SEARCH="Search";
 	$MSG_PROBLEM_ID="Problem ID";
 	$MSG_TITLE="Title";
-	$MSG_SOURCE="Source";
+	$MSG_SOURCE="Source/Category";
 	$MSG_SUBMIT="Submit";
 	
 	//ranklist.php

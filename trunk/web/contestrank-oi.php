@@ -61,10 +61,10 @@ class TM{
 
 function s_cmp($A,$B){
 //      echo "Cmp....<br>";
-        if ($A->solved!=$B->solved) return $A->solved<$B->solved;
+        if ($A->total!=$B->total) return $A->total<$B->total;
         else {
-		if($A->total!=$B->total)
-			return $A->total<$B->total;
+		if($A->solved!=$B->solved)
+			return $A->solved<$B->solved;
 		else
 			return $A->time>$B->time;
 	}

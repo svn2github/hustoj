@@ -14,16 +14,24 @@
 			."FROM `problem` "
 			."LIMIT 500";
 	$result=pdo_query($sql);//mysql_escape_string($sql));
+	$category=array();
+        foreach ($result as $row){
+		$cate=explode(" ",$row['source']);
+		foreach($cate as $cat){
+			array_push($category,$cat);	
+		}
+	}
+	array_unique($category);
 	if (!$result){
 		$view_category= "<h3>No Category Now!</h3>";
 	}else{
-		$view_category.= "<div>";
+		$view_category.= "<div><p>";
 		
-		foreach ($result as $row){
-			$view_category.= "<a href='problemset.php?search=".htmlentities($row['source'],ENT_QUOTES,'UTF-8')."'><h2>".$row['source']."</h2></a>&nbsp;";
+		foreach ($category as $cat){
+			$view_category.= "<a class='btn btn-primary' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".$cat."</a>&nbsp;";
 		}
 		
-		$view_category.= "</div>";
+		$view_category.= "</p></div>";
 	}
 
 /////////////////////////Template

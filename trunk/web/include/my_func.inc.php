@@ -46,13 +46,15 @@ function pwCheck($password,$saved)
 	}
 	$svd=base64_decode($saved);
 	$salt=substr($svd,20);
-	$hash = base64_encode( sha1(md5($password) . $salt, true) . $salt );
+	if(!isOldPW($password)) $password=md5($password);
+	$hash = base64_encode( sha1(($password) . $salt, true) . $salt );
 	if (strcmp($hash,$saved)==0) return True;
 	else return False;
 }
 
 function isOldPW($password)
 {
+	if(strlen($password)!=32) return false;
 	for ($i=strlen($password)-1;$i>=0;$i--)
 	{
 		$c = $password[$i];

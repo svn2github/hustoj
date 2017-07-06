@@ -74,9 +74,14 @@ echo "<h2>$MSG_Sample_Output</h2>
 if ($pr_flag||true)
 echo "<h2>$MSG_HINT</h2>
 <div class=content><p>".nl2br($row['hint'])."</p></div>";
-if ($pr_flag)
-echo "<h2>$MSG_Source</h2>
-<div class=content><p><a href='problemset.php?search=".$row['source']."'>".nl2br($row['source'])."</a></p></div>";
+if ($pr_flag){
+	echo "<h2>$MSG_Source</h2><div class=content><p>";
+	$cats=explode(" ",$row['source']);
+	foreach($cats as $cat){
+		echo "<a href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'utf-8')."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
+	}
+	echo "</p></div>";
+}
 echo "<center>";
 if ($pr_flag){
 echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";

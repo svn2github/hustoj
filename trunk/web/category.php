@@ -28,6 +28,7 @@
 		$view_category.= "<div><p>";
 		
 		foreach ($category as $cat){
+			if(trim($cat)=="") continue;
 			$view_category.= "<a class='btn btn-primary' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".$cat."</a>&nbsp;";
 		}
 		

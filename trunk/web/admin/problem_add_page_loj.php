@@ -95,7 +95,7 @@ include_once("kindeditor.php") ;
 <textarea class="kindeditor" rows=13 name=hint cols=80><?php echo $hintHTML?></textarea>
 </p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
-<p align=left>Source:<br><textarea name=source rows=1 cols=70><?php echo $sourceHTML?></textarea></p>
+<p align=left>Source:<br><textarea name=source rows=1 cols=70>LibreOJ<?php echo $sourceHTML?></textarea></p>
 <p align=left>contest:
 	<select  name=contest_id>
 <?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";

@@ -59,7 +59,7 @@ $_SESSION["p$pid"]=true;
 $loj_id=intval($_POST['loj_id']);
 //print_r($_POST);
 echo "<br>".$loj_id."<br>";
-echo htmlentities("wget https://loj.ac/problem/".$loj_id."/download -O $OJ_DATA/$pid/data.zip");
+echo htmlentities("wget https://loj.ac/problem/".$loj_id."/testdata/download -O $OJ_DATA/$pid/data.zip");
 echo system("wget https://loj.ac/problem/".$loj_id."/download -O $OJ_DATA/$pid/data.zip");
 echo "<br>";
 echo htmlentities("unzip $OJ_DATA/$pid/data.zip -d $OJ_DATA/$pid");

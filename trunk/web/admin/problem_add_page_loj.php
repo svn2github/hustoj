@@ -69,6 +69,7 @@ include_once("kindeditor.php") ;
   $sourceHTML=$element->outertext;
 ?>
 <form method=POST action="problem_add_loj.php">
+<input type=submit value=Submit name=submit>
 <p align=center><font size=4 color=#333399>Add a Problem</font></p>
 <input type="hidden" name=problem_id value="New Problem">
 <input type="text" name="loj_id" value="<?php echo $loj_id?>">
@@ -111,7 +112,6 @@ if (count($result)==0){
 </p>
 <div align=center>
 <?php require_once("../include/set_post_key.php");?>
-<input type=submit value=Submit name=submit>
 </div></form>
 <p>
 

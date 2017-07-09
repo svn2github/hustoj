@@ -394,9 +394,8 @@ const char * getFileNameFromPath(const char * path) {
 	return path;
 }
 
-void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path0) {
+void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 	
-	char path[BUFFER_SIZE];
 	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
 	execute_cmd("echo '------test in top 100 lines------'>>diff.out");
 	execute_cmd("head -100 data.in>>diff.out");

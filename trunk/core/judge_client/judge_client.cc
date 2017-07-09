@@ -178,6 +178,7 @@ int execute_cmd(const char * fmt, ...) {
 
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
+	printf("%s\n",cmd);
 	ret = system(cmd);
 	va_end(ap);
 	return ret;
@@ -393,8 +394,9 @@ const char * getFileNameFromPath(const char * path) {
 	return path;
 }
 
-void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
+void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path0) {
 	
+	char path[BUFFER_SIZE];
 	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
 	execute_cmd("echo '------test in top 100 lines------'>>diff.out");
 	execute_cmd("head -100 data.in>>diff.out");
@@ -1272,20 +1274,42 @@ void get_problem_info(int p_id, int & time_lmt, int & mem_lmt, int & isspj) {
 	if(time_lmt<=0) time_lmt=1;
 	
 }
+char *escape(char s[], char t[])
+{
+    int i, j;
+    for(i = j = 0; t[i] != '\0'; ++i){
+	if(t[i]=='\'') {
+		s[j++]='\'';
+		s[j++]='\\';
+		s[j++]='\'';
+		s[j++]='\'';
+		continue;
+	}else{
+            s[j++] = t[i];
+        }
+    }
+    s[j] = '\0';
+    return s;
+}
 
 void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 		char * work_dir, char * outfile, char * userfile, int runner_id) {
 	//              printf("ACflg=%d %d check a file!\n",ACflg,solution_id);
 
-	char fname[BUFFER_SIZE];
-	strncpy(fname, filename, namelen);
-	fname[namelen] = 0;
-	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
-	execute_cmd("/bin/cp %s/data/%d/*.dic %s/", oj_home, p_id, work_dir);
 
-	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname);
-	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+		char fname0[BUFFER_SIZE];
+		char fname[BUFFER_SIZE];
+		strncpy(fname0, filename, namelen);
+		fname0[namelen] = 0;
+		escape(fname,fname0);
+		printf("%s\n%s\n",fname0,fname);
+		sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
+		execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
+		execute_cmd("/bin/cp %s/data/%d/*.dic %s/", oj_home, p_id, work_dir);
+
+		sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
+		sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+
 }
 
 void copy_shell_runtime(char * work_dir) {
@@ -1784,7 +1808,7 @@ int special_judge(char* oj_home, int problem_id, char *infile, char *outfile,
 		LIM.rlim_cur = STD_F_LIM;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
-		ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id,
+		ret = execute_cmd("%s/data/%d/spj '%s' '%s' %s", oj_home, problem_id,
 				infile, outfile, userfile);
 		if (DEBUG)
 			printf("spj1=%d\n", ret);

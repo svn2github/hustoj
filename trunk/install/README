@@ -1,6 +1,17 @@
 HUSTOJ安装说明 
 	by zhblue(newsclan@gmail.com)
-方法一、
+
+
+
+方法1
+
+如果是阿里云，系统选择ubuntu14.04，可以使用下面脚本
+
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
+    chmod +x install-ubuntu14.04.sh
+    sudo ./install-ubuntu14.04.sh
+    
+方法2
 
 1、安装Ubuntu 14.04 LTS  (16.04 need the php7 branch)  
 2、执行如下命令  
@@ -20,16 +31,7 @@ HUSTOJ安装说明
   
 推荐用干净的Ubuntu安装，不推荐使用外挂的LAMP或LNMP打包程序，会与安装脚本冲突。
 
-
-方法二、
-
-如果是阿里云，系统选择ubuntu14.04，可以使用下面脚本
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
-    chmod +x install-ubuntu14.04.sh
-    sudo ./install-ubuntu14.04.sh
-    
-方法三、
+方法3
 
 参考视频  https://v.qq.com/x/page/c03955kvowx.html
 

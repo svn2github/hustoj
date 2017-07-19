@@ -18,10 +18,10 @@
         foreach ($result as $row){
 		$cate=explode(" ",$row['source']);
 		foreach($cate as $cat){
-			array_push($category,$cat);	
+			array_push($category,trim($cat));	
 		}
 	}
-	array_unique($category);
+	$category=array_unique($category);
 	if (!$result){
 		$view_category= "<h3>No Category Now!</h3>";
 	}else{

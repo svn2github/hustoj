@@ -98,7 +98,7 @@ function pdo_query($sql){
     }else if(stripos($sql,"insert") === 0){
 	$result=$dbh->lastInsertId();
     }else{
-        $retult=$sth->rowCount();
+        $result=$sth->rowCount();
     }
     //print_r($result);
     $sth->closeCursor();

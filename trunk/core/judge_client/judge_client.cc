@@ -118,7 +118,10 @@ static int use_ptrace = 1;
 
 //static int sleep_tmp;
 #define ZOJ_COM
+
+#ifdef _mysql_h
 MYSQL *conn;
+#endif
 
 static char lang_ext[18][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
 		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js","go" };
@@ -572,6 +575,7 @@ void login() {
 	}
 
 }
+#ifdef _mysql_h
 /* write result back to database */
 void _update_solution_mysql(int solution_id, int result, int time, int memory,
 		int sim, int sim_s_id, double pass_rate) {
@@ -601,6 +605,7 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 	}
 
 }
+#endif
 void _update_solution_http(int solution_id, int result, int time, int memory,
 		int sim, int sim_s_id, double pass_rate) {
 	const char * cmd =
@@ -618,11 +623,15 @@ void update_solution(int solution_id, int result, int time, int memory, int sim,
 		_update_solution_http(solution_id, result, time, memory, sim, sim_s_id,
 				pass_rate);
 	} else {
+
+#ifdef _mysql_h
 		_update_solution_mysql(solution_id, result, time, memory, sim, sim_s_id,
 				pass_rate);
+#endif
 	}
 }
 /* write compile error message back to database */
+#ifdef _mysql_h
 void _addceinfo_mysql(int solution_id) {
 	char sql[(1 << 16)], *end;
 	char ceinfo[(1 << 16)], *cend;
@@ -654,6 +663,7 @@ void _addceinfo_mysql(int solution_id) {
 		printf("%s\n", mysql_error(conn));
 	fclose(fp);
 }
+#endif
 // urlencoded function copied from http://www.geekhideout.com/urlcode.shtml
 /* Converts a hex character to its integer value */
 char from_hex(char ch) {
@@ -715,10 +725,14 @@ void addceinfo(int solution_id) {
 	if (http_judge) {
 		_addceinfo_http(solution_id);
 	} else {
+
+#ifdef _mysql_h
 		_addceinfo_mysql(solution_id);
+#endif
 	}
 }
 /* write runtime error message back to database */
+#ifdef _mysql_h
 void _addreinfo_mysql(int solution_id, const char * filename) {
 	char sql[(1 << 16)], *end;
 	char reinfo[(1 << 16)], *rend;
@@ -750,7 +764,7 @@ void _addreinfo_mysql(int solution_id, const char * filename) {
 		printf("%s\n", mysql_error(conn));
 	fclose(fp);
 }
-
+#endif
 void _addreinfo_http(int solution_id, const char * filename) {
 
 	char reinfo[(1 << 16)], *rend;
@@ -781,7 +795,9 @@ void addreinfo(int solution_id) {
 	if (http_judge) {
 		_addreinfo_http(solution_id, "error.out");
 	} else {
+#ifdef _mysql_h
 		_addreinfo_mysql(solution_id, "error.out");
+#endif
 	}
 }
 
@@ -790,7 +806,9 @@ void adddiffinfo(int solution_id) {
 	if (http_judge) {
 		_addreinfo_http(solution_id, "diff.out");
 	} else {
+#ifdef _mysql_h
 		_addreinfo_mysql(solution_id, "diff.out");
+#endif
 	}
 }
 void addcustomout(int solution_id) {
@@ -798,9 +816,12 @@ void addcustomout(int solution_id) {
 	if (http_judge) {
 		_addreinfo_http(solution_id, "user.out");
 	} else {
+#ifdef _mysql_h
 		_addreinfo_mysql(solution_id, "user.out");
+#endif
 	}
 }
+#ifdef _mysql_h
 
 void _update_user_mysql(char * user_id) {
 	char sql[BUFFER_SIZE];
@@ -815,6 +836,7 @@ void _update_user_mysql(char * user_id) {
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 }
+#endif
 void _update_user_http(char * user_id) {
 
 	const char * cmd =
@@ -827,7 +849,10 @@ void update_user(char * user_id) {
 	if (http_judge) {
 		_update_user_http(user_id);
 	} else {
+
+#ifdef _mysql_h
 		_update_user_mysql(user_id);
+#endif
 	}
 }
 
@@ -838,6 +863,8 @@ void _update_problem_http(int pid) {
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
+
+#ifdef _mysql_h
 void _update_problem_mysql(int p_id) {
 	char sql[BUFFER_SIZE];
 	sprintf(sql,
@@ -851,11 +878,14 @@ void _update_problem_mysql(int p_id) {
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 }
+#endif
 void update_problem(int pid) {
 	if (http_judge) {
 		_update_problem_http(pid);
 	} else {
+#ifdef _mysql_h
 		_update_problem_mysql(pid);
+#endif
 	}
 }
 void umount(char * work_dir){
@@ -1067,6 +1097,8 @@ int get_proc_status(int pid, const char * mark) {
 		fclose(pf);
 	return ret;
 }
+
+#ifdef _mysql_h
 int init_mysql_conn() {
 
 	conn = mysql_init(NULL);
@@ -1086,6 +1118,9 @@ int init_mysql_conn() {
 	}
 	return 1;
 }
+#endif
+
+#ifdef _mysql_h
 void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 	char sql[BUFFER_SIZE], src_pth[BUFFER_SIZE];
 	// get the source code
@@ -1109,6 +1144,7 @@ void _get_solution_mysql(int solution_id, char * work_dir, int lang) {
 	}
 	fclose(fp_src);
 }
+#endif
 void _get_solution_http(int solution_id, char * work_dir, int lang) {
 	char src_pth[BUFFER_SIZE];
 
@@ -1130,11 +1166,15 @@ void get_solution(int solution_id, char * work_dir, int lang) {
 	if (http_judge) {
 		_get_solution_http(solution_id, work_dir, lang);
 	} else {
+
+#ifdef _mysql_h
 		_get_solution_mysql(solution_id, work_dir, lang);
+#endif
 	}
 
 }
 
+#ifdef _mysql_h
 void _get_custominput_mysql(int solution_id, char * work_dir) {
 	char sql[BUFFER_SIZE], src_pth[BUFFER_SIZE];
 	// get the source code
@@ -1159,6 +1199,7 @@ void _get_custominput_mysql(int solution_id, char * work_dir) {
 		res=NULL;
 	}
 }
+#endif
 void _get_custominput_http(int solution_id, char * work_dir) {
 	char src_pth[BUFFER_SIZE];
 
@@ -1178,10 +1219,13 @@ void get_custominput(int solution_id, char * work_dir) {
 	if (http_judge) {
 		_get_custominput_http(solution_id, work_dir);
 	} else {
+#ifdef _mysql_h
 		_get_custominput_mysql(solution_id, work_dir);
+#endif
 	}
 }
 
+#ifdef _mysql_h
 void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
 		int & lang) {
 
@@ -1205,7 +1249,7 @@ void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
 		res=NULL;
 	}
 }
-
+#endif
 void _get_solution_info_http(int solution_id, int & p_id, char * user_id,
 		int & lang) {
 
@@ -1226,10 +1270,13 @@ void get_solution_info(int solution_id, int & p_id, char * user_id,
 	if (http_judge) {
 		_get_solution_info_http(solution_id, p_id, user_id, lang);
 	} else {
+#ifdef _mysql_h
 		_get_solution_info_mysql(solution_id, p_id, user_id, lang);
+#endif
 	}
 }
 
+#ifdef _mysql_h
 void _get_problem_info_mysql(int p_id, int & time_lmt, int & mem_lmt,
 		int & isspj) {
 	// get the problem info from Table:problem
@@ -1250,7 +1297,7 @@ void _get_problem_info_mysql(int p_id, int & time_lmt, int & mem_lmt,
 		res=NULL;
 	}
 }
-
+#endif
 void _get_problem_info_http(int p_id, int & time_lmt, int & mem_lmt,
 		int & isspj) {
 	//login();
@@ -1268,7 +1315,9 @@ void get_problem_info(int p_id, int & time_lmt, int & mem_lmt, int & isspj) {
 	if (http_judge) {
 		_get_problem_info_http(p_id, time_lmt, mem_lmt, isspj);
 	} else {
+#ifdef _mysql_h
 		_get_problem_info_mysql(p_id, time_lmt, mem_lmt, isspj);
+#endif
 	}
 	if(time_lmt<=0) time_lmt=1;
 	
@@ -2245,9 +2294,11 @@ int main(int argc, char** argv) {
 
 	init_mysql_conf();
 
+#ifdef _mysql_h
 	if (!http_judge && !init_mysql_conn()) {
 		exit(0); //exit if mysql is down
 	}
+#endif
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 
@@ -2307,8 +2358,10 @@ int main(int argc, char** argv) {
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0, 0.0);
 		update_user(user_id);
 		update_problem(p_id);
+#ifdef _mysql_h
 		if (!http_judge)
 			mysql_close(conn);
+#endif
 		clean_workdir(work_dir);
 		write_log("compile error");
 		exit(0);
@@ -2333,8 +2386,10 @@ int main(int argc, char** argv) {
 	if (p_id > 0 && (dp = opendir(fullpath)) == NULL) {
 
 		write_log("No such dir:%s!\n", fullpath);
+#ifdef _mysql_h
 		if (!http_judge)
 			mysql_close(conn);
+#endif
 		exit(-1);
 	}
 
@@ -2490,8 +2545,10 @@ int main(int argc, char** argv) {
 
 	if (DEBUG)
 		write_log("result=%d", oi_mode ? finalACflg : ACflg);
+#ifdef _mysql_h
 	if (!http_judge)
 		mysql_close(conn);
+#endif
 	if (record_call) {
 		print_call_array();
 	}

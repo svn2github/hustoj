@@ -498,7 +498,7 @@ int work() {
 			}
 		}
 	}
-	while ((tmp_pid = waitpid(-1, NULL, WNOHANG)) > 0) {
+	while ((tmp_pid = waitpid(-1, NULL, 0)) > 0) {
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){
 			

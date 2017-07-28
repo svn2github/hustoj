@@ -4,7 +4,7 @@
 	if($dir=="discuss3") $path_fix="../";
 	else $path_fix="";
 	if($OJ_ONLINE){
-		require_once('../include/online.php');
+		require_once($path_fix.'include/online.php');
 		$on = new online();
 	}
 ?>

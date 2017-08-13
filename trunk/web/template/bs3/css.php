@@ -16,7 +16,3 @@
 <link rel="stylesheet" href="<?php echo $path_fix."template/$OJ_TEMPLATE/"?>katex.min.css">
 <link rel="stylesheet" href="<?php echo $path_fix."template/$OJ_TEMPLATE/"?>mathjax.css">
 <link rel="stylesheet" href="<?php echo $path_fix."template/$OJ_TEMPLATE/"?>semantic.min.css">
-
-
-
-    <link href="https://dn-menci.qbox.me/libreoj/mathjax.css" rel="stylesheet">

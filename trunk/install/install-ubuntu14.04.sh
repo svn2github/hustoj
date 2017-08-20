@@ -50,7 +50,10 @@ cd src/core
 if grep "/usr/bin/judged" /etc/rc.local ; then
 	echo "auto start judged added!"
 else
+	sed -i "s/exit 0//g" /etc/rc.local
 	echo "/usr/bin/judged" >> /etc/rc.local
+	echo "exit 0" >> /etc/rc.local
+	
 fi
 /usr/bin/judged
 

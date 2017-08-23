@@ -240,7 +240,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
 } else {
 	$tempfile = $_FILES ["fps"] ["tmp_name"];
 	if(get_extension( $_FILES ["fps"] ["name"])=="zip"){
-	   echo "zip file , single internal fps/xml file is supported";
+	   echo "zip file , only fps/xml files in root dir are supported";
 		 $resource = zip_open($tempfile);
 		  $i = 1;
 	   $tempfile=tempnam("/tmp", "fps");

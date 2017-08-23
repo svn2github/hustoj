@@ -81,38 +81,8 @@ function get_extension($file){
 	$info = pathinfo($file);
 	return $info['extension'];
 }
-if ($_FILES ["fps"] ["error"] > 0) {
-	echo "Error: " . $_FILES ["fps"] ["error"] . "File size is too big, change in PHP.ini<br />";
-} else {
-	$tempfile = $_FILES ["fps"] ["tmp_name"];
-	if(get_extension( $_FILES ["fps"] ["name"])=="zip"){
-	   echo "zip file , single internal fps/xml file is supported";
-		 $resource = zip_open($tempfile);
-		  $i = 1;
-	   $tempfile=tempnam("/tmp", "fps");
-	   if ($dir_resource = zip_read($resource)) {
-		  if (zip_entry_open($resource,$dir_resource)) {
-		   $file_name = $path.zip_entry_name($dir_resource);
-		   $file_path = substr($file_name,0,strrpos($file_name, "/"));
-		   if(!is_dir($file_name)){
-		    $file_size = zip_entry_filesize($dir_resource);
-		     $file_content = zip_entry_read($dir_resource,$file_size);
-		     file_put_contents($tempfile,$file_content);
-		   }
-		   zip_entry_close($dir_resource);
-		  }
-	  }
-	  zip_close($resource);
-	  unlink ( $_FILES ["fps"] ["tmp_name"] );
-	}
-//	echo "Upload: " . $_FILES ["fps"] ["name"] . "<br />";
-//	echo "Type: " . $_FILES ["fps"] ["type"] . "<br />";
-//	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
-//	echo "Stored in: " . $tempfile;
-	
-	//$xmlDoc = new DOMDocument ();
-	//$xmlDoc->load ( $tempfile );
-	//$xmlcontent=file_get_contents($tempfile );
+function import_fps($tempfile){
+	global $OJ_DATA;
 	$xmlDoc=simplexml_load_file($tempfile, 'SimpleXMLElement', LIBXML_PARSEHUGE);
 	$searchNodes = $xmlDoc->xpath ( "/fps/item" );
 	$spid=0;
@@ -265,5 +235,41 @@ if ($_FILES ["fps"] ["error"] > 0) {
 	 }
 }
 
+if ($_FILES ["fps"] ["error"] > 0) {
+	echo "Error: " . $_FILES ["fps"] ["error"] . "File size is too big, change in PHP.ini<br />";
+} else {
+	$tempfile = $_FILES ["fps"] ["tmp_name"];
+	if(get_extension( $_FILES ["fps"] ["name"])=="zip"){
+	   echo "zip file , single internal fps/xml file is supported";
+		 $resource = zip_open($tempfile);
+		  $i = 1;
+	   $tempfile=tempnam("/tmp", "fps");
+	   while ($dir_resource = zip_read($resource)) {
+		  if (zip_entry_open($resource,$dir_resource)) {
+		   $file_name = $path.zip_entry_name($dir_resource);
+		   $file_path = substr($file_name,0,strrpos($file_name, "/"));
+		   if(!is_dir($file_name)){
+		    $file_size = zip_entry_filesize($dir_resource);
+		     $file_content = zip_entry_read($dir_resource,$file_size);
+		     file_put_contents($tempfile,$file_content);
+		     import_fps($tempfile);
+		   }
+		   zip_entry_close($dir_resource);
+		  }
+	  }
+	  zip_close($resource);
+	  unlink ( $_FILES ["fps"] ["tmp_name"] );
+	}else{
+		import_fps($tempfile);
+	}
+//	echo "Upload: " . $_FILES ["fps"] ["name"] . "<br />";
+//	echo "Type: " . $_FILES ["fps"] ["type"] . "<br />";
+//	echo "Size: " . ($_FILES ["fps"] ["size"] / 1024) . " Kb<br />";
+//	echo "Stored in: " . $tempfile;
+	
+	//$xmlDoc = new DOMDocument ();
+	//$xmlDoc->load ( $tempfile );
+	//$xmlcontent=file_get_contents($tempfile );
+}
 ?>
 

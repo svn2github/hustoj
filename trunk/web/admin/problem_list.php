@@ -83,7 +83,7 @@ foreach($result as $row){
         }
         echo "</tr>";
 }
-echo "<tr><td colspan=7><input type=submit name='problem2contest' value='CheckToNewContest'>";
+echo "<tr><td colspan=8><input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "</tr></form>";
 echo "</table></center>";
 ?>

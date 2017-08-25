@@ -199,6 +199,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
         if($OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
+	   if(isset($OJ_REDISAUTH)) $redis->auth($OJ_REDISAUTH);
            $redis->lpush($OJ_REDISQNAME,$insert_id);
         }
 

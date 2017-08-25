@@ -36,7 +36,7 @@ if (!(isset($_SESSION['administrator']))){
 	if($OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
-
+	   if(isset($OJ_REDISAUTH)) $redis->auth($OJ_REDISAUTH);
                 $sql="select solution_id from solution where result=1 and problem_id>0";
                  $result=pdo_query($sql);
                  foreach($result as $row){

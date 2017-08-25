@@ -33,6 +33,7 @@ if (!(isset($_SESSION['administrator']))){
 		echo "Rejudged Contest id :".$rjcid;
 		echo "<script>location.href='$url';</script>";
 	}
+	echo str_repeat(" ",4096);
 	if($OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);

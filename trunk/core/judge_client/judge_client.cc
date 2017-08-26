@@ -115,7 +115,7 @@ static int shm_run = 0;
 
 static char record_call = 0;
 static int use_ptrace = 1;
-static int compile_chroot=0;
+static int compile_chroot=1;
 //static int sleep_tmp;
 #define ZOJ_COM
 

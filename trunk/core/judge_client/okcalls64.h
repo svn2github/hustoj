@@ -43,7 +43,7 @@ int LANG_RV[256] = { 0,1,2,3,4,5,9,10,12,13,14,16,21,22,56,59,72,97,98,107,108,1
 		SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_set_robust_list,
 		SYS_set_tid_address, SYS_write, 0 };
 //bash
-int LANG_BV[256] = { 0,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,102,104,107,108,110,111,158,231,
+int LANG_BV[256] = { 0,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,99,102,104,107,108,110,111,158,231,
 		96, 22, 61, 56, 42, 41, 79, 158, 117, 60, 39, 102, 191,
 		183, SYS_access, SYS_arch_prctl, SYS_brk, SYS_close, SYS_dup2,
 		SYS_execve, SYS_exit_group, SYS_fcntl, SYS_fstat, SYS_getegid,
@@ -52,7 +52,7 @@ int LANG_BV[256] = { 0,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,102,
 		SYS_munmap, SYS_open, SYS_read, SYS_rt_sigaction, SYS_rt_sigprocmask,
 		SYS_stat, SYS_uname, SYS_write, 14, 0 };
 //python
-int LANG_YV[256] = { 0,32,72,131,1,2,3,4,5,6,8,9,10,11,12,13,14,16,21,59,78,79,89,97,102,104,107,108,158,202,218,231,257,273
+int LANG_YV[256] = {0,1,2,3,4,5,6,8,9,10,12,13,14,16,21,59,78,79,89,97,99,102,104,107,108,158,218,231,273,32,72,131,1,2,3,4,5,6,8,9,10,11,12,13,14,16,21,59,78,79,89,97,102,104,107,108,158,202,218,231,257,273
 			, 41, 42, 146, SYS_mremap, 158, 117, 60, 39, 102, 191,
 		SYS_access, SYS_arch_prctl, SYS_brk, SYS_close, SYS_execve,
 		SYS_exit_group, SYS_fcntl, SYS_fstat, SYS_futex, SYS_getcwd,

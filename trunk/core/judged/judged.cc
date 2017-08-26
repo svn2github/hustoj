@@ -428,7 +428,7 @@ bool _check_out_http(int solution_id, int result) {
 	return ret;
 }
 bool check_out(int solution_id, int result) {
-        if(oj_redis) return true;
+        if(oj_redis||oj_tot>1) return true;
 	if (http_judge) {
 		return _check_out_http(solution_id, result);
 	} else{

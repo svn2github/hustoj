@@ -344,7 +344,7 @@ void init_mysql_conf() {
 //	fclose(fp);
 	
  	if(strcmp(http_username,"IP")==0){
-                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet addr'|awk -F: '{printf $2}'|awk  '{printf $1}'");
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }

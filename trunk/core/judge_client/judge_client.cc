@@ -115,7 +115,7 @@ static int shm_run = 0;
 
 static char record_call = 0;
 static int use_ptrace = 1;
-
+static int compile_chroot=0;
 //static int sleep_tmp;
 #define ZOJ_COM
 
@@ -336,6 +336,7 @@ void init_mysql_conf() {
 			read_int(buf, "OJ_SHM_RUN", &shm_run);
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
+			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 
 		}
 		//fclose(fp);
@@ -899,18 +900,18 @@ void update_problem(int pid) {
 	}
 }
 void umount(char * work_dir){
-        execute_cmd("/bin/umount %s/proc 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/dev 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/lib 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/lib64 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/etc/alternatives 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/usr 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/bin 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount %s/proc 2>&1 >/dev/null", work_dir);
-        execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
-        execute_cmd("/bin/umount %s/* 2>&1 >/dev/null",work_dir);
-	execute_cmd("/bin/umount %s/log/* 2>&1 >/dev/null",work_dir);
-	execute_cmd("/bin/umount %s/log/etc/alternatives 2>&1 >/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/proc", work_dir);
+        execute_cmd("/bin/umount -f %s/dev ", work_dir);
+        execute_cmd("/bin/umount -f %s/lib ", work_dir);
+        execute_cmd("/bin/umount -f %s/lib64 ", work_dir);
+        execute_cmd("/bin/umount -f %s/etc/alternatives ", work_dir);
+        execute_cmd("/bin/umount -f %s/usr ", work_dir);
+        execute_cmd("/bin/umount -f %s/bin ", work_dir);
+        execute_cmd("/bin/umount -f %s/proc ", work_dir);
+        execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev ");
+        execute_cmd("/bin/umount -f %s/* ",work_dir);
+	execute_cmd("/bin/umount -f %s/log/* ",work_dir);
+     	execute_cmd("/bin/umount -f %s/log/etc/alternatives ", work_dir);
 }
 int compile(int lang,char * work_dir) {
 	int pid;
@@ -982,7 +983,8 @@ int compile(int lang,char * work_dir) {
 		} else {
 			freopen("ce.txt", "w", stdout);
 		}
-		if(lang != 3 && lang != 9 && lang != 6 && lang != 11){
+
+		if(compile_chroot&&lang != 3 && lang != 9 && lang != 6 && lang != 11){
 			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 			execute_cmd("chown judge *");
                 	execute_cmd("mount -o bind /bin bin");
@@ -1069,8 +1071,8 @@ int compile(int lang,char * work_dir) {
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
-		execute_cmd("/bin/umount bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
- 		execute_cmd("/bin/umount %s/* 2>&1 >/dev/null",work_dir);
+		execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
+ 		execute_cmd("/bin/umount -f %s/* 2>&1 >/dev/null",work_dir);
 		umount(work_dir);
  
 		return status;

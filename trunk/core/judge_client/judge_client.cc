@@ -284,6 +284,22 @@ void read_int(char * buf, const char * key, int * value) {
 		sscanf(buf2, "%d", value);
 
 }
+
+FILE * read_cmd_output(const char * fmt, ...) {
+	char cmd[BUFFER_SIZE];
+
+	FILE * ret = NULL;
+	va_list ap;
+
+	va_start(ap, fmt);
+	vsprintf(cmd, fmt, ap);
+	va_end(ap);
+	if (DEBUG)
+		printf("%s\n", cmd);
+	ret = popen(cmd, "r");
+
+	return ret;
+}
 // read the configue file
 void init_mysql_conf() {
 	FILE *fp = NULL;
@@ -325,6 +341,15 @@ void init_mysql_conf() {
 		//fclose(fp);
 	}
 //	fclose(fp);
+	
+ 	if(strcmp(http_username,"IP")==0){
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet addr'|awk -F: '{printf $2}'|awk  '{printf $1}'");
+                  fscanf(fjobs, "%s", http_username);
+                  pclose(fjobs);
+        }
+	if(strcmp(http_username,"HOSTNAME")==0){
+                  strcpy(http_username,getenv("HOSTNAME"));
+        }
 }
 
 int isInFile(const char fname[]) {
@@ -539,21 +564,6 @@ int compare(const char *file1, const char *file2) {
 #endif
 }
 
-FILE * read_cmd_output(const char * fmt, ...) {
-	char cmd[BUFFER_SIZE];
-
-	FILE * ret = NULL;
-	va_list ap;
-
-	va_start(ap, fmt);
-	vsprintf(cmd, fmt, ap);
-	va_end(ap);
-	if (DEBUG)
-		printf("%s\n", cmd);
-	ret = popen(cmd, "r");
-
-	return ret;
-}
 bool check_login() {
 	const char * cmd =
 			" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";

@@ -58,6 +58,8 @@ if(isset($_POST['update_solution'])){
         if($OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
+	   if(isset($OJ_REDISAUTH)) $redis->auth($OJ_REDISAUTH);
+		
            for(;$max_running>0;$max_running--){
                 $sid=$redis->rpop($OJ_REDISQNAME);
                 if($sid>0){

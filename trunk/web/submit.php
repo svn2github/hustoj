@@ -201,6 +201,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
 	   if(isset($OJ_REDISAUTH)) $redis->auth($OJ_REDISAUTH);
            $redis->lpush($OJ_REDISQNAME,$insert_id);
+           $redis->close();     
         }
 
 }

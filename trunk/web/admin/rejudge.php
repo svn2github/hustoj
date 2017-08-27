@@ -34,6 +34,7 @@ if (!(isset($_SESSION['administrator']))){
 		echo "<script>location.href='$url';</script>";
 	}
 	echo str_repeat(" ",4096);
+	flush();
 	if($OJ_REDIS){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);

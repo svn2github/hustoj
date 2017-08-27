@@ -69,6 +69,7 @@ if(isset($_POST['update_solution'])){
                 }
 
            }
+	   $redis->close();     
         }else{
 
                 $oj_lang_set=$_POST['oj_lang_set'];

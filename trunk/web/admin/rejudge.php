@@ -44,7 +44,7 @@ if (!(isset($_SESSION['administrator']))){
                         echo $row['solution_id']."\n";
                         $redis->lpush($OJ_REDISQNAME,$row['solution_id']);
                 }
-                
+           $redis->close();     
         }
 
 }

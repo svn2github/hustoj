@@ -26,7 +26,7 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <p>
-<center>
+<center> Last minute average judge speed: <?php echo $speed?> sps.
 <div id=submission style="width:80%;height:300px" ></div>
 </center>
         </p>

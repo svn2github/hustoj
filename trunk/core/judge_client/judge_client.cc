@@ -116,6 +116,8 @@ static int shm_run = 0;
 static char record_call = 0;
 static int use_ptrace = 1;
 static int compile_chroot=1;
+static int turbo_mode=0;
+
 //static int sleep_tmp;
 #define ZOJ_COM
 
@@ -337,6 +339,7 @@ void init_mysql_conf() {
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
 			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
+			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 
 		}
 		//fclose(fp);
@@ -2368,8 +2371,8 @@ int main(int argc, char** argv) {
 	if (Compile_OK != 0) {
 		addceinfo(solution_id);
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0, 0.0);
-		update_user(user_id);
-		update_problem(p_id);
+		if(!turbo_mode)update_user(user_id);
+		if(!turbo_mode)update_problem(p_id);
 #ifdef _mysql_h
 		if (!http_judge)
 			mysql_close(conn);
@@ -2378,7 +2381,7 @@ int main(int argc, char** argv) {
 		write_log("compile error");
 		exit(0);
 	} else {
-		update_solution(solution_id, OJ_RI, 0, 0, 0, 0, 0.0);
+		if(!turbo_mode)update_solution(solution_id, OJ_RI, 0, 0, 0, 0, 0.0);
 		umount(work_dir);
 	}
 	//exit(0);
@@ -2551,8 +2554,8 @@ int main(int argc, char** argv) {
 		if (!isspj)
 			adddiffinfo(solution_id);
 	}
-	update_user(user_id);
-	update_problem(p_id);
+	if(!turbo_mode)update_user(user_id);
+	if(!turbo_mode)update_problem(p_id);
 	clean_workdir(work_dir);
 
 	if (DEBUG)

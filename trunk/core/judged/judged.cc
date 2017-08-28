@@ -594,7 +594,14 @@ int daemon_init(void)
 
 	return (0);
 }
+void turbo_mode2(){
+#ifdef _mysql_h
+			char sql[BUFFER_SIZE];
+			sprintf(sql," CALL `sync_result`();");
+			if (mysql_real_query(conn, sql, strlen(sql)));
+#endif
 
+}
 int main(int argc, char** argv) {
 	DEBUG = (argc > 2);
 	ONCE = (argc > 3);
@@ -625,6 +632,7 @@ int main(int argc, char** argv) {
 	signal(SIGKILL, call_for_exit);
 	signal(SIGTERM, call_for_exit);
 	int j = 1;
+	int n = 0;
 	while (1) {			// start to run
 		while (j && (http_judge
 #ifdef _mysql_h
@@ -633,16 +641,16 @@ int main(int argc, char** argv) {
 		)) {
 
 			j = work();
+			n+=j;
+			if(turbo_mode==2&&(n>max_running*10||j<max_running)){
+				turbo_mode2();
+				n=0;
+			}
+	
 
 			if(ONCE) break;
 		}
-	if(turbo_mode==2){
-#ifdef _mysql_h
-		char sql[BUFFER_SIZE];
-		sprintf(sql," CALL `sync_result`();");
-		if (mysql_real_query(conn, sql, strlen(sql)));
-#endif
-	}
+		turbo_mode2();
 		if(ONCE) break;
 		sleep(sleep_time);
 		j = 1;

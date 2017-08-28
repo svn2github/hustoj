@@ -76,6 +76,7 @@ static char oj_redisserver[BUFFER_SIZE];
 static int  oj_redisport;
 static char oj_redisauth[BUFFER_SIZE];
 static char oj_redisqname[BUFFER_SIZE];
+static int turbo_mode = 0;
 
 
 static bool STOP = false;
@@ -189,6 +190,7 @@ void init_mysql_conf() {
                         read_int(buf, "OJ_REDISPORT", &oj_redisport);
                         read_buf(buf, "OJ_REDISAUTH", oj_redisauth);
                         read_buf(buf, "OJ_REDISQNAME", oj_redisqname);
+                        read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 
 
 		}
@@ -634,6 +636,13 @@ int main(int argc, char** argv) {
 
 			if(ONCE) break;
 		}
+	if(turbo_mode==2){
+#ifdef _mysql_h
+		char sql[BUFFER_SIZE];
+		sprintf(sql," CALL `sync_result`();");
+		if (mysql_real_query(conn, sql, strlen(sql)));
+#endif
+	}
 		if(ONCE) break;
 		sleep(sleep_time);
 		j = 1;

@@ -118,6 +118,7 @@ static int use_ptrace = 1;
 static int compile_chroot=1;
 static int turbo_mode=0;
 
+static const char * tbname="solution";
 //static int sleep_tmp;
 #define ZOJ_COM
 
@@ -354,6 +355,7 @@ void init_mysql_conf() {
 	if(strcmp(http_username,"HOSTNAME")==0){
                   strcpy(http_username,getenv("HOSTNAME"));
         }
+	if(turbo_mode==2) tbname="solution2";
 }
 
 int isInFile(const char fname[]) {
@@ -594,14 +596,15 @@ void login() {
 void _update_solution_mysql(int solution_id, int result, int time, int memory,
 		int sim, int sim_s_id, double pass_rate) {
 	char sql[BUFFER_SIZE];
+	
 	if (oi_mode) {
 		sprintf(sql,
-				"UPDATE solution SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s' WHERE solution_id=%d LIMIT 1%c",
-				result, time, memory, pass_rate,http_username, solution_id, 0);
+				"UPDATE %s SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s' WHERE solution_id=%d LIMIT 1%c",
+					tbname,	    result, time,   memory,   pass_rate,  http_username, solution_id, 0);
 	} else {
 		sprintf(sql,
-				"UPDATE solution SET result=%d,time=%d,memory=%d,judger='%s' WHERE solution_id=%d LIMIT 1%c",
-				result, time, memory,http_username, solution_id, 0);
+				"UPDATE %s SET result=%d,time=%d,memory=%d,judger='%s' WHERE solution_id=%d LIMIT 1%c",
+					tbname,     result, time, memory,http_username, solution_id, 0);
 	}
 	//      printf("sql= %s\n",sql);
 	if (mysql_real_query(conn, sql, strlen(sql))) {
@@ -1249,9 +1252,21 @@ void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
 
 	char sql[BUFFER_SIZE];
 	// get the problem id and user id from Table:solution
-	sprintf(sql,
-			"SELECT problem_id, user_id, language FROM solution where solution_id=%d",
-			solution_id);
+	if(turbo_mode==2){
+		sprintf(sql,
+				"insert into solution2 select *  FROM solution where solution_id=%d",
+				solution_id);
+		//printf("%s\n",sql);
+		mysql_real_query(conn, sql, strlen(sql));
+		sprintf(sql,
+				"SELECT problem_id, user_id, language FROM solution2 where solution_id=%d",
+				solution_id);
+		//printf("%s\n",sql);
+	}else{
+		sprintf(sql,
+				"SELECT problem_id, user_id, language FROM solution where solution_id=%d",
+				solution_id);
+	}
 	//printf("%s\n",sql);
 	mysql_real_query(conn, sql, strlen(sql));
 	res = mysql_store_result(conn);

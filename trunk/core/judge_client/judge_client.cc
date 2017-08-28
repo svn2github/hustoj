@@ -599,11 +599,11 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 	
 	if (oi_mode) {
 		sprintf(sql,
-				"UPDATE %s SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s' WHERE solution_id=%d LIMIT 1%c",
+				"UPDATE %s SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s',judgetime=now() WHERE solution_id=%d LIMIT 1%c",
 					tbname,	    result, time,   memory,   pass_rate,  http_username, solution_id, 0);
 	} else {
 		sprintf(sql,
-				"UPDATE %s SET result=%d,time=%d,memory=%d,judger='%s' WHERE solution_id=%d LIMIT 1%c",
+				"UPDATE %s SET result=%d,time=%d,memory=%d,judger='%s',judgetime=now() WHERE solution_id=%d LIMIT 1%c",
 					tbname,     result, time, memory,http_username, solution_id, 0);
 	}
 	//      printf("sql= %s\n",sql);

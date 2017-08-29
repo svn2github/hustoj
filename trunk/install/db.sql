@@ -135,7 +135,7 @@ CREATE TABLE  `solution` (
   KEY `pid` (`problem_id`),
   KEY `res` (`result`),
   KEY `cid` (`contest_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM row_format=fixed AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `source_code` (
   `solution_id` int(11) NOT NULL,

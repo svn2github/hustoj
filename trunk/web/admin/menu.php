@@ -16,7 +16,7 @@
 <h4>
 <ol>
 	<li>
-		<a class='btn btn-primary' href="watch.php" target="main"><b><?php echo $MSG_SEEOJ?></b></a>
+		<a class='btn btn-primary' href="../status.php" target="_top"><b><?php echo $MSG_SEEOJ?></b></a>
 <?php if (isset($_SESSION['administrator'])){
 	?>
 	<li>

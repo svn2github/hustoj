@@ -3209,6 +3209,7 @@ function dir_list_form() {
             }
         }
 		function set_sel_dir_warn(b){
+		   if(document.getElementById(\"sel_dir_warn\")!=null)
         	document.getElementById(\"sel_dir_warn\").style.display=(b?'':'none');
 		}
 		function cancel_copy_move(){

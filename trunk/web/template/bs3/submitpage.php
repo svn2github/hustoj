@@ -103,6 +103,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input id="reverse" class="btn btn-success" title="WAF gives you reset ? try this." name=reverse1 type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="reverse_submit();">
 
+<input type=hidden id=do_reverse name=reverse2 value="reverse"/>
 <?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>

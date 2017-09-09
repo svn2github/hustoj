@@ -100,6 +100,11 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </textarea>
 <br>
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
+<?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
+<input id="reverse" class="btn btn-success" title="WAF gives you reset ? try this." name=reverse1 type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="reverse_submit();">
+
+<?php }?>
+
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
 <?php }?>
@@ -202,6 +207,27 @@ ret=ie.innerText;
 return ret+"";
 }
 var count=0;
+	 
+function reverse_submit(){
+if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
+
+      var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+        var problem_id=document.getElementById(mark);
+
+        if(mark=='problem_id')
+                problem_id.value='<?php echo $id?>';
+        else
+                problem_id.value='<?php echo $cid?>';
+
+        document.getElementById("frmSolution").target="_self";
+        document.getElementById("do_reverse").name="reverse";
+        var source=document.getElementById("source");
+        source.value=encode64(utf16to8(source.value));
+//      source.value=source.value.split("").reverse().join("");
+//      alert(source.value);
+        document.getElementById("frmSolution").submit();
+}
+
 function do_submit(){
 	if(using_blockly) 
 		 translate();

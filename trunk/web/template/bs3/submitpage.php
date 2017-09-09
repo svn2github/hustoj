@@ -324,6 +324,7 @@ function loadFromBlockly(){
 //  $("#Submit").prop('disabled', false);
 }
 </script>
+<script language="Javascript" type="text/javascript" src="include/base64.js"></script>
 
   </body>
 </html>

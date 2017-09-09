@@ -118,8 +118,12 @@ $input_text=$_POST['input_text'];
 if(get_magic_quotes_gpc()){
 	$source=stripslashes($source);
 	$input_text=stripslashes($input_text);
-
 }
+if(isset($_POST['reverse'])){
+   $source=base64_decode($source);
+}
+
+
 $input_text=preg_replace ( "(\r\n)", "\n", $input_text );
 $source=($source);
 $input_text=($input_text);

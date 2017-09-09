@@ -102,7 +102,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
-<input type=hidden id="encoded_submit" name=reverse2 value="reverse"/>
+<input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
 <?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
@@ -220,7 +220,7 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
                 problem_id.value='<?php echo $cid?>';
 
         document.getElementById("frmSolution").target="_self";
-        document.getElementById("encoded_submit").name="encoded_submit";
+        document.getElementById("encoded_submit_mark").name="encoded_submit";
         var source=document.getElementById("source");
         source.value=encode64(utf16to8(source.value));
 //      source.value=source.value.split("").reverse().join("");

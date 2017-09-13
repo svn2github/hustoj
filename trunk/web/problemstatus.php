@@ -103,7 +103,7 @@ LEFT JOIN (
   ORDER BY score, in_date DESC
 )b ON b.user_id=c.user_id AND b.score=c.score
 ORDER BY c.score, in_date ASC
-LIMIT $start,100;";
+LIMIT $start,$sz;";
 
 $result=pdo_query( "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 $result=pdo_query( $sql,$id,$id);

@@ -119,7 +119,7 @@ foreach($result as $row){
         $s_memory=intval(substr($sscore,9,6));
         $s_cl=intval(substr($sscore,15,5));
 
-        $view_solution[$j][0]= $j+1;
+        $view_solution[$j][0]= $i;
         $view_solution[$j][1]= $row['solution_id'];
         if (intval($row['att'])>1) $view_solution[$j][1].=  "(".$row['att'].")";
         $view_solution[$j][2]=  "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";

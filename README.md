@@ -26,10 +26,10 @@ ubuntu16.04（不推荐），可以使用下面脚本
     
 安装后几个重要配置文件的位置
 
-    /home/judge/etc/judge.conf
-    /home/judge/src/web/include/db_info.inc.php
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
-    /etc/nginx/sites-enabled/default
+    /home/judge/etc/judge.conf
+    /home/judge/src/web/include/db_info.inc.php
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
+    /etc/nginx/sites-enabled/default
 
 REDHAT / CENTOS 用户请浏览 
 

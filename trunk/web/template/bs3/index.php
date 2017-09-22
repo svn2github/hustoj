@@ -52,9 +52,9 @@ grid: {
 backgroundColor: { colors: ["#fff", "#eee"] }
 },
 xaxis: {
-mode: "time",
-max:(new Date()).getTime(),
-min:(new Date()).getTime()-100*24*3600*1000
+mode: "time"//,
+//max:(new Date()).getTime(),
+//min:(new Date()).getTime()-100*24*3600*1000
 }
 });
 });

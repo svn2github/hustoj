@@ -1,10 +1,10 @@
 <?php
 $cache_time=30;
 $OJ_CACHE_SHARE=false;
-	$debug = true;
+	$debug = false;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
-	ini_set("display_errors","On");
+	ini_set("display_errors","Off");
 	require_once('./include/setlang.php');
 	require_once('./include/online.php');
 	$on = new online();

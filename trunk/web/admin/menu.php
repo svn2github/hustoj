@@ -24,6 +24,8 @@
 	<li>
 		<a class='btn btn-primary' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a>
 		
+	<li>
+	<a class='btn btn-primary' href="user_list.php" target="main"><b>用户管理</b></a>
 <?php }
 if (isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
 ?>
@@ -98,8 +100,6 @@ if (isset($OJ_ONLINE)&&$OJ_ONLINE){
 	<a class='btn btn-primary' href="http://tk.hustoj.com" target="_blank"><b>自助题库</b></a>
 <li>
 	<a class='btn btn-primary' href="http://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a" target="_blank">手机QQ加官方群23361372</a>
-	
-
 
 </ol>
 <?php if (isset($_SESSION['administrator'])&&!$OJ_SAE){

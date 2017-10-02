@@ -155,6 +155,12 @@
 			
 
 }else{
+$page=1;
+if(isset($_GET['page'])) $page=intval($_GET['page']);
+$page_cnt=10;
+$pstart=$page_cnt*$page-$page_cnt;
+$pend=$page_cnt;
+$view_total_page=intval(pdo_query("select count(1) from contest where defunct='N'")[0][0]/$page_cnt);
   $keyword="";
   if(isset($_POST['keyword'])){
       $keyword="%".$_POST['keyword']."%";
@@ -175,10 +181,13 @@
 
   $sql="SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC limit 1000";
   if($keyword){
-	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like ? $wheremy  order by contest_id desc limit 1000;";
+	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' and contest.title like ? $wheremy  order by contest_id desc ";
+	
+	$sql.=" limit ".strval($pstart).",".strval($pend); 
 	$result=pdo_query($sql,$keyword);
   }else{
-	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' $wheremy  order by contest_id desc limit 1000;";
+	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' $wheremy  order by contest_id desc ";
+	$sql.=" limit ".strval($pstart).",".strval($pend); 
 	$result=pdo_query($sql);
   }
   

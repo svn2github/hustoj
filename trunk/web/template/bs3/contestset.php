@@ -25,6 +25,23 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
+<nav class="center"><ul class="pagination">
+<li class="page-item"><a href="contest.php?page=1">&lt;&lt;</a></li>
+<?php
+if(!isset($page)) $page=1;
+$page=intval($page);
+$section=8;
+$start=$page>$section?$page-$section:1;
+$end=$page+$section>$view_total_page?$view_total_page:$page+$section;
+for ($i=$start;$i<=$end;$i++){
+ echo "<li class='".($page==$i?"active ":"")."page-item'>
+        <a href='contest.php?page=".$i."'>".$i."</a></li>";
+}
+?>
+<li class="page-item"><a href="contest.php?page=<?php echo $view_total_page?>">&gt;&gt;</a></li>
+</ul></nav>
+
+
 <center><form method=post action=contest.php >
 	<?php echo $MSG_SEARCH;?>
 	<input name=keyword type=text >

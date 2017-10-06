@@ -77,7 +77,7 @@ function pdo_query($sql){
     global $DB_HOST,$DB_NAME,$DB_USER,$DB_PASS,$dbh;
     if(!$dbh){
 			
-		if($OJ_SAE)	{
+		if(isset($OJ_SAE)&&$OJ_SAE)	{
 			$OJ_DATA="saestor://data/";
 		//  for sae.sina.com.cn
 			$DB_NAME=SAE_MYSQL_DB;

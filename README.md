@@ -20,9 +20,9 @@ Ubuntu14.04（推荐）快速安装指南：  
 
 ubuntu16.04（不推荐），可以使用下面脚本
 
-    wget https://raw.githubusercontent.com/zhblue/hustoj/php7/trunk/install/install-ubuntu16.04.sh
-    chmod +x install-ubuntu16.04.sh
-    sudo ./install-ubuntu16.04.sh
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
+    chmod +x install-ubuntu16+.sh
+    sudo ./install-ubuntu16+.sh
     
 安装后几个重要配置文件的位置
 

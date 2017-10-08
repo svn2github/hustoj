@@ -42,7 +42,7 @@ sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabl
 sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 sed -i "s|#\tfastcgi_pass unix:/run/php/php7.0-fpm.sock;|\t fastcgi_pass unix:/run/php/php7.1-fpm.sock;\n\t}|g" /etc/nginx/sites-enabled/default
 sed -i "s:#\tfastcgi_index:\tfastcgi_index:g" /etc/nginx/sites-enabled/default
-sed -i "s:#\tinclude fastcgi_params;:\tinclude fastcgi_params;\n\t}:g" /etc/nginx/sites-enabled/default
+sed -i "s:#\tfastcgi_pass 127.0.0.1:#\tfastcgi_pass 127.0.0.1\n\t}:g" /etc/nginx/sites-enabled/default
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini

@@ -40,9 +40,9 @@ sed -i "s:root /var/www/html;:root /home/judge/src/web;:g" /etc/nginx/sites-enab
 sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
-sed -i "s|#\tfastcgi_pass unix:/run/php/php7.0-fpm.sock;|\t fastcgi_pass unix:/run/php/php7.1-fpm.sock;\n\t}|g" /etc/nginx/sites-enabled/default
-sed -i "s:#\tfastcgi_index:\tfastcgi_index:g" /etc/nginx/sites-enabled/default
-sed -i "s|#\tfastcgi_pass 127.0.0.1:9000;|#\tfastcgi_pass 127.0.0.1:9000;\n\t}|g" /etc/nginx/sites-enabled/default
+sed -i "s|#\tfastcgi_pass unix:/var/run/php/php7.0-fpm.sock;|\t fastcgi_pass unix:/run/php/php7.1-fpm.sock;\n\t|g" /etc/nginx/sites-enabled/default
+sed -i "s:}#added_by_hustoj::g" /etc/nginx/sites-enabled/default
+sed -i "s|#\tfastcgi_pass 127.0.0.1:9000;|#\tfastcgi_pass 127.0.0.1:9000;\n\t}#added_by_hustoj|g" /etc/nginx/sites-enabled/default
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini

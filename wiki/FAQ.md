@@ -72,17 +72,22 @@ sudo /etc/init.d/apache2 restart
 
 * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
 
+
     您需要修改系统php.ini,给予php操作数据目录的权限。
-    以下是推荐修改的设置
-`sudo gedit /etc/php5/fpm/php.ini 
-       max_execution_time = 300     ; Maximum execution time of each script, in seconds
-       max_input_time = 600 
-       memory_limit = 128M      ; Maximum amount of memory a script may consume (16MB)
-       post_max_size = 64M
-       upload_tmp_dir =/tmp
-       upload_max_filesize = 64M`
-     修改php.ini后php-fpm需重启，sudo service php-fpm restart
-     
+    以下是推荐修改的设置
+```
+    sudo gedit /etc/php5/fpm/php.ini 
+    max_execution_time = 300     ; Maximum execution time of each script, in seconds
+    max_input_time = 600 
+    memory_limit = 128M      ; Maximum amount of memory a script may consume (16MB)
+    post_max_size = 64M
+    upload_tmp_dir =/tmp
+    upload_max_filesize = 64M
+```
+    修改php.ini后php-fpm需重启
+```
+    sudo service php-fpm restart
+```     
 * 为什么我添加的题目普通用户看不到？
 
     题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中红色的Reserved,切换为绿色的Available启用题目。

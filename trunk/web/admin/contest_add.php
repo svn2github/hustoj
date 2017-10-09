@@ -37,9 +37,9 @@ $description="";
 $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	//echo $langmask;	
 	
-        $sql="INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
+        $sql="insert INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
                 VALUES(?,?,?,?,?,?,?)";
-	echo $sql;
+	echo $sql.$title.$starttime.$endtime.$private.$langmask.$description.$password;
 	$cid=pdo_query($sql,$title,$starttime,$endtime,$private,$langmask,$description,$password) ;
 	echo "Add Contest ".$cid;
 	$sql="DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
@@ -88,10 +88,9 @@ else{
 			$plist="";
 			$sql="SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? ORDER BY `num`";
 			$result=pdo_query($sql,$cid) ;
-			for ($i=count($result);$i>0;$i--){
-				$row=$result[0];
+			foreach($result as $row){
+				if ($plist) $plist=$plist.',';
 				$plist=$plist.$row[0];
-				if ($i>1) $plist=$plist.',';
 			}
 			
    }

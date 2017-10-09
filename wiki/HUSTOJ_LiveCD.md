@@ -3,7 +3,7 @@
 
 Download:
 14.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员)
-* http://pan.baidu.com/s/1bYX0QE
+* https://pan.baidu.com/s/1sl8wD4L
 
 12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172

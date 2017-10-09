@@ -11,12 +11,13 @@ When people asked question, we put the answer here
 
 * 编译报错找不到mysql.h
 
-    如果使用debian或centos，可能默认安装的是mariadb不是mysql，这时请自行搜索安装mariadb的头文件
-    debian里大约是
+    如果使用debian或centos，可能默认安装的是mariadb不是mysql，这时请自行搜索安装mariadb的头文件。
+    
+debian里大约是
 ```
     sudo apt-get install libmariadb-dev
 ```
-    centos里大约是
+centos里大约是
 ```
     sudo yum install MariaDB-devel
 ```

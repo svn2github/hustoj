@@ -34,7 +34,7 @@ When people asked question, we put the answer here
 
 * 配置文件里的字段什么含义?
 
-    点击链接(https://github.com/zhblue/hustoj/blob/master/wiki/Configuration.md)
+    点击[Configuration](https://github.com/zhblue/hustoj/blob/master/wiki/Configuration.md)
 	 
 * 多组数据怎么上传？
 加好题目后在题目列表找TestData，点击上传。

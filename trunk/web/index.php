@@ -1,7 +1,7 @@
 <?php
 ////////////////////////////Common head
-	$cache_time=10;
-	$OJ_CACHE_SHARE=false;
+	$cache_time=300;
+	$OJ_CACHE_SHARE=true;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
@@ -31,7 +31,7 @@
 	}
 $view_apc_info="";
 
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`  group by md order by md desc limit 100";
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 2000) solution  where result<13 group by md order by md desc limit 30";
 	$result=pdo_query($sql);//mysql_escape_string($sql));
 	$chart_data_all= array();
 //echo $sql;
@@ -40,7 +40,7 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution`  
 		array_push($chart_data_all,array($row['md'],$row['c']));
     }
     
-$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` where result=4 group by md order by md desc limit 100";
+$sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * from solution order by solution_id desc limit 2000) where result=4 group by md order by md desc limit 30";
 	$result=pdo_query($sql);//mysql_escape_string($sql));
 	$chart_data_ac= array();
 //echo $sql;

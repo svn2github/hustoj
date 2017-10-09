@@ -8,6 +8,19 @@ When people asked question, we put the answer here
 这里是常见问答。
 
 = Details =
+
+* 编译报错找不到mysql.h
+
+    如果使用debian或centos，可能默认安装的是mariadb不是mysql，这时请自行搜索安装mariadb的头文件
+    debian里大约是
+    ```
+    sudo apt-get install libmariadb-dev
+    ```
+    centos里大约是
+    ```
+    sudo yum install MariaDB-devel
+    ```
+
 * Runtime Error:[ERROR] A Not allowed system call: runid:10735 CALLID:20 如何解决？
 编辑okcalls64.h或okcalls32.h（取决于您使用的Linux版本uname -a出现x64字样则64位，i686字样则32位），在对应的语言数组里增加内容。
 如C或C++：

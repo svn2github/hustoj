@@ -33,7 +33,8 @@ When people asked question, we put the answer here
 	在judge_client.cc头部增加宏定义 IGNORE_ESOL
 
 * 配置文件里的字段什么含义?
-	 详见 [https://github.com/zhblue/hustoj/blob/master/wiki/Configuration.md]
+
+    点击链接(https://github.com/zhblue/hustoj/blob/master/wiki/Configuration.md)
 	 
 * 多组数据怎么上传？
 加好题目后在题目列表找TestData，点击上传。
@@ -55,18 +56,24 @@ sudo svn up /var/www/JudgeOnline
 sudo rm /etc/apache2/mods-enabled/deflate.*
 sudo /etc/init.d/apache2 restart
 
-* CentOS 用户，点击[CentOS]
+* CentOS 用户，点击[CentOS](https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md)
+
 * 使用HUSTOJ要花多少钱？
+
     不要钱，我们是GPL的。
+    
 * 管理员如何添加，如何管理？
+
     查看安装说明[README],管理员登录后有Admin菜单。
 
 * 为什么我提交的答案始终在pending？
+
     判题程序judged需要用root帐号启动，请重启服务器或手动执行sudo judged。如果无效，请检查/home/judge/etc/judge.conf中的数据库账号配置,参考[Configuration]，修正后再次重启服务器或执行sudo pkill -9 judged等待一会儿再执行sudo judged
 
 * 为什么添加题目时出现warning,题目目录下数据没有自动生成？
+
     您需要修改系统php.ini,给予php操作数据目录的权限。
-    以下是推荐修改的设置
+    以下是推荐修改的设置
        sudo gedit /etc/php5/fpm/php.ini 
        max_execution_time = 300     ; Maximum execution time of each script, in seconds
        max_input_time = 600 
@@ -74,10 +81,8 @@ sudo /etc/init.d/apache2 restart
        post_max_size = 64M
        upload_tmp_dir =/tmp
        upload_max_filesize = 64M
-      
-    
-     修改php.ini后apache需重启
-    
+     修改php.ini后php-fpm需重启，sudo service php-fpm restart
+     
 * 为什么我添加的题目普通用户看不到？
 
     题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中红色的Reserved,切换为绿色的Available启用题目。

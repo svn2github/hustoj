@@ -3,8 +3,8 @@
 HUST JOL安装说明 
 	by zhblue(newsclan@gmail.com)
 
-对Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD]安装，并浏览[FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)。
-[HUSTOJ_LiveCD] and [FAQ] is recommended
+对Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveCD.md)安装，并浏览[FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)。
+[HUSTOJ_LiveCD](https://github.com/zhblue/hustoj/blob/master/wiki/HUSTOJ_LiveCD.md) and [FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md) is recommended
 
 下面两个方法二选一
 

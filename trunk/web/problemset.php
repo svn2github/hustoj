@@ -83,11 +83,14 @@ else{
 	$now=strftime("%Y-%m-%d %H:%M",time());
 	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
 	"WHERE `defunct`='N' and $filter_sql AND `problem_id` NOT IN(
-		SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>'$now' or private=1)and `defunct`='N'
-			
+		SELECT  `problem_id` 
+		FROM contest c
+		INNER JOIN  `contest_problem` cp ON c.contest_id = cp.contest_id
+		AND (
+			c.`end_time` >  '$now'
+			OR c.private =1
 		)
+			AND c.`defunct` =  'N'
 	) ";
 
 }

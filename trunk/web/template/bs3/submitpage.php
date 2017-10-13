@@ -215,9 +215,9 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
         var problem_id=document.getElementById(mark);
 
         if(mark=='problem_id')
-                problem_id.value='<?php echo $id?>';
+                problem_id.value='<?php if(isset($id)) echo $id?>';
         else
-                problem_id.value='<?php echo $cid?>';
+                problem_id.value='<?php if(isset($cid))echo $cid?>';
 
         document.getElementById("frmSolution").target="_self";
         document.getElementById("encoded_submit_mark").name="encoded_submit";

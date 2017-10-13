@@ -7,7 +7,7 @@ function crypto_rand_secure($min, $max) {
         $bits = (int) $log + 1; // length in bits
         $filter = (int) (1 << $bits) - 1; // set all lower bits to 1
         do {
-			if(function_exists(openssl_random_pseudo_bytes)){
+			if(function_exists("openssl_random_pseudo_bytes")){
 				$rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
 			}else{
 				$rnd = hexdec(bin2hex(rand()."_".rand()));

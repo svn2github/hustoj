@@ -57,7 +57,7 @@
     </td>
   </tr>
 </table>
-<p>  编译器版本为（系统可能升级编译器版本，这里直供参考）:<br>
+<p>  编译器版本为（系统可能升级编译器版本，这里仅供参考）:<br>
   <font color=blue>gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5</font><br>
   <font color=blue>glibc 2.3.6</font><br>
 <font color=blue>Free Pascal Compiler version 2.4.0-2 [2010/03/06] for i386<br>

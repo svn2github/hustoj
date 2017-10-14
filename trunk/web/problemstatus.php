@@ -148,7 +148,7 @@ foreach($result as $row){
 $view_recommand=Array();
 if(isset($_GET['id'])){
   $id=intval($_GET['id']);
-        $user_id=($_SESSION['user_id']);
+        if(isset($_SESSION['user_id']))$user_id=($_SESSION['user_id']);
 	$sql="select source from problem where problem_id=?";
 	$result=pdo_query($sql,$id);
 	$source=$result[0][0];

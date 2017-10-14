@@ -16,6 +16,7 @@ $user_id=$_SESSION['user_id'];
         if($row[0]>20) $OJ_VCODE=true;
         
 if($OJ_VCODE)$vcode=$_POST["vcode"];
+$err_str="";
 if($OJ_VCODE&&($_SESSION["vcode"]==null||$vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
         $_SESSION["vcode"]=null;
         $err_str=$err_str."Verification Code Wrong!\\n";

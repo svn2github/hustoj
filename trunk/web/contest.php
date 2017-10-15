@@ -160,7 +160,7 @@ if(isset($_GET['page'])) $page=intval($_GET['page']);
 $page_cnt=10;
 $pstart=$page_cnt*$page-$page_cnt;
 $pend=$page_cnt;
-$view_total_page=intval(pdo_query("select count(1) from contest where defunct='N'")[0][0]/$page_cnt);
+$view_total_page=intval(pdo_query("select count(1) from contest where defunct='N'")[0][0]/$page_cnt)+1;
   $keyword="";
   if(isset($_POST['keyword'])){
       $keyword="%".$_POST['keyword']."%";

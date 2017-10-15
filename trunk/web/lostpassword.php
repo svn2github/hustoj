@@ -7,7 +7,7 @@ require_once("./include/const.inc.php");
 require_once("./include/my_func.inc.php");
 $lost_user_id=$_POST['user_id'];
 $lost_email=$_POST['email'];
-    $vcode=trim($_POST['vcode']);
+    if(isset($_POST['vcode']))$vcode=trim($_POST['vcode']);
     if($lost_user_id&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
                 echo "<script language='javascript'>\n";
                 echo "alert('Verify Code Wrong!');\n";
@@ -31,10 +31,10 @@ $lost_email=$_POST['email'];
 	//******************** 配置信息 ********************************
 	$smtpserver = "smtp.126.com";//SMTP服务器
 	$smtpserverport =25;//SMTP服务器端口
-	$smtpusermail = "account@126.com";//SMTP服务器的用户邮箱
+	$smtpusermail = "zjicm_oj_system@126.com";//SMTP服务器的用户邮箱
 	$smtpemailto = $row['email'];//发送给谁
-	$smtpuser = "account@126.com";//SMTP服务器的用户帐号
-	$smtppass = "password";//SMTP服务器的用户密码
+	$smtpuser = "zjicm_oj_system@126.com";//SMTP服务器的用户帐号
+	$smtppass = "hustoj2015";//SMTP服务器的用户密码
 	$mailtitle = "OJ系统密码重置激活";//邮件主题
 	$mailcontent = "$lost_user_id:\n您好！\n您在OJ系统选择了找回密码服务,为了验证您的身份,请将下面字串输入口令重置页面以确认身份:".$_SESSION['lost_key']."\n\n\n浙江传媒学院在线评测系统";//邮件内容
 	$mailtype = "TXT";//邮件格式（HTML/TXT）,TXT为文本邮件

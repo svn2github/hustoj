@@ -47,7 +47,7 @@ if(isset($_POST['update_solution'])){
 	
 	$sid=intval($_POST['sid']);
 	$result=intval($_POST['result']);
-	$sql="UPDATE solution SET result=,time=0,memory=0,judgetime=NOW() WHERE solution_id=? and (result<2 or (result<4 and NOW()-judgetime>60)) LIMIT 1";
+	$sql="update solution SET result=?,time=0,memory=0,judgetime=NOW() WHERE solution_id=? and (result<2 or (result<4 and NOW()-judgetime>60)) LIMIT 1";
 	$rows=pdo_query($sql,$result,$sid);
 	if($rows>0)
 		echo "1";

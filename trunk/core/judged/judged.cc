@@ -596,9 +596,11 @@ int daemon_init(void)
 }
 void turbo_mode2(){
 #ifdef _mysql_h
+	if(turbo_mode==2){
 			char sql[BUFFER_SIZE];
 			sprintf(sql," CALL `sync_result`();");
 			if (mysql_real_query(conn, sql, strlen(sql)));
+	}
 #endif
 
 }

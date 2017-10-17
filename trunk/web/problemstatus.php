@@ -7,7 +7,7 @@
         $view_title= "Welcome To Online Judge";
 require_once("./include/const.inc.php");
 
-$id=intval($_GET['id']);
+if(isset($_GET['id']))$id=intval($_GET['id']);
 if (isset($_GET['page']))
         $page=strval(intval($_GET['page']));
 else $page=0;
@@ -152,7 +152,7 @@ if(isset($_GET['id'])){
 	$sql="select source from problem where problem_id=?";
 	$result=pdo_query($sql,$id);
 	$source=$result[0][0];
-        $sql="select problem_id from problem where source like ? and problem_id!=?";
+        $sql="select problem_id from problem where source like ? and problem_id!=? limit 10";
 
         $result=pdo_query( $sql,"%$source%",$id);
         $i=0;

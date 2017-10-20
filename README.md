@@ -52,3 +52,12 @@ Linux不熟悉的用户推荐使用[HUSTOJ_LiveCD](https://pan.baidu.com/s/1sl8w
 Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linux_basic.php)
 
 建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/)
+
+----------------------
+这里是广告：
+NOIP在线课程
+[基础入门课程](https://ke.qq.com/course/237339?saleToken=20665) 
+[初赛课程](https://ke.qq.com/course/245508?saleToken=20667) 
+[复赛算法课程](https://ke.qq.com/course/247615?saleToken=20666) 
+
+

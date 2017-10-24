@@ -1,5 +1,6 @@
 //
 #define IGNORE_ESOL
+#define RASPBERRY_PI
 // File:   main.cc
 // Author: sempr
 // refacted by zhblue
@@ -45,9 +46,13 @@
 //#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <mysql/mysql.h>
 #include <assert.h>
+
+#include <mysql/mysql.h>
+#ifndef RASPBERRY_PI
 #include "okcalls.h"
+#endif
+
 
 #define STD_MB 1048576
 #define STD_T_LIM 2
@@ -194,6 +199,7 @@ const int call_array_size = 512;
 int call_counter[call_array_size] = { 0 };
 static char LANG_NAME[BUFFER_SIZE];
 void init_syscalls_limits(int lang) {
+#ifndef RASPBERRY_PI
 	int i;
 	memset(call_counter, 0, sizeof(call_counter));
 	if (DEBUG)
@@ -249,7 +255,7 @@ void init_syscalls_limits(int lang) {
 		for (i = 0; i==0||LANG_GOV[i]; i++)
 			call_counter[LANG_GOV[i]] = HOJ_MAX_LIMIT;
 	}
-
+#endif
 }
 
 int after_equal(char * c) {
@@ -1685,6 +1691,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
+	
 	if(use_ptrace) ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3)
@@ -1986,7 +1993,10 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		printf("pid=%d judging %s\n", pidApp, infile);
 
 	int status, sig, exitcode;
+
+#ifndef RASPBERRY_PI
 	struct user_regs_struct reg;
+#endif
 	struct rusage ruse;
 	if(topmemory==0) 
 			topmemory= get_proc_status(pidApp, "VmRSS:") << 10;
@@ -2106,6 +2116,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		 */
 
 		// check the system calls
+
+#ifndef RASPBERRY_PI
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 		if (call_counter[reg.REG_SYSCALL] ){
 			//call_counter[reg.REG_SYSCALL]--;
@@ -2127,7 +2139,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 			print_runtimeerror(error);
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		}
-		
+#endif		
 
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 	}

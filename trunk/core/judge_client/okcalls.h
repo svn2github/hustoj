@@ -18,8 +18,35 @@
  */
 #include <sys/syscall.h>
 #define HOJ_MAX_LIMIT -1
-#ifdef __i386
-   #include "okcalls32.h"
-#else
-   #include "okcalls64.h"
-#endif
+#define LANGV_LENGTH 256
+//C C++
+int LANG_CV[256]={3,4,5,33,45,85,122,197,248,0};
+//pascal
+int LANG_PV[256] = {0,0};
+//java
+int LANG_JV[256] = {0,0};
+//ruby
+int LANG_RV[256] = {0,0};
+//bash
+int LANG_BV[256] = {0,0};
+//python
+int LANG_YV[256] = {0,0};
+//php
+int LANG_PHV[256] = {0,0};
+//perl
+int LANG_PLV[256] = {0,0};
+//c-sharp
+int LANG_CSV[256] = {0,0};
+//objective-c
+int LANG_OV[256] = {0,0};
+//freebasic
+int LANG_BASICV[256] = {0,0};
+//scheme
+int LANG_SV[256] = {0,0};
+//lua
+int LANG_LUAV[256]={0,0};
+//nodejs
+int LANG_JSV[256]={0,0};
+//go-lang
+int LANG_GOV[256]={0,0};
+

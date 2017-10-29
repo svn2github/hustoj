@@ -380,7 +380,7 @@ void init_mysql_conf() {
 //	fclose(fp);
 	
  	if(strcmp(http_username,"IP")==0){
-                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'netmask 255.255'|awk  '{printf $2\"\\n\" }'");
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
@@ -1028,8 +1028,10 @@ int compile(int lang,char * work_dir) {
                 	execute_cmd("mount -o bind /bin bin");
                 	execute_cmd("mount -o bind /usr usr");
                 	execute_cmd("mount -o bind /lib lib");
+#ifndef RASPBERRY_PI
 #ifndef __i386
                 	execute_cmd("mount -o bind /lib64 lib64");
+#endif
 #endif
                 	execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");

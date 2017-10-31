@@ -38,6 +38,7 @@ static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_TEMPLATE="bs3"; //使用的默认模板
 if(isset($_GET['tp'])) $OJ_TEMPLATE=$_GET['tp'];
 static  $OJ_LOGIN_MOD="hustoj";
+static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_RANK_LOCK_PERCENT=0; //比赛封榜时间比例
 static  $OJ_SHOW_DIFF=false; //是否显示WA的对比说明
 static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行

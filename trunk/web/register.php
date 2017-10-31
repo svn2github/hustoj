@@ -1,5 +1,6 @@
 <?php 
 require_once("./include/db_info.inc.php");
+if(isset($OJ_REGISTER)&&!$OJ_REGISTER) exit(0);
 require_once("./include/my_func.inc.php");
 $err_str="";
 $err_cnt=0;

@@ -51,7 +51,7 @@ if (isset($_GET['solution_id'])){
 		
 			//echo $sql.$res;
 		}else{
-			echo $row['result'].",".$row['memory'].",".$row['time'];
+			echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'];
 		}
 	}else{
 		echo "0, 0, 0";

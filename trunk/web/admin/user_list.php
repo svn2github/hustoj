@@ -14,7 +14,7 @@ if(isset($_GET['keyword'])){
 	 $sql="select `user_id`,`nick`,`reg_time`,`ip`,`school`,`defunct` FROM `users` where user_id like ? ";
 	 $result=pdo_query($sql,$keyword);
 }else{
-     $sql="select `user_id`,`nick`,`reg_time`,`ip`,`school`,`defunct` FROM `users`  order by `reg_time` desc";
+     $sql="select `user_id`,`nick`,`reg_time`,`ip`,`school`,`defunct` FROM `users`  order by `reg_time` desc limit 100 ";
 	 $result=pdo_query($sql);
 }
 ?>

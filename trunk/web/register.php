@@ -77,13 +77,15 @@ $nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip=$_SERVER['REMOTE_ADDR'];
+if(isset($OJ_REG_NEED_CONFIRM)&&$OJ_REG_NEED_CONFIRM) $defunct="Y";
+else $defunct="N";
 $sql="INSERT INTO `users`("
-."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
-."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
-$rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);// or die("Insert Error!\n");
+."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`,`defunct`)"
+."VALUES(?,?,?,NOW(),?,NOW(),?,?,?)";
+$rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school,$defunct);// or die("Insert Error!\n");
 
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
-pdo_query($sql,$user_id,$password,$ip);
+pdo_query($sql,$user_id,"no save",$ip);
 $_SESSION['user_id']=$user_id;
 
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";

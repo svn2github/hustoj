@@ -86,8 +86,9 @@ $rows=pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$sc
 
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);
-$_SESSION['user_id']=$user_id;
 
+if(!isset($OJ_REG_NEED_CONFIRM)||!$OJ_REG_NEED_CONFIRM){
+		$_SESSION['user_id']=$user_id;
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 		//echo $sql."<br />";
 		$result=pdo_query($sql,$_SESSION['user_id']);
@@ -97,5 +98,6 @@ $_SESSION['user_id']=$user_id;
 		}
 		$_SESSION['ac']=Array();
 		$_SESSION['sub']=Array();
+}
 ?>
 <script>history.go(-2);</script>

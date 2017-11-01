@@ -11,13 +11,17 @@
                 if ($_REQUEST['action']=='delete') $stat = 2;
                 if ($stat == -1) err_msg("Wrong action.");
                 $rid = intval($rid);
-                $sql = "UPDATE reply SET status =? WHERE `rid` = ?";
+                $sql = "update reply SET status =? WHERE `rid` = ?";
                 if (!isset($_SESSION['administrator'])){
-                        if ($stat!=2) 
-							err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
-                        else 
-							$sql.=" AND author_id=?";
-                }
+                        if ($stat!=2){ 
+				$sql.=" and ?!=''";
+				err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
+                        }else{ 
+				$sql.=" AND author_id=?";
+			}
+                }else{
+			 $sql.=" and ?!=''";
+		}
                 if (pdo_query($sql, $stat,$rid,$_SESSION['user_id'])>0) 
 					header('Location: thread.php?tid='.$tid);
                 else 

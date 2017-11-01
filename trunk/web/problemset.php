@@ -102,7 +102,7 @@ if(isset($_GET['search'])&&trim($_GET['search'])!=""){
 	$result=pdo_query($sql);
 }
 
-$view_total_page=$cnt+1;
+$view_total_page=intval($cnt+1);
 
 $cnt=0;
 $view_problemset=Array();

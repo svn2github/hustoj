@@ -26,7 +26,7 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 <center>
-<nav class="center"><ul class="pagination">
+<nav id="page" class="center"><ul class="pagination">
 <li class="page-item"><a href="problemset.php?page=1">&lt;&lt;</a></li>
 <?php
 if(!isset($page)) $page=1;
@@ -103,6 +103,7 @@ $cnt=1-$cnt;
 $(document).ready(function()
 {
 $("#problemset").tablesorter();
+$("#problemset").after($("#page").prop("outerHTML"));
 }
 );
 </script>

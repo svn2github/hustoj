@@ -11,7 +11,11 @@
                 $scope=$_GET['scope'];
         if($scope!=""&&$scope!='d'&&$scope!='w'&&$scope!='m')
                 $scope='y';
-
+	$where="";
+	if(isset($_GET['prefix'])){
+		$prefix=$_GET['prefix'];
+		$where="where user_id like ?";
+	}
         $rank = 0;
         if(isset( $_GET ['start'] ))
                 $rank = intval ( $_GET ['start'] );
@@ -24,7 +28,7 @@
                 if ($rank < 0)
                         $rank = 0;
 
-                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
+                $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` $where ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
 
                 if($scope){
                         $s="";
@@ -56,17 +60,14 @@
 
 
       
-        if($OJ_MEMCACHE){
-                require("./include/memcache.php");
-                $result = mysql_query_cache($sql) ;//;
+		
+		if(isset($_GET['prefix'])){
+			$result = pdo_query($sql,$_GET['prefix']."%");
+		}else{
+                	$result = pdo_query($sql) ;
+		}
                 if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
-        }else{
-
-                $result = pdo_query($sql) ;
-                if($result) $rows_cnt=count($result);
-                else $rows_cnt=0;
-        }
                 $view_rank=Array();
                 $i=0;
                 for ( $i=0;$i<$rows_cnt;$i++ ) {
@@ -91,12 +92,8 @@
 
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
         //        $result = mysql_query ( $sql );
-        if($OJ_MEMCACHE){
           // require("./include/memcache.php");
-                $result = mysql_query_cache($sql);
-        }else{
                 $result = pdo_query($sql);
-        }
                  $row=$result[0];
                 $view_total=$row['mycount'];
 

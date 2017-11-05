@@ -35,7 +35,18 @@ if (isset($_GET['id'])){
 	$result=pdo_query($sql,$sid);
 	 $row=$result[0];
 	if ($row && $row['user_id']==$_SESSION['user_id']) $ok=true;
-	if (isset($_SESSION['source_browser'])) $ok=true;
+	if (isset($_SESSION['source_browser'])) {
+		$ok=true;
+	}else{
+		if(isset($OJ_EXAM_CONTEST_ID)){
+			if($cid<$OJ_EXAM_CONTEST_ID&&!isset($_SESSION['source_browser'])){
+				header("Content-type: text/html; charset=utf-8");
+				 echo $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM;
+				 exit();
+			}
+		}
+	
+	}
 	
 	if ($ok==true){
 		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=?";

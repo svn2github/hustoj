@@ -1514,6 +1514,8 @@ void copy_ruby_runtime(char * work_dir) {
         execute_cmd("cp -a /usr/lib64/ruby* %s/usr/lib64/", work_dir);
         execute_cmd("cp -a /usr/lib64/libruby* %s/usr/lib64/", work_dir);
         execute_cmd("cp -a /usr/bin/ruby* %s/", work_dir);
+        execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libruby* %s/usr/lib/",work_dir);
+        execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgmp* %s/usr/lib/",work_dir);
 
 }
 
@@ -1536,6 +1538,10 @@ void copy_guile_runtime(char * work_dir) {
 	execute_cmd("/bin/cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/bin/guile* %s/", work_dir);
+	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libguile* %s/usr/lib/",work_dir);
+	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgc* %s/usr/lib/",work_dir);
+	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libffi* %s/usr/lib/",work_dir);
+	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libunistring* %s/usr/lib/",work_dir);
 
 }
 
@@ -1581,6 +1587,8 @@ void copy_php_runtime(char * work_dir) {
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicuuc.so* %s/usr/lib/",work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so* %s/usr/lib/",work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libstdc++.so* %s/usr/lib/",work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libssl* %s/usr/lib/",work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libcrypto* %s/usr/lib/",work_dir);
 	execute_cmd("/bin/cp /usr/bin/php* %s/", work_dir);
 	execute_cmd("chmod +rx %s/Main.php", work_dir);
 	
@@ -1673,7 +1681,8 @@ void copy_js_runtime(char * work_dir) {
         execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libm.so.6  %s/lib/x86_64-linux-gnu/", work_dir);
         execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libgcc_s.so.1  %s/lib/x86_64-linux-gnu/", work_dir);
         execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.2  %s/lib/x86_64-linux-gnu/", work_dir);
-
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libcares* %s/usr/lib/",work_dir);
+	
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/", work_dir);
 
 }

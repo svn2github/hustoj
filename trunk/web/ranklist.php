@@ -15,6 +15,8 @@
 	if(isset($_GET['prefix'])){
 		$prefix=$_GET['prefix'];
 		$where="where user_id like ?";
+	}else{
+		$where="where defunct='N' ";
 	}
         $rank = 0;
         if(isset( $_GET ['start'] ))

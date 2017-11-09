@@ -132,13 +132,15 @@ $input_text=($input_text);
 $source_user=$source;
 if($test_run) $id=-$id;
 //use append Main code
-$prepend_file="$OJ_DATA/$id/prepend.$language_ext[$language]";
+$prepend_file="$OJ_DATA/$id/prepend.".$language_ext[$language];
 if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($prepend_file)){
      $source=file_get_contents($prepend_file)."\n".$source;
 }
-$append_file="$OJ_DATA/$id/append.$language_ext[$language]";
+$append_file="$OJ_DATA/$id/append.".$language_ext[$language];
+//echo $append_file;
 if(isset($OJ_APPENDCODE)&&$OJ_APPENDCODE&&file_exists($append_file)){
      $source.=("\n".file_get_contents($append_file));
+     //echo "$source";
 }
 //end of append 
 if($language==6)
@@ -194,7 +196,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	$sql="INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";
 	pdo_query($sql,$insert_id,$source_user);
 	$sql="INSERT INTO `source_code`(`solution_id`,`source`)VALUES(?,?)";
-	pdo_query($sql,$insert_id,$source_user);
+	pdo_query($sql,$insert_id,$source);
 	if($test_run){
 		$sql="INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES(?,?)";
 		pdo_query($sql,$insert_id,$input_text);

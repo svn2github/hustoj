@@ -210,7 +210,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	echo "<td>".$U[$i]->nick."";
 	echo "<td>$usolved";
 	echo "<td>";
-	
+        if($usolved==0) $U[$i]->mark=0;	
 	
 	echo $U[$i]->mark>0?intval($U[$i]->mark):0;
 	for ($j=0;$j<$pid_cnt;$j++){

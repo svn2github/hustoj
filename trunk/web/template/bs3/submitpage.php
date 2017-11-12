@@ -93,12 +93,15 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <br>
 </span>
 <textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+
+<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
 <textarea style="width:30%" cols=10 rows=5 id="out" name="out" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
 <br>
+<?php } ?>
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
@@ -107,8 +110,8 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-<?php }?>
 <span class="btn" id=result>状态</span>
+<?php }?>
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
 	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">

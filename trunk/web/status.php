@@ -292,8 +292,8 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                         $view_status[$i][6]= "<a target=_blank href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>";
 			if($row["problem_id"]>0){
-                        	if (isset($cid)) {
-                                	$view_status[$i][6].= "/<a target=_self href=\"submitpage.php?cid=".$cid."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
+                        	if ($row['contest_id']>0) {
+                                	$view_status[$i][6].= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
                         	}else{
                                 	$view_status[$i][6].= "/<a target=_self href=\"submitpage.php?id=".$row['problem_id']."&sid=".$row['solution_id']."\">Edit</a>";
                         	}

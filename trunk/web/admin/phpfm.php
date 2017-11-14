@@ -3939,6 +3939,7 @@ function edit_file_form(){
     $file = $current_dir.$filename;
     if ($save_file){
         $fh=fopen($file,"w");
+	$file_data=preg_replace("(\r\n)","\n",$file_data);
         fputs($fh,$file_data,strlen($file_data));
         fclose($fh);
     }

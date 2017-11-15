@@ -444,7 +444,7 @@ void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 }
 void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
-	execute_cmd("echo '本应输出						      |	你的输出'>>diff.out");
+	execute_cmd("echo 'Expected						      |	Yours'>>diff.out");
 	execute_cmd("diff '%s' user.out -y|head -100>>diff.out",path);
 	execute_cmd("echo '\n=============================='>>diff.out");
 }

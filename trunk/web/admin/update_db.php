@@ -74,11 +74,11 @@ $csql[5]="";
 $tsql[6]="select langmask from contest limit 1;";
 $csql[6]="ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;";
 
-$tsql[7]="whatever;";
-$csql[7]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
+$csql[7]="";
+$tsql[7]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
 
-$tsql[8]="whatever;";
-$csql[8]="ALTER TABLE `contest` MODIFY COLUMN `langmask` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask';";
+$csql[8]=""
+$tsql[8]="ALTER TABLE `contest` MODIFY COLUMN `langmask` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask';";
 $tsql[9]="select 1 from runtimeinfo limit 1";
 $csql[9]="CREATE TABLE  `runtimeinfo` (
   `solution_id` int(11) NOT NULL DEFAULT '0',
@@ -89,26 +89,26 @@ $csql[9]="CREATE TABLE  `runtimeinfo` (
 $tsql[10]="select pass_rate from solution";
 $csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
 
-$tsql[11]="whatever;";
-$csql[11]="ALTER TABLE `users` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[11]="";
+$tsql[11]="ALTER TABLE `users` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[12]="whatever;";
-$csql[12]="ALTER TABLE `topic` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[12]="";
+$tsql[12]="ALTER TABLE `topic` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[13]="whatever;";
-$csql[13]="ALTER TABLE `mail` MODIFY COLUMN `to_user` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id',MODIFY COLUMN `from_user` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[13]="";
+$tsql[13]="ALTER TABLE `mail` MODIFY COLUMN `to_user` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id',MODIFY COLUMN `from_user` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[14]="whatever;";
-$csql[14]="ALTER TABLE `reply` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[14]="";
+$tsql[14]="ALTER TABLE `reply` MODIFY COLUMN `author_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[15]="whatever;";
-$csql[15]="ALTER TABLE `privilege` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[15]="";
+$tsql[15]="ALTER TABLE `privilege` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[15]="whatever;";
-$csql[15]="ALTER TABLE `loginlog` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[15]="";
+$tsql[15]="ALTER TABLE `loginlog` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 
-$tsql[15]="whatever;";
-$csql[15]="ALTER TABLE `news` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
+$csql[15]="";
+$tsql[15]="ALTER TABLE `news` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";
 $tsql[16]="ALTER TABLE `sim` ADD INDEX `Index_sim_id`(`sim_s_id`);";
 $csql[16]="";
 $tsql[17]="ALTER TABLE `contest_problem` ADD INDEX `Index_contest_id`(`contest_id`);";
@@ -132,22 +132,22 @@ $csql[22]="";
 $tsql[23]="select judger from solution limit 1 ";
 $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
 
-$tsql[24]="whatever";
-$csql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
+$csql[24]="";
+$tsql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
 
-$tsql[25]="whatever";
-$csql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
+$csql[25]="";
+$tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
 
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
-		if(!$res=pdo_query($tsql[$i])){
+		if(pdo_query($tsql[$i])){
 				echo $csql[$i]."<br>";
 				pdo_query($csql[$i]);
 		}else{
-				echo "DB Error";
+				echo $tsql[$i]."<br>";
 		}
 		
 	}

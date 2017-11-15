@@ -438,15 +438,15 @@ void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 	execute_cmd("echo '------user out top 100 lines-----'>>diff.out");
 	execute_cmd("head -100 user.out>>diff.out");
 	execute_cmd("echo '------diff out 200 lines-----'>>diff.out");
-	execute_cmd("diff '%s' user.out|head -200>>diff.out",path);
+	execute_cmd("diff '%s' user.out -y|head -200>>diff.out",path);
 	execute_cmd("echo '=============================='>>diff.out");
 
 }
 void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char * path) {
 	execute_cmd("echo '========[%s]========='>>diff.out",getFileNameFromPath(path));
-	execute_cmd("echo '=======diff out 100 lines====='>>diff.out");
-	execute_cmd("diff '%s' user.out|head -100>>diff.out",path);
-	execute_cmd("echo '=============================='>>diff.out");
+	execute_cmd("echo '本应输出						      |	你的输出'>>diff.out");
+	execute_cmd("diff '%s' user.out -y|head -100>>diff.out",path);
+	execute_cmd("echo '\n=============================='>>diff.out");
 }
 
 /*

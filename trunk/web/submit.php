@@ -116,7 +116,8 @@ $language=strval($language);
 
 
 $source=$_POST['source'];
-$input_text=$_POST['input_text'];
+$input_text="";
+if(isset($_POST['input_text']))$input_text=$_POST['input_text'];
 if(get_magic_quotes_gpc()){
 	$source=stripslashes($source);
 	$input_text=stripslashes($input_text);

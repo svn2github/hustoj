@@ -25,7 +25,7 @@ $csql[1]="
 CREATE TABLE `reply` (
  `rid` int(11) NOT NULL auto_increment,
  `author_id` varchar(20) NOT NULL,
- `time` datetime NOT NULL default '0000-00-00 00:00:00',
+ `time` datetime NOT NULL default '2000-01-01 00:00:01',
  `content` text NOT NULL,
  `topic_id` int(11) NOT NULL,
  `status` int(2) NOT NULL default '0',

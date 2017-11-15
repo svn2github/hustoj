@@ -77,7 +77,7 @@ $csql[6]="ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 
 $csql[7]="";
 $tsql[7]="optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
 
-$csql[8]=""
+$csql[8]="";
 $tsql[8]="ALTER TABLE `contest` MODIFY COLUMN `langmask` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask';";
 $tsql[9]="select 1 from runtimeinfo limit 1";
 $csql[9]="CREATE TABLE  `runtimeinfo` (

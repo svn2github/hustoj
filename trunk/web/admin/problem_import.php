@@ -51,4 +51,4 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 ?>
 <br>
 
-free problem set FPS-xml can be download at <a href=http://code.google.com/p/freeproblemset/downloads/list>FPS-Googlecode</a>
+更多题目请到 <a href=http://tk.hustoj.com/>TK 题库</a> 选购。

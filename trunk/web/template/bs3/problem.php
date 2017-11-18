@@ -57,7 +57,7 @@ require_once("include/set_get_key.php");
 <?php
 }
 echo "</center>";
-echo "<!--StartMarkForVirtualJudge-->"
+echo "<!--StartMarkForVirtualJudge-->";
 echo "<h2>$MSG_Description</h2><div class=content>".$row['description']."</div>";
 echo "<h2>$MSG_Input</h2><div class=content>".$row['input']."</div>";
 echo "<h2>$MSG_Output</h2><div class=content>".$row['output']."</div>";
@@ -85,7 +85,7 @@ if ($pr_flag){
 	echo "</p></div>";
 }
 echo "<center>";
-echo "<!--EndMarkForVirtualJudge-->"
+echo "<!--EndMarkForVirtualJudge-->";
 if ($pr_flag){
 echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 }else{

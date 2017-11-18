@@ -31,7 +31,7 @@ if ($pr_flag){
 echo "<title>$MSG_PROBLEM ".$row['problem_id']." --". $row['title']."</title>";
 echo "<center><h2>$id: ".$row['title']."</h2>";
 }else{
-$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $id=$row['problem_id'];
 echo "<title>$MSG_PROBLEM ".$PID[$pid].": ".$row['title']." </title>";
 echo "<center><h2>$MSG_PROBLEM ".$PID[$pid].": ".$row['title']."</h2>";
@@ -48,6 +48,7 @@ echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT
 }
 echo "[<a href='problemstatus.php?id=".$row['problem_id']."'>$MSG_STATUS</a>]";
 echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
+echo "[$MSG_Creator:<span id='creator'></span>]";
 if(isset($_SESSION['administrator'])){
 require_once("include/set_get_key.php");
 ?>
@@ -56,6 +57,7 @@ require_once("include/set_get_key.php");
 <?php
 }
 echo "</center>";
+echo "<!--StartMarkForVirtualJudge-->"
 echo "<h2>$MSG_Description</h2><div class=content>".$row['description']."</div>";
 echo "<h2>$MSG_Input</h2><div class=content>".$row['input']."</div>";
 echo "<h2>$MSG_Output</h2><div class=content>".$row['output']."</div>";
@@ -83,6 +85,7 @@ if ($pr_flag){
 	echo "</p></div>";
 }
 echo "<center>";
+echo "<!--EndMarkForVirtualJudge-->"
 if ($pr_flag){
 echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
 }else{
@@ -117,6 +120,9 @@ function phpfm(pid){
                 }
         });
 }
+$(document).ready(function(){
+	$("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
+});
 </script>	  
   </body>
 </html>

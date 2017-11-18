@@ -57,11 +57,11 @@
     </td>
   </tr>
 </table>
-<p>  编译器版本为（系统可能升级编译器版本，这里直供参考）:<br>
-  <font color=blue>gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5</font><br>
-  <font color=blue>glibc 2.3.6</font><br>
-<font color=blue>Free Pascal Compiler version 2.4.0-2 [2010/03/06] for i386<br>
-java version "1.6.0_22"<br>
+<p>  编译器版本为（系统可能升级编译器版本，这里仅供参考）:<br>
+  <font color=blue>gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3)</font><br>
+  <font color=blue>glibc 2.19</font><br>
+<font color=blue>Free Pascal Compiler version 2.6.2<br>
+openjdk 1.7.0_151<br>
 </font></p>
 <hr>
 <p><font color=green>Q</font>:程序怎样取得输入、进行输出?<br>
@@ -127,7 +127,7 @@ public class Main{
   <li><font color=blue>main</font> 函数必须返回<font color=blue>int</font>, <font color=blue>void main</font> 的函数声明会报编译错误。<br> 
   <li><font color=green>i</font> 在循环外失去定义 "<font color=blue>for</font>(<font color=blue>int</font> <font color=green>i</font>=0...){...}"<br>
   <li><font color=green>itoa</font> 不是ansi标准函数.<br>
-  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>如果用了__int64,试试提交前加一句#define __int64 long long
+  <li><font color=green>__int64</font> 不是ANSI标准定义，只能在VC使用, 但是可以使用<font color=blue>long long</font>声明64位整数。<br>如果用了__int64,试试提交前加一句#define __int64 long long, scanf和printf 请使用%lld作为格式
 </ul>
 <hr>
 <font color=green>Q</font>:系统返回信息都是什么意思?<br>

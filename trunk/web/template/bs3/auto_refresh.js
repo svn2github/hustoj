@@ -12,7 +12,6 @@ function auto_refresh(){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
 			   console.log("cell:"+cell+" result:"+judge_result[result]);
-               		   return;
 			}
 	}
 }
@@ -72,8 +71,6 @@ function fresh_result(solution_id){
 	xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 	xmlhttp.send();
 }
-//<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
-//alert(123);
 var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
 	for(var i=0;i<10;i++){
    		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
@@ -93,7 +90,7 @@ $(".http_judge_form").submit(function (){
 auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
-   $(this).children(".http_judge_form").show(600);
+   $(this).find("form").show(600);
 });
 $(".http_judge_form").hide();
 

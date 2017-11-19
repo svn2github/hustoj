@@ -71,8 +71,6 @@ function fresh_result(solution_id){
 	xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 	xmlhttp.send();
 }
-//<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
-//alert(123);
 var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
 	for(var i=0;i<10;i++){
    		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";

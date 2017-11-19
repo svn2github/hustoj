@@ -139,4 +139,7 @@ $MSG_TEST_RUN="Test Running Done";
 
   $MSG_MY_SUBMISSIONS="My Submissions"; 
   $MSG_MY_CONTESTS="My Contests"; 
+  $MSG_Creator="Creator";
+
+  $MSG_IMPORTED="Imported";
  ?>

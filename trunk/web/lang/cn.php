@@ -66,7 +66,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_CE="编译错误";
 	$MSG_CO="编译成功";
 	
-	$MSG_RUNID="运行编号";
+	$MSG_RUNID="提交编号";
 	$MSG_USER="用户";
 	$MSG_PROBLEM="问题";
 	$MSG_RESULT="结果";
@@ -144,4 +144,6 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_BLOCKLY_TEST="翻译运行"; 
   $MSG_MY_SUBMISSIONS="我的提交"; 
   $MSG_MY_CONTESTS="我的$MSG_CONTEST"; 
+  $MSG_Creator="命题人";
+  $MSG_IMPORTED="外部导入";
 ?>

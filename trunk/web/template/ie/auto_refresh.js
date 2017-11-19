@@ -5,18 +5,14 @@ function auto_refresh(){
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
 	for(var i=rows.length-1;i>0;i--){
-		var cell=rows[i].cells[3].children[0].innerHTML;
+		var result=$(rows[i].cells[3].children[0].children[0]).attr("result");
 		rows[i].cells[3].className="td_result";
 		var sid=rows[i].cells[0].innerHTML;
-	        for(var j=0;j<4;j++){
-			if(cell.indexOf(judge_result[j])!=-1){
+			if(result<4){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
-
-               return;
-
+			   console.log("cell:"+cell+" result:"+judge_result[result]);
 			}
-		}
 	}
 }
 function findRow(solution_id){
@@ -49,6 +45,7 @@ function fresh_result(solution_id){
 			row.cells[3].innerHTML="<span class='btn btn-warning'>"+judge_result[ra[0]]+"</span>"+loader;
 			row.cells[4].innerHTML=ra[1];
 			row.cells[5].innerHTML=ra[2];
+			row.cells[9].innerHTML=ra[3];
 			if(ra[0]<4){
 				window.setTimeout("fresh_result("+solution_id+")",interval);
 				interval*=2;
@@ -95,7 +92,7 @@ $(".http_judge_form").submit(function (){
 auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
-   $(this).children(".http_judge_form").show(600);
+   $(this).find("form").show(600);
 });
 $(".http_judge_form").hide();
 

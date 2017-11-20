@@ -222,7 +222,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
        
        
-	$view_status[$i][3]="<span style='display:none' result='".$row['result']."' ></span>";
+	$view_status[$i][3]="<span class='hidden' style='display:none' result='".$row['result']."' ></span>";
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Click_Detail'>".$MSG_Compile_Error."";
 
@@ -254,7 +254,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                         }
                 }else{
 
-                        $view_status[$i][3]= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."";
+                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
                 }

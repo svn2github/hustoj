@@ -5,7 +5,7 @@ function auto_refresh(){
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
 	for(var i=rows.length-1;i>0;i--){
-		var result=$(rows[i].cells[3].children[0].children[0]).attr("result");
+		var result=$(rows[i].cells[3].children[0]).attr("result");
 		rows[i].cells[3].className="td_result";
 		var sid=rows[i].cells[0].innerHTML;
 			if(result<4){

@@ -4,7 +4,7 @@
 </head>
 <frameset cols="20,90">
 <frame name="menu" src="menu.php">
-<frame name="main" src="about:blank">
+<frame name="main" src="help.php">
 <noframes>
 
 </noframes>

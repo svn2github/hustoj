@@ -51,10 +51,16 @@
                         }
                         //echo $s."<-------------------------";
                         $sql="SELECT users.`user_id`,`nick`,s.`solved`,t.`submit` FROM `users`
-                                        right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
-                                        left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
+                                        inner join
+                                        (select count(distinct problem_id) solved ,user_id from solution 
+						where in_date>str_to_date('$s','%Y-%m-%d') and result=4 
+						group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s 
+					on users.user_id=s.user_id
+                                        inner join
+                                        (select count( problem_id) submit ,user_id from solution 
+						where in_date>str_to_date('$s','%Y-%m-%d') 
+						group by user_id order by submit desc ) t 
+					on users.user_id=t.user_id
                                 ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
                          ";
 //                      echo $sql;

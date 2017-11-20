@@ -25,7 +25,7 @@
 		<a class='btn btn-primary' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a>
 		
 	<li>
-	<a class='btn btn-primary' href="user_list.php" target="main"><b>用户管理</b></a>
+	<a class='btn btn-primary' href="user_list.php" target="main"><b><?php echo $MSG_USER.$MSG_LIST?></b></a>
 <?php }
 if (isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
 ?>

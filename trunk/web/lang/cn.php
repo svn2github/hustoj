@@ -66,7 +66,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_CE="编译错误";
 	$MSG_CO="编译成功";
 	
-	$MSG_RUNID="运行编号";
+	$MSG_RUNID="提交编号";
 	$MSG_USER="用户";
 	$MSG_PROBLEM="问题";
 	$MSG_RESULT="结果";
@@ -144,4 +144,32 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_BLOCKLY_TEST="翻译运行"; 
   $MSG_MY_SUBMISSIONS="我的提交"; 
   $MSG_MY_CONTESTS="我的$MSG_CONTEST"; 
+  $MSG_Creator="命题人";
+  $MSG_IMPORTED="外部导入";
+  
+  $MSG_USER="用户";
+   
+  $MSG_HELP_SEEOJ="跳转回到前台";
+  $MSG_HELP_ADD_NEWS="添加首页显示的新闻";
+  $MSG_HELP_NEWS_LIST="管理已经发布的新闻";
+  $MSG_HELP_USER_LIST="对注册用户停用、启用帐号";
+  $MSG_HELP_ADD_PROBLEM="手动添加新的题目，多组测试数据在添加后从题目列表TestData按钮进入上传。";
+  $MSG_HELP_PROBLEM_LIST="管理已有的题目和数据，上传数据可以用zip压缩不含目录的数据。";
+  $MSG_HELP_ADD_CONTEST="规划新的比赛，用逗号分隔题号。可以设定私有比赛，用密码或名单限制参与者。";
+  $MSG_HELP_CONTEST_LIST="已有的比赛列表，修改时间和公开/私有，尽量不要在开赛后调整题目列表。";
+  $MSG_HELP_TEAMGENERATOR="批量生成大量比赛帐号、密码，用于来自不同学校的参赛者。小系统不要随便使用，可能产生垃圾帐号，无法删除。";
+  $MSG_HELP_SETMESSAGE="设置滚动公告内容";
+  $MSG_HELP_SETPASSWORD="重设指定用户的密码，对于管理员帐号需要先降级为普通用户才能修改。";
+  $MSG_HELP_REJUDGE="重判指定的题目、提交或比赛。";
+  $MSG_HELP_ADD_PRIVILEGE="给指定用户增加权限，包括管理员、题目添加者、比赛组织者、比赛参加者、代码查看者、手动判题、远程判题等权限。";
+  $MSG_HELP_PRIVILEGE_LIST="查看已有的特殊权限列表、进行删除操作。";
+  $MSG_HELP_GIVESOURCE="将导入系统的标程赠与指定帐号，用于训练后辅助未通过的人学习参考。";
+  $MSG_HELP_EXPORT_PROBLEM="将系统中的题目以fps.xml文件的形式导出。";
+  $MSG_HELP_IMPORT_PROBLEM="导入从官方群共享或tk.hustoj.com下载到的fps.xml文件。";
+  $MSG_HELP_UPDATE_DATABASE="更新数据库结构，在每次升级（sudo update-hustoj）之后应操作一次。";
+  $MSG_HELP_ONLINE="查看在线用户";
+  
+  
+  
+  
 ?>

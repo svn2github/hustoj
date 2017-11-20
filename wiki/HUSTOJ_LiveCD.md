@@ -5,6 +5,8 @@ Download:
 14.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员)
 * https://pan.baidu.com/s/1sl8wD4L
 
+× 关注微信公众号onlinejudge获得最新版本LiveCD下载链接
+
 12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172
 * http://pan.baidu.com/netdisk/singlepublic?fid=241719_3088787629

@@ -22,10 +22,10 @@
 	<li>
 		<a class='btn btn-primary' href="news_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_NEWS?></b></a><?php echo $MSG_HELP_ADD_NEWS?>
 	<li>
-		<a class='btn btn-primary' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a><?php echo $MSG_HELP_USER_LIST?>
+		<a class='btn btn-primary' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a><?php echo $MSG_HELP_NEWS_LIST?>
 		
 	<li>
-	<a class='btn btn-primary' href="user_list.php" target="main"><b><?php echo $MSG_USER.$MSG_LIST?></b></a>
+	<a class='btn btn-primary' href="user_list.php" target="main"><b><?php echo $MSG_USER.$MSG_LIST?></b></a><?php echo $MSG_HELP_USER_LIST?>
 <?php }
 if (isset($_SESSION['administrator'])||isset($_SESSION['problem_editor'])){
 ?>

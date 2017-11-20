@@ -142,4 +142,29 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_Creator="Creator";
 
   $MSG_IMPORTED="Imported";
+  
+  
+    
+  $MSG_USER="User";
+   
+  $MSG_HELP_SEEOJ="watch the front pages";
+  $MSG_HELP_ADD_NEWS="add news for the homepage";
+  $MSG_HELP_NEWS_LIST="edit or shutdown published news";
+  $MSG_HELP_USER_LIST="enable/disable user";
+  $MSG_HELP_ADD_PROBLEM="add new problem,multi test cases can be added after problem added ,using TestData button on the Problem List";
+  $MSG_HELP_PROBLEM_LIST="manage existing problems, test case files can be uploaded within a zip file and decompress later";
+  $MSG_HELP_ADD_CONTEST="schedule a new contest, problem list seperated with comma. You can set up private contest and restrict participants with passwords or lists.";
+  $MSG_HELP_CONTEST_LIST="The existing list of contests, modification time and public / private, try not to adjust the list of items after the start.";
+  $MSG_HELP_TEAMGENERATOR="Generate accounts and passwords in batches for competitors from different schools. Small system should not be used casually, may produce garbage accounts, which can not be easily deleted.";
+  $MSG_HELP_SETMESSAGE="Set scroll notification content";
+  $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";
+  $MSG_HELP_REJUDGE="To review a specified subject, submission, or contest.";
+ $MSG_HELP_ADD_PRIVILEGE=" adds permissions to designated users, including administrators, subjects, players, organizers, participants, code viewer, manual judge questions, remote questions and other permissions. ";
+$MSG_HELP_PRIVILEGE_LIST= "looks at the existing list of special permissions and deletes them. ";
+$MSG_HELP_GIVESOURCE=" transfers the label of the import system to the designated account number, which is used to assist the person who has not passed the training after the training. ";
+$MSG_HELP_EXPORT_PROBLEM= "export the problems of the system in the form of fps.xml file. ";
+$MSG_HELP_IMPORT_PROBLEM=" import fps.xml files downloaded from internet or tk.hustoj.com. ";
+$MSG_HELP_UPDATE_DATABASE= "update the database structure, after each upgrade (sudo update-hustoj), run it once. ";
+$MSG_HELP_ONLINE= "view online users";
+  
  ?>

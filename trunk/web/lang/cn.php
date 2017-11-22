@@ -168,6 +168,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_HELP_IMPORT_PROBLEM="导入从官方群共享或tk.hustoj.com下载到的fps.xml文件。";
   $MSG_HELP_UPDATE_DATABASE="更新数据库结构，在每次升级（sudo update-hustoj）之后应操作一次。";
   $MSG_HELP_ONLINE="查看在线用户";
+  $MSG_HELP_AC="答案正确，请再接再厉。"; 
   $MSG_HELP_PE="答案基本正确，但是格式不对。"; 
   $MSG_HELP_WA="答案不对，仅仅通过样例数据的测试并不一定是正确答案，一定还有你没想到的地方，点击查看系统可能提供的对比信息。"; 
   $MSG_HELP_TLE="运行超出时间限制，检查下是否有死循环，或者应该有更快的计算方法"; 

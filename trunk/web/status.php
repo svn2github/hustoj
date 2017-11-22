@@ -220,6 +220,8 @@ for ($i=0;$i<$rows_cnt;$i++){
                 $view_status[$i][2]= "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
         }
 	switch($row['result']){
+		case 4:
+			$MSG_Tips=$MSG_HELP_AC;break;
 		case 5:
 			$MSG_Tips=$MSG_HELP_PE;break;
 		case 6:
@@ -234,6 +236,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 			$MSG_Tips=$MSG_HELP_RE;break;
 		case 11:
 			$MSG_Tips=$MSG_HELP_CE;break;
+		default: $MSG_Tips="";
 
 	}
        

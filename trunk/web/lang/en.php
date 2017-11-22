@@ -173,5 +173,5 @@ $MSG_HELP_ONLINE= "view online users";
   $MSG_HELP_OLE="Your program tried to write too much information. This usually occurs if it goes into a infinite loop. Currently the output limit is 1M bytes"; 
   $MSG_HELP_RE="All the other Error on the running phrase will get Runtime Error, such as 'segmentation fault','floating point exception','used forbidden functions', 'tried to access forbidden memories' and so on";
   $MSG_HELP_CE="The compiler (gcc/g++/gpc) could not compile your ANSI program. Of course, warning messages are not error messages. Click the link at the judge reply to see the actual error message"; 
- 
+  $MSG_HELP_AC="Congratulations!"; 
  ?>

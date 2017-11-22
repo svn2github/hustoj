@@ -219,24 +219,42 @@ for ($i=0;$i<$rows_cnt;$i++){
         }else{
                 $view_status[$i][2]= "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
         }
+	switch($row['result']){
+		case 4:
+			$MSG_Tips=$MSG_HELP_AC;break;
+		case 5:
+			$MSG_Tips=$MSG_HELP_PE;break;
+		case 6:
+			$MSG_Tips=$MSG_HELP_WA;break;
+		case 7:
+			$MSG_Tips=$MSG_HELP_TLE;break;
+		case 8:
+			$MSG_Tips=$MSG_HELP_MLE;break;
+		case 9:
+			$MSG_Tips=$MSG_HELP_OLE;break;
+		case 10:
+			$MSG_Tips=$MSG_HELP_RE;break;
+		case 11:
+			$MSG_Tips=$MSG_HELP_CE;break;
+		default: $MSG_Tips="";
 
-       
+	}
        
 	$view_status[$i][3]="<span class='hidden' style='display:none' result='".$row['result']."' ></span>";
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Click_Detail'>".$MSG_Compile_Error."";
+                $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$MSG_Compile_Error."";
 
         if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
         }else if ((((intval($row['result'])==5||intval($row['result'])==6)&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."' title='$MSG_Click_Detail'>".$judge_result[$row['result']]."";
+                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."' title='$MSG_Tips'>".$judge_result[$row['result']]."";
         if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'>*".$judge_result[$row['result']]."";
+                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
 
@@ -254,7 +272,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                         }
                 }else{
 
-                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'>".$judge_result[$row['result']]."";
+                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
                 }

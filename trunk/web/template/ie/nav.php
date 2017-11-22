@@ -19,7 +19,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo $OJ_HOME?>"><?php echo $OJ_NAME?></a>
-            <a class="navbar-brand" href="<?php echo $OJ_HOME?>/moodle">Moodle</a>
+            <?php if (is_dir("moodle")){ ?><a class="navbar-brand" href="<?php echo $OJ_HOME?>/moodle">Moodle</a><?php }?>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

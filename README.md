@@ -43,7 +43,11 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 <b>[FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)</b> 和
 <b>[Wiki](https://github.com/zhblue/hustoj/tree/master/wiki)</b> 或使用搜索引擎。  
 
-使用上需要帮助，请加用户交流QQ群23361372，仅限QQ手机加群(费用5元)或购买在线服务hustoj.taobao.com。  
+使用上需要帮助，请加用户交流QQ群23361372，仅支持开通支付功能的手机QQ加群，不接受其他方式加群。
+群共享有题库 安装盘 文档 ，群内可以讨论 答疑 。
+新加群，请改群名片，5分钟后可以发言 。
+请尊重开源软件开发者的辛苦劳动，出言不逊者将被踢出，群费不退。
+
 
 Linux不熟悉的用户推荐使用:
 HUSTOJ_LiveCD(关注微信公众号onlinejudge获得下载链接)

@@ -1,6 +1,5 @@
 <?php @session_start();?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<?php include("../template/$OJ_TEMPLATE/css.php");?>
 <link rel=stylesheet href='../include/hoj.css' type='text/css'>
 <script src="../template/bs3/jquery.min.js"></script>
 <script>
@@ -17,6 +16,7 @@ $("document").ready(function (){
 	exit(1);
 }
 require_once("../include/db_info.inc.php");
+require_once("../template/$OJ_TEMPLATE/css.php");
 if(file_exists("../lang/$OJ_LANG.php")) require_once("../lang/$OJ_LANG.php");
 ?>
 

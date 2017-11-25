@@ -122,22 +122,28 @@ else if(isset($_POST['problem2contest'])){
 	
 <div class="container">
 	<form method=POST >
-	<p align=left>Title:<input class=input-xxlarge  type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
-	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
+	<p align=left><?php echo $MSG_TITLE?><input class=input-xxlarge  type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
+	<p align=left><?php echo $MSG_Start?>:
 	Year:<input  class=input-mini type=text name=syear value=<?php echo date('Y')?> size=4 >
 	Month:<input class=input-mini  type=text name=smonth value=<?php echo date('m')?> size=2 >
 	Day:<input class=input-mini type=text name=sday size=2 value=<?php echo date('d')?> >&nbsp;
 	Hour:<input class=input-mini    type=text name=shour size=2 value=<?php echo date('H')?>>&nbsp;
 	Minute:<input class=input-mini    type=text name=sminute value=00 size=2 ></p>
-	<p align=left>End Time:<br>&nbsp;&nbsp;&nbsp;
+	<p align=left><?php echo $MSG_End?>
 	Year:<input class=input-mini    type=text name=eyear value=<?php echo date('Y')?> size=4 >
 	Month:<input class=input-mini    type=text name=emonth value=<?php echo date('m')?> size=2 >
 	
 	Day:<input class=input-mini  type=text name=eday size=2 value=<?php echo date('d')+(date('H')+4>23?1:0)?>>&nbsp;
 	Hour:<input class=input-mini  type=text name=ehour size=2 value=<?php echo (date('H')+4)%24?>>&nbsp;
 	Minute:<input class=input-mini  type=text name=eminute value=00 size=2 ></p>
-	Public:<select name=private><option value=0>Public</option><option value=1>Private</option></select>
-	Password:<input type=text name=password value="">
+	Public:<select name=private><option value=0><?php echo $MSG_Public?></option>
+				    <option value=1><?php echo $MSG_Private?></option>
+               </select>
+	<?php echo $MSG_PASSWORD?>:<input type=text name=password value="">
+	<?php require_once("../include/set_post_key.php");?>
+	<br>Problems:<input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
+	<br>
+	<p align=left>Description:<br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
 	Language:<select name="lang[]" multiple="multiple"    style="height:220px">
 	<?php
 $lang_count=count($language_ext);
@@ -154,16 +160,10 @@ $lang_count=count($language_ext);
 
 
         </select>
-	<?php require_once("../include/set_post_key.php");?>
-	<br>Problems:<input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
-	<br>
-	<p align=left>Description:<br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
 
 
-	Users:<textarea name="ulist" rows="20" cols="20"></textarea>
-	<br />
-	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。
-	<p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
+	Users:<textarea name="ulist" rows="12" cols="20" placeholder="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"></textarea>
+	<input type=submit value=Submit name=submit><input type=reset value=Reset name=reset>
 	</form>
 </div>
 <?php }

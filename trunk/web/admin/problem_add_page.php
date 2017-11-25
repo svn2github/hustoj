@@ -22,8 +22,8 @@ include_once("kindeditor.php") ;
 <form method=POST action=problem_add.php>
 <input type=hidden name=problem_id value="New Problem">
 <p align=left><?php echo $MSG_TITLE?>:<input class="input input-xxlarge" type=text name=title size=71></p>
-<p align=left><?php echo $MSG_Time_Limit?>:<input type=text name=time_limit size=20 value=1>S</p>
-<p align=left><?php echo $MSG_Memory_Limit?>:<input type=text name=memory_limit size=20 value=128>MByte</p>
+<p align=left><?php echo $MSG_Time_Limit?>:<input class="input input-mini" type=text name=time_limit size=20 value=1>S
+<?php echo $MSG_Memory_Limit?>:<input class="input input-mini" type=text name=memory_limit size=20 value=128>MByte</p>
 <p align=left><?php echo $MSG_Description?>:<br>
 <textarea class="kindeditor" rows=13 name=description cols=80></textarea>
 
@@ -41,10 +41,10 @@ include_once("kindeditor.php") ;
 
 
 </p>
-<p align=left><?php echo $MSG_Sample_Input?>:<br><textarea  class="input input-xxlarge"  rows=13 name=sample_input cols=80></textarea></p>
-<p align=left><?php echo $MSG_Sample_Output?>:<br><textarea  class="input input-xxlarge"  rows=13 name=sample_output cols=80></textarea></p>
-<p align=left><?php echo $MSG_Test_Input?>:<br><textarea  class="input input-xxlarge" rows=13 name=test_input cols=80></textarea></p>
-<p align=left><?php echo $MSG_Test_Output?><br><textarea  class="input input-xxlarge"  rows=13 name=test_output cols=80></textarea></p>
+<p align=left><?php echo $MSG_Sample_Input?><textarea  class="input input-large"  rows=13 name=sample_input cols=40></textarea>
+              <?php echo $MSG_Sample_Output?><textarea  class="input input-large"  rows=13 name=sample_output cols=40></textarea></p>
+<p align=left><?php echo $MSG_Test_Input?><textarea  class="input input-large" rows=13 name=test_input cols=40></textarea>
+              <?php echo $MSG_Test_Output?><textarea  class="input input-large"  rows=13 name=test_output cols=40></textarea></p>
 <p align=left><?php echo $MSG_HELP_MORE_TESTDATA_LATER?></p>
 <p align=left><?php echo $MSG_HINT?>:<br>
 <textarea class="kindeditor" rows=13 name=hint cols=80></textarea>

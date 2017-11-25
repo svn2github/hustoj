@@ -104,6 +104,9 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_Output= "输出" ;
 	$MSG_Sample_Input= "样例输入" ;
 	$MSG_Sample_Output= "样例输出" ;
+	$MSG_Test_Input= "测试输入" ;
+	$MSG_Test_Output= "测试输出" ;
+	$MSG_SPJ= "特殊裁判" ;
 	$MSG_HINT= "提示" ;
 	$MSG_Source= "来源" ;
 	$MSG_Time_Limit="时间限制";
@@ -177,7 +180,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_HELP_RE="运行时错误，非法的内存访问，数组越界，指针漂移，调用禁用的系统函数。请点击后获得详细输出";
   $MSG_HELP_CE="编译错误，请点击后获得编译器的详细输出"; 
   
-  
-  
+  $MSG_HELP_MORE_TESTDATA_LATER="更多组测试数据，请在题目添加完成后补充"; 
+  $MSG_HELP_SPJ="特殊裁判的使用，请参考<a href='https://cn.bing.com/search?q=hustoj+special+judge'>搜索hustoj special judge</a>"; 
   
 ?>

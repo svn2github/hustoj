@@ -7,6 +7,7 @@
 <title>New Problem</title>
 </head>
 <body leftmargin="30" >
+<div class="container">
 
 <?php require_once("../include/db_info.inc.php");?>
 <?php require_once("admin-header.php");
@@ -74,6 +75,6 @@ if (count($result)==0){
 <input type=submit value=Submit name=submit>
 </div></form>
 <p>
-
+</div>
 </body></html>
 

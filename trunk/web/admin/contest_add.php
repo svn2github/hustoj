@@ -120,8 +120,8 @@ else if(isset($_POST['problem2contest'])){
   include_once("kindeditor.php") ;
 ?>
 	
+<div class="container">
 	<form method=POST >
-	<p align=center><font size=4 color=#333399>Add a Contest</font></p>
 	<p align=left>Title:<input class=input-xxlarge  type=text name=title size=71 value="<?php echo isset($title)?$title:""?>"></p>
 	<p align=left>Start Time:<br>&nbsp;&nbsp;&nbsp;
 	Year:<input  class=input-mini type=text name=syear value=<?php echo date('Y')?> size=4 >
@@ -165,6 +165,7 @@ $lang_count=count($language_ext);
 	*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。
 	<p><input type=submit value=Submit name=submit><input type=reset value=Reset name=reset></p>
 	</form>
+</div>
 <?php }
 require_once("../oj-footer.php");
 

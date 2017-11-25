@@ -15,7 +15,6 @@ if (!(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-if(file_exists("../lang/$OJ_LANG.php")) require("../lang/$OJ_LANG.php");
 ?>
 <?php
 include_once("kindeditor.php") ;

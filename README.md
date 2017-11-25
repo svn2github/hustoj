@@ -59,6 +59,8 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 
 建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/)
 
+
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/menu.png" >
 ----------------------
 这里是广告：
 NOIP在线课程

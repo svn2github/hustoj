@@ -153,6 +153,7 @@ if(isset($_POST['do'])){
 	}
 }
 ?>
+<div class="container">
 <b>Update DataBase</b>
 	Create New Tables ,drop useless columes.
 	<b>Necessary for using plagiarism detection.</b>
@@ -166,3 +167,4 @@ if(isset($_POST['do'])){
    <a href="update_pw.php">Upgrade all users password storage form to get more security.</a>
    * only do once !
 <?php }?>
+</div>

@@ -6,8 +6,7 @@ if (!(isset($_SESSION['administrator']))){
 }
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>News Edit</title>
-
+<div class="container">
 <?php require_once("../include/db_info.inc.php");
 if (isset($_POST['news_id']))
 {
@@ -59,5 +58,5 @@ if (get_magic_quotes_gpc ()) {
 <?php require_once("../include/set_post_key.php");?>
 <input type=submit>
 </form>
-
+</div>
 

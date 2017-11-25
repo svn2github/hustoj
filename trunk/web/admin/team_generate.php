@@ -45,14 +45,15 @@ if (!(isset($_SESSION['administrator']))){
 	
 }
 ?>
+<div class="container">
 <b>TeamGenerator:</b>
 	
 	<form action='team_generate.php' method=post>
-	    Prefix:<input type='test' name='prefix' value='team'>
-		Generate<input type=input name='teamnumber' value=50>Teams.
-		<input type=submit value=Generate><br>
-                Users:<textarea name="ulist" rows="20" cols="20"><?php if (isset($ulist)) { echo $ulist; } ?></textarea>
+	    Prefix:<input type='test' name='prefix' value='team' placeholder="Team"><br>
+		Generate<input class="input-mini" type=input name='teamnumber' value=5 size=3 >Teams.<br>
+                Users:<textarea name="ulist" rows="12" cols="40" placeholder="Preset nicknames of the teams. One name per line."></textarea>
 		<?php require_once("../include/set_post_key.php");?>
+		<input type=submit value=Generate><br>
 	</form>
 
-
+</div>

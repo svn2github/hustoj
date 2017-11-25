@@ -16,5 +16,7 @@ $("document").ready(function (){
 	exit(1);
 }
 require_once("../include/db_info.inc.php");
+require_once("../template/$OJ_TEMPLATE/css.php");
+if(file_exists("../lang/$OJ_LANG.php")) require_once("../lang/$OJ_LANG.php");
 ?>
 

@@ -13,15 +13,16 @@ if(isset($_POST['do'])){
 
 
 $msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"msg.txt");
+include("kindeditor.php");
 
 ?>
-	<b>Set Message</b>
+<div class="container">
 	<form action='setmsg.php' method='post'>
-		<textarea name='msg' rows=25 class="input input-xxlarge" ><?php echo $msg?></textarea><br>
+		<textarea name='msg' rows=25 class="kindeditor" ><?php echo $msg?></textarea><br>
 		<input type='hidden' name='do' value='do'>
 		<input type='submit' value='change'>
 		<?php require_once("../include/set_post_key.php");?>
 	</form>
-	
+</div>
 <?php require_once('../oj-footer.php');
 ?>

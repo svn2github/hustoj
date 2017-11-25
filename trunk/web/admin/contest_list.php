@@ -6,7 +6,7 @@
 
 
 echo "<title>Problem List</title>";
-echo "<center><h2>Contest List</h2></center>";
+echo "<div class=\"container\">";
 require_once("../include/set_get_key.php");
 $sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";
 $page_cnt=50;
@@ -67,6 +67,6 @@ foreach($result as $row){
 
         echo "</tr>";
 }
-echo "</table></center>";
+echo "</table></center></div>";
 require("../oj-footer.php");
 ?>

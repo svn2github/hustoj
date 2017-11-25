@@ -7,6 +7,7 @@
 <title>New Problem</title>
 </head>
 <body leftmargin="30" >
+<div class="container">
 
 <?php require_once("../include/db_info.inc.php");?>
 <?php require_once("admin-header.php");
@@ -20,16 +21,13 @@ include_once("kindeditor.php") ;
 ?>
 <form method=POST action=news_add.php>
 
-<p align=left>Post a News</p>
-<p align=left>Title:<input type=text name=title size=71></p>
+<p align=left><?php echo $MSG_TITLE?>:<input type=text name=title size=71></p>
 
-<p align=left>Content:<br>
 <textarea class=kindeditor name=content ></textarea>
 </p>
 <input type=submit value=Submit name=submit>
 <?php require_once("../include/set_post_key.php");?>
 </div></form>
-<p>
-
+</div>
 </body></html>
 

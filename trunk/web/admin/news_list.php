@@ -5,7 +5,7 @@ if (!isset($_SESSION['administrator'])){
 	exit(1);
 }
 echo "<title>News List</title>";
-echo "<center><h2>News List</h2></center>";
+echo "<div class='container'>";
 $sql="select `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` order by `news_id` desc";
 $result=pdo_query($sql) ;
 echo "<center><table width=90% border=1>";
@@ -24,6 +24,6 @@ foreach($result as $row){
 }
 
 echo "</tr></form>";
-echo "</table></center>";
+echo "</table></div>";
 
 ?>

@@ -15,6 +15,7 @@ if (!(isset($_SESSION['administrator']))){
 	
 }
 ?>
+<div class="container">
 <form action='source_give.php' method=post>
 	<b>Give source:</b><br />
 	From:<input type=text size=10 name="from" value="zhblue"><br />
@@ -26,3 +27,4 @@ if (!(isset($_SESSION['administrator']))){
 	<?php require_once("../include/set_post_key.php");?>
 	<input type=submit value='GiveMySourceToHim'>
 </form>
+</div>

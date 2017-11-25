@@ -14,6 +14,7 @@ if(isset($_POST['do'])){
 	
 }
 ?>
+<div class="container">
 <form method=post>
 <?php require("../include/set_post_key.php");?>
 	<b>Add privilege for User:</b><br />
@@ -42,3 +43,4 @@ while(list($key, $val)=each($rightarray)) {
 	<input type=submit value='Add'>
 	<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
 </form>
+</div>

@@ -5,7 +5,7 @@ if (!(isset($_SESSION['administrator']))){
 	exit(1);
 }
 echo "<title>Privilege List</title>"; 
-echo "<center><h2>Privilege List</h2></center>";
+echo "<div class='container'>";
 $sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor','password_setter') ";
 $result=pdo_query($sql) ;
 echo "<center><table class='table table-striped' width=60% border=1>";
@@ -22,6 +22,6 @@ foreach($result as $row){
 //	echo "<td><a href=contest_add.php?cid=$row['contest_id']>Copy</a>";
 	echo "</tr>";
 }
-echo "</table></center>";
+echo "</table></center></div>";
 
 ?>

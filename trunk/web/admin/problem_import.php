@@ -14,6 +14,7 @@ if (!(isset($_SESSION['administrator']))){
    $maxfile=min(ini_get("upload_max_filesize"),ini_get("post_max_size"));
 
 ?>
+<div class="container">
 Import FPS data ,please make sure you file is smaller than [<?php echo $maxfile?>] <br/>
 or set upload_max_filesize and post_max_size in PHP.ini<br/>
 if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in php.ini.<br>
@@ -52,3 +53,4 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 <br>
 
 更多题目请到 <a href=http://tk.hustoj.com/>TK 题库</a> 选购。
+</div>

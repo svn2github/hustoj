@@ -50,23 +50,25 @@ if (!(isset($_SESSION['administrator']))){
 
 }
 ?>
+<div class="container">
 <b>Rejudge</b>
 	<ol>
-	<li>Problem
+	<li><?php echo $MSG_PROBLEM?>
 	<form action='rejudge.php' method=post>
-		<input type=input name='rjpid'>	<input type='hidden' name='do' value='do'>
+		<input type=input name='rjpid' placeholder="1001">	<input type='hidden' name='do' value='do'>
 		<input type=submit value=submit>
 		<?php require_once("../include/set_post_key.php");?>
 	</form>
-	<li>Solution
+	<li><?php echo $MSG_SUBMIT?>
 	<form action='rejudge.php' method=post>
-		<input type=input name='rjsid'>	<input type='hidden' name='do' value='do'>
+		<input type=input name='rjsid' placeholder="1002">	<input type='hidden' name='do' value='do'>
 		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
 		<input type=submit value=submit>
 	</form>
-	<li>Contest
+	<li><?php echo $MSG_CONTEST?>
 	<form action='rejudge.php' method=post>
-		<input type=input name='rjcid'>	<input type='hidden' name='do' value='do'>
+		<input type=input name='rjcid' placeholder="1003">	<input type='hidden' name='do' value='do'>
 		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
 		<input type=submit value=submit>
 	</form>
+</div>

@@ -93,6 +93,10 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_Output= "Output" ;
 	$MSG_Sample_Input= "Sample Input" ;
 	$MSG_Sample_Output= "Sample Output" ;
+	$MSG_Test_Input= "Test Input" ;
+	$MSG_Test_Output= "Test Output" ;
+	$MSG_SPJ= "Special Judge" ;
+
 	$MSG_HINT= "HINT" ;
 	$MSG_Source= "Source" ;
 	$MSG_Time_Limit="Time Limit";
@@ -174,4 +178,8 @@ $MSG_HELP_ONLINE= "view online users";
   $MSG_HELP_RE="All the other Error on the running phrase will get Runtime Error, such as 'segmentation fault','floating point exception','used forbidden functions', 'tried to access forbidden memories' and so on";
   $MSG_HELP_CE="The compiler (gcc/g++/gpc) could not compile your ANSI program. Of course, warning messages are not error messages. Click the link at the judge reply to see the actual error message"; 
   $MSG_HELP_AC="Congratulations!"; 
+  
+  $MSG_HELP_MORE_TESTDATA_LATER="more testdata can be added later after this problem added."; 
+  $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>for more details"; 
+ 
  ?>

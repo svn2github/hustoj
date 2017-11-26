@@ -25,7 +25,7 @@ if (isset($_GET['page'])){
 }else $page=$cnt;
 $pstart=1000+$page_cnt*intval($page-1);
 $pend=$pstart+$page_cnt;
-echo "<center><h2>Problem List</h2></center>";
+echo "<div class='container'>";
 echo "<form action=problem_list.php>";
 echo "<select class='input-mini' onchange=\"location.href='problem_list.php?page='+this.value;\">";
 for ($i=1;$i<=$cnt;$i++){
@@ -46,7 +46,6 @@ if($keyword) {
 	$result=pdo_query($sql,$pstart,$pend);
 }
 ?>
-<div class="container">
 <form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
 <?php

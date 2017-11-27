@@ -79,10 +79,12 @@
          ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
          ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
          // reg it
-	 $ip = $_SERVER['REMOTE_ADDR'];
+	 $ip = ($_SERVER['REMOTE_ADDR']);
          if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
-             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	 }
+             $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+             $tmp_ip=explode(',',$REMOTE_ADDR);
+             $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+         }
          pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school);
      }
 	 //login it

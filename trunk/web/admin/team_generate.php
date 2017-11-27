@@ -35,17 +35,14 @@ if (!(isset($_SESSION['administrator']))){
                        
 			$school="your_own_school";
 			$ip = ($_SERVER['REMOTE_ADDR']);
-      
-      
 			if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
-				    $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
-
-				    $tmp_ip=explode(',',$REMOTE_ADDR);
-				    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+			    $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+			    $tmp_ip=explode(',',$REMOTE_ADDR);
+			    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 			}
 			$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
 			"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
-			pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school) ;
+			pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school) ;
 		}
 		echo  "</table>";
 		

@@ -45,7 +45,10 @@ if(array_key_exists('code',$_GET)){
                     ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
             ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
            // reg it
-           pdo_query($sql,$uname,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);
+           if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
+               $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+           }
+           pdo_query($sql,$uname,$email,$ip,$password,$nick,$school);
         }
         // login it
 		$_SESSION['user_id']=$uname;

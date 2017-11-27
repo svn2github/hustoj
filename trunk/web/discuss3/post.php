@@ -47,10 +47,12 @@
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=intval($_POST['tid']);
                 if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
-                        $ip = $_SERVER['REMOTE_ADDR'];
+                        $ip = ($_SERVER['REMOTE_ADDR']);
 			if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
-                            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                        }
+			    $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+			    $tmp_ip=explode(',',$REMOTE_ADDR);
+			    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+			}
                         $sql="insert INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) values(?,NOW(),?,?,?)";
                         if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$ip)){
                                 header('Location: thread.php?tid='.$tid);

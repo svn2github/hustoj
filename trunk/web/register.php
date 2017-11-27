@@ -76,9 +76,11 @@ if ($rows_cnt == 1){
 $nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
-$ip=$_SERVER['REMOTE_ADDR'];
+$ip = ($_SERVER['REMOTE_ADDR']);
 if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $tmp_ip=explode(',',$REMOTE_ADDR);
+    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 }
 if(isset($OJ_REG_NEED_CONFIRM)&&$OJ_REG_NEED_CONFIRM) $defunct="Y";
 else $defunct="N";

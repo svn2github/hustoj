@@ -2,7 +2,7 @@
 <?php
 	require_once("./include/db_info.inc.php");
 	require_once("./include/my_func.inc.php"); 
-	//Step1£º»ñÈ¡Authorization Code
+	//Step1Â£ÂºÂ»Ã±ÃˆÂ¡Authorization Code
 	session_start();
 	$code = $_REQUEST["code"];
 	if(empty($code)) 
@@ -79,7 +79,11 @@
          ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)"
          ."VALUES(?,?,?,NOW(),?,NOW(),?,?)";
          // reg it
-         pdo_query($sql,$user_id,$email,$_SERVER['REMOTE_ADDR'],$password,$nick,$school);
+	 $ip = $_SERVER['REMOTE_ADDR'];
+         if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
+             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	 }
+         pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school);
      }
 	 //login it
 	 $_SESSION['user_id']=$user_id;

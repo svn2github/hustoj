@@ -20,11 +20,13 @@ if (isset($_GET['page'])){
 }else $page=$cnt;
 $pstart=$base+$page_cnt*intval($page-1);
 $pend=$pstart+$page_cnt;
+/*
 for ($i=1;$i<=$cnt;$i++){
         if ($i>1) echo '&nbsp;';
         if ($i==$page) echo "<span class=red>$i</span>";
         else echo "<a href='contest_list.php?page=".$i."'>".$i."</a>";
 }
+*/
 $sql="";
 if(isset($_GET['keyword'])){
 	$keyword=$_GET['keyword'];
@@ -36,8 +38,26 @@ if(isset($_GET['keyword'])){
 	 $result=pdo_query($sql,$pstart,$pend);
 }
 ?>
-<form action=contest_list.php class=center><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
-
+<div style="float:left;">
+<form action=contest_list.php class="pagination" ><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
+</div><div style="display:inline;">
+<nav class="center"><ul class="pagination">
+<li class="page-item"><a href="contest_list.php?page=1">&lt;&lt;</a></li>
+<?php
+if(!isset($page)) $page=1;
+$page=intval($page);
+$section=3;
+$start=$page>$section?$page-$section:1;
+$end=$page+$section>$cnt?$cnt:$page+$section;
+for ($i=$start;$i<=$end;$i++){
+ echo "<li class='".($page==$i?"active ":"")."page-item'>
+            <a title='go to page' href='contest_list.php?page=".$i.(isset($_GET['my'])?"&my":"")."'>".$i."</a></li>";
+}
+?>
+<li class="page-item"><a href="contest_list.php?page=<?php echo $cnt?>">&gt;&gt;</a></li>
+</ul>
+</nav>
+</div>
 <?php
 echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs";

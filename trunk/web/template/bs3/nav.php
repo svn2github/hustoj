@@ -3,19 +3,20 @@
 	$dir=basename(getcwd());
 	if($dir=="discuss3") $path_fix="../";
 	else $path_fix="";
-	if($OJ_ONLINE){
-		require_once($path_fix.'include/online.php');
-		$on = new online();
-	}
-	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
-		$url!='loginpage.php'&&
-		$url!='lostpassword.php'&&
-		$url!='lostpassword2.php'&&
-		$url!='registerpage.php'
-		) && !isset($_SESSION['user_id'])){
+ 	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
+                  $url!='loginpage.php'&&
+                  $url!='lostpassword.php'&&
+                  $url!='lostpassword2.php'&&
+                  $url!='registerpage.php'
+                  ) && !isset($_SESSION['user_id'])){
+ 
+           header("location:loginpage.php");
+           exit();
+        }
 
-	 header("location:loginpage.php");
-	 exit();
+	if($OJ_ONLINE){
+		require_once('./include/online.php');
+		$on = new online();
 	}
 ?>
       <!-- Static navbar -->

@@ -36,7 +36,7 @@ $result=pdo_query($sql,intval($_GET['id']));
 <p><?php echo $MSG_Output?>:<br><textarea class="kindeditor" rows=13 name=output cols=120><?php echo htmlentities($row['output'],ENT_QUOTES,"UTF-8")?></textarea></p>
 
 <p><?php echo $MSG_Sample_Input?>:<textarea rows=13 name=sample_input cols=120><?php echo htmlentities($row['sample_input'],ENT_QUOTES,"UTF-8")?></textarea>
-<?php echo $MSG_Sample_Input?>:<textarea rows=13 name=sample_output cols=120><?php echo htmlentities($row['sample_output'],ENT_QUOTES,"UTF-8")?></textarea></p>
+<?php echo $MSG_Sample_Output?>:<textarea rows=13 name=sample_output cols=120><?php echo htmlentities($row['sample_output'],ENT_QUOTES,"UTF-8")?></textarea></p>
 <p><?php echo $MSG_HINT?>:<br>
 <textarea class="kindeditor" rows=13 name=hint cols=120><?php echo htmlentities($row['hint'],ENT_QUOTES,"UTF-8")?></textarea></p>
 </p>

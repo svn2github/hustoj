@@ -91,6 +91,8 @@ auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
    $(this).find("form").show(600);
+   var sid=$(this).find("span[class=original]").attr("sid");
+   $(this).find("span[class=original]").load("status-ajax.php?q=user_id&solution_id="+sid);
 });
 $(".http_judge_form").hide();
 

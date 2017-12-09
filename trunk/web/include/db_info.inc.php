@@ -27,6 +27,7 @@ static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;
 static  $OJ_APPENDCODE=false;
+static  $OJ_CE_PENALTY=false;
 static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;

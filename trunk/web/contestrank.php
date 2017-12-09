@@ -22,10 +22,13 @@ class TM{
                 $this->p_ac_sec=array(0);
         }
         function Add($pid,$sec,$res){
+		global $OJ_CE_PENALTY;
 //              echo "Add $pid $sec $res<br>";
                 if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
                         return;
                 if ($res!=4){
+			if(isset($OJ_CE_PENALTY)&&!$OJ_CE_PENALTY&&$res==11) return;  // ACM WF punish no ce 
+	
                         if(isset($this->p_wa_num[$pid])){
                                 $this->p_wa_num[$pid]++;
                         }else{

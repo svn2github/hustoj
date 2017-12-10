@@ -86,7 +86,7 @@ if (empty($_FILES) === false) {
 	}
 	//检查目录写权限
 	if (@is_writable($save_path) === false) {
-		alert("上传目录没有写权限。");
+		alert("上传目录没有写权限。在服务器上执行下述命令解决该问题:\n chown www-data -R /home/judge/src/web/upload \n");
 	}
 	//检查是否已上传
 	if (@is_uploaded_file($tmp_name) === false) {

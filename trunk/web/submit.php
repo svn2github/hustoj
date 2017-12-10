@@ -174,7 +174,7 @@ if ($len>65536){
 }
 
 // last submit
-$now=strftime("%Y-%m-%d %X",time()-1);
+$now=strftime("%Y-%m-%d %X",time()-10);
 $sql="SELECT `in_date` from `solution` where `user_id`=? and in_date>? order by `in_date` desc limit 1";
 $res=pdo_query($sql,$user_id,$now);
 if (count($res)==1){

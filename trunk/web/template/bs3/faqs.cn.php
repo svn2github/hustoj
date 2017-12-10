@@ -169,7 +169,7 @@ public class Main{
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "https://github.com/zhblue/hustoj"><font color=red>16.12.02</font></a></td>
+      <a href = "https://github.com/zhblue/hustoj"><font color=red>17.12.01</font></a></td>
     </tr>
   </table>
 </center>

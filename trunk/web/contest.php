@@ -1,7 +1,9 @@
  <?php
-	$OJ_CACHE_SHARE=!isset($_GET['cid']);
+	$cache_time=30;
+	$OJ_CACHE_SHARE=false;//!(isset($_GET['cid'])||isset($_GET['my']));
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
+    require_once('./include/memcache.php');
 	require_once('./include/my_func.inc.php');
 	require_once('./include/const.inc.php');
 	require_once('./include/setlang.php');
@@ -188,7 +190,7 @@ $view_total_page=intval(pdo_query("select count(1) from contest where defunct='N
   }else{
 	$sql="select *  from contest left join (select * from privilege where rightstr like 'm%') p on concat('m',contest_id)=rightstr where contest.defunct='N' $wheremy  order by contest_id desc ";
 	$sql.=" limit ".strval($pstart).",".strval($pend); 
-	$result=pdo_query($sql);
+	$result=mysql_query_cache($sql);
   }
   
 			$view_contest=Array();

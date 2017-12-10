@@ -7,6 +7,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 	$OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
+    require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title= "$MSG_STATUS";
 	
@@ -155,21 +156,14 @@ $sql=$sql.$order_str." LIMIT 20";
 
 
 
-if($OJ_MEMCACHE){
-	require("./include/memcache.php");
-	$result = mysql_query_cache($sql);
-	if($result) $rows_cnt=count($result);
-	else $rows_cnt=0;
-}else{
 	if (isset($_GET['user_id'])){
 		$result = pdo_query($sql,$user_id);
 	}else{
-		$result = pdo_query($sql);
+		$result = mysql_query_cache($sql);
 	}
 	
 	if($result) $rows_cnt=count($result);
 	else $rows_cnt=0;
-}
 $top=$bottom=-1;
 $cnt=0;
 if ($start_first){
@@ -244,12 +238,18 @@ for ($i=0;$i<$rows_cnt;$i++){
         if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
                 $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$MSG_Compile_Error."";
 
-        if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
+        	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
+		else
+	      			$view_status[$i][3].="</a>";
+				
         }else if ((((intval($row['result'])==5||intval($row['result'])==6)&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
-                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."' title='$MSG_Tips'>".$judge_result[$row['result']]."";
-        if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
+                $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']
+					."' class='".$judge_color[$row['result']]."' title='$MSG_Tips'>".$judge_result[$row['result']]."";
+        	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
+		else
+				 $view_status[$i][3].= "</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
@@ -257,6 +257,8 @@ for ($i=0;$i<$rows_cnt;$i++){
                         $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
+			else
+				$view_status[$i][3].="</span>";
 
                         if( isset($_SESSION['source_browser'])){
 
@@ -266,8 +268,8 @@ for ($i=0;$i<$rows_cnt;$i++){
                                         $view_status[$i][3].= "<span class='btn-info'>".$row['sim_s_id']."</span>";
 
                         }
-                        if(isset($_GET['showsim'])&&isset($row[13])){
-                                        $view_status[$i][3].= "$row[13]";
+                        if(isset($_GET['showsim'])&&isset($row['sim_s_id'])){
+                                        $view_status[$i][3].= "<span sid='".$row['sim_s_id']."' class='original'></span>";
 
                         }
                 }else{
@@ -275,9 +277,11 @@ for ($i=0;$i<$rows_cnt;$i++){
                         $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
+			else
+				$view_status[$i][3].="</span>";
                 }
           }else{
-              echo "----";
+               $view_status[$i][3]="----";
           }
 	  
 
@@ -286,7 +290,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 		 $view_status[$i][3].="<form class='http_judge_form form-inline' >
 					<input type=hidden name=sid value='".$row['solution_id']."'>";
                  $view_status[$i][3].="</form>";
-        }
+	}
 	            
 
        

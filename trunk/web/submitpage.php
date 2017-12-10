@@ -1,9 +1,7 @@
 <?php
-	$cache_time=1;
-	$OJ_CACHE_SHARE=false;
-    require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
     require_once('./include/const.inc.php');
+    require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title=$MSG_SUBMIT;
  if (!isset($_SESSION['user_id'])){
@@ -89,7 +87,7 @@ if(!$view_src){
 
 }
 	$sql="SELECT count(1) FROM `solution` WHERE result<4";
-	$result=pdo_query($sql);
+	$result=mysql_query_cache($sql);
 	 $row=$result[0];
 	if($row[0]>10) {
 		$OJ_VCODE=true;
@@ -102,7 +100,5 @@ if(!$view_src){
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/submitpage.php");
 /////////////////////////Common foot
-if(file_exists('./include/cache_end.php'))
-	require_once('./include/cache_end.php');
 ?>
 

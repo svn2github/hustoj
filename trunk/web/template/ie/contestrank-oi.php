@@ -39,6 +39,7 @@ if($OJ_MEMCACHE){
 }
  ?>
 </center>
+<div style="overflow: auto">
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User</th><th width=10%>Nick</th><th width=5%>Solved</th><th width=5%>Penalty</th><th align="center">Mark</th>
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
@@ -91,6 +92,7 @@ echo "</tr>\n";
 }
 echo "</tbody></table>";
 ?>
+	</div>
       </div>
 
     </div> <!-- /container -->

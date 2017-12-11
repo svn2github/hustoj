@@ -52,13 +52,14 @@ grid: {
 backgroundColor: { colors: ["#fff", "#eee"] }
 },
 xaxis: {
-mode: "time"//,
-//max:(new Date()).getTime(),
+mode: "time",
+max:(new Date()).getTime()+1000*3600*24*5
 //min:(new Date()).getTime()-120*24*3600*1000
 }
 });
 });
 //alert((new Date()).getTime());
 </script>
+ <?php echo $view_apc_info  ?>
   </body>
 </html>

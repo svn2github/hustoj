@@ -1,5 +1,4 @@
 <?php
-	require_once("./include/db_info.inc.php");
         
     # Connect to memcache:
     global $memcache;
@@ -34,7 +33,7 @@
 //需要注意的是这里使用操作的命令加上sql语句的md5码作为一个特定的key，可能大家觉得使用数据项的
 //名称作为key会比较自然一点。运行memcached加上"-vv"参数，并且不作为daemon运行的话，可以看见
 //memcached处理时输出的相关信息
-        if (!($cache = getCache(md5("mysql_query" . $sql)))) {
+        if (!($cache = getCache(md5($OJ_NAME.$_SEVER['HTTP_HOST']."mysql_query" . $sql)))) {
 
             $cache = false;
 

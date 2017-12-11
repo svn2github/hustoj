@@ -3,7 +3,8 @@
 	$cache_time=10;
 	$OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
+        require_once('./include/db_info.inc.php');
+        require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title= "Welcome To Online Judge";
  $result=false;	
@@ -13,7 +14,7 @@
 	$sql=	"select distinct source "
 			."FROM `problem` "
 			."LIMIT 500";
-	$result=pdo_query($sql);//mysql_escape_string($sql));
+	$result=mysql_query_cache($sql);//mysql_escape_string($sql));
 	$category=array();
         foreach ($result as $row){
 		$cate=explode(" ",$row['source']);

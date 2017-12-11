@@ -3,13 +3,14 @@
 	$cache_time=60;
 	require_once('./include/db_info.inc.php');
 	require_once('./include/cache_start.php');
+	require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
     $view_title= "Problem Set";
 $first=1000;
   //if($OJ_SAE) $first=1;
 $sql="select max(`problem_id`) as upid FROM `problem`";
 $page_cnt=100;
-$result=pdo_query($sql);
+$result=mysql_query_cache($sql);
 $row=$result[0];
 $cnt=$row['upid']-$first;
 $cnt=$cnt/$page_cnt;
@@ -99,7 +100,7 @@ $sql.=" ORDER BY `problem_id`";
 if(isset($_GET['search'])&&trim($_GET['search'])!=""){
 	$result=pdo_query($sql,$search,$search);
 }else{
-	$result=pdo_query($sql);
+	$result=mysql_query_cache($sql);
 }
 
 $view_total_page=intval($cnt+1);

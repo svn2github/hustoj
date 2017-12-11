@@ -6,14 +6,15 @@ if (!isset($_SESSION['user_id'])){
 	exit(0);
 }
 require_once("include/db_info.inc.php");
+require_once("include/memcache.php");
 require_once("include/const.inc.php");
 $now=strftime("%Y-%m-%d %H:%M",time());
 $user_id=$_SESSION['user_id'];
 
         $sql="SELECT count(1) FROM `solution` WHERE result<4";
-        $result=pdo_query($sql);
+        $result=mysql_query_cache($sql);
          $row=$result[0];
-        if($row[0]>20) $OJ_VCODE=true;
+        if($row[0]>50) $OJ_VCODE=true;
         
 if($OJ_VCODE)$vcode=$_POST["vcode"];
 $err_str="";
@@ -22,6 +23,8 @@ if($OJ_VCODE&&($_SESSION["vcode"]==null||$vcode!= $_SESSION["vcode"]||$vcode==""
         $_SESSION["vcode"]=null;
         $err_str=$err_str."Verification Code Wrong!\\n";
         $err_cnt++;
+	require("template/".$OJ_TEMPLATE."/error.php");
+	
 	exit(0);
 }
 
@@ -41,7 +44,7 @@ if (isset($_POST['cid'])){
 }
 //echo $sql;	
 
-$res=pdo_query($sql);
+$res=mysql_query_cache($sql);
 if ($res&&count($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
 		
 		$view_errors=  "Where do find this link? No such problem.<br>";
@@ -174,7 +177,7 @@ if ($len>65536){
 }
 
 // last submit
-$now=strftime("%Y-%m-%d %X",time()-1);
+$now=strftime("%Y-%m-%d %X",time()-10);
 $sql="SELECT `in_date` from `solution` where `user_id`=? and in_date>? order by `in_date` desc limit 1";
 $res=pdo_query($sql,$user_id,$now);
 if (count($res)==1){

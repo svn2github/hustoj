@@ -4,6 +4,7 @@
         require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
         require_once('./include/setlang.php');
+        require_once('./include/memcache.php');
         $view_title= $MSG_RANKLIST;
 
         $scope="";
@@ -72,7 +73,7 @@
 		if(isset($_GET['prefix'])){
 			$result = pdo_query($sql,$_GET['prefix']."%");
 		}else{
-                	$result = pdo_query($sql) ;
+                	$result = mysql_query_cache($sql) ;
 		}
                 if($result) $rows_cnt=count($result);
                 else $rows_cnt=0;
@@ -101,7 +102,7 @@
                 $sql = "SELECT count(1) as `mycount` FROM `users`";
         //        $result = mysql_query ( $sql );
           // require("./include/memcache.php");
-                $result = pdo_query($sql);
+                $result = mysql_query_cache($sql);
                  $row=$result[0];
                 $view_total=$row['mycount'];
 

@@ -34,16 +34,16 @@
 <?php require_once('./include/set_post_key.php');?>
 </tr>
 <tr><td>Nick Name:
-<td><input name="nick" size=50 type=text value="<?php echo htmlentities($row['nick'],ENT_QUOTES,"UTF-8")?>" >
+<td><input  class="input-xxlarge" name="nick" size=50 type=text value="<?php echo htmlentities($row['nick'],ENT_QUOTES,"UTF-8")?>" >
 </tr>
 <tr><td>Old Password:
-<td><input name="opassword" size=20 type=password>
+<td><input  class="input-xxlarge" name="opassword" size=20 type=password>
 </tr>
 <tr><td>New Password:
-<td><input name="npassword" size=20 type=password>
+<td><input  class="input-xxlarge" name="npassword" size=20 type=password>
 </tr>
 <tr><td>Repeat New Password::
-<td><input name="rptpassword" size=20 type=password>
+<td><input class="input-xxlarge" name="rptpassword" size=20 type=password>
 </tr>
 <tr><td>School:
 <td><input name="school" size=30 type=text value="<?php echo htmlentities($row['school'],ENT_QUOTES,"UTF-8")?>" >

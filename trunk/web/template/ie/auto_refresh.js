@@ -72,7 +72,7 @@ function fresh_result(solution_id){
 	xmlhttp.send();
 }
 var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
-	for(var i=0;i<10;i++){
+	for(var i=4;i<10;i++){
    		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
 	}
    hj_ss+="</select>";
@@ -90,7 +90,10 @@ $(".http_judge_form").submit(function (){
 auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
+   var button=$(this);
    $(this).find("form").show(600);
+   var sid=$(this).find("span[class=original]").attr("sid");
+   $(this).find("span[class=original]").load("status-ajax.php?q=user_id&solution_id="+sid);
 });
 $(".http_judge_form").hide();
 

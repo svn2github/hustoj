@@ -35,7 +35,7 @@ $start=$page>$section?$page-$section:1;
 $end=$page+$section>$view_total_page?$view_total_page:$page+$section;
 for ($i=$start;$i<=$end;$i++){
  echo "<li class='".($page==$i?"active ":"")."page-item'>
-        <a href='contest.php?page=".$i."'>".$i."</a></li>";
+            <a title='go to page' href='contest.php?page=".$i.(isset($_GET['my'])?"&my":"")."'>".$i."</a></li>";
 }
 ?>
 <li class="page-item"><a href="contest.php?page=<?php echo $view_total_page?>">&gt;&gt;</a></li>

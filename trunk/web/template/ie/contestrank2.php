@@ -197,7 +197,7 @@ function add(){
   row=findrow(tab,solution);
   update(tab,row,solution);
   replay_index++;
-  sort(tab[0].rows);
+  if(parseInt(solution["result"])==4)sort(tab[0].rows);
   metal();
   window.setTimeout("add()",5);
 }
@@ -274,7 +274,7 @@ function update(tab,row,solution){
 function sort(rows){
    for(var i=1;i<rows.length;i++){
        for(var j=1;j<i;j++){
-	   if(cmp(rows[i],rows[j])){
+	   if(i!=j&&cmp(rows[i],rows[j])){
 		swapNode(rows[i],rows[j]);
  	   }
        }
@@ -287,15 +287,15 @@ function sort(rows){
           var parent = node1.parentNode;//父节点
           var t1 = node1.nextSibling;//两节点的相对位置
           var t2 = node2.nextSibling;
-$(node1).fadeToggle("slow");          
-$(node2).fadeToggle("slow");          
+//$(node1).fadeToggle("slow");          
+$(node2).fadeToggle("fast");          
           //如果是插入到最后就用appendChild
           if(t1) parent.insertBefore(node2,t1);
           else parent.appendChild(node2);
           if(t2) parent.insertBefore(node1,t2);
           else parent.appendChild(node1);
-$(node1).fadeToggle("slow");          
-$(node2).fadeToggle("slow");          
+//$(node1).fadeToggle("slow");          
+$(node2).fadeToggle("fast");          
 }    
 function cmp(a,b){
    if(parseInt(a.cells[3].innerHTML)>parseInt(b.cells[3].innerHTML))

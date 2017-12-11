@@ -24,10 +24,11 @@ $(document).ready(function(){
   $("form").append("<div id='csrf' />");
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
   $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
-  $("body").append("<div class=center ><a href='http://123.sogou.com/?22411-6387' title='每天点击一次开发者可获得￥0.06' target='_blank'>捐助系统开发者</a></div>");
+  $("body").append("<div class=center > <img src='http://hustoj.com/wx.jpg' width='96px'><br> 欢迎关注微信公众号onlinejudge</div>");
 });
+ var hello=1;
+ hello++;
   console.log("If you want to change the appearance of the web pages, make a copy of bs3 under template directory.\nRename it to whatever you like, and change the $OJ_TEMPLATE value in db_info.inc.php\nAfter that modify files under your own directory .\n");
-
 
 </script>
 

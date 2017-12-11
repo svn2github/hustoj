@@ -57,4 +57,4 @@ header("Pragma: no-cache");
 	 //  $profile.="</ul></li>";
 		?>
 document.write("<?php echo ( $profile);?>");
-document.getElementById("profile").innerHTML="<?php echo  isset($sid)?$sid:$MSG_LOGIN  ?>";
+//document.getElementById("profile").innerHTML="<?php echo  isset($sid)?$sid:$MSG_LOGIN  ?>";

@@ -33,7 +33,7 @@ if (isset($_GET['pid'])){
 
 	if ($result){
 		$row=$result[0];
-		echo "<a href='userinfo.php?user=".htmlentities($row['user_id'],ENT_QUOTES,'UTF8')."'>".htmlentities($row['user_id'],ENT_QUOTES,'UTF8')."</a>";
+		echo "<a href='userinfo.php?user=".htmlentities($row['user_id'],ENT_QUOTES,'utf-8')."'>".htmlentities($row['user_id'],ENT_QUOTES,'utf-8')."</a>";
 	}else{
 		echo "$MSG_IMPORTED";
 	}

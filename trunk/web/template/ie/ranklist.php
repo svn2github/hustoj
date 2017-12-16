@@ -29,7 +29,7 @@
 <thead>
 <tr><td colspan=3 align=left>
 <form class="form-inline" action="ranklist.php">
-<?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities($_GET['prefix'],ENT_QUOTES,"utf-8") ?>" >
+<?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>" >
 <input type=submit class="form-control" value=Search >
 </form></td><td colspan=3 align=right>
 <a href=ranklist.php?scope=d>Day</a>

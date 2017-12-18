@@ -3,8 +3,10 @@ apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
-svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm php-memcache memcached nginx mysql-server php-mysql php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
+
+svn co https://github.com/zhblue/hustoj/branches/rpi/trunk  src
+apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
+
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
 mkdir etc data log

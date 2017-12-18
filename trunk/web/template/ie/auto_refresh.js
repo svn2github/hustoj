@@ -11,7 +11,6 @@ function auto_refresh(){
 			if(result<4){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
-			   console.log("cell:"+cell+" result:"+judge_result[result]);
 			}
 	}
 }

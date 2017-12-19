@@ -45,38 +45,9 @@
 //#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <assert.h>
-
 #include <mysql/mysql.h>
+#include <assert.h>
 #include "okcalls.h"
-#ifdef RASPBERRY_PI
-struct pt_regs {
-        long uregs[18];
-};
-
-#define ARM_cpsr        uregs[16]
-#define ARM_pc          uregs[15]
-#define ARM_lr          uregs[14]
-#define ARM_sp          uregs[13]
-#define ARM_ip          uregs[12]
-#define ARM_fp          uregs[11]
-#define ARM_r10         uregs[10]
-#define ARM_r9          uregs[9]
-#define ARM_r8          uregs[8]
-#define ARM_r7          uregs[7]
-#define ARM_r6          uregs[6]
-#define ARM_r5          uregs[5]
-#define ARM_r4          uregs[4]
-#define ARM_r3          uregs[3]
-#define ARM_r2          uregs[2]
-#define ARM_r1          uregs[1]
-#define ARM_r0          uregs[0]
-#define ARM_ORIG_r0     uregs[17]
-
-
-
-#endif
-
 
 #define STD_MB 1048576
 #define STD_T_LIM 2
@@ -101,7 +72,6 @@ struct pt_regs {
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
-#ifndef RASPBERRY_PI
 #ifdef __i386
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
@@ -114,9 +84,7 @@ struct pt_regs {
 #define REG_ARG1 rsi
 
 #endif
-#else
-#define REG_SYSCALL ARM_r7
-#endif
+
 static int DEBUG = 0;
 static char host_name[BUFFER_SIZE];
 static char user_name[BUFFER_SIZE];
@@ -281,6 +249,7 @@ void init_syscalls_limits(int lang) {
 		for (i = 0; i==0||LANG_GOV[i]; i++)
 			call_counter[LANG_GOV[i]] = HOJ_MAX_LIMIT;
 	}
+
 }
 
 int after_equal(char * c) {
@@ -379,7 +348,7 @@ void init_mysql_conf() {
 //	fclose(fp);
 	
  	if(strcmp(http_username,"IP")==0){
-                  FILE * fjobs = read_cmd_output("ifconfig|grep 'netmask 255.255'|awk  '{printf $2\"\\n\" }'");
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
@@ -998,10 +967,10 @@ int compile(int lang,char * work_dir) {
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
-		LIM.rlim_max = 20;
-		LIM.rlim_cur = 20;
+		LIM.rlim_max = 6;
+		LIM.rlim_cur = 6;
 		setrlimit(RLIMIT_CPU, &LIM);
-		alarm(19);
+		alarm(6);
 		LIM.rlim_max = 10 * STD_MB;
 		LIM.rlim_cur = 10 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
@@ -1027,10 +996,8 @@ int compile(int lang,char * work_dir) {
                 	execute_cmd("mount -o bind /bin bin");
                 	execute_cmd("mount -o bind /usr usr");
                 	execute_cmd("mount -o bind /lib lib");
-#ifndef RASPBERRY_PI
 #ifndef __i386
                 	execute_cmd("mount -o bind /lib64 lib64");
-#endif
 #endif
                 	execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");
@@ -1730,7 +1697,6 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
-	
 	if(use_ptrace) ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3)
@@ -2032,12 +1998,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		printf("pid=%d judging %s\n", pidApp, infile);
 
 	int status, sig, exitcode;
-
-#ifndef RASPBERRY_PI
 	struct user_regs_struct reg;
-#else
-	struct pt_regs reg;
-#endif
 	struct rusage ruse;
 	if(topmemory==0) 
 			topmemory= get_proc_status(pidApp, "VmRSS:") << 10;
@@ -2157,42 +2118,28 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		 */
 
 		// check the system calls
-
-//#ifndef RASPBERRY_PI
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-                unsigned long scno = ptrace(PTRACE_PEEKTEXT, pidApp, (void *)(reg.ARM_pc - 4), NULL);
-		if (scno == 0xef000000) {
-		       scno = reg.ARM_r7;
-		} else {
-			if ((scno & 0x0ff00000) != 0x0f900000) {
-				scno=0;
-			}
-		}							  
-		scno &= 0x000fffff;
-		if (scno!=0){
-        	
-			if (call_counter[scno%LANGV_LENGTH] ){
-				//call_counter[reg.REG_SYSCALL]--;
-			}else if (record_call) {
-				call_counter[scno%LANGV_LENGTH] = 1;
-			
-			}else { //do not limit JVM syscall for using different JVM
-				ACflg = OJ_RE;
-				char error[BUFFER_SIZE];
-				sprintf(error,
-						"[ERROR] A Not allowed system call: runid:%d CALLID:%ld\n"
-						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
-						"and recompile judge_client. \n"
-						"if you are admin and you don't know what to do ,\n"
-						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-						solution_id, (long)reg.REG_SYSCALL);
-	 
-				write_log(error);
-				print_runtimeerror(error);
-				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
-			}
+		if (call_counter[reg.REG_SYSCALL] ){
+			//call_counter[reg.REG_SYSCALL]--;
+		}else if (record_call) {
+			call_counter[reg.REG_SYSCALL] = 1;
+		
+		}else { //do not limit JVM syscall for using different JVM
+			ACflg = OJ_RE;
+			char error[BUFFER_SIZE];
+			sprintf(error,
+                                        "[ERROR] A Not allowed system call: runid:%d CALLID:%ld\n"
+                                        " TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
+                                        "and recompile judge_client. \n"
+                                        "if you are admin and you don't know what to do ,\n"
+                                        "chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
+                                        solution_id, (long)reg.REG_SYSCALL);
+ 
+			write_log(error);
+			print_runtimeerror(error);
+			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 		}
-//#endif		
+		
 
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 	}

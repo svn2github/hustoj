@@ -41,6 +41,7 @@ function pwCheck($password,$saved)
 {
 	if (isOldPW($saved)){
 		if(!isOldPW($password)) $mpw = md5($password);
+		else $mpw=$password;
 		if ($mpw==$saved) return True;
 		else return False;
 	}

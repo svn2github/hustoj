@@ -44,7 +44,7 @@ sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabl
 sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 sed -i "s|#\tfastcgi_pass unix:/var/run/php/php7.0-fpm.sock;|\t fastcgi_pass unix:/run/php/php7.1-fpm.sock;\n\t|g" /etc/nginx/sites-enabled/default
 sed -i "s:}#added_by_hustoj::g" /etc/nginx/sites-enabled/default
-sed -i "s|#\tfastcgi_pass 127.0.0.1:9000;|#\tfastcgi_pass 127.0.0.1:9000;\n\t}#added_by_hustoj|g" /etc/nginx/sites-enabled/default
+sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini

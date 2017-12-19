@@ -1,6 +1,5 @@
 //
 #define IGNORE_ESOL
-#define RASPBERRY_PI
 // File:   main.cc
 // Author: sempr
 // refacted by zhblue

@@ -28,7 +28,7 @@
 
     # Caching version of pdo_query()
     function mysql_query_cache($sql, $linkIdentifier = false,$timeout = 4) {
-	global $OJ_NAMEi,$OJ_MEMCACHE;	
+	global $OJ_NAME,$OJ_MEMCACHE;	
 
 //首先调用上面的getCache函数，如果返回值不为false的话，就说明是从memcached服务器获取的数据
 //如果返回false，此时就需要直接从数据库中获取数据了。

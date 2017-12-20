@@ -153,13 +153,13 @@ exps[57]="错误的标点或符号";
 function explain(){
 //alert("asdf");
 var errmsg=document.getElementById("errtxt").innerHTML;
-var expmsg="辅助解释：<br>";
+var expmsg="辅助解释：<br><hr>";
 for(var i=0;i<pats.length;i++){
 var pat=pats[i];
 var exp=exps[i];
 var ret=pat.exec(errmsg);
 if(ret){
-expmsg+=ret+":"+exp+"<br>";
+expmsg+=ret+":"+exp+"<br><hr>";
 }
 }
 document.getElementById("errexp").innerHTML=expmsg;

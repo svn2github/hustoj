@@ -32,7 +32,7 @@
 var pats=new Array();
 var exps=new Array();
 pats[0]=/A Not allowed system call.* /;
-exps[0]="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源";
+exps[0]="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源。<br>如果你是管理员，确认答案无误，或者是在增加新的语言支持<a href='https://zhuanlan.zhihu.com/p/24498599'>点击这里。</a>";
 pats[1]=/Segmentation fault/;
 exps[1]="段错误，检查是否有数组越界，指针异常，访问到不应该访问的内存区域";
 pats[2]=/Floating point exception/;
@@ -43,16 +43,18 @@ pats[4]=/Killed/;
 exps[4]="进程因为内存或时间原因被杀死，检查是否有死循环";
 pats[5]=/Alarm clock/;
 exps[5]="进程因为时间原因被杀死，检查是否有死循环，本错误等价于超时TLE";
+pats[6]=/CALLID:20/;
+exps[6]="可能存在数组越界，检查题目描述的数据量与所申请数组大小关系";
 function explain(){
 //alert("asdf");
 var errmsg=document.getElementById("errtxt").innerHTML;
-var expmsg="辅助解释：<br>";
+var expmsg="辅助解释：<br><hr>";
 for(var i=0;i<pats.length;i++){
 var pat=pats[i];
 var exp=exps[i];
 var ret=pat.exec(errmsg);
 if(ret){
-expmsg+=ret+":"+exp+"<br>";
+expmsg+=ret+":"+exp+"<br><hr />";
 }
 }
 document.getElementById("errexp").innerHTML=expmsg;

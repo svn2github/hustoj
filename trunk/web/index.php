@@ -57,9 +57,6 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * f
 	
 
 
-if(function_exists('apc_cache_info')){
-	 $view_apc_info  = apc_cache_info(); 
-}
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/index.php");

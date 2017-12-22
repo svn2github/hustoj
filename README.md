@@ -15,14 +15,18 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 Ubuntu14.04（推荐）快速安装指南：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
-    chmod +x install-ubuntu14.04.sh
-    sudo ./install-ubuntu14.04.sh
-
+    sudo bash install-ubuntu14.04.sh
+  
 ubuntu16.04（不推荐），可以使用下面脚本
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
-    chmod +x install-ubuntu16+.sh
-    sudo ./install-ubuntu16+.sh
+    sudo bash install-ubuntu16+.sh
+    
+centos7 （不推荐），可以使用下面脚本
+
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
+    sudo bash install-ubuntu16+.sh
+    
     
 安装后几个重要配置文件的位置
 

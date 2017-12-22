@@ -40,6 +40,9 @@ chown www-data src/web/include/db_info.inc.php
 chown www-data src/web/upload data run0 run1 run2 run3
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 systemctl restart nginx.service
+systemctl restart php-fpm.service
+chmod 755 /home/judge
+chown apache -R /home/judge/src/web/
 
 cd /home/judge/src/core
 ./make.sh

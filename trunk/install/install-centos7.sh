@@ -44,6 +44,9 @@ systemctl restart php-fpm.service
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
 
+mkdir /var/lib/php/session
+chown apache /var/lib/php/session
+
 cd /home/judge/src/core
 ./make.sh
 judged

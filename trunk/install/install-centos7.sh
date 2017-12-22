@@ -36,8 +36,8 @@ sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.ph
 chmod 775 -R /home/judge/data && chgrp -R apache /home/judge/data
 chmod 700 src/web/include/db_info.inc.php
 
-chown www-data src/web/include/db_info.inc.php
-chown www-data src/web/upload data run0 run1 run2 run3
+chown apache src/web/include/db_info.inc.php
+chown apache src/web/upload data run0 run1 run2 run3
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 systemctl restart nginx.service
 systemctl restart php-fpm.service

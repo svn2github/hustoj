@@ -40,6 +40,11 @@ chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 systemctl restart nginx.service
+
+sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
+
+
 systemctl restart php-fpm.service
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/

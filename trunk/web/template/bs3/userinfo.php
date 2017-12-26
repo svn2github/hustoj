@@ -43,7 +43,7 @@ function p(id,c){
 
 }
 <?php $sql="SELECT `problem_id`,count(1) from solution where `user_id`=? and result=4 group by `problem_id` ORDER BY `problem_id` ASC";
-if ($result=pdo_query($sql,$user,$user)){ 
+if ($result=pdo_query($sql,$user)){ 
     foreach($result as $row)
     echo "p($row[0],$row[1]);";
 }

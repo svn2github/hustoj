@@ -2376,9 +2376,12 @@ function replace_double($sub,$str){
 }
 function remove_special_chars($str){
     $str = trim($str);
-    $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?",
-                      "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_______________");
-    $str = str_replace("..","",str_replace("/","",str_replace("\\","",str_replace("\$","",$str))));
+    $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?/\\",
+                      "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_________________");
+    $str = str_replace("..","",$str);
+    $str = str_replace("\\","",$str);
+    $str = str_replace("/","",$str);
+    $str = str_replace("\$","",$str);
     return $str;
 }
 function format_path($str){
@@ -3936,6 +3939,8 @@ function view(){
 }
 function edit_file_form(){
     global $current_dir,$filename,$file_data,$save_file,$path_info;
+    $filename=remove_special_chars($filename);
+   // echo "[$filename]";
     $file = $current_dir.$filename;
     if ($save_file){
         $fh=fopen($file,"w");
@@ -3954,7 +3959,7 @@ function edit_file_form(){
     <input type=hidden name=save_file value=\"1\">
     <input type=hidden name=current_dir value=\"$current_dir\">
     <input type=hidden name=filename value=\"$filename\">
-    <tr><th colspan=2>".$file."</th></tr>
+    <tr><th colspan=2>".$filename."</th></tr>
     <tr><td colspan=2><textarea name=file_data style='width:1000px;height:680px;'>".html_encode($file_data)."</textarea></td></tr>
     <tr><td><input type=button value=\"".et('Refresh')."\" onclick=\"document.edit_form_refresh.submit()\"></td><td align=right><input type=button value=\"".et('SaveFile')."\" onclick=\"go_save()\"></td></tr>
     </form>

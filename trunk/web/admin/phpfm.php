@@ -2259,6 +2259,7 @@ function total_move($orig,$dest) {
 }
 function download(){
     global $current_dir,$filename;
+    $filename = remove_special_chars($filename);
     $file = $current_dir.$filename;
     if(file_exists($file)){
         $is_denied = false;
@@ -3879,6 +3880,7 @@ function get_mime_type($ext = ''){
 function view(){
     global $doc_root,$path_info,$url_info,$current_dir,$islinux,$filename,$passthru;
 	if (intval($passthru)){
+    $filename = remove_special_chars($filename);
 	    $file = $current_dir.$filename;
 	    if(file_exists($file)){
 	        $is_denied = false;

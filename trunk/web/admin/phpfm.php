@@ -2321,6 +2321,7 @@ function zip_extract(){
         if (zip_entry_filesize($zip_entry)) {
             $complete_path = $path.dirname(zip_entry_name($zip_entry));
             $complete_name = $path.zip_entry_name($zip_entry);
+	    $complete_path=remove_special_chars($complete_path);
             if(!file_exists($complete_path)) {
                 $tmp = '';
                 foreach(explode('/',$complete_path) AS $k) {
@@ -2331,6 +2332,7 @@ function zip_extract(){
                 }
             }
             if (zip_entry_open($zip, $zip_entry, "r")) {
+		$complete_name=remove_special_chars($complete_name);
                 if ($fd = fopen($current_dir.$complete_name, 'w')){
                     fwrite($fd, zip_entry_read($zip_entry, zip_entry_filesize($zip_entry)));
                     fclose($fd);
@@ -4165,6 +4167,7 @@ function config_form(){
     echo "</body>\n</html>";
 }
 function server_info(){
+/*
     if (!@phpinfo()) echo et('NoPhpinfo')."...";
     echo "<br><br>";
 	    $a=ini_get_all();
@@ -4232,6 +4235,7 @@ function server_info(){
     //-->
     </script>";
     echo "</body>\n</html>";
+	*/
 }
 // +--------------------------------------------------
 // | Session

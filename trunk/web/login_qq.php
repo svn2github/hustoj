@@ -7,15 +7,15 @@
 	$code = $_REQUEST["code"];
 	if(empty($code)) 
 	{
-		 $_SESSION['state'] = md5(uniqid(rand(), TRUE));  
+		 $_SESSION[$OJ_NAME.'_'.'state'] = md5(uniqid(rand(), TRUE));  
 		 $dialog_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=" 
 			. $OJ_QQ_AKEY . "&redirect_uri=" . urlencode($OJ_QQ_CBURL) . "&state="
-			. $_SESSION['state'];
+			. $_SESSION[$OJ_NAME.'_'.'state'];
 		echo("<script> top.location.href='" . $dialog_url . "'</script>");
 	}
 
   //get Access Token
-   if($_REQUEST['state'] == $_SESSION['state']) 
+   if($_REQUEST['state'] == $_SESSION[$OJ_NAME.'_'.'state']) 
   {
      $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
      . "client_id=" . $OJ_QQ_AKEY . "&redirect_uri=" . urlencode($OJ_QQ_CBURL)
@@ -88,7 +88,7 @@
          pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school);
      }
 	 //login it
-	 $_SESSION['user_id']=$user_id;
+	 $_SESSION[$OJ_NAME.'_'.'user_id']=$user_id;
 	 // redirect it
 	 header("Location: ./"); 
   }

@@ -2,7 +2,7 @@
 	require_once("oj-header.php");
 
 	echo "<title>HUST Online Judge WebBoard >> New Thread</title>";
-	if (!isset($_SESSION['user_id'])){
+	if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 		echo "<a href=../loginpage.php>Please Login First</a>";
 		require_once("../template/$OJ_TEMPLATE/discuss.php");
 		exit(0);

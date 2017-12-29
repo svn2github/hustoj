@@ -2,7 +2,7 @@
     require_once("./include/db_info.inc.php");
     $vcode="";
     if(isset($_POST['vcode']))	$vcode=trim($_POST['vcode']);
-    if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
+    if($OJ_VCODE&&($vcode!= $_SESSION[$OJ_NAME.'_'."vcode"]||$vcode==""||$vcode==null) ){
 		echo "<script language='javascript'>\n";
 		echo "alert('Verify Code Wrong!');\n";
 		echo "history.go(-1);\n";
@@ -21,11 +21,11 @@
 	
 	if ($login)
     {
-		$_SESSION['user_id']=$login;
+		$_SESSION[$OJ_NAME.'_'.'user_id']=$login;
 		$result=pdo_query($sql,$login);
 
 		foreach ($result as $row)
-			$_SESSION[$row['rightstr']]=true;
+			$_SESSION[$OJ_NAME.'_'.$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";
 		echo "history.go(-2);\n";
 		echo "</script>";

@@ -48,10 +48,10 @@
 	}
 	echo "[<a href='problemstatus.php?id=".$row['problem_id']."'>$MSG_STATUS</a>]";
 	echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
-	  if(isset($_SESSION['administrator'])){
+	  if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
       require_once("include/set_get_key.php");
       ?>
-      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>" >Edit</a>]
       [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
       <?php
 
@@ -93,10 +93,10 @@
 
 	echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
 	
-	if(isset($_SESSION['administrator'])){
+	if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
       require_once("include/set_get_key.php");
   ?>
-     [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION['getkey']?>" >Edit</a>]
+     [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>" >Edit</a>]
       [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
      <?php
   }	

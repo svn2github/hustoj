@@ -49,7 +49,7 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * f
     foreach ($result as $row){
 		array_push($chart_data_ac,array($row['md'],$row['c']));
     }
-  if(isset($_SESSION['administrator'])){
+  if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
   	$sql="select avg(sp) sp from (select  count(1) sp,judgetime from solution where result>3 and judgetime>convert(now()-100,DATETIME)  group by judgetime order by sp) tt;";
   	$result=mysql_query_cache($sql);
   	$speed=$result[0][0]; 

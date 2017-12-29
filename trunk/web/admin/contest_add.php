@@ -63,8 +63,8 @@ $langmask=((1<<count($language_ext))-1)&(~$langmask);
 	$sql="DELETE FROM `privilege` WHERE `rightstr`=?";
 	pdo_query($sql,"c$cid");
 	$sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
-	pdo_query($sql,$_SESSION['user_id'],"m$cid");
-	$_SESSION["m$cid"]=true;
+	pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"m$cid");
+	$_SESSION[$OJ_NAME.'_'."m$cid"]=true;
 	$pieces = explode("\n", trim($_POST['ulist']));
 	if (count($pieces)>0 && strlen($pieces[0])>0){
 		$sql_1="INSERT INTO `privilege`(`user_id`,`rightstr`) 

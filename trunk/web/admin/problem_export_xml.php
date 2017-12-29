@@ -157,7 +157,7 @@ function fixImageURL(&$html,&$did){
    }   	
 }
 
-if (! isset ( $_SESSION['administrator'] )) {
+if (! isset ( $_SESSION[$OJ_NAME.'_'.'administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit ( 1 );
@@ -207,7 +207,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		header ( 'Content-Type:   text/xml' );
 	else {
 		header ( "content-type:   application/file" );
-		header ( "content-disposition:   attachment;   filename=\"fps-".$_SESSION['user_id'].$filename.".xml\"" );
+		header ( "content-disposition:   attachment;   filename=\"fps-".$_SESSION[$OJ_NAME.'_'.'user_id'].$filename.".xml\"" );
 	}
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   

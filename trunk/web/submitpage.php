@@ -4,12 +4,12 @@
     require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title=$MSG_SUBMIT;
- if (!isset($_SESSION['user_id'])){
+ if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 
 	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
-//	$_SESSION['user_id']="Guest";
+//	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
 }
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
@@ -32,12 +32,12 @@ if (isset($_GET['id'])){
 	$sql="SELECT * FROM `solution` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$sid);
 	 $row=$result[0];
-	if ($row && $row['user_id']==$_SESSION['user_id']) $ok=true;
-	if (isset($_SESSION['source_browser'])) {
+	if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+	if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) {
 		$ok=true;
 	}else{
 		if(isset($OJ_EXAM_CONTEST_ID)){
-			if($cid<$OJ_EXAM_CONTEST_ID&&!isset($_SESSION['source_browser'])){
+			if($cid<$OJ_EXAM_CONTEST_ID&&!isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 				header("Content-type: text/html; charset=utf-8");
 				 echo $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM;
 				 exit();

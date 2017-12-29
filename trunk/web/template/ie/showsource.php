@@ -47,7 +47,7 @@ SyntaxHighlighter.all();
 </script>
 <?php
 if ($ok==true){
-if($view_user_id!=$_SESSION['user_id'])
+if($view_user_id!=$_SESSION[$OJ_NAME.'_'.'user_id'])
 echo "<a href='mail.php?to_user=$view_user_id&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 $brush=strtolower($language_name[$slanguage]);
 if ($brush=='pascal') $brush='delphi';

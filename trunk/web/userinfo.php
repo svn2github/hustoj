@@ -47,7 +47,7 @@ $result=pdo_query($sql,$AC);
  $row=$result[0];
 $Rank=intval($row[0])+1;
 
- if (isset($_SESSION['administrator'])){
+ if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 $sql="SELECT user_id,password,ip,`time` FROM `loginlog` WHERE `user_id`=? order by `time` desc LIMIT 0,10";
 $view_userinfo=pdo_query($sql,$user) ;
 echo "</table>";

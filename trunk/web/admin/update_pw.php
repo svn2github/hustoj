@@ -2,7 +2,7 @@
 require_once("admin-header.php");
 require_once("../include/db_info.inc.php");
 require_once("../include/my_func.inc.php");
-if(!(isset($_SESSION['password_setter'])|| isset($_SESSION['administrator'])  )) return;
+if(!(isset($_SESSION[$OJ_NAME.'_'.'password_setter'])|| isset($_SESSION[$OJ_NAME.'_'.'administrator'])  )) return;
 function update_for_user($user_id){
 	$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`=?";
 	$result=pdo_query($sql,$user_id);

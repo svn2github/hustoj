@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['getkey']!=$_GET['getkey']){
+if ($_SESSION[$OJ_NAME.'_'.'getkey']!=$_GET['getkey']){
 ?>
 <script language=javascript>
         history.go(-1);
@@ -8,6 +8,6 @@ if ($_SESSION['getkey']!=$_GET['getkey']){
 	exit(1);
 }
 else{
-   unset($_SESSION['getkey']);
+   unset($_SESSION[$OJ_NAME.'_'.'getkey']);
 }
 ?>

@@ -22,9 +22,9 @@
 		
 			if($row['password']==md5(md5($password).$row['salt'])){
 
-					$_SESSION['user_id']=$row['username'];
-					$ret=$_SESSION['user_id'];
-				//	$sql="insert into jol.users(user_id,ip,nick,school) values('".$_SESSION['user_id']."','','','') on DUPLICATE KEY UPDATE nick='".$row['username']."'";
+					$_SESSION[$OJ_NAME.'_'.'user_id']=$row['username'];
+					$ret=$_SESSION[$OJ_NAME.'_'.'user_id'];
+				//	$sql="insert into jol.users(user_id,ip,nick,school) values('".$_SESSION[$OJ_NAME.'_'.'user_id']."','','','') on DUPLICATE KEY UPDATE nick='".$row['username']."'";
 				//	pdo_query($sql);
 					
 			}

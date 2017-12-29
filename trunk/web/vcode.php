@@ -1,4 +1,5 @@
 <?php
+require_once('include/db_info.inc.php');
 	/****************************************
 	*  验证码 v0.9
 	*  Powerd by awaysoft.com
@@ -21,7 +22,6 @@
 		return $result;
 	}
 	
-	session_start();
    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 header("Cache-Control: no-cache, must-revalidate");
@@ -37,7 +37,7 @@ header("Pramga: no-cache");
 	$height = 24;
 	/* 生成随机字符串并写入SESSION */
 	$vcode = get_rand_string($len, $vcodetype);
-	$_SESSION['vcode'] = $vcode;
+	$_SESSION[$OJ_NAME.'_'.'vcode'] = $vcode;
 	header("Content-type: image/".$imgtype);
 	
 	if($imgtype != 'gif' && function_exists('imagecreatetruecolor')){

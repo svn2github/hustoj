@@ -70,7 +70,7 @@ $sql.=" LIMIT 30";
 $result = pdo_query($sql);
 $rows_cnt = count($result);
 $cnt=0;
-$isadmin = isset($_SESSION['administrator']);
+$isadmin = isset($_SESSION[$OJ_NAME.'_'.'administrator']);
 ?>
 <table style="clear:both; width:100%">
 <tr align=center class='toprow'>

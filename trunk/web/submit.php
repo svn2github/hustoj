@@ -1,15 +1,15 @@
 <?php session_start();
-if (!isset($_SESSION['user_id'])){
+require_once("include/db_info.inc.php");
+if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 	require_once("oj-header.php");
 	echo "<a href='loginpage.php'>$MSG_Login</a>";
 	require_once("oj-footer.php");
 	exit(0);
 }
-require_once("include/db_info.inc.php");
 require_once("include/memcache.php");
 require_once("include/const.inc.php");
 $now=strftime("%Y-%m-%d %H:%M",time());
-$user_id=$_SESSION['user_id'];
+$user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 
         $sql="SELECT count(1) FROM `solution` WHERE result<4";
         $result=mysql_query_cache($sql);
@@ -19,8 +19,8 @@ $user_id=$_SESSION['user_id'];
 if($OJ_VCODE)$vcode=$_POST["vcode"];
 $err_str="";
 $err_cnt=0;
-if($OJ_VCODE&&($_SESSION["vcode"]==null||$vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
-        $_SESSION["vcode"]=null;
+if($OJ_VCODE&&($_SESSION[$OJ_NAME.'_'."vcode"]==null||$vcode!= $_SESSION[$OJ_NAME.'_'."vcode"]||$vcode==""||$vcode==null) ){
+        $_SESSION[$OJ_NAME.'_'."vcode"]=null;
         $err_str=$err_str."Verification Code Wrong!\\n";
         $err_cnt++;
 	require("template/".$OJ_TEMPLATE."/error.php");
@@ -39,13 +39,13 @@ if (isset($_POST['cid'])){
 			SELECT `contest_id` FROM `contest` WHERE 
 			(`end_time`>'$now' or private=1)and `defunct`='N'
 			))";
-	if(!isset($_SESSION['administrator']))
+	if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
 		$sql.=" and defunct='N'";
 }
 //echo $sql;	
 
 $res=mysql_query_cache($sql);
-if ($res&&count($res)<1&&!isset($_SESSION['administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
+if ($res&&count($res)<1&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
 		
 		$view_errors=  "Where do find this link? No such problem.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");
@@ -77,13 +77,13 @@ if (isset($_POST['id'])) {
 		 $row=$result[0];
 		$isprivate=intval($row[0]);
 		
-		if ($isprivate==1&&!isset($_SESSION['c'.$cid])){
+		if ($isprivate==1&&!isset($_SESSION[$OJ_NAME.'_'.'c'.$cid])){
 			$sql="SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
 			$result=pdo_query($sql,$user_id,"c$cid") ; 
 			$row=$result[0];
 			$ccnt=intval($row[0]);
 			
-			if ($ccnt==0&&!isset($_SESSION['administrator'])){
+			if ($ccnt==0&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 				$view_errors= "You are not invited!\n";
 				require("template/".$OJ_TEMPLATE."/error.php");
 				exit(0);
@@ -228,7 +228,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	    $statusURI.="?cid=$cid";
 	    
         $sid="";
-        if (isset($_SESSION['user_id'])){
+        if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
                 $sid.=session_id().$_SERVER['REMOTE_ADDR'];
         }
         if (isset($_SERVER["REQUEST_URI"])){
@@ -252,7 +252,7 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	     unlink($file);
     //echo $file;
     
-  $statusURI="status.php?user_id=".$_SESSION['user_id'];
+  $statusURI="status.php?user_id=".$_SESSION[$OJ_NAME.'_'.'user_id'];
   if (isset($cid))
 	    $statusURI.="&cid=$cid";
 	 

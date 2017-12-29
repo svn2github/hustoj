@@ -64,7 +64,7 @@ if(array_key_exists('code',$_GET)){
             pdo_query($sql,$uname,$email,$ip,$password,$nick,$school);
         }
         // login it
-		$_SESSION['user_id']=$uname;
+		$_SESSION[$OJ_NAME.'_'.'user_id']=$uname;
         // redirect it
         header("Location: ./");
     }else{

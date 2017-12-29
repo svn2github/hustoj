@@ -66,7 +66,7 @@ else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>";
 echo "</select>";
 ?>
 </select>
-<?php if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])){
+<?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 if(isset($_GET['showsim']))
 $showsim=intval($_GET['showsim']);
 else

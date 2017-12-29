@@ -75,7 +75,7 @@ echo "<tr id=pie bgcolor=#D7EBFF><td>Statistics<td><div id='PieDiv' style='posit
 <tr bgcolor=#D7EBFF><td>Email:<td align=center><?php echo $email?></tr>
 </table>
 <?php
- if(isset($_SESSION['administrator'])){
+ if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 
 	 ?><table border=1><tr class=toprow><td>UserID<td>Password<td>IP<td>Time</tr>
 	 <tbody>

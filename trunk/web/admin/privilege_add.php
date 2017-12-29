@@ -1,5 +1,5 @@
 <?php require_once("admin-header.php");?>
-<?php if (!(isset($_SESSION['administrator']))){
+<?php if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
@@ -41,6 +41,6 @@ while(list($key, $val)=each($rightarray)) {
 	<input type='hidden' name='do' value='do'>
 	<input type='hidden' name='contest' value='do'>
 	<input type=submit value='Add'>
-	<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
+	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 </form>
 </div>

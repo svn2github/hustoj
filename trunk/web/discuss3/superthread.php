@@ -6,7 +6,7 @@
 	$result=pdo_query($sql,$tid) ;
 	$rows_cnt = count($result) ;
 	$row= $result[0];
-	$isadmin = isset($_SESSION['administrator']);
+	$isadmin = isset($_SESSION[$OJ_NAME.'_'.'administrator']);
 ?>
 
 <center>
@@ -36,7 +36,7 @@
 	foreach($result as $row ){
 		
 		$url = "threadadmin.php?target=reply&rid=".$row['rid']."&tid={$tid}&action=";
-		$isuser = strtolower($row['author_id'])==strtolower($_SESSION['user_id']);
+		$isuser = strtolower($row['author_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id']);
 ?>
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
 	<td>
@@ -44,7 +44,7 @@
 		<a name=post<?php echo $row['rid'];?>></a>
 		<div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="userinfo.php?user=<?php echo $row['author_id']?>"><?php echo $row['author_id']; ?> </a> @ <?php echo $row['time']; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
-			<?php if (isset($_SESSION['administrator'])) {?>  
+			<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {?>  
 			<span>[ <a href="
 				<?php if ($row['status']==0) echo $url."disable\">Disable";
 				else echo $url."resume\">Resume";
@@ -77,7 +77,7 @@
 ?>
 </table>
 <div style="font-size:90%; width:100%; text-align:center">[<a href="#">Top</a>]  [<a href="#">Previous Page</a>]  [<a href="#">Next Page</a>] </div>
-<?php if (isset($_SESSION['user_id'])){?>
+<?php if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){?>
 <div style="font-size:80%;"><div style="margin:0 10px">New Reply:</div></div>
 <form action="post.php?action=reply" method=post>
 <input type=hidden name=tid value=<?php echo $tid;?>>

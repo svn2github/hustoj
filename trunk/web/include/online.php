@@ -85,7 +85,7 @@ class online{
 
         }
 
-		$this->ua = (htmlentities($_SESSION['user_id']."@".$_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
+		$this->ua = (htmlentities($_SESSION[$OJ_NAME.'_'.'user_id']."@".$_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
 		$this->uri = ($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
 			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));

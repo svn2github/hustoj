@@ -1,6 +1,6 @@
 <?php require("admin-header.php");
 
-if (!(isset($_SESSION['administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }?>
@@ -62,13 +62,13 @@ if (!(isset($_SESSION['administrator']))){
 	<li><?php echo $MSG_SUBMIT?>
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjsid' placeholder="1002">	<input type='hidden' name='do' value='do'>
-		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
+		<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 		<input type=submit value=submit>
 	</form>
 	<li><?php echo $MSG_CONTEST?>
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjcid' placeholder="1003">	<input type='hidden' name='do' value='do'>
-		<input type=hidden name="postkey" value="<?php echo $_SESSION['postkey']?>">
+		<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 		<input type=submit value=submit>
 	</form>
 </div>

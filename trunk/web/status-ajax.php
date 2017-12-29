@@ -33,7 +33,7 @@ if (isset($_GET['solution_id'])){
 
 	if ($result){
 		$row=$result[0];
-		if(isset($_GET['tr'])&&isset($_SESSION['user_id'])){
+		if(isset($_GET['tr'])&&isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 				$res=$row['result'];
 			if($res==11){
 				$sql="SELECT `error` FROM `compileinfo` WHERE `solution_id`=?";

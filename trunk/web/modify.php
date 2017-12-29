@@ -12,7 +12,7 @@
 $err_str="";
 $err_cnt=0;
 $len;
-$user_id=$_SESSION['user_id'];
+$user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
 $nick=trim($_POST['nick']);

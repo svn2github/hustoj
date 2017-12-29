@@ -1,6 +1,6 @@
 <?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
-if (!(isset($_SESSION['administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
@@ -13,7 +13,7 @@ if (!(isset($_SESSION['administrator']))){
 
 $title = $_POST ['title'];
 $content = $_POST ['content'];
-$user_id=$_SESSION['user_id'];
+$user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 if (get_magic_quotes_gpc ()) {
 	$title = stripslashes ( $title);
 	$content = stripslashes ( $content );

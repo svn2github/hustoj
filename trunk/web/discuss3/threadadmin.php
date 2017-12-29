@@ -12,7 +12,7 @@
                 if ($stat == -1) err_msg("Wrong action.");
                 $rid = intval($rid);
                 $sql = "update reply SET status =? WHERE `rid` = ?";
-                if (!isset($_SESSION['administrator'])){
+                if (!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
                         if ($stat!=2){ 
 				$sql.=" and ?!=''";
 				err_msg("<a href=\"../loginpage.php\">Please Login First</a>");
@@ -22,7 +22,7 @@
                 }else{
 			 $sql.=" and ?!=''";
 		}
-                if (pdo_query($sql, $stat,$rid,$_SESSION['user_id'])>0) 
+                if (pdo_query($sql, $stat,$rid,$_SESSION[$OJ_NAME.'_'.'user_id'])>0) 
 					header('Location: thread.php?tid='.$tid);
                 else 
 					err_msg("Reply not exist or no permission.");
@@ -38,7 +38,7 @@
                 if ($_REQUEST['action']=='resume') $stat = 0;
                 if ($_REQUEST['action']=='lock') $stat = 1;
                 if ($_REQUEST['action']=='delete') $stat = 2;
-                if (!isset($_SESSION['administrator']))
+                if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
                         errmsg("<a href=./loginpage.php>Please Login First</a>");
                 if ($toplevel == -1 && $stat == -1)
                         errmsg("Wrong action.");

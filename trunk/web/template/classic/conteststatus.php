@@ -50,7 +50,7 @@ echo "</select>";
 ?>
 </select>
 
-<?php if(isset($_SESSION['administrator'])||isset($_SESSION['source_browser'])){
+<?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
         if(isset($_GET['showsim']))
                 $showsim=intval($_GET['showsim']);
         else
@@ -194,7 +194,7 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 xmlhttp.send();
 }
-<?php if ($last>0&&$_SESSION['user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
+<?php if ($last>0&&$_SESSION[$OJ_NAME.'_'.'user_id']==$_GET['user_id']) echo "fresh_result($last);";?>
 </script>
 
 </body>

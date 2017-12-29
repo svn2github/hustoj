@@ -30,7 +30,7 @@ if (isset($_POST['startdate']))
 	echo $langmask;	
 
 	$cid=intval($_POST['cid']);
-	if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
+	if(!(isset($_SESSION[$OJ_NAME.'_'."m$cid"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();
 	$sql="UPDATE `contest` set `title`=?,description=?,`start_time`=?,`end_time`=?,`private`=?,`langmask`=? ,password=? WHERE `contest_id`=?";
 	//echo $sql;
 	pdo_query($sql,$title,$description,$starttime,$endtime,$private,$langmask,$password, $cid) ;

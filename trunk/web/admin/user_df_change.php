@@ -2,7 +2,7 @@
 require_once("../include/check_get_key.php");
 $cid=$_GET['cid'];
 echo $cid;
-if(!(isset($_SESSION["m$cid"])||isset($_SESSION['administrator']))) exit();
+if(!(isset($_SESSION[$OJ_NAME.'_'."m$cid"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();
 $sql="select `defunct` FROM `users` WHERE `user_id`=?";
 $result=pdo_query($sql,$cid);
 echo $result;

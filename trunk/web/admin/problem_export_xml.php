@@ -157,7 +157,7 @@ function fixImageURL(&$html,&$did){
    }   	
 }
 
-if (! isset ( $_SESSION ['administrator'] )) {
+if (! isset ( $_SESSION['administrator'] )) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit ( 1 );

@@ -31,6 +31,7 @@ function getLang($language){
 }
 function submitSolution($pid,$solution,$language)
 {
+	global $OJ_NAME;
 	$language=getLang($language);
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)

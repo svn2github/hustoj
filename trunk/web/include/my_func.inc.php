@@ -95,6 +95,7 @@ function is_running($cid){
 }
 function check_ac($cid,$pid){
 	//require_once("./include/db_info.inc.php");
+	global $OJ_NAME;
 	
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
 	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);

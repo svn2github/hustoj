@@ -9,6 +9,7 @@ header("Pragma: no-cache");
 		require_once("./lang/en.php");
 	}
     function checkmail(){
+		global $OJ_NAME;
 		
 		$sql="SELECT count(1) FROM `mail` WHERE 
 				new_mail=1 AND `to_user`=?";

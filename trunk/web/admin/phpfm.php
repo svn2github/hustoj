@@ -44,7 +44,7 @@
 // +--------------------------------------------------
 // | Header and Globals
 // +--------------------------------------------------	
-@session_start();
+require_once("../include/db_info.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
      )){
@@ -52,7 +52,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-require_once("../include/db_info.inc.php");
+
     $charset = "UTF-8";
     //@setlocale(LC_CTYPE, 'C');
     header("Pragma: no-cache");

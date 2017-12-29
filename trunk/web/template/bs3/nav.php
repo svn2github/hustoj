@@ -8,7 +8,7 @@
                   $url!='lostpassword.php'&&
                   $url!='lostpassword2.php'&&
                   $url!='registerpage.php'
-                  ) && !isset($_SESSION['user_id'])){
+                  ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
  
            header("location:loginpage.php");
            exit();

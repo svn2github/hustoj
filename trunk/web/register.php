@@ -10,8 +10,8 @@ $len=strlen($user_id);
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
 $vcode=trim($_POST['vcode']);
-if($OJ_VCODE&&($vcode!= $_SESSION["vcode"]||$vcode==""||$vcode==null) ){
-	$_SESSION["vcode"]=null;
+if($OJ_VCODE&&($vcode!= $_SESSION[$OJ_NAME.'_'."vcode"]||$vcode==""||$vcode==null) ){
+	$_SESSION[$OJ_NAME.'_'."vcode"]=null;
 	$err_str=$err_str."Verification Code Wrong!\\n";
 	$err_cnt++;
 }
@@ -93,16 +93,16 @@ $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);
 
 if(!isset($OJ_REG_NEED_CONFIRM)||!$OJ_REG_NEED_CONFIRM){
-		$_SESSION['user_id']=$user_id;
+		$_SESSION[$OJ_NAME.'_'.'user_id']=$user_id;
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 		//echo $sql."<br />";
-		$result=pdo_query($sql,$_SESSION['user_id']);
+		$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 		foreach ($result as $row){
-			$_SESSION[$row['rightstr']]=true;
-			//echo $_SESSION[$row['rightstr']]."<br />";
+			$_SESSION[$OJ_NAME.'_'.$row['rightstr']]=true;
+			//echo $_SESSION[$OJ_NAME.'_'.$row['rightstr']]."<br />";
 		}
-		$_SESSION['ac']=Array();
-		$_SESSION['sub']=Array();
+		$_SESSION[$OJ_NAME.'_'.'ac']=Array();
+		$_SESSION[$OJ_NAME.'_'.'sub']=Array();
 }
 ?>
 <script>history.go(-2);</script>

@@ -95,10 +95,10 @@
 			}else{
 				 $row=$result[0];
 				$view_private=$row['private'];
-				if($password!=""&&$password==$row['password']) $_SESSION['c'.$cid]=true;
-				if ($row['private'] && !isset($_SESSION['c'.$cid])) $contest_ok=false;
+				if($password!=""&&$password==$row['password']) $_SESSION[$OJ_NAME.'_'.'c'.$cid]=true;
+				if ($row['private'] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid])) $contest_ok=false;
 				if ($row['defunct']=='Y') $contest_ok=false;
-				if (isset($_SESSION['administrator'])) $contest_ok=true;
+				if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) $contest_ok=true;
 									
 				$now=time();
 				$start_time=strtotime($row['start_time']);
@@ -110,7 +110,7 @@
 				
 				
 				
-				if (!isset($_SESSION['administrator']) && $now<$start_time){
+				if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time){
 					$view_errors=  "<h2>$MSG_PRIVATE_WARNING</h2>";
 					require("template/".$OJ_TEMPLATE."/error.php");
 					exit(0);
@@ -144,7 +144,7 @@
 			 foreach($result as $row){
 				
 				$view_problemset[$cnt][0]="";
-				if (isset($_SESSION['user_id'])) 
+				if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])) 
 					$view_problemset[$cnt][0]=check_ac($cid,$cnt);
 				$view_problemset[$cnt][1]= $row['pid']." Problem &nbsp;".$PID[$cnt];
 				$view_problemset[$cnt][2]= "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
@@ -169,14 +169,15 @@ $view_total_page=intval(pdo_query("select count(1) from contest where defunct='N
   }
   //echo "$keyword";
   $mycontests="";
+  $len=mb_strlen($OJ_NAME.'_');
   foreach($_SESSION as $key => $value){
-      if(($key[0]=='m'||$key[0]=='c')&&intval(substr($key,1))>0){
+      if(($key[$len]=='m'||$key[$len]=='c')&&intval(substr($key,$len+1))>0){
 //      echo substr($key,1)."<br>";
-         $mycontests.=",".intval(substr($key,1));
+         $mycontests.=",".intval(substr($key,$len+1));
       }
   }
   if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
-//  echo "$mycontests";
+  echo "$mycontests";
   $wheremy="";
   if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
 

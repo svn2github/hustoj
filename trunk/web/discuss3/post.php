@@ -1,7 +1,7 @@
 <?php
         session_start();
         require_once("../include/db_info.inc.php");
-        if (!isset($_SESSION['user_id'])){
+        if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
                 require_once("oj-header.php");
                 echo "<a href=loginpage.php>Please Login First</a>";
                 require_once("../oj-footer.php");
@@ -35,7 +35,7 @@
                                 $cid='NULL';
                         $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) values(?,?,?,?)";
 						//echo $sql;
-                        $rows=pdo_query($sql,$_POST['title'],$_SESSION['user_id'],$cid,$pid);
+                        $rows=pdo_query($sql,$_POST['title'],$_SESSION[$OJ_NAME.'_'.'user_id'],$cid,$pid);
                         if(!$rows)
                                 echo('Unable to post.');
                         else
@@ -54,7 +54,7 @@
 			    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 			}
                         $sql="insert INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) values(?,NOW(),?,?,?)";
-                        if(pdo_query($sql, $_SESSION['user_id'],$_POST['content'],$tid,$ip)){
+                        if(pdo_query($sql, $_SESSION[$OJ_NAME.'_'.'user_id'],$_POST['content'],$tid,$ip)){
                                 header('Location: thread.php?tid='.$tid);
                                 exit(0);
                         }else{

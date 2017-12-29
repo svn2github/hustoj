@@ -50,7 +50,7 @@
 				}
 		}
 		
-		if(isset($_SESSION['administrator'])){
+		if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 		
 			echo "<tr><td width='100%' colspan='5'><form>IP<input type='text' name='search'><input type='submit' value='$MSG_SEARCH' ></form></td></tr>";
 	  

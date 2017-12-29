@@ -1,5 +1,5 @@
 <?php require_once("../include/db_info.inc.php");
-if (!(isset($_SESSION['http_judge']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'http_judge']))){
 	echo "0";
 	exit(1);
 }
@@ -33,7 +33,7 @@ if(isset($_POST['update_solution'])){
 	$sim=intval($_POST['sim']);
 	$simid=intval($_POST['simid']);
 	$pass_rate=floatval($_POST['pass_rate']);
-    $judger=$_SESSION['user_id'];
+    $judger=$_SESSION[$OJ_NAME.'_'.'user_id'];
 	$sql="UPDATE solution SET result=?,time=?,memory=?,judgetime=NOW(),pass_rate=?,judger=? WHERE solution_id=? LIMIT 1";
 	//echo $sql;
 	pdo_query($sql,$result,$time,$memory,$pass_rate,$judger,$sid);

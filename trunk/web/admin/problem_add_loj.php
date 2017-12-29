@@ -1,6 +1,6 @@
 <?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
-if (!(isset($_SESSION['administrator'])||isset($_SESSION['problem_editor']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
@@ -54,8 +54,8 @@ if(strlen($test_input))mkdata($pid,"test.in",$test_input,$OJ_DATA);
 if(strlen($test_output))mkdata($pid,"test.out",$test_output,$OJ_DATA);
 
 $sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
-pdo_query($sql,$_SESSION['user_id'],"p$pid");
-$_SESSION["p$pid"]=true;
+pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"p$pid");
+$_SESSION[$OJ_NAME.'_'."p$pid"]=true;
 $loj_id=intval($_POST['loj_id']);
 //print_r($_POST);
 echo "<br>".$loj_id."<br>";

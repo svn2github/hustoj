@@ -1,10 +1,10 @@
 <?php
   @session_start();
   if( $_SERVER['REQUEST_METHOD']=='POST'  ){
-	if (isset($_SESSION['csrf_keys'])
-   		&& is_array($_SESSION['csrf_keys'])
+	if (isset($_SESSION[$OJ_NAME.'_'.'csrf_keys'])
+   		&& is_array($_SESSION[$OJ_NAME.'_'.'csrf_keys'])
 		&& isset($_POST['csrf'])
-   		&& in_array($_POST['csrf'],$_SESSION['csrf_keys'])
+   		&& in_array($_POST['csrf'],$_SESSION[$OJ_NAME.'_'.'csrf_keys'])
    	){
 //		echo "<!-csrf check passed->";
   	}else{	

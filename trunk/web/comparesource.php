@@ -26,16 +26,16 @@ $view_user_id=$suser_id=$row['user_id'];
 
 
 
-if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION['user_id'])){
+if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 	$sql="SELECT 1 FROM solution where 
 			result=4 and problem_id=? and user_id=?";
-	$rrs=pdo_query($sql,$sproblem_id,$_SESSION['user_id']);
+	$rrs=pdo_query($sql,$sproblem_id,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	$ok=(count($rrs)>0);
 	
 }
 $view_source="No source code available!";
-if (isset($_SESSION['user_id'])&&$row && $row['user_id']==$_SESSION['user_id']) $ok=true;
-if (isset($_SESSION['source_browser'])) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 
 		$sql="SELECT `source` FROM `source_code` WHERE `solution_id`=?";
 		$result=pdo_query($sql,$id);

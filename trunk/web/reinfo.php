@@ -30,11 +30,11 @@ $sql="SELECT * FROM `solution` WHERE `solution_id`=?";
 $result=pdo_query($sql,$id);
 $row=$result[0];
 $isRE=$row['result']==10;
-if ($row && $row['user_id']==$_SESSION['user_id']) $ok=true;
-if (isset($_SESSION['source_browser'])) $ok=true;
+if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 $view_reinfo="";
 if ($ok==true){
-	if($row['user_id']!=$_SESSION['user_id'])
+	if($row['user_id']!=$_SESSION[$OJ_NAME.'_'.'user_id'])
 		$view_mail_link= "<a href='mail.php?to_user=".htmlentities($row['user_id'],ENT_QUOTES,"UTF-8")."&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";

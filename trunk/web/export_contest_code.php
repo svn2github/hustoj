@@ -4,13 +4,13 @@ require_once('./include/db_info.inc.php');
 require_once('./include/setlang.php');
  ini_set("display_errors","Off");
  
-if (!isset($_SESSION['user_id'])){
+if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
         $view_errors= "<a href=./loginpage.php>$MSG_Login</a>";
         require_once("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
 $contest_id=intval($_GET['cid']);
-if (!(isset($_SESSION['m'.$contest_id])||isset($_SESSION['administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'m'.$contest_id])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
         $view_errors= "<a href=./loginpage.php>No privileges!</a>";
         require_once("template/".$OJ_TEMPLATE."/error.php");
         exit(0);

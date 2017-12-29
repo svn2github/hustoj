@@ -1,6 +1,6 @@
 <?php require_once ("admin-header.php");
 require_once("../include/check_post_key.php");
-if (!(isset($_SESSION['administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
@@ -35,7 +35,7 @@ function submitSolution($pid,$solution,$language)
 	$len=mb_strlen($solution,'utf-8');
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
 						VALUES(?,?,NOW(),?,'127.0.0.1',?,14)";
-	$insert_id = pdo_query( $sql,$pid,$_SESSION['user_id'],$language,$len );
+	$insert_id = pdo_query( $sql,$pid,$_SESSION[$OJ_NAME.'_'.'user_id'],$language,$len );
 	//echo "submiting$language.....";
 	$sql = "INSERT INTO `source_code`(`solution_id`,`source`)VALUES(?,?)";
 	pdo_query( $sql ,$insert_id,$solution);
@@ -231,7 +231,7 @@ function import_fps($tempfile){
 
 	if($spid>0){
 		require_once("../include/set_get_key.php");
-		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION['getkey'].">Use these problems to create a contest.</a>";
+		echo "<br><a class=blue href=contest_add.php?spid=$spid&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Use these problems to create a contest.</a>";
 	 }
 }
 

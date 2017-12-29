@@ -19,14 +19,14 @@ $cnt=$cnt/$page_cnt;
   $page="1";
 if (isset($_GET['page'])){
     $page=intval($_GET['page']);
-    if(isset($_SESSION['user_id'])){
+    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
          $sql="update users set volume=? where user_id=?";
-         pdo_query($sql,$page,$_SESSION['user_id']);
+         pdo_query($sql,$page,$_SESSION[$OJ_NAME.'_'.'user_id']);
     }
 }else{
-    if(isset($_SESSION['user_id'])){
+    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
             $sql="select volume from users where user_id=?";
-            $result=pdo_query($sql,$_SESSION['user_id']);
+            $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
             $row=$result[0];
             $page=intval($row[0]);
     }
@@ -42,25 +42,25 @@ $pend=$pstart+$page_cnt;
 
 $sub_arr=Array();
 // submit
-if (isset($_SESSION['user_id'])){
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        // " AND `problem_id`<'$pend'".
 	" group by `problem_id`";
-$result=pdo_query($sql,$_SESSION['user_id']);
+$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 foreach ($result as $row)
 	$sub_arr[$row[0]]=true;
 }
 
 $acc_arr=Array();
 // ac
-if (isset($_SESSION['user_id'])){
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 $sql="SELECT `problem_id` FROM `solution` WHERE `user_id`=?".
                                                                        //  " AND `problem_id`>='$pstart'".
                                                                        //  " AND `problem_id`<'$pend'".
 	" AND `result`=4".
 	" group by `problem_id`";
-$result=pdo_query($sql,$_SESSION['user_id']);
+$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 foreach ($result as $row)
 	$acc_arr[$row[0]]=true;
 }
@@ -75,7 +75,7 @@ if(isset($_GET['search'])&&trim($_GET['search'])!=""){
      $filter_sql="  `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 }
 
-if (isset($_SESSION['administrator'])){
+if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 	
 	$sql="SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE $filter_sql ";
 	

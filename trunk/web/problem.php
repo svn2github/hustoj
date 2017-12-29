@@ -20,7 +20,7 @@ if (isset($_GET['id'])){
         // practice
         $id=intval($_GET['id']);
   //require("oj-header.php");
-        if (!isset($_SESSION['administrator']) && $id!=1000&&!isset($_SESSION['contest_creator']))
+        if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $id!=1000&&!isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))
                 $sql="SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
                                 SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
                                                 SELECT `contest_id` FROM `contest` WHERE `end_time`>'$now' or `private`='1'))
@@ -35,7 +35,7 @@ if (isset($_GET['id'])){
         $cid=intval($_GET['cid']);
         $pid=intval($_GET['pid']);
 
-        if (!isset($_SESSION['administrator']))
+        if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
                 $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=? AND `start_time`<='$now'";
         else
                 $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=?";
@@ -43,9 +43,9 @@ if (isset($_GET['id'])){
         $rows_cnt=count($result);
         $row=($result[0]);
         $contest_ok=true;
-        if ($row[1] && !isset($_SESSION['c'.$cid])) $contest_ok=false;
+        if ($row[1] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid])) $contest_ok=false;
         if ($row[2]=='Y') $contest_ok=false;
-        if (isset($_SESSION['administrator'])) $contest_ok=true;
+        if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) $contest_ok=true;
                                
        
     $ok_cnt=$rows_cnt==1;              

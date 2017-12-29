@@ -4,7 +4,7 @@
     require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
 	$view_title= "Welcome To Online Judge";
-	if (!isset($_SESSION['user_id'])){
+	if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 		$view_errors= "<a href=./loginpage.php>$MSG_Login</a>";
 		
 		require("template/".$OJ_TEMPLATE."/error.php");
@@ -12,7 +12,7 @@
 	}
 
 $sql="SELECT `school`,`nick`,`email` FROM `users` WHERE `user_id`=?";
-$result=pdo_query($sql,$_SESSION['user_id']);
+$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
  $row=$result[0];
 
 

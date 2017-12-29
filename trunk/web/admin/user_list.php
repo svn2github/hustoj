@@ -29,8 +29,8 @@ foreach($result as $row){
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
         echo "<td>".$row['nick'];
         $cid=$row['user_id'];
-        if(isset($_SESSION['administrator'])){
-                echo "<td><a href=user_df_change.php?cid=".$row['user_id']."&getkey=".$_SESSION['getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
+        if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+                echo "<td><a href=user_df_change.php?cid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
         }else{
                 echo "<td>No permissions";
         }

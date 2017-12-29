@@ -69,17 +69,17 @@ foreach($result as $row){
         echo "<td>".$row['start_time'];
         echo "<td>".$row['end_time'];
         $cid=$row['contest_id'];
-        if(isset($_SESSION['administrator'])||isset($_SESSION["m$cid"])){
-                echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey'].">".($row['private']=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a>";
-                echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
+        if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'."m$cid"])){
+                echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a>";
+                echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a>";
                 echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">Edit</a>";
                 echo "<td><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a>";
-                if(isset($_SESSION['administrator'])){
-                        echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey']."\">Export</a>";
+                if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+                        echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">Export</a>";
                 }else{
                   echo "<td>";
                 }
-     echo "<td> <a href=\"../export_contest_code.php?cid=".$row['contest_id']."&getkey=".$_SESSION['getkey']."\">Logs</a>";
+     echo "<td> <a href=\"../export_contest_code.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">Logs</a>";
         }else{
                 echo "<td colspan=5 align=right><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a><td>";
 

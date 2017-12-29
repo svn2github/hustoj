@@ -30,7 +30,7 @@
 <center><table>
 <tr><td colspan=2 height=40 width=500>&nbsp;&nbsp;&nbsp;Update Information</tr>
 <tr><td width=25%>User ID:
-<td width=75%><?php echo $_SESSION['user_id']?>
+<td width=75%><?php echo $_SESSION[$OJ_NAME.'_'.'user_id']?>
 <?php require_once('./include/set_post_key.php');?>
 </tr>
 <tr><td>Nick Name:

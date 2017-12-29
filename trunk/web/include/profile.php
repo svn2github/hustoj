@@ -12,7 +12,7 @@ header("Pragma: no-cache");
 		
 		$sql="SELECT count(1) FROM `mail` WHERE 
 				new_mail=1 AND `to_user`=?";
-		$result=pdo_query($sql,$_SESSION['user_id']);
+		$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 		if(!$result) return false;
 		$row=$result[0];
 		$retmsg="<span id=red>(".$row[0].")</span>";
@@ -20,8 +20,8 @@ header("Pragma: no-cache");
 		return $retmsg;
 	}
 	$profile="";
-		if (isset($_SESSION['user_id'])){
-				$sid=$_SESSION['user_id'];
+		if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+				$sid=$_SESSION[$OJ_NAME.'_'.'user_id'];
 				$profile.= "<i class=icon-user></i><a href=./modifypage.php>$MSG_USERINFO</a>&nbsp;<a href='./userinfo.php?user=$sid'><span id=red>$sid</span></a>";
 				$mail=checkmail();
 				if ($mail)
@@ -44,7 +44,7 @@ header("Pragma: no-cache");
 					$profile.= "<a href=./registerpage.php>$MSG_REGISTER</a>&nbsp;";
 				}
 			}
-			if (isset($_SESSION['administrator'])||isset($_SESSION['contest_creator'])||isset($_SESSION['problem_editor'])){
+			if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
            $profile.= "<a href=./admin/>$MSG_ADMIN</a>&nbsp;";
 			
 			}

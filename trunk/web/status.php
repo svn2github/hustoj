@@ -56,12 +56,12 @@ if (isset($_GET['cid'])){
         //require_once("contest-header.php");
 }else{
         //require_once("oj-header.php");
-  if(isset($_SESSION['administrator'])
-	||isset($_SESSION['source_browser'])
-	||(isset($_SESSION['user_id'])
-	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION['user_id']))
+  if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
+	||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
+	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
+	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
-      if ($_SESSION['user_id']!="guest")
+      if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
       		$sql="WHERE 1 ";
   }else{
       $sql="WHERE problem_id>0 ";
@@ -187,9 +187,9 @@ for ($i=0;$i<$rows_cnt;$i++){
 		if ($top==-1) $top=$row['solution_id'];
         $bottom=$row['solution_id'];
 		$flag=(!is_running(intval($row['contest_id']))) ||
-                        isset($_SESSION['source_browser']) ||
-                        isset($_SESSION['administrator']) || 
-                        (isset($_SESSION['user_id'])&&!strcmp($row['user_id'],$_SESSION['user_id']));
+                        isset($_SESSION[$OJ_NAME.'_'.'source_browser']) ||
+                        isset($_SESSION[$OJ_NAME.'_'.'administrator']) || 
+                        (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!strcmp($row['user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']));
 
         $cnt=1-$cnt;
 	
@@ -235,7 +235,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	}
        
 	$view_status[$i][3]="<span class='hidden' style='display:none' result='".$row['result']."' ></span>";
-        if (intval($row['result'])==11 && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+        if (intval($row['result'])==11 && ((isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){
                 $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$MSG_Compile_Error."";
 
         	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
@@ -243,7 +243,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 		else
 	      			$view_status[$i][3].="</a>";
 				
-        }else if ((((intval($row['result'])==5||intval($row['result'])==6)&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION['user_id'])&&$row['user_id']==$_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+        }else if ((((intval($row['result'])==5||intval($row['result'])==6)&&$OJ_SHOW_DIFF)||$row['result']==10||$row['result']==13) && ((isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){
                 $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']
 					."' class='".$judge_color[$row['result']]."' title='$MSG_Tips'>".$judge_result[$row['result']]."";
         	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
@@ -252,7 +252,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 				 $view_status[$i][3].= "</a>";
 
         }else{
-              if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION['user_id']){
+              if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
                         $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
@@ -260,7 +260,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 			else
 				$view_status[$i][3].="</span>";
 
-                        if( isset($_SESSION['source_browser'])){
+                        if( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 
                                         $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
@@ -286,7 +286,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	  
 
         }
-        if(isset($_SESSION['http_judge'])) {
+        if(isset($_SESSION[$OJ_NAME.'_'.'http_judge'])) {
 		 $view_status[$i][3].="<form class='http_judge_form form-inline' >
 					<input type=hidden name=sid value='".$row['solution_id']."'>";
                  $view_status[$i][3].="</form>";
@@ -308,7 +308,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 						
                 }
 				//echo $row['result'];
-                if (!(isset($_SESSION['user_id'])&&strtolower($row['user_id'])==strtolower($_SESSION['user_id']) || isset($_SESSION['source_browser']))){
+                if (!(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&strtolower($row['user_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){
                         $view_status[$i][6]=$language_name[$row['language']];
                 }else{
 

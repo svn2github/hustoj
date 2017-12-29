@@ -97,12 +97,12 @@ function check_ac($cid,$pid){
 	//require_once("./include/db_info.inc.php");
 	
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
-	$result=pdo_query($sql,$cid,$pid,$_SESSION['user_id']);
+	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	 $row=$result[0];
 	$ac=intval($row[0]);
 	if ($ac>0) return "<font color=green>Y</font>";
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`!=4 and `problem_id`!=0  AND `user_id`=?";
-	$result=pdo_query($sql,$cid,$pid,$_SESSION['user_id']);
+	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	$row=$result[0];
 	$sub=intval($row[0]);
 	

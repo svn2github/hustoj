@@ -7,8 +7,8 @@
 <?php require_once("../include/db_info.inc.php");?>
 <?php require_once("admin-header.php");
 
-if (!(isset($_SESSION['administrator'])
-      ||isset($_SESSION['problem_editor'])
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
+      ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
      )){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -53,7 +53,7 @@ Y<input type=radio name=spj value='1' <?php echo $row['spj']=="1"?"checked":""?>
 <?php }else{
 require_once("../include/check_post_key.php");
 $id=intval($_POST['problem_id']);
-if(!(isset($_SESSION["p$id"])||isset($_SESSION['administrator']))) exit();	
+if(!(isset($_SESSION[$OJ_NAME.'_'."p$id"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();	
 $title=$_POST['title'];
 $time_limit=$_POST['time_limit'];
 $memory_limit=$_POST['memory_limit'];

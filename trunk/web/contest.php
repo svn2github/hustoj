@@ -171,13 +171,13 @@ $view_total_page=intval(pdo_query("select count(1) from contest where defunct='N
   $mycontests="";
   $len=mb_strlen($OJ_NAME.'_');
   foreach($_SESSION as $key => $value){
-      if(($key[$len]=='m'||$key[$len]=='c')&&intval(substr($key,$len+1))>0){
+      if(($key[$len]=='m'||$key[$len]=='c')&&intval(mb_substr($key,$len+1))>0){
 //      echo substr($key,1)."<br>";
-         $mycontests.=",".intval(substr($key,$len+1));
+         $mycontests.=",".intval(mb_substr($key,$len+1));
       }
   }
   if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
-  echo "$mycontests";
+//  echo "$mycontests";
   $wheremy="";
   if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
 

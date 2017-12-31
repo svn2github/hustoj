@@ -33,6 +33,10 @@ chmod 700 etc/judge.conf
 
 #sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+
+sed -i "s+//date_default_timezone_set("PRC");+date_default_timezone_set("PRC");+g" src/web/include/db_info.inc.php
+sed -i "s+//pdo_query("SET time_zone ='+8:00'");+pdo_query("SET time_zone ='+8:00'");+g" src/web/include/db_info.inc.php
+
 chmod 775 -R /home/judge/data && chgrp -R apache /home/judge/data
 chmod 700 src/web/include/db_info.inc.php
 

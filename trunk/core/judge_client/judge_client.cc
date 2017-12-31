@@ -1181,6 +1181,8 @@ void _get_solution_http(int solution_id, char * work_dir, int lang) {
 
 }
 void get_solution(int solution_id, char * work_dir, int lang) {
+	char src_pth[BUFFER_SIZE];
+	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	if (http_judge) {
 		_get_solution_http(solution_id, work_dir, lang);
 	} else {
@@ -1189,6 +1191,7 @@ void get_solution(int solution_id, char * work_dir, int lang) {
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
+	execute_cmd("chown judge %s/%s", work_dir,src_pth);
 
 }
 

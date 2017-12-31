@@ -81,16 +81,7 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 wget https://downloads.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4.x86_64-linux.tar
 tar xf fpc-3.0.4.x86_64-linux.tar
 cd fpc-3.0.4.x86_64-linux
-echo "
-
-
-
-
-
-
-
-
-"|sh install.sh
+echo -e "\n\n\n\n\n\n\n\n\n\n"|sh install.sh
 
 
 reset

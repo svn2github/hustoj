@@ -9,6 +9,8 @@ apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm
 
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
+CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+
 mkdir etc data log
 
 cp src/install/java0.policy  /home/judge/etc
@@ -22,6 +24,8 @@ fi
 sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
 sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$PASSWORD/g" etc/judge.conf
 sed -i "s/OJ_COMPILE_CHROOT=1/OJ_COMPILE_CHROOT=0/g" etc/judge.conf
+sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
+
 chmod 700 etc/judge.conf
 
 sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php

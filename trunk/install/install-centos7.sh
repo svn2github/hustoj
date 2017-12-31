@@ -77,6 +77,11 @@ yum -y update
 yum -y install mono
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
+#free pascal
+wget https://downloads.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4-1.x86_64.rpm
+rpm -ivh  fpc-3.0.4-1.x86_64.rpm
+
+
 reset
 echo "Remember your database account for HUST Online Judge:"
 echo "username:root"

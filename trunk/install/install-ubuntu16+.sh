@@ -66,4 +66,6 @@ else
 	echo "exit 0" >> /etc/rc.local
 	
 fi
+ln -s /usr/bin/mcs /usr/bin/gmcs
+
 /usr/bin/judged

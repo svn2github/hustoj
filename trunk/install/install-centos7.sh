@@ -66,6 +66,7 @@ fi
 /usr/bin/judged
 
 # mono install for c# 
+yum -y install yum-utils
 rpm --import "http://keyserver.Ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos/ 
 yum -y update

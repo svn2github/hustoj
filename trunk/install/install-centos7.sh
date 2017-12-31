@@ -68,7 +68,8 @@ fi
 # mono install for c# 
 rpm --import "http://keyserver.Ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
 yum-config-manager --add-repo http://download.mono-project.com/repo/centos/ 
-yum install mono
+yum -y update
+yum -y install mono
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
 reset

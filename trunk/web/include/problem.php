@@ -23,7 +23,7 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	}
 	$basedir = "$OJ_DATA/$pid";
 	if(!isset($OJ_SAE)||!$OJ_SAE){
-			echo "[$title]data in $basedir";
+//			echo "[$title]data in $basedir";
 	}
 	return $pid;
 }

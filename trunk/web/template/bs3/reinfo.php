@@ -28,7 +28,17 @@
 	
 <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo?></pre>
 <div id='errexp'>Explain:</div>
-<script>
+
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	
+	  <script>
 var pats=new Array();
 var exps=new Array();
 pats[0]=/A Not allowed system call.* /;
@@ -62,14 +72,5 @@ document.getElementById("errexp").innerHTML=expmsg;
 }
 explain();
 </script>
-      </div>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
   </body>
 </html>

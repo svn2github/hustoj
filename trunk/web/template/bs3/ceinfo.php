@@ -152,7 +152,7 @@ pats[57]=/expected but/
 exps[57]="错误的标点或符号";
 function explain(){
 //alert("asdf");
-var errmsg=document.getElementById("errtxt").innerHTML;
+var errmsg=$("#errtxt").text();
 var expmsg="辅助解释：<br><hr>";
 for(var i=0;i<pats.length;i++){
 var pat=pats[i];

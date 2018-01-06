@@ -52,5 +52,5 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 ?>
 <br>
 
-更多题目请到 <a href=http://tk.hustoj.com/>TK 题库</a> 选购。
+更多题目请到 <a href="http://tk.hustoj.com/" target="_blank">TK 题库</a> 选购。
 </div>

@@ -64,7 +64,7 @@ if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
 }else{
   $level=" - ( `top_level` = 1 )";
 }
-$sql.=" GROUP BY `topic_id` ORDER BY `top_level`$level DESC, MAX(`r`.`time`) DESC";
+$sql.=" GROUP BY t.tid ORDER BY `top_level`$level DESC, MAX(`r`.`time`) DESC";
 $sql.=" LIMIT 30";
 //echo $sql;
 $result = pdo_query($sql);

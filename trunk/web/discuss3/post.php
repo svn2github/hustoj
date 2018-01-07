@@ -32,14 +32,16 @@
                         if(array_key_exists('cid',$_REQUEST)&&$_REQUEST['cid']!='')
                                 $cid=intval($_REQUEST['cid']);
                         else
-                                $cid='NULL';
+                                $cid=0;
                         $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) values(?,?,?,?)";
 						//echo $sql;
                         $rows=pdo_query($sql,$_POST['title'],$_SESSION[$OJ_NAME.'_'.'user_id'],$cid,$pid);
-                        if(!$rows)
-                                echo('Unable to post.');
-                        else
+                        if(!$rows){
+				echo $sql;
+                                echo('Unable to post new.');
+                        }else{
                                 $tid=$rows;
+			}
                 }
                 else
                         echo('Error!');

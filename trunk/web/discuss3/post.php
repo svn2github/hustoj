@@ -37,7 +37,7 @@
 						//echo $sql;
                         $rows=pdo_query($sql,$_POST['title'],$_SESSION[$OJ_NAME.'_'.'user_id'],$cid,$pid);
                         if(!$rows){
-				echo $sql;
+				//echo $sql;
                                 echo('Unable to post new.');
                         }else{
                                 $tid=$rows;

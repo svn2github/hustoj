@@ -46,12 +46,16 @@ if($keyword) {
 	$result=pdo_query($sql,$pstart,$pend);
 }
 ?>
-<form action=problem_list.php><input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
+<form action=problem_list.php>
+
+<input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
 
 <?php
 echo "<center><table class='table table-striped' width=90% border=1>";
 echo "<form method=post action=contest_add.php>";
-echo "<tr><td colspan=8><input type=submit name='problem2contest' value='CheckToNewContest'>";
+echo "<tr><td colspan=8>";
+echo "<input type=checkbox onchange='$(\"input[type=checkbox]\").prop(\"checked\", this.checked)'>";
+echo "<input type=submit name='problem2contest' value='CheckToNewContest'>";
 echo "<tr><td>PID<td>Title<td>AC<td>Date";
 if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))   echo "<td>Status<td>Delete";

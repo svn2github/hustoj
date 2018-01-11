@@ -1,5 +1,4 @@
 <?php
-@session_start();
 require_once('./include/db_info.inc.php');
 require_once('./include/setlang.php');
  ini_set("display_errors","Off");

@@ -64,7 +64,11 @@ else
 	sed -i "s/exit 0//g" /etc/rc.local
 	echo "/usr/bin/judged" >> /etc/rc.local
 	echo "exit 0" >> /etc/rc.local
-	
+fi
+if grep "bak.sh" /var/spool/cron/crontabs/root ; then
+	echo "auto backup added!"
+else
+	echo "1 0 * * * /home/judge/src/install/bak.sh" >> /var/spool/cron/crontabs/root
 fi
 ln -s /usr/bin/mcs /usr/bin/gmcs
 

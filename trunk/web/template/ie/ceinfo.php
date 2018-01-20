@@ -154,6 +154,8 @@ pats[58]=/redefinition of ‘main’/;
 exps[58]="这道题目可能是附加代码题，请重新审题，看清题意，不要提交系统已经定义的main函数，而应提交指定格式的某个函数。";
 pats[59]=/iostream: No such file or directory/;
 exps[59]="请不要将C++程序提交为C";
+pats[60]=/expected unqualified-id before ‘\[’ token/;
+exps[60]="留意数组声明后是否少了分号";
 function explain(){
 //alert("asdf");
 var errmsg=$("#errtxt").text();

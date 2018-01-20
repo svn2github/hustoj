@@ -27,7 +27,10 @@
 		foreach ($result as $row)
 			$_SESSION[$OJ_NAME.'_'.$row['rightstr']]=true;
 		echo "<script language='javascript'>\n";
-		echo "history.go(-2);\n";
+		if($OJ_NEED_LOGIN)
+			echo "window.location.href='index.php';\n";
+		else
+			echo "history.go(-2);\n";
 		echo "</script>";
 	}else{
 		

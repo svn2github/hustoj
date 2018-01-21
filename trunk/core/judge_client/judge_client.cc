@@ -1725,7 +1725,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	alarm(0);
-	alarm(time_lmt * 10);
+	alarm(time_lmt + 1 );
 
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;

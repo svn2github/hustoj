@@ -17,6 +17,7 @@
     # Gets key / value pair into memcache … called by mysql_query_cache()
     function getCache($key) {
         global $memcache;
+//	if ($memcache->get($key)) echo "true";
         return ($memcache) ? $memcache->get($key) : false;
     }
 
@@ -44,7 +45,7 @@
 
     //将数据放入memcached服务器中，如果memcached服务器没有开的话，此语句什么也不会做
     //如果开启了服务器的话，数据将会被缓存到memcached服务器中
-                if (!setCache(md5("mysql_query" . $sql), $cache, $timeout)) {
+                if (!setCache(md5($OJ_NAME.$_SERVER['HTTP_HOST']."mysql_query" . $sql), $cache, $timeout)) {
                     # If we get here, there isn’t a memcache daemon running or responding
 		 if($OJ_MEMCACHE) echo "You can run these command to get faster speed:<br>sudo apt-get install memcached<br>sudo apt-get install php5-memcache<br>sudo apt-get install php-memcache";
                 }

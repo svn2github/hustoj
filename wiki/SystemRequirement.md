@@ -34,3 +34,6 @@
    * CDROM
    * 无须硬盘
    * 无网络可本地运行、有网络可升级至最新版
+   
+   
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hareware.png" >

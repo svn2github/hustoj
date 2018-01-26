@@ -73,10 +73,7 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 后台功能：
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/menu.png" >
 ----------------------
-这里是广告：
-NOIP在线课程
-[基础入门课程](https://ke.qq.com/course/237339?saleToken=20665) 
-[初赛课程](https://ke.qq.com/course/245508?saleToken=20667) 
-[复赛算法课程](https://ke.qq.com/course/247615?saleToken=20666) 
+硬件需求：
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 
 

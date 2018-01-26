@@ -36,4 +36,4 @@
    * 无网络可本地运行、有网络可升级至最新版
    
    
-<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hareware.png" >
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >

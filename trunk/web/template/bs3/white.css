@@ -23,7 +23,7 @@
 }
 .container .jumbotron{
    padding: 5px;
-   background-color: #fff;
+   background-image: url(../../image/background.jpg);
    border: 1px solid #eee;
 }
 

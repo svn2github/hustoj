@@ -219,7 +219,7 @@ void run_client(int runid, int clientid) {
 	LIM.rlim_cur = STD_MB << 11;
 	setrlimit(RLIMIT_AS, &LIM);
 
-	LIM.rlim_cur = LIM.rlim_max = 200;
+	LIM.rlim_cur = LIM.rlim_max = 400;
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;

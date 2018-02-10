@@ -61,6 +61,7 @@ $loj_id=intval($_POST['loj_id']);
 echo "<br>".$loj_id."<br>";
 echo htmlentities("wget https://loj.ac/problem/".$loj_id."/testdata/download -O $OJ_DATA/$pid/data.zip");
 echo system("wget https://loj.ac/problem/".$loj_id."/testdata/download -O $OJ_DATA/$pid/data.zip");
+echo system("/home/judge/src/install/ans2out $OJ_DATA/$pid/");
 echo "<br>";
 echo htmlentities("unzip $OJ_DATA/$pid/data.zip -d $OJ_DATA/$pid");
 echo system("unzip $OJ_DATA/$pid/data.zip -d $OJ_DATA/$pid");

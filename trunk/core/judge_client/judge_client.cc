@@ -1733,13 +1733,13 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	setrlimit(RLIMIT_FSIZE, &LIM);
 	// proc limit
 	switch (lang) {
-	case 17:  
+	case 17: 
+	case 9: //C#	
 		LIM.rlim_cur = LIM.rlim_max = 280;
 		break;
 	case 3:  //java
 	case 4:  //ruby
 	//case 6:  //python
-	case 9: //C#
 	case 12:
 	case 16:
 		LIM.rlim_cur = LIM.rlim_max = 80;

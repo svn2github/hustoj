@@ -2,6 +2,7 @@
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
+header("content-type:application/javascript");
 	if(isset($_SERVER['HTTP_REFERER']))$dir=basename(dirname($_SERVER['HTTP_REFERER']));
 	else $dir="";
 	if($dir=="discuss3") $path_fix="../";

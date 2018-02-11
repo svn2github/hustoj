@@ -82,7 +82,7 @@ if (get_magic_quotes_gpc ()) {
 	$source = stripslashes ( $source );
 }
 $basedir=$OJ_DATA."/$id";
-echo "Sample data file in $basedir Updated!<br>";
+echo "Sample data file Updated!<br>";
 
 	if($sample_input&&file_exists($basedir."/sample.in")){
 		//mkdir($basedir);

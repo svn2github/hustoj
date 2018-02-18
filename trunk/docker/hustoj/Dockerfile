@@ -1,19 +1,19 @@
 FROM ubuntu:trusty-20171117
 
-ADD ./sources.list /etc/apt/sources.list
+#ADD ./sources.list /etc/apt/sources.list
 	
 RUN \
 	echo 'mysql-server-5.5 mysql-server/root_password password 123456' | sudo debconf-set-selections \
 	&& echo 'mysql-server-5.5 mysql-server/root_password_again password 123456' | sudo debconf-set-selections \
-	&& apt-get update && apt-get upgrade && apt-get install -y mysql-server \
+	&& apt-get update && apt-get upgrade -y && apt-get install -y mysql-server \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& /usr/sbin/useradd -m -u 1536 judge 
 
 	
-RUN apt-get update && apt-get upgrade && apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd \
+RUN apt-get update && && apt-get install -y subversion make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd fp-compiler openjdk-7-jdk  \
 	&& rm -rf /var/lib/apt/lists/* 
 	
-ADD ./ /home/judge/src
+ADD ../../ /home/judge/src
 
 RUN  \
 	USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`   \
@@ -44,25 +44,7 @@ RUN  \
 	&& sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/php.ini   
 	
 WORKDIR /home/judge/src/core
-
-RUN \
-	cd judged 									;\
-	chmod +x judged 									;\
-	cp judged /usr/bin 									;\
-	cd ../judge_client 									;\
-	chmod +x judge_client 									;\
-	cp judge_client /usr/bin 									;\
-	cd ../sim/sim_3_01 									;\
-	chmod +x sim* 									;\
-	cp sim_c.exe /usr/bin/sim_c 									;\
-	cp sim_c++.exe /usr/bin/sim_cc 									;\
-	cp sim_java.exe /usr/bin/sim_java 									;\
-	cp sim_pasc.exe /usr/bin/sim_pas 									;\
-	cp sim_text.exe /usr/bin/sim_text 									;\
-	cp sim_lisp.exe /usr/bin/sim_scm 									;\
-	cd .. 									;\
-	cp sim.sh /usr/bin 									;\
-	chmod +x /usr/bin/sim.sh
+RUN ./make.sh
 
 WORKDIR /home/judge/
 EXPOSE 80

@@ -1,9 +1,7 @@
 docker rm $(docker ps -a -q)
 #cd docker\hustoj-base
 #cd ../../
-cd core
-./makeForDocker.sh
-cd ..
+#cd core & ./makeForDocker.sh & cd ..
 docker build -t hustoj ./
 
 mkdir -p /home/data/

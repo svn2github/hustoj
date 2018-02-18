@@ -1,6 +1,6 @@
 #!/bin/bash
 service nginx start
-chown -R mysql:mysql /var/lib/mysql
+#chown -R mysql:mysql /var/lib/mysql
 service mysql start
 mysql -h localhost -uroot < src/install/db.sql
 echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -uroot 

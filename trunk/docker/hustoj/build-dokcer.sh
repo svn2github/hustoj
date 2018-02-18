@@ -2,19 +2,26 @@ docker rm $(docker ps -a -q)
 #cd docker\hustoj-base
 cd ../../
 #cd core & ./makeForDocker.sh & cd ..
-docker build -f docker/hustoj/Dockerfile -t hustoj  ./
+docker build -f Dockerfile -t hustoj  ./
 
+rm -R /home/data/
 mkdir -p /home/data/ /home/data/config
 chmod 777 /home/data/ /home/data/config
 
 docker rm -f /hustoj
-docker run -d \
--it \
--v /home/data/mysql:/var/lib/mysql \
+docker run -d -it \
 -v /home/data/data:/home/judge/data \
--v /home/data/config/db_info.inc.php:/home/judge/src/web/include/db_info.inc.php \
+-v /home/data/mysql:/var/lib/mysql \
 -v /home/data/upload:/home/judge/src/web/upload \
+-v /home/data/config:/home/judge/src/web/config \
+--name hustoj -p 80:80 hustoj
 
---name hustoj -p 80:80 \
-hustoj
+#docker run -d -it \ 
+#-v /home/data/data:/home/judge/data \
+#-v /home/data/upload:/home/judge/src/web/upload \
+#-v /home/data/mysql:/var/lib/mysql  \
+#--name hustoj -p 80:80 hustoj
 
+#
+#docker run -d -it --name hustoj -p 80:80 hustoj
+docker exec -i -t hustoj /bin/bash

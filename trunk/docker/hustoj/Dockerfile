@@ -10,7 +10,7 @@ RUN \
 	&& /usr/sbin/useradd -m -u 1536 judge 
 
 	
-RUN apt-get update && && apt-get install -y subversion make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd fp-compiler openjdk-7-jdk  \
+RUN apt-get update && apt-get install -y subversion make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd fp-compiler openjdk-7-jdk  \
 	&& rm -rf /var/lib/apt/lists/* 
 	
 ADD ../../ /home/judge/src

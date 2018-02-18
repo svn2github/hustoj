@@ -1,11 +1,11 @@
 FROM ubuntu:trusty-20171117
 
-#ADD ./sources.list /etc/apt/sources.list
+#COPY ./docker/hustoj/sources.list /etc/apt/sources.list
 	
 RUN \
 	echo 'mysql-server-5.5 mysql-server/root_password password 123456' | sudo debconf-set-selections \
 	&& echo 'mysql-server-5.5 mysql-server/root_password_again password 123456' | sudo debconf-set-selections \
-	&& apt-get update && apt-get upgrade -y && apt-get install -y mysql-server \
+	&& apt-get update && apt-get upgrade -y  && apt-get install -y mysql-server \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& /usr/sbin/useradd -m -u 1536 judge 
 
@@ -13,7 +13,7 @@ RUN \
 RUN apt-get update && apt-get install -y subversion make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd fp-compiler openjdk-7-jdk  \
 	&& rm -rf /var/lib/apt/lists/* 
 	
-ADD ../../ /home/judge/src
+COPY . /home/judge/src
 
 RUN  \
 	USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`   \
@@ -48,9 +48,9 @@ RUN ./make.sh
 
 WORKDIR /home/judge/
 EXPOSE 80
-VOLUME ["/home/judge/data","/home/judge/src/web/config","/home/judge/src/web/upload","/var/lib/mysql"]
+VOLUME ["/home/judge/data","/home/judge/src/web/upload","/var/lib/mysql"]
 
-ADD ./docker-entrypoint.sh /usr/local/bin/
+ADD ./docker/hustoj/docker-entrypoint.sh /usr/local/bin/
 RUN  chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

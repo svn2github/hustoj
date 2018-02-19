@@ -68,6 +68,7 @@ docker run -d -it \
     -v /data/docker/docker-wxy/mysql:/var/lib/mysql \
     -v /data/docker/docker-wxy/upload:/home/judge/src/web/upload \
     -v /data/docker/docker-wxy/config:/home/judge/src/web/config \
+	--privileged \
     --name hustoj -p 80:80 shiningrise/hustoj:latest
 
 	附加说明：
@@ -77,7 +78,7 @@ docker run -d -it \
 		/home/data/config #配置文件目录
 
 docker测试安装
-	docker run -d -it --name hustoj -p 80:80 shiningrise/hustoj:latest
+	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:latest
 ```	
 
 

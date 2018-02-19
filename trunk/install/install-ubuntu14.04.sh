@@ -4,6 +4,9 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
+
+echo 'mysql-server-5.5 mysql-server/root_password password ""' | sudo debconf-set-selections
+echo 'mysql-server-5.5 mysql-server/root_password_again password ""' | sudo debconf-set-selections
 apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx mysql-server php5-mysql php5-gd fp-compiler openjdk-7-jdk
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`

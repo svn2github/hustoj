@@ -22,8 +22,35 @@ ubuntu16.04（不推荐），可以使用下面脚本
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
+
+https://www.youtube.com/watch?v=nlhmfZqyHnA 
+
+
+centos7 （不推荐），可以使用下面脚本
+
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
+    sudo bash install-centos7.sh
+    
+https://www.youtube.com/watch?v=hRap7ettUWc
+
+<b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
+
+安装后几个重要配置文件的位置
+
+    /home/judge/etc/judge.conf
+    /home/judge/src/web/include/db_info.inc.php
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
+    /etc/nginx/sites-enabled/default
+
+REDHAT / CENTOS 用户请浏览 
+
+https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md
+
+https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
+
+
 docker安装
-	
+```	
 mkdir -p /data/docker/docker-wxy/data \
         /data/docker/docker-wxy/mysql:\
          /data/docker/docker-wxy/upload\
@@ -51,31 +78,8 @@ docker run -d -it \
 
 docker测试安装
 	docker run -d -it --name hustoj -p 80:80 shiningrise/hustoj:latest
-	
-https://www.youtube.com/watch?v=nlhmfZqyHnA 
+```	
 
-
-centos7 （不推荐），可以使用下面脚本
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
-    sudo bash install-centos7.sh
-    
-https://www.youtube.com/watch?v=hRap7ettUWc
-
-<b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
-
-安装后几个重要配置文件的位置
-
-    /home/judge/etc/judge.conf
-    /home/judge/src/web/include/db_info.inc.php
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
-    /etc/nginx/sites-enabled/default
-
-REDHAT / CENTOS 用户请浏览 
-
-https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md
-
-https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 [更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
 

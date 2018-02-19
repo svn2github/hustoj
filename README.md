@@ -48,7 +48,10 @@ docker run -d -it \
 		/home/data/mysql  # mysql数据库目录
 		/home/data/upload #文件上传目录
 		/home/data/config #配置文件目录
-		
+
+docker测试安装
+	docker run -d -it --name hustoj -p 80:80 shiningrise/hustoj:latest
+	
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
 

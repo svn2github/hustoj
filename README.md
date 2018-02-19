@@ -22,6 +22,36 @@ ubuntu16.04（不推荐），可以使用下面脚本
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
+docker安装
+	
+mkdir -p /data/docker/docker-wxy/data \
+        /data/docker/docker-wxy/mysql:\
+         /data/docker/docker-wxy/upload\
+        /data/docker/docker-wxy/config
+chmod 777 /data/docker/docker-wxy/data \
+        /data/docker/docker-wxy/mysql:\
+         /data/docker/docker-wxy/upload\
+        /data/docker/docker-wxy/config
+
+docker stop hustoj
+docker rm hustoj
+docker pull shiningrise/hustoj
+docker run -d -it \
+    -v /data/docker/docker-wxy/data:/home/judge/data \
+    -v /data/docker/docker-wxy/mysql:/var/lib/mysql \
+    -v /data/docker/docker-wxy/upload:/home/judge/src/web/upload \
+    -v /data/docker/docker-wxy/config:/home/judge/src/web/config \
+    --name hustoj -p 80:80 shiningrise/hustoj:latest
+
+	附加说明：
+		/home/data/data   # 测试数据目录
+		/home/data/mysql  # mysql数据库目录
+		/home/data/upload #文件上传目录
+		/home/data/config #配置文件目录
+
+docker测试安装
+	docker run -d -it --name hustoj -p 80:80 shiningrise/hustoj:latest
+	
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
 

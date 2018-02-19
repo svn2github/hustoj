@@ -3,6 +3,7 @@ FROM ubuntu:trusty-20171117
 #COPY ./docker/hustoj/sources.list /etc/apt/sources.list
 	
 RUN apt-get update && apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd \
+	fp-compiler openjdk-7-jdk \
 	&& rm -rf /var/lib/apt/lists/* 
 	
 RUN \
@@ -53,7 +54,8 @@ COPY ./docker/hustoj/docker-entrypoint.sh /usr/local/bin/
 RUN  chmod +x /usr/local/bin/docker-entrypoint.sh
 
 RUN cp -R /var/lib/mysql/ /home/ \
-	&& cp -R /home/judge/src/web/config/ /home/
+	&& cp -R /home/judge/src/web/config/ /home/  \
+	&& cp /home/judge/etc/judge.conf /home/config/judge.conf
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 

@@ -31,6 +31,13 @@ else
 	cp /home/judge/src/web/include/db_info.inc.php /home/judge/src/web/config/db_info.inc.php 
 fi
 
+if [ -f /home/judge/src/web/config/judge.conf ]; then
+	cp /home/judge/src/web/config/judge.conf /home/judge/etc/judge.conf  
+else
+	cp /home/judge/etc/judge.conf /home/judge/src/web/config/judge.conf  
+fi
+
+
 php5-fpm
 /usr/bin/judged
 chmod 775 -R /home/judge/data && chgrp -R www-data /home/judge/data

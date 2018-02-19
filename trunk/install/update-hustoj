@@ -1,5 +1,5 @@
 svn up /home/judge/src
 cd /home/judge/src/core
 sudo pkill -9 judged
-sudo ./make.sh
+sudo bash make.sh
 sudo judged

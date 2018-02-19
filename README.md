@@ -59,6 +59,8 @@ centos7 （不推荐），可以使用下面脚本
     
 https://www.youtube.com/watch?v=hRap7ettUWc
 
+<b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
+
 安装后几个重要配置文件的位置
 
     /home/judge/etc/judge.conf

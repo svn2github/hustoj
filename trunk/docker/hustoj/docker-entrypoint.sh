@@ -1,48 +1,54 @@
 #!/bin/bash
-service nginx start
-chown -R mysql:mysql /var/lib/mysql
 
-DIRECTORY="/var/lib/mysql"
-if [ "`ls -A $DIRECTORY`" = "" ]; then
-	cp -R /home/mysql/* /var/lib/mysql/
+DIRECTORY="/data/data/"
+if [ ! -d $DIRECTORY ]; then
+	mv  /home/judge/data/ /data/
+else
+	rm -R /home/judge/data/
 fi
-
-DIRECTORY="/home/judge/src/web/config"
-if [ "`ls -A $DIRECTORY`" = "" ]; then
-	cp -R /home/config/* /home/judge/src/web/config 
+ln -s $DIRECTORY /home/judge/data
+	
+DIRECTORY="/data/judge.conf"
+if [ ! -f $DIRECTORY ]; then
+	mv /home/judge/etc/judge.conf /data/
+else
+	rm /home/judge/etc/judge.conf
 fi
+ln -s $DIRECTORY /home/judge/etc/judge.conf
 
-chown -R mysql:mysql /var/lib/mysql
+DIRECTORY="/data/db_info.inc.php"
+if [ ! -f $DIRECTORY ]; then
+	mv /home/judge/src/web/include/db_info.inc.php /data/
+else
+	rm /home/judge/src/web/include/db_info.inc.php
+fi
+ln -s $DIRECTORY /home/judge/src/web/include/db_info.inc.php
+
+DIRECTORY="/data/mysql"
+if [ ! -d $DIRECTORY ]; then
+	mv  /var/lib/mysql /data
+else
+	rm -R /var/lib/mysql
+fi
+ln -s $DIRECTORY /var/lib/mysql
+
+chmod 775 -R /data/data 
+chgrp -R www-data /data/data
+chmod 770 -R /data/upload 
+chgrp -R www-data /data/upload
+chmod 770 -R /data/judge.conf 
+chgrp -R www-data /data/judge.conf
+chmod 770 -R /data/db_info.inc.php
+chgrp -R www-data /data/db_info.inc.php
+
+#chown -R mysql:mysql /var/lib/mysql 
+chown -R mysql:mysql /data/mysql/
+
 service mysql start
-
-dir="/var/lib/mysql/jol"
-if [ ! -d $dir ]; then
-	USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'` 
-	PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'` 
-	mysql -h localhost -u$USER -p$PASSWORD< /home/judge/src/install/db.sql
-	echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD
-else
-	cp /home/judge/src/web/config/db_info.inc.php /home/judge/src/web/include/db_info.inc.php
-fi
-
-if [ -f /home/judge/src/web/config/db_info.inc.php ]; then
-	cp /home/judge/src/web/config/db_info.inc.php /home/judge/src/web/include/db_info.inc.php
-else
-	cp /home/judge/src/web/include/db_info.inc.php /home/judge/src/web/config/db_info.inc.php 
-fi
-
-if [ -f /home/judge/src/web/config/judge.conf ]; then
-	cp /home/judge/src/web/config/judge.conf /home/judge/etc/judge.conf  
-else
-	cp /home/judge/etc/judge.conf /home/judge/src/web/config/judge.conf  
-fi
-
-
-php5-fpm
 /usr/bin/judged
-chmod 775 -R /home/judge/data && chgrp -R www-data /home/judge/data
-chmod 770 -R /home/judge/src/web/upload && chgrp -R www-data /home/judge/src/web/upload
-chmod 770 -R /home/judge/src/web/config && chgrp -R /home/judge/src/web/config
+php5-fpm
+service nginx start
+
 /bin/bash  
 exit 0 
 

@@ -4,6 +4,9 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
+
+echo 'mysql-server-5.5 mysql-server/root_password password ""' | sudo debconf-set-selections
+echo 'mysql-server-5.5 mysql-server/root_password_again password ""' | sudo debconf-set-selections
 apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx mysql-server php5-mysql php5-gd fp-compiler openjdk-7-jdk
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
@@ -48,6 +51,7 @@ sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/ph
 /etc/init.d/php5-fpm restart
 service php5-fpm restart
 cd src/core
+chmod +x ./make.sh
 ./make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then
 	echo "auto start judged added!"

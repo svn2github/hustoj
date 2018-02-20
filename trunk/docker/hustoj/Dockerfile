@@ -12,7 +12,7 @@ RUN set -ex \
 		nginx \
 		fp-compiler \
 		openjdk-7-jdk \
-		clang
+		clang \
 	#&& apt-get remove --purge git
 	&& rm -rf /var/lib/apt/lists/* 
 	

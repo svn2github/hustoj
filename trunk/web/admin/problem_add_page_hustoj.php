@@ -31,6 +31,13 @@ include_once("kindeditor.php") ;
 <hr>
 <h1>Add New problem</h1>
 <?php require_once("../include/simple_html_dom.php");
+function getPartByMark($html,$mark1,$mark2){
+   $i=mb_strpos($html,$mark1);
+   $j=mb_strpos($html,$mark2);
+  $descriptionHTML=substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
+  
+   return $descriptionHTML;
+}
   $url=$_POST ['url'];
 
   if (!$url) $url=$_GET['url'];
@@ -53,10 +60,12 @@ include_once("kindeditor.php") ;
   $sample_output=$sample_input=$descriptionHTML="";
   
   $html=$html->innertext;
-  $i=strpos($html,"<h2>Description</h2>");
-  $j=strpos($html,"<h2>Source</h2>");
  // echo $i."-".strlen($html);
-  $descriptionHTML=substr($html,$i+20,$j-($i+20));
+  if(strpos($html,"<h2>Description</h2>")>0){
+ 	 $descriptionHTML=getPartByMark($html,"<h2>Description</h2>","<h2>Source</h2>");
+  }else{
+ 	 $descriptionHTML=getPartByMark($html,"<h2>题目描述</h2>","<h2>来源</h2>");
+  }
  // echo $i."-".strlen($descriptionHTML);
 
 ?>

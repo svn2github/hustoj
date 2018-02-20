@@ -37,12 +37,14 @@ else
 	cp /home/judge/etc/judge.conf /home/judge/src/web/config/judge.conf  
 fi
 
-
 php5-fpm
 /usr/bin/judged
-chmod 775 -R /home/judge/data && chgrp -R www-data /home/judge/data
-chmod 770 -R /home/judge/src/web/upload && chgrp -R www-data /home/judge/src/web/upload
-chmod 770 -R /home/judge/src/web/config && chgrp -R /home/judge/src/web/config
+chmod 775 -R /home/judge/data
+chgrp -R www-data /home/judge/data
+chmod 770 -R /home/judge/src/web/upload 
+chgrp -R www-data /home/judge/src/web/upload
+chmod 770 -R /home/judge/src/web/config 
+chgrp -R /home/judge/src/web/config
 /bin/bash  
 exit 0 
 

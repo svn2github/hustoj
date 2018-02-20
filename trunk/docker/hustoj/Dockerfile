@@ -1,22 +1,24 @@
 FROM ubuntu:trusty-20171117
-
 #COPY ./docker/hustoj/sources.list /etc/apt/sources.list
-	
-RUN apt-get update && apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd \
+#FROM debian:jessie-slim
+
+RUN set -ex \
+	&& apt-get update && apt-get install -y git make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx php5-mysql php5-gd \
 	fp-compiler openjdk-7-jdk \
 	&& rm -rf /var/lib/apt/lists/* 
 	
-RUN \
-	echo 'mysql-server-5.5 mysql-server/root_password password ""' | sudo debconf-set-selections \
-	&& echo 'mysql-server-5.5 mysql-server/root_password_again password ""' | sudo debconf-set-selections \
+RUN set -ex \
+	&& echo 'mysql-server-5.5 mysql-server/root_password password ""' | debconf-set-selections \
+	&& echo 'mysql-server-5.5 mysql-server/root_password_again password ""' | debconf-set-selections \
 	&& apt-get update && apt-get install -y mysql-server \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& /usr/sbin/useradd -m -u 1536 judge 
-
-COPY . /home/judge/src
-
-RUN  \
-	USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'` \
+	&& rm -rf /var/lib/apt/lists/*
+	
+RUN set -ex \
+	&& /usr/sbin/useradd -m -u 1536 judge \
+	&& cd / && git clone https://github.com/zhblue/hustoj.git \	
+	&& mv /hustoj/trunk /home/judge/src \
+	&& rm -R /hustoj \
+	&& USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'` \
 	&& PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'` \
 	&& CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`   \	
 	&& cd /home/judge/                  \
@@ -42,20 +44,27 @@ RUN  \
 	&& sed -i "s:#\tinclude fastcgi_params;:\tinclude fastcgi_params;\n\t}:g" /etc/nginx/sites-enabled/default   \
 	&& sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php5/fpm/php.ini     \
 	&& sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/php.ini   
-	
-WORKDIR /home/judge/src/core
-RUN pwd && chmod +x make.sh && ./make.sh
 
+COPY ./docker-entrypoint.sh /usr/local/bin/
+
+RUN set -ex \
+	&& cd /home/judge/src/core/judged \
+    && make \
+    && chmod +x judged \
+    && cp judged /usr/bin \
+    && cd ../judge_client \
+    && make \
+    && chmod +x judge_client \
+    && cp judge_client /usr/bin \
+	&& cd /home/judge/ \
+	&& chmod +x /usr/local/bin/docker-entrypoint.sh \
+	&& cp -R /var/lib/mysql/ /home/ \
+	&& cp -R /home/judge/src/web/config/ /home/  \
+	&& cp /home/judge/etc/judge.conf /home/config/judge.conf
+	
 WORKDIR /home/judge/
 EXPOSE 80
 VOLUME ["/home/judge/data","/home/judge/src/web/upload","/var/lib/mysql"]
 
-COPY ./docker/hustoj/docker-entrypoint.sh /usr/local/bin/
-RUN  chmod +x /usr/local/bin/docker-entrypoint.sh
-
-RUN cp -R /var/lib/mysql/ /home/ \
-	&& cp -R /home/judge/src/web/config/ /home/  \
-	&& cp /home/judge/etc/judge.conf /home/config/judge.conf
-
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
+#CMD judged /home/judge debug && tail -f /dev/null

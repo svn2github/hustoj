@@ -2,7 +2,7 @@
 #COPY ./sources.list /etc/apt/sources.list 
 
 FROM debian:jessie-slim
-COPY ./sources.debian.list /etc/apt/sources.list
+#COPY ./sources.debian.list /etc/apt/sources.list
 
 COPY ./docker-entrypoint.sh /usr/local/bin/
 

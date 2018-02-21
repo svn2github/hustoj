@@ -4468,6 +4468,7 @@ function frame3(){
                         $zipfile->extract_files();
                     }
                     unset($zipfile);
+ 		    system("/home/judge/src/install/ans2out ".$current_dir);
                     reloadframe("parent",2);
                 }
             }

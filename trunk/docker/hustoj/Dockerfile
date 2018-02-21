@@ -1,5 +1,5 @@
 FROM ubuntu:trusty-20171117
-COPY ./sources.list /etc/apt/sources.list
+#COPY ./sources.list /etc/apt/sources.list
 #FROM debian:jessie-slim
 
 RUN set -ex \
@@ -12,7 +12,7 @@ RUN set -ex \
 		nginx \
 		fp-compiler \
 		openjdk-7-jdk \
-		clang
+		clang \
 	#&& apt-get remove --purge git
 	&& rm -rf /var/lib/apt/lists/* 
 	

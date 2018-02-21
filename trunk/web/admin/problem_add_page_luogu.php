@@ -31,11 +31,18 @@ include_once("kindeditor.php") ;
 <hr>
 <h1>Add New problem</h1>
 <?php require_once("../include/simple_html_dom.php");
+function getPartByMark($html,$mark1,$mark2){
+   $i=mb_strpos($html,$mark1);
+   $j=mb_strpos($html,$mark2,$i);
+  $descriptionHTML=substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
+   //echo "$i==$j";
+   return $descriptionHTML;
+}
   $url=$_POST ['url'];
 
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
-	echo "Please Input like http://acm.student.cs.uwaterloo.ca/~acm00";
+	echo "Please Input like https://www.luogu.org/problemnew/show/";
 	exit(1);
   }   
     
@@ -47,22 +54,15 @@ include_once("kindeditor.php") ;
   $html = file_get_html($url);
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
-  $element=$html->find('h2',0);
+  $element=$html->find('h1',0);
   $title=$element->plaintext;
   $i=1;
   $sample_output=$sample_input=$descriptionHTML="";
   
   $html=$html->innertext;
-  $i=strpos($html,"<h3>");
  // echo $i."-".strlen($html);
-  $descriptionHTML=substr($html,0,$i-1);
+ 	 $descriptionHTML=getPartByMark($html,"题目描述","am-modal am-modal-prompt");
  // echo $i."-".strlen($descriptionHTML);
-  $i=strpos($html,"<pre>",$i);
-  $j=strpos($html,"</pre>",$i);
-  $sample_input=substr($html,$i+5,$j-$i-5);
-  $i=strpos($html,"<pre>",$j);
-  $j=strpos($html,"</pre>",$i);
-  $sample_output=substr($html,$i+5,$j-$i-5);
 
 ?>
 <form method=POST action=problem_add.php>

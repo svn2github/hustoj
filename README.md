@@ -58,7 +58,9 @@ docker run -d -it \
     -p 80:80 shiningrise/hustoj:latest
 
 docker测试安装
-	docker run -d -it --name hustoj -p 8080:80 --privileged shiningrise/hustoj:latest
+	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:latest
+仅安装C++版本
+	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:cpp
 ```	
 
 

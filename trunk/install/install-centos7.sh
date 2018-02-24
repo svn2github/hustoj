@@ -61,6 +61,7 @@ mkdir /var/lib/php/session
 chown apache /var/lib/php/session
 
 cd /home/judge/src/core
+chmod +x make.sh
 ./make.sh
 
 if grep "/usr/bin/judged" /etc/rc.local ; then

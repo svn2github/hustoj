@@ -75,7 +75,7 @@ int main(){
     int a,b;
     while(cin >> a >> b)
         cout << a+b << endl;
-	return 0;
+    return 0;
 }
 </font></pre>
 Here is a sample solution for problem 1000 using C:<br>
@@ -85,7 +85,7 @@ int main(){
     int a,b;
     while(scanf("%d %d",&amp;a, &amp;b) != EOF)
         printf("%d\n",a+b);
-	return 0;
+    return 0;
 }
 </font></pre>
 Here is a sample solution for problem 1000 using PASCAL:<br>

@@ -12,6 +12,11 @@ HUSTOJ 是采用GPL的自由软件。
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
+如果这个项目对你有用，请挥动鼠标，右上角给个Star!
+
+Star us, please!
+
+
 Ubuntu14.04（推荐）快速安装指南：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh

@@ -108,7 +108,7 @@ function getSolution($pid,$lang){
 function fixurl($img_url){
    $img_url= html_entity_decode( $img_url,ENT_QUOTES,"UTF-8");
    
-   if (substr($img_url,0,7)!="http://"){
+   if (substr($img_url,0,4)!="http"){
      if(substr($img_url,0,1)=="/"){
 	     	$ret='http://'.$_SERVER['HTTP_HOST'].':'.$_SERVER["SERVER_PORT"].$img_url;
      }else{
@@ -122,7 +122,7 @@ function fixurl($img_url){
 } 
 function image_base64_encode($img_url){
     $img_url=fixurl($img_url);
-    if (substr($img_url,0,7)!="http://") return false;
+    if (substr($img_url,0,4)!="http") return false;
 	$handle = @fopen($img_url, "rb");
 	if($handle){
 		$contents = stream_get_contents($handle);
@@ -194,7 +194,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	   require_once("../include/check_post_key.php");
 	   $start = intval ( $_POST ['start'] );
 		$end = intval ( $_POST ['end'] );
-	 	$sql = "select * from problem where problem_id>=? and problem_id<=?";
+	 	$sql = "select * from problem where problem_id>=? and problem_id<=? order by id ";
 		$result = pdo_query( $sql,$start ,$end);
 	
        $filename="-$start-$end";

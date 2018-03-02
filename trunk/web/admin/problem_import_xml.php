@@ -56,7 +56,7 @@ function getAttribute($Node, $TagName,$attribute) {
 	return $Node->children()->$TagName->attributes()->$attribute;
 }
 function hasProblem($title){
-	
+//return false;	
 	$md5=md5($title);
 	$sql="select 1 from problem where md5(title)=?";  
 	$result=pdo_query( $sql,$md5 );
@@ -148,7 +148,7 @@ function import_fps($tempfile){
 						$base64=getValue($img,"base64");
 						$ext=pathinfo($src);
 						$ext=strtolower($ext['extension']);
-						if(!stristr(",jpeg,jpg,png,gif,bmp",$ext)){
+						if(!stristr(",jpeg,jpg,svg,png,gif,bmp",$ext)){
 							$ext="bad";
 							exit(1);
 						}

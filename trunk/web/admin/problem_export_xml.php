@@ -194,7 +194,7 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	   require_once("../include/check_post_key.php");
 	   $start = intval ( $_POST ['start'] );
 		$end = intval ( $_POST ['end'] );
-	 	$sql = "select * from problem where problem_id>=? and problem_id<=? order by id ";
+	 	$sql = "select * from problem where problem_id>=? and problem_id<=? order by problem_id ";
 		$result = pdo_query( $sql,$start ,$end);
 	
        $filename="-$start-$end";

@@ -38,6 +38,7 @@ centos7 （不推荐），可以使用下面脚本
     
 https://www.youtube.com/watch?v=hRap7ettUWc
 
+
 <b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
 
 安装后几个重要配置文件的位置
@@ -68,6 +69,7 @@ docker测试安装
 	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:cpp
 ```	
 
+树莓派用户请用rpi分支源码手工搭建web，并编译安装core目录下的judged和judge_client。
 
 [更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
 

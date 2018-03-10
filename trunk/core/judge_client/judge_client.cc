@@ -108,9 +108,10 @@ static int use_max_time = 0;
 
 static int http_judge = 0;
 static char http_baseurl[BUFFER_SIZE];
-
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
+static int http_download = 1;
+
 static int shm_run = 0;
 
 static char record_call = 0;
@@ -334,6 +335,7 @@ void init_mysql_conf() {
 			read_buf(buf, "OJ_HTTP_BASEURL", http_baseurl);
 			read_buf(buf, "OJ_HTTP_USERNAME", http_username);
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
+			read_int(buf, "OJ_HTTP_DOWNLOAD", &http_download);
 			read_int(buf, "OJ_OI_MODE", &oi_mode);
 			read_int(buf, "OJ_FULL_DIFF", &full_diff);
 			read_int(buf, "OJ_SHM_RUN", &shm_run);
@@ -2437,7 +2439,7 @@ int main(int argc, char** argv) {
 	DIR *dp;
 	dirent *dirp;
 	// using http to get remote test data files
-	if (p_id > 0 && http_judge)
+	if (p_id > 0 && http_judge && http_download)
 		get_test_file(work_dir, p_id);
 	if (p_id > 0 && (dp = opendir(fullpath)) == NULL) {
 
@@ -2518,7 +2520,7 @@ int main(int argc, char** argv) {
 		if (namelen == 0)
 			continue;
 
-		if(http_judge&&(!data_list_has(dirp->d_name))) 
+		if(http_judge&&http_download&&(!data_list_has(dirp->d_name))) 
 			continue;
 	
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,

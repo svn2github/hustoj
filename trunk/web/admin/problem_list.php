@@ -46,17 +46,19 @@ if($keyword) {
 	$result=pdo_query($sql,$pstart,$pend);
 }
 ?>
-<form action=problem_list.php>
-
+<form action=problem_list.php method="post" >
 <input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>" ></form>
+<center><table class='table table-striped' width=90% border=1>
+<form method=post action=contest_add.php>
+<?php require_once("../include/set_post_key.php"); ?>
+<tr><td colspan=8>
+<input type=checkbox onchange='$("input[type=checkbox]").prop("checked", this.checked)'>
+<input type=submit name='problem2contest' value='CheckToNewContest'>
+<input type=submit name='enable' value='Batch Open Access' onclick='$("form").attr("action","problem_df_change.php")'>
+<input type=submit name='disable' value='Batch Reserve'  onclick='$("form").attr("action","problem_df_change.php")'>
+<tr><td>PID<td>Title<td>AC<td>Date";
 
 <?php
-echo "<center><table class='table table-striped' width=90% border=1>";
-echo "<form method=post action=contest_add.php>";
-echo "<tr><td colspan=8>";
-echo "<input type=checkbox onchange='$(\"input[type=checkbox]\").prop(\"checked\", this.checked)'>";
-echo "<input type=submit name='problem2contest' value='CheckToNewContest'>";
-echo "<tr><td>PID<td>Title<td>AC<td>Date";
 if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))   echo "<td>Status<td>Delete";
         echo "<td>Edit<td>TestData</tr>";

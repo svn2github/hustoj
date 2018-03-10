@@ -100,7 +100,7 @@ else if(isset($_POST['problem2contest'])){
 	   sort($_POST['pid']);
 	   foreach($_POST['pid'] as $i){		    
 			if ($plist) 
-				$plist.=','.$i;
+				$plist.=','.intval($i);
 			else
 				$plist=$i;
 	   }

@@ -17,12 +17,12 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 Star us, please!
 
 
-Ubuntu14.04（推荐）快速安装指南：  
+首先安装Ubuntu14.04（推荐），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
-  
-ubuntu16.04（不推荐），可以使用下面脚本
+  
+或者安装ubuntu16.04（不推荐），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
@@ -31,7 +31,7 @@ ubuntu16.04（不推荐），可以使用下面脚本
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
 
-centos7 （不推荐），可以使用下面脚本
+假如你不得已非要用centos7 （不推荐），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh

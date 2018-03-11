@@ -56,7 +56,7 @@ if($keyword) {
 <input type=submit name='problem2contest' value='CheckToNewContest'>
 <input type=submit name='enable' value='Batch Open Access' onclick='$("form").attr("action","problem_df_change.php")'>
 <input type=submit name='disable' value='Batch Reserve'  onclick='$("form").attr("action","problem_df_change.php")'>
-<tr><td>PID<td>Title<td>AC<td>Date";
+<tr><td>PID<td>Title<td>AC<td>Date
 
 <?php
 if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){

@@ -17,6 +17,6 @@ echo "<h1>".htmlentities(str_replace("\n\r","\n",$view_user),ENT_QUOTES,"utf-8")
 echo "<pre>".htmlentities(str_replace("\n\r","\n",$view_content),ENT_QUOTES,"utf-8")."\n"."</pre>";
 ?>
 <input onclick="window.print();" type="button" value="<?php echo $MSG_PRINTER?>">
-<input onclick="location.href='printer.php?id=<?php echo $id?>';" type="button" value="Next">
+<input onclick="location.href='printer.php?id=<?php echo $id?>';" type="button" value="<?php echo $MSG_PRINT_DONE?>">
 </script>
 </body>

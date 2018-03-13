@@ -137,7 +137,17 @@ $tsql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DE
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
-
+$csql[26]="select 1 from printer";
+$tsql[26]="CREATE TABLE  `printer` (
+  `printer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` char(48) NOT NULL,
+  `in_date` datetime NOT NULL DEFAULT '2018-03-13 19:38:00',
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  `worktime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `printer` CHAR(16) NOT NULL DEFAULT 'LOCAL',
+  `content` text NOT NULL ,
+  PRIMARY KEY (`printer_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

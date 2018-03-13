@@ -151,6 +151,9 @@ $MSG_TEST_RUN="Test Running Done";
     
   $MSG_USER="User";
    
+  $MSG_PRINTER="Printer";
+  $MSG_PRINT_DONE="Printed Fine";
+  $MSG_PRINT_PENDING="Pending for Print";
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
   $MSG_HELP_NEWS_LIST="edit or shutdown published news";

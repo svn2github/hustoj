@@ -197,6 +197,16 @@ CREATE TABLE  `custominput` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE  `printer` (
+  `printer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` char(48) NOT NULL,
+  `in_date` datetime NOT NULL DEFAULT '2018-03-13 19:38:00',
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  `worktime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `printer` CHAR(16) NOT NULL DEFAULT 'LOCAL',
+  `content` text NOT NULL ,
+  PRIMARY KEY (`printer_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 delimiter //
 drop trigger if exists simfilter//

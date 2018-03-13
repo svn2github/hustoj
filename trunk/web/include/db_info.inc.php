@@ -8,8 +8,8 @@
 // connect db 
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
-static 	$DB_USER="root";
-static 	$DB_PASS="root";
+static 	$DB_USER="debian-sys-maint";
+static 	$DB_PASS="WdEuyzVd4vGomgfe";
 
 static 	$OJ_NAME="HUSTOJ";
 static 	$OJ_HOME="./";
@@ -28,6 +28,7 @@ static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;
 static  $OJ_APPENDCODE=false;
 static  $OJ_CE_PENALTY=false;
+static  $OJ_PRINTER=true;
 static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;

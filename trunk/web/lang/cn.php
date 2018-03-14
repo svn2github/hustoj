@@ -154,7 +154,8 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
    
   $MSG_PRINTER="打印";
   $MSG_PRINT_DONE="打印完成";
-  $MSG_PRINT_PENDING="待打印";
+  $MSG_PRINT_PENDING="提交成功,待打印";
+  $MSG_PRINT_WAITING="请耐心等候，不要重复提交相同的打印任务";
 
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";

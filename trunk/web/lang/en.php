@@ -154,6 +154,8 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_PRINTER="Printer";
   $MSG_PRINT_DONE="Printed Fine";
   $MSG_PRINT_PENDING="Pending for Print";
+  $MSG_PRINT_WAITING="Please waiting for delivery, don't post duplicated print task";
+
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
   $MSG_HELP_NEWS_LIST="edit or shutdown published news";

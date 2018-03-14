@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="10; url='printer.php'">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -25,6 +26,12 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
+	 <form action="printer.php" method="post">
+                <input type="hidden" name="clean" >
+                <input type="submit" value="Clean">
+		<?php require_once(dirname(__FILE__)."/../../include/set_post_key.php")?>
+        </form>
+
 	<table class="table table-striped content-box-header">
 <tr><td>id<td><?php echo $MSG_USER_ID?><td><?php echo $MSG_STATUS?><td></tr>
 <?php

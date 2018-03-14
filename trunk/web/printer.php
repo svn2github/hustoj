@@ -11,11 +11,17 @@
 	exit(0);
 //	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
  }
+if ($_SERVER['REQUEST_METHOD']=="POST"){
+	require_once("include/check_post_key.php");
+}
  if(isset($OJ_PRINTER)&&$OJ_PRINTER){
 	if(isset($_SESSION[$OJ_NAME.'_'.'printer'])){
 		if(isset($_GET['id'])){
 			$id=intval($_GET['id']);
 			pdo_query("update printer set status=1 where printer_id=?",$id);
+		}
+		if(isset($_POST['clean'])){
+			pdo_query("delete from printer ");
 		}
 		$view_printer=Array();
 		$result=pdo_query("select printer_id,user_id,status,content from printer order by status,printer_id desc limit 50");
@@ -37,6 +43,8 @@
 			$sql="insert into printer(user_id,in_date,status,content) values(?,now(),0,?)";
 			pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],$_POST['content']);
 			$view_errors= "$MSG_PRINT_PENDING";
+			$view_errors.= "...<br>";
+			$view_errors.= "$MSG_PRINT_WAITING";
 		        require("template/".$OJ_TEMPLATE."/error.php");
 
 

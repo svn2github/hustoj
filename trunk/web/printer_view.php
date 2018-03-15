@@ -25,6 +25,11 @@ $result=pdo_query($sql,$id);
 if($row=$result[0]){
    $view_user=$row['user_id'];
    $view_content=$row['content'];
+   $result=pdo_query("select * from users where user_id=?",$view_user);
+   if($row=$result[0]){
+	$view_nick=$row['nick'];
+	$view_school=$row['school'];
+   }
 }
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/printer_view.php");

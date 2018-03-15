@@ -123,8 +123,8 @@ $tsql[19]="ALTER TABLE `loginlog` ADD INDEX `user_time_index`(`user_id`, `time`)
 $csql[19]="";
 $tsql[20]="select `password` from contest limit 1 ";
 $csql[20]="ALTER TABLE `contest` ADD `password` CHAR( 16 ) NOT NULL DEFAULT '' AFTER `langmask` ";
-$tsql[21]="select * from source_code_user limit 1 ";
-$csql[21]="create TABLE `source_code_user` like source_code ";
+$tsql[21]="create TABLE `source_code_user` like source_code";
+$csql[21]="";
 
 $tsql[22]="insert into source_code_user select * from source_code where solution_id not in (select solution_id from source_code_user)  ";
 $csql[22]="";

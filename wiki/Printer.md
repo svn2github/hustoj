@@ -1,6 +1,6 @@
 打印功能的使用
 =======================
-0. 在db_info.inc.php中激活打印功能,$OJ_PRINTER=true
+0. 在db_info.inc.php中激活打印功能,$OJ_PRINTER=true;
 1. 注册一个用于打印员的帐号
 2. 用管理员帐号给这个打印员增加printer权限
 3. 选手访问打印页printer.php，提交打印文本

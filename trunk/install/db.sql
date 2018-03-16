@@ -208,6 +208,16 @@ CREATE TABLE  `printer` (
   PRIMARY KEY (`printer_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE  `balloon` (
+  `balloon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` char(48) NOT NULL,
+  `sid` int(11) NOT NULL ,
+  `cid` int(11) NOT NULL ,
+  `pid` int(11) NOT NULL ,
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`balloon_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 delimiter //
 drop trigger if exists simfilter//
 create trigger simfilter

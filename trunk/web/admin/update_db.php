@@ -149,7 +149,7 @@ $tsql[26]="CREATE TABLE  `printer` (
   PRIMARY KEY (`printer_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 $csql[27]="select 1 from balloon";
-$tsql[27]="select 1 from balloonCREATE TABLE  `balloon` (
+$tsql[27]="CREATE TABLE  `balloon` (
   `balloon_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` char(48) NOT NULL,
   `sid` int(11) NOT NULL ,

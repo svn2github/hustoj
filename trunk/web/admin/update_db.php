@@ -148,6 +148,16 @@ $tsql[26]="CREATE TABLE  `printer` (
   `content` text NOT NULL ,
   PRIMARY KEY (`printer_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+$csql[27]="select 1 from balloon";
+$tsql[27]="select 1 from balloonCREATE TABLE  `balloon` (
+  `balloon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` char(48) NOT NULL,
+  `sid` int(11) NOT NULL ,
+  `cid` int(11) NOT NULL ,
+  `pid` int(11) NOT NULL ,
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`balloon_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

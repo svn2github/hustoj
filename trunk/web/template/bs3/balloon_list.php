@@ -27,11 +27,15 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 	 <form action="balloon.php" method="post">
+                <input type="hidden" name="cid" value="<?php echo $cid?>" >
                 <input type="hidden" name="clean" >
                 <input type="submit" value="Clean">
 		<?php require_once(dirname(__FILE__)."/../../include/set_post_key.php")?>
         </form>
-
+	<form action="balloon.php" method="get">
+                Contest ID:<input type="text" name="cid" value="<?php echo $cid?>" >
+                <input type="submit" value="Check">
+	</form>
 	<table class="table table-striped content-box-header">
 <tr><td>id<td><?php echo $MSG_USER_ID?><td><?php echo $MSG_STATUS?><td></tr>
 <?php

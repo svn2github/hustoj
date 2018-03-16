@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 			pdo_query("update balloon set status=1 where balloon_id=?",$id);
 		}
 		if(isset($_POST['clean'])){
-			pdo_query("delete from balloon ");
+			pdo_query("delete from balloon where cid=?",$cid);
 		}
 		
 		$sql="select * from solution where result=4 and contest_id=? and solution_id not in (select sid from balloon where cid=?) order by solution_id;";
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 			//echo $sql;
 		     if(count(pdo_query($sql,$user_id,$cid,$pid))==0){
 			$sql="insert into balloon(user_id,sid,cid,pid,status) value(?,?,?,?,0)";
-			echo $sql."<br>".$user_id." ".$sid." ".$cid." ".$pid;
+//			echo $sql."<br>".$user_id." ".$sid." ".$cid." ".$pid;
 			pdo_query($sql,$user_id,$sid,$cid,$pid);
 		     }		     
 		}	

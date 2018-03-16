@@ -15,7 +15,6 @@
 <?php
 echo "<h2>".htmlentities(str_replace("\n\r","\n",$view_user),ENT_QUOTES,"utf-8")."\n";
 echo "-".htmlentities(str_replace("\n\r","\n",$view_school),ENT_QUOTES,"utf-8")."-".htmlentities(str_replace("\n\r","\n",$view_nick),ENT_QUOTES,"utf-8")."\n"."</h2>";
-$ball_color=Array('red','blue','green');
 echo "Problem ".$PID[$view_pid]."<br>";
 echo "Balloon Color: <font color='".$ball_color[$view_pid]."'>".$ball_color[$view_pid]."</font><br>";
 ?>

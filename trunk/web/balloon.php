@@ -46,8 +46,10 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 			$view_balloon[$i]=Array();
 			$view_balloon[$i][0]=$row['balloon_id'];
 			$view_balloon[$i][1]=$row['user_id'];
-			if($row['status']==1)$view_balloon[$i][2]="$MSG_PRINT_DONE";
-			else $view_balloon[$i][2]="$MSG_PRINT_PENDING";
+			$view_balloon[$i][2]= "<font color='".$ball_color[$row['pid']]."'>";
+			if($row['status']==1)$view_balloon[$i][2].="$MSG_PRINT_DONE";
+			else $view_balloon[$i][2].="$MSG_PRINT_PENDING";
+			 $view_balloon[$i][2].="</font>";
 			$view_balloon[$i][3]="<a href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
 			
 			$i++;

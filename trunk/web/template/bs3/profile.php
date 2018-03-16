@@ -59,6 +59,9 @@ header("content-type:application/javascript");
            $profile.= "<li><a href=".$path_fix."admin/>$MSG_ADMIN</a></li>&nbsp;";
 			
 			}
+			if (isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
+           $profile.= "<li><a href='".$path_fix."balloon.php'>Balloon</a></li>&nbsp;";
+			}
 	 //  $profile.="</ul></li>";
 		?>
 document.write("<?php echo ( $profile);?>");

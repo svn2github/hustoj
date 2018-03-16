@@ -6,7 +6,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 }
 echo "<title>Privilege List</title>"; 
 echo "<div class='container'>";
-$sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor','password_setter','printer') ";
+$sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor','password_setter','printer','balloon') ";
 $result=pdo_query($sql) ;
 echo "<center><table class='table table-striped' width=60% border=1>";
 echo "<thead><tr><td>user<td>right<td>defunc</tr></thead>";

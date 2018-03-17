@@ -924,8 +924,8 @@ void umount(char * work_dir){
 int compile(int lang,char * work_dir) {
 	int pid;
 
-	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-fno-asm", "-Wall",
-			"-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL };
+	const char * CP_C[] = { "gcc", "Main.c", "-o", "Main", "-Wall",
+			"-lm", "--static", "-DONLINE_JUDGE", NULL };
 	const char * CP_X[] = { "g++", "-fno-asm", "-Wall",
 			"-lm", "--static", "-std=c++11", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL };
 	const char * CP_P[] =
@@ -2016,12 +2016,22 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	int status, sig, exitcode;
 	struct user_regs_struct reg;
 	struct rusage ruse;
+	int first = true;
 	if(topmemory==0) 
 			topmemory= get_proc_status(pidApp, "VmRSS:") << 10;
 	while (1) {
 		// check the usage
 
-		wait4(pidApp, &status, 0, &ruse);
+		wait4(pidApp, &status, __WALL, &ruse);
+		if(first){ // 
+			ptrace(PTRACE_SETOPTIONS, pidApp, NULL, PTRACE_O_TRACESYSGOOD 
+								|PTRACE_O_TRACEEXIT 
+								|PTRACE_O_EXITKILL 
+							//	|PTRACE_O_TRACECLONE 
+							//	|PTRACE_O_TRACEFORK 
+							//	|PTRACE_O_TRACEVFORK
+			);
+		} 
 
 //jvm gc ask VM before need,so used kernel page fault times and page size
 		if (lang == 3 || lang == 7 || lang == 16 || lang==9 ||lang==17) {
@@ -2060,8 +2070,9 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		exitcode = WEXITSTATUS(status);
 		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
-		 *  */
-		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0)
+		 *  Runtime Error:Unknown signal xxx need be added here  
+                 */
+		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133 )
 			//go on and on
 			;
 		else {
@@ -2158,6 +2169,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		
 
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+		first = false;
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);

@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 }
  if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 	$cid=intval($_GET['cid']);
-	if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 		if(isset($_GET['id'])){
 			$id=intval($_GET['id']);
 			pdo_query("update balloon set status=1 where balloon_id=?",$id);
@@ -47,35 +46,20 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 			$view_balloon[$i][0]=$row['balloon_id'];
 			$view_balloon[$i][1]=$row['user_id'];
 			$view_balloon[$i][2]= "<font color='".$ball_color[$row['pid']]."'>";
-			if($row['status']==1)$view_balloon[$i][2].="$MSG_PRINT_DONE";
-			else $view_balloon[$i][2].="$MSG_PRINT_PENDING";
+			 $view_balloon[$i][2].=$ball_color[$row['pid']];
 			 $view_balloon[$i][2].="</font>";
-			$view_balloon[$i][3]="<a href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
+			if($row['status']==1)$view_balloon[$i][3].="<span class='btn btn-success'>$MSG_BALLOON_DONE</span>";
+			else $view_balloon[$i][3].="<span class='btn btn-danger'>$MSG_BALLOON_PENDING</span>";
+			$view_balloon[$i][4]="<a href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
 			
 			$i++;
 		}
 		require("template/".$OJ_TEMPLATE."/balloon_list.php");
 		exit(0);
-	}else{
-		if(isset($_POST['content'])){
-			$sql="insert into balloon(user_id,in_date,status,content) values(?,now(),0,?)";
-			pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],$_POST['content']);
-			$view_errors= "$MSG_PRINT_PENDING";
-			$view_errors.= "...<br>";
-			$view_errors.= "$MSG_PRINT_WAITING";
-		        require("template/".$OJ_TEMPLATE."/error.php");
-
-
-		}else{
-			require("template/".$OJ_TEMPLATE."/balloon_add.php");
-			exit(0);
-		}
-
-	}	
 
  }else{
 
-	$view_errors= "$MSG_PRINTER not available!";
+	$view_errors= "$MSG_BALLOON not available!";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
  }

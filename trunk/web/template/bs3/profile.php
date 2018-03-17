@@ -60,7 +60,7 @@ header("content-type:application/javascript");
 			
 			}
 			if (isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
-           $profile.= "<li><a href='".$path_fix."balloon.php'>Balloon</a></li>&nbsp;";
+           $profile.= "<li><a href='".$path_fix."balloon.php'>$MSG_BALLOON</a></li>&nbsp;";
 			}
 	 //  $profile.="</ul></li>";
 		?>

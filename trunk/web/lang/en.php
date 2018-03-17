@@ -155,6 +155,11 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_PRINT_DONE="Printed Fine";
   $MSG_PRINT_PENDING="Pending for Print";
   $MSG_PRINT_WAITING="Please waiting for delivery, don't post duplicated print task";
+  $MSG_COLOR="Color";
+  $MSG_BALLOON="Balloon";
+  $MSG_BALLOON_DONE="Balloon Sent";
+  $MSG_BALLOON_PENDING="Balloon Pending";
+
 
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";

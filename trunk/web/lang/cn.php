@@ -157,6 +157,11 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
   $MSG_PRINT_PENDING="提交成功,待打印";
   $MSG_PRINT_WAITING="请耐心等候，不要重复提交相同的打印任务";
 
+  $MSG_COLOR="颜色";
+  $MSG_BALLOON="气球";
+  $MSG_BALLOON_DONE="气球已发放";
+  $MSG_BALLOON_PENDING="气球待发放";
+
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";
   $MSG_HELP_NEWS_LIST="管理已经发布的新闻";

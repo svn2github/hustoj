@@ -8,8 +8,8 @@
 // connect db 
 static 	$DB_HOST="localhost";
 static 	$DB_NAME="jol";
-static 	$DB_USER="root";
-static 	$DB_PASS="root";
+static 	$DB_USER="debian-sys-maint";
+static 	$DB_PASS="WdEuyzVd4vGomgfe";
 
 static 	$OJ_NAME="HUSTOJ";
 static 	$OJ_HOME="./";
@@ -102,7 +102,7 @@ function pdo_query($sql){
     }else{
         $result=$sth->rowCount();
     }
-    //print_r($result);
+    //print($sql);
     $sth->closeCursor();
     return $result;
 }

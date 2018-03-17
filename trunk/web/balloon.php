@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 			 $view_balloon[$i][2].="</font>";
 			if($row['status']==1)$view_balloon[$i][3].="<span class='btn btn-success'>$MSG_BALLOON_DONE</span>";
 			else $view_balloon[$i][3].="<span class='btn btn-danger'>$MSG_BALLOON_PENDING</span>";
-			$view_balloon[$i][4]="<a href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
-			$view_balloon[$i][4].="<a href='balloon.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER_DONE</a>";
+			$view_balloon[$i][4]="<a class='btn btn-info' href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
+			$view_balloon[$i][4].="<a class='btn btn-primary'  href='balloon.php?id=".$row['balloon_id']."&cid=$cid' target='_self'>$MSG_PRINT_DONE</a>";
 			
 			$i++;
 		}

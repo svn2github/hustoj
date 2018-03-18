@@ -26,7 +26,7 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-	 <form action="balloon.php" method="post" onsubmit="return confirm('Delete All Tasks?');">
+	 <form action="balloon.php?cid=<?php echo $cid?>" method="post" onsubmit="return confirm('Delete All Tasks?');">
                 <input type="hidden" name="cid" value="<?php echo $cid?>" >
                 <input type="hidden" name="clean" >
                 <input type="submit" class='btn btn-danger' value="Clean">

@@ -14,18 +14,19 @@
 if ($_SERVER['REQUEST_METHOD']=="POST"){
 	require_once("include/check_post_key.php");
 }
- if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
+if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
+	$school=pdo_query("select school from users where user_id=?",$_SESSION[$OJ_NAME."_user_id"])[0][0];
 	$cid=intval($_GET['cid']);
 		if(isset($_GET['id'])){
 			$id=intval($_GET['id']);
 			pdo_query("update balloon set status=1 where balloon_id=?",$id);
 		}
 		if(isset($_POST['clean'])){
-			pdo_query("delete from balloon where cid=?",$cid);
+			pdo_query("delete from balloon where cid=? and user_id like ?",$cid,"$school%");
 		}
 		
-		$sql="select * from solution where result=4 and contest_id=? and solution_id not in (select sid from balloon where cid=?) order by solution_id;";
-		$result=pdo_query($sql,$cid,$cid);
+		$sql="select * from solution where result=4 and contest_id=? and user_id like ? and solution_id not in (select sid from balloon where cid=?) order by solution_id;";
+		$result=pdo_query($sql,$cid,"$school%",$cid);
 	        foreach($result as $row){
 		     $user_id=$row['user_id'];
 		     $sid=$row['solution_id'];
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 		     }		     
 		}	
 		$view_balloon=Array();
-		$result=pdo_query("select * from balloon where cid= ? order by status,balloon_id limit 50",$cid);
+		$result=pdo_query("select * from balloon where cid= ? and  user_id like ? order by status,balloon_id limit 50",$cid,"$school%");
 		$i=0;
 		foreach ($result as $row){
 			$view_balloon[$i]=Array();

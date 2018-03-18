@@ -15,16 +15,17 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 	require_once("include/check_post_key.php");
 }
  if(isset($OJ_PRINTER)&&$OJ_PRINTER){
+	$school=pdo_query("select school from users where user_id=?",$_SESSION[$OJ_NAME."_user_id"])[0][0];
 	if(isset($_SESSION[$OJ_NAME.'_'.'printer'])){
 		if(isset($_GET['id'])){
 			$id=intval($_GET['id']);
 			pdo_query("update printer set status=1 where printer_id=?",$id);
 		}
 		if(isset($_POST['clean'])){
-			pdo_query("delete from printer ");
+			pdo_query("delete from printer where user_id like ?","$school%");
 		}
 		$view_printer=Array();
-		$result=pdo_query("select printer_id,user_id,status,content from printer order by status,printer_id desc limit 50");
+		$result=pdo_query("select printer_id,user_id,status,content from printer where user_id like ? order by status,printer_id desc limit 50","$school%");
 		$i=0;
 		foreach ($result as $row){
 			$view_printer[$i]=Array();

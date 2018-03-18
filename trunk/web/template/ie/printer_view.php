@@ -15,27 +15,24 @@
 <link href='highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
 <script src='highlight/scripts/shCore.js' type='text/javascript'></script>
 <script src='highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCss.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushDelphi.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushRuby.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushBash.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPython.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPhp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
 <script language='javascript'>
-SyntaxHighlighter.config.bloggerMode = true;
-SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
-//SyntaxHighlighter.all();
+function draw(){
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.highlight();
+}
 </script>
 
+<input onclick="draw()" type="button" value="Line Number">
+<input onclick="window.print();" type="button" value="<?php echo $MSG_PRINTER?>">
+<input onclick="location.href='printer.php?id=<?php echo $id?>';" type="button" value="<?php echo $MSG_PRINT_DONE?>"><br>
 <?php
-echo "<h1>".htmlentities(str_replace("\n\r","\n",$view_user),ENT_QUOTES,"utf-8")."\n"."</h1>";
+echo "<h2>".htmlentities(str_replace("\n\r","\n",$view_user),ENT_QUOTES,"utf-8")."\n";
+echo "-".htmlentities(str_replace("\n\r","\n",$view_school),ENT_QUOTES,"utf-8")."-".htmlentities(str_replace("\n\r","\n",$view_nick),ENT_QUOTES,"utf-8")."\n"."</h2>";
 echo "<pre class='brush:c'>".htmlentities(str_replace("\n\r","\n",$view_content),ENT_QUOTES,"utf-8")."\n"."</pre>";
 ?>
+<input onclick="draw()" type="button" value="Line Number">
 <input onclick="window.print();" type="button" value="<?php echo $MSG_PRINTER?>">
 <input onclick="location.href='printer.php?id=<?php echo $id?>';" type="button" value="<?php echo $MSG_PRINT_DONE?>">
-</script>
+<img src="image/wx.jpg" height="100px" width="100px">
 </body>

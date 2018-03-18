@@ -192,4 +192,5 @@ $MSG_HELP_ONLINE= "view online users";
   $MSG_HELP_MORE_TESTDATA_LATER="more testdata can be added later after this problem added."; 
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>for more details"; 
  
+  $MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";
  ?>

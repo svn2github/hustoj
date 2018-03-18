@@ -31,6 +31,11 @@ if($row=$result[0]){
 	$view_nick=$row['nick'];
 	$view_school=$row['school'];
    }
+	$map=pdo_query("select * from news where title=?","SEAT$cid");
+	$view_map="add map by adding news titled SEAT$cid";
+	if(count($map)==1){
+		$view_map=$map[0]['content'];
+	}
 }
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/balloon_view.php");

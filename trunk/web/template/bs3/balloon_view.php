@@ -21,4 +21,10 @@ echo "Balloon Color: <font color='".$ball_color[$view_pid]."'>".$ball_color[$vie
 <input onclick="window.print();" type="button" value="<?php echo $MSG_PRINTER?>">
 <input onclick="location.href='balloon.php?id=<?php echo $id?>&cid=<?php echo $cid?>';" type="button" value="<?php echo $MSG_PRINT_DONE?>">
 <img src="image/wx.jpg" height="100px" width="100px">
+<?php echo $view_map?>
+<script src="template/bs3/jquery.min.js"></script>
+<script>
+  $("td:contains(<?php echo $view_user?>)").css("background-color","#F28080");
+
+</script>
 </body>

@@ -18,6 +18,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 	$school=pdo_query("select school from users where user_id=?",$_SESSION[$OJ_NAME."_user_id"])[0][0];
 	$cid=intval($_GET['cid']);
 	if($cid==0) $cid=1000;
+	
 		if(isset($_GET['id'])){
 			$id=intval($_GET['id']);
 			pdo_query("update balloon set status=1 where balloon_id=?",$id);

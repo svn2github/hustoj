@@ -33,6 +33,7 @@ while(list($key, $val)=each($rightarray)) {
 ?></select><br />
 	<input type='hidden' name='do' value='do'>
 	<input type=submit value='Add'>
+	<?php echo $MSG_HELP_ADD_PRIVILEGE; ?>
 </form>
 <form method=post>
 	<b>Add contest for User:</b><br />

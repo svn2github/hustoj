@@ -34,19 +34,20 @@
 <?php require_once('./include/set_post_key.php');?>
 </tr>
 <tr><td>Nick Name:
-<td><input  class="input-xxlarge" name="nick" size=50 type=text value="<?php echo htmlentities($row['nick'],ENT_QUOTES,"UTF-8")?>" >
+<td><input name="nick" size=50 type=text value="<?php echo htmlentities($row['nick'],ENT_QUOTES,"UTF-8")?>" >
 </tr>
 <tr><td>Old Password:
-<td><input  class="input-xxlarge" name="opassword" size=20 type=password>
+<td><input name="opassword" size=20 type=password>
 </tr>
 <tr><td>New Password:
-<td><input  class="input-xxlarge" name="npassword" size=20 type=password>
+<td><input name="npassword" size=20 type=password>
 </tr>
 <tr><td>Repeat New Password::
-<td><input class="input-xxlarge" name="rptpassword" size=20 type=password>
+<td><input name="rptpassword" size=20 type=password>
 </tr>
 <tr><td>School:
 <td><input name="school" size=30 type=text value="<?php echo htmlentities($row['school'],ENT_QUOTES,"UTF-8")?>" >
+<?php if(isset($_SESSION[$OJ_NAME."_printer"])) echo "*Printer/Balloon task filter mark!";?>
 </tr>
 <tr><td>Email:
 <td><input name="email" size=30 type=text value="<?php echo htmlentities($row['email'],ENT_QUOTES,"UTF-8")?>" >

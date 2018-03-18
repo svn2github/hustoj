@@ -47,6 +47,7 @@
 </tr>
 <tr><td>School:
 <td><input name="school" size=30 type=text value="<?php echo htmlentities($row['school'],ENT_QUOTES,"UTF-8")?>" >
+<?php if(isset($_SESSION[$OJ_NAME."_printer"])) echo "*Printer/Balloon task filter mark!";?>
 </tr>
 <tr><td>Email:
 <td><input name="email" size=30 type=text value="<?php echo htmlentities($row['email'],ENT_QUOTES,"UTF-8")?>" >

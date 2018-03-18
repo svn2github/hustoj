@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME?></title>  
+    <title><?php echo $OJ_NAME.$MSG_BALLOON?></title>  
     <?php include("template/$OJ_TEMPLATE/css.php");?>	    
 
 
@@ -26,16 +26,18 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-	 <form action="balloon.php?cid=<?php echo $cid?>" method="post" onsubmit="return confirm('Delete All Tasks?');">
+	<form  style="float:left;display:inline" action="balloon.php" method="get">
+                Contest ID:<input type="text" name="cid" value="<?php echo $cid?>" >
+                <input type="submit" class="btn btn-primary" value="Check">
+	</form>
+	<div style="float:right;display:inline">
+	 <form  style="float:left;" action="balloon.php?cid=<?php echo $cid?>" method="post" onsubmit="return confirm('Delete All Tasks?');">
                 <input type="hidden" name="cid" value="<?php echo $cid?>" >
                 <input type="hidden" name="clean" >
                 <input type="submit" class='btn btn-danger' value="Clean">
 		<?php require_once(dirname(__FILE__)."/../../include/set_post_key.php")?>
         </form>
-	<form action="balloon.php" method="get">
-                Contest ID:<input type="text" name="cid" value="<?php echo $cid?>" >
-                <input type="submit" value="Check">
-	</form>
+	</div>
 	<table class="table table-striped content-box-header">
 <tr><td>id<td><?php echo $MSG_USER_ID?><td><?php echo $MSG_COLOR?><td><?php echo $MSG_STATUS?><td></tr>
 <?php

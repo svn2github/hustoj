@@ -168,8 +168,8 @@ CREATE TABLE  `users` (
   `language` int(11) NOT NULL DEFAULT '1',
   `password` varchar(32) DEFAULT NULL,
   `reg_time` datetime DEFAULT NULL,
-  `nick` varchar(100) NOT NULL DEFAULT '',
-  `school` varchar(100) NOT NULL DEFAULT '',
+  `nick` varchar(20) NOT NULL DEFAULT '',
+  `school` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

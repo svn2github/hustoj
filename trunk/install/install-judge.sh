@@ -8,7 +8,9 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 mkdir -p $TARGET
 cd $TARGET/
-svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
+mkdir src
+svn co https://github.com/zhblue/hustoj/trunk/trunk/core src/core
+svn co https://github.com/zhblue/hustoj/trunk/trunk/install src/install
 apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev fp-compiler
 apt-get install -y openjdk-7-jdk
 apt-get install -y openjdk-8-jdk

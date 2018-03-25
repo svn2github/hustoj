@@ -1,7 +1,7 @@
 CPU Compensation
 ==================
 HUSTOJ has been used in some system for more than 9 years.
-Whole system need to be migrated to new platforms, which could be way fast than the original server
+Whole system need to be migrated to new platforms, which could be way more fast than the original server
 
 therefore, in judge.conf , a new parameter called OJ_CPU_COMPENSATION is introduced to adjust the outcome of judge.
 

@@ -111,6 +111,7 @@ static char http_baseurl[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
 static int http_download = 1;
+static double cpu_compensation=1.0;
 
 static int shm_run = 0;
 
@@ -282,11 +283,16 @@ bool read_buf(char * buf, const char * key, char * value) {
 	}
 	return 0;
 }
+void read_double(char * buf, const char * key,double * value) {
+	char buf2[BUFFER_SIZE];
+	if (read_buf(buf, key, buf2))
+		sscanf(buf2, "%lf", value);
+}
+
 void read_int(char * buf, const char * key, int * value) {
 	char buf2[BUFFER_SIZE];
 	if (read_buf(buf, key, buf2))
 		sscanf(buf2, "%d", value);
-
 }
 
 FILE * read_cmd_output(const char * fmt, ...) {
@@ -343,6 +349,7 @@ void init_mysql_conf() {
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
 			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
+			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 
 		}
 		//fclose(fp);
@@ -1734,11 +1741,12 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		LIM.rlim_cur = time_lmt + 1;
 	else
 		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
+	LIM.rlim_cur/=cpu_compensation;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	alarm(0);
-	alarm(time_lmt * 5 );
+	alarm(time_lmt * 5 / cpu_compensation);
 
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
@@ -2091,6 +2099,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				case SIGKILL:
 				case SIGXCPU:
 					ACflg = OJ_TL;
+					usedtime=time_lmt*1000;
+					if(DEBUG) printf("TLE:%d\n",usedtime);
 					break;
 				case SIGXFSZ:
 					ACflg = OJ_OL;
@@ -2171,8 +2181,8 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;
 	}
-	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000);
-	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000);
+	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation;
+	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation;
 	
 	//clean_session(pidApp);
 }
@@ -2593,6 +2603,8 @@ int main(int argc, char** argv) {
 	}
 	if (ACflg == OJ_TL) {
 		usedtime = time_lmt * 1000;
+		if (DEBUG)
+                        printf("usedtime:%d\n",usedtime);
 	}
 	if (oi_mode) {
 		if (num_of_test > 0)

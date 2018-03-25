@@ -1738,10 +1738,9 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
 	if (oi_mode)
-		LIM.rlim_cur = time_lmt + 1;
+		LIM.rlim_cur = time_lmt/cpu_compensation + 1;
 	else
-		LIM.rlim_cur = (time_lmt - usedtime / 1000) + 1;
-	LIM.rlim_cur/=cpu_compensation;
+		LIM.rlim_cur = (time_lmt/cpu_compensation  - usedtime / 1000) + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
@@ -2096,6 +2095,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 				case SIGCHLD:
 				case SIGALRM:
 					alarm(0);
+					if(DEBUG) printf("alarm:%d\n",time_lmt);
 				case SIGKILL:
 				case SIGXCPU:
 					ACflg = OJ_TL;
@@ -2601,7 +2601,7 @@ int main(int argc, char** argv) {
 	if (use_max_time) {
 		usedtime = max_case_time;
 	}
-	if (ACflg == OJ_TL) {
+	if (finalACflg == OJ_TL) {
 		usedtime = time_lmt * 1000;
 		if (DEBUG)
                         printf("usedtime:%d\n",usedtime);

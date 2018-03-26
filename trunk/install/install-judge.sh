@@ -29,6 +29,8 @@ sed -i "s|OJ_HTTP_BASEURL=http://127.0.0.1/JudgeOnline|OJ_HTTP_BASEURL=$URL|g" e
 sed -i "s/OJ_HTTP_USERNAME=IP/OJ_HTTP_USERNAME=$USER/g" etc/judge.conf
 sed -i "s/OJ_HTTP_PASSWORD=admin/OJ_HTTP_PASSWORD=$PASSWORD/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
+COMPENSATION=`grep 'mips' /proc/cpuinfo|awk -F: '{printf("%.2f",$2/4000)}'`
+sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 cd src/core
 chmod +x ./make.sh
 if [ ! -e /usr/bin/judged ] ; then

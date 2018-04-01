@@ -87,7 +87,10 @@ docker测试安装
 
 
 Linux不熟悉的用户推荐使用:
-HUSTOJ_LiveCD(关注微信公众号onlinejudge获得下载链接)
+HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
+https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-16.04.iso
+https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-14.04.iso
+
 HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 
 使用说明见iso中README,也可以参考[LiveCD简介](https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md)  

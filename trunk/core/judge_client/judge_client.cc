@@ -2015,7 +2015,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		int & topmemory, int mem_lmt, int & usedtime, int time_lmt, int & p_id,
 		int & PEflg, char * work_dir) {
 	// parent
-	int tempmemory;
+	int tempmemory=0;
 
 	if (DEBUG)
 		printf("pid=%d judging %s\n", pidApp, infile);
@@ -2024,8 +2024,6 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 	struct user_regs_struct reg;
 	struct rusage ruse;
 	int first = true;
-	if(topmemory==0) 
-			topmemory= get_proc_status(pidApp, "VmRSS:") << 10;
 	while (1) {
 		// check the usage
 
@@ -2521,7 +2519,7 @@ int main(int argc, char** argv) {
 					p_id, PEflg, work_dir);
 
 		}
-		if (ACflg == OJ_TL) {
+		if (finalACflg == OJ_TL) {
 			usedtime = time_lmt * 1000;
 		}
 		if (ACflg == OJ_RE) {
@@ -2601,7 +2599,7 @@ int main(int argc, char** argv) {
 	if (use_max_time) {
 		usedtime = max_case_time;
 	}
-	if (finalACflg == OJ_TL) {
+	if (finalACflg == OJ_TL ) {
 		usedtime = time_lmt * 1000;
 		if (DEBUG)
                         printf("usedtime:%d\n",usedtime);

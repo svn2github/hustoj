@@ -2,10 +2,14 @@
 #labels Featured,LiveCD,Phase-Deploy
 
 Download:
-14.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员)
-* https://pan.baidu.com/s/1sl8wD4L
 
-× 关注微信公众号onlinejudge获得最新版本LiveCD下载链接
+16.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员，不含vjudge) https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-16.04.iso 
+
+14.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员,含vjudge)
+* https://pan.baidu.com/s/1sl8wD4L
+* 关注微信公众号onlinejudge获得最新版本LiveCD下载链接
+* https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-14.04.iso 
+
 
 12.04 LTS 版本
 * http://pan.baidu.com/share/link?shareid=23135&uk=2838456172

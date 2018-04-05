@@ -49,7 +49,7 @@
 #include <assert.h>
 #include "okcalls.h"
 
-#define STD_MB 1048576
+#define STD_MB 1048576LL
 #define STD_T_LIM 2
 #define STD_F_LIM (STD_MB<<5)
 #define STD_M_LIM (STD_MB<<7)

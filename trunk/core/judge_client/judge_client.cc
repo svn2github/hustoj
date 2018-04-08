@@ -193,7 +193,8 @@ int execute_cmd(const char * fmt, ...) {
 }
 
 const int call_array_size = 512;
-int call_counter[call_array_size] = { 0 };
+unsigned int call_id=0;
+unsigned int call_counter[call_array_size] = { 0 };
 static char LANG_NAME[BUFFER_SIZE];
 void init_syscalls_limits(int lang) {
 	int i;
@@ -2154,21 +2155,22 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		if (call_counter[reg.REG_SYSCALL] ){
+		call_id=(unsigned int)reg.REG_SYSCALL % call_array_size;
+		if (call_counter[call_id] ){
 			//call_counter[reg.REG_SYSCALL]--;
 		}else if (record_call) {
-			call_counter[reg.REG_SYSCALL] = 1;
+			call_counter[call_id] = 1;
 		
 		}else { //do not limit JVM syscall for using different JVM
 			ACflg = OJ_RE;
 			char error[BUFFER_SIZE];
 			sprintf(error,
-                                        "[ERROR] A Not allowed system call: runid:%d CALLID:%ld\n"
+                                        "[ERROR] A Not allowed system call: runid:%d CALLID:%u\n"
                                         " TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
                                         "and recompile judge_client. \n"
                                         "if you are admin and you don't know what to do ,\n"
                                         "chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-                                        solution_id, (long)reg.REG_SYSCALL);
+                                        solution_id, call_id);
  
 			write_log(error);
 			print_runtimeerror(error);

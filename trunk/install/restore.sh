@@ -3,10 +3,10 @@ DATE=`date +%Y%m%d`
 BAKDATE=`echo $1 |awk -F\. '{print $1}'|awk -F_ '{print $2}'`
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
-echo $DATE
-echo $BAKDATE
-echo $USER
-echo $PASSWORD
+#echo $DATE
+#echo $BAKDATE
+#echo $USER
+#echo $PASSWORD
 mkdir hustoj-restore
 cd hustoj-restore
 MAIN="../$1"

@@ -157,8 +157,10 @@ long get_file_size(const char * filename) {
 	return (long) f_stat.st_size;
 }
 
-void write_log(const char *fmt, ...) {
+void write_log(const char *_fmt, ...) {
 	va_list ap;
+	char fmt[4096];
+	strncpy(fmt,_fmt,4096);
 	char buffer[4096];
 	//      time_t          t = time(NULL);
 	//int l;
@@ -168,7 +170,7 @@ void write_log(const char *fmt, ...) {
 		fprintf(stderr, "openfile error!\n");
 		system("pwd");
 	}
-	va_start(ap, fmt);
+	va_start(ap, _fmt);
 	//l = 
 	vsprintf(buffer, fmt, ap);
 	fprintf(fp, "%s\n", buffer);

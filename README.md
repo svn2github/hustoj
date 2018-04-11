@@ -1,20 +1,5 @@
 hustoj -- 请一定认真看完本页再动手安装，否则出现问题，勿谓言之不预！
 ======
-微信公众号:hustoj
-<img src="http://hustoj.com/wx.jpg" height="180">
-HUSTOJ is an GPL FreeSoftware?.
-
-HUSTOJ 是采用GPL的自由软件。
-
-注意：基于本项目源码从事科研、论文、系统开发，"最好"在文中或系统中表明来自于本项目的内容和创意，否则所有贡献者可能会鄙视你和你的项目。使用本项目源码和freeproblemset题库请尊重程序员职业和劳动。
-
-论文请引用参考文献[基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088&uid=WEEvREcwSlJHSldRa1FhdXNXYXJwcFhRL1Z1Q2lKUDFMNGd0TnJVVlh4bz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!&v=MjgwNTExVDNxVHJXTTFGckNVUkwyZlllWm1GaURsV3IvQUx6N0JiN0c0SDlPdnJJOU5iSVI4ZVgxTHV4WVM3RGg=)
-
-PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
-
-如果这个项目对你有用，请挥动鼠标，右上角给个Star!
-
-Star us, please!
 
 根据你选择的发行版不同，从下面三个脚本里选一个来用。
 
@@ -107,5 +92,22 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 ----------------------
 硬件需求：
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
+
+微信公众号:hustoj
+<img src="http://hustoj.com/wx.jpg" height="180">
+HUSTOJ is an GPL FreeSoftware?.
+
+HUSTOJ 是采用GPL的自由软件。
+
+注意：基于本项目源码从事科研、论文、系统开发，"最好"在文中或系统中表明来自于本项目的内容和创意，否则所有贡献者可能会鄙视你和你的项目。使用本项目源码和freeproblemset题库请尊重程序员职业和劳动。
+
+论文请引用参考文献[基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088&uid=WEEvREcwSlJHSldRa1FhdXNXYXJwcFhRL1Z1Q2lKUDFMNGd0TnJVVlh4bz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!&v=MjgwNTExVDNxVHJXTTFGckNVUkwyZlllWm1GaURsV3IvQUx6N0JiN0c0SDlPdnJJOU5iSVI4ZVgxTHV4WVM3RGg=)
+
+PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
+
+如果这个项目对你有用，请挥动鼠标，右上角给个Star!
+
+Star us, please!
+
 
 

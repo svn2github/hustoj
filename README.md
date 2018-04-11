@@ -1,4 +1,4 @@
-hustoj
+hustoj -- 请一定认真看完本页再动手安装，否则出现问题，勿谓言之不预！
 ======
 微信公众号:hustoj
 <img src="http://hustoj.com/wx.jpg" height="180">

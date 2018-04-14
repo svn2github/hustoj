@@ -988,8 +988,8 @@ int compile(int lang,char * work_dir) {
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		if(lang==3||lang==17){
-		   LIM.rlim_max = STD_MB <<11;
-		   LIM.rlim_cur = STD_MB <<11;	
+		   LIM.rlim_max = STD_MB <<12;
+		   LIM.rlim_cur = STD_MB <<12;	
                 }else{
 		   LIM.rlim_max = STD_MB *512 ;
 		   LIM.rlim_cur = STD_MB *512 ;

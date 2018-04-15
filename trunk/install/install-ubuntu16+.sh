@@ -54,7 +54,7 @@ sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny acces
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini
 
-COMPENSATION=`grep 'mips' /proc/cpuinfo|awk -F: '{printf("%.2f",$2/5000)}'`
+COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
 /etc/init.d/php7.0-fpm restart

@@ -983,13 +983,18 @@ int compile(int lang,char * work_dir) {
 		LIM.rlim_cur = 6;
 		setrlimit(RLIMIT_CPU, &LIM);
 		alarm(6);
-		LIM.rlim_max = 10 * STD_MB;
-		LIM.rlim_cur = 10 * STD_MB;
+		LIM.rlim_max = 40 * STD_MB;
+		LIM.rlim_cur = 40 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		if(lang==3||lang==17){
+#ifdef __i386
+		   LIM.rlim_max = STD_MB <<11;
+		   LIM.rlim_cur = STD_MB <<11;	
+#else
 		   LIM.rlim_max = STD_MB <<12;
 		   LIM.rlim_cur = STD_MB <<12;	
+#endif
                 }else{
 		   LIM.rlim_max = STD_MB *512 ;
 		   LIM.rlim_cur = STD_MB *512 ;

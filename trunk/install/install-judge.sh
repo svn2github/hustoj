@@ -1,4 +1,6 @@
 #!/bin/bash
+# usage : sudo ./install-judge.sh <ojurl> <judger_name> <judger_password> <localpath>
+# example : sudo ./install-judge.sh http://10.1.2.100/ judger1 judg3r_p@ss /home/judge/
 URL=$1
 USER=$2
 PASSWORD=$3

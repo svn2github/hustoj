@@ -2039,7 +2039,7 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 		if(first){ // 
 			ptrace(PTRACE_SETOPTIONS, pidApp, NULL, PTRACE_O_TRACESYSGOOD 
 								|PTRACE_O_TRACEEXIT 
-								|PTRACE_O_EXITKILL 
+							//	|PTRACE_O_EXITKILL 
 							//	|PTRACE_O_TRACECLONE 
 							//	|PTRACE_O_TRACEFORK 
 							//	|PTRACE_O_TRACEVFORK

@@ -46,6 +46,7 @@ chmod 700 src/web/include/db_info.inc.php
 
 chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
+cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 systemctl restart nginx.service
 

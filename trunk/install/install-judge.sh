@@ -1,6 +1,12 @@
 #!/bin/bash
+
 # usage : sudo ./install-judge.sh <ojurl> <judger_name> <judger_password> <localpath>
-# example : sudo ./install-judge.sh http://10.1.2.100/ judger1 judg3r_p@ss /home/judge/
+# example : 
+# step 0: registe a new user name judger1 on OJ web (http://10.1.2.100/) ,password :judg3r_p@ss
+# step 1: add http_judge privilege to judger1
+# step 2: install a new ubuntu on another node in same LAN , and open a new console to execute step 3
+# step 3: sudo ./install-judge.sh http://10.1.2.100/ judger1 judg3r_p@ss /home/judge/
+
 URL=$1
 USER=$2
 PASSWORD=$3

@@ -181,7 +181,11 @@ $U=array();
 
 		$user_name=$n_user;
 	}
-	$U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']),$mark_base,$mark_per_problem,$mark_per_punish);
+
+        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0),$mark_base,$mark_per_problem,$mark_per_punish);
+        else
+		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']),$mark_base,$mark_per_problem,$mark_per_punish);
 }
 
 usort($U,"s_cmp");

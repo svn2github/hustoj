@@ -188,7 +188,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                 $user_name=$n_user;
         }
 	if($row['result']!=4 && $row['pass_rate']>=0.99) $row['pass_rate']=0;
-        if(time()<$end_time&&$lock<strtotime($row['in_date']))
+        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
         else
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);

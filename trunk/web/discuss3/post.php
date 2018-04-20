@@ -33,6 +33,14 @@
                                 $cid=intval($_REQUEST['cid']);
                         else
                                 $cid=0;
+			if($pid==0){
+				  if($cid>0){
+			                $problem_id=htmlentities($_GET['problem_id'],ENT_QUOTES,'UTF-8');
+               				$num=strpos($PID,$problem_id);
+					$pid=pdo_query("select problem_id from contest_problem where contest_id=? and num=?",$cid,$num)[0][0];
+				  }
+
+			}
                         $sql="INSERT INTO `topic` (`title`, `author_id`, `cid`, `pid`) values(?,?,?,?)";
 						//echo $sql;
                         $rows=pdo_query($sql,$_POST['title'],$_SESSION[$OJ_NAME.'_'.'user_id'],$cid,$pid);

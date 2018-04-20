@@ -2,9 +2,11 @@
         session_start();
         require_once("../include/db_info.inc.php");
         require_once("discuss_func.inc.php");
+	
+	$tid = intval($_REQUEST['tid']);
+	$cid=pdo_query("select cid from topic where tid=?",$tid)[0][0];
         if ($_REQUEST['target']=='reply'){
                 $rid = intval($_REQUEST['rid']); 
-				$tid = intval($_REQUEST['tid']);
                 $stat = -1;
                 if ($_REQUEST['action']=='resume') $stat = 0;
                 if ($_REQUEST['action']=='disable') $stat = 1;
@@ -24,7 +26,7 @@
 			echo "$sql";
                 	pdo_query($sql, $stat,$rid);
 		}
-		header('Location: thread.php?tid='.$tid);
+		header('Location: thread.php?tid='.$tid."&cid=$cid");
 		exit();
         }
         if ($_REQUEST['target']=='thread'){
@@ -48,8 +50,8 @@
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
                
                 if ( pdo_query($sql) >0) {
-                        if ($stat!=2) header('Location: thread.php?tid='.$tid);
-                        else header('Location: discuss.php');
+                        if ($stat!=2) header('Location: thread.php?tid='.$tid."&cid=$cid");
+                        else header('Location: discuss.php'."?cid=$cid");
                 }
                 else {
                         errmsg( "The thread does not exist.");

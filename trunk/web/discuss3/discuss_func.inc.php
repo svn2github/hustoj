@@ -21,9 +21,8 @@ function problem_exist($pid,$cid){
 	return count($result)>0;
 }
 function err_msg($msg){
-	require_once("oj-header.php");
-	echo $msg;
-	require_once("oj-footer.php");
-	exit(0);
+        $view_errors= "$msg";
+        require("template/".$OJ_TEMPLATE."/error.php");
+        exit(0);
 }
 ?>

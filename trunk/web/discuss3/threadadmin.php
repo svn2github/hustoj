@@ -19,13 +19,13 @@
                         }else{ 
 				$sql.=" AND author_id=?";
 			}
+                	pdo_query($sql, $stat,$rid,$_SESSION[$OJ_NAME.'_'.'user_id']);
                 }else{
-			 $sql.=" and ?!=''";
+			echo "$sql";
+                	pdo_query($sql, $stat,$rid);
 		}
-                if (pdo_query($sql, $stat,$rid,$_SESSION[$OJ_NAME.'_'.'user_id'])>0) 
-					header('Location: thread.php?tid='.$tid);
-                else 
-					err_msg("Reply not exist or no permission.");
+		header('Location: thread.php?tid='.$tid);
+		exit();
         }
         if ($_REQUEST['target']=='thread'){
                 $tid = intval($_REQUEST['tid']);
@@ -42,7 +42,7 @@
                         errmsg("<a href=./loginpage.php>Please Login First</a>");
                 if ($toplevel == -1 && $stat == -1)
                         errmsg("Wrong action.");
-                $tid = mysql_escape_string($tid);
+                $tid =intval($tid);
                 if ($stat == -1) 
                         $sql = "UPDATE topic SET top_level = $toplevel WHERE `tid` = '$tid'";
                 else $sql = "UPDATE topic SET status = $stat WHERE `tid` = '$tid'";
@@ -52,9 +52,7 @@
                         else header('Location: discuss.php');
                 }
                 else {
-                        require_once("./oj-header.php");
-                        echo "The thread does not exist.";
-                        require_once("../oj-footer.php");
+                        errmsg( "The thread does not exist.");
                         exit(0);
                 }
         }

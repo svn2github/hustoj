@@ -1,7 +1,6 @@
 <?php
-	ob_start();
+	require_once("oj-header.php");
 	require_once("discuss_func.inc.php");
-	require_once("../include/const.inc.php");
 	$parm="";
 	if(isset($_GET['pid'])){
 		$pid=intval($_GET['pid']);

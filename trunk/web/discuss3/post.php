@@ -59,7 +59,12 @@
 				}
 				$sql="insert INTO `reply` (`author_id`, `time`, `content`, `topic_id`,`ip`) values(?,NOW(),?,?,?)";
 				if(pdo_query($sql, $_SESSION[$OJ_NAME.'_'.'user_id'],$_POST['content'],$tid,$ip)){
-					header('Location: thread.php?tid='.$tid);
+					if(isset($_REQUEST['cid'])){
+						$cid=intval($_REQUEST['cid']);
+						header('Location: thread.php?cid='.$cid.'&tid='.$tid);
+					}else{
+						header('Location: thread.php?tid='.$tid);
+					}
 					exit(0);
 				}else{
 					echo('Unable to post.');

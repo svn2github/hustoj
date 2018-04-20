@@ -1,6 +1,7 @@
 <?php
 	ob_start();
 	require_once("discuss_func.inc.php");
+	require_once("../include/const.inc.php");
 	$parm="";
 	if(isset($_GET['pid'])){
 		$pid=intval($_GET['pid']);
@@ -36,9 +37,13 @@ if ($prob_exist){?>
 		<?php if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";
 		if ($pid!=null && $pid!=0){
 				$query="?pid=$pid";
-				if($cid!=0) $query.="&cid=$cid";
-				 echo " >> <a href=\"discuss.php".$query."\">Problem ".$pid."</a>";
-
+				if($cid!=0) {
+					$query.="&cid=$cid";
+					$PAL=pdo_query("select num from contest_problem where contest_id=? and problem_id=?",$cid,$pid)[0][0];
+					 echo " >> <a href=\"discuss.php".$query."\">Problem ".$PID[$PAL]."</a>";
+				}else{
+					 echo " >> <a href=\"discuss.php".$query."\">Problem ".$pid."</a>";
+				}
 		}
 		?>
 		</div>
@@ -53,6 +58,15 @@ $sql = "SELECT `tid`, `title`, `top_level`, `t`.`status`, `cid`, `pid`, CONVERT(
 		MAX(`r`.`time`) `lastupdate`, `t`.`author_id`, COUNT(`rid`) `count`
 		FROM `topic` t left join `reply` r on t.tid=r.topic_id
 		WHERE `t`.`status`!=2  ";
+if(isset($_REQUEST['cid'])){
+	$cid=intval($_REQUEST['cid']);
+	
+	$sql = "SELECT `tid`, t.`title`, `top_level`, `t`.`status`, `cid`, `pid`, CONVERT(MIN(`r`.`time`),DATE) `posttime`,
+		MAX(`r`.`time`) `lastupdate`, `t`.`author_id`, COUNT(`rid`) `count`,cp.num
+		FROM `topic` t left join `reply` r on t.tid=r.topic_id left join contest_problem cp on t.pid=cp.problem_id and cp.contest_id=$cid 
+		WHERE `t`.`status`!=2  ";
+	//echo $sql;
+}
 if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') 
 	$sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
 else 
@@ -102,11 +116,13 @@ foreach ( $result as $row){
         echo "</td>";
         echo "<td>";
         if ($row['pid']!=0) {
-		if($row['cid'])	
+		if($row['cid']){	
 			echo "<a href=\"discuss.php?pid={$row['pid']}"."&cid={$row['cid']}\">";
-		else
+			echo "{$PID[$row['num']]}</a>";
+		}else{
 			echo "<a href=\"discuss.php?pid={$row['pid']}\">";
-		echo "{$row['pid']}</a>";
+			echo "{$row['pid']}</a>";
+		}
         }
 	echo "</td>";
         echo "<td><a href=\"../userinfo.php?user={$row['author_id']}\">{$row['author_id']}</a></td>";

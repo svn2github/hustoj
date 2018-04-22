@@ -5,12 +5,12 @@ hustoj -- 请一定认真看完本页再动手安装，否则出现问题，勿�
 
 <font color='red'><b>不要相信百度来的长篇大论的所谓教程，那些都是好几年前的老皇历了，会导致不判题，不显示，不好升级等等问题。</b></font>
 
-首先安装Ubuntu14.04（推荐），然后用下面脚本快速安装OJ：  
+首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
   
-或者安装ubuntu16.04（不推荐），然后用下面脚本快速安装OJ：  
+或者安装ubuntu16.04（不是特别稳定），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
@@ -19,7 +19,7 @@ hustoj -- 请一定认真看完本页再动手安装，否则出现问题，勿�
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
 
-假如你不得已非要用centos7 （不推荐），可以用下面脚本快速安装OJ：  
+假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh
@@ -57,7 +57,7 @@ docker测试安装
 	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:cpp
 ```	
 
-树莓派用户请用rpi分支源码手工搭建web，并编译安装core目录下的judged和judge_client。
+树莓派用户请用rpi分支源码（实验性质）手工搭建web，并编译安装core目录下的judged和judge_client。
 
 [更多安装方法](https://github.com/zhblue/hustoj/blob/master/trunk/install/README)
 

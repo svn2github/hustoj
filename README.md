@@ -9,15 +9,13 @@ hustoj -- 请一定认真看完本页再动手安装，否则出现问题，勿�
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
-  
+
 或者安装ubuntu16.04（不是特别稳定），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
-
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
-
 
 假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
 

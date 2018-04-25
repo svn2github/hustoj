@@ -3,20 +3,25 @@
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$tid=intval($_REQUEST['tid']);
         if(isset($_GET['cid']))$cid=intval($_GET['cid']);	
-	$sql="SELECT t.`title`, `cid`, `pid`, `status`, `top_level`,num FROM `topic` t left join contest_problem cp on cp.problem_id=t.pid  and cp.contest_id=? WHERE `tid` = ? AND `status` <= 1";
+	$sql="SELECT t.`title`, `cid`, `pid`, `status`, `top_level` FROM `topic` t left join contest_problem cp on cp.problem_id=t.pid   WHERE `tid` = ? AND `status` <= 1";
 //	echo $sql;
 	//exit();
-	$result=pdo_query($sql,$cid,$tid) ;
+	$result=pdo_query($sql,$tid) ;
 	$rows_cnt = count($result) ;
 	$row= $result[0];
 	if($row['cid']>0) $cid=$row['cid'];
-	
+	if($row['pid']>0 && $row['cid'] >0 ) {
+		$pid=pdo_query("select num from contest_problem where problem_id=? and contest_id=?",$row['pid'],$row['cid'])[0][0];
+		$pid=$PID[$pid];
+	}else{
+		$pid=$row['pid'];
+	}
 	$isadmin = isset($_SESSION[$OJ_NAME.'_'.'administrator']);
 ?>
 
 <center>
 <div style="width:90%; margin:0 auto; text-align:left;"> 
-<div style="text-align:left;font-size:80%;float:left;">[ <a href="newpost.php<?php if ($cid) echo "?cid=$cid"; ?>">New Thread</a> ]</div>
+<div style="text-align:left;font-size:80%;float:left;">[ <a href="newpost.php<?php if ($cid) echo "?cid=$cid&pid=".$row['pid']; ?>">New Thread</a> ]</div>
 <?php if ($isadmin){
 	?><div style="font-size:80%; float:right"> Change sticky level to<?php $adminurl = "threadadmin.php?target=thread&tid={$tid}&action=";
 	if ($row['top_level'] == 0) echo "[ <a href=\"{$adminurl}sticky&level=3\">Level Top</a> ] [ <a href=\"{$adminurl}sticky&level=2\">Level Mid</a> ] [ <a href=\"{$adminurl}sticky&level=1\">Level Low</a> ]"; else echo "[ <a href=\"{$adminurl}sticky&level=0\">Standard</a> ]";
@@ -29,7 +34,7 @@
 	<td style="text-align:left">
 	<a href="discuss.php<?php if ($row['pid']!=0 && $row['cid']!=null) echo "?pid=".$row['pid']."&cid=".$row['cid'];
 	else if ($row['pid']!=0) echo"?pid=".$row['pid']; else if ($row['cid']!=null) echo"?cid=".$row['cid'];?>">
-	<?php if ($row['pid']!=0) echo "Problem ".($cid?$PID[$row['num']]:$row['pid']); else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row['title'],ENT_QUOTES,"UTF-8"));?></td>
+	<?php if ($row['pid']!=0) echo "Problem $pid"; else echo "MainBoard";?></a> >> <?php echo nl2br(htmlentities($row['title'],ENT_QUOTES,"UTF-8"));?></td>
 </tr>
 
 <?php

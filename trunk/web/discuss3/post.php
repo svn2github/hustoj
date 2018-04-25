@@ -1,6 +1,6 @@
 <?php
         session_start();
-        require_once("../include/db_info.inc.php");
+        require_once("oj-header.php");
         if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
                 require_once("oj-header.php");
                 echo "<a href=loginpage.php>Please Login First</a>";
@@ -35,9 +35,12 @@
                                 $cid=0;
 			if($pid==0){
 				  if($cid>0){
-			                $problem_id=htmlentities($_GET['problem_id'],ENT_QUOTES,'UTF-8');
+			                $problem_id=htmlentities($_POST['pid'],ENT_QUOTES,'UTF-8');
+//					echo "problem_id:".$problem_id;
                				$num=strpos($PID,$problem_id);
+//					echo "num:$num";
 					$pid=pdo_query("select problem_id from contest_problem where contest_id=? and num=?",$cid,$num)[0][0];
+//					echo "pid:$pid";
 				  }
 
 			}

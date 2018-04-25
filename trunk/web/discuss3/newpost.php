@@ -7,6 +7,21 @@
 		require_once("../template/$OJ_TEMPLATE/discuss.php");
 		exit(0);
 	}
+	if(isset($_GET['pid']))
+		$pid=intval($_GET['pid']);
+	else	
+		$pid="";
+	if(isset($_GET['cid'])){
+		$cid=intval($_GET['cid']);
+		if($pid>0){
+		  $pid=pdo_query("select num from contest_problem where problem_id=? and contest_id=?",$pid,$cid)[0][0];
+		  $pid=$PID[$pid];
+		}
+	}else{
+		$cid=0;
+	}
+
+	
 ?>
 
 <center>
@@ -15,7 +30,7 @@
 <form action="post.php?action=new" method=post>
 <input type=hidden name=cid value="<?php if (array_key_exists('cid',$_REQUEST)) echo intval($_REQUEST['cid']);?>">
 <div style="margin:0px 10px">Problem : </div>
-<div><input name=pid style="border:1px dashed #8080FF; width:100px; height:20px; font-size:75%;margin:0 10px; padding:2px 10px" value="<?php if(array_key_exists('pid',$_REQUEST)) echo intval($_REQUEST['pid']); ?>"></div>
+<div><input name=pid style="border:1px dashed #8080FF; width:100px; height:20px; font-size:75%;margin:0 10px; padding:2px 10px" value="<?php echo $pid;?>"></div>
 <div style="margin:0px 10px">Title : </div>
 <div><input name=title style="border:1px dashed #8080FF; width:700px; height:20px; font-size:75%;margin:0 10px; padding:2px 10px"></div>
 <div style="margin:0px 10px">Content : </div>

@@ -8,6 +8,10 @@
 	require_once('./include/setlang.php');
 	$view_title= "Welcome To Online Judge";
  $result=false;	
+	if(isset($OJ_ON_SITE_CONTEST_ID)){
+		header("location:contest.php?cid=".$OJ_ON_SITE_CONTEST_ID);
+		exit();
+	}
 ///////////////////////////MAIN	
 	
 	$view_news="";

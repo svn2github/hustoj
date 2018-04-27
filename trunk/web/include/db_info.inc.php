@@ -47,6 +47,10 @@ static  $OJ_SHOW_DIFF=false; //是否显示WA的对比说明
 static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
+
+//static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
+//static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
+
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';
 
 /* weibo config here */

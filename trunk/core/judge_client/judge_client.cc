@@ -979,10 +979,12 @@ int compile(int lang,char * work_dir) {
 	pid = fork();
 	if (pid == 0) {
 		struct rlimit LIM;
-		LIM.rlim_max = 6;
-		LIM.rlim_cur = 6;
+		int cpu=6;
+		if (lang==3) cpu=30;
+		LIM.rlim_max = cpu;
+		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
-		alarm(6);
+		alarm(cpu);
 		LIM.rlim_max = 40 * STD_MB;
 		LIM.rlim_cur = 40 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);

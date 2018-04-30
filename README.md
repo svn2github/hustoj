@@ -17,6 +17,11 @@ hustoj -- 请一定认真看完本页再动手安装，勿谓言之不预！
 
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
+发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验)
+
+    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
+    sudo bash install-ubuntu18.04.sh
+
 假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh

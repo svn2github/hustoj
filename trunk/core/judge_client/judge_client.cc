@@ -1,6 +1,4 @@
-//
-#define IGNORE_ESOL
-// File:   main.cc
+// File:   judge_client.cc
 // Author: sempr
 // refacted by zhblue
 /*
@@ -49,6 +47,7 @@
 #include <assert.h>
 #include "okcalls.h"
 
+#define IGNORE_ESOL   //ignore the ending space char of lines while comparing
 #define STD_MB 1048576LL
 #define STD_T_LIM 2
 #define STD_F_LIM (STD_MB<<5)

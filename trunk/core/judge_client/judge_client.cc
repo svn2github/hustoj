@@ -50,9 +50,9 @@
 #define IGNORE_ESOL   //ignore the ending space char of lines while comparing
 #define STD_MB 1048576LL
 #define STD_T_LIM 2
-#define STD_F_LIM (STD_MB<<5)
-#define STD_M_LIM (STD_MB<<7)
-#define BUFFER_SIZE 5120
+#define STD_F_LIM (STD_MB<<5)  //default file size limit 32m ,2^5=32
+#define STD_M_LIM (STD_MB<<7)  //default memory limit 128m ,2^7=128
+#define BUFFER_SIZE 5120       //default size of char buffer 5120 bytes
 
 #define OJ_WT0 0
 #define OJ_WT1 1

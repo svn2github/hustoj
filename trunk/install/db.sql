@@ -162,7 +162,7 @@ CREATE TABLE  `users` (
   `submit` int(11) DEFAULT '0',
   `solved` int(11) DEFAULT '0',
   `defunct` char(1) NOT NULL DEFAULT 'N',
-  `ip` varchar(20) NOT NULL DEFAULT '',
+  `ip` varchar(39) NOT NULL DEFAULT '',
   `accesstime` datetime DEFAULT NULL,
   `volume` int(11) NOT NULL DEFAULT '1',
   `language` int(11) NOT NULL DEFAULT '1',

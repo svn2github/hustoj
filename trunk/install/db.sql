@@ -33,7 +33,7 @@ CREATE TABLE  `contest_problem` (
 CREATE TABLE `loginlog` (
   `user_id` varchar(48) NOT NULL DEFAULT '',
   `password` varchar(40) DEFAULT NULL,
-  `ip` varchar(100) DEFAULT NULL,
+  `ip` varchar(46) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   KEY `user_log_index` (`user_id`,`time`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -98,7 +98,7 @@ CREATE TABLE  `reply` (
   `content` text NOT NULL,
   `topic_id` int(11) NOT NULL,
   `status` int(2) NOT NULL DEFAULT '0',
-  `ip` varchar(30) NOT NULL,
+  `ip` varchar(46) NOT NULL,
   PRIMARY KEY (`rid`),
   KEY `author_id` (`author_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -162,7 +162,7 @@ CREATE TABLE  `users` (
   `submit` int(11) DEFAULT '0',
   `solved` int(11) DEFAULT '0',
   `defunct` char(1) NOT NULL DEFAULT 'N',
-  `ip` varchar(39) NOT NULL DEFAULT '',
+  `ip` varchar(46) NOT NULL DEFAULT '',
   `accesstime` datetime DEFAULT NULL,
   `volume` int(11) NOT NULL DEFAULT '1',
   `language` int(11) NOT NULL DEFAULT '1',
@@ -175,7 +175,7 @@ CREATE TABLE  `users` (
 
 CREATE TABLE `online` (
   `hash` varchar(32) collate utf8_unicode_ci NOT NULL,
-  `ip` varchar(20) character set utf8 NOT NULL default '',
+  `ip` varchar(46) character set utf8 NOT NULL default '',
   `ua` varchar(255) character set utf8 NOT NULL default '',
   `refer` varchar(255) collate utf8_unicode_ci default NULL,
   `lastmove` int(10) NOT NULL,

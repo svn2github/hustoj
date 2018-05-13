@@ -131,15 +131,15 @@ else if(isset($_POST['problem2contest'])){
 	<input  class=input-large type=date name='enddate' value='<?php echo date('Y').'-'. date('m').'-'.date('d')?>' size=4 >
 	Hour:<input class=input-mini  type=text name=ehour size=2 value=<?php echo (date('H')+4)%24?>>&nbsp;
 	Minute:<input class=input-mini  type=text name=eminute value=00 size=2 ></p>
-	Public:<select name=private><option value=0><?php echo $MSG_Public?></option>
+	<?php echo $MSG_Public?>:<select name=private><option value=0><?php echo $MSG_Public?></option>
 				    <option value=1><?php echo $MSG_Private?></option>
                </select>
 	<?php echo $MSG_PASSWORD?>:<input type=text name=password value="">
 	<?php require_once("../include/set_post_key.php");?>
-	<br>Problems:<input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
+	<br><?php echo $MSG_PROBLEM_ID?>:<input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text size=60 name=cproblem value="<?php echo isset($plist)?$plist:""?>">
 	<br>
-	<p align=left>Description:<br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
-	Language:<select name="lang[]" multiple="multiple"    style="height:220px">
+	<p align=left><?php echo $MSG_Description?><br><textarea class=kindeditor rows=13 name=description cols=80></textarea>
+	<?php echo $MSG_LANG?>:<select name="lang[]" multiple="multiple"    style="height:220px">
 	<?php
 $lang_count=count($language_ext);
 
@@ -157,8 +157,8 @@ $lang_count=count($language_ext);
         </select>
 
 
-	Users:<textarea name="ulist" rows="12" cols="20" placeholder="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"></textarea>
-	<input type=submit value=Submit name=submit><input type=reset value=Reset name=reset>
+	<?php echo $MSG_USER?><textarea name="ulist" rows="12" cols="20" placeholder="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"></textarea>
+	<input type=submit value="<?php echo $MSG_ADD?>" name=submit>
 	</form>
 </div>
 <?php }

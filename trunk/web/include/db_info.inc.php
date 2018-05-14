@@ -29,6 +29,7 @@ static  $OJ_VCODE=false;
 static  $OJ_APPENDCODE=false;
 static  $OJ_CE_PENALTY=false;
 static  $OJ_PRINTER=false;
+static  $OJ_MAIL=false;
 static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;

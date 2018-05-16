@@ -51,7 +51,6 @@ $i=0;
 <tr align=center class='<?php echo ($cnt=!$cnt)?'even':'odd';?>row'>
 	<td>
 		
-		<a name=post<?php echo $row['rid'];?>></a>
      <div style="display:inline;text-align:left; float:left; margin:0 10px"><a href="../userinfo.php?user=<?php echo $row['author_id']?>"><?php echo $row['author_id']; ?> </a> @ <?php echo $row['time']; ?></div>
 		<div class="mon" style="display:inline;text-align:right; float:right">
 			<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {?>  
@@ -59,7 +58,7 @@ $i=0;
 				<?php if ($row['status']==0) echo $url."disable\">Disable";
 				else echo $url."resume\">Resume";
 				?> </a> ]</span>
-			<span>[ <a href="#">Reply</a> ]</span> 
+			<span>[ <a onclick="reply(<?php echo $row['rid'];?>);">Reply</a> ]</span> 
 			<?php } ?>
 			<span>[ <a href="#">Quote</a> ]</span>
 			<span>[ <a href="#">Edit</a> ]</span>
@@ -70,7 +69,7 @@ $i=0;
 			<span style="width:5em;text-align:right;display:inline-block;font-weight:bold;margin:0 10px">
 			<?php echo $i+1;?>#</span>
 		</div>
-		<div class=content style="text-align:left; clear:both; margin:10px 30px">
+		<div id="post<?php echo $row['rid'];?>" class=content style="text-align:left; clear:both; margin:10px 30px">
 			<?php	if ($row['status'] == 0) echo nl2br(htmlentities($row['content'],ENT_QUOTES,"UTF-8"));
 					else {
 						if (!$isuser || $isadmin)echo "<div style=\"border-left:10px solid gray\"><font color=red><i>Notice : <br>This reply is blocked by administrator.</i></font></div>";
@@ -91,7 +90,7 @@ $i++;
 <div style="font-size:80%;"><div style="margin:0 10px">New Reply:</div></div>
 <form action="post.php?action=reply" method=post>
 <input type=hidden name=tid value=<?php echo $tid;?>>
-<div><textarea name=content style="border:1px dashed #8080FF; width:700px; height:200px; font-size:75%;margin:0 10px; padding:10px"></textarea></div>
+<div><textarea id="replyContent" name=content style="border:1px dashed #8080FF; width:700px; height:200px; font-size:75%;margin:0 10px; padding:10px"></textarea></div>
 <div><input type="submit" style="margin:5px 10px" value="Submit"></input></div>
 </form>
 <?php }
@@ -99,5 +98,14 @@ $i++;
 
 </center>
 </div>
+<script>
+function reply(rid){
+   var origin=$("#post"+rid).html();
+   console.log(origin);
+   origin="Reply to :"+origin+"\n----------------------\n";
+   $("#replyContent").html(origin);
+   $("#replyContent").focus();
+}
+</script>
 
 <?php require_once("../template/$OJ_TEMPLATE/discuss.php")?>

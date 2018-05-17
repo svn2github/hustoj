@@ -100,10 +100,10 @@ $i++;
 </div>
 <script>
 function reply(rid){
-   var origin=$("#post"+rid).html();
+   var origin=$("#post"+rid).text();
    console.log(origin);
    origin="Reply to :"+origin+"\n----------------------\n";
-   $("#replyContent").html(origin);
+   $("#replyContent").text(origin);
    $("#replyContent").focus();
 }
 </script>

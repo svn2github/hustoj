@@ -49,7 +49,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 			$view_balloon[$i][0]=$row['balloon_id'];
 			$view_balloon[$i][1]=$row['user_id'];
 			$view_balloon[$i][2]= "<font color='".$ball_color[$row['pid']]."'>";
-			 $view_balloon[$i][2].=$ball_color[$row['pid']];
+			 $view_balloon[$i][2].=$ball_name[$row['pid']];
 			 $view_balloon[$i][2].="</font>";
 			if($row['status']==1)$view_balloon[$i][3].="<span class='btn btn-success'>$MSG_BALLOON_DONE</span>";
 			else $view_balloon[$i][3].="<span class='btn btn-danger'>$MSG_BALLOON_PENDING</span>";

@@ -10,5 +10,6 @@ $judge_color=Array("gray","gray","orange","orange","green","red","red","red","re
 $language_name=Array("C","C++","Pascal","Java","Ruby","Bash","Python","PHP","Perl","C#","Obj-C","FreeBasic","Scheme","Clang","Clang++","Lua","JavaScript","Go","Other Language");
 $language_ext=Array( "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas","scm","c","cc","lua","js","go" );
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-$ball_color=Array('red','blue','green','pink','yellow','violet','magenta','maroon','olive','chocolate');
+$ball_color=Array('#66cccc','red','green','pink','yellow','violet','magenta','maroon','olive','chocolate');
+$ball_name=Array('蒂芙妮蓝','红','green','pink','yellow','violet','magenta','maroon','olive','chocolate');
 ?>

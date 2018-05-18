@@ -33,18 +33,23 @@
 <?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo  htmlspecialchars($user_id, ENT_QUOTES) ?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 <?php echo $MSG_LANG?>:<select class="form-control" size="1" name="language">
-<?php
-$selectedLang=intval($_GET['language']);
-$lang_count=count($language_ext);
-$langmask=$OJ_LANGMASK;
-$lang=(~((int)$langmask))&((1<<($lang_count))-1);
-for($i=0;$i<$lang_count;$i++){
-if($lang&(1<<$i))
-echo"<option value=$i ".( $selectedLang==$i?"selected":"").">
-".$language_name[$i]."
-</option>";
-}
-?>
+	<option value="-1">All</option>
+	<?php
+	if(isset($_GET['language'])){
+		$selectedLang=intval($_GET['language']);
+	}else{
+		$selectedLang=-1;
+	}
+	$lang_count=count($language_ext);
+	$langmask=$OJ_LANGMASK;
+	$lang=(~((int)$langmask))&((1<<($lang_count))-1);
+	for($i=0;$i<$lang_count;$i++){
+		if($lang&(1<<$i))
+		echo"<option value=$i ".( $selectedLang==$i?"selected":"").">
+		".$language_name[$i]."
+		</option>";
+	}
+	?>
 </select>
 <?php echo $MSG_RESULT?>:<select class="form-control" size="1" name="jresult">
 <?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);

@@ -33,8 +33,13 @@
 <?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo htmlspecialchars($user_id, ENT_QUOTES)?>'>
 <?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
 <?php echo $MSG_LANG?>:<select class="form-control" size="1" name="language">
+<option value="-1">All</option>
 <?php
-$selectedLang=intval($_GET['language']);
+if(isset($_GET['language'])){
+        $selectedLang=intval($_GET['language']);
+}else{
+        $selectedLang=-1;
+}
 $lang_count=count($language_ext);
 $langmask=$OJ_LANGMASK;
 $lang=(~((int)$langmask))&((1<<($lang_count))-1);

@@ -26,7 +26,7 @@ int LANG_PV[256] = {0,1,2,3,4,9,11,13,16,59,89,97,201,231,SYS_open, SYS_set_thre
 		SYS_rt_sigaction, SYS_getrlimit, 252, 191, 158, 231, SYS_close,
 		SYS_exit_group, SYS_munmap, SYS_time, 4, 0 };
 //java
-int LANG_JV[256] = { 0,2,3,4,5,9,10,11,12,13,14,21,56,59,89,97,104,158,202,218,231,273,257, 
+int LANG_JV[256] = { 0,39,257,302,2,3,4,5,9,10,11,12,13,14,21,56,59,89,97,104,158,202,218,231,273,257, 
 		61, 22, 6, 33, 8, 13, 16, 111, 110, 39, 79, SYS_fcntl,
 		SYS_getdents64, SYS_getrlimit, SYS_rt_sigprocmask, SYS_futex, SYS_read,
 		SYS_mmap, SYS_stat, SYS_open, SYS_close, SYS_execve, SYS_access,
@@ -43,7 +43,7 @@ int LANG_RV[256] = { 0,1,2,3,4,5,9,10,12,13,14,16,21,22,56,59,72,97,98,107,108,1
 		SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_set_robust_list,
 		SYS_set_tid_address, SYS_write, 0 };
 //bash
-int LANG_BV[256] = { 0,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,99,102,104,107,108,110,111,158,231,
+int LANG_BV[256] = { 0,1,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,99,102,104,107,108,110,111,158,231,257,302,1,2,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,79,97,99,102,104,107,108,110,111,158,231,
 		96, 22, 61, 56, 42, 41, 79, 158, 117, 60, 39, 102, 191,
 		183, SYS_access, SYS_arch_prctl, SYS_brk, SYS_close, SYS_dup2,
 		SYS_execve, SYS_exit_group, SYS_fcntl, SYS_fstat, SYS_getegid,

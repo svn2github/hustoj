@@ -213,12 +213,13 @@ for ($i=0;$i<$user_cnt;$i++){
 	if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')){
 		$U[$i]->nick=iconv("utf8","gbk",$U[$i]->nick);
 	}
-	echo "<td>".$U[$i]->nick."";
-	echo "<td>$usolved";
+	echo "<td>".$U[$i]->nick."</td>";
+	echo "<td>$usolved</td>";
 	echo "<td>";
         if($usolved==0) $U[$i]->mark=0;	
 	
 	echo $U[$i]->mark>0?intval($U[$i]->mark):0;
+	echo "</td>";
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){
@@ -227,6 +228,7 @@ for ($i=0;$i<$user_cnt;$i++){
 			if (isset($U[$i]->p_wa_num[$j])&&$U[$i]->p_wa_num[$j]>0) 
 				echo "(-".$U[$i]->p_wa_num[$j].")";
 		}
+		echo "</td>";
 	}
 	echo "</tr>";
 }

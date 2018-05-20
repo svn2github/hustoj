@@ -33,12 +33,14 @@ class TM{
 	
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
 			return;
-		if ($res!=4) 
-			if(isset($this->p_wa_num[$pid]))
+		if ($res!=4){
+			if(isset($OJ_CE_PENALTY)&&!$OJ_CE_PENALTY&&$res==11) return;  // ACM WF punish no ce 
+			if(isset($this->p_wa_num[$pid])){
 				$this->p_wa_num[$pid]++;
-			else
+			}else{
 				$this->p_wa_num[$pid]=1;
-		else{
+			}
+		}else{
 			$this->p_ac_sec[$pid]=$sec;
 			$this->solved++;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;

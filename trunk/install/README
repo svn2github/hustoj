@@ -5,7 +5,7 @@ HUSTOJ安装说明
 
 方法1
 
-如果是阿里云，系统选择ubuntu14.04，可以使用下面脚本
+系统选择ubuntu14.04，可以使用下面脚本
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     chmod +x install-ubuntu14.04.sh

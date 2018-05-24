@@ -298,16 +298,12 @@ function openBlockly(){
   
 }
 function translate(){
-  var source=$("#source");
-  var editor=$(window.frames['frame_source'].document).find('textarea[id=textarea]');
   var blockly=$(window.frames['frmBlockly'].document);
   var tb=blockly.find('td[id=tab_python]');
   var python=blockly.find('pre[id=content_python]');
   tb.click();
   blockly.find('td[id=tab_blocks]').click();
-  eAL.toggle("source");
-  source.val(python.text());
-  eAL.toggle("source");
+  editor.setValue(python.text());
   $("#language").val(6);
  
 }

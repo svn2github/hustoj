@@ -233,7 +233,6 @@ function do_submit(){
 	else
 	problem_id.value='<?php if (isset($cid))echo $cid?>';
 	document.getElementById("frmSolution").target="_self";
-	<?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
 	document.getElementById("frmSolution").submit();
 }
 var handler_interval;

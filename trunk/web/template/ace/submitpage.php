@@ -32,11 +32,7 @@
       <div class="jumbotron">
  <center>
 <script src="include/checksource.js"></script>
-<form id=frmSolution action="submit.php" method="post"
-<?php if($OJ_LANG=="cn"){?>
-onsubmit="return checksource(document.getElementById('source').value);"
-<?php }?>
->
+<form id=frmSolution action="submit.php" method="post">
 <?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
@@ -337,7 +333,7 @@ function loadFromBlockly(){
 <script>
     ace.require("ace/ext/language_tools");
     var editor = ace.edit("source");
-    editor.setTheme("ace/theme/xcode");
+    editor.setTheme("ace/theme/twilight");
     switchLang(<?php echo $lastlang ?>);
     editor.setOptions({
 	    enableBasicAutocompletion: true,

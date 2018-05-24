@@ -22,6 +22,7 @@ static  $OJ_SIM=false;
 static  $OJ_DICT=false;
 static  $OJ_LANGMASK=0; //1mC 2mCPP 4mPascal 8mJava 16mRuby 32mBash 1008 for security reason to mask all other language
 static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
+static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine

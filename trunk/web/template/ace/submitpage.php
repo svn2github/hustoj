@@ -74,7 +74,12 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 
 <br>
 </span>
-<pre style="width:80%;height:600" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre><br>
+<?php if($OJ_ACE_EDITOR){ ?>
+	<pre style="width:80%;height:600" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre><br>
+	<input type=hidden id="hide_source" name="source" value=""/>
+<?php }else{ ?>
+	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+<?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
@@ -89,7 +94,6 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
 <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
 <?php }?>
-<input type=hidden id="hide_source" name="source" value=""/>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
@@ -199,7 +203,8 @@ function encoded_submit(){
       var mark="<?php echo isset($id)?'problem_id':'cid';?>";
         var problem_id=document.getElementById(mark);
 
-	$("#hide_source").val(editor.getValue());
+	if(typeof(editor) != "undefined")
+		$("#hide_source").val(editor.getValue());
         if(mark=='problem_id')
                 problem_id.value='<?php if(isset($id)) echo $id?>';
         else
@@ -207,8 +212,13 @@ function encoded_submit(){
 
         document.getElementById("frmSolution").target="_self";
         document.getElementById("encoded_submit_mark").name="encoded_submit";
-        var source=editor.getValue();
-        $("#hide_source").val(encode64(utf16to8(source)));
+        var source=$("#source").val();
+	if(typeof(editor) != "undefined") {
+		source=editor.getValue();
+        	$("#hide_source").val(encode64(utf16to8(source)));
+	}else{
+        	$("#source").val(encode64(utf16to8(source)));
+	}
 //      source.value=source.value.split("").reverse().join("");
 //      alert(source.value);
         document.getElementById("frmSolution").submit();
@@ -235,14 +245,19 @@ function do_test_run(){
 	if( handler_interval) window.clearInterval( handler_interval);
 	var loader="<img width=18 src=image/loader.gif>";
 	var tb=window.document.getElementById('result');
-	if(editor.getValue().length<10) return alert("too short!");
+        var source=$("#source").val();
+	if(typeof(editor) != "undefined") {
+		source=editor.getValue();
+        	$("#hide_source").val(source);
+	}
+	if(source.length<10) return alert("too short!");
 	if(tb!=null)tb.innerHTML=loader;
 
 	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 	var problem_id=document.getElementById(mark);
 	problem_id.value=-problem_id.value;
 	document.getElementById("frmSolution").target="testRun";
-	$("#hide_source").val(editor.getValue());
+	//$("#hide_source").val(editor.getValue());
 	//document.getElementById("frmSolution").submit();
 	$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
   	$("#Submit").prop('disabled', true);
@@ -303,7 +318,8 @@ function translate(){
   var python=blockly.find('pre[id=content_python]');
   tb.click();
   blockly.find('td[id=tab_blocks]').click();
-  editor.setValue(python.text());
+  if(typeof(editor) != "undefined") editor.setValue(python.text());
+  else $("#source").val(python.text());
   $("#language").val(6);
  
 }
@@ -315,9 +331,7 @@ function loadFromBlockly(){
 }
 </script>
 <script language="Javascript" type="text/javascript" src="include/base64.js"></script>
-<?php
-if($OJ_ACE_EDITOR){
-?>
+<?php if($OJ_ACE_EDITOR){ ?>
 <script src="ace/ace.js"></script>
 <script src="ace/ext-language_tools.js"></script>
 <script>

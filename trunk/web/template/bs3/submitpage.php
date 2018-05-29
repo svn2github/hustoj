@@ -17,8 +17,13 @@
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+  <style>
+#source {
+    width: 80%;
+    height: 600px;
+}
+  </style>
   </head>
-
   <body>
 
     <div class="container">
@@ -26,35 +31,8 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
  <center>
-<?php
-if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-{
-$OJ_EDITE_AREA=false;
-}
-if($OJ_EDITE_AREA){
-?>
-<script language="Javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
-<script language="Javascript" type="text/javascript">
-editAreaLoader.init({
-id: "source"
-,start_highlight: true
-,allow_resize: "both"
-,allow_toggle: true
-,word_wrap: true
-,language: "en"
-,syntax: "cpp"
-,font_size: "12"
-,syntax_selection_allow: "basic,c,cpp,java,pas,perl,php,python,ruby"
-,toolbar: "search, go_to_line, fullscreen, |, undo, redo, |, select_font,syntax_selection,|, change_smooth_selection, highlight, reset_highlight, word_wrap, |, help"
-});
-</script>
-<?php }?>
 <script src="include/checksource.js"></script>
-<form id=frmSolution action="submit.php" method="post"
-<?php if($OJ_LANG=="cn"){?>
-onsubmit="return checksource(document.getElementById('source').value);"
-<?php }?>
->
+<form id=frmSolution action="submit.php" method="post">
 <?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
@@ -92,7 +70,12 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 
 <br>
 </span>
-<textarea style="width:80%" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+<?php if($OJ_ACE_EDITOR){ ?>
+	<pre style="width:80%;height:600" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre><br>
+	<input type=hidden id="hide_source" name="source" value=""/>
+<?php }else{ ?>
+	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+<?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
@@ -212,11 +195,12 @@ return ret+"";
 var count=0;
 	 
 function encoded_submit(){
-if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 
       var mark="<?php echo isset($id)?'problem_id':'cid';?>";
         var problem_id=document.getElementById(mark);
 
+	if(typeof(editor) != "undefined")
+		$("#hide_source").val(editor.getValue());
         if(mark=='problem_id')
                 problem_id.value='<?php if(isset($id)) echo $id?>';
         else
@@ -224,8 +208,13 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 
         document.getElementById("frmSolution").target="_self";
         document.getElementById("encoded_submit_mark").name="encoded_submit";
-        var source=document.getElementById("source");
-        source.value=encode64(utf16to8(source.value));
+        var source=$("#source").val();
+	if(typeof(editor) != "undefined") {
+		source=editor.getValue();
+        	$("#hide_source").val(encode64(utf16to8(source)));
+	}else{
+        	$("#source").val(encode64(utf16to8(source)));
+	}
 //      source.value=source.value.split("").reverse().join("");
 //      alert(source.value);
         document.getElementById("frmSolution").submit();
@@ -234,7 +223,9 @@ if(typeof(eAL) != "undefined"){   eAL.toggle("source");eAL.toggle("source");}
 function do_submit(){
 	if(using_blockly) 
 		 translate();
-	if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
+	if(typeof(editor) != "undefined"){ 
+		$("#hide_source").val(editor.getValue());
+	}
 	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 	var problem_id=document.getElementById(mark);
 	if(mark=='problem_id')
@@ -242,7 +233,6 @@ function do_submit(){
 	else
 	problem_id.value='<?php if (isset($cid))echo $cid?>';
 	document.getElementById("frmSolution").target="_self";
-	<?php if($OJ_LANG=="cn") echo "if(checksource(document.getElementById('source').value))";?>
 	document.getElementById("frmSolution").submit();
 }
 var handler_interval;
@@ -250,14 +240,19 @@ function do_test_run(){
 	if( handler_interval) window.clearInterval( handler_interval);
 	var loader="<img width=18 src=image/loader.gif>";
 	var tb=window.document.getElementById('result');
-	if(typeof(eAL) != "undefined"){ eAL.toggle("source");eAL.toggle("source");}
-	if($("#source").val().length<10) return alert("too short!");
+        var source=$("#source").val();
+	if(typeof(editor) != "undefined") {
+		source=editor.getValue();
+        	$("#hide_source").val(source);
+	}
+	if(source.length<10) return alert("too short!");
 	if(tb!=null)tb.innerHTML=loader;
 
 	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
 	var problem_id=document.getElementById(mark);
 	problem_id.value=-problem_id.value;
 	document.getElementById("frmSolution").target="testRun";
+	//$("#hide_source").val(editor.getValue());
 	//document.getElementById("frmSolution").submit();
 	$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
   	$("#Submit").prop('disabled', true);
@@ -283,14 +278,20 @@ function resume(){
 		window.setTimeout("resume();",1000);
 	}
 }
+function switchLang(lang){
+   var langnames=new Array("c_cpp","c_cpp","pascal","java","ruby","sh","python","php","perl","csharp","objectivec","vbscript","scheme","c_cpp","c_cpp","lua","javascript","golang");
+   editor.getSession().setMode("ace/mode/"+langnames[lang]);
+
+}
 function reloadtemplate(lang){
    document.cookie="lastlang="+lang.value;
    //alert(document.cookie);
    var url=window.location.href;
    var i=url.indexOf("sid=");
    if(i!=-1) url=url.substring(0,i-1);
-   if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
-        document.location.href=url;
+ //  if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
+ //       document.location.href=url;
+   switchLang(lang);
 }
 function openBlockly(){
    $("#frame_source").hide();
@@ -307,16 +308,13 @@ function openBlockly(){
   
 }
 function translate(){
-  var source=$("#source");
-  var editor=$(window.frames['frame_source'].document).find('textarea[id=textarea]');
   var blockly=$(window.frames['frmBlockly'].document);
   var tb=blockly.find('td[id=tab_python]');
   var python=blockly.find('pre[id=content_python]');
   tb.click();
   blockly.find('td[id=tab_blocks]').click();
-  eAL.toggle("source");
-  source.val(python.text());
-  eAL.toggle("source");
+  if(typeof(editor) != "undefined") editor.setValue(python.text());
+  else $("#source").val(python.text());
   $("#language").val(6);
  
 }
@@ -328,6 +326,21 @@ function loadFromBlockly(){
 }
 </script>
 <script language="Javascript" type="text/javascript" src="include/base64.js"></script>
+<?php if($OJ_ACE_EDITOR){ ?>
+<script src="ace/ace.js"></script>
+<script src="ace/ext-language_tools.js"></script>
+<script>
+    ace.require("ace/ext/language_tools");
+    var editor = ace.edit("source");
+    editor.setTheme("ace/theme/twilight");
+    switchLang(<?php echo $lastlang ?>);
+    editor.setOptions({
+	    enableBasicAutocompletion: true,
+	    enableSnippets: true,
+	    enableLiveAutocompletion: true
+    });
+</script>
+<?php }?>
 
   </body>
 </html>

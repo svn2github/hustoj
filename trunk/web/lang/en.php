@@ -134,9 +134,10 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_Login="Please Login";
   $MSG_JUDGER="Judger";
   
-  $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM="You can't browse early code during examing 。";
-  $MSG_BBS_NOT_ALLOWED_FOR_EXAM="You can't use bbs during examing 。";
-  $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="You can't use mail during examing 。";
+  $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM="You can't browse early code during examing .";
+  $MSG_BBS_NOT_ALLOWED_FOR_EXAM="You can't use bbs during examing.";
+  $MSG_MODIFY_NOT_ALLOWED_FOR_EXAM="You can't change password during examing or contest on site.";
+  $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="You can't use mail during examing.";
   $MSG_LOAD_TEMPLATE_CONFIRM="Do you want to reload template?\\n You may lost all code that you've typed here!";
   $MSG_BLOCKLY_OPEN="Blockly"; 
   $MSG_BLOCKLY_TEST="Blockly Test Run"; 

@@ -7,8 +7,14 @@
 	$view_title= "Welcome To Online Judge";
 	require_once("./include/check_post_key.php");
 	require_once("./include/my_func.inc.php");
-
-
+if(
+		(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
+   ){
+		$view_errors= $MSG_MODIFY_NOT_ALLOWED_FOR_EXAM;
+		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
+}
 $err_str="";
 $err_cnt=0;
 $len;

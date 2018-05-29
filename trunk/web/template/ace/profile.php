@@ -27,13 +27,14 @@ header("content-type:application/javascript");
 	}
 	$profile='';
 		if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-				$sid=$_SESSION[$OJ_NAME.'_'.'user_id'];
-				$profile.= "<li><a href=".$path_fix."modifypage.php>$MSG_USERINFO</a></li>&nbsp;<li><a href='".$path_fix."userinfo.php?user=$sid'><span id=red>$sid</span></a></li>";
+				$sid=htmlentities($_SESSION[$OJ_NAME.'_'.'user_id'],ENT_QUOTES ,"UTF-8");
+				$profile.= "<li><a href='".$path_fix."userinfo.php?user=$sid'>$sid</a></li>";
 				if(
 					(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
 					(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)||
 					(isset($OJ_MAIL)&&!$OJ_MAIL)
 			  	){}else{
+				$profile.= "<li><a href=".$path_fix."modifypage.php>$MSG_USERINFO</a></li>";
 						$mail=checkmail();
 						if ($mail)
 							$profile.= "&nbsp;<li><a  class='glyphicon glyphicon-envelope' href=".$path_fix."mail.php>$mail</a></li>";

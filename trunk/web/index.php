@@ -57,7 +57,10 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * f
   	$sql="select avg(sp) sp from (select  count(1) sp,judgetime from solution where result>3 and judgetime>convert(now()-100,DATETIME)  group by judgetime order by sp) tt;";
   	$result=mysql_query_cache($sql);
   	$speed=$result[0][0]; 
+  }else{
+        $speed=$chart_data_all[0][1];
   }
+
 	
 
 

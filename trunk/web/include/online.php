@@ -71,6 +71,7 @@ class online{
 	 */
 	function __construct()
 	{
+		global $OJ_NAME;
 		
 		$this->ip = ($_SERVER['REMOTE_ADDR']);
       
@@ -85,7 +86,12 @@ class online{
 
         }
 
-		$this->ua = (htmlentities($_SESSION[$OJ_NAME.'_'.'user_id']."@".$_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8"));
+		if(isset($_SESSION[$OJ_NAME.'_'.'user_id']))
+			$this->ua = htmlentities($_SESSION[$OJ_NAME.'_'.'user_id'],ENT_QUOTES,"UTF-8");
+		else
+			$this->ua ="guest";
+		$this->ua = htmlentities($_SESSION[$OJ_NAME.'_'.'user_id'],ENT_QUOTES,"UTF-8");
+		$this->ua .= "@".htmlentities($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES,"UTF-8");
 		$this->uri = ($_SERVER['PHP_SELF']);
 		if(isset($_SERVER['HTTP_REFERER'])){
 			$this->refer = (htmlentities($_SERVER['HTTP_REFERER'],ENT_QUOTES,"UTF-8"));

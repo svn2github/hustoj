@@ -38,6 +38,15 @@ https://www.youtube.com/watch?v=hRap7ettUWc
     /home/judge/src/web/include/db_info.inc.php
     /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
     /etc/nginx/sites-enabled/default
+如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
+```
+	worker_processes 8;
+	events {
+		worker_connections 2048;
+		multi_accept on;
+	}
+```
+其中数字8可以取CPU核心数的整数倍。
 
 REDHAT / CENTOS 用户请浏览 
 

@@ -18,7 +18,7 @@ $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/ms
 -->
 <script>
 $(document).ready(function(){
-  var msg="<marquee style='margin-top:10px' id=broadcast scrollamount=1 scrolldelay=50 onMouseOver='this.stop()'"+
+  var msg="<marquee style='margin-top:10px' id=broadcast direction='up' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
       " onMouseOut='this.start()' class=toprow>"+<?php echo json_encode($view_marquee_msg); ?>+"</marquee>";
   $(".jumbotron").prepend(msg);
   $("form").append("<div id='csrf' />");

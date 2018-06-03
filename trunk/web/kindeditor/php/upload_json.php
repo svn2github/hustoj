@@ -30,7 +30,7 @@ $ext_arr = array(
 	'image' => array('gif', 'jpg', 'jpeg', 'png', 'bmp'),
 	'flash' => array('swf', 'flv'),
 	'media' => array('swf', 'flv', 'mp3', 'wav', 'wma', 'wmv', 'mid', 'avi', 'mpg', 'asf', 'rm', 'rmvb'),
-	'file' => array('pdf','doc', 'docx', 'xls', 'xlsx', 'ppt', 'htm', 'html', 'txt', 'zip', 'rar', 'gz', 'bz2'),
+	'file' => array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'htm', 'html', 'txt', 'zip', 'rar', 'gz', 'bz2'),
 );
 //最大文件大小
 $max_size = 1000000;
@@ -86,7 +86,7 @@ if (empty($_FILES) === false) {
 	}
 	//检查目录写权限
 	if (@is_writable($save_path) === false) {
-		alert("上传目录没有写权限。在服务器上执行下述命令解决该问题:\n chown www-data -R /home/judge/src/web/upload \n");
+		alert("上传目录没有写权限。");
 	}
 	//检查是否已上传
 	if (@is_uploaded_file($tmp_name) === false) {

@@ -40,13 +40,19 @@ https://www.youtube.com/watch?v=hRap7ettUWc
     /etc/nginx/sites-enabled/default
 如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
 ```
-	worker_processes 8;
+	worker_processes 8;    #其中数字8可以取CPU核心数的整数倍。
 	events {
 		worker_connections 2048;
 		multi_accept on;
 	}
 ```
-其中数字8可以取CPU核心数的整数倍。
+如果遇到比赛排名无法下载，请修改/etc/nginx/sites-enabled/default,在fastcgi_pass一行的后面增加
+```
+ 	fastcgi_buffer_size 128k;
+        fastcgi_buffers 32 32k;
+```
+保存后，重启nginx
+
 
 REDHAT / CENTOS 用户请浏览 
 

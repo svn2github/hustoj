@@ -99,6 +99,10 @@ if (isset($_GET['problem_id'])&&$_GET['problem_id']!=""){
 }
 // check the user_id arg
 $user_id="";
+
+if(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+	$_GET['user_id']=$_SESSION[$OJ_NAME.'_'.'user_id'];
+}
 if (isset($_GET['user_id'])){
         $user_id=trim($_GET['user_id']);
         if (is_valid_user_name($user_id) && $user_id!=""){

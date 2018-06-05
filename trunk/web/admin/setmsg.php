@@ -6,7 +6,12 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	$fp=fopen($OJ_SAE?"saestor://web/msg.txt":"msg.txt","w");
-	fputs($fp, stripslashes($_POST['msg']));
+	$msg=$_POST['msg'];
+	if (get_magic_quotes_gpc ()) {
+		$title = stripslashes ( $title);
+	}
+	$msg=RemoveXSS($msg);
+	fputs($fp,$msg);
 	fclose($fp);
 	echo "Update At ".date('Y-m-d h:i:s');
 }

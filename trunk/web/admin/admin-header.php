@@ -1,5 +1,6 @@
 <?php 
 require_once("../include/db_info.inc.php");
+require_once ("../include/my_func.inc.php");
 ;?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href='../include/hoj.css' type='text/css'>

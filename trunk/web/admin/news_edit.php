@@ -8,6 +8,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <div class="container">
 <?php require_once("../include/db_info.inc.php");
+require_once("../include/my_func.inc.php");
 if (isset($_POST['news_id']))
 {
 	require_once("../include/check_post_key.php");
@@ -19,7 +20,8 @@ if (get_magic_quotes_gpc ()) {
 	$title = stripslashes ( $title);
 	$content = stripslashes ( $content );
 }
-
+$title=RemoveXSS($title);
+$content=RemoveXSS($content);
 
 	$sql="UPDATE `news` set `title`=?,`time`=now(),`content`=?,user_id=? WHERE `news_id`=?";
 	//echo $sql;

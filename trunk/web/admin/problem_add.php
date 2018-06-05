@@ -5,9 +5,10 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'
 	exit(1);
 }
 ?>
-<?php require_once ("../include/db_info.inc.php");
-?>
-<?php require_once ("../include/problem.php");
+<?php 
+require_once ("../include/db_info.inc.php");
+require_once ("../include/my_func.inc.php");
+require_once ("../include/problem.php");
 ?>
 <?php // contest_id
 
@@ -41,6 +42,11 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
+$title=RemoveXSS($title);
+$description=RemoveXSS($description);
+$input=RemoveXSS($input);
+$output=RemoveXSS($output);
+$hint=RemoveXSS($hint);
 //echo "->".$OJ_DATA."<-"; 
 $pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 $basedir = "$OJ_DATA/$pid";

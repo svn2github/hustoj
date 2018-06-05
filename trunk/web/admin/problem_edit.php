@@ -7,6 +7,7 @@
 <?php require_once("../include/db_info.inc.php");?>
 <?php require_once("admin-header.php");
 
+require_once("../include/my_func.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
      )){
@@ -81,6 +82,11 @@ if (get_magic_quotes_gpc ()) {
 	$spj = stripslashes ( $spj);
 	$source = stripslashes ( $source );
 }
+$title=RemoveXSS($title);
+$description=RemoveXSS($description);
+$input=RemoveXSS($input);
+$output=RemoveXSS($output);
+$hint=RemoveXSS($hint);
 $basedir=$OJ_DATA."/$id";
 echo "Sample data file Updated!<br>";
 

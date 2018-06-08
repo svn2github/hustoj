@@ -121,6 +121,8 @@ HUSTOJ 是采用GPL的自由软件。
 
 论文请引用参考文献[基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088&uid=WEEvREcwSlJHSldRa1FhdXNXYXJwcFhRL1Z1Q2lKUDFMNGd0TnJVVlh4bz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!&v=MjgwNTExVDNxVHJXTTFGckNVUkwyZlllWm1GaURsV3IvQUx6N0JiN0c0SDlPdnJJOU5iSVI4ZVgxTHV4WVM3RGg=)
 
+如果打算进行二次开发，[Wiki](https://github.com/zhblue/hustoj/tree/master/wiki)和这份[文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf)可能有帮助。
+
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
 如果这个项目对你有用，请挥动鼠标，右上角给个Star!

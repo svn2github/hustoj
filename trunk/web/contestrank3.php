@@ -211,30 +211,30 @@ if (isset($_GET['type'])&&$_GET['type']=='json') {
     if(isset($_GET['list'])&&$_GET['list']=='submit'){
 
         $subList = getSubmitByCid($OJ_MEMCACHE,$cid);
-        $problemMap = getProblemMapByCid($OJ_MEMCACHE,$cid);
+		$problemMap = getProblemMapByCid($OJ_MEMCACHE,$cid);
 
-        $arr = array();
-        for($i=0;$i<count($subList);$i++){
-            $arr[$i] = submit2Array($subList[$i],$problemMap);
-        }
-        echo json_encode($arr);
+		$arr = array();
+		for($i=0;$i<count($subList);$i++){
+		    $arr[$i] = submit2Array($subList[$i],$problemMap);
+		}
+		echo json_encode($arr);
 
-    }else if(isset($_GET['list'])&&$_GET['list']=='team'){
-        $teamList = getTeamByCid($OJ_MEMCACHE,$cid);
-        $arr = array();
-        for($i=0;$i<count($teamList);$i++){
-            $arr[$i] = team2Array($teamList[$i]);
-        }
-        echo json_encode($arr);
-    }
-    exit(0);
-}
+	    }else if(isset($_GET['list'])&&$_GET['list']=='team'){
+		$teamList = getTeamByCid($OJ_MEMCACHE,$cid);
+		$arr = array();
+		for($i=0;$i<count($teamList);$i++){
+		    $arr[$i] = team2Array($teamList[$i]);
+		}
+		echo json_encode($arr);
+	    }
+	    exit(0);
+	}
 
-//普通请求时
-$lock = $end_time - ($end_time - $start_time) * $OJ_RANK_LOCK_PERCENT;
-$start_time_str = date("Y-m-d H:i:s",$start_time);
-$lock_time_str = date("Y-m-d H:i:s",$lock);
-$problem_num = count(getProblemMapByCid($OJ_MEMCACHE,$cid));
+	//普通请求时
+	$lock = $end_time - ($end_time - $start_time) * $OJ_RANK_LOCK_PERCENT;
+	$start_time_str = date("Y-m-d H:i:s",$start_time);
+	$lock_time_str = date("Y-m-d H:i:s",$lock);
+$problem_num = pdo_query("select count(distinct problem_id ) from contest_problem where contest_id=?",$cid)[0][0];
 $team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
 $gold_num=intval($team_num*0.05);
 $silver_num=intval($team_num*0.15);

@@ -33,10 +33,11 @@
 	StringToDate("<?php echo  $start_time_str?>"), StringToDate("<?php echo $lock_time_str?>"),<?php echo $cid?>);
 
     board.showInitBoard();
-    $('html').keydown(function(e) {
-        if (e.keyCode == 13) {
+    $('html').click(function(e) {
             board.keydown();
-        }
+    });
+    $('html').keydown(function(e) {
+            board.keydown();
     });
 </script>
 </body>

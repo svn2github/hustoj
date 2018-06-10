@@ -132,11 +132,12 @@ if (!isset($_GET['cid'])) {
 $cid = intval($_GET['cid']);
 
 // 非管理员不能访问
-if (!isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
+/*if (!isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
     $view_errors = "Access Deny";
     require("template/" . $OJ_TEMPLATE . "/error.php");
     exit();
 }
+*/
 if(isset($_GET['lock_percent'])){
    $OJ_RANK_LOCK_PERCENT=floatval($_GET['lock_percent']);
    $_SESSION[$OJ_NAME."_lock_percent"]=$OJ_RANK_LOCK_PERCENT;
@@ -234,7 +235,10 @@ $lock = $end_time - ($end_time - $start_time) * $OJ_RANK_LOCK_PERCENT;
 $start_time_str = date("Y-m-d H:i:s",$start_time);
 $lock_time_str = date("Y-m-d H:i:s",$lock);
 $problem_num = count(getProblemMapByCid($OJ_MEMCACHE,$cid));
-
+$team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
+$gold_num=intval($team_num*0.05);
+$silver_num=intval($team_num*0.15);
+$copper_num=intval($team_num*0.20);
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/contestrank3.php");

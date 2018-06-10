@@ -29,7 +29,8 @@
 <script type="text/javascript" src="template/<?php echo $OJ_TEMPLATE?>/scrollboard.js"></script>
 <script type="text/javascript">
 
-    var board = new Board(<?php echo $problem_num?>, new Array(3, 6, 9), StringToDate("<?php echo  $start_time_str?>"), StringToDate("<?php echo $lock_time_str?>"),<?php echo $cid?>);
+    var board = new Board(<?php echo $problem_num?>, new Array(<?php echo $gold_num?>, <?php echo $silver_num?>, <?php echo $copper_num?>), 
+	StringToDate("<?php echo  $start_time_str?>"), StringToDate("<?php echo $lock_time_str?>"),<?php echo $cid?>);
 
     board.showInitBoard();
     $('html').keydown(function(e) {

@@ -238,7 +238,7 @@ $problem_num = count(getProblemMapByCid($OJ_MEMCACHE,$cid));
 $team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
 $gold_num=intval($team_num*0.05);
 $silver_num=intval($team_num*0.15);
-$copper_num=intval($team_num*0.20);
+$bronze_num=intval($team_num*0.20);
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/contestrank3.php");

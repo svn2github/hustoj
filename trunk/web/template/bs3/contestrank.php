@@ -32,10 +32,12 @@ $rank=1;
 <a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
 <?php
 if($OJ_MEMCACHE){
-  ?>
-<a href="contestrank2.php?cid=<?php echo $cid?>" >Replay</a>
-
-<?php
+    if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
+        echo ' | <a href="contestrank3.php?cid='.$cid.'">滚榜</a>';
+    }
+    if($OJ_MEMCACHE){
+        echo '<a href="contestrank2.php?cid='.$cid.'">Replay</a>';
+    }
 }
  ?>
 </center>

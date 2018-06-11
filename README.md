@@ -10,14 +10,14 @@ hustoj -- 请一定认真看完本页再动手安装，勿谓言之不预！
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
 
-或者安装ubuntu16.04（不是特别稳定），然后用下面脚本快速安装OJ：  
+或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
-发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验)
+发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh

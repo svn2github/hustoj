@@ -1,4 +1,4 @@
-hustoj -- 请一定认真看完本页再动手安装，勿谓言之不预！
+hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 ======
 
 根据你选择的发行版不同，从下面三个脚本里选一个来用。
@@ -46,7 +46,7 @@ https://www.youtube.com/watch?v=hRap7ettUWc
 		multi_accept on;
 	}
 ```
-如果遇到比赛排名无法下载，请修改/etc/nginx/sites-enabled/default,在fastcgi_pass一行的后面增加
+如果遇到比赛人数多，比赛排名xls文件无法下载，请修改/etc/nginx/sites-enabled/default,在fastcgi_pass一行的后面增加
 ```
  	fastcgi_buffer_size 128k;
         fastcgi_buffers 32 32k;

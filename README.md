@@ -129,5 +129,6 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Star us, please!
 
+需要配套题库，请访问[freeeproblemset项目](https://github.com/zhblue/hustoj)
 
 

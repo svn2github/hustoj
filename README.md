@@ -100,7 +100,7 @@ HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 
 Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linux_basic.php)
 
-建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/)
+建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/) 和 [freeeproblemset项目](https://github.com/zhblue/freeproblemset)
 
 
 [前台演示](http://hustoj.com/oj/)
@@ -129,6 +129,6 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Star us, please!
 
-需要配套题库，请访问[freeeproblemset项目](https://github.com/zhblue/hustoj)
+
 
 

@@ -32,7 +32,7 @@
       <div class="jumbotron">
  <center>
 <script src="include/checksource.js"></script>
-<form id=frmSolution action="submit.php" method="post">
+<form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>

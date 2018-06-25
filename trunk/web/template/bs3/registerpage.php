@@ -21,47 +21,66 @@
 
   <body>
 
-    <div class="container">
+  <div class="container">
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-<form action="register.php" method="post">
-<br><br>
-<center><table>
-<tr><td colspan=2 height=40 width=500>&nbsp;&nbsp;&nbsp;<?php echo $MSG_REG_INFO?></td></tr>
-<tr><td width=25%><?php echo $MSG_USER_ID?>:</td>
-<td width=75%><input name="user_id" size=20 type=text placeholder="*"></td>
-</tr>
-<tr><td><?php echo $MSG_NICK?>:</td>
-<td><input name="nick" size=50 type=text></td>
-</tr>
-<tr><td><?php echo $MSG_PASSWORD?>:</td>
-<td><input name="password" size=20 type=password placeholder="*"></td>
-</tr>
-<tr><td><?php echo $MSG_REPEAT_PASSWORD?>:</td>
-<td><input name="rptpassword" size=20 type=password placeholder="*"></td>
-</tr>
-<tr><td><?php echo $MSG_SCHOOL?>:</td>
-<td><input name="school" size=30 type=text></td>
-</tr>
-<tr><td><?php echo $MSG_EMAIL?>:</td>
-<td><input name="email" size=30 type=text></td>
-</tr>
-<?php if($OJ_VCODE){?>
-<tr><td><?php echo $MSG_VCODE?>:</td>
-<td><input name="vcode" size=4 type=text><img alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">*</td>
-</tr>
-<?php }?>
-<tr><td></td>
-<td><input value="Submit" name="submit" type="submit"><input value="Reset" name="reset" type="reset"></td>
-</tr>
-</table></center>
-<br><br>
-</form>
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
 
-      </div>
+      <form action="register.php" method="post" role="form" class="form-horizontal">
+        
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_REG_INFO?></label>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label>
+          <div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text"></div>
+        </div>
+          <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_NICK?></label>
+          <div class="col-sm-4"><input name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label>
+          <div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_REPEAT_PASSWORD?></label>
+          <div class="col-sm-4"><input name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_SCHOOL?></label>
+          <div class="col-sm-4"><input name="school" class="form-control" placeholder="<?php echo $MSG_SCHOOL?>" type="text"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_EMAIL?></label>
+          <div class="col-sm-4"><input name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"></div>
+        </div>
 
-    </div> <!-- /container -->
+        <?php if($OJ_VCODE){?>
+        <div class="form-group">
+          <label class="col-sm-4 control-label"><?php echo $MSG_VCODE?></label>
+          <div class="col-sm-3">
+            <input name="vcode" class="form-control" placeholder="<?php echo $MSG_VCODE?>*" type="text">
+          </div>
+          <div class="col-sm-4">
+            <img alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="30px">*
+          </div>
+        </div>
+        <?php }?>
+
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-2">
+            <button name="submit" type="submit" class="btn btn-default btn-block"><?php echo $MSG_REGISTER; ?></button>
+          </div>
+          <div class="col-sm-2">
+            <button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET; ?></button>
+          </div>
+        </div>
+        
+      </form>
+      
+    </div>
+  </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

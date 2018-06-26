@@ -5,7 +5,8 @@
         }
 
 echo "<title>User List</title>";
-echo "<center><h2>User List</h2></center>";
+echo "<hr>";
+echo "<center><h2>$MSG_USER"."$MSG_LIST</h2></center>";
 require_once("../include/set_get_key.php");
 $sql="";
 if(isset($_GET['keyword'])){

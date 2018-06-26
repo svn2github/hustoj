@@ -3,6 +3,10 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
+
+echo "<hr>";
+echo "<center><h2>$MSG_SETMESSAGE</h2></center>";
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	$fp=fopen($OJ_SAE?"saestor://web/msg.txt":"msg.txt","w");

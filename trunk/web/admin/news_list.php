@@ -5,6 +5,9 @@ if (!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 	exit(1);
 }
 echo "<title>News List</title>";
+echo "<hr>";
+echo "<center><h2>$MSG_NEWS"."$MSG_LIST</h2></center>";
+
 echo "<div class='container'>";
 $sql="select `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` order by `news_id` desc";
 $result=pdo_query($sql) ;

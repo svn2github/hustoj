@@ -24,7 +24,7 @@ $result=pdo_query($sql,$contest_id,$contest_id);
 ?>
 <?php
 echo "<center><table class='table table-striped' width=90% border=1>";
-echo "<tr><td>IP<td>user<td>submission count<td>";
+echo "<tr><td>IP<td>user<td>same ip user count<td>";
 echo "</tr>";
 foreach($result as $row){
         echo "<tr>";

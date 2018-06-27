@@ -2,6 +2,11 @@
         if(isset($OJ_LANG)){
                 require_once("../lang/$OJ_LANG.php");
         }
+
+echo "<title>Problem List</title>";
+echo "<hr>";
+echo "<center><h2>$MSG_PROBLEM"."$MSG_LIST</h2></center>";
+
 require_once("../include/set_get_key.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
                 ||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])

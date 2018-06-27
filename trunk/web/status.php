@@ -99,10 +99,6 @@ if (isset($_GET['problem_id'])&&$_GET['problem_id']!=""){
 }
 // check the user_id arg
 $user_id="";
-
-if(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-	$_GET['user_id']=$_SESSION[$OJ_NAME.'_'.'user_id'];
-}
 if (isset($_GET['user_id'])){
         $user_id=trim($_GET['user_id']);
         if (is_valid_user_name($user_id) && $user_id!=""){
@@ -201,9 +197,16 @@ for ($i=0;$i<$rows_cnt;$i++){
         $view_status[$i][0]=$row['solution_id'];
        
         if ($row['contest_id']>0) {
-                $view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user_id=".$row['user_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
+		
+                if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+                	$view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user_id=".$row['user_id']."#".$row['user_id']."' title='".$row['ip']."'>".$row['user_id']."</a>";
+		else
+                	$view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user_id=".$row['user_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
         }else{
-                $view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
+                if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+			$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['ip']."'>".$row['user_id']."</a>";
+		else
+                	$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
         }
 
        if ($row['contest_id']>0) {

@@ -7,6 +7,7 @@
 	<script>
 		KindEditor.ready(function(K) {
 			var editor1 = K.create('textarea[class="kindeditor"]', {
+				width : '100%',				
 				cssPath : '../kindeditor/plugins/code/prettify.css',
 				uploadJson : '../kindeditor/php/upload_json.php',
 				fileManagerJson : '../kindeditor/php/file_manager_json.php',

@@ -1,10 +1,19 @@
 <?php require("admin-header.php");
+
+        if(isset($OJ_LANG)){
+                require_once("../lang/$OJ_LANG.php");
+        }
+
+echo "<title>Privilege List</title>";
+echo "<hr>";
+echo "<center><h2>$MSG_PRIVILEGE"."$MSG_LIST</h2></center>";
 require_once("../include/set_get_key.php");
+
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-echo "<title>Privilege List</title>"; 
+
 echo "<div class='container'>";
 $sql="select * FROM privilege where rightstr in ('administrator','source_browser','contest_creator','http_judge','problem_editor','password_setter','printer','balloon') ";
 $result=pdo_query($sql) ;

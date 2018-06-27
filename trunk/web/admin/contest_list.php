@@ -4,8 +4,10 @@
                 require_once("../lang/$OJ_LANG.php");
         }
 
+echo "<title>Contest List</title>";
+echo "<hr>";
+echo "<center><h2>$MSG_CONTEST"."$MSG_LIST</h2></center>";
 
-echo "<title>Problem List</title>";
 echo "<div class=\"container\">";
 require_once("../include/set_get_key.php");
 $sql="SELECT max(`contest_id`) as upid, min(`contest_id`) as btid  FROM `contest`";

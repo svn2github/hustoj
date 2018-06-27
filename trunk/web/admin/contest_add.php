@@ -3,6 +3,12 @@
 <title>Add a contest</title>
 
 <?php
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||
+			isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])
+			)){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
 	require_once("../include/db_info.inc.php");
 	require_once("../lang/$OJ_LANG.php");
 	require_once("../include/const.inc.php");

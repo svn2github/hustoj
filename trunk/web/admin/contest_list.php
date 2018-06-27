@@ -1,5 +1,10 @@
 <?php require("admin-header.php");
-
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||
+			isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])
+			)){
+	echo "<a href='../loginpage.php'>Please Login First!</a>";
+	exit(1);
+}
         if(isset($OJ_LANG)){
                 require_once("../lang/$OJ_LANG.php");
         }
@@ -62,7 +67,7 @@ for ($i=$start;$i<=$end;$i++){
 </div>
 <?php
 echo "<center><table class='table table-striped' width=90% border=1>";
-echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs";
+echo "<tr><td>ContestID<td>Title<td>StartTime<td>EndTime<td>Private<td>Status<td>Edit<td>Copy<td>Export<td>Logs<td>Suspect";
 echo "</tr>";
 foreach($result as $row){
         echo "<tr>";
@@ -86,6 +91,7 @@ foreach($result as $row){
                 echo "<td colspan=5 align=right><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a><td>";
 
         }
+        echo "<td><a href='suspect_list.php?cid=".$row['contest_id']."'>Suspect</a>";
 
         echo "</tr>";
 }

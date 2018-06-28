@@ -10,6 +10,7 @@ echo "<center><h2>$MSG_SET_LOGIN_IP</h2></center>";
 require_once("../include/set_get_key.php");
 $sql="";
 if(isset($_POST['user_id'])){
+	require_once("../include/check_post_key.php");
 	$user_id=$_POST['user_id'];
 	$ip=$_POST['ip'];
 	 $sql="insert into loginlog (user_id,password,ip,time) value(?,?,?,now())";

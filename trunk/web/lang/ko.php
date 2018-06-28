@@ -202,4 +202,6 @@ $MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 더 많은 채점데이터 추
 $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>for more details"; 
 
 $MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";	
+$MSG_WARNING_LOGIN_FROM_DIFF_IP="Login from a diffrent ip ";
+$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" during exam is not allowed ";
 ?>

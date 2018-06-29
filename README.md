@@ -111,8 +111,12 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 硬件需求：
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 
-微信公众号:hustoj
+常见问题自动应答微信公众号:hustoj
 <img src="http://hustoj.com/wx.jpg" height="180">
+
+关注后回复： 新装系统、升级、目录等关键词，系统会自动回复相关帮助。
+
+
 HUSTOJ is an GPL FreeSoftware?.
 
 HUSTOJ 是采用GPL的自由软件。

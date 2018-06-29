@@ -9,7 +9,7 @@ require_once('./include/setlang.php');
 
 $now=strftime("%Y-%m-%d %H:%M",time());
 
-if (isset($_GET['cid']))
+if(isset($_GET['cid']))
   $ucid="&cid=".intval($_GET['cid']);
 else
   $ucid="";
@@ -23,11 +23,11 @@ if(isset($OJ_LANG)){
 $pr_flag=false;
 $co_flag=false;
 
-if (isset($_GET['id'])){
+if(isset($_GET['id'])){
   // practice
   $id=intval($_GET['id']);
   //require("oj-header.php");
-  if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $id!=1000&&!isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))
+  if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $id!=1000&&!isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))
     $sql="SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN(
             SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN(
               SELECT `contest_id` FROM `contest` WHERE `end_time`>'$now' or `private`='1'))";
@@ -36,12 +36,12 @@ if (isset($_GET['id'])){
 
   $pr_flag=true;
   $result=pdo_query($sql,$id);
-}else if (isset($_GET['cid']) && isset($_GET['pid'])){
+}else if(isset($_GET['cid']) && isset($_GET['pid'])){
   // contest
   $cid=intval($_GET['cid']);
   $pid=intval($_GET['pid']);
 
-  if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+  if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
     $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=? AND `start_time`<='$now'";
   else
     $sql="SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=?";
@@ -51,19 +51,19 @@ if (isset($_GET['id'])){
   $row=($result[0]);
   $contest_ok=true;
 
-  if ($row[1] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid]))
+  if($row[1] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid]))
     $contest_ok=false;
 
-  if ($row[2]=='Y')
+  if($row[2]=='Y')
     $contest_ok=false;
 
-  if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+  if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
     $contest_ok=true;
                                
   $ok_cnt=$rows_cnt==1;              
   $langmask=$row[0];
 
-  if ($ok_cnt!=1){
+  if($ok_cnt!=1){
     // not started
     $view_errors=  "No such Contest!";
     require("template/".$OJ_TEMPLATE."/error.php");
@@ -76,7 +76,7 @@ if (isset($_GET['id'])){
   }
 
   // public
-  if (!$contest_ok){
+  if(!$contest_ok){
     $view_errors= "Not Invited!";
     require("template/".$OJ_TEMPLATE."/error.php");
     exit(0);
@@ -85,12 +85,12 @@ if (isset($_GET['id'])){
   $co_flag=true;
 
 }else{
-  $view_errors=  "<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
+  $view_errors="<title>$MSG_NO_SUCH_PROBLEM</title><h2>$MSG_NO_SUCH_PROBLEM</h2>";
   require("template/".$OJ_TEMPLATE."/error.php");
   exit(0);
 }
      
-if (count($result)!=1){
+if(count($result)!=1){
   $view_errors="";
   if(isset($_GET['id'])){
     $id=intval($_GET['id']);

@@ -4,25 +4,23 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Content-Language" content="zh-cn">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>New Problem</title>
+  <title>Problem Add</title>
 </head>
+<hr>
+
+<?php 
+  require_once("../include/db_info.inc.php");
+  require_once("admin-header.php");
+  if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
+    echo "<a href='../loginpage.php'>Please Login First!</a>";
+    exit(1);
+  }
+  echo "<center><h2>$MSG_ADD"."$MSG_PROBLEM</h2></center>";
+  include_once("kindeditor.php") ;
+?>
+
 <body leftmargin="30" >
   <div class="container">
-    <?php 
-    require_once("../include/db_info.inc.php");
-    require_once("admin-header.php");
-    if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
-      echo "<a href='../loginpage.php'>Please Login First!</a>";
-      exit(1);
-    }
-
-    echo "<title>Problem Add</title>";
-    echo "<hr>";
-    echo "<center><h2>$MSG_ADD"."$MSG_PROBLEM</h2></center>";
-
-    include_once("kindeditor.php") ;
-    ?>
-
     <form method=POST action=problem_add.php>
       <input type=hidden name=problem_id value="New Problem">
         <p align=left>

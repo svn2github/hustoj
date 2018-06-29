@@ -26,7 +26,7 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
       <?php
-      if ($pr_flag){
+      if($pr_flag){
         echo "<title>$MSG_PROBLEM".$row['problem_id']."--". $row['title']."</title>";
         echo "<center><h3>$id: ".$row['title']."</h3>";
       }else{
@@ -39,11 +39,11 @@
       echo "<span class=green>$MSG_Time_Limit: </span>".$row['time_limit']." Sec&nbsp;&nbsp;";
       echo "<span class=green>$MSG_Memory_Limit: </span>".$row['memory_limit']." MB";
 
-      if ($row['spj']) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
+      if($row['spj']) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
       echo "<br><span class=green>$MSG_SUBMIT: </span>".$row['submit']."&nbsp;&nbsp;";
       echo "<span class=green>$MSG_SOVLED: </span>".$row['accepted']."<br>";
 
-      if ($pr_flag){
+      if($pr_flag){
         echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
       }else{
         echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>] ";
@@ -83,23 +83,23 @@
       echo "<h4>$MSG_Sample_Output</h4><pre class=content><span class=sampledata>".($soutput)."</span></pre><br>";
     }
 
-    if ($row['hint']){
-      echo "<h4>$MSG_HINT</h4><div class=content><p>".nl2br($row['hint'])."</p></div><br>";
+    if($row['hint']){
+      echo "<h4>$MSG_HINT</h4><div class=content>".$row['hint']."</div><br>";
     }
 
-    if ($pr_flag){
-      echo "<h4>$MSG_SOURCE</h4><div class=content><p>";
+    if($pr_flag){
+      echo "<h4>$MSG_SOURCE</h4><div class=content>";
       $cats=explode(" ",$row['source']);
       foreach($cats as $cat){
         echo "<a href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'utf-8')."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
       }
-      echo "</p></div><br>";
+      echo "</div><br>";
     }
 
     echo "<center>";
     echo "<!--EndMarkForVirtualJudge-->";
 
-    if ($pr_flag){
+    if($pr_flag){
       echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
     }else{
       echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";

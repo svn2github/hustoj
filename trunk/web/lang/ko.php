@@ -12,10 +12,10 @@ $MSG_LOGOUT="로그아웃";
 $MSG_LOGIN="로그인";
 $MSG_LOST_PASSWORD="비밀번호 분실";
 $MSG_REGISTER="회원가입";
-$MSG_ADMIN="관리자 메뉴";
+$MSG_ADMIN="관리자메뉴";
 $MSG_STANDING="순위";
 $MSG_STATISTICS="통계";
-$MSG_USERINFO="정보수정";
+$MSG_USERINFO="회원정보";
 $MSG_MAIL="E-mail";
 
 //status.php
@@ -89,8 +89,8 @@ $MSG_PASSWORD="비밀번호";
 $MSG_REPEAT_PASSWORD="비밀번호 확인";
 $MSG_SCHOOL="소속/학교";
 $MSG_EMAIL="E-mail";
-$MSG_REG_INFO="등록 정보";
-$MSG_VCODE="확인 코드";
+$MSG_REG_INFO="등록정보";
+$MSG_VCODE="확인코드";
 
 //problem.php
 $MSG_NO_SUCH_PROBLEM="문제가 없습니다!";

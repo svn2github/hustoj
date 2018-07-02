@@ -22,7 +22,7 @@
   <li><a class='btn btn-primary' href="news_list.php" target="main" title="<?php echo $MSG_HELP_NEWS_LIST?>"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a>
   <li><a class='btn btn-primary' href="news_add_page.php" target="main" title="<?php echo $MSG_HELP_ADD_NEWS?>"><b><?php echo $MSG_ADD.$MSG_NEWS?></b></a>
   <li><a class='btn btn-primary' href="user_list.php" target="main" title="<?php echo $MSG_HELP_USER_LIST?>"><b><?php echo $MSG_USER.$MSG_LIST?></b></a>
-  <li><a class='btn btn-primary' href="user_set_ip.php" target="main" title="<?php echo $MSG_HELP_SET_LOGIN_IP?>    "><b><?php echo $MSG_SET_LOGIN_IP?></b></a>
+  <li><a class='btn btn-primary' href="user_set_ip.php" target="main" title="<?php echo $MSG_SET_LOGIN_IP?>"><b><?php echo $MSG_SET_LOGIN_IP?></b></a>
   <?php }
   if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'] )){?>
   <li><a class='btn btn-primary' href="changepass.php" target="main" title="<?php echo $MSG_HELP_SETPASSWORD?>"><b><?php echo $MSG_SETPASSWORD?></b></a>

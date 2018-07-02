@@ -123,6 +123,7 @@ $MSG_IMPORT="업로드-";
 $MSG_EXPORT="다운로드-";
 $MSG_UPDATE_DATABASE="DATABASE UPDATE";
 $MSG_ONLINE="Online";
+$MSG_SET_LOGIN_IP="로그인IP 설정";
 
 
 //contest.php

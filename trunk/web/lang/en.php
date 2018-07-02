@@ -127,6 +127,7 @@ $MSG_TEST_RUN="Test Running Done";
   $MSG_Private="Private";
   $MSG_Running="Running";
   $MSG_Start="Start";
+  $MSG_End="End";
   $MSG_TotalTime="Total";
   $MSG_LeftTime="Left";
 

@@ -134,6 +134,7 @@ $MSG_Public="공개";
 $MSG_Private="비공개";
 $MSG_Running="대회중";
 $MSG_Start="시작시간";
+$MSG_End="종료시간";
 $MSG_TotalTime="대회시간";
 $MSG_LeftTime="남은시간";
 

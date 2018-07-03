@@ -17,15 +17,18 @@ $memory_limit = $_POST['memory_limit'];
 
 $description = $_POST['description'];
 $description = str_replace("<p>", "", $description); 
-$description = str_replace("</p>", "<br />", $description); 
+$description = str_replace("</p>", "<br />", $description);
+$description = str_replace(",", "&#44;", $description); 
 
 $input = $_POST['input'];
 $input = str_replace("<p>", "", $input); 
 $input = str_replace("</p>", "<br />", $input); 
+$input = str_replace(",", "&#44;", $input);
 
 $output = $_POST['output'];
 $output = str_replace("<p>", "", $output); 
-$output = str_replace("</p>", "<br />", $output); 
+$output = str_replace("</p>", "<br />", $output);
+$output = str_replace(",", "&#44;", $output); 
 
 $sample_input = $_POST['sample_input'];
 $sample_output = $_POST['sample_output'];
@@ -35,6 +38,7 @@ $test_output = $_POST['test_output'];
 $hint = $_POST['hint'];
 $hint = str_replace("<p>", "", $hint); 
 $hint = str_replace("</p>", "<br />", $hint); 
+$hint = str_replace(",", "&#44;", $hint);
 
 $source = $_POST['source'];
 

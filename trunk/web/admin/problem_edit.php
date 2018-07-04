@@ -13,7 +13,7 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.
   echo "<a href='../loginpage.php'>Please Login First!</a>";
 exit(1);
 }
-echo "<center><h2>Edit-"."$MSG_PROBLEM</h2></center>";
+echo "<center><h3>Edit-"."$MSG_PROBLEM</h3></center>";
 include_once("kindeditor.php") ;
 ?>
 

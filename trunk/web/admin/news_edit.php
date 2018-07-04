@@ -9,7 +9,7 @@ require_once("../include/db_info.inc.php");
 require_once("../include/my_func.inc.php");
 
 echo "<hr>";
-echo "<center><h2>Edit-"."$MSG_NEWS</h2></center>";
+echo "<center><h3>Edit-"."$MSG_NEWS</h3></center>";
 
 include_once("kindeditor.php");
 ?>

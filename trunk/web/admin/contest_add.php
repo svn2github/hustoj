@@ -17,7 +17,7 @@
     echo "<a href='../loginpage.php'>Please Login First!</a>";
     exit(1);
   }
-  echo "<center><h2>$MSG_ADD"."$MSG_CONTEST</h2></center>";
+  echo "<center><h3>$MSG_ADD"."$MSG_CONTEST</h3></center>";
   include_once("kindeditor.php") ;
 ?>
 

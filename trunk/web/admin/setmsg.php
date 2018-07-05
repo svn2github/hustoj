@@ -6,7 +6,7 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 }
 
 echo "<hr>";
-echo "<center><h2>$MSG_SETMESSAGE</h2></center>";
+echo "<center><h3>$MSG_SETMESSAGE</h3></center>";
 
 if(isset($_POST['do'])){
   require_once("../include/check_post_key.php");

@@ -6,7 +6,7 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 }
 
 echo "<hr>";
-echo "<center><h2>$MSG_ADD"."$MSG_NEWS</h2></center>";
+echo "<center><h3>$MSG_ADD"."$MSG_NEWS</h3></center>";
 
 include_once("kindeditor.php");
 ?>

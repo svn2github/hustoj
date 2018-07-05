@@ -11,7 +11,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||
 
 echo "<title>Contest List</title>";
 echo "<hr>";
-echo "<center><h2>$MSG_CONTEST"."$MSG_LIST</h2></center>";
+echo "<center><h3>$MSG_CONTEST"."$MSG_LIST</h3></center>";
 
 echo "<div class=\"container\">";
 require_once("../include/set_get_key.php");

@@ -51,7 +51,7 @@ if(isset($_POST['startdate'])){
   } 
 
   $langmask = ((1<<count($language_ext))-1)&(~$langmask);
-  //echo $langmask;	
+  //echo $langmask; 
 
   $cid=intval($_POST['cid']);
 
@@ -75,10 +75,10 @@ if(isset($_POST['startdate'])){
     $sql_1 = "INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) VALUES (?,?,?)";
     for($i=0; $i<count($pieces); $i++){
       pdo_query($sql_1,$cid,intval($pieces[$i]),$i);
-	}
-	
+  }
+  
     pdo_query("update solution set num=-1 where contest_id=?",$cid);
-	
+  
     $plist="";
     for($i=0; $i<count($pieces); $i++){
       if($plist) $plist.=",";
@@ -139,7 +139,7 @@ if(isset($_POST['startdate'])){
   foreach($result as $row){
     if($ulist) $ulist .= "\n";
     $ulist .= $row[0];
-  }	
+  } 
 }
 ?>
 
@@ -173,7 +173,7 @@ if(isset($_POST['startdate'])){
     <p align=left>
       <?php echo "<h4>".$MSG_CONTEST."-".$MSG_Description."</h4>"?>
       <textarea class=kindeditor rows=13 name=description cols=80>
-      	<?php echo htmlentities($description,ENT_QUOTES,'UTF-8')?>
+        <?php echo htmlentities($description,ENT_QUOTES,'UTF-8')?>
       </textarea>
       <br>
       <table width="100%">
@@ -216,7 +216,7 @@ if(isset($_POST['startdate'])){
               <?php echo $MSG_CONTEST."-".$MSG_USER?>
               <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
               <br>
-              <textarea name="ulist" rows="10"style="width:100%;"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
+              <textarea name="ulist" rows="10"style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
             </p>
           </td>
         </tr>

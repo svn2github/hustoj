@@ -58,7 +58,7 @@ if(isset($_POST['startdate'])){
 
   $description = str_replace("<p>", "", $description); 
   $description = str_replace("</p>", "<br />", $description);
-  $description = str_replace(",", "&#44;", $description);
+  $description = str_replace(",", "&#44; ", $description);
 
   echo $sql.$title.$starttime.$endtime.$private.$langmask.$description.$password;
   $cid = pdo_query($sql,$title,$starttime,$endtime,$private,$langmask,$description,$password) ;
@@ -106,12 +106,25 @@ else{
     $row = $result[0];
     $title = $row['title'];
 
+    $private = $row['private'];
+    $langmask = $row['langmask'];
+    $description = $row['description'];
+
     $plist = "";
     $sql = "SELECT `problem_id` FROM `contest_problem` WHERE `contest_id`=? ORDER BY `num`";
     $result = pdo_query($sql,$cid);
     foreach($result as $row){
       if($plist) $plist = $plist.',';
       $plist = $plist.$row[0];
+    }
+
+    $ulist = "";
+    $sql = "SELECT `user_id` FROM `privilege` WHERE `rightstr`=? order by user_id";
+    $result = pdo_query($sql,"c$cid");
+
+    foreach($result as $row){
+      if($ulist) $ulist .= "\n";
+      $ulist .= $row[0];
     }
   }
   else if(isset($_POST['problem2contest'])){
@@ -167,7 +180,7 @@ else{
     <br>
     <p align=left>
       <?php echo "<h4>".$MSG_CONTEST."-".$MSG_Description."</h4>"?>
-      <textarea class=kindeditor rows=13 name=description cols=80></textarea>
+      <textarea class=kindeditor rows=13 name=description cols=80><?php echo isset($description)?$description:""?></textarea>
       <br>
       <table width="100%">
         <tr>
@@ -178,9 +191,13 @@ else{
               <select name="lang[]" multiple="multiple" style="height:220px">
               <?php
               $lang_count = count($language_ext);
-              $langmask = $OJ_LANGMASK;
+              $lang = (~((int)$langmask))&((1<<$lang_count)-1);
+
+              if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
+              else $lastlang = 0;
+
               for($i=0; $i<$lang_count; $i++){
-                echo "<option value=$i selected>".$language_name[$i]."</option>";
+                echo "<option value=$i ".( $lang&(1<<$i)?"selected":"").">".$language_name[$i]."</option>";
               }
               ?>
               </select>
@@ -190,8 +207,8 @@ else{
             <p align=left>
               <?php echo $MSG_CONTEST."-".$MSG_Public?>:
               <select name=private style="width:150px;">
-                <option value=0><?php echo $MSG_Public?></option>
-                <option value=1><?php echo $MSG_Private?></option>
+                <option value=0 <?php echo $private=='0'?'selected=selected':''?>><?php echo $MSG_Public?></option>
+                <option value=1 <?php echo $private=='1'?'selected=selected':''?>><?php echo $MSG_Private?></option>
               </select>
               <?php echo $MSG_CONTEST."-".$MSG_PASSWORD?>:
               <input type=text name=password style="width:150px;" value="">
@@ -204,7 +221,7 @@ else{
               <?php echo $MSG_CONTEST."-".$MSG_USER?>
               <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
               <br>
-              <textarea name="ulist" rows="10"style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"></textarea>
+              <textarea name="ulist" rows="10"style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
             </p>
           </td>
         </tr>

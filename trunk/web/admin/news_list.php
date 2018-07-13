@@ -6,6 +6,10 @@ if(!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
 }
+
+if(isset($OJ_LANG)){
+  require_once("../lang/$OJ_LANG.php");
+}
 ?>
 
 <title>News List</title>
@@ -15,33 +19,35 @@ if(!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
 <div class='container'>
 
 <?php
-$sql = "SELECT max(`news_id`) AS upid, min(`news_id`) AS btid FROM `news`";
-$page_cnt = 20;
+$sql = "SELECT COUNT('news_id') AS ids FROM `news`";
 $result = pdo_query($sql);
 $row = $result[0];
-$base = intval($row['btid']);
-$cnt = intval($row['upid'])-$base;
-$cnt = intval($cnt/$page_cnt)+(($cnt%$page_cnt)>0?1:0);
 
-if(isset($_GET['page'])){
-  $page = intval($_GET['page']);
-}else 
-  $page = $cnt;
+$ids = intval($row['ids']);
 
-$pstart = $base+$page_cnt*intval($page-1);
-$pend = $pstart+$page_cnt;
-?>
+$idsperpage = 25;
+$pages = intval(ceil($ids/$idsperpage));
 
-<?php
+if(isset($_GET['page'])){ $page = intval($_GET['page']);}
+else{ $page = 1;}
+
+$pagesperframe = 5;
+$frame = intval(ceil($page/$pagesperframe));
+
+$spage = ($frame-1)*$pagesperframe+1;
+$epage = min($spage+$pagesperframe-1, $pages);
+
+$sid = ($page-1)*$idsperpage;
+
 $sql = "";
-if(isset($_GET['keyword'])){
+if(isset($_GET['keyword']) && $_GET['keyword']!=""){
   $keyword = $_GET['keyword'];
   $keyword = "%$keyword%";
   $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` WHERE (title LIKE ?) OR (content LIKE ?) ORDER BY `news_id` DESC";
   $result = pdo_query($sql,$keyword,$keyword);
 }else{
-  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` WHERE news_id>=? AND news_id <=? ORDER BY `news_id` DESC";
-  $result = pdo_query($sql,$pstart,$pend);
+  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` ORDER BY `news_id` DESC LIMIT $sid, $idsperpage";
+  $result = pdo_query($sql);
 }
 ?>
 
@@ -51,47 +57,45 @@ if(isset($_GET['keyword'])){
 
 <center>
   <table width=100% border=1 style="text-align:center;">
-    <tr>
+    <tr style='height:22px;'>
       <td>ID</td>
       <td>TITLE</td>
       <td>UPDATE</td>
       <td>NOW</td>
       <td>COPY</td>
-<!--  <td>edit</td> -->
     </tr>
     <?php
     foreach($result as $row){
-      echo "<tr>";
+      echo "<tr style='height:22px;'>";
         echo "<td>".$row['news_id']."</td>";
-        //echo "<input type=checkbox name='pid[]' value='$row['problem_id']'>";
         echo "<td><a href='news_edit.php?id=".$row['news_id']."'>".$row['title']."</a>"."</td>";
         echo "<td>".$row['time']."</td>";
         echo "<td><a href=news_df_change.php?id=".$row['news_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>On</span>":"<span class=red>Off</span>")."</a>"."</td>";
-       echo "<td><a href=news_add_page.php?cid=".$row['news_id'].">Copy</a></td>";
-        //echo "<td><a href=news_edit.php?id=".$row['news_id'].">Edit</a>"."</td>";
+        echo "<td><a href=news_add_page.php?cid=".$row['news_id'].">Copy</a></td>";
       echo "</tr>";
     }
-?>
+    ?>
     </form>
   </table>
-<center>
-<div style="display:inline;">
-  <nav class="center">
-    <ul class="pagination pagination-sm">
-      <li class="page-item"><a href="news_list.php?page=1">&lt;&lt;</a></li>
-      <?php
-      if(!isset($page)) $page = 1;
-      $page = intval($page);
-      $section = 3;
-      $start = $page>$section?$page-$section:1;
-      $end = $page+$section>$cnt?$cnt:$page+$section;
+</center>
 
-      for($i=$start; $i<=$end; $i++){
-        echo "<li class='".($page==$i?"active ":"")."page-item'><a title='go to page' href='news_list.php?page=".$i.(isset($_GET['my'])?"&my":"")."'>".$i."</a></li>";
-      }
-      ?>
-      <li class="page-item"><a href="news_list.php?page=<?php echo $cnt?>">&gt;&gt;</a></li>
-    </ul>
-  </nav>
-</div>
+<?php
+if(!(isset($_GET['keyword']) && $_GET['keyword']!=""))
+{
+  echo "<div style='display:inline;'>";
+  echo "<nav class='center'>";
+  echo "<ul class='pagination pagination-sm'>";
+  echo "<li class='page-item'><a href='news_list.php?page=".(strval(1))."'>&lt;&lt;</a></li>";
+  echo "<li class='page-item'><a href='news_list.php?page=".($page==1?strval(1):strval($page-1))."'>&lt;</a></li>";
+  for($i=$spage; $i<=$epage; $i++){
+    echo "<li class='".($page==$i?"active ":"")."page-item'><a title='go to page' href='news_list.php?page=".$i.(isset($_GET['my'])?"&my":"")."'>".$i."</a></li>";
+  }
+  echo "<li class='page-item'><a href='news_list.php?page=".($page==$pages?strval($page):strval($page+1))."'>&gt;</a></li>";
+  echo "<li class='page-item'><a href='news_list.php?page=".(strval($pages))."'>&gt;&gt;</a></li>";
+  echo "</ul>";
+  echo "</nav>";
+  echo "</div>";
+}
+?>
+
 </div>

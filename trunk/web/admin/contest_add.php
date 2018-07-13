@@ -104,7 +104,7 @@ else{
     $sql = "SELECT * FROM contest WHERE `contest_id`=?";
     $result = pdo_query($sql,$cid);
     $row = $result[0];
-    $title = $row['title'];
+    $title = $row['title']."-Copy";
 
     $private = $row['private'];
     $langmask = $row['langmask'];

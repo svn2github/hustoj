@@ -22,13 +22,13 @@ CREATE TABLE  `contest` (
   PRIMARY KEY (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `contest_problem` (
-  `problem_id` int(11) NOT NULL DEFAULT 0,
+CREATE TABLE IF NOT EXISTS `contest_problem` (
+  `problem_id` int(11) NOT NULL DEFAULT '0',
   `contest_id` int(11) DEFAULT NULL,
   `title` char(200) NOT NULL DEFAULT '',
-  `num` int(11) NOT NULL DEFAULT 0
+  `num` int(11) NOT NULL DEFAULT '0',
+  KEY `cni` (`contest_id`,`num`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `loginlog` (
   `user_id` varchar(48) NOT NULL DEFAULT '',

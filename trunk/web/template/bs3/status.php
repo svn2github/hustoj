@@ -171,6 +171,6 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 		 }
 		?>''];
 	</script>
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.30" ></script>
+	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.34" ></script>
   </body>
 </html>

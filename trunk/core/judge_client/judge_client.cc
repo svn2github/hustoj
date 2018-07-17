@@ -1000,7 +1000,7 @@ int compile(int lang,char * work_dir) {
 		   LIM.rlim_max = STD_MB *512 ;
 		   LIM.rlim_cur = STD_MB *512 ;
 		}
-		setrlimit(RLIMIT_AS, &LIM);
+		if (lang!=3)setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2 && lang != 11) {
 			freopen("ce.txt", "w", stderr);
 			//freopen("/dev/null", "w", stdout);

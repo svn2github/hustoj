@@ -84,7 +84,7 @@
     }
 
     if($row['hint']){
-      echo "<h4>$MSG_HINT</h4><div class=content>".$row['hint']."</div><br>";
+      echo "<h4>$MSG_HINT</h4><div class='hint content'>".$row['hint']."</div><br>";
     }
 
     if($pr_flag){

@@ -58,3 +58,6 @@ h3.pagenav div.active{
 #problemset {
    margin-top: 20px;
 }
+.hint pre{
+  display:none;
+}

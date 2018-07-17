@@ -33,6 +33,17 @@ $(document).ready(function(){
   $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
   $("body").append("<div class=center > <img src='http://hustoj.com/wx.jpg' width='96px'><img src='http://hustoj.com/alipay.png' width='96px'><br> 欢迎关注微信公众号onlinejudge</div>");
 });
+
+$(".hint pre").each(function(){
+	var plus="<span class='glyphicon glyphicon-plus'>Click</span>";
+	var content=$(this);
+	$(this).before(plus);
+	$(this).prev().click(function(){
+		content.toggle();
+	});
+	
+});
+
   console.log("If you want to change the appearance of the web pages, make a copy of bs3 under template directory.\nRename it to whatever you like, and change the $OJ_TEMPLATE value in db_info.inc.php\nAfter that modify files under your own directory .\n");
   console.log("To enable mathjax in hustoj, check line 15 in /home/judge/src/web/template/bs3/js.php");
 

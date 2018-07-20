@@ -2996,6 +2996,7 @@ function dir_list_form() {
             } elseif (is_dir($current_dir.$file)) {
                 // Recursive directory size disabled
                 // $entry_list[$entry_count]["size"] = total_size($current_dir.$file);
+		continue; // don't display subdir
                 $entry_list[$entry_count]["size"] = 0;
                 $entry_list[$entry_count]["sizet"] = "&nbsp;";
                 $entry_list[$entry_count]["type"] = "dir";

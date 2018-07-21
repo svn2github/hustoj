@@ -27,19 +27,19 @@
 	<?php
 	
 	if ($pr_flag){
-		echo "<title>$MSG_PROBLEM $row['problem_id']. -- $row['title']</title>";
-		echo "<center><h2>$id: $row['title']</h2>";
+		echo "<title>$MSG_PROBLEM ${row['problem_id']}. -- ${row['title']}</title>";
+		echo "<center><h2>$id: ${row['title']}</h2>";
 	}else{
 		$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		echo "<title>$MSG_PROBLEM $PID[$pid]: $row['title'] </title>";
-		echo "<center><h2>$MSG_PROBLEM $PID[$pid]: $row['title']</h2>";
+		echo "<title>$MSG_PROBLEM ${PID[$pid]}: ${row['title']} </title>";
+		echo "<center><h2>$MSG_PROBLEM ${PID[$pid]}: ${row['title']}</h2>";
 		$id=$row['problem_id'];
 	}
-	echo "<span class=green>$MSG_Time_Limit: </span>$row['time_limit'] Sec&nbsp;&nbsp;";
+	echo "<span class=green>$MSG_Time_Limit: </span>${row['time_limit']} Sec&nbsp;&nbsp;";
 	echo "<span class=green>$MSG_Memory_Limit: </span>".$row['memory_limit']." MB";
 	if ($row['spj']) echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 	echo "<br><span class=green>$MSG_SUBMIT: </span>".$row['submit']."&nbsp;&nbsp;";
-	echo "<span class=green>$MSG_SOVLED: </span>".$row['ac']cepted."<br>"; 
+	echo "<span class=green>$MSG_SOVLED: </span>".$row['ac']."<br>"; 
 	
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";
@@ -82,7 +82,7 @@
 			<div class=content><p>".nl2br($row['hint'])."</p></div>";
 	if ($pr_flag) 
 		echo "<h2>$MSG_Source</h2>
-			<div class=content><p><a href='problemset.php?search=$row['source']'>".nl2br($row['source'])."</a></p></div>";
+			<div class=content><p><a href='problemset.php?search=${row['source']}'>".nl2br($row['source'])."</a></p></div>";
 	echo "<center>";
 	if ($pr_flag){
 		echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>]";

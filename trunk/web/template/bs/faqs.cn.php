@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once("oj-header.php");?>
+	<?php require_once(dirname($_SERVER["PHP_SELF"])."oj-header.php");?>
 <div id=main>
 
 <hr>

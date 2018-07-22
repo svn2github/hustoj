@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once(dirname($_SERVER["PHP_SELF"])."oj-header.php");?>
+	<?php require_once("template/bs/oj-header.php");?>
 <div id=main>
 	
 <link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/> 

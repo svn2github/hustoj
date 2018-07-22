@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once(dirname($_SERVER["PHP_SELF"])."oj-header.php");?>
+	<?php require_once("template/bs/oj-header.php");?>
 <div id=main>
  <div id='source'></div>
 <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo?></pre>

@@ -52,7 +52,7 @@
       require_once("include/set_get_key.php");
       ?>
       [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>" >Edit</a>]
-      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
+      [<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
       <?php
 
     }
@@ -97,11 +97,25 @@
       require_once("include/set_get_key.php");
   ?>
      [<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>" >Edit</a>]
-      [<a href="admin/quixplorer/index.php?action=list&dir=<?php echo $row['problem_id']?>&order=name&srt=yes" >TestData</a>]
+     [<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
      <?php
   }	
   echo "</center>";
 	?>
+ <script src="<?php echo $path_fix."template/bs3/"?>jquery.min.js"></script> 
+  <script>
+  function phpfm(pid){
+    //alert(pid);
+    $.post("admin/phpfm.php",{'frame':3,'pid':pid,'pass':''},function(data,status){
+      if(status=="success"){
+        document.location.href="admin/phpfm.php?frame=3&pid="+pid;
+      }
+    });
+  }
+  $(document).ready(function(){
+    $("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
+  });
+  </script>   
 <div id=foot>
 	<?php require_once("oj-footer.php");?>
 

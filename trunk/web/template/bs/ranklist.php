@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once("oj-header.php");?>
+	<?php require_once("template/bs/oj-header.php");?>
 <div id=main>
 	<table align=center width=90%>
 		<thead>
@@ -65,7 +65,7 @@
 	
 	?>
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+	<?php require_once("template/bs/oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->

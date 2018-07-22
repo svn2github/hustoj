@@ -8,9 +8,9 @@
 		<?php echo $MSG_HOME?>						
 		</a>
 		
-		<a  class='btn <?php if ($url==$OJ_BBS.".php") echo " $ACTIVE";?>'  href="bbs.php">
+<!--		<a  class='btn <?php if ($url==$OJ_BBS.".php") echo " $ACTIVE";?>'  href="bbs.php">
 		<i class="icon-comment"></i><?php echo $MSG_BBS?></a>
-		<a  class='btn <?php if ($url=="problemset.php") echo " $ACTIVE";?>' href="problemset.php">
+-->		<a  class='btn <?php if ($url=="problemset.php") echo " $ACTIVE";?>' href="problemset.php">
 		<i class="icon-question-sign"></i><?php echo $MSG_PROBLEMS?></a>
 		
 	  <!-- <a  class='btn <?php if ($url=="submitpage.php") echo " $ACTIVE";?>' href="submitpage.php">
@@ -23,7 +23,7 @@
 		<i class="icon-signal"></i><?php echo $MSG_RANKLIST?></a>
 		
 		<a class='btn <?php if ($url=="contest.php") echo "  $ACTIVE";?>'  href="contest.php">
-		<i class="icon-fire"></i><?php echo checkcontest($MSG_CONTEST)?></a>
+		<i class="icon-fire"></i><?php echo $MSG_CONTEST?></a>
 		
 		<a class='btn <?php if ($url=="recent-contest.php") echo " $ACTIVE";?>' href="recent-contest.php">
 		<i class="icon-share"></i><?php echo "$MSG_RECENT_CONTEST"?></a>

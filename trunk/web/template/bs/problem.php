@@ -17,7 +17,7 @@
 <div id="wrapper">
 	<?php
 	if(isset($_GET['id']))
-		require_once("oj-header.php");
+		require_once("template/bs/oj-header.php");
 	else
 		require_once("contest-header.php");
 	
@@ -117,7 +117,7 @@
   });
   </script>   
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+	<?php require_once("template/bs/oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->

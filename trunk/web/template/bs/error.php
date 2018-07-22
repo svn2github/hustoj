@@ -10,7 +10,7 @@
 <div id=main>
 	<?php echo $view_errors?>
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+	<?php require_once("template/bs/oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->

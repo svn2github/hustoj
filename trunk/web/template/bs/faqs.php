@@ -153,7 +153,7 @@ If you can't, then please <a href=registerpage.php>register</a> an id with passw
 </center>
 
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+	<?php require_once("template/bs/oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->

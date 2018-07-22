@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once("oj-header.php");?>
+	<?php require_once("template/bs/oj-header.php");?>
 <div id=main>
 	<table width=80% align=center>
 <thead class=toprow>
@@ -30,7 +30,7 @@ $odd=true;
 <div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
 
 <div id=foot>
-	<?php require_once("oj-footer.php");?>
+	<?php require_once("template/bs/oj-footer.php");?>
 
 </div><!--end foot-->
 </div><!--end main-->

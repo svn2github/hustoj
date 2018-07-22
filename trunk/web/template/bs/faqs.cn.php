@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php require_once(dirname($_SERVER["PHP_SELF"])."oj-header.php");?>
+	<?php require_once("oj-header.php");?>
 <div id=main>
 
 <hr>
@@ -20,11 +20,11 @@
 <table border="1">
   <tr>
     <td>C:</td>
-    <td><font color=blue>gcc Main.c -o Main  -fno-asm -O2 -Wall -lm --static -std=c99 -DONLINE_JUDGE</font></td>
+    <td><font color=blue>gcc Main.c -o Main -O2 -Wall -lm --static -std=c99 -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ Main.cc -o Main  -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
+    <td><font color=blue>g++ Main.cc -o Main -O2 -Wall -lm --static -DONLINE_JUDGE</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>
@@ -150,7 +150,7 @@ public class Main{
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "http://code.google.com/p/hustoj/source/detail?r=1981"><font color=red>R1981+</font></a></td>
+      <a href = "http://code.google.com/p/hustoj/source/detail?r=486"><font color=red>R1281</font></a></td>
     </tr>
   </table>
 </center>

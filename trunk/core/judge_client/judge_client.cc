@@ -1789,7 +1789,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;
 	LIM.rlim_max = STD_MB * mem_lmt * 2;
-	if (lang < 3)
+	if (lang < 3 || lang == 10 || lang == 13 || lang == 14)
 		setrlimit(RLIMIT_AS, &LIM);
 
 	switch (lang) {

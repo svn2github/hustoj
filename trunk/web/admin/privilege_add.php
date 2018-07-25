@@ -8,6 +8,7 @@ if(isset($_POST['do'])){
 	$user_id=$_POST['user_id'];
 	$rightstr =$_POST['rightstr'];
 	if(isset($_POST['contest'])) $rightstr="c$rightstr";
+	if(isset($_POST['psv'])) $rightstr="s$rightstr";
 	$sql="insert into `privilege` values(?,?,'N')";
 	$rows=pdo_query($sql,$user_id,$rightstr);
 	echo "$user_id $rightstr added!";
@@ -41,6 +42,15 @@ while(list($key, $val)=each($rightarray)) {
 	Contest:<input type=text size=10 name="rightstr">1000 for Contest1000<br />
 	<input type='hidden' name='do' value='do'>
 	<input type='hidden' name='contest' value='do'>
+	<input type=submit value='Add'>
+	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+</form>
+<form method=post>
+	<b>Add Problem Solution View for User:</b><br />
+	User:<input type=text size=10 name="user_id"><br />
+	Problem:<input type=text size=10 name="rightstr">1000 for Problem 1000<br />
+	<input type='hidden' name='do' value='do'>
+	<input type='hidden' name='psv' value='do'>
 	<input type=submit value='Add'>
 	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 </form>

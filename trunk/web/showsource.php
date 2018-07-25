@@ -42,6 +42,23 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION[$OJ_NAME.'_'.'user_id
 	$ok=(count($rrs)>0);
 	
 }
+
+//check whether user has the right of view solutions of this problem
+//echo "checking...";
+if(isset($_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id])){
+	$ok=true;
+//	echo "Yes";
+}else{
+	$sql="select count(1) from privilege where user_id=? and rightstr=?";
+	$count=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"s".$sproblem_id);
+	if($count&&$count[0][0]>0){
+		$_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id])=true;
+		$ok=true;
+	}else{
+		//echo "not right";
+	}
+
+}
 $view_source="No source code available!";
 if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;

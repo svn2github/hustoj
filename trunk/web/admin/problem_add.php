@@ -12,6 +12,7 @@ require_once ("../include/problem.php");
 
 // contest_id
 $title = $_POST['title'];
+$title = str_replace(",", "&#44;", $title);
 $time_limit = $_POST['time_limit'];
 $memory_limit = $_POST['memory_limit'];
 

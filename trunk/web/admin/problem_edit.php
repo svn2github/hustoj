@@ -91,6 +91,7 @@ include_once("kindeditor.php") ;
       if(!(isset($_SESSION[$OJ_NAME.'_'."p$id"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();  
 
       $title=$_POST['title'];
+      $title = str_replace(",", "&#44;", $title);
       $time_limit=$_POST['time_limit'];
       $memory_limit=$_POST['memory_limit'];
       $description=$_POST['description'];
@@ -135,7 +136,7 @@ include_once("kindeditor.php") ;
         $source = stripslashes($source);
       }
 
-      $title=RemoveXSS($title);
+      $title=($title);
       $description=RemoveXSS($description);
       $input=RemoveXSS($input);
       $output=RemoveXSS($output);

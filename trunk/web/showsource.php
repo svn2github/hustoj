@@ -52,7 +52,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id])){
 	$sql="select count(1) from privilege where user_id=? and rightstr=?";
 	$count=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"s".$sproblem_id);
 	if($count&&$count[0][0]>0){
-		$_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id])=true;
+		$_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id]=true;
 		$ok=true;
 	}else{
 		//echo "not right";

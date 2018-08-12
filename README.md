@@ -7,6 +7,9 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 	
 尤其<b>别装apache</b>
 
+近期github的svn访问缓慢，可以到release中下载tar.gz版本，然后用install目录下的*-bytgz.sh脚本安装。
+但是注意这样安装的实例，将来升级时只能手工升级。
+
 首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh

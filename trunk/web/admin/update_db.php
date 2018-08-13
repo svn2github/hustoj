@@ -87,7 +87,7 @@ $csql[9]="CREATE TABLE  `runtimeinfo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 $tsql[10]="select pass_rate from solution";
-$csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(2,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
+$csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
 
 $csql[11]="";
 $tsql[11]="ALTER TABLE `users` MODIFY COLUMN `user_id` varchar(48) NOT NULL DEFAULT ''  COMMENT 'user_id';";

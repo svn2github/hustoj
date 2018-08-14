@@ -45,7 +45,7 @@ Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contes
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
 <span id="language_span">Language:
-<select id="language" name="language" onChange="reloadtemplate(this);" >
+<select id="language" name="language" onChange="reloadtemplate($(this).val());" >
 <?php
 $lang_count=count($language_ext);
 if(isset($_GET['langmask']))
@@ -284,6 +284,7 @@ function switchLang(lang){
 
 }
 function reloadtemplate(lang){
+   console.log("lang="+lang);
    document.cookie="lastlang="+lang.value;
    //alert(document.cookie);
    var url=window.location.href;
@@ -339,6 +340,8 @@ function loadFromBlockly(){
 	    enableSnippets: true,
 	    enableLiveAutocompletion: true
     });
+   reloadtemplate($("#language").val()); 
+     
 </script>
 <?php }?>
 

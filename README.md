@@ -138,7 +138,7 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Star us, please!
 
-<img src="http://tk.hustoj.com/upload/image/20180621/20180621190059_62537.png" >
+<img src="http://tk.hustoj.com/upload/image/20180621/20180621190059_62537.png" width="240px">
 
 
 

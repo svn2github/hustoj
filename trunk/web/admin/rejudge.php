@@ -8,7 +8,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	require_once("../include/check_post_key.php");
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
-		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=?";
+		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=? and problem_id>0";
 		pdo_query($sql,$rjpid) ;
 		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=?)";
 		pdo_query($sql,$rjpid) ;
@@ -20,14 +20,14 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		$rjsid=intval($_POST['rjsid']);
 		$sql="delete from `sim` WHERE `s_id`=?";
 		pdo_query($sql,$rjsid) ;
-		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=?";
+		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=? and problem_id>0" ;
 		pdo_query($sql,$rjsid) ;
 		$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
 		echo "<script>location.href='$url';</script>";
 	}else if (isset($_POST['rjcid'])){
 		$rjcid=intval($_POST['rjcid']);
-		$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=?";
+		$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=? and problem_id>0";
 		pdo_query($sql,$rjcid) ;
 		$url="../status.php?cid=".($rjcid);
 		echo "Rejudged Contest id :".$rjcid;

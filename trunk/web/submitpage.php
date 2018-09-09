@@ -67,6 +67,14 @@ $view_sample_output="3";
    }else{
 		$result=pdo_query($sample_sql,$cid,$pid);
    }
+	 
+   if($result == false)
+   {
+	   $view_errors=  "<h2>No Such Problem!</h2>";
+	   require("template/".$OJ_TEMPLATE."/error.php");
+	   exit(0);
+   }
+
 	$row=$result[0];
 	$view_sample_input=$row[0];
 	$view_sample_output=$row[1];

@@ -10,7 +10,7 @@
                   $url!='registerpage.php'
                   ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
  
-           header("location:loginpage.php");
+           header("location:".$path_fix."loginpage.php");
            exit();
         }
 

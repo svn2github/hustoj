@@ -89,3 +89,7 @@ RUN set -ex \
 ENTRYPOINT ["/docker-entrypoint.sh"]
 #CMD judged /home/judge debug && 
 #CMD tail -f /dev/null
+
+RUN chmod +x /home/judge/src/core/make.sh
+RUN cd /home/judge/src/core/ && ./make.sh
+RUN cd /usr/bin && rm awk && cp -s mawk awk

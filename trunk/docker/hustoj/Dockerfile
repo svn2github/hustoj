@@ -76,7 +76,12 @@ RUN set -ex \
 	&& mysql -h localhost -u$USER -p$PASSWORD< /home/judge/src/install/db.sql \
 	&& echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD \
 	&& service mysql stop
-		
+	
+	
+RUN chmod +x /home/judge/src/core/make.sh
+RUN cd /home/judge/src/core/ && ./make.sh
+RUN cd /usr/bin && rm awk && cp -s mawk awk
+
 WORKDIR /home/judge/
 EXPOSE 80
 VOLUME ["/data"]
@@ -90,6 +95,3 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 #CMD judged /home/judge debug && 
 #CMD tail -f /dev/null
 
-RUN chmod +x /home/judge/src/core/make.sh
-RUN cd /home/judge/src/core/ && ./make.sh
-RUN cd /usr/bin && rm awk && cp -s mawk awk

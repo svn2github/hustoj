@@ -8,6 +8,10 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	require_once("../include/check_post_key.php");
 	if (isset($_POST['rjpid'])){
 		$rjpid=intval($_POST['rjpid']);
+		if($rjpid == 0) {
+		    echo "Rejudge Problem ID should not equal to 0";
+		    exit(1);
+		}
 		$sql="UPDATE `solution` SET `result`=1 WHERE `problem_id`=? and problem_id>0";
 		pdo_query($sql,$rjpid) ;
 		$sql="delete from `sim` WHERE `s_id` in (select solution_id from solution where `problem_id`=?)";

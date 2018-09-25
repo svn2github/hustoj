@@ -197,7 +197,7 @@ void init_mysql_conf() {
 #ifdef _mysql_h
 		sprintf(query,
 				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",
-				oj_lang_set, oj_tot, oj_mod, 2*max_running );
+				oj_lang_set, oj_tot, oj_mod, 4 *max_running );
 #endif
 		sleep_tmp = sleep_time;
 		//	fclose(fp);
@@ -500,7 +500,14 @@ int work() {
 				}
 
 			} else {
-				ID[i] = 0;
+			//	ID[i] = 0;
+				if(DEBUG){
+					if(workcnt<max_running)
+						printf("check out failure ! runid:%d pid:%d \n",i,ID[i]);
+					else
+						printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
+						
+				}
 			}
 		}
 	}

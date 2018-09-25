@@ -1012,15 +1012,23 @@ int compile(int lang,char * work_dir) {
 			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 			execute_cmd("chown judge *");
                 	execute_cmd("mount -o bind /bin bin");
+                	execute_cmd("mount -o remount,ro bin");
                 	execute_cmd("mount -o bind /usr usr");
+                	execute_cmd("mount -o remount,ro usr");
                 	execute_cmd("mount -o bind /lib lib");
+                	execute_cmd("mount -o remount,ro lib");
 #ifndef __i386
                 	execute_cmd("mount -o bind /lib64 lib64");
+                	execute_cmd("mount -o remount,ro lib64");
 #endif
                 	execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
+                	execute_cmd("mount -o remount,ro etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");
-                	if(lang>2 && lang!=10 && lang!=13 && lang!=14)
+                	execute_cmd("mount -o remount,ro proc");
+                	if(lang>2 && lang!=10 && lang!=13 && lang!=14){
 				execute_cmd("mount -o bind /dev dev");
+                		execute_cmd("mount -o remount,ro dev");
+			}
                         chroot(work_dir);
 		}
 		while(setgid(1536)!=0) sleep(1);

@@ -187,7 +187,7 @@ int execute_cmd(const char * fmt, ...) {
 
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
-	printf("%s\n",cmd);
+	if(DEBUG) printf("%s\n",cmd);
 	ret = system(cmd);
 	va_end(ap);
 	return ret;
@@ -917,18 +917,18 @@ void update_problem(int pid) {
 	}
 }
 void umount(char * work_dir){
-        execute_cmd("/bin/umount -f %s/proc", work_dir);
-        execute_cmd("/bin/umount -f %s/dev ", work_dir);
-        execute_cmd("/bin/umount -f %s/lib ", work_dir);
-        execute_cmd("/bin/umount -f %s/lib64 ", work_dir);
-        execute_cmd("/bin/umount -f %s/etc/alternatives ", work_dir);
-        execute_cmd("/bin/umount -f %s/usr ", work_dir);
-        execute_cmd("/bin/umount -f %s/bin ", work_dir);
-        execute_cmd("/bin/umount -f %s/proc ", work_dir);
-        execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev ");
-        execute_cmd("/bin/umount -f %s/* ",work_dir);
-	execute_cmd("/bin/umount -f %s/log/* ",work_dir);
-     	execute_cmd("/bin/umount -f %s/log/etc/alternatives ", work_dir);
+        execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/dev 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/lib 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/lib64 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/etc/alternatives 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/usr 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/bin 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
+        execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+        execute_cmd("/bin/umount -f %s/* 2>/dev/null",work_dir);
+	execute_cmd("/bin/umount -f %s/log/* 2>/dev/null",work_dir);
+     	execute_cmd("/bin/umount -f %s/log/etc/alternatives 2>/dev/null", work_dir);
 }
 int compile(int lang,char * work_dir) {
 	int pid;
@@ -1095,8 +1095,8 @@ int compile(int lang,char * work_dir) {
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
-		execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>&1 >/dev/null");
- 		execute_cmd("/bin/umount -f %s/* 2>&1 >/dev/null",work_dir);
+		execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+ 		execute_cmd("/bin/umount -f %s/* 2>/dev/null",work_dir);
 		umount(work_dir);
  
 		return status;

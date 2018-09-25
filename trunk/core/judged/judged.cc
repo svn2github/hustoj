@@ -448,7 +448,7 @@ bool check_out(int solution_id, int result) {
 }
 int work() {
 //      char buf[1024];
-	static int retcnt = 0;
+	int retcnt = 0;
 	int i = 0;
 	static pid_t ID[100];
 	static int workcnt = 0;

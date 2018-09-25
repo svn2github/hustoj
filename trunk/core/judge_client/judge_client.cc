@@ -1401,10 +1401,10 @@ void prepare_files(char * filename, int namelen, char * infile, int & p_id,
 		strncpy(fname0, filename, namelen);
 		fname0[namelen] = 0;
 		escape(fname,fname0);
-		printf("%s\n%s\n",fname0,fname);
+		//printf("%s\n%s\n",fname0,fname);
 		sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
 		execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
-		execute_cmd("/bin/cp %s/data/%d/*.dic %s/", oj_home, p_id, work_dir);
+		execute_cmd("/bin/cp %s/data/%d/*.dic %s/ 2>/dev/null", oj_home, p_id, work_dir);
 
 		sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
 		sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
@@ -1721,7 +1721,7 @@ void copy_js_runtime(char * work_dir) {
 void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 		int & mem_lmt) {
 	nice(19);
-	int py2=execute_cmd("/bin/grep 'python2' Main.py");
+	int py2=execute_cmd("/bin/grep 'python2' Main.py 2>/dev/null");
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files
@@ -2198,13 +2198,13 @@ void watch_solution(pid_t pidApp, char * infile, int & ACflg, int isspj,
 void clean_workdir(char * work_dir) {
 	umount(work_dir);
  	if (DEBUG) {
-		execute_cmd("/bin/rm -rf %s/log/*", work_dir);
-		execute_cmd("mkdir %s/log/", work_dir);
-		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
+		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
+		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
 	} else {
-		execute_cmd("mkdir %s/log/", work_dir);
-		execute_cmd("/bin/mv %s/* %s/log/", work_dir, work_dir);
-		execute_cmd("/bin/rm -rf %s/log/*", work_dir);
+		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
+		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
+		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
 	}
 
 }
@@ -2242,17 +2242,17 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 
 	int sim = execute_cmd("/usr/bin/sim.sh %s %d", src_pth, pid);
 	if (!sim) {
-		execute_cmd("/bin/mkdir ../data/%d/ac/", pid);
+		execute_cmd("/bin/mkdir ../data/%d/ac/ 2>/dev/null", pid);
 
-		execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s", src_pth, pid, solution_id,
+		execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s 2>/dev/null", src_pth, pid, solution_id,
 				lang_ext[lang]);
 		//c cpp will
 		if (lang == 0)
-			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid,
+			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
 					solution_id, lang_ext[lang], pid, solution_id,
 					lang_ext[lang + 1]);
 		if (lang == 1)
-			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s", pid,
+			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
 					solution_id, lang_ext[lang], pid, solution_id,
 					lang_ext[lang - 1]);
 
@@ -2273,13 +2273,13 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id) {
 void mk_shm_workdir(char * work_dir) {
 	char shm_path[BUFFER_SIZE];
 	sprintf(shm_path, "/dev/shm/hustoj/%s", work_dir);
-	execute_cmd("/bin/mkdir -p %s", shm_path);
-	execute_cmd("/bin/ln -s %s %s/", shm_path, oj_home);
-	execute_cmd("/bin/chown judge %s ", shm_path);
-	execute_cmd("chmod 755 %s ", shm_path);
+	execute_cmd("/bin/mkdir -p %s  2>/dev/null", shm_path);
+	execute_cmd("/bin/ln -s %s %s/  2>/dev/null", shm_path, oj_home);
+	execute_cmd("/bin/chown judge %s  2>/dev/null", shm_path);
+	execute_cmd("chmod 755 %s  2>/dev/null", shm_path);
 	//sim need a soft link in shm_dir to work correctly
 	sprintf(shm_path, "/dev/shm/hustoj/%s/", oj_home);
-	execute_cmd("/bin/ln -s %s/data %s", oj_home, shm_path);
+	execute_cmd("/bin/ln -s %s/data %s  2>/dev/null", oj_home, shm_path);
 
 }
 int count_in_files(char * dirpath) {

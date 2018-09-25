@@ -459,6 +459,8 @@ int work() {
 	//for(i=0;i<max_running;i++){
 	//      ID[i]=0;
 	//}
+	for(i=0;i<max_running *2 +1 ;i++)
+		jobs[i]=0;
 
 	//sleep_time=sleep_tmp;
 	/* get the database info */
@@ -470,10 +472,8 @@ int work() {
 		runid = jobs[j];
 		if (runid % oj_tot != oj_mod)
 			continue;
-		if (DEBUG)
-			write_log("Judging solution %d", runid);
 		if (workcnt >= max_running) {           // if no more client can running
-			tmp_pid = waitpid(-1, NULL, 0);     // wait 4 one child exit
+			tmp_pid = waitpid(-1, NULL, WNOHANG);     // wait 4 one child exit
 			for (i = 0; i < max_running; i++){     // get the client id
 				if (ID[i] == tmp_pid){
 					workcnt--;
@@ -493,8 +493,10 @@ int work() {
 				workcnt++;
 				ID[i] = fork();                                   // start to fork
 				if (ID[i] == 0) {
-					if (DEBUG)
+					if (DEBUG){
+						write_log("Judging solution %d", runid);
 						write_log("<<=sid=%d===clientid=%d==>>\n", runid, i);
+					}
 					run_client(runid, i);    // if the process is the son, run it
 					exit(0);
 				}
@@ -510,8 +512,10 @@ int work() {
 				}
 			}
 		}
+		if(DEBUG)
+			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 	}
-	while ((tmp_pid = waitpid(-1, NULL, 0)) > 0) {
+	while ((tmp_pid = waitpid(-1, NULL,WNOHANG)) > 0) {
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){
 			
@@ -665,6 +669,7 @@ int main(int argc, char** argv) {
 		}
 		turbo_mode2();
 		if(ONCE) break;
+		if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
 		sleep(sleep_time);
 		j = 1;
 	}

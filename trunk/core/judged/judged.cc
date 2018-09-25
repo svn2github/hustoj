@@ -197,7 +197,7 @@ void init_mysql_conf() {
 #ifdef _mysql_h
 		sprintf(query,
 				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",
-				oj_lang_set, oj_tot, oj_mod, 4 *max_running );
+				oj_lang_set, oj_tot, oj_mod, 2 *max_running );
 #endif
 		sleep_tmp = sleep_time;
 		//	fclose(fp);
@@ -474,6 +474,7 @@ int work() {
 			continue;
 		if (workcnt >= max_running) {           // if no more client can running
 			tmp_pid = waitpid(-1, NULL, WNOHANG);     // wait 4 one child exit
+			if (DEBUG) printf("try get one tmp_pid=%d\n",tmp_pid);
 			for (i = 0; i < max_running; i++){     // get the client id
 				if (ID[i] == tmp_pid){
 					workcnt--;

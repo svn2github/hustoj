@@ -3,18 +3,24 @@ HUSTOJ安装说明
 
 
 
-方法1
-
-系统选择ubuntu14.04，可以使用下面脚本
+首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
-    chmod +x install-ubuntu14.04.sh
-    sudo ./install-ubuntu14.04.sh
-    
+    sudo bash install-ubuntu14.04.sh
 
-推荐用干净的Ubuntu安装，不推荐使用外挂的LAMP或LNMP打包程序，会与安装脚本冲突。
+或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
 
-方法2
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
+    sudo bash install-ubuntu16+.sh
 
-参考视频  https://v.qq.com/x/page/c03955kvowx.html
+https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
+发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
+
+    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
+    sudo bash install-ubuntu18.04.sh
+
+假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
+
+    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
+    sudo bash install-centos7.sh

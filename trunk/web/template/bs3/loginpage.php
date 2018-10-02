@@ -46,7 +46,7 @@
 	</div>
 </form>					
       </div>
-	<script src="include/md5-min.js"></script>
+	<script src="<?php echo $OJ_CDN_URL?>include/md5-min.js"></script>
 	<script>
 		function jsMd5(){
 			if($("input[name=password]").val()=="") return false;

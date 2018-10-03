@@ -52,5 +52,5 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 ?>
 <br>
 免费题目<a href="https://github.com/zhblue/freeproblemset/tree/master/fps-examples" target="_blank">下载</a><br>
-更多题目请到 <a href="http://tk.hustoj.com/" target="_blank">TK 题库</a> 查看，部分免费，部分收费。
+更多题目请到 <a href="http://tk.hustoj.com/problemset.php?search=free" target="_blank">TK 题库免费专区</a>。
 </div>

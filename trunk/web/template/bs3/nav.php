@@ -47,7 +47,7 @@
               <li <?php if ($url=="printer.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>printer.php"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> <?php echo $MSG_PRINTER?></a></li>
 	      <?php }?>
 	      <?php if(!isset($OJ_ON_SITE_CONTEST_ID)){?>
-              <li <?php if ($dir=="problemset.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>problemset.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> <?php echo $MSG_PROBLEMS?></a></li>
+              <li <?php if ($url=="problemset.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>problemset.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> <?php echo $MSG_PROBLEMS?></a></li>
               <li <?php if ($url=="category.php") echo " $ACTIVE";?>> <a href="<?php echo $path_fix?>category.php"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> <?php echo $MSG_SOURCE?></a></li>
               <li <?php if ($url=="status.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>status.php"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> <?php echo $MSG_STATUS?></a></li>
               <li <?php if ($url=="ranklist.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>ranklist.php"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <?php echo $MSG_RANKLIST?></a></li>

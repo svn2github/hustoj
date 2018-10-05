@@ -81,7 +81,7 @@ var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
    hj_ss+="</select>";
    hj_ss+="<input name='manual' type='hidden'>";
    hj_ss+="<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
-   hj_ss+="<input class='http_judge btn' name='manual' value='确定' onclick='http_judge(this)' >";
+   hj_ss+="<input type='button' class='http_judge btn' name='manual' value='确定' onclick='http_judge(this)' >";
 $(".http_judge_form").append(hj_ss);
 auto_refresh();
 $(".td_result").mouseover(function (){

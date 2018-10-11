@@ -40,7 +40,7 @@ if ($ok==true){
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$id);
 	 $row=$result[0];
-	if($row&&($OJ_SHOW_DIFF||$isRE)&&($OJ_TEST_RUN||is_valid($row['error']))){	
+	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||is_valid($row['error'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 	}else{
 		

@@ -3,6 +3,11 @@ DBNAME="jol"
 DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
 CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+
+wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
+rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
+rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
+
 yum -y update
 yum -y install nginx php-fpm php-mysql php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
 yum -y install mariadb mariadb-devel mariadb-server

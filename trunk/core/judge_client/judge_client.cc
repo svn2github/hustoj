@@ -2308,24 +2308,21 @@ int count_in_files(char * dirpath) {
 int get_test_file(char* work_dir, int p_id) {
 	char filename[BUFFER_SIZE];
 	char localfile[BUFFER_SIZE];
+	time_t remote_date, local_date;
 	int ret = 0;
 	const char * cmd =
-			" wget --post-data=\"gettestdatalist=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+			" wget --post-data=\"gettestdatalist=1&time=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	FILE * fjobs = read_cmd_output(cmd, p_id, http_baseurl);
 	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL) {
+		
+		sscanf(filename, "%ld", &remote_date);
+		if(fgets(filename, BUFFER_SIZE - 1, fjobs)==NULL) break;
 		sscanf(filename, "%s", filename);
 		if(http_judge&&(!data_list_has(filename))) data_list_add(filename);
 		sprintf(localfile, "%s/data/%d/%s", oj_home, p_id, filename);
 		if (DEBUG)
 			printf("localfile[%s]\n", localfile);
 
-		const char * check_file_cmd =
-				" wget --post-data=\"gettestdatadate=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O -  \"%s/admin/problem_judge.php\"";
-		FILE * rcop = read_cmd_output(check_file_cmd, p_id, filename,
-				http_baseurl);
-		time_t remote_date, local_date;
-		fscanf(rcop, "%ld", &remote_date);
-		fclose(rcop);
 		struct stat fst;
 		stat(localfile, &fst);
 		local_date = fst.st_mtime;

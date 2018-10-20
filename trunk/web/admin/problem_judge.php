@@ -203,7 +203,7 @@ if(isset($_POST['update_solution'])){
         
             $dir=opendir($OJ_DATA."/$pid");
             while (($file = readdir($dir)) != ""){
-              if(!is_dir($file)){
+              if(!is_dir($file)&&$file!="ac"){
 		    if(isset($_POST['time'])){
                         echo filemtime($OJ_DATA."/$pid/".$file)."\n";
                     }

@@ -203,10 +203,11 @@ if(isset($_POST['update_solution'])){
         
             $dir=opendir($OJ_DATA."/$pid");
             while (($file = readdir($dir)) != ""){
-	      if(isset($_POST['time'])){
-                        echo filemtime($OJ_DATA."/$pid/".$file)."\n";
-              }
               if(!is_dir($file)){
+		    if(isset($_POST['time'])){
+                        echo filemtime($OJ_DATA."/$pid/".$file)."\n";
+                    }
+
                	    $file=pathinfo($file);
                     $file=$file['basename'];
                     echo "$file\n";

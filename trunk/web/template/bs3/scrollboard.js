@@ -594,7 +594,7 @@ Board.prototype.updateTeamStatus = function(team) {
             //传参，不懂原理，用此可以在动画的回调函数使用参数
             (function(thisBoard, tProblem, problemHTML) {
                 //闪烁两次后显示未知题目的结果
-                var speed = 200; //闪烁速度
+                var speed = 100; //闪烁速度
                 $statusSpan.fadeOut(speed).fadeIn(speed).fadeOut(speed).fadeIn(speed, function() {
                     //更新题目表现状态
                     $(this).parent().html(problemHTML);
@@ -606,8 +606,8 @@ Board.prototype.updateTeamStatus = function(team) {
     //延时更新榜单
     //传参，不懂原理，用此可以在动画的回调函数使用参数
     (function(thisBoard, team) {
-        //延时0.8s
-        $('#timer').animate({ margin: 0 }, 800, function() {
+        //延时0.4s
+        $('#timer').animate({ margin: 0 }, 400, function() {
 
             /*
             更新Rank
@@ -669,13 +669,13 @@ Board.prototype.moveTeam = function(toPos) {
         var teamHeight = 68;
         for (var i = 0; i < thisBoard.teamCount; ++i) {
             var teamId = thisBoard.teamNextSequence[i].teamId;
-            //延时0.8s后更新位置，为了等待题目状态更新完成
+            //延时0.4s后更新位置，为了等待题目状态更新完成
             if(toPos != -1)
-                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 800).animate({ top: i * teamHeight + headerHeight }, 500, function() {
+                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 400).animate({ top: i * teamHeight + headerHeight }, 400, function() {
                     thisBoard.noAnimate = true;
                 });
             else
-                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 800 ,function() {
+                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 400 ,function() {
                     thisBoard.noAnimate = true;
                 });
         }

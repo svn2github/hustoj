@@ -235,7 +235,10 @@ if (isset($_GET['type'])&&$_GET['type']=='json') {
 	$start_time_str = date("Y-m-d H:i:s",$start_time);
 	$lock_time_str = date("Y-m-d H:i:s",$lock);
 $problem_num = pdo_query("select count(distinct problem_id ) from contest_problem where contest_id=?",$cid)[0][0];
-$team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
+if($OJ_ON_SITE_TEAM_TOTAL!=0)
+ $team_num=$OJ_ON_SITE_TEAM_TOTAL;
+else
+ $team_num=pdo_query("select count(distinct user_id ) from solution where contest_id=?",$cid)[0][0];
 $gold_num=intval($team_num*0.05);
 $silver_num=intval($team_num*0.15);
 $bronze_num=intval($team_num*0.20);

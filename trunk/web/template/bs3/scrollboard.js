@@ -667,30 +667,21 @@ Board.prototype.moveTeam = function(toPos) {
     (function(thisBoard) {
         var headerHeight = 44;
         var teamHeight = 68;
-	var screenHeigth=$(window).height();
         for (var i = 0; i < thisBoard.teamCount; ++i) {
             var teamId = thisBoard.teamNextSequence[i].teamId;
             //延时2.2s后更新位置，为了等待题目状态更新完成
-            if(toPos != -1){
+            if(toPos != -1)
                 $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 2200).animate({ top: i * teamHeight + headerHeight }, 1000, function() {
-                    	thisBoard.noAnimate = true;
+                    thisBoard.noAnimate = true;
                 });
-	//	lastMove=$("div[team-id=\"" + teamId + "\"]");
-            }else{
+            else
                 $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 1800 ,function() {
                     thisBoard.noAnimate = true;
                 });
-	    }
         }
     })(thisBoard);
-	
 }
-function showTeam(teamId){
-   var tTop=$("#team_"+teamId).offset().top - $(window).height()/3;
-   console.log("scroll:"+tTop);
-   $("html,body").scrollTop(tTop);
-   console.log("scroll done:"+tTop);
-}
+
 /**
  * 按下按键时调用的函数，包括榜更新一步的过程
  */
@@ -705,9 +696,6 @@ Board.prototype.keydown = function() {
             var toPos = this.updateTeamSequence();
             //更新队伍HTML内容
             this.updateTeamStatus(team);
-	    console.log(team);
-	window.setTimeout("showTeam("+team.teamId+")",3500);
-//	console.log("$('div[team-id="+lastMove.attr("team-id")+"]')[0].scrollIntoView()");
             //移动队伍
             this.moveTeam(toPos);
         } else {

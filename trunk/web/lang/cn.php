@@ -14,7 +14,7 @@
 	$MSG_ADMIN="管理";
 	$MSG_STANDING="名次";
 	$MSG_STATISTICS="统计";
-	$MSG_USERINFO="修改帐号";
+	$MSG_USERINFO="用户信息";
 	$MSG_MAIL="短消息";
 	
 	$MSG_Pending="等待";

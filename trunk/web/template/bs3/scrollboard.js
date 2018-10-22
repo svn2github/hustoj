@@ -594,7 +594,7 @@ Board.prototype.updateTeamStatus = function(team) {
             //传参，不懂原理，用此可以在动画的回调函数使用参数
             (function(thisBoard, tProblem, problemHTML) {
                 //闪烁两次后显示未知题目的结果
-                var speed = 400; //闪烁速度
+                var speed = 100; //闪烁速度
                 $statusSpan.fadeOut(speed).fadeIn(speed).fadeOut(speed).fadeIn(speed, function() {
                     //更新题目表现状态
                     $(this).parent().html(problemHTML);
@@ -606,8 +606,8 @@ Board.prototype.updateTeamStatus = function(team) {
     //延时更新榜单
     //传参，不懂原理，用此可以在动画的回调函数使用参数
     (function(thisBoard, team) {
-        //延时1.6s
-        $('#timer').animate({ margin: 0 }, 1600, function() {
+        //延时0.4s
+        $('#timer').animate({ margin: 0 }, 400, function() {
 
             /*
             更新Rank
@@ -667,30 +667,21 @@ Board.prototype.moveTeam = function(toPos) {
     (function(thisBoard) {
         var headerHeight = 44;
         var teamHeight = 68;
-	var screenHeigth=$(window).height();
         for (var i = 0; i < thisBoard.teamCount; ++i) {
             var teamId = thisBoard.teamNextSequence[i].teamId;
-            //延时2.2s后更新位置，为了等待题目状态更新完成
-            if(toPos != -1){
-                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 2200).animate({ top: i * teamHeight + headerHeight }, 1000, function() {
-                    	thisBoard.noAnimate = true;
-                });
-	//	lastMove=$("div[team-id=\"" + teamId + "\"]");
-            }else{
-                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 1800 ,function() {
+            //延时0.4s后更新位置，为了等待题目状态更新完成
+            if(toPos != -1)
+                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 400).animate({ top: i * teamHeight + headerHeight }, 400, function() {
                     thisBoard.noAnimate = true;
                 });
-	    }
+            else
+                $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 400 ,function() {
+                    thisBoard.noAnimate = true;
+                });
         }
     })(thisBoard);
-	
 }
-function showTeam(teamId){
-   var tTop=$("#team_"+teamId).offset().top - $(window).height()/3;
-   console.log("scroll:"+tTop);
-   $("html,body").scrollTop(tTop);
-   console.log("scroll done:"+tTop);
-}
+
 /**
  * 按下按键时调用的函数，包括榜更新一步的过程
  */
@@ -705,9 +696,6 @@ Board.prototype.keydown = function() {
             var toPos = this.updateTeamSequence();
             //更新队伍HTML内容
             this.updateTeamStatus(team);
-	    console.log(team);
-	window.setTimeout("showTeam("+team.teamId+")",3500);
-//	console.log("$('div[team-id="+lastMove.attr("team-id")+"]')[0].scrollIntoView()");
             //移动队伍
             this.moveTeam(toPos);
         } else {

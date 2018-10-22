@@ -202,9 +202,12 @@ if(isset($_POST['update_solution'])){
         } else{
         
             $dir=opendir($OJ_DATA."/$pid");
-            while (($file = readdir($dir)) != "")
-            {
-              if(!is_dir($file)){
+            while (($file = readdir($dir)) != ""){
+              if(!is_dir($file)&&$file!="ac"){
+		    if(isset($_POST['time'])){
+                        echo filemtime($OJ_DATA."/$pid/".$file)."\n";
+                    }
+
                	    $file=pathinfo($file);
                     $file=$file['basename'];
                     echo "$file\n";
@@ -226,14 +229,6 @@ if(isset($_POST['update_solution'])){
         }else{
           	echo file_get_contents($OJ_DATA.'/'.$file);
         }
-           
-}
-else if(isset($_POST['gettestdatadate'])){
-	$file=$_POST['filename'];
-        
-		
-    echo filemtime($OJ_DATA.'/'.$file);
-        
            
 }else{
 ?>

@@ -17,7 +17,8 @@ Even more, the latest hustoj is now possible running on SAE(sina application Eng
   * apt-get install wget
   * update latest web code from svn
   * register a new user and add privilege of "http_judge"
-  * add/edit settings in /home/judge/etc/judge.conf
+  * add/edit settings in /home/judge/etc/judge.conf
+  
 ``` OJ_HTTP_JUDGE=1
     OJ_HTTP_BASEURL=http://127.0.0.1/JudgeOnline
     OJ_HTTP_USERNAME=admin

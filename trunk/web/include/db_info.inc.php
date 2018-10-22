@@ -54,7 +54,9 @@ static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
-
+//$OJ_ON_SITE_TEAM_TOTAL用于计算奖牌比例的有效参赛队伍总数，此总数不含打星队伍。
+//0表示根据榜单上的出现的队伍总数计算，非0即采用此值计算。
+static $OJ_ON_SITE_TEAM_TOTAL=0;
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';
 
 /* weibo config here */

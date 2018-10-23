@@ -94,6 +94,11 @@ tar xf fpc-3.0.4.x86_64-linux.tar
 cd fpc-3.0.4.x86_64-linux
 echo -e "\n\n\n\n\n\n\n\n\n\n"|sh install.sh
 
+# startup nginx when booting.
+systemctl enable nginx.service 
+
+# open http/https services.
+firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
 reset
 echo "Remember your database account for HUST Online Judge:"

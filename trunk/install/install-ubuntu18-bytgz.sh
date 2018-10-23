@@ -2,7 +2,6 @@
 apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
-cd /home/judge/
 
 if [ -z "$1" ]  
 then  

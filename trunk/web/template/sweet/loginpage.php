@@ -46,6 +46,10 @@ $cur_path = "template/$OJ_TEMPLATE/"
                         <h2>LOGIN</h2>
                         <input type="text" placeholder="用户名" name="user_id"/>
                         <input type="password" placeholder="密码" name="password" />
+                        <div>
+                            <input type="text" placeholder="验证码" name="vcode"/>
+                            <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
+                        </div>
                         <button class="btn_login" type="submit">登录</button>
                     </div>
 
@@ -84,6 +88,13 @@ $cur_path = "template/$OJ_TEMPLATE/"
         return true;
     }
 </script>
+<?php if ($OJ_VCODE) { ?>
+    <script>
+        $(document).ready(function () {
+            $("#vcode-img").attr("src", "vcode.php?" + Math.random());
+        })
+    </script>
+<?php } ?>
 <!--<script>-->
 <!--    function login() {-->
 <!--        console.log('login')-->

@@ -22,16 +22,16 @@ $cur_path = "template/$OJ_TEMPLATE/"
             <div class="cont_info_log_sign_up">
                 <div class="col_md_login">
                     <div class="cont_ba_opcitiy">
-                        <h2>LOGIN</h2>
+                        <h2>$MSG_LOGIN</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_login" onClick="cambiar_login()">LOGIN</button>
+                        <button class="btn_login" onClick="cambiar_login()">$MSG_LOGIN</button>
                     </div>
                 </div>
                 <div class="col_md_sign_up">
                     <div class="cont_ba_opcitiy">
-                        <h2>SIGN UP</h2>
+                        <h2>$MSG_REGISTER</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_sign_up" onClick="cambiar_sign_up()">SIGN UP</button>
+                        <button class="btn_sign_up" onClick="cambiar_sign_up()">$MSG_REGISTER</button>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@ $cur_path = "template/$OJ_TEMPLATE/"
                 <form action="login.php" method="post" onSubmit="return jsMd5();">
 
                     <div class="cont_form_login"> <a href="#" onClick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
-                        <h2>LOGIN</h2>
-                        <input type="text" placeholder="用户名" name="user_id"/>
-                        <input type="password" placeholder="密码" name="password" />
-                        <input type="text" placeholder="验证码" name="vcode"/>
+                        <h2>$MSG_LOGIN</h2>
+                        <input type="text" placeholder="$MSG_USER_ID" name="user_id"/>
+                        <input type="password" placeholder="$MSG_PASSWORD" name="password" />
+                        <input type="text" placeholder="$MSG_VCODE" name="vcode"/>
                         <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
-                        <button class="btn_login" type="submit">登录</button>
+                        <button class="btn_login" type="submit">$MSG_LOGIN</button>
                     </div>
 
                 </form>
@@ -57,11 +57,11 @@ $cur_path = "template/$OJ_TEMPLATE/"
 
                     <div class="cont_form_sign_up"> <a href="#" onClick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
                         <h2>SIGN UP</h2>
-                        <input type="text" placeholder="用户名（学号）" name="user_id" />
-                        <input type="text" placeholder="昵称" name="nick" />
-                        <input type="password" placeholder="密码" name="password" />
-                        <input type="password" placeholder="重复密码" name="rptpassword" />
-                        <button class="btn_sign_up" type="submit">注册</button>
+                        <input type="text" placeholder="$MSG_USER_ID" name="user_id" />
+                        <input type="text" placeholder="$MSG_NICK" name="nick" />
+                        <input type="password" placeholder="$MSG_PASSWORD" name="password" />
+                        <input type="password" placeholder="$MSG_REPEAT_PASSWORD" name="rptpassword" />
+                        <button class="btn_sign_up" type="submit">$MSG_REGISTER</button>
                     </div>
 
                 </form>

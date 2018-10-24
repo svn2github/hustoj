@@ -15,7 +15,7 @@
 	$MSG_ADMIN="Admin";
 	$MSG_STANDING="Standing";
 	$MSG_STATISTICS="Statistics";
-	$MSG_USERINFO="ModifyUser";
+	$MSG_USERINFO="User Information";
 	$MSG_MAIL="Mail";
 	//status.php
 	$MSG_Pending="Pending";

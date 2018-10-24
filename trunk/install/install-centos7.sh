@@ -72,6 +72,10 @@ systemctl restart php-fpm.service
 # startup php-fpm.service when booting.
 systemctl enable php-fpm.service
 
+# if `GET localhost` get 403 or 503 response code , "access denied" or other response content,
+# remove '#' from next line and run script to allow httpd read user content ( /home/judge/src/web ).
+# setsebool -P httpd_read_user_content 1
+
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
 

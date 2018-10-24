@@ -53,13 +53,25 @@ chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
 cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
 cp /home/judge/src/install/nginx.conf /etc/nginx/
+
+# restart nginx.service
 systemctl restart nginx.service
+
+# startup nginx.service when booting.
+systemctl enable nginx.service 
+
+# open http/https services.
+firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
 
-
+# restart php-fpm.service.
 systemctl restart php-fpm.service
+
+# startup php-fpm.service when booting.
+systemctl enable php-fpm.service
+
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
 
@@ -93,12 +105,6 @@ wget https://downloads.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4.
 tar xf fpc-3.0.4.x86_64-linux.tar
 cd fpc-3.0.4.x86_64-linux
 echo -e "\n\n\n\n\n\n\n\n\n\n"|sh install.sh
-
-# startup nginx when booting.
-systemctl enable nginx.service 
-
-# open http/https services.
-firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
 reset
 echo "Remember your database account for HUST Online Judge:"

@@ -56,7 +56,7 @@ $cur_path = "template/$OJ_TEMPLATE/"
                 <form action="register.php" method="post" >
 
                     <div class="cont_form_sign_up"> <a href="#" onClick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-                        <h2>SIGN UP</h2>
+                        <h2><?php echo $MSG_REGISTER?></h2>
                         <input type="text" placeholder="<?php echo $MSG_USER_ID?>" name="user_id" />
                         <input type="text" placeholder="<?php echo $MSG_NICK?>" name="nick" />
                         <input type="password" placeholder="<?php echo $MSG_PASSWORD?>" name="password" />

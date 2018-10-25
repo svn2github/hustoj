@@ -22,16 +22,16 @@ $cur_path = "template/$OJ_TEMPLATE/"
             <div class="cont_info_log_sign_up">
                 <div class="col_md_login">
                     <div class="cont_ba_opcitiy">
-                        <h2>LOGIN</h2>
+                        <h2><?php echo $MSG_LOGIN?></h2>
                         <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_login" onClick="cambiar_login()">LOGIN</button>
+                        <button class="btn_login" onClick="cambiar_login()"><?php echo $MSG_LOGIN?></button>
                     </div>
                 </div>
                 <div class="col_md_sign_up">
                     <div class="cont_ba_opcitiy">
-                        <h2>SIGN UP</h2>
+                        <h2><?php echo $MSG_REGISTER?></h2>
                         <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                        <button class="btn_sign_up" onClick="cambiar_sign_up()">SIGN UP</button>
+                        <button class="btn_sign_up" onClick="cambiar_sign_up()"><?php echo $MSG_REGISTER?></button>
                     </div>
                 </div>
             </div>
@@ -43,10 +43,12 @@ $cur_path = "template/$OJ_TEMPLATE/"
                 <form action="login.php" method="post" onSubmit="return jsMd5();">
 
                     <div class="cont_form_login"> <a href="#" onClick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
-                        <h2>LOGIN</h2>
-                        <input type="text" placeholder="用户名" name="user_id"/>
-                        <input type="password" placeholder="密码" name="password" />
-                        <button class="btn_login" type="submit">登录</button>
+                        <h2><?php echo $MSG_LOGIN?></h2>
+                        <input type="text" placeholder="<?php echo $MSG_USER_ID?>" name="user_id"/>
+                        <input type="password" placeholder="<?php echo $MSG_PASSWORD?>" name="password" />
+                        <input type="text" placeholder="<?php echo $MSG_VCODE?>" name="vcode"/>
+                        <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
+                        <button class="btn_login" type="submit"><?php echo $MSG_LOGIN?></button>
                     </div>
 
                 </form>
@@ -54,12 +56,12 @@ $cur_path = "template/$OJ_TEMPLATE/"
                 <form action="register.php" method="post" >
 
                     <div class="cont_form_sign_up"> <a href="#" onClick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-                        <h2>SIGN UP</h2>
-                        <input type="text" placeholder="用户名（学号）" name="user_id" />
-                        <input type="text" placeholder="昵称" name="nick" />
-                        <input type="password" placeholder="密码" name="password" />
-                        <input type="password" placeholder="重复密码" name="rptpassword" />
-                        <button class="btn_sign_up" type="submit">注册</button>
+                        <h2><?php echo $MSG_REGISTER?></h2>
+                        <input type="text" placeholder="<?php echo $MSG_USER_ID?>" name="user_id" />
+                        <input type="text" placeholder="<?php echo $MSG_NICK?>" name="nick" />
+                        <input type="password" placeholder="<?php echo $MSG_PASSWORD?>" name="password" />
+                        <input type="password" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>" name="rptpassword" />
+                        <button class="btn_sign_up" type="submit"><?php echo $MSG_REGISTER?></button>
                     </div>
 
                 </form>
@@ -84,6 +86,13 @@ $cur_path = "template/$OJ_TEMPLATE/"
         return true;
     }
 </script>
+<?php if ($OJ_VCODE) { ?>
+    <script>
+        $(document).ready(function () {
+            $("#vcode-img").attr("src", "vcode.php?" + Math.random());
+        })
+    </script>
+<?php } ?>
 <!--<script>-->
 <!--    function login() {-->
 <!--        console.log('login')-->

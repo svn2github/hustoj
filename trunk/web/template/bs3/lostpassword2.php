@@ -29,7 +29,8 @@
 <center>
 <table algin=center>
 <tr><td><?php echo $MSG_USER_ID?>:<td><input name="user_id" type="text" size=20></td></tr>
-<tr><td>Input the Code sended to your email:<td><input name="lost_key" type="text" size=20>* if it's correct, it will be the new password</td></tr>
+<tr><td><?php echo $MSG_LOSTPASSWORD_MAILBOX ?>:<td><input name="lost_key" type="text" size=20>*
+        <?php echo $MSG_LOSTPASSWORD_WILLBENEW ?></td></tr>
 <?php // if($OJ_VCODE){
   ?>
 <tr><td><?php echo $MSG_VCODE?>:</td>

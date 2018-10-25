@@ -200,4 +200,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="从不同的ip地址登录";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
+  $MSG_LOSTPASSWORD_MAILBOX="请到您邮箱的垃圾邮件文件夹寻找验证码，并填写到这里：";
+  $MSG_LOSTPASSWORD_WILLBENEW="如果填写正确，通过下一步验证，这个验证码就自动成为您的新密码！";
+
 ?>

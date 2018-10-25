@@ -198,4 +198,9 @@ $MSG_HELP_ONLINE= "view online users";
   $MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="Login from a diffrent ip ";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" during exam is not allowed ";
+
+  $MSG_LOSTPASSWORD_MAILBOX="Input the Code sended to your email (Trash Box )";
+  $MSG_LOSTPASSWORD_WILLBENEW="if it's correct, it will be the new password";
+
+
  ?>

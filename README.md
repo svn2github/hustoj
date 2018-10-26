@@ -32,6 +32,8 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh
     
+出于Centos7的selinux限制，在使用centos7的过程中会出现各种意料之外的错误，请尝试使用`sudo setenforce 0 `临时关闭selinux后，再次尝试操作。如果运维能力有限无法解决问题可以考虑将`/etc/selinux/config`文件中的`SELINUX=enforcing`设置为`disable`，并重新启动（当然并不是十分推荐您这么做）。
+
 https://www.youtube.com/watch?v=hRap7ettUWc
 
 

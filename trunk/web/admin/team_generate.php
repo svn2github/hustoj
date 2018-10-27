@@ -40,6 +40,11 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 			    $tmp_ip=explode(',',$REMOTE_ADDR);
 			    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 			}
+			if(mb_strlen($nick,'utf-8')>20){
+				$new_len=mb_strlen($nick,'utf-8');
+				$longer="ALTER TABLE `users` MODIFY COLUMN `nick` varchar($new_len) NULL DEFAULT '' ";
+				pdo_query($longer);
+			}
 			$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
 			"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
 			pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school) ;

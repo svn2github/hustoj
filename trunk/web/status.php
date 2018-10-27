@@ -272,7 +272,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                         if( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 
-                                        $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
+                                        $view_status[$i][3].= "<a href=comparesource.php?left=".$row['sim_s_id']."&right=".$row['solution_id']."  class='btn btn-info'  target=original>".$row['sim_s_id']."(".$row['sim']."%)</a>";
                         }else{
 
                                         $view_status[$i][3].= "<span class='btn-info'>".$row['sim_s_id']."</span>";

@@ -13,7 +13,12 @@ if (!isset($_GET['sid'])){
 	exit(0);
 }
 function is_valid($str2){
-    //return 0;    // enable this line to disable RE view
+    global	$OJ_ON_SITE_CONTEST_ID,$OJ_EXAM_CONTEST_ID;
+    if((isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+       (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)){
+	      return 0;    // enable this line to disable RE view
+     }
+   
     $n=strlen($str2);
     $str=str_split($str2);
     $m=1;

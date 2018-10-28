@@ -29,6 +29,7 @@ $id=strval(intval($_GET['sid']));
 $sql="SELECT * FROM `solution` WHERE `solution_id`=?";
 $result=pdo_query($sql,$id);
 $row=$result[0];
+$lang=$row['language'];
 $isRE=$row['result']==10;
 if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
@@ -40,7 +41,7 @@ if ($ok==true){
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$id);
 	 $row=$result[0];
-	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||is_valid($row['error'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
+	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||(is_valid($row['error'])&&$lang!=3)||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 	}else{
 		

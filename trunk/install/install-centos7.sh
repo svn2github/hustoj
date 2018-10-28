@@ -97,6 +97,7 @@ chmod +x make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then
 	echo "auto start judged added!"
 else
+	chmod +x /etc/rc.d/rc.local
 	sed -i "s/exit 0//g" /etc/rc.local
 	echo "/usr/bin/judged" >> /etc/rc.local
 	echo "exit 0" >> /etc/rc.local

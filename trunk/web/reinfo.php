@@ -13,7 +13,7 @@ if (!isset($_GET['sid'])){
 	exit(0);
 }
 function is_valid($str2){
-    //return 1;
+    //return 0;    // enable this line to disable RE view
     $n=strlen($str2);
     $str=str_split($str2);
     $m=1;

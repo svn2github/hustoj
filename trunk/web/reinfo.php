@@ -13,11 +13,6 @@ if (!isset($_GET['sid'])){
 	exit(0);
 }
 function is_valid($str2){
-    global	$OJ_ON_SITE_CONTEST_ID,$OJ_EXAM_CONTEST_ID;
-    if((isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
-       (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)){
-	      return 0;    // enable this line to disable RE view
-     }
    
     $n=strlen($str2);
     $str=str_split($str2);
@@ -35,18 +30,25 @@ $sql="SELECT * FROM `solution` WHERE `solution_id`=?";
 $result=pdo_query($sql,$id);
 $row=$result[0];
 $lang=$row['language'];
+$contest_id=intval($row['contest_id']);
 $isRE=$row['result']==10;
 if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 $view_reinfo="";
-if ($ok==true){
+if ($ok==true&&$lang!=3&&$contest_id==0&&
+
+    !(
+    	(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+        (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
+     )
+){
 	if($row['user_id']!=$_SESSION[$OJ_NAME.'_'.'user_id'])
 		$view_mail_link= "<a href='mail.php?to_user=".htmlentities($row['user_id'],ENT_QUOTES,"UTF-8")."&title=$MSG_SUBMIT $id'>Mail the auther</a>";
 	
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$id);
 	 $row=$result[0];
-	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||(is_valid($row['error'])&&$lang!=3)||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
+	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||is_valid($row['error'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 	}else{
 		

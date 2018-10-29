@@ -606,8 +606,8 @@ Board.prototype.updateTeamStatus = function(team) {
     //延时更新榜单
     //传参，不懂原理，用此可以在动画的回调函数使用参数
     (function(thisBoard, team) {
-        //延时0.4s
-        $('#timer').animate({ margin: 0 }, 2000, function() {
+        //延时0.2s
+        $('#timer').animate({ margin: 0 }, 200, function() {
 
             /*
             更新Rank
@@ -669,7 +669,7 @@ Board.prototype.moveTeam = function(toPos) {
         var teamHeight = 68;
         for (var i = 0; i < thisBoard.teamCount; ++i) {
             var teamId = thisBoard.teamNextSequence[i].teamId;
-            //延时0.4s后更新位置，为了等待题目状态更新完成
+            //延时1.2s更新位置，为了等待题目状态更新完成
             if(toPos != -1)
                 $("div[team-id=\"" + teamId + "\"]").animate({ margin: 0 }, 200).animate({ top: i * teamHeight + headerHeight }, 1000, function() {
                     thisBoard.noAnimate = true;

@@ -57,7 +57,7 @@ static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
 //CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌
-//0表示根据榜单上的出现的队伍总数计算(包含了AC0题的队伍和打星队伍，不包含从未提交过代码的队伍)
+//0表示根据榜单上的出现的队伍总数计算(包含了AC0题的队伍和打星队伍)
 static $OJ_ON_SITE_TEAM_TOTAL=0;
 
 static $OJ_OPENID_PWD = '8a367fe87b1e406ea8e94d7d508dcf01';

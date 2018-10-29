@@ -75,8 +75,14 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
-# set selinux bool flag to avoid 'access denied' error.
-setsebool -P httpd_read_user_content 1
+# set selinux content .
+# to avoid 'access denied' and cannot upload .
+# not ensure there has no other problems .
+semanage fcontent -a -t httpd_sys_content_t /home/judge/web
+semanage fcontent -a -t httpd_sys_content_t /home/judge/src
+
+# If you want to unify HTTPD handling of all content files, you must turn on the httpd_unified boolean.
+setsebool -P httpd_unified 1
 
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
@@ -91,9 +97,10 @@ chmod +x make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then
 	echo "auto start judged added!"
 else
-	sed -i "s/exit 0//g" /etc/rc.local
-	echo "/usr/bin/judged" >> /etc/rc.local
-	echo "exit 0" >> /etc/rc.local
+	chmod +x /etc/rc.d/rc.local
+	sed -i "s/exit 0//g" /etc/rc.d/rc.local
+	echo "/usr/bin/judged" >> /etc/rc.d/rc.local
+	echo "exit 0" >> /etc/rc.d/rc.local
 	
 fi
 /usr/bin/judged
@@ -107,10 +114,9 @@ yum -y install mono
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
 #free pascal
-wget https://downloads.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4.x86_64-linux.tar
-tar xf fpc-3.0.4.x86_64-linux.tar
-cd fpc-3.0.4.x86_64-linux
-echo -e "\n\n\n\n\n\n\n\n\n\n"|sh install.sh
+wget https://download.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4-1.x86_64.rpm
+rpm -ivh fpc-3.0.4-1.x86_64.rpm
+rm -rf fpc-3.0.4-1.x86_64.rpm
 
 reset
 echo "Remember your database account for HUST Online Judge:"

@@ -80,7 +80,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
-<textarea style="width:30%" cols=10 rows=5 id="out" name="out" >SHOULD BE:
+<textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
 <br>

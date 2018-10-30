@@ -68,7 +68,7 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md
 https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 
-docker安装，<b>仅供docker熟练用户参考使用，假如你不知道什么是docker，请假装没看见这一段！</b>
+docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
 ```	
 docker run -d -it \
     -v /data/docker/docker-wxy/data:/data \

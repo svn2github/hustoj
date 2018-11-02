@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<h3><?php echo $MSG_HELP?></h3>
+	
 <hr>
 <h4>
 <ul>

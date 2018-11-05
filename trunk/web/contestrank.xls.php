@@ -123,14 +123,17 @@ function  getMark($users,  $start,  $end, $s) {
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 //require_once("contest-header.php");
-$sql="SELECT `start_time`,`title` FROM `contest` WHERE `contest_id`=?";
+$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
 $result=pdo_query($sql,$cid) ;
 $rows_cnt=count($result);
 $start_time=0;
+$end_time=0;
 if ($rows_cnt>0){
 	 $row=$result[0];
 	$start_time=strtotime($row[0]);
 	$title=$row[1];
+	$end_time=strtotime($row[2]);
+	
 	$ftitle=rawurlencode($title);
 	header ( "content-disposition:   attachment;   filename=contest".$cid."_".$ftitle.".xls" );
 }

@@ -13,7 +13,9 @@ if (!isset($_GET['sid'])){
 	exit(0);
 }
 function is_valid($str2){
-   
+    global $_SESSION;
+    if(isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) return true;
+    //return true; // 如果希望能然任何人都查看对比和RE,放开行首注释 if you fail to view diff , try remove the // at beginning of this line.
     $n=strlen($str2);
     $str=str_split($str2);
     $m=1;

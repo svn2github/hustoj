@@ -82,7 +82,7 @@ if($OJ_ONLINE){
             <div class="page page_1"><span class="page_bg scale_box"></span>
                 <div class=img_box><img src="" alt=""></div>
                 <div class="txt_box scale_box">
-                    <h2>商丘师范学院 OnlineJudge</h2>
+                    <h2><?php echo $OJ_NAME?> OnlineJudge</h2>
                     <p class=txt_brief>从现在开始，你的大学生活将是如此的不同。巨大的脑洞，丰富的题库，全面的测试用例，全新的视野，这一切，都让你的 ACMer 生活更加精彩。</div>
             </div>
             <div class="page page_2"><span class="page_bg scale_box"></span>

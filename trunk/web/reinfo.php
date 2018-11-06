@@ -37,11 +37,12 @@ $isRE=$row['result']==10;
 if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 $view_reinfo="";
-if ($ok==true&&$lang!=3&&$contest_id==0&&                          // 防止打表过数据弱的题目
+if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||
+	($ok&&$lang!=3&&$contest_id==0&&                          // 防止打表过数据弱的题目
     !(                                                             // 默认禁止比赛中查看WAd对比和RE详情
     	(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||      // 如果希望教学中无论练习或比赛均开放数据对比与运行错误，可以将这里
         (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)  // 的所有条件简化为 $ok，即38行到43行简化为: if($ok){
-     )                                                             // if you want a friendly WA and RE, change line 38-43 to "if($ok){"
+     ) )                                                            // if you want a friendly WA and RE, change line 38-43 to "if($ok){"
 ){
 	if($row['user_id']!=$_SESSION[$OJ_NAME.'_'.'user_id'])
 		$view_mail_link= "<a href='mail.php?to_user=".htmlentities($row['user_id'],ENT_QUOTES,"UTF-8")."&title=$MSG_SUBMIT $id'>Mail the auther</a>";

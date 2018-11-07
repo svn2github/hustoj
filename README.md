@@ -39,12 +39,13 @@ https://www.youtube.com/watch?v=hRap7ettUWc
 
 <b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
 
-安装后几个重要配置文件的位置
+大部分功能和选项的开关和参数调整都在配置文件中，安装后几个重要配置文件的位置如下：
 
-    /home/judge/etc/judge.conf
-    /home/judge/src/web/include/db_info.inc.php
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
-    /etc/nginx/sites-enabled/default
+    /home/judge/etc/judge.conf        判题judged/judge_client
+    /home/judge/src/web/include/db_info.inc.php   Web
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini   php
+    /etc/nginx/sites-enabled/default                   nginx
+    
 如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
 ```
 	worker_processes 8;    #其中数字8可以取CPU核心数的整数倍。

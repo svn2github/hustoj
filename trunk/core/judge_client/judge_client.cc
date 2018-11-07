@@ -2565,6 +2565,14 @@ int main(int argc, char** argv) {
 	
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
+		if(access(outfile, 0) == -1 ){
+                                //out file does not exist
+                                char error[BUFFER_SIZE];
+                                sprintf(error,"missing out file %s, report to system administrator!\n",outfile);
+                                print_runtimeerror(error);
+                                ACflg=OJ_RE;
+                }
+
 		init_syscalls_limits(lang);
 
 		pid_t pidApp = fork();

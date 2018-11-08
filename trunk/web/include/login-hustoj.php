@@ -27,7 +27,7 @@
 					$sql="select ip from loginlog where user_id=? and time>? order by time desc";
 					$rows=pdo_query($sql,$user_id,$start_time);
 					$lastip=$rows[0][0];
-					if($lastip!=$ip) {
+					if((!empty($lastip))&&$lastip!=$ip) {
 						$view_errors="$MSG_WARNING_LOGIN_FROM_DIFF_IP($lastip/$ip) $MSG_WARNING_DURING_EXAM_NOT_ALLOWED!";
 						return false;
 					}

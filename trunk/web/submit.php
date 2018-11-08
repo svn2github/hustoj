@@ -31,11 +31,11 @@ if($OJ_VCODE&&($_SESSION[$OJ_NAME.'_'."vcode"]==null||$vcode!= $_SESSION[$OJ_NAM
 if (isset($_POST['cid'])){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
-	$sql="SELECT `problem_id` from `contest_problem` 
+	$sql="SELECT `problem_id`,defunct from `contest_problem` 
 				where `num`='$pid' and contest_id=$cid";
 }else{
 	$id=intval($_POST['id']);
-	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
+	$sql="SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
 			(`end_time`>'$now' or private=1)and `defunct`='N'
 			))";
@@ -50,6 +50,13 @@ if ($res&&count($res)<1&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])&&!((iss
 		$view_errors=  "Where do find this link? No such problem.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
+}
+if($res[0][1]!='N'&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+
+		$view_errors=  "Problem disabled.<br>";
+		require("template/".$OJ_TEMPLATE."/error.php");
+		exit(0);
+
 }
 
 

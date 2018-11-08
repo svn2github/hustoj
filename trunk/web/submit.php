@@ -35,23 +35,25 @@ if (isset($_POST['cid'])){
 				where `num`='$pid' and contest_id=$cid";
 }else{
 	$id=intval($_POST['id']);
-	$sql="SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
-			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>'$now' or private=1)and `defunct`='N'
-			))";
+	$sql="SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' ";
 	if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
-		$sql.=" and defunct='N'";
+		$sql.=" and defunct='N' ";
+
+	$sql.=" and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
+			SELECT `contest_id` FROM `contest` WHERE 
+			(`end_time`>'$now' or private=1) and `defunct`='N') )";
 }
 //echo $sql;	
 
 $res=mysql_query_cache($sql);
-if ($res&&count($res)<1&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
+if (isset($res)&&count($res)<1&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])&&!((isset($cid)&&$cid<=0)||(isset($id)&&$id<=0))){
 		
 		$view_errors=  "Where do find this link? No such problem.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 }
 if($res[0][1]!='N'&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+		echo "res:$res,count:".count($res);
 
 		$view_errors=  "Problem disabled.<br>";
 		require("template/".$OJ_TEMPLATE."/error.php");

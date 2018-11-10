@@ -31,7 +31,7 @@ if($OJ_VCODE&&($_SESSION[$OJ_NAME.'_'."vcode"]==null||$vcode!= $_SESSION[$OJ_NAM
 if (isset($_POST['cid'])){
 	$pid=intval($_POST['pid']);
 	$cid=intval($_POST['cid']);
-	$sql="SELECT `problem_id`,defunct from `contest_problem` 
+	$sql="SELECT `problem_id`,'N' from `contest_problem` 
 				where `num`='$pid' and contest_id=$cid";
 }else{
 	$id=intval($_POST['id']);

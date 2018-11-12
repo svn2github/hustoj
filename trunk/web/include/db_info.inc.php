@@ -55,6 +55,9 @@ static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
 
+/* share code */
+static  $OJ_SHARE_CODE = false; // 代码分享功能
+
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
 //CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌
 //0表示根据榜单上的出现的队伍总数计算(包含了AC0题的队伍和打星队伍)

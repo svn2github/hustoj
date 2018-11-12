@@ -158,7 +158,15 @@ $tsql[27]="CREATE TABLE  `balloon` (
   `status` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-
+$csql[28]="select 1 from share_code";
+$tsql[28]="CREATE TABLE `share_code` (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_code` text COLLATE utf8_unicode_ci,
+  `language` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`share_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

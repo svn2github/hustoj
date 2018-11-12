@@ -50,7 +50,13 @@ if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 
   $profile.="&nbsp;<li><a href='".$path_fix."status.php?user_id=$sid'><span id=red>$MSG_MY_SUBMISSIONS</span></a></li>";
   $profile.="&nbsp;<li><a href='".$path_fix."contest.php?my'><span id=red>$MSG_MY_CONTESTS</span></a></li>";
-
+  if(
+    (isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+    (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)||
+    (isset($OJ_SHARE_CODE)&&!$OJ_SHARE_CODE)
+  ){}else{
+    $profile.= "&nbsp;<li><a href='./sharecodelist.php'>代码分享</a></li>";
+  }
   $profile.= "&nbsp;<li><a href=".$path_fix."logout.php>$MSG_LOGOUT</a></li>&nbsp;";
 
 }else{

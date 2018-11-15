@@ -2,7 +2,7 @@
 DBNAME="jol"
 DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
-CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm

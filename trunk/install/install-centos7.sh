@@ -69,15 +69,6 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
-# set selinux content .
-# to avoid 'access denied' and cannot upload .
-# not ensure there has no other problems .
-semanage fcontent -a -t httpd_sys_content_t /home/judge/web
-semanage fcontent -a -t httpd_sys_content_t /home/judge/src
-
-# If you want to unify HTTPD handling of all content files, you must turn on the httpd_unified boolean.
-setsebool -P httpd_unified 1
-
 # restart nginx.service
 systemctl restart nginx.service
 

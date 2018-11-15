@@ -60,6 +60,9 @@ systemctl enable nginx.service
 # open http/https services.
 firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
+# reload firewall config
+firewall-cmd --reload
+
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
 

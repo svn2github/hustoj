@@ -143,7 +143,8 @@ function Submit(submitId, teamId, alphabetId, subTime, resultId) {
     this.submitId = submitId; //全局runID
     this.teamId = teamId; //队伍ID
     this.alphabetId = alphabetId; //比赛中的题目ID：A,B,C,D...
-    this.subTime = new Date(subTime);
+    //this.subTime = new Date(subTime);
+    this.subTime = StringToDate(subTime);
     /**
      * 判题结果ID
      * @type {int}

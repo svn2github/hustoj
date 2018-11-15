@@ -218,6 +218,15 @@ CREATE TABLE  `balloon` (
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `share_code` (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_code` text COLLATE utf8_unicode_ci,
+  `language` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`share_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
 delimiter //
 drop trigger if exists simfilter//
 create trigger simfilter

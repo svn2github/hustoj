@@ -54,9 +54,6 @@ chown apache src/web/upload data run0 run1 run2 run3
 cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 
-# restart nginx.service
-systemctl restart nginx.service
-
 # startup nginx.service when booting.
 systemctl enable nginx.service 
 
@@ -65,9 +62,6 @@ firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
-
-# restart php-fpm.service.
-systemctl restart php-fpm.service
 
 # startup php-fpm.service when booting.
 systemctl enable php-fpm.service
@@ -83,6 +77,12 @@ semanage fcontent -a -t httpd_sys_content_t /home/judge/src
 
 # If you want to unify HTTPD handling of all content files, you must turn on the httpd_unified boolean.
 setsebool -P httpd_unified 1
+
+# restart nginx.service
+systemctl restart nginx.service
+
+# restart php-fpm.service.
+systemctl restart php-fpm.service
 
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/

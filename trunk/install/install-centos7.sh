@@ -69,6 +69,9 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
+semodule -i /home/judge/src/install/my-phpfpm.pp
+semodule -i /home/judge/src/install/my-ifconfig.pp
+
 # restart nginx.service
 systemctl restart nginx.service
 

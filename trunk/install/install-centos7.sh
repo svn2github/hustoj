@@ -2,7 +2,7 @@
 DBNAME="jol"
 DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
-CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
@@ -43,8 +43,8 @@ chmod 700 etc/judge.conf
 #sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
 
-sed -i "s+//date_default_timezone_set("PRC");+date_default_timezone_set("PRC");+g" src/web/include/db_info.inc.php
-sed -i "s+//pdo_query("SET time_zone ='+8:00'");+pdo_query("SET time_zone ='+8:00'");+g" src/web/include/db_info.inc.php
+sed -i "s+//date_default_timezone_set(\"PRC\");+date_default_timezone_set(\"PRC\");+g" src/web/include/db_info.inc.php
+sed -i "s+//pdo_query(\"SET time_zone ='\+8:00'\");+pdo_query(\"SET time_zone ='\+8:00'\");+g" src/web/include/db_info.inc.php
 
 chmod 775 -R /home/judge/data && chgrp -R apache /home/judge/data
 chmod 700 src/web/include/db_info.inc.php
@@ -54,20 +54,17 @@ chown apache src/web/upload data run0 run1 run2 run3
 cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
 cp /home/judge/src/install/nginx.conf /etc/nginx/
 
-# restart nginx.service
-systemctl restart nginx.service
-
 # startup nginx.service when booting.
 systemctl enable nginx.service 
 
 # open http/https services.
 firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
+# reload firewall config
+firewall-cmd --reload
+
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
-
-# restart php-fpm.service.
-systemctl restart php-fpm.service
 
 # startup php-fpm.service when booting.
 systemctl enable php-fpm.service
@@ -75,14 +72,14 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
-# set selinux content .
-# to avoid 'access denied' and cannot upload .
-# not ensure there has no other problems .
-semanage fcontent -a -t httpd_sys_content_t /home/judge/web
-semanage fcontent -a -t httpd_sys_content_t /home/judge/src
+semodule -i /home/judge/src/install/my-phpfpm.pp
+semodule -i /home/judge/src/install/my-ifconfig.pp
 
-# If you want to unify HTTPD handling of all content files, you must turn on the httpd_unified boolean.
-setsebool -P httpd_unified 1
+# restart nginx.service
+systemctl restart nginx.service
+
+# restart php-fpm.service.
+systemctl restart php-fpm.service
 
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/

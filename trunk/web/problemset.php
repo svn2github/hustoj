@@ -120,9 +120,23 @@ foreach ($result as $row){
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}
+
+	$category=array();
+	$cate=explode(" ",$row['source']);
+	foreach($cate as $cat){
+		array_push($category,trim($cat));	
+	}
+
 	$view_problemset[$i][1]="<div class='center'>".$row['problem_id']."</div>";;
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
-	$view_problemset[$i][3]="<div class='center'><nobr>".mb_substr($row['source'],0,8,'utf8')."</nobr></div >";
+	$view_problemset[$i][3]="<div class='center'>";
+	foreach($category as $cat){
+		if(trim($cat)=="")continue;
+		$hash_num=hexdec(substr(md5($cat),0,15));
+		$label_theme=$color_theme[$hash_num%count($color_theme)];
+		$view_problemset[$i][3].="<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,4,'utf8')."</a>&nbsp;";
+	}
+	$view_problemset[$i][3].="</div >";
 	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."&jresult=4'>".$row['accepted']."</a></div>";
 	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
 	

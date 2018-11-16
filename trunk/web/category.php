@@ -27,10 +27,11 @@
 		$view_category= "<h3>No Category Now!</h3>";
 	}else{
 		$view_category.= "<div><p>";
-		
 		foreach ($category as $cat){
 			if(trim($cat)=="") continue;
-			$view_category.= "<a class='btn btn-primary' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".$cat."</a>&nbsp;";
+			$hash_num=hexdec(substr(md5($cat),0,15));
+			$label_theme=$color_theme[$hash_num%count($color_theme)];
+			$view_category.= "<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".$cat."</a>&nbsp;";
 		}
 		
 		$view_category.= "</p></div>";

@@ -108,7 +108,6 @@ $view_total_page=intval($cnt+1);
 $cnt=0;
 $view_problemset=Array();
 $i=0;
-$color_theme=["default","primary","success","info","warning","danger"];
 foreach ($result as $row){
 	
 	

@@ -9,7 +9,10 @@ rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 
 yum -y update
-yum -y install nginx php-fpm php-mysql php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum -y install epel-release yum-utils
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php72
+yum -y install nginx php-fpm php-mysqlnd php-xml php-gd php-mbstring gcc-c++  mysql-devel glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
 yum -y install mariadb mariadb-devel mariadb-server
 systemctl start mariadb.service 
 /usr/sbin/useradd -m -u 1536 judge

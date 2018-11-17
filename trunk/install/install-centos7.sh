@@ -132,6 +132,9 @@ wget https://download.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4-1
 rpm -ivh fpc-3.0.4-1.x86_64.rpm
 rm -rf fpc-3.0.4-1.x86_64.rpm
 
+# Go language
+yum -y install golang
+
 reset
 echo "Remember your database account for HUST Online Judge:"
 echo "username:root"

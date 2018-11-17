@@ -53,15 +53,15 @@ if(isset($_POST['startdate'])){
   $langmask = ((1<<count($language_ext))-1)&(~$langmask);
   //echo $langmask; 
 
-  $sql = "INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`)
-          VALUES(?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO `contest`(`title`,`start_time`,`end_time`,`private`,`langmask`,`description`,`password`,`user_id`)
+          VALUES(?,?,?,?,?,?,?,?)";
 
   $description = str_replace("<p>", "", $description); 
   $description = str_replace("</p>", "<br />", $description);
   $description = str_replace(",", "&#44; ", $description);
-
-  echo $sql.$title.$starttime.$endtime.$private.$langmask.$description.$password;
-  $cid = pdo_query($sql,$title,$starttime,$endtime,$private,$langmask,$description,$password) ;
+  $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
+  echo $sql.$title.$starttime.$endtime.$private.$langmask.$description.$password,$user_id;
+  $cid = pdo_query($sql,$title,$starttime,$endtime,$private,$langmask,$description,$password,$user_id) ;
   echo "Add Contest ".$cid;
 
   $sql = "DELETE FROM `contest_problem` WHERE `contest_id`=$cid";

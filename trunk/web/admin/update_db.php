@@ -132,8 +132,8 @@ $csql[22]="";
 $tsql[23]="select judger from solution limit 1 ";
 $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
 
-$csql[24]="";
 $tsql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
+$csql[24]="";
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
@@ -168,7 +168,7 @@ $tsql[28]="CREATE TABLE `share_code` (
   PRIMARY KEY (`share_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
 $tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
-$csql[29]="";
+$csql[29]="select user_id from contest limit 1";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

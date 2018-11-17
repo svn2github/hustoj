@@ -167,6 +167,9 @@ $tsql[28]="CREATE TABLE `share_code` (
   `share_time` datetime DEFAULT NULL,
   PRIMARY KEY (`share_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
+$tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
+$csql[29]="";
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

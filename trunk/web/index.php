@@ -24,15 +24,18 @@
 	if (!$result){
 		$view_news= "<h3>No News Now!</h3>";
 	}else{
-		$view_news.= "<table width=96%>";
-		
-		foreach ($result as $row){
-			$view_news.= "<tr><td><td><big><b>".$row['title']."</b></big>-<small>[".$row['user_id']."]</small></tr>";
-			$view_news.= "<tr><td><td>".$row['content']."</tr>";
-		}
-		
-		$view_news.= "<tr><td width=20%><td>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=https://github.com/zhblue/hustoj>hustoj</a></tr>";
-		$view_news.= "</table>";
+		$view_news.="<div class='panel panel-default' style='width:80%;margin:0 auto;'>";
+			$view_news.="<div class='panel-heading'><h3>".$MSG_NEWS."<h3></div>";
+			$view_news.="<div class='panel-body'>";
+			foreach ($result as $row){
+				$view_news.="<div class='panel panel-default'>";
+				$view_news.="<div class='panel-heading'><big>".$row['title']."</big>-<small>".$row['user_id']."</small></div>";
+				$view_news.="<div class='panel-body'>".$row['content']."</div>";
+				$view_news.="</div>";
+			}
+			$view_news.="</div>";
+			$view_news.= "<div class='panel-footer'>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=https://github.com/zhblue/hustoj>hustoj</a></div>";
+		$view_news.="</div>";
 	}
 $view_apc_info="";
 

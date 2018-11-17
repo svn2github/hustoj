@@ -75,9 +75,9 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
-# check out selinux policy modules
-checkout /home/judge/src/install/my-phpfpm.te -M -m -o my-phpfpm.mod
-checkout /home/judge/src/install/my-ifconfig.te -M -m -o my-ifconfig.mod
+# check module selinux policy modules
+checkmodule /home/judge/src/install/my-phpfpm.te -M -m -o my-phpfpm.mod
+checkmodule /home/judge/src/install/my-ifconfig.te -M -m -o my-ifconfig.mod
 
 # package policy modules
 semodule_package -m my-phpfpm.mod -o my-phpfpm.pp

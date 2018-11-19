@@ -29,6 +29,7 @@
     <caption style="text-align: center;font-size: 20px">代码分享列表，<a href="./sharecodepage.php">立即分享</a></caption>
     <tr>
         <th>编号</th>
+        <th>标题</th>
         <th>语言</th>
         <th>分享时间</th>
         <th>操作</th>
@@ -40,6 +41,7 @@
     foreach($share_list as $share_info){
         echo "<tr>";
         echo "<td><a href='./sharecodepage.php?sid=".$share_info["share_id"]."'>".$share_info["share_id"]."</a></td>";
+        echo "<td><a href='./sharecodepage.php?sid=".$share_info["share_id"]."'>".$share_info["title"]."</a></td>";
         echo "<td>".$share_info["language"]."</td>";
         echo "<td>".$share_info["share_time"]."</td>";
         echo "<td><div class=\"btn-group btn-group-sm\" role=\"group\" aria-label=\"Default button group\">

@@ -14,7 +14,7 @@ $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 
 /************************  数据库  *******************************/
 function getShareCodeListByPage($user_id){
-    $sql = "SELECT `share_id`, `language`, `share_time` FROM share_code WHERE `user_id` = ? ORDER BY share_time DESC";
+    $sql = "SELECT `share_id`, `title`, `language`, `share_time` FROM share_code WHERE `user_id` = ? ORDER BY share_time DESC";
     $share_list = pdo_query($sql, $user_id);
     return $share_list;
 }

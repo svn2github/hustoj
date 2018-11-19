@@ -114,9 +114,9 @@ foreach ($result as $row){
 	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row['problem_id']])){
 		if (isset($acc_arr[$row['problem_id']])) 
-			$view_problemset[$i][0]="<div class='btn btn-success'>Y</div>";
+			$view_problemset[$i][0]="<div class='label label-success'>Y</div>";
 		else 
-			$view_problemset[$i][0]= "<div class='btn btn-danger'>N</div>";
+			$view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}

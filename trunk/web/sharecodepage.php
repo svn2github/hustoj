@@ -16,13 +16,14 @@ $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 
 /**
  * 存储用户分享的代码
+ * @param $title
  * @param $code
  * @param $user_id
  * @param $language
  * @return mixed
  */
 function saveShareCode($title,$code,$language,$user_id){
-    $sql = "INSERT INTO share_code(`user_id`,`title`,`share_code`,`language`,`share_time`) VALUES (?,?,?,NOW());";
+    $sql = "INSERT INTO share_code(`user_id`,`title`,`share_code`,`language`,`share_time`) VALUES (?,?,?,?,NOW());";
     $rows = pdo_query($sql, $user_id, $title, $code, $language);
     return $rows;
 }

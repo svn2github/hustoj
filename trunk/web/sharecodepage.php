@@ -21,9 +21,9 @@ $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
  * @param $language
  * @return mixed
  */
-function saveShareCode($code,$language,$user_id){
-    $sql = "INSERT INTO share_code(`user_id`,`share_code`,`language`,`share_time`) VALUES (?,?,?,NOW());";
-    $rows = pdo_query($sql, $user_id, $code, $language);
+function saveShareCode($title,$code,$language,$user_id){
+    $sql = "INSERT INTO share_code(`user_id`,`title`,`share_code`,`language`,`share_time`) VALUES (?,?,?,NOW());";
+    $rows = pdo_query($sql, $user_id, $title, $code, $language);
     return $rows;
 }
 
@@ -79,9 +79,9 @@ function deleteShareCodeBySid($sid, $user_id){
  * @param $user_id
  * @return mixed
  */
-function updateShareCodeBySid($sid, $code, $language, $user_id) {
-    $sql = "UPDATE share_code SET share_code = ?,`language` = ? WHERE share_id = ? AND user_id = ?";
-    pdo_query($sql, $code, $language, $sid, $user_id);
+function updateShareCodeBySid($sid, $title,$code, $language, $user_id) {
+    $sql = "UPDATE share_code SET title=?,share_code = ?,`language` = ? WHERE share_id = ? AND user_id = ?";
+    pdo_query($sql,$title, $code, $language, $sid, $user_id);
     return $sid;
 }
 
@@ -173,13 +173,14 @@ if(isset($_POST['code'])) {
             if(isset($_POST['sid'])) {
                 $sid = $_POST['sid'];
             }
+            $title = $_POST['title'];
             $code = $_POST['code'];
             $language = $_POST['language'];
             try {
                 if(isset($_POST['sid'])) {
-                    $new_id = updateShareCodeBySid($sid, $code, $language, $user_id);
+                    $new_id = updateShareCodeBySid($sid,$title, $code, $language, $user_id);
                 }else {
-                    $new_id = saveShareCode($code, $language, $user_id);
+                    $new_id = saveShareCode($title,$code, $language, $user_id);
                 }
 
             }catch (Exception $e) {

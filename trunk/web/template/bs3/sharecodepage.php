@@ -34,7 +34,7 @@
       <?php } ?>
 
 <?php if(!$readOnly){?>
-<h3><?php echo $title?></h3>
+<div><label for="#title"><input type="text" id="title" value="<?php echo $title?>"></div>
 <span id="language_span">Language:
 <select id="language" name="language" >
     <option value="c_cpp">C/C++</option>
@@ -102,6 +102,7 @@
         <?php if(!$readOnly){?>
         function submitCode() {
             var code = editor.getValue();
+            var title=$("#title").val().trim();
             var vcode = $("#vcode").val().trim();
             var language = $("#language").val();
             if(vcode.length===0){
@@ -120,6 +121,7 @@
                     <?php if($isOwner){
                     echo '"sid": '.$sid.',';
                     }?>
+                    "title":title,
                     "code": code,
                     "vcode": vcode,
                     "language": language

@@ -146,13 +146,13 @@ if(isset($_GET['cid'])){
   $sql = "SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC LIMIT 1000";
 
   if($keyword){
-    $sql = "SELECT *  FROM contest LEFT JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr WHERE contest.defunct='N' AND contest.title LIKE ? $wheremy  ORDER BY contest_id DESC";
+    $sql = "SELECT *  FROM contest WHERE contest.defunct='N' AND contest.title LIKE ? $wheremy  ORDER BY contest_id DESC";
 	
 	$sql .= " limit ".strval($pstart).",".strval($pend); 
 
 	$result = pdo_query($sql,$keyword);
   }else{
-    $sql = "SELECT *  FROM contest LEFT JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr WHERE contest.defunct='N' $wheremy  ORDER BY contest_id DESC";
+    $sql = "SELECT *  FROM contest WHERE contest.defunct='N' $wheremy  ORDER BY contest_id DESC";
 	$sql .= " limit ".strval($pstart).",".strval($pend); 
 	$result = mysql_query_cache($sql);
   }

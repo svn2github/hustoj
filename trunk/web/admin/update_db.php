@@ -132,8 +132,8 @@ $csql[22]="";
 $tsql[23]="select judger from solution limit 1 ";
 $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
 
-$csql[24]="";
 $tsql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
+$csql[24]="";
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
@@ -167,6 +167,9 @@ $tsql[28]="CREATE TABLE `share_code` (
   `share_time` datetime DEFAULT NULL,
   PRIMARY KEY (`share_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
+$tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
+$csql[29]="update contest c LEFT JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr set c.user_id=p.user_id";
+
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

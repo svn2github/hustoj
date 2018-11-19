@@ -168,7 +168,7 @@ $tsql[28]="CREATE TABLE `share_code` (
   PRIMARY KEY (`share_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
 $tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
-$csql[29]="select user_id from contest limit 1";
+$csql[29]="update contest c LEFT JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr set c.user_id=p.user_id";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

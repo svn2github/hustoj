@@ -34,6 +34,7 @@
       <?php } ?>
 
 <?php if(!$readOnly){?>
+<h3><?php echo $title?></h3>
 <span id="language_span">Language:
 <select id="language" name="language" >
     <option value="c_cpp">C/C++</option>

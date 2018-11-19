@@ -162,6 +162,7 @@ $csql[28]="select 1 from share_code";
 $tsql[28]="CREATE TABLE `share_code` (
   `share_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `share_code` text COLLATE utf8_unicode_ci,
   `language` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `share_time` datetime DEFAULT NULL,

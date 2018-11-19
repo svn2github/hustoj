@@ -139,6 +139,7 @@ if(isset($_GET['sid'])){
         //echo array_column($share_info,"user_id")[0] ;
         $sid = array_column($share_info,"share_id")[0];
         $author = array_column($share_info,"user_id")[0];
+        $title = array_column($share_info,"title")[0];
         $language = array_column($share_info,"language")[0];
         $share_time = array_column($share_info,"share_time")[0];
         $view_src = array_column($share_info,"share_code")[0];

@@ -34,7 +34,7 @@
       <?php } ?>
 
 <?php if(!$readOnly){?>
-<div><label for="#title"><input type="text" id="title" value="<?php echo $title?>"></div>
+<div><label for="#title">Title</label><input type="text" id="title" value="<?php echo $title?>"></div>
 <span id="language_span">Language:
 <select id="language" name="language" >
     <option value="c_cpp">C/C++</option>

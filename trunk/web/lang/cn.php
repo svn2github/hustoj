@@ -95,7 +95,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_REPEAT_PASSWORD="重复密码";
 	$MSG_SCHOOL="学校";
 	$MSG_EMAIL="电子邮件";
-	$MSG_REG_INFO="注册信息";
+	$MSG_REG_INFO="修改注册信息";
 	$MSG_VCODE="验证码";
 
 		//problem.php

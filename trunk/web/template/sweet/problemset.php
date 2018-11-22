@@ -110,7 +110,7 @@ $limit++;
 // );
 </script>
     <script>
-
+/*
         layui.use('table', function(){
             var table = layui.table;
 
@@ -124,7 +124,7 @@ $limit++;
             // var element = layui.element;
             //…
         });
-
+*/
     </script>
 </body>
 </html>

@@ -19,11 +19,6 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-	<style>
-		.panel {
-			margin: 10px;
-		}
-	</style>
 </head>
 
 <body>
@@ -32,7 +27,7 @@
 
 		<!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron"></div>
-    
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<?php

@@ -25,6 +25,7 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="panel panel-default">
+    <div class="panel-heading">
       <?php
       if($pr_flag){
         echo "<title>$MSG_PROBLEM".$row['problem_id']."--". $row['title']."</title>";
@@ -64,6 +65,7 @@
     }
 
     echo "</center>";
+    echo "</div>";
     echo "<!--StartMarkForVirtualJudge-->";
     echo "<h4>$MSG_Description</h4><div class=content>".$row['description']."</div><br>";
     
@@ -99,6 +101,7 @@
     echo "<center>";
     echo "<!--EndMarkForVirtualJudge-->";
 
+    echo "<div class='panel-footer'>";
     if($pr_flag){
       echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
     }else{
@@ -119,6 +122,7 @@
   }
 
   echo "</center>";
+  echo "</div>";
   ?>
     </div>
   </div> <!-- /container -->

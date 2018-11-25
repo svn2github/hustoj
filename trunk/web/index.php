@@ -16,7 +16,7 @@ if ( isset( $OJ_ON_SITE_CONTEST_ID ) ) {
 
 $view_news = "";
 $sql = "select * "
-	. "FROM `news` "
+. "FROM `news` "
 . "WHERE `defunct`!='Y'"
 . "ORDER BY `importance` ASC,`time` DESC "
 . "LIMIT 50";

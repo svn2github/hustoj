@@ -11,15 +11,16 @@
 	exit(0);
 //	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
 }
+$problem_id=1000;
 if (isset($_GET['id'])){
 	$id=intval($_GET['id']);
         $sample_sql="select sample_input,sample_output,problem_id from problem where problem_id=?";
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
+	$psql="select problem_id from contest_problem where contest_id=? and num=?";
+	$problem_id=pdo_query($psql,$cid,$pid)[0][0];
 	$sample_sql="SELECT p.sample_input, p.sample_output, p.problem_id
-			FROM problem p inner join 
-			 contest_problem cp on p.problem_id=cp.problem_id and cp.contest_id = ?
-			AND cp.num =  ? ";
+			FROM problem p where problem_id =  ? ";
 }else{
 	$view_errors=  "<h2>No Such Problem!</h2>";
 	require("template/".$OJ_TEMPLATE."/error.php");
@@ -65,7 +66,7 @@ $view_sample_output="3";
    if (isset($_GET['id'])){
 		$result=pdo_query($sample_sql,$id);
    }else{
-		$result=pdo_query($sample_sql,$cid,$pid);
+		$result=pdo_query($sample_sql,$problem_id);
    }
 	 
    if($result == false)

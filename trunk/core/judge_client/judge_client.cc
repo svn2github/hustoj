@@ -774,7 +774,7 @@ void _addreinfo_mysql(int solution_id, const char * filename) {
 		if (rend - reinfo > 40000)
 			break;
 	}
-	rend = 0;
+	*rend = '\0';
 	end = sql;
 	strcpy(end, "INSERT INTO runtimeinfo VALUES(");
 	end += strlen(sql);
@@ -805,6 +805,7 @@ void _addreinfo_http(int solution_id, const char * filename) {
 		if (rend - reinfo > 40000)
 			break;
 	}
+	*rend = '\0';
 	fclose(fp);
 	reinfo_encode = url_encode(reinfo);
 	FILE * re = fopen("re.post", "we");

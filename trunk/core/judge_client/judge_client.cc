@@ -1026,7 +1026,7 @@ int compile(int lang,char * work_dir) {
                 	execute_cmd("mount -o remount,ro etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");
                 	execute_cmd("mount -o remount,ro proc");
-                	if(lang>2 && lang!=10 && lang!=13 && lang!=14){
+                	if(lang>2 && lang!=10 && lang!=13 && lang!=14 && lang!=17){
 				execute_cmd("mount -o bind /dev dev");
                 		execute_cmd("mount -o remount,ro dev");
 			}
@@ -1803,7 +1803,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;
 	LIM.rlim_max = STD_MB * mem_lmt * 2;
-	if (lang < 3 || lang == 10 || lang == 13 || lang == 14)
+	if (lang < 3 || lang == 10 || lang == 13 || lang == 14|| lang==17 )
 		setrlimit(RLIMIT_AS, &LIM);
 
 	switch (lang) {
@@ -2424,7 +2424,7 @@ int main(int argc, char** argv) {
 	get_solution(solution_id, work_dir, lang);
 
 	//java is lucky
-	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14) {  // Clang Clang++ not VM or Script
+	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14  && lang!= 17 ) {  //ObjectivC Clang Clang++ Go not VM or Script
 		// the limit for java
 		time_lmt = time_lmt + java_time_bonus;
 		mem_lmt = mem_lmt + java_memory_bonus;

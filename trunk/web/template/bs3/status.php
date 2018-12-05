@@ -108,24 +108,34 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 						<tr class='toprow'>
 							<th>
 								<?php echo $MSG_RUNID?>
-								<th>
-									<?php echo $MSG_USER?>
-									<th>
-										<?php echo $MSG_PROBLEM?>
-										<th>
-											<?php echo $MSG_RESULT?>
-											<th class='hidden-xs'>
-												<?php echo $MSG_MEMORY?>
-												<th class='hidden-xs'>
-													<?php echo $MSG_TIME?>
-													<th class='hidden-xs'>
-														<?php echo $MSG_LANG?>
-														<th class='hidden-xs'>
-															<?php echo $MSG_CODE_LENGTH?>
-															<th>
-																<?php echo $MSG_SUBMIT_TIME?>
-																<th class='hidden-xs'>
-																	<?php echo $MSG_JUDGER?>
+							</th>
+							<th>
+								<?php echo $MSG_USER?>
+							</th>
+							<th>
+								<?php echo $MSG_PROBLEM?>
+							</th>
+							<th>
+								<?php echo $MSG_RESULT?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_MEMORY?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_TIME?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_LANG?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_CODE_LENGTH?>
+							</th>
+							<th>
+								<?php echo $MSG_SUBMIT_TIME?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_JUDGER?>
+							</th>
 						</tr>
 					</thead>
 					<tbody>

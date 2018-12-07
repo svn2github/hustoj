@@ -63,7 +63,7 @@
 					?> [
 
 				<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
-				<a href='javascript:phpfm(<?php echo $row[' problem_id '];?>)'>TestData</a>]
+				<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
 
 				<?php
 				}
@@ -188,7 +188,7 @@
         ?> [
 
 						<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
-						<a href='javascript:phpfm(<?php echo $row[' problem_id '];?>)'>TestData</a>]
+						<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
 						<?php } ?>
 					</div>
 				</center>

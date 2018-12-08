@@ -14,6 +14,10 @@ yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager --enable remi-php72
 yum -y install nginx php-fpm php-mysqlnd php-xml php-gd php-mbstring gcc-c++  mysql-devel glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
 yum -y install mariadb mariadb-devel mariadb-server
+
+# install semanage to setup selinux
+yum -y install policycoreutils-python
+
 systemctl start mariadb.service 
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/

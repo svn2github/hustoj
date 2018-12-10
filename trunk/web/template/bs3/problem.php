@@ -26,7 +26,7 @@
 		<?php include("template/$OJ_TEMPLATE/nav.php");?>
 
 		<!-- Main component for a primary marketing message or call to action -->
-		<div class="jumbotron"></div>
+    <div class="jumbotron"></div>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -171,10 +171,10 @@
 					<?php }?>
 
 				</div>
-				<center>
-					<!--EndMarkForVirtualJudge-->
-					<div class='panel-footer'>
-						<?php 
+			<center>
+				<!--EndMarkForVirtualJudge-->
+				<div class='panel-footer'>
+					<?php 
         if($pr_flag){
           echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
         }else{
@@ -187,38 +187,38 @@
           require_once("include/set_get_key.php");
         ?> [
 
-						<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
-						<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
-						<?php } ?>
-					</div>
-				</center>
-			</div>
+					<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
+					<a href='javascript:phpfm(<?php echo $row[' problem_id '];?>)'>TestData</a>]
+					<?php } ?>
+				</div>
+			</center>
 		</div>
-		<!-- /container -->
+	</div>
+	<!-- /container -->
 
 
-		<!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
   ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<?php include("template/$OJ_TEMPLATE/js.php");?>
-		<script>
-			function phpfm( pid ) {
-				//alert(pid);
-				$.post( "admin/phpfm.php", {
-					'frame': 3,
-					'pid': pid,
-					'pass': ''
-				}, function ( data, status ) {
-					if ( status == "success" ) {
-						document.location.href = "admin/phpfm.php?frame=3&pid=" + pid;
-					}
-				} );
-			}
-
-			$( document ).ready( function () {
-				$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
+	<!-- Placed at the end of the document so the pages load faster -->
+	<?php include("template/$OJ_TEMPLATE/js.php");?>
+	<script>
+		function phpfm( pid ) {
+			//alert(pid);
+			$.post( "admin/phpfm.php", {
+				'frame': 3,
+				'pid': pid,
+				'pass': ''
+			}, function ( data, status ) {
+				if ( status == "success" ) {
+					document.location.href = "admin/phpfm.php?frame=3&pid=" + pid;
+				}
 			} );
-		</script>
+		}
+
+		$( document ).ready( function () {
+			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
+		} );
+	</script>
 
 </body>
 </html>

@@ -120,10 +120,11 @@
 					<div class='panel panel-default'>
 						<div class='panel-heading'>
 							<h4>
-								<?php echo $MSG_Sample_Input?>
+								<?php echo $MSG_Sample_Input?> 
+								<a href="javascript:CopyToClipboard($('#sampleinput').text())">Copy</a>
 							</h4>
 						</div>
-						<div class='panel-body'><pre class=content><span class=sampledata><?php echo $sinput?></span></pre>
+						<div class='panel-body'><pre class=content><span id="sampleinput" class=sampledata><?php echo $sinput?></span></pre>
 						</div>
 					</div>
 					<?php }
@@ -133,9 +134,10 @@
 						<div class='panel-heading'>
 							<h4>
 								<?php echo $MSG_Sample_Output?>
+								<a href="javascript:CopyToClipboard($('#sampleoutput').text())">Copy</a>
 							</h4>
 						</div>
-						<div class='panel-body'><pre class=content><span class=sampledata><?php echo $soutput?></span></pre>
+						<div class='panel-body'><pre class=content><span id='sampleoutput' class=sampledata><?php echo $soutput?></span></pre>
 						</div>
 					</div>
 					<?php }
@@ -158,6 +160,7 @@
 						<div class='panel-heading'>
 							<h4>
 								<?php echo $MSG_SOURCE?>
+
 							</h4>
 						</div>
 						<div class='panel-body content'>
@@ -218,6 +221,74 @@
 		$( document ).ready( function () {
 			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
 		} );
+		function CopyToClipboard (input) {
+			var textToClipboard = input;
+			 
+			var success = true;
+			if (window.clipboardData) { // Internet Explorer
+			    window.clipboardData.setData ("Text", textToClipboard);
+			}
+			else {
+				// create a temporary element for the execCommand method
+			    var forExecElement = CreateElementForExecCommand (textToClipboard);
+			 
+				    /* Select the contents of the element 
+					(the execCommand for 'copy' method works on the selection) */
+			    SelectContent (forExecElement);
+			 
+			    var supported = true;
+			 
+				// UniversalXPConnect privilege is required for clipboard access in Firefox
+			    try {
+				if (window.netscape && netscape.security) {
+				    netscape.security.PrivilegeManager.enablePrivilege ("UniversalXPConnect");
+				}
+			 
+				    // Copy the selected content to the clipboard
+				    // Works in Firefox and in Safari before version 5
+				success = document.execCommand ("copy", false, null);
+			    }
+			    catch (e) {
+				success = false;
+			    }
+			 
+				// remove the temporary element
+			    document.body.removeChild (forExecElement);
+			}
+			 
+			if (success) {
+			    alert ("The text is on the clipboard, try to paste it!");
+			}
+			else {
+			    alert ("Your browser doesn't allow clipboard access!");
+			}
+			}
+			 
+			function CreateElementForExecCommand (textToClipboard) {
+			var forExecElement = document.createElement ("pre");
+			    // place outside the visible area
+			forExecElement.style.position = "absolute";
+			forExecElement.style.left = "-10000px";
+			forExecElement.style.top = "-10000px";
+			    // write the necessary text into the element and append to the document
+			forExecElement.textContent = textToClipboard;
+			document.body.appendChild (forExecElement);
+			    // the contentEditable mode is necessary for the  execCommand method in Firefox
+			forExecElement.contentEditable = true;
+			 
+			return forExecElement;
+			}
+			 
+			function SelectContent (element) {
+			    // first create a range
+			var rangeToSelect = document.createRange ();
+			rangeToSelect.selectNodeContents (element);
+			 
+			    // select the contents
+			var selection = window.getSelection ();
+			selection.removeAllRanges ();
+			selection.addRange (rangeToSelect);
+			}
 	</script>
 
 </body>

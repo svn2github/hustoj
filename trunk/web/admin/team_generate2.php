@@ -52,27 +52,14 @@ if(isset($_POST['idlist']) && isset($_POST['pwdlist']) && isset($_POST['nicklist
 			echo "<tr><td colspan=3>Copy these accounts to distribute</td></tr>";
 			echo "<tr><td>team_name<td>login_id</td><td>password</td></tr>";
 
-			/*
-				由于user表使用的是MyISAM无法使用优雅的事务处理
-				由于userid字段不是主键自增，现有的 pdo_query(...) 对于insert操作返回的lastInsertId无法判断数据是否正确添加入数据库
-				为了不修改大框架，我只能copy pdo.php部分代码，改用返回值rowCount检查账号是否成功添加
-			*/
-			if(isset($OJ_SAE)&&$OJ_SAE)	{
-				$OJ_DATA="saestor://data/";
-				$DB_NAME=SAE_MYSQL_DB;
-				$dbh=new PDO("mysql:host=".SAE_MYSQL_HOST_M.';dbname='.SAE_MYSQL_DB, SAE_MYSQL_USER, SAE_MYSQL_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
-			}else{
-				$dbh=new PDO("mysql:host=".$DB_HOST.';dbname='.$DB_NAME, $DB_USER, $DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
-			}
-			
-			$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
-			"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
-			$sth = $dbh->prepare($sql);
-
+			$max_length=20;
+	
 			for($i=0;$i<$teamnumber;$i++){
 				$user_id=$idPieces[$i];
 				$nick=$nickPieces[$i];
-				
+
+				echo "<tr><td>$nick<td>$user_id</td><td>$pwdPieces[$i]</td></tr>";
+
 				$password=pwGen($pwdPieces[$i]);
 
 				$email="your_own_email@internet";
@@ -84,17 +71,18 @@ if(isset($_POST['idlist']) && isset($_POST['pwdlist']) && isset($_POST['nicklist
 					$tmp_ip=explode(',',$REMOTE_ADDR);
 					$ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 				}
-
-				$rowCount=$sth->execute([$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school]);
-
-				if($rowCount==0)
-				{
-					//数据有误，无法插入数据库
-					echo "<tr><td>$nick</td><td>$user_id</td><td>".$pwdPieces[$i]."</td><td><h3>ADD ERROR,MAYBE NICK TOO LONG.</h3></td>";
-				}else{
-					echo "<tr><td>$nick<td>$user_id</td><td>".$pwdPieces[$i]."</td></tr>";
+				if(mb_strlen($nick,'utf-8')>20){
+					$new_len=mb_strlen($nick,'utf-8');
+					if($new_len>$max_length){
+						$max_length=$new_len;
+						$longer="ALTER TABLE `users` MODIFY COLUMN `nick` varchar($max_length) NULL DEFAULT '' ";
+						pdo_query($longer);
+					}
 				}
 				
+				$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
+				"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
+				pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school) ;
 			}
 		}
 

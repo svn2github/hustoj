@@ -51,7 +51,6 @@
   <?php }
   if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
   <li><a class='btn btn-primary' href="team_generate.php" target="main"><b><?php echo $MSG_TEAMGENERATOR?></b></a><?php echo $MSG_HELP_TEAMGENERATOR?>
-  <li><a class='btn btn-primary' href="team_generate2.php" target="main" title="<?php echo $MSG_HELP_TEAMGENERATOR?>"><b><?php echo $MSG_TEAMGENERATOR?></b></a>
   <?php }
   if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
   <li><a class='btn btn-primary' href="rejudge.php" target="main"><b><?php echo $MSG_REJUDGE?></b></a><?php echo $MSG_HELP_REJUDGE?>

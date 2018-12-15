@@ -53,7 +53,7 @@ if(isset($_POST['idlist']) && isset($_POST['pwdlist']) && isset($_POST['nicklist
 			echo "<tr><td>team_name<td>login_id</td><td>password</td></tr>";
 
 			/*
-				由于user表使用的是MyISLAM无法使用优雅的事务处理
+				由于user表使用的是MyISAM无法使用优雅的事务处理
 				由于userid字段不是主键自增，现有的 pdo_query(...) 对于insert操作返回的lastInsertId无法判断数据是否正确添加入数据库
 				为了不修改大框架，我只能copy pdo.php部分代码，改用返回值rowCount检查账号是否成功添加
 			*/

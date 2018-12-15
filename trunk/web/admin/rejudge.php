@@ -26,7 +26,12 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		pdo_query($sql,$rjsid) ;
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=? and problem_id>0" ;
 		pdo_query($sql,$rjsid) ;
-		$url="../status.php?top=".($rjsid+1);
+		$sql="select contest_id from `solution` WHERE `solution_id`=? " ;
+		$cid=intval(pdo_query($sql,$rjsid)[0][0]);
+		if ($cid>0)
+			$url="../status.php?cid=".$cid."&top=".($rjsid+1);
+		else
+			$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
 		echo "<script>location.href='$url';</script>";
 	}else if (isset($_POST['rjcid'])){

@@ -14,7 +14,7 @@
 	$MSG_ADMIN="管理";
 	$MSG_STANDING="名次";
 	$MSG_STATISTICS="统计";
-	$MSG_USERINFO="修改帐号";
+	$MSG_USERINFO="用户信息";
 	$MSG_MAIL="短消息";
 	
 	$MSG_Pending="等待";
@@ -95,7 +95,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_REPEAT_PASSWORD="重复密码";
 	$MSG_SCHOOL="学校";
 	$MSG_EMAIL="电子邮件";
-	$MSG_REG_INFO="注册信息";
+	$MSG_REG_INFO="设置注册信息";
 	$MSG_VCODE="验证码";
 
 		//problem.php
@@ -200,4 +200,7 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="从不同的ip地址登录";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
+  $MSG_LOSTPASSWORD_MAILBOX="请到您邮箱的垃圾邮件文件夹寻找验证码，并填写到这里";
+  $MSG_LOSTPASSWORD_WILLBENEW="如果填写正确，通过下一步验证，这个验证码就自动成为您的新密码！";
+
 ?>

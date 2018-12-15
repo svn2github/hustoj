@@ -2,15 +2,22 @@
 DBNAME="jol"
 DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
-CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 
 yum -y update
-yum -y install nginx php-fpm php-mysql php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum -y install epel-release yum-utils
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php72
+yum -y install nginx php-fpm php-mysqlnd php-xml php-gd php-mbstring gcc-c++  mysql-devel glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
 yum -y install mariadb mariadb-devel mariadb-server
+
+# install semanage to setup selinux
+yum -y install policycoreutils-python
+
 systemctl start mariadb.service 
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
@@ -43,8 +50,8 @@ chmod 700 etc/judge.conf
 #sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
 
-sed -i "s+//date_default_timezone_set("PRC");+date_default_timezone_set("PRC");+g" src/web/include/db_info.inc.php
-sed -i "s+//pdo_query("SET time_zone ='+8:00'");+pdo_query("SET time_zone ='+8:00'");+g" src/web/include/db_info.inc.php
+sed -i "s+//date_default_timezone_set(\"PRC\");+date_default_timezone_set(\"PRC\");+g" src/web/include/db_info.inc.php
+sed -i "s+//pdo_query(\"SET time_zone ='\+8:00'\");+pdo_query(\"SET time_zone ='\+8:00'\");+g" src/web/include/db_info.inc.php
 
 chmod 775 -R /home/judge/data && chgrp -R apache /home/judge/data
 chmod 700 src/web/include/db_info.inc.php
@@ -53,13 +60,48 @@ chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
 cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
 cp /home/judge/src/install/nginx.conf /etc/nginx/
-systemctl restart nginx.service
+
+# startup nginx.service when booting.
+systemctl enable nginx.service 
+
+# open http/https services.
+firewall-cmd --permanent --add-service=http --add-service=https --zone=public
+
+# reload firewall config
+firewall-cmd --reload
 
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
 
+# startup php-fpm.service when booting.
+systemctl enable php-fpm.service
 
+# startup mariadb.service when booting.
+systemctl enable mariadb.service
+
+# check module selinux policy modules
+checkmodule /home/judge/src/install/my-phpfpm.te -M -m -o my-phpfpm.mod
+checkmodule /home/judge/src/install/my-ifconfig.te -M -m -o my-ifconfig.mod
+
+# package policy modules
+semodule_package -m my-phpfpm.mod -o my-phpfpm.pp
+semodule_package -m my-ifconfig.mod -o my-ifconfig.pp
+
+# install policy modules
+semodule -i my-phpfpm.pp
+semodule -i my-ifconfig.pp
+
+# clean up
+echo "clean up selinux module output files"
+rm -rf my-phpfpm.mod my-phpfpm.pp
+rm -rf my-ifconfig.mod my-ifconfig.pp
+
+# restart nginx.service
+systemctl restart nginx.service
+
+# restart php-fpm.service.
 systemctl restart php-fpm.service
+
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
 
@@ -73,9 +115,10 @@ chmod +x make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then
 	echo "auto start judged added!"
 else
-	sed -i "s/exit 0//g" /etc/rc.local
-	echo "/usr/bin/judged" >> /etc/rc.local
-	echo "exit 0" >> /etc/rc.local
+	chmod +x /etc/rc.d/rc.local
+	sed -i "s/exit 0//g" /etc/rc.d/rc.local
+	echo "/usr/bin/judged" >> /etc/rc.d/rc.local
+	echo "exit 0" >> /etc/rc.d/rc.local
 	
 fi
 /usr/bin/judged
@@ -89,11 +132,12 @@ yum -y install mono
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
 #free pascal
-wget https://downloads.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4.x86_64-linux.tar
-tar xf fpc-3.0.4.x86_64-linux.tar
-cd fpc-3.0.4.x86_64-linux
-echo -e "\n\n\n\n\n\n\n\n\n\n"|sh install.sh
+wget https://download.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4-1.x86_64.rpm
+rpm -ivh fpc-3.0.4-1.x86_64.rpm
+rm -rf fpc-3.0.4-1.x86_64.rpm
 
+# Go language
+yum -y install golang
 
 reset
 echo "Remember your database account for HUST Online Judge:"

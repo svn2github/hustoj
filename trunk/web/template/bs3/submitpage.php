@@ -65,7 +65,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </select>
 <?php if($OJ_VCODE){?>
 <?php echo $MSG_VCODE?>:
-<input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
+<input name="vcode" size=4 type=text><img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">
 <?php }?>
 
 <br>
@@ -80,7 +80,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
 <?php echo $MSG_Output?>:
-<textarea style="width:30%" cols=10 rows=5 id="out" name="out" >SHOULD BE:
+<textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
 <br>
@@ -344,6 +344,12 @@ function loadFromBlockly(){
      
 </script>
 <?php }?>
-
+<?php if ($OJ_VCODE) { ?>
+    <script>
+        $(document).ready(function () {
+            $("#vcode").attr("src", "vcode.php?" + Math.random());
+        })
+    </script>
+<?php } ?>
   </body>
 </html>

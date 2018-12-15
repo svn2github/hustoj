@@ -51,6 +51,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 			$view_balloon[$i][2]= "<font color='".$ball_color[$row['pid']]."'>";
 			 $view_balloon[$i][2].=$ball_name[$row['pid']];
 			 $view_balloon[$i][2].="</font>";
+			$view_balloon[$i][3]="";
 			if($row['status']==1)$view_balloon[$i][3].="<span class='btn btn-success'>$MSG_BALLOON_DONE</span>";
 			else $view_balloon[$i][3].="<span class='btn btn-danger'>$MSG_BALLOON_PENDING</span>";
 			$view_balloon[$i][4]="<a class='btn btn-info' href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";

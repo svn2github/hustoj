@@ -31,18 +31,19 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh
-    
+
 https://www.youtube.com/watch?v=hRap7ettUWc
 
 
 <b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
 
-安装后几个重要配置文件的位置
+大部分功能和选项的开关和参数调整都在配置文件中，安装后几个重要配置文件的位置如下：
 
-    /home/judge/etc/judge.conf
-    /home/judge/src/web/include/db_info.inc.php
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini
-    /etc/nginx/sites-enabled/default
+    /home/judge/etc/judge.conf        判题judged/judge_client
+    /home/judge/src/web/include/db_info.inc.php   Web
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini 或 /etc/php.ini (in Centos7)   php
+    /etc/nginx/sites-enabled/default 或 /etc/nginx/nginx.conf (in Centos7)               nginx
+    
 如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
 ```
 	worker_processes 8;    #其中数字8可以取CPU核心数的整数倍。
@@ -66,7 +67,7 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOSx86_64.md
 https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 
-docker安装，<b>仅供docker熟练用户参考使用，假如你不知道什么是docker，请假装没看见这一段！</b>
+docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
 ```	
 docker run -d -it \
     -v /data/docker/docker-wxy/data:/data \

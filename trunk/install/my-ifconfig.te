@@ -1,0 +1,11 @@
+
+module my-ifconfig 1.0;
+
+require {
+	type ifconfig_t;
+	type user_home_t;
+	class file { read write };
+}
+
+#============= ifconfig_t ==============
+allow ifconfig_t user_home_t:file { read write };

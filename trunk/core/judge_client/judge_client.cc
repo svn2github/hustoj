@@ -359,7 +359,7 @@ void init_mysql_conf() {
 //	fclose(fp);
 	
  	if(strcmp(http_username,"IP")==0){
-                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk '{print $2}'");
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
@@ -774,7 +774,7 @@ void _addreinfo_mysql(int solution_id, const char * filename) {
 		if (rend - reinfo > 40000)
 			break;
 	}
-	rend = 0;
+	*rend = '\0';
 	end = sql;
 	strcpy(end, "INSERT INTO runtimeinfo VALUES(");
 	end += strlen(sql);
@@ -805,6 +805,7 @@ void _addreinfo_http(int solution_id, const char * filename) {
 		if (rend - reinfo > 40000)
 			break;
 	}
+	*rend = '\0';
 	fclose(fp);
 	reinfo_encode = url_encode(reinfo);
 	FILE * re = fopen("re.post", "we");
@@ -1025,7 +1026,7 @@ int compile(int lang,char * work_dir) {
                 	execute_cmd("mount -o remount,ro etc/alternatives");
                 	execute_cmd("mount -o bind /proc proc");
                 	execute_cmd("mount -o remount,ro proc");
-                	if(lang>2 && lang!=10 && lang!=13 && lang!=14){
+                	if(lang>2 && lang!=10 && lang!=13 && lang!=14 && lang!=17){
 				execute_cmd("mount -o bind /dev dev");
                 		execute_cmd("mount -o remount,ro dev");
 			}
@@ -1802,7 +1803,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;
 	LIM.rlim_max = STD_MB * mem_lmt * 2;
-	if (lang < 3 || lang == 10 || lang == 13 || lang == 14)
+	if (lang < 3 || lang == 10 || lang == 13 || lang == 14|| lang==17 )
 		setrlimit(RLIMIT_AS, &LIM);
 
 	switch (lang) {
@@ -2423,7 +2424,7 @@ int main(int argc, char** argv) {
 	get_solution(solution_id, work_dir, lang);
 
 	//java is lucky
-	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14) {  // Clang Clang++ not VM or Script
+	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14  && lang!= 17 ) {  //ObjectivC Clang Clang++ Go not VM or Script
 		// the limit for java
 		time_lmt = time_lmt + java_time_bonus;
 		mem_lmt = mem_lmt + java_memory_bonus;
@@ -2565,6 +2566,14 @@ int main(int argc, char** argv) {
 	
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 				userfile, runner_id);
+		if(access(outfile, 0) == -1 ){
+                                //out file does not exist
+                                char error[BUFFER_SIZE];
+                                sprintf(error,"missing out file %s, report to system administrator!\n",outfile);
+                                print_runtimeerror(error);
+                                ACflg=OJ_RE;
+                }
+
 		init_syscalls_limits(lang);
 
 		pid_t pidApp = fork();

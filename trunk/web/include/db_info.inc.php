@@ -40,7 +40,7 @@ static  $OJ_REDISPORT=6379;
 static  $OJ_REDISQNAME="hustoj";
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_CDN_URL="";  //  http://cdn.hustoj.com/  https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/web/ 
-static  $OJ_TEMPLATE="bs3"; //使用的默认模板
+static  $OJ_TEMPLATE="bs3"; //使用的默认模板, [bs3 ie ace sweet sae] work with discuss3, [classic bs] work with discuss
 if(isset($_GET['tp'])) $OJ_TEMPLATE=$_GET['tp'];
 static  $OJ_LOGIN_MOD="hustoj";
 static  $OJ_REGISTER=true; //允许注册新用户
@@ -54,6 +54,9 @@ static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
+
+/* share code */
+static  $OJ_SHARE_CODE = false; // 代码分享功能
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
 //CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌
@@ -78,6 +81,8 @@ static  $OJ_QQ_AUTH=false;
 static  $OJ_QQ_AKEY='1124518951';
 static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
+
+static  $color_theme=["default","primary","success","info","warning","danger"];
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if( isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {

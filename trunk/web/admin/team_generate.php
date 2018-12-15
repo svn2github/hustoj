@@ -18,31 +18,20 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		echo "<table border=1>";
 		echo "<tr><td colspan=3>Copy these accounts to distribute</td></tr>";
 		echo "<tr><td>team_name<td>login_id</td><td>password</td></tr>";
-
-		if(isset($OJ_SAE)&&$OJ_SAE)	{
-			$OJ_DATA="saestor://data/";
-			$DB_NAME=SAE_MYSQL_DB;
-			$dbh=new PDO("mysql:host=".SAE_MYSQL_HOST_M.';dbname='.SAE_MYSQL_DB, SAE_MYSQL_USER, SAE_MYSQL_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
-		}else{
-			$dbh=new PDO("mysql:host=".$DB_HOST.';dbname='.$DB_NAME, $DB_USER, $DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
-		}
-		
-		$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
-		"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
-		$sth = $dbh->prepare($sql);
-
-
+		$max_length=20;
 		for($i=1;$i<=$teamnumber;$i++){
-        	$user_id=$prefix.($i<10?('0'.$i):$i);
-			$password_raw=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));
+			
+        $user_id=$prefix.($i<10?('0'.$i):$i);
+			$password=strtoupper(substr(MD5($user_id.rand(0,9999999)),0,10));
                         if(isset($pieces[$i-1]))
                         	$nick=$pieces[$i-1];
                         else
 				$nick="your_own_nick";
 			if($teamnumber==1) $user_id=$prefix;
+
+			echo "<tr><td>$nick<td>$user_id</td><td>$password</td></tr>";
 			
-			$password=pwGen($password_raw);
-			
+			$password=pwGen($password);
 			$email="your_own_email@internet";
                        
 			$school="your_own_school";
@@ -52,16 +41,18 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 			    $tmp_ip=explode(',',$REMOTE_ADDR);
 			    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
 			}
-		
-			$rowCount=$sth->execute([$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school]);
-
-			if($rowCount==0)
-			{
-				//数据有误，无法插入数据库
-				echo "<tr><td>$nick</td><td>$user_id</td><td>".$password_raw."</td><td><h3>ADD ERROR,MAYBE NICK TOO LONG.</h3></td>";
-			}else{
-				echo "<tr><td>$nick<td>$user_id</td><td>".$password_raw."</td></tr>";
+			
+			if(mb_strlen($nick,'utf-8')>20){
+				$new_len=mb_strlen($nick,'utf-8');
+				if($new_len>$max_length){
+					$max_length=$new_len;
+					$longer="ALTER TABLE `users` MODIFY COLUMN `nick` varchar($max_length) NULL DEFAULT '' ";
+					pdo_query($longer);
+				}
 			}
+			$sql="INSERT INTO `users`("."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)".
+			"VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
+			pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$email,$ip,$password,$nick,$school) ;
 		}
 		echo  "</table>";
 		

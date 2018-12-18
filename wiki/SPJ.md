@@ -37,6 +37,7 @@ spj的退出值决定判断结果，成功退出(0)表示AC,其余表示WA.
 
 A+B spj.c
 
+```c
  #include <stdio.h>
  int main(int argc,char *args[]){
    FILE * f_in=fopen(args[1],"r");
@@ -56,4 +57,5 @@ A+B spj.c
    fclose(f_user);
    return ret;
  }
+```
 

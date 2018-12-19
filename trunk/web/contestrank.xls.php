@@ -149,6 +149,8 @@ if ($start_time>time()){
 	//require_once("oj-footer.php");
 	exit(0);
 }
+if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
+$lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`=?";
 $result=pdo_query($sql,$cid);

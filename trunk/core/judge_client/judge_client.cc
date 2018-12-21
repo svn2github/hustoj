@@ -607,15 +607,17 @@ void login() {
 void _update_solution_mysql(int solution_id, int result, int time, int memory,
 		int sim, int sim_s_id, double pass_rate) {
 	char sql[BUFFER_SIZE];
+	char judger[BUFFER_SIZE];
+	mysql_real_escape_string(conn, judger, http_username, strlen(http_username));
 	
 	if (oi_mode) {
 		sprintf(sql,
 				"UPDATE %s SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s',judgetime=now() WHERE solution_id=%d ",
-					tbname,	    result, time,   memory,   pass_rate,  http_username, solution_id);
+					tbname,	    result, time,   memory,   pass_rate,  judger, solution_id);
 	} else {
 		sprintf(sql,
 				"UPDATE %s SET result=%d,time=%d,memory=%d,judger='%s',judgetime=now() WHERE solution_id=%d ",
-					tbname,     result, time, memory,http_username, solution_id);
+					tbname,     result, time, memory,judger, solution_id);
 	}
 	//      printf("sql= %s\n",sql);
 	if (mysql_real_query(conn, sql, strlen(sql))) {

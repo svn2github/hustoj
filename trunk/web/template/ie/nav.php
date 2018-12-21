@@ -7,6 +7,17 @@
 		require_once('./include/online.php');
 		$on = new online();
 	}
+ 	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
+                  $url!='loginpage.php'&&
+                  $url!='lostpassword.php'&&
+                  $url!='lostpassword2.php'&&
+                  $url!='registerpage.php'
+                  ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+
+           header("location:".$path_fix."loginpage.php");
+           exit();
+        }
+
 ?>
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation" >

@@ -409,20 +409,17 @@ void init_mysql_conf()
 		}
 		//fclose(fp);
 	}
-	//	fclose(fp);
-
-	if (strcmp(http_username, "IP") == 0)
-	{
-		FILE *fjobs = read_cmd_output("ifconfig|grep 'inet'|awk '{print $2}'");
-		fscanf(fjobs, "%s", http_username);
-		pclose(fjobs);
-	}
-	if (strcmp(http_username, "HOSTNAME") == 0)
-	{
-		strcpy(http_username, getenv("HOSTNAME"));
-	}
-	if (turbo_mode == 2)
-		tbname = "solution2";
+//	fclose(fp);
+	
+ 	if(strcmp(http_username,"IP")==0){
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
+                  fscanf(fjobs, "%s", http_username);
+                  pclose(fjobs);
+        }
+	if(strcmp(http_username,"HOSTNAME")==0){
+                  strcpy(http_username,getenv("HOSTNAME"));
+        }
+	if(turbo_mode==2) tbname="solution2";
 }
 
 int isInFile(const char fname[])
@@ -578,9 +575,8 @@ int compare_zoj(const char *file1, const char *file2)
 					{
 						break;
 					}
-					if (c1 != c2)
-					{
-						// Consecutive non-space characters should be all exactly the same
+					if (c1 != c2) {
+						// Consecutive non-space characters should be all exactly the ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'same
 						ret = OJ_WA;
 						goto end;
 					}
@@ -716,18 +712,17 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 							int sim, int sim_s_id, double pass_rate)
 {
 	char sql[BUFFER_SIZE];
-
-	if (oi_mode)
-	{
+	char judger[BUFFER_SIZE];
+	mysql_real_escape_string(conn, judger, http_username, strlen(http_username));
+	
+	if (oi_mode) {
 		sprintf(sql,
 				"UPDATE %s SET result=%d,time=%d,memory=%d,pass_rate=%f,judger='%s',judgetime=now() WHERE solution_id=%d ",
-				tbname, result, time, memory, pass_rate, http_username, solution_id);
-	}
-	else
-	{
+					tbname,	    result, time,   memory,   pass_rate,  judger, solution_id);
+	} else {
 		sprintf(sql,
 				"UPDATE %s SET result=%d,time=%d,memory=%d,judger='%s',judgetime=now() WHERE solution_id=%d ",
-				tbname, result, time, memory, http_username, solution_id);
+					tbname,     result, time, memory,judger, solution_id);
 	}
 	//      printf("sql= %s\n",sql);
 	if (mysql_real_query(conn, sql, strlen(sql)))
@@ -1993,7 +1988,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	//case 6:  //python
 	case 12:
 	case 16:
-		LIM.rlim_cur = LIM.rlim_max = 80;
+		LIM.rlim_cur = LIM.rlim_max = 200;
 		break;
 	case 5: //bash
 		LIM.rlim_cur = LIM.rlim_max = 3;
@@ -2030,9 +2025,9 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		sprintf(java_xms, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execl("/usr/bin/java", "/usr/bin/java", java_xms, java_xmx,
-			  "-Djava.security.manager",
-			  "-Djava.security.policy=./java.policy", "Main", (char *)NULL);
+		execl("/usr/bin/java", "/usr/bin/java", java_xmx, 
+				"-Djava.security.manager",
+				"-Djava.security.policy=./java.policy", "Main", (char *) NULL);
 		break;
 	case 4:
 		//system("/ruby Main.rb<data.in");

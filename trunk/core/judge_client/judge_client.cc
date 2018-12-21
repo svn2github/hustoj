@@ -1787,7 +1787,7 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	//case 6:  //python
 	case 12:
 	case 16:
-		LIM.rlim_cur = LIM.rlim_max = 80;
+		LIM.rlim_cur = LIM.rlim_max = 200;
 		break;
 	case 5: //bash
 		LIM.rlim_cur = LIM.rlim_max = 3;

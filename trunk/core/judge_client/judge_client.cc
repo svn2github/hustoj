@@ -359,7 +359,7 @@ void init_mysql_conf() {
 //	fclose(fp);
 	
  	if(strcmp(http_username,"IP")==0){
-                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk '{print $2}'");
+                  FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
@@ -491,7 +491,7 @@ int compare_zoj(const char *file1, const char *file2) {
 						break;
 					}
 					if (c1 != c2) {
-						// Consecutive non-space characters should be all exactly the same
+						// Consecutive non-space characters should be all exactly the ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'same
 						ret = OJ_WA;
 						goto end;
 					}

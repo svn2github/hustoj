@@ -363,9 +363,6 @@ void init_mysql_conf() {
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
-	if(strcmp(http_username,"HOSTNAME")==0){
-                  strcpy(http_username,getenv("HOSTNAME"));
-        }
 	if(turbo_mode==2) tbname="solution2";
 }
 

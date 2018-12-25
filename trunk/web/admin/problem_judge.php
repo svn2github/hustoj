@@ -93,12 +93,13 @@ if(isset($_POST['update_solution'])){
 }else if(isset($_POST['getsolutioninfo'])){
 	
 	$sid=intval($_POST['sid']);
-	$sql="select problem_id, user_id, language from solution WHERE solution_id=?";
+	$sql="select problem_id, user_id, language,contest_id from solution WHERE solution_id=?";
 	$result=pdo_query($sql,$sid);
 	if ( $row=$result[0]){
 		echo $row['problem_id']."\n";
 		echo $row['user_id']."\n";
 		echo $row['language']."\n";
+		echo $row['contest_id']."\n";
 		
 	}
 	
@@ -166,16 +167,22 @@ if(isset($_POST['update_solution'])){
   //	echo $sql;
 	
 }else if(isset($_POST['updateproblem'])){
-	
+	$cid=intval($_POST['cid']);
 	$pid=intval($_POST['pid']);
-	$sql="UPDATE `problem` SET `accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? AND `result`=4) WHERE `problem_id`=?";
+	if($cid>0){
+		$sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
+		pdo_query($sql,$pid,$cid,$pid,$cid);
+		$sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+		pdo_query($sql,$pid,$cid,$pid,$cid);
+	}else{
+		$sql="UPDATE `problem` SET `submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=?) WHERE `problem_id`=?";
 	//echo $sql;
-	pdo_query($sql,$pid,$pid);
-	
-	$sql="UPDATE `problem` SET `submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=?) WHERE `problem_id`=?";
+		pdo_query($sql,$pid,$pid);
+		$sql="UPDATE `problem` SET `accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? AND `result`=4) WHERE `problem_id`=?";
 	//echo $sql;
-	pdo_query($sql,$pid,$pid);
-	
+		pdo_query($sql,$pid,$pid);
+	}
+
 	
 }else if(isset($_POST['checklogin'])){
 	echo "1";

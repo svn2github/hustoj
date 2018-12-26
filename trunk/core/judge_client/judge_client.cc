@@ -1319,7 +1319,9 @@ void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
 	p_id = atoi(row[0]);
 	strcpy(user_id, row[1]);
 	lang = atoi(row[2]);
-	cid = atoi(row[3]);
+	if(row[3]==NULL) cid=0;
+	else cid = atoi(row[3]);
+	printf("cid:%d\n",cid);
 	if(res!=NULL) {
 		mysql_free_result(res);                         // free the memory
 		res=NULL;

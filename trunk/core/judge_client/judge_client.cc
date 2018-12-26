@@ -672,7 +672,7 @@ void _addceinfo_mysql(int solution_id) {
 		if (cend - ceinfo > 40000)
 			break;
 	}
-	cend = 0;
+	*cend = '\0';
 	end = sql;
 	strcpy(end, "INSERT INTO compileinfo VALUES(");
 	end += strlen(sql);
@@ -734,6 +734,7 @@ void _addceinfo_http(int solution_id) {
 		if (cend - ceinfo > 40000)
 			break;
 	}
+	*cend='\0';
 	fclose(fp);
 	ceinfo_encode = url_encode(ceinfo);
 	FILE * ce = fopen("ce.post", "we");

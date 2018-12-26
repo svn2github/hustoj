@@ -28,7 +28,9 @@ CREATE TABLE IF NOT EXISTS `contest_problem` (
   `contest_id` int(11) DEFAULT NULL,
   `title` char(200) NOT NULL DEFAULT '',
   `num` int(11) NOT NULL DEFAULT '0',
-  KEY `cni` (`contest_id`,`num`)
+  `c_accepted` int(11) NOT NULL DEFAULT '0',
+  `c_submit` int(11) NOT NULL DEFAULT '0',
+  KEY `Index_contest_id` (`contest_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `loginlog` (

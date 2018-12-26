@@ -416,9 +416,6 @@ void init_mysql_conf()
                   fscanf(fjobs, "%s", http_username);
                   pclose(fjobs);
         }
-	if(strcmp(http_username,"HOSTNAME")==0){
-                  strcpy(http_username,getenv("HOSTNAME"));
-        }
 	if(turbo_mode==2) tbname="solution2";
 }
 
@@ -788,7 +785,7 @@ void _addceinfo_mysql(int solution_id)
 		if (cend - ceinfo > 40000)
 			break;
 	}
-	cend = 0;
+	*cend = '\0';
 	end = sql;
 	strcpy(end, "INSERT INTO compileinfo VALUES(");
 	end += strlen(sql);
@@ -854,6 +851,7 @@ void _addceinfo_http(int solution_id)
 		if (cend - ceinfo > 40000)
 			break;
 	}
+	*cend='\0';
 	fclose(fp);
 	ceinfo_encode = url_encode(ceinfo);
 	FILE *ce = fopen("ce.post", "we");
@@ -1028,41 +1026,51 @@ void update_user(char *user_id)
 	}
 }
 
-void _update_problem_http(int pid)
-{
-	const char *cmd =
-		" wget --post-data=\"updateproblem=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *fjobs = read_cmd_output(cmd, pid, http_baseurl);
+void _update_problem_http(int pid,int cid) {
+	const char * cmd =
+			" wget --post-data=\"updateproblem=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+	FILE * fjobs = read_cmd_output(cmd, pid, http_baseurl);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
 
 #ifdef _mysql_h
-void _update_problem_mysql(int p_id)
-{
+void _update_problem_mysql(int p_id,int cid) {
 	char sql[BUFFER_SIZE];
-	sprintf(sql,
+	if(cid>0){
+		sprintf(sql,
+			"UPDATE `contest_problem` SET `c_accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND `result`=4 and contest_id=%d) WHERE `problem_id`=%d and contest_id=%d",
+			p_id,cid, p_id,cid);
+		printf("sql:[%s]\n",sql);
+
+	}else{
+		sprintf(sql,
 			"UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND `result`=4) WHERE `problem_id`=%d",
 			p_id, p_id);
+		printf("sql:[%s]\n",sql);
+	}
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
-	sprintf(sql,
+	if(cid>0){
+		sprintf(sql,
+			"UPDATE `contest_problem` SET `c_submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND  contest_id=%d) WHERE `problem_id`=%d and contest_id=%d",
+			p_id,cid, p_id,cid);
+	}else{
+		sprintf(sql,
 			"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d) WHERE `problem_id`=%d",
 			p_id, p_id);
+
+	}
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 }
 #endif
-void update_problem(int pid)
-{
-	if (http_judge)
-	{
-		_update_problem_http(pid);
-	}
-	else
-	{
+void update_problem(int pid,int cid) {
+	if (http_judge) {
+		_update_problem_http(pid,cid);
+	} else {
 #ifdef _mysql_h
-		_update_problem_mysql(pid);
+		_update_problem_mysql(pid,cid);
 #endif
 	}
 }
@@ -1458,9 +1466,8 @@ void get_custominput(int solution_id, char *work_dir)
 }
 
 #ifdef _mysql_h
-void _get_solution_info_mysql(int solution_id, int &p_id, char *user_id,
-							  int &lang)
-{
+void _get_solution_info_mysql(int solution_id, int & p_id, char * user_id,
+		int & lang,int &cid) {
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
@@ -1475,14 +1482,14 @@ void _get_solution_info_mysql(int solution_id, int &p_id, char *user_id,
 		//printf("%s\n",sql);
 		mysql_real_query(conn, sql, strlen(sql));
 		sprintf(sql,
-				"SELECT problem_id, user_id, language FROM solution2 where solution_id=%d",
+				"SELECT problem_id, user_id, language,contest_id FROM solution2 where solution_id=%d",
 				solution_id);
 		//printf("%s\n",sql);
 	}
 	else
 	{
 		sprintf(sql,
-				"SELECT problem_id, user_id, language FROM solution where solution_id=%d",
+				"SELECT problem_id, user_id, language,contest_id FROM solution where solution_id=%d",
 				solution_id);
 	}
 	//printf("%s\n",sql);
@@ -1492,16 +1499,17 @@ void _get_solution_info_mysql(int solution_id, int &p_id, char *user_id,
 	p_id = atoi(row[0]);
 	strcpy(user_id, row[1]);
 	lang = atoi(row[2]);
-	if (res != NULL)
-	{
-		mysql_free_result(res); // free the memory
-		res = NULL;
+	if(row[3]==NULL) cid=0;
+	else cid = atoi(row[3]);
+	printf("cid:%d\n",cid);
+	if(res!=NULL) {
+		mysql_free_result(res);                         // free the memory
+		res=NULL;
 	}
 }
 #endif
-void _get_solution_info_http(int solution_id, int &p_id, char *user_id,
-							 int &lang)
-{
+void _get_solution_info_http(int solution_id, int & p_id, char * user_id,
+		int & lang,int & cid) {
 
 	login();
 
@@ -1511,20 +1519,17 @@ void _get_solution_info_http(int solution_id, int &p_id, char *user_id,
 	fscanf(pout, "%d", &p_id);
 	fscanf(pout, "%s", user_id);
 	fscanf(pout, "%d", &lang);
+	fscanf(pout, "%d", &cid);
 	pclose(pout);
 }
-void get_solution_info(int solution_id, int &p_id, char *user_id,
-					   int &lang)
-{
+void get_solution_info(int solution_id, int & p_id, char * user_id,
+		int & lang,int & cid) {
 
-	if (http_judge)
-	{
-		_get_solution_info_http(solution_id, p_id, user_id, lang);
-	}
-	else
-	{
+	if (http_judge) {
+		_get_solution_info_http(solution_id, p_id, user_id, lang,cid);
+	} else {
 #ifdef _mysql_h
-		_get_solution_info_mysql(solution_id, p_id, user_id, lang);
+		_get_solution_info_mysql(solution_id, p_id, user_id, lang,cid);
 #endif
 	}
 }
@@ -2656,7 +2661,7 @@ int main(int argc, char **argv)
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0;
+	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0,cid=0;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -2679,7 +2684,7 @@ int main(int argc, char **argv)
 
 	if (http_judge)
 		system("/bin/ln -s ../cookie ./");
-	get_solution_info(solution_id, p_id, user_id, lang);
+	get_solution_info(solution_id, p_id, user_id, lang,cid);
 	//get the limit
 
 	if (p_id == 0)
@@ -2730,10 +2735,8 @@ int main(int argc, char **argv)
 	{
 		addceinfo(solution_id);
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0, 0.0);
-		if (!turbo_mode)
-			update_user(user_id);
-		if (!turbo_mode)
-			update_problem(p_id);
+		if(!turbo_mode)update_user(user_id);
+		if(!turbo_mode)update_problem(p_id,cid);
 #ifdef _mysql_h
 		if (!http_judge)
 			mysql_close(conn);
@@ -2954,10 +2957,8 @@ int main(int argc, char **argv)
 		if (!isspj)
 			adddiffinfo(solution_id);
 	}
-	if (!turbo_mode)
-		update_user(user_id);
-	if (!turbo_mode)
-		update_problem(p_id);
+	if(!turbo_mode)update_user(user_id);
+	if(!turbo_mode)update_problem(p_id,cid);
 	clean_workdir(work_dir);
 
 	if (DEBUG)

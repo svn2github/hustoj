@@ -99,7 +99,7 @@ if(isset($_POST['update_solution'])){
 		echo $row['problem_id']."\n";
 		echo $row['user_id']."\n";
 		echo $row['language']."\n";
-		echo $row['contest_id']."\n";
+		echo intval($row['contest_id'])."\n";
 		
 	}
 	

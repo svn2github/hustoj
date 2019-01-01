@@ -135,6 +135,7 @@ foreach ($result as $row){
 		if(trim($cat)=="")continue;
 		$hash_num=hexdec(substr(md5($cat),0,15));
 		$label_theme=$color_theme[$hash_num%count($color_theme)];
+		if($label_theme=="") $label_theme="default";
 		$view_problemset[$i][3].="<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,4,'utf8')."</a>&nbsp;";
 	}
 	$view_problemset[$i][3].="</div >";

@@ -32,6 +32,7 @@
 			if(trim($cat)=="") continue;
 			$hash_num=hexdec(substr(md5($cat),0,15));
 			$label_theme=$color_theme[$hash_num%count($color_theme)];
+			if($label_theme=="") $label_theme="default";
 			$view_category.= "<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".urlencode(htmlentities($cat,ENT_QUOTES,'UTF-8'))."'>".$cat."</a>&nbsp;";
 		}
 		

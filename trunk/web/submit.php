@@ -207,6 +207,9 @@ if((~$OJ_LANGMASK)&(1<<$language)){
 	}else{
 	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,result)
 		VALUES(?,?,NOW(),?,?,?,?,?,14)";
+		if(isset($OJ_OI_1_SOLUTION_ONLY)&&$OJ_OI_1_SOLUTION_ONLY){
+			pdo_query("update solution set contest_id =0 where contest_id=? and user_id=? and num=?",$cid,$user_id,$pid);
+		}
 		$insert_id= pdo_query($sql,$id,$user_id,$language,$ip,$len,$cid,$pid);
 	}
 	

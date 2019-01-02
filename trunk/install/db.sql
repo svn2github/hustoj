@@ -125,7 +125,7 @@ CREATE TABLE  `solution` (
   `result` smallint(6) NOT NULL DEFAULT '0',
   `language` INT UNSIGNED NOT NULL DEFAULT '0',
   `ip` char(46) NOT NULL,
-  `contest_id` int(11) DEFAULT NULL,
+  `contest_id` int(11) DEFAULT 0,
   `valid` tinyint(4) NOT NULL DEFAULT '1',
   `num` tinyint(4) NOT NULL DEFAULT '-1',
   `code_length` int(11) NOT NULL DEFAULT 0,

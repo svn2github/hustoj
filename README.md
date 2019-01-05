@@ -5,17 +5,17 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 
 <b>不要相信百度来的长篇大论的所谓教程，那些都是好几年前的老皇历了，会导致不判题，不显示，不好升级等等问题。</b>
 	
-尤其<b>别装apache</b>
+尤其<b>别装apache</b>，如果已经安装，请先停用或卸载，以免80端口冲突。
 
 近期github的svn访问缓慢，可以到release中下载tar.gz版本，然后用install目录下的*-bytgz.sh脚本安装。
 但是注意这样安装的实例，将来升级时只能手工升级。
 
-首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
+首先安装Ubuntu14.04（编译器较老），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
 
-或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
+或者安装ubuntu16.04（推荐使用），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
 
-假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
+假如你不得已非要用centos7 （有的语言可能不支持，但是某些机架式服务器的Raid卡Ubuntu不认只能装CentOS），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh

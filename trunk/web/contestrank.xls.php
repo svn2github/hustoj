@@ -28,6 +28,7 @@ class TM{
 		$this->p_ac_sec=array(0);
 	}
 	function Add($pid,$sec,$res,$mark_base,$mark_per_problem,$mark_per_punish){
+		global $OJ_CE_PENALTY;
 //		echo "Add $pid $sec $res<br>";
 	
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)

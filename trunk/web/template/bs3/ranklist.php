@@ -67,14 +67,21 @@ $cnt=1-$cnt;
 </table>
 <?php
 echo "<center>";
+$qs="";
+if(isset($_GET['prefix'])){
+	$qs.="&prefix=".htmlentities($_GET['prefix'],ENT_QUOTES,"utf-8");
+}
+if(isset($scope)){
+	$qs.="&scope=".htmlentities($scope,ENT_QUOTES,"utf-8");
+}
 for($i = 0; $i <$view_total ; $i += $page_size) {
-echo "<a href='./ranklist.php?start=" . strval ( $i ).($scope?"&scope=$scope":"") . "'>";
-echo strval ( $i + 1 );
-echo "-";
-echo strval ( $i + $page_size );
-echo "</a>&nbsp;";
-if ($i % 250 == 200)
-echo "<br>";
+	echo "<a href='./ranklist.php?start=" . strval ( $i ).$qs. "'>";
+	echo strval ( $i + 1 );
+	echo "-";
+	echo strval ( $i + $page_size );
+	echo "</a>&nbsp;";
+	if ($i % 250 == 200)
+		echo "<br>";
 }
 echo "</center>";
 ?>

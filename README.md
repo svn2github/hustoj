@@ -15,7 +15,7 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
 
-或者安装ubuntu16.04（推荐使用），然后用下面脚本快速安装OJ：  
+或者安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh

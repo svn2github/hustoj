@@ -2954,7 +2954,7 @@ int main(int argc, char **argv)
 		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
 						sim_s_id, 0);
 	}
-	FILE *df=fopen("diff.out","wa");
+	FILE *df=fopen("diff.out","a");
 	fprintf(df,"time_space_table:\n%s\n",time_space_table);
 	fclose(df);
 	adddiffinfo(solution_id);

@@ -2886,10 +2886,8 @@ int main(int argc, char **argv)
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
-			if(DEBUG){
-				printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
-				time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%dk time=%dms\n",infile+strlen(oj_home)+5,topmemory/1024,usedtime);	
-			}
+			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
+			time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%dk time=%dms\n",infile+strlen(oj_home)+5,topmemory/1024,usedtime);	
 
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,

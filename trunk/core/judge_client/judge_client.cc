@@ -2888,7 +2888,7 @@ int main(int argc, char **argv)
 						   p_id, PEflg, work_dir);
 			if(DEBUG){
 				printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
-				time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
+				time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%dk time=%dms\n",infile+strlen(oj_home)+5,topmemory/1024,usedtime);	
 			}
 
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,

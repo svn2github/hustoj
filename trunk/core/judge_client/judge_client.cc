@@ -2662,6 +2662,8 @@ int main(int argc, char **argv)
 	int solution_id = 1000;
 	int runner_id = 0;
 	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0,cid=0;
+	char time_space_table[BUFFER_SIZE*100];
+	int time_space_index=0;
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
@@ -2884,6 +2886,10 @@ int main(int argc, char **argv)
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
+			if(DEBUG){
+				printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
+				time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
+			}
 
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
@@ -2950,13 +2956,10 @@ int main(int argc, char **argv)
 		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
 						sim_s_id, 0);
 	}
-	if ((oi_mode && finalACflg == OJ_WA) || ACflg == OJ_WA)
-	{
-		if (DEBUG)
-			printf("add diff info of %d..... \n", solution_id);
-		if (!isspj)
-			adddiffinfo(solution_id);
-	}
+	FILE *df=fopen("diff.out","wa");
+	fprintf(df,"time_space_table:\n%s\n",time_space_table);
+	fclose(df);
+	adddiffinfo(solution_id);
 	if(!turbo_mode)update_user(user_id);
 	if(!turbo_mode)update_problem(p_id,cid);
 	clean_workdir(work_dir);

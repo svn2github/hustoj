@@ -208,6 +208,7 @@ class config {
     var $filename;
     function config(){
         global $fm_self;
+	global $OJ_LANG;
         $this->data = array(
             'lang'=>'en',
             'auth_pass'=>md5(''),
@@ -228,6 +229,7 @@ class config {
         }
         if (is_array($data)&&count($data)==count($this->data)) $this->data = $data;
         else $this->save();
+	if($OJ_LANG == "cn" ) $this->data['lang']="cn";
     }
     function save(){
         $objdata = "<?php".chr(13).chr(10)."//".serialize($this->data).chr(13).chr(10);
@@ -360,7 +362,8 @@ function et($tag){
     $en['RenderTime'] = 'Time to render this page';
     $en['Seconds'] = 'sec';
     $en['ErrorReport'] = 'Error Reporting';
-
+    $en['Random-data'] = 'Random-data generator';
+    
     // chinese
 	$cn['Version'] = '版本';
     $cn['DocRoot'] = '根目录';
@@ -468,6 +471,7 @@ function et($tag){
     $cn['RenderTime'] = '页面执行时间';
     $cn['Seconds'] = '秒';
     $cn['ErrorReport'] = '错误报告';
+    $en['Random-data'] = '随机测试数据生成器';
 
     // Portuguese by - Fabricio Seger Kolling
     $pt['Version'] = 'Versão';
@@ -3453,6 +3457,7 @@ function dir_list_form() {
             <input type=button onclick=\"test_prompt(2)\" value=\"".et('CreateArq')."\">
             <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">
             <b>$ip</b>
+            <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
             </nobr>";
         $uplink = "";
         if ($current_dir != $fm_current_root){

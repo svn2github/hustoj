@@ -39,10 +39,10 @@ https://www.youtube.com/watch?v=hRap7ettUWc
 
 大部分功能和选项的开关和参数调整都在配置文件中，安装后几个重要配置文件的位置如下：
 
-    /home/judge/etc/judge.conf        判题judged/judge_client
-    /home/judge/src/web/include/db_info.inc.php   Web
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini 或 /etc/php.ini (in Centos7)   php
-    /etc/nginx/sites-enabled/default 或 /etc/nginx/nginx.conf (in Centos7)               nginx
+    /home/judge/etc/judge.conf                                                      判题judged/judge_client
+    /home/judge/src/web/include/db_info.inc.php                                     Web
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini 或 /etc/php.ini (in Centos7)    php
+    /etc/nginx/sites-enabled/default 或 /etc/nginx/nginx.conf (in Centos7)          nginx
     
 如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
 ```

@@ -27,6 +27,9 @@ rm -rf /home/judge/data
 rm -rf /home/judge/etc
 rm -rf /home/judge/src/web
 
+# create temp directory
+mkdir /home/judge/backup/temp
+
 # start restore
 tar -xvf /home/judge/backup/${archive} -C /home/judge/backup/temp
 
@@ -60,3 +63,6 @@ chmod 700 /home/judge/src/web/include/db_info.inc.php
 chown -R apache:apache /home/judge/data
 chown apache /home/judge/src/web/include/db_info.inc.php
 chown apache /home/judge/src/web/upload 
+
+# clear temp directory
+rm -rf /home/judge/backup/temp

@@ -27,7 +27,7 @@ echo "backup web files"
 cp -r /home/judge/src/web /home/judge/backup/${cdate}/src/web
 
 echo "Create backup archive"
-tar -zcvf /home/judge/backup/${cdate}.tar.gz -C /home/judge/backup/${cdate} data etc src
+tar -zcvf /home/judge/backup/${cdate}.tar.gz -C /home/judge/backup/${cdate} jol.sql data etc src
 
 echo "clean backup temp files"
 rm -rf /home/judge/backup/${cdate}

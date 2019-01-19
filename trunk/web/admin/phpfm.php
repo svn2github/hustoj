@@ -123,11 +123,12 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
     if(isset($_GET['pid'])){
 		$current_dir="$OJ_DATA/".intval($_GET['pid'])."/";
     }else{
-	$pid=explode("/",$current_dir);
-	$pid=$pid[count($pid)-2];
+	$pid=intval(basename($current_dir));
+	if($pid==0) $pid=intval(basename($dir_dest));
 
 	$current_dir="$OJ_DATA/".intval($pid)."/";
     }
+    $dir_dest=$current_dir;
     if (!isset($current_dir)){
         $current_dir = $path_info["dirname"]."/";
         if (!$islinux) $current_dir = ucfirst($current_dir);
@@ -2408,6 +2409,7 @@ function save_upload($temp_file,$filename,$dir_dest) {
     }
     if (!$is_denied){
         if (!check_limit($filesize)){
+	//echo "file:$file";
             if (file_exists($file)){
                 if (unlink($file)){
                     if (copy($temp_file,$file)){
@@ -2490,13 +2492,13 @@ function replace_double($sub,$str){
     return $out;
 }
 function remove_special_chars($str){
-    $str = trim($str);
-    $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?/\\",
-                      "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_________________");
-    $str = str_replace("..","",$str);
-    $str = str_replace("\\","",$str);
-    $str = str_replace("/","",$str);
-    $str = str_replace("\$","",$str);
+   // $str = trim($str);
+   // $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?/\\",
+   //                   "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_________________");
+    $str = mb_ereg_replace ("\\.\\.","",$str);
+    $str = mb_ereg_replace("\\\\","",$str);
+    $str = mb_ereg_replace ("/","",$str);
+    $str = mb_ereg_replace ("\\$","",$str);
     return $str;
 }
 function format_path($str){
@@ -3453,7 +3455,6 @@ function dir_list_form() {
         $out .= "
             <tr>
             <td bgcolor=\"#DDDDDD\" colspan=50><nobr>
-            <input type=button onclick=\"test_prompt(1)\" value=\"".et('CreateDir')."\">
             <input type=button onclick=\"test_prompt(2)\" value=\"".et('CreateArq')."\">
             <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">
             <b>$ip</b>
@@ -3658,10 +3659,10 @@ function upload_form(){
         echo "
         <table height=\"100%\" border=0 cellspacing=0 cellpadding=2 align=center>
         <form name=\"upload_form\" action=\"".$path_info["basename"]."\" method=\"post\" ENCTYPE=\"multipart/form-data\">
-        <input type=hidden name=dir_dest value=\"$current_dir\">
+        <input type=hidden name=dir_dest value=\"".basename($current_dir)."\">
         <input type=hidden name=action value=10>
         <tr><th colspan=2>".et('Upload')."</th></tr>
-        <tr><td align=right><b>".et('Destination').":<td><b><nobr>$current_dir</nobr>";
+        <tr><td align=right><b>".et('Destination').":<td><b><nobr>".basename($current_dir)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
             echo "<tr><td width=1 align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
             $test_js .= "(document.upload_form.file$x.value.length>0)||";
@@ -3695,7 +3696,7 @@ function upload_form(){
         </script>";
     } else {
         $out = "<tr><th colspan=2>".et('UploadEnd')."</th></tr>
-                <tr><th colspan=2><nobr>".et('Destination').": $dir_dest</nobr>";
+                <tr><th colspan=2><nobr>".et('Destination').": ".basename($dir_dest)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
             $temp_file = $_FILES["file".$x]["tmp_name"];
             $filename = $_FILES["file".$x]["name"];
@@ -4436,7 +4437,7 @@ function frame3(){
             if (strlen($cmd_arg)){
                 $cmd_arg = format_path($current_dir.$cmd_arg);
                 if (!file_exists($cmd_arg)){
-                    @mkdir($cmd_arg,0755);
+                  //  @mkdir($cmd_arg,0755);
                     @chmod($cmd_arg,0755);
                     reloadframe("parent",2,"&ec_dir=".$cmd_arg);
                 } else alert(et('FileDirExists').".");

@@ -7,6 +7,8 @@ else
     archive=`ls -r /home/judge/backup | head -1`;
 fi
 
+echo "restore archive ${archive}"
+
 # Get database password
 OJ_USERNAME=`cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
 OJ_PASSWORD=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`

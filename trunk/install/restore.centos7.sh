@@ -31,7 +31,7 @@ rm -rf /home/judge/src/web
 mkdir /home/judge/backup/temp
 
 # start restore
-tar -xvf /home/judge/backup/${archive} -C /home/judge/backup/temp
+tar -xf /home/judge/backup/${archive} -C /home/judge/backup/temp
 
 # restore database
 echo "restore database"
@@ -50,9 +50,9 @@ cp -r /home/judge/backup/temp/src/web /home/judge/src/web
 
 # adjustment config file
 CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
-cdbusername = `cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
-cdbpassword = `cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
-ccpu        = `cat /home/judge/etc/judge.conf | grep OJ_RUNNING`
+cdbusername=`cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
+cdbpassword=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
+ccpu=`cat /home/judge/etc/judge.conf | grep OJ_RUNNING`
 sed -i "s/${cdbusername}/OJ_USER_NAME=${DB_USERNAME}/g" /home/judge/etc/judge.conf
 sed -i "s/${cdbpassword}/OJ_PASSWORD=${DB_PASSWORD}/g"  /home/judge/etc/judge.conf
 sed -i "s/${ccpu}/OJ_RUNNING=${CPU}/g"                  /home/judge/etc/judge.conf

@@ -12,7 +12,7 @@ echo "restore archive ${archive}"
 # Get database password
 OJ_USERNAME=`cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
 OJ_PASSWORD=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
-DB_USERNAME=`echo ${OJ_USER_NAME:13}`
+DB_USERNAME=`echo ${OJ_USERNAME:13}`
 DB_PASSWORD=`echo ${OJ_PASSWORD:12}`
 
 if [ -e /home/judge/src/install/backup.centos7.sh ];then

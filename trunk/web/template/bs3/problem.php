@@ -9,7 +9,7 @@
 	<link rel="icon" href="../../favicon.ico">
 
 	<title>
-		<?php echo $OJ_NAME?>
+		<?php echo $OJ_NAME?> <?php echo $OJ_BBS?>
 	</title>
 
 	<?php include("template/$OJ_TEMPLATE/css.php");?>

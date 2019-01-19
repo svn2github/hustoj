@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Get backup archive file
-if [ ${#} > 0 ];then
+if [ ${#} -gt 0 ];then
     archive=${1};
 else
     archive=`ls -r /home/judge/backup | head -1`;
@@ -28,7 +28,7 @@ rm -rf /home/judge/etc
 rm -rf /home/judge/src/web
 
 # start restore
-tar -xvf ${archive} -C /home/judge/backup/temp
+tar -xvf /home/judge/backup/${archive} -C /home/judge/backup/temp
 
 # restore database
 echo "restore database"

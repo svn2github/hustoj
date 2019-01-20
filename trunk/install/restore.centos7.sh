@@ -48,7 +48,8 @@ cp -r /home/judge/backup/temp/etc /home/judge/etc
 # restore web files
 cp -r /home/judge/backup/temp/src/web /home/judge/src/web
 
-# adjustment config file
+# adjustment judge config file
+echo "adjustment judge config file"
 CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 cdbusername=`cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
 cdbpassword=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
@@ -56,6 +57,13 @@ ccpu=`cat /home/judge/etc/judge.conf | grep OJ_RUNNING`
 sed -i "s/${cdbusername}/OJ_USER_NAME=${DB_USERNAME}/g" /home/judge/etc/judge.conf
 sed -i "s/${cdbpassword}/OJ_PASSWORD=${DB_PASSWORD}/g"  /home/judge/etc/judge.conf
 sed -i "s/${ccpu}/OJ_RUNNING=${CPU}/g"                  /home/judge/etc/judge.conf
+
+# adjustment web config file
+echo "adjustment web config file"
+cdbuser=`cat /home/judge/src/web/include/db_info.inc.php | grep static |grep DB_USER`
+cdbpass=`cat /home/judge/src/web/include/db_info.inc.php | grep static |grep DB_PASS`
+sed -i "s/${cdbuser}/static\ \ \$DB_USER=\"${DB_USERNAME}\"/g" /home/judge/src/web/include/db_info.inc.php
+sed -i "s/${cdbpass}/static\ \ \$DB_PASS=\"${DB_PASSWORD}\"/g" /home/judge/src/web/include/db_info.inc.php
 
 chmod 775 -R /home/judge/data
 chmod 700 /home/judge/etc/judge.conf

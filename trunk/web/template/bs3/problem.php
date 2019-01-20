@@ -9,7 +9,7 @@
 	<link rel="icon" href="../../favicon.ico">
 
 	<title>
-		<?php echo $OJ_NAME?>
+		<?php echo $OJ_NAME?> <?php echo $OJ_BBS?>
 	</title>
 
 	<?php include("template/$OJ_TEMPLATE/css.php");?>
@@ -55,7 +55,7 @@
 				}
 
 				echo "[<a href='problemstatus.php?id=" . $row[ 'problem_id' ] . "'>$MSG_STATUS</a>] ";
-				echo "[<a href='bbs.php?pid=" . $row[ 'problem_id' ] . "$ucid'>$MSG_BBS</a>] ";
+				if($OJ_BBS)echo "[<a href='bbs.php?pid=" . $row[ 'problem_id' ] . "$ucid'>$MSG_BBS</a>] ";
 				echo "[$MSG_Creator:<span id='creator'></span>]";
 
 				if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {

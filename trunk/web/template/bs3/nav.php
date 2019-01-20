@@ -37,11 +37,16 @@
 	      <?php if(!isset($OJ_ON_SITE_CONTEST_ID)){?>
               <li <?php if ($url=="faqs.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>faqs.php">
 			<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> <?php echo $MSG_FAQ?></a></li>
-	      <li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php<?php if (isset($_GET['cid'])) echo "?cid=".intval($_GET['cid']); ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?php echo $MSG_BBS?></a></li>
-	      <?php }else{?>
-              <li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php<?php echo "?cid=".intval($OJ_ON_SITE_CONTEST_ID); ?>">
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><?php echo $MSG_BBS?></a></li>
-	      <?php }?>
+		      <?php if ($OJ_BBS){?>
+			      <li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php<?php if (isset($_GET['cid'])) echo "?cid=".intval($_GET['cid']); ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?php echo $MSG_BBS?></a></li>
+			      <?php }
+		}else{
+			if($OJ_BBS){?>
+		      <li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php<?php echo "?cid=".intval($OJ_ON_SITE_CONTEST_ID); ?>">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><?php echo $MSG_BBS?></a></li>
+		      <?php }
+		}
+		?>
 
 	      <?php if (isset($OJ_PRINTER)&& $OJ_PRINTER){ ?>
               <li <?php if ($url=="printer.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>printer.php"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> <?php echo $MSG_PRINTER?></a></li>

@@ -62,8 +62,8 @@ sed -i "s/${ccpu}/OJ_RUNNING=${CPU}/g"                  /home/judge/etc/judge.co
 echo "adjustment web config file"
 cdbuser=`cat /home/judge/src/web/include/db_info.inc.php | grep static |grep DB_USER`
 cdbpass=`cat /home/judge/src/web/include/db_info.inc.php | grep static |grep DB_PASS`
-sed -i "s/${cdbuser}/static\ \ \$DB_USER=\"${DB_USERNAME}\"/g" /home/judge/src/web/include/db_info.inc.php
-sed -i "s/${cdbpass}/static\ \ \$DB_PASS=\"${DB_PASSWORD}\"/g" /home/judge/src/web/include/db_info.inc.php
+sed -i "s/${cdbuser}/static\ \ \$DB_USER=\"${DB_USERNAME}\";/g" /home/judge/src/web/include/db_info.inc.php
+sed -i "s/${cdbpass}/static\ \ \$DB_PASS=\"${DB_PASSWORD}\";/g" /home/judge/src/web/include/db_info.inc.php
 
 chmod 775 -R /home/judge/data
 chmod 700 /home/judge/etc/judge.conf

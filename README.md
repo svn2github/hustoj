@@ -22,7 +22,7 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
-发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
+发烧级用户ubuntu18.04/18.10(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh

@@ -68,14 +68,19 @@ chmod 775 -R /home/judge/data
 chmod 700 /home/judge/etc/judge.conf
 chmod 700 /home/judge/src/web/include/db_info.inc.php
 
-if [ -n "`cat /etc/os-release | grep PRETTY_NAME | grep CentOS | grep 7 `"];then
+centos7=`cat /etc/os-release | grep PRETTY_NAME | grep CentOS | grep 7 `
+ubuntu14=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 14`
+ubuntu16=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 16`
+ubuntu18=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 18`
+
+if [ -n "${centos7}" ];then
     own=apache;
-else if [ -n "`cat /etc/os/release | grep PRETTY_NAME | grep Ubuntu | grep 16`"];then
-    own=www-data;
-else if [ -n "`cat /etc/os/release | grep PRETTY_NAME | grep Ubuntu | grep 18`"];then
-    own=www-data;
-else
+elif [ -n "${ubuntu14}" ];then
     own=judge;
+elif [ -n "${ubuntu16}" ];then
+    own=www-data;
+elif [ -n $"{ubuntu18}" ];then
+    own=www-data;
 fi
 
 chown -R ${own}:${own} /home/judge/data

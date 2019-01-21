@@ -15,20 +15,19 @@ OJ_PASSWORD=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
 DB_USERNAME=`echo ${OJ_USERNAME:13}`
 DB_PASSWORD=`echo ${OJ_PASSWORD:12}`
 
-if [ -e /home/judge/src/install/backup.centos7.sh ];then
-    echo "backup current archive for restoring when interrupted"
-    bash /home/judge/src/install/backup.centos7.sh
-else
-    echo "no backup shell cannot create backup archive"
-fi 
+
+# create temp directory
+mkdir /home/judge/backup/temp
+
+# save database config if interrupted
+touch /home/judge/backup/temp/db.conf
+echo DB_USERNAME=${DB_USERNAME} >> /home/judge/backup/temp/db.conf
+echo DB_PASSWORD=${DB_PASSWORD} >> /home/judge/backup/temp/db.conf
 
 # clear old files
 rm -rf /home/judge/data
 rm -rf /home/judge/etc
 rm -rf /home/judge/src/web
-
-# create temp directory
-mkdir /home/judge/backup/temp
 
 # start restore
 tar -xf /home/judge/backup/${archive} -C /home/judge/backup/temp
@@ -68,9 +67,25 @@ sed -i "s/${cdbpass}/static\ \ \$DB_PASS=\"${DB_PASSWORD}\";/g" /home/judge/src/
 chmod 775 -R /home/judge/data
 chmod 700 /home/judge/etc/judge.conf
 chmod 700 /home/judge/src/web/include/db_info.inc.php
-chown -R apache:apache /home/judge/data
-chown apache /home/judge/src/web/include/db_info.inc.php
-chown apache /home/judge/src/web/upload 
+
+centos7=`cat /etc/os-release | grep PRETTY_NAME | grep CentOS | grep 7 `
+ubuntu14=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 14`
+ubuntu16=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 16`
+ubuntu18=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 18`
+
+if [ -n "${centos7}" ];then
+    own=apache;
+elif [ -n "${ubuntu14}" ];then
+    own=judge;
+elif [ -n "${ubuntu16}" ];then
+    own=www-data;
+elif [ -n $"{ubuntu18}" ];then
+    own=www-data;
+fi
+
+chown -R ${own}:${own} /home/judge/data
+chown ${own} /home/judge/src/web/include/db_info.inc.php
+chown ${own} /home/judge/src/web/upload 
 
 # clear temp directory
 rm -rf /home/judge/backup/temp

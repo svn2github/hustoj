@@ -20,7 +20,7 @@ DB_PASSWORD=`echo ${OJ_PASSWORD:12}`
 mkdir /home/judge/backup/temp
 
 # save database config if interrupted
-cat /home/judge/backup/temp/db.conf
+touch /home/judge/backup/temp/db.conf
 echo DB_USERNAME=${DB_USERNAME} >> /home/judge/backup/temp/db.conf
 echo DB_PASSWORD=${DB_PASSWORD} >> /home/judge/backup/temp/db.conf
 

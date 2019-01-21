@@ -9,7 +9,7 @@ mkdir /home/judge/backup/${cdate}/etc
 mkdir /home/judge/backup/${cdate}/src
 
 # Get database password
-OJ_USERNAME=`cat /home/judge/etc/judge.conf | greo OJ_USER_NAME`
+OJ_USERNAME=`cat /home/judge/etc/judge.conf | grep OJ_USER_NAME`
 OJ_PASSWORD=`cat /home/judge/etc/judge.conf | grep OJ_PASSWORD`
 DB_USERNAME=`echo ${OJ_USERNAME:13}`
 DB_PASSWORD=`echo ${OJ_PASSWORD:12}`

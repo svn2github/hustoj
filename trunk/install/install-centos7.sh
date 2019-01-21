@@ -29,7 +29,7 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 mysqladmin -u root password $DBPASS
 cd ../../
 
-mkdir etc data log
+mkdir etc data log backup
 
 cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
@@ -45,6 +45,7 @@ sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
 sed -i "s/OJ_COMPILE_CHROOT=1/OJ_COMPILE_CHROOT=0/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 
+chmod 700 backup
 chmod 700 etc/judge.conf
 
 #sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php

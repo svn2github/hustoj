@@ -6,11 +6,14 @@ ubuntu16=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 16`
 ubuntu18=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 18`
 
 if [ -n "${centos7}" ];then
-    own=apache;
+    sudo curl https://github.com/zhblue/hustoj/raw/master/trunk/install/install-centos7.sh | sudo bash ;
 elif [ -n "${ubuntu14}" ];then
-    own=judge;
+    sudo apt-get -y install curl ;
+    sudo curl https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu14.04.sh | sudo bash ;
 elif [ -n "${ubuntu16}" ];then
-    own=www-data;
+    sudo apt-get -y install curl ;
+    sudo curl https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu16+.sh | sudo bash ;
 elif [ -n "${ubuntu18}" ];then
-    own=www-data;
+    sudo apt-get -y install curl ;
+    sudo curl https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh | sudo bash ;
 fi

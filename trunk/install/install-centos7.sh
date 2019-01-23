@@ -4,11 +4,16 @@ DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
 CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
+yum -y update
+
+# avoid minimal installation no wget
+yum -y install wget
+
+# install nginx
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 
-yum -y update
 yum -y install epel-release yum-utils
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager --enable remi-php72

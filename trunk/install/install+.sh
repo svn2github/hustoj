@@ -5,6 +5,8 @@ ubuntu14=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 14`
 ubuntu16=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 16`
 ubuntu18=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 18`
 
+# remind: centos7 doesn't install wget with minimal installation and ubuntu doesn't install curl by default !!!
+
 if [ -n "${centos7}" ];then
     sudo curl https://github.com/zhblue/hustoj/raw/master/trunk/install/install-centos7.sh | sudo bash ;
 elif [ -n "${ubuntu14}" ];then

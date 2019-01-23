@@ -79,7 +79,7 @@ elif [ -n "${ubuntu14}" ];then
     own=judge;
 elif [ -n "${ubuntu16}" ];then
     own=www-data;
-elif [ -n $"{ubuntu18}" ];then
+elif [ -n "${ubuntu18}" ];then
     own=www-data;
 fi
 

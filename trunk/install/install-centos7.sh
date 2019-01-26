@@ -131,6 +131,9 @@ else
 fi
 /usr/bin/judged
 
+# change pwd
+cd /home/judge/
+
 # write password at the end of install
 sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php

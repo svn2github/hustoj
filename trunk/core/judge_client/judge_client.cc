@@ -121,6 +121,9 @@ static int turbo_mode = 0;
 
 static const char *tbname = "solution";
 //static int sleep_tmp;
+
+static int py2=1;
+
 #define ZOJ_COM
 
 #ifdef _mysql_h
@@ -1405,6 +1408,9 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
+	
+	py2 = execute_cmd("/bin/grep 'python3' %s/Main.py > /dev/null", work_dir);
+
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }
 
@@ -1954,8 +1960,6 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 				  int &mem_lmt)
 {
 	nice(19);
-	//int py2 = execute_cmd("/bin/grep 'python2' Main.py 2>/dev/null");
-	int py2=1;
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files

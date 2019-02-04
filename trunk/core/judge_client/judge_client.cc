@@ -121,6 +121,9 @@ static int turbo_mode = 0;
 
 static const char *tbname = "solution";
 //static int sleep_tmp;
+
+static int py2=1;
+
 #define ZOJ_COM
 
 #ifdef _mysql_h
@@ -1405,6 +1408,9 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
+	
+	py2 = execute_cmd("/bin/grep 'python3' %s/Main.py > /dev/null", work_dir);
+
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }
 
@@ -1794,6 +1800,19 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);
 	execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
+
+	// /etc/abrt/plugins/python.conf for Centos7
+	execute_cmd("mkdir -p %s/etc/abrt", work_dir);
+	execute_cmd("mkdir -p %s/etc/abrt/plugins", work_dir);
+	execute_cmd("cp -a /etc/abrt/plugins/python.conf %s/etc/abrt/plugins/python.conf", work_dir);
+	
+	// /usr/share/abrt/conf.d/plugins/python.conf for Centos7
+	execute_cmd("mkdir -p %s/usr/share", work_dir);
+	execute_cmd("mkdir -p %s/usr/share/abrt/", work_dir);
+	execute_cmd("mkdir -p %s/usr/share/abrt/conf.d", work_dir);
+	execute_cmd("mkdir -p %s/usr/share/abrt/conf.d/plugins", work_dir);
+	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
+	
 	execute_cmd("cp /usr/bin/python* %s/", work_dir);
 	execute_cmd("cp -a /usr/lib/python* %s/usr/lib/", work_dir);
 	execute_cmd("cp -a /usr/lib64/python* %s/usr/lib64/", work_dir);
@@ -1941,7 +1960,6 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 				  int &mem_lmt)
 {
 	nice(19);
-	int py2 = execute_cmd("/bin/grep 'python2' Main.py 2>/dev/null");
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files
@@ -2042,7 +2060,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		execl("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL);
 		break;
 	case 6: //Python
-		if (!py2)
+		if (py2)
 		{
 			execl("/python2", "/python2", "Main.py", (char *)NULL);
 		}

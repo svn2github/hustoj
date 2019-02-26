@@ -30,7 +30,8 @@ include_once("kindeditor.php") ;
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);
   //echo $baseurl;
-  $html = file_get_html($url);
+  $html = file_get_html($url,'GB2312');
+  
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
         

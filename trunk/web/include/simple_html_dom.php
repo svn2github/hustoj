@@ -36,7 +36,11 @@ define('HDOM_INFO_ENDSPACE',7);
 function file_get_html() {
     $dom = new simple_html_dom;
     $args = func_get_args();
-    $dom->load(call_user_func_array('file_get_contents', $args), true);
+	if($args[1]!==null){
+        $dom->load(iconv($args[1], 'UTF-8',call_user_func_array('file_get_contents', $args)), true);
+    }else {
+        $dom->load(call_user_func_array('file_get_contents', $args), true);
+    }
     return $dom;
 }
 

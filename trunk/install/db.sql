@@ -19,6 +19,7 @@ CREATE TABLE  `contest` (
   `private` tinyint(4) NOT NULL DEFAULT '0',
   `langmask` int NOT NULL DEFAULT '0' COMMENT 'bits for LANG to mask',
   `password` CHAR( 16 ) NOT NULL DEFAULT '',
+  `user_id` varchar(48) NOT NULL DEFAULT 'admin',
   PRIMARY KEY (`contest_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
@@ -27,7 +28,9 @@ CREATE TABLE IF NOT EXISTS `contest_problem` (
   `contest_id` int(11) DEFAULT NULL,
   `title` char(200) NOT NULL DEFAULT '',
   `num` int(11) NOT NULL DEFAULT '0',
-  KEY `cni` (`contest_id`,`num`)
+  `c_accepted` int(11) NOT NULL DEFAULT '0',
+  `c_submit` int(11) NOT NULL DEFAULT '0',
+  KEY `Index_contest_id` (`contest_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `loginlog` (
@@ -122,7 +125,7 @@ CREATE TABLE  `solution` (
   `result` smallint(6) NOT NULL DEFAULT '0',
   `language` INT UNSIGNED NOT NULL DEFAULT '0',
   `ip` char(46) NOT NULL,
-  `contest_id` int(11) DEFAULT NULL,
+  `contest_id` int(11) DEFAULT 0,
   `valid` tinyint(4) NOT NULL DEFAULT '1',
   `num` tinyint(4) NOT NULL DEFAULT '-1',
   `code_length` int(11) NOT NULL DEFAULT 0,
@@ -217,6 +220,15 @@ CREATE TABLE  `balloon` (
   `status` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `share_code` (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_code` text COLLATE utf8_unicode_ci,
+  `language` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`share_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 delimiter //
 drop trigger if exists simfilter//

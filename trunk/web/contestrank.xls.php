@@ -28,6 +28,7 @@ class TM{
 		$this->p_ac_sec=array(0);
 	}
 	function Add($pid,$sec,$res,$mark_base,$mark_per_problem,$mark_per_punish){
+		global $OJ_CE_PENALTY;
 //		echo "Add $pid $sec $res<br>";
 	
 		if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
@@ -149,6 +150,8 @@ if ($start_time>time()){
 	//require_once("oj-footer.php");
 	exit(0);
 }
+if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
+$lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 $sql="SELECT count(1) FROM `contest_problem` WHERE `contest_id`=?";
 $result=pdo_query($sql,$cid);

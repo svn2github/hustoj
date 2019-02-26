@@ -132,8 +132,8 @@ $csql[22]="";
 $tsql[23]="select judger from solution limit 1 ";
 $csql[23]="ALTER TABLE `solution` ADD `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL' ;  ";
 
-$csql[24]="";
 $tsql[24]="alter table solution modify column pass_rate decimal(3,2) NOT NULL DEFAULT 0;";
+$csql[24]="";
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
@@ -158,6 +158,21 @@ $tsql[27]="CREATE TABLE  `balloon` (
   `status` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+$csql[28]="select 1 from share_code";
+$tsql[28]="CREATE TABLE `share_code` (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_code` text COLLATE utf8_unicode_ci,
+  `language` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `share_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`share_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
+$tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
+$csql[29]="update contest c LEFT JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr set c.user_id=p.user_id";
+$tsql[30]="ALTER TABLE  `contest_problem` ADD  `c_accepted` INT NOT NULL DEFAULT  '0' AFTER  `num` ,
+ADD  `c_submit` INT NOT NULL DEFAULT  '0' AFTER  `c_accepted` ;";
+$csql[30]="update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit;update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted    =sb.ac";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

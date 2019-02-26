@@ -9,7 +9,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title><?php echo $OJ_NAME?></title>  
-<!--    --><?php //include("template/$OJ_TEMPLATE/css.php");?><!--	    -->
+<!--    --><?php include("template/$OJ_TEMPLATE/css.php");?><!--	    -->
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -175,22 +175,5 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 	</script>
 	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.34" ></script>
 
-    <script>
-
-        layui.use('table', function(){
-            var table = layui.table;
-
-            //转换静态表格
-            table.init('demo', {
-                // height: 500 //设置高度
-                // ,
-                limit: <?php echo $limit ?> //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-                //支持所有基础参数
-            });
-            // var element = layui.element;
-            //…
-        });
-
-    </script>
   </body>
 </html>

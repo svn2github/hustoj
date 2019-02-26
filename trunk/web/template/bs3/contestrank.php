@@ -139,6 +139,7 @@ $(document).ready(function()
               }
         });
   metal();
+  setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000)
 }
 );
 </script>

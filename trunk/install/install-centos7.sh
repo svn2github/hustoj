@@ -2,15 +2,27 @@
 DBNAME="jol"
 DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
-CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
+yum -y update
+
+# avoid minimal installation no wget
+yum -y install wget
+
+# install nginx
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 
-yum -y update
-yum -y install nginx php-fpm php-mysql php-xml php-gd gcc-c++  mysql-devel php-mbstring glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum -y install epel-release yum-utils
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php72
+yum -y install nginx php-fpm php-mysqlnd php-xml php-gd php-mbstring gcc-c++  mysql-devel glibc-static libstdc++-static flex java-1.8.0-openjdk java-1.8.0-openjdk-devel
 yum -y install mariadb mariadb-devel mariadb-server
+
+# install semanage to setup selinux
+yum -y install policycoreutils-python
+
 systemctl start mariadb.service 
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
@@ -19,10 +31,10 @@ svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
 cd src/install
 mysql -h localhost -uroot < db.sql
 echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -uroot
-mysqladmin -u root password $DBPASS
+# mysqladmin -u root password $DBPASS
 cd ../../
 
-mkdir etc data log
+mkdir etc data log backup
 
 cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
@@ -33,29 +45,29 @@ if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 	chown apache run0 run1 run2 run3
 fi
 
-#sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
-sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
+# sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
+# sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
 sed -i "s/OJ_COMPILE_CHROOT=1/OJ_COMPILE_CHROOT=0/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 
+chmod 700 backup
 chmod 700 etc/judge.conf
 
-#sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
-sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+# sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
+# sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
 
-sed -i "s+//date_default_timezone_set("PRC");+date_default_timezone_set("PRC");+g" src/web/include/db_info.inc.php
-sed -i "s+//pdo_query("SET time_zone ='+8:00'");+pdo_query("SET time_zone ='+8:00'");+g" src/web/include/db_info.inc.php
+sed -i "s+//date_default_timezone_set(\"PRC\");+date_default_timezone_set(\"PRC\");+g" src/web/include/db_info.inc.php
+sed -i "s+//pdo_query(\"SET time_zone ='\+8:00'\");+pdo_query(\"SET time_zone ='\+8:00'\");+g" src/web/include/db_info.inc.php
 
 chmod 775 -R /home/judge/data && chgrp -R apache /home/judge/data
 chmod 700 src/web/include/db_info.inc.php
 
 chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
-cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
-cp /home/judge/src/install/nginx.conf /etc/nginx/
 
-# restart nginx.service
-systemctl restart nginx.service
+# cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
+mv /etc/nginx/conf.d/default.conf /home/judge/src/install/default.conf.bak
+cp /home/judge/src/install/default.conf /etc/nginx/conf.d/default.conf
 
 # startup nginx.service when booting.
 systemctl enable nginx.service 
@@ -63,11 +75,11 @@ systemctl enable nginx.service
 # open http/https services.
 firewall-cmd --permanent --add-service=http --add-service=https --zone=public
 
+# reload firewall config
+firewall-cmd --reload
+
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php.ini
-
-# restart php-fpm.service.
-systemctl restart php-fpm.service
 
 # startup php-fpm.service when booting.
 systemctl enable php-fpm.service
@@ -75,14 +87,28 @@ systemctl enable php-fpm.service
 # startup mariadb.service when booting.
 systemctl enable mariadb.service
 
-# set selinux content .
-# to avoid 'access denied' and cannot upload .
-# not ensure there has no other problems .
-semanage fcontent -a -t httpd_sys_content_t /home/judge/web
-semanage fcontent -a -t httpd_sys_content_t /home/judge/src
+# check module selinux policy modules
+checkmodule /home/judge/src/install/my-phpfpm.te -M -m -o my-phpfpm.mod
+checkmodule /home/judge/src/install/my-ifconfig.te -M -m -o my-ifconfig.mod
 
-# If you want to unify HTTPD handling of all content files, you must turn on the httpd_unified boolean.
-setsebool -P httpd_unified 1
+# package policy modules
+semodule_package -m my-phpfpm.mod -o my-phpfpm.pp
+semodule_package -m my-ifconfig.mod -o my-ifconfig.pp
+
+# install policy modules
+semodule -i my-phpfpm.pp
+semodule -i my-ifconfig.pp
+
+# clean up
+echo "clean up selinux module output files"
+rm -rf my-phpfpm.mod my-phpfpm.pp
+rm -rf my-ifconfig.mod my-ifconfig.pp
+
+# restart nginx.service
+systemctl restart nginx.service
+
+# restart php-fpm.service.
+systemctl restart php-fpm.service
 
 chmod 755 /home/judge
 chown apache -R /home/judge/src/web/
@@ -105,6 +131,16 @@ else
 fi
 /usr/bin/judged
 
+# change pwd
+cd /home/judge/
+
+# write password at the end of install
+sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
+sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+
+# change database password at the end of install
+mysqladmin -u root password $DBPASS
+
 # mono install for c# 
 yum -y install yum-utils
 rpm --import "http://keyserver.Ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
@@ -117,6 +153,9 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 wget https://download.sourceforge.net/project/freepascal/Linux/3.0.4/fpc-3.0.4-1.x86_64.rpm
 rpm -ivh fpc-3.0.4-1.x86_64.rpm
 rm -rf fpc-3.0.4-1.x86_64.rpm
+
+# Go language
+yum -y install golang
 
 reset
 echo "Remember your database account for HUST Online Judge:"

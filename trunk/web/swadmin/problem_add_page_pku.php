@@ -100,7 +100,7 @@ echo "<option value=''>none</option>";
 if (count($result)==0){
 }else{
 	foreach($result as $row)
-		echo "<option value='$row['contest_id']'>$row['contest_id'] $row['title']</option>";
+    echo "<option value=".$row['contest_id'].">".$row['contest_id']. $row['title']."</option>";
 }
 ?>
 	</select>

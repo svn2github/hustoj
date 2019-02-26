@@ -38,6 +38,7 @@ function fresh_result(solution_id){
 			//alert(row);
 			var r=xmlhttp.responseText;
 			var ra=r.split(",");
+			ra[0]=parseInt(ra[0]);
 			// alert(r);
 			// alert(judge_result[r]);
 			var loader="<img width=18 src=image/loader.gif>";

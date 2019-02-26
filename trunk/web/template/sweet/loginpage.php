@@ -47,7 +47,7 @@ $cur_path = "template/$OJ_TEMPLATE/"
                         <input type="text" placeholder="<?php echo $MSG_USER_ID?>" name="user_id"/>
                         <input type="password" placeholder="<?php echo $MSG_PASSWORD?>" name="password" />
                         <input type="text" placeholder="<?php echo $MSG_VCODE?>" name="vcode"/>
-                        <img id="vcode-img" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
+                        <img id="vcode-img" src="vcode.php?v=0.1" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
                         <button class="btn_login" type="submit"><?php echo $MSG_LOGIN?></button>
                     </div>
 

@@ -5,17 +5,17 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 
 <b>不要相信百度来的长篇大论的所谓教程，那些都是好几年前的老皇历了，会导致不判题，不显示，不好升级等等问题。</b>
 	
-尤其<b>别装apache</b>
+尤其<b>别装apache</b>，如果已经安装，请先停用或卸载，以免80端口冲突。
 
 近期github的svn访问缓慢，可以到release中下载tar.gz版本，然后用install目录下的*-bytgz.sh脚本安装。
 但是注意这样安装的实例，将来升级时只能手工升级。
 
-首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
+首先安装Ubuntu14.04（编译器较老），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
     sudo bash install-ubuntu14.04.sh
 
-或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
+或者安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
@@ -27,12 +27,10 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
 
-假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
+假如你不得已非要用centos7 （有的语言可能不支持，但是某些机架式服务器的Raid卡Ubuntu不认只能装CentOS），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh
-    
-出于Centos7的selinux限制，在使用centos7的过程中会出现各种意料之外的错误，请尝试使用`sudo setenforce 0 `临时关闭selinux后，再次尝试操作。如果运维能力有限无法解决问题可以考虑将`/etc/selinux/config`文件中的`SELINUX=enforcing`设置为`disable`，并重新启动（当然并不是十分推荐您这么做）。
 
 https://www.youtube.com/watch?v=hRap7ettUWc
 
@@ -41,10 +39,10 @@ https://www.youtube.com/watch?v=hRap7ettUWc
 
 大部分功能和选项的开关和参数调整都在配置文件中，安装后几个重要配置文件的位置如下：
 
-    /home/judge/etc/judge.conf        判题judged/judge_client
-    /home/judge/src/web/include/db_info.inc.php   Web
-    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini   php
-    /etc/nginx/sites-enabled/default                   nginx
+    /home/judge/etc/judge.conf                                                      判题judged/judge_client
+    /home/judge/src/web/include/db_info.inc.php                                     Web
+    /etc/php5/fpm/php.ini 或 /etc/php7.0/fpm/php.ini 或 /etc/php.ini (in Centos7)    php
+    /etc/nginx/sites-enabled/default 或 /etc/nginx/nginx.conf (in Centos7)          nginx
     
 如果用户量比较大，报50x错误,可能需要修改/etc/nginx/nginx.conf中的设置：
 ```
@@ -99,9 +97,8 @@ docker测试安装
 
 Linux不熟悉的用户推荐使用:
 HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
-https://pan.baidu.com/s/1bMtEt9TUxUdaNsrSWza-rg
-https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-16.04.iso
-https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-14.04.iso
+http://adc.zjicm.edu.cn/iso/hustoj20190128.iso
+
 
 HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 

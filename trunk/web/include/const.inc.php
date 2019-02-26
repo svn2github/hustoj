@@ -12,4 +12,5 @@ $language_ext=Array( "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs
 $PID="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 $ball_color=Array('#66cccc','red','green','pink','yellow','violet','magenta','maroon','olive','chocolate');
 $ball_name=Array('蒂芙妮蓝','红','green','pink','yellow','violet','magenta','maroon','olive','chocolate');
+$color_theme=["default","primary","success","info","warning","danger"];
 ?>

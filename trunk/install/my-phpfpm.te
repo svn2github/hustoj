@@ -1,0 +1,29 @@
+
+module my-phpfpm 1.0;
+
+require {
+	type httpd_t;
+	type user_home_t;
+	type smtp_port_t;
+	class process execmem;
+	class tcp_socket name_connect;
+	class dir { add_name create read remove_name rename write };
+	class file { create open read rename setattr unlink write };
+}
+
+#============= httpd_t ==============
+
+#!!!! This avc can be allowed using the boolean 'httpd_execmem'
+allow httpd_t self:process execmem;
+
+#!!!! This avc can be allowed using one of the these booleans:
+#     httpd_can_network_connect, httpd_can_sendmail, nis_enabled
+allow httpd_t smtp_port_t:tcp_socket name_connect;
+allow httpd_t user_home_t:dir rename;
+
+#!!!! This avc is allowed in the current policy
+allow httpd_t user_home_t:dir { add_name create read remove_name write };
+allow httpd_t user_home_t:file { rename setattr };
+
+#!!!! This avc is allowed in the current policy
+allow httpd_t user_home_t:file { create open read unlink write };

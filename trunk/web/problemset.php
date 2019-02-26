@@ -2,6 +2,7 @@
 	$OJ_CACHE_SHARE=false;
 	$cache_time=60;
 	require_once('./include/db_info.inc.php');
+	require_once('./include/const.inc.php');
 	require_once('./include/cache_start.php');
 	require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
@@ -114,15 +115,30 @@ foreach ($result as $row){
 	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row['problem_id']])){
 		if (isset($acc_arr[$row['problem_id']])) 
-			$view_problemset[$i][0]="<div class='btn btn-success'>Y</div>";
+			$view_problemset[$i][0]="<div class='label label-success'>Y</div>";
 		else 
-			$view_problemset[$i][0]= "<div class='btn btn-danger'>N</div>";
+			$view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}
+
+	$category=array();
+	$cate=explode(" ",$row['source']);
+	foreach($cate as $cat){
+		array_push($category,trim($cat));	
+	}
+
 	$view_problemset[$i][1]="<div class='center'>".$row['problem_id']."</div>";;
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
-	$view_problemset[$i][3]="<div class='center'><nobr>".mb_substr($row['source'],0,8,'utf8')."</nobr></div >";
+	$view_problemset[$i][3]="<div class='center'>";
+	foreach($category as $cat){
+		if(trim($cat)=="")continue;
+		$hash_num=hexdec(substr(md5($cat),0,15));
+		$label_theme=$color_theme[$hash_num%count($color_theme)];
+		if($label_theme=="") $label_theme="default";
+		$view_problemset[$i][3].="<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,4,'utf8')."</a>&nbsp;";
+	}
+	$view_problemset[$i][3].="</div >";
 	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."&jresult=4'>".$row['accepted']."</a></div>";
 	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
 	

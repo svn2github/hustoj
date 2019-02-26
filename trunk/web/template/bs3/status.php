@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo $OJ_NAME?></title>  
-    <?php include("template/$OJ_TEMPLATE/css.php");?>	    
+	<title>
+		<?php echo $OJ_NAME?>
+	</title>
+	<?php include("template/$OJ_TEMPLATE/css.php");?>
 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-<div align=center class="input-append">
-<?php
-?>
-<form id=simform class=form-inline action="status.php" method="get">
-<?php echo $MSG_PROBLEM_ID?>:<input class="form-control" type=text size=4 name=problem_id value='<?php echo  htmlspecialchars($problem_id, ENT_QUOTES) ?>'>
-<?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo  htmlspecialchars($user_id, ENT_QUOTES) ?>'>
-<?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
-<?php echo $MSG_LANG?>:<select class="form-control" size="1" name="language">
-	<option value="-1">All</option>
-	<?php
-	if(isset($_GET['language'])){
-		$selectedLang=intval($_GET['language']);
-	}else{
-		$selectedLang=-1;
-	}
-	$lang_count=count($language_ext);
-	$langmask=$OJ_LANGMASK;
-	$lang=(~((int)$langmask))&((1<<($lang_count))-1);
-	for($i=0;$i<$lang_count;$i++){
-		if($lang&(1<<$i))
-		echo"<option value=$i ".( $selectedLang==$i?"selected":"").">
-		".$language_name[$i]."
+	<div class="container">
+		<?php include("template/$OJ_TEMPLATE/nav.php");?>
+		<!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div align=center class="input-append">
+				<?php
+				?>
+				<form id=simform class=form-inline action="status.php" method="get">
+					<?php echo $MSG_PROBLEM_ID?>:<input class="form-control" type=text size=4 name=problem_id value='<?php echo  htmlspecialchars($problem_id, ENT_QUOTES) ?>'>
+					<?php echo $MSG_USER?>:<input class="form-control" type=text size=4 name=user_id value='<?php echo  htmlspecialchars($user_id, ENT_QUOTES) ?>'>
+					<?php if (isset($cid)) echo "<input type='hidden' name='cid' value='$cid'>";?>
+					<?php echo $MSG_LANG?>:
+					<select class="form-control" size="1" name="language">
+						<option value="-1">All</option>
+						<?php
+						if ( isset( $_GET[ 'language' ] ) ) {
+							$selectedLang = intval( $_GET[ 'language' ] );
+						} else {
+							$selectedLang = -1;
+						}
+						$lang_count = count( $language_ext );
+						$langmask = $OJ_LANGMASK;
+						$lang = ( ~( ( int )$langmask ) ) & ( ( 1 << ( $lang_count ) ) - 1 );
+						for ( $i = 0; $i < $lang_count; $i++ ) {
+							if ( $lang & ( 1 << $i ) )
+								echo "<option value=$i " . ( $selectedLang == $i ? "selected" : "" ) . ">
+		" . $language_name[ $i ] . "
 		</option>";
-	}
-	?>
-</select>
-<?php echo $MSG_RESULT?>:<select class="form-control" size="1" name="jresult">
-<?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
+						}
+						?>
+					</select>
+					<?php echo $MSG_RESULT?>:
+					<select class="form-control" size="1" name="jresult">
+						<?php if (isset($_GET['jresult'])) $jresult_get=intval($_GET['jresult']);
 else $jresult_get=-1;
 if ($jresult_get>=12||$jresult_get<0) $jresult_get=-1;
 /*if ($jresult_get!=-1){
@@ -68,8 +72,8 @@ else echo "<option value='".strval($i)."'>".$jresult[$i]."</option>";
 }
 echo "</select>";
 ?>
-</select>
-<?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
+					</select>
+					<?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 if(isset($_GET['showsim']))
 $showsim=intval($_GET['showsim']);
 else
@@ -97,80 +101,106 @@ echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
 }
 echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 ?>
-</div>
-<div id=center>
-<table id=result-tab class="table table-striped content-box-header" align=center width=80%>
-<thead>
-<tr class='toprow' >
-<th ><?php echo $MSG_RUNID?>
-<th ><?php echo $MSG_USER?>
-<th ><?php echo $MSG_PROBLEM?>
-<th ><?php echo $MSG_RESULT?>
-<th class='hidden-xs' ><?php echo $MSG_MEMORY?>
-<th class='hidden-xs' ><?php echo $MSG_TIME?>
-<th class='hidden-xs' ><?php echo $MSG_LANG?>
-<th class='hidden-xs' ><?php echo $MSG_CODE_LENGTH?>
-<th ><?php echo $MSG_SUBMIT_TIME?>
-<th class='hidden-xs' ><?php echo $MSG_JUDGER?>
-</tr>
-</thead>
-<tbody>
-<?php
-$cnt=0;
-foreach($view_status as $row){
-if ($cnt)
-echo "<tr class='oddrow'>";
-else
-echo "<tr class='evenrow'>";
-$i=0;
-foreach($row as $table_cell){
-	if($i>3&&$i!=8)
-		echo "<td class='hidden-xs'>";
-	else
-		echo "<td>";
-	echo $table_cell;
-	echo "</td>";
-	$i++;
-}
-echo "</tr>\n";
-$cnt=1-$cnt;
-}
-?>
-</tbody>
-</table>
-</div>
-<div id=center>
-<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+			</div>
+			<div id=center>
+				<table id=result-tab class="table table-striped content-box-header" align=center width=80%>
+					<thead>
+						<tr class='toprow'>
+							<th>
+								<?php echo $MSG_RUNID?>
+							</th>
+							<th>
+								<?php echo $MSG_USER?>
+							</th>
+							<th>
+								<?php echo $MSG_PROBLEM?>
+							</th>
+							<th>
+								<?php echo $MSG_RESULT?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_MEMORY?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_TIME?>
+							</th>
+							<th> 
+								<?php echo $MSG_LANG?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_CODE_LENGTH?>
+							</th>
+							<th>
+								<?php echo $MSG_SUBMIT_TIME?>
+							</th>
+							<th class='hidden-xs'>
+								<?php echo $MSG_JUDGER?>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$cnt = 0;
+						foreach ( $view_status as $row ) {
+							if ( $cnt )
+								echo "<tr class='oddrow'>";
+							else
+								echo "<tr class='evenrow'>";
+							$i = 0;
+							foreach ( $row as $table_cell ) {
+								if ( $i > 3 && $i != 8 && $i!=6)
+									echo "<td class='hidden-xs'>";
+								else
+									echo "<td>";
+								echo $table_cell;
+								echo "</td>";
+								$i++;
+							}
+							echo "</tr>\n";
+							$cnt = 1 - $cnt;
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+			<div id=center>
+				<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
 echo "[<a href=status.php?".$str2."&top=".intval($_GET['prevtop']).">Previous Page</a>]&nbsp;&nbsp;";
 else
 echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
 echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
-</div>
+			</div>
 
-      </div>
+		</div>
 
-    </div> <!-- /container -->
+	</div>
+	<!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
-	<script>var i=0;
-		var judge_result=[<?php
+	<!-- Placed at the end of the document so the pages load faster -->
+	<?php include("template/$OJ_TEMPLATE/js.php");?>
+	<script>
+		var i = 0;
+		var judge_result = [ <?php
 		foreach($judge_result as $result){
 		echo "'$result',";
 		}
-		?>''];
+		?>
+			''
+		];
 
-		var judge_color=[<?php
+		var judge_color = [ <?php
 		 foreach($judge_color as $result){
 		 echo "'$result',";
 		 }
-		?>''];
+		?>
+			''
+		];
 	</script>
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.34" ></script>
-  </body>
+	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.35"></script>
+</body>
 </html>

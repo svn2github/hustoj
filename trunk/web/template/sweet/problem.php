@@ -91,7 +91,7 @@
       echo "<h4>$MSG_SOURCE</h4><div class=content>";
       $cats=explode(" ",$row['source']);
       foreach($cats as $cat){
-        echo "<a href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'utf-8')."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
+        echo "<a href='problemset.php?search=".urlencode(htmlentities($cat,ENT_QUOTES,'utf-8'))."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
       }
       echo "</div><br>";
     }

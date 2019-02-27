@@ -7,7 +7,7 @@
 	require_once('./include/setlang.php');
 	$view_title= "Recent Contests from Naikai-contest-spider";
 	
-	// bs3 bs ie 除外的模板依旧使用老方法
+	// bs ie sweet 除外的模板依旧使用老方法
 	if($OJ_TEMPLATE!="bs3"&&$OJ_TEMPLATE!="sweet"&&$OJ_TEMPLATE!="ie"){
 		$json = @file_get_contents('http://contests.acmicpc.info/contests.json');
 		$rows = json_decode($json, true);

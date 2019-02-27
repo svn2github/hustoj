@@ -30,6 +30,8 @@ $cur_path = "template/$OJ_TEMPLATE/"
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 <div id=main>
+
+<!--
 	<table lay-filter="demo">
 <thead class=toprow>
 	<tr>
@@ -52,24 +54,23 @@ $limit = 0;
  } ?>
 </tbody>
 </table>
+-->
+
+<table lay-filter="demo">
+<thead class=toprow>
+	<tr>
+		<th lay-data="{field:'username',}">OJ</th>
+		<th lay-data="{field:'username1',}">Name</th>
+		<th class="column-3" lay-data="{field:'username2', width:100}">Start Time</th>
+		<th class="column-4" lay-data="{field:'username3', width:100}">Week</th>
+		<th class="column-5" lay-data="{field:'username4', width:100}">Access</th>
+	</tr>
+</thead>
+<tbody class="row-hover" id="contest-list"></tbody>
+
+</table>
 </div>
-          <script>
-
-              layui.use('table', function(){
-                  var table = layui.table;
-
-                  //转换静态表格
-                  table.init('demo', {
-                      // height: 315 //设置高度
-                      // ,
-                      limit: <?php echo $limit ?> //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-                      //支持所有基础参数
-                  });
-                  // var element = layui.element;
-                  //…
-              });
-
-          </script>
+  
 <div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
 
       </div>
@@ -80,6 +81,26 @@ $limit = 0;
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/js.php");?>
+	<script>
+		var contestList = $("#contest-list");
+		$.get("./recent-contest.json",function(response){
+			response.map(function(val){
+				var item = "<tr><td class='column-1'>"+val.oj+"</td>"+
+					"<td class='column-2'><a target='_blank' href='"+val.link+"'>"+val.name+"</a></td>"+
+					"<td class='column-3'>"+val.start_time+"</td>"+
+					"<td class='column-4'>"+val.week+"</td>"+
+					"<td class='column-5'>"+val.access+"</td></tr>"
+				contestList.append(item);
+			});
+			layui.use('table', function(){
+				var table = layui.table;
+				table.init('demo', {
+					limit: response.length
+				});
+			});
+		});
+
+  </script>	
   </body>
 </html>

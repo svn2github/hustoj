@@ -50,7 +50,7 @@ fi
 mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
 echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
-sed -i "s:root /usr/share/nginx/html;:root /home/judge/src/web;:g" /etc/nginx/sites-enabled/default
+sed -i "s#root /usr/share/nginx/html;#root /home/judge/src/web;\n\n\tlocation /recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
 sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 sed -i "s:#\tfastcgi_split_path_info:\tfastcgi_split_path_info:g" /etc/nginx/sites-enabled/default

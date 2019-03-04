@@ -25,25 +25,40 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<div id=main>
+<div id="main" style="margin: 10px;">
+<!--
 	<table width=80% align=center>
-<thead class=toprow>
-	<tr>
-		<th class="column-1">OJ</th><th class="column-2">Name</th><th class="column-3">Start Time</th><th class="column-4">Week</th><th class="column-5">Access</th>
-	</tr>
-</thead>
-<tbody class="row-hover">
-<?php
-$odd=true;
- foreach($rows as $row) {
-   $odd=!$odd;
-?>
-  <tr class="<?php echo $odd?"oddrow":"evenrow"  ?>">
-		<td class="column-1"><?php echo$row['oj']?></td><td class="column-2"><a id="name_<?php echo$row['id']?>" href="<?php echo$row['link']?>" target="_blank"><?php echo$row['name']?></a></td><td class="column-3"><?php echo$row['start_time']?></td><td class="column-4"><?php echo$row['week']?></td><td class="column-5"><?php echo$row['access']?></td>
-	</tr>
-<?php } ?>
-</tbody>
-</table>
+		<thead class=toprow>
+			<tr>
+				<th class="column-1">OJ</th><th class="column-2">Name</th><th class="column-3">Start Time</th><th class="column-4">Week</th><th class="column-5">Access</th>
+			</tr>
+		</thead>
+		<tbody class="row-hover">
+		<?php
+		$odd=true;
+		 foreach($rows as $row) {
+		   $odd=!$odd;
+		?>
+		<tr class="<?php echo $odd?"oddrow":"evenrow"  ?>">
+			<td class="column-1"><?php echo$row['oj']?></td><td class="column-2"><a id="name_<?php echo$row['id']?>" href="<?php echo$row['link']?>" target="_blank"><?php echo$row['name']?></a></td><td class="column-3"><?php echo$row['start_time']?></td><td class="column-4"><?php echo$row['week']?></td><td class="column-5"><?php echo$row['access']?></td>
+		</tr>
+		<?php } ?>
+		</tbody>
+	</table>
+-->
+	<table class="table table-striped" align="center">
+	<thead>
+		<tr>
+			<th class="column-1">OJ</th>
+			<th class="column-2">Name</th>
+			<th class="column-3">Start Time</th>
+			<th class="column-4">Week</th>
+			<th class="column-5">Access</th>
+		</tr>
+	</thead>
+	<tbody id="contest-list"></tbody>
+	</table>
+
 </div>
 <div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
 
@@ -55,6 +70,19 @@ $odd=true;
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	  
+	<script>
+		var contestList = $("#contest-list");
+		$.get("./recent-contest.json",function(response){
+			response.map(function(val){
+				var item = "<tr><td class='column-1'>"+val.oj+"</td>"+
+					"<td class='column-2'><a target='_blank' href='"+val.link+"'>"+val.name+"</a></td>"+
+					"<td class='column-3'>"+val.start_time+"</td>"+
+					"<td class='column-4'>"+val.week+"</td>"+
+					"<td class='column-5'>"+val.access+"</td></tr>"
+				contestList.append(item); 
+			});
+		});
+	</script>		
   </body>
 </html>

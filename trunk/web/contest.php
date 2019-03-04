@@ -164,6 +164,7 @@ if(isset($_GET['cid'])){
 
   foreach($result as $row){
     $view_contest[$i][0] = $row['contest_id'];
+    if(trim($row['title'])=="") $row['title']=$MSG_CONTEST.$row['contest_id'];
     $view_contest[$i][1] = "<a href='contest.php?cid=".$row['contest_id']."'>".$row['title']."</a>";
     $start_time = strtotime($row['start_time']);
     $end_time = strtotime($row['end_time']);

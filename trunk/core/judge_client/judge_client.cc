@@ -2060,7 +2060,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		execl("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL);
 		break;
 	case 6: //Python
-		if (py2)
+		if (!py2)
 		{
 			execl("/python2", "/python2", "Main.py", (char *)NULL);
 		}

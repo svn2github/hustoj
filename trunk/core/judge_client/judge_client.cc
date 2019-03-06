@@ -1409,7 +1409,7 @@ void get_solution(int solution_id, char *work_dir, int lang)
 #endif
 	}
 	
-	py2 = execute_cmd("/bin/grep 'python3' %s/Main.py > /dev/null", work_dir);
+	py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
 
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }

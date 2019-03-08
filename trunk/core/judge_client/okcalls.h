@@ -20,6 +20,10 @@
 #define HOJ_MAX_LIMIT -1
 #ifdef __i386
    #include "okcalls32.h"
-#else
+#endif
+#ifdef __x86_64
    #include "okcalls64.h"
+#endif
+#ifdef __arm__
+   #include "okcalls_arm.h"
 #endif

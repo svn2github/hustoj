@@ -71,18 +71,34 @@
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
+#ifdef __arm__
+struct user_regs_struct {
+        long uregs[18];
+};
+
+#define ARM_r7          uregs[7]
+#define ARM_ORIG_r0     uregs[17]
+
+#define REG_SYSCALL ARM_r7
+
+#endif
+
 #ifdef __i386
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
 #define REG_ARG0 ebx
 #define REG_ARG1 ecx
-#else
+#endif
+
+#ifdef __x86_64
 #define REG_SYSCALL orig_rax
 #define REG_RET rax
 #define REG_ARG0 rdi
 #define REG_ARG1 rsi
 
 #endif
+
+
 
 static int DEBUG = 0;
 static char host_name[BUFFER_SIZE];
@@ -1155,10 +1171,15 @@ int compile(int lang, char *work_dir)
 
 		if (lang == 3 || lang == 17)
 		{
-#ifdef __i386
+#ifdef __arm__
 			LIM.rlim_max = STD_MB << 11;
 			LIM.rlim_cur = STD_MB << 11;
-#else
+#endif
+#ifdef __i386__
+			LIM.rlim_max = STD_MB << 11;
+			LIM.rlim_cur = STD_MB << 11;
+#endif
+#ifdef __x86_64__
 			LIM.rlim_max = STD_MB << 12;
 			LIM.rlim_cur = STD_MB << 12;
 #endif

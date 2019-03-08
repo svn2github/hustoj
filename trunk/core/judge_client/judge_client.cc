@@ -83,6 +83,21 @@ struct user_regs_struct {
 
 #endif
 
+#ifdef __mips__
+typedef unsigned long long uint64_t;
+struct pt_regs {
+        uint64_t uregs[38];
+};
+
+
+#define REG_V0 2
+#define REG_A0 4
+
+#define mips_REG_V0 uregs[REG_V0]
+#define REG_SYSCALL mips_REG_V0
+
+#endif
+
 #ifdef __i386
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
@@ -1171,6 +1186,10 @@ int compile(int lang, char *work_dir)
 
 		if (lang == 3 || lang == 17)
 		{
+#ifdef __mips__
+			LIM.rlim_max = STD_MB << 11;
+			LIM.rlim_cur = STD_MB << 11;
+#endif
 #ifdef __arm__
 			LIM.rlim_max = STD_MB << 11;
 			LIM.rlim_cur = STD_MB << 11;

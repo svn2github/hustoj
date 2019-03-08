@@ -90,7 +90,7 @@ struct user_regs_struct {
 #define REG_ARG1 ecx
 #endif
 
-#ifdef __x86_64
+#ifdef __x86_64__
 #define REG_SYSCALL orig_rax
 #define REG_RET rax
 #define REG_ARG0 rdi

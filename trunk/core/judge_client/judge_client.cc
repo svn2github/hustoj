@@ -153,7 +153,7 @@ static int turbo_mode = 0;
 static const char *tbname = "solution";
 //static int sleep_tmp;
 
-static int py2=1;
+static int py2=1; // caution: py2=1 means default using py3
 
 #define ZOJ_COM
 
@@ -1448,9 +1448,9 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
-	
-	py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
-
+	if(lang == 6 ){	
+		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
+	}
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }
 

@@ -85,7 +85,7 @@ struct user_regs_struct {
 
 #ifdef __mips__
 typedef unsigned long long uint64_t;
-struct pt_regs {
+struct user_regs_struct{
         uint64_t uregs[38];
 };
 

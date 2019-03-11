@@ -71,18 +71,49 @@
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
+#ifdef __arm__
+struct user_regs_struct {
+        long uregs[18];
+};
+
+#define ARM_r7          uregs[7]
+#define ARM_ORIG_r0     uregs[17]
+
+#define REG_SYSCALL ARM_r7
+
+#endif
+
+#ifdef __mips__
+typedef unsigned long long uint64_t;
+struct pt_regs {
+        uint64_t uregs[38];
+};
+
+
+#define REG_V0 2
+#define REG_A0 4
+
+#define mips_REG_V0 uregs[REG_V0]
+#define REG_SYSCALL mips_REG_V0
+
+#endif
+
 #ifdef __i386
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
 #define REG_ARG0 ebx
 #define REG_ARG1 ecx
-#else
+#endif
+
+#ifdef __x86_64__
 #define REG_SYSCALL orig_rax
 #define REG_RET rax
 #define REG_ARG0 rdi
 #define REG_ARG1 rsi
 
 #endif
+
+
 
 static int DEBUG = 0;
 static char host_name[BUFFER_SIZE];
@@ -122,7 +153,7 @@ static int turbo_mode = 0;
 static const char *tbname = "solution";
 //static int sleep_tmp;
 
-static int py2=1;
+static int py2=1; // caution: py2=1 means default using py3
 
 #define ZOJ_COM
 
@@ -1155,10 +1186,19 @@ int compile(int lang, char *work_dir)
 
 		if (lang == 3 || lang == 17)
 		{
-#ifdef __i386
+#ifdef __mips__
 			LIM.rlim_max = STD_MB << 11;
 			LIM.rlim_cur = STD_MB << 11;
-#else
+#endif
+#ifdef __arm__
+			LIM.rlim_max = STD_MB << 11;
+			LIM.rlim_cur = STD_MB << 11;
+#endif
+#ifdef __i386__
+			LIM.rlim_max = STD_MB << 11;
+			LIM.rlim_cur = STD_MB << 11;
+#endif
+#ifdef __x86_64__
 			LIM.rlim_max = STD_MB << 12;
 			LIM.rlim_cur = STD_MB << 12;
 #endif
@@ -1190,7 +1230,7 @@ int compile(int lang, char *work_dir)
 			execute_cmd("mount -o remount,ro usr");
 			execute_cmd("mount -o bind /lib lib");
 			execute_cmd("mount -o remount,ro lib");
-#ifndef __i386
+#ifndef __i386__
 			execute_cmd("mount -o bind /lib64 lib64");
 			execute_cmd("mount -o remount,ro lib64");
 #endif
@@ -1408,9 +1448,9 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
-	
-	py2 = execute_cmd("/bin/grep 'python3' %s/Main.py > /dev/null", work_dir);
-
+	if(lang == 6 ){	
+		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
+	}
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }
 
@@ -1647,8 +1687,10 @@ void copy_shell_runtime(char *work_dir)
 	execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
 #endif
 
+#ifdef __x86_64__
 	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu %s/lib/", work_dir);
 	execute_cmd("/bin/cp /lib64/* %s/lib64/", work_dir);
+#endif
 	//	execute_cmd("/bin/cp /lib32 %s/", work_dir);
 	execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
 	execute_cmd("/bin/ln -s /bin/busybox %s/bin/sh", work_dir);
@@ -1760,8 +1802,10 @@ void copy_ruby_runtime(char *work_dir)
 	execute_cmd("cp -a /usr/lib64/ruby* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/lib64/libruby* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/bin/ruby* %s/", work_dir);
+#ifdef __x86_64__
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libruby* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgmp* %s/usr/lib/", work_dir);
+#endif
 }
 
 void copy_guile_runtime(char *work_dir)
@@ -1785,10 +1829,12 @@ void copy_guile_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/bin/guile* %s/", work_dir);
+#ifdef __x86_64__
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libguile* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgc* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libffi* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libunistring* %s/usr/lib/", work_dir);
+#endif
 }
 
 void copy_python_runtime(char *work_dir)
@@ -1812,9 +1858,13 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("mkdir -p %s/usr/share/abrt/conf.d", work_dir);
 	execute_cmd("mkdir -p %s/usr/share/abrt/conf.d/plugins", work_dir);
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
-	
-	execute_cmd("cp /usr/bin/python* %s/", work_dir);
-	execute_cmd("cp -a /usr/lib/python* %s/usr/lib/", work_dir);
+	if(!py2){	
+		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
+		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
+	}else{
+		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
+		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
+	}
 	execute_cmd("cp -a /usr/lib64/python* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
 	execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
@@ -1843,12 +1893,14 @@ void copy_php_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/*/libkrb5* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
+#ifdef __x86_64__
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicuuc.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libstdc++.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libssl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libcrypto* %s/usr/lib/", work_dir);
+#endif
 	execute_cmd("/bin/cp /usr/bin/php* %s/", work_dir);
 	execute_cmd("chmod +rx %s/Main.php", work_dir);
 }
@@ -1894,7 +1946,9 @@ void copy_mono_runtime(char *work_dir)
 				work_dir);
 	execute_cmd("/bin/cp /lib/libpcre* %s/lib/", work_dir);
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
+#ifdef __x86_64__
 	execute_cmd("/bin/cp /lib64/ld-linux* %s/lib64/", work_dir);
+#endif
 	execute_cmd("/bin/mkdir -p %s/home/judge", work_dir);
 	execute_cmd("/bin/chown judge %s/home/judge", work_dir);
 	execute_cmd("/bin/mkdir -p %s/etc", work_dir);
@@ -1936,6 +1990,7 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib/i386-linux-gnu/libgcc_s.so.1  %s/lib/i386-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib/ld-linux.so.*  %s/lib/", work_dir);
 
+#ifdef __x86_64__
 	execute_cmd("/bin/mkdir -p %s/usr/lib %s/lib/x86_64-linux-gnu/", work_dir, work_dir);
 
 	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libz.so.* %s/lib/x86_64-linux-gnu/", work_dir);
@@ -1953,7 +2008,7 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libc.so.* %s/lib/x86_64-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.* %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so.* %s/lib/x86_64-linux-gnu/", work_dir);
-
+#endif
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/", work_dir);
 }
 void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
@@ -2060,7 +2115,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		execl("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL);
 		break;
 	case 6: //Python
-		if (py2)
+		if (!py2)
 		{
 			execl("/python2", "/python2", "Main.py", (char *)NULL);
 		}

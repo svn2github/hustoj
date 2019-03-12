@@ -3030,7 +3030,9 @@ int main(int argc, char **argv)
 	FILE *df=fopen("diff.out","a");
 	fprintf(df,"time_space_table:\n%s\n",time_space_table);
 	fclose(df);
-	if(ACflg != 10) adddiffinfo(solution_id);
+	if(DEBUG) printf("ACflg:%d\n",ACflg);
+	if(DEBUG) printf("finalACflg:%d\n",finalACflg);
+	if(ACflg != 10 && finalACflg!= 10 ) adddiffinfo(solution_id);
 	if(!turbo_mode)update_user(user_id);
 	if(!turbo_mode)update_problem(p_id,cid);
 	clean_workdir(work_dir);

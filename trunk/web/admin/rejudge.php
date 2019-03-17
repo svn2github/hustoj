@@ -27,7 +27,9 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=? and problem_id>0" ;
 		pdo_query($sql,$rjsid) ;
 		$sql="select contest_id from `solution` WHERE `solution_id`=? " ;
-		$cid=intval(pdo_query($sql,$rjsid)[0][0]);
+		$data=pdo_query($sql,$rjsid);
+		$row=$data[0];
+		$cid=intval($row[0]);
 		if ($cid>0)
 			$url="../status.php?cid=".$cid."&top=".($rjsid+1);
 		else

@@ -2499,7 +2499,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		call_id = (unsigned int)reg.REG_SYSCALL % call_array_size;
+		call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 		if (call_counter[call_id])
 		{
 			//call_counter[reg.REG_SYSCALL]--;

@@ -35,6 +35,7 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
 
 https://www.youtube.com/watch?v=hRap7ettUWc
 
+阿里云用户请百度“阿里云 80端口”
 
 <b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
 

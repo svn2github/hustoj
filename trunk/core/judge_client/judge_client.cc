@@ -1187,8 +1187,8 @@ int compile(int lang, char *work_dir)
 		if (lang == 3 || lang == 17)
 		{
 #ifdef __mips__
-			LIM.rlim_max = STD_MB << 11;
-			LIM.rlim_cur = STD_MB << 11;
+			LIM.rlim_max = STD_MB << 12;
+			LIM.rlim_cur = STD_MB << 12;
 #endif
 #ifdef __arm__
 			LIM.rlim_max = STD_MB << 11;
@@ -2100,10 +2100,10 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		execl("./Main", "./Main", (char *)NULL);
 		break;
 	case 3:
-		sprintf(java_xms, "-Xmx%dM", mem_lmt);
+		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execl("/usr/bin/java", "/usr/bin/java", java_xmx, 
+		execl("/usr/bin/java", "/usr/bin/java",java_xmx ,
 				"-Djava.security.manager",
 				"-Djava.security.policy=./java.policy", "Main", (char *) NULL);
 		break;
@@ -2499,32 +2499,38 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
-		if (call_counter[call_id])
-		{
-			//call_counter[reg.REG_SYSCALL]--;
-		}
-		else if (record_call)
-		{
-			call_counter[call_id] = 1;
-		}
-		else
-		{ //do not limit JVM syscall for using different JVM
-			ACflg = OJ_RE;
-			char error[BUFFER_SIZE];
-			sprintf(error,
-					"[ERROR] A Not allowed system call: runid:%d CALLID:%u\n"
-					" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
-					"and recompile judge_client. \n"
-					"if you are admin and you don't know what to do ,\n"
-					"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-					solution_id, call_id);
+#ifdef __mips__
+	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
+		if((unsigned int)reg.REG_SYSCALL<6500){  
+#endif
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+			if (call_counter[call_id])
+			{
+				//call_counter[reg.REG_SYSCALL]--;
+			}
+			else if (record_call)
+			{
+				call_counter[call_id] = 1;
+			}
+			else
+			{ //do not limit JVM syscall for using different JVM
+				ACflg = OJ_RE;
+				char error[BUFFER_SIZE];
+				sprintf(error,
+						"[ERROR] A Not allowed system call: runid:%d CALLID:%u\n"
+						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
+						"and recompile judge_client. \n"
+						"if you are admin and you don't know what to do ,\n"
+						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
+						solution_id, call_id);
 
-			write_log(error);
-			print_runtimeerror(error);
-			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+				write_log(error);
+				print_runtimeerror(error);
+				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+			}
+#ifdef __mips__
 		}
-
+#endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;
 	}

@@ -1680,6 +1680,13 @@ void copy_shell_runtime(char *work_dir)
 	execute_cmd("/bin/mkdir %s/lib", work_dir);
 	execute_cmd("/bin/mkdir %s/lib64", work_dir);
 	execute_cmd("/bin/mkdir %s/bin", work_dir);
+#ifdef __mips__
+	execute_cmd("/bin/cp -a /lib64/ld.so.1  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libdl.so.2  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/ldc.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6  %s/lib64/", work_dir);
+
+#endif
 
 #ifdef __i386
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
@@ -1866,6 +1873,7 @@ void copy_python_runtime(char *work_dir)
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
 	}
 	execute_cmd("cp -a /usr/lib64/python* %s/usr/lib64/", work_dir);
+	execute_cmd("cp -a /usr/lib64/libpython* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
 	execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
 	execute_cmd("cp -a /usr/lib/libpython* %s/usr/lib/", work_dir);

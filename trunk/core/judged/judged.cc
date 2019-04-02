@@ -215,8 +215,8 @@ void run_client(int runid, int clientid) {
 	LIM.rlim_cur = 800 * STD_MB;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 #ifdef __mips__
-	LIM.rlim_max = STD_MB << 11;
-	LIM.rlim_cur = STD_MB << 11;
+	LIM.rlim_max = STD_MB << 12;
+	LIM.rlim_cur = STD_MB << 12;
 #endif
 #ifdef __arm__
 	LIM.rlim_max = STD_MB << 11;

@@ -1683,8 +1683,12 @@ void copy_shell_runtime(char *work_dir)
 #ifdef __mips__
 	execute_cmd("/bin/cp -a /lib64/ld.so.1  %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libdl.so.2  %s/lib64/", work_dir);
-	execute_cmd("/bin/cp -a /lib64/ldc.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libc.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/ld-2.27.so  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libc-2.27.so %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libdl-2.27.so %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6.1 %s/lib64/", work_dir);
 
 #endif
 
@@ -1872,6 +1876,18 @@ void copy_python_runtime(char *work_dir)
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
 	}
+#ifdef __mips__
+	execute_cmd("/bin/cp -a /lib64/libpthread.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libutil.so.1 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libm.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libc.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libpthread-2.27.so %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libutil-2.27.so %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libc-2.27.so %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib64/libm-2.27.so %s/lib64/", work_dir);
+
+
+#endif
 	execute_cmd("cp -a /usr/lib64/python* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/lib64/libpython* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);

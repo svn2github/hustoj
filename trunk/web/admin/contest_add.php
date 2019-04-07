@@ -1,3 +1,6 @@
+<?php
+   header("Cache-control:private"); 
+?>
 <html>
 <head>
   <meta http-equiv="Pragma" content="no-cache">
@@ -138,7 +141,7 @@ else{
         $plist=$i;
     }
   }else if(isset($_GET['spid'])){
-    require_once("../include/check_get_key.php");
+    //require_once("../include/check_get_key.php");
     $spid = intval($_GET['spid']);
 
     $plist = "";

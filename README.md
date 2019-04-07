@@ -1,5 +1,6 @@
 hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 ======
+2019-3-14  更新:主线支持  树莓派(arm)  <b>龙芯(loongson-2f)</b>  i386 x86_64 
 
 根据你选择的发行版不同，从下面三个脚本里选一个来用。
 
@@ -34,6 +35,7 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
 
 https://www.youtube.com/watch?v=hRap7ettUWc
 
+阿里云用户请百度“阿里云 80端口”
 
 <b>安装完成，用admin作为用户名注册一个用户，自动成为管理员。</b>
 

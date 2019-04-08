@@ -32,3 +32,10 @@ tar -zcvf /home/judge/backup/${cdate}.tar.gz -C /home/judge/backup/${cdate} jol.
 
 echo "clean backup temp files"
 rm -rf /home/judge/backup/${cdate}
+
+echo "数据千万条，备份第一条。"
+echo "备份不及时，运维两行泪。"
+echo "Data is tens of thousands,"
+echo "backing up the first one."
+echo "The backup is not timely,"
+echo "and the operation and maintenance of the two lines of tears."

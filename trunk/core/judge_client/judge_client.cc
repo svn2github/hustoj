@@ -2070,10 +2070,12 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files
-	if(lang==18) 
+	if(lang==18){ 
+		execute_cmd("/bin/chown judge %s/data.in", work_dir);
 		freopen("Main.sql", "r", stdin);
-	else
+	}else{
 		freopen("data.in", "r", stdin);
+	}
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
@@ -2559,7 +2561,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 #ifdef __mips__
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
-		if((unsigned int)reg.REG_SYSCALL<6500){  
+		if(exitcode!=5&&exitcode!=133&&(unsigned int)reg.REG_SYSCALL<6500){  
 #endif
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 			if (call_counter[call_id])
@@ -2580,7 +2582,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"
 						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-						solution_id, call_id,(unsigned int)reg.REG_SYSCALL);
+						solution_id, call_id,exitcode);
 
 				write_log(error);
 				print_runtimeerror(error);

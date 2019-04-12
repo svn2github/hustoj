@@ -40,6 +40,7 @@
 <script src='highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
 <script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
 <script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
+<script src='highlight/scripts/shBrushSql.js' type='text/javascript'></script>
 <script language='javascript'>
 SyntaxHighlighter.config.bloggerMode = false;
 SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';

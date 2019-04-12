@@ -161,8 +161,8 @@ static int py2=1; // caution: py2=1 means default using py3
 MYSQL *conn;
 #endif
 
-static char lang_ext[18][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
-							   "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go"};
+static char lang_ext[19][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
+							   "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql"};
 //static char buf[BUFFER_SIZE];
 int data_list_has(char *file)
 {
@@ -331,6 +331,11 @@ void init_syscalls_limits(int lang)
 	{ //go
 		for (i = 0; i == 0 || LANG_GOV[i]; i++)
 			call_counter[LANG_GOV[i]] = HOJ_MAX_LIMIT;
+	}
+	else if (lang == 18)
+	{ //go
+		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
+			call_counter[LANG_SQLV[i]] = HOJ_MAX_LIMIT;
 	}
 }
 
@@ -1995,6 +2000,20 @@ void copy_lua_runtime(char *work_dir)
 	execute_cmd("/bin/mkdir -p %s/usr/local/bin", work_dir);
 	execute_cmd("/bin/cp /usr/bin/lua %s/", work_dir);
 }
+void copy_sql_runtime(char *work_dir)
+{
+
+	copy_shell_runtime(work_dir);
+	execute_cmd("/bin/cp /usr/bin/sqlite3 %s/", work_dir);
+	execute_cmd("/bin/cp /lib64/libedit.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libm.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libdl.so.2 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libz.so.1 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libpthread.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libc.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib64/libtinfo.so.6 %s/lib64/", work_dir);
+
+}
 void copy_js_runtime(char *work_dir)
 {
 
@@ -2051,7 +2070,10 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	// now the user is "judger"
 	chdir(work_dir);
 	// open the files
-	freopen("data.in", "r", stdin);
+	if(lang==18) 
+		freopen("Main.sql", "r", stdin);
+	else
+		freopen("data.in", "r", stdin);
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
@@ -2174,6 +2196,9 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		break;
 	case 16: //Node.js
 		execl("/nodejs", "/nodejs", "Main.js", (char *)NULL);
+		break;
+	case 18: //sqlite3
+		execl("/sqlite3", "/sqlite3", "data.in", (char *)NULL);
 		break;
 	}
 	//sleep(1);
@@ -2550,12 +2575,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
-						"[ERROR] A Not allowed system call: runid:%d CALLID:%u\n"
+						"[ERROR] A Not allowed system call: runid:%d CALLID:%u [%u]\n"
 						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"
 						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-						solution_id, call_id);
+						solution_id, call_id,(unsigned int)reg.REG_SYSCALL);
 
 				write_log(error);
 				print_runtimeerror(error);
@@ -2918,6 +2943,8 @@ int main(int argc, char **argv)
 		copy_lua_runtime(work_dir);
 	if (lang == 16)
 		copy_js_runtime(work_dir);
+	if (lang == 18)
+		copy_sql_runtime(work_dir);
 	// read files and run
 	// read files and run
 	// read files and run

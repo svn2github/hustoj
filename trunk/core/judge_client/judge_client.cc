@@ -1871,12 +1871,20 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
 	if(!py2){	
 		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
+#if (defined __i386) || (defined __arm__)
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
+#endif
+#if (defined __x86_64__) || (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python2* %s/usr/lib64/", work_dir);
+#endif
 	}else{
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
+#if (defined __i386) || (defined __arm__)
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
+#endif
+#if (defined __x86_64__) || (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python3* %s/usr/lib64/", work_dir);
+#endif
 	}
 #ifdef __mips__
 	execute_cmd("/bin/cp -a /lib64/libpthread.so.0 %s/lib64/", work_dir);

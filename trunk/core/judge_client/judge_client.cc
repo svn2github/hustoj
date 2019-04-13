@@ -1134,7 +1134,7 @@ int compile(int lang, char *work_dir)
 
 	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", "-O2", "-fmax-errors=10", "-Wall",
 						  "-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL};
-	const char *CP_X[] = {"g++", "-fno-asm", "-O2", "-fmax-errors=10", "-Wall",
+	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",
 						  "-lm", "--static", "-std=c++11", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
 	const char *CP_P[] =
 		{"fpc", "Main.pas", "-Cs32000000", "-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL};
@@ -2005,6 +2005,7 @@ void copy_sql_runtime(char *work_dir)
 
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/cp /usr/bin/sqlite3 %s/", work_dir);
+#ifdef __mips__
 	execute_cmd("/bin/cp /lib64/libedit.so.0 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libm.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libdl.so.2 %s/lib64/", work_dir);
@@ -2012,7 +2013,19 @@ void copy_sql_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib64/libpthread.so.0 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libc.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libtinfo.so.6 %s/lib64/", work_dir);
-
+#endif
+#ifdef __x86_64__
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libsqlite3.so.0   %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libreadline.so.6   %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libc.so.6  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libpthread.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libdl.so.2 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libtinfo.so.5 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libedit.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libm.so.6 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libz.so.1 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libtinfo.so.6 %s/lib64/", work_dir);
+#endif
 }
 void copy_js_runtime(char *work_dir)
 {
@@ -2559,9 +2572,10 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+		if(exitcode!=5&&exitcode!=133){
 #ifdef __mips__
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
-		if(exitcode!=5&&exitcode!=133&&(unsigned int)reg.REG_SYSCALL<6500){  
+		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 			if (call_counter[call_id])
@@ -2589,8 +2603,9 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			}
 #ifdef __mips__
-		}
+		   }
 #endif
+		}
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;
 	}

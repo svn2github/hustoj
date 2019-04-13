@@ -35,6 +35,7 @@ if (isset($_POST['cid'])){
 				where `num`='$pid' and contest_id=$cid";
 }else{
 	$id=intval($_POST['id']);
+	if($id<0) $id=-$id;
 	$sql="SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' ";
 	if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
 		$sql.=" and defunct='N' ";
@@ -53,10 +54,14 @@ if (isset($res)&&count($res)<1&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])&
 		exit(0);
 }
 if($res[0][1]!='N'&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-		echo "res:$res,count:".count($res);
-
+	//	echo "res:$res,count:".count($res);
+	//	echo "$sql";
 		$view_errors=  "Problem disabled.<br>";
-		require("template/".$OJ_TEMPLATE."/error.php");
+		if(isset($_POST['ajax'])) {
+			echo  $view_errors;
+		}else{
+			require("template/".$OJ_TEMPLATE."/error.php");
+		}
 		exit(0);
 
 }
@@ -201,11 +206,11 @@ if (count($res)==1){
 if((~$OJ_LANGMASK)&(1<<$language)){
 
 	if (!isset($pid)){
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
+	$sql="insert INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
 		VALUES(?,?,NOW(),?,?,?,14)";
 		$insert_id= pdo_query($sql,$id,$user_id,$language,$ip,$len);
 	}else{
-	$sql="INSERT INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,result)
+	$sql="insert INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,result)
 		VALUES(?,?,NOW(),?,?,?,?,?,14)";
 		if(isset($OJ_OI_1_SOLUTION_ONLY)&&$OJ_OI_1_SOLUTION_ONLY){
 			pdo_query("update solution set contest_id =0 where contest_id=? and user_id=? and num=?",$cid,$user_id,$pid);

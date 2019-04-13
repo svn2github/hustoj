@@ -2084,7 +2084,8 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	chdir(work_dir);
 	// open the files
 	if(lang==18){ 
-		execute_cmd("/bin/chown judge %s/data.in", work_dir);
+		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s/data.in", work_dir,work_dir);
+		execute_cmd("/bin/chown judge %s/data.db", work_dir);
 		freopen("Main.sql", "r", stdin);
 	}else{
 		freopen("data.in", "r", stdin);
@@ -2213,7 +2214,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		execl("/nodejs", "/nodejs", "Main.js", (char *)NULL);
 		break;
 	case 18: //sqlite3
-		execl("/sqlite3", "/sqlite3", "data.in", (char *)NULL);
+		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
 		break;
 	}
 	//sleep(1);

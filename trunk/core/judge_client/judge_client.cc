@@ -1224,6 +1224,12 @@ int compile(int lang, char *work_dir)
 		{
 			freopen("ce.txt", "w", stdout);
 		}
+		if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+		{
+			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
+			execute_cmd("mount -o bind /dev dev");
+			execute_cmd("mount -o remount,ro dev");
+		}
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{
@@ -1243,11 +1249,6 @@ int compile(int lang, char *work_dir)
 			execute_cmd("mount -o remount,ro etc/alternatives");
 			execute_cmd("mount -o bind /proc proc");
 			execute_cmd("mount -o remount,ro proc");
-			if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
-			{
-				execute_cmd("mount -o bind /dev dev");
-				execute_cmd("mount -o remount,ro dev");
-			}
 			chroot(work_dir);
 		}
 		while (setgid(1536) != 0)
@@ -1876,18 +1877,18 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
 	if(!py2){	
 		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
-#if (defined __i386) || (defined __arm__)
+#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
 #endif
-#if (defined __x86_64__) || (defined __mips__)
+#if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python2* %s/usr/lib64/", work_dir);
 #endif
 	}else{
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
-#if (defined __i386) || (defined __arm__)
+#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
 #endif
-#if (defined __x86_64__) || (defined __mips__)
+#if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python3* %s/usr/lib64/", work_dir);
 #endif
 	}

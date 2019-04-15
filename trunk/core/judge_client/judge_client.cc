@@ -1224,12 +1224,6 @@ int compile(int lang, char *work_dir)
 		{
 			freopen("ce.txt", "w", stdout);
 		}
-		if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
-		{
-			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
-			execute_cmd("mount -o bind /dev dev");
-			execute_cmd("mount -o remount,ro dev");
-		}
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{
@@ -1248,6 +1242,12 @@ int compile(int lang, char *work_dir)
 			execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
 			execute_cmd("mount -o remount,ro etc/alternatives");
 			execute_cmd("mount -o bind /proc proc");
+			if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+			{
+				execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
+				execute_cmd("mount -o bind /dev dev");
+				execute_cmd("mount -o remount,ro dev");
+			}
 			execute_cmd("mount -o remount,ro proc");
 			chroot(work_dir);
 		}

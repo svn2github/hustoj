@@ -2015,6 +2015,18 @@ void copy_sql_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib64/libc.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libtinfo.so.6 %s/lib64/", work_dir);
 #endif
+#ifdef __i386__
+	execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libsqlite3.so.0*   %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libreadline.so.6*   %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libc.so.6*  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libpthread.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libdl.so.2* %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.5* %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libedit.so.0 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libm.so.6* %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libz.so.1 %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.6* %s/lib64/", work_dir);
+#endif
 #ifdef __x86_64__
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libsqlite3.so.0   %s/lib/", work_dir);
 	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libreadline.so.6   %s/lib64/", work_dir);

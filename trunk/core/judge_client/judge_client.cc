@@ -2587,7 +2587,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 #ifdef __mips__
-		if(exitcode!=5&&exitcode!=133){
+//		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
@@ -2618,7 +2618,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 #ifdef __mips__
 		   }
-		}
+//		}
 #endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;

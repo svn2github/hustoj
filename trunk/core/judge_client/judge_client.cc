@@ -1700,8 +1700,8 @@ void copy_shell_runtime(char *work_dir)
 
 #ifdef __i386
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
-	execute_cmd("/bin/cp -a /lib/i386-linux-gnu  %s/lib/", work_dir);
-	execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
+//	execute_cmd("/bin/cp -a /lib/i386-linux-gnu/  %s/lib/", work_dir);
+//	execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
 #endif
 
 #ifdef __x86_64__
@@ -2017,15 +2017,15 @@ void copy_sql_runtime(char *work_dir)
 #endif
 #ifdef __i386__
 	execute_cmd("/bin/cp /usr/lib/i386-linux-gnu/libsqlite3.so.0*   %s/lib/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libreadline.so.6*   %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libc.so.6*  %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libpthread.so.0 %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libdl.so.2* %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.5* %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libedit.so.0 %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libm.so.6* %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libz.so.1 %s/lib64/", work_dir);
-	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.6* %s/lib64/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libreadline.so.6*   %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libc.so.6*  %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libpthread.so.0 %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libdl.so.2* %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.5* %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libedit.so.0 %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libm.so.6* %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libz.so.1 %s/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/i386-linux-gnu/libtinfo.so.6* %s/lib/", work_dir);
 #endif
 #ifdef __x86_64__
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libsqlite3.so.0   %s/lib/", work_dir);
@@ -2586,8 +2586,8 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		// check the system calls
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		if(exitcode!=5&&exitcode!=133){
 #ifdef __mips__
+		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
@@ -2618,8 +2618,8 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 #ifdef __mips__
 		   }
-#endif
 		}
+#endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;
 	}

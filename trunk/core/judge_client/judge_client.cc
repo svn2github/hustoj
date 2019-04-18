@@ -1081,25 +1081,29 @@ void _update_problem_mysql(int p_id,int cid) {
 			"UPDATE `contest_problem` SET `c_accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND `result`=4 and contest_id=%d) WHERE `problem_id`=%d and contest_id=%d",
 			p_id,cid, p_id,cid);
 		printf("sql:[%s]\n",sql);
+		if (mysql_real_query(conn, sql, strlen(sql)))
+			write_log(mysql_error(conn));
 
-	}else{
+	}
+
 		sprintf(sql,
 			"UPDATE `problem` SET `accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND `result`=4) WHERE `problem_id`=%d",
 			p_id, p_id);
 		printf("sql:[%s]\n",sql);
-	}
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 	if(cid>0){
 		sprintf(sql,
 			"UPDATE `contest_problem` SET `c_submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d AND  contest_id=%d) WHERE `problem_id`=%d and contest_id=%d",
 			p_id,cid, p_id,cid);
-	}else{
+		if (mysql_real_query(conn, sql, strlen(sql)))
+			write_log(mysql_error(conn));
+	}
 		sprintf(sql,
 			"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d) WHERE `problem_id`=%d",
 			p_id, p_id);
 
-	}
+	
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
 }
@@ -2622,6 +2626,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 #endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;
+		//usleep(1);
 	}
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation;
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation;

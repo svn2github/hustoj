@@ -29,7 +29,7 @@ chmod +x src/install/ans2out
 
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 	mkdir run0 run1 run2 run3
-	chown www-data run0 run1 run2 run3
+	chown judge run0 run1 run2 run3
 fi
 
 sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf

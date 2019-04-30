@@ -1228,6 +1228,8 @@ int compile(int lang, char *work_dir)
 		{
 			freopen("ce.txt", "w", stdout);
 		}
+		execute_cmd("/bin/chown judge %s ", work_dir);
+		execute_cmd("/bin/chmod 700 %s ", work_dir);
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{

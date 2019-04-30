@@ -4,7 +4,7 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 svn co https://github.com/zhblue/hustoj/trunk/trunk  src
-for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php5-fpm php5-memcache memcached nginx mysql-server php5-mysql php5-gd fp-compiler openjdk-7-jdk
+for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php7.0-fpm php7.0-memcache memcached nginx mysql-server php7.0-mysql php7.0-gd fp-compiler openjdk-7-jdk
 do
 	apt-get install -y $PKG
 done
@@ -39,10 +39,10 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 
 cp src/install/nginx.default /etc/nginx/sites-available/default
 /etc/init.d/nginx restart
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php5/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/php.ini
-/etc/init.d/php5-fpm restart
-service php5-fpm restart
+sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php7.0/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php7.0/fpm/php.ini
+/etc/init.d/php7.0-fpm restart
+service php7.0-fpm restart
 cd src/core
 bash ./make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then

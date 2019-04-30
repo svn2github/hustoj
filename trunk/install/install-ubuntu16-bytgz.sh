@@ -29,7 +29,7 @@ chmod +x src/install/ans2out
 
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 	mkdir run0 run1 run2 run3
-	chown www-data run0 run1 run2 run3
+	chown judge run0 run1 run2 run3
 fi
 
 sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
@@ -43,7 +43,7 @@ sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
 chown www-data src/web/include/db_info.inc.php
-chown www-data src/web/upload data run0 run1 run2 run3
+chown www-data src/web/upload data
 if grep client_max_body_size /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else

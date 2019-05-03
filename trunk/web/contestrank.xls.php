@@ -209,8 +209,14 @@ getMark($U,$mark_start,$mark_end,$mark_sigma);
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>";
 	else echo "<tr class=evenrow align=center>";
-	echo "<td>$rank";
-	$rank++;
+	// don't count rank while nick start with * 
+	if($U[$i]->nick[0]=='*'){
+                echo "<td>*";
+        }else{
+                echo "<td>$rank";
+                $rank++;
+        }
+	
 	$uuid=$U[$i]->user_id;
         
 	$usolved=$U[$i]->solved;

@@ -14,19 +14,14 @@ hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 近期github的svn访问缓慢，可以到release中下载tar.gz版本，然后用install目录下的*-bytgz.sh脚本安装。
 但是注意这样安装的实例，将来升级时只能手工升级。
 
-首先安装Ubuntu14.04（编译器较老），然后用下面脚本快速安装OJ：  
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
-    sudo bash install-ubuntu14.04.sh
-
-或者安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
+首先安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
 
-发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
+高级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
@@ -35,6 +30,8 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh
+
+其他的发行版，如树莓派的raspbian8/9,ubuntu14.04,deepin的安装脚本在install目录可以找到，但是不完善，安装后需要部分手工修复调整。
 
 https://www.youtube.com/watch?v=hRap7ettUWc
 

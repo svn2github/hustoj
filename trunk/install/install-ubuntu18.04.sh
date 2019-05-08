@@ -48,7 +48,7 @@ if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"
 else
 	echo "modify the default site"
-	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /JudgeOnline/recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default

@@ -1,12 +1,10 @@
 HUSTOJ安装说明 
 	by zhblue(newsclan@gmail.com)
+	
+debian8 可以用.deb文件安装
 
+    https://github.com/muzea/hustoj-deb/issues/4
 
-
-首先安装Ubuntu14.04（最稳定），然后用下面脚本快速安装OJ：  
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu14.04.sh
-    sudo bash install-ubuntu14.04.sh
 
 或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
 

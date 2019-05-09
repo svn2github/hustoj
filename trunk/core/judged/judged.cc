@@ -232,7 +232,7 @@ void run_client(int runid, int clientid) {
 #endif
 	setrlimit(RLIMIT_AS, &LIM);
 
-	LIM.rlim_cur = LIM.rlim_max = 800;
+	LIM.rlim_cur = LIM.rlim_max = 800* max_running;
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;

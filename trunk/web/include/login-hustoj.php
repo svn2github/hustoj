@@ -34,6 +34,8 @@
 				}
 				$sql="INSERT INTO `loginlog` VALUES(?,'login ok',?,NOW())";
 				pdo_query($sql,$user_id,$ip);
+				$sql="UPDATE users set accesstime=now() where user_id=?";
+				pdo_query($sql,$user_id);
 				return $user_id;
 			}
 		}

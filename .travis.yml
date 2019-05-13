@@ -10,8 +10,8 @@ before_install:
 - docker pull woodenfish42/hustoj-deb-ubuntu18
 
 script:
-- docker run -v `pwd`/deb:/tmp/deb woodenfish42/hustoj-deb-debian8 sh -c "DISTRIBUTION=debian8 /root/build.sh"
-- docker run -v `pwd`/deb:/tmp/deb woodenfish42/hustoj-deb-ubuntu18 sh -c "DISTRIBUTION=ubuntu18 /root/build.sh"
+- docker run -v `pwd`/deb:/tmp/deb woodenfish42/hustoj-deb-debian8 sh -c "TRAVIS_TAG=$TRAVIS_TAG DISTRIBUTION=debian8 /root/build.sh"
+- docker run -v `pwd`/deb:/tmp/deb woodenfish42/hustoj-deb-ubuntu18 sh -c "TRAVIS_TAG=$TRAVIS_TAG DISTRIBUTION=ubuntu18 /root/build.sh"
 
 deploy:
   provider: releases

@@ -1,7 +1,7 @@
 hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 ======
 
-2019-5-7   更新：muzea 提供了Debian安装包打包(*.deb)，https://github.com/muzea/hustoj-deb/releases 
+2019-5-7   更新：muzea 提供了Debian安装包打包(*.deb)，https://github.com/zhblue/hustoj/releases
 
 2019-4-13  更新：支持SQL判题，基于sqlite3，支持龙芯3A3000（致谢江苏航天龙梦信息技术有限公司提供龙芯主机！）。
 

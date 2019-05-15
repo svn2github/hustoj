@@ -72,18 +72,15 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 
 docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
-```	
-docker run -d -it \
-    -v /data/docker/docker-wxy/data:/data \
-    --privileged \
-    --name hustoj \
-    -p 80:80 shiningrise/hustoj:latest
+在docker内[下载deb文件](https://github.com/zhblue/hustoj/releases)安装
+```
+	dpkg -i  xxxx.deb ; apt-get install -f
+```
 
-docker测试安装
-	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:latest
-仅安装C++版本
-	docker run -d -it --name hustoj -p 80:80 --privileged shiningrise/hustoj:cpp
-```	
+然后参考
+https://github.com/muzea/hustoj-deb/issues/4#issuecomment-492186622 。
+
+
 
 树莓派用户请用rpi分支源码（实验性质）手工搭建web，并编译安装core目录下的judged和judge_client。
 

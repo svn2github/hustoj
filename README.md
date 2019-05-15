@@ -1,5 +1,6 @@
 hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 ======
+2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计于gcc/g++有关。
 
 2019-5-7   更新：muzea 提供了Debian安装包打包(*.deb)，https://github.com/zhblue/hustoj/releases
 

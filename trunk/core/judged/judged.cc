@@ -679,8 +679,10 @@ int main(int argc, char** argv) {
 		}
 		turbo_mode2();
 		if(ONCE) break;
-		if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
-		sleep(sleep_time);
+                if(n==0){
+                        sleep(sleep_time);
+                        if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
+                }
 		j = 1;
 	}
 	return 0;

@@ -1,7 +1,7 @@
 var i=0;
-var interval=800;
+var interval=80;
 function auto_refresh(){
-	interval=800;
+	interval=80;
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
 	for(var i=rows.length-1;i>0;i--){
@@ -11,6 +11,7 @@ function auto_refresh(){
 			if(result<4){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
+			   break;
 			}
 	}
 }
@@ -38,14 +39,19 @@ function fresh_result(solution_id){
 			//alert(row);
 			var r=xmlhttp.responseText;
 			var ra=r.split(",");
+			ra[0]=parseInt(ra[0]);
 			// alert(r);
 			// alert(judge_result[r]);
 			var loader="<img width=18 src=image/loader.gif>";
-			row.cells[3].innerHTML="<span class='btn btn-warning'>"+judge_result[ra[0]]+"</span>"+loader;
 			row.cells[4].innerHTML=ra[1];
 			row.cells[5].innerHTML=ra[2];
 			row.cells[9].innerHTML=ra[3];
 			if(ra[0]<4){
+			//	console.log(loader);
+				if(-1==row.cells[3].innerHTML.indexOf("loader")){
+			//		console.log(row.cells[3].innerHTML);
+			 		row.cells[3].innerHTML+=loader;
+				}
 				window.setTimeout("fresh_result("+solution_id+")",interval);
 				interval*=2;
 			}else{
@@ -71,28 +77,27 @@ function fresh_result(solution_id){
 	xmlhttp.send();
 }
 var hj_ss="<select class='http_judge form-control' length='2' name='result'>";
-	for(var i=4;i<10;i++){
+	for(var i=0;i<10;i++){
    		hj_ss+="	<option value='"+i+"'>"+judge_result[i]+" </option>";
 	}
    hj_ss+="</select>";
    hj_ss+="<input name='manual' type='hidden'>";
    hj_ss+="<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
-   hj_ss+="<input class='http_judge btn' name='manual' value='确定' type='submit'>";
+   hj_ss+="<input type='button' class='http_judge btn' name='manual' value='确定' onclick='http_judge(this)' >";
 $(".http_judge_form").append(hj_ss);
-$(".http_judge_form").submit(function (){
-   var sid=this.children[0].value;
-   $.post("admin/problem_judge.php",$(this).serialize(),function(data,textStatus){
-   		if(textStatus=="success")window.setTimeout("fresh_result("+sid+")",1000);
-	})
-   return false;
-});
 auto_refresh();
 $(".td_result").mouseover(function (){
 //   $(this).children(".btn").hide(300);
-   var button=$(this);
    $(this).find("form").show(600);
    var sid=$(this).find("span[class=original]").attr("sid");
    $(this).find("span[class=original]").load("status-ajax.php?q=user_id&solution_id="+sid);
 });
 $(".http_judge_form").hide();
 
+function http_judge(btn){
+   var sid=$(btn).parent()[0].children[0].value;
+   $.post("admin/problem_judge.php",$(btn).parent().serialize(),function(data,textStatus){
+   		if(textStatus=="success")window.setTimeout("fresh_result("+sid+")",1000);
+	})
+   return false;
+}

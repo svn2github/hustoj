@@ -1706,7 +1706,7 @@ void copy_shell_runtime(char *work_dir)
 
 #ifdef __i386
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
-//	execute_cmd("/bin/cp -a /lib/i386-linux-gnu/  %s/lib/", work_dir);
+	execute_cmd("/bin/cp -a /lib/i386-linux-gnu/  %s/lib/", work_dir);
 //	execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
 #endif
 

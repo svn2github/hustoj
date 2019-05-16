@@ -1,7 +1,7 @@
 var i=0;
-var interval=800;
+var interval=80;
 function auto_refresh(){
-	interval=800;
+	interval=80;
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
 	for(var i=rows.length-1;i>0;i--){
@@ -11,6 +11,7 @@ function auto_refresh(){
 			if(result<4){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
+			   break;
 			}
 	}
 }

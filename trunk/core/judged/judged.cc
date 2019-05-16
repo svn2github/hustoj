@@ -661,6 +661,7 @@ int main(int argc, char** argv) {
 	int j = 1;
 	int n = 0;
 	while (1) {			// start to run
+		n=0;
 		while (j && (http_judge
 #ifdef _mysql_h
 			 || !init_mysql()

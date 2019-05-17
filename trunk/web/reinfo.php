@@ -13,7 +13,7 @@ if (!isset($_GET['sid'])){
 	exit(0);
 }
 function is_valid($str2){
-    global $_SESSION;
+    global $_SESSION,$OJ_NAME;
     if(isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) return true;
     //return true; // 如果希望能让任何人都查看对比和RE,放开行首注释 if you fail to view diff , try remove the // at beginning of this line.
     $n=strlen($str2);
@@ -49,7 +49,7 @@ if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||
 	
 	$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$id);
-	 $row=$result[0];
+	if(isset($result[0]))$row=$result[0];
 	if($row&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||$isRE)&&($OJ_TEST_RUN||is_valid($row['error'])||isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){	
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 	}else{

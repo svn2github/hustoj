@@ -1,5 +1,7 @@
 hustoj -- 请一定认真看完本页再动手安装，以免无谓的折腾！
 ======
+2019-5-18 修订：16.04以上版本FB显示异常。 [基于OpenJudger的Windows集成便携版](https://github.com/Azure99/WinHustOJ/releases)
+
 2019-5-17 修订：改善ajax，减少并发量，降低web压力，提高judge轮询效率。
 
 2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计于gcc/g++有关。

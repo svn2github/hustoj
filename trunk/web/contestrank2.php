@@ -172,16 +172,22 @@ for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
 if($OJ_MEMCACHE){
-	$sql="select num,user_id from
-        (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
-        group by num";
-    $fb = mysql_query_cache($sql);
+	$sql="select s.num,s.user_id from solution s ,
+        (select num,min(solution_id) minId from solution where contest_id=$cid and result=4 GROUP BY num order by solution_id ) c
+where s.solution_id =c.minId";
+        $fb = mysql_query_cache($sql);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
 }else{
-	$sql="select num,user_id from
-        (select num,user_id from solution where contest_id=? and result=4 order by solution_id ) contest
-        group by num";
-    $fb = pdo_query($sql,$cid);
+	$sql="select s.num,s.user_id from solution s ,
+        (select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num order by solution_id ) c
+where s.solution_id =c.minId
+        ";
+        $fb = pdo_query($sql,$cid);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
 }
+
 foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];
 }

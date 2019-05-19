@@ -107,7 +107,7 @@ if(isset($_GET['cid'])){
     $view_problemset[$cnt][0] = "";
     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
 
-    $view_problemset[$cnt][1] = $row['pid']." Problem &nbsp;".$PID[$cnt];
+    $view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
     $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
     $view_problemset[$cnt][3] = $row['source'];
     $view_problemset[$cnt][4] = $row['accepted'];

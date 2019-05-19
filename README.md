@@ -1,4 +1,4 @@
-hustoj -- 流行的开源OJ系统，最新更新*.deb安装包和Win集成版。
+hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 ======
 2019-5-18 修订：16.04以上版本FB显示异常。 [基于OpenJudger的Windows集成便携版](https://github.com/Azure99/WinHustOJ/releases) [浙传网盘](https://pan.cuz.edu.cn:8443/share/287448cfc1b7f8b0073b1e11a7)
 

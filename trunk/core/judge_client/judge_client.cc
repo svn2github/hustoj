@@ -1254,7 +1254,7 @@ int compile(int lang, char *work_dir)
 				execute_cmd("mount -o bind /dev dev");
 				execute_cmd("mount -o remount,ro dev");
 			}
-			execute_cmd("mount -o remount,ro proc");
+			//execute_cmd("mount -o remount,ro proc");
 			chroot(work_dir);
 		}
 		while (setgid(1536) != 0)

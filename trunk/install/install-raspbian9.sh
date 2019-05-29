@@ -4,7 +4,7 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 svn co https://github.com/zhblue/hustoj/trunk/trunk  src
-for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php7.0-fpm php7.0-memcache memcached nginx mysql-server php7.0-mysql php7.0-gd fp-compiler openjdk-7-jdk
+for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php7.0-fpm php7.0-memcache php-zip php-xml php-mbstring memcached nginx mysql-server php7.0-mysql php7.0-gd fp-compiler openjdk-7-jdk
 do
 	apt-get install -y $PKG
 done

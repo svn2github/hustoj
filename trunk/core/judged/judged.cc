@@ -91,8 +91,12 @@ static char query[BUFFER_SIZE];
 #endif
 
 void call_for_exit(int s) {
-	STOP = true;
-	printf("Stopping judged...\n");
+	if(DEBUG){
+		STOP = true;
+		printf("Stopping judged...\n");
+	}else{
+		printf("HUSTOJ Refusing to stop...\n Please use kill -9 !\n");
+	}
 }
 
 void write_log(const char *fmt, ...) {

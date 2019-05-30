@@ -656,11 +656,11 @@ int main(int argc, char** argv) {
 	init_mysql_conf();	// set the database info
 #endif
 	signal(SIGQUIT, call_for_exit);
-	signal(SIGKILL, call_for_exit);
+	signal(SIGINT, call_for_exit);
 	signal(SIGTERM, call_for_exit);
 	int j = 1;
 	int n = 0;
-	while (1) {			// start to run
+	while (!STOP) {			// start to run until call for exit
 		n=0;
 		while (j && (http_judge
 #ifdef _mysql_h

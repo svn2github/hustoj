@@ -259,6 +259,8 @@ void init_syscalls_limits(int lang)
 	{ // C & C++
 		for (i = 0; i == 0 || LANG_CV[i]; i++)
 		{
+			if(LANG_CV[i]==SYS_execve)call_counter[LANG_CV[i]] = 1;
+			else
 			call_counter[LANG_CV[i]] = HOJ_MAX_LIMIT;
 		}
 	}
@@ -2600,11 +2602,11 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 			if (call_counter[call_id])
 			{
-				//call_counter[reg.REG_SYSCALL]--;
+				call_counter[reg.REG_SYSCALL]--;
 			}
 			else if (record_call)
 			{
-				call_counter[call_id] = 1;
+				call_counter[call_id]++;
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM
@@ -2823,7 +2825,7 @@ void print_call_array()
 	{
 		if (call_counter[i])
 		{
-			printf("HOJ_MAX_LIMIT,");
+			printf("%d,",call_counter[i]);
 		}
 	}
 	printf("0};\n");

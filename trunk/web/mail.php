@@ -48,10 +48,11 @@ $view_content=false;
 if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=?
-								and to_user=?";
-	$result=pdo_query($sql,$vid,$_SESSION[$OJ_NAME.'_'.'user_id']);
+								and (to_user=? or from_user=?)";
+	$result=pdo_query($sql,$vid,$_SESSION[$OJ_NAME.'_'.'user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']);
 	 $row=$result[0];
-	$to_user=$row['from_user'];
+	$from_user=$row['from_user'];
+	$to_user=$row['to_user'];
 	$view_title=$row['title'];
 	$view_content=$row['content'];
 
@@ -93,9 +94,9 @@ if(isset($_POST['to_user'])){
 	}
 }
 //list mail
-	$sql="SELECT * FROM `mail` WHERE to_user=?
+	$sql="SELECT * FROM `mail` WHERE to_user=? or from_user=?
 					order by mail_id desc";
-	$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']) ;
+	$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']) ;
 $view_mail=Array();
 $i=0;
 foreach($result as $row){

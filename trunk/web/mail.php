@@ -50,7 +50,7 @@ if (isset($_GET['vid'])){
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=?
 								and (to_user=? or from_user=?)";
 	$result=pdo_query($sql,$vid,$_SESSION[$OJ_NAME.'_'.'user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']);
-	 $row=$result[0];
+	$row=$result[0];
 	$from_user=$row['from_user'];
 	$to_user=$row['to_user'];
 	$view_title=$row['title'];
@@ -75,12 +75,10 @@ if(isset($_POST['to_user'])){
 	}
 	$title = RemoveXSS( $title);
 	
-	$sql="select 1 from users where user_id=? ";
-	$res=pdo_query($sql,$to_user);
+	$sql="select 1 from privilege where (rightstr='source_browser' or rightstr='administrator') and (user_id=? or user_id=? )";
+	$res=pdo_query($sql,$from_user,$to_user);
 	if ($res&&count($res)<1){
-			
-			$view_title= "No Such User!";
-
+			$view_title= "Mail can only send to or from a Code Reviewer!";
 	}else{
 		if($res)
 		$sql="insert into mail(to_user,from_user,title,content,in_date)

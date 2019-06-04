@@ -191,7 +191,9 @@ cell.className="badge badge-info";
 //alert(e);
 }
 }
-metal();
+<?php if($OJ_SHOW_METAL) { ?>
+  metal();
+<?php } ?>
 </script>
 <style>
 .well{

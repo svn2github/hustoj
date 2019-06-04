@@ -28,7 +28,9 @@
 <?php
 $rank=1;
 ?>
-<center><h3>Contest RankList -- <?php echo $title?></h3><a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
+<center><h3>Contest RankList -- <?php echo $title?></h3>
+<h4><?php echo $locked_msg ?></h4>
+<a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User</th><th width=10%>Nick</th><th width=5%>Solved</th><th width=5%>Penalty</th>
 <?php
 for ($i=0;$i<$pid_cnt;$i++)
@@ -179,7 +181,9 @@ function metal(){
      alert(e);
   }
 }
-metal();
+<?php if($OJ_SHOW_METAL) { ?>
+  metal();
+<?php } ?>
 replay();
 <?php if (isset($solution_json)) echo "var solutions=$solution_json;"?>
 var replay_index=0;
@@ -198,7 +202,9 @@ function add(){
   update(tab,row,solution);
   replay_index++;
   sort(tab[0].rows);
+<?php if($OJ_SHOW_METAL) { ?>
   metal();
+<?php } ?>
   window.setTimeout("add()",5);
 }
 function sec2str(sec){

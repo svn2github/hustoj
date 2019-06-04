@@ -31,7 +31,9 @@
 <p><?php echo $view_description?></p>
 <br>Start Time: <font color=#993399><?php echo $view_start_time?></font>
 End Time: <font color=#993399><?php echo $view_end_time?></font><br>
+Lock Board Time: <font color=#993399><?php echo date("Y-m-d H:i:s", $view_lock_time) ?></font>
 Current Time: <font color=#993399><span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span></font>
+<br/>
 Status:<?php
 if ($now>$end_time)
 echo "<span class=red>Ended</span>";

@@ -106,8 +106,8 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 <th ><?php echo $MSG_USER?>
 <th ><?php echo $MSG_PROBLEM?>
 <th ><?php echo $MSG_RESULT?>
-<th class='hidden-xs' ><?php echo $MSG_MEMORY?>
-<th class='hidden-xs' ><?php echo $MSG_TIME?>
+<th class='hidden-xs' ><?php echo $MSG_MEMORY."(KB)"?>
+<th class='hidden-xs' ><?php echo $MSG_TIME."(MS)"?>
 <th class='hidden-xs' ><?php echo $MSG_LANG?>
 <th class='hidden-xs' ><?php echo $MSG_CODE_LENGTH?>
 <th ><?php echo $MSG_SUBMIT_TIME?>

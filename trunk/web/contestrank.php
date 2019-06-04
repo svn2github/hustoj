@@ -99,6 +99,11 @@ if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
+$view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
+$locked_msg = "";
+if (time() > $view_lock_time && time() < $end_time + $OJ_RANK_LOCK_DELAY) {
+    $locked_msg = "The board has been locked.";
+}
 
 if($OJ_MEMCACHE){
 	$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
@@ -161,7 +166,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                 $user_name=$n_user;
         }
-        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+        if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
         else
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
@@ -178,16 +183,13 @@ for($i=0;$i<$pid_cnt;$i++){
 
 if($OJ_MEMCACHE){
 	$sql="select s.num,s.user_id from solution s ,
-        (select num,min(solution_id) minId from solution where contest_id=$cid and result=4 GROUP BY num order by solution_id ) c
-where s.solution_id =c.minId";
+        (select num,min(solution_id) minId from solution where contest_id=$cid and result=4 GROUP BY num ) c where s.solution_id = c.minId";
         $fb = mysql_query_cache($sql);
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;
 }else{
 	$sql="select s.num,s.user_id from solution s ,
-        (select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num order by solution_id ) c
-where s.solution_id =c.minId
-        ";
+        (select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num ) c where s.solution_id = c.minId";
         $fb = pdo_query($sql,$cid);
         if($fb) $rows_cnt=count($fb);
         else $rows_cnt=0;

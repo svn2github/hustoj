@@ -119,10 +119,10 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 								<?php echo $MSG_RESULT?>
 							</th>
 							<th class='hidden-xs'>
-								<?php echo $MSG_MEMORY?>
+								<?php echo $MSG_MEMORY."(KB)"?>
 							</th>
 							<th class='hidden-xs'>
-								<?php echo $MSG_TIME?>
+								<?php echo $MSG_TIME."(MS)"?>
 							</th>
 							<th> 
 								<?php echo $MSG_LANG?>

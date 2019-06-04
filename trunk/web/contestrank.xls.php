@@ -189,7 +189,7 @@ $U=array();
 		$user_name=$n_user;
 	}
 
-        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+        if( time()<$end_time+$OJ_RANK_LOCK_DELAY && $lock<strtotime($row['in_date']) && !isset($_SESSION[$OJ_NAME.'_'.'administrator']) )
 		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0,$mark_base,$mark_per_problem,$mark_per_punish);
         else
 		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']),$mark_base,$mark_per_problem,$mark_per_punish);

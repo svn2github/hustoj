@@ -4,11 +4,16 @@ DBUSER="root"
 DBPASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
 CPU=`cat /proc/cpuinfo| grep "processor"| wc -l`
 
+yum -y update
+
+# avoid minimal installation no wget
+yum -y install wget
+
+# install nginx
 wget http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rpm -ivh nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 rm -rf nginx-1.14.0-1.el7_4.ngx.x86_64.rpm
 
-yum -y update
 yum -y install epel-release yum-utils
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager --enable remi-php72
@@ -26,10 +31,10 @@ svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
 cd src/install
 mysql -h localhost -uroot < db.sql
 echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -uroot
-mysqladmin -u root password $DBPASS
+# mysqladmin -u root password $DBPASS
 cd ../../
 
-mkdir etc data log
+mkdir etc data log backup
 
 cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
@@ -40,15 +45,16 @@ if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 	chown apache run0 run1 run2 run3
 fi
 
-#sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
-sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
+# sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
+# sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
 sed -i "s/OJ_COMPILE_CHROOT=1/OJ_COMPILE_CHROOT=0/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 
+chmod 700 backup
 chmod 700 etc/judge.conf
 
-#sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
-sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+# sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
+# sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
 
 sed -i "s+//date_default_timezone_set(\"PRC\");+date_default_timezone_set(\"PRC\");+g" src/web/include/db_info.inc.php
 sed -i "s+//pdo_query(\"SET time_zone ='\+8:00'\");+pdo_query(\"SET time_zone ='\+8:00'\");+g" src/web/include/db_info.inc.php
@@ -58,8 +64,10 @@ chmod 700 src/web/include/db_info.inc.php
 
 chown apache src/web/include/db_info.inc.php
 chown apache src/web/upload data run0 run1 run2 run3
-cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
-cp /home/judge/src/install/nginx.conf /etc/nginx/
+
+# cp /etc/nginx/nginx.conf /home/judge/src/install/nginx.origin
+mv /etc/nginx/conf.d/default.conf /home/judge/src/install/default.conf.bak
+cp /home/judge/src/install/default.conf /etc/nginx/conf.d/default.conf
 
 # startup nginx.service when booting.
 systemctl enable nginx.service 
@@ -122,6 +130,16 @@ else
 	
 fi
 /usr/bin/judged
+
+# change pwd
+cd /home/judge/
+
+# write password at the end of install
+sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
+sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+
+# change database password at the end of install
+mysqladmin -u root password $DBPASS
 
 # mono install for c# 
 yum -y install yum-utils

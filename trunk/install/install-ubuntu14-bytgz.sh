@@ -39,7 +39,7 @@ sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge
 
 sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
-
+chown -R www-data src/web/
 chown www-data src/web/upload data
 if grep client_max_body_size /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
@@ -50,7 +50,7 @@ fi
 mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
 echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
-sed -i "s:root /usr/share/nginx/html;:root /home/judge/src/web;:g" /etc/nginx/sites-enabled/default
+#sed -i "s#root /usr/share/nginx/html;#root /home/judge/src/web;\n\n\tlocation /recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
 sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 sed -i "s:#\tfastcgi_split_path_info:\tfastcgi_split_path_info:g" /etc/nginx/sites-enabled/default

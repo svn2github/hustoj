@@ -18,7 +18,9 @@ if (isset($_GET['id'])){
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
 	$psql="select problem_id from contest_problem where contest_id=? and num=?";
-	$problem_id=pdo_query($psql,$cid,$pid)[0][0];
+	$data=pdo_query($psql,$cid,$pid);
+	$row=$data[0];
+	$problem_id=$row[0];
 	$sample_sql="SELECT p.sample_input, p.sample_output, p.problem_id
 			FROM problem p where problem_id =  ? ";
 }else{

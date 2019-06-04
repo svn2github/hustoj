@@ -1,7 +1,7 @@
 var i=0;
-var interval=800;
+var interval=80;
 function auto_refresh(){
-	interval=800;
+	interval=80;
 	var tb=window.document.getElementById('result-tab');
 	var rows=tb.rows;
 	for(var i=rows.length-1;i>0;i--){
@@ -11,6 +11,7 @@ function auto_refresh(){
 			if(result<4){
 			   window.setTimeout("fresh_result("+sid+")",interval);
 			   console.log("auto_refresh "+sid+" actived!");
+			   break;
 			}
 	}
 }
@@ -38,6 +39,7 @@ function fresh_result(solution_id){
 			//alert(row);
 			var r=xmlhttp.responseText;
 			var ra=r.split(",");
+			ra[0]=parseInt(ra[0]);
 			// alert(r);
 			// alert(judge_result[r]);
 			var loader="<img width=18 src=image/loader.gif>";

@@ -142,12 +142,12 @@ $limit++;
 </table>
 </div>
 <div id=center>
-<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+				<?php echo "[<a href='status.php?".$str2."'>Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
-echo "[<a href=status.php?".$str2."&top=".intval($_GET['prevtop']).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".intval($_GET['prevtop'])."'>Previous Page</a>]&nbsp;&nbsp;";
 else
-echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
+echo "[<a href='status.php?".$str2."&top=".($top+20)."'>Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".$bottom."&prevtop=$top'>Next Page</a>]";
 ?>
 </div>
 

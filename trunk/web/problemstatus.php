@@ -90,18 +90,20 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION[$OJ_NAME.'_'.'user_id
 }
 //check whether user has the right of view solutions of this problem
 //echo "checking...";
-if(isset($_SESSION[$OJ_NAME.'_'.'s'.$id])){
-	$AC=true;
-//	echo "Yes";
-}else{
-	$sql="select count(1) from privilege where user_id=? and rightstr=?";
-	$count=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"s".$id);
-	if($count&&$count[0][0]>0){
+if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+	if(isset($_SESSION[$OJ_NAME.'_'.'s'.$id])){
 		$AC=true;
+	//	echo "Yes";
 	}else{
-		//echo "not right";
-	}
+		$sql="select count(1) from privilege where user_id=? and rightstr=?";
+		$count=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"s".$id);
+		if($count&&$count[0][0]>0){
+			$AC=true;
+		}else{
+			//echo "not right";
+		}
 
+	}
 }
 $sql="SELECT * FROM (
   SELECT COUNT(*) att, user_id, min(10000000000000000000 + time*100000000000 + memory*100000 + code_length) score

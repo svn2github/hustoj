@@ -24,4 +24,4 @@ mv home/judge/data /home/judge/
 mv /home/judge/src/web/upload /home/judge/src/web/upload.del.$DATE
 mv home/judge/src/web/upload /home/judge/src/web/
 bzip2 -d var/backups/db_${BAKDATE}.sql.bz2
-mysql -h localhost -u$USER -p$PASSWORD < var/backups/db_${BAKDATE}.sql
+mysql -h localhost -u$USER -p$PASSWORD jol < var/backups/db_${BAKDATE}.sql

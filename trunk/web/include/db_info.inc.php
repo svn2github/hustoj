@@ -51,9 +51,9 @@ static  $OJ_SHOW_DIFF=false; //是否显示WA的对比说明
 static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
+static  $OJ_OI_1_SOLUTION_ONLY=false; //比赛是否采用noip中的仅保留最后一次提交的规则。true则在新提交发生时，将本场比赛该题老的提交计入练习。
 static  $OJ_SHOW_METAL=true;//榜单上是否按比例显示奖牌
 static  $OJ_RANK_LOCK_DELAY=3600;//赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
-
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
@@ -85,7 +85,6 @@ static  $OJ_QQ_AKEY='1124518951';
 static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
-static  $color_theme=["default","primary","success","info","warning","danger"];
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if( isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {

@@ -124,7 +124,7 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 							<th class='hidden-xs'>
 								<?php echo $MSG_TIME?>
 							</th>
-							<th class='hidden-xs'>
+							<th> 
 								<?php echo $MSG_LANG?>
 							</th>
 							<th class='hidden-xs'>
@@ -148,7 +148,7 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 								echo "<tr class='evenrow'>";
 							$i = 0;
 							foreach ( $row as $table_cell ) {
-								if ( $i > 3 && $i != 8 )
+								if ( $i > 3 && $i != 8 && $i!=6)
 									echo "<td class='hidden-xs'>";
 								else
 									echo "<td>";
@@ -164,12 +164,12 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 				</table>
 			</div>
 			<div id=center>
-				<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+				<?php echo "[<a href='status.php?".$str2."'>Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
-echo "[<a href=status.php?".$str2."&top=".intval($_GET['prevtop']).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".intval($_GET['prevtop'])."'>Previous Page</a>]&nbsp;&nbsp;";
 else
-echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
+echo "[<a href='status.php?".$str2."&top=".($top+20)."'>Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".$bottom."&prevtop=$top'>Next Page</a>]";
 ?>
 			</div>
 
@@ -201,6 +201,6 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 			''
 		];
 	</script>
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.34"></script>
+	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.36"></script>
 </body>
 </html>

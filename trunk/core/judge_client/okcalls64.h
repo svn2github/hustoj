@@ -17,8 +17,8 @@
  * along with HUSTOJ. if not, see <http://www.gnu.org/licenses/>.
  */
 //c & c++
-int LANG_CV[256] = {0,1,2,3,4,5,8,9,11,12,20,21,59,63,89,99,158,231,240,272,511, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
-		SYS_close, SYS_execve, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
+int LANG_CV[256] = {0,1,2,3,4,5,8,9,11,12,20,21,59,63,89,99,158,231,240,272,273,275,511, SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
+		SYS_close, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
 		SYS_mmap, SYS_fstat, SYS_set_thread_area, 252, SYS_arch_prctl, 0 };
 //pascal
 int LANG_PV[256] = {0,1,2,3,4,9,11,13,16,59,89,97,201,231,511,SYS_open, SYS_set_thread_area, SYS_brk, SYS_read,
@@ -124,3 +124,5 @@ int LANG_LUAV[256]={0,1,2,3,4,5,9,10,11,12,13,21,59,158,231,292,0};
 int LANG_JSV[256]={0,1,2,3,4,5,6,7,9,10,11,12,13,14,16,21,56,59,79,89,96,97,102,104,107,108,158,160,186,202,218,228,229,231,232,233,273,290,291,293,0};
 //go-lang
 int LANG_GOV[256]={0,1,9,11,13,14,56,59,131,158,202,204,228,231,0};
+//sqlite3
+int LANG_SQLV[256]={0,1,2,3,4,5,8,9,10,12,13,14,16,21,41,42,59,64,72,74,79,87,97,102,107,158,202,218,231,273,0};

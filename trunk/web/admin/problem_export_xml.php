@@ -8,6 +8,7 @@ if(!isset($OJ_LANG)){
 require_once("../lang/$OJ_LANG.php");
 require_once("../include/const.inc.php");
 function fixcdata($content){
+	 $content=str_replace("\x1a","",$content);   // remove some strange \x1a [SUB] char from datafile
     return str_replace("]]>","]]]]><![CDATA[>",$content);
 }
 function getTestFileIn($pid, $testfile,$OJ_DATA) {

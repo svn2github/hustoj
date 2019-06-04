@@ -48,6 +48,11 @@ if(isset($_GET['id'])){
     
   $result=pdo_query($sql,$cid);
   $rows_cnt=count($result);
+  if ($rows_cnt==0) {
+			$view_errors=  "<title>$MSG_CONTEST</title><h2>No such Contest!</h2>";
+			require("template/".$OJ_TEMPLATE."/error.php");
+			exit(0);
+		}
   $row=($result[0]);
   $contest_ok=true;
 

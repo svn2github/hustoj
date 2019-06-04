@@ -179,7 +179,9 @@ function metal(){
      alert(e);
   }
 }
-metal();
+<?php if($OJ_SHOW_METAL) { ?>
+  metal();
+<?php } ?>
 replay();
 <?php if (isset($solution_json)) echo "var solutions=$solution_json;"?>
 var replay_index=0;
@@ -198,7 +200,9 @@ function add(){
   update(tab,row,solution);
   replay_index++;
   sort(tab[0].rows);
+<?php if($OJ_SHOW_METAL) { ?>
   metal();
+<?php } ?>
   window.setTimeout("add()",5);
 }
 function sec2str(sec){

@@ -171,7 +171,8 @@ $sql="SELECT
 		FROM 
 			(select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution 
 		left join users 
-		on users.user_id=solution.user_id 
+		on users.user_id=solution.user_id
+	WHERE users.defunct='N'
 	ORDER BY users.user_id,in_date";
 //echo $sql;
 $result=pdo_query($sql,$cid);

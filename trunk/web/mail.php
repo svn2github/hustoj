@@ -12,7 +12,8 @@
 		(isset($OJ_MAIL)&&!$OJ_MAIL)
 	  ){
 		header("Content-type: text/html; charset=utf-8");
-		echo $MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
+		$view_errors=$MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
+  		require("template/".$OJ_TEMPLATE."/error.php");
 		exit ();
 	}
 
@@ -27,9 +28,9 @@ if (isset($_GET['title'])){
 }
 
 if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	echo "<a href=loginpage.php>$MSG_Login</a>";
-	require_once("oj-footer.php");
-	exit(0);
+	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
 }
 require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");

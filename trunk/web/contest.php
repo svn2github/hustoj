@@ -79,7 +79,7 @@ if(isset($_GET['cid'])){
     $view_title = $row['title'];
     $view_start_time = $row['start_time'];
     $view_end_time = $row['end_time'];
-
+    $view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
     if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time){
       $view_errors =  "<h2>$MSG_PRIVATE_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");

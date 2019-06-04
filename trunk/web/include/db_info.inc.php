@@ -52,6 +52,9 @@ static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
 static  $OJ_SHOW_METAL=true;//榜单上是否按比例显示奖牌
+static  $OJ_RANK_LOCK_DELAY=3600;//赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
+
+
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
 

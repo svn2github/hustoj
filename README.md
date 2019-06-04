@@ -104,7 +104,7 @@ https://github.com/muzea/hustoj-deb/issues/4#issuecomment-492186622 。
 Linux不熟悉的用户推荐使用:
 HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
 
-[浙传云盘](https://pan.cuz.edu.cn:8443/share/17678033618e591d8a06063b6b)
+[浙传云盘](https://pan.cuz.edu.cn:8443/share/a0891f19f930eef5ffb4bfb0d9)
 
 
 

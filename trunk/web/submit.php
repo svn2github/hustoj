@@ -205,17 +205,20 @@ if (count($res)==1){
 
 if((~$OJ_LANGMASK)&(1<<$language)){
 
+	$sql="select nick from users where user_id=?";	
+	$nick=pdo_query($sql,$user_id);
+	if($nick) $nick=$nick[0][0];
 	if (!isset($pid)){
-	$sql="insert INTO solution(problem_id,user_id,in_date,language,ip,code_length,result)
-		VALUES(?,?,NOW(),?,?,?,14)";
-		$insert_id= pdo_query($sql,$id,$user_id,$language,$ip,$len);
+	$sql="insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,result)
+		VALUES(?,?,?,NOW(),?,?,?,14)";
+		$insert_id= pdo_query($sql,$id,$user_id,$nick,$language,$ip,$len);
 	}else{
-	$sql="insert INTO solution(problem_id,user_id,in_date,language,ip,code_length,contest_id,num,result)
-		VALUES(?,?,NOW(),?,?,?,?,?,14)";
+	$sql="insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
+		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
 		if(isset($OJ_OI_1_SOLUTION_ONLY)&&$OJ_OI_1_SOLUTION_ONLY){
 			pdo_query("update solution set contest_id =0 where contest_id=? and user_id=? and num=?",$cid,$user_id,$pid);
 		}
-		$insert_id= pdo_query($sql,$id,$user_id,$language,$ip,$len,$cid,$pid);
+		$insert_id= pdo_query($sql,$id,$user_id,$nick,$language,$ip,$len,$cid,$pid);
 	}
 	
 	$sql="INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";

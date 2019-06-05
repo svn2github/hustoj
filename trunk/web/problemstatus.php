@@ -110,17 +110,17 @@ $sql="SELECT * FROM (
   FROM solution
   WHERE problem_id =? AND result =4
   GROUP BY user_id
-  ORDER BY score, solution_id DESC
+  ORDER BY score 
 )c
-LEFT JOIN (
+inner JOIN (
   SELECT solution_id, user_id, language, 10000000000000000000 + time*100000000000 + memory*100000 + code_length score, in_date
   FROM solution 
   WHERE problem_id =? AND result =4  
-  ORDER BY score, solution_id DESC
+  ORDER BY score
 )b ON b.user_id=c.user_id AND b.score=c.score
-ORDER BY c.score, in_date ASC
+ORDER BY c.score, solution_id ASC
 LIMIT $start,$sz;";
-
+//echo $sql;
 $result=pdo_query( "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 $result=pdo_query( $sql,$id,$id);
 

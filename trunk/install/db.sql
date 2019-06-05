@@ -119,6 +119,7 @@ CREATE TABLE  `solution` (
   `solution_id` int(11) NOT NULL AUTO_INCREMENT,
   `problem_id` int(11) NOT NULL DEFAULT 0,
   `user_id` char(48) NOT NULL,
+  `nick` char(20) NOT NULL DEFAULT '', 
   `time` int(11) NOT NULL DEFAULT 0,
   `memory` int(11) NOT NULL DEFAULT 0,
   `in_date` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',

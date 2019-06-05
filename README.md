@@ -20,6 +20,11 @@ hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 
 近期github的svn访问缓慢，可以到release中下载tar.gz版本，然后用install目录下的*-bytgz.sh脚本安装。
 但是注意这样安装的实例，将来升级时只能手工升级。
+例如16.04下载好Releases中的19.06.04.tar.gz，然后准备好install-ubuntu16-bytgz.sh
+
+```
+sudo bash install-ubuntu16-bytgz.sh 19.06.04.tar.gz
+```
 
 首先安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
 

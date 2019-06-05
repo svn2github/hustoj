@@ -110,13 +110,13 @@ $sql="SELECT * FROM (
   FROM solution
   WHERE problem_id =? AND result =4
   GROUP BY user_id
-  ORDER BY score, in_date DESC
+  ORDER BY score, solution_id DESC
 )c
 LEFT JOIN (
   SELECT solution_id, user_id, language, 10000000000000000000 + time*100000000000 + memory*100000 + code_length score, in_date
   FROM solution 
   WHERE problem_id =? AND result =4  
-  ORDER BY score, in_date DESC
+  ORDER BY score, solution_id DESC
 )b ON b.user_id=c.user_id AND b.score=c.score
 ORDER BY c.score, in_date ASC
 LIMIT $start,$sz;";

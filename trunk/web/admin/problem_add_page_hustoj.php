@@ -34,7 +34,7 @@ include_once("kindeditor.php") ;
 function getPartByMark($html,$mark1,$mark2){
    $i=mb_strpos($html,$mark1);
    $j=mb_strpos($html,$mark2);
-  $descriptionHTML=substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
+  $descriptionHTML=mb_substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
   
    return $descriptionHTML;
 }

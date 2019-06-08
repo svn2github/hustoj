@@ -161,8 +161,8 @@ static int py2=1; // caution: py2=1 means default using py3
 MYSQL *conn;
 #endif
 
-static char lang_ext[19][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
-							   "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql"};
+static char lang_ext[20][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
+			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95"};
 //static char buf[BUFFER_SIZE];
 int data_list_has(char *file)
 {
@@ -338,6 +338,11 @@ void init_syscalls_limits(int lang)
 	{ //go
 		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
 			call_counter[LANG_SQLV[i]] = HOJ_MAX_LIMIT;
+	}
+	else if (lang == 19)
+	{ //go
+		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
+			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
 	}
 }
 
@@ -1165,6 +1170,7 @@ int compile(int lang, char *work_dir)
 	const char *CP_LUA[] = {"luac", "-o", "Main", "Main.lua", NULL};
 	//const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 	const char *CP_GO[] = {"go", "build", "-o", "Main", "Main.go", NULL};
+	const char *CP_FORTRAN[] = {"f95", "-static", "-o", "Main", "Main.f95", NULL};
 
 	char javac_buf[7][32];
 	char *CP_J[7];
@@ -1319,6 +1325,9 @@ int compile(int lang, char *work_dir)
 		//	break;
 		case 17:
 			execvp(CP_GO[0], (char *const *)CP_GO);
+			break;
+		case 19:
+			execvp(CP_FORTRAN[0], (char *const *)CP_FORTRAN);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -2189,6 +2198,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	case 13:
 	case 14:
 	case 17:
+	case 19:
 		execl("./Main", "./Main", (char *)NULL);
 		break;
 	case 3:

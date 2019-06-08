@@ -51,3 +51,5 @@ int LANG_JSV[256]={0,0};
 int LANG_GOV[256]={0,0};
 //sqlite3
 int LANG_SQLV[256]={0,0};
+//fortran
+int LANG_FV[256]={0,0};

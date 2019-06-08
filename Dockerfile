@@ -84,6 +84,9 @@ RUN CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`              
     && sed -i "s/DB_USER=\"root\"/DB_USER=\"$USERNAME\"/g"                  /home/judge/src/web/include/db_info.inc.php     \
     && sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g"                  /home/judge/src/web/include/db_info.inc.php     
 
+# Install openssh-server
+RUN apt-get -y install ssh
+
 VOLUME /volume
 
 ENTRYPOINT set -xe                                  \

@@ -85,7 +85,9 @@ RUN CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`              
     && sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g"                  /home/judge/src/web/include/db_info.inc.php     
 
 # Install openssh-server
-RUN apt-get -y install ssh
+RUN apt-get -y install ssh          \
+    && echo "root:root" | chpasswd  \
+    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 VOLUME /volume
 
@@ -103,7 +105,8 @@ ENTRYPOINT set -xe                                  \
     && rm -rf /var/lib/mysql                        \
     && ln -s /volume/data /home/judge/data          \
     && ln -s /volume/mysql /var/lib/mysql           \
-    && service mysql start                          \
-    && service php7.2-fpm start                     \
-    && service hustoj start                         \
+    && service mysql        start                   \
+    && service php7.2-fpm   start                   \
+    && service hustoj       start                   \
+    && service ssh          start                   \
     && nginx -g "daemon off;"

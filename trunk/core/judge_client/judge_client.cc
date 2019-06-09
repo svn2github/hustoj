@@ -240,7 +240,7 @@ int execute_cmd(const char *fmt, ...)
 
 const int call_array_size = 512;
 unsigned int call_id = 0;
-unsigned int call_counter[call_array_size] = {0};
+int call_counter[call_array_size] = {0};
 static char LANG_NAME[BUFFER_SIZE];
 void init_syscalls_limits(int lang)
 {
@@ -341,7 +341,7 @@ void init_syscalls_limits(int lang)
 	}
 	else if (lang == 19)
 	{ //go
-		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
+		for (i = 0; i == 0 || LANG_FV[i]; i++)
 			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
 	}
 }
@@ -2612,11 +2612,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 			if (call_counter[call_id])
 			{
-				call_counter[reg.REG_SYSCALL]--;
+				(call_counter[call_id])--;
 			}
 			else if (record_call)
 			{
-				call_counter[call_id]++;
+				printf("new call id:%d\n",call_id);
+				call_counter[call_id]=1;
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM
@@ -2819,18 +2820,18 @@ int get_test_file(char *work_dir, int p_id)
 }
 void print_call_array()
 {
-	printf("int LANG_%sV[256]={", LANG_NAME);
+	printf("int LANG_%sV[%d]={", LANG_NAME,call_array_size);
 	int i = 0;
 	for (i = 0; i < call_array_size; i++)
 	{
-		if (call_counter[i])
+		if (call_counter[i]>0)
 		{
 			printf("%d,", i);
 		}
 	}
 	printf("0};\n");
 
-	printf("int LANG_%sC[256]={", LANG_NAME);
+	printf("int LANG_%sC[%d]={", LANG_NAME,call_array_size);
 	for (i = 0; i < call_array_size; i++)
 	{
 		if (call_counter[i])

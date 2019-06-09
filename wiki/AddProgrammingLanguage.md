@@ -26,7 +26,7 @@ access
 ......
 write
 ```
- * copy the calls names to add new arrays in to okcalls.h,remember to add twice for both 32-bits and 64-bits, like r747
+ * copy the calls names to add new arrays in to okcallsXX.h,remember to add twice for 32/64-bits x86,armhf,mips, like r747
 ```
 int LANG_YV[256]={SYS_access,SYS_write.....};
 int LANG_YC[256]={-1,-1,......,0};

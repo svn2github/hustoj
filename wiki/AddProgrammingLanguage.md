@@ -54,10 +54,8 @@ judge_client 2028 0 /home/judge debug
 
  * if you finally get AC on the A+B problem showed "Other Language", continue for web.
 
- * web/include/const.inc.php add "Python" before "Other Language",r764
-
- * web/submitpage.php, add Python select option, r765
- * web/showsource.php, add Python high lighten , r766
- * web/conteststatistics.php, add Python statistic , r767
- * web/admin/contest_add.php, add Python langmask option,r769
- * web/admin/contest_edit.php, add Python langmask edit option,r770
+ * web/include/const.inc.php add "Python" before "Other Language"
+ https://github.com/zhblue/hustoj/blob/master/trunk/web/include/const.inc.php#L10
+ * web/include/const.inc.php add "py" in "language_ext" array
+ https://github.com/zhblue/hustoj/blob/master/trunk/web/include/const.inc.php#L11
+ 

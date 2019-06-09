@@ -9,15 +9,15 @@ Python for example
 = Details =
   
  * write A+B problem solution in this language.
-
+```
 #!/usr/bin/python
 a=input()
 b=input()
 print a+b
-
+```
 
  * strace to check minimal syscalls,if you want 32-bits do it under 32-bits ,if you want a 64-bits do it under 64-bits too.
-
+```
 strace -ff python Main.py 2>&1|awk -F\( '{print $1}'|sort -u
 
 output like:
@@ -25,15 +25,15 @@ output like:
 access
 ......
 write
-
+```
  * copy the calls names to add new arrays in to okcalls.h,remember to add twice for both 32-bits and 64-bits, like r747
-
+```
 int LANG_YV[256]={SYS_access,SYS_write.....};
 int LANG_YC[256]={-1,-1,......,0};
 #else
 int LANG_YV[256]={};
 int LANG_YC[256]={0};
-
+```
 
  * edit judge_client.cc
    * lang_ext add new ext for lang , "py" for python,r749

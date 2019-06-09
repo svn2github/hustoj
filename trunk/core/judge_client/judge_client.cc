@@ -2610,14 +2610,14 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
-			if (call_counter[call_id])
-			{
-				(call_counter[call_id])--;
-			}
-			else if (record_call)
+			if (record_call)
 			{
 				printf("new call id:%d\n",call_id);
-				call_counter[call_id]=1;
+				call_counter[call_id]++;
+				printf("call %d: %d\n",call_id,call_counter[call_id]);
+			}else if (call_counter[call_id])
+			{
+				call_counter[call_id]--;
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM

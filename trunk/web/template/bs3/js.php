@@ -51,7 +51,7 @@ $(".hint pre").each(function(){
   console.log("To enable mathjax in hustoj, check line 15 in /home/judge/src/web/template/bs3/js.php");
 function admin_mod(){
 	$("div[fd=source]").each(function(){
-		let pid=$(this).parent().parent().find("div[fd=problem_id]").text();	
+		let pid=$(this).attr('pid');	
 		$(this).append("<span><span class='label label-success' pid='"+pid+"' onclick='problem_add_source(this,"+pid+");'>+</span></span>");
 
 	});

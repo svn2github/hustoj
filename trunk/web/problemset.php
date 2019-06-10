@@ -130,7 +130,7 @@ foreach ($result as $row){
 
 	$view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";;
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
-	$view_problemset[$i][3]="<div fd='source' class='center'>";
+	$view_problemset[$i][3]="<div pid='".$row['problem_id']."' fd='source' class='center'>";
 	foreach($category as $cat){
 		if(trim($cat)=="")continue;
 		$hash_num=hexdec(substr(md5($cat),0,15));

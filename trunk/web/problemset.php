@@ -1,9 +1,9 @@
 <?php 
 	$OJ_CACHE_SHARE=false;
-	$cache_time=60;
+	$cache_time=0;
 	require_once('./include/db_info.inc.php');
 	require_once('./include/const.inc.php');
-	require_once('./include/cache_start.php');
+	//require_once('./include/cache_start.php');
 	require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
     $view_title= "Problem Set";
@@ -128,15 +128,15 @@ foreach ($result as $row){
 		array_push($category,trim($cat));	
 	}
 
-	$view_problemset[$i][1]="<div class='center'>".$row['problem_id']."</div>";;
+	$view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";;
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
-	$view_problemset[$i][3]="<div class='center'>";
+	$view_problemset[$i][3]="<div fd='source' class='center'>";
 	foreach($category as $cat){
 		if(trim($cat)=="")continue;
 		$hash_num=hexdec(substr(md5($cat),0,15));
 		$label_theme=$color_theme[$hash_num%count($color_theme)];
 		if($label_theme=="") $label_theme="default";
-		$view_problemset[$i][3].="<a title='".htmlentities($cat,ENT_QUOTES,'UTF-8')."' class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,4,'utf8')."</a>&nbsp;";
+		$view_problemset[$i][3].="<a title='".htmlentities($cat,ENT_QUOTES,'UTF-8')."' class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,10,'utf8')."</a>&nbsp;";
 	}
 	$view_problemset[$i][3].="</div >";
 	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."&jresult=4'>".$row['accepted']."</a></div>";

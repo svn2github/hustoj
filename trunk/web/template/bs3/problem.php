@@ -163,7 +163,7 @@
 
 							</h4>
 						</div>
-						<div class='panel-body content'>
+						<div fd="source" pid=<?php echo $row['problem_id']?> class='panel-body content'>
 							<?php 
               $cats=explode(" ",$row['source']);
               foreach($cats as $cat){

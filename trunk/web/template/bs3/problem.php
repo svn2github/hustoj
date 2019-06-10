@@ -41,7 +41,7 @@
 					echo "<center><h3>$MSG_PROBLEM " . $PID[ $pid ] . ": " . $row[ 'title' ] . "</h3>";
 				}
 
-				echo "<span class=green>$MSG_Time_Limit: </span>" . $row[ 'time_limit' ] . " Sec&nbsp;&nbsp;";
+				echo "<span class=green>$MSG_Time_Limit: </span><span><span fd='time_limit' pid='".$row['problem_id']."'  >" . $row[ 'time_limit' ] . "</span></span> Sec&nbsp;&nbsp;";
 				echo "<span class=green>$MSG_Memory_Limit: </span>" . $row[ 'memory_limit' ] . " MB";
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";

@@ -61,7 +61,7 @@ function admin_mod(){
 		$(this).dblclick(function(){
 			let time=sp.text();
 			console.log("pid:"+pid+"  time_limit:"+time);	
-			sp.html("<form onsubmit='return false;'><input type=hidden name='m' value='problem_update_time'><input type='hidden' name='pid' value='"+pid+"'><input type='text' name='t' value='"+time+"' selected='true' class='input-mini'></form>");
+			sp.html("<form onsubmit='return false;'><input type=hidden name='m' value='problem_update_time'><input type='hidden' name='pid' value='"+pid+"'><input type='text' name='t' value='"+time+"' selected='true' class='input-mini' size=2 ></form>");
 			let ipt=sp.find("input[name=t]");
 			ipt.focus();
 			ipt[0].select();

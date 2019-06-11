@@ -105,4 +105,3 @@ require_once(dirname(__FILE__)."/pdo.php");
 	//date_default_timezone_set("PRC");
 	//pdo_query("SET time_zone ='+8:00'");
 
-?>

@@ -92,8 +92,8 @@ else{
 			c.`end_time` >  '$now'
 			OR c.private =1
 		)
-			AND c.`defunct` =  'N'
-	) ";
+		
+	) ";      ////	AND c.`defunct` =  'N'  即使私有结束后被隐藏了，它的题目依旧保留，以免泄露
 
 }
 $sql.=" ORDER BY `problem_id`";

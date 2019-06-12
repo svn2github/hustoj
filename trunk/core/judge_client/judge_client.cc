@@ -161,8 +161,8 @@ static int py2=1; // caution: py2=1 means default using py3
 MYSQL *conn;
 #endif
 
-static char lang_ext[20][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
-			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95"};
+static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
+			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
 int data_list_has(char *file)
 {
@@ -238,7 +238,7 @@ int execute_cmd(const char *fmt, ...)
 	return ret;
 }
 
-const int call_array_size = 512;
+const int call_array_size = CALL_ARRAY_SIZE;
 unsigned int call_id = 0;
 int call_counter[call_array_size] = {0};
 static char LANG_NAME[BUFFER_SIZE];
@@ -259,8 +259,6 @@ void init_syscalls_limits(int lang)
 	{ // C & C++
 		for (i = 0; i == 0 || LANG_CV[i]; i++)
 		{
-			if(LANG_CV[i]==SYS_execve)call_counter[LANG_CV[i]] = 1;
-			else
 			call_counter[LANG_CV[i]] = HOJ_MAX_LIMIT;
 		}
 	}
@@ -344,6 +342,12 @@ void init_syscalls_limits(int lang)
 		for (i = 0; i == 0 || LANG_FV[i]; i++)
 			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
 	}
+	else if (lang == 20 )
+	{ //go
+		for (i = 0; i == 0 || LANG_MV[i]; i++)
+			call_counter[LANG_MV[i]] = HOJ_MAX_LIMIT;
+	}
+	call_counter[SYS_execve]= 1;
 }
 
 int after_equal(char *c)
@@ -2126,7 +2130,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	if (use_ptrace)
 		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang != 3)
+	if (lang != 3 && lang!=20)
 		chroot(work_dir);
 
 	while (setgid(1536) != 0)
@@ -2167,6 +2171,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	//case 6:  //python
 	case 12:
 	case 16:
+	case 20:
 		LIM.rlim_cur = LIM.rlim_max = 200;
 		break;
 	case 5: //bash
@@ -2246,6 +2251,9 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		break;
 	case 18: //sqlite3
 		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
+		break;
+	case 20: //octave
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "Main.m", (char *)NULL);
 		break;
 	}
 	//sleep(1);
@@ -2476,7 +2484,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		}
 
 		//jvm gc ask VM before need,so used kernel page fault times and page size
-		if (lang == 3 || lang == 7 || lang == 9 || lang == 13 || lang == 14 || lang == 16 || lang == 17)
+		if (lang == 3 || lang == 7 || lang == 9 || lang == 13 || lang == 14 || lang == 16 || lang == 17 || lang == 20)
 		{
 			tempmemory = get_page_fault_mem(ruse, pidApp);
 		}

@@ -57,7 +57,7 @@ if (isset($_POST['cid'])) {
 
     $sql .= " and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
 			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>'$now' or private=1) and `defunct`='N') )";
+			(`end_time`>'$now' or private=1) ) )";      //and `defunct`='N'  隐藏的私有比赛题目依旧隐藏
 }
 //echo $sql;
 

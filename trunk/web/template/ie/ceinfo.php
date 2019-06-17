@@ -30,10 +30,7 @@
 <pre class="brush:c;" id='errtxt' ><?php echo $view_reinfo?></pre>
 <div id='errexp'>Explain:</div>
 
-<script src="include/ceinfo.js?v=0.2"></script>
-<script> ceinfo();</script>
-
-      </div>
+    </div>
 
     </div> <!-- /container -->
 
@@ -55,19 +52,17 @@
 <script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
 <script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
 
+<script src="include/ceinfo.js?v=0.2"></script>
 <script>
 $(document).ready(function(){
 	$("#source").load("showsource2.php?id=<?php echo $id?>",function(response,status,xhr){
-
    	if(status=="success"){
 		SyntaxHighlighter.config.bloggerMode = false;
 		SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
 		SyntaxHighlighter.highlight();
 		ceinfo();
    	}
-
 	});
-
 });
 </script>
   </body>

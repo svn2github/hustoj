@@ -19,6 +19,8 @@ function reinfo(){
 	exps[7]="可能对输入数据的格式理解有误，输入的数据类型和数量与预期不符";
 	pats[8]=/ArrayIndexOutOfBoundsException/;
         exps[8]="数组下标越界，请检查循环变量的上下界范围是否合适，对于特殊值可能需要特殊处理";
+	pats[9]=/NoClassDefFoundError: Main/;
+        exps[9]="Java语言的提交，主类public class必须是Main";
 
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();

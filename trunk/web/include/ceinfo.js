@@ -130,6 +130,8 @@ function ceinfo(){
 	exps[62]="检查是否使用了中文标点或空格";
 	pats[63]=/variably modified/;
         exps[63]="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
+        pats[64]=/was not declared in this scope/;
+        exps[64]="调用了没有声明的函数，看看是不是拼写错误，或者忘记include正确的头文件";
  
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();

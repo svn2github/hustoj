@@ -134,6 +134,10 @@ function ceinfo(){
         exps[64]="调用了没有声明的函数，看看是不是拼写错误，或者忘记include正确的头文件";
         pats[65]=/#include expects "FILENAME"/;
         exps[65]="include语句需要给出文件名，从百度结果中复制来的代码很可能缺少正确的文件名，因为<>被识别为HTML标记";
+        pats[66]=/找不到符号/;
+        exps[66]="使用的类名似乎没有定义过，检查下是否拼写错误或者忘记了引入正确的包名，比如java.util.*";
+        pats[67]=/错误: 需要';'/;
+        exps[67]="每行语句的末尾都需要分号，并且是英文的分号，请再次确认;";
 
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();

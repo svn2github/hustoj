@@ -128,19 +128,16 @@ function ceinfo(){
 	exps[61]="程序末尾缺少大括号";
 	pats[62]=/非法字符/;
 	exps[62]="检查是否使用了中文标点或空格";
-	function explain(){
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();
 	var expmsg="辅助解释：<br><hr>";
 	for(var i=0;i<pats.length;i++){
-	var pat=pats[i];
-	var exp=exps[i];
-	var ret=pat.exec(errmsg);
-	if(ret){
-	expmsg+=ret+":"+exp+"<br><hr>";
-	}
+		var pat=pats[i];
+		var exp=exps[i];
+		var ret=pat.exec(errmsg);
+		if(ret){
+		expmsg+=ret+":"+exp+"<br><hr>";
+		}
 	}
 	document.getElementById("errexp").innerHTML=expmsg;
-	//alert(expmsg);
-	}
 }

@@ -132,7 +132,9 @@ function ceinfo(){
         exps[63]="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
         pats[64]=/was not declared in this scope/;
         exps[64]="调用了没有声明的函数，看看是不是拼写错误，或者忘记include正确的头文件";
- 
+        pats[65]=/#include expects "FILENAME"/;
+        exps[65]="include语句需要给出文件名，从百度结果中复制来的代码很可能缺少正确的文件名，因为<>被识别为HTML标记";
+
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();
 	var expmsg="辅助解释：<br><hr>";

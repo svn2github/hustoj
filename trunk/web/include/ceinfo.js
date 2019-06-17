@@ -128,6 +128,9 @@ function ceinfo(){
 	exps[61]="程序末尾缺少大括号";
 	pats[62]=/非法字符/;
 	exps[62]="检查是否使用了中文标点或空格";
+	pats[63]=/variably modified/;
+        exps[63]="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
+ 
 	//alert("asdf");
 	var errmsg=$("#errtxt").text();
 	var expmsg="辅助解释：<br><hr>";

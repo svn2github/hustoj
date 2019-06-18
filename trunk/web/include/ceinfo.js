@@ -150,5 +150,10 @@ function ceinfo(){
 		expmsg+=ret+":"+exp+"<br><hr>";
 		}
 	}
+	let keyword=$("#errtxt").find(".number1").text();
+        //console.log(keyword);
+        keyword=encodeURIComponent(keyword);
+        //console.log(keyword);
+        expmsg+="<br><a target='_blank' href='https://www.baidu.com/s?wd="+keyword+"'>问问度娘</a>";
 	document.getElementById("errexp").innerHTML=expmsg;
 }

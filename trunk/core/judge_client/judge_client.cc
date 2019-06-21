@@ -2843,7 +2843,7 @@ int get_test_file(char *work_dir, int p_id)
 }
 void print_call_array()
 {
-	printf("int LANG_%sV[%d]={", LANG_NAME,call_array_size);
+	printf("int LANG_%sV[CALL_ARRAY_SIZE]={", LANG_NAME);
 	int i = 0;
 	for (i = 0; i < call_array_size; i++)
 	{
@@ -2854,7 +2854,7 @@ void print_call_array()
 	}
 	printf("0};\n");
 
-	printf("int LANG_%sC[%d]={", LANG_NAME,call_array_size);
+	printf("int LANG_%sC[CALL_ARRAY_SIZE]={", LANG_NAME);
 	for (i = 0; i < call_array_size; i++)
 	{
 		if (call_counter[i])

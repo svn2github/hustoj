@@ -1708,14 +1708,25 @@ void copy_shell_runtime(char *work_dir)
 	execute_cmd("/bin/mkdir %s/lib64", work_dir);
 	execute_cmd("/bin/mkdir %s/bin", work_dir);
 #ifdef __mips__
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/  %s/lib/mips64el-linux-gnuabi64",work_dir);
+	execute_cmd("mkdir -p %s/lib/mips64el-linux-gnuabi64/",work_dir);
 	execute_cmd("/bin/cp -a /lib64/ld.so.1  %s/lib64/", work_dir);
-	execute_cmd("/bin/cp -a /lib64/libdl.so.2  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libdl.so.2  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libutil.so.1  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libz.so.1  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libm.so.6  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libc.so.6  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libtinfo.so.5  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/ld-2.24.so  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libc-2.24.so  %s/lib/mips64el-linux-gnuabi64", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libc.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6  %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/ld-2.27.so  %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libc-2.27.so %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libdl-2.27.so %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6.1 %s/lib64/", work_dir);
+	execute_cmd("cp  /lib/mips64el-linux-gnuabi64/libpthread.so.0 %s/lib/mips64el-linux-gnuabi64/",work_dir);
+	execute_cmd("/bin/cp -a /bin/bash %s/bin/", work_dir);
 
 #endif
 
@@ -1877,7 +1888,6 @@ void copy_guile_runtime(char *work_dir)
 
 void copy_python_runtime(char *work_dir)
 {
-
 	copy_shell_runtime(work_dir);
 	execute_cmd("mkdir -p %s/usr/include", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
@@ -1898,19 +1908,19 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
 	if(!py2){	
 		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
-#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
-#endif
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python2* %s/usr/lib64/", work_dir);
+		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
+		execute_cmd("cp -a /usr/local/lib/python2* %s/usr/local/lib/", work_dir);
 #endif
 	}else{
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
-#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
-#endif
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python3* %s/usr/lib64/", work_dir);
+		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
+		execute_cmd("cp -a /usr/local/lib/python3* %s/usr/local/lib/", work_dir);
 #endif
 	}
 #ifdef __mips__
@@ -2130,7 +2140,12 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	if (use_ptrace)
 		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang != 3 && lang!=20)
+	if (lang != 3 && lang!=20
+#ifdef __mips__
+//		&& lang != 6
+#endif			
+			
+			)
 		chroot(work_dir);
 
 	while (setgid(1536) != 0)
@@ -2168,7 +2183,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		break;
 	case 3: //java
 	case 4: //ruby
-	//case 6:  //python
+	case 6:  //python
 	case 12:
 	case 16:
 	case 20:

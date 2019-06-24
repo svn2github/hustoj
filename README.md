@@ -1,4 +1,4 @@
-hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
+hustoj -- 流行的OJ系统，跨平台、易安装、有题库。
 ======
 
 版权说明
@@ -237,4 +237,11 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 
 更严谨的请求数QPS测试,请参考muzea的[hustoj web 跑分小工具](https://github.com/muzea/hustoj-benchmark)
+
+免费题库
+--
+访问项目[FPS](https://github.com/zhblue/freeproblemset/tree/master/fps-examples)下载免费例程。
+
+访问[TK题库免费专区](http://tk.hustoj.com/problemset.php?search=free)
+
 

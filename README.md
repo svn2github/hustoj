@@ -200,6 +200,16 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 新加群，请改群名片，5分钟后可以发言 。
 请尊重开源软件开发者的辛苦劳动，出言不逊者将被踢出，群费不退。
 
+您可以用这几种方式支援本项目：
+
+1、付费50加入官方群23361372
+
+2、领取并使用支付宝红包
+
+<img src="http://tk.hustoj.com/upload/image/20180621/20180621190059_62537.png" width="140px">
+
+3、在[TK题库](http://tk.hustoj.com)充值下载题目
+
 系统演示
 --
 [前台演示](http://hustoj.com/oj/)
@@ -212,9 +222,6 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 硬件需求
 --
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
-
-<img src="http://tk.hustoj.com/upload/image/20180621/20180621190059_62537.png" width="240px">
-
 
 
 

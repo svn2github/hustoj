@@ -176,10 +176,13 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 --
 [前台演示](http://hustoj.com/oj/)
 [龙芯部署](http://loongson.hustoj.com/)
+
 后台功能：
+--
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/menu.png" >
 ----------------------
 硬件需求：
+--
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 
 <img src="http://tk.hustoj.com/upload/image/20180621/20180621190059_62537.png" width="240px">

@@ -1,10 +1,38 @@
 hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 ======
+目录
+--
+[版权说明](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97)
 
+[安装说明](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E)
 
+[注意事项](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+
+[校园网安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%AE%89%E8%A3%85)
+
+[基于Ubuntu16.04安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
+
+[基于Ubuntu18.04安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
+
+[基于Centos安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
+
+[基于Docker安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85)
+
+[基于其他发行版安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8E%E5%85%B6%E4%BB%96%E5%8F%91%E8%A1%8C%E7%89%88%E5%AE%89%E8%A3%85)
+
+[LiveCD下载安装](https://github.com/zhblue/hustoj/blob/master/README.md#livecd%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85)
+
+[装后须知](https://github.com/zhblue/hustoj/blob/master/README.md#%E8%A3%85%E5%90%8E%E9%A1%BB%E7%9F%A5)
+
+[支持捐助、加入社区](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
+
+[系统演示](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
+
+版权说明
+--
 HUSTOJ is an GPL FreeSoftware?.
 
-HUSTOJ 是采用GPL的自由软件。
+HUSTOJ 是采用GPL的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
 
 注意：基于本项目源码从事科研、论文、系统开发，"最好"在文中或系统中表明来自于本项目的内容和创意，否则所有贡献者可能会鄙视你和你的项目。使用本项目源码和freeproblemset题库请尊重程序员职业和劳动。
 
@@ -177,11 +205,11 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 [前台演示](http://hustoj.com/oj/)
 [龙芯部署](http://loongson.hustoj.com/)
 
-后台功能：
+后台功能
 --
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/menu.png" >
-----------------------
-硬件需求：
+
+硬件需求
 --
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 

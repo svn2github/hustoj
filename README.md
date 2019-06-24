@@ -210,6 +210,14 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 
 3、在[TK题库](http://tk.hustoj.com)充值下载题目
 
+4、右上角点击Star，给本项目加星
+
+5、保留您安装使用的系统中页脚的公众号和红包二维码
+
+6、在您的论文中引用本项目的网址
+
+7、向其他老师同学推荐本项目
+
 系统演示
 --
 [前台演示](http://hustoj.com/oj/)

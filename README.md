@@ -50,7 +50,7 @@ Star us, please!
 
 [硬件需求](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)
 
-
+[免费题库](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%85%8D%E8%B4%B9%E9%A2%98%E5%BA%93)
 
 更新日志
 ------
@@ -244,4 +244,4 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 
 访问[TK题库免费专区](http://tk.hustoj.com/problemset.php?search=free)
 
-
+FQ访问[谷歌代码存档版](http://code.google.com/p/freeproblemset)，下载老版本FPS共享题库。

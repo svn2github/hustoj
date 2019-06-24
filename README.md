@@ -28,6 +28,8 @@ hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 
 [系统演示](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
 
+[硬件需求](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)
+
 版权说明
 --
 HUSTOJ is an GPL FreeSoftware?.
@@ -231,5 +233,5 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 --
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" >
 
-
+更严谨的请求数QPS测试,请参考muzea的[hustoj web 跑分小工具](https://github.com/muzea/hustoj-benchmark)
 

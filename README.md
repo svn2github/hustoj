@@ -1,8 +1,28 @@
 hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 ======
+
+版权说明
+--
+HUSTOJ is an GPL FreeSoftware?.
+
+HUSTOJ 是采用GPL的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
+
+注意：基于本项目源码从事科研、论文、系统开发，"最好"在文中或系统中表明来自于本项目的内容和创意，否则所有贡献者可能会鄙视你和你的项目。使用本项目源码和freeproblemset题库请尊重程序员职业和劳动。
+
+论文请引用参考文献[基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088&uid=WEEvREcwSlJHSldRa1FhdXNXYXJwcFhRL1Z1Q2lKUDFMNGd0TnJVVlh4bz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!&v=MjgwNTExVDNxVHJXTTFGckNVUkwyZlllWm1GaURsV3IvQUx6N0JiN0c0SDlPdnJJOU5iSVI4ZVgxTHV4WVM3RGg=)
+
+如果打算进行二次开发，[Wiki](https://github.com/zhblue/hustoj/tree/master/wiki)和这份[文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf)可能有帮助。
+
+PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
+
+如果这个项目对你有用，请挥动鼠标，右上角给个Star!
+
+Star us, please!
+
+
 目录
 --
-[版权说明](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97)
+[更新日志](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97)
 
 [安装说明](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E)
 
@@ -29,24 +49,6 @@ hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。
 [系统演示](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
 
 [硬件需求](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)
-
-版权说明
---
-HUSTOJ is an GPL FreeSoftware?.
-
-HUSTOJ 是采用GPL的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
-
-注意：基于本项目源码从事科研、论文、系统开发，"最好"在文中或系统中表明来自于本项目的内容和创意，否则所有贡献者可能会鄙视你和你的项目。使用本项目源码和freeproblemset题库请尊重程序员职业和劳动。
-
-论文请引用参考文献[基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088&uid=WEEvREcwSlJHSldRa1FhdXNXYXJwcFhRL1Z1Q2lKUDFMNGd0TnJVVlh4bz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!&v=MjgwNTExVDNxVHJXTTFGckNVUkwyZlllWm1GaURsV3IvQUx6N0JiN0c0SDlPdnJJOU5iSVI4ZVgxTHV4WVM3RGg=)
-
-如果打算进行二次开发，[Wiki](https://github.com/zhblue/hustoj/tree/master/wiki)和这份[文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf)可能有帮助。
-
-PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
-
-如果这个项目对你有用，请挥动鼠标，右上角给个Star!
-
-Star us, please!
 
 
 

@@ -52,6 +52,8 @@ Star us, please!
 
 [免费题库](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%85%8D%E8%B4%B9%E9%A2%98%E5%BA%93)
 
+[求助 报错](https://github.com/zhblue/hustoj/issues/new)
+
 更新日志
 ------
 2019-6-24 文档：对项目首页进行分块标注，调整顺序和内容，增加目录。

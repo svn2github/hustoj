@@ -52,7 +52,7 @@ Star us, please!
 
 [免费题库](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%85%8D%E8%B4%B9%E9%A2%98%E5%BA%93)
 
-[求助 报错](https://github.com/zhblue/hustoj/issues/new)
+[求助 报错](https://github.com/zhblue/hustoj/issues/new/choose)
 
 更新日志
 ------

@@ -202,6 +202,9 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 升级
 --
 脚本安装的用户，可以使用install目录中的update-hustoj进行升级。
+```
+sudo bash /home/judge/src/install/update-hustoj
+```
 升级脚本执行后，可能需要登陆web端管理后台，执行一次更新数据库。
 
 修复

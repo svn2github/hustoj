@@ -199,6 +199,21 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 ```
 保存后，重启nginx
 
+备份
+--
+脚本安装的用户，可以使用install目录中的bak.sh进行备份。
+```
+sudo bash /home/judge/src/install/bak.sh
+```
+备份后的数据在/var/backups/
+
+百度学习crontab的用法后，可以使用
+```
+sudo crontab -e
+```
+定制自动备份计划，部分安装脚本中包含了自动备份，但可能需要运行上面的语句一次来激活。
+
+
 升级
 --
 脚本安装的用户，可以使用install目录中的update-hustoj进行升级。

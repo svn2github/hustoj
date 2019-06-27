@@ -114,6 +114,11 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2>NOIP contest !</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 if(!isset($OJ_RANK_LOCK_PERCENT)) 
 $OJ_RANK_LOCK_PERCENT=1;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;

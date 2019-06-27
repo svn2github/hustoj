@@ -36,10 +36,15 @@ if (isset($_GET['cid'])){
         $start_time=0;
         $end_time=0;
         if ($rows_cnt>0){
-                 $row=$result[0];
+                $row=$result[0];
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
+		if(time()<$end_time && stripos($title,"noip")){
+		      $view_errors =  "<h2>NOIP contest !</h2>";
+		      require("template/".$OJ_TEMPLATE."/error.php");
+		      exit(0);
+		}
         }
         $lock_time=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
   //$lock_time=date("Y-m-d H:i:s",$lock_time);

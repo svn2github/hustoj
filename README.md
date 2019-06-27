@@ -44,6 +44,10 @@ Star us, please!
 
 [装后须知](https://github.com/zhblue/hustoj/blob/master/README.md#%E8%A3%85%E5%90%8E%E9%A1%BB%E7%9F%A5)
 
+[备份](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%A4%87%E4%BB%BD)
+
+[升级](https://github.com/zhblue/hustoj/blob/master/README.md#升级)
+
 [支持捐助、加入社区](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
 
 [系统演示](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)

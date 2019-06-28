@@ -115,7 +115,7 @@ if ($start_time>time()){
         exit(0);
 }
 if(time()<$end_time && stripos($title,"noip")){
-      $view_errors =  "<h2>NOIP contest !</h2>";
+      $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);
 }

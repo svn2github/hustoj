@@ -140,7 +140,7 @@ $cnt=1-$cnt;
 </table>
 </div>
 <div id=center>
-<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+<?php echo "[<a href='status.php?".$str2."'>Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
 echo "[<a href='status.php?".$str2."&top=".intval($_GET['prevtop'])."'>Previous Page</a>]&nbsp;&nbsp;";
 else

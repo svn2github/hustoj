@@ -88,5 +88,10 @@ RUN CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`              
     done 
 
 VOLUME /volume
+VOLUME /home/judge/backup
+VOLUME /home/judge/data
+VOLUME /home/judge/etc
+VOLUME /home/judge/web
+VOLUME /var/lib/mysql
 
 ENTRYPOINT [ "/bin/bash", "/docker/entrypoint.sh" ]

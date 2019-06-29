@@ -15,6 +15,7 @@ RUN echo "  \
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security universe                              \n\
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security multiverse                            \n\
     " > /etc/apt/sources.list && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get -y update  && \
     apt-get -y upgrade && \
     apt-get -y install --no-install-recommends \

@@ -5,9 +5,9 @@ COPY trunk /trunk
 
 # Linux: Aliyun Apt Mirrors.
 RUN cp /docker/sources.list /etc/apt/sources.list && \
-    DEBIAN_FRONTEND=noninteractive \
     apt-get -y update  && \
     apt-get -y upgrade && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get -y install --no-install-recommends \
         nginx \
         mysql-server \

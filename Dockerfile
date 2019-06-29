@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 
 COPY docker /docker
-COPY trunk /trunk
 
 # Linux: Aliyun Apt Mirrors.
 RUN cp /docker/sources.list /etc/apt/sources.list && \
@@ -26,6 +25,8 @@ RUN cp /docker/sources.list /etc/apt/sources.list && \
         g++ \
         openjdk-11-jdk \
         ssh
+
+COPY trunk /trunk
 
 # Mysql
 RUN mkdir -p /var/run/mysqld                     \

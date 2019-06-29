@@ -1,20 +1,10 @@
 FROM ubuntu:18.04
 
+COPY docker /docker
 COPY trunk /trunk
 
 # Linux: Aliyun Apt Mirrors.
-RUN echo "  \
-    deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted                                \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted                        \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic universe                                       \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates universe                               \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic multiverse                                     \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-updates multiverse                             \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse  \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted                       \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-security universe                              \n\
-    deb http://mirrors.aliyun.com/ubuntu/ bionic-security multiverse                            \n\
-    " > /etc/apt/sources.list && \
+RUN cp /docker/sources.list /etc/apt/sources.list && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get -y update  && \
     apt-get -y upgrade && \

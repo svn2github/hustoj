@@ -1909,6 +1909,7 @@ void copy_python_runtime(char *work_dir)
 	if(!py2){	
 		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
+		execute_cmd("cp -a /usr/lib64/python2.7  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python2* %s/usr/lib64/", work_dir);
 		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
@@ -1917,6 +1918,7 @@ void copy_python_runtime(char *work_dir)
 	}else{
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
+		execute_cmd("cp -a /usr/lib64/python3.6  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python3* %s/usr/lib64/", work_dir);
 		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
@@ -1935,6 +1937,8 @@ void copy_python_runtime(char *work_dir)
 
 
 #endif
+
+
 	execute_cmd("cp -a /usr/lib64/libpython* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
 	execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);

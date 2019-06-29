@@ -14,16 +14,27 @@ RUN echo "  \
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted                       \n\
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security universe                              \n\
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security multiverse                            \n\
-    " > /etc/apt/sources.list   \
-    && apt-get -y update        \
-    && apt-get -y upgrade && \
-    apt-get -y install --no-install-recommends nginx && \
-    apt-get -y install --no-install-recommends && \
-        mysql-server libmysqlclient-dev libmysql++-dev && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    php-common php-fpm php-mysql php-gd php-zip php-mbstring php-xml && \
-    apt-get -y install --no-install-recommends make flex gcc g++ openjdk-11-jdk && \
-    apt-get -y install --no-install-recommends ssh
+    " > /etc/apt/sources.list && \
+    apt-get -y update  && \
+    apt-get -y upgrade && \
+    apt-get -y install --no-install-recommends \
+        nginx \
+        mysql-server \
+        libmysqlclient-dev \
+        libmysql++-dev \
+        php-common \
+        php-fpm \
+        php-mysql \
+        php-gd \
+        php-zip \
+        php-mbstring \
+        php-xml \
+        make \
+        flex \
+        gcc \
+        g++ \
+        openjdk-11-jdk \
+        ssh
 
 # Mysql
 RUN mkdir -p /var/run/mysqld                     \

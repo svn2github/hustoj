@@ -93,4 +93,5 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
-sudo systemctl enable
+sudo systemctl enable hustoj
+systemctl start mysql

@@ -19,7 +19,7 @@ RUN echo "  \
     && apt-get -y upgrade
 
 # Nginx
-RUN apt-get -y install nginx
+RUN apt-get -y install --no-install-recommends nginx
 
 # Mysql
 RUN apt-get -y install --no-install-recommends      \

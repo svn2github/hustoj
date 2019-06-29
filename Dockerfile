@@ -87,10 +87,6 @@ RUN CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`              
     chown judge /home/judge/run`expr ${CPU} - 1`;    \
     done 
 
-# Install openssh-server
-RUN echo "root:root" | chpasswd  \
-    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-
 VOLUME /volume
 
 ENTRYPOINT [ "/bin/bash", "/docker/entrypoint.sh" ]

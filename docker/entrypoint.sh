@@ -1,4 +1,8 @@
 set -xe 
+
+echo "root:root" | chpasswd
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
 if [ ! -d /volume/backup ]; then
 cp -rp /home/judge/backup  /volume/backup; 
 fi 

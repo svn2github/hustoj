@@ -16,24 +16,22 @@ RUN echo "  \
     deb http://mirrors.aliyun.com/ubuntu/ bionic-security multiverse                            \n\
     " > /etc/apt/sources.list   \
     && apt-get -y update        \
-    && apt-get -y upgrade
-
-# Nginx
-RUN apt-get -y install --no-install-recommends nginx
+    && apt-get -y upgrade && \
+    apt-get -y install --no-install-recommends nginx && \
+    apt-get -y install --no-install-recommends && \
+        mysql-server libmysqlclient-dev libmysql++-dev && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    php-common php-fpm php-mysql php-gd php-zip php-mbstring php-xml && \
+    apt-get -y install --no-install-recommends make flex gcc g++ openjdk-11-jdk && \
+    apt-get -y install --no-install-recommends ssh
 
 # Mysql
-RUN apt-get -y install --no-install-recommends      \
-    mysql-server libmysqlclient-dev libmysql++-dev  \
-    && mkdir -p /var/run/mysqld                     \
+RUN mkdir -p /var/run/mysqld                     \
     && chown -R mysql:mysql /var/run/mysqld         \
     && chmod -R 755         /var/run/mysqld         \
     && service mysql start                          \
     && mysql < /trunk/install/db.sql                \
     && mysql -e "insert into jol.privilege values('admin','administrator','N');"
-
-# Php
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    php-common php-fpm php-mysql php-gd php-zip php-mbstring php-xml
 
 # Hustoj basic file system
 RUN useradd -m -u 1536 judge            \
@@ -49,8 +47,7 @@ RUN useradd -m -u 1536 judge            \
     && chown -R www-data:www-data /home/judge/src/web 
 
 # Judge daemon and client
-RUN apt-get -y install --no-install-recommends make flex gcc g++ openjdk-11-jdk \
-    && make      -C /home/judge/src/core/judged                                 \
+RUN make      -C /home/judge/src/core/judged                                 \
     && make      -C /home/judge/src/core/judge_client                           \
     && make exes -C /home/judge/src/core/sim/sim_3_01                           \
     && cp /home/judge/src/core/judged/judged                /usr/bin/judged         \
@@ -89,8 +86,7 @@ RUN CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`              
     done 
 
 # Install openssh-server
-RUN apt-get -y install --no-install-recommends ssh \
-    && echo "root:root" | chpasswd  \
+RUN echo "root:root" | chpasswd  \
     && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 VOLUME /volume

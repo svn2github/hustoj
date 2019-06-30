@@ -34,6 +34,14 @@ ln -s /volume/data   /home/judge/data
 ln -s /volume/etc/home/judge/etc
 ln -s /volume/web/home/judge/src/web
 ln -s /volume/mysql  /var/lib/mysql 
+
+RUNNING=`cat /home/judge/etc/judge.conf | grep OJ_RUNNING`
+RUNNING=${OJ_RUNNING:11}
+for i in `seq 1 $RUNNING`; do
+    mkdir -p    /home/judge/run`expr ${i} - 1`;
+    chown judge /home/judge/run`expr ${i} - 1`;
+done 
+
 service mysqlstart  
 service php7.2-fpm   start  
 service hustoj   start  

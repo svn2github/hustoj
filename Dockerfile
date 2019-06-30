@@ -31,6 +31,7 @@ COPY docker/ /opt/docker/
 
 RUN bash /opt/docker/setup.sh
 
-VOLUME [ "/volume", "/home/judge/backup", "/home/judge/data", "/home/judge/etc", "/home/judge/web", "/var/lib/mysql" ]
+# VOLUME [ "/volume", "/home/judge/backup", "/home/judge/data", "/home/judge/etc", "/home/judge/web", "/var/lib/mysql" ]
+VOLUME [ "/volume" ]
 
 ENTRYPOINT [ "/bin/bash", "/opt/docker/entrypoint.sh" ]

@@ -27,12 +27,10 @@ RUN apt-get -y update  && \
 
 COPY trunk /trunk
 
-COPY docker/setup.sh /opt/setup.sh
+COPY docker/ /opt/docker/
 
-COPY docker/entrypoint.sh /opt/entrypoint.sh
-
-RUN bash /opt/setup.sh
+RUN bash /opt/docker/setup.sh
 
 VOLUME [ "/volume", "/home/judge/backup", "/home/judge/data", "/home/judge/etc", "/home/judge/web", "/var/lib/mysql" ]
 
-ENTRYPOINT [ "/bin/bash", "/opt/entrypoint.sh" ]
+ENTRYPOINT [ "/bin/bash", "/opt/docker/entrypoint.sh" ]

@@ -251,7 +251,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 	}
 	if(isset($OJ_MARK)&&$OJ_MARK=="mark"){ 
 		$mark=intval($row['pass_rate']*100);
-	}else if (isset($OJ_MARK)&&$OJ_MARK=""){
+	}else if (isset($OJ_MARK)&&$OJ_MARK==""){
 		$mark="";
 	}else{
 		if($row['result']!=4) $mark=(100-$row['pass_rate']*100)."%";else $mark="100%";      

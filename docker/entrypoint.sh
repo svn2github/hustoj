@@ -31,8 +31,8 @@ rm -rf /home/judge/src/web
 rm -rf /var/lib/mysql   
 ln -s /volume/backup /home/judge/backup 
 ln -s /volume/data   /home/judge/data   
-ln -s /volume/etc/home/judge/etc
-ln -s /volume/web/home/judge/src/web
+ln -s /volume/etc    /home/judge/etc
+ln -s /volume/web    /home/judge/src/web
 ln -s /volume/mysql  /var/lib/mysql 
 
 RUNNING=`cat /home/judge/etc/judge.conf | grep OJ_RUNNING`

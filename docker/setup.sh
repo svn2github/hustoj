@@ -1,3 +1,4 @@
+set -xe
 
 # Mysql
 mkdir -p /var/run/mysqld

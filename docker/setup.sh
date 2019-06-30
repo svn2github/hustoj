@@ -53,5 +53,5 @@ sed -i "s#OJ_COMPILE_CHROOT=1#OJ_COMPILE_CHROOT=0#g"     /home/judge/etc/judge.c
 sed -i "s#OJ_RUNNING=1#OJ_RUNNING=$CPU#g"                /home/judge/etc/judge.conf
 sed -i "s#OJ_SHM_RUN=1#OJ_SHM_RUN=0#g"                   /home/judge/etc/judge.conf
 sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/sites-available/default
-sed -i "s#DB_USER="root"#DB_USER="$USERNAME"#g"                  /home/judge/src/web/include/db_info.inc.php
-sed -i "s#DB_PASS="root"#DB_PASS="$PASSWORD"#g"                  /home/judge/src/web/include/db_info.inc.php
+sed -i "s#DB_USER=\"root\"#DB_USER=\"$USERNAME\"#g"                  /home/judge/src/web/include/db_info.inc.php
+sed -i "s#DB_PASS=\"root\"#DB_PASS=\"$PASSWORD\"#g"                  /home/judge/src/web/include/db_info.inc.php

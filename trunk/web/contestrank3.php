@@ -204,6 +204,11 @@ if ($end_time > time()) {
     exit(0);
 }
 
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2>NOIP contest !</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 // json 请求时
 if (isset($_GET['type'])&&$_GET['type']=='json') {
     header('Content-Type:application/json');

@@ -5,7 +5,13 @@ apt-get install -y subversion
 cd /home/judge/
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
+for pkg in "make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml"
+do
+	while ! apt-get install -y $pkg 
+	do
+		echo "Network fail, retry... you might want to change another apt source for install"
+	done
+done
 
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
@@ -87,4 +93,5 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
-sudo systemctl enable
+sudo systemctl enable hustoj
+systemctl start mysql

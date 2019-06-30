@@ -130,6 +130,8 @@ $MSG_Compile_OK="人品问题-愚人节快乐";
 	$MSG_SET_LOGIN_IP="指定登录IP";
   //contest
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
+  $MSG_NOIP_WARNING="NOIP 比赛，结束后才能查看结果。<a href=\"contest.php?cid=$cid\">返回比赛</a>";
+  
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_Public="公开";
   $MSG_Private="私有";

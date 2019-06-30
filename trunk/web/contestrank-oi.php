@@ -114,6 +114,11 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 if(!isset($OJ_RANK_LOCK_PERCENT)) 
 $OJ_RANK_LOCK_PERCENT=1;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
@@ -166,7 +171,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                 $user_name=$n_user;
         }
 	if($row['result']!=4 && $row['pass_rate']>=0.99) $row['pass_rate']=0;
-        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+        if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
         else
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);

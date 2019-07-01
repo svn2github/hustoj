@@ -132,13 +132,20 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 基于Docker安装
 --
 docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
-在docker内[下载deb文件](https://github.com/zhblue/hustoj/releases)安装
-```
-	dpkg -i  xxxx.deb ; apt-get install -f
+使用构建好的docker镜像
+
+```shell
+docker run -d           \
+    --name hustoj       \
+    -p 8080:80          \
+    -p 2222:22          \
+    -v ~/volume:/volume \
+    -v /proc:/proc      \
+    --privileged        \
+    mgdream/hustoj
 ```
 
-然后参考
-https://github.com/muzea/hustoj-deb/issues/4#issuecomment-492186622 。
+部署后使用浏览器访问[http://localhost:8080](http://localhost:8080)
 
 基于其他发行版安装
 --

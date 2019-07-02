@@ -42,7 +42,7 @@ for i in `seq 1 $RUNNING`; do
     chown judge /home/judge/run`expr ${i} - 1`;
 done 
 
-service mysql start  
+service mysql      start  
 service php7.2-fpm start  
 service hustoj     start  
 service ssh        start  

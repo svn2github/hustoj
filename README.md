@@ -22,39 +22,39 @@ Star us, please!
 
 目录
 --
-[更新日志](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97)
+[更新日志](#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97)
 
-[安装说明](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E)
+[安装说明](#%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E)
 
-[注意事项](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+[注意事项](#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 
-[校园网安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%AE%89%E8%A3%85)
+[校园网安装](#%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%AE%89%E8%A3%85)
 
-[基于Ubuntu16.04安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
+[基于Ubuntu16.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
 
-[基于Ubuntu18.04安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
+[基于Ubuntu18.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
 
-[基于Centos安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
+[基于Centos安装](#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
 
-[基于Docker安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85)
+[基于Docker安装](#%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85)
 
-[基于其他发行版安装](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%9F%BA%E4%BA%8E%E5%85%B6%E4%BB%96%E5%8F%91%E8%A1%8C%E7%89%88%E5%AE%89%E8%A3%85)
+[基于其他发行版安装](#%E5%9F%BA%E4%BA%8E%E5%85%B6%E4%BB%96%E5%8F%91%E8%A1%8C%E7%89%88%E5%AE%89%E8%A3%85)
 
-[LiveCD下载安装](https://github.com/zhblue/hustoj/blob/master/README.md#livecd%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85)
+[LiveCD下载安装](#livecd%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85)
 
-[装后须知](https://github.com/zhblue/hustoj/blob/master/README.md#%E8%A3%85%E5%90%8E%E9%A1%BB%E7%9F%A5)
+[装后须知](#%E8%A3%85%E5%90%8E%E9%A1%BB%E7%9F%A5)
 
-[备份](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%A4%87%E4%BB%BD)
+[备份](#%E5%A4%87%E4%BB%BD)
 
-[升级](https://github.com/zhblue/hustoj/blob/master/README.md#升级)
+[升级](#升级)
 
-[支持捐助、加入社区](https://github.com/zhblue/hustoj/blob/master/README.md#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
+[支持捐助、加入社区](#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
 
-[系统演示](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
+[系统演示](#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
 
-[硬件需求](https://github.com/zhblue/hustoj/blob/master/README.md#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)
+[硬件需求](#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)
 
-[免费题库](https://github.com/zhblue/hustoj/blob/master/README.md#%E5%85%8D%E8%B4%B9%E9%A2%98%E5%BA%93)
+[免费题库](#%E5%85%8D%E8%B4%B9%E9%A2%98%E5%BA%93)
 
 [求助 报错](https://github.com/zhblue/hustoj/issues/new/choose)
 
@@ -132,13 +132,20 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 基于Docker安装
 --
 docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
-在docker内[下载deb文件](https://github.com/zhblue/hustoj/releases)安装
-```
-	dpkg -i  xxxx.deb ; apt-get install -f
+使用构建好的docker镜像
+
+```shell
+docker run -d           \
+    --name hustoj       \
+    -p 8080:80          \
+    -p 2222:22          \
+    -v ~/volume:/volume \
+    -v /proc:/proc      \
+    --privileged        \
+    mgdream/hustoj
 ```
 
-然后参考
-https://github.com/muzea/hustoj-deb/issues/4#issuecomment-492186622 。
+部署后使用浏览器访问[http://localhost:8080](http://localhost:8080)
 
 基于其他发行版安装
 --

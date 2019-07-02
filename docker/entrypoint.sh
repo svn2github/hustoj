@@ -43,7 +43,7 @@ for i in `seq 1 $RUNNING`; do
 done 
 
 service mysql start  
-service php7.2-fpm   start  
-service hustoj   start  
-service ssh  start  
+service php7.2-fpm start  
+service hustoj     start  
+service ssh        start  
 nginx -g "daemon off;"

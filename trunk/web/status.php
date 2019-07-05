@@ -41,7 +41,7 @@ if (isset($_GET['cid'])){
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
 		if(time()<$end_time && stripos($title,"noip")){
-		      $view_errors =  "<h2> $MSG_NOIP_WARNING </h2>";
+		      $view_errors =  "<h2> $MSG_NOIP_WARNING <a href=\"contest.php?cid=$cid\">返回比赛</a></h2>";
 		      require("template/".$OJ_TEMPLATE."/error.php");
 		      exit(0);
 		}
@@ -67,9 +67,9 @@ if (isset($_GET['cid'])){
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
       if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      		$sql="WHERE 1 ";
+      		$sql="WHERE (contest_is is null || contest_id = 0)  ";
   }else{
-      $sql="WHERE problem_id>0 ";
+      $sql="WHERE problem_id>0 and( contest_id is null || contest_id =0)   ";
   }
 }
 $start_first=true;

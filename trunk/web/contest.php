@@ -111,6 +111,8 @@ if(isset($_GET['cid'])){
     $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
     $view_problemset[$cnt][3] = $row['source'];
     if(time()<$end_time&&stripos($view_title,"noip")){
+	    $view_problemset[$cnt][4] = "NOIP";
+    }else{
 	    $view_problemset[$cnt][4] = $row['accepted'];
     }
     $view_problemset[$cnt][5] = $row['submit'] ;

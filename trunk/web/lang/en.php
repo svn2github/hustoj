@@ -115,7 +115,7 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_GIVESOURCE="GiveSource";
 	$MSG_IMPORT="Import";
 	$MSG_EXPORT="Export";
-	$MSG_UPDATE_DATABASE="UpdateDatabase";
+	$MSG_UPDATE_DATABASE="Update Database";
 	$MSG_ONLINE="Online";
    	$MSG_SET_LOGIN_IP="SetLoginIP";
 

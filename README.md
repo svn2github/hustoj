@@ -58,6 +58,8 @@ Star us, please!
 
 [求助 报错](https://github.com/zhblue/hustoj/issues/new/choose)
 
+如果您喜欢在线聊天，希望获得及时反馈，不介意付费获得服务，请加[官方群](https://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a)
+
 更新日志
 ------
 2019-7-6 NOIP：对于标题带有NOIP字样的比赛，比赛结束后才能看到结果。

@@ -1,5 +1,6 @@
 <?php
 @session_start ();
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 require_once ("../include/db_info.inc.php");
 
 if(!isset($OJ_LANG)){
@@ -210,7 +211,6 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		header ( "content-type:   application/file" );
 		header ( "content-disposition:   attachment;   filename=\"fps-".$_SESSION[$OJ_NAME.'_'.'user_id'].$filename.".xml\"" );
 	}
-	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   
 	?>
    

@@ -6,10 +6,10 @@
 	$view_title=$MSG_SUBMIT;
  if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 
-	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
-	require("template/".$OJ_TEMPLATE."/error.php");
-	exit(0);
-//	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
+//	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+//	require("template/".$OJ_TEMPLATE."/error.php");
+//	exit(0);
+	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
 }
 $problem_id=1000;
 if (isset($_GET['id'])){
@@ -87,6 +87,7 @@ $view_sample_output="3";
 	
  }
  
+$lastlang=0;
 if(!$view_src){
 	if(isset($_COOKIE['lastlang'])) 
 		$lastlang=intval($_COOKIE['lastlang']);

@@ -16,6 +16,11 @@ When people asked question, we put the answer here
 * 私有比赛的题目，在比赛结束后，仍然保留，即使比赛被隐藏也是一样，这是为了防止下一届新生提前获知测试内容。
 * 如果希望私有比赛后，题目公开可做，请将比赛切换为公开。
 
+关于NOIP赛制
+--
+* 设置db_info.inc.php中的 $OJ_MARK="mark";
+* 设置judge.conf中的OJ_OI_MODE=1
+* 添加比赛时，比赛标题中包含"NOIP"这个关键词
 
 
 老版本

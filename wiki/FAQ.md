@@ -18,9 +18,10 @@ When people asked question, we put the answer here
 
 关于NOIP赛制
 --
-* 设置db_info.inc.php中的 $OJ_MARK="mark";
-* 设置judge.conf中的OJ_OI_MODE=1
-* 添加比赛时，比赛标题中包含"NOIP"这个关键词
+* 设置judge.conf中的OJ_OI_MODE=1       //不在单个数据点WA时停止判题，而是继续判题
+* 设置db_info.inc.php中的 $OJ_MARK="mark";   // 非AC的提交结果显示得分而非错误比率
+* 设置db_info.inc.php中的 $OJ_OI_1_SOLUTION_ONLY=true; //比赛是否采用noip中的仅保留最后一次提交的规则。
+* 添加比赛时，比赛标题中包含"NOIP"这个关键词  // 赛后才能看结果
 
 
 老版本

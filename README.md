@@ -58,6 +58,8 @@ Star us, please!
 
 [支持捐助、加入社区](#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
 
+[二次开发](https://github.com/zhblue/hustoj/blob/master/wiki/SecondaryDevelopment.md)
+
 [系统演示](#%E7%B3%BB%E7%BB%9F%E6%BC%94%E7%A4%BA)
 
 [硬件需求](#%E7%A1%AC%E4%BB%B6%E9%9C%80%E6%B1%82)

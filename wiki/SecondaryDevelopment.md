@@ -17,6 +17,9 @@ sudo cp -a bs3 newgui
 
 利用判题内核/重新开发Web
 --
+数据库主要表结构
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hustoj-db.png" >
+
 如果希望自己用jsp/j2ee/php/python/nodejs/golang等二次开发，请保留数据库中的以下表和表已有字段：
 ```
 users

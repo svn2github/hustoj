@@ -15,6 +15,18 @@ sudo cp -a bs3 newgui
 之后随意修改newgui目录下的文件，来进行美化处理。
 
 
-重新开发Web
+利用判题内核/重新开发Web
 --
-待续
+如果希望自己用jsp/j2ee/php/python/nodejs/golang等二次开发，请保留数据库中的以下表和表已有字段：
+```
+users
+solution
+source_code
+problem
+contest_problem
+reinfo
+ceinfo
+```
+在solution表中插入新的记录，设置result=0，将源码插入source_code，然后judged将轮询得到任务，调用judge_client去执行，执行时从source_code取出源码，执行完成后会更新ceinfo、solution、reinfo、problem、users、contest_problem等表。
+
+了解以上流程后，您可以根据自己的需要自行编写新的Web或Client/App端。

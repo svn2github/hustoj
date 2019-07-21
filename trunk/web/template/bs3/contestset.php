@@ -51,7 +51,7 @@ for ($i=$start;$i<=$end;$i++){
 <thead>
 <tr class=toprow align=center><td width=10%>ID<td width=50%>Name<td width=30%>Status<td width=10%>Private<td>Creator</tr>
 </thead>
-<tbody>
+<tbody align='center'>
 <?php
 $cnt=0;
 foreach($view_contest as $row){

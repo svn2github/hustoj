@@ -66,7 +66,7 @@ echo "&nbsp;&nbsp;<span class=red>Private</font>";
 <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
 </tr>
 </thead>
-<tbody>
+<tbody align='center'>
 <?php
 $cnt=0;
 foreach($view_problemset as $row){

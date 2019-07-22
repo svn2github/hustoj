@@ -34,7 +34,7 @@ if ( !$result ) {
 		$view_news .= "</div>";
 	}
 	$view_news .= "</div>";
-	$view_news .= "<div class='panel-footer'>This <a href=http://cm.baylor.edu/welcome.icpc>ACM/ICPC</a> OnlineJudge is a GPL product from <a href=https://github.com/zhblue/hustoj>hustoj</a></div>";
+	$view_news .= "<div class='panel-footer'>请到<a target='_blank' href='https://github.com/zhblue/hustoj'> GitHub</a>来，给我们加个星星！&nbsp;Please give us a star on <a target='_blank' href='https://github.com/zhblue/hustoj'>Github</a>!</div>";
 	$view_news .= "</div>";
 }
 $view_apc_info = "";

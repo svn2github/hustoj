@@ -26,6 +26,9 @@ if ( $login ) {
 
 	foreach ( $result as $row )
 		$_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
+	$sql="update users set accesstime=now() where user_id=?";
+        $result = pdo_query( $sql, $login );
+
 	echo "<script language='javascript'>\n";
 	if ( $OJ_NEED_LOGIN )
 		echo "window.location.href='index.php';\n";

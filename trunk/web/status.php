@@ -343,7 +343,10 @@ for ($i=0;$i<$rows_cnt;$i++){
 			$view_status[$i][6]="----";
 			$view_status[$i][7]="----";
 		}
-        $view_status[$i][8]= $row['in_date'];
+	if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+		$view_status[$i][8]= $row['in_date']."[".(strtotime($row['judgetime'])-strtotime($row['in_date']))."]";
+	else
+        	$view_status[$i][8]= $row['in_date'];
         $view_status[$i][9]= $row['judger'];
         
    

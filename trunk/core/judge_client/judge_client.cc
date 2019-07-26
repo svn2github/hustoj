@@ -72,14 +72,24 @@
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
 #ifdef __arm__
+/*
 struct user_regs_struct {
         long uregs[18];
 };
-
-#define ARM_r7          uregs[7]
-#define ARM_ORIG_r0     uregs[17]
+*/
+#define ARM_r7          regs[7]
+#define ARM_ORIG_r0     regs[17]
 
 #define REG_SYSCALL ARM_r7
+#define pt_regs         user_pt_regs  
+#define uregs	regs
+#define ARM_pc	pc
+#define ARM_sp	sp
+#define ARM_cpsr	pstate
+#define ARM_lr		regs[30]
+#define ARM_r0		regs[0]  
+#define PTRACE_GETREGS PTRACE_GETREGSET
+#define PTRACE_SETREGS PTRACE_SETREGSET
 
 #endif
 
@@ -2627,13 +2637,30 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		 */
 
 		// check the system calls
-		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
+#ifdef __arm__
+			if(call_id== 0xef000000){
+				call_id = reg.ARM_r7;
+			}else{
+				if ((call_id & 0x0ff00000) != 0x0f900000){ 
+					call_id=0;
+				}else 
+				        call_id &= 0x000fffff; 
+			}
+#endif
+#ifdef __i386__
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+#endif 
+#ifdef __x86_64__
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+#endif 
+			
+
 			if (record_call)
 			{
 				printf("new call id:%d\n",call_id);

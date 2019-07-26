@@ -91,8 +91,12 @@ static char query[BUFFER_SIZE];
 #endif
 
 void call_for_exit(int s) {
-	STOP = true;
-	printf("Stopping judged...\n");
+	if(DEBUG){
+		STOP = true;
+		printf("Stopping judged...\n");
+	}else{
+		printf("HUSTOJ Refusing to stop...\n Please use kill -9 !\n");
+	}
 }
 
 void write_log(const char *fmt, ...) {
@@ -222,6 +226,10 @@ void run_client(int runid, int clientid) {
 	LIM.rlim_max = STD_MB << 11;
 	LIM.rlim_cur = STD_MB << 11;
 #endif
+#ifdef __aarch64__
+	LIM.rlim_max = STD_MB << 15;
+	LIM.rlim_cur = STD_MB << 15;
+#endif
 #ifdef __i386
 	LIM.rlim_max = STD_MB << 11;
 	LIM.rlim_cur = STD_MB << 11;
@@ -232,7 +240,7 @@ void run_client(int runid, int clientid) {
 #endif
 	setrlimit(RLIMIT_AS, &LIM);
 
-	LIM.rlim_cur = LIM.rlim_max = 400;
+	LIM.rlim_cur = LIM.rlim_max = 800* max_running;
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	//buf[0]=clientid+'0'; buf[1]=0;
@@ -656,11 +664,12 @@ int main(int argc, char** argv) {
 	init_mysql_conf();	// set the database info
 #endif
 	signal(SIGQUIT, call_for_exit);
-	signal(SIGKILL, call_for_exit);
+	signal(SIGINT, call_for_exit);
 	signal(SIGTERM, call_for_exit);
 	int j = 1;
 	int n = 0;
-	while (1) {			// start to run
+	while (!STOP) {			// start to run until call for exit
+		n=0;
 		while (j && (http_judge
 #ifdef _mysql_h
 			 || !init_mysql()
@@ -679,8 +688,10 @@ int main(int argc, char** argv) {
 		}
 		turbo_mode2();
 		if(ONCE) break;
-		if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
-		sleep(sleep_time);
+                if(n==0){
+                        sleep(sleep_time);
+                        if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
+                }
 		j = 1;
 	}
 	return 0;

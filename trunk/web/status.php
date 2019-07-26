@@ -36,10 +36,15 @@ if (isset($_GET['cid'])){
         $start_time=0;
         $end_time=0;
         if ($rows_cnt>0){
-                 $row=$result[0];
+                $row=$result[0];
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
+		if(time()<$end_time && stripos($title,"noip")){
+		      $view_errors =  "<h2> $MSG_NOIP_WARNING <a href=\"contest.php?cid=$cid\">返回比赛</a></h2>";
+		      require("template/".$OJ_TEMPLATE."/error.php");
+		      exit(0);
+		}
         }
         $lock_time=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
   //$lock_time=date("Y-m-d H:i:s",$lock_time);
@@ -62,9 +67,9 @@ if (isset($_GET['cid'])){
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
       if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      		$sql="WHERE 1 ";
+      		$sql="WHERE (contest_id is null || contest_id = 0)  ";
   }else{
-      $sql="WHERE problem_id>0 ";
+      $sql="WHERE problem_id>0 and( contest_id is null || contest_id =0)   ";
   }
 }
 $start_first=true;
@@ -244,30 +249,30 @@ for ($i=0;$i<$rows_cnt;$i++){
 		default: $MSG_Tips="";
 
 	}
-       
+	if(isset($OJ_MARK)&&$OJ_MARK=="mark"){ 
+		$mark=intval($row['pass_rate']*100);
+	}else if (isset($OJ_MARK)&&$OJ_MARK==""){
+		$mark="";
+	}else{
+		if($row['result']!=4) $mark=(100-$row['pass_rate']*100)."%";else $mark="100%";      
+	}
 	$view_status[$i][3]="<span class='hidden' style='display:none' result='".$row['result']."' ></span>";
         if (intval($row['result'])==11 && ((isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){
                 $view_status[$i][3].= "<a href='ceinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$MSG_Compile_Error."";
 
-        	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
-                                $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
-		else
-	      			$view_status[$i][3].="</a>";
+                                $view_status[$i][3].= "$mark</a>";
 				
         }else if ((((intval($row['result'])==8||intval($row['result'])==7||intval($row['result'])==5||intval($row['result'])==6)&&($OJ_SHOW_DIFF||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])))||$row['result']==10||$row['result']==13) && ((isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))){
                 $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']
 					."' class='".$judge_color[$row['result']]."' title='$MSG_Tips'>".$judge_result[$row['result']]."";
-        	if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
-                                $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
-		else
-				 $view_status[$i][3].= "</a>";
+                $view_status[$i][3].= "$mark</a>";
 
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
                         $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
-                                $view_status[$i][3].= (100-$row['pass_rate']*100)."%</span>";
+                                $view_status[$i][3].= "$mark</a>";
 			else
 				$view_status[$i][3].="</span>";
 
@@ -286,10 +291,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                 }else{
 
                         $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>".$judge_result[$row['result']]."";
-        		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
-                                $view_status[$i][3].= (100-$row['pass_rate']*100)."%</a>";
-			else
-				$view_status[$i][3].="</a>";
+                                $view_status[$i][3].= "$mark</a>";
                 }
           }else{
                $view_status[$i][3]="----";
@@ -341,7 +343,10 @@ for ($i=0;$i<$rows_cnt;$i++){
 			$view_status[$i][6]="----";
 			$view_status[$i][7]="----";
 		}
-        $view_status[$i][8]= $row['in_date'];
+	if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+		$view_status[$i][8]= $row['in_date']."[".(strtotime($row['judgetime'])-strtotime($row['in_date']))."]";
+	else
+        	$view_status[$i][8]= $row['in_date'];
         $view_status[$i][9]= $row['judger'];
         
    

@@ -4,7 +4,7 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 svn co https://github.com/zhblue/hustoj/trunk/trunk  src
-for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php7.0-fpm php7.0-memcache memcached nginx mysql-server php7.0-mysql php7.0-gd fp-compiler openjdk-7-jdk
+for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php7.0-fpm php7.0-memcache php-zip php-xml php-mbstring memcached nginx mysql-server php7.0-mysql php7.0-gd fp-compiler openjdk-7-jdk
 do
 	apt-get install -y $PKG
 done
@@ -41,6 +41,8 @@ cp src/install/nginx.default /etc/nginx/sites-available/default
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php7.0/fpm/php.ini
+sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
+ 
 /etc/init.d/php7.0-fpm restart
 service php7.0-fpm restart
 cd src/core

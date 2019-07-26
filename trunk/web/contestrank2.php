@@ -93,6 +93,11 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2> $MSG_NOIP_WARNING</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
@@ -115,30 +120,7 @@ $row=$result[0];
 // $row=$result[0];
 $pid_cnt=intval($row['pbc']);
 
-
-if($OJ_MEMCACHE){
-	$sql="SELECT
-        users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
-                FROM
-                        (select * from solution where solution.contest_id='$cid' and num>=0 and problem_id>0) solution
-                left join users
-                on users.user_id=solution.user_id
-        ORDER BY in_date";
-        $result = mysql_query_cache($sql);
-        if($result) $rows_cnt=count($result);
-        else $rows_cnt=0;
-}else{
-	$sql="SELECT
-        users.user_id,users.nick,solution.result,solution.num,unix_timestamp(solution.in_date)-$start_time in_date
-                FROM
-                        (select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution
-                left join users
-                on users.user_id=solution.user_id
-        ORDER BY in_date";
-        $result = pdo_query($sql,$cid);
-        if($result) $rows_cnt=count($result);
-        else $rows_cnt=0;
-}
+require("./include/contest_solutions.php");
 
 $user_cnt=0;
 $user_name='';
@@ -155,7 +137,7 @@ for ($i=0;$i<$rows_cnt;$i++){
 
                 $user_name=$n_user;
         }
-        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+        if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
         else
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']));
@@ -172,16 +154,19 @@ for($i=0;$i<$pid_cnt;$i++){
       $first_blood[$i]="";
 }
 if($OJ_MEMCACHE){
-	$sql="select num,user_id from
-        (select num,user_id from solution where contest_id=$cid and result=4 order by solution_id ) contest
-        group by num";
-    $fb = mysql_query_cache($sql);
+	$sql="select s.num,s.user_id from solution s ,
+        (select num,min(solution_id) minId from solution where contest_id=$cid and result=4 GROUP BY num ) c where s.solution_id = c.minId";
+        $fb = mysql_query_cache($sql);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
 }else{
-	$sql="select num,user_id from
-        (select num,user_id from solution where contest_id=? and result=4 order by solution_id ) contest
-        group by num";
-    $fb = pdo_query($sql,$cid);
+	$sql="select s.num,s.user_id from solution s ,
+        (select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num ) c where s.solution_id = c.minId";
+        $fb = pdo_query($sql,$cid);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
 }
+
 foreach ($fb as $row){
          $first_blood[$row['num']]=$row['user_id'];
 }

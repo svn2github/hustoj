@@ -6,9 +6,16 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 ?>
 <ol>
 <li>
+Copy from http://uoj.ac
+<form method=POST action=problem_add_page_uoj.php>
+  <input name=url type=text size="100" class="input input-xxlarge" value="http://uoj.ac/problem/1">
+  <input type=submit>
+</form>
+</li>
+<li>
 Copy from http://hustoj......
 <form method=POST action=problem_add_page_hustoj.php>
-  <input name=url type=text size=100>
+  <input name=url type=text size=100 value="http://hustoj.com/oj/problem.php?id=1000">
   <input type=submit>
 </form>
 </li>
@@ -22,7 +29,7 @@ Copy from https://www.luogu.org/problemnew/show/
 <li>
 Copy from https://loj.ac/problem/
 <form method=POST action=problem_add_page_loj.php>
-  <input name=url type=text size=100>
+  <input name=url type=text size=100 >
   <input type=submit>
 </form>
 </li>

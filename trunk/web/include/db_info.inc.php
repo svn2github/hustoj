@@ -31,6 +31,7 @@ static  $OJ_APPENDCODE=false;
 static  $OJ_CE_PENALTY=false;
 static  $OJ_PRINTER=false;
 static  $OJ_MAIL=false;
+static  $OJ_MARK="mark"; // "mark" for right "percent" for WA
 static  $OJ_MEMCACHE=false;
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
@@ -52,6 +53,9 @@ static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
 static  $OJ_OI_1_SOLUTION_ONLY=false; //比赛是否采用noip中的仅保留最后一次提交的规则。true则在新提交发生时，将本场比赛该题老的提交计入练习。
+static  $OJ_SHOW_METAL=true;//榜单上是否按比例显示奖牌
+static  $OJ_RANK_LOCK_DELAY=3600;//赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
+static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
@@ -96,11 +100,10 @@ require_once(dirname(__FILE__)."/pdo.php");
 	//pdo_query("set names utf8");	
 		
 	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
-		 require_once('csrf_check.php');
+		 require_once(dirname(__FILE__)."/csrf_check.php");
 
 	//sychronize php and mysql server with timezone settings, dafault setting for China
 	//if you are not from China, comment out these two lines or modify them.
 	//date_default_timezone_set("PRC");
 	//pdo_query("SET time_zone ='+8:00'");
 
-?>

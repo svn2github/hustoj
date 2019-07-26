@@ -37,7 +37,7 @@ while(list($key, $val)=each($rightarray)) {
 	<?php echo $MSG_HELP_ADD_PRIVILEGE; ?>
 </form>
 <form method=post>
-	<b>Add contest for User:</b><br />
+	<b>Add contest for User[给用户添加单个比赛权限]:</b><br />
 	User:<input type=text size=10 name="user_id"><br />
 	Contest:<input type=text size=10 name="rightstr">1000 for Contest1000<br />
 	<input type='hidden' name='do' value='do'>
@@ -46,7 +46,7 @@ while(list($key, $val)=each($rightarray)) {
 	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 </form>
 <form method=post>
-	<b>Add Problem Solution View for User:</b><br />
+	<b>Add Problem Solution View for User[给用户添加单个题目的答案查看权限]:</b><br />
 	User:<input type=text size=10 name="user_id"><br />
 	Problem:<input type=text size=10 name="rightstr">1000 for Problem 1000<br />
 	<input type='hidden' name='do' value='do'>

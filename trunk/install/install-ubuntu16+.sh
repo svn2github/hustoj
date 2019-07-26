@@ -33,7 +33,7 @@ chmod 700 etc/judge.conf
 sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
-chown www-data src/web/include/db_info.inc.php
+chown -R www-data src/web/
 chown www-data src/web/upload data 
 if grep client_max_body_size /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
@@ -47,7 +47,7 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"
 else
-	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
@@ -58,7 +58,8 @@ fi
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini
-
+sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
+ 
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 

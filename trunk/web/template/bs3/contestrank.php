@@ -29,6 +29,7 @@
 $rank=1;
 ?>
 <center><h3>Contest RankList -- <?php echo $title?></h3>
+<h4><?php echo $locked_msg ?></h4>
 <a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
 <?php
 if($OJ_MEMCACHE){
@@ -138,10 +139,12 @@ $(document).ready(function()
               ?>
               }
         });
+<?php if($OJ_SHOW_METAL) { ?>
   metal();
-  setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000)
-}
-);
+<?php } ?>
+$(document).ready(function(){
+        setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000)
+});
 </script>
 <script>
 function getTotal(rows){

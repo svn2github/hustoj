@@ -5,7 +5,13 @@ apt-get install -y subversion
 cd /home/judge/
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
+for pkg in "make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml"
+do
+	while ! apt-get install -y $pkg 
+	do
+		echo "Network fail, retry... you might want to change another apt source for install"
+	done
+done
 
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
@@ -33,7 +39,7 @@ chmod 700 etc/judge.conf
 sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
-chown www-data src/web/include/db_info.inc.php
+chown -R www-data src/web/
 chown www-data src/web/upload data
 if grep client_max_body_size /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
@@ -48,7 +54,7 @@ if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"
 else
 	echo "modify the default site"
-	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /JudgeOnline/recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
@@ -60,7 +66,8 @@ fi
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.2/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.2/fpm/php.ini
-
+sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
+ 
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
@@ -87,3 +94,5 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
+sudo systemctl enable hustoj
+systemctl start mysql

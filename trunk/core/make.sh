@@ -20,6 +20,5 @@ cp sim_lisp.exe /usr/bin/sim_scm
 cd ..
 cp sim.sh /usr/bin
 chmod +x /usr/bin/sim.sh
-rm /usr/bin/sim_rb /usr/bin/sim_sh
-ln -s /usr/bin/sim_c /usr/bin/sim_cc
+ln -fs /usr/bin/sim_c /usr/bin/sim_cc 2>&1 > /dev/null
 echo "done!"

@@ -150,6 +150,11 @@ if ($start_time>time()){
 	//require_once("oj-footer.php");
 	exit(0);
 }
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2>NOIP contest !</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
@@ -165,14 +170,11 @@ if($pid_cnt==1) {
 }
 $mark_per_punish=$mark_per_problem/5;
 
+	$sql="select
+        user_id,nick,solution.result,solution.num,solution.in_date
+                        from solution where solution.contest_id=? and num>=0 and problem_id>0
+        ORDER BY user_id,solution_id";
 
-$sql="SELECT 
-	users.user_id,users.nick,solution.result,solution.num,solution.in_date 
-		FROM 
-			(select * from solution where solution.contest_id=? and num>=0 and problem_id>0) solution 
-		left join users 
-		on users.user_id=solution.user_id 
-	ORDER BY users.user_id,in_date";
 //echo $sql;
 $result=pdo_query($sql,$cid);
 $user_cnt=0;
@@ -189,7 +191,7 @@ $U=array();
 		$user_name=$n_user;
 	}
 
-        if(time()<$end_time+3600&&$lock<strtotime($row['in_date']))
+        if( time()<$end_time+$OJ_RANK_LOCK_DELAY && $lock<strtotime($row['in_date']) && !isset($_SESSION[$OJ_NAME.'_'.'administrator']) )
 		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0,$mark_base,$mark_per_problem,$mark_per_punish);
         else
 		  $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,intval($row['result']),$mark_base,$mark_per_problem,$mark_per_punish);
@@ -209,8 +211,14 @@ getMark($U,$mark_start,$mark_end,$mark_sigma);
 for ($i=0;$i<$user_cnt;$i++){
 	if ($i&1) echo "<tr class=oddrow align=center>";
 	else echo "<tr class=evenrow align=center>";
-	echo "<td>$rank";
-	$rank++;
+	// don't count rank while nick start with * 
+	if($U[$i]->nick[0]=='*'){
+                echo "<td>*";
+        }else{
+                echo "<td>$rank";
+                $rank++;
+        }
+	
 	$uuid=$U[$i]->user_id;
         
 	$usolved=$U[$i]->solved;

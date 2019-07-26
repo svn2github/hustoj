@@ -106,8 +106,8 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 <th ><?php echo $MSG_USER?>
 <th ><?php echo $MSG_PROBLEM?>
 <th ><?php echo $MSG_RESULT?>
-<th class='hidden-xs' ><?php echo $MSG_MEMORY?>
-<th class='hidden-xs' ><?php echo $MSG_TIME?>
+<th class='hidden-xs' ><?php echo $MSG_MEMORY."(KB)"?>
+<th class='hidden-xs' ><?php echo $MSG_TIME."(MS)"?>
 <th class='hidden-xs' ><?php echo $MSG_LANG?>
 <th class='hidden-xs' ><?php echo $MSG_CODE_LENGTH?>
 <th ><?php echo $MSG_SUBMIT_TIME?>
@@ -140,12 +140,12 @@ $cnt=1-$cnt;
 </table>
 </div>
 <div id=center>
-<?php echo "[<a href=status.php?".$str2.">Top</a>]&nbsp;&nbsp;";
+<?php echo "[<a href='status.php?".$str2."'>Top</a>]&nbsp;&nbsp;";
 if (isset($_GET['prevtop']))
-echo "[<a href=status.php?".$str2."&top=".intval($_GET['prevtop']).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".intval($_GET['prevtop'])."'>Previous Page</a>]&nbsp;&nbsp;";
 else
-echo "[<a href=status.php?".$str2."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]";
+echo "[<a href='status.php?".$str2."&top=".($top+20)."'>Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href='status.php?".$str2."&top=".$bottom."&prevtop=$top'>Next Page</a>]";
 ?>
 </div>
 

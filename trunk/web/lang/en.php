@@ -115,14 +115,15 @@ $MSG_TEST_RUN="Test Running Done";
 	$MSG_GIVESOURCE="GiveSource";
 	$MSG_IMPORT="Import";
 	$MSG_EXPORT="Export";
-	$MSG_UPDATE_DATABASE="UpdateDatabase";
+	$MSG_UPDATE_DATABASE="Update Database";
 	$MSG_ONLINE="Online";
    	$MSG_SET_LOGIN_IP="SetLoginIP";
 
   //contest.php
-  $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it。";
+  $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
-
+  $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";
+  
   $MSG_Public="Public";
   $MSG_Private="Private";
   $MSG_Running="Running";

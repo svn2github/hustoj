@@ -79,7 +79,7 @@ if(isset($_GET['cid'])){
     $view_title = $row['title'];
     $view_start_time = $row['start_time'];
     $view_end_time = $row['end_time'];
-
+    $view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
     if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time){
       $view_errors =  "<h2>$MSG_PRIVATE_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
@@ -105,12 +105,16 @@ if(isset($_GET['cid'])){
 
   foreach($result as $row){
     $view_problemset[$cnt][0] = "";
-    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
+    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&& !(time()<$end_time&&stripos($view_title,"noip"))) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
 
-    $view_problemset[$cnt][1] = $row['pid']." Problem &nbsp;".$PID[$cnt];
+    $view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
     $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
     $view_problemset[$cnt][3] = $row['source'];
-    $view_problemset[$cnt][4] = $row['accepted'];
+    if(time()<$end_time&&stripos($view_title,"noip")){
+	    $view_problemset[$cnt][4] = "NOIP";
+    }else{
+	    $view_problemset[$cnt][4] = $row['accepted'];
+    }
     $view_problemset[$cnt][5] = $row['submit'] ;
     $cnt++;
   }

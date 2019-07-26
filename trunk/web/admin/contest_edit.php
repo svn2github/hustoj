@@ -74,8 +74,13 @@ if(isset($_POST['startdate'])){
   if(count($pieces)>0 && strlen($pieces[0])>0){
     $sql_1 = "INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) VALUES (?,?,?)";
     for($i=0; $i<count($pieces); $i++){
-      pdo_query($sql_1,$cid,intval($pieces[$i]),$i);
-  }
+      $pid=intval($pieces[$i]);
+      pdo_query($sql_1,$cid,$pid,$i);
+      $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
+      pdo_query($sql,$pid,$cid,$pid,$cid);
+      $sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+      pdo_query($sql,$pid,$cid,$pid,$cid);
+    }
   
     pdo_query("update solution set num=-1 where contest_id=?",$cid);
   

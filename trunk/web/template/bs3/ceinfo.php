@@ -156,6 +156,11 @@ pats[59]=/iostream: No such file or directory/;
 exps[59]="请不要将C++程序提交为C";
 pats[60]=/expected unqualified-id before ‘\[’ token/;
 exps[60]="留意数组声明后是否少了分号";
+pats[61]=/解析时已到达文件结尾/;
+exps[61]="程序末尾缺少大括号";
+pats[62]=/非法字符/;
+exps[62]="检查是否使用了中文标点或空格";
+
 function explain(){
 //alert("asdf");
 var errmsg=$("#errtxt").text();

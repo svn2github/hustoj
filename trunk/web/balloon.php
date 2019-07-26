@@ -40,7 +40,16 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 //			echo $sql."<br>".$user_id." ".$sid." ".$cid." ".$pid;
 			pdo_query($sql,$user_id,$sid,$cid,$pid);
 		     }		     
-		}	
+		}
+		$sql="select s.num,s.user_id from solution s ,
+        	(select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num ) c where s.solution_id =c.minId";
+       		$fb = pdo_query($sql,$cid);
+       		if($fb) $rows_cnt=count($fb);
+        	else $rows_cnt=0;
+		for ($i=0;$i<$rows_cnt;$i++){
+			$row=$fb[$i];
+			$first_blood[$row['num']]=$row['user_id'];
+		}
 		$view_balloon=Array();
 		$result=pdo_query("select * from balloon where cid= ? and  user_id like ? order by status,balloon_id limit 50",$cid,"$school%");
 		$i=0;
@@ -50,11 +59,12 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
 			$view_balloon[$i][1]=$row['user_id'];
 			$view_balloon[$i][2]= "<font color='".$ball_color[$row['pid']]."'>";
 			 $view_balloon[$i][2].=$ball_name[$row['pid']];
+			if($first_blood[$row['pid']]==$row['user_id']) $view_balloon[$i][2].=" First Blood!";
 			 $view_balloon[$i][2].="</font>";
 			$view_balloon[$i][3]="";
 			if($row['status']==1)$view_balloon[$i][3].="<span class='btn btn-success'>$MSG_BALLOON_DONE</span>";
 			else $view_balloon[$i][3].="<span class='btn btn-danger'>$MSG_BALLOON_PENDING</span>";
-			$view_balloon[$i][4]="<a class='btn btn-info' href='balloon_view.php?id=".$row['balloon_id']."' target='_self'>$MSG_PRINTER</a>";
+			$view_balloon[$i][4]="<a class='btn btn-info' href='balloon_view.php?id=".$row['balloon_id']."&fb=".($first_blood[$row['pid']]==$row['user_id']?1:0)."' target='_self'>$MSG_PRINTER</a>";
 			$view_balloon[$i][4].="<a class='btn btn-primary'  href='balloon.php?id=".$row['balloon_id']."&cid=$cid' target='_self'>$MSG_PRINT_DONE</a>";
 			
 			$i++;

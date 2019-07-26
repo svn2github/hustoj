@@ -119,10 +119,10 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 								<?php echo $MSG_RESULT?>
 							</th>
 							<th class='hidden-xs'>
-								<?php echo $MSG_MEMORY?>
+								<?php echo $MSG_MEMORY."(KB)"?>
 							</th>
 							<th class='hidden-xs'>
-								<?php echo $MSG_TIME?>
+								<?php echo $MSG_TIME."(MS)"?>
 							</th>
 							<th> 
 								<?php echo $MSG_LANG?>
@@ -201,6 +201,6 @@ echo "[<a href='status.php?".$str2."&top=".$bottom."&prevtop=$top'>Next Page</a>
 			''
 		];
 	</script>
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.35"></script>
+	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.37"></script>
 </body>
 </html>

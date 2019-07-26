@@ -75,13 +75,24 @@
 struct user_regs_struct {
         long uregs[18];
 };
-
 #define ARM_r7          uregs[7]
 #define ARM_ORIG_r0     uregs[17]
 
 #define REG_SYSCALL ARM_r7
-
 #endif
+#ifdef __aarch64__
+#define pt_regs         user_pt_regs  
+#define uregs	regs
+#define ARM_pc	pc
+#define ARM_sp	sp
+#define ARM_cpsr	pstate
+#define ARM_lr		regs[30]
+#define ARM_r0		regs[0]  
+#define ARM_r7          regs[7]
+#define PTRACE_GETREGS PTRACE_GETREGSET
+#define PTRACE_SETREGS PTRACE_SETREGSET
+
+#endif 
 
 #ifdef __mips__
 typedef unsigned long long uint64_t;
@@ -161,8 +172,8 @@ static int py2=1; // caution: py2=1 means default using py3
 MYSQL *conn;
 #endif
 
-static char lang_ext[19][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
-							   "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql"};
+static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
+			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
 int data_list_has(char *file)
 {
@@ -238,9 +249,9 @@ int execute_cmd(const char *fmt, ...)
 	return ret;
 }
 
-const int call_array_size = 512;
+const int call_array_size = CALL_ARRAY_SIZE;
 unsigned int call_id = 0;
-unsigned int call_counter[call_array_size] = {0};
+int call_counter[call_array_size] = {0};
 static char LANG_NAME[BUFFER_SIZE];
 void init_syscalls_limits(int lang)
 {
@@ -337,6 +348,17 @@ void init_syscalls_limits(int lang)
 		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
 			call_counter[LANG_SQLV[i]] = HOJ_MAX_LIMIT;
 	}
+	else if (lang == 19)
+	{ //go
+		for (i = 0; i == 0 || LANG_FV[i]; i++)
+			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
+	}
+	else if (lang == 20 )
+	{ //go
+		for (i = 0; i == 0 || LANG_MV[i]; i++)
+			call_counter[LANG_MV[i]] = HOJ_MAX_LIMIT;
+	}
+	call_counter[SYS_execve]= 1;
 }
 
 int after_equal(char *c)
@@ -1163,6 +1185,7 @@ int compile(int lang, char *work_dir)
 	const char *CP_LUA[] = {"luac", "-o", "Main", "Main.lua", NULL};
 	//const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 	const char *CP_GO[] = {"go", "build", "-o", "Main", "Main.go", NULL};
+	const char *CP_FORTRAN[] = {"f95", "-static", "-o", "Main", "Main.f95", NULL};
 
 	char javac_buf[7][32];
 	char *CP_J[7];
@@ -1247,14 +1270,14 @@ int compile(int lang, char *work_dir)
 #endif
 			execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
 			execute_cmd("mount -o remount,ro etc/alternatives");
-			execute_cmd("mount -o bind /proc proc");
+			execute_cmd("mount -t proc /proc proc");
 			if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
 			{
 				execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 				execute_cmd("mount -o bind /dev dev");
 				execute_cmd("mount -o remount,ro dev");
 			}
-			execute_cmd("mount -o remount,ro proc");
+			//execute_cmd("mount -o remount,ro proc");
 			chroot(work_dir);
 		}
 		while (setgid(1536) != 0)
@@ -1317,6 +1340,9 @@ int compile(int lang, char *work_dir)
 		//	break;
 		case 17:
 			execvp(CP_GO[0], (char *const *)CP_GO);
+			break;
+		case 19:
+			execvp(CP_FORTRAN[0], (char *const *)CP_FORTRAN);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -1693,20 +1719,31 @@ void copy_shell_runtime(char *work_dir)
 	execute_cmd("/bin/mkdir %s/lib64", work_dir);
 	execute_cmd("/bin/mkdir %s/bin", work_dir);
 #ifdef __mips__
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/  %s/lib/mips64el-linux-gnuabi64",work_dir);
+	execute_cmd("mkdir -p %s/lib/mips64el-linux-gnuabi64/",work_dir);
 	execute_cmd("/bin/cp -a /lib64/ld.so.1  %s/lib64/", work_dir);
-	execute_cmd("/bin/cp -a /lib64/libdl.so.2  %s/lib64/", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libdl.so.2  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libutil.so.1  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libz.so.1  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libm.so.6  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libc.so.6  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libtinfo.so.5  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/ld-2.24.so  %s/lib/mips64el-linux-gnuabi64", work_dir);
+	execute_cmd("/bin/cp -a /lib/mips64el-linux-gnuabi64/libc-2.24.so  %s/lib/mips64el-linux-gnuabi64", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libc.so.6 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6  %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/ld-2.27.so  %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libc-2.27.so %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libdl-2.27.so %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libtinfo.so.6.1 %s/lib64/", work_dir);
+	execute_cmd("cp  /lib/mips64el-linux-gnuabi64/libpthread.so.0 %s/lib/mips64el-linux-gnuabi64/",work_dir);
+	execute_cmd("/bin/cp -a /bin/bash %s/bin/", work_dir);
 
 #endif
 
 #ifdef __i386
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
-//	execute_cmd("/bin/cp -a /lib/i386-linux-gnu/  %s/lib/", work_dir);
+	execute_cmd("/bin/cp -a /lib/i386-linux-gnu/  %s/lib/", work_dir);
 //	execute_cmd("/bin/cp -a /usr/lib/i386-linux-gnu %s/lib/", work_dir);
 #endif
 
@@ -1724,7 +1761,6 @@ void copy_objc_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/mkdir -p %s/proc", work_dir);
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
-	execute_cmd("/bin/mount -o remount,ro %s/proc", work_dir);
 	execute_cmd("/bin/mkdir -p %s/lib/", work_dir);
 	execute_cmd(
 		"/bin/cp -aL /lib/libdbus-1.so.3                          %s/lib/ ",
@@ -1837,7 +1873,6 @@ void copy_guile_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/mkdir -p %s/proc", work_dir);
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
-	execute_cmd("/bin/mount -o remount,ro %s/proc", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/share", work_dir);
 	execute_cmd("/bin/cp -a /usr/share/guile %s/usr/share/", work_dir);
@@ -1862,7 +1897,6 @@ void copy_guile_runtime(char *work_dir)
 
 void copy_python_runtime(char *work_dir)
 {
-
 	copy_shell_runtime(work_dir);
 	execute_cmd("mkdir -p %s/usr/include", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
@@ -1883,19 +1917,21 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
 	if(!py2){	
 		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
-#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
-#endif
+		execute_cmd("cp -a /usr/lib64/python2.7  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python2* %s/usr/lib64/", work_dir);
+		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
+		execute_cmd("cp -a /usr/local/lib/python2* %s/usr/local/lib/", work_dir);
 #endif
 	}else{
 		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
-#if (defined __i386) || (defined __arm__) || (defined __x86_64__)
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
-#endif
+		execute_cmd("cp -a /usr/lib64/python3.6  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
 		execute_cmd("cp -a /usr/lib64/python3* %s/usr/lib64/", work_dir);
+		execute_cmd("mkdir -p  %s/usr/local/lib/", work_dir);
+		execute_cmd("cp -a /usr/local/lib/python3* %s/usr/local/lib/", work_dir);
 #endif
 	}
 #ifdef __mips__
@@ -1910,6 +1946,8 @@ void copy_python_runtime(char *work_dir)
 
 
 #endif
+
+
 	execute_cmd("cp -a /usr/lib64/libpython* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
 	execute_cmd("cp -a /usr/include/python* %s/usr/include/", work_dir);
@@ -1982,7 +2020,6 @@ void copy_mono_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
-	execute_cmd("/bin/mount -o remount,ro %s/proc", work_dir);
 	execute_cmd("/bin/cp /usr/bin/mono* %s/", work_dir);
 
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
@@ -2115,7 +2152,12 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	if (use_ptrace)
 		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang != 3)
+	if (lang != 3 && lang!=20
+#ifdef __mips__
+//		&& lang != 6
+#endif			
+			
+			)
 		chroot(work_dir);
 
 	while (setgid(1536) != 0)
@@ -2153,9 +2195,10 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		break;
 	case 3: //java
 	case 4: //ruby
-	//case 6:  //python
+	case 6:  //python
 	case 12:
 	case 16:
+	case 20:
 		LIM.rlim_cur = LIM.rlim_max = 200;
 		break;
 	case 5: //bash
@@ -2187,6 +2230,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	case 13:
 	case 14:
 	case 17:
+	case 19:
 		execl("./Main", "./Main", (char *)NULL);
 		break;
 	case 3:
@@ -2234,6 +2278,9 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 		break;
 	case 18: //sqlite3
 		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
+		break;
+	case 20: //octave
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "Main.m", (char *)NULL);
 		break;
 	}
 	//sleep(1);
@@ -2464,7 +2511,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		}
 
 		//jvm gc ask VM before need,so used kernel page fault times and page size
-		if (lang == 3 || lang == 7 || lang == 9 || lang == 13 || lang == 14 || lang == 16 || lang == 17)
+		if (lang == 3 || lang == 7 || lang == 9 || lang == 13 || lang == 14 || lang == 16 || lang == 17 || lang == 20)
 		{
 			tempmemory = get_page_fault_mem(ruse, pidApp);
 		}
@@ -2591,20 +2638,48 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		 */
 
 		// check the system calls
-		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
-			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
-			if (call_counter[call_id])
-			{
-				//call_counter[reg.REG_SYSCALL]--;
+#ifdef __arm__
+			if(call_id== 0xef000000){
+				call_id = reg.ARM_r7;
+			}else{
+				if ((call_id & 0x0ff00000) != 0x0f900000){ 
+					call_id=0;
+				}else 
+				        call_id &= 0x000fffff; 
 			}
-			else if (record_call)
+#endif
+#ifdef __aarch64__
+			if(call_id== 0xef000000){
+				call_id = reg.ARM_r7;
+			}else{
+				if ((call_id & 0x0ff00000) != 0x0f900000){ 
+					call_id=0;
+				}else 
+				        call_id &= 0x000fffff; 
+			}
+#endif
+#ifdef __i386__
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+#endif 
+#ifdef __x86_64__
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+#endif 
+			
+
+			if (record_call)
 			{
-				call_counter[call_id] = 1;
+				printf("new call id:%d\n",call_id);
+				call_counter[call_id]++;
+				printf("call %d: %d\n",call_id,call_counter[call_id]);
+			}else if (call_counter[call_id])
+			{
+				call_counter[call_id]--;
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM
@@ -2807,23 +2882,23 @@ int get_test_file(char *work_dir, int p_id)
 }
 void print_call_array()
 {
-	printf("int LANG_%sV[256]={", LANG_NAME);
+	printf("int LANG_%sV[CALL_ARRAY_SIZE]={", LANG_NAME);
 	int i = 0;
 	for (i = 0; i < call_array_size; i++)
 	{
-		if (call_counter[i])
+		if (call_counter[i]>0)
 		{
 			printf("%d,", i);
 		}
 	}
 	printf("0};\n");
 
-	printf("int LANG_%sC[256]={", LANG_NAME);
+	printf("int LANG_%sC[CALL_ARRAY_SIZE]={", LANG_NAME);
 	for (i = 0; i < call_array_size; i++)
 	{
 		if (call_counter[i])
 		{
-			printf("HOJ_MAX_LIMIT,");
+			printf("%d,",call_counter[i]);
 		}
 	}
 	printf("0};\n");

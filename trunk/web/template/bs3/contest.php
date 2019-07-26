@@ -31,7 +31,11 @@
 <p><?php echo $view_description?></p>
 <br>Start Time: <font color=#993399><?php echo $view_start_time?></font>
 End Time: <font color=#993399><?php echo $view_end_time?></font><br>
+<?php if($OJ_OJ_RANK_LOCK_PERCENT!=0) { ?>
+Lock Board Time: <font color=#993399><?php echo date("Y-m-d H:i:s", $view_lock_time) ?></font><br/>
+<?php } ?>
 Current Time: <font color=#993399><span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span></font>
+<br/>
 Status:<?php
 if ($now>$end_time)
 echo "<span class=red>Ended</span>";
@@ -62,7 +66,7 @@ echo "&nbsp;&nbsp;<span class=red>Private</font>";
 <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
 </tr>
 </thead>
-<tbody>
+<tbody align='center'>
 <?php
 $cnt=0;
 foreach($view_problemset as $row){

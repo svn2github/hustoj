@@ -20,18 +20,11 @@ $solution_id=0;
 if (isset($_GET['solution_id'])){
         $solution_id=intval($_GET['solution_id']);
 }
-	if($OJ_MEMCACHE){
-		$sql="select * from solution where solution_id=$solution_id  LIMIT 1";
-		require("./include/memcache.php");
-		$result = mysql_query_cache($sql);
-		
-	}else{
 		$sql="select * from solution where solution_id=? LIMIT 1";
 		$result = pdo_query($sql,$solution_id);
 		
-	}
 
-	if ($result){
+	if (count($result)>0){
 		$row=$result[0];
 		if(isset($_GET['tr'])&&isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 				$res=$row['result'];
@@ -54,11 +47,12 @@ if (isset($_GET['solution_id'])){
 		    if(isset($_GET['q'])&&"user_id"==$_GET['q']){
 			echo $row['user_id'];
 		    }else{
-			echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'];
+			echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'].",".($row['pass_rate']*100);
 		    }
 		}
 	}else{
-		echo "0, 0, 0,unknown";
+		echo $solution_id;
+		echo "0, 0, 0,unknown,0";
 	}
 
 

@@ -28,6 +28,9 @@
 #ifdef __arm__
    #include "okcalls_arm.h"
 #endif
+#ifdef __aarch64__
+   #include "okcalls_aarch64.h"
+#endif
 #ifdef __mips__
    #include "okcalls_mips.h"
 #endif

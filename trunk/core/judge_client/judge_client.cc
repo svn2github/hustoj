@@ -2645,16 +2645,10 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
 #ifdef __arm__
-			if(call_id== 0xef000000){
-				call_id = reg.ARM_r7;
-			}else{
-				if ((call_id & 0x0ff00000) != 0x0f900000){ 
-					call_id=0;
-				}else 
-				        call_id &= 0x000fffff; 
-			}
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif
 #ifdef __aarch64__
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 			if(call_id== 0xef000000){
 				call_id = reg.ARM_r7;
 			}else{

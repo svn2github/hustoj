@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: hustoj
+    namespace: hustoj
+spec:
+    resources:
+        requests:
+            storage: 10Gi
+    accessModes:
+        - ReadWriteOnce
+    storageClassName: "hustoj"

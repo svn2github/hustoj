@@ -1,4 +1,23 @@
 <?php
+function send_udp_message($host, $port, $message)
+{
+    $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+    @socket_connect($socket, $host, $port);
+ 
+    $num = 0;
+    $length = strlen($message);
+    do
+    {
+        $buffer = substr($message, $num);
+        $ret = @socket_write($socket, $buffer);
+        $num += $ret;
+    } while ($num < $length);
+ 
+    socket_close($socket);
+ 
+    // UDP ............, ............
+    return true;
+}
 function crypto_rand_secure($min, $max) {
         $range = $max - $min;
         if ($range < 0) return $min; // not so random...

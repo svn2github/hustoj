@@ -219,19 +219,16 @@ if ($len > 65536) {
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
-if(isset($OJ_UDP)&&$OJ_UDP){
-        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
-}
 
 if (!$OJ_BENCHMARK_MODE) {
     // last submit
-    $now = strftime("%Y-%m-%d %X", time() - 10);
+    $now = strftime("%Y-%m-%d %X", time() - 1);
     $sql =
         "SELECT `in_date` from `solution` where `user_id`=? and in_date>? order by `in_date` desc limit 1";
     $res = pdo_query($sql, $user_id, $now);
     if (count($res) == 1) {
         $view_errors =
-            "You should not submit more than twice in 10 seconds.....<br>";
+            "You should not submit more than twice in 1 seconds.....<br>";
         require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
     }
@@ -302,6 +299,9 @@ if (~$OJ_LANGMASK & (1 << $language)) {
     }
 }
 
+if(isset($OJ_UDP)&&$OJ_UDP){
+        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
+}
 if ($OJ_BENCHMARK_MODE) {
     echo $insert_id;
     exit(0);

@@ -1,5 +1,7 @@
 <?php session_start();
 require_once "include/db_info.inc.php";
+require_once "include/my_func.inc.php";
+
 if (!isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     require_once "oj-header.php";
     echo "<a href='loginpage.php'>$MSG_Login</a>";
@@ -216,6 +218,9 @@ if ($len > 65536) {
     $view_errors = "Code too long!<br>";
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
+}
+if(isset($OJ_UDP)&&$OJ_UDP){
+        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
 }
 
 if (!$OJ_BENCHMARK_MODE) {

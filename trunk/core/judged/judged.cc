@@ -34,6 +34,11 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <sys/resource.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 
 #define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"
@@ -71,6 +76,11 @@ static char http_baseurl[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
 
+static int  oj_udp = 0;
+static char oj_udpserver[BUFFER_SIZE];
+static int  oj_udpport=1536;
+static int  oj_udp_fd;
+
 static int  oj_redis = 0;
 static char oj_redisserver[BUFFER_SIZE];
 static int  oj_redisport;
@@ -89,6 +99,27 @@ static MYSQL_ROW row;
 //static FILE *fp_log;
 static char query[BUFFER_SIZE];
 #endif
+void wait_udp_msg(int fd)
+{
+    char buf[BUFFER_SIZE];  //......1024..
+    socklen_t len;
+    int count;
+    struct sockaddr_in clent_addr;  //clent_addr............
+        memset(buf, 0, BUFFER_SIZE);
+        len = sizeof(clent_addr);
+        count = recvfrom(fd, buf, BUFFER_SIZE, 0, (struct sockaddr*)&clent_addr, &len);  //recvfrom...............
+        if(count == -1)
+        {
+            printf("recieve data fail!\n");
+            return;
+        }
+        printf("udp client:%s\n",buf);  //..client......
+        memset(buf, 0, BUFFER_SIZE);
+//        sprintf(buf, "I have recieved %d bytes data!\n", count);  //..client
+//        printf("server:%s\n",buf);  //..........
+//        sendto(fd, buf, BUFF_LEN, 0, (struct sockaddr*)&clent_addr, len);  //.....client......clent_addr.....
+
+}
 
 void call_for_exit(int s) {
 	if(DEBUG){
@@ -169,6 +200,7 @@ void init_mysql_conf() {
 	oj_tot = 1;
 	oj_mod = 0;
 	strcpy(oj_lang_set, "0,1,2,3");
+	strcpy(oj_udpserver, "127.0.0.1");
 	fp = fopen("./etc/judge.conf", "r");
 	if (fp != NULL) {
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
@@ -189,6 +221,10 @@ void init_mysql_conf() {
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
 			read_buf(buf, "OJ_LANG_SET", oj_lang_set);
 			
+			read_int(buf, "OJ_UDP_ENABLE", &oj_udp);
+                        read_buf(buf, "OJ_UDP_SERVER", oj_udpserver);
+                        read_int(buf, "OJ_UDP_PORT", &oj_udpport);
+
 			read_int(buf, "OJ_REDISENABLE", &oj_redis);
                         read_buf(buf, "OJ_REDISSERVER", oj_redisserver);
                         read_int(buf, "OJ_REDISPORT", &oj_redisport);
@@ -463,12 +499,12 @@ bool check_out(int solution_id, int result) {
 	}
 
 }
+	static int workcnt = 0;
 int work() {
 //      char buf[1024];
 	int retcnt = 0;
 	int i = 0;
 	static pid_t ID[100];
-	static int workcnt = 0;
 	int runid = 0;
 	int jobs[max_running * 2 + 1];
 	pid_t tmp_pid = 0;
@@ -516,6 +552,7 @@ int work() {
 						write_log("<<=sid=%d===clientid=%d==>>\n", runid, i);
 					}
 					run_client(runid, i);    // if the process is the son, run it
+					workcnt--;
 					exit(0);
 				}
 
@@ -638,6 +675,7 @@ void turbo_mode2(){
 
 }
 int main(int argc, char** argv) {
+	int oj_udp_ret=0;
 	DEBUG = (argc > 2);
 	ONCE = (argc > 3);
 	if (argc > 1)
@@ -663,6 +701,26 @@ int main(int argc, char** argv) {
 #ifdef _mysql_h
 	init_mysql_conf();	// set the database info
 #endif
+	if(oj_udp){
+		oj_udp_fd = socket(AF_INET, SOCK_DGRAM, 0);
+		if(oj_udp_fd<0) 
+			printf("udp fd open failed! \n");		
+		struct sockaddr_in ser_addr;
+		memset(&ser_addr, 0, sizeof(ser_addr));
+		ser_addr.sin_family = AF_INET;
+		ser_addr.sin_addr.s_addr = inet_addr(oj_udpserver);
+		ser_addr.sin_port = htons(oj_udpport);
+		struct timeval timeOut;
+		timeOut.tv_sec = 5;                 //..5s..
+		timeOut.tv_usec = 0;
+		if (setsockopt(oj_udp_fd, SOL_SOCKET, SO_RCVTIMEO, &timeOut, sizeof(timeOut)) < 0)
+		{
+			printf("time out setting failed\n");
+		}
+		oj_udp_ret=bind(oj_udp_fd, (struct sockaddr*)&ser_addr, sizeof(ser_addr));
+		if(oj_udp_ret<0) 
+			printf("udp fd open failed! \n");
+	}
 	signal(SIGQUIT, call_for_exit);
 	signal(SIGINT, call_for_exit);
 	signal(SIGTERM, call_for_exit);
@@ -689,8 +747,16 @@ int main(int argc, char** argv) {
 		turbo_mode2();
 		if(ONCE) break;
                 if(n==0){
-                        sleep(sleep_time);
-                        if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
+			printf("workcnt:%d\n",workcnt);
+			if(oj_udp&&oj_udp_ret==0){
+				if(STOP) return 1;
+				wait_udp_msg(oj_udp_fd);
+                        	if(DEBUG) printf("udp job ... \n");
+
+			}else{
+                        	sleep(sleep_time);
+                        	if(DEBUG) printf("sleeping ... %ds \n",sleep_time);
+			}
                 }
 		j = 1;
 	}

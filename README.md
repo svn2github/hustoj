@@ -107,6 +107,10 @@ Star us, please!
 	
 尤其<b>别装apache</b>，如果已经安装，请先停用或卸载，以免80端口冲突。
 
+<b>不要</b>使用LNMP/LAMP/Cpanel/其他面板程序提供的Mysql Nginx Apache PHP 环境，安装脚本已经包含所有必须环境的安装。
+
+腾讯云用户请换软件源，增加multiverse。
+
 阿里云用户请百度“阿里云 80端口”
 
 校园网安装

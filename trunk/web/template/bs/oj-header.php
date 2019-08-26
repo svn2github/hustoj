@@ -25,9 +25,6 @@
 		<a class='btn <?php if ($url=="contest.php") echo "  $ACTIVE";?>'  href="contest.php">
 		<i class="icon-fire"></i><?php echo $MSG_CONTEST?></a>
 		
-		<a class='btn <?php if ($url=="recent-contest.php") echo " $ACTIVE";?>' href="recent-contest.php">
-		<i class="icon-share"></i><?php echo "$MSG_RECENT_CONTEST"?></a>
-		
 		<a class='btn <?php if ($url==(isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php")) echo " $ACTIVE";?>' href="<?php echo isset($OJ_FAQ_LINK)?$OJ_FAQ_LINK:"faqs.php"?>">
                 <i class="icon-info-sign"></i><?php echo "$MSG_FAQ"?></a>
 		

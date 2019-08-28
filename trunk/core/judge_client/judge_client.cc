@@ -104,7 +104,7 @@ struct user_regs_struct {
 #define ARM_ORIG_r0	uregs[17]
 #define PTRACE_GETREGS PTRACE_GETREGSET
 #define PTRACE_SETREGS PTRACE_SETREGSET
-#define REG_SYSCALL regs[31]
+#define REG_SYSCALL regs[18]
 
 #endif 
 
@@ -190,7 +190,7 @@ static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
 void print_arm_regs(long long unsigned int *d){
-	for(int i=0;i<34;i++){
+	for(int i=0;i<32;i++){
 		printf("[%d]:%lld ",i,d[i]%CALL_ARRAY_SIZE);
 	}
 	printf("\n");
@@ -2175,8 +2175,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
-	if (use_ptrace)
-		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3 && lang!=20
 #ifdef __mips__
@@ -2218,7 +2217,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	case 17:
 	case 9: //C#
 	case 3: //java
-		LIM.rlim_cur = LIM.rlim_max = 280;
+		LIM.rlim_cur = LIM.rlim_max = 880;
 		break;
 	case 4: //ruby
 	case 6:  //python
@@ -2664,6 +2663,11 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		 */
 
 		// check the system calls
+	if (!use_ptrace){
+		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+		continue;
+		
+	}
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
@@ -2676,8 +2680,10 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 #endif
 #ifdef __aarch64__
 		call_id=ptrace(PTRACE_GETREGS, pidApp, (void *)NT_ARM_SYSTEM_CALL, &reg);
+		print_arm_regs(reg.regs);
+		printf("return call_id:%d\n",call_id);
 		call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
-			//if(DEBUG)print_arm_regs(reg.regs);
+		printf("regist call_id:%d\n",call_id);
 #endif
 #ifdef __i386__
 		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);

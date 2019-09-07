@@ -27,7 +27,7 @@
 	if (!$result){
 		$view_category= "<h3>No Category Now!</h3>";
 	}else{
-		$view_category.= "<div><p>";
+		$view_category.= "<div style='word-wrap:break-word;'><p>";
 		foreach ($category as $cat){
 			if(trim($cat)=="") continue;
 			$hash_num=hexdec(substr(md5($cat),0,15));

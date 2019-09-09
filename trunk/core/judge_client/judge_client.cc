@@ -2951,10 +2951,14 @@ int main(int argc, char **argv)
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 
-	clean_workdir(work_dir);
-	if (shm_run)
+	if (shm_run){
 		mk_shm_workdir(work_dir);
-
+	}else{
+		execute_cmd("mkdir %s",work_dir);
+	}
+	
+	clean_workdir(work_dir);
+	
 	chdir(work_dir);
 
 	if (http_judge)

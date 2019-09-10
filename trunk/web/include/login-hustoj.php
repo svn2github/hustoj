@@ -13,11 +13,11 @@
 			if( pwCheck($password,$row['password'])){
 				$user_id=$row['user_id'];
 				$ip = ($_SERVER['REMOTE_ADDR']);
-				if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
+				if( !empty( trim( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ){
                                     $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
                                     $tmp_ip=explode(',',$REMOTE_ADDR);
                                     $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
-                                } else if( !empty( $_SERVER['HTTP_X_REAL_IP'] ) ){
+                                } else if( !empty( trim( $_SERVER['HTTP_X_REAL_IP'] ) ) ){
                                     $REMOTE_ADDR = $_SERVER['HTTP_X_REAL_IP'];
                                     $tmp_ip=explode(',',$REMOTE_ADDR);
                                     $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));

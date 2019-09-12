@@ -67,9 +67,9 @@ if (isset($_GET['cid'])){
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
       if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      		$sql="WHERE (contest_id is null || contest_id = 0)  ";
+      		$sql="WHERE 1  ";
   }else{
-      $sql="WHERE problem_id>0 and( contest_id is null || contest_id =0)   ";
+      $sql="WHERE problem_id>0   ";
   }
 }
 $start_first=true;

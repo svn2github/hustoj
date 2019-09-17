@@ -28,7 +28,7 @@ sed -i "s/DB_USER=\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 
 chown www-data src/web/upload data
-if grep client_max_body_size /etc/nginx/nginx.conf ; then 
+if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    80m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf

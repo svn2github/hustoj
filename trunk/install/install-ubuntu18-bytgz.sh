@@ -44,7 +44,7 @@ sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.
 chmod 700 src/web/include/db_info.inc.php
 chown -R www-data src/web/
 chown www-data src/web/upload data
-if grep client_max_body_size /etc/nginx/nginx.conf ; then 
+if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    80m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
@@ -61,7 +61,7 @@ else
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
-	sed -i "s:}#added_by_hustoj::g" /etc/nginx/sites-enabled/default
+	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
 	sed -i "s:php7.0:php7.2:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi

@@ -61,7 +61,7 @@ else
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
-	sed -i "s:}#added_by_hustoj::g" /etc/nginx/sites-enabled/default
+	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart

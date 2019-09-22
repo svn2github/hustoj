@@ -23,7 +23,6 @@ RUN apt-get -y update  && \
         gcc \
         g++ \
         openjdk-11-jdk \
-        ssh
 
 COPY trunk /trunk
 

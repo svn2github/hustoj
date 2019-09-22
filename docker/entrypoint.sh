@@ -1,6 +1,5 @@
 set -xe 
 
-echo "root:root" | chpasswd
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 if [ ! -d /volume/backup ]; then
@@ -45,5 +44,4 @@ done
 service mysql      start  
 service php7.2-fpm start  
 service hustoj     start  
-service ssh        start  
 nginx -g "daemon off;"

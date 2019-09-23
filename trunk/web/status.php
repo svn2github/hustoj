@@ -213,9 +213,9 @@ for ($i=0;$i<$rows_cnt;$i++){
                 	$view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user_id=".$row['user_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
         }else{
                 if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
-			$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['ip']."'>".$row['user_id']."</a>";
+			$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."[".$row['ip']."]'>".$row['user_id']."</a>";
 		else
-                	$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
+                	$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."'>".$row['user_id']."</a>";
         }
 
        if ($row['contest_id']>0) {

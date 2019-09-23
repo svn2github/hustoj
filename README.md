@@ -191,7 +191,7 @@ LiveCD下载安装
 Linux不熟悉的用户推荐使用:
 HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
 
-[浙传云盘](https://pan.cuz.edu.cn:8443/share/63e8d1cdb7963e5b7f2c31103f)
+[浙传云盘](https://pan.cuz.edu.cn:8443/share/c9e8ed0f3be6a92287c02985a0)
 
 
 

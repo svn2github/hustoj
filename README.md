@@ -92,7 +92,7 @@ Star us, please!
 
 2019-5-17 修订：改善ajax，减少并发量，降低web压力，提高judge轮询效率。
 
-2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计于gcc/g++有关。
+2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计与gcc/g++有关。
 
 2019-5-7   更新：muzea 提供了Debian安装包打包(*.deb)，https://github.com/zhblue/hustoj/releases
 

@@ -31,7 +31,7 @@
 <p><?php echo $view_description?></p>
 <br>Start Time: <font color=#993399><?php echo $view_start_time?></font>
 End Time: <font color=#993399><?php echo $view_end_time?></font><br>
-<?php if($OJ_OJ_RANK_LOCK_PERCENT!=0) { ?>
+<?php if(isset($OJ_RANK_LOCK_PERCENT)&&$OJ_RANK_LOCK_PERCENT!=0) { ?>
 Lock Board Time: <font color=#993399><?php echo date("Y-m-d H:i:s", $view_lock_time) ?></font><br/>
 <?php } ?>
 Current Time: <font color=#993399><span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span></font>

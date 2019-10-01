@@ -88,3 +88,6 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
+echo "Remember your database account for HUST Online Judge:"
+echo "username:$USER"
+echo "password:$PASSWORD"

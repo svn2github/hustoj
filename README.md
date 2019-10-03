@@ -72,6 +72,8 @@ Star us, please!
 
 更新日志
 ------
+2019-10-3 更新：修订测试deepin15.11安装脚本，补丁：注册页面验证csrf
+
 2019-9-23 补丁：修复昵称比赛中不更新问题，以及提醒官方群用户及时更新处理504超时问题。
 
 2019-9-21 补丁：修复部分安装脚本不能执行第二次的问题
@@ -142,6 +144,15 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
+    
+基于Deepin15+安装
+--
+
+国内桌面用户Deepin15.9+(内置QQ微信WPS方便出题人本地测试，最新15.11测试通过)
+
+    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-deepin15.9.sh
+    sudo bash install-deepin15.9.sh
+    
     
 基于Centos安装
 --

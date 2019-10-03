@@ -42,6 +42,8 @@ Star us, please!
 
 [基于Ubuntu18.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
 
+[基于Deepin深度15安装](#%E5%9F%BA%E4%BA%8Edeepin15%E5%AE%89%E8%A3%85)
+
 [基于Centos安装](#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
 
 [基于Docker安装](#%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85)

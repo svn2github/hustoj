@@ -11,7 +11,7 @@
 		  	exit;
 		} else {
 			$index = array_search($_POST['csrf'],$_SESSION[$OJ_NAME.'_'.'csrf_keys']);
-			array_splice($_SESSION[$OJ_NAME.'_'.'csrf_keys'], $index);
+			array_splice($_SESSION[$OJ_NAME.'_'.'csrf_keys'], $index, 1);
 		}
   	}
 ?>

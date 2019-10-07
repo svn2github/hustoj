@@ -1231,15 +1231,15 @@ int compile(int lang, char *work_dir)
 	if (pid == 0)
 	{
 		struct rlimit LIM;
-		int cpu = 6;
+		int cpu = 20;
 		if (lang == 3)
 			cpu = 30;
 		LIM.rlim_max = cpu;
 		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
 		alarm(cpu);
-		LIM.rlim_max = 40 * STD_MB;
-		LIM.rlim_cur = 40 * STD_MB;
+		LIM.rlim_max = 100 * STD_MB;
+		LIM.rlim_cur = 100 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		if (lang == 3 || lang == 17)
@@ -1263,8 +1263,8 @@ int compile(int lang, char *work_dir)
 		}
 		else
 		{
-			LIM.rlim_max = STD_MB * 512;
-			LIM.rlim_cur = STD_MB * 512;
+			LIM.rlim_max = STD_MB << 11 ;
+			LIM.rlim_cur = STD_MB << 11;
 		}
 		if (lang != 3)
 			setrlimit(RLIMIT_AS, &LIM);

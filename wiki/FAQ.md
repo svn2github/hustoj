@@ -30,6 +30,10 @@ When people asked question, we put the answer here
 * 设置db_info.inc.php中的 $OJ_OI_1_SOLUTION_ONLY=true; //比赛是否采用noip中的仅保留最后一次提交的规则。
 * 添加比赛时，比赛标题中包含"NOIP"这个关键词  // 赛后才能看结果
 
+随机的CE编译错误
+--
+* 检查OJ_RUNNING的设置与run?目录的对应关系，例如:OJ_RUNNING=2，需要run0 run1两个目录，属主judge，权限700。
+* 有的题目CE有的题目AC，适当放宽judge_client.cc中compile函数里的CPU、内存、文件限制。约1234行前后。修改后需在core目录执行sudo bash make.sh
 
 老版本
 ----

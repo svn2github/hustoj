@@ -2,6 +2,7 @@ image: docker:latest
 
 stages:
   - build
+  - test
 
 build:
   stage: build
@@ -12,3 +13,13 @@ build:
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE .
     - docker push $CI_REGISTRY_IMAGE
+
+test:
+  stage: test
+  services:
+    - docker:dind
+  before_script:
+    - apk add curl
+  script:
+    - docker run -d --name hustoj -p 8080:80 $CI_REGISTRY_IMAGE
+    - curl localhost:8080

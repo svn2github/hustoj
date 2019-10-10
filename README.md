@@ -172,18 +172,17 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 基于Docker安装
 --
-docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
-使用构建好的docker镜像
+docker安装，可用于快速体验HUSTOJ的全部功能，<b>可能存在未知的魔法问题，请慎重考虑用于生产环境！！！</b>
+使用构建好的docker镜像（GitLab CI/CD系统自动构建）
 
 ```shell
 docker run -d           \
     --name hustoj       \
     -p 8080:80          \
-    -p 2222:22          \
     -v ~/volume:/volume \
     -v /proc:/proc      \
     --privileged        \
-    mgdream/hustoj
+    registry.gitlab.com/mgdream/hustoj
 ```
 
 部署后使用浏览器访问[http://localhost:8080](http://localhost:8080)

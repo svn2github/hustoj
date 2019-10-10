@@ -22,7 +22,7 @@ RUN apt-get -y update  && \
         flex \
         gcc \
         g++ \
-        openjdk-11-jdk \
+        openjdk-11-jdk
 
 COPY trunk /trunk
 

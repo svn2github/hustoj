@@ -22,5 +22,5 @@ test:
     - apk add curl
   script:
     - docker run -d --name hustoj -p 8080:80 $CI_REGISTRY_IMAGE
-    - sleep 5
+    - sleep 30
     - curl localhost:8080

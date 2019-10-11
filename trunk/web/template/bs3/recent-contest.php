@@ -60,7 +60,7 @@
 	</table>
 
 </div>
-<div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
+<div align=center>Data Source reimplemented by Azure99 </div>
 
       </div>
 

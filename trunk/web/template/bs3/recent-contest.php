@@ -60,7 +60,7 @@
 	</table>
 
 </div>
-<div align=center>Data Source reimplemented by Azure99 </div>
+<div align=center>DataSource:http://algcontest.rainng.com/contests.json  Spider Author:<a href="https://github.com/Azure99/AlgContestInfo" >Azure99</a></div>
 
       </div>
 

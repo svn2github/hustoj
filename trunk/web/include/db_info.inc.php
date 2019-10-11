@@ -65,6 +65,8 @@ static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有�
 
 /* share code */
 static  $OJ_SHARE_CODE = false; // 代码分享功能
+/* recent contest */
+static  $OJ_RECENT_CONTEST = false;// "http://algcontest.rainng.com/contests.json" ; // 名校联赛
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
 //CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌

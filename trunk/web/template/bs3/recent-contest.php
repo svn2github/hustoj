@@ -73,7 +73,7 @@
     <?php include("template/$OJ_TEMPLATE/js.php");?>	  
 	<script>
 		var contestList = $("#contest-list");
-		$.get("./recent-contest.json",function(response){
+		$.get("http://algcontest.rainng.com/contests.json",function(response){
 			response.map(function(val){
 				var item = "<tr><td class='column-1'>"+val.oj+"</td>"+
 					"<td class='column-2'><a target='_blank' href='"+val.link+"'>"+val.name+"</a></td>"+

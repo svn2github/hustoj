@@ -247,3 +247,15 @@ begin
  
 end;//
 delimiter ;
+
+DELIMITER //
+CREATE PROCEDURE DEFAULT_ADMINISTRATOR(user_name VARCHAR(48))
+BEGIN
+    DECLARE privileged_count INT DEFAULT 0;
+    SET privileged_count=(SELECT COUNT(1) FROM `privilege`);
+    IF privileged_count=0 THEN
+        INSERT INTO `privilege` values(user_name,'administrator','N');
+    end if;
+end //
+
+CALL DEFAULT_ADMINISTRATOR('admin');

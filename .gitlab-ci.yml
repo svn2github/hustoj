@@ -34,7 +34,7 @@ build-mysql:
     - docker build --pull --file=docker/mysql/Dockerfile -t $CI_REGISTRY_IMAGE:mysql .
     - docker push $CI_REGISTRY_IMAGE:mysql
 
-build-web:
+build-judge:
   stage: build
   services:
     - docker:dind

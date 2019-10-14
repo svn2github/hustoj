@@ -22,7 +22,8 @@ COPY docker/ /opt/docker/
 
 RUN bash /opt/docker/web/setup.sh
 
-VOLUME [ "/home/judge/src/web" ]
+# sharing data volume with judge container
+VOLUME [ "/home/judge/data" ]
 
 ENV HOSTNAME=localhost
 

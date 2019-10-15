@@ -180,8 +180,6 @@ docker run -d           \
     --name hustoj       \
     -p 8080:80          \
     -v ~/volume:/volume \
-    -v /proc:/proc      \
-    --privileged        \
     registry.gitlab.com/mgdream/hustoj
 ```
 

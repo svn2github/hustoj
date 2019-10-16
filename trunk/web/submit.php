@@ -44,7 +44,7 @@ if (!$OJ_BENCHMARK_MODE) {
 
 if (isset($_POST['cid'])) {
     $pid = intval($_POST['pid']);
-    $cid = intval($_POST['cid']);
+    $cid = abs(intval($_POST['cid']));
     $sql = "SELECT `problem_id`,'N' from `contest_problem` 
 				where `num`='$pid' and contest_id=$cid";
 } else {

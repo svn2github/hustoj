@@ -10,7 +10,7 @@
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
-$sql="SELECT * FROM `contest` WHERE `contest_id`=? AND `start_time`<NOW()";
+$sql="SELECT title,end_time FROM `contest` WHERE `contest_id`=? AND `start_time`<NOW()";
 $result=pdo_query($sql,$cid);
 $num=count($result);
 if ($num==0){
@@ -18,7 +18,14 @@ if ($num==0){
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
-
+$row=$result[0];
+$title=$row[0];
+$end_time=strtotime($row[1]);
+if(time()<$end_time && stripos($title,"noip")){
+      $view_errors =  "<h2>NOIP contest !</h2>";
+      require("template/".$OJ_TEMPLATE."/error.php");
+      exit(0);
+}
 
 $view_title= "Contest Statistics";
 

@@ -102,15 +102,17 @@ if(isset($_GET['cid'])){
   $view_problemset = Array();
 
   $cnt = 0;
-
+  $noip=time()<$end_time && stripos($view_title,"noip");
   foreach($result as $row){
     $view_problemset[$cnt][0] = "";
-    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
+    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!$noip) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
+    else  $view_problemset[$cnt][0]="";
 
     $view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
     $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
     $view_problemset[$cnt][3] = $row['source'];
-    $view_problemset[$cnt][4] = $row['accepted'];
+    if(!$noip)$view_problemset[$cnt][4] = $row['accepted'];
+    else $view_problemset[$cnt][4] = "";
     $view_problemset[$cnt][5] = $row['submit'] ;
     $cnt++;
   }

@@ -66,11 +66,12 @@ if (isset($_GET['cid'])){
 	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
-      if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      		$sql="WHERE 1  ";
-  }else{
-      $sql="WHERE problem_id>0   ";
-  }
+    if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
+                  $sql="WHERE (contest_id=0 or contest_id is null)  ";
+    }else{
+        $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
+    }
+
 }
 $start_first=true;
 $order_str=" ORDER BY `solution_id` DESC ";

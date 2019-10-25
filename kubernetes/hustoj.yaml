@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hustoj
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hustoj-mysql
+  namespace: hustoj
+  labels:
+    deployment: hustoj-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: hustoj-mysql
+  template:
+    metadata:
+      name: hustoj-mysql
+      namespace: hustoj
+      labels:
+        pod: hustoj-mysql
+    spec:
+      containers:
+        - name: hustoj-mysql
+          image: registry.gitlab.com/mgdream/hustoj:mysql
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql
+      volumes:
+        - name: mysql
+          hostPath:
+            path: /srv/hustoj/mysql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hustoj-web
+  namespace: hustoj
+  labels:
+    deployment: hustoj-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      pod: hustoj-web
+  template:
+    metadata:
+      name: hustoj-web
+      namespace: hustoj
+      labels:
+        pod: hustoj-web
+    spec:
+      containers:
+        - name: hustoj-web
+          image: registry.gitlab.com/mgdream/hustoj:web
+          ports:
+            - containerPort: 80
+          env:
+            - name: HOSTNAME
+              value: hustoj-mysql
+          volumeMounts:
+            - mountPath: /home/judge/data
+              name: data
+      volumes:
+        - name: data
+          hostPath:
+            path: /srv/hustoj/data
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hustoj-judge
+  namespace: hustoj
+  labels:
+    deployment: hustoj-judge
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      pod: hustoj-judge
+  template:
+    metadata:
+      name: hustoj-judge
+      namespace: hustoj
+      labels:
+        pod: hustoj-judge
+    spec:
+      containers:
+        - name: hustoj-judge
+          image: registry.gitlab.com/mgdream/hustoj:judge
+          env:
+            - name: HOSTNAME
+              value: hustoj-mysql
+          volumeMounts:
+            - mountPath: /home/judge/data
+              name: data
+      volumes:
+        - name: data
+          hostPath:
+            path: /srv/hustoj/data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hustoj-web
+  namespace: hustoj
+  labels:
+    service: hustoj-web
+spec:
+  type: NodePort
+  selector:
+    pod: hustoj-web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hustoj-mysql
+  namespace: hustoj
+  labels:
+    service: hustoj-mysql
+spec:
+  selector:
+    pod: hustoj-mysql
+  ports:
+    - port: 3306
+      targetPort: 3306

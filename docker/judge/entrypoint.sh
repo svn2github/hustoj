@@ -7,6 +7,8 @@ sed -i "s#OJ_USER_NAME=root#OJ_USER_NAME=$USERNAME#g"      /home/judge/etc/judge
 sed -i "s#OJ_PASSWORD=root#OJ_PASSWORD=$PASSWORD#g"        /home/judge/etc/judge.conf
 sed -i "s#OJ_RUNNING=1#OJ_RUNNING=$CPU#g"                  /home/judge/etc/judge.conf
 
+chown -R www-data:www-data /home/judge/data
+
 RUNNING=`cat /home/judge/etc/judge.conf | grep OJ_RUNNING`
 RUNNING=${RUNNING:11}
 for i in `seq 1 $RUNNING`; do

@@ -6,6 +6,10 @@
         require_once('./include/setlang.php');
         require_once('./include/memcache.php');
         $view_title= $MSG_RANKLIST;
+	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
+		header("location:index.php");
+		exit();
+	}
 
         $scope="";
         if(isset($_GET['scope']))

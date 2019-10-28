@@ -45,8 +45,12 @@
 				echo "<span class=green>$MSG_Memory_Limit: </span>" . $row[ 'memory_limit' ] . " MB";
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
+	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
+				echo "<br>";
+	}else{
 				echo "<br><span class=green>$MSG_SUBMIT: </span>" . $row[ 'submit' ] . "&nbsp;&nbsp;";
 				echo "<span class=green>$MSG_SOVLED: </span>" . $row[ 'accepted' ] . "<br>";
+	}
 
 				if ( $pr_flag ) {
 					echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";

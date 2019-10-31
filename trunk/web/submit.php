@@ -239,6 +239,8 @@ if (~$OJ_LANGMASK & (1 << $language)) {
     $nick = pdo_query($sql, $user_id);
     if ($nick) {
         $nick = $nick[0][0];
+    }else{
+    	$nick = "Guest";
     }
     if (!isset($pid)) {
         $sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,result)

@@ -1,0 +1,25 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+    name: hustoj
+    namespace: hustoj
+    labels:
+        deployment: hustoj
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            pod: hustoj
+    template:
+        metadata:
+            name: hustoj
+            namespace: hustoj
+            labels:
+                pod: hustoj
+        spec:
+            containers:
+                - name: hustoj
+                  image: mgdream/hustoj:latest
+                  ports:
+                      - containerPort: 80
+                        protocol: TCP

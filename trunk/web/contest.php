@@ -2,7 +2,7 @@
 if(isset($_POST['keyword']))
   $cache_time = 1;
 else
-  $cache_time = 30;
+  $cache_time = 10;
 
 $OJ_CACHE_SHARE = false;//!(isset($_GET['cid'])||isset($_GET['my']));
 require_once('./include/cache_start.php');
@@ -79,7 +79,7 @@ if(isset($_GET['cid'])){
     $view_title = $row['title'];
     $view_start_time = $row['start_time'];
     $view_end_time = $row['end_time'];
-    $view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
+
     if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time){
       $view_errors =  "<h2>$MSG_PRIVATE_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
@@ -102,19 +102,17 @@ if(isset($_GET['cid'])){
   $view_problemset = Array();
 
   $cnt = 0;
-
+  $noip=time()<$end_time && stripos($view_title,"noip");
   foreach($result as $row){
     $view_problemset[$cnt][0] = "";
-    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&& !(time()<$end_time&&stripos($view_title,"noip"))) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
+    if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!$noip) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
+    else  $view_problemset[$cnt][0]="";
 
     $view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
     $view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
     $view_problemset[$cnt][3] = $row['source'];
-    if(time()<$end_time&&stripos($view_title,"noip")){
-	    $view_problemset[$cnt][4] = "NOIP";
-    }else{
-	    $view_problemset[$cnt][4] = $row['accepted'];
-    }
+    if(!$noip)$view_problemset[$cnt][4] = $row['accepted'];
+    else $view_problemset[$cnt][4] = "";
     $view_problemset[$cnt][5] = $row['submit'] ;
     $cnt++;
   }
@@ -134,6 +132,11 @@ if(isset($_GET['cid'])){
   //echo "$keyword";
 
   $mycontests = "";
+  $sql="select distinct contest_id from solution where contest_id>0 and user_id=?";
+  $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id']);
+  foreach($result as $row){
+	$mycontests.=",".$row[0];
+  }
   $len = mb_strlen($OJ_NAME.'_');
 
   foreach($_SESSION as $key => $value){
@@ -142,9 +145,9 @@ if(isset($_GET['cid'])){
       $mycontests.=",".intval(mb_substr($key,$len+1));
     }
   }
+//  echo "=====>$mycontests<====";
 
   if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
-  //echo "$mycontests";
  
   $wheremy = "";
   if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
@@ -160,6 +163,7 @@ if(isset($_GET['cid'])){
   }else{
     $sql = "SELECT *  FROM contest WHERE contest.defunct='N' $wheremy  ORDER BY contest_id DESC";
 	$sql .= " limit ".strval($pstart).",".strval($pend); 
+//	echo $sql;
 	$result = mysql_query_cache($sql);
   }
   

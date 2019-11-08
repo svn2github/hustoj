@@ -4,12 +4,14 @@
     require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title=$MSG_SUBMIT;
- if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-
-//	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
-//	require("template/".$OJ_TEMPLATE."/error.php");
-//	exit(0);
+if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+  if(isset($OJ_GUEST)&&$OJ_GUEST){
 	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
+  }else{
+	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+	require("template/".$OJ_TEMPLATE."/error.php");
+        exit(0);
+  }
 }
 $problem_id=1000;
 if (isset($_GET['id'])){

@@ -66,11 +66,12 @@ if (isset($_GET['cid'])){
 	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
 	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
-      if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      		$sql="WHERE (contest_id is null || contest_id = 0)  ";
-  }else{
-      $sql="WHERE problem_id>0 and( contest_id is null || contest_id =0)   ";
-  }
+    if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
+                  $sql="WHERE (contest_id=0 or contest_id is null)  ";
+    }else{
+        $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
+    }
+
 }
 $start_first=true;
 $order_str=" ORDER BY `solution_id` DESC ";
@@ -89,7 +90,7 @@ if (isset($_GET['problem_id'])&&$_GET['problem_id']!=""){
 	
 	if(isset($_GET['cid'])){
 		$problem_id=htmlentities($_GET['problem_id'],ENT_QUOTES,'UTF-8');
-		$num=strpos($PID,$problem_id);
+		$num=array_search($problem_id,$PID);
 		$problem_id=$PID[$num];
 		$sql=$sql."AND `num`='".$num."' ";
         $str2=$str2."&problem_id=".trim($problem_id);
@@ -213,9 +214,9 @@ for ($i=0;$i<$rows_cnt;$i++){
                 	$view_status[$i][1]= "<a href='contestrank.php?cid=".$row['contest_id']."&user_id=".$row['user_id']."#".$row['user_id']."'>".$row['user_id']."</a>";
         }else{
                 if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
-			$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['ip']."'>".$row['user_id']."</a>";
+			$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."[".$row['ip']."]'>".$row['user_id']."</a>";
 		else
-                	$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
+                	$view_status[$i][1]= "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."'>".$row['user_id']."</a>";
         }
 
        if ($row['contest_id']>0) {

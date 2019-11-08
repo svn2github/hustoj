@@ -80,17 +80,31 @@ struct user_regs_struct {
 
 #define REG_SYSCALL ARM_r7
 #endif
+
 #ifdef __aarch64__
-#define pt_regs         user_pt_regs  
-#define uregs	regs
-#define ARM_pc	pc
-#define ARM_sp	sp
-#define ARM_cpsr	pstate
-#define ARM_lr		regs[30]
-#define ARM_r0		regs[0]  
-#define ARM_r7          regs[7]
+#define NT_PRSTATUS	1
+#define NT_ARM_SYSTEM_CALL	0x404
+#define ARM_cpsr	uregs[16]
+#define ARM_pc		uregs[15]
+#define ARM_lr		uregs[14]
+#define ARM_sp		uregs[13]
+#define ARM_ip		uregs[12]
+#define ARM_fp		uregs[11]
+#define ARM_r10		uregs[10]
+#define ARM_r9		uregs[9]
+#define ARM_r8		regs[8]
+#define ARM_r7		uregs[7]
+#define ARM_r6		uregs[6]
+#define ARM_r5		uregs[5]
+#define ARM_r4		uregs[4]
+#define ARM_r3		uregs[3]
+#define ARM_r2		uregs[2]
+#define ARM_r1		uregs[1]
+#define ARM_r0		uregs[0]
+#define ARM_ORIG_r0	uregs[17]
 #define PTRACE_GETREGS PTRACE_GETREGSET
 #define PTRACE_SETREGS PTRACE_SETREGSET
+#define REG_SYSCALL regs[18]
 
 #endif 
 
@@ -175,6 +189,12 @@ MYSQL *conn;
 static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
+void print_arm_regs(long long unsigned int *d){
+	for(int i=0;i<32;i++){
+		printf("[%d]:%lld ",i,d[i]%CALL_ARRAY_SIZE);
+	}
+	printf("\n");
+}
 int data_list_has(char *file)
 {
 	for (int i = 0; i < data_list_len; i++)
@@ -358,7 +378,13 @@ void init_syscalls_limits(int lang)
 		for (i = 0; i == 0 || LANG_MV[i]; i++)
 			call_counter[LANG_MV[i]] = HOJ_MAX_LIMIT;
 	}
+#ifdef __aarch64__
+	if (lang==3)call_counter[220]= 100;
+	else call_counter[220]= 1;
+#else
 	call_counter[SYS_execve]= 1;
+#endif
+	printf("SYS_execve:%d\n",SYS_execve);
 }
 
 int after_equal(char *c)
@@ -1205,15 +1231,15 @@ int compile(int lang, char *work_dir)
 	if (pid == 0)
 	{
 		struct rlimit LIM;
-		int cpu = 6;
+		int cpu = 20;
 		if (lang == 3)
 			cpu = 30;
 		LIM.rlim_max = cpu;
 		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
 		alarm(cpu);
-		LIM.rlim_max = 40 * STD_MB;
-		LIM.rlim_cur = 40 * STD_MB;
+		LIM.rlim_max = 100 * STD_MB;
+		LIM.rlim_cur = 100 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
 		if (lang == 3 || lang == 17)
@@ -1237,8 +1263,8 @@ int compile(int lang, char *work_dir)
 		}
 		else
 		{
-			LIM.rlim_max = STD_MB * 512;
-			LIM.rlim_cur = STD_MB * 512;
+			LIM.rlim_max = STD_MB << 11 ;
+			LIM.rlim_cur = STD_MB << 11;
 		}
 		if (lang != 3)
 			setrlimit(RLIMIT_AS, &LIM);
@@ -2149,8 +2175,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
-	if (use_ptrace)
-		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
+	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3 && lang!=20
 #ifdef __mips__
@@ -2191,9 +2216,9 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	{
 	case 17:
 	case 9: //C#
-		LIM.rlim_cur = LIM.rlim_max = 280;
-		break;
 	case 3: //java
+		LIM.rlim_cur = LIM.rlim_max = 880;
+		break;
 	case 4: //ruby
 	case 6:  //python
 	case 12:
@@ -2638,36 +2663,34 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		 */
 
 		// check the system calls
-		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+	if (!use_ptrace){
+		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+		continue;
+		
+	}
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 		   if((unsigned int)reg.REG_SYSCALL<6500){  
 #endif
 #ifdef __arm__
-			if(call_id== 0xef000000){
-				call_id = reg.ARM_r7;
-			}else{
-				if ((call_id & 0x0ff00000) != 0x0f900000){ 
-					call_id=0;
-				}else 
-				        call_id &= 0x000fffff; 
-			}
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif
 #ifdef __aarch64__
-			if(call_id== 0xef000000){
-				call_id = reg.ARM_r7;
-			}else{
-				if ((call_id & 0x0ff00000) != 0x0f900000){ 
-					call_id=0;
-				}else 
-				        call_id &= 0x000fffff; 
-			}
+		call_id=ptrace(PTRACE_GETREGS, pidApp, (void *)NT_ARM_SYSTEM_CALL, &reg);
+		print_arm_regs(reg.regs);
+		printf("return call_id:%d\n",call_id);
+		call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+		printf("regist call_id:%d\n",call_id);
 #endif
 #ifdef __i386__
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif 
 #ifdef __x86_64__
+		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif 
 			
@@ -2928,10 +2951,14 @@ int main(int argc, char **argv)
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 
-	clean_workdir(work_dir);
-	if (shm_run)
+	if (shm_run){
 		mk_shm_workdir(work_dir);
-
+	}else{
+		execute_cmd("mkdir %s",work_dir);
+	}
+	
+	clean_workdir(work_dir);
+	
 	chdir(work_dir);
 
 	if (http_judge)

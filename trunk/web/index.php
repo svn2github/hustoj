@@ -61,7 +61,7 @@ if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
 	$result = mysql_query_cache( $sql );
 	$speed = ( $result[ 0 ][ 0 ] ? $result[ 0 ][ 0 ] : 0 ) . '/min';
 } else {
-	$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
+	if(isset($chart_data_all[ 0 ][ 1 ] ))$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
 }
 
 /////////////////////////Template

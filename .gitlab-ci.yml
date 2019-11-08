@@ -1,5 +1,8 @@
+image: docker:latest
+
 stages:
   - build
+  - test
 
 build:
   stage: build
@@ -10,3 +13,33 @@ build:
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE .
     - docker push $CI_REGISTRY_IMAGE
+
+build-web:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull --file=docker/web/Dockerfile -t $CI_REGISTRY_IMAGE:web .
+    - docker push $CI_REGISTRY_IMAGE:web
+
+build-mysql:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull --file=docker/mysql/Dockerfile -t $CI_REGISTRY_IMAGE:mysql .
+    - docker push $CI_REGISTRY_IMAGE:mysql
+
+build-judge:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull --file=docker/judge/Dockerfile -t $CI_REGISTRY_IMAGE:judge .
+    - docker push $CI_REGISTRY_IMAGE:judge

@@ -67,7 +67,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<tr>";
         echo "<td>".$row['user_id']."</td>";
         echo "<td>".$row['rightstr']."</td>";
-        echo "<td><a href=privilege_delete.php?uid={$row['user_id']}&rightstr={$row['rightstr']}&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Delete</a></td>";
+        echo "<td><a href='privilege_delete.php?uid=".htmlentities($row['user_id'],ENT_QUOTES,"UTF-8")."&rightstr={$row['rightstr']}&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."'>Delete</a></td>";
       echo "</tr>";
     }
     ?>

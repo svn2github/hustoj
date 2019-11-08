@@ -67,6 +67,7 @@ $cur_path = "template/$OJ_TEMPLATE/"
                             <input type="text" placeholder="<?php echo $MSG_VCODE?>" name="vcode"/>
                             <img id="vcode-img" src="vcode.php?v=0.1" alt="click to change" onclick="this.src='vcode.php?'+Math.random()"/>
                         <?php } ?>
+			<?php require("csrf.php")?>
                         <button class="btn_sign_up" type="submit"><?php echo $MSG_REGISTER?></button>
                     </div>
 

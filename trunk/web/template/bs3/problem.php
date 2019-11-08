@@ -45,8 +45,14 @@
 				echo "<span class=green>$MSG_Memory_Limit: </span>" . $row[ 'memory_limit' ] . " MB";
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
+	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
+				echo "<br>";
+	}else{
 				echo "<br><span class=green>$MSG_SUBMIT: </span>" . $row[ 'submit' ] . "&nbsp;&nbsp;";
 				echo "<span class=green>$MSG_SOVLED: </span>" . $row[ 'accepted' ] . "<br>";
+				echo "[<a href='problemstatus.php?id=" . $row[ 'problem_id' ] . "'>$MSG_STATUS</a>] ";
+				if($OJ_BBS)echo "[<a href='bbs.php?pid=" . $row[ 'problem_id' ] . "$ucid'>$MSG_BBS</a>] ";
+	}
 
 				if ( $pr_flag ) {
 					echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
@@ -54,8 +60,6 @@
 					echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>] ";
 				}
 
-				echo "[<a href='problemstatus.php?id=" . $row[ 'problem_id' ] . "'>$MSG_STATUS</a>] ";
-				if($OJ_BBS)echo "[<a href='bbs.php?pid=" . $row[ 'problem_id' ] . "$ucid'>$MSG_BBS</a>] ";
 				echo "[$MSG_Creator:<span id='creator'></span>]";
 
 				if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {

@@ -35,8 +35,9 @@ $cur_path = "template/$OJ_TEMPLATE/";
     <li class='layui-nav-item <?php if ($url=="category.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>category.php">分类</a></li>
     <li class='layui-nav-item <?php if ($url=="status.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>status.php">状态</a></li>
     <li class='layui-nav-item <?php if ($url=="ranklist.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>ranklist.php">排名</a></li>
+	<?php if($OJ_BBS){?>
     <li class='layui-nav-item <?php if ($url=="bbs.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>bbs.php">社区</a></li>
-    <li class='layui-nav-item <?php if ($url=="recent-contest.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>recent-contest.php">联赛</a></li>
+	<?php } ?>
     <li class='layui-nav-item <?php if ($url=="faqs.php") echo "layui-this";?>'><a href="<?php echo $path_fix?>faqs.php">问答</a></li>
 
 

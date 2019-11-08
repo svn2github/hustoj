@@ -3,7 +3,7 @@ hustoj -- 流行的OJ系统，跨平台、易安装、有题库。
 
 版权说明
 --
-HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) FreeSoftware?.
+HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
 
 HUSTOJ 是采用GPL的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
 
@@ -42,6 +42,8 @@ Star us, please!
 
 [基于Ubuntu18.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
 
+[基于Deepin深度15安装](#%E5%9F%BA%E4%BA%8Edeepin15%E5%AE%89%E8%A3%85)
+
 [基于Centos安装](#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
 
 [基于Docker安装](#%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85)
@@ -72,6 +74,18 @@ Star us, please!
 
 更新日志
 ------
+2019-10-30 更新：提供$OJ_OI_MODE开关。
+
+2019-10-29 更新：加强了OI模式下的限制，控制Web行为。
+
+2019-10-3 更新：修订测试deepin15.11安装脚本，补丁：注册页面验证csrf
+
+2019-9-23 补丁：修复昵称比赛中不更新问题，以及提醒官方群用户及时更新处理504超时问题。
+
+2019-9-21 补丁：修复部分安装脚本不能执行第二次的问题
+
+2019-8-6 更新：支持用UDP数据包触发判题轮询，实现Web本地judge秒判。
+
 2019-7-26 更新：支持华为鲲鹏服务器，aarch64，感谢深度科技公司和华为云提供鲲鹏服务器。
 
 2019-7-6 NOIP：对于标题带有NOIP字样的比赛，比赛结束后才能看到结果。
@@ -86,7 +100,7 @@ Star us, please!
 
 2019-5-17 修订：改善ajax，减少并发量，降低web压力，提高judge轮询效率。
 
-2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计于gcc/g++有关。
+2019-5-15 修订：修复了部分TLE误判为RE的情况，主要是在Ubuntu18/19 Deepin15.9/15.10 以上的版本，估计与gcc/g++有关。
 
 2019-5-7   更新：muzea 提供了Debian安装包打包(*.deb)，https://github.com/zhblue/hustoj/releases
 
@@ -104,6 +118,10 @@ Star us, please!
 <b>不要相信百度来的长篇大论的所谓教程，那些都是好几年前的老皇历了，会导致不判题，不显示，不好升级等等问题。</b>
 	
 尤其<b>别装apache</b>，如果已经安装，请先停用或卸载，以免80端口冲突。
+
+<b>不要</b>使用LNMP/LAMP/Cpanel/其他面板程序提供的Mysql Nginx Apache PHP 环境，安装脚本已经包含所有必须环境的安装。
+
+腾讯云用户请换软件源，增加multiverse。
 
 阿里云用户请百度“阿里云 80端口”
 
@@ -133,6 +151,15 @@ https://www.youtube.com/watch?v=nlhmfZqyHnA
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
     
+基于Deepin15+安装
+--
+
+国内桌面用户Deepin15.9+(内置QQ微信WPS方便出题人本地测试，最新15.11测试通过)
+
+    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-deepin15.9.sh
+    sudo bash install-deepin15.9.sh
+    
+    
 基于Centos安装
 --
 假如你不得已非要用centos7 （有的语言可能不支持，但是某些机架式服务器的Raid卡Ubuntu不认只能装CentOS），可以用下面脚本快速安装OJ：  
@@ -149,18 +176,15 @@ https://github.com/zhblue/hustoj/blob/master/wiki/CentOS.md
 
 基于Docker安装
 --
-docker安装，<b>仅供docker熟练用户参考使用，不适合用于生产环境！切记！切记！</b>
-使用构建好的docker镜像
+docker安装，可用于快速体验HUSTOJ的全部功能，<b>可能存在未知的魔法问题，请慎重考虑用于生产环境！！！</b>
+使用构建好的docker镜像（GitLab CI/CD系统自动构建）
 
 ```shell
 docker run -d           \
     --name hustoj       \
     -p 8080:80          \
-    -p 2222:22          \
     -v ~/volume:/volume \
-    -v /proc:/proc      \
-    --privileged        \
-    mgdream/hustoj
+    registry.gitlab.com/mgdream/hustoj
 ```
 
 部署后使用浏览器访问[http://localhost:8080](http://localhost:8080)
@@ -181,7 +205,7 @@ LiveCD下载安装
 Linux不熟悉的用户推荐使用:
 HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
 
-[浙传云盘](https://pan.cuz.edu.cn:8443/share/63e8d1cdb7963e5b7f2c31103f)
+[浙传云盘](https://pan.cuz.edu.cn:8443/share/c9e8ed0f3be6a92287c02985a0)
 
 
 

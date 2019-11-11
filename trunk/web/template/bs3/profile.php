@@ -12,8 +12,9 @@ else $path_fix="";
 
 require_once("../../include/db_info.inc.php");
 
-if($_GET['profile_csrf']!=$_SESSION[$OJ_NAME.'_'.'profile_csrf']){
-  exit();
+if(isset($_SESSION[$OJ_NAME.'_'.'profile_csrf'])&&$_GET['profile_csrf']!=$_SESSION[$OJ_NAME.'_'.'profile_csrf']){
+    echo "<!--".$_SESSION[$OJ_NAME.'_'.'profile_csrf']."-->";
+//  exit();
 }else{
   $_SESSION[$OJ_NAME.'_'.'profile_csrf']="";
 }

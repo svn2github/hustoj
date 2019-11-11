@@ -1,4 +1,5 @@
 <?php 
+if(stripos($_SERVER['REQUEST_URI'],"template"))exit();
 	$url=basename($_SERVER['REQUEST_URI']);
 	$dir=basename(getcwd());
 	if($dir=="discuss3") $path_fix="../";

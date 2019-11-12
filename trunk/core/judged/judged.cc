@@ -711,7 +711,7 @@ int main(int argc, char** argv) {
 		ser_addr.sin_addr.s_addr = inet_addr(oj_udpserver);
 		ser_addr.sin_port = htons(oj_udpport);
 		struct timeval timeOut;
-		timeOut.tv_sec = 5;                 //..5s..
+		timeOut.tv_sec = sleep_time;                 //..5s..
 		timeOut.tv_usec = 0;
 		if (setsockopt(oj_udp_fd, SOL_SOCKET, SO_RCVTIMEO, &timeOut, sizeof(timeOut)) < 0)
 		{

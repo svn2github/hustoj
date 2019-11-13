@@ -28,9 +28,9 @@
 
 <form id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();"  >
 	<div class="form-group">
-	<label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label><div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>" type="text"></div>						</div>
+	<label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label><div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>" type="text" required ></div>						</div>
 	<div class="form-group">
-	<label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label><div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>" type="password"></div>						</div>
+	<label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label><div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>" type="password"  autocomplete="off" required ></div>						</div>
 <?php if($OJ_VCODE){?>
 
 	<div class="form-group">

@@ -23,4 +23,6 @@ jobs:
           tags: true
     - stage: sync to gitee
       if: branch = master
-      script: git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master
+      script:
+      - git fetch --unshallow
+      - git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master

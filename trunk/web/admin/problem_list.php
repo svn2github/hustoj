@@ -73,10 +73,10 @@ echo "</select>";
 <table width=100% border=1 style="text-align:center;">
   <form method=post action=contest_add.php>
     <tr>
-      <td width=60px>ID <input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
-      <td>TITLE</td>
-      <td>AC</td>
-      <td>UPDATE</td>
+      <td width=60px><?php echo $MSG_PROBLEM_ID?><input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
+      <td><?php echo $MSG_TITLE?></td>
+      <td><?php echo $MSG_AC?></td>
+      <td></td>
       <?php
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))

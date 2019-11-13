@@ -21,7 +21,7 @@ if ($num==0){
 $row=$result[0];
 $title=$row[0];
 $end_time=strtotime($row[1]);
-if(time()<$end_time && stripos($title,"noip")>=0){
+if(time()<$end_time && stripos($title,"noip")!==false){
       $view_errors =  "<h2>NOIP contest !</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);

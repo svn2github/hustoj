@@ -1,7 +1,6 @@
 <?php @session_start();
 	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
 	ini_set("session.cookie_httponly", 1);   
-	header("Set-Cookie: hidden=value; httpOnly");
 	header('X-Frame-Options:SAMEORIGIN');
 
 //for people using hustoj out of China , be careful of the last two line of this file !

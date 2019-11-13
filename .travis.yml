@@ -25,4 +25,5 @@ jobs:
       if: branch = master
       script:
       - git fetch --unshallow
-      - git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master
+      - git gc --prune=now
+      - travis_wait 30 git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master

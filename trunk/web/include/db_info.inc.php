@@ -98,7 +98,7 @@ static  $OJ_QQ_CBURL='192.168.0.108';
 if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
 	$OJ_LANG = "cn";
 }
-if (isset($_GET['lang'])) {
+if (isset($_GET['lang'])&&in_array($_GET['lang'],array("cn","en",'fa','ko','th'))) {
 	$OJ_LANG = $_GET['lang'];
 }
 if (isset($_SESSION[$OJ_NAME.'_'.'OJ_LANG'])) $OJ_LANG=$_SESSION[$OJ_NAME.'_'.'OJ_LANG'];

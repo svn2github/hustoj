@@ -56,6 +56,8 @@ Star us, please!
 
 [备份](#%E5%A4%87%E4%BB%BD)
 
+[迁移](#迁移)
+
 [升级](#升级)
 
 [支持捐助、加入社区](#%E6%94%AF%E6%8C%81%E6%8D%90%E5%8A%A9%E5%8A%A0%E5%85%A5%E7%A4%BE%E5%8C%BA)
@@ -270,6 +272,19 @@ sudo crontab -e
 ```
 定制自动备份计划，部分安装脚本中包含了自动备份，但可能需要运行上面的语句一次来激活。
 
+迁移
+--
+如果你需要进行跨系统迁移（如从Ubuntu迁移到CentOS），可以尝试使用下面的脚本进行备份
+```shell
+sudo bash /home/judge/src/install/backup+.sh
+```
+备份后的归档在`/home/judge/backup`，命名格式为`%Y-%m-%d-%H-%M-%S`
+
+将你需要迁移的归档复制到目标系统的`/home/judge/backup`目录下，执行下面的脚本进行恢复
+```shell
+sudo bash /home/judge/src/install/restore+.sh
+```
+脚本的第一个参数为恢复的目标归档，如果没有参数则默认为按名字排序后字典序最大的归档
 
 升级
 --

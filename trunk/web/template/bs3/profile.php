@@ -12,6 +12,12 @@ else $path_fix="";
 
 require_once("../../include/db_info.inc.php");
 
+if(isset($_SESSION[$OJ_NAME.'_'.'profile_csrf'])&&$_GET['profile_csrf']!=$_SESSION[$OJ_NAME.'_'.'profile_csrf']){
+    echo "<!--".$_SESSION[$OJ_NAME.'_'.'profile_csrf']."-->";
+//  exit();
+}else{
+  $_SESSION[$OJ_NAME.'_'.'profile_csrf']="";
+}
 if(isset($OJ_LANG)){
   require_once("../../lang/$OJ_LANG.php");
 }else{
@@ -90,5 +96,5 @@ if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.
 
 //$profile.="</ul></li>";
 ?>
-	document.write("<?php echo ( $profile);?>");
-	document.getElementById("profile").innerHTML="<?php echo  isset($sid)?$sid:$MSG_LOGIN  ?>";
+document.write("<?php echo ( $profile);?>");
+document.getElementById("profile").innerHTML="<?php echo  isset($sid)?$sid:$MSG_LOGIN  ?>";

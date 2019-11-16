@@ -9,9 +9,8 @@ if(file_exists("./admin/msg.txt"))
 $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
 if(file_exists("../admin/msg.txt"))
 $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
+/*
 
-
-?>
 <!--  to enable mathjax in hustoj:
 svn export http://github.com/mathjax/MathJax/trunk /home/judge/src/web/mathjax
 <script type="text/javascript"
@@ -23,6 +22,12 @@ or
 </script>
 
 -->
+
+
+*/
+
+?>
+
 <script>
 $(document).ready(function(){
   var msg="<marquee style='margin-top:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+

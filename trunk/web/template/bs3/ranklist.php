@@ -1,3 +1,4 @@
+<?php	if(stripos($_SERVER['REQUEST_URI'],"template"))exit(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

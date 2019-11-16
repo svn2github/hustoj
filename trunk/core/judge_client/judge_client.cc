@@ -2490,10 +2490,10 @@ int get_page_fault_mem(struct rusage &ruse, pid_t &pidApp)
 	}
 	return m_minflt;
 }
-void print_runtimeerror(char *err)
+void print_runtimeerror(char* infile,char *err)
 {
 	FILE *ferr = fopen("error.out", "a+");
-	fprintf(ferr, "Runtime Error:%s\n", err);
+	fprintf(ferr, "%s:%s\n",infile, err);
 	fclose(ferr);
 }
 void clean_session(pid_t p)
@@ -2612,7 +2612,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				default:
 					ACflg = OJ_RE;
 				}
-				print_runtimeerror(strsignal(exitcode));
+				print_runtimeerror(infile+strlen(oj_home)+5,strsignal(exitcode));
 			}
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 
@@ -2652,7 +2652,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				default:
 					ACflg = OJ_RE;
 				}
-				print_runtimeerror(strsignal(sig));
+				print_runtimeerror(infile+strlen(oj_home)+5,strsignal(sig));
 			}
 			break;
 		}
@@ -2717,7 +2717,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 						solution_id, call_id,exitcode);
 
 				write_log(error);
-				print_runtimeerror(error);
+				print_runtimeerror(infile+strlen(oj_home)+5,error);
 				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			}
 #ifdef __mips__
@@ -3144,7 +3144,7 @@ int main(int argc, char **argv)
 			//out file does not exist
 			char error[BUFFER_SIZE];
 			sprintf(error, "missing out file %s, report to system administrator!\n", outfile);
-			print_runtimeerror(error);
+			print_runtimeerror(infile+strlen(oj_home)+5,error);
 			ACflg = OJ_RE;
 		}
 

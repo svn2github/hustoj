@@ -1,7 +1,7 @@
 <?php @session_start();
 	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
 	ini_set("session.cookie_httponly", 1);   
-	header('X-Frame-Options:SAMEORIGIN');
+	//header('X-Frame-Options:SAMEORIGIN');
 
 //for people using hustoj out of China , be careful of the last two line of this file !
 
@@ -35,7 +35,7 @@ static  $OJ_MARK="mark"; // "mark" for right "percent" for WA
 static  $OJ_MEMCACHE=false;  //使用内存缓存
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
-static  $OJ_UDP=false;   //使用UDP通知
+static  $OJ_UDP=true;   //使用UDP通知
 static  $OJ_UDPSERVER="127.0.0.1";
 static  $OJ_UDPPORT=1536;
 static  $OJ_REDIS=false;   //使用REDIS队列

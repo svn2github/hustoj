@@ -7,5 +7,8 @@ sed -i "s#DB_PASS=\"root\"#DB_PASS=\"$PASSWORD\"#g"         /home/judge/src/web/
 
 chown -R www-data:www-data /home/judge/data
 
+regexp=`cat /home/judge/src/web/template/bs3/js.php | grep http://hustoj.com/wx.jpg | grep http://hustoj.com/alipay.png`;
+sed -i "s#$regexp##g" /home/judge/src/web/template/bs3/js.php
+
 service php7.2-fpm start
 nginx -g "daemon off;"

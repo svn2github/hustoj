@@ -39,6 +39,9 @@ for i in `seq 1 $RUNNING`; do
     chown judge /home/judge/run`expr ${i} - 1`;
 done 
 
+regexp=`cat /home/judge/src/web/template/bs3/js.php | grep http://hustoj.com/wx.jpg | grep http://hustoj.com/alipay.png`;
+sed -i "s#$regexp##g" /home/judge/src/web/template/bs3/js.php
+
 service mysql      start  
 service php7.2-fpm start  
 service hustoj     start  

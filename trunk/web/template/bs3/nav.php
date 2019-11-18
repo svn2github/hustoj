@@ -105,8 +105,11 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="profile">Language</span><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href=<?php echo "lang.php?lang=cn&back=".$url?>>中文</a></li>
-                <li><a href=<?php echo "lang.php?lang=en&back=".$url?>>English</a></li>
+                <li><a href="setlang.php?lang=cn">中文</a></li>
+                <li><a href="setlang.php?lang=en">English</a></li>
+                <li><a href="setlang.php?lang=fa">فارسی</a></li>
+                <li><a href="setlang.php?lang=th">ไทย</a></li>
+                <li><a href="setlang.php?lang=ko">한국어</a></li>
               </ul>
             </ul><!-- select language -->
 

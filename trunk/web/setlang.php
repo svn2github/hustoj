@@ -6,5 +6,5 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "en", 'fa', 'ko'
 }
 ?>
 <script>
-    window.history.back();
+    window.history.go(-1);
 </script>

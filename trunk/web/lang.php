@@ -5,7 +5,7 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "en", 'fa', 'ko'
     setcookie("lang", $_GET['lang'], time() + 604800);
     if (isset($_GET['back']) && !empty($_GET['back'])) {
         ?>
-        <script>window.location.go(-1);</script>
+        <script>window.history.go(-1);</script>
         <?php
             exit(0);
     } else {

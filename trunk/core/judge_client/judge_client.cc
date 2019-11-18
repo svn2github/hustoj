@@ -185,7 +185,7 @@ static int py2=1; // caution: py2=1 means default using py3
 #ifdef _mysql_h
 MYSQL *conn;
 #endif
-
+static char jresult[14][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR"};
 static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
@@ -3166,11 +3166,10 @@ int main(int argc, char **argv)
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
-			time_space_index+=sprintf(time_space_table+time_space_index,"%s: mem=%dk time=%dms\n",infile+strlen(oj_home)+5,topmemory/1024,usedtime);	
-
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test);
+			time_space_index+=sprintf(time_space_table+time_space_index,"%s:%s mem=%dk time=%dms\n",infile+strlen(oj_home)+5,jresult[ACflg],topmemory/1024,usedtime);
 			if (use_max_time)
 			{
 				max_case_time =

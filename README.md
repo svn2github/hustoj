@@ -77,6 +77,8 @@ Star us, please!
 
 更新日志
 ------
+2019-11-21 补丁：修复比赛中Edit按钮后可以选择出题人禁用的语言提交。
+
 2019-11-20 更新：在运行结果对比输出（OJ_SHOW_DIFF）中提示每个数据点的结果(AC/WA/TLE...)。
 
 2019-11-16 优化：[muzea](https://github.com/muzea) 开发了从github到[gitee](https://gitee.com/zhblue/hustoj)的同步机制，并部署了CI。

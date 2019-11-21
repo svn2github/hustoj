@@ -1,7 +1,7 @@
 <?php session_start();
 require_once "include/db_info.inc.php";
 require_once "include/my_func.inc.php";
-
+ 
 if (!isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     require_once "oj-header.php";
     echo "<a href='loginpage.php'>$MSG_Login</a>";
@@ -12,6 +12,7 @@ require_once "include/memcache.php";
 require_once "include/const.inc.php";
 $now = strftime("%Y-%m-%d %H:%M", time());
 $user_id = $_SESSION[$OJ_NAME . '_' . 'user_id'];
+$language = intval($_POST['language']);
 
 if (!$OJ_BENCHMARK_MODE) {
     $sql = "SELECT count(1) FROM `solution` WHERE result<4";
@@ -90,6 +91,7 @@ $test_run = false;
 if (isset($_POST['id'])) {
     $id = intval($_POST['id']);
     $test_run = $id <= 0;
+    $langmask=$OJ_LANGMASK;
 } elseif (isset($_POST['pid']) && isset($_POST['cid']) && $_POST['cid'] != 0) {
     $pid = intval($_POST['pid']);
     $cid = intval($_POST['cid']);
@@ -99,7 +101,7 @@ if (isset($_POST['id'])) {
     }
     // check user if private
     $sql =
-        "SELECT `private` FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
+        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
     $result = pdo_query($sql, $cid, $now, $now);
     $rows_cnt = count($result);
     if ($rows_cnt != 1) {
@@ -110,7 +112,7 @@ if (isset($_POST['id'])) {
     } else {
         $row = $result[0];
         $isprivate = intval($row[0]);
-
+	$langmask=$row[1];
         if ($isprivate == 1 && !isset($_SESSION[$OJ_NAME . '_' . 'c' . $cid])) {
             $sql =
                 "SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
@@ -151,13 +153,21 @@ if (isset($_POST['id'])) {
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 */
+    $langmask=$OJ_LANGMASK;
     $test_run = true;
 }
-$language = intval($_POST['language']);
+
 if ($language > count($language_name) || $language < 0) {
     $language = 0;
 }
 $language = strval($language);
+
+    if($langmask&(1<<$language)){
+        $view_errors = "Using unknown programing language!\n[$language][$langmask][".($langmask&(1<<$language))."]";
+        require "template/" . $OJ_TEMPLATE . "/error.php";
+        exit(0);
+		
+    }
 
 $source = $_POST['source'];
 $input_text = "";
@@ -300,7 +310,9 @@ if (~$OJ_LANGMASK & (1 << $language)) {
         $redis->close();
     }
 }
-
+if(isset($OJ_UDP)&&$OJ_UDP){
+	send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
+}
 if(isset($OJ_UDP)&&$OJ_UDP){
         send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
 }

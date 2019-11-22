@@ -55,13 +55,14 @@ function fresh_result(solution_id){
 				window.setTimeout("fresh_result("+solution_id+")",interval);
 				interval*=2;
 			}else{
-				//alert(ra[0]);
+				console.log(ra[0]);
 				switch(ra[0]){
-				 case "6":
-				 case "10":
+				 case 4:
+				 case 6:
+				 case 10:
 					row.cells[3].innerHTML="<a href='reinfo.php?sid="+solution_id+"' class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</a>";
 					break;
-				 case "11":
+				 case 11:
 					row.cells[3].innerHTML="<a href='ceinfo.php?sid="+solution_id+"' class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</a>";
 					break;
 				

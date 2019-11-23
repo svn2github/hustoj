@@ -1,6 +1,5 @@
 <?php @session_start();
 	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
-	ini_set("session.cookie_httponly", 1);   
 	//header('X-Frame-Options:SAMEORIGIN');
 
 //for people using hustoj out of China , be careful of the last two line of this file !
@@ -28,6 +27,7 @@ static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
 static  $OJ_APPENDCODE=false;  // 代码预定模板
+if(!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模式需要允许javascript操作cookie保存当前语言。
 static  $OJ_CE_PENALTY=false;  // 编译错误是否罚时
 static  $OJ_PRINTER=false;  //启用打印服务
 static  $OJ_MAIL=false; //内邮

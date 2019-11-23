@@ -285,13 +285,15 @@ function switchLang(lang){
 }
 function reloadtemplate(lang){
    console.log("lang="+lang);
-   document.cookie="lastlang="+lang.value;
+   document.cookie="lastlang="+lang;
    //alert(document.cookie);
    var url=window.location.href;
    var i=url.indexOf("sid=");
    if(i!=-1) url=url.substring(0,i-1);
- //  if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
- //       document.location.href=url;
+   <?php if (isset($OJ_APPENDCODE)&&$OJ_APPENDCODE){?>
+   if(confirm("<?php echo  $MSG_LOAD_TEMPLATE_CONFIRM?>"))
+        document.location.href=url;
+   <?php }?>
    switchLang(lang);
 }
 function openBlockly(){
@@ -340,7 +342,6 @@ function loadFromBlockly(){
 	    enableSnippets: true,
 	    enableLiveAutocompletion: true
     });
-   reloadtemplate($("#language").val()); 
      
 </script>
 <?php }?>

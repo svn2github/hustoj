@@ -10,6 +10,11 @@ When people asked question, we put the answer here
 新版本
 ----
 
+为什么题目不见了/如何让比赛里的题目也可以在练习里做？
+--
+[参考这里](https://github.com/zhblue/hustoj/issues/520)
+
+
 其他主机怎么连接到oj?
 --
 这取决于买的阿里云还是校园网服务器，或者虚拟机：

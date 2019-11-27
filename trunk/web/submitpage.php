@@ -96,10 +96,18 @@ $view_sample_output="3";
  
 $lastlang=0;
 if(!$view_src){
-	if(isset($_COOKIE['lastlang'])) 
+	if(isset($_COOKIE['lastlang'])&&$_COOKIE['lastlang']!="undefined"){
 		$lastlang=intval($_COOKIE['lastlang']);
-	else 
-		$lastlang=0;
+	}else{
+		$sql="select language from solution where user_id=? order by solution_id desc limit 1";
+		$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+		if(count($result)>0){
+			$lastlang=$result[0][0];
+		}else{
+			$lastlang=0;
+		}
+//			echo "last=$lastlang";
+	}
    $template_file="$OJ_DATA/$problem_id/template.".$language_ext[$lastlang];
    if(file_exists($template_file)){
 	$view_src=file_get_contents($template_file);

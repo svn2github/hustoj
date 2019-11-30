@@ -218,7 +218,7 @@ LiveCD下载安装
 --
 Linux不熟悉的用户推荐使用:
 
-HUSTOJ_LiveCD(关注微信公众号onlinejudge获得百度云下载链接)
+HUSTOJ_LiveCD(发送"livecd"到微信公众号onlinejudge，获得百度云下载链接)
 
 HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 

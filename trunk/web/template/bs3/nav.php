@@ -106,6 +106,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="profile">Language</span><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="setlang.php?lang=cn">中文</a></li>
+		<li><a href="setlang.php?lang=ug">ئۇيغۇرچە</a></li>
                 <li><a href="setlang.php?lang=en">English</a></li>
                 <li><a href="setlang.php?lang=fa">فارسی</a></li>
                 <li><a href="setlang.php?lang=th">ไทย</a></li>

@@ -25,6 +25,11 @@ function is_valid($str2){
     return $n/$m>3;
 }
 
+if(!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+	$view_errors= "I am sorry, You could not view this message!";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+}
 
 $ok=false;
 $id=strval(intval($_GET['sid']));
@@ -34,7 +39,7 @@ $row=$result[0];
 $lang=$row['language'];
 $contest_id=intval($row['contest_id']);
 $isRE=$row['result']==10;
-if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 $view_reinfo="";
 if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||

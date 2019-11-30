@@ -97,9 +97,9 @@ static  $OJ_QQ_CBURL='192.168.0.108';
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
 	$OJ_LANG = $_SESSION[$OJ_NAME . '_' . 'OJ_LANG'];
-} else if (isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], array("cn", "en", 'fa', 'ko', 'th'))) {
+} else if (isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
 	$OJ_LANG = $_COOKIE['lang'];
-} else if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "en", 'fa', 'ko', 'th'))) {
+} else if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
 	$OJ_LANG = $_GET['lang'];
 } else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
 	$OJ_LANG = "cn";

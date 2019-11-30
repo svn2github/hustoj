@@ -97,4 +97,4 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
 clear
-echo "Visit http://127.0.0.1" to get
+echo "Visit http://127.0.0.1/"

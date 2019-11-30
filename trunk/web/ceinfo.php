@@ -22,7 +22,11 @@ function is_valid($str2){
     }
     return $n/$m>3;
 }
-
+if(!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+	$view_errors= "I am sorry, You could not view this message!";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+}
 
 $ok=false;
 $id=intval($_GET['sid']);

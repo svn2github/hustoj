@@ -26,7 +26,7 @@ $view_news .= "<div class='panel panel-default' style='width:80%;margin:0 auto;'
 	
 $result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
 if ( !$result ) {
-	$view_news. = "";
+	$view_news.= "";
 } else {
 	foreach ( $result as $row ) {
 		$view_news .= "<div class='panel panel-default'>";

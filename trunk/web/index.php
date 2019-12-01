@@ -20,23 +20,26 @@ $sql = "select * "
 . "WHERE `defunct`!='Y'"
 . "ORDER BY `importance` ASC,`time` DESC "
 . "LIMIT 50";
-$result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
-if ( !$result ) {
-	$view_news = "<h3>No News Now!</h3>";
-} else {
-	$view_news .= "<div class='panel panel-default' style='width:80%;margin:0 auto;'>";
+$view_news .= "<div class='panel panel-default' style='width:80%;margin:0 auto;'>";
 	$view_news .= "<div class='panel-heading'><h3>" . $MSG_NEWS . "<h3></div>";
 	$view_news .= "<div class='panel-body'>";
+	
+$result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
+if ( !$result ) {
+	$view_news. = "";
+} else {
 	foreach ( $result as $row ) {
 		$view_news .= "<div class='panel panel-default'>";
 		$view_news .= "<div class='panel-heading'><big>" . $row[ 'title' ] . "</big>-<small>" . $row[ 'user_id' ] . "</small></div>";
 		$view_news .= "<div class='panel-body'>" . $row[ 'content' ] . "</div>";
 		$view_news .= "</div>";
 	}
-	$view_news .= "</div>";
-	$view_news .= "<div class='panel-footer'>请到<a target='_blank' href='https://github.com/zhblue/hustoj'> GitHub</a>来，给我们加个星星！&nbsp;Please give us a star on <a target='_blank' href='https://github.com/zhblue/hustoj'>Github</a>!</div>";
-	$view_news .= "</div>";
+	
 }
+$view_news .= "</div>";
+$view_news .= "<div class='panel-footer'>请到<a target='_blank' href='https://github.com/zhblue/hustoj'> GitHub</a>来，给我们加个星星！&nbsp;Please give us a star on <a target='_blank' href='https://github.com/zhblue/hustoj'>Github</a>!</div>";
+$view_news .= "</div>";
+
 $view_apc_info = "";
 
 $sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 8000) solution  where result<13 group by md order by md desc limit 200";

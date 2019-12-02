@@ -132,26 +132,27 @@ if(isset($_GET['cid'])){
   //echo "$keyword";
 
   $mycontests = "";
-  $sql="select distinct contest_id from solution where contest_id>0 and user_id=?";
-  $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id']);
-  foreach($result as $row){
-	$mycontests.=",".$row[0];
-  }
-  $len = mb_strlen($OJ_NAME.'_');
-
-  foreach($_SESSION as $key => $value){
-    if(($key[$len]=='m'||$key[$len]=='c')&&intval(mb_substr($key,$len+1))>0){
-      //echo substr($key,1)."<br>";
-      $mycontests.=",".intval(mb_substr($key,$len+1));
-    }
-  }
-//  echo "=====>$mycontests<====";
-
-  if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
- 
   $wheremy = "";
-  if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
+  if(isset($_SESSION[$OJ_NAME.'_user_id'])){
+	  $sql="select distinct contest_id from solution where contest_id>0 and user_id=?";
+	  $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id']);
+	  foreach($result as $row){
+		$mycontests.=",".$row[0];
+	  }
+	  $len = mb_strlen($OJ_NAME.'_');
 
+	  foreach($_SESSION as $key => $value){
+	    if(($key[$len]=='m'||$key[$len]=='c')&&intval(mb_substr($key,$len+1))>0){
+	      //echo substr($key,1)."<br>";
+	      $mycontests.=",".intval(mb_substr($key,$len+1));
+	    }
+	  }
+	//  echo "=====>$mycontests<====";
+
+	  if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
+	 
+	  if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
+  }
   $sql = "SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC LIMIT 1000";
 
   if($keyword){

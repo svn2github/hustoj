@@ -37,6 +37,7 @@ if (!$OJ_BENCHMARK_MODE) {
         $_SESSION[$OJ_NAME . '_' . "vcode"] = null;
         $err_str = $err_str . "Verification Code Wrong!\\n";
         $err_cnt++;
+	$view_errors=$err_str;
         require "template/" . $OJ_TEMPLATE . "/error.php";
 
         exit(0);

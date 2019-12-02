@@ -165,7 +165,7 @@ try{
   <?php 
     //若有队伍从未进行过任何提交，数据库solution表里不会有数据，榜单上该队伍不存在，总rows数量不等于报名参赛队伍数量，奖牌比例的计算会出错
     //解决办法：可以为现场赛采用人为设定有效参赛队伍数$OJ_ON_SITE_TEAM_TOTAL，值为0时则采用榜单计算。详情见db_info.inc.php
-    if($OJ_ON_SITE_TEAM_TOTAL!=0)
+    if(isset($OJ_ON_SITE_TEAM_TOTAL)&&$OJ_ON_SITE_TEAM_TOTAL!=0)
       echo "var total=".$OJ_ON_SITE_TEAM_TOTAL.";";
     else
       echo "var total=getTotal(rows);";

@@ -31,6 +31,9 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo $OJ_HOME?>"><i class="icon-home"></i><?php echo $OJ_NAME?></a>
+	 <?php if(file_exists("moodle")){?>
+            <a class="navbar-brand" href="moodle"><i class="icon-home"></i>Moodle</a>
+	 <?php }?>
          
           </div>
           <div id="navbar" class="navbar-collapse collapse">

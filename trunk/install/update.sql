@@ -1,4 +1,5 @@
  alter table solution MODIFY COLUMN in_date datetime not null default '2009-06-13 19:00:00';
+ alter table solution MODIFY COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0;
  
  select 1 from topic limit 1;
 CREATE TABLE `topic` ( `tid` int(11) NOT NULL auto_increment, `title` varbinary(60) NOT NULL, `status` int(2) NOT NULL default '0', `top_level` int(2) NOT NULL default '0', `cid` int(11) default NULL, `pid` int(11) NOT NULL, `author_id` varchar(20) NOT NULL, PRIMARY KEY (`tid`), KEY `cid` (`cid`,`pid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ;

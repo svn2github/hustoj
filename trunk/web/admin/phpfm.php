@@ -3665,7 +3665,7 @@ function upload_form(){
         <tr><th colspan=2>".et('Upload')."</th></tr>
         <tr><td align=right><b>".et('Destination').":<td><b><nobr>".basename($current_dir)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
-            echo "<tr><td width=1 align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
+            echo "<tr><td align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
             $test_js .= "(document.upload_form.file$x.value.length>0)||";
         }
         echo "

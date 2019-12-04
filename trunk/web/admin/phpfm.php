@@ -2423,6 +2423,7 @@ function save_upload($temp_file,$filename,$dir_dest) {
                     $out = 1;
                 } else $out = 2;
             }
+	if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$file);
         } else $out = 3;
     } else $out = 4;
     return $out;
@@ -4583,7 +4584,8 @@ function frame3(){
                         $zipfile->extract_files();
                     }
                     unset($zipfile);
- 		    system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(function_exists("system"))system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$current_dir."/*");
                     reloadframe("parent",2);
                 }
             }

@@ -1,6 +1,4 @@
- alter table solution MODIFY COLUMN in_date datetime not null default '2009-06-13 19:00:00';
- alter table solution MODIFY COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0;
- 
+
  select 1 from topic limit 1;
 CREATE TABLE `topic` ( `tid` int(11) NOT NULL auto_increment, `title` varbinary(60) NOT NULL, `status` int(2) NOT NULL default '0', `top_level` int(2) NOT NULL default '0', `cid` int(11) default NULL, `pid` int(11) NOT NULL, `author_id` varchar(20) NOT NULL, PRIMARY KEY (`tid`), KEY `cid` (`cid`,`pid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ;
 select 1 from reply limit 1;
@@ -10,9 +8,9 @@ ALTER TABLE `problem` DROP COLUMN `sample_Program`, DROP COLUMN `ratio`, DROP CO
 select 1 from sim limit 1;
 CREATE TABLE `sim` ( `s_id` int(11) NOT NULL, `sim_s_id` int(11) NULL, `sim` int(11) NULL, PRIMARY KEY (`s_id`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;;
 select 1 from mail limit 1;
-CREATE TABLE `mail` ( `mail_id` int(11) NOT NULL auto_increment, `to_user` varchar(20) NOT NULL default '', `from_user` varchar(20) NOT NULL default '', `title` varchar(200) NOT NULL default '', `content` text, `new_mail` tinyint(1) NOT NULL default '1', `reply` tinyint(4) default '0', `in_date` datetime default NULL, `defunct` char(1) NOT NULL default 'N', PRIMARY KEY (`mail_id`), KEY `uid` (`to_user`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;;
-ALTER TABLE `solution` MODIFY COLUMN `user_id` CHAR(48) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, DROP COLUMN `className`,MODIFY COLUMN `ip` CHAR(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;;
-;
+CREATE TABLE `mail` ( `mail_id` int(11) NOT NULL auto_increment, `to_user` varchar(20) NOT NULL default '', `from_user` varchar(20) NOT NULL default '', `title` varchar(200) NOT NULL default '', `content` text, `new_mail` tinyint(1) NOT NULL default '1', `reply` tinyint(4) default '0', `in_date` datetime default NULL, `defunct` char(1) NOT NULL default 'N', PRIMARY KEY (`mail_id`), KEY `uid` (`to_user`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+ALTER TABLE `solution` MODIFY COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0,MODIFY COLUMN in_date datetime not null default '2009-06-13 19:00:00', MODIFY COLUMN `user_id` CHAR(48)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `solution` DROP COLUMN `className`;
 select langmask from contest limit 1;;
 ALTER TABLE `contest` ADD COLUMN `langmask` TINYINT NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;;
 optimize table `compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;;

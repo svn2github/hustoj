@@ -31,7 +31,7 @@ sudo bash install-interactive.sh
 如果您没有预先mysql服务器，安装安装过程中会自动安装，并触发root账户密码设置操作。这种情况下，第一次询问您数据库账号，请输入root,然后会有三次询问数据库密码的提示，请确保输入完全相同的三次密码，并自行记录下来，以做将来备份迁移时使用。
 
 
-2、手动安装顺序如下：
+2、手动安装顺序如下[已经淘汰，仅供参考]：
 
 下载源码
 ```
@@ -47,15 +47,15 @@ sudo bash install-interactive.sh
 	source db.sql
 ```
 配置Web界面
-        cp -R web /var/www/html/JudgeOnline
+        cp -R web /home/judge/src/web
 注册用户
-	http://127.0.0.1/JudgeOnline/registerpage.php
+	http://127.0.0.1/registerpage.php
 	注册一个普通帐号zhblue
 创建管理员
     insert into privilege(user_id,rightstr) values('zhblue','administrator');
     zhblue 为需要加管理员权限的帐号
 管理员登录
-          普通登录后访问http://127.0.0.1/JudgeOnline/admin
+          普通登录后访问http://127.0.0.1/admin
 ##########添加用户
 useradd --uid 1536 judge
 judge_client.cc:424  

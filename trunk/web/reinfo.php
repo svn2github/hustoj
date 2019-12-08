@@ -26,7 +26,7 @@ function is_valid($str2){
 }
 
 if(!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	$view_errors= "I am sorry, You could not view this message!";
+	$view_errors= $MSG_WARNING_ACCESS_DENIED ;
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
@@ -65,7 +65,7 @@ if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||
 	
 }else{
 	
-	$view_errors= "I am sorry, You could not view this message!";
+	$view_errors= $MSG_WARNING_ACCESS_DENIED ;
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 	

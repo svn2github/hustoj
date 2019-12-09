@@ -2201,14 +2201,14 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
 	if (time_limit_to_total)
-		LIM.rlim_cur = time_lmt / cpu_compensation + 1;
+		LIM.rlim_cur = (time_lmt / cpu_compensation - usedtime / 1000.0f) + 1;
 	else
-		LIM.rlim_cur = (time_lmt / cpu_compensation - usedtime / 1000) + 1;
+		LIM.rlim_cur = time_lmt / cpu_compensation + 1;
 	LIM.rlim_max = LIM.rlim_cur;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	alarm(0);
-	alarm(time_lmt * 5 / cpu_compensation);
+	alarm(time_lmt / cpu_compensation);
 
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
@@ -3126,10 +3126,6 @@ int main(int argc, char **argv)
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 		}
-		if (finalACflg == OJ_TL)
-		{
-			usedtime = time_lmt * 1000;
-		}
 		if (ACflg == OJ_RE)
 		{
 			if (DEBUG)
@@ -3193,10 +3189,8 @@ int main(int argc, char **argv)
 				max_case_time =
 					usedtime > max_case_time ? usedtime : max_case_time;
 				usedtime = 0;
-				total_time+=usedtime;
-			}else{
-				total_time=usedtime;
 			}
+			total_time+=usedtime;
 			//clean_session(pidApp);
 		}
 		if (oi_mode)
@@ -3234,12 +3228,8 @@ int main(int argc, char **argv)
 	if (use_max_time)
 	{
 		usedtime = max_case_time;
-	}
-	if (finalACflg == OJ_TL)
-	{
-		usedtime = time_lmt * 1000;
-		if (DEBUG)
-			printf("usedtime:%d\n", usedtime);
+	}else{
+		usedtime = total_time;
 	}
 	if (oi_mode)
 	{

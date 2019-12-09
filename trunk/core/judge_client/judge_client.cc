@@ -160,6 +160,8 @@ static int sim_enable = 0;
 static int oi_mode = 0;
 static int full_diff = 0;
 static int use_max_time = 0;
+static int time_limit_to_total= 0;
+static int total_time= 0;
 
 static int http_judge = 0;
 static char http_baseurl[BUFFER_SIZE];
@@ -489,6 +491,7 @@ void init_mysql_conf()
 			read_int(buf, "OJ_FULL_DIFF", &full_diff);
 			read_int(buf, "OJ_SHM_RUN", &shm_run);
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
+			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
 			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
@@ -2197,7 +2200,7 @@ void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
 	// set the limit
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
-	if (oi_mode)
+	if (time_limit_to_total)
 		LIM.rlim_cur = time_lmt / cpu_compensation + 1;
 	else
 		LIM.rlim_cur = (time_lmt / cpu_compensation - usedtime / 1000) + 1;
@@ -2431,8 +2434,23 @@ void judge_solution(int &ACflg, int &usedtime, int time_lmt, int isspj,
 	int comp_res;
 	if (!oi_mode)
 		num_of_test = 1.0;
-	if (ACflg == OJ_AC && usedtime > time_lmt * 1000 * (use_max_time ? 1 : num_of_test))
-		ACflg = OJ_TL;
+	
+	if (ACflg == OJ_AC){
+		int real_limit=1000;
+		if(time_limit_to_total){                 // 如果限制总时间
+			real_limit=time_lmt*1000;
+			if(total_time>real_limit) ACflg = OJ_TL;   // 总时间超过
+			if(usedtime> real_limit) ACflg = OJ_TL;    // 单点超过
+		}else if(num_of_test>0){                        // 如果数据点不为0，且限制单点时间
+			real_limit=num_of_test*time_lmt*1000;
+			if(total_time>real_limit) ACflg = OJ_TL;  //总时间超过测试点数*限制
+			if(usedtime> time_lmt*1000) ACflg = OJ_TL; // 单点超过限制
+		}else{                                            //测试数为0 ，这种情况不应该出现，但给出，作为保险。
+			real_limit=time_lmt*1000; // fallback
+			if(usedtime > real_limit) ACflg = OJ_TL;
+			if(total_time>real_limit) ACflg = OJ_TL;
+		}
+	}
 	if (topmemory > mem_lmt * STD_MB)
 		ACflg = OJ_ML; //issues79
 	// compare
@@ -3175,6 +3193,9 @@ int main(int argc, char **argv)
 				max_case_time =
 					usedtime > max_case_time ? usedtime : max_case_time;
 				usedtime = 0;
+				total_time+=usedtime;
+			}else{
+				total_time=usedtime;
 			}
 			//clean_session(pidApp);
 		}

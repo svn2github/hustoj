@@ -10,6 +10,16 @@ When people asked question, we put the answer here
 新版本
 ----
 
+电脑配置太高，造了很多数据还是没法卡住暴力怎么办？
+--
+修改/home/judge/etc/judge.conf
+```
+OJ_CPU_COMPENSATION=1.0
+```
+增加这个值可以降低CPU的评测速度，安装脚本根据CPU的bogomips值来初始化。
+最高不超过100，设为100可以将原先1ms的测试数据计成100ms。
+
+
 为什么题目不见了/如何让比赛里的题目也可以在练习里做？
 --
 [参考这里](https://github.com/zhblue/hustoj/issues/520)

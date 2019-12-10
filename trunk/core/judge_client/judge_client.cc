@@ -3180,6 +3180,8 @@ int main(int argc, char **argv)
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
+			total_time+=usedtime;
+			printf("time:%d/%d\n",usedtime,total_time);
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test);
@@ -3190,7 +3192,6 @@ int main(int argc, char **argv)
 					usedtime > max_case_time ? usedtime : max_case_time;
 				usedtime = 0;
 			}
-			total_time+=usedtime;
 			//clean_session(pidApp);
 		}
 		if (oi_mode)
@@ -3227,8 +3228,10 @@ int main(int argc, char **argv)
 	}
 	if (use_max_time)
 	{
+		if(DEBUG) printf("use max case time:%d\n",max_case_time);
 		usedtime = max_case_time;
 	}else{
+		if(DEBUG) printf("use total time:%d\n",total_time);
 		usedtime = total_time;
 	}
 	if (oi_mode)

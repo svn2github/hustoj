@@ -3190,8 +3190,8 @@ int main(int argc, char **argv)
 			{
 				max_case_time =
 					usedtime > max_case_time ? usedtime : max_case_time;
-				usedtime = 0;
 			}
+				usedtime = 0;
 			//clean_session(pidApp);
 		}
 		if (oi_mode)

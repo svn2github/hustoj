@@ -52,7 +52,7 @@ int LANG_BV[CALL_ARRAY_SIZE] = { 0,1,3,4,5,8,9,10,12,13,14,16,21,33,39,59,63,72,
 		SYS_munmap, SYS_open, SYS_read, SYS_rt_sigaction, SYS_rt_sigprocmask,
 		SYS_stat, SYS_uname, SYS_write, 14, 0 };
 //python
-int LANG_YV[CALL_ARRAY_SIZE] = {0,2,3,4,5,6,8,9,10,11,12,13,14,16,21,32,59,72,78,79,89,97,99,102,104,107,108,131,158,218,228,231,272,273,318,39,99,302,99,32,72,131,1,202,257,41, 42, 146, SYS_mremap, 158, 117, 60, 39, 102, 191,
+int LANG_YV[CALL_ARRAY_SIZE] = {0,2,3,4,5,6,8,9,10,11,12,13,14,16,21,32,59,72,78,79,89,97,99,102,104,107,108,131,158,217,218,228,231,272,273,318,39,99,302,99,32,72,131,1,202,257,41, 42, 146, SYS_mremap, 158, 117, 60, 39, 102, 191,
 		SYS_access, SYS_arch_prctl, SYS_brk, SYS_close, SYS_execve,
 		SYS_exit_group, SYS_fcntl, SYS_fstat, SYS_futex, SYS_getcwd,
 		SYS_getdents, SYS_getegid, SYS_geteuid, SYS_getgid, SYS_getrlimit,

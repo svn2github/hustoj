@@ -1,7 +1,9 @@
 <?php session_start();
 require_once "include/db_info.inc.php";
 require_once "include/my_func.inc.php";
- 
+if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&!isset($_SESSION[$OJ_NAME.'_'.'http_judge']))
+		 require_once(dirname(__FILE__)."/include/csrf_check.php");
+
 if (!isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     require_once "oj-header.php";
     echo "<a href='loginpage.php'>$MSG_Login</a>";

@@ -110,8 +110,7 @@ require_once(dirname(__FILE__)."/pdo.php");
 		// use db
 	//pdo_query("set names utf8");	
 		
-	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&!isset($_SESSION[$OJ_NAME.'_'.'http_judge']))
-		 require_once(dirname(__FILE__)."/csrf_check.php");
+
 
 	//sychronize php and mysql server with timezone settings, dafault setting for China
 	//if you are not from China, comment out these two lines or modify them.

@@ -75,4 +75,15 @@ else
 	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
 fi
 /usr/bin/judged
+systemctl enable hustoj
+systemctl enable nginx
+systemctl enable mysql
+systemctl enable php7.3-fpm
+systemctl enable judged
 
+cls
+reset
+
+echo "Remember your database account for HUST Online Judge:"
+echo "username:$USER"
+echo "password:$PASSWORD"

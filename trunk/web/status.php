@@ -271,11 +271,11 @@ for ($i=0;$i<$rows_cnt;$i++){
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
+                        $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= "$mark</a>";
 			else
-				$view_status[$i][3].="</span>";
+				$view_status[$i][3].="</a>";
 
                         if( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 

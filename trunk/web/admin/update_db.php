@@ -171,10 +171,12 @@ $tsql[28]="create TABLE `share_code` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
 $tsql[29]="alter TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
 $csql[29]="update contest c inner JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr set c.user_id=p.user_id";
-$tsql[30]="alter TABLE  `contest_problem` ADD  `c_accepted` INT NOT NULL DEFAULT  '0' AFTER  `num` ,ADD  `c_submit` INT NOT NULL DEFAULT  '0' AFTER  `c_accepted` ;";
-$csql[30]="update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit;update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted    =sb.ac";
-$tsql[31]="alter table solution add column nick char(20) not null default '' after user_id ";
-$csql[31]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
+$tsql[30]="alter TABLE  `contest_problem` ADD  `c_accepted` INT NOT NULL DEFAULT  '0' AFTER  `num` ,ADD  `c_submit` INT NOT NULL DEFAULT  '0' AFTER  `c_accepted`";
+$csql[30]="";
+$tsql[31]="update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit";
+$csql[31]="update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted=sb.ac";
+$tsql[32]="alter table solution add column nick char(20) not null default '' after user_id ";
+$csql[32]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

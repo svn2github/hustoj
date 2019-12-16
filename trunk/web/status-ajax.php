@@ -34,7 +34,7 @@ if (isset($_GET['solution_id'])){
 				$sql="SELECT `error` FROM `runtimeinfo` WHERE `solution_id`=?";
 			}
 			$result=pdo_query($sql,$solution_id);
-			 $row=$result[0];
+			$row=$result[0];
 			if($row){
 					echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 					$sql="delete from custominput where solution_id=?";
@@ -47,7 +47,21 @@ if (isset($_GET['solution_id'])){
 		    if(isset($_GET['q'])&&"user_id"==$_GET['q']){
 			echo $row['user_id'];
 		    }else{
-			echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'].",".($row['pass_rate']*100);
+			$contest_id=$row['contest_id'];
+			if($contest_id>0){
+				$result=pdo_query("select title from contest where contest_id=?",$contest_id);
+				$contest_title=$result[0][0];
+				if(stripos($contest_title,$OJ_NOIP_KEYWORD)!==false){
+					echo "$OJ_NOIP_KEYWORD";
+					exit(0);
+				}
+
+			}
+			if(isset($_GET['t'])&&"json"==$_GET['t']){
+				echo json_encode($row);
+			}else{
+				echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'].",".($row['pass_rate']*100);
+			}
 		    }
 		}
 	}else{

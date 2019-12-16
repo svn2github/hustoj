@@ -102,7 +102,7 @@ if(isset($_GET['cid'])){
   $view_problemset = Array();
 
   $cnt = 0;
-  $noip=(time()<$end_time) && (stripos($view_title,"noip")!==false);
+  $noip=(time()<$end_time) && (stripos($view_title,$OJ_NOIP_KEYWORD)!==false);
   foreach($result as $row){
     $view_problemset[$cnt][0] = "";
     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!$noip) $view_problemset[$cnt][0] = check_ac($cid,$cnt);

@@ -190,8 +190,8 @@ if ($loggedon==$auth_pass){
                 case 5: server_info(); break;
                 //case 6: execute_cmd(); break;
                 case 7: edit_file_form(); break;
-                case 8: chmod_form(); break;
-                case 9: shell_form(); break;
+                //case 8: chmod_form(); break;
+                //case 9: shell_form(); break;
                 case 10: upload_form(); break;
                 //case 11: execute_file(); break;
                 default: frameset();

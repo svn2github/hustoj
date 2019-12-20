@@ -303,6 +303,10 @@ if (~$OJ_LANGMASK & (1 << $language)) {
 
 	$sql="update problem set submit=submit+1 where problem_id=?";
 	pdo_query($sql,$id);
+	if(isset($cid)&&$cid>0){
+		$sql="update contest_problem set c_submit=c_submit+1 where contest_id=? and num=?";
+		pdo_query($sql,$cid,$pid);
+	}
     }
     $sql = "update solution set result=0 where solution_id=?";
     pdo_query($sql, $insert_id);

@@ -30,7 +30,10 @@
 					$sql="select ip from loginlog where user_id=? and time>? order by time desc";
 					$rows=pdo_query($sql,$user_id,$start_time);
 					$lastip=$rows[0][0];
-					if((!empty($lastip))&&$lastip!=$ip) { //如果考试开后曾经登陆过，则之后登陆所用ip必须保持一致。
+					$sql="select count(1) from `privilege` where `user_id`=? and `rightstr`='administrator' limit 1";
+                                        $rows=pdo_query($sql, $user_id);
+                                        $isAdministrator=($rows[0][0]>0);
+					if((!empty($lastip))&&$lastip!=$ip&&!($isAdministrator)) { //如果考试开后曾经登陆过，则之后登陆所用ip必须保持一致。
 						$view_errors="$MSG_WARNING_LOGIN_FROM_DIFF_IP($lastip/$ip) $MSG_WARNING_DURING_EXAM_NOT_ALLOWED!";
 						return false;
 					}//如遇机器故障，可经管理员后台指定新的ip来允许登陆。

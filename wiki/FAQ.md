@@ -13,9 +13,13 @@ When people asked question, we put the answer here
 
 后台导入问题失败
 --
+
 1、先用谷歌浏览器直接打开xml文件，看是否有语法错误，如果有，用文本编辑器修订提示的行号。
+
 2、如果超过100M,可以先用EasyFPSViewer拆分成多个小文件，然后再导入。
+
 3、对于HUSTOJ，可以先压缩为zip再上传导入
+
 4、修改/etc/php/7.2/fpm/php.ini, 提高post_max_size、upload_max_filesize 、memory_limit、max_execution_time 的值。修改后执行sudo service php7.2-fpm restart生效。
 
 

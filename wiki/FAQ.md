@@ -10,6 +10,16 @@ When people asked question, we put the answer here
 新版本
 ----
 
+
+导入失败
+--
+1、先用谷歌浏览器直接打开xml文件，看是否有语法错误，如果有，用文本编辑器修订提示的行号。
+2、如果超过100M,可以先用EasyFPSViewer拆分成多个小文件，然后再导入。
+3、对于HUSTOJ，可以先压缩为zip再上传导入
+
+
+
+
 电脑配置太高，造了很多数据还是没法卡住暴力怎么办？
 --
 修改/home/judge/etc/judge.conf

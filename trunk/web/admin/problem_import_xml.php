@@ -46,6 +46,7 @@ function submitSolution($pid,$solution,$language)
 }
 ?>
 Import Free Problem Set ... <br>
+如果导入失败，请参考<a href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md" target="_blank">FAQ</a>。
 
 <?php
 function getValue($Node, $TagName) {

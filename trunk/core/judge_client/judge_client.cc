@@ -1150,13 +1150,14 @@ void _update_problem_mysql(int p_id,int cid) {
 		if (mysql_real_query(conn, sql, strlen(sql)))
 			write_log(mysql_error(conn));
 	}
-		sprintf(sql,
+	/*	sprintf(sql,
 			"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d) WHERE `problem_id`=%d",
 			p_id, p_id);
 
 	
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
+	*/
 }
 #endif
 void update_problem(int pid,int cid) {

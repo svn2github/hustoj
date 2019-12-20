@@ -299,6 +299,10 @@ if (~$OJ_LANGMASK & (1 << $language)) {
         $sql =
             "INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES(?,?)";
         pdo_query($sql, $insert_id, $input_text);
+    }else{
+
+	$sql="update problem set submit=submit+1 where problem_id=?";
+	pdo_query($sql,$id);
     }
     $sql = "update solution set result=0 where solution_id=?";
     pdo_query($sql, $insert_id);

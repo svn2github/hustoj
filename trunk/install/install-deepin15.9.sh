@@ -66,6 +66,8 @@ fi
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
+
 /etc/init.d/php7.0-fpm restart
 service php7.0-fpm restart
 

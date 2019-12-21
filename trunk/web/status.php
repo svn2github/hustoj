@@ -40,7 +40,7 @@ if (isset($_GET['cid'])){
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
-		if(time()<$end_time && stripos($title,"noip")!==false){
+		if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
 		      $view_errors =  "<h2> $MSG_NOIP_WARNING <a href=\"contest.php?cid=$cid\">返回比赛</a></h2>";
 		      require("template/".$OJ_TEMPLATE."/error.php");
 		      exit(0);

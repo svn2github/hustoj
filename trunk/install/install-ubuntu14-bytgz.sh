@@ -60,6 +60,8 @@ sed -i "s:#\tinclude fastcgi_params;:\tinclude fastcgi_params;\n\t}:g" /etc/ngin
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php5/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/php.ini
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php5 -name www.conf`
+
 /etc/init.d/php5-fpm restart
 service php5-fpm restart
 cd src/core

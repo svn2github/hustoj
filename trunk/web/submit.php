@@ -104,13 +104,15 @@ if (isset($_POST['id'])) {
     }
     // check user if private
     $sql =
-        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
-    $result = pdo_query($sql, $cid, $now, $now);
+        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
+    //    "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
+    //$result = pdo_query($sql, $cid, $now, $now);
+    $result = mysql_query_cache($sql);
     $rows_cnt = count($result);
     if ($rows_cnt != 1) {
-        echo "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+        $view_errors.= "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
 
-        require_once "oj-footer.php";
+        require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
     } else {
         $row = $result[0];
@@ -233,7 +235,7 @@ if ($len > 65536) {
     exit(0);
 }
 
-if (!$OJ_BENCHMARK_MODE) {
+if (false&&!$OJ_BENCHMARK_MODE) {
     // last submit
     $now = strftime("%Y-%m-%d %X", time() - 1);
     $sql =

@@ -143,7 +143,7 @@ $(document).ready(function()
   metal();
 <?php } ?>
 
-        setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000)
+        setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000);
 });
 </script>
 <script>

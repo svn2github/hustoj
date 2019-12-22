@@ -142,7 +142,7 @@ $(document).ready(function()
 <?php if($OJ_SHOW_METAL) { ?>
   metal();
 <?php } ?>
-$(document).ready(function(){
+
         setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000)
 });
 </script>

@@ -16,8 +16,10 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 ?>
 <div class="container">
 Import FPS data ,please make sure you file is smaller than [<?php echo $maxfile?>] <br/>
-or set upload_max_filesize and post_max_size in PHP.ini<br/>
-if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in php.ini.<br>
+	or set upload_max_filesize and post_max_size in <span style='color:blue'>php.ini</span><br/>
+if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in <span style='color:blue'>php.ini</span>.<br>
+	
+To locate the file , use <span style='color:blue'> find /etc -name php.ini </span>
 <?php 
     $show_form=true;
    if(!isset($OJ_SAE)||!$OJ_SAE){

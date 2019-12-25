@@ -93,6 +93,7 @@ systemctl enable mysql
 systemctl enable php7.3-fpm
 systemctl enable judged
 
+echo "Note: skip-networking is needed for Andorid based Linux Deploy to start mariadb "
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"

@@ -177,6 +177,9 @@ $tsql[31]="update contest_problem cp inner join (select count(1) submit,contest_
 $csql[31]="update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted=sb.ac";
 $tsql[32]="alter table solution add column nick char(20) not null default '' after user_id ";
 $csql[32]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
+$tsql[33]="update problem p inner join (select problem_id pid ,count(1) submit from solution group by problem_id) s on p.problem_id=s.pid set p.submit=s.submit;";
+$csql[33]="";
+
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

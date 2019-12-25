@@ -50,7 +50,7 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"
 else
-
+        sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default

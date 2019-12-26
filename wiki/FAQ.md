@@ -10,6 +10,19 @@ When people asked question, we put the answer here
 新版本
 ----
 
+数据库账号密码是什么，如何登陆mysql?
+--
+数据库账号密码存放在两个配置文件中：
+```
+/home/judge/etc/judge.conf
+/home/judge/src/web/include/db_info.inc.php
+```
+新版本中，快速登陆mysql的脚本在install目录里，名字为mysql.sh
+使用方法
+```
+sudo bash /home/judge/src/install/mysql.sh
+```
+
 
 后台导入问题失败
 --

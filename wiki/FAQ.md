@@ -9,6 +9,13 @@ When people asked question, we put the answer here
 
 新版本
 ----
+请问如何重启判题机？
+--
+```
+sudo pkill -9 judged
+sudo judged
+```
+
 XXXXX 这个文件是在哪的
 --
 ```

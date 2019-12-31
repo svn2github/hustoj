@@ -12,9 +12,9 @@
 </head>
 
 <body>
-	
+	<h4><a target='_blank' href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md">管理员常见问题</a></h4>	
 <hr>
-<h4>
+
 <ul>
 
   <li><a class='btn btn-danger' href="../status.php" target="_top"><b><?php echo $MSG_SEEOJ?></b></a><?php echo $MSG_HELP_SEEOJ?>
@@ -74,6 +74,6 @@
    
 <?php }
 ?>
-<h4>
+
 </body>
 </html>

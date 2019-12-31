@@ -9,6 +9,12 @@ When people asked question, we put the answer here
 
 新版本
 ----
+XXXXX 这个文件是在哪的
+--
+```
+   sudo find /home/judge -name "XXXXX"
+```
+
 
 数据库账号密码是什么，如何登陆mysql?
 --

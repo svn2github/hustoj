@@ -92,6 +92,7 @@ OJ_CPU_COMPENSATION=1.0
 * 设置db_info.inc.php中的 $OJ_MARK="mark";   // 非AC的提交结果显示得分而非错误比率
 * 设置db_info.inc.php中的 $OJ_OI_1_SOLUTION_ONLY=true; //比赛是否采用noip中的仅保留最后一次提交的规则。
 * 添加比赛时，比赛标题中包含"NOIP"这个关键词  // 赛后才能看结果
+* "NOIP"这个敏感词在db_info.inc.php中可以修改
 
 随机的CE编译错误
 --

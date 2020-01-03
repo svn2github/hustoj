@@ -5,7 +5,7 @@ apt-get install -y subversion
 cd /home/judge/
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-for pkg in "make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml"
+for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml"
 do
 	while ! apt-get install -y $pkg 
 	do

@@ -49,9 +49,9 @@ Star us, please!
 
 [校园网安装](#%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%AE%89%E8%A3%85)
 
-[基于Ubuntu16.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
-
 [基于Ubuntu18.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
+
+[基于Ubuntu16.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
 
 [基于Deepin深度15安装](#%E5%9F%BA%E4%BA%8Edeepin15%E5%AE%89%E8%A3%85)
 
@@ -159,22 +159,24 @@ Star us, please!
 ```
 sudo bash install-ubuntu16-bytgz.sh 19.06.04.tar.gz
 ```
+
+
+基于Ubuntu18.04安装
+--
+
+高级用户ubuntu18.04(推荐使用)
+
+    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
+    sudo bash install-ubuntu18.04.sh
+    
 基于Ubuntu16.04安装
 --
-首先安装ubuntu16.04（推荐使用,php7速度杠杠的），然后用下面脚本快速安装OJ：  
+首先安装ubuntu16.04（如果没有18再选这个），然后用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
     sudo bash install-ubuntu16+.sh
 
 https://www.youtube.com/watch?v=nlhmfZqyHnA 
-
-基于Ubuntu18.04安装
---
-
-高级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
-
-    wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
-    sudo bash install-ubuntu18.04.sh
     
 基于Deepin15+安装
 --

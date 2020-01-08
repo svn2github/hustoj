@@ -146,7 +146,7 @@ Star us, please!
 
 <b>不要</b>使用LNMP/LAMP/Cpanel/其他面板程序提供的Mysql Nginx Apache PHP 环境，安装脚本已经包含所有必须环境的安装。
 
-腾讯云用户请换软件源，增加multiverse。
+腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)，增加multiverse。
 
 阿里云用户请百度“阿里云 80端口”
 
@@ -161,7 +161,7 @@ sudo bash install-ubuntu16-bytgz.sh 19.06.04.tar.gz
 ```
 
 
-基于Ubuntu18.04安装
+基于Ubuntu18.04安装  / 腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)
 --
 
 高级用户ubuntu18.04(推荐使用)
@@ -169,7 +169,7 @@ sudo bash install-ubuntu16-bytgz.sh 19.06.04.tar.gz
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
     
-基于Ubuntu16.04安装
+基于Ubuntu16.04安装 / 腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)
 --
 首先安装ubuntu16.04（如果没有18再选这个），然后用下面脚本快速安装OJ：  
 

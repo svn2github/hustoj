@@ -9,6 +9,14 @@ When people asked question, we put the answer here
 
 新版本
 ----
+不能访问github，国内网，如何通过gitee安装？
+--
+```
+wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
+sudo bash install-ubuntu18-gitee.sh
+```
+
+
 请问如何重启判题机？
 --
 ```

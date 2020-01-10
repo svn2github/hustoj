@@ -5,7 +5,7 @@ apt-get install -y git
 cd /home/judge/
 
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-git clone https://github.com/zhblue/hustoj.git git
+git clone https://gitee.com/zhblue/hustoj.git git
 cp -a git/trunk src
 for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml"
 do

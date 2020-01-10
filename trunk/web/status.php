@@ -63,14 +63,12 @@ if (isset($_GET['cid'])){
         //require_once("oj-header.php");
   if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
-	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
-	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
     if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-                  $sql="WHERE (contest_id=0 or contest_id is null)  ";
-    }else{
+                  $sql="WHERE 1 ";
+  }else{
         $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
-    }
+  }
 
 }
 $start_first=true;

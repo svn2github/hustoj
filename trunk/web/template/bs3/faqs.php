@@ -179,7 +179,7 @@ public class Main{
 			<br>
 			<hr>
 			<center>
-				<font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php">HUSTOJ BBS</a>
+				<font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php"><?php echo $MSG_BBS?></a>
 				</font>
 			</center>
 			<hr>

@@ -87,7 +87,7 @@ $csql[9]="CREATE TABLE  `runtimeinfo` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
-$tsql[10]="select pass_rate from solution";
+$tsql[10]="select pass_rate from solution limit 1";
 $csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
 
 $csql[11]="";
@@ -138,7 +138,7 @@ $csql[24]="";
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
-$csql[26]="select 1 from printer";
+$csql[26]="select 1 from printer limit 1";
 $tsql[26]="CREATE TABLE  `printer` (
   `printer_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` char(48) NOT NULL,
@@ -149,7 +149,7 @@ $tsql[26]="CREATE TABLE  `printer` (
   `content` text NOT NULL ,
   PRIMARY KEY (`printer_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-$csql[27]="select 1 from balloon";
+$csql[27]="select 1 from balloon limit 1";
 $tsql[27]="CREATE TABLE  `balloon` (
   `balloon_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` char(48) NOT NULL,
@@ -159,7 +159,7 @@ $tsql[27]="CREATE TABLE  `balloon` (
   `status` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-$csql[28]="select 1 from share_code";
+$csql[28]="select 1 from share_code limit 1";
 $tsql[28]="create TABLE `share_code` (
   `share_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,

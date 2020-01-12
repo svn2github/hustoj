@@ -58,3 +58,4 @@ alter TABLE `contest_problem` ADD `c_accepted` INT NOT NULL DEFAULT '0' AFTER `n
 update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit;update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted =sb.ac;
 alter table solution add column nick char(20) not null default '' after user_id ;
 update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick;
+alter table privilege add index user_id_index(user_id);

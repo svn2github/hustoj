@@ -179,6 +179,9 @@ $tsql[32]="alter table solution add column nick char(20) not null default '' aft
 $csql[32]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
 $tsql[33]="update problem p inner join (select problem_id pid ,count(1) submit from solution group by problem_id) s on p.problem_id=s.pid set p.submit=s.submit;";
 $csql[33]="";
+$tsql[34]="alter table privilege add index user_id_index(user_id);";
+$csql[34]="";
+
 
 
 if(isset($_POST['do'])){

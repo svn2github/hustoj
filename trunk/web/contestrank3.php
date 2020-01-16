@@ -19,10 +19,10 @@ require_once("./include/memcache.php");
  */
 function getSubmitByCid($OJ_MEMCACHE,$cid){
     if ($OJ_MEMCACHE) {
-        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`='$cid'";
+        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`='$cid' and num>=0 and problem_id>0";
         $subList = mysql_query_cache($sql);
     } else {
-        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`= ?";
+        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`= ? and num>=0 and problem_id>0";
         $subList = pdo_query($sql, $cid);
     }
     return $subList;

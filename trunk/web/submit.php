@@ -274,7 +274,7 @@ if (~$OJ_LANGMASK & (1 << $language)) {
 		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
         if (isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
             pdo_query(
-                "update solution set contest_id =0 where contest_id=? and user_id=? and num=?",
+                "delete from solution where contest_id=? and user_id=? and num=?",
                 $cid,
                 $user_id,
                 $pid

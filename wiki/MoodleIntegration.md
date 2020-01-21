@@ -9,16 +9,16 @@ Teachers want to use HUSTOJ with Moodle
 = Details =
 
 try include/login-moodle.php by change db_info.inc.php
-
+```
 $OJ_LOGIN_MOD="moodle";
-
+```
 
 ----
 
 add homework with title [OJ]-C1000 for OJ Contest 1000
 
 add trigger and procedue
- 
+``` 
 DELIMITER $$
 DROP trigger IF EXISTS `jol`.`tri_moodle` $$
 create trigger tri_moodle
@@ -89,3 +89,4 @@ END $$
 
 DELIMITER ;
  
+```

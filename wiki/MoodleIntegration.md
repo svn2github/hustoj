@@ -73,8 +73,8 @@ top:BEGIN
 
 
        insert into moodle.mdl_assignment_submissions
-        (assignment,userid,timecreated,timemodified,numfiles,data1,data2,grade,submissioncomment,`format`,teacher,timemarked,mailed)
-       values( as_id,u_id,nowtime,nowtime,0,'','',mark,'',1,1,nowtime,0);
+             (assignment,userid,timecreated,timemodified,grader,grade,attemptnumber)
+       values( as_id    ,u_id  ,nowtime    ,nowtime     ,1     ,mark ,0);
 
    else
 

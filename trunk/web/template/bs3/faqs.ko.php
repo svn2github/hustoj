@@ -128,7 +128,7 @@ public class Main{
 				<li>
 					<font color=blue>main</font> 함수의 데이터형은 반드시 <font color=blue>int</font> 이어야 합니다. <font color=blue>void main</font> 으로 작성한 경우 Compile Error 메시지를 받게 됩니다.<br>
 					<li>
-						<font color=green>i</font> 변수가 "<font color=blue>for</font>(<font color=blue>int</font><font color=green>i</font>=0...){...}" 와 같이 선언되어있는 상태인데 for 코드블록 밖에서 참조되는 경우 Compile Error 메시지를 받게 됩니다.<br>
+						<font color=green>i</font> 변수가 "<font color=blue>for</font>(<font color=blue>int </font><font color=green>i</font>=0...){...}" 와 같이 선언되어있는 상태인데 for 코드블록 밖에서 참조되는 경우 Compile Error 메시지를 받게 됩니다.<br>
 						<li>
 							<font color=green>itoa</font> 함수는 ANSI 표준 함수가 아닙니다.<br>
 							<li>

@@ -9,7 +9,7 @@
 
 /////////////////////////Template
 $faqs_name="faqs.$OJ_LANG";
-$sql="select title,content from news where title=? order by news_id limit 1";
+$sql="select title,content from news where title=? and defunct='N' order by news_id limit 1";
 $result=pdo_query($sql,$faqs_name);
 if(count($result)>0&&file_exists("template/".$OJ_TEMPLATE."/faqs.news.php")){
 	$view_faqs=$result[0][1];

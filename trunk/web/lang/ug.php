@@ -1,5 +1,5 @@
-﻿ <?php
-//oj-header.php
+﻿<?php
+	//oj-header.php
 	$MSG_FAQ="چۈشەنچە & سوئال";
 	$MSG_BBS="تور بەت";
 	$MSG_HOME="باش بەت";
@@ -17,7 +17,8 @@
 	$MSG_STATISTICS="سىتاتىستىكا";
 	$MSG_USERINFO="ئابونىت ئۇچۇرى";
 	$MSG_MAIL="ئېلخەت";
-//status.php
+
+	//status.php
 	$MSG_Pending="كۈتۈۋاتىدۇ...";
 	$MSG_Pending_Rejudging="قايتا تەكشۈرۈشنى كۈتۈۋاتىدۇ...";
 	$MSG_Compiling="تەرجىمىلىنىۋاتىدۇ...";
@@ -29,24 +30,15 @@
 	$MSG_Memory_Limit_Exceed="ساقلىغۇچ چەكتىن ئاشتى";
 	$MSG_Output_Limit_Exceed="چىقىرىش چەكتىن ئاشتى";
 	$MSG_Runtime_Error="يۈرۈش خاتا";
-	$MSG_TEST_RUN="ئۈلگە مۇۋەپپىقىيەتلىك ئۆتتى";
 	$MSG_Compile_Error="تەرجىمە خاتا";
 	$MSG_Runtime_Click="يۈرۈش خاتا";
 	$MSG_Compile_Click="تەرجىمە خاتا";
-	$MSG_Click_Detail="تەپسىلاتىنى كۆرۈش";
 	$MSG_Compile_OK="تەرجىمە تامام";
-	$MSG_RUNID="يوللىنىش نۇمۇرى";
-	$MSG_USER="ئابۇنىت";
-	$MSG_PROBLEM="مەسىلە";
-	$MSG_RESULT="نەتىجە";
-	$MSG_MEMORY="سېغىم";
-	$MSG_TIME="ۋاقىت";
-	$MSG_LANG="تىل";
-	$MSG_CODE_LENGTH="كود ئۇزۇنلۇقى";
-	$MSG_SUBMIT_TIME="تەكشۈرگەن ۋاقىت";
+	$MSG_Click_Detail="تەپسىلاتىنى كۆرۈش";
 	$MSG_Manual="قولدا تەكشۈرۈش";
-   	$MSG_OK="تامام";
-   	$MSG_Explain="ھالەت ۋە چۈشەندۈرۈش";
+ 	$MSG_OK="تامام";
+ 	$MSG_Explain="ھالەت ۋە چۈشەندۈرۈش";
+
 //fool's day
 if(date('m')==4&&date('d')==1&&rand(0,100)<10){
                  $MSG_Accepted="كاللىڭىزدا مەسىلە بار...ئالدامچىلار بايرىمىغا مۇبارەك";
@@ -71,7 +63,21 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_Compile_Error="يىڭى يىل مۇبارەك";
 	$MSG_Compile_OK="يىڭى يىل مۇبارەك";
 }
-//problemstatistics.php
+
+
+	$MSG_TEST_RUN="ئۈلگە مۇۋەپپىقىيەتلىك ئۆتتى";
+
+	$MSG_RUNID="يوللىنىش نۇمۇرى";
+	$MSG_USER="ئابۇنىت";
+	$MSG_PROBLEM="مەسىلە";
+	$MSG_RESULT="نەتىجە";
+	$MSG_MEMORY="سېغىم";
+	$MSG_TIME="ۋاقىت";
+	$MSG_LANG="تىل";
+	$MSG_CODE_LENGTH="كود ئۇزۇنلۇقى";
+	$MSG_SUBMIT_TIME="تەكشۈرگەن ۋاقىت";
+
+	//problemstatistics.php
 	$MSG_PD="كۈتۈۋاتىدۇ";
 	$MSG_PR="قايتا تەكشۈرۈشنى كۈتۈۋاتىدۇ...";
 	$MSG_CI="تەرجىمىلىنىۋاتىدۇ";
@@ -87,18 +93,21 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_CO="تەرجىمە تامام";
 	$MSG_TR=" سىناق ";
 	$MSG_RESET=" قايتا ";
-//problemset.php
+
+	//problemset.php
 	$MSG_SEARCH="ئىزدەش";
 	$MSG_PROBLEM_ID="مەسلە نۇمۇرى";
 	$MSG_TITLE="ماۋزۇ";
 	$MSG_SOURCE="مەنبە";
 	$MSG_SUBMIT="تاپشۇرۇش";
-//ranklist.php
+
+	//ranklist.php
 	$MSG_Number="نۇمۇر";
 	$MSG_NICK="نامى";
 	$MSG_SOVLED="يېشلگىنى";
 	$MSG_RATIO="نىسبىتى";
-//registerpage.php
+
+	//registerpage.php
 	$MSG_USER_ID="ئابۇنىت نۇمۇرى";
 	$MSG_PASSWORD="مەخپى نۇمۇر";
 	$MSG_REPEAT_PASSWORD="مەخپى نۇمۇرنى قايتىلاش";
@@ -106,7 +115,8 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_EMAIL="ئېلخەت";
 	$MSG_REG_INFO="رويىخەت ئۇچۇرى";
 	$MSG_VCODE="دەلىللەش كودى ";
-//problem.php
+
+	//problem.php
 	$MSG_NO_SUCH_PROBLEM="بۇ سوئال شەخسىيگە تەۋە،كۆرۈشكە رۇخسەت يوق";
 	$MSG_Description="مەزمۇن";
 	$MSG_Input="كىرگۈزۈش";
@@ -120,7 +130,8 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_Source= "مەنبە";
 	$MSG_Time_Limit="ۋاقىت چەكلىمىسى";
 	$MSG_Memory_Limit="ساقلىغۇچ چەكلىمىسى";
-//admin menu
+
+	//admin menu
 	$MSG_SEEOJ="باش بەت";
 	$MSG_ADD=" قوشۇش  ";
 	$MSG_LIST=" جەدۋەل ";
@@ -135,12 +146,13 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_EXPORT=" چىقىرىش ";
 	$MSG_UPDATE_DATABASE=" سان-سىپىرنى يېڭىلاش ";
 	$MSG_ONLINE=" سىمدا ";
-   	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
+	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
 
-//contest.php
+	//contest.php
   $MSG_PRIVATE_WARNING="مۇسابىقە باشلانمىدى ياكى سوئال شەخىسكە تەۋە";
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
   $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز NOIP";
+
   $MSG_Public="ئاشكارە";
   $MSG_Private="خۇسۇسىي";
   $MSG_Running=" ئىلىپ بېرىلىۋاتىدۇ ";
@@ -157,6 +169,7 @@ if(date('m')==1 && date('d') == 1){
   $MSG_MODIFY_NOT_ALLOWED_FOR_EXAM="ئىمتاھان مەزگىلىدە ئابۇنىت ئۇچۇرىنى ئۆزگەرتىشكە بولمايدۇ";
   $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="ئىمتاھان تۈگىمىگىچە ئېلخەت ئىشلىتىشكە بولمايدۇ";
   $MSG_LOAD_TEMPLATE_CONFIRM="ئىلگىرىكى نۇسخىنى چۈشۈرمەكچىمۇ\\n ئۇنداقتا سىز ھازىرقى كودىڭىزنى يۇيۇۋىتىسىز ";
+
   $MSG_BLOCKLY_OPEN="كۆرۈنمە";
   $MSG_BLOCKLY_TEST="كورۈنمە يۈرگۈزۈش";
   $MSG_MY_SUBMISSIONS=" تاپشۇرغىنىم";
@@ -172,12 +185,11 @@ if(date('m')==1 && date('d') == 1){
   $MSG_BALLOON=" شار ";
   $MSG_BALLOON_DONE=" شار قويۇۋىتىلدى ";
   $MSG_BALLOON_PENDING=" شار تارقىتىلمىدى ";
+
   $MSG_HELP_SEEOJ="ئالدىنىقى بەتكە قايتىش  ";
   $MSG_HELP_ADD_NEWS="باش بەتكە ئۇقتۇرۇش يېزىش";
   $MSG_HELP_NEWS_LIST=" يېزىلغان ئۇقتۇرۇشلارنى تەھرېرلەش ";
   $MSG_HELP_USER_LIST=" ئابۇنىتچىلارنى باشقۇرۇش ";
-
-
   $MSG_HELP_ADD_PROBLEM="ئالدى بىلەن سوئال قوشۇپ،كىيىن سىناق نۇقتىلىرىنى يوللىسىڭىز بولىدۇ ";
   $MSG_HELP_PROBLEM_LIST="قوشۇلۇپ بولغان سوئاللارنى تەھرىرلەش ياكى سىناق نۇقتىلىرىنى ئۆزگەرتىش";
   $MSG_HELP_ADD_CONTEST="مۇسابىقە ئورۇنلاشتۇرۇش.بۇنىڭدا سوئاللارنىڭ نۇمۇرى پەش بىلەن ئايرىلىدۇ.خۇسۇسىي ياكى ئاشكارە تەڭشەشكە،تەكلىپ كودى بىكىتىشكە ،قاتناشقۇچىلارنى بىكىتىشكە بولىدۇ";
@@ -186,14 +198,14 @@ if(date('m')==1 && date('d') == 1){
   $MSG_HELP_SETMESSAGE="دومىلىما ئۇقتۇرۇش يېزىش";
   $MSG_HELP_SETPASSWORD=" مەخپى نۇمۇرنى قايتا تەڭشەش.باشقۇرغۇچى ئاۋال ئادەتتىكى ئابۇنىتچىغا ئايلىنىشى كىرەك";
   $MSG_HELP_REJUDGE="سوئال،مۇسابىقە،تاپشۇرۇشلارنى قايتا تەكشۈرۈش ";
-   $MSG_HELP_ADD_PRIVILEGE="ئالاھېدە ئەزا ياكى ھوقۇق بىكىتىش مەسىلەن: administratorsباشقۇرغۇچى , subjectsكاتىپ , playersئوينىغۇچى, organizersتەشكىللىگۈچى, participantsقاتناشقۇچى, code viewerكود كۆرگۈچى, manual judge questions سوئال بىر تەرەپ قىلىش, remote questions&سوئال يۆتكەش   other permissionsباشقا ھوقوقلار ";
-    $MSG_HELP_PRIVILEGE_LIST= "ئالاھېدە ھوقوق چەكلىمىلەرنى تەڭشەش";
-    $MSG_HELP_GIVESOURCE="بەزى ئابۇنىتلارغا ئۆلچەملىك كودنى كۆرۈش ھوقۇقى بىرىش،شۇ ئارقىلىق كودى ئۆتەلمىگەن ئابۇنىت مۇسابىقىدىن كىيىن ئۆلچەملىك كودنى ئۆگىنىشكە ياردەم بىرىش";
-    $MSG_HELP_EXPORT_PROBLEM= " ھۆججىتى نۇسخىسىدا چىقىرىپ ساقلاشfps.xml سوئاللارنى ";
-    $MSG_HELP_IMPORT_PROBLEM="ھۆججىتى سوئاللىرىنى كىرگۈزۈش ياكى توردىن سوئال ئىزدەش   fps.xml";
-    $MSG_HELP_UPDATE_DATABASE= "سان-سىپىر ئامبىرىنى يېڭىلاش (ھەر قېتىم سىستېما يىڭىلىغاندا مۇشۇ بۇيرۇقنى يۈرگۈزۈڭ)";
-    
-$MSG_HELP_ONLINE= "توردىكى ئابۇنىتلارنى كۆرۈش";
+  $MSG_HELP_ADD_PRIVILEGE="ئالاھېدە ئەزا ياكى ھوقۇق بىكىتىش مەسىلەن: administratorsباشقۇرغۇچى , subjectsكاتىپ , playersئوينىغۇچى, organizersتەشكىللىگۈچى, participantsقاتناشقۇچى, code viewerكود كۆرگۈچى, manual judge questions سوئال بىر تەرەپ قىلىش, remote questions&سوئال يۆتكەش   other permissionsباشقا ھوقوقلار ";
+  $MSG_HELP_PRIVILEGE_LIST= "ئالاھېدە ھوقوق چەكلىمىلەرنى تەڭشەش";
+  $MSG_HELP_GIVESOURCE="بەزى ئابۇنىتلارغا ئۆلچەملىك كودنى كۆرۈش ھوقۇقى بىرىش،شۇ ئارقىلىق كودى ئۆتەلمىگەن ئابۇنىت مۇسابىقىدىن كىيىن ئۆلچەملىك كودنى ئۆگىنىشكە ياردەم بىرىش";
+  $MSG_HELP_EXPORT_PROBLEM= " ھۆججىتى نۇسخىسىدا چىقىرىپ ساقلاشfps.xml سوئاللارنى ";
+  $MSG_HELP_IMPORT_PROBLEM="ھۆججىتى سوئاللىرىنى كىرگۈزۈش ياكى توردىن سوئال ئىزدەش   fps.xml";
+  $MSG_HELP_UPDATE_DATABASE= "سان-سىپىر ئامبىرىنى يېڭىلاش (ھەر قېتىم سىستېما يىڭىلىغاندا مۇشۇ بۇيرۇقنى يۈرگۈزۈڭ)";
+  $MSG_HELP_ONLINE= "توردىكى ئابۇنىتلارنى كۆرۈش";
+  $MSG_HELP_AC="مۇبارەك بولسۇن،كودىڭىز بارلىق سىناق نۇقتىلىرىدىن ئۆتتى. تېخىمۇ تېرىشىڭ";
   $MSG_HELP_PE="جاۋابىڭىز توغرا ئەمما فورماتى خاتا،جاۋابىڭىزنى تەپسىلى كۆررۈپ بېقىڭ.بوش كاتەك،بوش قۇرلار بولماسلىقى كىرەك";
   $MSG_HELP_WA="جاۋابىڭىز خاتا!!! ئۈلگە كىرگۈزۈش چىقىرىشتىنلا ئۆتكەن كود توغرا كود بولۇشى ناتايىن،تېخىمۇ ئىنچىكە ئويلىنىپ بېقىڭ،ئارقا سۇپىدا يەنە باشقا كىرگۈزۈش چىقىرىشلار بار";
   $MSG_HELP_TLE="كودىڭىز بەلگىلەنگەن چەكلىك ۋاقىت ئىچىدە بارلىق سىناق نۇقتىلىرىدىن ئۆتۈپ بولالمىدى";
@@ -201,14 +213,15 @@ $MSG_HELP_ONLINE= "توردىكى ئابۇنىتلارنى كۆرۈش";
   $MSG_HELP_OLE="كودىڭىز بەك كۆپ ئۇچۇر چىقاردى،تەپسىلى كۆرۈپ بېقىڭ ،ئادەتتە چىقىرىش 1 مىگابايىتتىن ئاشمايدۇ";
   $MSG_HELP_RE="يۈرۈش خاتا.گەرچە كودىڭىز توغرا تەرجىمە بولۇنسىمۇ،يۈرۈش جەريانىدا خاتالىق كۆرۈلدى.سەۋەبى بەلكىم تۆۋەندىكىچە:قائىدىگە ئىخلاپ ساقلىغۇچ زىيارىتى ياكى ئىندىكىس،چەكلەنگەن فۇنكىسىيەنى ئىشلىتىش،پويىنتېر ئۇچۇپ يۈرۈش ...";
   $MSG_HELP_CE="كودىڭىز تەرجىمىدە مەغلۇپ بولدى.كودىڭىزدا ئېغىر دەرجىدە تىل خاتالىق بار،بۇيەرنى چىكىپ تەپسىلاتىنى كۆرۈڭ";
-  $MSG_HELP_AC="مۇبارەك بولسۇن،كودىڭىز بارلىق سىناق نۇقتىلىرىدىن ئۆتتى. تېخىمۇ تېرىشىڭ";
   
-$MSG_HELP_MORE_TESTDATA_LATER="كۆپلىگەن سىناق نۇقتىلىرىنى سوئال كىرگۈزۈپ بولغاندىن كىيىن قوشۇش";
+	$MSG_HELP_MORE_TESTDATA_LATER="كۆپلىگەن سىناق نۇقتىلىرىنى سوئال كىرگۈزۈپ بولغاندىن كىيىن قوشۇش";
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>ئىزدەڭ hustoj special judge</a>تېخىمۇ كۆپ تەپسىلات ";
   $MSG_HELP_BALLOON_SCHOOL="پىرىنتېر ۋە شار ئۈچۈن مەكتەپ نامى سۈزۈۋىتىلىدۇ";
+
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="ئادىرىستىن تىزىملاپ كىرىشip ئوخشىمىغان";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" ئىمتاھان ۋاقتىدا رۇخسەت يوق  ";
   $MSG_WARNING_ACCESS_DENIED="I am sorry, You could not view this message! Because it's not belong to you, or Administrator won't show you.";
+
   $MSG_LOSTPASSWORD_MAILBOX="  دەلىللەش كودىنى ئېلخېتىڭىزگە يوللاندى،تەكشۈرۈپ ئېلىڭ";
   $MSG_LOSTPASSWORD_WILLBENEW=" ئەگەر توغرا بولسا ،كىيىنكى قەدەمدە مۇقۇملاش ئارقىلىق دەلىللەش كودى سىزنىڭ يېڭى مەخپى شىفىرىڭىزگە ئايلىنىدۇ";
 ?>

@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="忘记密码";
 	$MSG_REGISTER="注册";
 	$MSG_ADMIN="管理";
+	$MSG_SYSTEM="系统";
 	$MSG_STANDING="名次";
 	$MSG_STATISTICS="统计";
 	$MSG_USERINFO="用户信息";

@@ -174,6 +174,8 @@ public class Main{
 				</font>
 			</center>
 			<hr>
+			this page can be replaced by add a news which titled "<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>";
+			<hr>
 			<center>
 				<table width=100% border=0>
 					<tr>

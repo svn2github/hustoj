@@ -12,7 +12,7 @@
 	$MSG_LOGIN="로그인";
 	$MSG_LOST_PASSWORD="비밀번호 분실";
 	$MSG_REGISTER="회원가입";
-	$MSG_ADMIN="관리자메뉴";
+	$MSG_ADMIN="관리";
 	$MSG_SYSTEM="시스템";
 	$MSG_STANDING="순위";
 	$MSG_STATISTICS="통계";
@@ -122,6 +122,8 @@
 	//admin menu
 	$MSG_SEEOJ="OJ확인";
 	$MSG_ADD="등록-";
+	$MSG_MENU="메뉴";
+	$MSG_EXPLANATION="설명";
 	$MSG_LIST="리스트";
 	$MSG_NEWS="공지사항";
 	$MSG_TEAMGENERATOR="팀만들기";

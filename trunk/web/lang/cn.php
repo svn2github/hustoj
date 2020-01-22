@@ -122,6 +122,8 @@
 	//admin menu
 	$MSG_SEEOJ="查看前台";
 	$MSG_ADD="添加";
+	$MSG_MENU="菜单";
+	$$MSG_EXPLANATION="内容描述";
 	$MSG_LIST="列表";
 	$MSG_NEWS="新闻";
 	$MSG_TEAMGENERATOR="比赛队帐号生成器";

@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="مەخپى نۇمۇر يۈتتى";
 	$MSG_REGISTER="رويخەتكە ئىلىش";
 	$MSG_ADMIN="باشقۇرغۇچى";
+	$MSG_SYSTEM="System";
 	$MSG_STANDING="مەرتىۋە";
 	$MSG_STATISTICS="سىتاتىستىكا";
 	$MSG_USERINFO="ئابونىت ئۇچۇرى";
@@ -134,6 +135,8 @@ if(date('m')==1 && date('d') == 1){
 	//admin menu
 	$MSG_SEEOJ="باش بەت";
 	$MSG_ADD=" قوشۇش  ";
+	$MSG_MENU="menu";
+	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST=" جەدۋەل ";
 	$MSG_NEWS=" ئۇقتۇرۇش ";
 	$MSG_TEAMGENERATOR=" گورۇپ نۇمۇرى چىقارغۇچ ";

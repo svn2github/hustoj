@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="비밀번호 분실";
 	$MSG_REGISTER="회원가입";
 	$MSG_ADMIN="관리자메뉴";
+	$MSG_SYSTEM="시스템";
 	$MSG_STANDING="순위";
 	$MSG_STATISTICS="통계";
 	$MSG_USERINFO="회원정보";

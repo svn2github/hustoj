@@ -174,7 +174,7 @@ public class Main{
 				</font>
 			</center>
 			<hr>
-			this page can be replaced by add a news which titled "<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>";
+			관리자메뉴를 이용해 "<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>" 제목으로 공지사항을 등록하면 이 FAQ 페이지를 통해 나타납니다.
 			<hr>
 			<center>
 				<table width=100% border=0>

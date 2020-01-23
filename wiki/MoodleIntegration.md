@@ -52,8 +52,10 @@ refresh OJ web will show the Moodle Link on top left, click to begain install mo
 
 刷新OJ页，得到右上角的Moodle入口，点击开始安装流程。
 
-*don't change the moodle default database name: moodle   default table name prefix: mdl_
-*moodle的数据库默认moodle，表前缀mdl_ ，请不要修改
+**don't change the moodle default database name: moodle   default table name prefix: mdl_**
+
+**moodle的数据库默认moodle，表前缀mdl_ ，请不要修改**
+
 
 link two system 关联两个系统
 --

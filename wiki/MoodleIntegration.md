@@ -39,12 +39,10 @@ begin
 
    declare mark int;
    declare total int;
-   declare ac int;
-   declare wa int;
-   set mark=100;
+  
    select count(1) into total from contest_problem where contest_id=new.contest_id;
    if total>0 then
-       select sum(ac) into mark
+       select sum(ac)/total*100 into mark
           from (select max(pass_rate) from solution where user_id=new.user_id and contest_id=new.contest_id and problem_id>0 group by problem_id) s;
      
        call update_moodle(new.contest_id,new.user_id,mark);

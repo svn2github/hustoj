@@ -1,4 +1,4 @@
-#summary Moodle system Integation 集成Moodle线下活动自动给分
+#summary Moodle system Integation 集成Moodle活动自动给分
 #labels Featured
 
 = Introduction =
@@ -16,19 +16,13 @@ add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for inst
 
 ```
 
+let students use same username in both system.
 
 
 
-try include/login-moodle.php by change db_info.inc.php
-```
-$OJ_LOGIN_MOD="moodle";
-```
+add text-homework with title [OJ]-C1000 for OJ Contest 1000
 
-----
-
-add homework with title [OJ]-C1000 for OJ Contest 1000
-
-add trigger and procedue
+add trigger 
 ``` 
 DELIMITER $$
 DROP trigger IF EXISTS `jol`.`tri_moodle` $$
@@ -49,7 +43,9 @@ begin
    end if;
 end $$
 DELIMITER ;
-
+```
+add procedure
+```
 DELIMITER $$
 CREATE DEFINER=`debian-sys-maint`@`localhost` PROCEDURE `update_moodle`(IN `cid` INT, IN `user_id` VARCHAR(20), IN `mark` INT)
 top:BEGIN

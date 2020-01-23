@@ -36,19 +36,19 @@ create trigger tri_moodle
 after update on solution
 for each row
 begin
+
    declare mark int;
    declare total int;
    declare ac int;
    declare wa int;
    set mark=100;
    select count(1) into total from contest_problem where contest_id=new.contest_id;
-   select count(distinct problem_id)into ac
-      from solution where result=4 and user_id=new.user_id and contest_id=new.contest_id;
-   select count(distinct problem_id)into wa
-      from solution where result>4 and user_id=new.user_id and contest_id=new.contest_id;
-   set mark=mark/total*ac-wa;
-   if new.result=4 then
-      call update_moodle(new.contest_id,new.user_id,mark);
+   if total>0 then
+       select sum(ac) into mark
+          from (select max(pass_rate) from solution where user_id=new.user_id and contest_id=new.contest_id and problem_id>0 group by problem_id) s;
+     
+       call update_moodle(new.contest_id,new.user_id,mark);
+       
    end if;
 
 end $$

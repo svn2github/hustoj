@@ -101,7 +101,7 @@ top:BEGIN
          inner join mdl_grade_items mgi on mgi.iteminstance=ma.id
          inner join `mdl_grade_grades` mgg on mgg.itemid=mgi.id  and  mgg.userid=mag.userid and mgg.finalgrade is null
            and ma.course = as_id
-         set  mgg.finalgrade=mag.grade";
+         set  mgg.finalgrade=mag.grade;
   -- select as_id,u_id,oldmark,mark;
 
 END $$

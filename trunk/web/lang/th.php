@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="ลงทะเบียน";
 	$MSG_ADMIN="จัดการระบบ";
+	$MSG_SYSTEM="System";
 	$MSG_STANDING="STANDING";
 	$MSG_STATISTICS="สถิติ";
 	$MSG_USERINFO="โปรไฟล์";
@@ -121,6 +122,8 @@
 	//admin menu
 	$MSG_SEEOJ="ดูเว็บ";
 	$MSG_ADD="เพิ่มโจทย์";
+	$MSG_MENU="menu";
+	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST="รายการโจทย์";
 	$MSG_NEWS="ข่าวประกาศ";
 	$MSG_TEAMGENERATOR="ตัวสร้างทีม";

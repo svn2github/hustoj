@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="عضویت";
 	$MSG_ADMIN="ادمین";
+	$MSG_SYSTEM="System";
 	$MSG_STANDING="جایگاه ها";
 	$MSG_STATISTICS="آمار";
 	$MSG_USERINFO="اصلاح اطلاعات";
@@ -121,6 +122,8 @@
 	//admin menu
 	$MSG_SEEOJ="نمایش";
 	$MSG_ADD="ایجاد ";
+	$MSG_MENU="menu";
+	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST="لیست";
 	$MSG_NEWS="خبرها";
 	$MSG_TEAMGENERATOR="ساخت تیم";

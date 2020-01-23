@@ -13,6 +13,7 @@
 	$MSG_LOST_PASSWORD="Lost Password";
 	$MSG_REGISTER="Register";
 	$MSG_ADMIN="Admin";
+	$MSG_SYSTEM="System";
 	$MSG_STANDING="Standing";
 	$MSG_STATISTICS="Statistics";
 	$MSG_USERINFO="User Information";
@@ -122,6 +123,8 @@
 	$MSG_SEEOJ="SeeOJ";
 	$MSG_ADD="Add";
 	$MSG_LIST="List";
+	$MSG_MENU="menu";
+	$$MSG_EXPLANATION="explanation";
 	$MSG_NEWS="News";
 	$MSG_TEAMGENERATOR="TeamGenerator";
 	$MSG_SETMESSAGE="SetMessage";

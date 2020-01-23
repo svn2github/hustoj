@@ -17,7 +17,7 @@ if ( isset( $OJ_ON_SITE_CONTEST_ID ) ) {
 $view_news = "";
 $sql = "select * "
 . "FROM `news` "
-. "WHERE `defunct`!='Y'"
+. "WHERE `defunct`!='Y' AND `title`!='faqs.$OJ_LANG'"
 . "ORDER BY `importance` ASC,`time` DESC "
 . "LIMIT 50";
 $view_news .= "<div class='panel panel-default' style='width:80%;margin:0 auto;'>";

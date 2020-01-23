@@ -1,14 +1,19 @@
-#summary Moodle system Integation 集成Moodle活动自动给分
-#labels Featured
+集成Moodle活动自动给分
+----
+How to use HUSTOJ with Moodle 
+----
 
-= Introduction =
+Base requirement 基础要求
+--
+Moodle3.8+ need ubuntu 18.04 
+由于Moodle需要新版的PHP和mysql，所以需要安装在Ubuntu18.04以上的机器上。
 
-Teachers want to use HUSTOJ with Moodle 
+Preparation 预备工作
+--
 
+install hustoj using .sh script, add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for install moodle
+首先用脚本安装HUSTOJ，然后在/etc/nginx/sites-enbaled/default文件中```location / { ``` 这一行之前添加下面的内容：
 
-= Details =
-moodle3.8+ need ubuntu 18.04 
-add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for install moodle
 ```
         if (!-e $request_filename) {
            rewrite "^(.*\.php)(/)(.*)$" $1?file=/$3 last;
@@ -16,8 +21,38 @@ add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for inst
 
 ```
 
-let students use same username in both system.
+read judge.conf to get account for mysql 查阅judge.conf获得数据库账户
+```
+cat /home/judge/etc/judge.conf
+```
 
+
+reload configure for nginx 重新加载nginx配置文件
+
+```
+sudo service nginx reload
+```
+install moodle 安装moodle
+--
+
+unzip/tar -xzf moodle files into /home/judge/src/web/
+把下载到的moodle安装文件解压到/home/judge/src/web目录下，得到/home/judge/src/web/moodle目录
+
+fix ownner of src
+修改所有目录的属主为www-data
+
+```
+chown -R www-data /home/judge/src/
+
+```
+refresh OJ web will show the Moodle Link on top left, click to begain install moodle.
+刷新OJ页，得到右上角的Moodle入口，点击开始安装流程。
+
+
+
+
+let students use same username in both system.
+让学生在两个系统中用相同的用户名注册。
 
 
 add text-homework with title [OJ]-C1000 for OJ Contest 1000

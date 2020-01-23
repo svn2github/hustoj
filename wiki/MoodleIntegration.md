@@ -95,7 +95,7 @@ add procedure 添加存储过程
 --
 ```
 DELIMITER $$
-CREATE DEFINER=`debian-sys-maint`@`localhost` PROCEDURE `update_moodle`(IN `cid` INT, IN `user_id` VARCHAR(20), IN `mark` INT)
+CREATE PROCEDURE `update_moodle`(IN `cid` INT, IN `user_id` VARCHAR(20), IN `mark` INT)
 top:BEGIN
    declare as_id int;
   declare u_id int;

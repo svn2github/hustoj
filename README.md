@@ -87,6 +87,8 @@ Star us, please!
 
 更新日志
 ------
+2020-01-23 更新：修订了[Moodle集成代码](https://github.com/zhblue/hustoj/blob/master/wiki/MoodleIntegration.md)，实现HUSTOJ给moodle系统作业自动判分。
+
 2020-01-20 更新：删除noip模式比赛的多余提交记录，允许自定义“noip”关键词，增加privilege表user_id索引。
 
 2019-12-19 更新：增加了judge.conf中的注释，提供了备案号变量$OJ_BEIAN，对系统判题时间分辨率进行了更新优化，提高灵活度。

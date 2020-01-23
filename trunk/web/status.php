@@ -311,8 +311,8 @@ for ($i=0;$i<$rows_cnt;$i++){
 
 
                 if ($row['result']>=4){
-                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']."</div>";
-                        $view_status[$i][5]= "<div id=center class=red>".$row['time']."</div>";
+                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']." KB</div>";
+                        $view_status[$i][5]= "<div id=center class=red>".$row['time']." ms</div>";
 						//echo "=========".$row['memory']."========";
                 }else{
                         $view_status[$i][4]= "---";
@@ -333,7 +333,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                         	}
 			}
                 }
-                $view_status[$i][7]= $row['code_length']." B";
+                $view_status[$i][7]= $row['code_length']." bytes";
 				
         }else
 		{

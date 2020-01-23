@@ -92,8 +92,8 @@ echo "<input type=submit class='input'  value='$MSG_SEARCH'></form>";
 <thead>
 <tr  class='success toprow' >
 <th ><?php echo $MSG_RUNID?>
-<th ><?php echo $MSG_USER?>
-<th ><?php echo $MSG_PROBLEM?>
+<th ><?php echo $MSG_USER."ID"?>
+<th ><?php echo $MSG_PROBLEM."ID"?>
 <th ><?php echo $MSG_RESULT?>
 <th ><?php echo $MSG_MEMORY?>
 <th ><?php echo $MSG_TIME?>

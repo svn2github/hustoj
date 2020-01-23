@@ -106,34 +106,34 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 				<table id=result-tab class="table table-striped content-box-header" align=center width=80%>
 					<thead>
 						<tr class='toprow'>
-							<th>
+							<th class="text-center">
 								<?php echo $MSG_RUNID?>
 							</th>
-							<th>
-								<?php echo $MSG_USER?>
+							<th class="text-center">
+								<?php echo $MSG_USER."ID"?>
 							</th>
-							<th>
-								<?php echo $MSG_PROBLEM?>
+							<th class="text-center">
+								<?php echo $MSG_PROBLEM."ID"?>
 							</th>
-							<th>
+							<th class="text-center">
 								<?php echo $MSG_RESULT?>
 							</th>
-							<th class='hidden-xs'>
-								<?php echo $MSG_MEMORY."(KB)"?>
+							<th class="text-center">
+								<?php echo $MSG_MEMORY?>
 							</th>
-							<th class='hidden-xs'>
-								<?php echo $MSG_TIME."(MS)"?>
+							<th class="text-center">
+								<?php echo $MSG_TIME?>
 							</th>
-							<th> 
+							<th class="text-center"> 
 								<?php echo $MSG_LANG?>
 							</th>
-							<th class='hidden-xs'>
+							<th class="text-center">
 								<?php echo $MSG_CODE_LENGTH?>
 							</th>
-							<th>
+							<th class="text-center">
 								<?php echo $MSG_SUBMIT_TIME?>
 							</th>
-							<th class='hidden-xs'>
+							<th class="text-center">
 								<?php echo $MSG_JUDGER?>
 							</th>
 						</tr>
@@ -148,8 +148,8 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 								echo "<tr class='evenrow'>";
 							$i = 0;
 							foreach ( $row as $table_cell ) {
-								if ( $i > 3 && $i != 8 && $i!=6)
-									echo "<td class='hidden-xs'>";
+								if ( $i==0 || $i==4 || $i==5 || $i==6 || $i==7)
+									echo "<td class='text-right'>";
 								else
 									echo "<td>";
 								echo $table_cell;

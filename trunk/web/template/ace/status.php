@@ -103,8 +103,8 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 <thead>
 <tr class='toprow' >
 <th ><?php echo $MSG_RUNID?>
-<th ><?php echo $MSG_USER?>
-<th ><?php echo $MSG_PROBLEM?>
+<th ><?php echo $MSG_USER."ID"?>
+<th ><?php echo $MSG_PROBLEM."ID"?>
 <th ><?php echo $MSG_RESULT?>
 <th class='hidden-xs' ><?php echo $MSG_MEMORY?>
 <th class='hidden-xs' ><?php echo $MSG_TIME?>

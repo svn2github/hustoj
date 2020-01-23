@@ -91,8 +91,8 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 <table id=result-tab class=content-box-header align=center width=80%>
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
-<td ><?php echo $MSG_USER?>
-<td ><?php echo $MSG_PROBLEM?>
+<td ><?php echo $MSG_USER."ID"?>
+<td ><?php echo $MSG_PROBLEM."ID"?>
 <td ><?php echo $MSG_RESULT?>
 <td ><?php echo $MSG_MEMORY?>
 <td ><?php echo $MSG_TIME?>

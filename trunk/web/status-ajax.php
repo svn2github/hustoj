@@ -60,7 +60,7 @@ if (isset($_GET['solution_id'])){
 			if(isset($_GET['t'])&&"json"==$_GET['t']){
 				echo json_encode($row);
 			}else{
-				echo $row['result'].",".$row['memory'].",".$row['time'].",".$row['judger'].",".($row['pass_rate']*100);
+				echo $row['result'].",".$row['memory']." KB,".$row['time']." ms,".$row['judger'].",".($row['pass_rate']*100);
 			}
 		    }
 		}

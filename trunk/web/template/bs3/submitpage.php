@@ -34,17 +34,18 @@
 <script src="include/checksource.js"></script>
 <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
-Problem <span class=blue><b><?php echo $id?></b></span>
+<b><br><?php echo $MSG_PROBLEM."ID : "?> <span class=blue><?php echo $id?></b><br></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
 <?php }else{
 //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
 ?>
-Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+<b><br><?php echo $MSG_PROBLEM."ID : "?> <span class=blue><b><?php echo chr($pid+ord('A'))?></b><br></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
-<span id="language_span">Language:
+
+<span id="language_span"><?php echo $MSG_LANG?>:
 <select id="language" name="language" onChange="reloadtemplate($(this).val());" >
 <?php
 $lang_count=count($language_ext);
@@ -63,18 +64,13 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 }
 ?>
 </select>
-<?php if($OJ_VCODE){?>
-<?php echo $MSG_VCODE?>:
-<input name="vcode" size=4 type=text><img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">
-<?php }?>
-
-<br>
 </span>
+
 <?php if($OJ_ACE_EDITOR){ ?>
-	<pre style="width:80%;height:600" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre><br>
+	<pre style="width:80%;height:600;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
 	<input type=hidden id="hide_source" name="source" value=""/>
 <?php }else{ ?>
-	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
 <?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
@@ -83,8 +79,12 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
-<br>
 <?php } ?>
+<?php if($OJ_VCODE){?>
+<?php echo $MSG_VCODE?>:
+<input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
+<?php }?>
+<br><br>
 <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">

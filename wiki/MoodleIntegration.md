@@ -140,10 +140,10 @@ DELIMITER ;
 Expecting Result 预期效果
 --
 when students submit solution in hustoj , moodle will show the latest mark for the contest in 0-100.
+
 当学生在hustoj中提交代码，moodle将在作业里同步显示他们的最新成绩。
 
-
-
+<img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/moodle.png" >
 
 
 

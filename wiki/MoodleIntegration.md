@@ -7,6 +7,17 @@ Teachers want to use HUSTOJ with Moodle
 
 
 = Details =
+moodle3.8+ need ubuntu 18.04 
+add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for install moodle
+```
+        if (!-e $request_filename) {
+           rewrite "^(.*\.php)(/)(.*)$" $1?file=/$3 last;
+        }
+
+```
+
+
+
 
 try include/login-moodle.php by change db_info.inc.php
 ```

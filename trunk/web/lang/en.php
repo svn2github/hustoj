@@ -166,7 +166,6 @@
   $MSG_MY_CONTESTS="My Contests"; 
   $MSG_Creator="Creator";
   $MSG_IMPORTED="Imported";
-  $MSG_USER="User";
   $MSG_PRINTER="Printer";
   $MSG_PRINT_DONE="Printed Fine";
   $MSG_PRINT_PENDING="Pending for Print";

@@ -84,8 +84,8 @@
 
 	//problemset.php
 	$MSG_SEARCH="검색";
-	$MSG_PROBLEM_ID="문제번호";
-	$MSG_TITLE="제목";
+	$MSG_PROBLEM_ID="문제ID";
+	$MSG_TITLE="문제 제목";
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT="제출";
 
@@ -166,7 +166,6 @@
 	$MSG_MY_CONTESTS="대회기록"; 
 	$MSG_Creator="만든사람";
 	$MSG_IMPORTED="업로드완료";
-	$MSG_USER="사용자";
 	$MSG_PRINTER="Printer";
 	$MSG_PRINT_DONE="Printed Fine";
 	$MSG_PRINT_PENDING="Pending for Print";

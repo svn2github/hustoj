@@ -34,13 +34,13 @@
 <script src="include/checksource.js"></script>
 <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
-<b><br><?php echo $MSG_PROBLEM."ID : "?> <span class=blue><?php echo $id?></b><br></span>
+<b><br><?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo $id?></b><br></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
 <?php }else{
 //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
 ?>
-<b><br><?php echo $MSG_PROBLEM."ID : "?> <span class=blue><b><?php echo chr($pid+ord('A'))?></b><br></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+<b><br><?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><b><?php echo chr($pid+ord('A'))?></b><br></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>

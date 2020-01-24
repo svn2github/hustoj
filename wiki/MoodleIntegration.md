@@ -35,6 +35,9 @@ sudo service nginx reload
 ```
 install moodle 安装moodle
 --
+download moodle source files from [Moodle Download](https://download.moodle.org/releases/latest/)
+
+从[这里](https://download.moodle.org/releases/latest/)下载最新的moodle源码文件。
 
 unzip/tar -xzf moodle files into /home/judge/src/web/
 

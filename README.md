@@ -15,8 +15,8 @@ HUSTOJ 是采用GPL的自由软件。(仅限原创部分代码，其中使用了
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
-常见问题自动应答微信公众号:hustoj
-<img src="http://hustoj.com/wx.jpg" height="180">
+常见问题自动应答微信公众号:hustoj          <img src="http://hustoj.com/wx.jpg" height="180">
+
 关注后回复： 新装系统、升级、目录等关键词，系统会自动回复相关帮助。
 
 有问题请先查阅

@@ -100,9 +100,9 @@
                         $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . htmlentities ($row['user_id'],ENT_QUOTES,"UTF-8") ."'>" . $row['submit'] . "</a>"."</div>";
 
                         if ($row['submit'] == 0)
-                                $view_rank[$i][5]= "0.000%";
+                                $view_rank[$i][5]= "0.00%";
                         else
-                                $view_rank[$i][5]= sprintf ( "%.03lf%%", 100 * $row['solved'] / $row['submit'] );
+                                $view_rank[$i][5]= sprintf ( "%.02lf%%", 100 * $row['solved'] / $row['submit'] );
 
 //                      $i++;
                 }

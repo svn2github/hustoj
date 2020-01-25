@@ -156,6 +156,13 @@ if(date('m')==1 && date('d') == 1){
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
   $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز NOIP";
 
+	$MSG_SERVER_TIME="SERVER TIME";
+	$MSG_CONTEST_ID="CONTEST ID";
+	$MSG_CONTEST_NAME="CONTEST NAME";
+	$MSG_CONTEST_STATUS="STATUS";
+	$MSG_CONTEST_OPEN="OPEN";
+	$MSG_CONTEST_CREATOR="CREATOR";
+
   $MSG_Public="ئاشكارە";
   $MSG_Private="خۇسۇسىي";
   $MSG_Running=" ئىلىپ بېرىلىۋاتىدۇ ";

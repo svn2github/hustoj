@@ -141,14 +141,21 @@
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 참가권한이 없습니다.";
 	$MSG_WATCH_RANK="대회순위 보기";
-  $MSG_NOIP_WARNING="NOIP 대회는 종료 전까지 결과를 보여주지 않습니다.";
+	$MSG_NOIP_WARNING="NOIP 대회는 종료 전까지 결과를 보여주지 않습니다.";
+
+	$MSG_SERVER_TIME="현재 시간";
+	$MSG_CONTEST_ID="대회ID";
+	$MSG_CONTEST_NAME="대회 이름";
+	$MSG_CONTEST_STATUS="대회 상태";
+	$MSG_CONTEST_OPEN="대회 구분";
+	$MSG_CONTEST_CREATOR="등록자";
 
 	$MSG_Public="공개";
 	$MSG_Private="비공개";
 	$MSG_Running="대회중";
-	$MSG_Start="시작시간";
-	$MSG_End="종료시간";
-	$MSG_TotalTime="대회시간";
+	$MSG_Start="시작";
+	$MSG_End="종료";
+	$MSG_TotalTime="시간";
 	$MSG_LeftTime="남은시간";
 	$MSG_Ended="대회종료";
 	$MSG_Login="로그인하세요.";

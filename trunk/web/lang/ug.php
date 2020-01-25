@@ -179,7 +179,6 @@ if(date('m')==1 && date('d') == 1){
   $MSG_MY_CONTESTS=" مۇسابىقەم";
   $MSG_Creator=" چىقارغۇچى ";
   $MSG_IMPORTED=" سىرىتتىن ";
-  $MSG_USER=" ئابۇنىت ";
   $MSG_PRINTER="پىرىنتېر ";
   $MSG_PRINT_DONE="پىرىتېرلاش تامام";
   $MSG_PRINT_PENDING=" پىرىتېرنى كۈتۈۋاتىدۇ ";

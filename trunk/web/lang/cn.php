@@ -166,7 +166,6 @@
   $MSG_MY_CONTESTS="我的$MSG_CONTEST"; 
   $MSG_Creator="命题人";
   $MSG_IMPORTED="外部导入";
-  $MSG_USER="用户";
   $MSG_PRINTER="打印";
   $MSG_PRINT_DONE="打印完成";
   $MSG_PRINT_PENDING="提交成功,待打印";

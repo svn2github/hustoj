@@ -81,7 +81,7 @@
 								<?php echo $MSG_SOURCE?>
 							</th>
 							<th style="cursor:hand" width=60>
-								<?php echo $MSG_AC?>
+								<?php echo $MSG_SOVLED?>
 							</th>
 							<th style="cursor:hand" width=60>
 								<?php echo $MSG_SUBMIT?>

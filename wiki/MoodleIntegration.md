@@ -5,7 +5,8 @@ How to use HUSTOJ with Moodle
 
 Base requirement 基础要求
 --
-Moodle3.8+ need ubuntu 18.04 
+Moodle3.8+ need ubuntu 18.04.
+
 由于Moodle需要新版的PHP和mysql，所以需要安装在Ubuntu18.04以上的机器上。
 
 Preparation 预备工作

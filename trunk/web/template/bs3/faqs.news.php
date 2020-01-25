@@ -27,7 +27,7 @@
       <div class="jumbotron">
 <hr>
 <center>
-  <font size="+3"><?php echo $OJ_NAME?> Online Judge FAQ</font>
+  <font size="+3"><?php echo $OJ_NAME?> FAQ</font>
 </center>
 <hr>
 	<?php echo $view_faqs?>

@@ -158,7 +158,7 @@ if($OJ_SIM){
 
 
 
-$sql=$sql.$order_str." LIMIT 20";
+$sql=$sql.$order_str." LIMIT 50";
 //echo $sql;
 
 

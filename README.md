@@ -87,6 +87,8 @@ Star us, please!
 
 更新日志
 ------
+2020-01-26 更新：允许为每个Web添加多个UDP通知对象，每个判题服务器允许使用不同的UDP端口监听消息。阿里云+腾讯云测试通过。
+
 2020-01-23 更新：修订了[Moodle集成代码](https://github.com/zhblue/hustoj/blob/master/wiki/MoodleIntegration.md)，实现HUSTOJ给moodle系统作业自动判分。
 
 2020-01-20 更新：删除noip模式比赛的多余提交记录，允许自定义“noip”关键词，增加privilege表user_id索引。

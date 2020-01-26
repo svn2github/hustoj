@@ -319,6 +319,7 @@ if(isset($OJ_UDP)&&$OJ_UDP){
 	$JUDGE_SERVERS=explode(",",$OJ_UDPSERVER);
 	$JUDGE_TOTAL=count($JUDGE_SERVERS);
 	$select= $insert_id % $JUDGE_TOTAL;
+	if(count(explode(":",$JUDGE_SERVERS[$select]))>1) $OJ_UDPPORT=explode(":",$JUDGE_SERVERS[$select])[1];
         send_udp_message($JUDGE_SERVERS[$select], $OJ_UDPPORT, $insert_id);
 }
 if ($OJ_BENCHMARK_MODE) {

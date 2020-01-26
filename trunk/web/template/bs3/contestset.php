@@ -28,7 +28,7 @@
         <tr align='center'>
           <td>
             <form class=form-inline method=post action=contest.php>
-              <input class="form-control" name=keyword value="" placeholder="<?php echo $MSG_USER?>">
+              <input class="form-control" name=keyword value="" placeholder="<?php echo $MSG_CONTEST_ID?>">
               <button class="form-control" type=submit><?php echo $MSG_SEARCH?></button>
             </form>
           </td>
@@ -56,10 +56,13 @@
               echo "<tr class='oddrow'>";
             else
               echo "<tr class='evenrow'>";
+            $i=0;
             foreach($row as $table_cell){
-              echo "<td>";
+              if($i==2) echo "<td class=text-left>";
+              else echo "<td>";
               echo "\t".$table_cell;
               echo "</td>";
+              $i++;
             }
             echo "</tr>";
             $cnt=1-$cnt;
@@ -110,7 +113,7 @@
     h=x.getHours();
     m=x.getMinutes();
     s=x.getSeconds();
-    n=y+"-"+mon+"-"+d+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
+    n=y+"-"+(mon>=10?mon:"0"+mon)+"-"+(d>=10?d:"0"+d)+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
     //alert(n);
     document.getElementById('nowdate').innerHTML=n;
     setTimeout("clock()",1000);

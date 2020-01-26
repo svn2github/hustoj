@@ -144,11 +144,20 @@
   $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";
   
 	$MSG_SERVER_TIME="SERVER TIME";
+	$MSG_START_TIME="Start Time";
+	$MSG_END_TIME="End Time";
 	$MSG_CONTEST_ID="CONTEST ID";
 	$MSG_CONTEST_NAME="CONTEST NAME";
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";
 	$MSG_CONTEST_CREATOR="CREATOR";
+
+	$MSG_SECONDS="seconds";
+	$MSG_MINUTES="minutes";
+	$MSG_HOURS="hours";
+	$MSG_DAYS="days";
+	$MSG_MONTHS="months";
+	$MSG_YEARS="years";
 
   $MSG_Public="Public";
   $MSG_Private="Private";

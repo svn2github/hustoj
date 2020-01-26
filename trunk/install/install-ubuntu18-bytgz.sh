@@ -1,4 +1,5 @@
 #!/bin/bash
+sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge

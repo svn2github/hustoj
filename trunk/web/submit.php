@@ -319,8 +319,13 @@ if(isset($OJ_UDP)&&$OJ_UDP){
 	$JUDGE_SERVERS=explode(",",$OJ_UDPSERVER);
 	$JUDGE_TOTAL=count($JUDGE_SERVERS);
 	$select= $insert_id % $JUDGE_TOTAL;
-	if(count(explode(":",$JUDGE_SERVERS[$select]))>1) $OJ_UDPPORT=explode(":",$JUDGE_SERVERS[$select])[1];
-        send_udp_message($JUDGE_SERVERS[$select], $OJ_UDPPORT, $insert_id);
+	$JUDGE_HOST=$JUDGE_SERVERS[$select];
+	if(strstr($JUDGE_HOST,":")!==false) {
+		$JUDGE_SERVERS=explode(":",$JUDGE_HOST);
+		$JUDGE_HOST=$JUDGE_SERVERS[0];
+		$OJ_UDPPORT=$JUDGE_SERVERS[1];
+	}
+        send_udp_message($JUDGE_HOST, $OJ_UDPPORT, $insert_id);
 }
 if ($OJ_BENCHMARK_MODE) {
     echo $insert_id;

@@ -51,19 +51,11 @@ if (isset($_POST['cid'])) {
     $cid = abs(intval($_POST['cid']));
     $sql = "SELECT `problem_id`,'N' from `contest_problem` 
 				where `num`='$pid' and contest_id=$cid";
-} else {
-    $id = intval($_POST['id']);
-    if ($id < 0) {
-        $id = -$id;
-    }
-    $sql = "SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' ";
-    if (!isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-        $sql .= " and defunct='N' ";
-    }
-
-    $sql .= " and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
-			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>'$now' or private=1) ) )";      //and `defunct`='N'  隐藏的私有比赛题目依旧隐藏
+}else{
+	$id=intval($_POST['id']);
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' ";
+	if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+		$sql.=" and defunct='N'";
 }
 //echo $sql;
 
@@ -78,7 +70,7 @@ if (
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
-if ($res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+if (false&&$res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     //	echo "res:$res,count:".count($res);
     //	echo "$sql";
     $view_errors = "Problem disabled.<br>";
@@ -324,10 +316,10 @@ if (~$OJ_LANGMASK & (1 << $language)) {
     }
 }
 if(isset($OJ_UDP)&&$OJ_UDP){
-	send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
-}
-if(isset($OJ_UDP)&&$OJ_UDP){
-        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
+	$JUDGE_SERVERS=explode(",",$OJ_UDPSERVER);
+	$JUDGE_TOTAL=count($JUDGE_SERVERS);
+	$select= $insert_id % $JUDGE_TOTAL;
+        send_udp_message($JUDGE_SERVERS[$select], $OJ_UDPPORT, $insert_id);
 }
 if ($OJ_BENCHMARK_MODE) {
     echo $insert_id;

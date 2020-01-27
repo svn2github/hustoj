@@ -219,7 +219,8 @@
   $MSG_HELP_RE="All the other Error on the running phrase will get Runtime Error, such as 'segmentation fault','floating point exception','used forbidden functions', 'tried to access forbidden memories' and so on";
   $MSG_HELP_CE="The compiler (gcc/g++/gpc) could not compile your ANSI program. Of course, warning messages are not error messages. Click the link at the judge reply to see the actual error message"; 
     
-  $MSG_HELP_MORE_TESTDATA_LATER="more testdata can be added later after this problem added."; 
+  $MSG_HELP_MORE_TESTDATA_LATER="more testdata can be added later after this problem added.";
+  $MSG_HELP_ADD_FAQS="Add a news which titled \"faqs.$OJ_LANG\", it apears as <a href=../faqs.php>$MSG_FAQ</a>";
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>for more details"; 
   $MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";
   

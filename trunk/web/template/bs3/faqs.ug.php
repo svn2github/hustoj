@@ -184,8 +184,6 @@ public class Main{
   <font color=green size="+2"><a href="bbs.php"><?php echo $OJ_NAME?>论坛系统</a>باشقا كۆپ تەپسىلاتلارنى بۇ يەردىن كۆرۈڭ</font>
 </center>
 <hr>
-			this page can be replaced by add a news which titled "<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>";
-			<hr>
 <center>
   <table width=100% border=0>
     <tr>

@@ -59,3 +59,4 @@ update contest_problem cp inner join (select count(1) submit,contest_id cid,num 
 alter table solution add column nick char(20) not null default '' after user_id ;
 update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick;
 alter table privilege add index user_id_index(user_id);
+ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DEFAULT '0';

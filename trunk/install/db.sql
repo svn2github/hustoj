@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
   `hint` text,
   `source` varchar(100) DEFAULT NULL,
   `in_date` datetime DEFAULT NULL,
-  `time_limit` int(11) NOT NULL DEFAULT 0,
+  `time_limit` DECIMAL(10,3) NOT NULL DEFAULT 0,
   `memory_limit` int(11) NOT NULL DEFAULT 0,
   `defunct` char(1) NOT NULL DEFAULT 'N',
   `accepted` int(11) DEFAULT '0',

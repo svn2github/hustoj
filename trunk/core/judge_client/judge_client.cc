@@ -1649,7 +1649,7 @@ void get_solution_info(int solution_id, int & p_id, char * user_id,
 }
 
 #ifdef _mysql_h
-void _get_problem_info_mysql(int p_id, int &time_lmt, int &mem_lmt,
+void _get_problem_info_mysql(int p_id, double &time_lmt, int &mem_lmt,
 							 int &isspj)
 {
 	// get the problem info from Table:problem
@@ -1662,7 +1662,7 @@ void _get_problem_info_mysql(int p_id, int &time_lmt, int &mem_lmt,
 	mysql_real_query(conn, sql, strlen(sql));
 	res = mysql_store_result(conn);
 	row = mysql_fetch_row(res);
-	time_lmt = atoi(row[0]);
+	time_lmt = atof(row[0]);
 	mem_lmt = atoi(row[1]);
 	isspj = (row[2][0] == '1');
 	if (res != NULL)
@@ -1672,7 +1672,7 @@ void _get_problem_info_mysql(int p_id, int &time_lmt, int &mem_lmt,
 	}
 }
 #endif
-void _get_problem_info_http(int p_id, int &time_lmt, int &mem_lmt,
+void _get_problem_info_http(int p_id, double &time_lmt, int &mem_lmt,
 							int &isspj)
 {
 	//login();
@@ -1680,13 +1680,14 @@ void _get_problem_info_http(int p_id, int &time_lmt, int &mem_lmt,
 	const char *cmd =
 		"wget --post-data=\"getprobleminfo=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	FILE *pout = read_cmd_output(cmd, p_id, http_baseurl);
-	fscanf(pout, "%d", &time_lmt);
+	fscanf(pout, "%lf", &time_lmt);
 	fscanf(pout, "%d", &mem_lmt);
 	fscanf(pout, "%d", &isspj);
 	pclose(pout);
+	if(DEBUG) printf("time_lmt:%g\n",time_lmt);
 }
 
-void get_problem_info(int p_id, int &time_lmt, int &mem_lmt, int &isspj)
+void get_problem_info(int p_id, double &time_lmt, int &mem_lmt, int &isspj)
 {
 	if (http_judge)
 	{
@@ -2162,7 +2163,7 @@ void copy_js_runtime(char *work_dir)
 #endif
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/", work_dir);
 }
-void run_solution(int &lang, char *work_dir, int &time_lmt, int &usedtime,
+void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 				  int &mem_lmt)
 {
 	nice(19);
@@ -2426,7 +2427,7 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 	}
 	return ret;
 }
-void judge_solution(int &ACflg, int &usedtime, int time_lmt, int isspj,
+void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 					int p_id, char *infile, char *outfile, char *userfile, int &PEflg,
 					int lang, char *work_dir, int &topmemory, int mem_lmt,
 					int solution_id, int num_of_test)
@@ -2526,7 +2527,7 @@ void clean_session(pid_t p)
 
 void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 					char *userfile, char *outfile, int solution_id, int lang,
-					int &topmemory, int mem_lmt, int &usedtime, int time_lmt, int &p_id,
+					int &topmemory, int mem_lmt, int &usedtime, double time_lmt, int &p_id,
 					int &PEflg, char *work_dir)
 {
 	// parent
@@ -2617,7 +2618,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				case SIGALRM:
 					alarm(0);
 					if (DEBUG)
-						printf("alarm:%d\n", time_lmt);
+						printf("alarm:%g\n", time_lmt);
 				case SIGKILL:
 				case SIGXCPU:
 					ACflg = OJ_TL;
@@ -2953,7 +2954,8 @@ int main(int argc, char **argv)
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id, time_lmt, mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0,cid=0;
+	int p_id,  mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0,cid=0;
+	double time_lmt;
 	char time_space_table[BUFFER_SIZE*100];
 	int time_space_index=0;
 
@@ -3015,13 +3017,13 @@ int main(int argc, char **argv)
 	}
 
 	//never bigger than judged set value;
-	if (time_lmt > 300 || time_lmt < 1)
-		time_lmt = 300;
+	if (time_lmt > 300 || time_lmt < 0)
+		time_lmt = 1;
 	if (mem_lmt > 1024 || mem_lmt < 1)
 		mem_lmt = 1024;
 
 	if (DEBUG)
-		printf("time: %d mem: %d\n", time_lmt, mem_lmt);
+		printf("time: %g mem: %d\n", time_lmt, mem_lmt);
 
 	// compile
 	//      printf("%s\n",cmd);

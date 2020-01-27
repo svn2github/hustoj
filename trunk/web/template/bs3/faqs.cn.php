@@ -166,8 +166,6 @@ public class Main{
   <font color=green size="+2">其他问题请访问<a href="bbs.php"><?php echo $OJ_NAME?>论坛系统</a></font>
 </center>
 <hr>
-	管理员可以添加一条新闻，命名为"<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>" 来取代本页内容。
-			<hr>
 <center>
   <table width=100% border=0>
     <tr>

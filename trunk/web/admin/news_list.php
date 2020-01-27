@@ -75,9 +75,9 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "</tr>";
     }
     ?>
-    </form>
   </table>
 </center>
+- <?php echo $MSG_HELP_ADD_FAQS?>
 
 <?php
 if(!(isset($_GET['keyword']) && $_GET['keyword']!=""))

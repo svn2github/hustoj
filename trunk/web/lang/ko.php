@@ -219,7 +219,8 @@
 	$MSG_HELP_RE=" 실행중 오류: 프로그램을 실행하는 도중에 오류가 발생하였습니다.";
 	$MSG_HELP_CE=" 컴파일 오류: gcc/g++/gpc 컴파일러가 프로그램을 변환하지 못하였습니다. 링크를 눌러 오류메시지 확인."; 
 
-	$MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 채점데이터를 더 추가할 수 있습니다."; 
+	$MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 채점데이터를 더 추가할 수 있습니다.";
+	$MSG_HELP_ADD_FAQS="\"faqs.$OJ_LANG\"를 제목으로 공지사항을 등록하면 <a href=../faqs.php>$MSG_FAQ</a> 페이지를 통해 나타납니다.";
 	$MSG_HELP_SPJ="자세한 내용은 <a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>"; 
 	$MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";	
 

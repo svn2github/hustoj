@@ -60,27 +60,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
 	      <?php }else{?>
               <li <?php if ($url=="contest.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>contest.php<?php echo "?cid=".intval($OJ_ON_SITE_CONTEST_ID); ?>"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <?php echo $MSG_CONTEST?></a></li>
 	      <?php }?>
-<?php if(isset($_GET['cid'])){
-	$cid=intval($_GET['cid']);
-?>
-	      <li><a>[</a></li>
-              <li class="active" ><a href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>">
-			<?php echo $MSG_PROBLEMS?>
-	      </a></li>
-               <li  class="active" ><a href="<?php echo $path_fix?>status.php?cid=<?php echo $cid?>">
-			<?php echo $MSG_STATUS?>
-	      </a></li>
-              <li  class="active" ><a href="<?php echo $path_fix?>contestrank.php?cid=<?php echo $cid?>">
-			<?php echo $MSG_RANKLIST?>
-	      </a></li>
-              <li  class="active" ><a href="<?php echo $path_fix?>contestrank-oi.php?cid=<?php echo $cid?>">OI
-			<?php echo $MSG_RANKLIST?>
-	      </a></li>
-              <li  class="active" ><a href="<?php echo $path_fix?>conteststatistics.php?cid=<?php echo $cid?>">
-			<?php echo $MSG_STATISTICS?>
-	      </a></li>
-	      <li><a>]</a></li>
-<?php }?>
+<?php if(isset($_GET['cid'])){ $cid=intval($_GET['cid']); } ?>
 
               <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>

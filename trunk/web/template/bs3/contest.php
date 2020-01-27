@@ -69,22 +69,26 @@
   <br>
   <?php echo $MSG_START_TIME?> : <?php echo $view_start_time?><br>
   <?php echo $MSG_END_TIME?> : <?php echo $view_end_time?><br>
-
   <br>
-  [<a href='status.php?cid=<?php echo $view_cid?>'>Status</a>]
-  [<a href='contestrank.php?cid=<?php echo $view_cid?>'>Standing</a>]
-  [<a href='conteststatistics.php?cid=<?php echo $view_cid?>'>Statistics</a>]
+  <div class="btn-group">
+    <a href="contest.php?cid=<?php echo $cid?>" class="btn btn-primary"><?php echo $MSG_PROBLEMS?></a>
+    <a href="status.php?cid=<?php echo $view_cid?>" class="btn btn-primary"><?php echo $MSG_MY_SUBMISSIONS?></a>
+    <a href="contestrank.php?cid=<?php echo $view_cid?>" class="btn btn-primary"><?php echo $MSG_STANDING?></a>
+    <a href="contestrank-oi.php?cid=<?php echo $view_cid?>" class="btn btn-primary"><?php echo "OI".$MSG_STANDING?></a>
+    <a href="conteststatistics.php?cid=<?php echo $view_cid?>" class="btn btn-primary"><?php echo $MSG_STATISTICS?></a>
+  </div>
+
 </div>
 
 <table id='problemset' class='table table-striped'  width='90%'>
   <thead>
     <tr align=center class='toprow'>
-      <td width='5'>
-      <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" ><?php echo $MSG_PROBLEM_ID?>
-      <td width='60%'><?php echo $MSG_TITLE?></td>
-      <td width='10%'><?php echo $MSG_SOURCE?></td>
-      <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><?php echo $MSG_SOVLED?></td>
-      <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
+      <td></td>
+      <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" ><?php echo $MSG_PROBLEM_ID?></td>
+      <td><?php echo $MSG_TITLE?></td>
+      <td><?php echo $MSG_SOURCE?></td>
+      <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');"><?php echo $MSG_SOVLED?></td>
+      <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');"><?php echo $MSG_SUBMIT?></td>
     </tr>
   </thead>
   <tbody align='center'>

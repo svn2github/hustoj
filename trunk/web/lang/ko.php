@@ -144,18 +144,27 @@
 	$MSG_NOIP_WARNING="NOIP 대회는 종료 전까지 결과를 보여주지 않습니다.";
 
 	$MSG_SERVER_TIME="현재 시간";
+	$MSG_START_TIME="시작 시간";
+	$MSG_END_TIME="종료 시간";
 	$MSG_CONTEST_ID="대회ID";
 	$MSG_CONTEST_NAME="대회 이름";
 	$MSG_CONTEST_STATUS="대회 상태";
 	$MSG_CONTEST_OPEN="대회 구분";
 	$MSG_CONTEST_CREATOR="등록자";
 
+	$MSG_SECONDS="초";
+	$MSG_MINUTES="분";
+	$MSG_HOURS="시간";
+	$MSG_DAYS="일";
+	$MSG_MONTHS="월";
+	$MSG_YEARS="년";
+
 	$MSG_Public="공개";
 	$MSG_Private="비공개";
-	$MSG_Running="대회중";
-	$MSG_Start="시작";
-	$MSG_End="종료";
-	$MSG_TotalTime="시간";
+	$MSG_Running="대회시작";
+	$MSG_Start="대회예정";
+	$MSG_End="대회종료";
+	$MSG_TotalTime="대회시간";
 	$MSG_LeftTime="남은시간";
 	$MSG_Ended="대회종료";
 	$MSG_Login="로그인하세요.";

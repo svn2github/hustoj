@@ -144,11 +144,20 @@
   $MSG_NOIP_WARNING="NOIP 比赛，结束后才能查看结果。";
   
 	$MSG_SERVER_TIME="服务器时间";
+	$MSG_START_TIME="Start Time";
+	$MSG_END_TIME="End Time";
 	$MSG_CONTEST_ID="作业比赛编号";
 	$MSG_CONTEST_NAME="作业比赛名称";
 	$MSG_CONTEST_STATUS="作业比赛状态";
 	$MSG_CONTEST_OPEN="开放";
 	$MSG_CONTEST_CREATOR="创建人";
+
+	$MSG_SECONDS="秒";
+	$MSG_MINUTES="分";
+	$MSG_HOURS="小时";
+	$MSG_DAYS="天";
+	$MSG_MONTHS="月份";
+	$MSG_YEARS="年份";
 
   $MSG_Public="公开";
   $MSG_Private="私有";

@@ -20,27 +20,32 @@ function formatTimeLength($length)
   $second = 0;
   $result = '';
 
-  if($length >= 60){
+  global $MSG_SECONDS, $MSG_MINUTES, $MSG_HOURS, $MSG_DAYS;
+
+  if($length>=60){
     $second = $length%60;
-    if($second > 0){ $result = $second.'秒';}
+    if($second>0 && $second<10){ $result = '0'.$second.$MSG_SECONDS;}
+    else if($second>0){ $result = $second.$MSG_SECONDS;}    
     $length = floor($length/60);
     if($length >= 60){
       $minute = $length%60;
-      if($minute == 0){ if($result != ''){ $result = '0分' . $result;}}
-      else{ $result = $minute.'分'.$result;}
+      if($minute==0){ if($result != ''){ $result = '00'.$MSG_MINUTES.$result;}}
+      else if($minute>0 && $minute<10){ if($result != ''){ $result = '0'.$MSG_MINUTES.$result;}}
+      else{ $result = $minute.$MSG_MINUTES.$result;}
       $length = floor($length/60);
       if($length >= 24){
       	$hour = $length%24;
-        if($hour == 0){ if($result != ''){ $result = '0小时' . $result;}}
-        else{ $result = $hour . '小时' . $result;}
+        if($hour==0){ if($result != ''){ $result = '00'.$MSG_HOURS.$result;}}
+        else if($hour>0 && $hour<10){ if($result != ''){ $result = '0'.$MSG_HOURS.$result;}}
+        else{ $result = $hour.$MSG_HOURS.$result;}
         $length = floor($length / 24);
-        $result = $length . '天' . $result;
+        $result = $length .$MSG_DAYS.$result;
       }
-      else{ $result = $length . '小时' . $result;}
+      else{ $result = $length.$MSG_HOURS.$result;}
     }
-    else{ $result = $length . '分' . $result;}
+    else{ $result = $length.$MSG_MINUTES.$result;}
   }
-  else{ $result = $length . '秒';
+  else{ $result = $length.$MSG_SECONDS;
   }
   return $result;
 }
@@ -184,21 +189,21 @@ if(isset($_GET['cid'])){
 	//past
 
     if($now>$end_time){
-      $view_contest[$i][2] = "<span class=green>$MSG_Ended@".$row['end_time']."</span>";
+      $view_contest[$i][2] = "<span class=text-muted>$MSG_Ended</span>"." "."<span class=text-muted>".$row['end_time']."</span>";
       //pending
 
     }else if ($now<$start_time){
-  	  $view_contest[$i][2] = "<span class=blue>$MSG_Start@".$row['start_time']."</span>&nbsp;";
-      $view_contest[$i][2] .= "<span class=green>$MSG_TotalTime".formatTimeLength($length)."</span>";
+      $view_contest[$i][2] = "<span class=text-success>$MSG_Start</span>"." ".$row['start_time']."&nbsp;";
+      $view_contest[$i][2] .= "<span class=text-success>$MSG_TotalTime</span>"." ".formatTimeLength($length);
 	  //running
     }else{
-  	  $view_contest[$i][2] = "<span class=red> $MSG_Running</font>&nbsp;";
-      $view_contest[$i][2] .= "<span class=green> $MSG_LeftTime ".formatTimeLength($left)." </span>";
+      $view_contest[$i][2] = "<span class=text-danger>$MSG_Running</span>"." ".$row['start_time']."&nbsp;";
+      $view_contest[$i][2] .= "<span class=text-success>$MSG_LeftTime</span>"." "."<span class=text-danger>".formatTimeLength($left)."</span>";
     }
 
     $private = intval($row['private']);
-    if($private==0) $view_contest[$i][4] = "<span class=blue>$MSG_Public</span>";
-    else $view_contest[$i][5] = "<span class=red>$MSG_Private</span>";
+    if($private==0) $view_contest[$i][4] = "<span class=text-primary>$MSG_Public</span>";
+    else $view_contest[$i][5] = "<span class=text-danger>$MSG_Private</span>";
 
     $view_contest[$i][6]=$row['user_id'];
 

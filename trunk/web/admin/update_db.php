@@ -181,8 +181,8 @@ $tsql[33]="update problem p inner join (select problem_id pid ,count(1) submit f
 $csql[33]="";
 $tsql[34]="alter table privilege add index user_id_index(user_id);";
 $csql[34]="";
-
-
+$tsql[35]="ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DEFAULT '0';";
+$csql[35]="";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

@@ -164,6 +164,7 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";
 	$MSG_CONTEST_CREATOR="CREATOR";
+	$MSG_CONTEST_PENALTY="TIME PENALTY";	
 
 	$MSG_SECONDS="seconds";
 	$MSG_MINUTES="minutes";

@@ -41,11 +41,11 @@
       <table class='table table-striped' width=90%>
         <thead>
           <tr class=toprow align=center>
-            <td width=10%><?php echo $MSG_CONTEST_ID?></td>
-            <td width=30%><?php echo $MSG_CONTEST_NAME?></td>
-            <td width=30%><?php echo $MSG_CONTEST_STATUS?></td>
-            <td width=10%><?php echo $MSG_CONTEST_OPEN?></td>
-            <td width=10%><?php echo $MSG_CONTEST_CREATOR?></td>
+            <td><?php echo $MSG_CONTEST_ID?></td>
+            <td><?php echo $MSG_CONTEST_NAME?></td>
+            <td><?php echo $MSG_CONTEST_STATUS?></td>
+            <td><?php echo $MSG_CONTEST_OPEN?></td>
+            <td><?php echo $MSG_CONTEST_CREATOR?></td>
           </tr>
         </thead>
         <tbody align='center'>

@@ -69,20 +69,20 @@
 				<table id='problemset' width='90%' class='table table-striped'>
 					<thead>
 						<tr class='toprow'>
-							<th width='5'></th>
-							<th width='20' class='hidden-xs'>
+							<th></th>
+							<th class='hidden-xs'>
 								<?php echo $MSG_PROBLEM_ID?>
 							</th>
 							<th>
 								<?php echo $MSG_TITLE?>
 							</th>
-							<th class='hidden-xs' width='10%'>
+							<th class='hidden-xs'>
 								<?php echo $MSG_SOURCE?>
 							</th>
-							<th style="cursor:hand" width=60>
+							<th style="cursor:hand">
 								<?php echo $MSG_SOVLED?>
 							</th>
-							<th style="cursor:hand" width=60>
+							<th style="cursor:hand">
 								<?php echo $MSG_SUBMIT?>
 							</th>
 						</tr>

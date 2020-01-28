@@ -140,6 +140,7 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
+	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";
   

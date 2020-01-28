@@ -28,7 +28,7 @@
         <tr align='center'>
           <td>
             <form class=form-inline method=post action=contest.php>
-              <input class="form-control" name=keyword value="" placeholder="<?php echo $MSG_CONTEST_ID?>">
+              <input class="form-control" name=keyword value="" placeholder="<?php echo $MSG_CONTEST_NAME?>">
               <button class="form-control" type=submit><?php echo $MSG_SEARCH?></button>
             </form>
           </td>

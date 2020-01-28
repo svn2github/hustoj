@@ -140,6 +140,7 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
+	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_NOIP_WARNING="NOIP 比赛，结束后才能查看结果。";
   

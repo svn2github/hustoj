@@ -32,6 +32,7 @@
         <h3><?php echo $title?></h3>
         <h4><?php echo "OI Mode - ".$MSG_STANDING?></h4>
         <a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
+        <h4></h4>
         <?php
         if($OJ_MEMCACHE){
         ?>

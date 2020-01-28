@@ -139,7 +139,8 @@
 	$MSG_SET_LOGIN_IP="로그인IP 설정";
 
 	//contest.php
-	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 참가권한이 없습니다.";
+	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
+	$MSG_TIME_WARNING="대회 시작전입니다.";
 	$MSG_WATCH_RANK="대회순위 보기";
 	$MSG_NOIP_WARNING="NOIP 대회는 종료 전까지 결과를 보여주지 않습니다.";
 

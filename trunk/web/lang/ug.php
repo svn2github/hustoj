@@ -236,6 +236,7 @@ if(date('m')==1 && date('d') == 1){
   
 	$MSG_HELP_MORE_TESTDATA_LATER="كۆپلىگەن سىناق نۇقتىلىرىنى سوئال كىرگۈزۈپ بولغاندىن كىيىن قوشۇش";
   $MSG_HELP_ADD_FAQS="Add a news which titled \"faqs.$OJ_LANG\", it apears as <a href=../faqs.php>$MSG_FAQ</a>";
+	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> Please give us a <span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star @HUSTOJ Github!</a></sub>";
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>ئىزدەڭ hustoj special judge</a>تېخىمۇ كۆپ تەپسىلات ";
   $MSG_HELP_BALLOON_SCHOOL="پىرىنتېر ۋە شار ئۈچۈن مەكتەپ نامى سۈزۈۋىتىلىدۇ";
 

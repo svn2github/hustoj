@@ -90,7 +90,7 @@ if(isset($_GET['cid'])){
       $view_errors .= "<h3>$MSG_CONTEST_ID : $view_cid - $view_title</h3>";
       $view_errors .= "<p>$view_description</p>";
       $view_errors .= "<br>";
-      $view_errors .= "<span class=text-danger>$MSG_TIME_WARNING</span>";
+      $view_errors .= "<span class=text-success>$MSG_TIME_WARNING</span>";
       $view_errors .= "</center>";
       $view_errors .= "<br><br>";
 
@@ -229,7 +229,7 @@ if(isset($_GET['cid'])){
 	  //running
     }else{
       $view_contest[$i][2] = "<span class=text-danger>$MSG_Running</span>"." ".$row['start_time']."&nbsp;";
-      $view_contest[$i][2] .= "<span class=text-success>$MSG_LeftTime</span>"." "."<span class=text-danger>".formatTimeLength($left)."</span>";
+      $view_contest[$i][2] .= "<span class=text-danger>$MSG_LeftTime</span>"." ".formatTimeLength($left)."</span>";
     }
 
     $private = intval($row['private']);

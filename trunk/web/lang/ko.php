@@ -85,7 +85,7 @@
 	//problemset.php
 	$MSG_SEARCH="검색";
 	$MSG_PROBLEM_ID="문제ID";
-	$MSG_TITLE="문제 제목";
+	$MSG_TITLE="제목";
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT="제출";
 
@@ -223,6 +223,7 @@
 
 	$MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 채점데이터를 더 추가할 수 있습니다.";
 	$MSG_HELP_ADD_FAQS="\"faqs.$OJ_LANG\"를 제목으로 공지사항을 등록하면 <a href=../faqs.php>$MSG_FAQ</a> 페이지를 통해 나타납니다.";
+	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> HUSTOJ Github 에서 <span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star를 부탁드립니다!</a></sub>";
 	$MSG_HELP_SPJ="자세한 내용은 <a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>"; 
 	$MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";	
 

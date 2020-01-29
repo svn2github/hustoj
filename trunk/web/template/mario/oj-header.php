@@ -65,7 +65,7 @@
 		<?php }?>
 	</div><!--end menu-->
 <div id=profile >
-<script src="include/profile.php" ></script>
+<script src="<?php echo 'template/'.$OJ_TEMPLATE?>/swProfile.php" ></script>
 </div><!--end profile-->
 </div><!--end subhead-->
 </div>

@@ -91,7 +91,7 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 function fix($str,$OJ_TEMPLATE){
 	require("include/setlang.php");
 	if(strstr($str,"AC"))
-	  return "<img width=23 src=template/".$OJ_TEMPLATE."/image/green.jpeg>".$str;
+	  return "<img width=23 src=template/".$OJ_TEMPLATE."/image/green.png>".$str;
 	if(strstr($str,"WA"))
 	  return "<img width=23 src=template/".$OJ_TEMPLATE."/image/recent.png>".$str;
 	if(strstr($str,"Waiting"))

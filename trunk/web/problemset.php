@@ -129,8 +129,8 @@ foreach ($result as $row){
 	foreach($cate as $cat){
 		array_push($category,trim($cat));	
 	}
-
-	$view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";;
+        if($OJ_TEMPLATE=='mario')$view_problemset[$i][0]="<div fd='problem_id' class='center'>"."<img style='height:35px'src='/template/mario/image/red.png'/>".$row['problem_id']."</div>";
+	else $view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
 	$view_problemset[$i][3]="<div pid='".$row['problem_id']."' fd='source' class='center'>";
 	foreach($category as $cat){

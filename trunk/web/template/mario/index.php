@@ -7,6 +7,7 @@
 <body>
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
+	 <center><img src='/template/mario/image/mario.gif'/> </center>
 <div id=main>
 	<?php echo $view_news?>
 <div id=foot>

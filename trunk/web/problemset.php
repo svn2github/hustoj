@@ -116,8 +116,8 @@ foreach ($result as $row){
 	if (isset($sub_arr[$row['problem_id']])){
 		if (isset($acc_arr[$row['problem_id']])) 
 			$view_problemset[$i][0]="<div class='label label-success'>Y</div>";
-		else 
-			$view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
+		else
+                        $view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}
@@ -127,8 +127,7 @@ foreach ($result as $row){
 	foreach($cate as $cat){
 		array_push($category,trim($cat));	
 	}
-
-	$view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";;
+        $view_problemset[$i][1]="<div fd='problem_id' class='center'>".$row['problem_id']."</div>";
 	$view_problemset[$i][2]="<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
 	$view_problemset[$i][3]="<div pid='".$row['problem_id']."' fd='source' class='center'>";
 	foreach($category as $cat){
@@ -141,12 +140,8 @@ foreach ($result as $row){
 	$view_problemset[$i][3].="</div >";
 	$view_problemset[$i][4]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."&jresult=4'>".$row['accepted']."</a></div>";
 	$view_problemset[$i][5]="<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
-	
-	
 	$i++;
 }
-
-
 require("template/".$OJ_TEMPLATE."/problemset.php");
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

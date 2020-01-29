@@ -115,9 +115,11 @@ foreach ($result as $row){
 	$view_problemset[$i]=Array();
 	if (isset($sub_arr[$row['problem_id']])){
 		if (isset($acc_arr[$row['problem_id']])) 
-			$view_problemset[$i][0]="<div class='label label-success'>Y</div>";
-		else 
-			$view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
+			if($OJ_TEMPLATE=='mario')$view_problemset[$i][0]="<div class='center'><img style='height:35px'src='/template/mario/image/green.png'/>100</div>";
+			else $view_problemset[$i][0]="<div class='label label-success'>100</div>";
+		else
+                        if($OJ_TEMPLATE=='mario')$view_problemset[$i][0]="<div class='center'><img style='height:35px'src='/template/mario/image/logo_r.jpg'/>100</div>";
+			else $view_problemset[$i][0]= "<div class='label label-danger'>N</div>";
 	}else{
 		$view_problemset[$i][0]= "<div class=none> </div>";
 	}

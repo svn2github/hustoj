@@ -19,10 +19,10 @@ require_once("./include/memcache.php");
  */
 function getSubmitByCid($OJ_MEMCACHE,$cid){
     if ($OJ_MEMCACHE) {
-        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`='$cid'";
+        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`='$cid' and num>=0 and problem_id>0";
         $subList = mysql_query_cache($sql);
     } else {
-        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`= ?";
+        $sql = "SELECT `solution_id`,`user_id`,`problem_id`,`in_date`,`result` FROM solution WHERE `contest_id`= ? and num>=0 and problem_id>0";
         $subList = pdo_query($sql, $cid);
     }
     return $subList;
@@ -204,8 +204,8 @@ if ($end_time > time()) {
     exit(0);
 }
 
-if(time()<$end_time && stripos($title,"noip")){
-      $view_errors =  "<h2>NOIP contest !</h2>";
+if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
+      $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);
 }

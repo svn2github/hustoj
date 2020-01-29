@@ -9,9 +9,8 @@ if(file_exists("./admin/msg.txt"))
 $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
 if(file_exists("../admin/msg.txt"))
 $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
+/*
 
-
-?>
 <!--  to enable mathjax in hustoj:
 svn export http://github.com/mathjax/MathJax/trunk /home/judge/src/web/mathjax
 <script type="text/javascript"
@@ -23,6 +22,12 @@ or
 </script>
 
 -->
+
+
+*/
+
+?>
+
 <script>
 $(document).ready(function(){
   var msg="<marquee style='margin-top:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
@@ -31,7 +36,14 @@ $(document).ready(function(){
   $("form").append("<div id='csrf' />");
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
   $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
+  $("body").append("<center><?php echo $MSG_HELP_HUSTOJ?></center>");  
   $("body").append("<div class=center > <img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge</div>");
+  
+  <?php if(isset($OJ_BEIAN)&&$OJ_BEIAN){ ?>
+         $("body").append("<br><center><a href='http://beian.miit.gov.cn/' target='_blank'><?php echo $OJ_BEIAN?></a></center>");
+  <?php } ?>
+
+	
   <?php 
 	if(isset($_SESSION[$OJ_NAME."_administrator"])) echo "admin_mod();";
   ?>

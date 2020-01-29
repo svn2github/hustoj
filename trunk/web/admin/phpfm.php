@@ -1,49 +1,5 @@
 <?php
 //a:9:{s:4:"lang";s:2:"en";s:9:"auth_pass";s:32:"d41d8cd98f00b204e9800998ecf8427e";s:8:"quota_mb";i:0;s:17:"upload_ext_filter";a:0:{}s:19:"download_ext_filter";a:0:{}s:15:"error_reporting";i:1;s:7:"fm_root";s:0:"";s:17:"cookie_cache_time";i:2592000;s:7:"version";s:5:"0.9.8";}
-/*--------------------------------------------------
- | PHP FILE MANAGER
- +--------------------------------------------------
- | phpFileManager 0.9.8
- | By Fabricio Seger Kolling
- | Copyright (c) 2004-2013 Fabrício Seger Kolling
- | E-mail: dulldusk@gmail.com
- | URL: http://phpfm.sf.net
- | Last Changed: 2013-10-15
- +--------------------------------------------------
- | OPEN SOURCE CONTRIBUTIONS
- +--------------------------------------------------
- | TAR/GZIP/BZIP2/ZIP ARCHIVE CLASSES 2.0
- | By Devin Doucette
- | Copyright (c) 2004 Devin Doucette
- | E-mail: darksnoopy@shaw.ca
- | URL: http://www.phpclasses.org
- +--------------------------------------------------
- | It is the AUTHOR'S REQUEST that you keep intact the above header information
- | and notify him if you conceive any BUGFIXES or IMPROVEMENTS to this program.
- +--------------------------------------------------
- | LICENSE
- +--------------------------------------------------
- | Licensed under the terms of any of the following licenses at your choice:
- | - GNU General Public License Version 2 or later (the "GPL");
- | - GNU Lesser General Public License Version 2.1 or later (the "LGPL");
- | - Mozilla Public License Version 1.1 or later (the "MPL").
- | You are not required to, but if you want to explicitly declare the license
- | you have chosen to be bound to when using, reproducing, modifying and
- | distributing this software, just include a text file titled "LEGAL" in your version
- | of this software, indicating your license choice. In any case, your choice will not
- | restrict any recipient of your version of this software to use, reproduce, modify
- | and distribute this software under any of the above licenses.
- +--------------------------------------------------
- | CONFIGURATION AND INSTALATION NOTES
- +--------------------------------------------------
- | This program does not include any instalation or configuration
- | notes because it simply does not require them.
- | Just throw this file anywhere in your webserver and enjoy !!
- +--------------------------------------------------
-*/
-// +--------------------------------------------------
-// | Header and Globals
-// +--------------------------------------------------	
 require_once("../include/db_info.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
@@ -188,12 +144,12 @@ if ($loggedon==$auth_pass){
                 case 3: download(); break;
                 case 4: view(); break;
                 case 5: server_info(); break;
-                case 6: execute_cmd(); break;
+                //case 6: execute_cmd(); break;
                 case 7: edit_file_form(); break;
-                case 8: chmod_form(); break;
-                case 9: shell_form(); break;
+                //case 8: chmod_form(); break;
+                //case 9: shell_form(); break;
                 case 10: upload_form(); break;
-                case 11: execute_file(); break;
+                //case 11: execute_file(); break;
                 default: frameset();
             }
     }
@@ -2423,6 +2379,7 @@ function save_upload($temp_file,$filename,$dir_dest) {
                     $out = 1;
                 } else $out = 2;
             }
+	if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$file);
         } else $out = 3;
     } else $out = 4;
     return $out;
@@ -3664,7 +3621,7 @@ function upload_form(){
         <tr><th colspan=2>".et('Upload')."</th></tr>
         <tr><td align=right><b>".et('Destination').":<td><b><nobr>".basename($current_dir)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
-            echo "<tr><td width=1 align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
+            echo "<tr><td align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
             $test_js .= "(document.upload_form.file$x.value.length>0)||";
         }
         echo "
@@ -4583,7 +4540,8 @@ function frame3(){
                         $zipfile->extract_files();
                     }
                     unset($zipfile);
- 		    system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(function_exists("system"))system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$current_dir."/*");
                     reloadframe("parent",2);
                 }
             }

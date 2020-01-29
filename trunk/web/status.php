@@ -40,7 +40,7 @@ if (isset($_GET['cid'])){
                 $start_time=strtotime($row[0]);
                 $title=$row[1];
                 $end_time=strtotime($row[2]);       
-		if(time()<$end_time && stripos($title,"noip")){
+		if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
 		      $view_errors =  "<h2> $MSG_NOIP_WARNING <a href=\"contest.php?cid=$cid\">返回比赛</a></h2>";
 		      require("template/".$OJ_TEMPLATE."/error.php");
 		      exit(0);
@@ -63,14 +63,12 @@ if (isset($_GET['cid'])){
         //require_once("oj-header.php");
   if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
-	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
-	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
   ){
     if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-                  $sql="WHERE (contest_id=0 or contest_id is null)  ";
-    }else{
+                  $sql="WHERE 1 ";
+  }else{
         $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
-    }
+  }
 
 }
 $start_first=true;
@@ -160,7 +158,7 @@ if($OJ_SIM){
 
 
 
-$sql=$sql.$order_str." LIMIT 20";
+$sql=$sql.$order_str." LIMIT 50";
 //echo $sql;
 
 
@@ -271,11 +269,11 @@ for ($i=0;$i<$rows_cnt;$i++){
         }else{
               if(!$lock||$lock_time>$row['in_date']||$row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']){
                 if($OJ_SIM&&$row['sim']>80&&$row['sim_s_id']!=$row['s_id']) {
-                        $view_status[$i][3].= "<span class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
+                        $view_status[$i][3].= "<a href='reinfo.php?sid=".$row['solution_id']."' class='".$judge_color[$row['result']]."'  title='$MSG_Tips'>*".$judge_result[$row['result']]."";
         		if ($row['result']!=4&&isset($row['pass_rate'])&&$row['pass_rate']>0&&$row['pass_rate']<.98)
                                 $view_status[$i][3].= "$mark</a>";
 			else
-				$view_status[$i][3].="</span>";
+				$view_status[$i][3].="</a>";
 
                         if( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 
@@ -313,8 +311,8 @@ for ($i=0;$i<$rows_cnt;$i++){
 
 
                 if ($row['result']>=4){
-                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']."</div>";
-                        $view_status[$i][5]= "<div id=center class=red>".$row['time']."</div>";
+                        $view_status[$i][4]= "<div id=center class=red>".$row['memory']." KB</div>";
+                        $view_status[$i][5]= "<div id=center class=red>".$row['time']." ms</div>";
 						//echo "=========".$row['memory']."========";
                 }else{
                         $view_status[$i][4]= "---";
@@ -335,7 +333,7 @@ for ($i=0;$i<$rows_cnt;$i++){
                         	}
 			}
                 }
-                $view_status[$i][7]= $row['code_length']." B";
+                $view_status[$i][7]= $row['code_length']." bytes";
 				
         }else
 		{
@@ -345,10 +343,13 @@ for ($i=0;$i<$rows_cnt;$i++){
 			$view_status[$i][7]="----";
 		}
 	if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+    {
 		$view_status[$i][8]= $row['in_date']."[".(strtotime($row['judgetime'])-strtotime($row['in_date']))."]";
-	else
-        	$view_status[$i][8]= $row['in_date'];
         $view_status[$i][9]= $row['judger'];
+    }
+	else
+        $view_status[$i][8]= $row['in_date'];
+
         
    
    

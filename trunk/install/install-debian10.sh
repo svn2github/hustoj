@@ -50,7 +50,7 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"
 else
-
+        sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
@@ -81,7 +81,7 @@ fi
 if grep "bak.sh" /var/spool/cron/crontabs/root ; then
 	echo "auto backup added!"
 else
-	echo "1 0 * * * /home/judge/src/install/bak.sh" >> /var/spool/cron/crontabs/root
+	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
 fi
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
@@ -89,6 +89,11 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
 systemctl enable nginx
+systemctl enable mysql
+systemctl enable php7.3-fpm
+systemctl enable judged
+
+echo "Note: skip-networking is needed for Andorid based Linux Deploy to start mariadb "
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"

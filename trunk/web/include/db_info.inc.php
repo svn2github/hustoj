@@ -1,7 +1,6 @@
 <?php @session_start();
 	ini_set("display_errors","Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
-	ini_set("session.cookie_httponly", 1);   
-	header('X-Frame-Options:SAMEORIGIN');
+	//header('X-Frame-Options:SAMEORIGIN');
 
 //for people using hustoj out of China , be careful of the last two line of this file !
 
@@ -15,12 +14,12 @@ static 	$OJ_NAME="HUSTOJ";  //左上角显示的系统名称
 static 	$OJ_HOME="./";    //主页目录
 static 	$OJ_ADMIN="root@localhost";  //管理员email
 static 	$OJ_DATA="/home/judge/data";  //测试数据目录
-static 	$OJ_BBS=false;//"bbs" for phpBB3 bridge or "discuss" for mini-forum or false for close any 
+static 	$OJ_BBS=false;//设为"discuss3" 启用， "bbs" for phpBB3 bridge or "discuss" for mini-forum or false for close any 
 static  $OJ_ONLINE=false;  //是否记录在线情况
 static  $OJ_LANG="en";  //默认语言
 static  $OJ_SIM=false;  //显示相似度
 static  $OJ_DICT=false; //显示在线翻译
-static  $OJ_LANGMASK=0; //1mC 2mCPP 4mPascal 8mJava 16mRuby 32mBash 1008 for security reason to mask all other language
+static  $OJ_LANGMASK=2097072; //calculator :   https://pigeon-developer.github.io/hustoj-langmask/
 static  $OJ_EDITE_AREA=true;//true: syntax highlighting is active
 static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false;//true: One can view all AC submit if he/she has ACed it onece.
@@ -28,6 +27,7 @@ static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
 static  $OJ_APPENDCODE=false;  // 代码预定模板
+if(!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模式需要允许javascript操作cookie保存当前语言。
 static  $OJ_CE_PENALTY=false;  // 编译错误是否罚时
 static  $OJ_PRINTER=false;  //启用打印服务
 static  $OJ_MAIL=false; //内邮
@@ -46,6 +46,7 @@ static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_CDN_URL="";  //  http://cdn.hustoj.com/  https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/web/ 
 static  $OJ_TEMPLATE="bs3"; //使用的默认模板, [bs3 ie ace sweet sae] work with discuss3, [classic bs] work with discuss
 //if(isset($_GET['tp'])) $OJ_TEMPLATE=$_GET['tp'];
+if($OJ_TEMPLATE=="classic") $OJ_CSS="hoj.css";
 static  $OJ_LOGIN_MOD="hustoj";
 static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
@@ -60,6 +61,9 @@ static  $OJ_OI_MODE=false;//是否开启OI比赛模式，禁用排名、状态�
 static  $OJ_SHOW_METAL=true;//榜单上是否按比例显示奖牌
 static  $OJ_RANK_LOCK_DELAY=3600;//赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
 static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
+
+static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。
+static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
@@ -95,18 +99,22 @@ static  $OJ_QQ_CBURL='192.168.0.108';
 
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
-if( isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'],"zh-CN")) {
-        $OJ_LANG="cn";
+if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
+	$OJ_LANG = $_SESSION[$OJ_NAME . '_' . 'OJ_LANG'];
+} else if (isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
+	$OJ_LANG = $_COOKIE['lang'];
+} else if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
+	$OJ_LANG = $_GET['lang'];
+} else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
+	$OJ_LANG = "cn";
 }
-if (isset($_SESSION[$OJ_NAME.'_'.'OJ_LANG'])) $OJ_LANG=$_SESSION[$OJ_NAME.'_'.'OJ_LANG'];
 
 require_once(dirname(__FILE__)."/pdo.php");
 
 		// use db
 	//pdo_query("set names utf8");	
 		
-	if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&basename($_SERVER['PHP_SELF'])!="problem_judge")
-		 require_once(dirname(__FILE__)."/csrf_check.php");
+
 
 	//sychronize php and mysql server with timezone settings, dafault setting for China
 	//if you are not from China, comment out these two lines or modify them.

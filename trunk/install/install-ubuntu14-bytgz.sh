@@ -60,6 +60,9 @@ sed -i "s:#\tinclude fastcgi_params;:\tinclude fastcgi_params;\n\t}:g" /etc/ngin
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php5/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php5/fpm/php.ini
+sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php5 -name www.conf`
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php5 -name www.conf`
+
 /etc/init.d/php5-fpm restart
 service php5-fpm restart
 cd src/core
@@ -76,7 +79,7 @@ fi
 if grep "bak.sh" /var/spool/cron/crontabs/root ; then
 	echo "auto backup added!"
 else
-	echo "1 0 * * * /home/judge/src/install/bak.sh" >> /var/spool/cron/crontabs/root
+	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
 fi
 /usr/bin/judged
 

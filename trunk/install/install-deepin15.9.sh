@@ -5,7 +5,7 @@ apt-get install -y subversion
 cd /home/judge/
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
+for PKG in make flex g++ clang libmariadb++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
 do
    apt-get install -y $PKG 
 done
@@ -51,7 +51,7 @@ echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h l
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"
 else
-	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /JudgeOnline/recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
@@ -65,6 +65,8 @@ else
 fi
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
+
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
 
 /etc/init.d/php7.0-fpm restart
 service php7.0-fpm restart
@@ -82,7 +84,7 @@ fi
 if grep "bak.sh" /var/spool/cron/crontabs/root ; then
 	echo "auto backup added!"
 else
-	echo "1 0 * * * /home/judge/src/install/bak.sh" >> /var/spool/cron/crontabs/root
+	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
 fi
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
@@ -91,6 +93,13 @@ cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
 
 systemctl enable nginx
+systemctl enable mysql
+systemctl enable php7.3-fpm
+systemctl enable judged
+
+cls
+
+
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"

@@ -70,7 +70,7 @@ $auth=ob_get_contents();
 ob_end_clean();
 echo htmlentities(str_replace("\n\r","\n",$view_source),ENT_QUOTES,"utf-8")."\n".$auth."</pre>";
 }else{
-echo "I am sorry, You could not view this code!";
+echo $MSG_WARNING_ACCESS_DENIED ;
 }
 ?>
       </div>

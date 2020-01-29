@@ -2,14 +2,12 @@
         $OJ_CACHE_SHARE=false;
         $cache_time=30;
         require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
+    	require_once('./include/db_info.inc.php');
+	require_once("./include/my_func.inc.php");
+
         require_once('./include/setlang.php');
         require_once('./include/memcache.php');
         $view_title= $MSG_RANKLIST;
-	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
-		header("location:index.php");
-		exit();
-	}
 
         $scope="";
         if(isset($_GET['scope']))
@@ -75,7 +73,13 @@
       
 		
 		if(isset($_GET['prefix'])){
-			$result = pdo_query($sql,$_GET['prefix']."%");
+			if(is_valid_user_name($_GET['prefix'])){
+				$result = pdo_query($sql,$_GET['prefix']."%");
+			}else{
+				 $view_errors =  "<h2>invalid user name prefix</h2>";
+			         require("template/".$OJ_TEMPLATE."/error.php");
+      				 exit(0);
+			}
 		}else{
                 	$result = mysql_query_cache($sql) ;
 		}
@@ -96,9 +100,9 @@
                         $view_rank[$i][4]=  "<div class=center><a href='status.php?user_id=" . htmlentities ($row['user_id'],ENT_QUOTES,"UTF-8") ."'>" . $row['submit'] . "</a>"."</div>";
 
                         if ($row['submit'] == 0)
-                                $view_rank[$i][5]= "0.000%";
+                                $view_rank[$i][5]= "0.00%";
                         else
-                                $view_rank[$i][5]= sprintf ( "%.03lf%%", 100 * $row['solved'] / $row['submit'] );
+                                $view_rank[$i][5]= sprintf ( "%.02lf%%", 100 * $row['solved'] / $row['submit'] );
 
 //                      $i++;
                 }

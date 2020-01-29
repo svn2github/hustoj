@@ -1,6 +1,8 @@
 <?php session_start();
 require_once "include/db_info.inc.php";
 require_once "include/my_func.inc.php";
+if(isset($OJ_CSRF)&&$OJ_CSRF&&$OJ_TEMPLATE=="bs3"&&!isset($_SESSION[$OJ_NAME.'_'.'http_judge']))
+		 require_once(dirname(__FILE__)."/include/csrf_check.php");
 
 if (!isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
     require_once "oj-header.php";
@@ -12,6 +14,7 @@ require_once "include/memcache.php";
 require_once "include/const.inc.php";
 $now = strftime("%Y-%m-%d %H:%M", time());
 $user_id = $_SESSION[$OJ_NAME . '_' . 'user_id'];
+$language = intval($_POST['language']);
 
 if (!$OJ_BENCHMARK_MODE) {
     $sql = "SELECT count(1) FROM `solution` WHERE result<4";
@@ -36,6 +39,7 @@ if (!$OJ_BENCHMARK_MODE) {
         $_SESSION[$OJ_NAME . '_' . "vcode"] = null;
         $err_str = $err_str . "Verification Code Wrong!\\n";
         $err_cnt++;
+	$view_errors=$err_str;
         require "template/" . $OJ_TEMPLATE . "/error.php";
 
         exit(0);
@@ -47,19 +51,11 @@ if (isset($_POST['cid'])) {
     $cid = abs(intval($_POST['cid']));
     $sql = "SELECT `problem_id`,'N' from `contest_problem` 
 				where `num`='$pid' and contest_id=$cid";
-} else {
-    $id = intval($_POST['id']);
-    if ($id < 0) {
-        $id = -$id;
-    }
-    $sql = "SELECT `problem_id`,defunct from `problem` where `problem_id`='$id' ";
-    if (!isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
-        $sql .= " and defunct='N' ";
-    }
-
-    $sql .= " and problem_id not in (select distinct problem_id from contest_problem where `contest_id` IN (
-			SELECT `contest_id` FROM `contest` WHERE 
-			(`end_time`>'$now' or private=1) ) )";      //and `defunct`='N'  隐藏的私有比赛题目依旧隐藏
+}else{
+	$id=intval($_POST['id']);
+	$sql="SELECT `problem_id` from `problem` where `problem_id`='$id' ";
+	if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+		$sql.=" and defunct='N'";
 }
 //echo $sql;
 
@@ -74,7 +70,7 @@ if (
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
-if ($res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
+if (false&&$res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     //	echo "res:$res,count:".count($res);
     //	echo "$sql";
     $view_errors = "Problem disabled.<br>";
@@ -90,6 +86,7 @@ $test_run = false;
 if (isset($_POST['id'])) {
     $id = intval($_POST['id']);
     $test_run = $id <= 0;
+    $langmask=$OJ_LANGMASK;
 } elseif (isset($_POST['pid']) && isset($_POST['cid']) && $_POST['cid'] != 0) {
     $pid = intval($_POST['pid']);
     $cid = intval($_POST['cid']);
@@ -99,18 +96,20 @@ if (isset($_POST['id'])) {
     }
     // check user if private
     $sql =
-        "SELECT `private` FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
-    $result = pdo_query($sql, $cid, $now, $now);
+        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
+    //    "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
+    //$result = pdo_query($sql, $cid, $now, $now);
+    $result = mysql_query_cache($sql);
     $rows_cnt = count($result);
     if ($rows_cnt != 1) {
-        echo "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+        $view_errors.= "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
 
-        require_once "oj-footer.php";
+        require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
     } else {
         $row = $result[0];
         $isprivate = intval($row[0]);
-
+	$langmask=$row[1];
         if ($isprivate == 1 && !isset($_SESSION[$OJ_NAME . '_' . 'c' . $cid])) {
             $sql =
                 "SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
@@ -151,13 +150,21 @@ if (isset($_POST['id'])) {
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 */
+    $langmask=$OJ_LANGMASK;
     $test_run = true;
 }
-$language = intval($_POST['language']);
+
 if ($language > count($language_name) || $language < 0) {
     $language = 0;
 }
 $language = strval($language);
+
+    if($langmask&(1<<$language)){
+        $view_errors = "Using unknown programing language!\n[$language][$langmask][".($langmask&(1<<$language))."]";
+        require "template/" . $OJ_TEMPLATE . "/error.php";
+        exit(0);
+		
+    }
 
 $source = $_POST['source'];
 $input_text = "";
@@ -220,7 +227,7 @@ if ($len > 65536) {
     exit(0);
 }
 
-if (!$OJ_BENCHMARK_MODE) {
+if (false&&!$OJ_BENCHMARK_MODE) {
     // last submit
     $now = strftime("%Y-%m-%d %X", time() - 1);
     $sql =
@@ -259,7 +266,7 @@ if (~$OJ_LANGMASK & (1 << $language)) {
 		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
         if (isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
             pdo_query(
-                "update solution set contest_id =0 where contest_id=? and user_id=? and num=?",
+                "delete from solution where contest_id=? and user_id=? and num=?",
                 $cid,
                 $user_id,
                 $pid
@@ -286,6 +293,14 @@ if (~$OJ_LANGMASK & (1 << $language)) {
         $sql =
             "INSERT INTO `custominput`(`solution_id`,`input_text`)VALUES(?,?)";
         pdo_query($sql, $insert_id, $input_text);
+    }else{
+
+	$sql="update problem set submit=submit+1 where problem_id=?";
+	pdo_query($sql,$id);
+	if(isset($cid)&&$cid>0){
+		$sql="update contest_problem set c_submit=c_submit+1 where contest_id=? and num=?";
+		pdo_query($sql,$cid,$pid);
+	}
     }
     $sql = "update solution set result=0 where solution_id=?";
     pdo_query($sql, $insert_id);
@@ -300,9 +315,17 @@ if (~$OJ_LANGMASK & (1 << $language)) {
         $redis->close();
     }
 }
-
 if(isset($OJ_UDP)&&$OJ_UDP){
-        send_udp_message($OJ_UDPSERVER, $OJ_UDPPORT, $insert_id);
+	$JUDGE_SERVERS=explode(",",$OJ_UDPSERVER);
+	$JUDGE_TOTAL=count($JUDGE_SERVERS);
+	$select= $insert_id % $JUDGE_TOTAL;
+	$JUDGE_HOST=$JUDGE_SERVERS[$select];
+	if(strstr($JUDGE_HOST,":")!==false) {
+		$JUDGE_SERVERS=explode(":",$JUDGE_HOST);
+		$JUDGE_HOST=$JUDGE_SERVERS[0];
+		$OJ_UDPPORT=$JUDGE_SERVERS[1];
+	}
+        send_udp_message($JUDGE_HOST, $OJ_UDPPORT, $insert_id);
 }
 if ($OJ_BENCHMARK_MODE) {
     echo $insert_id;

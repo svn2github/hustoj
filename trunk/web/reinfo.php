@@ -25,6 +25,11 @@ function is_valid($str2){
     return $n/$m>3;
 }
 
+if(!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+	$view_errors= $MSG_WARNING_ACCESS_DENIED ;
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+}
 
 $ok=false;
 $id=strval(intval($_GET['sid']));
@@ -34,7 +39,7 @@ $row=$result[0];
 $lang=$row['language'];
 $contest_id=intval($row['contest_id']);
 $isRE=$row['result']==10;
-if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 $view_reinfo="";
 if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||
@@ -54,13 +59,13 @@ if ( isset($_SESSION[$OJ_NAME.'_'.'source_browser'])||
 		$view_reinfo= htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 	}else{
 		
-		$view_reinfo="出于数据保密原因，当前错误提示不可查看，如果希望能让任何人都查看对比和运行错误,请管理员配置$OJ_SHOW_DIFF=true;<br>然后编辑本文件，开放18行首注释，令is_valid总是返回true。 <br>\n Sorry , not available (RE:".$isRE.",OJ_SHOW_DIFF:".$OJ_SHOW_DIFF.",TR:".$OJ_TEST_RUN.",valid:".is_valid($row['error']).")";
+		$view_reinfo="出于数据保密原因，当前错误提示不可查看，如果希望能让任何人都查看对比和运行错误,请管理员配置\$OJ_SHOW_DIFF=true;<br>然后编辑本文件，开放18行首注释，令is_valid总是返回true。 <br>\n Sorry , not available (RE:".$isRE.",OJ_SHOW_DIFF:".$OJ_SHOW_DIFF.",TR:".$OJ_TEST_RUN.",valid:".is_valid($row['error']).")";
 	}
         
 	
 }else{
 	
-	$view_errors= "I am sorry, You could not view this message!";
+	$view_errors= $MSG_WARNING_ACCESS_DENIED ;
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 	

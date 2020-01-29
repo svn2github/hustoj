@@ -110,10 +110,10 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 								<?php echo $MSG_RUNID?>
 							</th>
 							<th>
-								<?php echo $MSG_USER?>
+								<?php echo $MSG_USER."ID"?>
 							</th>
 							<th>
-								<?php echo $MSG_PROBLEM?>
+								<?php echo $MSG_PROBLEM."ID"?>
 							</th>
 							<th>
 								<?php echo $MSG_RESULT?>

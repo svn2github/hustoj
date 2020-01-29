@@ -1,4 +1,5 @@
 #!/bin/bash
+sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
@@ -15,7 +16,7 @@ else
     cd /home/judge/
 fi 
 
-apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
+apt-get install -y net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
 
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
@@ -69,6 +70,7 @@ fi
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.2/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.2/fpm/php.ini
 sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
 
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
@@ -89,10 +91,12 @@ fi
 if grep "bak.sh" /var/spool/cron/crontabs/root ; then
 	echo "auto backup added!"
 else
-	echo "1 0 * * * /home/judge/src/install/bak.sh" >> /var/spool/cron/crontabs/root
+	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
 fi
 ln -s /usr/bin/mcs /usr/bin/gmcs
 
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
+clear
+echo "Visit http://127.0.0.1/"

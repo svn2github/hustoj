@@ -29,7 +29,7 @@
 $rank=1;
 ?>
 <center><h3>Contest RankList -- <?php echo $title?></h3>
-<h4><?php echo $locked_msg ?></h4>
+<h4><?php if(isset($locked_msg)) echo $locked_msg; ?></h4>
 <a href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a></center>
 <table id=rank><thead><tr class=toprow align=center><td class="{sorter:'false'}" width=5%>Rank<th width=10%>User</th><th width=10%>Nick</th><th width=5%>Solved</th><th width=5%>Penalty</th>
 <?php

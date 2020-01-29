@@ -39,7 +39,7 @@ chcon -R -t httpd_sys_content_t /home
 ```
 short_open_tag=On
 register_globals=Off
-open_basedir=/var/www/html:/var/www/html/JudgeOnline:/tmp:/home/judge/data
+open_basedir=/var/www/html:/home/judge/src/web:/tmp:/home/judge/data
 ```
  *  change makefiles in core/judged and core/judge_client
    change -L/usr/local/mysql/lib/mysql to -L/usr/lib/mysql

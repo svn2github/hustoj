@@ -2,7 +2,7 @@
 	$cache_time=10;
 	$OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
+        require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
 	$view_title= "Welcome To Online Judge";
 	
@@ -22,7 +22,11 @@ function is_valid($str2){
     }
     return $n/$m>3;
 }
-
+if(!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+	$view_errors= $MSG_WARNING_ACCESS_DENIED ;
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+}
 
 $ok=false;
 $id=intval($_GET['sid']);
@@ -46,7 +50,7 @@ if ($ok==true){
 	
 }else{
 	
-	$view_errors= "I am sorry, You could not view this message!";
+	$view_errors= $MSG_WARNING_ACCESS_DENIED;
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 	

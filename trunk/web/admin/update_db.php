@@ -67,8 +67,9 @@ CREATE TABLE `mail` (
   `defunct` char(1) NOT NULL default 'N',
   PRIMARY KEY  (`mail_id`),
   KEY `uid` (`to_user`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";
-$tsql[5]="ALTER TABLE `solution` MODIFY COLUMN `user_id` CHAR(48)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,	DROP COLUMN `className`,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;";   
+ 
+$tsql[5]="ALTER TABLE `solution` MODIFY COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0,MODIFY COLUMN in_date datetime not null default '2009-06-13 19:00:00', MODIFY COLUMN `user_id` CHAR(48)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,MODIFY COLUMN `ip` CHAR(15)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;";
 $csql[5]="";
 
 $tsql[6]="select langmask from contest limit 1;";
@@ -86,7 +87,7 @@ $csql[9]="CREATE TABLE  `runtimeinfo` (
   PRIMARY KEY (`solution_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
-$tsql[10]="select pass_rate from solution";
+$tsql[10]="select pass_rate from solution limit 1";
 $csql[10]="ALTER TABLE `solution` ADD COLUMN `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0 AFTER `judgetime`;";
 
 $csql[11]="";
@@ -137,7 +138,7 @@ $csql[24]="";
 
 $csql[25]="";
 $tsql[25]="ALTER TABLE  `solution` CHANGE  `ip`  `ip` CHAR( 46 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  '';";
-$csql[26]="select 1 from printer";
+$csql[26]="select 1 from printer limit 1";
 $tsql[26]="CREATE TABLE  `printer` (
   `printer_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` char(48) NOT NULL,
@@ -148,7 +149,7 @@ $tsql[26]="CREATE TABLE  `printer` (
   `content` text NOT NULL ,
   PRIMARY KEY (`printer_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-$csql[27]="select 1 from balloon";
+$csql[27]="select 1 from balloon limit 1";
 $tsql[27]="CREATE TABLE  `balloon` (
   `balloon_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` char(48) NOT NULL,
@@ -158,8 +159,8 @@ $tsql[27]="CREATE TABLE  `balloon` (
   `status` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`balloon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-$csql[28]="select 1 from share_code";
-$tsql[28]="CREATE TABLE `share_code` (
+$csql[28]="select 1 from share_code limit 1";
+$tsql[28]="create TABLE `share_code` (
   `share_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -168,13 +169,20 @@ $tsql[28]="CREATE TABLE `share_code` (
   `share_time` datetime DEFAULT NULL,
   PRIMARY KEY (`share_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;";
-$tsql[29]="ALTER TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
+$tsql[29]="alter TABLE `contest` ADD `user_id` CHAR( 48 ) NOT NULL DEFAULT 'admin' AFTER `password` ";
 $csql[29]="update contest c inner JOIN (SELECT * FROM privilege WHERE rightstr LIKE 'm%') p ON concat('m',contest_id)=rightstr set c.user_id=p.user_id";
-$tsql[30]="ALTER TABLE  `contest_problem` ADD  `c_accepted` INT NOT NULL DEFAULT  '0' AFTER  `num` ,
-ADD  `c_submit` INT NOT NULL DEFAULT  '0' AFTER  `c_accepted` ;";
-$csql[30]="update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit;update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted    =sb.ac";
-$tsql[31]="alter table solution add column nick char(20) not null default '' after user_id ";
-$csql[31]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
+$tsql[30]="alter TABLE  `contest_problem` ADD  `c_accepted` INT NOT NULL DEFAULT  '0' AFTER  `num` ,ADD  `c_submit` INT NOT NULL DEFAULT  '0' AFTER  `c_accepted`";
+$csql[30]="";
+$tsql[31]="update contest_problem cp inner join (select count(1) submit,contest_id cid,num from solution where contest_id>0 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_submit=sb.submit";
+$csql[31]="update contest_problem cp inner join (select count(1) ac,contest_id cid,num from solution where contest_id>0 and result=4 group by contest_id,num) sb on cp.contest_id=sb.cid and cp.num=sb.num set cp.c_accepted=sb.ac";
+$tsql[32]="alter table solution add column nick char(20) not null default '' after user_id ";
+$csql[32]="update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick";
+$tsql[33]="update problem p inner join (select problem_id pid ,count(1) submit from solution group by problem_id) s on p.problem_id=s.pid set p.submit=s.submit;";
+$csql[33]="";
+$tsql[34]="alter table privilege add index user_id_index(user_id);";
+$csql[34]="";
+$tsql[35]="ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DEFAULT '0';";
+$csql[35]="";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

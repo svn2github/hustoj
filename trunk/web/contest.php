@@ -20,27 +20,32 @@ function formatTimeLength($length)
   $second = 0;
   $result = '';
 
-  if($length >= 60){
+  global $MSG_SECONDS, $MSG_MINUTES, $MSG_HOURS, $MSG_DAYS;
+
+  if($length>=60){
     $second = $length%60;
-    if($second > 0){ $result = $second.'秒';}
+    if($second>0 && $second<10){ $result = '0'.$second.' '.$MSG_SECONDS;}
+    else if($second>0){ $result = $second.' '.$MSG_SECONDS;}    
     $length = floor($length/60);
     if($length >= 60){
       $minute = $length%60;
-      if($minute == 0){ if($result != ''){ $result = '0分' . $result;}}
-      else{ $result = $minute.'分'.$result;}
+      if($minute==0){ if($result != ''){ $result = '00'.' '.$MSG_MINUTES.' '.$result;}}
+      else if($minute>0 && $minute<10){ if($result != ''){ $result = '0'.$minute.' '.$MSG_MINUTES.' '.$result;}}
+      else{ $result = $minute.' '.$MSG_MINUTES.' '.$result;}
       $length = floor($length/60);
       if($length >= 24){
       	$hour = $length%24;
-        if($hour == 0){ if($result != ''){ $result = '0小时' . $result;}}
-        else{ $result = $hour . '小时' . $result;}
+        if($hour==0){ if($result != ''){ $result = '00'.' '.$MSG_HOURS.' '.$result;}}
+        else if($hour>0 && $hour<10){ if($result != ''){ $result = '0'.$hour.' '.$MSG_HOURS.' '.$result;}}
+        else{ $result = $hour.' '.$MSG_HOURS.' '.$result;}
         $length = floor($length / 24);
-        $result = $length . '天' . $result;
+        $result = $length .$MSG_DAYS.' '.$result;
       }
-      else{ $result = $length . '小时' . $result;}
+      else{ $result = $length.' '.$MSG_HOURS.' '.$result;}
     }
-    else{ $result = $length . '分' . $result;}
+    else{ $result = $length.' '.$MSG_MINUTES.' '.$result;}
   }
-  else{ $result = $length . '秒';
+  else{ $result = $length.' '.$MSG_SECONDS;
   }
   return $result;
 }
@@ -81,15 +86,46 @@ if(isset($_GET['cid'])){
     $view_end_time = $row['end_time'];
 
     if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time){
-      $view_errors =  "<h2>$MSG_PRIVATE_WARNING</h2>";
+      $view_errors = "<center>";
+      $view_errors .= "<h3>$MSG_CONTEST_ID : $view_cid - $view_title</h3>";
+      $view_errors .= "<p>$view_description</p>";
+      $view_errors .= "<br>";
+      $view_errors .= "<span class=text-success>$MSG_TIME_WARNING</span>";
+      $view_errors .= "</center>";
+      $view_errors .= "<br><br>";
+
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);
     }
   }
 
   if(!$contest_ok){
-    $view_errors =  "<h2>$MSG_PRIVATE_WARNING <br><a href=contestrank.php?cid=$cid>$MSG_WATCH_RANK</a></h2>";
-    $view_errors .=  "<form method=post action='contest.php?cid=$cid'>$MSG_CONTEST $MSG_PASSWORD:<input class=input-mini type=password name=password><input class=btn type=submit></form>";
+    $view_errors = "<center>";
+    $view_errors .= "<h3>$MSG_CONTEST_ID : $view_cid - $view_title</h3>";
+    $view_errors .= "<p>$view_description</p>";
+    $view_errors .= "<span class=text-danger>$MSG_PRIVATE_WARNING</span>";
+
+    $view_errors .= "<br><br>";
+
+    $view_errors .= "<div class='btn-group'>";
+    $view_errors .= "<a href=contestrank.php?cid=$view_cid class='btn btn-primary'>$MSG_STANDING</a>";
+    $view_errors .= "<a href=contestrank-oi.php?cid=$view_cid class='btn btn-primary'>OI$MSG_STANDING</a>";
+    $view_errors .= "<a href=conteststatistics.php?cid=$view_cid class='btn btn-primary'>$MSG_STATISTICS</a>";
+    $view_errors .= "</div>";
+
+    $view_errors .= "<br><br>";
+    $view_errors .= "<table align=center width=80%>";
+    $view_errors .= "<tr align='center'>";
+    $view_errors .= "<td>";
+    $view_errors .= "<form class=form-inline method=post action=contest.php?cid=$cid>";
+    $view_errors .= "<input class=input-mini type=password name=password value='' placeholder=$MSG_CONTEST-$MSG_PASSWORD>";
+    $view_errors .= "<button class='form-control'>$MSG_SUBMIT</button>";
+    $view_errors .= "</form>";
+    $view_errors .= "</td>";
+    $view_errors .= "</tr>";
+    $view_errors .= "</table>";
+    $view_errors .= "<br>";
+
     require("template/".$OJ_TEMPLATE."/error.php");
     exit(0);
   }
@@ -102,7 +138,7 @@ if(isset($_GET['cid'])){
   $view_problemset = Array();
 
   $cnt = 0;
-  $noip=time()<$end_time && stripos($view_title,"noip");
+  $noip=(time()<$end_time) && (stripos($view_title,$OJ_NOIP_KEYWORD)!==false);
   foreach($result as $row){
     $view_problemset[$cnt][0] = "";
     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!$noip) $view_problemset[$cnt][0] = check_ac($cid,$cnt);
@@ -132,26 +168,27 @@ if(isset($_GET['cid'])){
   //echo "$keyword";
 
   $mycontests = "";
-  $sql="select distinct contest_id from solution where contest_id>0 and user_id=?";
-  $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id']);
-  foreach($result as $row){
-	$mycontests.=",".$row[0];
-  }
-  $len = mb_strlen($OJ_NAME.'_');
-
-  foreach($_SESSION as $key => $value){
-    if(($key[$len]=='m'||$key[$len]=='c')&&intval(mb_substr($key,$len+1))>0){
-      //echo substr($key,1)."<br>";
-      $mycontests.=",".intval(mb_substr($key,$len+1));
-    }
-  }
-//  echo "=====>$mycontests<====";
-
-  if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
- 
   $wheremy = "";
-  if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
+  if(isset($_SESSION[$OJ_NAME.'_user_id'])){
+	  $sql="select distinct contest_id from solution where contest_id>0 and user_id=?";
+	  $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id']);
+	  foreach($result as $row){
+		$mycontests.=",".$row[0];
+	  }
+	  $len = mb_strlen($OJ_NAME.'_');
 
+	  foreach($_SESSION as $key => $value){
+	    if(($key[$len]=='m'||$key[$len]=='c')&&intval(mb_substr($key,$len+1))>0){
+	      //echo substr($key,1)."<br>";
+	      $mycontests.=",".intval(mb_substr($key,$len+1));
+	    }
+	  }
+	//  echo "=====>$mycontests<====";
+
+	  if(strlen($mycontests)>0) $mycontests=substr($mycontests,1);
+	 
+	  if(isset($_GET['my'])) $wheremy=" and contest_id in ($mycontests)";
+  }
   $sql = "SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC LIMIT 1000";
 
   if($keyword){
@@ -183,21 +220,21 @@ if(isset($_GET['cid'])){
 	//past
 
     if($now>$end_time){
-      $view_contest[$i][2] = "<span class=green>$MSG_Ended@".$row['end_time']."</span>";
+      $view_contest[$i][2] = "<span class=text-muted>$MSG_Ended</span>"." "."<span class=text-muted>".$row['end_time']."</span>";
       //pending
 
     }else if ($now<$start_time){
-  	  $view_contest[$i][2] = "<span class=blue>$MSG_Start@".$row['start_time']."</span>&nbsp;";
-      $view_contest[$i][2] .= "<span class=green>$MSG_TotalTime".formatTimeLength($length)."</span>";
+      $view_contest[$i][2] = "<span class=text-success>$MSG_Start</span>"." ".$row['start_time']."&nbsp;";
+      $view_contest[$i][2] .= "<span class=text-success>$MSG_TotalTime</span>"." ".formatTimeLength($length);
 	  //running
     }else{
-  	  $view_contest[$i][2] = "<span class=red> $MSG_Running</font>&nbsp;";
-      $view_contest[$i][2] .= "<span class=green> $MSG_LeftTime ".formatTimeLength($left)." </span>";
+      $view_contest[$i][2] = "<span class=text-danger>$MSG_Running</span>"." ".$row['start_time']."&nbsp;";
+      $view_contest[$i][2] .= "<span class=text-danger>$MSG_LeftTime</span>"." ".formatTimeLength($left)."</span>";
     }
 
     $private = intval($row['private']);
-    if($private==0) $view_contest[$i][4] = "<span class=blue>$MSG_Public</span>";
-    else $view_contest[$i][5] = "<span class=red>$MSG_Private</span>";
+    if($private==0) $view_contest[$i][4] = "<span class=text-primary>$MSG_Public</span>";
+    else $view_contest[$i][5] = "<span class=text-danger>$MSG_Private</span>";
 
     $view_contest[$i][6]=$row['user_id'];
 

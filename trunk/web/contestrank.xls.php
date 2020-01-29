@@ -135,7 +135,7 @@ if ($rows_cnt>0){
 	$title=$row[1];
 	$end_time=strtotime($row[2]);
 	
-	$ftitle=rawurlencode($title);
+	$ftitle=rawurlencode(preg_replace('/\.|\\\|\\/|\:|\*|\?|\"|\<|\>|\|/','',$title));
 	header ( "content-disposition:   attachment;   filename=contest".$cid."_".$ftitle.".xls" );
 }
 
@@ -150,8 +150,8 @@ if ($start_time>time()){
 	//require_once("oj-footer.php");
 	exit(0);
 }
-if(time()<$end_time && stripos($title,"noip")){
-      $view_errors =  "<h2>NOIP contest !</h2>";
+if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
+      $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);
 }

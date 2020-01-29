@@ -179,10 +179,13 @@ public class Main{
 			<br>
 			<hr>
 			<center>
-				<font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php">HUSTOJ BBS</a>
+				<font color=green size="+2">Any questions/suggestions please post to <a href="bbs.php"><?php echo $MSG_BBS?></a>
 				</font>
 			</center>
 			<hr>
+			this page can be replaced by add a news which titled "<?php echo htmlentities($faqs_name,ENT_QUOTES,"UTF-8")?>";
+			<hr>
+			
 			<center>
 				<table width=100% border=0>
 					<tr>
@@ -191,7 +194,7 @@ public class Main{
 								<font color=red>HUSTOJ</font>
 							</a>
 							<a href="https://github.com/zhblue/hustoj">
-								<font color=red>16.12.02</font>
+								<font color=red>2020.01.22</font>
 							</a>
 						</td>
 					</tr>

@@ -1,24 +1,14 @@
 HUSTOJ安装说明 
 	by zhblue(newsclan@gmail.com)
 	
-debian8 可以用.deb文件安装
-
-    https://github.com/muzea/hustoj-deb/issues/4
 
 
-或者安装ubuntu16.04（拥有更新的编译器版本），然后用下面脚本快速安装OJ：  
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
-    sudo bash install-ubuntu16+.sh
-
-https://www.youtube.com/watch?v=nlhmfZqyHnA 
-
-发烧级用户ubuntu18.04(至少1年以上debian系Linux使用经验，欢迎帮忙踩坑测试，有问题会尽快修复)
+小白用户推荐ubuntu18.04
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
 
-假如你不得已非要用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
+服务器无法安装ubuntu可以用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
 
     wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-centos7.sh
     sudo bash install-centos7.sh

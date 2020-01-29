@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 CREATE TABLE IF NOT EXISTS `privilege` (
   `user_id` char(48) NOT NULL DEFAULT '',
   `rightstr` char(30) NOT NULL DEFAULT '',
-  `defunct` char(1) NOT NULL DEFAULT 'N'
+  `defunct` char(1) NOT NULL DEFAULT 'N',
+  KEY `user_id_index` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `problem` (
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
   `hint` text,
   `source` varchar(100) DEFAULT NULL,
   `in_date` datetime DEFAULT NULL,
-  `time_limit` int(11) NOT NULL DEFAULT 0,
+  `time_limit` DECIMAL(10,3) NOT NULL DEFAULT 0,
   `memory_limit` int(11) NOT NULL DEFAULT 0,
   `defunct` char(1) NOT NULL DEFAULT 'N',
   `accepted` int(11) DEFAULT '0',

@@ -62,13 +62,13 @@
 			<?php 
 			$cnt=0;
 			foreach($view_problemset as $row){
-				if ($cnt) 
-					echo "<tr class='oddrow'>";
-				else
-					echo "<tr class='evenrow'>";
+				if ($cnt)  echo "<tr class='oddrow'>";
+				else 	echo "<tr class='evenrow'>";
 				foreach($row as $table_cell){
 					echo "<td>";
-					echo "\t".$table_cell;
+					if($table_cell=="<div class='label label-success'>Y</div>")echo "<div class='center'><img style='height:35px' src='/template/mario/image/green.png'100</div>";
+					else if($table_cell=="<div class='label label-danger'>N</div>")echo "<div class='center'><img style='height:35px' src='/template/mario/image/red.png'N</div>";
+					else echo "\t".$table_cell;
 					echo "</td>";
 				}
 				echo "</tr>";

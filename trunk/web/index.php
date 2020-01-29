@@ -37,7 +37,7 @@ if ( !$result ) {
 	
 }
 $view_news .= "</div>";
-$view_news .= "<div class='panel-footer'>请到<a target='_blank' href='https://github.com/zhblue/hustoj'> GitHub</a>来，给我们加个星星！&nbsp;Please give us a star on <a target='_blank' href='https://github.com/zhblue/hustoj'>Github</a>!</div>";
+$view_news .= "<div class='panel-footer'></div>";
 $view_news .= "</div>";
 
 $view_apc_info = "";

@@ -136,8 +136,10 @@
               <th class="text-center">
                 <?php echo $MSG_SUBMIT_TIME?>
               </th>
+              <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
               <th class="text-center">
                 <?php echo $MSG_JUDGER?>
+              <?php }?>
               </th>
             </tr>
           </thead>

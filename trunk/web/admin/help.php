@@ -9,127 +9,128 @@
 </head>
 
 <body>
+  <br>
 <table class="table">
   <tbody>
     <tr>
-      <td><a class='btn btn-block' href="../status.php" target="_top"><b><?php echo $MSG_SEEOJ?></b></a></td>
-      <td><?php echo $MSG_HELP_SEEOJ?></td>
+      <td><a class='btn btn-block btn-sm' href="../status.php" target="_top"><b><?php echo $MSG_SEEOJ?></b></a></td>
+      <td><p><?php echo $MSG_HELP_SEEOJ?></p></td>
     </tr>
 
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
     <tr>
-      <td><center><a class='btn btn-info' href="setmsg.php" target="main"><b><?php echo $MSG_SETMESSAGE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_SETMESSAGE?></td>
+      <td><center><a class='btn btn-info btn-sm' href="setmsg.php" target="main"><b><?php echo $MSG_SETMESSAGE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_SETMESSAGE?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-info' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_NEWS_LIST?></td>
+      <td><center><a class='btn btn-info btn-sm' href="news_list.php" target="main"><b><?php echo $MSG_NEWS.$MSG_LIST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_NEWS_LIST?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-info' href="news_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_NEWS?></b></a></center></td>
-      <td><?php echo $MSG_HELP_ADD_NEWS?></td>
+      <td><center><a class='btn btn-info btn-sm' href="news_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_NEWS?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_ADD_NEWS?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-primary' href="user_list.php" target="main"><b><?php echo $MSG_USER.$MSG_LIST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_USER_LIST?></td>
+      <td><center><a class='btn btn-primary btn-sm' href="user_list.php" target="main"><b><?php echo $MSG_USER.$MSG_LIST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_USER_LIST?></p></td>
     </tr>
   <?php }?>
 
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'] )){?>
     <tr>
-      <td><center><a class='btn btn-primary' href="changepass.php" target="main"><b><?php echo $MSG_SETPASSWORD?></b></a></center></td>
-      <td><?php echo $MSG_HELP_SETPASSWORD?></td>
+      <td><center><a class='btn btn-primary btn-sm' href="changepass.php" target="main"><b><?php echo $MSG_SETPASSWORD?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_SETPASSWORD?></p></td>
     </tr>
   <?php }?>
 
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
    <tr>
-      <td><center><a class='btn btn-primary' href="user_set_ip.php" target="main"><b><?php echo $MSG_SET_LOGIN_IP?></b></a></center></td>
-      <td><?php echo $MSG_SET_LOGIN_IP?></td>
+      <td><center><a class='btn btn-primary btn-sm' href="user_set_ip.php" target="main"><b><?php echo $MSG_SET_LOGIN_IP?></b></a></center></td>
+      <td><p><?php echo $MSG_SET_LOGIN_IP?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-primary' href="privilege_list.php" target="main"><b><?php echo $MSG_PRIVILEGE.$MSG_LIST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_PRIVILEGE_LIST?></td>
+      <td><center><a class='btn btn-primary btn-sm' href="privilege_list.php" target="main"><b><?php echo $MSG_PRIVILEGE.$MSG_LIST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_PRIVILEGE_LIST?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-primary' href="privilege_add.php" target="main"><b><?php echo $MSG_ADD.$MSG_PRIVILEGE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_ADD_PRIVILEGE?></td>
+      <td><center><a class='btn btn-primary btn-sm' href="privilege_add.php" target="main"><b><?php echo $MSG_ADD.$MSG_PRIVILEGE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_ADD_PRIVILEGE?></p></td>
     </tr>
   <?php }?>
 
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])){?>
     <tr>
-      <td><center><a class='btn btn-success' href="problem_list.php" target="main"><b><?php echo $MSG_PROBLEM.$MSG_LIST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_PROBLEM_LIST?></td>
+      <td><center><a class='btn btn-success btn-sm' href="problem_list.php" target="main"><b><?php echo $MSG_PROBLEM.$MSG_LIST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_PROBLEM_LIST?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-success' href="problem_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_PROBLEM?></b></a></center></td>
-      <td><?php echo $MSG_HELP_ADD_PROBLEM?></td>
+      <td><center><a class='btn btn-success btn-sm' href="problem_add_page.php" target="main"><b><?php echo $MSG_ADD.$MSG_PROBLEM?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_ADD_PROBLEM?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-success' href="problem_import.php" target="main"><b><?php echo $MSG_IMPORT.$MSG_PROBLEM?></b></a></center></td>
-      <td><?php echo $MSG_HELP_IMPORT_PROBLEM?></td>
+      <td><center><a class='btn btn-success btn-sm' href="problem_import.php" target="main"><b><?php echo $MSG_IMPORT.$MSG_PROBLEM?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_IMPORT_PROBLEM?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-success' href="problem_export.php" target="main"><b><?php echo $MSG_EXPORT.$MSG_PROBLEM?></b></a></center></td>
-      <td><?php echo $MSG_HELP_EXPORT_PROBLEM?></td>
+      <td><center><a class='btn btn-success btn-sm' href="problem_export.php" target="main"><b><?php echo $MSG_EXPORT.$MSG_PROBLEM?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_EXPORT_PROBLEM?></p></td>
     </tr>
   <?php }?>
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])){?>
     <tr>
-      <td><center><a class='btn btn-warning' href="contest_list.php" target="main"><b><?php echo $MSG_CONTEST.$MSG_LIST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_CONTEST_LIST?></td>
+      <td><center><a class='btn btn-warning btn-sm' href="contest_list.php" target="main"><b><?php echo $MSG_CONTEST.$MSG_LIST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_CONTEST_LIST?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-warning' href="contest_add.php" target="main"><b><?php echo $MSG_ADD.$MSG_CONTEST?></b></a></center></td>
-      <td><?php echo $MSG_HELP_ADD_CONTEST?></td>
+      <td><center><a class='btn btn-warning btn-sm' href="contest_add.php" target="main"><b><?php echo $MSG_ADD.$MSG_CONTEST?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_ADD_CONTEST?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-warning' href="team_generate.php" target="main"><b><?php echo $MSG_TEAMGENERATOR?></b></a></center></td>
-      <td><?php echo $MSG_HELP_TEAMGENERATOR?></td>
+      <td><center><a class='btn btn-warning btn-sm' href="team_generate.php" target="main"><b><?php echo $MSG_TEAMGENERATOR?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_TEAMGENERATOR?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-warning' href="team_generate2.php" target="main"><b><?php echo $MSG_TEAMGENERATOR?></b></a></center></td>
-      <td><?php echo $MSG_HELP_TEAMGENERATOR?></td>
+      <td><center><a class='btn btn-warning btn-sm' href="team_generate2.php" target="main"><b><?php echo $MSG_TEAMGENERATOR?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_TEAMGENERATOR?></p></td>
     </tr>
   <?php }?>
 
   <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
     <tr>
-      <td><center><a class='btn btn-danger' href="rejudge.php" target="main"><b><?php echo $MSG_REJUDGE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_REJUDGE?></td>
+      <td><center><a class='btn btn-danger btn-sm' href="rejudge.php" target="main"><b><?php echo $MSG_REJUDGE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_REJUDGE?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-danger' href="source_give.php" target="main"><b><?php echo $MSG_GIVESOURCE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_GIVESOURCE?></td>
+      <td><center><a class='btn btn-danger btn-sm' href="source_give.php" target="main"><b><?php echo $MSG_GIVESOURCE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_GIVESOURCE?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-danger' href="../online.php" target="main"><b><?php echo $MSG_HELP_ONLINE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_ONLINE?></td>
+      <td><center><a class='btn btn-danger btn-sm' href="../online.php" target="main"><b><?php echo $MSG_HELP_ONLINE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_ONLINE?></p></td>
     </tr>
     <tr>
-      <td><center><a class='btn btn-danger' href="update_db.php" target="main"><b><?php echo $MSG_UPDATE_DATABASE?></b></a></center></td>
-      <td><?php echo $MSG_HELP_UPDATE_DATABASE?></td>
+      <td><center><a class='btn btn-danger btn-sm' href="update_db.php" target="main"><b><?php echo $MSG_UPDATE_DATABASE?></b></a></center></td>
+      <td><p><?php echo $MSG_HELP_UPDATE_DATABASE?></p></td>
     </tr>
     <tr>
-      <td><a class='btn btn-block' href="https://github.com/zhblue/hustoj/" target="_blank"><b>HUSTOJ</b></a></td>
-      <td>HUSTOJ</td>
+      <td><a class='btn btn-block btn-sm' href="https://github.com/zhblue/hustoj/" target="_blank"><b>HUSTOJ</b></a></td>
+      <td><p>HUSTOJ</p></td>
     </tr>
     <tr>
-      <td><center><a class='btn' target='_blank' href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md" target="main"><?php echo $MSG_ADMIN." ".$MSG_FAQ?></a></center></td>
-      <td><?php echo $MSG_ADMIN." ".$MSG_FAQ?></td>
+      <td><center><a class='btn btn-sm' target='_blank' href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md" target="main"><?php echo $MSG_ADMIN." ".$MSG_FAQ?></a></center></td>
+      <td><p><?php echo $MSG_ADMIN." ".$MSG_FAQ?></p></td>
     </tr>
     <tr>
-      <td><a class='btn btn-block' href="https://github.com/zhblue/freeproblemset/" target="_blank"><b>FreeProblemSet</b></a></td>
-      <td>FreeProblemSet</td>
+      <td><a class='btn btn-block btn-sm' href="https://github.com/zhblue/freeproblemset/" target="_blank"><b>FreeProblemSet</b></a></td>
+      <td><p>FreeProblemSet</p></td>
     </tr>
     <tr>
-      <td><a class='btn btn-block' href="http://tk.hustoj.com" target="_blank"><b>自助题库</b></a></td>
-      <td></td>
+      <td><a class='btn btn-block btn-sm' href="http://tk.hustoj.com" target="_blank"><b>自助题库</b></a></td>
+      <td><p></p></td>
     </tr>
     <tr>
-      <td><a class='btn btn-block' href="http://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a" target="_blank">手机QQ加官方群23361372</a></td>
-      <td></td>
+      <td><a class='btn btn-block btn-sm' href="http://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a" target="_blank">手机QQ加官方群23361372</a></td>
+      <td><p></p></td>
     </tr>
   <?php }?>
   </tbody>

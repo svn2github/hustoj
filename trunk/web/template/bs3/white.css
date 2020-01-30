@@ -51,8 +51,8 @@ h3.pagenav div.active{
    color: #888;
 }
 
-.broadcast {
-   height: 20px;
+#broadcast {
+   height: 90px;
 }
 
 #problemset {

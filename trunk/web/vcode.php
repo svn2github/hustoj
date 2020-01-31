@@ -1,5 +1,7 @@
 <?php
 require_once('include/db_info.inc.php');
+        //ob_clean()清除缓存区,否则有可能不显示gif
+        ob_clean(); 
 	/****************************************
 	*  验证码 v0.9
 	*  Powerd by awaysoft.com

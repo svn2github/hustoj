@@ -47,12 +47,21 @@
 				echo "<span class=green>$MSG_Memory_Limit : </span>" . $row[ 'memory_limit' ] . " MB";
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
-	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
-				echo "<br>";
-	}else{
-				echo "<br><span class=green>$MSG_SOVLED : </span>" . $row[ 'accepted' ] . "&nbsp;&nbsp;";
-				echo "<span class=green>$MSG_SUBMIT : </span>" . $row[ 'submit' ];
-	}
+				if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
+					echo "<br><br>";
+				}else{
+					echo "<br><br>";
+					echo "<div class='btn-group' role='group'>";
+  					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
+  					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT: ".$row['accepted']."</a>";
+  					echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
+	        if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+	        	require_once("include/set_get_key.php");
+  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
+  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
+					}
+					echo "</div>";
+				}
 
 				echo "</center>";
 				# end of head
@@ -167,22 +176,14 @@
 			<center>
 				<!--EndMarkForVirtualJudge-->
 				<div class='panel-footer'>
-					<?php 
+				<?php 
         if($pr_flag){
-          echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
+					echo "<a class='btn btn-info btn-sm' href='submitpage.php?id=$id' role='button'>$MSG_SUBMIT</a>";
         }else{
           echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>]";
         }
-        echo "[<a href='problemstatus.php?id=".$row['problem_id']."'>$MSG_STATUS</a>]";
         //echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
-
-        if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-          require_once("include/set_get_key.php");
-        ?> [
-
-					<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
-					<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
-					<?php } ?>
+        ?>
 				</div>
 			</center>
 		</div>

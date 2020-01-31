@@ -183,7 +183,7 @@
 	$MSG_MY_SUBMISSIONS="채점기록"; 
 	$MSG_MY_CONTESTS="대회기록"; 
 	$MSG_Creator="만든사람";
-	$MSG_IMPORTED="업로드완료";
+	$MSG_IMPORTED="관리자 업로드";
 	$MSG_PRINTER="Printer";
 	$MSG_PRINT_DONE="Printed Fine";
 	$MSG_PRINT_PENDING="Pending for Print";

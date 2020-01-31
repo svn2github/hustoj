@@ -33,44 +33,26 @@
 				<?php
 				if ( $pr_flag ) {
 					echo "<title>$MSG_PROBLEM" . $row[ 'problem_id' ] . "--" . $row[ 'title' ] . "</title>";
-					echo "<center><h3>$id: " . $row[ 'title' ] . "</h3>";
+					echo "<center><h3>$id: " . $row[ 'title' ] . "</h3></center>";
+					echo "<div align=right><sub>[$MSG_Creator : <span id='creator'></span>]</sub></div>";
 				} else {
 					//$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 					$id = $row[ 'problem_id' ];
 					echo "<title>$MSG_PROBLEM " . $PID[ $pid ] . ": " . $row[ 'title' ] . " </title>";
-					echo "<center><h3>$MSG_PROBLEM " . $PID[ $pid ] . ": " . $row[ 'title' ] . "</h3>";
+					echo "<center><h3>$MSG_PROBLEM " . $PID[ $pid ] . ": " . $row[ 'title' ] . "</h3><center>";
+					echo "<div align=right><sub>[$MSG_Creator : <span id='creator'></span>]</sub></div>";
 				}
-
-				echo "<span class=green>$MSG_Time_Limit: </span><span><span fd='time_limit' pid='".$row['problem_id']."'  >" . $row[ 'time_limit' ] . "</span></span> Sec&nbsp;&nbsp;";
-				echo "<span class=green>$MSG_Memory_Limit: </span>" . $row[ 'memory_limit' ] . " MB";
+				echo "<center>";
+				echo "<span class=green>$MSG_Time_Limit : </span><span><span fd='time_limit' pid='".$row['problem_id']."'  >" . $row[ 'time_limit' ] . "</span></span> sec&nbsp;&nbsp;";
+				echo "<span class=green>$MSG_Memory_Limit : </span>" . $row[ 'memory_limit' ] . " MB";
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
 				echo "<br>";
 	}else{
-				echo "<br><span class=green>$MSG_SUBMIT: </span>" . $row[ 'submit' ] . "&nbsp;&nbsp;";
-				echo "<span class=green>$MSG_SOVLED: </span>" . $row[ 'accepted' ] . "<br>";
+				echo "<br><span class=green>$MSG_SOVLED : </span>" . $row[ 'accepted' ] . "&nbsp;&nbsp;";
+				echo "<span class=green>$MSG_SUBMIT : </span>" . $row[ 'submit' ];
 	}
-
-				if ( $pr_flag ) {
-					echo "[<a href='submitpage.php?id=$id'>$MSG_SUBMIT</a>] ";
-				} else {
-					echo "[<a href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask'>$MSG_SUBMIT</a>] ";
-				}
-				echo "[<a href='problemstatus.php?id=" . $row[ 'problem_id' ] . "'>$MSG_STATUS</a>] ";
-				if($OJ_BBS)echo "[<a href='bbs.php?pid=" . $row[ 'problem_id' ] . "$ucid'>$MSG_BBS</a>] ";
-
-				echo "[$MSG_Creator:<span id='creator'></span>]";
-
-				if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
-					require_once( "include/set_get_key.php" );
-					?> [
-
-				<a href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a>] [
-				<a href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>TestData</a>]
-
-				<?php
-				}
 
 				echo "</center>";
 				# end of head
@@ -164,16 +146,20 @@
 						<div class='panel-heading'>
 							<h4>
 								<?php echo $MSG_SOURCE?>
-
 							</h4>
 						</div>
-						<div fd="source" pid=<?php echo $row['problem_id']?> class='panel-body content'>
+
+						<div fd="source" style='word-wrap:break-word;' pid=<?php echo $row['problem_id']?> class='panel-body content'>
 							<?php 
               $cats=explode(" ",$row['source']);
               foreach($cats as $cat){
-                echo "<a href='problemset.php?search=".urlencode(htmlentities($cat,ENT_QUOTES,'utf-8'))."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
-            }?>
-						</div>
+								$hash_num=hexdec(substr(md5($cat),0,7));
+								$label_theme=$color_theme[$hash_num%count($color_theme)];
+								if($label_theme=="") $label_theme="default";
+                echo "<a class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".urlencode(htmlentities($cat,ENT_QUOTES,'utf-8'))."'>".htmlentities($cat,ENT_QUOTES,'utf-8')."</a>&nbsp;";
+	            }?>
+	          </div>
+
 					</div>
 					<?php }?>
 

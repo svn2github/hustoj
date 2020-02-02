@@ -29,6 +29,7 @@
 		<div class="jumbotron">
 			<center>
 				<nav id="page" class="center">
+					<small>
 					<ul class="pagination">
 						<li class="page-item"><a href="problemset.php?page=1">&lt;&lt;</a>
 						</li>
@@ -39,13 +40,13 @@
 						$start = $page > $section ? $page - $section : 1;
 						$end = $page + $section > $view_total_page ? $view_total_page : $page + $section;
 						for ( $i = $start; $i <= $end; $i++ ) {
-							echo "<li class='" . ( $page == $i ? "active " : "" ) . "page-item'>
-        <a href='problemset.php?page=" . $i . "'>" . $i . "</a></li>";
+							echo "<li class='" . ( $page == $i ? "active " : "" ) . "page-item'> <a href='problemset.php?page=" . $i . "'>" . $i . "</a></li>";
 						}
 						?>
 						<li class="page-item"><a href="problemset.php?page=<?php echo $view_total_page?>">&gt;&gt;</a>
 						</li>
 					</ul>
+					</small>
 				</nav>
 
 				<table>

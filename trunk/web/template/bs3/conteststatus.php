@@ -172,6 +172,7 @@
 
 <div align=center id=center>
   <nav id="page" class="center">
+    <small>
     <ul class="pagination">
       <?php
       echo "<li class='page-item'> <a href=status.php?".$str2.">&lt;&lt; Top</a></li>";
@@ -182,6 +183,7 @@
       echo "<li class='page-item'> <a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next &gt;</a></li>";
       ?>
     </ul>
+    </small>
   </nav>
 </div>
 

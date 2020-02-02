@@ -25,11 +25,16 @@
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <p>
-<center>
-	<?php echo $view_category?>
-</center>
-        </p>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <h4>
+              <?php echo $MSG_SOURCE?>
+            </h4>
+          </div>
+          <div class='panel-body content'>
+            <?php echo $view_category?>
+          </div>
+        </div>
       </div>
 
     </div> <!-- /container -->

@@ -121,25 +121,30 @@
 
 	//admin menu
 	$MSG_SEEOJ="OJ확인";
-	$MSG_ADD="등록-";
+	$MSG_ADD="등록";
 	$MSG_MENU="메뉴";
 	$MSG_EXPLANATION="설명";
 	$MSG_LIST="리스트";
 	$MSG_NEWS="공지사항";
+	$MSG_CONTENTS="내용";
+	$MSG_SAVE="저장";	
+	
 	$MSG_TEAMGENERATOR="팀만들기";
 	$MSG_SETMESSAGE="메시지설정";
 	$MSG_SETPASSWORD="비밀번호변경";
 	$MSG_REJUDGE="재채점";
 	$MSG_PRIVILEGE="권한설정";
 	$MSG_GIVESOURCE="소스코드주기";
-	$MSG_IMPORT="업로드-";
-	$MSG_EXPORT="다운로드-";
+	$MSG_IMPORT="업로드";
+	$MSG_EXPORT="다운로드";
 	$MSG_UPDATE_DATABASE="DATABASE UPDATE";
 	$MSG_ONLINE="Online";
 	$MSG_SET_LOGIN_IP="로그인IP 설정";
 
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
+	$MSG_PRIVATE_USERS_ADD="*참여시킬 사용자ID를 줄을 바꿔 입력하거나, 스프레드시트에서 사용자ID를 복사해서 붙여넣으세요.";
+	$MSG_PLS_ADD="*Ctrl+클릭으로 제출 가능 언어를 모두 선택하세요.";
 	$MSG_TIME_WARNING="대회 시작전입니다.";
 	$MSG_WATCH_RANK="대회순위 보기";
 	$MSG_NOIP_WARNING="NOIP 대회는 종료 전까지 결과를 보여주지 않습니다.";
@@ -193,33 +198,33 @@
 	$MSG_BALLOON_DONE="Balloon Sent";
 	$MSG_BALLOON_PENDING="Balloon Pending";
 
-	$MSG_HELP_SEEOJ=" OJ 확인";
-	$MSG_HELP_ADD_NEWS=" 첫 페이지 공지사항 추가";
-	$MSG_HELP_NEWS_LIST=" 첫 페이지 공지사항 활성화/비활성화/수정";
-	$MSG_HELP_USER_LIST=" 사용자 활성화/비활성화";
-	$MSG_HELP_ADD_PROBLEM=" 문제 등록. 문제 등록 후, 문제리스트에서 각 문제별 채점데이터 추가 가능";
-	$MSG_HELP_PROBLEM_LIST=" 문제 관리. zip 파일로 채점데이터 파일 업로드 가능";
-	$MSG_HELP_ADD_CONTEST=" 대회 등록. 쉼표(,)로 구분해 문제 입력. 비공개대회(비밀번호/사용자등록) 가능";
-	$MSG_HELP_CONTEST_LIST=" 대회 확인. 대회시간/공개/비공개 수정. 이미 시작된 대회는 수정 권장하지 않음";
-	$MSG_HELP_TEAMGENERATOR=" 다른 소속/학교로 계정/비번 생성. 인원 적은 경우 사용 권장하지 않음. 계정오류/삭제어려움";
-	$MSG_HELP_SETMESSAGE=" 메시지설정";
-	$MSG_HELP_SETPASSWORD=" 사용자 비밀번호 변경. 관리자권한 필요";
-	$MSG_HELP_REJUDGE=" 문제별/채점번호별/대회별 재채점";
-	$MSG_HELP_ADD_PRIVILEGE=" 사용자별 권한설정 및 변경";
-	$MSG_HELP_PRIVILEGE_LIST=" 사용자별 권한설정 및 삭제";
-	$MSG_HELP_GIVESOURCE=" 특정 사용자 채점코드 밀어주기. 부진학생 도움용";
-	$MSG_HELP_EXPORT_PROBLEM=" fps.xml 파일로 문제 다운로드";
-	$MSG_HELP_IMPORT_PROBLEM=" fps.xml 파일로 문제 업로드";
-	$MSG_HELP_UPDATE_DATABASE=" hustoj 업데이트(sudo update-hustoj) 후, 데이터베이스 업데이트. 한 번만 실행!";
-	$MSG_HELP_ONLINE=" 현재접속자";
-	$MSG_HELP_AC=" 통과했습니다.";
-	$MSG_HELP_PE=" 출력된 형식이 틀렸습니다. 출력형식/공백/줄바꿈 등을 다시 확인해주세요."; 
-	$MSG_HELP_WA=" 출력된 답이 틀렸습니다. 입력데이터의 범위, 출력해야 할 결과 등을 다시 확인해주세요."; 
-	$MSG_HELP_TLE=" 실행시간 초과: 실행 제한시간을 초과하였습니다."; 
-	$MSG_HELP_MLE=" 메모리사용 초과: 메모리사용 용량을 초과하였습니다."; 
-	$MSG_HELP_OLE=" 출력 초과: 너무 많이 출력하였습니다. 무한 루프 출력 등.";
-	$MSG_HELP_RE=" 실행중 오류: 프로그램을 실행하는 도중에 오류가 발생하였습니다.";
-	$MSG_HELP_CE=" 컴파일 오류: gcc/g++/gpc 컴파일러가 프로그램을 변환하지 못하였습니다. 링크를 눌러 오류메시지 확인."; 
+	$MSG_HELP_SEEOJ="OJ 확인";
+	$MSG_HELP_ADD_NEWS="첫 페이지 공지사항 추가";
+	$MSG_HELP_NEWS_LIST="첫 페이지 공지사항 활성화/비활성화/수정";
+	$MSG_HELP_USER_LIST="사용자 활성화/비활성화";
+	$MSG_HELP_ADD_PROBLEM="문제 등록. 문제 등록 후, 문제리스트에서 각 문제별 채점데이터 추가 가능";
+	$MSG_HELP_PROBLEM_LIST="문제 관리. zip 파일로 채점데이터 파일 업로드 가능";
+	$MSG_HELP_ADD_CONTEST="대회 등록. 쉼표(,)로 구분해 문제 입력. 비공개대회(비밀번호/사용자등록) 가능";
+	$MSG_HELP_CONTEST_LIST="대회 확인. 대회시간/공개/비공개 수정. 이미 시작된 대회는 수정 권장하지 않음";
+	$MSG_HELP_TEAMGENERATOR="다른 소속/학교로 계정/비번 생성. 인원 적은 경우 사용 권장하지 않음. 계정오류/삭제어려움";
+	$MSG_HELP_SETMESSAGE="메시지설정";
+	$MSG_HELP_SETPASSWORD="사용자 비밀번호 변경. 관리자권한 필요";
+	$MSG_HELP_REJUDGE="문제별/채점번호별/대회별 재채점";
+	$MSG_HELP_ADD_PRIVILEGE="사용자별 권한설정 및 변경";
+	$MSG_HELP_PRIVILEGE_LIST="사용자별 권한설정 및 삭제";
+	$MSG_HELP_GIVESOURCE="특정 사용자 채점코드 밀어주기. 부진학생 도움용";
+	$MSG_HELP_EXPORT_PROBLEM="fps.xml 파일로 문제 다운로드";
+	$MSG_HELP_IMPORT_PROBLEM="fps.xml 파일로 문제 업로드";
+	$MSG_HELP_UPDATE_DATABASE="hustoj 업데이트(sudo update-hustoj) 후, 데이터베이스 업데이트. 한 번만 실행!";
+	$MSG_HELP_ONLINE="현재접속자";
+	$MSG_HELP_AC="통과했습니다.";
+	$MSG_HELP_PE="출력된 형식이 틀렸습니다. 출력형식/공백/줄바꿈 등을 다시 확인해주세요."; 
+	$MSG_HELP_WA="출력된 답이 틀렸습니다. 입력데이터의 범위, 출력해야 할 결과 등을 다시 확인해주세요."; 
+	$MSG_HELP_TLE="실행시간 초과: 실행 제한시간을 초과하였습니다."; 
+	$MSG_HELP_MLE="메모리사용 초과: 메모리사용 용량을 초과하였습니다."; 
+	$MSG_HELP_OLE="출력 초과: 너무 많이 출력하였습니다. 무한 루프 출력 등.";
+	$MSG_HELP_RE="실행중 오류: 프로그램을 실행하는 도중에 오류가 발생하였습니다.";
+	$MSG_HELP_CE="컴파일 오류: gcc/g++/gpc 컴파일러가 프로그램을 변환하지 못하였습니다. 링크를 눌러 오류메시지 확인."; 
 
 	$MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 채점데이터를 더 추가할 수 있습니다.";
 	$MSG_HELP_ADD_FAQS="\"faqs.$OJ_LANG\"를 제목으로 공지사항을 등록하면 <a href=../faqs.php>$MSG_FAQ</a> 페이지를 통해 나타납니다.";

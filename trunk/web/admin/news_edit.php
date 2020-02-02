@@ -74,7 +74,7 @@ if(isset($_POST['news_id'])){
     <?php require_once("../include/set_post_key.php");?>
     <p>
       <center>
-      <input type=submit value=Submit name=submit>
+      <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
       </center>
     </p>
   </form>

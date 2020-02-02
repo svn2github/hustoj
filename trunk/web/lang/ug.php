@@ -139,6 +139,9 @@ if(date('m')==1 && date('d') == 1){
 	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST=" جەدۋەل ";
 	$MSG_NEWS=" ئۇقتۇرۇش ";
+	$MSG_CONTENTS="Contents";
+	$MSG_SAVE="Save";	
+
 	$MSG_TEAMGENERATOR=" گورۇپ نۇمۇرى چىقارغۇچ ";
 	$MSG_SETMESSAGE=" ئۇچۇر يېزىش ";
 	$MSG_SETPASSWORD=" مەخپى نۇمۇر ئۆزگەرتىش ";
@@ -153,6 +156,8 @@ if(date('m')==1 && date('d') == 1){
 
 	//contest.php
   $MSG_PRIVATE_WARNING="مۇسابىقە باشلانمىدى ياكى سوئال شەخىسكە تەۋە";
+	$MSG_PRIVATE_USERS_ADD="*Enter userIDs with newline, or you can copy and paste from a spreadsheet.";
+	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";
 	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
   $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز NOIP";

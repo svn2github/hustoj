@@ -31,7 +31,7 @@ or
 <script>
 $(document).ready(function(){
 	<?php if($view_marquee_msg!="") { ?> 
-  	var msg="<marquee style='margin-top:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
+  	var msg="<marquee style='margin-top:10px' direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
       " onMouseOut='this.start()' class=toprow>"+<?php echo json_encode($view_marquee_msg); ?>+"</marquee>";
   	$(".jumbotron").prepend(msg);
   <?php } ?>

@@ -126,6 +126,9 @@
 	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST="รายการโจทย์";
 	$MSG_NEWS="ข่าวประกาศ";
+	$MSG_CONTENTS="Contents";
+	$MSG_SAVE="Save";	
+	
 	$MSG_TEAMGENERATOR="ตัวสร้างทีม";
 	$MSG_SETMESSAGE="ข้อความต้อนรับ";
 	$MSG_SETPASSWORD="เปลี่ยนรหัสผ่าน";
@@ -140,6 +143,8 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
+  $MSG_PRIVATE_USERS_ADD="*Enter userIDs with newline, or you can copy and paste from a spreadsheet.";
+	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";  
 	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";

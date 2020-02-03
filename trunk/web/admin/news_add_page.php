@@ -6,7 +6,7 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 }
 
 echo "<hr>";
-echo "<center><h3>$MSG_ADD"."$MSG_NEWS</h3></center>";
+echo "<center><h3>".$MSG_NEWS."-".$MSG_ADD."</h3></center>";
 
 include_once("kindeditor.php");
 ?>
@@ -35,7 +35,7 @@ if(isset($_GET['cid'])){
     </p>
     <p>
       <center>
-      <input type=submit value=Submit name=submit>
+      <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
       </center>
     </p>
     <?php require_once("../include/set_post_key.php");?>

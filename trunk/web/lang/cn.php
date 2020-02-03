@@ -126,6 +126,9 @@
 	$MSG_EXPLANATION="内容描述";
 	$MSG_LIST="列表";
 	$MSG_NEWS="新闻";
+	$MSG_CONTENTS="内容";
+	$MSG_SAVE="保存";	
+
 	$MSG_TEAMGENERATOR="比赛队帐号生成器";
 	$MSG_SETMESSAGE="设置公告";
 	$MSG_SETPASSWORD="修改密码";
@@ -140,6 +143,8 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
+  $MSG_PRIVATE_USERS_ADD="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。";
+  $MSG_PLS_ADD="*请选择所有可以通过Ctrl +单击提交的语言。";
 	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_NOIP_WARNING="NOIP 比赛，结束后才能查看结果。";

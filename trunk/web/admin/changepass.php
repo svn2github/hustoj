@@ -41,32 +41,32 @@ if(isset($_POST['do'])){
 }
 ?>
 
-<form action=changepass.php method=post class="form-search form-inline">
-	<div class="row">
+<form action=changepass.php method=post class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
 		<?php if(isset($_GET['uid'])) { ?>
-    <div class="col-sm-offset-4 col-sm-4"><?php echo $MSG_USER_ID?>: <input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required >
-    </div>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
   	<?php } else if(isset($_POST['user_id'])) { ?>
-    <div class="col-sm-offset-4 col-sm-4"><?php echo $MSG_USER_ID?>: <input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required >
-    </div>  		
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
 		<?php } else { ?>
-    <div class="col-sm-offset-4 col-sm-4"><?php echo $MSG_USER_ID?>: <input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text" required >
-    </div>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
 		<?php } ?>
+	</div>
 
-  </div>
-	<div class="row">
-  	<div class="col-sm-offset-4 col-sm-4"><?php echo $MSG_PASSWORD?>: <input name="passwd" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="text" required ></div>
-  </div>
-	<div class="row">
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PASSWORD?></label>
+		<div class="col-sm-3"><input name="passwd" class="form-control" placeholder="<?php echo $MSG_PASSWORD."*"?>" type="password"  autocomplete="off" required ></div>
+	</div>
+
+	<div class="form-group">
 		<?php require_once("../include/set_post_key.php");?>
-  	<div class="col-sm-offset-4 col-sm-2">
-    	<button name="do" type="hidden" value="do" class="btn btn-default btn-block"><?php echo $MSG_SAVE?></button>
-    </div>
-    <div class="col-sm-2">
-      <button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
-    </div>
-  </div>
+		<div class="col-sm-offset-4 col-sm-2">
+			<button name="do" type="hidden" valud="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE; ?></button>
+		</div>
+		<div class="col-sm-2">
+			<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
 </form>
 
 </div>

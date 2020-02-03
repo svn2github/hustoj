@@ -45,10 +45,10 @@
       <?php echo $MSG_USER."-".$MSG_ADMIN ?> <span class="caret"></span>
     </button>
     <div class="dropdown-menu">
-<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
+<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'])){?>
       <a class="dropdown-item btn-sm" href="user_list.php" target="main" title="<?php echo $MSG_HELP_USER_LIST?>"><b><?php echo $MSG_USER."-".$MSG_LIST?></b></a>
 <?php }?>
-<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'] )){?>
+<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'])){?>
       <a class="dropdown-item btn-sm" href="changepass.php" target="main" title="<?php echo $MSG_HELP_SETPASSWORD?>"><b><?php echo $MSG_SETPASSWORD?></b></a>
 <?php }?>
 <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>

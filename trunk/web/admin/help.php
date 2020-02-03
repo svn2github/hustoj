@@ -30,13 +30,13 @@
       <td><center><a class='btn btn-info btn-sm' href="news_add_page.php" target="main"><b><?php echo $MSG_NEWS."-".$MSG_ADD?></b></a></center></td>
       <td><p><?php echo $MSG_HELP_ADD_NEWS?></p></td>
     </tr>
+  <?php }?>
+
+  <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'] )){?>
     <tr>
       <td><center><a class='btn btn-primary btn-sm' href="user_list.php" target="main"><b><?php echo $MSG_USER."-".$MSG_LIST?></b></a></center></td>
       <td><p><?php echo $MSG_HELP_USER_LIST?></p></td>
     </tr>
-  <?php }?>
-
-  <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset( $_SESSION[$OJ_NAME.'_'.'password_setter'] )){?>
     <tr>
       <td><center><a class='btn btn-primary btn-sm' href="changepass.php" target="main"><b><?php echo $MSG_SETPASSWORD?></b></a></center></td>
       <td><p><?php echo $MSG_HELP_SETPASSWORD?></p></td>

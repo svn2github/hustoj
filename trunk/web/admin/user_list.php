@@ -2,7 +2,7 @@
 require("admin-header.php");
 require_once("../include/set_get_key.php");
 
-if(!isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'password_setter']))){
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
 }
@@ -63,6 +63,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
     <tr>
       <td>ID</td>
       <td>NICK</td>
+      <td>P/W</td>
       <td>SCHOOL</td>
       <td>LOGIN</td> 
       <td>SIGN UP</td> 
@@ -73,13 +74,18 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<tr>";
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
         echo "<td>".$row['nick']."</td>";
+        echo "<td><a href=changepass.php?uid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">"."RESET"."</a></td>";
         echo "<td>".$row['school']."</td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
         echo "<td><a href=user_df_change.php?cid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Locked</span>")."</a></td>";
+      }
+      else {
+        echo "<td>".($row['defunct']=="N"?"<span>Available</span>":"<span>Locked</span>")."</td>";        
+      }
       echo "</tr>";
-    }
-    ?>
+    } ?>
   </table>
 </center>
 

@@ -26,7 +26,8 @@ if(isset($_GET['cid'])){
 <div class="container">
   <form method=POST action=news_add.php>
     <p align=left>
-      <?php echo $MSG_TITLE?>:<input type=text name=title size=71 value='<?php echo isset($title)?$title."-Copy":""?>'>
+      <label class="col control-label"><?php echo $MSG_TITLE?></label>
+      <input type=text name=title size=71 value='<?php echo isset($title)?$title."-Copy":""?>'>
     </p>
     <p align=left>
       <textarea class=kindeditor name=content>

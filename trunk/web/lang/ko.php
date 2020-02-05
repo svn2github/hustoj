@@ -137,9 +137,9 @@
 	$MSG_GIVESOURCE="소스코드주기";
 	$MSG_IMPORT="업로드";
 	$MSG_EXPORT="다운로드";
-	$MSG_UPDATE_DATABASE="DATABASE UPDATE";
+	$MSG_UPDATE_DATABASE="DB UPDATE";
 	$MSG_ONLINE="Online";
-	$MSG_SET_LOGIN_IP="로그인IP 설정";
+	$MSG_SET_LOGIN_IP="로그인IP 변경 기록";
 
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
@@ -206,6 +206,7 @@
 	$MSG_HELP_PROBLEM_LIST="문제 관리. zip 파일로 채점데이터 파일 업로드 가능";
 	$MSG_HELP_ADD_CONTEST="대회 등록. 쉼표(,)로 구분해 문제 입력. 비공개대회(비밀번호/사용자등록) 가능";
 	$MSG_HELP_CONTEST_LIST="대회 확인. 대회시간/공개/비공개 수정. 이미 시작된 대회는 수정 권장하지 않음";
+	$MSG_HELP_SET_LOGIN_IP="대회 중 컴퓨터(로그인IP) 변경을 기록합니다.";
 	$MSG_HELP_TEAMGENERATOR="다른 소속/학교로 계정/비번 생성. 인원 적은 경우 사용 권장하지 않음. 계정오류/삭제어려움";
 	$MSG_HELP_SETMESSAGE="메시지설정";
 	$MSG_HELP_SETPASSWORD="사용자 비밀번호 변경. 관리자권한 필요";
@@ -232,7 +233,7 @@
 	$MSG_HELP_SPJ="자세한 내용은 <a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>"; 
 	$MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";	
 
-	$MSG_WARNING_LOGIN_FROM_DIFF_IP="로그인 IP주소가 변경되었습니다.";
+	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
 	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
   $MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
 

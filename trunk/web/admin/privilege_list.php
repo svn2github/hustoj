@@ -14,7 +14,7 @@ if(isset($OJ_LANG)){
 
 <title>Privilege List</title>
 <hr>
-<center><h3><?php echo $MSG_PRIVILEGE."-".$MSG_LIST?></h3></center>
+<center><h3><?php echo $MSG_USER."-".$MSG_PRIVILEGE."-".$MSG_LIST?></h3></center>
 
 <div class='container'>
 

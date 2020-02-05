@@ -12,7 +12,7 @@ if(isset($OJ_LANG)){
 
 <title>Set Password</title>
 <hr>
-<center><h3><?php echo $MSG_SETPASSWORD?></h3></center>
+<center><h3><?php echo $MSG_USER."-".$MSG_SETPASSWORD?></h3></center>
 
 <div class='container'>
 

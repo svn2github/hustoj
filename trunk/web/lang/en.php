@@ -206,6 +206,7 @@
   $MSG_HELP_PROBLEM_LIST="manage existing problems, test case files can be uploaded within a zip file and decompress later";
   $MSG_HELP_ADD_CONTEST="schedule a new contest, problem list seperated with comma. You can set up private contest and restrict participants with passwords or lists.";
   $MSG_HELP_CONTEST_LIST="The existing list of contests, modification time and public / private, try not to adjust the list of items after the start.";
+  $MSG_HELP_SET_LOGIN_IP="Record computer(login IP) changes during the exam.";
   $MSG_HELP_TEAMGENERATOR="Generate accounts and passwords in batches for competitors from different schools. Small system should not be used casually, may produce garbage accounts, which can not be easily deleted.";
   $MSG_HELP_SETMESSAGE="Set scroll notification content";
   $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";

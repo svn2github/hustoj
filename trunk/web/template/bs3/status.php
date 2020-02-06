@@ -155,7 +155,9 @@
 								echo "<tr class='evenrow'>";
 							$i = 0;
 							foreach ( $row as $table_cell ) {
-								if ( $i==0 || $i==4 || $i==5 || $i==6 || $i==7)
+								if ($i==2 || $i==8)
+									echo "<td class='text-center'>";
+								else if($i==0 || $i==4 || $i==5 || $i==6 || $i==7)
 									echo "<td class='text-right'>";
 								else
 									echo "<td>";

@@ -72,6 +72,7 @@
       </table>
 
       <nav class="center">
+        <small>
         <ul class="pagination">
           <li class="page-item"><a href="contest.php?page=1">&lt;&lt;</a></li>
           <?php
@@ -86,6 +87,7 @@
           ?>
           <li class="page-item"><a href="contest.php?page=<?php echo $view_total_page?>">&gt;&gt;</a></li>
         </ul>
+        </small>
       </nav>
       </center>
 

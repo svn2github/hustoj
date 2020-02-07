@@ -126,6 +126,9 @@
 	$$MSG_EXPLANATION="explanation";
 	$MSG_LIST="รายการโจทย์";
 	$MSG_NEWS="ข่าวประกาศ";
+	$MSG_CONTENTS="Contents";
+	$MSG_SAVE="Save";	
+	
 	$MSG_TEAMGENERATOR="ตัวสร้างทีม";
 	$MSG_SETMESSAGE="ข้อความต้อนรับ";
 	$MSG_SETPASSWORD="เปลี่ยนรหัสผ่าน";
@@ -140,6 +143,8 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
+  $MSG_PRIVATE_USERS_ADD="*Enter userIDs with newline, or you can copy and paste from a spreadsheet.";
+	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";  
 	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";
@@ -201,6 +206,7 @@
   $MSG_HELP_PROBLEM_LIST="manage existing problems, test case files can be uploaded within a zip file and decompress later";
   $MSG_HELP_ADD_CONTEST="schedule a new contest, problem list seperated with comma. You can set up private contest and restrict participants with passwords or lists.";
   $MSG_HELP_CONTEST_LIST="The existing list of contests, modification time and public / private, try not to adjust the list of items after the start.";
+  $MSG_HELP_SET_LOGIN_IP="Record computer(login IP) changes during the exam.";
   $MSG_HELP_TEAMGENERATOR="Generate accounts and passwords in batches for competitors from different schools. Small system should not be used casually, may produce garbage accounts, which can not be easily deleted.";
   $MSG_HELP_SETMESSAGE="Set scroll notification content";
   $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";

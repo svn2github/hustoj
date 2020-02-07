@@ -126,6 +126,9 @@
 	$MSG_EXPLANATION="内容描述";
 	$MSG_LIST="列表";
 	$MSG_NEWS="新闻";
+	$MSG_CONTENTS="内容";
+	$MSG_SAVE="保存";	
+
 	$MSG_TEAMGENERATOR="比赛队帐号生成器";
 	$MSG_SETMESSAGE="设置公告";
 	$MSG_SETPASSWORD="修改密码";
@@ -140,6 +143,8 @@
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
+  $MSG_PRIVATE_USERS_ADD="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。";
+  $MSG_PLS_ADD="*请选择所有可以通过Ctrl +单击提交的语言。";
 	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_NOIP_WARNING="NOIP 比赛，结束后才能查看结果。";
@@ -201,6 +206,7 @@
   $MSG_HELP_PROBLEM_LIST="管理已有的题目和数据，上传数据可以用zip压缩不含目录的数据。";
   $MSG_HELP_ADD_CONTEST="规划新的比赛，用逗号分隔题号。可以设定私有比赛，用密码或名单限制参与者。";
   $MSG_HELP_CONTEST_LIST="已有的比赛列表，修改时间和公开/私有，尽量不要在开赛后调整题目列表。";
+	$MSG_HELP_SET_LOGIN_IP="记录考试期间的计算机(登录IP)更改。";
   $MSG_HELP_TEAMGENERATOR="批量生成大量比赛帐号、密码，用于来自不同学校的参赛者。小系统不要随便使用，可能产生垃圾帐号，无法删除。";
   $MSG_HELP_SETMESSAGE="设置滚动公告内容";
   $MSG_HELP_SETPASSWORD="重设指定用户的密码，对于管理员帐号需要先降级为普通用户才能修改。";

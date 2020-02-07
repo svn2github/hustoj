@@ -13,7 +13,7 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.
   echo "<a href='../loginpage.php'>Please Login First!</a>";
 exit(1);
 }
-echo "<center><h3>Edit-"."$MSG_PROBLEM</h3></center>";
+echo "<center><h3>"."Edit-".$MSG_PROBLEM."</h3></center>";
 include_once("kindeditor.php") ;
 ?>
 
@@ -39,7 +39,7 @@ include_once("kindeditor.php") ;
         </p>
         <p align=left>
           <?php echo $MSG_Time_Limit?><br>
-          <input class="input input-mini" type=text name=time_limit size=20 value='<?php echo htmlentities($row['time_limit'],ENT_QUOTES,"UTF-8")?>'> Sec<br><br>
+          <input class="input input-mini" type=text name=time_limit size=20 value='<?php echo htmlentities($row['time_limit'],ENT_QUOTES,"UTF-8")?>'> sec<br><br>
           <?php echo $MSG_Memory_Limit?><br>
           <input class="input input-mini" type=text name=memory_limit size=20 value='<?php echo htmlentities($row['memory_limit'],ENT_QUOTES,"UTF-8")?>'> MB<br><br>
         </p>
@@ -79,7 +79,7 @@ include_once("kindeditor.php") ;
         </p>
         <div align=center>
           <?php require_once("../include/set_post_key.php");?>
-          <input type=submit value=Submit name=submit>
+          <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
         </div>
       </input>
     </form>

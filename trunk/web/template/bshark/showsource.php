@@ -1,0 +1,121 @@
+<?php 
+    $color = Array(0=>'light',
+                   1=>'light',
+                   2=>'light',
+                   3=>'light',
+                   4=>'success',
+                   5=>'danger',
+                   6=>'danger',
+                   7=>'warning',
+                   8=>'primary',
+                   9=>'light',
+                   10=>'warning',
+                   11=>'warning');
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>ShowSource - MasterOJ</title>
+        <?php require( "./template/bshark/header-files.php");?>
+    </head>
+    
+    <body>
+        <?php require( "./template/bshark/nav.php");?>
+        <div class="card" style="margin: 3% 8% 5% 8%">
+            <div class="card-body">
+                 <h4>ShowSource <?php echo $id;?></h4>
+                 <h5>评测信息<span class="badge badge-secondary" id="status_show">加载中</span></h5>
+                 <div class="col-md-8">
+                 <table class="table table-hover">
+                     <tbody>
+                         <tr>
+                             <th width=20%>题目</th>
+                             <td width=30%><a href="problem.php?id=<?php echo $sproblem_id;?>">P<?php echo $sproblem_id;?></a></td>
+                             <th width=20%>语言</th>
+                             <td width=30%><?php echo $language_name[$slanguage];?></td>
+                         </tr>
+                         <tr>
+                             <th width=20%>用户</th>
+                             <td width=30%><a href="userinfo.php?user=<?php echo $suser_id;?>"><?php echo $suser_id;?></a></td>
+                             <th width=20%>时间</th>
+                             <td width=30% id="stime">加载中</td>
+                         </tr>
+                         <tr>
+                             <th width=20%>提交时间</th>
+                             <td width=30%><?php echo $sin_date;?></td>
+                             <th width=20%>空间</th>
+                             <td width=30% id='smemory'>加载中</td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 </div>
+                <?php
+echo "<div class=\"card\" style=\"box-shadow:0px 3px 3px #ddd;\"><div class=\"card-body\"><pre><code class=\"".$language_name[$slanguage].";\">";?>
+<?php 
+if ($ok!=true) echo '不要偷看别人的代码哟TvT';
+else echo htmlentities(str_replace("\n\r","\n",$view_source),ENT_QUOTES,"utf-8")."\n".$auth;?></div></div></code></pre>
+            </div>
+        </div>
+        <?php require( "./template/bshark/footer.php");?>
+        <?php require( "./template/bshark/footer-files.php");?>
+        
+        <script>
+var judge_result=[<?php
+foreach($judge_result as $result){
+echo "'$result',";
+}
+?>''];
+var color=[<?php
+foreach($color as $result){
+echo "'$result',";
+}
+?>''];
+var fresh_res = <?php echo $sresult;?>;
+var is_look = 1;
+if (is_look==0) fresh_res = '----';
+     if (is_look==1) {
+     document.getElementById("status_show").innerHTML = judge_result[fresh_res];
+     document.getElementById("stime").innerHTML = stime+'ms';
+     document.getElementById("smemory").innerHTML = smemory+'KB';
+     document.getElementById("status_show").className = "badge badge-"+color[fresh_res];
+     }
+     else {
+     document.getElementById("status_show").innerHTML = "----";
+     document.getElementById("stime").innerHTML = "----";
+     document.getElementById("smemory").innerHTML = "----";
+     document.getElementById("status_show").className = "badge badge-secondary";
+     }
+var out = setInterval(getData, 500);
+function getData() {
+if (fresh_res>=4) window.clearInterval(out);
+$.ajax({
+   type: "GET",
+   url: "status-ajax.php",
+   data: "solution_id=<?php echo $id;?>",
+   success: function(msg){
+     //alert(msg);
+     fresh_res = msg.split(",")[0];
+     stime = msg.split(",")[2];
+     smemory = msg.split(",")[1];
+     if (is_look==1) {
+     document.getElementById("status_show").innerHTML = judge_result[fresh_res];
+     document.getElementById("stime").innerHTML = stime+'ms';
+     document.getElementById("smemory").innerHTML = smemory+'KB';
+     document.getElementById("status_show").className = "badge badge-"+color[fresh_res];
+     }
+     else {
+     document.getElementById("status_show").innerHTML = "----";
+     document.getElementById("stime").innerHTML = "----";
+     document.getElementById("smemory").innerHTML = "----";
+     document.getElementById("status_show").className = "badge badge-secondary";
+     }
+     //alert(fresh_res);
+   }
+});
+}
+        </script>
+    </body>
+
+</html>

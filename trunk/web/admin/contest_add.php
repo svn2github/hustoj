@@ -20,7 +20,7 @@
     echo "<a href='../loginpage.php'>Please Login First!</a>";
     exit(1);
   }
-  echo "<center><h3>$MSG_ADD"."$MSG_CONTEST</h3></center>";
+  echo "<center><h3>".$MSG_CONTEST."-".$MSG_ADD."</h3></center>";
   include_once("kindeditor.php") ;
 ?>
 
@@ -191,6 +191,7 @@ else{
             <p aligh=left>
               <?php echo $MSG_CONTEST."-".$MSG_LANG?>
               <?php echo "( Add PLs with Ctrl+click )"?><br>
+              <?php echo $MSG_PLS_ADD?><br>
               <select name="lang[]" multiple="multiple" style="height:220px">
               <?php
               $lang_count = count($language_ext);
@@ -224,7 +225,8 @@ else{
               <?php echo $MSG_CONTEST."-".$MSG_USER?>
               <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
               <br>
-              <textarea name="ulist" rows="10"style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
+              <textarea name='ulist' rows='10' style='width:100%;' placeholder='user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>
+              <?php echo $MSG_PRIVATE_USERS_ADD?><?php echo "\n"?>'><?php if(isset($ulist)){ echo $ulist;}?></textarea>
             </p>
           </td>
         </tr>
@@ -232,7 +234,7 @@ else{
 
       <div align=center>
         <?php require_once("../include/set_post_key.php");?>
-        <input type=submit value=Submit name=submit>
+        <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
       </div>
     </p>
   </form>

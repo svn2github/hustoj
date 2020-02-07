@@ -18,93 +18,107 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   <style>
-#source {
+	#source {
     width: 80%;
     height: 600px;
-}
+	}
   </style>
   </head>
-  <body>
 
+  <body>
     <div class="container">
     <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
- <center>
-<script src="include/checksource.js"></script>
-<form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
-<?php if (isset($id)){?>
-<b><br><?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo $id?></b><br></span>
-<input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
-<?php }else{
-//$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//if ($pid>25) $pid=25;
-?>
-<b><br><?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><b><?php echo chr($pid+ord('A'))?></b><br></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
-<input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
-<input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
-<?php }?>
+			<center>
+				<script src="include/checksource.js"></script>
+				<form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
+				<?php if (isset($id)){?>
+					<br>
+					<?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo $id?></span>
+					<br>
+					<input id=problem_id type='hidden' value='<?php echo $id?>' name="id" >
+					<br>
+				<?php }else{
+					//$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+					//if ($pid>25) $pid=25;
+					?>
+					<br>
+					<?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo chr($pid+ord('A'))?></span>
+					<br> of Contest <span class=blue> <?php echo $cid?> </span>
+					<br>
+					<input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
+					<input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
+				<?php }?>
 
-<span id="language_span"><?php echo $MSG_LANG?>:
-<select id="language" name="language" onChange="reloadtemplate($(this).val());" >
-<?php
-$lang_count=count($language_ext);
-if(isset($_GET['langmask']))
-$langmask=$_GET['langmask'];
-else
-$langmask=$OJ_LANGMASK;
-$lang=(~((int)$langmask))&((1<<($lang_count))-1);
-if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
-else $lastlang=0;
-for($i=0;$i<$lang_count;$i++){
-if($lang&(1<<$i))
-echo"<option value=$i ".( $lastlang==$i?"selected":"").">
-".$language_name[$i]."
-</option>";
-}
-?>
-</select>
-</span>
+				<span id="language_span"><?php echo $MSG_LANG?>:
+					<select id="language" name="language" onChange="reloadtemplate($(this).val());" >
+					<?php
+						$lang_count=count($language_ext);
+						if(isset($_GET['langmask']))
+							$langmask=$_GET['langmask'];
+						else
+							$langmask=$OJ_LANGMASK;
+						$lang=(~((int)$langmask))&((1<<($lang_count))-1);
+						if(isset($_COOKIE['lastlang'])) $lastlang=$_COOKIE['lastlang'];
+						else $lastlang=0;
+						for($i=0;$i<$lang_count;$i++){
+							if($lang&(1<<$i))
+								echo"<option value=$i ".( $lastlang==$i?"selected":"").">".$language_name[$i]."</option>";
+						}
+					?>
+					</select>
+				</span>
 
-<?php if($OJ_ACE_EDITOR){ ?>
-	<pre style="width:80%;height:600;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
-	<input type=hidden id="hide_source" name="source" value=""/>
-<?php }else{ ?>
-	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
-<?php }?>
+				<?php if($OJ_ACE_EDITOR){ ?>
+				<pre style="width:80%;height:600;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
+				<input type=hidden id="hide_source" name="source" value=""/>
+				<?php }else{ ?>
+				<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source">
+					<?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?>
+				</textarea>
+				<?php }?>
 
-<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
-<?php echo $MSG_Input?>:<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" ><?php echo $view_sample_input?></textarea>
-<?php echo $MSG_Output?>:
-<textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:
-<?php echo $view_sample_output?>
-</textarea>
-<?php } ?>
-<?php if($OJ_VCODE){?>
-<?php echo $MSG_VCODE?>:
-<input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
-<?php }?>
-<br><br>
-<input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
-<?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
-<input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
-<input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
-<?php }?>
+				<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+				<?php echo $MSG_Input?>:
+				<textarea style="width:30%" cols=40 rows=5 id="input_text" name="input_text" >
+					<?php echo $view_sample_input?>
+				</textarea>
 
-<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
-<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-<span class="btn" id=result>状态</span>
-<?php }?>
-<?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
-	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
-	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
-<div id="blockly" class="center">Blockly</div>
-<?php }?>
-</form>
-</center>
-     </div>
+				<?php echo $MSG_Output?>:
+				<textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >
+					SHOULD BE:<?php echo $view_sample_output?>
+				</textarea>
+				<?php } ?>
 
-    </div> <!-- /container -->
+				<?php if($OJ_VCODE){?>
+				<?php echo $MSG_VCODE?>:
+				<input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
+				<?php }?>
+				<br><br>
+
+				<input id="Submit" class="btn btn-info btn-sm" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
+
+				<?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
+				<input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
+				<input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse">
+				<?php }?>
+
+				<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+				<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
+					<span class="btn" id=result>状态</span>
+				<?php }?>
+
+				<?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
+				<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
+				<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
+				<div id="blockly" class="center">Blockly</div>
+				<?php }?>
+			</form>
+		</center>
+    </div>
+
+  </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

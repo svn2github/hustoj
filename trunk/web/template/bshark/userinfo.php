@@ -28,7 +28,7 @@ for ($i = count($accall);$i > 0; $i--) {
                   <tbody>
                       <tr>
                           <th width=30%>提交总数</th>
-                          <td width=70%><a href='/status?user_id=<?php echo $user?>'><?php if ($aflag==0) echo $Submit;
+                          <td width=70%><a href='./status.php?user_id=<?php echo $user?>'><?php if ($aflag==0) echo $Submit;
 else echo '---';?></a></td>
                       </tr>
                       <tr>
@@ -38,7 +38,7 @@ else echo '---';?></td>
                       </tr><?php
 foreach($view_userstat as $row){
 //i++;
-echo "<tr><th>".$jresult[$row[0]]."</th><td><a href=/status?user_id=$user&jresult=".$row[0]." >";
+echo "<tr><th>".$jresult[$row[0]]."</th><td><a href=./status.php?user_id=$user&jresult=".$row[0]." >";
 if ($aflag==0) echo $row[1];
 else echo '---';
 echo "</a></td></tr>";
@@ -48,14 +48,8 @@ echo "</a></td></tr>";
               </table>
           </div></div>
 </div><div class="col-md-5"><div class="card"><div class="card-body" align=center>
-    <img src="https://q.qlogo.cn/headimg_dl?dst_uin=<?php echo $myqq;?>&spec=160" style="width:100px;height:100px;border-radius:50%;margin-bottom: 1em">
-      <h3><span<?php 
-                        if ($viplevel[$user]) {
-                            if ($isadmm[$user]==23333) echo ' class="purple-c"';
-                            else echo ' class="colorful"';
-                        }
-                        else if ($isadmm[$user]==23333) echo ' class="purple"';
-          ?>><?php echo $user;?></span></h3>
+    <img src="https://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160" style="width:100px;height:100px;border-radius:50%;margin-bottom: 1em">
+      <h3><span><?php echo $user;?></span></h3>
         <div class="row">
             <div class="col-md-4">
                 <h1><?php echo $AC;?></h1>解决

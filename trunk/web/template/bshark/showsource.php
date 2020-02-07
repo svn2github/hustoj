@@ -73,18 +73,7 @@ echo "'$result',";
 }
 ?>''];
 var fresh_res = <?php echo $sresult;?>;
-var is_look = <?php 
-$locklock=0;
-if (is_running($contest_id)) {
-    $sql = "SELECT * FROM `contest` WHERE `contest_id`=?";
-    $ress = pdo_query($sql, $contest_id);
-    if (count($ress) && $ress[0]['type']==1) {
-        echo 0;
-        $locklock=1;
-    }
-}
-if ($locklock == 0) echo 1;
-?>;
+var is_look = 1;
 if (is_look==0) fresh_res = '----';
      if (is_look==1) {
      document.getElementById("status_show").innerHTML = judge_result[fresh_res];

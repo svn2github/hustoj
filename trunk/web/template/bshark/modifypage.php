@@ -136,6 +136,17 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-5">
+                                    <label>学校：</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"> <span class="input-group-text" id="basic-addon1"><i class="iconfont icon-user"></i></span>
+
+                                        </div>
+                                        <input name="school" class="form-control" value="<?php echo htmlentities($row['school'],ENT_QUOTES,"UTF-8")?>" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
                                     <fieldset><div class="custom-control custom-toggle d-block my-2"><input type="checkbox" id="codeshare" name="codeshare" class="custom-control-input"<?php if ($row['codeshare']) { ?> checked="checked"<?php } ?>><label class="custom-control-label" for="codeshare">代码共享</label></div></fieldset>
                                 </div>
                             </div>

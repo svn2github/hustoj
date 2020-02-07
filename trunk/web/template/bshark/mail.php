@@ -137,8 +137,7 @@ a:hover {
                                                 if ($kkk[strtolower($this_f)]=='666') continue;
                                                 else $kkk[strtolower($this_f)]='666';
                                                 ?>
-                                                <a href="/user/chat/<?php echo $this_f;?>" class="<?php if ($this_f==$friend) echo 'active';?>"><div style="position:relative;width:48px;height:48px;display:inline;"><img src="<?php $logopng = '/template/meto/logo.jpg';
-                                                if ($this_f_qq=pdo_query('select * from `users` where `user_id`=?',$this_f)[0]['qq']) $logopng='http://q.qlogo.cn/headimg_dl?dst_uin='.$this_f_qq.'&spec=160';echo $logopng;?>" width=48 height=48 style="border:1px solid #222;display:inline;border-radius:50%;float:left;">
+                                                <a href="?friend=<?php echo $this_f;?>" class="<?php if ($this_f==$friend) echo 'active';?>"><div style="position:relative;width:48px;height:48px;display:inline;"><img src="<?php $logopng = 'http://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160';echo $logopng;?>" width=48 height=48 style="border:1px solid #222;display:inline;border-radius:50%;float:left;">
                                                 <?php 
                                                 if (count(pdo_query('select * from `mail` where `from_user`=? and `to_user`=? and `new_mail`=1',$this_f, $user_id))>0) {?>
                                                 <span class="info-tip"></span><?php
@@ -174,16 +173,13 @@ a:hover {
                                                         $say = 0;
                                                         $this_u=$friend;
                                                     }
-                                                    $logopng = '/template/meto/logo.jpg';
-                                                    if ($this_s_qq=pdo_query('select * from `users` where `user_id`=?',$this_u)[0]['qq']) {
-                                                        $logopng='http://q.qlogo.cn/headimg_dl?dst_uin='.$this_s_qq.'&spec=160';
-                                                    }
+                                                    $logopng = 'http://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160';
                                                     //if ($chat_id != 0 && strtotime($chat_r['in_date'])-strtotime($chats_i[$chat_id-1]['in_date'])>30*60) {
                                                     ?>
                                                     <span style="display:block;text-align:center"><?php echo $chat_r['in_date'];?></span>
                                                     <?php // } ?><!--br-->
                                                     <div style="width:100%;float:none;display:block">
-                                                    <a href="/user/<?php echo $this_u;?>"><img src="<?php echo $logopng;?>" width=32 height=32 style="border:1px solid #000;border-radius:50%;float:<?php if ($say==0) echo 'left';else echo 'right';?>"></a>
+                                                    <a href="userinfo.php?user=<?php echo $this_u;?>"><img src="<?php echo $logopng;?>" width=32 height=32 style="border:1px solid #000;border-radius:50%;float:<?php if ($say==0) echo 'left';else echo 'right';?>"></a>
                                                     <div class="item-<?php if ($say==0) echo 'left';else echo 'right';?>"><p style="margin:6px"><?php echo $chat_r['content'];?></p></div>
                                                     </div>
                                                     

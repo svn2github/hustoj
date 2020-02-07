@@ -5,6 +5,15 @@ $acneed = [10,20,30,50,80,100,200,300,500,800,1000];
 $accall = ["萌新","小小牛","小牛","小犇","中牛","中犇","大牛","大犇","神牛","神犇"];
 for ($i = count($accall);$i > 0; $i--) {
     if ($AC < $acneed[$i]) {$calsed = $accall[$i - 1];$calledid=$i-1;}
+}
+
+for ($i=0;$i<=11;++$i){
+	$ped[$i]=0;
+}
+$sql="SELECT * FROM `solution` WHERE `user_id`=?";
+$result = pdo_query($sql, $user);
+foreach ($result as $row) {
+	++$ped[$row['result']];
 }?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

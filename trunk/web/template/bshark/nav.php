@@ -49,7 +49,7 @@ $cur_path = "template/$OJ_TEMPLATE/";
       <span class="line"></span>
       <div class="dropdown-content animated">
         <div><a class="dropdown-item" href="./userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?>">个人信息</a></div>
-        <div><a class="dropdown-item" href="./modifypag.php">信息修改</a></div>
+        <div><a class="dropdown-item" href="./modifypage.php">信息修改</a></div>
         <div><a class="dropdown-item" href="./mail.php" style="position:relative">聊天<?php if ($if_new_mail) { ?>(有新消息)<?php } ?></a></div>
         <div><a class="dropdown-item" href="./logout.php">注销</a></div>
         <?php 

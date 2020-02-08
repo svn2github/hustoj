@@ -3,7 +3,7 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>修改信息 - MasterOJ</title>
+        <title>修改信息 - <?php echo $OJ_NAME;?></title>
         <?php require( "./template/bshark/header-files.php");?>
     </head>
     

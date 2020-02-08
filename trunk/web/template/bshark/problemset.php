@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>问题列表 - MasterOJ</title>
+        <title><?php echo $MSG_PROBLEMS;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -12,7 +12,7 @@
             <div class="col-md-8">
             <div class='card'>
   <div class="card-body">
-    <h4>题目列表</h4>
+    <h4><?php echo $MSG_PROBLEMS;?></h4>
 				<?php if (!$_GET["search"]) { ?>
     <ul class="pagination">
 						<li class="page-item"><a class="page-link" href="problemset.php?page=1">&lt;&lt;</a>
@@ -34,7 +34,7 @@
     <table class="table table-hover">
     <thead>
 						<tr class='toprow'>
-							<th>得分</th>
+							<th></th>
 							<th class='hidden-xs'>
 								id
 							</th>
@@ -96,14 +96,14 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h4>检索</h4>
+                <h4><?php echo $MSG_SEARCH;?></h4>
 					<div class="row">
 						<div colspan='1' class="col-md-12"><form action='problemset.php' class="form-search form-inline">
 							        <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="iconfont icon-search"></i></span>
         </div>
-								<input type="text" name=search class="form-control search-query" placeholder="关键字" style="display:inline;width:auto">
+								<input type="text" name=search class="form-control search-query" style="display:inline;width:auto">
 								</div>
 							</form>
 						</div>

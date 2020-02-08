@@ -118,6 +118,8 @@
 	$MSG_Source= "Source" ;
 	$MSG_Time_Limit="Time Limit";
 	$MSG_Memory_Limit="Memory Limit";
+	$MSG_EDIT="Edit";
+	$MSG_TESTDATA="TestData";
 	
 	//admin menu
 	$MSG_SEEOJ="SeeOJ";

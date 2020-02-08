@@ -14,69 +14,6 @@ $ac_count=$result[0]['solved'];
 $sql='SELECT * FROM `news` WHERE `importance`<0 AND `defunct`!="Y"';
 $result=pdo_query($sql);
 $res=$result;
-$scope='y';
- $where="where defunct='N' ";
- $s=date('Y').'-'.date('m').'-'.date('d');
- $page_size=50;
- $rank=0;
- $sql="SELECT users.`user_id`,`email`,`nick`,`school`,s.`solved`,t.`submit` FROM `users`
-                                        right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
-                                        left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
-                                ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
-                         ";
-$result = pdo_query($sql) ;
-if($result) $rows_cnt=count($result);
-else $rows_cnt=0;
-$pttt=$result; $scope='w';
- $where="where defunct='N' ";
-$monday=mktime(0, 0, 0, date("m"),date("d")-(date("w")+7)%8+1, date("Y"))                                                            ;
-                                        //$monday->subDays(date('w'));
-                                        $s=strftime("%Y-%m-%d",$monday);
- $page_size=50;
- $rank=0;
- $sql="SELECT users.`user_id`,`email`,`nick`,`school`,s.`solved`,t.`submit` FROM `users`
-                                        right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
-                                        left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
-                                ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
-                         ";
-$result = pdo_query($sql) ;
-if($result) $rows_cnt=count($result);
-else $rows_cnt=0;
-$ptttt=$result;$scope='m';
- $where="where defunct='N' ";
-$s=date('Y').'-'.date('m').'-01';
- $page_size=50;
- $rank=0;
- $sql="SELECT users.`user_id`,`email`,`nick`,`school`,s.`solved`,t.`submit` FROM `users`
-                                        right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
-                                        left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
-                                ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
-                         ";
-$result = pdo_query($sql) ;
-if($result) $rows_cnt=count($result);
-else $rows_cnt=0;
-$pttttt=$result;$scope='y';
- $where="where defunct='N' ";
-$s=date('Y').'-01-01';
- $page_size=50;
- $rank=0;
- $sql="SELECT users.`user_id`,`nick`,`email`,`school`,s.`solved`,t.`submit` FROM `users`
-                                        right join
-                                        (select count(distinct problem_id) solved ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') and result=4 group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s on users.user_id=s.user_id
-                                        left join
-                                        (select count( problem_id) submit ,user_id from solution where in_date>str_to_date('$s','%Y-%m-%d') group by user_id order by submit desc limit " . strval ( $rank ) . ",".($page_size*2).") t on users.user_id=t.user_id
-                                ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
-                         ";
-$result = pdo_query($sql) ;
-if($result) $rows_cnt=count($result);
-else $rows_cnt=0;
-$ptttttt=$result;
 $day[1] = strtotime(date('Y-m-d',time()));
 $day[0] = $day[1] + 60*60*24;
 $day[2] = $day[1] - 60*60*24;
@@ -96,7 +33,7 @@ for ($csadff = 1; $csadff <= 7; ++$csadff) {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>首页 - MasterOJ</title>
+        <title><?php echo $MSG_HOME;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -109,13 +46,13 @@ for ($csadff = 1; $csadff <= 7; ++$csadff) {
                         <?php
 $sql = 'SELECT * FROM `news` WHERE `defunct`!=\'Y\' ORDER BY `importance`';
 $news = pdo_query($sql);
-?>                <h4>公告</h4>
+?>                <h4><?php echo $MSG_NEWS;?></h4>
 <table class="table table-hover">
     <thead>
       <tr>
-        <th>公告标题</th>
-        <th>上传时间</th>
-        <th>作者</th>
+        <th><?php echo $MSG_NEWS.$MSG_TITLE;?></th>
+        <th><?php echo $MSG_SUBMIT_TIME;?></th>
+        <th><?php echo $MSG_USER;?></th>
       </tr>
     </thead>
     <tbody>
@@ -148,19 +85,19 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     </div>
     
             <div class="col-md-4"><div class="card"><div class="card-body">
-    <h4>搜索题目</h4>
+    <h4><?php echo $MSG_SEARCH;?><?php echo $MSG_PROBLEM;?></h4>
 							<form action='problemset.php' class="form-search form-inline">
 							        <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="iconfont icon-search"></i></span>
         </div>
-								<input type="text" name=search class="form-control search-query" placeholder="关键字" style="display:inline;width:auto">
+								<input type="text" name=search class="form-control search-query" style="display:inline;width:auto">
 								</div>
 							</form>
     </div>
         </div>
                 <br><div class="card"><div class="card-body">
-    <h4>近期比赛</h4>
+    <h4><?php echo $MSG_CONTEST;?></h4>
     <?php 
     $sql = "SELECT * FROM `contest` WHERE `defunct`!='Y' ORDER BY UNIX_TIMESTAMP(`start_time`) DESC LIMIT 5";
     $ress = pdo_query($sql);
@@ -168,18 +105,18 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     <table class="table table-hover">
         <thead>
             <tr>
-                <th width="auto">标题</th>
-                <th width="auto">状态</th>
-                <th width="auto">开始时间</th>
+                <th width="auto"><?php echo $MSG_TITLE;?></th>
+                <th width="auto"><?php echo $MSG_STATUS;?></th>
+                <th width="auto"><?php echo $MSG_START_TIME;?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($ress as $new) { ?>
             <tr>
                 <td><a href="contest.php?cid=<?php echo $new['contest_id'];?>"><?php echo $new['title'];?></a></td> 
-                <td><?php if (strtotime($new['end_time'])<time()) { ?><span class="badge badge-secondary">已结束</span><?php }
+                <td><?php if (strtotime($new['end_time'])<time()) { ?><span class="badge badge-secondary"><?php echo $MSG_Ended;?></span><?php }
                 else if (strtotime($new['start_time'])>time()) { ?><span class="badge badge-success">未开始</span><?php }
-                else { ?><span class="badge badge-danger">运行中</span><?php } ?></td>
+                else { ?><span class="badge badge-danger"><?php echo $MSG_Runnning;?></span><?php } ?></td>
                 <td><?php echo $new['start_time'];?></td>
             </tr>
             <?php } ?>

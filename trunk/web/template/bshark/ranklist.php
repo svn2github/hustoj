@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>排行榜 - MasterOJ</title>
+        <title><?php echo $MSG_RANKLIST;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -10,7 +10,7 @@
         <?php require("./template/bshark/nav.php");?>
         <div class="card" style="margin: 3% 8% 5% 8%">
   <div class="card-body">
-    <h4>排行榜</h4>
+    <h4><?php echo $MSG_RANKLIST;?></h4>
     <form class="form-inline" action="ranklist.php">
 <?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>" >
 <input type=submit class="form-control btn btn-outline-primary" value=Search >

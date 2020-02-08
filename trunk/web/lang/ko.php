@@ -118,6 +118,8 @@
 	$MSG_Source="출처";
 	$MSG_Time_Limit="실행시간 제한";
 	$MSG_Memory_Limit="메모리사용 제한";
+	$MSG_EDIT="수정";
+	$MSG_TESTDATA="테스트 데이터";
 
 	//admin menu
 	$MSG_SEEOJ="OJ확인";

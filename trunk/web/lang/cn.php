@@ -118,6 +118,8 @@
 	$MSG_Source= "来源" ;
 	$MSG_Time_Limit="时间限制";
 	$MSG_Memory_Limit="内存限制";
+	$MSG_EDIT="编辑";
+	$MSG_TESTDATA="测试数据";
 
 	//admin menu
 	$MSG_SEEOJ="查看前台";

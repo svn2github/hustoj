@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>排名 - MasterOJ</title>
+        <title><?php echo $MSG_STATISTICS;?> - <?php $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -10,13 +10,14 @@
         <?php require("./template/bshark/nav.php");?>
         <div class="card" style="margin: 3% 8% 5% 8%">
   <div class="card-body">
-    <h4><?php echo pdo_query('SELECT * FROM `contest` WHERE `contest_id`=?', $cid)[0]['title'];?> - 统计</h4>
+    <h4><?php echo pdo_query('SELECT * FROM `contest` WHERE `contest_id`=?', $cid)[0]['title'];?> - <?php echo $MSG_STATISTICS;?></h4>
     
-        <ul class="pagination">
-    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $cid?>'>竞赛C<?php echo $cid;?></a></li>
-    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $cid?>'>状态</a></li>
-    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $cid?>'>排名</a></li>
-    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $cid?>'>统计</a></li>
+    <ul class="pagination">
+    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $cid?>'><?php echo $MSG_CONTEST;?>C<?php echo $cid;?></a></li>
+    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $cid?>'><?php echo $MSG_STATUS;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $cid?>'><?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank-oi.php?cid=<?php echo $cid?>'>OI-<?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $cid?>'><?php echo $MSG_STATISTICS;?></a></li>
     </ul>
     <table id=cs class="table table-hover">
 <thead>

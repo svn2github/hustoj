@@ -118,6 +118,8 @@
 	$MSG_Source= "แหล่งที่มา" ;
 	$MSG_Time_Limit="จำกัดเวลา";
 	$MSG_Memory_Limit="จำกัดหน่วยความจำ";
+	$MSG_EDIT="แก้ไข้";
+	$MSG_TESTDATA="ทดสอบข้อมูล";
 	
 	//admin menu
 	$MSG_SEEOJ="ดูเว็บ";

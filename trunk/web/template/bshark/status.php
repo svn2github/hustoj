@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>评测记录 - MasterOJ</title>
+        <title><?php echo $MSG_STATUS;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -12,7 +12,7 @@
             <div class="col-md-9">
             <div class="card">
   <div class="card-body">
-    <h4>评测记录</h4>
+    <h4><?php echo $MSG_STATUS;?></h4>
     <?php if ($cid) { ?>
     
     <ul class="pagination">

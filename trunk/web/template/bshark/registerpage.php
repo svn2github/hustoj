@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>注册 - MasterOJ</title>
+        <title><?php echo $MSG_REGISTER;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
         <style>
             body {
@@ -64,34 +64,39 @@
         <div style="display:none"><ul id="navbar"><li id="navbarstyles"></li><li id="logolink"></li><li id="lowmenuchild1"></li></ul></div>
         <center>
         <div style="background-color:rgba(0,0,0,0);margin-top:5%;">
-                <h4 style="color:#fff">注 册</h4>
+                <h4 style="color:#fff"><?php echo $MSG_REGISTER;?></h4>
                 <form action="/register.php" method="post" role="form">
                     <div class="input-o" style="display:inline-block">
                         <i class="iconfont icon-user"></i>
-                        <input placeholder="请输入用户名" autocomplete="off" name="user_id" type="text">
+                        <input placeholder="<?php echo $MSG_USER_ID;?>" autocomplete="off" name="user_id" type="text">
                     </div>
                     <br>
                     <div class="input-o" style="display:inline-block">
                         <i class="iconfont icon-user"></i>
-                        <input placeholder="请输入昵称" autocomplete="off" name="nick" type="text">
+                        <input placeholder="<?php echo $MSG_NICK;?>" autocomplete="off" name="nick" type="text">
                     </div>
                     <br>
                     <div class="input-o" style="display:inline-block">
                         <i class="iconfont icon-key"></i>
-                        <input placeholder="请输入密码"  autocomplete="new-password" type="password" name="password">
+                        <input placeholder="<?php echo $MSG_PASSWORD;?>"  autocomplete="new-password" type="password" name="password">
                     </div>
                     <br>
                     <div class="input-o" style="display:inline-block">
                         <i class="iconfont icon-key"></i>
-                        <input placeholder="请重复密码"  autocomplete="new-password" type="password" name="rptpassword">
+                        <input placeholder="<?php echo $MSG_REPEAT_PASSWORD;?>"  autocomplete="new-password" type="password" name="rptpassword">
+                    </div>
+                    <br>
+                    <div class="input-o" style="display:inline-block">
+                        <i class="iconfont icon-shu"></i>
+                        <input placeholder="<?php echo $MSG_SCHOOL;?>"  autocomplete="off" type="text" name="school" required>
                     </div>
                     <br>
                     <div class="input-o" style="display:inline-block">
                         <i class="iconfont icon-mail"></i>
-                        <input placeholder="请输入邮箱"  autocomplete="off" type="email" name="email" required>
+                        <input placeholder="<?php echo $MSG_EMAIL;?>"  autocomplete="off" type="email" name="email" required>
                     </div>
                     <br>
-                    <button class="button-login">注 册</button>
+                    <button class="button-login"><?php echo $MSG_REGISTER;?></button>
                 </form>		<br>
                 <script src="<?php echo $OJ_CDN_URL?>/include/md5-min.js"></script>
 	            <script>

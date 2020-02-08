@@ -16,10 +16,11 @@
     <?php if ($cid) { ?>
     
     <ul class="pagination">
-    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $cid?>'>竞赛C<?php echo $cid;?></a></li>
-    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $cid?>'>状态</a></li>
-    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $cid?>'>排名</a></li>
-    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $cid?>'>统计</a></li>
+    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $view_cid?>'><?php echo $MSG_CONTEST;?>C<?php echo $cid;?></a></li>
+    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $view_cid?>'><?php echo $MSG_STATUS;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $view_cid?>'><?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank-oi.php?cid=<?php echo $view_cid?>'>OI-<?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $view_cid?>'><?php echo $MSG_STATISTICS;?></a></li>
     </ul><?php } ?>
     <table class="table table-hover" style="width:100%">
     <thead>

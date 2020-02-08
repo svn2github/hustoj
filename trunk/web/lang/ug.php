@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	//oj-header.php
 	$MSG_FAQ="چۈشەنچە & سوئال";
 	$MSG_BBS="تور بەت";
@@ -131,6 +131,8 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_Source= "مەنبە";
 	$MSG_Time_Limit="ۋاقىت چەكلىمىسى";
 	$MSG_Memory_Limit="ساقلىغۇچ چەكلىمىسى";
+	$MSG_EDIT= "Edit";
+	$MSG_TESTDATA= "TestDATA";
 
 	//admin menu
 	$MSG_SEEOJ="باش بەت";

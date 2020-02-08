@@ -77,12 +77,9 @@ include_once("kindeditor.php");
 								            $row = $result[0];
 								            $new_nick = $isadmin==0?$_POST['nick']:$row['nick'];
 								            $new_email = $isadmin==0?$_POST['email']:$row['email'];
-								            $new_qq = $isadmin==0?$_POST['qq']:$row['qq'];
 								            $new_school = $isadmin==0?$_POST['school']:$row['school'];
-								            $new_score = $_POST['score'] - (int)($row['solved']) * 5;
-								            $new_hb = $_POST['hb'];
-								            $sql = 'UPDATE `users` SET `nick`=?,`email`=?,`qq`=?,`school`=?,`score`=?,`hb`=? WHERE `user_id`=?';
-								            pdo_query($sql, $new_nick, $new_email, $new_qq, $new_school, $new_score, $new_hb, $user_id);
+								            $sql = 'UPDATE `users` SET `nick`=?,`email`=?,`school`=? WHERE `user_id`=?';
+								            pdo_query($sql, $new_nick, $new_email, $new_school, $user_id);
 								            echo "修改成功!<script>history.back(-1);</script>";
 								            if ($isadmin == 0) {
 								                if (isset($_POST['password'])) {
@@ -107,10 +104,7 @@ include_once("kindeditor.php");
 								        $result = $row[0];
 								        $nick = $result['nick'];
 								        $email = $result['email'];
-								        $qq = $result['qq'];
 								        $school = $result['school'];
-								        $score = $result['score'] + (int)($result['solved'])*5;
-								        $hb = $result['hb'];
 								        $sql = 'SELECT * FROM `privilege` WHERE `user_id`=? AND `rightstr`=?';
 								        if (count(pdo_query($sql, $user_id, 'administrator'))) {
 								            $isadmin = 1;
@@ -131,14 +125,8 @@ include_once("kindeditor.php");
 								    <input type="text" class="form-control" name="password" placeholder="谨慎操作！请勿随意修改"<?php if ($isadmin == 1) echo " readonly";?>>
 								    邮箱：
 								    <input type="email" class="form-control" name="email" value="<?php echo htmlentities($email,ENT_QUOTES,"UTF-8")?>"<?php if ($isadmin == 1) echo " readonly";?>>
-								    QQ：
-								    <input type="text" class="form-control" name="qq" value="<?php echo $qq;?>"<?php if ($isadmin == 1) echo " readonly";?>>
-								    个性签名:
-								    <textarea name='school' class="form-control" rows=3<?php if ($isadmin == 1) echo " readonly";?>><?php echo htmlentities($school,ENT_QUOTES,"UTF-8")?></textarea>
-								    积分:
-								    <input type="text" name="score" class="form-control" value="<?php echo $score;?>">
-								    壕币:
-								    <input type="text" name="hb" value="<?php echo $hb;?>" class="form-control">
+								    学校
+								    <input type="text" class="form-control" name="nick" value="<?php echo $school;?>"<?php if ($isadmin == 1) echo " readonly";?>>
 								    <button type="submit" class="btn btn-dark">提交</button>
 								    </form>
 								</div>

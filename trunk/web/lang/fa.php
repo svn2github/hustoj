@@ -118,6 +118,8 @@
 	$MSG_Source= "منبع";
 	$MSG_Time_Limit="محدودیت زمانی";
 	$MSG_Memory_Limit="محدودیت حجمی";
+	$MSG_EDIT="ویرایش کنید";
+	$MSG_TESTDATA="داده های آزمون";
 
 	//admin menu
 	$MSG_SEEOJ="نمایش";

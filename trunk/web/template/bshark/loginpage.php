@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>登录 - MasterOJ</title>
+        <title><?php echo $MSG_LOGIN;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
         <style>
             body {
@@ -61,17 +61,17 @@
         <div style="display:none"><ul id="navbar"><li id="navbarstyles"></li><li id="logolink"></li><li id="lowmenuchild1"></li></ul></div>
         <center>
         <div style="background-color:rgba(0,0,0,0);margin-top:10%;">
-                <h4 style="color:#fff">登 录</h4>
+                <h4 style="color:#fff"><?php echo $MSG_LOGIN;?></h4>
                 <form id="login" action="/login.php" method="post" role="form" onSubmit="return jsMd5();"  >
                     <div class="input-o">
                         <i class="iconfont icon-user"></i>
-                        <input placeholder="请输入用户名" autocomplete="off" name="user_id" type="text">
+                        <input placeholder="<?php echo $MSG_USER_ID;?>" autocomplete="off" name="user_id" type="text">
                     </div>
                     <div class="input-o">
                         <i class="iconfont icon-key"></i>
-                        <input placeholder="请输入密码"  autocomplete="new-password" type="password" name="password">
+                        <input placeholder="<?php echo $MSG_PASSWORD;?>"  autocomplete="new-password" type="password" name="password">
                     </div>
-                    <button class="button-login">登 录</button>
+                    <button class="button-login"><?php echo $MSG_LOGIN;?></button>
                 </form>		
                 <script src="<?php echo $OJ_CDN_URL?>/include/md5-min.js"></script>
 	            <script>

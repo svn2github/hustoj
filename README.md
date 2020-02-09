@@ -87,7 +87,9 @@ Star us, please!
 
 更新日志
 ------
-2020-01-31 更新:@melongist 增加了很多页面美化。
+2020-02-10 更新：新的模板bshark基本可用，如需启用新模板，只需修改/home/judge/src/web/include/db_info.inc.php，设置$OJ_TEMPLATE="bshark";
+
+2020-01-31 更新：@melongist 增加了很多页面美化。
 
 2020-01-27 更新：题目限时增强为浮点型，3位小数精度，即标称毫秒(ms)。
 

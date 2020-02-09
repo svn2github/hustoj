@@ -1,57 +1,146 @@
-<?php require_once("admin-header.php");?>
-<?php if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
+<?php require_once("admin-header.php");
+
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))) {
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-if(isset($_POST['do'])){
+?>
+
+<title>Privilege Add</title>
+<hr>
+<center><h3><?php echo $MSG_USER."-".$MSG_PRIVILEGE."-".$MSG_ADD?></h3></center>
+
+<div class="container">
+
+<?php
+if (isset($_POST['do'])) {
 	require_once("../include/check_post_key.php");
-	$user_id=$_POST['user_id'];
-	$rightstr =$_POST['rightstr'];
-	if(isset($_POST['contest'])) $rightstr="c$rightstr";
-	if(isset($_POST['psv'])) $rightstr="s$rightstr";
-	$sql="insert into `privilege` values(?,?,'N')";
-	$rows=pdo_query($sql,$user_id,$rightstr);
-	echo "$user_id $rightstr added!";
-	
+
+	$user_id = $_POST['user_id'];
+	$rightstr = $_POST['rightstr'];
+
+	if (isset($_POST['contest']))
+		$rightstr = "c$rightstr";
+
+	if (isset($_POST['psv']))
+		$rightstr = "s$rightstr";
+
+	$sql = "insert into `privilege` values(?,?,'N')";
+	$rows = pdo_query($sql,$user_id,$rightstr);
+	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Privilege Added!</h4></center>";
 }
 ?>
-<div class="container">
-<form method=post>
-<?php require("../include/set_post_key.php");?>
-	<b>Add privilege for User:</b><br />
-	User:<input type=text size=10 name="user_id"><br />
-	Privilege:
-	<select name="rightstr">
-<?php
-$rightarray=array("administrator","problem_editor","source_browser","contest_creator","http_judge","password_setter","printer","balloon" );
-while(list($key, $val)=each($rightarray)) {
-	if (isset($rightstr) && ($rightstr == $val)) {
-		echo '<option value="'.$val.'" selected>'.$val.'</option>';
-	} else {
-		echo '<option value="'.$val.'">'.$val.'</option>';
-	}
-}
-?></select><br />
-	<input type='hidden' name='do' value='do'>
-	<input type=submit value='Add'>
-	<?php echo $MSG_HELP_ADD_PRIVILEGE; ?>
+
+<div>
+<form method="post" class="form-horizontal">
+	<?php require_once("../include/set_post_key.php");?>
+	<center><label class="text-info"><?php echo $MSG_HELP_ADD_PRIVILEGE?></label></center>
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+		<?php if(isset($_GET['uid'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+  	<?php } else if(isset($_POST['user_id'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PRIVILEGE_TYPE?></label>
+		<select class="col-sm-3" name="rightstr">
+		<?php
+			$rightarray = array("administrator","problem_editor","source_browser","contest_creator","http_judge","password_setter","printer","balloon");
+			while (list($key, $val)=each($rightarray)) {
+				if (isset($rightstr) && ($rightstr == $val)) {
+					echo '<option value="'.$val.'" selected>'.$val.'</option>';
+				} else {
+					echo '<option value="'.$val.'">'.$val.'</option>';
+				}
+			}
+		?>
+		</select>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-4 col-sm-2">
+			<input type='hidden' name='do' value='do'>
+			<button type="submit" name="do" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
+		</div>
+		<div class="col-sm-2">
+			<button type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
 </form>
-<form method=post>
-	<b>Add contest for User[给用户添加单个比赛权限]:</b><br />
-	User:<input type=text size=10 name="user_id"><br />
-	Contest:<input type=text size=10 name="rightstr">1000 for Contest1000<br />
-	<input type='hidden' name='do' value='do'>
-	<input type='hidden' name='contest' value='do'>
-	<input type=submit value='Add'>
-	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+</div>
+
+<br>
+
+<div>
+<form method="post" class="form-horizontal">
+	<?php require_once("../include/set_post_key.php");?>
+	<center><label class="text-info"><?php echo $MSG_HELP_ADD_CONTEST_USER?></label></center>
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+		<?php if(isset($_GET['uid'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+  	<?php } else if(isset($_POST['user_id'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_CONTEST_ID?></label>
+		<div class="col-sm-3"><input name="rightstr" class="form-control" placeholder="<?php echo $MSG_CONTEST_ID."*"?>" type="text"></div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-4 col-sm-2">
+			<input type='hidden' name='do' value='do'>
+			<button type="submit" name="contest" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
+			<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+		</div>
+		<div class="col-sm-2">
+			<button type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
 </form>
-<form method=post>
-	<b>Add Problem Solution View for User[给用户添加单个题目的答案查看权限]:</b><br />
-	User:<input type=text size=10 name="user_id"><br />
-	Problem:<input type=text size=10 name="rightstr">1000 for Problem 1000<br />
-	<input type='hidden' name='do' value='do'>
-	<input type='hidden' name='psv' value='do'>
-	<input type=submit value='Add'>
-	<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+</div>
+
+<br>
+
+<div>
+<form method="post" class="form-horizontal">
+	<?php require_once("../include/set_post_key.php");?>
+	<center><label class="text-info"><?php echo $MSG_HELP_ADD_SOLUTION_VIEW?></label></center>
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+		<?php if(isset($_GET['uid'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+  	<?php } else if(isset($_POST['user_id'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PROBLEM_ID?></label>
+		<div class="col-sm-3"><input name="rightstr" class="form-control" placeholder="<?php echo $MSG_PROBLEM_ID."*"?>" type="text"></div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-4 col-sm-2">
+			<input type='hidden' name='do' value='do'>
+			<button type="submit" name="psv" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
+			<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+			</div>
+		<div class="col-sm-2">
+			<button type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
 </form>
+</div>
+
 </div>

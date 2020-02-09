@@ -154,6 +154,7 @@
 	$MSG_UPDATE_DATABASE="Update Database";
 	$MSG_ONLINE="Online";
   $MSG_SET_LOGIN_IP="SetLoginIP";
+	$MSG_PRIVILEGE_TYPE="Privilege Type";
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
@@ -226,6 +227,8 @@
   $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";
   $MSG_HELP_REJUDGE="To review a specified subject, submission, or contest.";
 	$MSG_HELP_ADD_PRIVILEGE=" adds permissions to designated users, including administrators, subjects, players, organizers, participants, code viewer, manual judge questions, remote questions and other permissions. ";
+	$MSG_HELP_ADD_CONTEST_USER="Add User to private contest.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="Add Problem Solution View for User.";
 	$MSG_HELP_PRIVILEGE_LIST= "looks at the existing list of special permissions and deletes them. ";
 	$MSG_HELP_GIVESOURCE=" transfers the label of the import system to the designated account number, which is used to assist the person who has not passed the training after the training. ";
 	$MSG_HELP_EXPORT_PROBLEM= "export the problems of the system in the form of fps.xml file. ";

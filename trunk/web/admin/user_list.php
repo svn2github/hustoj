@@ -63,18 +63,18 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
     <tr>
       <td>ID</td>
       <td>NICK</td>
-      <td>P/W</td>
       <td>SCHOOL</td>
       <td>LOGIN</td> 
       <td>SIGN UP</td> 
       <td>USE</td>
-    </tr>
+      <td>P/W</td>
+      <td>PRIVILEGE</td>
+      </tr>
     <?php
     foreach($result as $row){
       echo "<tr>";
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
         echo "<td>".$row['nick']."</td>";
-        echo "<td><a href=changepass.php?uid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">"."RESET"."</a></td>";
         echo "<td>".$row['school']."</td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";
@@ -84,6 +84,8 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       else {
         echo "<td>".($row['defunct']=="N"?"<span>Available</span>":"<span>Locked</span>")."</td>";        
       }
+        echo "<td><a href=changepass.php?uid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">"."Reset"."</a></td>";
+        echo "<td><a href=privilege_add.php?uid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">"."Add"."</a></td>";
       echo "</tr>";
     } ?>
   </table>

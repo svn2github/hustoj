@@ -53,6 +53,7 @@ else
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.0:php7.2:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart
@@ -64,8 +65,8 @@ sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
-/etc/init.d/php7.0-fpm restart
-service php7.0-fpm restart
+/etc/init.d/php7.2-fpm restart
+service php7.2-fpm restart
 
 cd src/core
 chmod +x ./make.sh
@@ -90,7 +91,7 @@ update-rc.d hustoj defaults
 systemctl enable hustoj
 systemctl enable nginx
 systemctl enable mysql
-systemctl enable php7.3-fpm
+systemctl enable php7.2-fpm
 systemctl enable judged
 
 cls

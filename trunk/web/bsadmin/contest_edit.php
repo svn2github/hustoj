@@ -76,7 +76,6 @@ if(isset($_POST['startdate'])){
   $private = $_POST['private'];
   $password = $_POST['password'];
   $description = $_POST['description'];
-  $ctype = $_POST['ctype'];
  
   if(get_magic_quotes_gpc()){
     $title = stripslashes($title);
@@ -103,9 +102,9 @@ if(isset($_POST['startdate'])){
   $description = str_replace(",", "&#44;", $description);
 
 
-  $sql = "UPDATE `contest` SET `title`=?,`description`=?,`start_time`=?,`end_time`=?,`private`=?,`langmask`=?,`password`=?,`type`=? WHERE `contest_id`=?";
+  $sql = "UPDATE `contest` SET `title`=?,`description`=?,`start_time`=?,`end_time`=?,`private`=?,`langmask`=?,`password`=? WHERE `contest_id`=?";
   //echo $sql;
-  pdo_query($sql,$title,$description,$starttime,$endtime,$private,$langmask,$password,$ctype,$cid);
+  pdo_query($sql,$title,$description,$starttime,$endtime,$private,$langmask,$password,$cid);
 
   $sql = "DELETE FROM `contest_problem` WHERE `contest_id`=?";
   pdo_query($sql,$cid);
@@ -162,7 +161,6 @@ if(isset($_POST['startdate'])){
   $password = $row['password'];
   $langmask = $row['langmask'];
   $description = $row['description'];
-  $ctype = $row['type'];
   $title = htmlentities($row['title'],ENT_QUOTES,"UTF-8");
 
   $plist = "";
@@ -199,10 +197,6 @@ if(isset($_POST['startdate'])){
       <input class="form-control" style="display:inline;width:auto" type=date name='enddate' value='<?php echo substr($endtime,0,10)?>' size=4 >
       <input class="form-control" style="display:inline;width:auto" type=text name=ehour size=2 value='<?php echo substr($endtime,11,2)?>'>时
       <input class="form-control" style="display:inline;width:auto" type=text name=eminute value='<?php echo substr($endtime,14,2)?>' size=2 >分
-      </p>
-      <p>
-          赛制：<input type=radio name="ctype" value='0' <?php if ($ctype==0) echo 'checked';?>>ACM
-          <input type=radio name="ctype" value='1' <?php if ($ctype!=0) echo 'checked';?>>OI
       </p><p>
       题目编号(用','隔开)
       <input class=form-control type=text style="width:100%" name=cproblem value='<?php echo $plist?>'>

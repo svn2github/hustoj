@@ -1,7 +1,7 @@
 <?php
 	//oj-header.php
 	$MSG_FAQ="자주묻는질문";
-  $MSG_BBS="묻고답하기";
+	$MSG_BBS="묻고답하기";
 	$MSG_HOME="처음화면";
 	$MSG_PROBLEMS="문제";
 	$MSG_STATUS="채점기록";
@@ -88,6 +88,18 @@
 	$MSG_TITLE="제목";
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT="제출";
+
+	//submit.php
+	$MSG_VCODE_WRONG="확인코드가 다릅니다.";
+	$MSG_LINK_ERROR="링크가 없습니다. 문제를 찾을 수 없습니다.";
+	$MSG_PROBLEM_RESERVED="문제가 비활성화되어 있습니다.";
+	$MSG_NOT_IN_CONTEST="제출할 수 없습니다. 대회에 참여할 수 없거나, 대회가 종료되었습니다!!";
+	$MSG_NOT_INVITED="대회에 참여할 수 없습니다.";
+	$MSG_NO_PROBLEM="해당 문제가 없습니다.";
+	$MSG_NO_PLS="허용된 프로그래밍 언어가 아닙니다!";
+	$MSG_TOO_SHORT="코드가 너무 짧습니다!";
+	$MSG_TOO_LONG="코드가 너무 깁니다!";
+	$MSG_BREAK_TIME="1초 이내에 다시 제출 할 수 없습니다.....";
 
 	//ranklist.php
 	$MSG_Number="순위";
@@ -237,8 +249,8 @@
 
 	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
 	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
-  $MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
+	$MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
 
-  $MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
-  $MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";
+	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
+	$MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";
 ?>

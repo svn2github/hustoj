@@ -89,6 +89,18 @@
 	$MSG_SOURCE="ที่มา";
 	$MSG_SUBMIT="ส่ง";
 	
+	//submit.php
+	$MSG_VCODE_WRONG="Verification Code Wrong!";
+	$MSG_LINK_ERROR="Where do find this link? No such problem.";
+	$MSG_PROBLEM_RESERVED="Problem disabled.";
+	$MSG_NOT_IN_CONTEST="You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+	$MSG_NOT_INVITED="You are not invited!";
+	$MSG_NO_PROBLEM="No Such Problem!";
+	$MSG_NO_PLS="Using unknown programing language!";
+	$MSG_TOO_SHORT="Code too short!";
+	$MSG_TOO_LONG="Code too long!";
+	$MSG_BREAK_TIME="You should not submit more than twice in 1 seconds.....";
+
 	//ranklist.php
 	$MSG_Number="ลำดับที่";
 	$MSG_NICK="ชื่อ";

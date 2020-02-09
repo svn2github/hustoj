@@ -89,6 +89,18 @@
 	$MSG_SOURCE="来源/分类";
 	$MSG_SUBMIT="提交";
 	
+	//submit.php
+	$MSG_VCODE_WRONG="验证码错误！";
+	$MSG_LINK_ERROR="在哪里可以找到此链接？ 没有这个问题。";
+	$MSG_PROBLEM_RESERVED="问题已禁用。";
+	$MSG_NOT_IN_CONTEST="您不能立即提交，因为您没有被比赛邀请或比赛没有进行！";
+	$MSG_NOT_INVITED="您不被邀请！";
+	$MSG_NO_PROBLEM="没有这样的问题！";
+	$MSG_NO_PLS="使用未知的编程语言！";
+	$MSG_TOO_SHORT="代码太短！";
+	$MSG_TOO_LONG="代码太长！";
+	$MSG_BREAK_TIME="您不应在一秒钟内提交超过两次的申请.....";
+
 	//ranklist.php
 	$MSG_Number="名次";
 	$MSG_NICK="昵称";

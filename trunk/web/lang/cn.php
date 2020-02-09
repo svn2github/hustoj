@@ -154,6 +154,7 @@
 	$MSG_UPDATE_DATABASE="更新数据库";
 	$MSG_ONLINE="在线";
 	$MSG_SET_LOGIN_IP="指定登录IP";
+	$MSG_PRIVILEGE_TYPE="权限 类型";
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
@@ -226,6 +227,8 @@
   $MSG_HELP_SETPASSWORD="重设指定用户的密码，对于管理员帐号需要先降级为普通用户才能修改。";
   $MSG_HELP_REJUDGE="重判指定的题目、提交或比赛。";
   $MSG_HELP_ADD_PRIVILEGE="给指定用户增加权限，包括管理员、题目添加者、比赛组织者、比赛参加者、代码查看者、手动判题、远程判题、打印员、气球发放员等权限。";
+	$MSG_HELP_ADD_CONTEST_USER="给用户添加单个比赛权限。";
+	$MSG_HELP_ADD_SOLUTION_VIEW="给用户添加单个题目的答案查看权限。";
   $MSG_HELP_PRIVILEGE_LIST="查看已有的特殊权限列表、进行删除操作。";
   $MSG_HELP_GIVESOURCE="将导入系统的标程赠与指定帐号，用于训练后辅助未通过的人学习参考。";
   $MSG_HELP_EXPORT_PROBLEM="将系统中的题目以fps.xml文件的形式导出。";

@@ -154,6 +154,7 @@
 	$MSG_UPDATE_DATABASE="DB UPDATE";
 	$MSG_ONLINE="Online";
 	$MSG_SET_LOGIN_IP="로그인IP 변경 기록";
+	$MSG_PRIVILEGE_TYPE="권한 종류";
 
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
@@ -225,8 +226,10 @@
 	$MSG_HELP_SETMESSAGE="메시지설정";
 	$MSG_HELP_SETPASSWORD="사용자 비밀번호 변경. 관리자권한 필요";
 	$MSG_HELP_REJUDGE="문제별/채점번호별/대회별 재채점";
-	$MSG_HELP_ADD_PRIVILEGE="사용자별 권한설정 및 변경";
-	$MSG_HELP_PRIVILEGE_LIST="사용자별 권한설정 및 삭제";
+	$MSG_HELP_ADD_PRIVILEGE="사용자에게 특별한 권한을 추가합니다.";
+	$MSG_HELP_ADD_CONTEST_USER="대회에 참가할 수 있는 참가 권한을 추가합니다.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="특정 문제의 소스코드를 볼 수 있는 코드 보기 권한을 추가합니다.";
+	$MSG_HELP_PRIVILEGE_LIST="사용자별 권한 확인 및 삭제";
 	$MSG_HELP_GIVESOURCE="특정 사용자 채점코드 밀어주기. 부진학생 도움용";
 	$MSG_HELP_EXPORT_PROBLEM="fps.xml 파일로 문제 다운로드";
 	$MSG_HELP_IMPORT_PROBLEM="fps.xml 파일로 문제 업로드";

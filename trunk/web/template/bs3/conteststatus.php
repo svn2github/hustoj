@@ -25,7 +25,127 @@
   <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
   <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <br><br>
+
+  <?php
+  if (isset($_GET['cid'])) {
+    $cid = intval($_GET['cid']);
+    $view_cid = $cid;
+    //print $cid;
+
+    //check contest valid
+    $sql = "SELECT * FROM `contest` WHERE `contest_id`=?";
+    $result = pdo_query($sql,$cid);
+
+    $rows_cnt = count($result);
+    $contest_ok = true;
+    $password = "";
+
+    if (isset($_POST['password']))
+      $password = $_POST['password'];
+
+    if (get_magic_quotes_gpc()) {
+      $password = stripslashes($password);
+    }
+
+    if ($rows_cnt==0) {
+      $view_title = "比赛已经关闭!";
+    }
+    else{
+      $row = $result[0];
+      $view_private = $row['private'];
+
+      if ($password!="" && $password==$row['password'])
+        $_SESSION[$OJ_NAME.'_'.'c'.$cid] = true;
+
+      if ($row['private'] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid]))
+        $contest_ok = false;
+
+      if($row['defunct']=='Y')
+        $contest_ok = false;
+
+      if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+        $contest_ok = true;
+
+      $now = time();
+      $start_time = strtotime($row['start_time']);
+      $end_time = strtotime($row['end_time']);
+      $view_description = $row['description'];
+      $view_title = $row['title'];
+      $view_start_time = $row['start_time'];
+      $view_end_time = $row['end_time'];
+    }
+  }
+  ?>
+
+  <?php if (isset($_GET['cid'])) {?>
+      <center>
+      <div>
+        <h3><?php echo $MSG_CONTEST_ID?> : <?php echo $view_cid?> - <?php echo $view_title ?></h3>
+        <p>
+          <?php echo $view_description?>
+        </p>
+        <br>
+        <?php echo $MSG_SERVER_TIME?> : <span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span>
+        <br>
+        
+        <?php if (isset($OJ_RANK_LOCK_PERCENT)&&$OJ_RANK_LOCK_PERCENT!=0) { ?>
+        Lock Board Time: <?php echo date("Y-m-d H:i:s", $view_lock_time) ?><br/>
+        <?php } ?>
+        
+        <?php if ($now>$end_time) {
+          echo "<span class=text-muted>$MSG_Ended</span>";
+        }
+        else if ($now<$start_time) {
+          echo "<span class=text-success>$MSG_Start&nbsp;</span>";
+          echo "<span class=text-success>$MSG_TotalTime</span>"." ".formatTimeLength($end_time-$start_time);
+        }
+        else {
+          echo "<span class=text-danger>$MSG_Running</span>&nbsp;";
+          echo "<span class=text-danger>$MSG_LeftTime</span>"." ".formatTimeLength($end_time-$now);
+        }
+        ?>
+
+        <br><br>
+
+        <?php echo $MSG_CONTEST_STATUS?> : 
+        
+        <?php
+        if ($now>$end_time)
+          echo "<span class=text-muted>".$MSG_End."</span>";
+        else if ($now<$start_time)
+          echo "<span class=text-success>".$MSG_Start."</span>";
+        else
+          echo "<span class=text-danger>".$MSG_Running."</span>";
+        ?>
+        &nbsp;&nbsp;
+
+        <?php echo $MSG_CONTEST_OPEN?> : 
+
+        <?php if ($view_private=='0')
+          echo "<span class=text-primary>".$MSG_Public."</span>";
+        else
+          echo "<span class=text-danger>".$MSG_Private."</span>";
+        ?>
+
+        <br>
+
+        <?php echo $MSG_START_TIME?> : <?php echo $view_start_time?>
+        <br>
+        <?php echo $MSG_END_TIME?> : <?php echo $view_end_time?>
+        <br><br>
+
+        <div class="btn-group">
+          <a href="contest.php?cid=<?php echo $cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_PROBLEMS?></a>
+          <a href="status.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_MY_SUBMISSIONS?></a>
+          <a href="contestrank.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_STANDING?></a>
+          <a href="contestrank-oi.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo "OI".$MSG_STANDING?></a>
+          <a href="conteststatistics.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_STATISTICS?></a>
+        </div>
+      </div>
+      </center>
+  <?php }?>
+
+    <br>
     <div align=center class="input-append">
       <form id=simform class=form-inline action="status.php" method="get">
        <?php echo $MSG_PROBLEM_ID?>
@@ -124,33 +244,33 @@
       <table id=result-tab class="table table-striped content-box-header" align=center width=80%>
         <thead>
           <tr class='toprow'>
-            <th class="text-center">
+            <td class="text-center">
               <?php echo $MSG_RUNID?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_USER?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_PROBLEM_ID?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_RESULT?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_MEMORY?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_TIME?>
-            </th>
-            <th class="text-center"> 
+            </td>
+            <td class="text-center"> 
               <?php echo $MSG_LANG?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_CODE_LENGTH?>
-            </th>
-            <th class="text-center">
+            </td>
+            <td class="text-center">
               <?php echo $MSG_SUBMIT_TIME?>
-            </th>
+            </td>
             <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
               echo "<th class='text-center'>";
                 echo $MSG_JUDGER;
@@ -231,6 +351,32 @@
 </script>
 
 <script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js" ></script>
+
+<script>
+  var diff = new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
+  //alert(diff);
+  function clock() {
+    var x,h,m,s,n,xingqi,y,mon,d;
+    var x = new Date(new Date().getTime()+diff);
+    y = x.getYear()+1900;
+
+    if (y>3000)
+      y -= 1900;
+
+    mon = x.getMonth()+1;
+    d = x.getDate();
+    xingqi = x.getDay();
+    h = x.getHours();
+    m = x.getMinutes();
+    s = x.getSeconds();
+    n = y+"-"+(mon>=10?mon:"0"+mon)+"-"+(d>=10?d:"0"+d)+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
+
+    //alert(n);
+    document.getElementById('nowdate').innerHTML = n;
+    setTimeout("clock()",1000);
+  }
+  clock();
+</script>
 
 </body>
 

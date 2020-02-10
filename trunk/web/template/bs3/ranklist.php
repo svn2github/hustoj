@@ -55,12 +55,12 @@
       <table class="table table-striped content-box-header" align=center width=80%>
         <thead>
           <tr class='toprow'>
-            <td class='text-center'><b><?php echo $MSG_Number?></b></td>
-            <td class='text-center'><b><?php echo $MSG_USER?></b></td>
-            <td class='text-center'><b><?php echo $MSG_NICK?></b></td>
-            <td class='text-center'><b><?php echo $MSG_SOVLED?></b></td>
-            <td class='text-center'><b><?php echo $MSG_SUBMIT?></b></td>
-            <td class='text-center'><b><?php echo $MSG_RATIO?></b></td>
+            <td class='text-center'><?php echo $MSG_Number?></td>
+            <td class='text-center'><?php echo $MSG_USER?></td>
+            <td class='text-center'><?php echo $MSG_NICK?></td>
+            <td class='text-center'><?php echo $MSG_SOVLED?></td>
+            <td class='text-center'><?php echo $MSG_SUBMIT?></td>
+            <td class='text-center'><?php echo $MSG_RATIO?></td>
           </tr>
         </thead>
         <tbody>

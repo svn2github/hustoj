@@ -96,7 +96,15 @@ $sql=   "SELECT floor(UNIX_TIMESTAMP((in_date))/$res)*$res*1000 md,count(1) c FR
     }
  
   
+if(!isset($OJ_RANK_LOCK_PERCENT)) $OJ_RANK_LOCK_PERCENT=0;
+$lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
+//echo $lock.'-'.date("Y-m-d H:i:s",$lock);
+$view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
+$locked_msg = "";
+if (time() > $view_lock_time && time() < $end_time + $OJ_RANK_LOCK_DELAY) {
+    $locked_msg = "The board has been locked.";
+}
 
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/conteststatistics.php");

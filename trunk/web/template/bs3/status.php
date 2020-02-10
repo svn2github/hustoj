@@ -124,37 +124,37 @@
 			<table id=result-tab class="table table-striped content-box-header" align=center width=80%>
 				<thead>
 					<tr class='toprow'>
-						<th class="text-center">
+						<td class="text-center">
 							<?php echo $MSG_RUNID?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_USER?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_PROBLEM_ID?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_RESULT?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_MEMORY?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_TIME?>
-						</th>
-						<th class="text-center"> 
+						</td>
+						<td class="text-center"> 
 							<?php echo $MSG_LANG?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_CODE_LENGTH?>
-						</th>
-						<th class="text-center">
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_SUBMIT_TIME?>
-						</th>
+						</td>
 						<?php	if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
-							echo "<th class='text-center'>";
+							echo "<td class='text-center'>";
 								echo $MSG_JUDGER;
-							echo "</th>";
+							echo "</td>";
 						} ?>
 					</tr>
 				</thead>

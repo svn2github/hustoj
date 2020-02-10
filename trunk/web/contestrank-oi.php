@@ -124,8 +124,12 @@ $OJ_RANK_LOCK_PERCENT=1;
 $lock=$end_time-($end_time-$start_time)*$OJ_RANK_LOCK_PERCENT;
 
 //echo $lock.'-'.date("Y-m-d H:i:s",$lock);
+$view_lock_time = $start_time + ($end_time - $start_time) * (1 - $OJ_RANK_LOCK_PERCENT);
+$locked_msg = "";
+if (time() > $view_lock_time && time() < $end_time + $OJ_RANK_LOCK_DELAY) {
+    $locked_msg = "The board has been locked.";
+}
 
-//$result=pdo_query($sql);
 if($OJ_MEMCACHE){
 //        require("./include/memcache.php");
 		$sql="SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";

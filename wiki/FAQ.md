@@ -9,6 +9,19 @@ When people asked question, we put the answer here
 
 新版本
 ----
+
+如何启用查重机制？
+--
+修改/home/judge/etc/judge.conf，设置
+```
+OJ_SIM_ENABLE=1
+```
+修改/home/judge/src/web/include/db_info.inc.php，设置
+```
+$OJ_SIM=true;
+```
+* 抄袭只对不同账号间生效，自己抄袭自己不计。拥有Source_browser权限的账号可以看到具体数值和对比。
+
 不能访问github，国内网，如何通过gitee安装？
 --
 ```

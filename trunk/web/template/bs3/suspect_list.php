@@ -90,40 +90,69 @@
         <a href="suspect_list.php?cid=<?php echo $view_cid?>" class="btn btn-warning btn-sm"><?php echo $MSG_IP_VERIFICATION?></a>
       </div>
     </div>
+	  </center>
 
-    <table id='problemset' class='table table-striped'  width='90%'>
-      <thead>
-        <tr align=center class='toprow'>
-          <td></td>
-          <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" ><?php echo $MSG_PROBLEM_ID?></td>
-          <td><?php echo $MSG_TITLE?></td>
-          <td><?php echo $MSG_SOURCE?></td>
-          <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');"><?php echo $MSG_SOVLED?></td>
-          <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');"><?php echo $MSG_SUBMIT?></td>
-        </tr>
-      </thead>
-      <tbody align='center'>
-        <?php
-        $cnt=0;
-        foreach ($view_problemset as $row) {
-          if ($cnt)
-            echo "<tr class='oddrow'>";
-          else
-            echo "<tr class='evenrow'>";
-          
-          foreach ($row as $table_cell) {
-            echo "<td>";
-            echo "\t".$table_cell;
-            echo "</td>";
-          }
-          echo "</tr>";
-          $cnt=1-$cnt;
-        }
-        ?>
-      </tbody>
-    </table>
-    </center>
-  </div>
+	  <br>
+
+		<div>
+			<center>
+				<?php echo $MSG_CONTEST_SUSPECT1?>
+				<table width=90% border=1 style="text-align:center;">
+					<tr>
+						<td>IP Address</td>
+						<td>IP Address COUNT</td>
+						<td colspan=2>Used ID</td>
+					</tr>
+
+					<?php
+					foreach ($result1 as $row) {
+						echo "<tr>";
+							echo "<td>".$row['ip']."</td>";
+							echo "<td>".$row['c']."</td>";
+							echo "<td>".$row['user_id']."</td>";
+							echo "<td>";
+								echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
+								echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
+							echo "</td>";
+						echo "</tr>";
+					}
+					?>
+
+				</table>
+			</center>
+		</div>
+
+		<br><br>
+
+		<div>
+			<center>
+				<?php echo $MSG_CONTEST_SUSPECT2?>
+				<table width=90% border=1 style="text-align:center;">
+					<tr>
+						<td colspan=2>USER ID</td>
+						<td>Used IP Address</td>
+						<td>IP Address Count</td>
+					</tr>
+
+					<?php
+					foreach ($result2 as $row) {
+						echo "<tr>";
+							echo "<td>".$row['user_id']."</td>";
+							echo "<td>";
+								echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
+								echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
+							echo "</td>";
+							echo "<td>".$row['ip'];
+							echo "<td>".$row['c'];
+							echo "</tr>";
+					}
+					?>
+				</table>
+			</center>
+		</div>
+
+	</div>
+
 </div>
 
 <!-- /container -->
@@ -162,3 +191,4 @@
 
 </body>
 </html>
+

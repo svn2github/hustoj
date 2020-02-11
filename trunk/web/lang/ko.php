@@ -173,6 +173,9 @@
 	$MSG_CONTEST_OPEN="대회 구분";
 	$MSG_CONTEST_CREATOR="등록자";
 	$MSG_CONTEST_PENALTY="누적시간";
+	$MSG_IP_VERIFICATION="IP검증";
+	$MSG_CONTEST_SUSPECT1="여러 개의 ID가 사용된 IP 주소. 대회 중에 같은 컴퓨터에서 다른 ID로 접근하면 기록됩니다.";
+	$MSG_CONTEST_SUSPECT2="여러 개의 IP 주소에서 접속된 ID. 대회 중에 다른 컴퓨터로 바꾸면 기록됩니다.";
 
 	$MSG_SECONDS="초";
 	$MSG_MINUTES="분";
@@ -252,6 +255,7 @@
 
 	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
 	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
+
 	$MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
 
 	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";

@@ -103,20 +103,22 @@
 				<table width=90% border=1 style="text-align:center;">
 					<tr>
 						<td>IP address</td>
+            <td colspan=2>Used ID</td>
+            <td>Time</td>
 						<td>IP address count</td>
-						<td colspan=2>Used ID</td>
 					</tr>
 
 					<?php
 					foreach ($result1 as $row) {
 						echo "<tr>";
 							echo "<td>".$row['ip']."</td>";
-							echo "<td>".$row['c']."</td>";
-							echo "<td>".$row['user_id']."</td>";
-							echo "<td>";
-								echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
-								echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
-							echo "</td>";
+              echo "<td>".$row['user_id']."</td>";
+              echo "<td>";
+                echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
+                echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
+              echo "</td>";
+              echo "<td>".$row['in_date'];
+              echo "<td>".$row['c']."</td>";
 						echo "</tr>";
 					}
 					?>
@@ -133,7 +135,8 @@
 				<table width=90% border=1 style="text-align:center;">
 					<tr>
 						<td colspan=2>User ID</td>
-						<td>Used IP address</td>
+            <td>Used IP address</td>
+            <td>Time</td>
 						<td>IP address count</td>
 					</tr>
 
@@ -145,7 +148,8 @@
 								echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
 								echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
 							echo "</td>";
-							echo "<td>".$row['ip'];
+              echo "<td>".$row['ip'];
+							echo "<td>".$row['time'];
 							echo "<td>".$row['c'];
 							echo "</tr>";
 					}

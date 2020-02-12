@@ -184,13 +184,13 @@ if (isset($_GET['cid'])) {
 if (isset($_GET['cid'])) {
 	$contest_id = intval($_GET['cid']);
 
-	$sql = "select * from (select count(distinct user_id) c,ip from solution where contest_id=? group by ip) suspect inner join (select distinct ip,user_id from solution where contest_id=? ) u on suspect.ip=u.ip and suspect.c>1 order by c desc, u.ip, user_id";
+	$sql = "select * from (select count(distinct user_id) c,ip from solution where contest_id=? group by ip) suspect inner join (select distinct ip, user_id, in_date from solution where contest_id=? ) u on suspect.ip=u.ip and suspect.c>1 order by c desc, u.ip, in_date, user_id";
 
 	$result1 = pdo_query($sql,$contest_id,$contest_id);
 
 	$start = pdo_query("select start_time from contest where contest_id=?",$contest_id)[0][0];
 	$end = pdo_query("select end_time from contest where contest_id=?",$contest_id)[0][0];
-	$sql = "select * from (select count(distinct ip) c,user_id from loginlog where time>=? and time<=? group by user_id) suspect inner join (select distinct user_id from solution where contest_id=? ) u on suspect.user_id=u.user_id and suspect.c>1 inner join (select distinct ip,user_id from loginlog where time>=? and time<=? ) ips on ips.user_id=u.user_id order by c desc, u.user_id, ip";
+	$sql = "select * from (select count(distinct ip) c,user_id from loginlog where time>=? and time<=? group by user_id) suspect inner join (select distinct user_id from solution where contest_id=? ) u on suspect.user_id=u.user_id and suspect.c>1 inner join (select distinct ip, user_id, time from loginlog where time>=? and time<=? ) ips on ips.user_id=u.user_id order by c desc, u.user_id, ips.time, ip";
 
 	$result2 = pdo_query($sql,$start,$end,$contest_id,$start,$end);
 }

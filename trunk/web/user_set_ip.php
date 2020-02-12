@@ -14,7 +14,7 @@ require_once("./include/const.inc.php");
 require_once('./include/setlang.php');
 
 if (isset($OJ_LANG)) {
-  require_once("./lang/$OJ_LANG.php");
+	require_once("./lang/$OJ_LANG.php");
 }
 
 function formatTimeLength($length) {
@@ -180,24 +180,25 @@ if (isset($_GET['cid'])) {
 	}
 }
 
-//require_once("./include/set_get_key.php");
-if (isset($_GET['cid'])) {
-	$contest_id = intval($_GET['cid']);
+$result2="";
+if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) && isset($_POST['do'])) {
 
-	$sql = "select * from (select count(distinct user_id) c,ip from solution where contest_id=? group by ip) suspect inner join (select distinct ip, user_id, in_date from solution where contest_id=? ) u on suspect.ip=u.ip and suspect.c>1 order by c desc, u.ip, in_date, user_id";
+	$user_id = $_POST['user_id'];
+  $ip = $_POST['ip'];
 
-	$result1 = pdo_query($sql,$contest_id,$contest_id);
+  if(get_magic_quotes_gpc()){
+		$user_id = stripslashes($user_id);
+		$ip = stripslashes($ip);
+	}
 
-	$start = pdo_query("select start_time from contest where contest_id=?",$contest_id)[0][0];
-	$end = pdo_query("select end_time from contest where contest_id=?",$contest_id)[0][0];
-	$sql = "select * from (select count(distinct ip) c,user_id from loginlog where time>=? and time<=? group by user_id) suspect inner join (select distinct user_id from solution where contest_id=? ) u on suspect.user_id=u.user_id and suspect.c>1 inner join (select distinct ip, user_id, time from loginlog where time>=? and time<=? ) ips on ips.user_id=u.user_id order by c desc, u.user_id, ips.time, ip";
-
-	$result2 = pdo_query($sql,$start,$end,$contest_id,$start,$end);
+	$sql = "insert into loginlog (user_id,password,ip,time) value(?,?,?,now())";
+	$result = pdo_query($sql,$user_id,"set ip by ".$_SESSION[$OJ_NAME."_user_id"],$ip);
+	$result2 = "changed";
 }
 
 /////////////////////////Template
 if (isset($_GET['cid']))
-  require("template/".$OJ_TEMPLATE."/suspect_list.php");
+  require("template/".$OJ_TEMPLATE."/user_set_ip.php");
 
 /////////////////////////Common foot
 if (file_exists('./include/cache_end.php') )

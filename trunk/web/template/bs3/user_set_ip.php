@@ -23,6 +23,7 @@
 <body>
 <div class="container">
   <?php include("template/$OJ_TEMPLATE/nav.php");?>
+
   <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
     <center>
@@ -97,73 +98,51 @@
 
 	  <br>
 
-		<div>
-			<center>
-				<?php echo $MSG_CONTEST_SUSPECT1?>
-				<table width=90% border=1 style="text-align:center;">
-					<tr>
-						<td>IP address</td>
-            <td colspan=2>Used ID</td>
-            <td>Time</td>
-						<td>IP address count</td>
-					</tr>
+	  <?php
+	  if ($result2=="changed")
+	  	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Login IP Changed to ".$ip."</h4></center>";
+	  else
+	  	echo "<center><h4 class='text-danger'>Login IP Change</h4></center>";
+	 	?>
 
-					<?php
-					foreach ($result1 as $row) {
-						echo "<tr>";
-							echo "<td>".$row['ip']."</td>";
-              echo "<td>".$row['user_id']."</td>";
-              echo "<td>";
-                echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
-                echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
-              echo "</td>";
-              echo "<td>".$row['in_date'];
-              echo "<td>".$row['c']."</td>";
-						echo "</tr>";
-					}
-					?>
+	  <center>
+		<form action=user_set_ip.php?cid=<?php echo $view_cid?> method=post class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+				<?php if(isset($_GET['uid'])) { ?>
+				<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+		  	<?php } else if(isset($_POST['user_id'])) { ?>
+				<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+				<?php } else { ?>
+				<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+				<?php } ?>
+			</div>
 
-				</table>
-			</center>
-		</div>
+			<div class="form-group">
+				<label class="col-sm-offset-2 col-sm-3 control-label"><?php echo "New IP"?></label>
+				<?php if(isset($_POST['ip'])) { ?>
+				<div class="col-sm-3"><input name="ip" class="form-control" value="<?php echo $_POST['ip']?>" type="text"  autocomplete="off" required ></div>
+				<?php } else { ?>
+				<div class="col-sm-3"><input name="ip" class="form-control" placeholder="<?php echo "?.?.?.?*"?>" type="text"  autocomplete="off" required ></div>
+				<?php } ?>
+			</div>
 
-		<br><br>
-
-		<div>
-			<center>
-				<?php echo $MSG_CONTEST_SUSPECT2?>
-				<table width=90% border=1 style="text-align:center;">
-					<tr>
-						<td colspan=2>User ID</td>
-            <td>Used IP address</td>
-            <td>Time</td>
-						<td>IP address count</td>
-					</tr>
-
-					<?php
-					foreach ($result2 as $row) {
-						echo "<tr>";
-							echo "<td>".$row['user_id']."</td>";
-							echo "<td>";
-								echo "<a href='../userinfo.php?user=".$row['user_id']."'><sub>".$MSG_USERINFO."</sub></a> <sub>/</sub> ";
-								echo "<a href='../status.php?cid=$contest_id&user_id=".$row['user_id']."'><sub>".$MSG_CONTEST." ".$MSG_SUBMIT."</sub></a>";
-							echo "</td>";
-              echo "<td>".$row['ip'];
-							echo "<td>".$row['time'];
-							echo "<td>".$row['c'];
-							echo "</tr>";
-					}
-					?>
-				</table>
-			</center>
-		</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-2">
+					<button name="do" type="hidden" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE; ?></button>
+				</div>
+				<div class="col-sm-2">
+					<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+				</div>
+			</div>
+		</form>
+		</center>
 
 	</div>
-
 </div>
 
 <!-- /container -->
-<!-- Bootstrap core JavaScript
+<!-- Bootstrap core JavaScrip
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include("template/$OJ_TEMPLATE/js.php");?>      

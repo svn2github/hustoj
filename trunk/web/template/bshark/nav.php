@@ -12,8 +12,12 @@ $cur_path = "template/$OJ_TEMPLATE/";
 <a class="nav-link" href="/"><b><?php echo $OJ_NAME;?></b></a>
 </li>
 <li class="nav-item">
-<a class="nav-link<?php if ($url=='') echo ' active';?>" href="/"><?php echo $MSG_HOME?></a>
+<a class="nav-link<?php if ($url=='') echo ' active';?>" href="./"><?php echo $MSG_HOME?></a>
 <span class="line <?php if ($url=='') echo ' active';?>"></span>
+</li>
+<li class="nav-item">
+<a class="nav-link<?php if ($url=='faqs.php') echo ' active';?>" href="./faqs.php"><?php echo $MSG_FAQ?></a>
+<span class="line <?php if ($url=='faqs.php') echo ' active';?>"></span>
 </li>
 <li class="nav-item">
 <a class="nav-link<?php if ($url=='problemset.php') echo ' active';?>" href="./problemset.php"><?php echo $MSG_PROBLEMS?></a>

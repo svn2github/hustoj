@@ -32,8 +32,8 @@ if (isset($OJ_LANG)) {
 			<?php echo $MSG_CONTEST_SUSPECT1?>
 			<table width=90% border=1 style="text-align:center;">
 				<tr>
-					<td>IP Address</td>
-					<td>IP Address COUNT</td>
+					<td>IP address</td>
+					<td>IP address count</td>
 					<td colspan=2>Used ID</td>
 				</tr>
 
@@ -69,9 +69,9 @@ if (isset($OJ_LANG)) {
 			<?php echo $MSG_CONTEST_SUSPECT2?>
 			<table width=90% border=1 style="text-align:center;">
 				<tr>
-					<td colspan=2>USER ID</td>
-					<td>Used IP Address</td>
-					<td>IP Address Count</td>
+					<td colspan=2>User ID</td>
+					<td>Used IP address</td>
+					<td>IP address count</td>
 				</tr>
 
 				<?php

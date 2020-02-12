@@ -127,10 +127,7 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     </div>
         </div>
                 <br><div class="card"><div class="card-body">
-    <h4>友情链接</h4>
-    <ul>
-        
-    </ul>
+            <h4>公众号</h4><img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge
     </div>
         </div>
         </div>

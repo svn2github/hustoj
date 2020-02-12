@@ -1,4 +1,6 @@
 <footer align=center>
-            <p>CopyRight &copy; <?php echo date('Y');?>  <?php echo $OJ_NAME;?><br>
-            Powered by <a href="https://github.com/zhblue/hustoj">Hustoj</a>. THEME by <a href="https://github.com/yemaster">yemaster</a>.</p>
+            <p>GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> <?php echo date('Y');?><br>
+            THEME bshark by <a href="https://github.com/yemaster">yemaster</a>.
+            
+            </p>
 </footer>

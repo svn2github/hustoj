@@ -80,7 +80,9 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
 <canvas id="myChart"></canvas></div></div>
 </div></div><br><div class="card"><div class="card-body">
     <h4>关于<?php echo $OJ_NAME;?></h4>
-    <p>This ACM/ICPC OnlineJudge is a GPL product from hustoj<br>hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。<br>本OJ基于Hustoj，采用BShark主题，BShark主题由<a href="http://masteroj.hustoj.com/userinfo.php?user=yemaster">yemaster</a>开发</p>
+    <p>This ACM/ICPC OnlineJudge is a GPL product from hustoj<br>hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。<br>本OJ基于Hustoj，采用BShark主题，BShark主题由<a href="http://github.com/yemaster">yemaster</a>开发<br>
+    <a href="https://github.com/zhblue/hustoj">请到GitHub来给我们加star!</a>
+    </p>
     </div></div>
     </div>
     

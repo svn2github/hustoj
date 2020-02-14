@@ -118,31 +118,41 @@ include_once("kindeditor.php");
 
                         </div>
                     </div><!-- /# row -->
-					<div class="row">
 						<div class="col-lg-4">
                             <div class="card alert">
                                 <div class="card-header">
-                                    <h4>计划列表</h4>
+                                    <h4>DEMOS</h4>
                                     <div class="card-header-right-icon">
                                         <ul>
                                             <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li> 
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-										<div class="tdl-content">
-											<ul>
-												<li><label><input type="checkbox" checked><i></i><span>完成前端</span><a href='#' class="ti-close"></a></label></li>
-												<li><label><input type="checkbox"><i></i><span>完成后端</span><a href='#' class="ti-close"></a></label></li>
-												<li><label><input type="checkbox"><i></i><span>优化体验</span><a href='#' class="ti-close"></a></label></li>
-											</ul>
+                                <div class="recent-meaasge">
+									<div class="media">
+										<div class="media-body">
+											<h5 class="media-heading"><a href="http://154.8.211.48/">Hustoj兼容版</a></h5>
+											<div class="meaasge-date"></div>
+											<p>包含普通Hustoj的所有内容，配bshark主题和bsadmin后台</p>
 										</div>
-										<input type="text" class="tdl-new form-control" placeholder="输入新计划然后按回车">
 									</div>
-                                </div>
-                            </div>
-                        </div><!-- /# column -->
+									<div class="media">
+										<div class="media-body">
+											<h5 class="media-heading"><a href="https://masteroj.hustoj.com">Pro版本</a></h5>
+											<div class="meaasge-date"></div>
+											<p>包含更多丰富内容</p>
+										</div>
+									</div>
+									<div class="media no-border">
+										<div class="media-body">
+											<h5 class="media-heading"><a href="https://www.masteroj.cn">Super版本</a></h5>
+											<div class="meaasge-date"></div>
+											<p>服务器经费不足关站</p>
+										</div>
+									</div>
+								</div>
+							</div><!-- /# card -->
+						</div><!-- /# column -->
 						<div class="col-lg-4">
                             <div class="card alert">
                                 <div class="card-header">
@@ -203,10 +213,10 @@ include_once("kindeditor.php");
                                             <div class="timeline-badge primary"><i class="fa fa-smile-o"></i></div>
                                             <div class="timeline-panel">
                                                 <div class="timeline-heading">
-                                                    <h5 class="timeline-title">OJ诞生</h5>
+                                                    <h5 class="timeline-title">BShark主题诞生</h5>
                                                 </div>
                                                 <div class="timeline-body">
-                                                    <p>2019年2月13日</p>
+                                                    <p>2019年8月1日</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -215,10 +225,10 @@ include_once("kindeditor.php");
                                             <div class="timeline-badge warning"><i class="fa fa-user-o"></i></div>
                                             <div class="timeline-panel">
                                                 <div class="timeline-heading">
-                                                    <h5 class="timeline-title">用户人数达到180</h5>
+                                                    <h5 class="timeline-title">BSadmin诞生</h5>
                                                 </div>
                                                 <div class="timeline-body">
-                                                    <p>2019年7月23日</p>
+                                                    <p>2019年10月23日</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -227,10 +237,10 @@ include_once("kindeditor.php");
                                             <div class="timeline-badge success"><i class="fa fa-check-circle-o"></i></div>
                                             <div class="timeline-panel">
                                                 <div class="timeline-heading">
-                                                    <h5 class="timeline-title">采用自主的Bshark主题</h5>
+                                                    <h5 class="timeline-title">BShark系列开源</h5>
                                                 </div>
                                                 <div class="timeline-body">
-                                                    <p>2019年8月1日</p>
+                                                    <p>2020年2月10日</p>
                                                 </div>
                                             </div>
                                         </li>

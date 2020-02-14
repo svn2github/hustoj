@@ -113,16 +113,16 @@ var tac = 0;
         tac = 0;
 });
     if (tac == 1) {
-        navbar.style.backgroundColor = 'rgba(255,255,255,1)';
-        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#000;}.nav_ul li .line{background:#ed5f82;}";
+        navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#fff";else echo "#444";?>';
+        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:<?php if ($THEME_MOD == "light") echo "#000";else echo "#fff";?>;}.nav_ul li .line{background:<?php if ($THEME_MOD == "light") echo "#ed5f82";else echo "#FFD700";?>;}";
     } else if (pps > 150) {
-        navbar.style.boxShadow = '0px 1px 2px rgba(0,0,0,0.2)';
-    navbar.style.backgroundColor = 'rgba(255,255,255,1)';
-        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#000;}.nav_ul li .line{background:#ed5f82;}";
+        navbar.style.boxShadow = '0px 1px 2px <?php if ($THEME_MOD == "light") echo "#00000020";else echo "#ffffff20";?>';
+    navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#fff";else echo "#444";?>';
+        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:<?php if ($THEME_MOD == "light") echo "#000";else echo "#fff";?>;}.nav_ul li .line{background:<?php if ($THEME_MOD == "light") echo "#ed5f82";else echo "#FFD700";?>;}";
     logolink.style.width = '98px';
     } else {
-        navbar.style.boxShadow = '0 0 0 0 rgba(0,0,0,0.5)';
-    navbar.style.backgroundColor = 'rgba(255,255,255,0)';
+        navbar.style.boxShadow = '0 0 0 0 <?php if ($THEME_MOD == "light") echo "#00000050";else echo "#ffffff50";?>';
+    navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#00000000";else echo "#ffffff00";?>';
         document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#fff;}.nav_ul li .line{background:#9ae3f3;}";
     logolink.style.width = '0px';
 }

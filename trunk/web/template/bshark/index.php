@@ -35,6 +35,14 @@ for ($csadff = 1; $csadff <= 7; ++$csadff) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><?php echo $MSG_HOME;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
+        <style>
+            .faqs-card {
+                border-radius: 20px;
+                border: 1px solid #00000020;
+                padding: 20px;
+                margin-bottom: 10px;
+            }
+        </style>
     </head>
     
     <body>
@@ -46,7 +54,9 @@ for ($csadff = 1; $csadff <= 7; ++$csadff) {
                         <?php
 $sql = 'SELECT * FROM `news` WHERE `defunct`!=\'Y\' ORDER BY `importance`';
 $news = pdo_query($sql);
-?>                <h4><?php echo $MSG_NEWS;?></h4>
+?>                
+<h4><?php echo $MSG_NEWS;?></h4>
+<?php if ($THEME_NEWS_MOD == 'list') { ?>
 <table class="table table-hover">
     <thead>
       <tr>
@@ -63,6 +73,16 @@ $news = pdo_query($sql);
       ?>
     </tbody>
 </table>
+    <?php }  else if ($THEME_NEWS_MOD == 'show') {
+        foreach ($news as $view_news) {
+            ?>
+            <div class="faqs-card">
+<h4><?php echo $view_news['title'];?> <small><?php echo $view_news['user_id'];?> - <?php echo $view_news['time'];?></small></h4>
+<?php echo $view_news['content'];?>
+            </div>
+            <?php
+        }
+    } else echo "There is something wrong with your configuration file.Please open '/template/bshark/theme.conf.php' and fix it." ?>
                     </div>
                 </div><br>
                 <div class="card"><div class="card-body">

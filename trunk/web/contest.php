@@ -116,10 +116,10 @@ if (isset($_GET['cid'])) {
 		if ($row['private'] && !isset($_SESSION[$OJ_NAME.'_'.'c'.$cid]))
 			$contest_ok = false;
 
-		if($row['defunct']=='Y')
-			$contest_ok = false;
+//		if($row['defunct']=='Y')  //defunct problem not in contest/exam list
+//			$contest_ok = false;
 
-		if (isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+		if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))
 			$contest_ok = true;
 
 		$now = time();
@@ -191,12 +191,28 @@ if (isset($_GET['cid'])) {
 		else
 			$view_problemset[$cnt][0] = "";
 
-		$view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
+//		$view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
+		$view_problemset[$cnt][1] = "Problem &nbsp;".$PID[$cnt];
 
-		if($now < $end_time) //in contest time
+		if($now < $end_time) //during contest/exam time
 			$view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
-		else //over contest time
-			$view_problemset[$cnt][2] = "<a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a>";
+		else {               //over contest time
+			$pid = intval($row['problem_id']);
+
+			//check the problem will be use remained contest/exam
+			$sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
+				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+				)
+			)";
+
+			$result = pdo_query($sql, $pid);
+
+			if (intval($result) != 0)   //if the problem will be use remaind contes/exam
+				$view_problemset[$cnt][2] = "----"; //hide
+			else
+				$view_problemset[$cnt][2] = "<a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a>";
+		}
 		
 		$view_problemset[$cnt][3] = $row['source'];
 

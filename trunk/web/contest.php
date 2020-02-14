@@ -191,29 +191,32 @@ if (isset($_GET['cid'])) {
 		else
 			$view_problemset[$cnt][0] = "";
 
-//		$view_problemset[$cnt][1] = $row['problem_id']." Problem &nbsp;".$PID[$cnt];
-		$view_problemset[$cnt][1] = "Problem &nbsp;".$PID[$cnt];
 
-		if($now < $end_time) //during contest/exam time
-			$view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>";
+		if($now < $end_time) { //during contest/exam time
+			$view_problemset[$cnt][1] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$PID[$cnt]."</a>";
+			$view_problemset[$cnt][2] = $row['title'];
+		}
 		else {               //over contest time
-			$pid = intval($row['problem_id']);
-
 			//check the problem will be use remained contest/exam
+			$tpid = intval($row['problem_id']);
 			$sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
 					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
 				)
 			)";
 
-			$result = pdo_query($sql, $pid);
+			$tresult = pdo_query($sql, $tpid);
 
-			if (intval($result) != 0)   //if the problem will be use remaind contes/exam
-				$view_problemset[$cnt][2] = "----"; //hide
-			else
-				$view_problemset[$cnt][2] = "<a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a>";
+			if (intval($tresult) != 0) { //if the problem will be use remained contes/exam
+				$view_problemset[$cnt][1] = $PID[$cnt]; //hide
+				$view_problemset[$cnt][2] = '----';
+			}
+			else {
+				$view_problemset[$cnt][1] = "<a href='problem.php?id=".$row['problem_id']."'>".$PID[$cnt]."</a>";
+				$view_problemset[$cnt][2] = $row['title'];
+			}
 		}
-		
+
 		$view_problemset[$cnt][3] = $row['source'];
 
 		if (!$noip)

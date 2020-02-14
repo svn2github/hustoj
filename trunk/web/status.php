@@ -306,15 +306,40 @@ for ($i=0; $i<$rows_cnt; $i++) {
   }
 
   if ($row['contest_id']>0) {
-    $view_status[$i][2] = "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
-    if (isset($cid)) {
-      $view_status[$i][2] .= $PID[$row['num']];
+    if (time() < $end_time) {
+      $view_status[$i][2] = "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+      if (isset($cid)) {
+        $view_status[$i][2] .= $PID[$row['num']];
+      }
+      else {
+        $view_status[$i][2] .= $row['problem_id'];
+      }
+      $view_status[$i][2] .= "</div></a>";
     }
     else {
-      $view_status[$i][2] .= $row['problem_id'];
-    }
+      $view_status[$i][2] = "<div class=center>";
+      if (isset($cid)) {
 
-    $view_status[$i][2] .= "</div></a>";
+        //check the problem will be use remained contest/exam
+        $tpid = intval($row['problem_id']);
+        $sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
+          SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+            SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+          )
+        )";
+
+        $tresult = pdo_query($sql, $tpid);
+
+        if (intval($tresult) != 0)   //if the problem will be use remaind contes/exam
+          $view_status[$i][2] .= $PID[$row['num']]; //hide link
+        else
+          $view_status[$i][2] .= "<a href='problem.php?id=".$row['problem_id']."'>".$PID[$row['num']]."</a>";
+      }
+      else {
+        $view_status[$i][2] .= "<a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
+      }
+      $view_status[$i][2] .= "</div>";
+    }
   }
   else {
     $view_status[$i][2] = "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
@@ -413,11 +438,17 @@ for ($i=0; $i<$rows_cnt; $i++) {
       $view_status[$i][6] = $language_name[$row['language']];
     }
     else {
-      $view_status[$i][6] = "<a target=_self href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>";
+      if (time() < $end_time)
+        $view_status[$i][6] = "<a target=_self href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>";
+      else
+        $view_status[$i][6] = $language_name[$row['language']];
 
       if ($row["problem_id"]>0) {
         if ($row['contest_id']>0) {
-          $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
+          if (time() < $end_time)
+            $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
+          else
+            $view_status[$i][6] .= "";
         }
         else {
           $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?id=".$row['problem_id']."&sid=".$row['solution_id']."\">Edit</a>";

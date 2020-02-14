@@ -251,8 +251,30 @@
 							<td width=5%><?php echo $MSG_SOVLED?></td>
 							<td width=5%><?php echo $MSG_CONTEST_PENALTY?></td>
 							<?php
-							for ($i=0; $i<$pid_cnt; $i++)
-								echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></td>";
+							for ($i=0; $i<$pid_cnt; $i++) {
+						    if (time() < $end_time) {  //during contest/exam time
+									echo "<td><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></td>";
+								}
+								else {  //over contest/exam time
+
+								//check the problem will be use remained contest/exam
+								$sql = "SELECT `problem_id` FROM `contest_problem` WHERE (`contest_id`=? AND `num`=?)";
+								$tresult = pdo_query($sql, $cid, $i);
+
+				        $tpid = $tresult[0][0];
+				        $sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
+				          SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+				            SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+				          )
+				        )";
+				        $tresult = pdo_query($sql, $tpid);
+
+				        if (intval($tresult) != 0)   //if the problem will be use remained contes/exam */
+									echo "<td>$PID[$i]</td>";
+				        else
+				        	echo "<td><a href='problem.php?id=".$tpid."'>".$PID[$i]."</a></td>";
+								}
+							}
 							?>
 						</tr>
 					</thead>

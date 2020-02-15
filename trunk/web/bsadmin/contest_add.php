@@ -34,7 +34,7 @@ include_once("kindeditor.php");
                     <div class="col-lg-8 p-0">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>后台主页</h1>
+                                <h1><?php echo $MSG_ADMIN.$MSG_HOME;?></h1>
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -42,8 +42,8 @@ include_once("kindeditor.php");
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li>竞赛</li>
-                                    <li class="active">添加竞赛</li>
+                                    <li><?php echo $MSG_CONTEST;?></li>
+                                    <li class="active"><?php echo $MSG_ADD.$MSG_CONTEST;?></li>
                                 </ol>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ include_once("kindeditor.php");
 						<div class="col-lg-12">
 							<div class="card alert">
 								<div class="card-header">
-									<h4>添加竞赛</h4>
+									<h4><?php echo $MSG_ADD.$MSG_CONTEST;?></h4>
 									<div class="card-header-right-icon">
 										<ul>
 											<li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li> 
@@ -199,28 +199,26 @@ else{
 <form method=POST>
     <?php require_once("../include/set_post_key.php");?>
     <input type=hidden name='cid' value=<?php echo $cid?>>
-      <label>竞赛标题</label>
+      <label><?php echo $MSG_CONTEST.$MSG_TITLE;?></label>
       <input class="form-control" style="width:100%;" type=text name=title value="<?php echo $title?>">
-      <label>开始时间</label>
+      <label><?php echo $MSG_START_TIME;?></label>
       <p>
       <input class="form-control" style="display:inline;width:auto" type=date name='startdate' value='<?php echo date('Y').'-'. date('m').'-'.date('d')?>' size=4 >
       <input class="form-control" style="display:inline;width:auto" type=text name=shour size=2 value='<?php echo date('H')?>'>时
       <input class="form-control" style="display:inline;width:auto" type=text name=sminute value='00' size=2 >分
       </p><p>
-      <label>结束时间</label><br>
+      <label><?php echo $MSG_END_TIME;?></label><br>
       <input class="form-control" style="display:inline;width:auto" type=date name='enddate' value='<?php echo date('Y').'-'. date('m').'-'.date('d')?>' size=4 >
       <input class="form-control" style="display:inline;width:auto" type=text name=ehour size=2 value='<?php echo (date('H')+4)%24?>'>时
       <input class="form-control" style="display:inline;width:auto" type=text name=eminute value='00' size=2 >分
       </p>
       <p>
-          赛制：<!--<input type=radio name="ctype" value='0' checked>ACM
-          <input type=radio name="ctype" value='1'>OI--> 如果您数据库中有'type'这一字段，则可以开启
-      </p><p>
-      题目编号(用','隔开)
+      <?php echo $MSG_CONTEST."-".$MSG_PROBLEM_ID?>
+      <?php echo "( Add problemIDs with coma , )"?>
       <input class=form-control type=text style="width:100%" placeholder="例如:1000,1001,1002" name=cproblem value='<?php echo $plist?>'>
 
       </p><p>
-      竞赛介绍
+      <?php echo $MSG_CONTEST.$MSG_Description;?>
       <textarea class=kindeditor rows=13 name=description cols=80>
         <?php echo htmlentities($description,ENT_QUOTES,'UTF-8')?>
       </textarea>
@@ -230,7 +228,9 @@ else{
         <tr>
           <td rowspan=2>
             <p>
-              竞赛语言(按住ctrl多选)
+              <?php echo $MSG_CONTEST."-".$MSG_LANG?>
+              <?php echo "( Add PLs with Ctrl+click )"?><br>
+              <?php echo $MSG_PLS_ADD?>
               <select name="lang[]" class="form-control" multiple="multiple" style="height:220px">
               <?php
               $lang_count = count($language_ext);
@@ -249,12 +249,12 @@ else{
 
           <td height="10px">
             <p align=left>
-              竞赛公开度
+              <?php echo $MSG_CONTEST."-".$MSG_Public?>:
               <select class="form-control" name=private style="display:inline;width:150px;">
-                <option value=0 <?php echo $private=='0'?'selected=selected':''?>>公开</option>
-                <option value=1 <?php echo $private=='1'?'selected=selected':''?>>私有</option>
+                <option value=0 <?php echo $private=='0'?'selected=selected':''?>><?php echo $MSG_Public;?></option>
+                <option value=1 <?php echo $private=='1'?'selected=selected':''?>><?php echo $MSG_Private;?></option>
               </select>
-              竞赛密码
+              <?php echo $MSG_CONTEST."-".$MSG_PASSWORD?>:
               <input type=text class=form-control name=password style="display:inline;width:150px;" value='<?php echo htmlentities($password,ENT_QUOTES,'utf-8')?>'>
             </p>
           </td>
@@ -262,17 +262,17 @@ else{
         <tr>
           <td height="*">
             <p>
-              竞赛选手
-              <?php echo "( 使用换行符&#47;n添加私有竞赛中的参赛选手id )"?>
+              <?php echo $MSG_CONTEST."-".$MSG_USER?>
+              <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
               <br>
-              <textarea name="ulist" rows="10" class=form-control style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
+              <textarea name="ulist" rows="10" class=form-control style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*<?php echo $MSG_PRIVATE_USERS_ADD?><?php echo "\n"?>"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
             </p>
           </td>
         </tr>
       </table>
 
         <?php require_once("../include/set_post_key.php");?>
-        <input type=submit value=Submit name=submit class="btn btn-info"><input type=reset value=Reset name=reset class="btn btn-primary">
+        <input type=submit value=<?php echo $MSG_SUBMIT;?> name=submit class="btn btn-info"><input type=reset value=<?php echo $MSG_RESET;?> name=reset class="btn btn-primary">
     </p>
   </form>
   <?php } ?>

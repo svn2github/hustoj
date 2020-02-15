@@ -463,7 +463,9 @@ for ($i=0; $i<$rows_cnt; $i++) {
 
       if ($row["problem_id"]>0) {
         if ($row['contest_id']>0) {
-          if (time() < $end_time)
+         if (time() < $end_time
+		||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
+	 )
             $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
           else
             $view_status[$i][6] .= "";

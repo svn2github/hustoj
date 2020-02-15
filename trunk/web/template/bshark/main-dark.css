@@ -152,9 +152,11 @@ blockquote.testcase {
 
 .card {
     border-radius: 0;
+    background-color: #dddddd;
     box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2);
     transition: all 0.5s;
     padding: 10px 3px;
+    filter: Invert();
 }
 
 .card:hover {

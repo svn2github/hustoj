@@ -153,7 +153,7 @@
 	$MSG_EXPORT="다운로드";
 	$MSG_UPDATE_DATABASE="DB UPDATE";
 	$MSG_ONLINE="Online";
-	$MSG_SET_LOGIN_IP="로그인IP 변경 기록";
+	$MSG_SET_LOGIN_IP="IP 변경";
 	$MSG_PRIVILEGE_TYPE="권한 종류";
 
 	//contest.php

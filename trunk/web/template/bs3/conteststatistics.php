@@ -213,11 +213,11 @@
 					<a href="contestrank.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_STANDING?></a>
 					<a href="contestrank-oi.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo "OI".$MSG_STANDING?></a>
 					<a href="conteststatistics.php?cid=<?php echo $view_cid?>" class="btn btn-primary btn-sm"><?php echo $MSG_STATISTICS?></a>
-          <a href="suspect_list.php?cid=<?php echo $view_cid?>" class="btn btn-warning btn-sm"><?php echo $MSG_IP_VERIFICATION?></a>
-	        <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {?>
-	          <a href="user_set_ip.php?cid=<?php echo $view_cid?>" class="btn btn-danger btn-sm"><?php echo $MSG_SET_LOGIN_IP?></a> 
-	        <?php } ?>
-          </div>
+					<a href="suspect_list.php?cid=<?php echo $view_cid?>" class="btn btn-warning btn-sm"><?php echo $MSG_IP_VERIFICATION?></a>
+					<?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {?>
+						<a href="user_set_ip.php?cid=<?php echo $view_cid?>" class="btn btn-danger btn-sm"><?php echo $MSG_SET_LOGIN_IP?></a> 
+					<?php } ?>
+					</div>
 			</div>
 			</center>
 			<?php }?>
@@ -248,7 +248,29 @@
 								echo "<tr align=center class=oddrow><td>";
 							else
 								echo "<tr align=center class=evenrow><td>";
-							echo "<a href='problem.php?cid=$cid&pid=$i'>$PID[$i]</a>";
+
+							if (time() < $end_time) {  //during contest/exam time
+								echo "<a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+							}
+							else {  //over contest/exam time
+								//check the problem will be use remained contest/exam
+								$sql = "SELECT `problem_id` FROM `contest_problem` WHERE (`contest_id`=? AND `num`=?)";
+								$tresult = pdo_query($sql, $cid, $i);
+
+								$tpid = $tresult[0][0];
+								$sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
+									SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+										SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+									)
+								)";
+								$tresult = pdo_query($sql, $tpid);
+
+								if (intval($tresult) != 0)   //if the problem will be use remained contes/exam */
+									echo "<td>$PID[$i]</td>";
+								else
+									echo "<td><a href='problem.php?id=".$tpid."'>".$PID[$i]."</a></td>";
+							}
+
 							for ($j=0;$j<count($language_name)+11;$j++) {
 								if(!isset($R[$i][$j])) $R[$i][$j]="";
 								echo "<td>".$R[$i][$j];
@@ -320,29 +342,29 @@ grid: {
 </script>
 
 <script>
-  var diff = new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
-  //alert(diff);
-  function clock() {
-    var x,h,m,s,n,xingqi,y,mon,d;
-    var x = new Date(new Date().getTime()+diff);
-    y = x.getYear()+1900;
+	var diff = new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();
+	//alert(diff);
+	function clock() {
+		var x,h,m,s,n,xingqi,y,mon,d;
+		var x = new Date(new Date().getTime()+diff);
+		y = x.getYear()+1900;
 
-    if (y>3000)
-      y -= 1900;
+		if (y>3000)
+			y -= 1900;
 
-    mon = x.getMonth()+1;
-    d = x.getDate();
-    xingqi = x.getDay();
-    h = x.getHours();
-    m = x.getMinutes();
-    s = x.getSeconds();
-    n = y+"-"+(mon>=10?mon:"0"+mon)+"-"+(d>=10?d:"0"+d)+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
+		mon = x.getMonth()+1;
+		d = x.getDate();
+		xingqi = x.getDay();
+		h = x.getHours();
+		m = x.getMinutes();
+		s = x.getSeconds();
+		n = y+"-"+(mon>=10?mon:"0"+mon)+"-"+(d>=10?d:"0"+d)+" "+(h>=10?h:"0"+h)+":"+(m>=10?m:"0"+m)+":"+(s>=10?s:"0"+s);
 
-    //alert(n);
-    document.getElementById('nowdate').innerHTML = n;
-    setTimeout("clock()",1000);
-  }
-  clock();
+		//alert(n);
+		document.getElementById('nowdate').innerHTML = n;
+		setTimeout("clock()",1000);
+	}
+	clock();
 </script>
 
 </body>

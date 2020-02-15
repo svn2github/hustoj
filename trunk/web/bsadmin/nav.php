@@ -40,7 +40,7 @@
                 <?php } ?>
                 <?php if ($mod=='administrator') { ?>
                 <li class="label"><?php echo $MSG_SYSTEM;?></li>
-                <li<?php if ($url=='update_db.php') echo ' class="active"';?>><a href="./update_db.php"><i class="ti-dropbox"></i><?php echo $MSG_HELP_UPDATE_DATABASE?></a></li>
+                <li<?php if ($url=='update_db.php') echo ' class="active"';?>><a href="./update_db.php"><i class="ti-dropbox"></i><?php echo $MSG_UPDATE_DATABASE?></a></li>
                 <?php } ?>
                 
             </ul>
@@ -63,13 +63,13 @@
 
         <div class="pull-right p-r-15">
             <ul>
-                <li class="header-icon dib"><img class="avatar-img" src="<?php if ($_SESSION[$OJ_NAME.'_'.'myqq'])  echo "http://q.qlogo.cn/headimg_dl?dst_uin=".$_SESSION[$OJ_NAME.'_'.'myqq']."&spec=160";else echo "../template/meto/logo.jpg";?>" alt="" /> <span class="user-avatar"><?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?> <i class="ti-angle-down f-s-10"></i></span>
+                <li class="header-icon dib"><img class="avatar-img" src="http://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160" alt="" /> <span class="user-avatar"><?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?> <i class="ti-angle-down f-s-10"></i></span>
                     <div class="drop-down dropdown-profile">
                         <div class="dropdown-content-body">
                             <ul>
-                                <li><a href="../userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?>"><i class="ti-user"></i> <span>个人信息</span></a></li>
-                                <li><a href="../modifypage.php"><i class="ti-pencil-alt"></i> <span>修改信息</span></a></li>
-                                <li><a href="../logout.php"><i class="ti-power-off"></i> <span>登出</span></a></li>
+                                <li><a href="../userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?>"><i class="ti-user"></i> <span><?php echo $MSG_USERINFO;?></span></a></li>
+                                <li><a href="../modifypage.php"><i class="ti-pencil-alt"></i> <span><?php echo $MSG_REG_INFO;?></span></a></li>
+                                <li><a href="../logout.php"><i class="ti-power-off"></i> <span><?php echo $MSG_LOGOUT;?></span></a></li>
                             </ul>
                         </div>
                     </div>

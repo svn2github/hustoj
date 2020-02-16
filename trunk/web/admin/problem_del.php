@@ -3,7 +3,7 @@
 ini_set("display_errors","On");
 require_once("../include/check_get_key.php");
 
-if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
+if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
 }

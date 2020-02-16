@@ -9,10 +9,12 @@
 require_once("../include/db_info.inc.php");
 require_once("admin-header.php");
 require_once("../include/my_func.inc.php");
-if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
+
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))) {
   echo "<a href='../loginpage.php'>Please Login First!</a>";
-exit(1);
+  exit(1);
 }
+
 echo "<center><h3>"."Edit-".$MSG_PROBLEM."</h3></center>";
 include_once("kindeditor.php") ;
 ?>
@@ -88,7 +90,7 @@ include_once("kindeditor.php") ;
     }else{
       require_once("../include/check_post_key.php");
       $id=intval($_POST['problem_id']);
-      if(!(isset($_SESSION[$OJ_NAME.'_'."p$id"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();  
+      if (!(isset($_SESSION[$OJ_NAME.'_'."p$id"]) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']) )) exit();  
 
       $title=$_POST['title'];
       $title = str_replace(",", "&#44;", $title);
@@ -143,7 +145,7 @@ include_once("kindeditor.php") ;
       $hint=RemoveXSS($hint);
       $basedir=$OJ_DATA."/$id";
 
-      echo "Sample data file Updated!<br>";
+      echo "Problem Updated!<br>";
 
       if($sample_input&&file_exists($basedir."/sample.in")){
         //mkdir($basedir);
@@ -163,7 +165,7 @@ include_once("kindeditor.php") ;
             WHERE `problem_id`=?";
 
       @pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint,$source,$spj,$id) ;
-      echo "Edit OK!";
+      echo "Edit OK!<br>";
       echo "<a href='../problem.php?id=$id'>See The Problem!</a>";
     }
     ?>

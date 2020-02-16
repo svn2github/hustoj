@@ -37,8 +37,8 @@ function make($str) {
   if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
 					require_once( "include/set_get_key.php" );
   ?>
-  <li class="page-item"><a class="page-link" href="bsadmin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">Edit</a></li>
-				<li class="page-item"><a class="page-link" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>Test Data</a></li>
+  <li class="page-item"><a class="page-link" href="bsadmin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>"><?php echo $MSG_EDIT;?></a></li>
+				<li class="page-item"><a class="page-link" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'><?php echo $MSG_TESTDATA;?></a></li>
   <?php } ?>
 </ul>
 	<?php 
@@ -63,18 +63,22 @@ function make($str) {
     $soutput=str_replace("<","&lt;",$row['sample_output']);
     $soutput=str_replace(">","&gt;",$soutput);
 	?>
+	<div id="qwqs1">
 	<?php 
 	if (strlen($sinput)) {
-	    ?><h4><?php echo $MSG_Sample_Input;?></h4><blockquote><pre><?php
+	    ?><h4><?php echo $MSG_Sample_Input;?> <small id="qwqa1">点击复制</small></h4><blockquote id="sampleInput"><pre><?php
 	    echo $sinput."</pre></blockquote>";
 	}
 	?>
+	</div>
+	<div id="qwqs2">
 	<?php 
 	if (strlen($soutput)) {
-	    ?><h4><?php echo $MSG_Sample_Output;?></h4><blockquote><pre><?php
+	    ?><h4><?php echo $MSG_Sample_Output;?> <small id="qwqa2">点击复制</small></h4><blockquote id="sampleOutput"><pre><?php
 	    echo $soutput.'</pre></blockquote>';
 	}
 	?>
+	</div>
 	<?php 
 	if ($row['hint']) {
 	    ?><h4><?php echo $MSG_HINT;?></h4><?php
@@ -94,5 +98,98 @@ function make($str) {
 </div>
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>
+<script>
+	function phpfm( pid ) {
+		//alert(pid);
+		$.post( "admin/phpfm.php", {
+			'frame': 3,
+			'pid': pid,
+			'pass': ''
+		}, function ( data, status ) {
+			if ( status == "success" ) {
+				document.location.href = "admin/phpfm.php?frame=3&pid=" + pid;
+			}
+		} );
+	}
+
+		function CopyToClipboard (input) {
+			var textToClipboard = input;
+			 
+			var success = true;
+			if (window.clipboardData) { // Internet Explorer
+			    window.clipboardData.setData ("Text", textToClipboard);
+			}
+			else {
+				// create a temporary element for the execCommand method
+			    var forExecElement = CreateElementForExecCommand (textToClipboard);
+			 
+				    /* Select the contents of the element 
+					(the execCommand for 'copy' method works on the selection) */
+			    SelectContent (forExecElement);
+			 
+			    var supported = true;
+			 
+				// UniversalXPConnect privilege is required for clipboard access in Firefox
+			    try {
+				if (window.netscape && netscape.security) {
+				    netscape.security.PrivilegeManager.enablePrivilege ("UniversalXPConnect");
+				}
+			 
+				    // Copy the selected content to the clipboard
+				    // Works in Firefox and in Safari before version 5
+				success = document.execCommand ("copy", false, null);
+			    }
+			    catch (e) {
+				success = false;
+			    }
+			 
+				// remove the temporary element
+			    document.body.removeChild (forExecElement);
+			}
+			 
+			if (success) {
+			    console.log(input);
+			}
+			else {
+			    console.log("Can't");
+			}
+			}
+			 
+			function CreateElementForExecCommand (textToClipboard) {
+			var forExecElement = document.createElement ("pre");
+			    // place outside the visible area
+			forExecElement.style.position = "absolute";
+			forExecElement.style.left = "-10000px";
+			forExecElement.style.top = "-10000px";
+			    // write the necessary text into the element and append to the document
+			forExecElement.textContent = textToClipboard;
+			document.body.appendChild (forExecElement);
+			    // the contentEditable mode is necessary for the  execCommand method in Firefox
+			forExecElement.contentEditable = true;
+			 
+			return forExecElement;
+			}
+			 
+			function SelectContent (element) {
+			    // first create a range
+			var rangeToSelect = document.createRange ();
+			rangeToSelect.selectNodeContents (element);
+			 
+			    // select the contents
+			var selection = window.getSelection ();
+			selection.removeAllRanges ();
+			selection.addRange (rangeToSelect);
+			}
+	$('#qwqs1').click(function() {
+		$('#qwqa1').text('复制成功');
+		CopyToClipboard($('#sampleInput').text());
+		setTimeout(function(){ $('#qwqa1').text('点击复制'); }, 1000);
+	});
+	$('#qwqs2').click(function() {
+		$('#qwqa2').text('复制成功');
+		CopyToClipboard($('#sampleOutput').text());
+		setTimeout(function(){ $('#qwqa2').text('点击复制'); }, 1000);
+	});
+</script>
     </body>
 </html>

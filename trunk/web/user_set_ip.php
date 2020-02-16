@@ -181,7 +181,7 @@ if (isset($_GET['cid'])) {
 }
 
 $result2="";
-if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) && isset($_POST['do'])) {
+if ((isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))&& isset($_POST['do'])) {
 
 	$user_id = $_POST['user_id'];
   $ip = $_POST['ip'];

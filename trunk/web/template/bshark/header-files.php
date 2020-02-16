@@ -4,7 +4,7 @@ require("./template/$OJ_TEMPLATE/theme.conf.php");?>
 <meta name="viewport" content="width=device-width,initial-scale=auto" />
 
 <!-- KaTeX核心css -->
-<link href="https://cdn.bootcss.com/KaTeX/0.10.2/katex.min.css" rel="stylesheet">
+<!--link href="https://cdn.bootcss.com/KaTeX/0.10.2/katex.min.css" rel="stylesheet"-->
 
 <!-- Bootstrap4核心css -->
 <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">

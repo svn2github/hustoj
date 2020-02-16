@@ -81,8 +81,8 @@ echo "</select>";
       <td><?php echo $MSG_AC?></td>
       <td></td>
       <?php
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
-        if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
+        if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
           echo "<td>STATUS</td><td>DELETE</td>";
         echo "<td>EDIT</td><td>TESTDATA</td>";
       }
@@ -96,7 +96,7 @@ echo "</select>";
         echo "<td>".$row['accepted']."</td>";
         echo "<td>".$row['in_date']."</td>";
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
-          if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+          if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
             echo "<td><a href=problem_df_change.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span titlc='click to reserve it' class=green>Available</span>":"<span class=red title='click to be available'>Reserved</span>")."</a><td>";
             if($OJ_SAE||function_exists("system")){
     ?>
@@ -104,7 +104,7 @@ echo "</select>";
         <?php
         }
       }
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']])){
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']]) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         echo "<td><a href=problem_edit.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Edit</a>";
         echo "<td><a href='javascript:phpfm(".$row['problem_id'].");'>TestData</a>";
       }

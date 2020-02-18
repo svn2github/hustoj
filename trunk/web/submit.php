@@ -83,6 +83,7 @@ if (false&&$res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator
 }
 
 $test_run = false;
+$title="";
 if (isset($_POST['id'])) {
     $id = intval($_POST['id']);
     $test_run = $id <= 0;
@@ -96,11 +97,12 @@ if (isset($_POST['id'])) {
     }
     // check user if private
     $sql =
-        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
+        "SELECT `private`,langmask,title FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
     //    "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
     //$result = pdo_query($sql, $cid, $now, $now);
     $result = mysql_query_cache($sql);
     $rows_cnt = count($result);
+   
     if ($rows_cnt != 1) {
         $view_errors.= $MSG_NOT_IN_CONTEST;
 
@@ -110,6 +112,7 @@ if (isset($_POST['id'])) {
         $row = $result[0];
         $isprivate = intval($row[0]);
 	$langmask=$row[1];
+	$title=$row[2];
         if ($isprivate == 1 && !isset($_SESSION[$OJ_NAME . '_' . 'c' . $cid])) {
             $sql =
                 "SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
@@ -261,27 +264,29 @@ if (~$OJ_LANGMASK & (1 << $language)) {
             $len
         );
     } else {
-        $sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
+
+
+	$sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
 		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
-        if (isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
-            pdo_query(
-                "delete from solution where contest_id=? and user_id=? and num=?",
-                $cid,
-                $user_id,
-                $pid
-            );
-        }
-        $insert_id = pdo_query(
-            $sql,
-            $id,
-            $user_id,
-            $nick,
-            $language,
-            $ip,
-            $len,
-            $cid,
-            $pid
-        );
+	if ((stripos($title,$OJ_NOIP_KEYWORD)!==false) && isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
+	    pdo_query(
+		"delete from solution where contest_id=? and user_id=? and num=?",
+		$cid,
+		$user_id,
+		$pid
+	    );
+	}
+	$insert_id = pdo_query(
+	    $sql,
+	    $id,
+	    $user_id,
+	    $nick,
+	    $language,
+	    $ip,
+	    $len,
+	    $cid,
+	    $pid
+	);
     }
 
     $sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";

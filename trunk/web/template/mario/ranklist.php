@@ -8,7 +8,7 @@
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
 <div id=main>
-	<h1><?php echo $OJ_NAME.' '.$MSG_RANKLIST?></h1>
+	<h1 style="text-align:center"><?php echo $OJ_NAME.' '.$MSG_RANKLIST?></h1>
 	<table align=center width=90%>
 		<thead>
 		<tr><td colspan=3 align=left>
@@ -42,9 +42,8 @@
 				foreach($row as $table_cell){
 					echo "<td>";
 					if($cnt==1&&$cnt2==1) echo"<img src='/template/mario/image/red.png' height=43px>";
-					else if($cnt==2&&$cnt2==2) echo"<img src='/template/mario/image/logo.png' height=43px>";
-					else if($cnt==3&&$cnt2==3) echo"<img src='/template/mario/image/green.png' height=43px>";
-					else echo"<img src='/template/mario/image/green.png' height=43px>";
+					else if($cnt==2&&$cnt2==1) echo"<img src='/template/mario/image/logo.png' height=43px>";
+					else if($cnt==3&&$cnt2==1) echo"<img src='/template/mario/image/green.png' height=43px>";
 					echo "\t".$table_cell;
 					echo "</td>"; $cnt2++;
 				}

@@ -16,10 +16,10 @@
 				<?php echo $MSG_USER?><input name=user>
 				<input type=submit value=Go>
 			</form></td><td colspan=3 align=right>
-	                <a href=ranklist.php?scope=d>$MSG_DAY</a>
-			<a href=ranklist.php?scope=w>$MSG_WEEK</a>
-			<a href=ranklist.php?scope=m>$MSG_MONTH</a>
-			<a href=ranklist.php?scope=y>$MSG_YEAR</a>
+	                <a href=ranklist.php?scope=d><?php echo $MSG_DAY?></a>
+			<a href=ranklist.php?scope=w><?php echo $MSG_WEEK?>/a>
+			<a href=ranklist.php?scope=m><?php echo $MSG_MONTH?></a>
+			<a href=ranklist.php?scope=y><?php echo $MSG_YEAR?></a>
 			</td></tr>
 		<tr class='toprow'>
 				<td width=5% align=center><b><?php echo $MSG_Number?></b>

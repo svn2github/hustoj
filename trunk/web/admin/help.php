@@ -54,7 +54,7 @@
     </tr>
   <?php }?>
 
-  <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])){?>
+  <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){?>
     <tr>
       <td><center><a class='btn btn-success btn-sm' href="problem_list.php" target="main"><b><?php echo $MSG_PROBLEM."-".$MSG_LIST?></b></a></center></td>
       <td><p><?php echo $MSG_HELP_PROBLEM_LIST?></p></td>

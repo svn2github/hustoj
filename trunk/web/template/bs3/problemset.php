@@ -70,22 +70,22 @@
 				<table id='problemset' width='90%' class='table table-striped'>
 					<thead>
 						<tr class='toprow'>
-							<th></th>
-							<th class='hidden-xs'>
+							<td></td>
+							<td class='hidden-xs'>
 								<?php echo $MSG_PROBLEM_ID?>
-							</th>
-							<th>
+							</td>
+							<td>
 								<?php echo $MSG_TITLE?>
-							</th>
-							<th class='hidden-xs'>
+							</td>
+							<td class='hidden-xs'>
 								<?php echo $MSG_SOURCE?>
-							</th>
-							<th style="cursor:hand">
+							</td>
+							<td style="cursor:hand">
 								<?php echo $MSG_SOVLED?>
-							</th>
-							<th style="cursor:hand">
+							</td>
+							<td style="cursor:hand">
 								<?php echo $MSG_SUBMIT?>
-							</th>
+							</td>
 						</tr>
 					</thead>
 					<tbody>

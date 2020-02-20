@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>排名 - MasterOJ</title>
+        <title>OI<?php echo $MSG_STANDING;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -10,15 +10,22 @@
         <?php require("./template/bshark/nav.php");?>
         <div class="card" style="margin: 3% 8% 5% 8%">
   <div class="card-body">
-    <h4><?php echo $title?> - 排名(OI)</h4>
-        <ul class="pagination">
-    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $cid?>'>竞赛C<?php echo $cid;?></a></li>
-    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $cid?>'>状态</a></li>
-    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $cid?>'>排名</a></li>
-    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $cid?>'>统计</a></li>
+    <h4><?php echo $title?> - <?php echo $MSG_STANDING;?>(OI)</h4>
+    <ul class="pagination">
+    <li class="page-item"><a class="page-link" href='contest.php?cid=<?php echo $cid?>'><?php echo $MSG_CONTEST;?>C<?php echo $cid;?></a></li>
+    <li class="page-item"><a class="page-link" href='status.php?cid=<?php echo $cid?>'><?php echo $MSG_STATUS;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank.php?cid=<?php echo $cid?>'><?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='contestrank-oi.php?cid=<?php echo $cid?>'>OI-<?php echo $MSG_STANDING;?></a></li>
+    <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $cid?>'><?php echo $MSG_STATISTICS;?></a></li>
     </ul>
-<a class="btn btn-outline-dark" href="contestrank.xls.php?cid=<?php echo $cid?>" >下载xls文件</a>
-<table id=rank class="table table-hover"><thead><tr class=toprow align=center><td class="{sorter:'false'}">Rank<th>User</th><th>Nick</th><th>Solved</th><th>Penalty</th><th align="center">Mark</th>
+<a class="btn btn-outline-dark" href="contestrank.xls.php?cid=<?php echo $cid?>" >Download xls file</a>
+<table id=rank class="table table-hover"><thead><tr class=toprow align=center>
+              <td class="{sorter:'false'}"><?php echo $MSG_STANDING?></td>
+              <th><?php echo $MSG_USER?></th>
+              <th><?php echo $MSG_NICK?></th>
+              <th><?php echo $MSG_SOVLED?></th>
+              <th><?php echo $MSG_CONTEST_PENALTY?></th>
+              <th align="center">Mark</th>
 <?php
 $rank=1;
 for ($i=0;$i<$pid_cnt;$i++)

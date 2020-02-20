@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	//oj-header.php
 	$MSG_FAQ="چۈشەنچە & سوئال";
 	$MSG_BBS="تور بەت";
@@ -102,6 +102,18 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_SOURCE="مەنبە";
 	$MSG_SUBMIT="تاپشۇرۇش";
 
+	//submit.php
+	$MSG_VCODE_WRONG="Verification Code Wrong!";
+	$MSG_LINK_ERROR="Where do find this link? No such problem.";
+	$MSG_PROBLEM_RESERVED="Problem disabled.";
+	$MSG_NOT_IN_CONTEST="You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+	$MSG_NOT_INVITED="You are not invited!";
+	$MSG_NO_PROBLEM="No Such Problem!";
+	$MSG_NO_PLS="Using unknown programing language!";
+	$MSG_TOO_SHORT="Code too short!";
+	$MSG_TOO_LONG="Code too long!";
+	$MSG_BREAK_TIME="You should not submit more than twice in 1 seconds.....";
+
 	//ranklist.php
 	$MSG_Number="نۇمۇر";
 	$MSG_NICK="نامى";
@@ -131,6 +143,8 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_Source= "مەنبە";
 	$MSG_Time_Limit="ۋاقىت چەكلىمىسى";
 	$MSG_Memory_Limit="ساقلىغۇچ چەكلىمىسى";
+	$MSG_EDIT= "Edit";
+	$MSG_TESTDATA= "TestDATA";
 
 	//admin menu
 	$MSG_SEEOJ="باش بەت";
@@ -153,6 +167,7 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_UPDATE_DATABASE=" سان-سىپىرنى يېڭىلاش ";
 	$MSG_ONLINE=" سىمدا ";
 	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
+	$MSG_PRIVILEGE_TYPE="Privilege Type";
 
 	//contest.php
   $MSG_PRIVATE_WARNING="مۇسابىقە باشلانمىدى ياكى سوئال شەخىسكە تەۋە";
@@ -170,8 +185,11 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";
 	$MSG_CONTEST_CREATOR="CREATOR";
-	$MSG_CONTEST_PENALTY="TIME PENALTY";	
-
+	$MSG_CONTEST_PENALTY="TIME PENALTY";
+	$MSG_IP_VERIFICATION="IP VERIFICATION";
+	$MSG_CONTEST_SUSPECT1="IP addresses with multiple IDs. If multiple IDs are accessed at the same computer during the contest/exam, it logged.";
+	$MSG_CONTEST_SUSPECT2="IDs with multiple IP addresses. If switch to another computer during the contest/exam, it logged.";
+		
 	$MSG_SECONDS="seconds";
 	$MSG_MINUTES="minutes";
 	$MSG_HOURS="hours";
@@ -225,6 +243,8 @@ if(date('m')==1 && date('d') == 1){
   $MSG_HELP_SETPASSWORD=" مەخپى نۇمۇرنى قايتا تەڭشەش.باشقۇرغۇچى ئاۋال ئادەتتىكى ئابۇنىتچىغا ئايلىنىشى كىرەك";
   $MSG_HELP_REJUDGE="سوئال،مۇسابىقە،تاپشۇرۇشلارنى قايتا تەكشۈرۈش ";
   $MSG_HELP_ADD_PRIVILEGE="ئالاھېدە ئەزا ياكى ھوقۇق بىكىتىش مەسىلەن: administratorsباشقۇرغۇچى , subjectsكاتىپ , playersئوينىغۇچى, organizersتەشكىللىگۈچى, participantsقاتناشقۇچى, code viewerكود كۆرگۈچى, manual judge questions سوئال بىر تەرەپ قىلىش, remote questions&سوئال يۆتكەش   other permissionsباشقا ھوقوقلار ";
+  $MSG_HELP_ADD_CONTEST_USER="Add User to private contest.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="Add Problem Solution View for User.";
   $MSG_HELP_PRIVILEGE_LIST= "ئالاھېدە ھوقوق چەكلىمىلەرنى تەڭشەش";
   $MSG_HELP_GIVESOURCE="بەزى ئابۇنىتلارغا ئۆلچەملىك كودنى كۆرۈش ھوقۇقى بىرىش،شۇ ئارقىلىق كودى ئۆتەلمىگەن ئابۇنىت مۇسابىقىدىن كىيىن ئۆلچەملىك كودنى ئۆگىنىشكە ياردەم بىرىش";
   $MSG_HELP_EXPORT_PROBLEM= " ھۆججىتى نۇسخىسىدا چىقىرىپ ساقلاشfps.xml سوئاللارنى ";

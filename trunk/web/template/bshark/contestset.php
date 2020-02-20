@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>比赛列表 - MasterOJ</title>
+        <title><?php echo $MSG_CONTEST;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
     </head>
     
@@ -10,7 +10,7 @@
         <?php require("./template/bshark/nav.php");?>
         <div class="card" style="margin: 3% 8% 5% 8%">
   <div class="card-body">
-    <h4>比赛列表&nbsp;&nbsp;&nbsp;Time:<span id=nowdate></span></h4>
+    <h4><?php echo $MSG_CONTEST;?>&nbsp;&nbsp;&nbsp;Time:<span id=nowdate></span></h4>
 <form method=post action=contest.php class="form-inline" >
 	<input class="form-control" name=keyword type=text >
 	<input class="btn btn-outline-dark" type=submit value="查询">
@@ -32,7 +32,12 @@ for ($i=$start;$i<=$end;$i++){
 </ul>
     <table class="table table-hover">
     <thead>
-<tr class=toprow align=center><td>ID<td>标题<td>赛制</td><td>状态<td>权限<td>创建者</tr>
+<tr class=toprow align=center>
+            <td><?php echo $MSG_CONTEST_ID?></td>
+            <td><?php echo $MSG_CONTEST_NAME?></td>
+            <td><?php echo $MSG_CONTEST_STATUS?></td>
+            <td><?php echo $MSG_CONTEST_OPEN?></td>
+            <td><?php echo $MSG_CONTEST_CREATOR?></td></tr>
 </thead>
 <tbody>
 <?php

@@ -89,6 +89,18 @@
 	$MSG_SOURCE="ที่มา";
 	$MSG_SUBMIT="ส่ง";
 	
+	//submit.php
+	$MSG_VCODE_WRONG="Verification Code Wrong!";
+	$MSG_LINK_ERROR="Where do find this link? No such problem.";
+	$MSG_PROBLEM_RESERVED="Problem disabled.";
+	$MSG_NOT_IN_CONTEST="You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+	$MSG_NOT_INVITED="You are not invited!";
+	$MSG_NO_PROBLEM="No Such Problem!";
+	$MSG_NO_PLS="Using unknown programing language!";
+	$MSG_TOO_SHORT="Code too short!";
+	$MSG_TOO_LONG="Code too long!";
+	$MSG_BREAK_TIME="You should not submit more than twice in 1 seconds.....";
+
 	//ranklist.php
 	$MSG_Number="ลำดับที่";
 	$MSG_NICK="ชื่อ";
@@ -118,6 +130,8 @@
 	$MSG_Source= "แหล่งที่มา" ;
 	$MSG_Time_Limit="จำกัดเวลา";
 	$MSG_Memory_Limit="จำกัดหน่วยความจำ";
+	$MSG_EDIT="แก้ไข้";
+	$MSG_TESTDATA="ทดสอบข้อมูล";
 	
 	//admin menu
 	$MSG_SEEOJ="ดูเว็บ";
@@ -140,6 +154,7 @@
 	$MSG_UPDATE_DATABASE="ปรับปรุงฐานข้อมูล";
 	$MSG_ONLINE="ผู้ที่อยู่ในระบบ";
   $MSG_SET_LOGIN_IP="SetLoginIP";
+	$MSG_PRIVILEGE_TYPE="Privilege Type";
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
@@ -158,7 +173,10 @@
 	$MSG_CONTEST_OPEN="OPEN";
 	$MSG_CONTEST_CREATOR="CREATOR";
 	$MSG_CONTEST_PENALTY="TIME PENALTY";
-
+	$MSG_IP_VERIFICATION="IP VERIFICATION";
+	$MSG_CONTEST_SUSPECT1="IP addresses with multiple IDs. If multiple IDs are accessed at the same computer during the contest/exam, it logged.";
+	$MSG_CONTEST_SUSPECT2="IDs with multiple IP addresses. If switch to another computer during the contest/exam, it logged.";
+	
 	$MSG_SECONDS="seconds";
 	$MSG_MINUTES="minutes";
 	$MSG_HOURS="hours";
@@ -212,6 +230,8 @@
   $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";
   $MSG_HELP_REJUDGE="To review a specified subject, submission, or contest.";
 	$MSG_HELP_ADD_PRIVILEGE=" adds permissions to designated users, including administrators, subjects, players, organizers, participants, code viewer, manual judge questions, remote questions and other permissions. ";
+	$MSG_HELP_ADD_CONTEST_USER="Add User to private contest.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="Add Problem Solution View for User.";
 	$MSG_HELP_PRIVILEGE_LIST= "looks at the existing list of special permissions and deletes them. ";
 	$MSG_HELP_GIVESOURCE=" transfers the label of the import system to the designated account number, which is used to assist the person who has not passed the training after the training. ";
 	$MSG_HELP_EXPORT_PROBLEM= "export the problems of the system in the form of fps.xml file. ";

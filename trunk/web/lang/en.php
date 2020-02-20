@@ -7,7 +7,7 @@
 	$MSG_STATUS="Status";
 	$MSG_RANKLIST="Ranklist";
 	$MSG_CONTEST="Contest";
-  $MSG_RECENT_CONTEST="Recent";
+  	$MSG_RECENT_CONTEST="Recent";
 	$MSG_LOGOUT="Logout";
 	$MSG_LOGIN="Login";
 	$MSG_LOST_PASSWORD="Lost Password";
@@ -36,26 +36,12 @@
 	$MSG_Compile_Click="Compile Error(Click)";
 	$MSG_Compile_OK="Compile OK";
 	$MSG_Click_Detail="Click To View Detail";
-  $MSG_Manual="Manual Judge";
-  $MSG_OK="OK";
-  $MSG_Explain="Type reason or explaination";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	$MSG_TEST_RUN="Test Running Done";
-   
-  $MSG_RUNID="RunID";
+  	$MSG_Manual="Manual Judge";
+ 	 $MSG_OK="OK";
+ 	 $MSG_Explain="Type reason or explaination";
+         $TEST_RUN="Test Running Done";
+  	
+ 	$MSG_RUNID="RunID";
 	$MSG_USER="User";
 	$MSG_PROBLEM="Problem";
 	$MSG_RESULT="Result";
@@ -89,11 +75,27 @@
 	$MSG_SOURCE="Source/Category";
 	$MSG_SUBMIT="Submit";
 	
+	//submit.php
+	$MSG_VCODE_WRONG="Verification Code Wrong!";
+	$MSG_LINK_ERROR="Where do find this link? No such problem.";
+	$MSG_PROBLEM_RESERVED="Problem disabled.";
+	$MSG_NOT_IN_CONTEST="You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+	$MSG_NOT_INVITED="You are not invited!";
+	$MSG_NO_PROBLEM="No Such Problem!";
+	$MSG_NO_PLS="Using unknown programing language!";
+	$MSG_TOO_SHORT="Code too short!";
+	$MSG_TOO_LONG="Code too long!";
+	$MSG_BREAK_TIME="You should not submit more than twice in 1 seconds.....";
+
 	//ranklist.php
 	$MSG_Number="No.";
 	$MSG_NICK="Nick Name";
 	$MSG_SOVLED="Solved";
 	$MSG_RATIO="Ratio";
+	$MSG_DAY="Day-Rank";
+	$MSG_WEEK="Week-Rank";
+	$MSG_MONTH="Month-Rank";
+	$MSG_YEAR="Year-Rank";
 	
 	//registerpage.php
 	$MSG_USER_ID="User ID";
@@ -118,6 +120,8 @@
 	$MSG_Source= "Source" ;
 	$MSG_Time_Limit="Time Limit";
 	$MSG_Memory_Limit="Memory Limit";
+	$MSG_EDIT="Edit";
+	$MSG_TESTDATA="TestData";
 	
 	//admin menu
 	$MSG_SEEOJ="SeeOJ";
@@ -140,6 +144,7 @@
 	$MSG_UPDATE_DATABASE="Update Database";
 	$MSG_ONLINE="Online";
   $MSG_SET_LOGIN_IP="SetLoginIP";
+	$MSG_PRIVILEGE_TYPE="Privilege Type";
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
@@ -158,6 +163,9 @@
 	$MSG_CONTEST_OPEN="OPEN";
 	$MSG_CONTEST_CREATOR="CREATOR";
 	$MSG_CONTEST_PENALTY="TIME PENALTY";
+	$MSG_IP_VERIFICATION="IP VERIFICATION";
+	$MSG_CONTEST_SUSPECT1="IP addresses with multiple IDs. If multiple IDs are accessed at the same computer during the contest/exam, it logged.";
+	$MSG_CONTEST_SUSPECT2="IDs with multiple IP addresses. If switch to another computer during the contest/exam, it logged.";
 
 	$MSG_SECONDS="seconds";
 	$MSG_MINUTES="minutes";
@@ -212,6 +220,8 @@
   $MSG_HELP_SETPASSWORD="Reset the password for the specified user, for administrator account need to downgrade to ordinary users to modify.";
   $MSG_HELP_REJUDGE="To review a specified subject, submission, or contest.";
 	$MSG_HELP_ADD_PRIVILEGE=" adds permissions to designated users, including administrators, subjects, players, organizers, participants, code viewer, manual judge questions, remote questions and other permissions. ";
+	$MSG_HELP_ADD_CONTEST_USER="Add User to private contest.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="Add Problem Solution View for User.";
 	$MSG_HELP_PRIVILEGE_LIST= "looks at the existing list of special permissions and deletes them. ";
 	$MSG_HELP_GIVESOURCE=" transfers the label of the import system to the designated account number, which is used to assist the person who has not passed the training after the training. ";
 	$MSG_HELP_EXPORT_PROBLEM= "export the problems of the system in the form of fps.xml file. ";

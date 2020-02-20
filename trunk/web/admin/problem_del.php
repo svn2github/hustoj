@@ -2,10 +2,12 @@
  require_once("admin-header.php");
 ini_set("display_errors","On");
 require_once("../include/check_get_key.php");
-if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
-        echo "<a href='../loginpage.php'>Please Login First!</a>";
-        exit(1);
+
+if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
+  echo "<a href='../loginpage.php'>Please Login First!</a>";
+  exit(1);
 }
+
 ?> 
 <?php
   if($OJ_SAE||function_exists('system')){

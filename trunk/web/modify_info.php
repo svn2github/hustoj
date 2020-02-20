@@ -25,8 +25,6 @@ if (!$_SESSION[$OJ_NAME.'_'.'user_id']) {
 $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];
 $school=trim($_POST['school']);
 $nick=trim($_POST['nick']);
-$qq=trim($_POST['qq']);
-$codeshare = $_POST['codeshare'] == 'on'?'Y':'N';
 $len=strlen($nick);
 if ($len>100){
 	$err_str=$err_str."昵称太长!";
@@ -34,7 +32,7 @@ if ($len>100){
 }else if ($len==0) $nick=$user_id;
 $len=strlen($_POST['school']);
 if ($len>100){
-	$err_str=$err_str."个性签名太长";
+	$err_str=$err_str."学校太长";
 	$err_cnt++;
 }
 if ($err_cnt>0){
@@ -49,13 +47,11 @@ $nick=htmlentities ($nick,ENT_QUOTES,"UTF-8");
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $sql="UPDATE `users` SET"
 ."`nick`=?,"
-."`school`=?,"
-."`qq`=?,"
-."`codeshare`=?";
+."`school`=? ";
 $sql.="WHERE `user_id`=?";
 //echo $sql;
 //exit(0);
-pdo_query($sql,$nick,$school,$qq,$codeshare,$user_id);
+pdo_query($sql,$nick,$school,$user_id);
 ?>
 <script>
     alert("修改成功！");

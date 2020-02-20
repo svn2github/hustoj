@@ -61,7 +61,7 @@ if(isset($_POST['do'])){
 	<div class="form-group">
 		<?php require_once("../include/set_post_key.php");?>
 		<div class="col-sm-offset-4 col-sm-2">
-			<button name="do" type="hidden" valud="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE; ?></button>
+			<button name="do" type="hidden" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
 		</div>
 		<div class="col-sm-2">
 			<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>

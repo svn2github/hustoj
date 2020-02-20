@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>提交评测 - MasterOJ</title>
+        <title><?php echo $MSG_SUBMIT;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
           <style>
 #source {
@@ -16,7 +16,7 @@
         <?php require("./template/bshark/nav.php");?>
         <div class="card" style="margin: 3% 8% 5% 8%">
   <div class="card-body">
-    <h4>提交评测</h4>
+    <h4><?php echo $MSG_SUBMIT;?></h4>
     <script src="include/checksource.js"></script>
 <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
@@ -26,11 +26,11 @@ Problem <span class=blue><b><?php echo $id?></b></span>
 //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
 ?>
-Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+<?php echo $MSG_PROBLEM;?> <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of <?php echo $MSG_CONTEST;?> <span class=blue><b><?php echo $cid?></b></span><br>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
-<span id="language_span">Language:
+<span id="language_span"><?php echo $MSG_LANG;?>:
 <select class="custom-select" style="width:200px" id="language" name="language" onChange="reloadtemplate($(this).val());" >
 <?php
 $lang_count=count($language_ext);
@@ -80,7 +80,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-outline-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-<span class="btn" id=result>状态</span>
+<span class="btn" id=result><?php echo $MSG_STATUS;?></span>
 <?php }?>
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">

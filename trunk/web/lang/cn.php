@@ -7,7 +7,7 @@
 	$MSG_STATUS="状态";
 	$MSG_RANKLIST="排名";
 	$MSG_CONTEST="竞赛&作业";
-  $MSG_RECENT_CONTEST="名校联赛";
+        $MSG_RECENT_CONTEST="名校联赛";
 	$MSG_LOGOUT="注销";
 	$MSG_LOGIN="登录";
 	$MSG_LOST_PASSWORD="忘记密码";
@@ -35,10 +35,10 @@
 	$MSG_Runtime_Click="运行错误(点击看详细)";
 	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
-  $MSG_Click_Detail="点击看详细";
-  $MSG_Manual="人工判题";
-  $MSG_OK="确定";
-  $MSG_Explain="输入判定原因与提示";
+        $MSG_Click_Detail="点击看详细";
+        $MSG_Manual="人工判题";
+        $MSG_OK="确定";
+        $MSG_Explain="输入判定原因与提示";
   
 	//fool's day
 	if(date('m')==4&&date('d')==1&&rand(0,100)<10){
@@ -53,7 +53,7 @@
 		$MSG_Compile_OK="人品问题-愚人节快乐";
 	}
   
-  $MSG_TEST_RUN="运行完成";
+        $MSG_TEST_RUN="运行完成";
 
 	$MSG_RUNID="提交编号";
 	$MSG_USER="用户";
@@ -89,12 +89,27 @@
 	$MSG_SOURCE="来源/分类";
 	$MSG_SUBMIT="提交";
 	
+	//submit.php
+	$MSG_VCODE_WRONG="验证码错误！";
+	$MSG_LINK_ERROR="在哪里可以找到此链接？ 没有这个问题。";
+	$MSG_PROBLEM_RESERVED="问题已禁用。";
+	$MSG_NOT_IN_CONTEST="您不能立即提交，因为您没有被比赛邀请或比赛没有进行！";
+	$MSG_NOT_INVITED="您不被邀请！";
+	$MSG_NO_PROBLEM="没有这样的问题！";
+	$MSG_NO_PLS="使用未知的编程语言！";
+	$MSG_TOO_SHORT="代码太短！";
+	$MSG_TOO_LONG="代码太长！";
+	$MSG_BREAK_TIME="您不应在一秒钟内提交超过两次的申请.....";
+
 	//ranklist.php
 	$MSG_Number="名次";
 	$MSG_NICK="昵称";
 	$MSG_SOVLED="解决";
 	$MSG_RATIO="比率";
-	
+	$MSG_DAY="日排行";
+ 	$MSG_WEEK="周排行";
+	$MSG_MONTH="月排行";
+	$MSG_YEAR="年排行";
 	//registerpage.php
 	$MSG_USER_ID="用户名（学号）";
 	$MSG_PASSWORD="密码";
@@ -118,6 +133,8 @@
 	$MSG_Source= "来源" ;
 	$MSG_Time_Limit="时间限制";
 	$MSG_Memory_Limit="内存限制";
+	$MSG_EDIT="编辑";
+	$MSG_TESTDATA="测试数据";
 
 	//admin menu
 	$MSG_SEEOJ="查看前台";
@@ -140,6 +157,7 @@
 	$MSG_UPDATE_DATABASE="更新数据库";
 	$MSG_ONLINE="在线";
 	$MSG_SET_LOGIN_IP="指定登录IP";
+	$MSG_PRIVILEGE_TYPE="权限 类型";
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
@@ -158,7 +176,10 @@
 	$MSG_CONTEST_OPEN="开放";
 	$MSG_CONTEST_CREATOR="创建人";
 	$MSG_CONTEST_PENALTY="累计时间";
-
+	$MSG_IP_VERIFICATION="IP验证";
+	$MSG_CONTEST_SUSPECT1="具有多个ID的IP地址。如果在竞赛/考试期间在同一台计算机上访问了多个ID，则会记录该ID。";
+	$MSG_CONTEST_SUSPECT2="具有多个IP地址的ID。 如果在竞赛/考试期间切换到另一台计算机，它将记录下来。";
+	
 	$MSG_SECONDS="秒";
 	$MSG_MINUTES="分";
 	$MSG_HOURS="小时";
@@ -212,6 +233,8 @@
   $MSG_HELP_SETPASSWORD="重设指定用户的密码，对于管理员帐号需要先降级为普通用户才能修改。";
   $MSG_HELP_REJUDGE="重判指定的题目、提交或比赛。";
   $MSG_HELP_ADD_PRIVILEGE="给指定用户增加权限，包括管理员、题目添加者、比赛组织者、比赛参加者、代码查看者、手动判题、远程判题、打印员、气球发放员等权限。";
+	$MSG_HELP_ADD_CONTEST_USER="给用户添加单个比赛权限。";
+	$MSG_HELP_ADD_SOLUTION_VIEW="给用户添加单个题目的答案查看权限。";
   $MSG_HELP_PRIVILEGE_LIST="查看已有的特殊权限列表、进行删除操作。";
   $MSG_HELP_GIVESOURCE="将导入系统的标程赠与指定帐号，用于训练后辅助未通过的人学习参考。";
   $MSG_HELP_EXPORT_PROBLEM="将系统中的题目以fps.xml文件的形式导出。";

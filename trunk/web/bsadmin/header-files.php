@@ -1,6 +1,10 @@
 <?php 
     require_once("../include/db_info.inc.php");
     require_once ("../include/my_func.inc.php");
+
+	if(isset($OJ_LANG)){
+		require_once("../lang/$OJ_LANG.php");
+	}
 	$url=basename($_SERVER['REQUEST_URI']);
 	$realurl=basename($_SERVER['REQUEST_URI']);
 	$url=str_replace(strrchr($url, "?"),"",$url);

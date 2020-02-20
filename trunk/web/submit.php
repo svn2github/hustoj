@@ -37,7 +37,7 @@ if (!$OJ_BENCHMARK_MODE) {
             $vcode == null)
     ) {
         $_SESSION[$OJ_NAME . '_' . "vcode"] = null;
-        $err_str = $err_str . "Verification Code Wrong!\\n";
+        $err_str = $err_str . $MSG_VCODE_WRONG."\\n";
         $err_cnt++;
 	$view_errors=$err_str;
         require "template/" . $OJ_TEMPLATE . "/error.php";
@@ -66,14 +66,14 @@ if (
     !isset($_SESSION[$OJ_NAME . '_' . 'administrator']) &&
     !((isset($cid) && $cid <= 0) || (isset($id) && $id <= 0))
 ) {
-    $view_errors = "Where do find this link? No such problem.<br>";
+    $view_errors = $MSG_LINK_ERROR."<br>";
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
 if (false&&$res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])) {
     //	echo "res:$res,count:".count($res);
     //	echo "$sql";
-    $view_errors = "Problem disabled.<br>";
+    $view_errors = $MSG_PROBLEM_RESERVED."<br>";
     if (isset($_POST['ajax'])) {
         echo $view_errors;
     } else {
@@ -83,6 +83,7 @@ if (false&&$res[0][1] != 'N' && !isset($_SESSION[$OJ_NAME . '_' . 'administrator
 }
 
 $test_run = false;
+$title="";
 if (isset($_POST['id'])) {
     $id = intval($_POST['id']);
     $test_run = $id <= 0;
@@ -96,13 +97,14 @@ if (isset($_POST['id'])) {
     }
     // check user if private
     $sql =
-        "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
+        "SELECT `private`,langmask,title FROM `contest` WHERE `contest_id`=$cid AND `start_time`<='$now' AND `end_time`>'$now'";
     //    "SELECT `private`,langmask FROM `contest` WHERE `contest_id`=? AND `start_time`<=? AND `end_time`>?";
     //$result = pdo_query($sql, $cid, $now, $now);
     $result = mysql_query_cache($sql);
     $rows_cnt = count($result);
+   
     if ($rows_cnt != 1) {
-        $view_errors.= "You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
+        $view_errors.= $MSG_NOT_IN_CONTEST;
 
         require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
@@ -110,6 +112,7 @@ if (isset($_POST['id'])) {
         $row = $result[0];
         $isprivate = intval($row[0]);
 	$langmask=$row[1];
+	$title=$row[2];
         if ($isprivate == 1 && !isset($_SESSION[$OJ_NAME . '_' . 'c' . $cid])) {
             $sql =
                 "SELECT count(*) FROM `privilege` WHERE `user_id`=? AND `rightstr`=?";
@@ -121,7 +124,7 @@ if (isset($_POST['id'])) {
                 $ccnt == 0 &&
                 !isset($_SESSION[$OJ_NAME . '_' . 'administrator'])
             ) {
-                $view_errors = "You are not invited!\n";
+                $view_errors = $MSG_NOT_INVITED."\n";
                 require "template/" . $OJ_TEMPLATE . "/error.php";
                 exit(0);
             }
@@ -132,7 +135,7 @@ if (isset($_POST['id'])) {
     $result = pdo_query($sql, $cid, $pid);
     $rows_cnt = count($result);
     if ($rows_cnt != 1) {
-        $view_errors = "No Such Problem!\n";
+        $view_errors = $MSG_NO_PROBLEM."\n";
         require "template/" . $OJ_TEMPLATE . "/error.php";
 
         exit(0);
@@ -160,7 +163,7 @@ if ($language > count($language_name) || $language < 0) {
 $language = strval($language);
 
     if($langmask&(1<<$language)){
-        $view_errors = "Using unknown programing language!\n[$language][$langmask][".($langmask&(1<<$language))."]";
+        $view_errors = $MSG_NO_PLS."\n[$language][$langmask][".($langmask&(1<<$language))."]";
         require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
 		
@@ -217,12 +220,12 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
     $ip = htmlentities($tmp_ip[0], ENT_QUOTES, "UTF-8");
 }
 if ($len < 2) {
-    $view_errors = "Code too short!<br>";
+    $view_errors = $MSG_TOO_SHORT."<br>";
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
 if ($len > 65536) {
-    $view_errors = "Code too long!<br>";
+    $view_errors = $MSG_TOO_LONG."<br>";
     require "template/" . $OJ_TEMPLATE . "/error.php";
     exit(0);
 }
@@ -234,8 +237,7 @@ if (false&&!$OJ_BENCHMARK_MODE) {
         "SELECT `in_date` from `solution` where `user_id`=? and in_date>? order by `in_date` desc limit 1";
     $res = pdo_query($sql, $user_id, $now);
     if (count($res) == 1) {
-        $view_errors =
-            "You should not submit more than twice in 1 seconds.....<br>";
+        $view_errors = $MSG_BREAK_TIME."<br>";
         require "template/" . $OJ_TEMPLATE . "/error.php";
         exit(0);
     }
@@ -262,27 +264,29 @@ if (~$OJ_LANGMASK & (1 << $language)) {
             $len
         );
     } else {
-        $sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
+
+
+	$sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
 		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
-        if (isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
-            pdo_query(
-                "delete from solution where contest_id=? and user_id=? and num=?",
-                $cid,
-                $user_id,
-                $pid
-            );
-        }
-        $insert_id = pdo_query(
-            $sql,
-            $id,
-            $user_id,
-            $nick,
-            $language,
-            $ip,
-            $len,
-            $cid,
-            $pid
-        );
+	if ((stripos($title,$OJ_NOIP_KEYWORD)!==false) && isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
+	    pdo_query(
+		"delete from solution where contest_id=? and user_id=? and num=?",
+		$cid,
+		$user_id,
+		$pid
+	    );
+	}
+	$insert_id = pdo_query(
+	    $sql,
+	    $id,
+	    $user_id,
+	    $nick,
+	    $language,
+	    $ip,
+	    $len,
+	    $cid,
+	    $pid
+	);
     }
 
     $sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";

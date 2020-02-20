@@ -1,7 +1,7 @@
 <?php
 	//oj-header.php
 	$MSG_FAQ="자주묻는질문";
-  $MSG_BBS="묻고답하기";
+	$MSG_BBS="묻고답하기";
 	$MSG_HOME="처음화면";
 	$MSG_PROBLEMS="문제";
 	$MSG_STATUS="채점기록";
@@ -89,6 +89,18 @@
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT="제출";
 
+	//submit.php
+	$MSG_VCODE_WRONG="확인코드가 다릅니다.";
+	$MSG_LINK_ERROR="링크가 없습니다. 문제를 찾을 수 없습니다.";
+	$MSG_PROBLEM_RESERVED="문제가 비활성화되어 있습니다.";
+	$MSG_NOT_IN_CONTEST="제출할 수 없습니다. 대회에 참여할 수 없거나, 대회가 종료되었습니다!!";
+	$MSG_NOT_INVITED="대회에 참여할 수 없습니다.";
+	$MSG_NO_PROBLEM="해당 문제가 없습니다.";
+	$MSG_NO_PLS="허용된 프로그래밍 언어가 아닙니다!";
+	$MSG_TOO_SHORT="코드가 너무 짧습니다!";
+	$MSG_TOO_LONG="코드가 너무 깁니다!";
+	$MSG_BREAK_TIME="1초 이내에 다시 제출 할 수 없습니다.....";
+
 	//ranklist.php
 	$MSG_Number="순위";
 	$MSG_NICK="별명";
@@ -118,6 +130,8 @@
 	$MSG_Source="출처";
 	$MSG_Time_Limit="실행시간 제한";
 	$MSG_Memory_Limit="메모리사용 제한";
+	$MSG_EDIT="수정";
+	$MSG_TESTDATA="테스트 데이터";
 
 	//admin menu
 	$MSG_SEEOJ="OJ확인";
@@ -139,7 +153,8 @@
 	$MSG_EXPORT="다운로드";
 	$MSG_UPDATE_DATABASE="DB UPDATE";
 	$MSG_ONLINE="Online";
-	$MSG_SET_LOGIN_IP="로그인IP 변경 기록";
+	$MSG_SET_LOGIN_IP="IP 변경";
+	$MSG_PRIVILEGE_TYPE="권한 종류";
 
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
@@ -158,6 +173,9 @@
 	$MSG_CONTEST_OPEN="대회 구분";
 	$MSG_CONTEST_CREATOR="등록자";
 	$MSG_CONTEST_PENALTY="누적시간";
+	$MSG_IP_VERIFICATION="IP검증";
+	$MSG_CONTEST_SUSPECT1="여러 개의 ID가 사용된 IP 주소. 대회 중에 같은 컴퓨터에서 다른 ID로 접근하면 기록됩니다.";
+	$MSG_CONTEST_SUSPECT2="여러 개의 IP 주소에서 접속된 ID. 대회 중에 다른 컴퓨터로 바꾸면 기록됩니다.";
 
 	$MSG_SECONDS="초";
 	$MSG_MINUTES="분";
@@ -211,8 +229,10 @@
 	$MSG_HELP_SETMESSAGE="메시지설정";
 	$MSG_HELP_SETPASSWORD="사용자 비밀번호 변경. 관리자권한 필요";
 	$MSG_HELP_REJUDGE="문제별/채점번호별/대회별 재채점";
-	$MSG_HELP_ADD_PRIVILEGE="사용자별 권한설정 및 변경";
-	$MSG_HELP_PRIVILEGE_LIST="사용자별 권한설정 및 삭제";
+	$MSG_HELP_ADD_PRIVILEGE="사용자에게 특별한 권한을 추가합니다.";
+	$MSG_HELP_ADD_CONTEST_USER="대회에 참가할 수 있는 참가 권한을 추가합니다.";
+	$MSG_HELP_ADD_SOLUTION_VIEW="특정 문제의 소스코드를 볼 수 있는 코드 보기 권한을 추가합니다.";
+	$MSG_HELP_PRIVILEGE_LIST="사용자별 권한 확인 및 삭제";
 	$MSG_HELP_GIVESOURCE="특정 사용자 채점코드 밀어주기. 부진학생 도움용";
 	$MSG_HELP_EXPORT_PROBLEM="fps.xml 파일로 문제 다운로드";
 	$MSG_HELP_IMPORT_PROBLEM="fps.xml 파일로 문제 업로드";
@@ -235,8 +255,9 @@
 
 	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
 	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
-  $MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
 
-  $MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
-  $MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";
+	$MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
+
+	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
+	$MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";
 ?>

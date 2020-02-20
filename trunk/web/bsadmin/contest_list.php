@@ -36,7 +36,7 @@ require_once("../include/set_get_key.php");
                     <div class="col-lg-8 p-0">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>后台主页</h1>
+                                <h1><?php echo $MSG_ADMIN.$MSG_HOME;?></h1>
                             </div>
                         </div>
                     </div><!-- /# column -->
@@ -44,8 +44,8 @@ require_once("../include/set_get_key.php");
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li>竞赛</li>
-                                    <li class="active">竞赛列表</li>
+                                    <li><?php echo $MSG_CONTEST;?></li>
+                                    <li class="active"><?php echo $MSG_CONTEST.$MSG_LIST;?></li>
                                 </ol>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ require_once("../include/set_get_key.php");
 						<div class="col-lg-12">
 							<div class="card alert">
 								<div class="card-header">
-									<h4>竞赛列表</h4>
+									<h4><?php echo $MSG_CONTEST.$MSG_LIST;?></h4>
 									<div class="card-header-right-icon">
 										<ul>
 											<li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li> 
@@ -100,7 +100,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
                                         <form>
                                             <div class="form-group">
                                                 <div class="input-group input-group-rounded col-md-4">
-                                                    <input type="text" placeholder="键入以搜索" name=keyword class="form-control">
+                                                    <input type="text" placeholder="" name=keyword class="form-control">
                                                     <span class="input-group-btn"><button class="btn btn-primary btn-group-right" type="submit"><i class="ti-search"></i></button></span>
                                                 </div>
                                             </div>
@@ -108,16 +108,16 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
                                         <table width=100% class="table table-hover" style="text-align:center;">
     <tr>
       <td>ID</td>
-      <td>标题</td>
-      <td>开始时间</td>
-      <td>结束时间</td>
-      <td>开放性</td>
-      <td>状态</td>
-      <td>编辑</td>
-      <td>复制</td>
-      <td>导出</td>
-      <td>日志</td>
-      <td>用户怀疑</td>
+      <td><?php echo $MSG_TITLE;?></td>
+      <td><?php echo $MSG_START_TIME;?></td>
+      <td><?php echo $MSG_END_TIME;?></td>
+      <td><?php echo $MSG_Public;?></td>
+      <td><?php echo $MSG_STATUS;?></td>
+      <td><?php echo $MSG_EDIT;?></td>
+      <td>COPY</td>
+      <td><?php echo $MSG_EXPORT;?></td>
+      <td>LOGS</td>
+      <td>SUSPECT</td>
     </tr>
     <?php
     foreach($result as $row){
@@ -128,20 +128,20 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<td>".$row['end_time']."</td>";
       $cid = $row['contest_id'];
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'."m$cid"])){
-        echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class='badge badge-info'>公开</span>":"<span class='badge badge-warning'>私有<span>")."</a></td>";
-        echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class='badge badge-success'>可用</span>":"<span class='badge badge-danger'>不可用</span>")."</a></td>";
-        echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">编辑</a></td>";
-        echo "<td><a href=contest_add.php?cid=".$row['contest_id'].">复制</a></td>";
+        echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class='badge badge-info'>$MSG_Public</span>":"<span class='badge badge-warning'>$MSG_Private<span>")."</a></td>";
+        echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class='badge badge-success'>Available</span>":"<span class='badge badge-danger'>Reserved</span>")."</a></td>";
+        echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">$MSG_EDIT</a></td>";
+        echo "<td><a href=contest_add.php?cid=".$row['contest_id'].">COPY</a></td>";
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-          echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">导出</a></td>";
+          echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">$MSG_EXPORT</a></td>";
         }else{
           echo "<td></td>";
         }
-        echo "<td> <a href=\"../export_contest_code.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">日志</a></td>";
+        echo "<td> <a href=\"../export_contest_code.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">LOGS</a></td>";
       }else{
-        echo "<td colspan=5 align=right><a href=contest_add.php?cid=".$row['contest_id'].">复制</a><td>";
+        echo "<td colspan=5 align=right><a href=contest_add.php?cid=".$row['contest_id'].">COPY</a><td>";
       }
-      echo "<td><a href='suspect_list.php?cid=".$row['contest_id']."'>用户怀疑</a></td>";
+      echo "<td><a href='suspect_list.php?cid=".$row['contest_id']."'>SUSPECT</a></td>";
       echo "</tr>";
     }
   ?>

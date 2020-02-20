@@ -1,4 +1,4 @@
-<div id=head >
+<div id=head>
 <nobr>
 <img height=100 src=<?php echo "template/".$OJ_TEMPLATE?>/image/logo.png>
 <img height=100 src=<?php echo "template/".$OJ_TEMPLATE?>/image/banner.jpg>
@@ -10,9 +10,8 @@
 	    <div class=menu_item >
 		<a href="<?php echo $OJ_HOME?>">
 		<img width=23 src=<?php echo "template/".$OJ_TEMPLATE?>/image/home.png>
-		<?php if ($url=="JudgeOnline") echo "<span style='color:orange'>";?>
-								<?php echo $MSG_HOME?>
-								<?php if ($url=="JudgeOnline") echo "</span>";?>
+		<?php if ($url=="") echo "<span style='color:orange'>";?>
+		<?php echo $MSG_HOME."</span>"?>
 		</a>
 		</div>
 		<div class=menu_item >
@@ -64,8 +63,8 @@
 		  <script type="text/javascript">dictInit();</script>
 		<?php }?>
 	</div><!--end menu-->
-<div id=profile >
-<script src="<?php echo 'template/'.$OJ_TEMPLATE?>/swProfile.php" ></script>
-</div><!--end profile-->
+        <div id=profile>
+            <script src="<?php echo 'template/'.$OJ_TEMPLATE?>/swProfile.php" ></script>
+        </div><!--end profile-->
 </div><!--end subhead-->
 </div>

@@ -12,23 +12,27 @@ $cur_path = "template/$OJ_TEMPLATE/";
 <a class="nav-link" href="/"><b><?php echo $OJ_NAME;?></b></a>
 </li>
 <li class="nav-item">
-<a class="nav-link<?php if ($url=='') echo ' active';?>" href="/">首页</a>
+<a class="nav-link<?php if ($url=='') echo ' active';?>" href="./"><?php echo $MSG_HOME?></a>
 <span class="line <?php if ($url=='') echo ' active';?>"></span>
 </li>
 <li class="nav-item">
-<a class="nav-link<?php if ($url=='problemset.php') echo ' active';?>" href="./problemset.php">题库</a>
+<a class="nav-link<?php if ($url=='faqs.php') echo ' active';?>" href="./faqs.php"><?php echo $MSG_FAQ?></a>
+<span class="line <?php if ($url=='faqs.php') echo ' active';?>"></span>
+</li>
+<li class="nav-item">
+<a class="nav-link<?php if ($url=='problemset.php') echo ' active';?>" href="./problemset.php"><?php echo $MSG_PROBLEMS?></a>
 <span class="line <?php if ($url=='problemset.php') echo ' active';?>"></span>
 </li>
 <li class="nav-item">
-<a class="nav-link<?php if ($url=='contest.php') echo ' active';?>" href="./contest.php">竞赛</a>
+<a class="nav-link<?php if ($url=='contest.php') echo ' active';?>" href="./contest.php"><?php echo $MSG_CONTEST?></a>
 <span class="line<?php if ($url=='contest.php') echo ' active';?>"></span>
 </li>
      <li class="nav-item">
-<a class="nav-link<?php if ($url=='status.php') echo ' active';?>" href="./status.php">状态</a>
+<a class="nav-link<?php if ($url=='status.php') echo ' active';?>" href="./status.php"><?php echo $MSG_STATUS?></a>
 <span class="line<?php if ($url=='status.php') echo ' active';?>"></span>
       </li> 
      <li class="nav-item">
-<a class="nav-link<?php if ($url=='ranklist.php') echo ' active';?>" href="./ranklist.php">排名</a>
+<a class="nav-link<?php if ($url=='ranklist.php') echo ' active';?>" href="./ranklist.php"><?php echo $MSG_RANKLIST?></a>
 <span class="line<?php if ($url=='ranklist.php') echo ' active';?>"></span>
       </li> 
       <?php 
@@ -48,15 +52,15 @@ $cur_path = "template/$OJ_TEMPLATE/";
       </a>
       <span class="line"></span>
       <div class="dropdown-content animated">
-        <div><a class="dropdown-item" href="./userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?>">个人信息</a></div>
-        <div><a class="dropdown-item" href="./modifypage.php">信息修改</a></div>
-        <div><a class="dropdown-item" href="./mail.php" style="position:relative">聊天<?php if ($if_new_mail) { ?>(有新消息)<?php } ?></a></div>
-        <div><a class="dropdown-item" href="./logout.php">注销</a></div>
+        <div><a class="dropdown-item" href="./userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id'];?>"><?php echo $MSG_USERINFO;?></a></div>
+        <div><a class="dropdown-item" href="./modifypage.php"><?php echo $MSG_REG_INFO;?></a></div>
+        <div><a class="dropdown-item" href="./mail.php" style="position:relative"><?php echo $MSG_MAIL;?><?php if ($if_new_mail) { ?>(有新消息)<?php } ?></a></div>
+        <div><a class="dropdown-item" href="./logout.php"><?php echo $MSG_LOGOUT;?></a></div>
         <?php 
         if ($_SESSION[$OJ_NAME.'_'.'administrator']) {
         ?>
         
-        <div><a class="dropdown-item" href="./bsadmin">管理</a></div>
+        <div><a class="dropdown-item" href="./bsadmin"><?php echo $MSG_ADMIN;?></a></div>
         <?php 
           }
         ?>
@@ -64,14 +68,29 @@ $cur_path = "template/$OJ_TEMPLATE/";
     </li>
       <?php } else {?>
       <li class="nav-item" style="float:right;margin-right:7%">
-        <a class="nav-link" href="./registerpage.php">注册</a>
+        <a class="nav-link" href="./registerpage.php"><?php echo $MSG_REGISTER;?></a>
 <span class="line"></span>
       </li> 
       <li class="nav-item" style="float:right;">
-        <a class="nav-link" href="./loginpage.php">登陆</a>
+        <a class="nav-link" href="./loginpage.php"><?php echo $MSG_LOGIN;?></a>
 <span class="line"></span>
       </li> 
       <?php } ?>
+      <li class="nav-item dropdown" style="margin-right:1%;float:right">
+      <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+        <span style="position:relative"><?php echo $MSG_LANG;?></span>
+        <span class="line"></span>
+      </a>
+      <span class="line"></span>
+      <div class="dropdown-content animated">
+        <div><a class="dropdown-item" href="./setlang.php?lang=cn">中文</a></div>
+        <div><a class="dropdown-item" href="./setlang.php?lang=en">English</a></div>
+        <div><a class="dropdown-item" href="./setlang.php?lang=ug">ئۇيغۇرچە</a></div>
+        <div><a class="dropdown-item" href="./setlang.php?lang=fa">فارسی</a></div>
+        <div><a class="dropdown-item" href="./setlang.php?lang=th">ไทย</a></div>
+        <div><a class="dropdown-item" href="./setlang.php?lang=ko">한국어</a></div>
+      </div>
+    </li>
 </ul>
 
 <div id=banner style="width:100%;height:200px;margin:0;background-image: url('./template/bshark/1.jpg');
@@ -94,16 +113,16 @@ var tac = 0;
         tac = 0;
 });
     if (tac == 1) {
-        navbar.style.backgroundColor = 'rgba(255,255,255,1)';
-        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#000;}.nav_ul li .line{background:#ed5f82;}";
+        navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#fff";else echo "#444";?>';
+        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:<?php if ($THEME_MOD == "light") echo "#000";else echo "#fff";?>;}.nav_ul li .line{background:<?php if ($THEME_MOD == "light") echo "#ed5f82";else echo "#FFD700";?>;}";
     } else if (pps > 150) {
-        navbar.style.boxShadow = '0px 1px 2px rgba(0,0,0,0.2)';
-    navbar.style.backgroundColor = 'rgba(255,255,255,1)';
-        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#000;}.nav_ul li .line{background:#ed5f82;}";
+        navbar.style.boxShadow = '0px 1px 2px <?php if ($THEME_MOD == "light") echo "#00000020";else echo "#ffffff20";?>';
+    navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#fff";else echo "#444";?>';
+        document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:<?php if ($THEME_MOD == "light") echo "#000";else echo "#fff";?>;}.nav_ul li .line{background:<?php if ($THEME_MOD == "light") echo "#ed5f82";else echo "#FFD700";?>;}";
     logolink.style.width = '98px';
     } else {
-        navbar.style.boxShadow = '0 0 0 0 rgba(0,0,0,0.5)';
-    navbar.style.backgroundColor = 'rgba(255,255,255,0)';
+        navbar.style.boxShadow = '0 0 0 0 <?php if ($THEME_MOD == "light") echo "#00000050";else echo "#ffffff50";?>';
+    navbar.style.backgroundColor = '<?php if ($THEME_MOD == "light") echo "#00000000";else echo "#ffffff00";?>';
         document.getElementById("navbarstyles").innerHTML = ".nav_ul li a{color:#fff;}.nav_ul li .line{background:#9ae3f3;}";
     logolink.style.width = '0px';
 }

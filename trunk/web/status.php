@@ -11,6 +11,76 @@ require_once('./include/memcache.php');
 require_once('./include/setlang.php');
 $view_title = "$MSG_STATUS";
 
+function formatTimeLength($length) {
+  $hour = 0;
+  $minute = 0;
+  $second = 0;
+  $result = '';
+
+  global $MSG_SECONDS, $MSG_MINUTES, $MSG_HOURS, $MSG_DAYS;
+
+  if ($length>=60) {
+    $second = $length%60;
+    
+    if ($second>0 && $second<10) {
+      $result = '0'.$second.' '.$MSG_SECONDS;}
+    else if ($second>0) {
+      $result = $second.' '.$MSG_SECONDS;
+    }
+
+    $length = floor($length/60);
+    if ($length >= 60) {
+      $minute = $length%60;
+      
+      if ($minute==0) {
+        if ($result != '') {
+          $result = '00'.' '.$MSG_MINUTES.' '.$result;
+        }
+      }
+      else if ($minute>0 && $minute<10) {
+        if ($result != '') {
+          $result = '0'.$minute.' '.$MSG_MINUTES.' '.$result;}
+        }
+        else {
+          $result = $minute.' '.$MSG_MINUTES.' '.$result;
+        }
+        
+        $length = floor($length/60);
+
+        if ($length >= 24) {
+          $hour = $length%24;
+
+        if ($hour==0) {
+          if ($result != '') {
+            $result = '00'.' '.$MSG_HOURS.' '.$result;
+          }
+        }
+        else if ($hour>0 && $hour<10) {
+          if($result != '') {
+            $result = '0'.$hour.' '.$MSG_HOURS.' '.$result;
+          }
+        }
+        else {
+          $result = $hour.' '.$MSG_HOURS.' '.$result;
+        }
+
+        $length = floor($length / 24);
+        $result = $length .$MSG_DAYS.' '.$result;
+      }
+      else {
+        $result = $length.' '.$MSG_HOURS.' '.$result;
+      }
+    }
+    else {
+      $result = $length.' '.$MSG_MINUTES.' '.$result;
+    }
+  }
+  else {
+    $result = $length.' '.$MSG_SECONDS;
+  }
+  return $result;
+}
+
 require_once("./include/my_func.inc.php");
 
 if (isset($OJ_LANG)) {
@@ -68,13 +138,18 @@ if (isset($_GET['cid'])) {
 }
 else {
   //require_once("oj-header.php");
-  if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) {
-    if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
-      $sql = "WHERE 1 ";
-  }
-  else {
-    $sql = "WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
-  }
+   if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
+	||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
+	||(isset($_SESSION[$OJ_NAME.'_'.'user_id'])
+	&&(isset($_GET['user_id'])&&$_GET['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']))
+  ){
+    if(isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
+                  $sql="WHERE problem_id>0  ";
+    }else if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
+                  $sql="WHERE (contest_id=0 or contest_id is null)  ";
+    }else{
+        $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
+    }
 }
 
 $start_first = true;
@@ -107,6 +182,8 @@ if (isset($_GET['problem_id']) && $_GET['problem_id']!="") {
       $problem_id = "";
   }
 }
+
+
 
 // check the user_id arg
 $user_id = "";
@@ -216,7 +293,10 @@ for ($i=0; $i<$rows_cnt; $i++) {
     $top = $row['solution_id'];
   
   $bottom = $row['solution_id'];
-  $flag = (!is_running(intval($row['contest_id']))) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!strcmp($row['user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']));
+  $flag = (!is_running(intval($row['contest_id']))) 
+  || isset($_SESSION[$OJ_NAME.'_'.'source_browser']) 
+  || isset($_SESSION[$OJ_NAME.'_'.'administrator']) 
+  || (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!strcmp($row['user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']));
 
   $cnt = 1-$cnt;
   
@@ -236,15 +316,40 @@ for ($i=0; $i<$rows_cnt; $i++) {
   }
 
   if ($row['contest_id']>0) {
-    $view_status[$i][2] = "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
-    if (isset($cid)) {
-      $view_status[$i][2] .= $PID[$row['num']];
+    if (time() < $end_time) {
+      $view_status[$i][2] = "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+      if (isset($cid)) {
+        $view_status[$i][2] .= $PID[$row['num']];
+      }
+      else {
+        $view_status[$i][2] .= $row['problem_id'];
+      }
+      $view_status[$i][2] .= "</div></a>";
     }
     else {
-      $view_status[$i][2] .= $row['problem_id'];
-    }
+      $view_status[$i][2] = "<div class=center>";
+      if (isset($cid)) {
 
-    $view_status[$i][2] .= "</div></a>";
+        //check the problem will be use remained contest/exam
+        $tpid = intval($row['problem_id']);
+        $sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
+          SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+            SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+          )
+        )";
+
+        $tresult = pdo_query($sql, $tpid);
+
+        if (intval($tresult) != 0)   //if the problem will be use remaind contes/exam
+          $view_status[$i][2] .= $PID[$row['num']]; //hide link
+        else
+          $view_status[$i][2] .= "<a href='problem.php?id=".$row['problem_id']."'>".$PID[$row['num']]."</a>";
+      }
+      else {
+        $view_status[$i][2] .= "<a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a>";
+      }
+      $view_status[$i][2] .= "</div>";
+    }
   }
   else {
     $view_status[$i][2] = "<div class=center><a href='problem.php?id=".$row['problem_id']."'>".$row['problem_id']."</a></div>";
@@ -337,17 +442,33 @@ for ($i=0; $i<$rows_cnt; $i++) {
       $view_status[$i][4] = "---";
       $view_status[$i][5] = "---";
     }
+    
+    
+    
+    
 
     //echo $row['result'];
-    if (!(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && strtolower($row['user_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id']) || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))) {
+    if (!(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && strtolower($row['user_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id']) 
+    || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))) {
       $view_status[$i][6] = $language_name[$row['language']];
     }
     else {
-      $view_status[$i][6] = "<a target=_self href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>";
+      if(time() < $end_time
+		||(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && strtolower($row['user_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id'])) 
+		||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
+	)
+        $view_status[$i][6] = "<a target=_self href=showsource.php?id=".$row['solution_id'].">".$language_name[$row['language']]."</a>";
+      else
+        $view_status[$i][6] = $language_name[$row['language']];
 
       if ($row["problem_id"]>0) {
         if ($row['contest_id']>0) {
-          $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
+         if (time() < $end_time
+		||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
+	 )
+            $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
+          else
+            $view_status[$i][6] .= "";
         }
         else {
           $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?id=".$row['problem_id']."&sid=".$row['solution_id']."\">Edit</a>";

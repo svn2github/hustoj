@@ -8,6 +8,7 @@
 <div id="wrapper">
 	<?php require_once("oj-header.php");?>
 <div id=main>
+	<h1><?php echo $OJ_NAME.' '.$MSG_RANKLIST?></h1>
 	<table align=center width=90%>
 		<thead>
 		<tr><td colspan=3 align=left>
@@ -15,36 +16,41 @@
 				<?php echo $MSG_USER?><input name=user>
 				<input type=submit value=Go>
 			</form></td><td colspan=3 align=right>
-			<a href=ranklist.php?scope=d>Day</a>
-			<a href=ranklist.php?scope=w>Week</a>
-			<a href=ranklist.php?scope=m>Month</a>
-			<a href=ranklist.php?scope=y>Year</a>
+	                <a href=ranklist.php?scope=d>$MSG_DAY</a>
+			<a href=ranklist.php?scope=w>$MSG_WEEK</a>
+			<a href=ranklist.php?scope=m>$MSG_MONTH</a>
+			<a href=ranklist.php?scope=y>$MSG_YEAR</a>
 			</td></tr>
 		<tr class='toprow'>
 				<td width=5% align=center><b><?php echo $MSG_Number?></b>
-				<td width=10% align=center><b><?php echo $MSG_NICK?></b>
-				<td width=55% align=center><b><?php echo $MSG_SIGN?></b>
+				<td width=10% align=center><b><?php echo $MSG_USER?></b>
+				<td width=55% align=center><b><?php echo $MSG_NICK?></b>
 				<td width=10% align=center><b><?php echo $MSG_AC?></b>
 				<td width=10% align=center><b><?php echo $MSG_SUBMIT?></b>
-				<td width=10% align=center><b><?php echo $MSG_POWER?></b>
+				<td width=10% align=center><b><?php echo $MSG_RATIO?></b>
 		</tr>
 		</thead>
 		<tbody>
 			<?php 
-			$cnt=0;
+			$cnt=0; $cnt1=0;
 			foreach($view_rank as $row){
 				if ($cnt) 
 					echo "<tr class='oddrow'>";
 				else
 					echo "<tr class='evenrow'>";
+				$cnt2=1;
 				foreach($row as $table_cell){
 					echo "<td>";
+					if($cnt==1&&$cnt2==1) echo"<img src='/template/mario/image/red.png' height=43px>";
+					else if($cnt==2&&$cnt2==2) echo"<img src='/template/mario/image/logo.png' height=43px>";
+					else if($cnt==3&&$cnt2==3) echo"<img src='/template/mario/image/green.png' height=43px>";
+					else echo"<img src='/template/mario/image/green.png' height=43px>";
 					echo "\t".$table_cell;
-					echo "</td>";
+					echo "</td>"; $cnt2++;
 				}
 				
 				echo "</tr>";
-				
+				$cnt1++;
 				$cnt=1-$cnt;
 			}
 			?>
@@ -64,7 +70,6 @@
 		echo "</center>";?>
 <div id=foot>
 	<?php require_once("oj-footer.php");?>
-
 </div><!--end foot-->
 </div><!--end main-->
 </div><!--end wrapper-->

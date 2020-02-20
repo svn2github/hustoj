@@ -7,7 +7,7 @@
 	$MSG_STATUS="状态";
 	$MSG_RANKLIST="排名";
 	$MSG_CONTEST="竞赛&作业";
-  $MSG_RECENT_CONTEST="名校联赛";
+        $MSG_RECENT_CONTEST="名校联赛";
 	$MSG_LOGOUT="注销";
 	$MSG_LOGIN="登录";
 	$MSG_LOST_PASSWORD="忘记密码";
@@ -35,10 +35,10 @@
 	$MSG_Runtime_Click="运行错误(点击看详细)";
 	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
-  $MSG_Click_Detail="点击看详细";
-  $MSG_Manual="人工判题";
-  $MSG_OK="确定";
-  $MSG_Explain="输入判定原因与提示";
+        $MSG_Click_Detail="点击看详细";
+        $MSG_Manual="人工判题";
+        $MSG_OK="确定";
+        $MSG_Explain="输入判定原因与提示";
   
 	//fool's day
 	if(date('m')==4&&date('d')==1&&rand(0,100)<10){
@@ -53,7 +53,7 @@
 		$MSG_Compile_OK="人品问题-愚人节快乐";
 	}
   
-  $MSG_TEST_RUN="运行完成";
+        $MSG_TEST_RUN="运行完成";
 
 	$MSG_RUNID="提交编号";
 	$MSG_USER="用户";
@@ -106,7 +106,10 @@
 	$MSG_NICK="昵称";
 	$MSG_SOVLED="解决";
 	$MSG_RATIO="比率";
-	
+	$MSG_DAY="日排行";
+ 	$MSG_WEEK="周排行";
+	$MSG_MONTH="月排行";
+	$MSG_YEAR="年排行";
 	//registerpage.php
 	$MSG_USER_ID="用户名（学号）";
 	$MSG_PASSWORD="密码";

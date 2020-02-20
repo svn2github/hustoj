@@ -7,7 +7,7 @@
 	$MSG_STATUS="Status";
 	$MSG_RANKLIST="Ranklist";
 	$MSG_CONTEST="Contest";
-  $MSG_RECENT_CONTEST="Recent";
+  	$MSG_RECENT_CONTEST="Recent";
 	$MSG_LOGOUT="Logout";
 	$MSG_LOGIN="Login";
 	$MSG_LOST_PASSWORD="Lost Password";
@@ -36,26 +36,12 @@
 	$MSG_Compile_Click="Compile Error(Click)";
 	$MSG_Compile_OK="Compile OK";
 	$MSG_Click_Detail="Click To View Detail";
-  $MSG_Manual="Manual Judge";
-  $MSG_OK="OK";
-  $MSG_Explain="Type reason or explaination";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	$MSG_TEST_RUN="Test Running Done";
-   
-  $MSG_RUNID="RunID";
+  	$MSG_Manual="Manual Judge";
+ 	 $MSG_OK="OK";
+ 	 $MSG_Explain="Type reason or explaination";
+         $TEST_RUN="Test Running Done";
+  	
+ 	$MSG_RUNID="RunID";
 	$MSG_USER="User";
 	$MSG_PROBLEM="Problem";
 	$MSG_RESULT="Result";
@@ -106,6 +92,10 @@
 	$MSG_NICK="Nick Name";
 	$MSG_SOVLED="Solved";
 	$MSG_RATIO="Ratio";
+	$MSG_DAY="Day-Rank";
+	$MSG_WEEK="Week-Rank";
+	$MSG_MONTH="Month-Rank";
+	$MSG_YEAR="Year-Rank";
 	
 	//registerpage.php
 	$MSG_USER_ID="User ID";

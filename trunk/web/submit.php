@@ -269,12 +269,22 @@ if (~$OJ_LANGMASK & (1 << $language)) {
 	$sql = "insert INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,contest_id,num,result)
 		VALUES(?,?,?,NOW(),?,?,?,?,?,14)";
 	if ((stripos($title,$OJ_NOIP_KEYWORD)!==false) && isset($OJ_OI_1_SOLUTION_ONLY) && $OJ_OI_1_SOLUTION_ONLY) {
-	    pdo_query(
+	    $delete=pdo_query(
 		"delete from solution where contest_id=? and user_id=? and num=?",
 		$cid,
 		$user_id,
 		$pid
 	    );
+	    if($delete>0){
+		$sql_fix="update problem p inner join 
+				(select problem_id pid ,count(1) ac from solution where problem_id=? and result=4) s 
+				on p.problem_id=s.pid set p.accepted=s.ac;";
+		$fixed=pdo_query($sql_fix,$id);
+		$sql_fix="update problem p inner join 
+				(select problem_id pid ,count(1) submit from solution where problem_id=?) s 
+				on p.problem_id=s.pid set p.submit=s.submit;";
+		$fixed=pdo_query($sql_fix,$id);
+	    }
 	}
 	$insert_id = pdo_query(
 	    $sql,
@@ -368,7 +378,7 @@ if ($OJ_MEMCACHE) {
 
 $statusURI = "status.php?user_id=" . $_SESSION[$OJ_NAME . '_' . 'user_id'];
 if (isset($cid)) {
-    $statusURI .= "&cid=$cid";
+    $statusURI .= "&cid=$cid&fixed=";
 }
 
 if (!$test_run) {

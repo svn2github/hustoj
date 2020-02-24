@@ -101,7 +101,8 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
 </div></div><br><div class="card"><div class="card-body">
     <h4>关于<?php echo $OJ_NAME;?></h4>
     <p>This ACM/ICPC OnlineJudge is a GPL product from hustoj<br>hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。<br>本OJ基于Hustoj，采用BShark主题，BShark主题由<a href="http://github.com/yemaster">yemaster</a>开发<br>
-    <a href="https://github.com/zhblue/hustoj">请到GitHub来给我们加star!</a>
+	    <a href="https://github.com/zhblue/hustoj">请到GitHub来给我们加star!</a><br>
+	    <b>如果你想要更丰富的功能，请使用更高级的<a href="https://yemaster.coding.net/p/MasterOJ/d/MasterOJ/git/tree/master">MasterOJ</a></b>
     </p>
     </div></div>
     </div>

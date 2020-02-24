@@ -313,6 +313,7 @@ body {
     z-index: 20000;
     transition: all 0.1s;
     left: 0;
+    box-shadow: 0 4px 8px #00000060;
 }
 
 @media (max-width: 1200px) {
@@ -461,3 +462,42 @@ ul {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding-top: 10px;
 }
+
+    #lowmenuchild1{
+        z-index: 1;
+    }
+    .footer {
+        bottom:-1;
+        float:top;
+        top:50px;
+        margin-top:50px;
+        z-index: 0;
+        width:100%;
+        position:relative;
+        overflow: hidden;
+        height: 220px;
+        box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.2);
+        background-color: #fff;
+    }
+    
+    .topfooter {
+        margin-right:5% ;
+        margin-left:7% ;
+        margin-top:2% ;
+    }
+    
+    .list1 {
+        float:left;
+        width:15%;
+    }
+    
+    .list2 {
+        float:right;
+        width:200px;
+    }
+    
+    .footer a:hover {
+        text-decoration:underline
+    }
+    
+    .testdiv *{ vertical-align:top ; }

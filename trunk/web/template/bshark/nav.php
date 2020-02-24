@@ -92,7 +92,7 @@ $cur_path = "template/$OJ_TEMPLATE/";
       </div>
     </li>
 </ul>
-
+<?php if ($THEME_BANNER != "hidden") { ?>
 <div id=banner style="width:100%;height:200px;margin:0;background-image: url('./template/bshark/1.jpg');
 background-position: center center;
 background-repeat: no-repeat;
@@ -128,3 +128,4 @@ var tac = 0;
 }
 }, 200);
 </script>
+<?php } else echo "<br><br>"; ?>

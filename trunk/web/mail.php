@@ -8,17 +8,22 @@
 	 
 	if(
 		(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
-		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)||
-		(isset($OJ_MAIL)&&!$OJ_MAIL)
+		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
+		
 	  ){
 		header("Content-type: text/html; charset=utf-8");
 		$view_errors=$MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
   		require("template/".$OJ_TEMPLATE."/error.php");
 		exit ();
 	}
-
+	if(isset($OJ_MAIL)&&!$OJ_MAIL){
+		header("Content-type: text/html; charset=utf-8");
+		$view_errors=$MSG_NO_MAIL_HERE;
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
+	}
 	$view_title=$MSG_MAIL;
- $to_user="";
+$to_user="";
 $title="";
 if (isset($_GET['to_user'])){
 	$to_user=htmlentities($_GET['to_user'],ENT_QUOTES,"UTF-8");

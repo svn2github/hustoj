@@ -190,6 +190,7 @@
   $MSG_MODIFY_NOT_ALLOWED_FOR_EXAM="You can't change password during examing or contest on site.";
   $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="You can't use mail during examing.";
   $MSG_LOAD_TEMPLATE_CONFIRM="Do you want to reload template?\\n You may lost all code that you've typed here!";
+  $MSG_NO_MAIL_HERE="This OJ doesn't support Mail.";  
 
   $MSG_BLOCKLY_OPEN="Blockly"; 
   $MSG_BLOCKLY_TEST="Blockly Test Run"; 

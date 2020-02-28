@@ -182,7 +182,7 @@
         }else{
 					echo "<a class='btn btn-info btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask' role='button'>$MSG_SUBMIT</a>";
         }
-        //echo "[<a href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>]";
+        if ($OJ_BBS) echo "<a class='btn btn-warning btn-sm' href='bbs.php?pid=".$row['problem_id']."$ucid'>$MSG_BBS</a>";
         ?>
 				</div>
 			</center>
@@ -201,7 +201,8 @@
 			$.post( "admin/phpfm.php", {
 				'frame': 3,
 				'pid': pid,
-				'pass': ''
+				'pass': '',
+				'csrf': '<?php echo $token?>'
 			}, function ( data, status ) {
 				if ( status == "success" ) {
 					document.location.href = "admin/phpfm.php?frame=3&pid=" + pid;

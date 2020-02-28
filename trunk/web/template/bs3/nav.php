@@ -50,7 +50,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
 	      <?php }?>
 	      <?php if(!isset($OJ_ON_SITE_CONTEST_ID)){?>
 	      <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
-              		<li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php"><?php echo $MSG_BBS?></a></li>
+              		<li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><?php echo $MSG_BBS?></a></li>
               <?php }?>
 	      <li <?php if ($url=="problemset.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>problemset.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> <?php echo $MSG_PROBLEMS?></a></li>
               <li <?php if ($url=="category.php") echo " $ACTIVE";?>> <a href="<?php echo $path_fix?>category.php"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> <?php echo $MSG_SOURCE?></a></li>

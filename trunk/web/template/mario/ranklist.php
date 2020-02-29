@@ -16,10 +16,10 @@
 				<?php echo $MSG_USER?><input name=user>
 				<input type=submit value=Go>
 			</form></td><td colspan=3 align=right>
-	                <a href=ranklist.php?scope=d>$MSG_DAY</a>
-			<a href=ranklist.php?scope=w>$MSG_WEEK</a>
-			<a href=ranklist.php?scope=m>$MSG_MONTH</a>
-			<a href=ranklist.php?scope=y>$MSG_YEAR</a>
+	                <a href=ranklist.php?scope=d><?php echo $MSG_DAY?></a>
+			<a href=ranklist.php?scope=w><?php echo $MSG_WEEK?></a>
+			<a href=ranklist.php?scope=m><?php echo $MSG_MONTH?></a>
+			<a href=ranklist.php?scope=y><?php echo $MSG_YEAR?></a>
 			</td></tr>
 		<tr class='toprow'>
 				<td width=5% align=center><b><?php echo $MSG_Number?></b>
@@ -32,18 +32,19 @@
 		</thead>
 		<tbody>
 			<?php 
-			$cnt=0; $cnt1=0;
+			$cnt=0; $cnt1=1;
 			foreach($view_rank as $row){
 				if ($cnt) 
 					echo "<tr class='oddrow'>";
 				else
 					echo "<tr class='evenrow'>";
 				$cnt2=1;
+
 				foreach($row as $table_cell){
 					echo "<td>";
-					if($cnt==1&&$cnt2==1) echo"<img src='/template/mario/image/red.png' height=43px>";
-					else if($cnt==2&&$cnt2==1) echo"<img src='/template/mario/image/logo.png' height=43px>";
-					else if($cnt==3&&$cnt2==1) echo"<img src='/template/mario/image/green.png' height=43px>";
+					if($cnt1==1&&$cnt2==1) echo"<img src='/template/mario/image/red.png' height=43px>";
+					else if($cnt1==2&&$cnt2==1) echo"<img src='/template/mario/image/logo.png' height=43px>";
+					else if($cnt1==3&&$cnt2==1) echo"<img src='/template/mario/image/green.png' height=43px>";
 					echo "\t".$table_cell;
 					echo "</td>"; $cnt2++;
 				}

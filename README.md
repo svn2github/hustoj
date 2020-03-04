@@ -51,8 +51,6 @@ Star us, please!
 
 [基于Ubuntu18.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1804%E5%AE%89%E8%A3%85)
 
-[基于Ubuntu16.04安装](#%E5%9F%BA%E4%BA%8Eubuntu1604%E5%AE%89%E8%A3%85)
-
 [基于Deepin深度15安装](#%E5%9F%BA%E4%BA%8Edeepin15%E5%AE%89%E8%A3%85)
 
 [基于Centos安装](#%E5%9F%BA%E4%BA%8Ecentos%E5%AE%89%E8%A3%85)
@@ -184,14 +182,6 @@ sudo bash install-ubuntu18-gitee.sh
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
     sudo bash install-ubuntu18.04.sh
     
-基于Ubuntu16.04安装 / 腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)
---
-首先安装ubuntu16.04（如果没有18再选这个），然后用下面脚本快速安装OJ：  
-
-    wget https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu16+.sh
-    sudo bash install-ubuntu16+.sh
-
-https://www.youtube.com/watch?v=nlhmfZqyHnA 
     
 基于Deepin15+安装
 --

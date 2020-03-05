@@ -1,31 +1,31 @@
 <?php
-$sql='SELECT * FROM `problem`';
+$sql='SELECT COUNT(1) FROM `problem`';
 $result=pdo_query($sql);
-$problem_count=count($result);
-$sql='SELECT * FROM `users`';
+$problem_count=$result[0][0];
+$sql='SELECT COUNT(1) FROM `users`';
 $result=pdo_query($sql);
-$user_count=count($result);
-$sql='SELECT * FROM `solution`';
-$result=pdo_query($sql);
-$submit_count=count($result);
-$sql='SELECT * FROM `users` WHERE `user_id`=?';
+$user_count=$result[0][0];
+$sql='SELECT COUNT(1) FROM `solution`';
+$result=pdo_query($sql);                     
+$submit_count=$result[0][0];
+$sql='SELECT solved FROM `users` WHERE `user_id`=?';
 $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
-$ac_count=$result[0]['solved'];
-$sql='SELECT * FROM `news` WHERE `importance`<0 AND `defunct`!="Y"';
-$result=pdo_query($sql);
+$ac_count=$result[0]['solved'];                
+$sql='SELECT * FROM `news` WHERE `importance`<0 AND `defunct`!="Y"'; 
+$result=pdo_query($sql);                    
 $res=$result;
-$day[1] = strtotime(date('Y-m-d',time()));
-$day[0] = $day[1] + 60*60*24;
-$day[2] = $day[1] - 60*60*24;
-$day[3] = $day[2] - 60*60*24;
-$day[4] = $day[3] - 60*60*24;
-$day[5] = $day[4] - 60*60*24;
-$day[6] = $day[5] - 60*60*24;
-$day[7] = $day[6] - 60*60*24;
-$sql ='SELECT * FROM `solution` WHERE UNIX_TIMESTAMP(`in_date`)>=? AND UNIX_TIMESTAMP(`in_date`)<?';
-for ($csadff = 1; $csadff <= 7; ++$csadff) {
-    $subcount[$csadff] = count(pdo_query($sql, $day[$csadff], $day[$csadff - 1]));
-    $account[$csadff] = count(pdo_query($sql.' AND `result`=4', $day[$csadff], $day[$csadff - 1]));
+$day[1] = strtotime(date('Y-m-d',time()));  
+$day[0] = $day[1] + 60*60*24;               
+$day[2] = $day[1] - 60*60*24;               
+$day[3] = $day[2] - 60*60*24;               
+$day[4] = $day[3] - 60*60*24;               
+$day[5] = $day[4] - 60*60*24;               
+$day[6] = $day[5] - 60*60*24;               
+$day[7] = $day[6] - 60*60*24;               
+$sql ='SELECT COUNT(1) FROM `solution` WHERE UNIX_TIMESTAMP(`in_date`)>=? AND UNIX_TIMESTAMP(`in_date`)<?';
+for ($csadff = 1; $csadff <= 7; ++$csadff) { 
+    $subcount[$csadff] = pdo_query($sql, $day[$csadff], $day[$csadff - 1])[0][0];
+    $account[$csadff] = pdo_query($sql.' AND `result`=4', $day[$csadff], $day[$csadff - 1])[0][0];
 }
 ?>
 

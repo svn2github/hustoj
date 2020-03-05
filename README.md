@@ -219,6 +219,8 @@ docker run -d           \
     registry.gitlab.com/mgdream/hustoj
 ```
 
+由于Web端/数据库/判题机全部被打包在同一个镜像，无法扩展，不推荐使用此镜像做分布式判题，另外请不要在Docker中使用SHM文件系统，会由于内存空间不足无法挂载沙箱环境而导致莫名其妙的运行错误
+
 部署后使用浏览器访问[http://localhost:8080](http://localhost:8080)
 
 基于其他发行版安装

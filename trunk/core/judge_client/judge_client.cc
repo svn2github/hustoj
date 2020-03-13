@@ -2445,7 +2445,7 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 			if(usedtime> real_limit) ACflg = OJ_TL;    // 单点超过
 		}else if(num_of_test>0){                        // 如果数据点不为0，且限制单点时间
 			real_limit=num_of_test*time_lmt*1000;
-			if(total_time>real_limit) ACflg = OJ_TL;  //总时间超过测试点数*限制
+			//if(total_time>real_limit) ACflg = OJ_TL;  //总时间超过测试点数*限制
 			if(usedtime> time_lmt*1000) ACflg = OJ_TL; // 单点超过限制
 		}else{                                            //测试数为0 ，这种情况不应该出现，但给出，作为保险。
 			real_limit=time_lmt*1000; // fallback

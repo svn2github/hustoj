@@ -79,23 +79,17 @@ include_once("kindeditor.php");
     <div><input type="number" name="time_limit" class="form-control" style="width:40%;display:inline" size=20 value="<?php echo $row['time_limit'];?>">秒
     <input type="number" name="memory_limit" class="form-control" style="width:40%;display:inline" size=20 value="<?php echo $row['memory_limit'];?>">MB</div>
     <lable for=description>题目描述</lable>
-    <textarea name='description' rows=15 class="kindeditor" ><?php echo htmlentities($row['description'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='description' rows=15 class="kindeditor" ><?php echo htmlentities($row['description'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=input>输入格式</lable>
-    <textarea name='input' rows=15 class="kindeditor" ><?php echo htmlentities($row['input'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='input' rows=15 class="kindeditor" ><?php echo htmlentities($row['input'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=output>输出格式</lable>
-    <textarea name='output' rows=15 class="kindeditor" ><?php echo htmlentities($row['output'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='output' rows=15 class="kindeditor" ><?php echo htmlentities($row['output'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=sample_input>样例输入</lable>
-    <textarea name='sample_input' rows=15  class='form-control'><?php echo htmlentities($row['sample_input'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='sample_input' rows=15  class='form-control'><?php echo htmlentities($row['sample_input'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=sample_output>样例输出</lable>
-    <textarea name='sample_output' rows=15  class='form-control'><?php echo htmlentities($row['sample_output'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='sample_output' rows=15  class='form-control'><?php echo htmlentities($row['sample_output'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=hint>提示</lable>
-    <textarea name='hint' rows=15 class="kindeditor" ><?php echo htmlentities($row['hint'],ENT_QUOTES,"UTF-8")?>
-        </textarea><br>
+    <textarea name='hint' rows=15 class="kindeditor" ><?php echo htmlentities($row['hint'],ENT_QUOTES,"UTF-8")?></textarea><br>
     <lable for=source>来源</lable>
     <textarea name='source' rows=1 class="form-control"><?php echo htmlentities($row['source'],ENT_QUOTES,"UTF-8")?></textarea><br>
      <label for=spj>Special Judge：</label>

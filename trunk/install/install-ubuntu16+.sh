@@ -53,7 +53,9 @@ else
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
-	sed -i "s:php7.0:php7.2:g" /etc/nginx/sites-enabled/default
+	if [ -f "/run/php/php7.2-fpm.sock" ]; then
+  		sed -i "s:php7.0:php7.2:g" /etc/nginx/sites-enabled/default
+	fi
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart

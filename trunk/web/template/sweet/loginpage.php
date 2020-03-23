@@ -23,14 +23,14 @@ $cur_path = "template/$OJ_TEMPLATE/"
                 <div class="col_md_login">
                     <div class="cont_ba_opcitiy">
                         <h2><?php echo $MSG_LOGIN?></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <p>Click Button Below</p>
                         <button class="btn_login" onClick="cambiar_login()"><?php echo $MSG_LOGIN?></button>
                     </div>
                 </div>
                 <div class="col_md_sign_up">
                     <div class="cont_ba_opcitiy">
                         <h2><?php echo $MSG_REGISTER?></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <p>Click Button Below</p>
                         <button class="btn_sign_up" onClick="cambiar_sign_up()"><?php echo $MSG_REGISTER?></button>
                     </div>
                 </div>

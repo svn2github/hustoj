@@ -1931,6 +1931,8 @@ void copy_python_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("mkdir -p %s/usr/include", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
+	execute_cmd("mount -o bind /dev %s/dev", work_dir);
+	
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);
 	execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
@@ -1965,6 +1967,10 @@ void copy_python_runtime(char *work_dir)
 		execute_cmd("cp -a /usr/local/lib/python3* %s/usr/local/lib/", work_dir);
 #endif
 	}
+	execute_cmd("cp /usr/lib/lapack/liblapack.so.3.0 %s/usr/lib/liblapack.so.3", work_dir);
+	execute_cmd("cp /usr/lib/libblas/libblas.so.3.0 %s/usr/lib/libblas.so.3", work_dir);
+	execute_cmd("cp /usr/lib/x86_64-linux-gnu/libgfortran.so.3 %s/usr/lib/", work_dir);
+	execute_cmd("cp /usr/lib/x86_64-linux-gnu/libquadmath.so.0 %s/usr/lib", work_dir);
 #ifdef __mips__
 	execute_cmd("/bin/cp -a /lib64/libpthread.so.0 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp -a /lib64/libutil.so.1 %s/lib64/", work_dir);

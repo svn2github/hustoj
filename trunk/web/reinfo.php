@@ -15,7 +15,7 @@ if (!isset($_GET['sid'])){
 function is_valid($str2){
     global $_SESSION,$OJ_NAME;
     if(isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) return true;
-    //return true; // 如果希望能让任何人都查看对比和RE,放开行首注释 if you fail to view diff , try remove the // at beginning of this line.
+    //return true; // 如果希望能让任何人都查看对比和RE,放开行首注释，并设定$OJ_SHOW_DIFF=true; if you fail to view diff , try remove the // at beginning of this line.
     $n=strlen($str2);
     $str=str_split($str2);
     $m=1;

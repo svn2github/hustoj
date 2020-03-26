@@ -169,14 +169,14 @@ Star us, please!
 ```
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ```
-基于Ubuntu18.04 通过gitee安装 / 腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)
+基于Ubuntu18.04 通过gitee安装 / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11KMMZqy)
 --
 ```
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
 sudo bash install-ubuntu18-gitee.sh
 ```
 
-基于Ubuntu18.04安装  / 腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)
+基于Ubuntu18.04安装  / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11KMMZqy)
 --
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh

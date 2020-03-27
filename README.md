@@ -156,7 +156,7 @@ Star us, please!
 
 <b>不要</b>使用LNMP/LAMP/Cpanel/其他面板程序提供的Mysql Nginx Apache PHP 环境，安装脚本已经包含所有必须环境的安装。
 
-腾讯云用户请[换软件源](https://yq.aliyun.com/articles/704603)，增加multiverse。
+腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)，增加multiverse。
 
 阿里云用户请百度“阿里云 80端口”
 
@@ -169,14 +169,14 @@ Star us, please!
 ```
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ```
-基于Ubuntu18.04 通过gitee安装 / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11KMMZqy)
+基于Ubuntu18.04 通过gitee安装 / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)
 --
 ```
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
 sudo bash install-ubuntu18-gitee.sh
 ```
 
-基于Ubuntu18.04安装  / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11KMMZqy)
+基于Ubuntu18.04安装  / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)
 --
 
     wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh

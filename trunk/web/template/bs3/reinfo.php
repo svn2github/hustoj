@@ -55,6 +55,9 @@ pats[5]=/Alarm clock/;
 exps[5]="进程因为时间原因被杀死，检查是否有死循环，本错误等价于超时TLE";
 pats[6]=/CALLID:20/;
 exps[6]="可能存在数组越界，检查题目描述的数据量与所申请数组大小关系";
+pats[7]=/ArrayIndexOutOfBoundsException/;
+exps[7]="检查数组越界的情况";
+
 function explain(){
 //alert("asdf");
 var errmsg=$("#errtxt").text();

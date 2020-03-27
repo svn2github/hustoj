@@ -160,6 +160,8 @@ pats[61]=/解析时已到达文件结尾/;
 exps[61]="程序末尾缺少大括号";
 pats[62]=/非法字符/;
 exps[62]="检查是否使用了中文标点或空格";
+pats[63]=/应在名为.*的文件中声明/;
+exps[63]="OJ中public类只能是Main";
 
 function explain(){
 //alert("asdf");

@@ -10,6 +10,15 @@ When people asked question, we put the answer here
 新版本
 ----
 
+如何显示MathJax语法的公式？
+--
+修改[db_info.inc.php](https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L57)设置
+```
+static  $OJ_MATHJAX=true;  // 激活mathjax
+```
+需要用户能够正常访问互联网，内网用户需要自行部署mathjax内网镜像，并修改template/bs3/problem.php中相关路径。
+
+
 如何启用查重机制？
 --
 修改/home/judge/etc/judge.conf，设置

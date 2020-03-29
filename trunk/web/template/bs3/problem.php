@@ -19,6 +19,21 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
+<?php if (isset($OJ_MATHJAX)&&$OJ_MATHJAX){?>
+    <!--以下为了加载公式的使用而既加入-->
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+  </script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+.jumbotron1{ 
+    font-size: 18px; 
+}
+</style>
+<?php } ?>
+<!--数学公式js加载完毕-->
 </head>
 
 <body>

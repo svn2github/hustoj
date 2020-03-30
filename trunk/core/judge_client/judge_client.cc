@@ -2588,7 +2588,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		if (WIFEXITED(status))
 			break;
-		if ((lang < 4 || lang == 9) && get_file_size("error.out") && !oi_mode)
+		if ((lang < 4||lang == 5 || lang == 9) && get_file_size("error.out") && !oi_mode)
 		{
 			ACflg = OJ_RE;
 			//addreinfo(solution_id);
@@ -3138,7 +3138,8 @@ int main(int argc, char **argv)
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 		}
-		if (ACflg == OJ_RE)
+		if(DEBUG) printf("custom running result:%d PEflg:%d\n",ACflg,PEflg);
+		if (ACflg == OJ_RE||get_file_size("error.out")>0)
 		{
 			if (DEBUG)
 				printf("add RE info of %d..... \n", solution_id);

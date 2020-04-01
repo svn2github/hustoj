@@ -49,6 +49,8 @@ Star us, please!
 
 [校园网安装](#校园网安装)
 
+[基于 Ubuntu 20.04 安装（Preview）](#基于-ubuntu-2004-安装)
+
 [基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装-腾讯云用户请换软件源)
 
 [基于Deepin深度15安装](#基于-deepin-15-安装)
@@ -151,6 +153,13 @@ Star us, please!
 
 ```bash
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
+```
+
+### 基于 Ubuntu 20.04 安装
+
+```bash
+wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20.04.sh
+sudo bash install-ubuntu20.04.sh
 ```
 
 ### 基于 Ubuntu 18.04 通过 Gitee 安装 / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)

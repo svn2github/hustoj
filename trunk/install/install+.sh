@@ -4,6 +4,7 @@ centos7=`cat /etc/os-release | grep PRETTY_NAME | grep CentOS | grep 7 `
 ubuntu14=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 14`
 ubuntu16=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 16`
 ubuntu18=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 18`
+ubuntu20=`cat /etc/os-release | grep PRETTY_NAME | grep Ubuntu | grep 20`
 
 # remind: centos7 doesn't install wget with minimal installation and ubuntu doesn't install curl by default !!!
 
@@ -22,6 +23,10 @@ elif [ -n "${ubuntu18}" ];then
     echo "Ubuntu18.* detected" ;
     sudo apt-get -y install curl ;
     sudo curl https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu18.04.sh | sudo bash ;
+elif [ -n "${ubuntu20}" ];then
+    echo "Ubuntu18.* detected" ;
+    sudo apt-get -y install curl ;
+    sudo curl https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/install/install-ubuntu20.04.sh | sudo bash ;
 else
     echo "Not support yet system release"
 fi

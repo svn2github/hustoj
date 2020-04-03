@@ -170,6 +170,7 @@ sudo bash install-ubuntu18-gitee.sh
 ```
 
 ### 基于 Ubuntu 18.04 安装  / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)
+### 各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机 ###
 
 ```bash
 wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh

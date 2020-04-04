@@ -42,7 +42,8 @@ function submitSolution($pid,$solution,$language)
 	pdo_query( $sql ,$insert_id,$solution);
 	$sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";
 	pdo_query( $sql,$insert_id,$solution );
-    pdo_query("update solution set result=1 where solution_id=?",$insert_id);
+        pdo_query("update solution set result=1 where solution_id=?",$insert_id);
+	pdo_query("update problem set submit=submit+1 where problem_id=?",$pid);
 }
 ?>
 Import Free Problem Set ... <br>

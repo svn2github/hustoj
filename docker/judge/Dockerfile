@@ -1,9 +1,10 @@
 FROM ubuntu:18.04
 
-COPY docker/sources.list /etc/apt/sources.list
+COPY trunk/install/sources.list.sh /opt/sources.list.sh
 
 # Linux: Aliyun Apt Mirrors.
-RUN apt-get -y update  && \
+RUN bash /opt/sources.list.sh &&\
+    apt-get -y update  && \
     apt-get -y upgrade && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get -y install --no-install-recommends \

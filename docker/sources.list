@@ -1,3 +1,0 @@
-deb [arch=amd64] http://mirrors.aliyun.com/ubuntu bionic main restricted universe multiverse
-deb [arch=amd64] http://mirrors.aliyun.com/ubuntu bionic-security main restricted universe multiverse
-deb [arch=amd64] http://mirrors.aliyun.com/ubuntu bionic-updates main restricted universe multiverse

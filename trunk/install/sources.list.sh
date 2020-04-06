@@ -2,6 +2,8 @@
 
 codename=`cat /etc/os-release | grep UBUNTU_CODENAME | awk -F '=' '{print $2}'`
 
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+
 cat >/etc/apt/sources.list <<EOF
 # See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
 # newer versions of the distribution.

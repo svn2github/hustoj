@@ -51,7 +51,9 @@ Star us, please!
 
 [基于 Ubuntu 20.04 安装（Preview）](#基于-ubuntu-2004-安装)
 
-[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装-腾讯云用户请换软件源)
+[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装) **各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
+
+**[Ubuntu 更换软件源](#ubuntu-更换软件源)**
 
 [基于Deepin深度15安装](#基于-deepin-15-安装)
 
@@ -162,21 +164,31 @@ wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20.
 sudo bash install-ubuntu20.04.sh
 ```
 
-### 基于 Ubuntu 18.04 通过 Gitee 安装 / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)
+### 基于 Ubuntu 18.04 通过 Gitee 安装
+
+**腾讯云用户请使用下方脚本[换软件源](https://developer.aliyun.com/mirror/ubuntu)**
 
 ```bash
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
 sudo bash install-ubuntu18-gitee.sh
 ```
 
-### 基于 Ubuntu 18.04 安装  / 腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)
-### 各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机 ###
+### 基于 Ubuntu 18.04 安装
+
+**腾讯云用户请使用下方脚本[换软件源](https://developer.aliyun.com/mirror/ubuntu)**
+
+**各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
 
 ```bash
 wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
 sudo bash install-ubuntu18.04.sh
 ```
-    
+### Ubuntu 更换软件源
+
+```bash
+wget https://github.com/zhblue/hustoj/raw/master/trunk/install/update-sources-ubuntu.sh
+sudo bash update-sources-ubuntu.sh
+```
     
 ### 基于 Deepin 15+ 安装
 

@@ -194,7 +194,7 @@ if (isset($_GET['cid'])) {
 
 		if($now < $end_time) { //during contest/exam time
 			$view_problemset[$cnt][1] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$PID[$cnt]."</a>";
-			$view_problemset[$cnt][2] = $row['title'];
+			$view_problemset[$cnt][2] = "<a href='problem.php?cid=$cid&pid=$cnt'>".$row['title']."</a>"; 
 		}
 		else {               //over contest time
 			//check the problem will be use remained contest/exam

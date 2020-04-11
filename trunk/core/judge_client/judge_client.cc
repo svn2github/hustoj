@@ -497,7 +497,7 @@ void init_mysql_conf()
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 		}
-		//fclose(fp);
+		fclose(fp);
 	}
 //	fclose(fp);
 	

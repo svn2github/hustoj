@@ -240,7 +240,7 @@ void init_mysql_conf() {
 				oj_lang_set, oj_tot, oj_mod, 2 *max_running );
 #endif
 		sleep_tmp = sleep_time;
-		//	fclose(fp);
+			fclose(fp);
 	}
 }
 

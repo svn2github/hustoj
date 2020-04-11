@@ -23,6 +23,19 @@ setpropertiy DB_NAME quate
 setpropertiy DB_USER quate
 setpropertiy DB_PASS quate
 
+# List all `static $OJ_X=X;` format lines and auto set from env
+while read line;do
+  pair=`echo $line | grep static | grep OJ_ | awk -F '$' '{print $2}' | awk -F ';' '{print $1}'`
+  key=`echo $pair | awk -F '=' '{print $1}'`
+  quate=`echo $pair | grep \"`
+  singleQuate=`echo $pair | grep \'`
+  if [ -n "$quate" ] || [ -n "$singleQuate"];then
+    setpropertiy $key quate
+  else
+    setpropertiy $key false
+  fi
+done < /home/judge/src/web/include/db_info.inc.php
+
 chown -R www-data:www-data /home/judge/data
 
 regexp=`cat /home/judge/src/web/template/bs3/js.php | grep http://hustoj.com/wx.jpg | grep http://hustoj.com/alipay.png`;

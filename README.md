@@ -233,6 +233,44 @@ docker run -d           \
 
 部署后使用浏览器访问 <http://localhost:8080>
 
+### 基于Docker安装（分布式）
+
+Docker分布式改造基本完成，目前支持web/mysql/judge基础镜像，支持使用环境变量进行配置。
+目前judge镜像仍处于不稳定状态，有能力的用户对`docker/judge`进行完善。
+
+在本地执行前需要先创建Docker网络`docker network create hustoj`，使用下面的命令来运行对应的服务。
+
+- MySQL服务
+
+```shell script
+docker run -d \
+    --network hustoj \
+    --name hustoj.mysql \
+    -e MYSQL_USER=<mysql_username> \
+    -e MYSQL_PASSWORD=<mysql_password> \
+    -v mysql:/var/lib/mysql \
+    registry.gitlab.com/mgdream/hustoj:mysql
+```
+
+基础镜像为mysql:5.7，所有的环境变量都继承自[mysql:5.7](https://hub.docker.com/_/mysql)官方镜像，默认提供数据库为`jol`。
+
+- Web服务
+
+```shell script
+docker run -d \
+    --network hustoj
+    --name hustoj.web \
+    -e DB_HOST=<mysql_server> \
+    -e DB_NAME=<mysql_database> \
+    -e DB_USER=<mysql_username> \
+    -e DB_PASS=<mysql_password> \
+    -v data:/home/judge/data \
+    -p 80:80 \
+    registry.gitlab.com/mgdream/hustoj:web
+```
+
+基础镜像为ubuntu:18.04，使用php版本为php7.2，所有的环境变量都继承自db_info.inc.php文件，后续会完善php与nginx的环境变量配置。
+
 ### 基于其他发行版安装
 
 其他的发行版，如树莓派的 `raspbian8/9` , `ubuntu14.04`的安装脚本在 `install` 目录可以找到，但是不完善，安装后需要部分手工修复调整。

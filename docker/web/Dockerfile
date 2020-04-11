@@ -26,12 +26,4 @@ RUN bash /opt/docker/web/setup.sh
 # sharing data volume with judge container
 VOLUME [ "/home/judge/data" ]
 
-ENV HOSTNAME=localhost
-
-ENV DATABASE=jol
-
-ENV USERNAME=root
-
-ENV PASSWORD=root
-
 ENTRYPOINT [ "/bin/bash", "/opt/docker/web/entrypoint.sh" ]

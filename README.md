@@ -22,7 +22,7 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 有问题请先查阅 **[FAQ常见问答](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)** 和 **[Wiki使用技巧](https://github.com/zhblue/hustoj/tree/master/wiki)** 或使用搜索引擎。 
 
-新版 `wiki` （不全，整理中，非官方）：<https://wiki.hustoj.baoshuo.ren>
+新版 `wiki` ：<https://hustoj.wiki>
 
 
 如果这个项目对你有用，请：

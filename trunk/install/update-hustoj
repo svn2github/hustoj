@@ -1,3 +1,7 @@
+#!/bin/bash
+cd /home/judge/git
+git pull
+
 svn up /home/judge/src
 cd /home/judge/src/core
 sudo pkill -9 judged

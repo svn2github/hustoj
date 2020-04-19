@@ -1305,7 +1305,7 @@ int compile(int lang, char *work_dir)
 			{
 				execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 				execute_cmd("mount -o bind /dev dev");
-				execute_cmd("mount -o remount,ro dev");
+				//execute_cmd("mount -o remount,ro dev");
 			}
 			//execute_cmd("mount -o remount,ro proc");
 			chroot(work_dir);

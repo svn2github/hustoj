@@ -1187,6 +1187,7 @@ void umount(char *work_dir)
 }
 int compile(int lang, char *work_dir)
 {
+	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
 	int pid;
 
 	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", "-O2", "-fmax-errors=10", "-Wall",
@@ -1302,7 +1303,7 @@ int compile(int lang, char *work_dir)
 			execute_cmd("mount -o bind /etc/alternatives etc/alternatives");
 			execute_cmd("mount -o remount,ro etc/alternatives");
 			execute_cmd("mount -t proc /proc proc");
-			if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+			if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
 			{
 				execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
 				//execute_cmd("mount -o bind /dev dev");

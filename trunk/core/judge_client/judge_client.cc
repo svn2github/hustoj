@@ -1179,7 +1179,8 @@ void umount(char *work_dir)
 	execute_cmd("/bin/umount -f %s/usr 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -f %s/bin 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+	chdir(work_dir);
+	//execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
 	execute_cmd("/bin/umount -f %s/* 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -f %s/log/* 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -f %s/log/etc/alternatives 2>/dev/null", work_dir);
@@ -1304,7 +1305,7 @@ int compile(int lang, char *work_dir)
 			if (lang > 2 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
 			{
 				execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
-				execute_cmd("mount -o bind /dev dev");
+				//execute_cmd("mount -o bind /dev dev");
 				//execute_cmd("mount -o remount,ro dev");
 			}
 			//execute_cmd("mount -o remount,ro proc");
@@ -1931,7 +1932,6 @@ void copy_python_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("mkdir -p %s/usr/include", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
-	execute_cmd("mount -o bind /dev %s/dev", work_dir);
 	
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);

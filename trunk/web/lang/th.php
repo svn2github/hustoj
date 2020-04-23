@@ -137,7 +137,7 @@
 	$MSG_SEEOJ="ดูเว็บ";
 	$MSG_ADD="เพิ่มโจทย์";
 	$MSG_MENU="menu";
-	$$MSG_EXPLANATION="explanation";
+	$MSG_EXPLANATION="explanation";
 	$MSG_LIST="รายการโจทย์";
 	$MSG_NEWS="ข่าวประกาศ";
 	$MSG_CONTENTS="Contents";

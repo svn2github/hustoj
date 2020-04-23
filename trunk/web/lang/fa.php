@@ -137,7 +137,7 @@
 	$MSG_SEEOJ="نمایش";
 	$MSG_ADD="ایجاد ";
 	$MSG_MENU="menu";
-	$$MSG_EXPLANATION="explanation";
+	$MSG_EXPLANATION="explanation";
 	$MSG_LIST="لیست";
 	$MSG_NEWS="خبرها";
 	$MSG_CONTENTS="Contents";

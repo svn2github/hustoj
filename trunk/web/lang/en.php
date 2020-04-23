@@ -37,9 +37,9 @@
 	$MSG_Compile_OK="Compile OK";
 	$MSG_Click_Detail="Click To View Detail";
   	$MSG_Manual="Manual Judge";
- 	 $MSG_OK="OK";
- 	 $MSG_Explain="Type reason or explaination";
-         $TEST_RUN="Test Running Done";
+ 	$MSG_OK="OK";
+ 	$MSG_Explain="Type reason or explaination";
+        $MSG_TEST_RUN="Test Running Done";
   	
  	$MSG_RUNID="RunID";
 	$MSG_USER="User";

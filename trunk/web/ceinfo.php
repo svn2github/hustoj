@@ -1,4 +1,9 @@
 <?php
+ if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
+          header("location:loginpage.php");
+           exit(0);
+ }
+
 	$cache_time=10;
 	$OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');

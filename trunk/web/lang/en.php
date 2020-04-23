@@ -128,7 +128,7 @@
 	$MSG_ADD="Add";
 	$MSG_LIST="List";
 	$MSG_MENU="menu";
-	$$MSG_EXPLANATION="explanation";
+	$MSG_EXPLANATION="explanation";
 	$MSG_NEWS="News";
 	$MSG_CONTENTS="Contents";
 	$MSG_SAVE="Save";	

@@ -1,8 +1,8 @@
 var i = 0;
-var interval = 80;
+var interval = 800;
 
 function auto_refresh() {
-	interval = 80;
+	interval *=1.5;
 	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {

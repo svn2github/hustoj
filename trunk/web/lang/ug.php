@@ -150,7 +150,7 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_SEEOJ="باش بەت";
 	$MSG_ADD=" قوشۇش  ";
 	$MSG_MENU="menu";
-	$$MSG_EXPLANATION="explanation";
+	$MSG_EXPLANATION="explanation";
 	$MSG_LIST=" جەدۋەل ";
 	$MSG_NEWS=" ئۇقتۇرۇش ";
 	$MSG_CONTENTS="Contents";

@@ -2,7 +2,7 @@ var i = 0;
 var interval = 800;
 
 function auto_refresh() {
-	interval *=1.5;
+	interval = 800;
 	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {
@@ -60,9 +60,8 @@ function fresh_result(solution_id) {
 					//console.log(row.cells[3].innerHTML);
 			 		row.cells[3].innerHTML += loader;
 				}
-
+				interval *= 1.5;
 				window.setTimeout("fresh_result("+solution_id+")",interval);
-				interval *= 2;
 			}
 			else {
 				console.log(ra[0]);
@@ -80,7 +79,7 @@ function fresh_result(solution_id) {
 				  default:
 						row.cells[3].innerHTML="<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</span>";
 				}
-
+			
 				auto_refresh();
 			}
 		}

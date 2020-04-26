@@ -9,6 +9,15 @@ When people asked question, we put the answer here
 
 新版本
 ----
+是否可以只由管理员来注册账号，自己不能注册
+--
+可以，设置db_info.inc.php中的选项，
+https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L51
+static $OJ_REGISTER=true; //允许注册新用户
+static $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
+关闭注册后，管理员可以在后台“比赛队账户生成器”，生成指定数量的账户用于分配。
+http://xxxx.xxxxx/admin/team_generate.php
+
 
 如何显示MathJax语法的公式？
 --

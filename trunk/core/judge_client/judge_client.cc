@@ -141,11 +141,11 @@ struct user_regs_struct{
 
 
 static int DEBUG = 0;
-static char host_name[BUFFER_SIZE];
-static char user_name[BUFFER_SIZE];
-static char password[BUFFER_SIZE];
-static char db_name[BUFFER_SIZE];
-static char oj_home[BUFFER_SIZE];
+static char host_name[BUFFER_SIZE/10];
+static char user_name[BUFFER_SIZE/10];
+static char password[BUFFER_SIZE/10];
+static char db_name[BUFFER_SIZE/10];
+static char oj_home[BUFFER_SIZE/10];
 static char data_list[BUFFER_SIZE][BUFFER_SIZE];
 static int data_list_len = 0;
 
@@ -154,8 +154,8 @@ static int max_running;
 static int sleep_time;
 static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
-static char java_xms[BUFFER_SIZE];
-static char java_xmx[BUFFER_SIZE];
+static char java_xms[BUFFER_SIZE/10];
+static char java_xmx[BUFFER_SIZE/10];
 static int sim_enable = 0;
 static int oi_mode = 0;
 static int full_diff = 0;
@@ -164,9 +164,9 @@ static int time_limit_to_total= 0;
 static int total_time= 0;
 
 static int http_judge = 0;
-static char http_baseurl[BUFFER_SIZE];
-static char http_username[BUFFER_SIZE];
-static char http_password[BUFFER_SIZE];
+static char http_baseurl[BUFFER_SIZE/10];
+static char http_username[BUFFER_SIZE/10];
+static char http_password[BUFFER_SIZE/10];
 static int http_download = 1;
 static double cpu_compensation = 1.0;
 
@@ -799,7 +799,7 @@ void _update_solution_mysql(int solution_id, int result, int time, int memory,
 							int sim, int sim_s_id, double pass_rate)
 {
 	char sql[BUFFER_SIZE];
-	char judger[BUFFER_SIZE];
+	char judger[BUFFER_SIZE/10];
 	mysql_real_escape_string(conn, judger, http_username, strlen(http_username));
 	
 	if (oi_mode) {
@@ -1781,8 +1781,8 @@ void copy_shell_runtime(char *work_dir)
 #endif
 
 #ifdef __x86_64__
-	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu %s/lib/", work_dir);
-	execute_cmd("/bin/cp /lib64/* %s/lib64/", work_dir);
+	execute_cmd("mount -o bind /lib %s/lib", work_dir);
+	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
 #endif
 	//	execute_cmd("/bin/cp /lib32 %s/", work_dir);
 	execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
@@ -2873,7 +2873,7 @@ int count_in_files(char *dirpath)
 
 int get_test_file(char *work_dir, int p_id)
 {
-	char filename[BUFFER_SIZE];
+	char filename[BUFFER_SIZE/10];
 	char localfile[BUFFER_SIZE];
 	time_t remote_date, local_date;
 	int ret = 0;
@@ -3064,9 +3064,9 @@ int main(int argc, char **argv)
 	//exit(0);
 	// run
 	char fullpath[BUFFER_SIZE];
-	char infile[BUFFER_SIZE];
-	char outfile[BUFFER_SIZE];
-	char userfile[BUFFER_SIZE];
+	char infile[BUFFER_SIZE/10];
+	char outfile[BUFFER_SIZE/10];
+	char userfile[BUFFER_SIZE/10];
 	sprintf(fullpath, "%s/data/%d", oj_home, p_id); // the fullpath of data dir
 
 	// open DIRs

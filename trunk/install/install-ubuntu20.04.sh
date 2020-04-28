@@ -1,4 +1,5 @@
 #!/bin/bash
+sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
 apt-get update
 apt-get install -y subversion
@@ -6,7 +7,7 @@ apt-get install -y subversion
 cd /home/judge/
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-14-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap"
+for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap"
 do
 	while ! apt-get install -y $pkg 
 	do
@@ -65,8 +66,8 @@ else
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.2/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.2/fpm/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.4/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.4/fpm/php.ini
 sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
 sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
  

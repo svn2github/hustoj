@@ -1,4 +1,5 @@
 <?php
+if ($THEME_HOME_STATISTICS == "show") {
 $sql='SELECT COUNT(1) FROM `problem`';
 $result=pdo_query($sql);
 $problem_count=$result[0][0];
@@ -14,18 +15,19 @@ $ac_count=$result[0]['solved'];
 $sql='SELECT * FROM `news` WHERE `importance`<0 AND `defunct`!="Y"'; 
 $result=pdo_query($sql);                    
 $res=$result;
-$day[1] = strtotime(date('Y-m-d',time()));  
-$day[0] = $day[1] + 60*60*24;               
-$day[2] = $day[1] - 60*60*24;               
-$day[3] = $day[2] - 60*60*24;               
-$day[4] = $day[3] - 60*60*24;               
-$day[5] = $day[4] - 60*60*24;               
-$day[6] = $day[5] - 60*60*24;               
-$day[7] = $day[6] - 60*60*24;               
-$sql ='SELECT COUNT(1) FROM `solution` WHERE UNIX_TIMESTAMP(`in_date`)>=? AND UNIX_TIMESTAMP(`in_date`)<?';
-for ($csadff = 1; $csadff <= 7; ++$csadff) { 
-    $subcount[$csadff] = pdo_query($sql, $day[$csadff], $day[$csadff - 1])[0][0];
-    $account[$csadff] = pdo_query($sql.' AND `result`=4', $day[$csadff], $day[$csadff - 1])[0][0];
+    $day[1] = strtotime(date('Y-m-d',time()));  
+    $day[0] = $day[1] + 60*60*24;               
+    $day[2] = $day[1] - 60*60*24;               
+    $day[3] = $day[2] - 60*60*24;               
+    $day[4] = $day[3] - 60*60*24;               
+    $day[5] = $day[4] - 60*60*24;               
+    $day[6] = $day[5] - 60*60*24;               
+    $day[7] = $day[6] - 60*60*24;               
+    $sql ='SELECT COUNT(1) FROM `solution` WHERE UNIX_TIMESTAMP(`in_date`)>=? AND UNIX_TIMESTAMP(`in_date`)<?';
+    for ($csadff = 1; $csadff <= 7; ++$csadff) { 
+        $subcount[$csadff] = pdo_query($sql, $day[$csadff], $day[$csadff - 1])[0][0];
+        $account[$csadff] = pdo_query($sql.' AND `result`=4', $day[$csadff], $day[$csadff - 1])[0][0];
+    }
 }
 ?>
 
@@ -84,7 +86,9 @@ $news = pdo_query($sql);
         }
     } else echo "There is something wrong with your configuration file.Please open '/template/bshark/theme.conf.php' and fix it." ?>
                     </div>
-                </div><br>
+                </div>
+<br>
+    <?php if ($THEME_HOME_STATISTICS == "show") { ?>
                 <div class="card"><div class="card-body">
     <h4>统计信息</h4>
     <p>共有<?php
@@ -96,15 +100,27 @@ echo $problem_count;
 echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['user_id'];
 ?>!</p>
 <div>
-    <div style="width:100%;" align="center">
-<canvas id="myChart"></canvas></div></div>
-</div></div><br><div class="card"><div class="card-body">
+<div style="width:100%;" align="center">
+
+<canvas id="myChart"></canvas>
+</div></div>
+</div></div><br>
+<?php } ?>
+<div class="card"><div class="card-body">
     <h4>关于<?php echo $OJ_NAME;?></h4>
     <p>This ACM/ICPC OnlineJudge is a GPL product from hustoj<br>hustoj -- 流行的开源OJ系统，含*.deb安装包和Win集成版。<br>本OJ基于Hustoj，采用BShark主题，BShark主题由<a href="http://github.com/yemaster">yemaster</a>开发<br>
 	    <a href="https://github.com/zhblue/hustoj">请到GitHub来给我们加star!</a><br>
-	    <b>如果你想要更丰富的功能，请使用更高级的<a href="https://yemaster.coding.net/p/MasterOJ/d/MasterOJ/git/tree/master">MasterOJ</a></b>
     </p>
     </div></div>
+<?php if ($THEME_AUTO_GET_LATEST_INFO == "yes") { ?>
+<br>
+<div class="card">
+    <div class="card-body">
+        <h4>当前版本：Bshark <?php echo $THEME_BSHARK_VERSION;?></h4>
+        <div id="info-version"></div>
+    </div>
+</div>
+<?php } ?>
     </div>
     
             <div class="col-md-4"><div class="card"><div class="card-body">
@@ -148,12 +164,13 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     </div>
         </div>
                 <br><div class="card"><div class="card-body">
-            <h4>公众号</h4><img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge
+            <h4>注意！</h4>本主题还不是很稳定，请加QQ群：753870126，有问题及时反馈。另外欢迎使用专业版哦！<img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge
     </div>
         </div>
         </div>
         </div>
        
+    <?php if ($THEME_HOME_STATISTICS == "show") { ?>
 <script>
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -198,6 +215,12 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     }
 });
     </script>
+<?php } ?>
+<?php if ($THEME_AUTO_GET_LATEST_INFO == "yes") { ?>
+<script>
+$("#info-version").html($.ajax({url:"https://vt-dev-team.github.io/bshark/version",async:false}).responseText);
+</script>
+<?php } ?>
 
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>

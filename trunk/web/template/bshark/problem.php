@@ -17,7 +17,9 @@ function make($str) {
     
     <body>
         <?php require("./template/bshark/nav.php");?>
-        <div class="card" style="margin: 3% 10% 5% 10%">
+<div class="row" style="margin: 3% 10% 5% 10%">
+<div class="col-md-8">
+        <div class="card">
   <div class="card-body">
     <?php
 				if ( $pr_flag ) {
@@ -28,19 +30,7 @@ function make($str) {
 					echo "<h3>$MSG_PROBLEM " . $PID[ $pid ] . ": " . $row[ 'title' ] . "</h3>";
 				}
 				if ( $row[ 'spj' ] )echo $MSG_SPJ.'/';
-	?>
-	<?php echo $MSG_Time_Limit.':'.$row['time_limit'].'s '.$MSG_Memory_Limit.':'.$row['memory_limit'];?>MB
-	<ul class="pagination" style="float:right">
-  <li class="page-item"><a class="page-link" href="<?php if ( $pr_flag ) { echo "submitpage.php?id=$id";} else { echo "submitpage.php?cid=$cid&pid=$pid&langmask=$langmask";}?>"><?php echo $MSG_SUBMIT;?></a></li>
-  <li class="page-item"><a class="page-link" href="<?php echo "status.php?problem_id=" . $row[ 'problem_id' ];?>"><?php echo $MSG_STATUS;?></a></li>
-  <?php 
-  if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
-					require_once( "include/set_get_key.php" );
-  ?>
-  <li class="page-item"><a class="page-link" href="bsadmin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>"><?php echo $MSG_EDIT;?></a></li>
-				<li class="page-item"><a class="page-link" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'><?php echo $MSG_TESTDATA;?></a></li>
-  <?php } ?>
-</ul>
+	?><hr/>
 	<?php 
 	if ($row['description']) {
 	    ?><h4><?php echo $MSG_Description;?></h4><?php
@@ -66,7 +56,7 @@ function make($str) {
 	<div id="qwqs1">
 	<?php 
 	if (strlen($sinput)) {
-	    ?><h4><?php echo $MSG_Sample_Input;?> <small id="qwqa1">点击复制</small></h4><blockquote id="sampleInput"><pre><?php
+	    ?><h4><?php echo $MSG_Sample_Input;?><a class="badge badge-outline-info" href="#" id="qwqa1">复制</a></h4><blockquote id="sampleInput"><pre><?php
 	    echo $sinput."</pre></blockquote>";
 	}
 	?>
@@ -74,7 +64,7 @@ function make($str) {
 	<div id="qwqs2">
 	<?php 
 	if (strlen($soutput)) {
-	    ?><h4><?php echo $MSG_Sample_Output;?> <small id="qwqa2">点击复制</small></h4><blockquote id="sampleOutput"><pre><?php
+	    ?><h4><?php echo $MSG_Sample_Output;?> <a class="badge badge-outline-info" href="#" id="qwqa2">复制</a></h4><blockquote id="sampleOutput"><pre><?php
 	    echo $soutput.'</pre></blockquote>';
 	}
 	?>
@@ -95,6 +85,33 @@ function make($str) {
 	}
 	?>
     </div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-body">
+<h4>问题信息</h4>
+<b><?php echo $MSG_Time_Limit;?></b> <?php echo $row['time_limit'];?>s<br>
+<b><?php echo $MSG_Memory_Limit;?></b> <?php echo $row['memory_limit'];?>MB<br>
+<b>评测方式</b> <?php echo $row['spj']?"Special Judge":"Normal Judge";?>
+</div>
+</div>
+<br>
+<div class="card">
+<div class="card-body">
+<h4>咻咻~</h4>
+<a class="btn btn-info" href="<?php if ( $pr_flag ) { echo "submitpage.php?id=$id";} else { echo "submitpage.php?cid=$cid&pid=$pid&langmask=$langmask";}?>"><?php echo $MSG_SUBMIT;?></a>
+<a class="btn btn-warning" href="<?php echo "status.php?problem_id=" . $row[ 'problem_id' ];?>"><?php echo $MSG_STATUS;?></a>
+ <?php 
+  if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] )||isset($_SESSION[$OJ_NAME.'_'.'problem_manager']) ) {
+					require_once( "include/set_get_key.php" );
+  ?><hr/>
+<a class="btn btn-success" href="bsadmin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>"><?php echo $MSG_EDIT;?></a>
+<a class="btn btn-danger" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'><?php echo $MSG_TESTDATA;?></a>
+  <?php } ?>
+</div>
+</div>
+</div>
 </div>
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>
@@ -180,15 +197,13 @@ function make($str) {
 			selection.removeAllRanges ();
 			selection.addRange (rangeToSelect);
 			}
-	$('#qwqs1').click(function() {
-		$('#qwqa1').text('复制成功');
+	$('#qwqa1').click(function() {
 		CopyToClipboard($('#sampleInput').text());
-		setTimeout(function(){ $('#qwqa1').text('点击复制'); }, 1000);
+		swal("样例输入复制成功","","success");
 	});
-	$('#qwqs2').click(function() {
-		$('#qwqa2').text('复制成功');
+	$('#qwqa2').click(function() {
 		CopyToClipboard($('#sampleOutput').text());
-		setTimeout(function(){ $('#qwqa2').text('点击复制'); }, 1000);
+		swal("样例输出复制成功","","success");
 	});
 </script>
     </body>

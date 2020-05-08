@@ -31,3 +31,6 @@ hljs.initHighlightingOnLoad();
 
 <!-- ChartJs 核心文件 -->
 <script src="./template/bshark/chartjs/Chart.bundle.js"></script>
+
+<!-- SweetAlert 核心文件 -->
+<script src="./template/bshark/sweetalert/sweetalert.min.js"></script>

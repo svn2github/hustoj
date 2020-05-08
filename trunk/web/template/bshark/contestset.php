@@ -8,13 +8,11 @@
     
     <body>
         <?php require("./template/bshark/nav.php");?>
-        <div class="card" style="margin: 3% 8% 5% 8%">
+        <div class="row" style="margin: 3% 8% 5% 8%">
+        <div class="col-md-8">
+        <div class="card">
   <div class="card-body">
-    <h4><?php echo $MSG_CONTEST;?>&nbsp;&nbsp;&nbsp;Time:<span id=nowdate></span></h4>
-<form method=post action=contest.php class="form-inline" >
-	<input class="form-control" name=keyword type=text >
-	<input class="btn btn-outline-dark" type=submit value="查询">
-</form><hr/>
+    <h4><?php echo $MSG_CONTEST;?></h4>
     <ul class="pagination">
 <li class="page-item"><a class="page-link" href="contest.php?page=1">&lt;&lt;</a></li>
 <?php
@@ -59,6 +57,26 @@ $cnt=1-$cnt;
 </tbody>
 </table>
     </div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card">
+<div class="card-body">
+<h4>现在时间</h4>
+<span id=nowdate></span>
+</div>
+</div>
+<br>
+<div class="card">
+<div class="card-body">
+<h4>查询</h4>
+<form method=post action=contest.php class="form-inline" >
+	<input class="form-control" name=keyword type=text >
+	<input class="btn btn-outline-dark" type=submit value="查询">
+</form>
+</div>
+</div>
+</div>
 </div>
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>

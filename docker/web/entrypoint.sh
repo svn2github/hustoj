@@ -10,9 +10,9 @@ setpropertiy(){
     if [ -n "$value" ];then
       oldvalue=`cat /home/judge/src/web/include/db_info.inc.php | grep $key | awk -F '=' '{print $2}' | awk -F ';' '{print $1}' | awk -F '"' '{print $2}'`
       if [ $quate == "quate" ] || [$quate == "true"];then
-        sed -i "s#$key=\"$oldvalue\"#$key=\"$value\"#g"   /home/judge/src/web/include/db_info.inc.php
+        sed -i "s#$key[[:space:]]*=[[:space:]]*\"$oldvalue\"#$key = \"$value\"#g"   /home/judge/src/web/include/db_info.inc.php
       else
-        sed -i "s#$key=$oldvalue#$key=$value#g"           /home/judge/src/web/include/db_info.inc.php
+        sed -i "s#$key[[:space:]]*=[[:space:]]*$oldvalue#$key[[:space:]]*=[[:space:]]*$value#g"           /home/judge/src/web/include/db_info.inc.php
       fi
     fi
   fi
@@ -27,8 +27,8 @@ setpropertiy DB_PASS quate
 while read line;do
   pair=`echo $line | grep static | grep OJ_ | awk -F '$' '{print $2}' | awk -F ';' '{print $1}'`
   key=`echo $pair | awk -F '=' '{print $1}'`
-  quate=`echo $pair | grep \"`
-  singleQuate=`echo $pair | grep \'`
+  quate=`echo $pair | grep \" || true`
+  singleQuate=`echo $pair | grep \' || true`
   if [ -n "$quate" ] || [ -n "$singleQuate"];then
     setpropertiy $key quate
   else

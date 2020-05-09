@@ -1,5 +1,5 @@
 <?php @session_start();
-ini_set("display_errors", "Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
+//ini_set("display_errors", "Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
 //header('X-Frame-Options:SAMEORIGIN');
 
 //for people using hustoj out of China , be careful of the last two line of this file !

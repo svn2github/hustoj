@@ -35,12 +35,12 @@ class Logger
 
     public function info($message = "", array $data = [])
     {
-        $this->logging("info", $message, $data);
+        $this->delegrate_logging("info", $message, $data);
     }
 
     public function warn($message = "", array $data = [])
     {
-        $this->logging("warn", $message, $data);
+        $this->delegrate_logging("warn", $message, $data);
     }
 
     protected function delegrate_logging($level, $message = "", array $data = [])

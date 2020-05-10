@@ -131,7 +131,7 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
 
-require_once("./logger.php");
+require_once(dirname(__FILE__) . "/logger.php");
 
 $logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
 					$OJ_LOG_FILE, 

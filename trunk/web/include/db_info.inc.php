@@ -99,9 +99,14 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
-static  $OJ_LOG_ENABLED=false;
+static  $OJ_LOG_ENABLED=true;
 static  $OJ_LOG_FILE="/var/log/hustoj/hustoj.log";
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
+static  $OJ_LOG_PID_ENABLED=true;
+static  $OJ_LOG_USER_ENABLED=true;
+static  $OJ_LOG_URL_ENABLED=true;
+static  $OJ_LOG_URL_HOST_ENABLED=true;
+static  $OJ_LOG_URL_PARAM_ENABLED=true;
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
@@ -132,13 +137,31 @@ class Logger
 	private $logfile;
 	private $datetime_format;
 	private $enabled;
+	private $pid_enabled;
+	private $user_enabled;
+	private $url_enabled;
+	private $url_host_enabled;
+	private $url_param_enabled;
 
-	public function __construct($user, $logfile, $datetime_format="Y-m-d H:i:s",$enabled=true)
+	public function __construct($user,
+								 $logfile, 
+								 $datetime_format, 
+								 $enabled, 
+								 $pid_enabled, 
+								 $user_enabled,
+								 $url_enabled, 
+								 $url_host_enabled,
+								 $url_param_enabled)
 	{
 		$this->user=$user;
 		$this->logfile=$logfile;
 		$this->datetime_format=$datetime_format;
 		$this->enabled=$enabled;
+		$this->pid_enabled=$pid_enabled;
+		$this->user_enabled=$user_enabled;
+		$this->url_enabled=$url_enabled;
+		$this->url_host_enabled=$url_host_enabled;
+		$this->url_param_enabled=$url_param_enabled;
 	}
 
 	public function info($message = "", array $data = [])
@@ -158,14 +181,44 @@ class Logger
 			$this->logging($level,$message,$data);
 		}
 	}
-	
+
 	public function logging($level, $message = "", array $data=[])
 	{
 		$datetime=new DateTime();
 		$datetime=$datetime->format($this->datetime_format);
-		$pid=getmypid();
 		$user=$this->user;
-		$message="$datetime $level $pid [$user] --- $message";
+		$prefix = "$datetime $level ";
+		if($this->pid_enabled)
+		{
+			$pid=getmypid();
+			$prefix=$prefix."$pid ";
+		}
+		if($this->user_enabled)
+		{
+			$prefix = $prefix. "[$user] ";
+		}
+		if($this->url_enabled)
+		{
+			$script   = $_SERVER['SCRIPT_NAME'];
+			$url	  =  $script;
+			if($this->url_host_enabled)
+			{
+				$protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']),'https') === FALSE ? 'http' : 'https';
+				$host     = $_SERVER['HTTP_HOST'];
+				$url	  = $protocol . '://' . $host . $url;
+			}
+			if($this->url_param_enabled)
+			{
+				$params   = $_SERVER['QUERY_STRING'];
+				if(!empty($params))
+					$url = $url . "?" . $params;
+			}
+			$prefix = $prefix . "$url ";
+		}
+		if(empty($message))
+			$message = $prefix;
+		else
+			$message="$prefix --- $message";
 		foreach ($data as $key => $val)
 			$message=str_replace("%{$key}%", $val, $message);
 		$message .= PHP_EOL;
@@ -174,5 +227,13 @@ class Logger
 		fclose($handle);
 	}
 }
-$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], $OJ_LOG_FILE, $OJ_LOG_DATETIME_FORMAT, $OJ_LOG_ENABLED);
+$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
+					$OJ_LOG_FILE, 
+					$OJ_LOG_DATETIME_FORMAT, 
+					$OJ_LOG_ENABLE, 
+					$OJ_LOG_PID_ENABLED,
+					$OJ_LOG_USER_ENABLED,
+					$OJ_LOG_URL_ENABLED,
+					$OJ_LOG_URL_HOST_ENABLED,
+					$OJ_LOG_URL_PARAM_ENABLED);
 $logger->info();

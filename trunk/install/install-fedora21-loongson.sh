@@ -130,8 +130,8 @@ fi
 cd /home/judge/
 
 # write password at the end of install
-sed -i "s/OJ_PASSWORD=root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
-sed -i "s/DB_PASS=\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
+sed -i "s/OJ_PASSWORD[[:space:]]*=[[:space:]]*root/OJ_PASSWORD=$DBPASS/g" etc/judge.conf
+sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$DBPASS\"/g" src/web/include/db_info.inc.php
 
 # change database password at the end of install
 mysqladmin -u root password $DBPASS

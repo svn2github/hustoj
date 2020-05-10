@@ -99,6 +99,7 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
+static  $OJ_LOG_ENABLED=false;
 static  $OJ_LOG_FILE="/var/log/hustoj/hustoj.log";
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
 
@@ -130,22 +131,35 @@ class Logger
 	private $user;
 	private $logfile;
 	private $datetime_format;
+	private $enabled;
 
-	public function __construct($user, $logfile, $datetime_format="Y-m-d H:i:s")
+	public function __construct($user, $logfile, $datetime_format="Y-m-d H:i:s",$enabled=true)
 	{
 		$this->user=$user;
 		$this->logfile=$logfile;
 		$this->datetime_format=$datetime_format;
+		$this->enabled=$enabled;
 	}
-	public function info($message, array $data=[])
+
+	public function info($message = "", array $data = [])
 	{
 		$this->logging("info", $message, $data);
 	}
-	public function warn($message, array $data=[])
+
+	public function warn($message = "", array $data = [])
 	{
 		$this->logging("warn", $message, $data);
 	}
-	public function logging($level, $message, array $data=[])
+
+	protected function delegrate_logging($level, $message = "", array $data = [])
+	{
+		if($this->enabled)
+		{
+			$this->logging($level,$message,$data);
+		}
+	}
+	
+	public function logging($level, $message = "", array $data=[])
 	{
 		$datetime=new DateTime();
 		$datetime=$datetime->format($this->datetime_format);
@@ -160,4 +174,5 @@ class Logger
 		fclose($handle);
 	}
 }
-$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], $OJ_LOG_FILE, $OJ_LOG_DATETIME_FORMAT);
+$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], $OJ_LOG_FILE, $OJ_LOG_DATETIME_FORMAT, $OJ_LOG_ENABLED);
+$logger->info();

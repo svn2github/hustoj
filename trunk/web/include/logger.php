@@ -10,6 +10,8 @@ class Logger
     private $url_enabled;
     private $url_host_enabled;
     private $url_param_enabled;
+    private $trace_enabled;
+    private $trace_id;
 
     public function __construct(
         $user,
@@ -20,7 +22,8 @@ class Logger
         $user_enabled,
         $url_enabled,
         $url_host_enabled,
-        $url_param_enabled
+        $url_param_enabled,
+        $trace_enabled
     ) {
         $this->user = $user;
         $this->logfile = $logfile;
@@ -31,6 +34,9 @@ class Logger
         $this->url_enabled = $url_enabled;
         $this->url_host_enabled = $url_host_enabled;
         $this->url_param_enabled = $url_param_enabled;
+        $this->trace_enabled = $trace_enabled;
+        if ($this->trace_enabled)
+            $this->trace_id = uniqid();
     }
 
     public function info($message = "", array $data = [])
@@ -55,14 +61,16 @@ class Logger
         $datetime = new DateTime();
         $datetime = $datetime->format($this->datetime_format);
         $user = $this->user;
+        $trace_id = $this->trace_id;
         $prefix = "$datetime $level ";
         if ($this->pid_enabled) {
             $pid = getmypid();
             $prefix = $prefix . "$pid ";
         }
-        if ($this->user_enabled) {
+        if ($this->user_enabled)
             $prefix = $prefix . "[$user] ";
-        }
+        if ($this->trace_enabled)
+            $prefix = $prefix . "[$trace_id] ";
         if ($this->url_enabled) {
             $script   = $_SERVER['SCRIPT_NAME'];
             $url      =  $script;

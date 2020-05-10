@@ -107,6 +107,7 @@ static  $OJ_LOG_USER_ENABLED=false;
 static  $OJ_LOG_URL_ENABLED=false;
 static  $OJ_LOG_URL_HOST_ENABLED=false;
 static  $OJ_LOG_URL_PARAM_ENABLED=false;
+static  $OJ_LOG_TRACE_ENABLED=false;
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
@@ -136,10 +137,11 @@ require_once(dirname(__FILE__) . "/logger.php");
 $logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
 					$OJ_LOG_FILE, 
 					$OJ_LOG_DATETIME_FORMAT, 
-					$OJ_LOG_ENABLE, 
+					$OJ_LOG_ENABLED, 
 					$OJ_LOG_PID_ENABLED,
 					$OJ_LOG_USER_ENABLED,
 					$OJ_LOG_URL_ENABLED,
 					$OJ_LOG_URL_HOST_ENABLED,
-					$OJ_LOG_URL_PARAM_ENABLED);
+					$OJ_LOG_URL_PARAM_ENABLED,
+					$OJ_LOG_TRACE_ENABLED);
 $logger->info();

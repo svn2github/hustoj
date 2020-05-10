@@ -99,14 +99,14 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
-static  $OJ_LOG_ENABLED=true;
+static  $OJ_LOG_ENABLED=false;
 static  $OJ_LOG_FILE="/var/log/hustoj/hustoj.log";
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
-static  $OJ_LOG_PID_ENABLED=true;
-static  $OJ_LOG_USER_ENABLED=true;
-static  $OJ_LOG_URL_ENABLED=true;
-static  $OJ_LOG_URL_HOST_ENABLED=true;
-static  $OJ_LOG_URL_PARAM_ENABLED=true;
+static  $OJ_LOG_PID_ENABLED=false;
+static  $OJ_LOG_USER_ENABLED=false;
+static  $OJ_LOG_URL_ENABLED=false;
+static  $OJ_LOG_URL_HOST_ENABLED=false;
+static  $OJ_LOG_URL_PARAM_ENABLED=false;
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {

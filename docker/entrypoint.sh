@@ -21,6 +21,7 @@ chmod -R 700 /volume/web/include/
 chown -R www-data:www-data /volume/data 
 chown -R www-data:www-data /volume/web  
 chown -R mysql:mysql       /volume/mysql   
+chown -R www-data:www-data /var/log/hustoj
 rm -rf /home/judge/backup   
 rm -rf /home/judge/data 
 rm -rf /home/judge/etc  

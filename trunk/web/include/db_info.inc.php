@@ -99,8 +99,15 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
-static  $OJ_LOG_FILE="/var/log/hustoj/hustoj.log";
+$OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
+static  $OJ_LOG_ENABLED=false;
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
+static  $OJ_LOG_PID_ENABLED=false;
+static  $OJ_LOG_USER_ENABLED=false;
+static  $OJ_LOG_URL_ENABLED=false;
+static  $OJ_LOG_URL_HOST_ENABLED=false;
+static  $OJ_LOG_URL_PARAM_ENABLED=false;
+static  $OJ_LOG_TRACE_ENABLED=false;
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
@@ -125,39 +132,16 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
 
-class Logger
-{
-	private $user;
-	private $logfile;
-	private $datetime_format;
+require_once(dirname(__FILE__) . "/logger.php");
 
-	public function __construct($user, $logfile, $datetime_format="Y-m-d H:i:s")
-	{
-		$this->user=$user;
-		$this->logfile=$logfile;
-		$this->datetime_format=$datetime_format;
-	}
-	public function info($message, array $data=[])
-	{
-		$this->logging("info", $message, $data);
-	}
-	public function warn($message, array $data=[])
-	{
-		$this->logging("warn", $message, $data);
-	}
-	public function logging($level, $message, array $data=[])
-	{
-		$datetime=new DateTime();
-		$datetime=$datetime->format($this->datetime_format);
-		$pid=getmypid();
-		$user=$this->user;
-		$message="$datetime $level $pid [$user] --- $message";
-		foreach ($data as $key => $val)
-			$message=str_replace("%{$key}%", $val, $message);
-		$message .= PHP_EOL;
-		$handle=fopen($this->logfile, "a");
-		fwrite($handle, $message);
-		fclose($handle);
-	}
-}
-$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], $OJ_LOG_FILE, $OJ_LOG_DATETIME_FORMAT);
+$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
+					$OJ_LOG_FILE, 
+					$OJ_LOG_DATETIME_FORMAT, 
+					$OJ_LOG_ENABLED, 
+					$OJ_LOG_PID_ENABLED,
+					$OJ_LOG_USER_ENABLED,
+					$OJ_LOG_URL_ENABLED,
+					$OJ_LOG_URL_HOST_ENABLED,
+					$OJ_LOG_URL_PARAM_ENABLED,
+					$OJ_LOG_TRACE_ENABLED);
+$logger->info();

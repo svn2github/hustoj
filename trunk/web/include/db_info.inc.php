@@ -99,7 +99,7 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
-$OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}\.log";
+$OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 static  $OJ_LOG_ENABLED=false;
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
 static  $OJ_LOG_PID_ENABLED=false;

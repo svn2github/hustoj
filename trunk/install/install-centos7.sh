@@ -141,6 +141,9 @@ sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$DBPASS\"/g" src/we
 # change database password at the end of install
 mysqladmin -u root password $DBPASS
 
+mkdir /var/log/hustoj/
+chown apache -R /var/log/hustoj/
+
 # mono install for c# 
 yum -y install yum-utils
 rpm --import "http://keyserver.Ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"

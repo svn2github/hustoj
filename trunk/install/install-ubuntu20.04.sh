@@ -4,20 +4,20 @@ sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
-cd /home/judge/
+cd /home/judge/ || exit
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap"
 do
-	while ! apt-get install -y $pkg 
+	while ! apt-get install -y i "$pkg" 
 	do
 		echo "Network fail, retry... you might want to change another apt source for install"
 	done
 done
 
-USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
-PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
-CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
+USER=$(grep user /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
+PASSWORD=$(grep password /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
+CPU=$(grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}')
 
 mkdir etc data log backup
 
@@ -49,8 +49,8 @@ else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    80m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
 fi
 
-mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+mysql -h localhost -u"$USER" -p"$PASSWORD" < src/install/db.sql
+echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u"$USER" -p"$PASSWORD" 
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"
@@ -68,16 +68,19 @@ fi
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.4/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.4/fpm/php.ini
-sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
-sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
+WWW_CONF=$(find /etc/php -name www.conf)
+sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' "$WWW_CONF"
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' "$WWW_CONF"
  
-COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
+COMPENSATION=$(grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}')
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
-/etc/init.d/php7.4-fpm restart
-service php7.4-fpm restart
+PHP_FPM=$(find /etc/init.d/ -name "php*-fpm")
+$PHP_FPM restart
+PHP_FPM=$(service --status-all|grep php|awk '{print $4}')
+if [ "$PHP_FPM" != ""  ]; then service "$PHP_FPM" restart ;else echo "NO PHP FPM";fi;
 
-cd src/core
+cd src/core || exit 
 chmod +x ./make.sh
 ./make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then

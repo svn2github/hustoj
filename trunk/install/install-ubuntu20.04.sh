@@ -7,9 +7,9 @@ apt-get install -y subversion
 cd /home/judge/ || exit
 
 svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap"
+for pkg in net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
 do
-	while ! apt-get install -y i "$pkg" 
+	while ! apt-get install -y "$pkg" 
 	do
 		echo "Network fail, retry... you might want to change another apt source for install"
 	done

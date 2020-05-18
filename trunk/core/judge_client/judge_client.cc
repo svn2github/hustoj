@@ -2195,11 +2195,9 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (lang != 3 && lang!=20
-
+	if (    ( lang != 3 && lang != 20 )
 		|| (lang == 6 && !python_free)		
-			
-			)
+	   )
 		chroot(work_dir);
 
 	while (setgid(1536) != 0)

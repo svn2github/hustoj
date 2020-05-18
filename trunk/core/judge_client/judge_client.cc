@@ -176,7 +176,7 @@ static char record_call = 0;
 static int use_ptrace = 1;
 static int compile_chroot = 1;
 static int turbo_mode = 0;
-
+static int python_free=0;
 static const char *tbname = "solution";
 //static int sleep_tmp;
 
@@ -496,6 +496,9 @@ void init_mysql_conf()
 			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
+			read_int(buf, "OJ_PYTHON_FREE", &python_free);
+			
+			
 		}
 		fclose(fp);
 	}
@@ -2193,9 +2196,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (lang != 3 && lang!=20
-#ifdef __mips__
-//		&& lang != 6
-#endif			
+
+		|| (lang == 6 && !python_free)		
 			
 			)
 		chroot(work_dir);
@@ -3096,7 +3098,7 @@ int main(int argc, char **argv)
 		copy_ruby_runtime(work_dir);
 	if (lang == 5)
 		copy_bash_runtime(work_dir);
-	if (lang == 6)
+	if (lang == 6 && !python_free)
 		copy_python_runtime(work_dir);
 	if (lang == 7)
 		copy_php_runtime(work_dir);

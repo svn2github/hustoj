@@ -2195,11 +2195,12 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
-	if (    ( lang != 3 && lang != 20 )
-		|| (lang == 6 && !python_free)		
-	   )
+	if (   
+		 lang != 3 && lang != 20 && !(lang ==6 && python_free )
+	   ){
+		if(DEBUG)printf("Chrooting...\n");
 		chroot(work_dir);
-
+	}
 	while (setgid(1536) != 0)
 		sleep(1);
 	while (setuid(1536) != 0)
@@ -2290,11 +2291,15 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		break;
 	case 6: //Python
 		if (!py2)
-		{
+		{       if(python_free)
+			execl("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL);
+			else
 			execl("/python2", "/python2", "Main.py", (char *)NULL);
 		}
 		else
-		{
+		{       if(python_free)
+			execl("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL);
+			else
 			execl("/python3", "/python3", "Main.py", (char *)NULL);
 		}
 		break;

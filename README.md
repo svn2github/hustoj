@@ -71,7 +71,7 @@ Star us, please!
 
 [迁移](#迁移)
 
-[升级](#升级)
+[更新升级](#更新升级)
 
 [支持捐助、加入社区](#支持捐助加入社区)
 
@@ -365,9 +365,9 @@ sudo bash /home/judge/src/install/restore+.sh
 
 脚本的第一个参数为恢复的目标归档，如果没有参数则默认为按名字排序后字典序最大的归档
 
-## 升级
+## 更新升级
 
-脚本安装的用户，可以使用 `install` 目录中的 `update-hustoj` 进行升级。
+脚本安装的用户，可以使用 `install` 目录中的 `update-hustoj` 进行更新升级。
 
 ```
 sudo bash /home/judge/src/install/update-hustoj

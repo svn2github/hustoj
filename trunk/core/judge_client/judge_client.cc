@@ -3253,6 +3253,11 @@ int main(int argc, char **argv)
 		if(DEBUG) printf("use total time:%d\n",total_time);
 		usedtime = total_time;
 	}
+	
+	if(usedtime > time_lmt * 1000) {
+		usedtime = time_lmt * 1000;
+	}
+
 	if (oi_mode)
 	{
 		if (num_of_test > 0)

@@ -417,7 +417,7 @@ bool read_buf(char *buf, const char *key, char *value)
 		strcpy(value, buf + after_equal(buf));
 		trim(value);
 		if (DEBUG)
-			printf("%s\n", value);
+			printf("%s=%s\n", key, value);
 		return 1;
 	}
 	return 0;
@@ -3253,6 +3253,11 @@ int main(int argc, char **argv)
 		if(DEBUG) printf("use total time:%d\n",total_time);
 		usedtime = total_time;
 	}
+	
+	if(usedtime > time_lmt * 1000) {
+		usedtime = time_lmt * 1000;
+	}
+
 	if (oi_mode)
 	{
 		if (num_of_test > 0)

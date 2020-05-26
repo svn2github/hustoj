@@ -73,6 +73,8 @@ Star us, please!
 
 [更新升级](#更新升级)
 
+[修复](#修复)
+
 [支持捐助、加入社区](#支持捐助加入社区)
 
 [二次开发](https://github.com/zhblue/hustoj/blob/master/wiki/SecondaryDevelopment.md)
@@ -378,7 +380,9 @@ sudo bash /home/judge/src/install/update-hustoj
 ## 修复
 
 自己不小心改坏了 `web` 代码，可以使用 `install` 目录中的 `fixing.sh` 进行系统修复。
-
+```
+sudo bash /home/judge/src/install/fixing.sh
+```
 
 ## 支持捐助、加入社区
 

@@ -9,6 +9,26 @@ When people asked question, we put the answer here
 
 新版本
 ----
+如何使用HTTP判题模式
+--
+ 1、注册一个新的账户例如judger1，用作判题。
+ 2、用管理员登陆后台，给这个判题账户增加HTTP_JUDGE权限。
+ 3、修改判题机judge.conf，设置好相关字段
+ ```
+    OJ_HTTP_JUDGE=1
+    OJ_HTTP_BASEURL=http://OJ系统URL地址/
+    OJ_HTTP_USERNAME=judger1
+    OJ_HTTP_PASSWORD=judger1password
+ ```
+ 4、修改db_info.inc.php，禁用$OJ_VCODE验证码。
+ 5、重启判题机
+ ```
+ 	sudo pkill -9 judged
+	sudo judged
+ ```
+
+另参考 https://github.com/zhblue/hustoj/blob/master/wiki/HTTPJudge.md
+
 是否可以只由管理员来注册账号，自己不能注册
 --
 可以，设置db_info.inc.php中的选项，

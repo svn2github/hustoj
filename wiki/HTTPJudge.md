@@ -19,7 +19,8 @@ Even more, the latest hustoj is now possible running on SAE(sina application Eng
   * register a new user and add privilege of "http_judge"
   * add/edit settings in /home/judge/etc/judge.conf
   
-``` OJ_HTTP_JUDGE=1
+``` 
+    OJ_HTTP_JUDGE=1
     OJ_HTTP_BASEURL=http://127.0.0.1/JudgeOnline
     OJ_HTTP_USERNAME=admin
     OJ_HTTP_PASSWORD=admin
@@ -33,3 +34,5 @@ OJ_HTTP_USERNAME is the new user mentioned above with http_judge authorize
 OJ_HTTP_PASSWORD is the password
 
 *disable vcode in db_info.inc.php on SAE ,to let judge client login with http. you can enable it after the judge working, but need to disable it every time judged reboot or reinstall*
+
+

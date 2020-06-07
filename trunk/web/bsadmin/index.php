@@ -131,23 +131,16 @@ include_once("kindeditor.php");
                                 <div class="recent-meaasge">
 									<div class="media">
 										<div class="media-body">
-											<h5 class="media-heading"><a href="http://154.8.211.48/">Hustoj兼容版</a></h5>
+											<h5 class="media-heading">Hustoj兼容版</h5>
 											<div class="meaasge-date"></div>
 											<p>包含普通Hustoj的所有内容，配bshark主题和bsadmin后台</p>
 										</div>
 									</div>
 									<div class="media">
 										<div class="media-body">
-											<h5 class="media-heading"><a href="https://masteroj.hustoj.com">Pro版本</a></h5>
+											<h5 class="media-heading">VegeTableOJ</h5>
 											<div class="meaasge-date"></div>
-											<p>包含更多丰富内容</p>
-										</div>
-									</div>
-									<div class="media no-border">
-										<div class="media-body">
-											<h5 class="media-heading"><a href="https://www.masteroj.cn">Super版本</a></h5>
-											<div class="meaasge-date"></div>
-											<p>服务器经费不足关站</p>
+											<p>自主研发，包含更多丰富内容</p>
 										</div>
 									</div>
 								</div>

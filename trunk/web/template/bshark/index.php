@@ -164,7 +164,7 @@ echo pdo_query('select * from `users` order by `reg_time` DESC limit 1')[0]['use
     </div>
         </div>
                 <br><div class="card"><div class="card-body">
-            <h4>注意！</h4>本主题还不是很稳定，请加QQ群：753870126，有问题及时反馈。另外欢迎使用专业版哦！<img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge
+            <h4>注意！</h4>本主题还不是很稳定，请加QQ群：753870126，有问题及时反馈!<img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge
     </div>
         </div>
         </div>

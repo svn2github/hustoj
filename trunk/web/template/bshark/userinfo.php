@@ -53,7 +53,7 @@ echo "</a></td></tr>";
               </table>
           </div></div>
 </div><div class="col-md-5"><div class="card"><div class="card-body" align=center>
-    <img src="https://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160" style="width:100px;height:100px;border-radius:50%;margin-bottom: 1em">
+    <img src="http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?size=100" style="width:100px;height:100px;border-radius:50%;margin-bottom: 1em">
       <h3><span><?php echo $user;?></span></h3>
         <div class="row">
             <div class="col-md-4">

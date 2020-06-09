@@ -12,7 +12,7 @@
     /* ================================
     You cannot modify the following configuration, otherwise unknown bugs may occur
     */
-    $THEME_BSHARK_VERSION = "V20.5.8";
+    $THEME_BSHARK_VERSION = "V20.6.7";
     // You can visit https://vt-dev-team.github.io/bshark/version.html to check the lastest version
 
     /* The followings is not finished */

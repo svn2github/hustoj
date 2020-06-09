@@ -223,7 +223,7 @@ else{
           <td height="*">
             <p align=left>
               <?php echo $MSG_CONTEST."-".$MSG_USER?>
-              <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
+              <?php echo "( Add private contest's userIDs with newline &#92;n )"?>
               <br>
               <textarea name='ulist' rows='10' style='width:100%;' placeholder='user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>
               <?php echo $MSG_PRIVATE_USERS_ADD?><?php echo "\n"?>'><?php if(isset($ulist)){ echo $ulist;}?></textarea>

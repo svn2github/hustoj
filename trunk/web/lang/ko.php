@@ -220,6 +220,7 @@
 	$MSG_HELP_ADD_NEWS="첫 페이지 공지사항 추가";
 	$MSG_HELP_NEWS_LIST="첫 페이지 공지사항 활성화/비활성화/수정";
 	$MSG_HELP_USER_LIST="사용자 활성화/비활성화";
+	$MSG_HELP_USER_ADD="사용자 등록";
 	$MSG_HELP_ADD_PROBLEM="문제 등록. 문제 등록 후, 문제리스트에서 각 문제별 채점데이터 추가 가능";
 	$MSG_HELP_PROBLEM_LIST="문제 관리. zip 파일로 채점데이터 파일 업로드 가능";
 	$MSG_HELP_ADD_CONTEST="대회 등록. 쉼표(,)로 구분해 문제 입력. 비공개대회(비밀번호/사용자등록) 가능";

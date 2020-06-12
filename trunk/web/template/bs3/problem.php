@@ -63,23 +63,26 @@
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 				echo "<br><br>";
-	        if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])) {
-	        	require_once("include/set_get_key.php");
-  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
-  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
-					}
-					echo "</div>";
-				if(isset($OJ_OI_MODE)&&$OJ_OI_MODE){
-				}else{
-					echo "<div class='btn-group' role='group'>";
-  					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
-  					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT: ".$row['submit']."</a>";
-  					echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
 
+				if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
+				} else {
+					echo "<div class='btn-group' role='group'>";
+  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
+  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT: ".$row['submit']."</a>";
+  				echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
 				}
+
+	      if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])) {
+        	require_once("include/set_get_key.php");
+ 					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
+ 					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
+				}
+
+				echo "</div>";
 				echo "</center>";
 				# end of head
 				echo "</div>";
+
 				echo "<!--StartMarkForVirtualJudge-->";
 				?>
 

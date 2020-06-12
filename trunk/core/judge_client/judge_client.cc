@@ -1473,20 +1473,23 @@ void _get_solution_mysql(int solution_id, char *work_dir, int lang)
 			solution_id);
 	mysql_real_query(conn, sql, strlen(sql));
 	res = mysql_store_result(conn);
-	row = mysql_fetch_row(res);
 
 	// create the src file
-	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	if (DEBUG)
 		printf("Main=%s", src_pth);
-	FILE *fp_src = fopen(src_pth, "we");
-	fprintf(fp_src, "%s", row[0]);
 	if (res != NULL)
 	{
-		mysql_free_result(res); // free the memory
-		res = NULL;
+		row = mysql_fetch_row(res);
+		if(row != NULL) {
+			sprintf(src_pth, "Main.%s", lang_ext[lang]);
+			FILE *fp_src = fopen(src_pth, "we");
+			fprintf(fp_src, "%s", row[0]);
+			mysql_free_result(res); // free the memory
+			res = NULL;
+			row = NULL;
+			fclose(fp_src);
+		}
 	}
-	fclose(fp_src);
 }
 #endif
 void _get_solution_http(int solution_id, char *work_dir, int lang)

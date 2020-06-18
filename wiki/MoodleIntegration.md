@@ -12,9 +12,17 @@ Moodle3.8+ need ubuntu 18.04.
 Preparation 预备工作
 --
 
-install hustoj using .sh script, add line before ```location / { ``` in /etc/nginx/sites-enbaled/default for install moodle
+install hustoj using .sh script, add line before 
+```
+location / { 
+``` 
+in /etc/nginx/sites-enbaled/default for install moodle
 
-首先用脚本安装HUSTOJ，然后在/etc/nginx/sites-enbaled/default文件中```location / { ``` 这一行之前添加下面的内容：
+首先用脚本安装HUSTOJ，然后在/etc/nginx/sites-enbaled/default文件中
+```
+location / { 
+``` 
+这一行之前添加下面的内容：
 
 ```
         if (!-e $request_filename) {

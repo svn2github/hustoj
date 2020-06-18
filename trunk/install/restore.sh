@@ -5,15 +5,10 @@ if [ $# != 1 ] ; then
   echo " tar.bz2 should be created by bak.sh, default location : /var/backups/ "
   exit 1; 
 fi 
-
 DATE=`date +%Y%m%d`
 BAKDATE=`echo $1 |awk -F\. '{print $1}'|awk -F_ '{print $2}'`
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
-#echo $DATE
-#echo $BAKDATE
-#echo $USER
-#echo $PASSWORD
 mkdir hustoj-restore
 cd hustoj-restore
 MAIN="../$1"

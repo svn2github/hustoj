@@ -387,7 +387,7 @@
 				metal();
 			<?php } ?>
 
-			setTimeout(function(){document.location.href='/contestrank-oi.php?cid=<?php echo $cid?>'},60000);
+			setTimeout(function(){document.location.href='/contestrank.php?cid=<?php echo $cid?>'},60000);
 		});
 	</script>
 

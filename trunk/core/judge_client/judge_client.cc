@@ -2710,7 +2710,8 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-		   if((unsigned int)reg.REG_SYSCALL<6500){  
+	//	   if((unsigned int)reg.REG_SYSCALL<6500){  
+			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif
 #ifdef __arm__
 		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
@@ -2759,7 +2760,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
 			}
 #ifdef __mips__
-		   }
+//		   }
 //		}
 #endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);

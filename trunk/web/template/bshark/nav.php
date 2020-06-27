@@ -9,7 +9,10 @@ $cur_path = "template/$OJ_TEMPLATE/";
                   $url!='lostpassword2.php'&&
                   $url!='registerpage.php'
                   ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
- 
+	   
+	   $dir=basename(getcwd());
+           if($dir=="discuss3") $path_fix="../";
+	   else $path_fix="";
            header("location:".$path_fix."loginpage.php");
            exit();
         }

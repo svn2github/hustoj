@@ -99,7 +99,7 @@
 	$MSG_NO_PLS="使用未知的编程语言！";
 	$MSG_TOO_SHORT="代码太短！";
 	$MSG_TOO_LONG="代码太长！";
-	$MSG_BREAK_TIME="您不应在一秒钟内提交超过两次的申请.....";
+	$MSG_BREAK_TIME="您不应在10秒钟内提交超过1次的申请.....";
 
 	//ranklist.php
 	$MSG_Number="名次";

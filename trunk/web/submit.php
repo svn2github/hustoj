@@ -230,7 +230,7 @@ if ($len > 65536) {
     exit(0);
 }
 
-if (false&&!$OJ_BENCHMARK_MODE) {
+if (!$OJ_BENCHMARK_MODE) {
     // last submit
     $now = strftime("%Y-%m-%d %X", time() - 1);
     $sql =

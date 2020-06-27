@@ -3,6 +3,16 @@ $cur_path = "template/$OJ_TEMPLATE/";
 	$url=basename($_SERVER['REQUEST_URI']);
 	$realurl=basename($_SERVER['REQUEST_URI']);
 	$url=str_replace(strrchr($url, "?"),"",$url); 
+ 	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
+                  $url!='loginpage.php'&&
+                  $url!='lostpassword.php'&&
+                  $url!='lostpassword2.php'&&
+                  $url!='registerpage.php'
+                  ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+ 
+           header("location:".$path_fix."loginpage.php");
+           exit();
+        }
 ?>
 <style id="navbarstyles">
 </style>

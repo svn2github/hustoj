@@ -149,11 +149,11 @@ Star us, please!
 
 ### 校园网安装
 
-近期 `Github` 的 SVN 访问缓慢，可以到 `release` 中下载 `tar.gz` 版本，然后用 `install` 目录下的 `*-bytgz.sh` 脚本安装。
+近期 `Github` 的 SVN 访问缓慢，可以到  (Releases)[https://github.com/zhblue/hustoj/releases] 中下载 `tar.gz` 版本，然后用 `install` 目录下的 `*-bytgz.sh` 脚本安装。
 
 但是注意这样安装的实例，将来升级时只能手工升级。
 
-以 `Ubuntu 18.04` 为例：下载好 `Releases` 中的 `Source code(tar.gz)`，然后准备好 `install-ubuntu18-bytgz.sh`
+以 `Ubuntu 18.04` 为例：下载好 (Releases)[https://github.com/zhblue/hustoj/releases] 中的 `Source code(tar.gz)`，然后准备好 `install-ubuntu18-bytgz.sh`
 
 ```bash
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz

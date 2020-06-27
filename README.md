@@ -357,12 +357,12 @@ sudo bash /home/judge/src/install/bak.sh
 sudo bash /home/judge/src/install/backup+.sh
 ```
 
-备份后的归档在 `/home/judge/backup` ，命名格式为`%Y-%m-%d-%H-%M-%S`
+备份后的归档在 `/home/judge/backup` ，命名格式为 hustoj_%Y%m%d.tar.bz2
 
 将你需要迁移的归档复制到目标系统的`/home/judge/backup`目录下，执行下面的脚本进行恢复
 
 ```shell
-sudo bash /home/judge/src/install/restore+.sh
+sudo bash /home/judge/src/install/restore.sh <hustoj_%Y%m%d.tar.bz2>
 ```
 
 脚本的第一个参数为恢复的目标归档，如果没有参数则默认为按名字排序后字典序最大的归档

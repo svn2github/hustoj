@@ -187,10 +187,16 @@ sudo bash install-ubuntu18.04.sh
 ```
 ### Ubuntu 更换软件源
 
+下列两个脚本可以二选一，对于使用**腾讯云镜像**和**Ubuntu 原版镜像的用户**，推荐使用脚本二。
+
++ 脚本一
+
 ```shell
 wget https://github.com/zhblue/hustoj/raw/master/trunk/install/sources.list.sh
 sudo bash sources.list.sh
 ```
+
++ 脚本二
 
 ```shell
 wget https://github.com/zhblue/hustoj/raw/master/trunk/install/update-sources-ubuntu.sh

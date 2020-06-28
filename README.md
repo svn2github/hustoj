@@ -187,7 +187,12 @@ sudo bash install-ubuntu18.04.sh
 ```
 ### Ubuntu 更换软件源
 
-```bash
+```shell
+wget https://github.com/zhblue/hustoj/raw/master/trunk/install/sources.list.sh
+sudo bash sources.list.sh
+```
+
+```shell
 wget https://github.com/zhblue/hustoj/raw/master/trunk/install/update-sources-ubuntu.sh
 sudo bash update-sources-ubuntu.sh
 ```

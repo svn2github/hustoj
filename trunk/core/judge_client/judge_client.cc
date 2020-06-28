@@ -109,17 +109,17 @@ struct user_regs_struct {
 #endif 
 
 #ifdef __mips__
-typedef unsigned long long uint64_t;
-struct user_regs_struct{
-        uint64_t uregs[38];
-};
+	typedef unsigned long long uint64_t;
+	struct user_regs_struct{
+		uint64_t uregs[38];
+	};
 
 
-#define REG_V0 2
-#define REG_A0 4
+	#define REG_V0 2
+	#define REG_A0 4
 
-#define mips_REG_V0 uregs[REG_V0]
-#define REG_SYSCALL mips_REG_V0
+	#define mips_REG_V0 uregs[REG_V0]
+	#define REG_SYSCALL mips_REG_V0
 
 #endif
 
@@ -2709,13 +2709,19 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
-		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-	//	   if((unsigned int)reg.REG_SYSCALL<6500){  
-			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
+		call_id=(unsigned int)reg.REG_SYSCALL;
+		if( (call_id > 1000 && call_id <5000 )|| (lang == 6 && call_id < 5500)  || call_id> 6500){
+		    // not a valid syscall
+			ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+			continue;
+		}else{
+			call_id = call_id % call_array_size;
+			//printf("call_id:%x\n",call_id);
 #endif
 #ifdef __arm__
 		call_id=ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
-			call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
+		call_id = ((unsigned int)reg.REG_SYSCALL) % call_array_size;
 #endif
 #ifdef __aarch64__
 		call_id=ptrace(PTRACE_GETREGS, pidApp, (void *)NT_ARM_SYSTEM_CALL, &reg);
@@ -2753,7 +2759,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"
 						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
-						solution_id, call_id,exitcode);
+						solution_id, call_id,(unsigned int)reg.REG_SYSCALL);
 
 				write_log(error);
 				print_runtimeerror(infile+strlen(oj_home)+5,error);
@@ -2761,7 +2767,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 #ifdef __mips__
 //		   }
-//		}
+		}
 #endif
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		first = false;

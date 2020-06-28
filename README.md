@@ -12,7 +12,7 @@ HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用�
 
 论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 
 
-如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf)可能有帮助。
+如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf) 可能有帮助。
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
@@ -51,7 +51,7 @@ Star us, please!
 
 [基于 Ubuntu 20.04 安装](#基于-ubuntu-2004-安装)
 
-[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装) **各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
+[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装)  ***各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机***
 
 **[Ubuntu 更换软件源](#ubuntu-更换软件源)**
 
@@ -168,7 +168,7 @@ sudo bash install-ubuntu20.04.sh
 
 ### 基于 Ubuntu 18.04 通过 Gitee 安装
 
-**腾讯云用户请使用下方脚本[换软件源](https://developer.aliyun.com/mirror/ubuntu)**
+**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
 ```bash
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
@@ -177,7 +177,7 @@ sudo bash install-ubuntu18-gitee.sh
 
 ### 基于 Ubuntu 18.04 安装
 
-**腾讯云用户请使用下方脚本[换软件源](https://developer.aliyun.com/mirror/ubuntu)**
+**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
 **各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
 

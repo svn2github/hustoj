@@ -43,4 +43,8 @@ sed -i 's/http\:\/\/archive.ubuntu.com/https\:\/\/mirrors.aliyun.com/g'    /etc/
 
 sed -i 's/http\:\/\/security.ubuntu.com/https\:\/\/mirrors.aliyun.com/g'   /etc/apt/sources.list
 
+# Tencent Cloud
+
+sed -i 's/http\:\/\/mirrors.tencentyun.com/https\:\/\/mirrors.aliyun.com/g'   /etc/apt/sources.list
+
 apt update

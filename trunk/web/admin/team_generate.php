@@ -1,5 +1,5 @@
 <?php require("admin-header.php");
-if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))) {
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }?>
@@ -71,5 +71,6 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		<?php require_once("../include/set_post_key.php");?>
 		<input type=submit value=Generate><br>
 	</form>
+	<span style="color:red;font-weight:bold">以相同的前缀生成账号，将覆盖昵称和密码，请谨慎操作！</span>
 
 </div>

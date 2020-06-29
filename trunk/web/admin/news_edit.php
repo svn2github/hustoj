@@ -9,7 +9,7 @@ require_once("../include/db_info.inc.php");
 require_once("../include/my_func.inc.php");
 
 echo "<hr>";
-echo "<center><h3>Edit-"."$MSG_NEWS</h3></center>";
+echo "<center><h3>".$MSG_NEWS."-"."Edit"."</h3></center>";
 
 include_once("kindeditor.php");
 ?>
@@ -64,7 +64,8 @@ if(isset($_POST['news_id'])){
   <form method=POST action=news_edit.php>
     <input type=hidden name='news_id' value=<?php echo $news_id?>>
     <p align=left>
-      <?php echo $MSG_TITLE?>:<input type=text name=title size=71 value='<?php echo $title?>'>
+      <label class="col control-label"><?php echo $MSG_TITLE?></label>
+      <input type=text name=title size=71 value='<?php echo $title?>'>
     </p>
     <p align=left>
       <textarea class=kindeditor name=content>
@@ -74,7 +75,7 @@ if(isset($_POST['news_id'])){
     <?php require_once("../include/set_post_key.php");?>
     <p>
       <center>
-      <input type=submit value=Submit name=submit>
+      <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
       </center>
     </p>
   </form>

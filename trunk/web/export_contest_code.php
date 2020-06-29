@@ -9,7 +9,7 @@ if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
         exit(0);
 }
 $contest_id=intval($_GET['cid']);
-if (!(isset($_SESSION[$OJ_NAME.'_'.'m'.$contest_id])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
+if (!(isset($_SESSION[$OJ_NAME.'_'.'m'.$contest_id]) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))){
         $view_errors= "<a href=./loginpage.php>No privileges!</a>";
         require_once("template/".$OJ_TEMPLATE."/error.php");
         exit(0);

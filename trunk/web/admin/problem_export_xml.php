@@ -1,5 +1,6 @@
 <?php
 @session_start ();
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 require_once ("../include/db_info.inc.php");
 
 if(!isset($OJ_LANG)){
@@ -8,6 +9,7 @@ if(!isset($OJ_LANG)){
 require_once("../lang/$OJ_LANG.php");
 require_once("../include/const.inc.php");
 function fixcdata($content){
+	 $content=str_replace("\x1a","",$content);   // remove some strange \x1a [SUB] char from datafile
     return str_replace("]]>","]]]]><![CDATA[>",$content);
 }
 function getTestFileIn($pid, $testfile,$OJ_DATA) {
@@ -157,7 +159,7 @@ function fixImageURL(&$html,&$did){
    }   	
 }
 
-if (! isset ( $_SESSION[$OJ_NAME.'_'.'administrator'] )) {
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))) {
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit ( 1 );
@@ -209,7 +211,6 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 		header ( "content-type:   application/file" );
 		header ( "content-disposition:   attachment;   filename=\"fps-".$_SESSION[$OJ_NAME.'_'.'user_id'].$filename.".xml\"" );
 	}
-	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   
 	?>
    

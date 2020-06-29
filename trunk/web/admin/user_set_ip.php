@@ -1,29 +1,69 @@
 <?php require("admin-header.php");
 
-        if(isset($OJ_LANG)){
-                require_once("../lang/$OJ_LANG.php");
-        }
-
-echo "<title>User List</title>";
-echo "<hr>";
-echo "<center><h2>$MSG_SET_LOGIN_IP</h2></center>";
-require_once("../include/set_get_key.php");
-$sql="";
-if(isset($_POST['user_id'])){
-	require_once("../include/check_post_key.php");
-	$user_id=$_POST['user_id'];
-	$ip=$_POST['ip'];
-	 $sql="insert into loginlog (user_id,password,ip,time) value(?,?,?,now())";
-	 $result=pdo_query($sql,$user_id,"set ip by ".$_SESSION[$OJ_NAME."_user_id"],$ip);
-	echo "$MSG_USER ".htmlentities($user_id)." $MSG_SET_LOGIN_IP : ".htmlentities($ip);
+if (isset($OJ_LANG)) {
+	require_once("../lang/$OJ_LANG.php");
 }
 ?>
-<form action=user_set_ip.php class=center method="post">
-<?php echo $MSG_USER?>	
-	<input type="text" name="user_id" ><br>
-	IP:<input type="text" name="ip" ><br>
-<?php require_once("../include/set_post_key.php");?>
-<input type=submit value="<?php echo $MSG_ADD?>" ></form>
+
+<title>User Set IP</title>
+<hr>
+<center><h3><?php echo $MSG_SET_LOGIN_IP?></h3></center>
+
+<div class='container'>
+
+<?php
+require_once("../include/set_get_key.php");
+$sql = "";
+if(isset($_POST['do'])){
+	require_once("../include/check_post_key.php");
+	
+	$user_id = $_POST['user_id'];
+  $ip = $_POST['ip'];
+
+  if(get_magic_quotes_gpc()){
+		$user_id = stripslashes($user_id);
+		$ip = stripslashes($ip);
+	}
+
+	$sql = "insert into loginlog (user_id,password,ip,time) value(?,?,?,now())";
+	$result = pdo_query($sql,$user_id,"set ip by ".$_SESSION[$OJ_NAME."_user_id"],$ip);
+	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Login IP Changed!</h4></center>";
+}
+?>
+
+<form action=user_set_ip.php method=post class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+		<?php if(isset($_GET['uid'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+  	<?php } else if(isset($_POST['user_id'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo "New IP"?></label>
+		<?php if(isset($_POST['ip'])) { ?>
+		<div class="col-sm-3"><input name="ip" class="form-control" value="<?php echo $_POST['ip']?>" type="text"  autocomplete="off" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="ip" class="form-control" placeholder="<?php echo "?.?.?.?*"?>" type="text"  autocomplete="off" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<?php require_once("../include/set_post_key.php");?>
+		<div class="col-sm-offset-4 col-sm-2">
+			<button name="do" type="hidden" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE; ?></button>
+		</div>
+		<div class="col-sm-2">
+			<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
+</form>
+
+</div>
 
 <?php
 require("../oj-footer.php");

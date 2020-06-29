@@ -51,20 +51,27 @@ include_once("kindeditor.php") ;
   //$mlimit/=1000;
   //echo "mlimit:$mlimit<br>";
   //echo "tlimit:".$tlimit;
+function mjpage($raw){
+ 
+          $ret=str_replace('<span class="mjpage">','\(',$raw);
+          $ret=str_replace('</span>','\)',$ret);
+          return $ret;
+}
+
   
   $element=$html->find('div[class=ui bottom attached segment font-content]',0);
-  $descriptionHTML=$element->outertext;
+  $descriptionHTML=mjpage($element->outertext);
   $element=$html->find('div[class=ui bottom attached segment font-content]',1);
-  $inputHTML=$element->outertext;
+  $inputHTML=mjpage($element->outertext);
   $element=$html->find('div[class=ui bottom attached segment font-content]',2);
-  $outputHTML=$element->outertext;
+  $outputHTML=mjpage($element->outertext);
   
   $element=$html->find('code[class=lang-plain]',0);
   $sample_input=$element->innertext;
   $element=$html->find('code[class=lang-plain]',1);
   $sample_output=$element->innertext;
   $element=$html->find('div[class=ui bottom attached segment font-content]',4);
-  $hintHTML=$element->outertext;
+  $hintHTML=mjpage($element->outertext);
   $element=$html->find('div[class=ui bottom attached segment]',1);
   $sourceHTML=$element->outertext;
 ?>

@@ -4,12 +4,14 @@
     require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title=$MSG_SUBMIT;
- if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-
+if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+  if(isset($OJ_GUEST)&&$OJ_GUEST){
+	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
+  }else{
 	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
 	require("template/".$OJ_TEMPLATE."/error.php");
-	exit(0);
-//	$_SESSION[$OJ_NAME.'_'.'user_id']="Guest";
+        exit(0);
+  }
 }
 $problem_id=1000;
 if (isset($_GET['id'])){
@@ -18,7 +20,9 @@ if (isset($_GET['id'])){
 }else if (isset($_GET['cid'])&&isset($_GET['pid'])){
 	$cid=intval($_GET['cid']);$pid=intval($_GET['pid']);
 	$psql="select problem_id from contest_problem where contest_id=? and num=?";
-	$problem_id=pdo_query($psql,$cid,$pid)[0][0];
+	$data=pdo_query($psql,$cid,$pid);
+	$row=$data[0];
+	$problem_id=$row[0];
 	$sample_sql="SELECT p.sample_input, p.sample_output, p.problem_id
 			FROM problem p where problem_id =  ? ";
 }else{
@@ -33,7 +37,8 @@ if (isset($_GET['id'])){
 	$sid=intval($_GET['sid']);
 	$sql="SELECT * FROM `solution` WHERE `solution_id`=?";
 	$result=pdo_query($sql,$sid);
-	 $row=$result[0];
+	$row=$result[0];
+	$cid=intval($row['contest_id']);
 	if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 	if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) {
 		$ok=true;
@@ -54,7 +59,11 @@ if (isset($_GET['id'])){
 		$row=$result[0];
 		if($row)
 			$view_src=$row['source'];
-		
+		$sql="select langmask from contest where contest_id=?";
+		$result=pdo_query($sql,$cid);
+		$row=$result[0];
+		if($row)
+			$_GET['langmask']=$row['langmask'];
 	}
 	
  }
@@ -85,11 +94,20 @@ $view_sample_output="3";
 	
  }
  
+$lastlang=0;
 if(!$view_src){
-	if(isset($_COOKIE['lastlang'])) 
+	if(isset($_COOKIE['lastlang'])&&$_COOKIE['lastlang']!="undefined"){
 		$lastlang=intval($_COOKIE['lastlang']);
-	else 
-		$lastlang=0;
+	}else{
+		$sql="select language from solution where user_id=? order by solution_id desc limit 1";
+		$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+		if(count($result)>0){
+			$lastlang=$result[0][0];
+		}else{
+			$lastlang=0;
+		}
+//			echo "last=$lastlang";
+	}
    $template_file="$OJ_DATA/$problem_id/template.".$language_ext[$lastlang];
    if(file_exists($template_file)){
 	$view_src=file_get_contents($template_file);

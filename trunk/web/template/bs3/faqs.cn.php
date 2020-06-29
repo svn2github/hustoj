@@ -121,7 +121,14 @@ public class Main{
 		}
 	}
 }</font></pre>
-
+Python3<br>
+<pre>import sys
+for line in sys.stdin:
+    a = line.split()
+    print(int(a[0]) + int(a[1]))
+</pre>
+	      
+	
 <hr>
 <font color=green>Q</font>:为什么我的程序在自己的电脑上正常编译，而系统告诉我编译错误!<br>
 <font color=red>A</font>:GCC的编译标准与VC6有些不同，更加符合c/c++标准:<br>
@@ -171,7 +178,7 @@ public class Main{
     <tr>
       <td align=right width=65%>
       <a href = "index.php"><font color=red><?php echo $OJ_NAME?></font></a> 
-      <a href = "https://github.com/zhblue/hustoj"><font color=red>17.12.01</font></a></td>
+      <a href = "https://github.com/zhblue/hustoj"><font color=red>2020.1.22</font></a></td>
     </tr>
   </table>
 </center>

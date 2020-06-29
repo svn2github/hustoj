@@ -2,7 +2,7 @@
 require("admin-header.php");
 require_once("../include/set_get_key.php");
 
-if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
+if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))){
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
 }
@@ -14,7 +14,7 @@ if(isset($OJ_LANG)){
 
 <title>Problem List</title>
 <hr>
-<center><h3><?php echo $MSG_PROBLEM.$MSG_LIST?></h3></center>
+<center><h3><?php echo $MSG_PROBLEM."-".$MSG_LIST?></h3></center>
 
 <div class='container'>
 
@@ -25,7 +25,7 @@ $row = $result[0];
 
 $ids = intval($row['ids']);
 
-$idsperpage = 25;
+$idsperpage = 50;
 $pages = intval(ceil($ids/$idsperpage));
 
 if(isset($_GET['page'])){ $page = intval($_GET['page']);}
@@ -51,9 +51,12 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
 }
 ?>
 
-<form action=problem_list.php class="center">
-  <input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>">
+<center>
+<form action=problem_list.php class="form-search form-inline">
+  <input type="text" name=keyword class="form-control search-query" placeholder="<?php echo $MSG_PROBLEM_ID.', '.$MSG_TITLE.', '.$MSG_Description.', '.$MSG_SOURCE?>">
+  <button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 </form>
+</center>
 
 <?php
 /*
@@ -73,13 +76,13 @@ echo "</select>";
 <table width=100% border=1 style="text-align:center;">
   <form method=post action=contest_add.php>
     <tr>
-      <td width=60px>ID <input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
-      <td>TITLE</td>
-      <td>AC</td>
-      <td>UPDATE</td>
+      <td width=60px><?php echo $MSG_PROBLEM_ID?><input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
+      <td><?php echo $MSG_TITLE?></td>
+      <td><?php echo $MSG_AC?></td>
+      <td></td>
       <?php
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
-        if(isset($_SESSION[$OJ_NAME.'_'.'administrator']))
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
+        if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
           echo "<td>STATUS</td><td>DELETE</td>";
         echo "<td>EDIT</td><td>TESTDATA</td>";
       }
@@ -93,7 +96,7 @@ echo "</select>";
         echo "<td>".$row['accepted']."</td>";
         echo "<td>".$row['in_date']."</td>";
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
-          if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+          if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
             echo "<td><a href=problem_df_change.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span titlc='click to reserve it' class=green>Available</span>":"<span class=red title='click to be available'>Reserved</span>")."</a><td>";
             if($OJ_SAE||function_exists("system")){
     ?>
@@ -101,7 +104,7 @@ echo "</select>";
         <?php
         }
       }
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']])){
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']]) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         echo "<td><a href=problem_edit.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Edit</a>";
         echo "<td><a href='javascript:phpfm(".$row['problem_id'].");'>TestData</a>";
       }

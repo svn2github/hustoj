@@ -42,10 +42,12 @@ function submitSolution($pid,$solution,$language)
 	pdo_query( $sql ,$insert_id,$solution);
 	$sql = "INSERT INTO `source_code_user`(`solution_id`,`source`)VALUES(?,?)";
 	pdo_query( $sql,$insert_id,$solution );
-    pdo_query("update solution set result=1 where solution_id=?",$insert_id);
+        pdo_query("update solution set result=1 where solution_id=?",$insert_id);
+	pdo_query("update problem set submit=submit+1 where problem_id=?",$pid);
 }
 ?>
 Import Free Problem Set ... <br>
+如果导入失败，请参考<a href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md#%E5%90%8E%E5%8F%B0%E5%AF%BC%E5%85%A5%E9%97%AE%E9%A2%98%E5%A4%B1%E8%B4%A5" target="_blank">FAQ</a>。
 
 <?php
 function getValue($Node, $TagName) {

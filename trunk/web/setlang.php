@@ -1,11 +1,10 @@
-<?php require_once("./include/db_info.inc.php");
-	require_once("./include/my_func.inc.php");
-	$newlang=strval($_GET['lang']);
-	if(is_valid_user_name($newlang)&&strlen($newlang)<3){
-		$_SESSION[$OJ_NAME.'_'.'OJ_LANG']=$newlang;
-	}
-		echo "<script language='javascript'>\n";
-		echo "history.go(-1);\n";
-		echo "</script>";
-	
+<?php
+if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn","ug", "en", 'fa', 'ko', 'th'))) {
+    session_start();
+    $_SESSION[$OJ_NAME . '_' . 'OJ_LANG'] = $_GET['lang'];
+    setcookie("lang", $_GET['lang'], time() + 604800);
+}
 ?>
+<script>
+    window.history.go(-1);
+</script>

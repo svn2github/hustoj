@@ -8,16 +8,22 @@
 	 
 	if(
 		(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
-		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)||
-		(isset($OJ_MAIL)&&!$OJ_MAIL)
+		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
+		
 	  ){
 		header("Content-type: text/html; charset=utf-8");
-		echo $MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
+		$view_errors=$MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
+  		require("template/".$OJ_TEMPLATE."/error.php");
 		exit ();
 	}
-
+	if(isset($OJ_MAIL)&&!$OJ_MAIL){
+		header("Content-type: text/html; charset=utf-8");
+		$view_errors=$MSG_NO_MAIL_HERE;
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
+	}
 	$view_title=$MSG_MAIL;
- $to_user="";
+$to_user="";
 $title="";
 if (isset($_GET['to_user'])){
 	$to_user=htmlentities($_GET['to_user'],ENT_QUOTES,"UTF-8");
@@ -27,9 +33,9 @@ if (isset($_GET['title'])){
 }
 
 if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	echo "<a href=loginpage.php>$MSG_Login</a>";
-	require_once("oj-footer.php");
-	exit(0);
+	$view_errors= "<a href=loginpage.php>$MSG_Login</a>";
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
 }
 require_once("./include/db_info.inc.php");
 require_once("./include/const.inc.php");
@@ -48,10 +54,11 @@ $view_content=false;
 if (isset($_GET['vid'])){
 	$vid=intval($_GET['vid']);
 	$sql="SELECT * FROM `mail` WHERE `mail_id`=?
-								and to_user=?";
-	$result=pdo_query($sql,$vid,$_SESSION[$OJ_NAME.'_'.'user_id']);
-	 $row=$result[0];
-	$to_user=$row['from_user'];
+								and (to_user=? or from_user=?)";
+	$result=pdo_query($sql,$vid,$_SESSION[$OJ_NAME.'_'.'user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']);
+	$row=$result[0];
+	$from_user=$row['from_user'];
+	$to_user=$row['to_user'];
 	$view_title=$row['title'];
 	$view_content=$row['content'];
 
@@ -74,12 +81,10 @@ if(isset($_POST['to_user'])){
 	}
 	$title = RemoveXSS( $title);
 	
-	$sql="select 1 from users where user_id=? ";
-	$res=pdo_query($sql,$to_user);
+	$sql="select 1 from privilege where (rightstr='source_browser' or rightstr='administrator') and (user_id=? or user_id=? )";
+	$res=pdo_query($sql,$from_user,$to_user);
 	if ($res&&count($res)<1){
-			
-			$view_title= "No Such User!";
-
+			$view_title= "Mail can only send to or from a Code Reviewer!";
 	}else{
 		if($res)
 		$sql="insert into mail(to_user,from_user,title,content,in_date)
@@ -93,9 +98,9 @@ if(isset($_POST['to_user'])){
 	}
 }
 //list mail
-	$sql="SELECT * FROM `mail` WHERE to_user=?
+	$sql="SELECT * FROM `mail` WHERE to_user=? or from_user=?
 					order by mail_id desc";
-	$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']) ;
+	$result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],$_SESSION[$OJ_NAME.'_'.'user_id']) ;
 $view_mail=Array();
 $i=0;
 foreach($result as $row){

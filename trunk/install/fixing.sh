@@ -7,6 +7,7 @@ if [ `whoami` = "root" ];then
 	cp -a src/web/upload/* new/web/upload/
 	mv src "old.$DATE"
 	mv new src
+	chown www-data:www-data -R src
 else
 	echo "usage: sudo $0"
 fi

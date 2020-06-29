@@ -51,8 +51,8 @@ h3.pagenav div.active{
    color: #888;
 }
 
-.broadcast {
-   height: 20px;
+#broadcast {
+   height: 90px;
 }
 
 #problemset {
@@ -60,4 +60,13 @@ h3.pagenav div.active{
 }
 .hint pre{
   display:none;
+}
+.red{
+  color:red;
+}
+.green{
+  color:green;
+}
+.blue{
+  color:blue;
 }

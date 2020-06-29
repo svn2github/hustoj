@@ -172,12 +172,12 @@ if(isset($_POST['update_solution'])){
 	if($cid>0){
 		$sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
 		pdo_query($sql,$pid,$cid,$pid,$cid);
-		$sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
-		pdo_query($sql,$pid,$cid,$pid,$cid);
+	//	$sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+	//	pdo_query($sql,$pid,$cid,$pid,$cid);
 	}else{
-		$sql="UPDATE `problem` SET `submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=?) WHERE `problem_id`=?";
+	//	$sql="UPDATE `problem` SET `submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=?) WHERE `problem_id`=?";
 	//echo $sql;
-		pdo_query($sql,$pid,$pid);
+	//	pdo_query($sql,$pid,$pid);
 		$sql="UPDATE `problem` SET `accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? AND `result`=4) WHERE `problem_id`=?";
 	//echo $sql;
 		pdo_query($sql,$pid,$pid);

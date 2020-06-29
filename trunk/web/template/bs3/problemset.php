@@ -29,6 +29,7 @@
 		<div class="jumbotron">
 			<center>
 				<nav id="page" class="center">
+					<small>
 					<ul class="pagination">
 						<li class="page-item"><a href="problemset.php?page=1">&lt;&lt;</a>
 						</li>
@@ -39,13 +40,13 @@
 						$start = $page > $section ? $page - $section : 1;
 						$end = $page + $section > $view_total_page ? $view_total_page : $page + $section;
 						for ( $i = $start; $i <= $end; $i++ ) {
-							echo "<li class='" . ( $page == $i ? "active " : "" ) . "page-item'>
-        <a href='problemset.php?page=" . $i . "'>" . $i . "</a></li>";
+							echo "<li class='" . ( $page == $i ? "active " : "" ) . "page-item'> <a href='problemset.php?page=" . $i . "'>" . $i . "</a></li>";
 						}
 						?>
 						<li class="page-item"><a href="problemset.php?page=<?php echo $view_total_page?>">&gt;&gt;</a>
 						</li>
 					</ul>
+					</small>
 				</nav>
 
 				<table>
@@ -53,39 +54,38 @@
 						<td width='5'></td>
 						<td colspan='1'>
 							<form class=form-inline action=problem.php>
-								<input class="form-control search-query" type='text' name='id' placeholder="Problem ID">
-								<button class="form-control" type='submit'>Go</button>
+								<input class="form-control search-query" type='text' name='id' placeholder="<?php echo $MSG_PROBLEM_ID?>">
+								<button class="form-control" type='submit'><?php echo $MSG_SEARCH?></button>&nbsp;&nbsp;
 							</form>
 						</td>
 						<td colspan='1'>
 							<form class="form-search form-inline">
-								<input type="text" name=search class="form-control search-query" placeholder="Keywords Title or Source">
-								<button type="submit" class="form-control">
-									<?php echo $MSG_SEARCH?>
-								</button>
+								<input type="text" name=search class="form-control search-query" placeholder="<?php echo $MSG_TITLE.', '.$MSG_SOURCE?>">
+								<button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 							</form>
 						</td>
 					</tr>
 				</table>
+
 				<table id='problemset' width='90%' class='table table-striped'>
 					<thead>
 						<tr class='toprow'>
-							<th width='5'></th>
-							<th width='20' class='hidden-xs'>
+							<td></td>
+							<td class='hidden-xs'>
 								<?php echo $MSG_PROBLEM_ID?>
-							</th>
-							<th>
+							</td>
+							<td>
 								<?php echo $MSG_TITLE?>
-							</th>
-							<th class='hidden-xs' width='10%'>
+							</td>
+							<td class='hidden-xs'>
 								<?php echo $MSG_SOURCE?>
-							</th>
-							<th style="cursor:hand" width=60>
-								<?php echo $MSG_AC?>
-							</th>
-							<th style="cursor:hand" width=60>
+							</td>
+							<td style="cursor:hand">
+								<?php echo $MSG_SOVLED?>
+							</td>
+							<td style="cursor:hand">
 								<?php echo $MSG_SUBMIT?>
-							</th>
+							</td>
 						</tr>
 					</thead>
 					<tbody>

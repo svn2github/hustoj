@@ -1,5 +1,13 @@
+#!/bin/bash
+cd /home/judge/git
+git pull
+
 svn up /home/judge/src
 cd /home/judge/src/core
 sudo pkill -9 judged
 sudo bash make.sh
 sudo judged
+
+web_user=`ls -l /home/judge/src/web/include/db_info.inc.php | awk -F ' ' '{print $3}'`
+mkdir /var/log/hustoj/
+chown -R $web_user /var/log/hustoj

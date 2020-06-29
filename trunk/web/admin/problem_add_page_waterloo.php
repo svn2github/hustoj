@@ -50,16 +50,22 @@ include_once("kindeditor.php") ;
   $element=$html->find('h2',0);
   $title=$element->plaintext;
   $i=1;
-  $sample_output=$sample_input=$descriptionHTML="";
+  $outputHTML=$inputHTML=$sample_output=$sample_input=$descriptionHTML="";
   
   $html=$html->innertext;
   $i=strpos($html,"<h3>");
  // echo $i."-".strlen($html);
   $descriptionHTML=substr($html,0,$i-1);
  // echo $i."-".strlen($descriptionHTML);
+  $i=strpos($html,"</h3>",$i+1);
+  $j=strpos($html,"<h3>",$i);
+  $inputHTML=substr($html,$i+5,$j-$i-1);
   $i=strpos($html,"<pre>",$i);
   $j=strpos($html,"</pre>",$i);
   $sample_input=substr($html,$i+5,$j-$i-5);
+  $i=strpos($html,"</h3>",$i+1);
+  $j=strpos($html,"<h3>",$i);
+  $outputHTML=substr($html,$i+5,$j-$i-1);
   $i=strpos($html,"<pre>",$j);
   $j=strpos($html,"</pre>",$i);
   $sample_output=substr($html,$i+5,$j-$i-5);
@@ -90,7 +96,7 @@ include_once("kindeditor.php") ;
 <textarea class="kindeditor" rows=13 name=hint cols=80></textarea>
 </p>
 <p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
-<p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
+<p align=left>Source:<br><textarea name=source rows=1 cols=70>Waterloo </textarea></p>
 <p align=left>contest:
 	<select  name=contest_id>
 <?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";

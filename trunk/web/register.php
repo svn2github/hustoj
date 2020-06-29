@@ -2,6 +2,7 @@
 require_once("./include/db_info.inc.php");
 if(isset($OJ_REGISTER)&&!$OJ_REGISTER) exit(0);
 require_once("./include/my_func.inc.php");
+if(isset($OJ_CSRF)&&$OJ_CSRF)require_once("./include/csrf_check.php");
 $err_str="";
 $err_cnt=0;
 $len;
@@ -9,7 +10,7 @@ $user_id=trim($_POST['user_id']);
 $len=strlen($user_id);
 $email=trim($_POST['email']);
 $school=trim($_POST['school']);
-$vcode=trim($_POST['vcode']);
+if(isset($OJ_VCODE)&&$OJ_VCODE)$vcode=trim($_POST['vcode']);
 if($OJ_VCODE&&($vcode!= $_SESSION[$OJ_NAME.'_'."vcode"]||$vcode==""||$vcode==null) ){
 	$_SESSION[$OJ_NAME.'_'."vcode"]=null;
 	$err_str=$err_str."Verification Code Wrong!\\n";
@@ -77,18 +78,23 @@ $nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip = ($_SERVER['REMOTE_ADDR']);
-if( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ){
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])&&!empty(trim($_SERVER['HTTP_X_FORWARDED_FOR']))) {
     $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    $tmp_ip=explode(',',$REMOTE_ADDR);
-    $ip =(htmlentities($tmp_ip[0],ENT_QUOTES,"UTF-8"));
+    $tmp_ip = explode(',', $REMOTE_ADDR);
+    $ip = (htmlentities($tmp_ip[0], ENT_QUOTES, "UTF-8"));
+} else if (isset($_SERVER['HTTP_X_REAL_IP'])&&!empty(trim($_SERVER['HTTP_X_REAL_IP']))) {
+    $REMOTE_ADDR = $_SERVER['HTTP_X_REAL_IP'];
+    $tmp_ip = explode(',', $REMOTE_ADDR);
+    $ip = (htmlentities($tmp_ip[0], ENT_QUOTES, "UTF-8"));
 }
 if(isset($OJ_REG_NEED_CONFIRM)&&$OJ_REG_NEED_CONFIRM) $defunct="Y";
 else $defunct="N";
 $sql="INSERT INTO `users`("
 ."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`,`defunct`)"
 ."VALUES(?,?,?,NOW(),?,NOW(),?,?,?)";
+//echo "$sql:$user_id,$email,$ip,$password,$nick,$school,$defunct";
 $rows=pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$defunct);// or die("Insert Error!\n");
-
+//echo $rows;
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);
 

@@ -37,7 +37,7 @@ if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 fi
 sed -i "s/OJ_HTTP_JUDGE=0/OJ_HTTP_JUDGE=1/g" etc/judge.conf
 sed -i "s|OJ_HTTP_BASEURL=http://127.0.0.1/JudgeOnline|OJ_HTTP_BASEURL=$URL|g" etc/judge.conf
-sed -i "s/OJ_HTTP_USERNAME=IP/OJ_HTTP_USERNAME=$USER/g" etc/judge.conf
+sed -i "s/OJ_HTTP_USERNAME=admin/OJ_HTTP_USERNAME=$USER/g" etc/judge.conf
 sed -i "s/OJ_HTTP_PASSWORD=admin/OJ_HTTP_PASSWORD=$PASSWORD/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 COMPENSATION=`grep 'mips' /proc/cpuinfo|awk -F: '{printf("%.2f",$2/5000)}'`

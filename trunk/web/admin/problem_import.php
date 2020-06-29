@@ -7,17 +7,19 @@
 	return $ret;
 }
 require_once("admin-header.php");
-if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
-	echo "<a href='../loginpage.php'>Please Login First!</a>";
-	exit(1);
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))) {
+  echo "<a href='../loginpage.php'>Please Login First!</a>";
+  exit(1);
 }
    $maxfile=min(ini_get("upload_max_filesize"),ini_get("post_max_size"));
 
 ?>
 <div class="container">
 Import FPS data ,please make sure you file is smaller than [<?php echo $maxfile?>] <br/>
-or set upload_max_filesize and post_max_size in PHP.ini<br/>
-if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in php.ini.<br>
+	or set upload_max_filesize and post_max_size in <span style='color:blue'>php.ini</span><br/>
+if you fail on import big files[10M+],try enlarge your [memory_limit]  setting in <span style='color:blue'>php.ini</span>.<br>
+	
+To locate the file , use <span style='color:blue'> find /etc -name php.ini </span>
 <?php 
     $show_form=true;
    if(!isset($OJ_SAE)||!$OJ_SAE){
@@ -26,7 +28,9 @@ if you fail on import big files[10M+],try enlarge your [memory_limit]  setting i
 					or you need to execute:<br>
 					   <b>chmod 775 -R $OJ_DATA && chgrp -R www-data $OJ_DATA</b><br>
 					you can't use import function at this time.<br>"; 
-			$show_form=false;
+		   if($OJ_LANG=="cn") echo "权限异常，请先去执行sudo chmod 775 -R $OJ_DATA <br> 和 sudo chgrp -R www-data $OJ_DATA <br>";
+		   
+		   $show_form=false;
 	   }
 	   if(!file_exists("../upload"))mkdir("../upload");
 	   if(!writable("../upload")){

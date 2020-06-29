@@ -1,34 +1,75 @@
-<?php require_once("admin-header.php");?>
-<?php if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])|| isset($_SESSION[$OJ_NAME.'_'.'password_setter']) )){
+<?php require_once("admin-header.php");
+
+if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'password_setter']) )){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
+
+if(isset($OJ_LANG)){
+  require_once("../lang/$OJ_LANG.php");
+}
+?>
+
+<title>Set Password</title>
+<hr>
+<center><h3><?php echo $MSG_USER."-".$MSG_SETPASSWORD?></h3></center>
+
+<div class='container'>
+
+<?php
 if(isset($_POST['do'])){
 	//echo $_POST['user_id'];
 	require_once("../include/check_post_key.php");
 	//echo $_POST['passwd'];
 	require_once("../include/my_func.inc.php");
 	
-	$user_id=$_POST['user_id'];
-    $passwd =$_POST['passwd'];
-    if (get_magic_quotes_gpc ()) {
-		$user_id = stripslashes ( $user_id);
-		$passwd = stripslashes ( $passwd);
+	$user_id = $_POST['user_id'];
+  $passwd = $_POST['passwd'];
+
+  if(get_magic_quotes_gpc()){
+		$user_id = stripslashes($user_id);
+		$passwd = stripslashes($passwd);
 	}
-	$passwd=pwGen($passwd);
-	$sql="update `users` set `password`=? where `user_id`=?  and user_id not in( select user_id from privilege where rightstr='administrator') ";
+
+	$passwd = pwGen($passwd);
+	$sql = "update `users` set `password`=? where `user_id`=?  and user_id not in( select user_id from privilege where rightstr='administrator')";
 	
-	if (pdo_query($sql,$passwd,$user_id)==1) echo "Password Changed!";
-  else echo "No such user! or He/Her is an administrator!";
+	if(pdo_query($sql,$passwd,$user_id) == 1)
+		echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Password Changed!</h4></center>";
+  else
+  	echo "<center><h4 class='text-danger'>There is No such User ".$_POST['user_id']."! or User ".$_POST['user_id']." is administrator!</h4></center>";
 }
 ?>
-<div class="container">
-<form action='changepass.php' method=post>
-	<b>Reset Password:</b><br />
-	<?php echo $MSG_USER_ID?>:<input type=text size=10 name="user_id"><br />
-	<?php echo $MSG_PASSWORD?>:<input type=text size=10 name="passwd"><br />
-	<?php require_once("../include/set_post_key.php");?>
-	<input type='hidden' name='do' value='do'>
-	<input type=submit value='Change'>
+
+<form action=changepass.php method=post class="form-horizontal">
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_USER_ID?></label>
+		<?php if(isset($_GET['uid'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_GET['uid']?>" type="text" required ></div>
+  	<?php } else if(isset($_POST['user_id'])) { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" value="<?php echo $_POST['user_id']?>" type="text" required ></div>
+		<?php } else { ?>
+		<div class="col-sm-3"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID."*"?>" type="text" required ></div>
+		<?php } ?>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PASSWORD?></label>
+		<div class="col-sm-3"><input name="passwd" class="form-control" placeholder="<?php echo $MSG_PASSWORD."*"?>" type="password"  autocomplete="off" required ></div>
+	</div>
+
+	<div class="form-group">
+		<?php require_once("../include/set_post_key.php");?>
+		<div class="col-sm-offset-4 col-sm-2">
+			<button name="do" type="hidden" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
+		</div>
+		<div class="col-sm-2">
+			<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+		</div>
+	</div>
 </form>
+
 </div>
+
+
+

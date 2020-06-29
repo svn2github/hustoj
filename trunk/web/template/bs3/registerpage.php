@@ -33,19 +33,19 @@
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label>
-          <div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text"></div>
+          <div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text" required ></div>
         </div>
           <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_NICK?></label>
-          <div class="col-sm-4"><input name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text"></div>
+          <div class="col-sm-4"><input name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label>
-          <div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"></div>
+          <div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_REPEAT_PASSWORD?></label>
-          <div class="col-sm-4"><input name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"></div>
+          <div class="col-sm-4"><input name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_SCHOOL?></label>
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_EMAIL?></label>
-          <div class="col-sm-4"><input name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"></div>
+          <div class="col-sm-4"><input name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"  required ></div>
         </div>
 
         <?php if($OJ_VCODE){?>

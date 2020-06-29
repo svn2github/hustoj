@@ -56,7 +56,7 @@
 					show: true
 				}
 			}, {
-				label: "<?php echo $MSG_AC?>",
+				label: "<?php echo $MSG_SOVLED?>",
 				data: d2,
 				bars: {
 					show: true

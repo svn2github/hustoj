@@ -1,7 +1,7 @@
 <?php require_once("./include/db_info.inc.php");
 /* 
 */
-if(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0){
+if($OJ_BBS===false||(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)){
 	header("Content-type: text/html; charset=utf-8");
 	echo $MSG_BBS_NOT_ALLOWED_FOR_EXAM;
 	exit ();

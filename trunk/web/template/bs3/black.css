@@ -60,7 +60,7 @@
 .btn-danger{
     background-color:#d3406d;
 }
-.toprow{
+a,.label,.toprow{
    color:#999;
    background-color:#000000;
    white-space:nowrap;

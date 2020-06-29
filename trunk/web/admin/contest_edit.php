@@ -18,7 +18,7 @@
     echo "<a href='../loginpage.php'>Please Login First!</a>";
     exit(1);
   }
-  echo "<center><h3>Edit-"."$MSG_CONTEST</h3></center>";
+  echo "<center><h3>"."Edit-".$MSG_CONTEST."</h3></center>";
   include_once("kindeditor.php") ;
 ?>
 
@@ -55,7 +55,7 @@ if(isset($_POST['startdate'])){
 
   $cid=intval($_POST['cid']);
 
-  if(!(isset($_SESSION[$OJ_NAME.'_'."m$cid"])||isset($_SESSION[$OJ_NAME.'_'.'administrator']))) exit();
+  if(!(isset($_SESSION[$OJ_NAME.'_'."m$cid"])||isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))) exit();
 
   $description = str_replace("<p>", "", $description); 
   $description = str_replace("</p>", "<br />", $description);
@@ -74,8 +74,13 @@ if(isset($_POST['startdate'])){
   if(count($pieces)>0 && strlen($pieces[0])>0){
     $sql_1 = "INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) VALUES (?,?,?)";
     for($i=0; $i<count($pieces); $i++){
-      pdo_query($sql_1,$cid,intval($pieces[$i]),$i);
-  }
+      $pid=intval($pieces[$i]);
+      pdo_query($sql_1,$cid,$pid,$i);
+      $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
+      pdo_query($sql,$pid,$cid,$pid,$cid);
+      $sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+      pdo_query($sql,$pid,$cid,$pid,$cid);
+    }
   
     pdo_query("update solution set num=-1 where contest_id=?",$cid);
   
@@ -182,6 +187,7 @@ if(isset($_POST['startdate'])){
             <p aligh=left>
               <?php echo $MSG_CONTEST."-".$MSG_LANG?>
               <?php echo "( Add PLs with Ctrl+click )"?><br>
+              <?php echo $MSG_PLS_ADD?><br>
               <select name="lang[]" multiple="multiple" style="height:220px">
               <?php
               $lang_count = count($language_ext);
@@ -216,7 +222,8 @@ if(isset($_POST['startdate'])){
               <?php echo $MSG_CONTEST."-".$MSG_USER?>
               <?php echo "( Add private contest's userIDs with newline &#47;n )"?>
               <br>
-              <textarea name="ulist" rows="10"style="width:100%;" placeholder="user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。"><?php if(isset($ulist)){ echo $ulist;}?></textarea>
+              <textarea name='ulist' rows='10' style='width:100%;' placeholder='user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>
+              <?php echo $MSG_PRIVATE_USERS_ADD?><?php echo "\n"?>'><?php if(isset($ulist)){ echo $ulist;}?></textarea>
             </p>
           </td>
         </tr>
@@ -224,7 +231,7 @@ if(isset($_POST['startdate'])){
 
       <div align=center>
         <?php require_once("../include/set_post_key.php");?>
-        <input type=submit value=Submit name=submit><input type=reset value=Reset name=reset>
+        <input type=submit value='<?php echo $MSG_SAVE?>' name=submit> <input type=reset value=Reset name=reset>
       </div>
     </p>
   </form>

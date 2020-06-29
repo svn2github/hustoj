@@ -19,20 +19,27 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 		$url="../status.php?problem_id=".$rjpid;
 		echo "Rejudged Problem ".$rjpid;
 		echo "<script>location.href='$url';</script>";
-	}
-	else if (isset($_POST['rjsid'])){
+	}else if (isset($_POST['rjsid'])){
 		$rjsid=intval($_POST['rjsid']);
 		$sql="delete from `sim` WHERE `s_id`=?";
 		pdo_query($sql,$rjsid) ;
 		$sql="UPDATE `solution` SET `result`=1 WHERE `solution_id`=? and problem_id>0" ;
 		pdo_query($sql,$rjsid) ;
 		$sql="select contest_id from `solution` WHERE `solution_id`=? " ;
-		$cid=intval(pdo_query($sql,$rjsid)[0][0]);
+		$data=pdo_query($sql,$rjsid);
+		$row=$data[0];
+		$cid=intval($row[0]);
 		if ($cid>0)
 			$url="../status.php?cid=".$cid."&top=".($rjsid+1);
 		else
 			$url="../status.php?top=".($rjsid+1);
 		echo "Rejudged Runid ".$rjsid;
+		echo "<script>location.href='$url';</script>";
+	}else if (isset($_POST['result'])){
+		$result=intval($_POST['result']);
+		$sql="UPDATE `solution` SET `result`=1 WHERE `result`=? and problem_id>0" ;
+		pdo_query($sql,$result) ;
+		$url="../status.php?jresult=1";
 		echo "<script>location.href='$url';</script>";
 	}else if (isset($_POST['rjcid'])){
 		$rjcid=intval($_POST['rjcid']);
@@ -71,6 +78,12 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	<li><?php echo $MSG_SUBMIT?>
 	<form action='rejudge.php' method=post>
 		<input type=input name='rjsid' placeholder="1002">	<input type='hidden' name='do' value='do'>
+		<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
+		<input type=submit value=submit>
+	</form>
+	<li><?php echo "Stuck on running "?>
+	<form action='rejudge.php' method=post>
+		<input type=input name='result' placeholder="3" value="3">	<input type='hidden' name='do' value='do'>
 		<input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
 		<input type=submit value=submit>
 	</form>

@@ -14,7 +14,7 @@ if(isset($OJ_LANG)){
 
 <title>Privilege List</title>
 <hr>
-<center><h3><?php echo $MSG_PRIVILEGE.$MSG_LIST?></h3></center>
+<center><h3><?php echo $MSG_USER."-".$MSG_PRIVILEGE."-".$MSG_LIST?></h3></center>
 
 <div class='container'>
 
@@ -51,9 +51,12 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
 }
 ?>
 
-<form action=privilege_list.php class="center">
-  <input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>">
+<center>
+<form action=privilege_list.php class="form-search form-inline">
+  <input type="text" name=keyword class="form-control search-query" placeholder="<?php echo $MSG_USER_ID.', '.$MSG_PRIVILEGE?>">
+  <button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 </form>
+</center>
 
 <center>
   <table width=100% border=1 style="text-align:center;">
@@ -67,7 +70,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<tr>";
         echo "<td>".$row['user_id']."</td>";
         echo "<td>".$row['rightstr']."</td>";
-        echo "<td><a href=privilege_delete.php?uid={$row['user_id']}&rightstr={$row['rightstr']}&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Delete</a></td>";
+        echo "<td><a href='privilege_delete.php?uid=".htmlentities($row['user_id'],ENT_QUOTES,"UTF-8")."&rightstr={$row['rightstr']}&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."'>Delete</a></td>";
       echo "</tr>";
     }
     ?>

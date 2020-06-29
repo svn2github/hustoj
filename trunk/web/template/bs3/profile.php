@@ -12,6 +12,12 @@ else $path_fix="";
 
 require_once("../../include/db_info.inc.php");
 
+if(isset($_SESSION[$OJ_NAME.'_'.'profile_csrf'])&&$_GET['profile_csrf']!=$_SESSION[$OJ_NAME.'_'.'profile_csrf']){
+//    echo "<!--".$_SESSION[$OJ_NAME.'_'.'profile_csrf']."-->";
+//  exit();
+}else{
+  $_SESSION[$OJ_NAME.'_'.'profile_csrf']="";
+}
 if(isset($OJ_LANG)){
   require_once("../../lang/$OJ_LANG.php");
 }else{
@@ -84,7 +90,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
   $profile.= "<li><a href='".$path_fix."balloon.php'>$MSG_BALLOON</a></li>&nbsp;";
 }
 
-if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
+if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])||isset($_SESSION[$OJ_NAME.'_'.'password_setter'])){
   $profile.= "<li><a href=".$path_fix."admin/>$MSG_ADMIN</a></li>&nbsp;";
 }
 

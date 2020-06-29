@@ -14,7 +14,7 @@ if(isset($OJ_LANG)){
 
 <title>News List</title>
 <hr>
-<center><h3><?php echo $MSG_NEWS.$MSG_LIST ?></h3></center>
+<center><h3><?php echo $MSG_NEWS."-".$MSG_LIST?></h3></center>
 
 <div class='container'>
 
@@ -51,9 +51,12 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
 }
 ?>
 
-<form action=news_list.php class="center">
-  <input name=keyword><input type=submit value="<?php echo $MSG_SEARCH?>">
+<center>
+<form action=news_list.php class="form-search form-inline">
+  <input type="text" name=keyword class="form-control search-query" placeholder="<?php echo $MSG_TITLE.', '.$MSG_CONTENTS?>">
+  <button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 </form>
+</center>
 
 <center>
   <table width=100% border=1 style="text-align:center;">
@@ -75,9 +78,9 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "</tr>";
     }
     ?>
-    </form>
   </table>
 </center>
+- <?php echo $MSG_HELP_ADD_FAQS?>
 
 <?php
 if(!(isset($_GET['keyword']) && $_GET['keyword']!=""))

@@ -17,7 +17,7 @@
 				<input type=submit value=Go>
 			</form></td><td colspan=3 align=right>
 	                <a href=ranklist.php?scope=d><?php echo $MSG_DAY?></a>
-			<a href=ranklist.php?scope=w><?php echo $MSG_WEEK?>/a>
+			<a href=ranklist.php?scope=w><?php echo $MSG_WEEK?></a>
 			<a href=ranklist.php?scope=m><?php echo $MSG_MONTH?></a>
 			<a href=ranklist.php?scope=y><?php echo $MSG_YEAR?></a>
 			</td></tr>

@@ -77,4 +77,5 @@ $description->Create() ;
 ```
 
 ## P.S. 如果需要对上传进行权限设置，可以修改file_manager_json.php，upload_json.php这两个文件
-## 如有问题可以提Issue~
+
+## 如有问题可以[提Issue~](https://github.com/zhblue/hustoj/issues)

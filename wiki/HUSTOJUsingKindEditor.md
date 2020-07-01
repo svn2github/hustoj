@@ -16,13 +16,13 @@ $root_url = $php_url . 'upload/';
 同样的修改file_manager_json.php。
 
 5. 编辑admin/problem_edit.php文件（下面行号以svn1109为例）
-1)删除16-18行：
+- 1. 删除16-18行：
 ```php
 <?php
 include_once("../fckeditor/fckeditor.php") ;
 ?>
 ```
-2)在第4行下面添加如下内容：
+- 2. 在第4行下面添加如下内容：
 ```html
 <link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
 <script charset="utf-8" src="../kindeditor/kindeditor-min.js"></script>
@@ -70,9 +70,11 @@ $description->Value = $row->description ;
 $description->Create() ;
 ?>
 ```
+
 8. 重复6,7两步，修改57,71,86行,注意86行需要添加:
 ```php
 <p align=left>Description:<br><textarea rows=13 name=description cols=80><?php echo $row->hint;?></textarea>
 ```
 
-9. 如果需要对上传进行权限设置，可以修改file_manager_json.php，upload_json.php这两个文件
+## P.S. 如果需要对上传进行权限设置，可以修改file_manager_json.php，upload_json.php这两个文件
+## 如有问题可以提Issue~

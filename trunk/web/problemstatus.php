@@ -11,14 +11,23 @@ require_once("./include/const.inc.php");
 		header("location:index.php");
 		exit();
 	}
-if(isset($_GET['id']))$id=intval($_GET['id']);
+if(isset($_GET['id']))
+	$id=intval($_GET['id']);
 if (isset($_GET['page']))
         $page=strval(intval($_GET['page']));
 else $page=0;
 
 ?>
-
 <?php
+$now = strftime("%Y-%m-%d %H:%M",time());
+$sql = "select 1 from `contest_problem` where `problem_id` = ? and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
+$rrs = pdo_array($sql, $id , $now , $now , '%$OJ_NOIP_KEYWORD%');
+$flag = count($rrs) > 0 ;
+if($flag){
+    $view_errors = "<h2> $MSG_NOIP_WARNING </h2>";
+    require("template/".$OJ_TEMPLATE."/error.php");
+    exit(0);
+}
 $view_problem=array();
 
 // total submit

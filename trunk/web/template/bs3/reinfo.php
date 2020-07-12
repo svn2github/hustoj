@@ -73,7 +73,14 @@ expmsg+=ret+":"+exp+"<br><hr />";
 document.getElementById("errexp").innerHTML=expmsg;
 //alert(expmsg);
 }
+function showDownload(){
+      var errmsg=$("#errtxt").html();
+      errmsg=errmsg.replace(/========\[(.*)\]=========/,"<a href='download.php?sid=<?php echo $id?>&name=$1'>$1</a>");
+      $("#errtxt").html(errmsg);
+}
 explain();
+<?php if(isset($OJ_DOWNLOAD)&&$OJ_DOWNLOAD) echo  "showDownload();" ?>
+
 </script>
   </body>
 </html>

@@ -68,9 +68,7 @@ if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
 }
 
 if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
-	$C_check=$_COOKIE[$OJ_NAME."_check"]; $C_user=$_COOKIE[$OJ_NAME."_user"];
-	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
-		
+	require("include/login.php");
 }
 /////////////////////////Template
 require( "template/" . $OJ_TEMPLATE . "/index.php" );

@@ -36,8 +36,11 @@ if ( $login ) {
 		echo "history.go(-2);\n";
 	echo "</script>";
 	
-	if($OJ_COOKIE_LOGIN=="true")
-		setcookie($OJ_NAME,,time()+86400*$OJ_KEEP_TIME);
+	if($OJ_COOKIE_LOGIN=="true"){
+		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
+		for
+		setcookie($OJ_NAME,$C_res,time()+86400*$OJ_KEEP_TIME);
+	}
 } else {
 	if ( $view_errors ) {
 		require( "template/" . $OJ_TEMPLATE . "/error.php" );

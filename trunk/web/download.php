@@ -17,7 +17,7 @@ if(count($data)>0){
    $pid=$row[0];
    $cid=$row[1];
    $uid=$row[2];
-   if(!(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && $uid != $_SESSION[$OJ_NAME.'_'.'user_id']
+   if(!(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && $uid == $_SESSION[$OJ_NAME.'_'.'user_id']
          || isset($_SESSION[$OJ_NAME.'_'.'administrator'])
        )){
        	    $view_errors="not your submission"; 

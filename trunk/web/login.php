@@ -35,6 +35,9 @@ if ( $login ) {
 	else
 		echo "history.go(-2);\n";
 	echo "</script>";
+	
+	if($OJ_COOKIE_LOGIN=="true")
+		setcookie($OJ_NAME,,time()+86400*$OJ_KEEP_TIME);
 } else {
 	if ( $view_errors ) {
 		require( "template/" . $OJ_TEMPLATE . "/error.php" );

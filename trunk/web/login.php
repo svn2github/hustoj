@@ -38,8 +38,10 @@ if ( $login ) {
 	
 	if($OJ_COOKIE_LOGIN=="true"){
 		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
+		$C_len=strlen($C_info[1]);
 		foreach($i=0;$i<strlen($C_info[0]);$i++){
-			$C_res+=;
+			$tp=ord($C_info[0][i]);
+			$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
 		}
 		setcookie($OJ_NAME,$C_res,time()+86400*$OJ_KEEP_TIME);
 	}

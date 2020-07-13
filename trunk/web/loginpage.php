@@ -11,7 +11,7 @@ require_once('./include/cache_start.php');
 }
 
 /////////////////////////Template
-if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
+if($OJ_LONG_LOGIN==true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
 	require("./index.php");
 	echo"<script>let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();</script>";
 }

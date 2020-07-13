@@ -36,7 +36,7 @@ if ( $login ) {
 		echo "history.go(-2);\n";
 	echo "</script>";
 	
-	if($OJ_COOKIE_LOGIN=="true"){
+	if($OJ_COOKIE_LOGIN==true){
 		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
 		$C_len=strlen($C_info[1]);
 		foreach($i=0;$i<strlen($C_info[0]);$i++){

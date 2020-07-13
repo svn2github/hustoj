@@ -10,7 +10,7 @@ if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_
 	}
 	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
 	for($i=0;$i<strlen($C_info[0]);$i++){
-		$tp=ord($C_info[0][i]);
+		$tp=ord($C_info[0][$i]);
 		$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
 	}
 	if($C_check==$C_res){ 
@@ -42,6 +42,7 @@ if((!isset($C_success)||$C_success!=true)&&!isset($_COOKIE[$OJ_NAME."_user"])&&!
   $sql = "SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
   $login = check_login( $user_id, $password );
 }
+
 if($login){
 	$_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
 	$result = pdo_query( $sql, $login );
@@ -51,6 +52,18 @@ if($login){
 	$sql="update users set accesstime=now() where user_id=?";
         $result = pdo_query( $sql, $login );
 
+	if($OJ_LONG_LOGIN){
+		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
+		$C_len=strlen($C_info[1]);
+		for($i=0;$i<strlen($C_info[0]);$i++){
+			$tp=ord($C_info[0][$i]);
+			$C_res.=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
+		}
+		$C_time=time()+86400*$OJ_KEEP_TIME;
+		setcookie($OJ_NAME."_user",$login,time()+$C_time);
+		setcookie($OJ_NAME."_check",$C_res.(strlen($C_res)*strlen($C_res))%7,$C_time);
+	}
+
 	echo "<script language='javascript'>\n";
 	if ( $OJ_NEED_LOGIN )
 		echo "window.location.href='index.php';\n";
@@ -58,17 +71,6 @@ if($login){
 		echo "history.go(-2);\n";
 	echo "</script>";
 	
-	if($OJ_COOKIE_LOGIN==true){
-		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
-		$C_len=strlen($C_info[1]);
-		for($i=0;$i<strlen($C_info[0]);$i++){
-			$tp=ord($C_info[0][i]);
-			$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
-		}
-		$C_time=time()+86400*$OJ_KEEP_TIME;
-		setcookie($OJ_NAME."_user",$login,$C_time);
-		setcookie($OJ_NAME."_check",$C_res+(strlen($C_res)*strlen($C_res))%7,$C_time);
-	}
 } else {
 	if ( $view_errors ) {
 		require( "template/" . $OJ_TEMPLATE . "/error.php" );

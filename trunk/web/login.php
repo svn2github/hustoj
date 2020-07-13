@@ -11,7 +11,7 @@ if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_
 	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
 	for($i=0;$i<strlen($C_info[0]);$i++){
 		$tp=ord($C_info[0][$i]);
-		$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
+		$C_res.=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
 	}
 	if($C_check==$C_res){ 
 		$C_success=true; 

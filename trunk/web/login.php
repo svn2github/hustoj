@@ -43,7 +43,9 @@ if ( $login ) {
 			$tp=ord($C_info[0][i]);
 			$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
 		}
-		setcookie($OJ_NAME,$C_res,time()+86400*$OJ_KEEP_TIME);
+		$C_time=time()+86400*$OJ_KEEP_TIME;
+		setcookie($OJ_NAME."_user",$login,$C_time);
+		setcookie($OJ_NAME."_check",$C_res,$C_time);
 	}
 } else {
 	if ( $view_errors ) {

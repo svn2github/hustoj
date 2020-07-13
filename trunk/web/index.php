@@ -67,6 +67,10 @@ if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
 	if(isset($chart_data_all[ 0 ][ 1 ] ))$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
 }
 
+if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME])){
+	$C_check=$_COOKIE[$OJ_NAME];
+	?
+}
 /////////////////////////Template
 require( "template/" . $OJ_TEMPLATE . "/index.php" );
 /////////////////////////Common foot

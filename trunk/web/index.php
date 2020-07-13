@@ -67,11 +67,10 @@ if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
 	if(isset($chart_data_all[ 0 ][ 1 ] ))$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
 }
 
-if(!isset($_SESSION[$OJ_NAME.'_user_id'])&&$OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))
-	require("include/login.php");
-
 /////////////////////////Template
 require( "template/" . $OJ_TEMPLATE . "/index.php" );
+if(!isset($_SESSION[$OJ_NAME.'_user_id'])&&$OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"<script>let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();</script>";
+
 /////////////////////////Common foot
 if ( file_exists( './include/cache_end.php' ) )
 	require_once( './include/cache_end.php' );

@@ -1,28 +1,32 @@
 <?php
 require_once( "./include/db_info.inc.php" );
 require_once( './include/setlang.php' );
-$C_success=false;
+$use_cookie=false;
+$login=false;
 if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
-	$C_check=$_COOKIE[$OJ_NAME."_check"]; $C_user=$_COOKIE[$OJ_NAME."_user"];
-	if(array_pop($C_check)!=strlen($C_check)-1){
-		echo "<script>\n alert('Cookie失效或错误!'); \n history.go(-1); \n </script>";
+	$C_check=$_COOKIE[$OJ_NAME."_check"]; 
+	$C_user=$_COOKIE[$OJ_NAME."_user"];
+	$use_cookie=true;
+	$C_num=strlen($C_check)-1;
+	$C_num=($C_num*$C_num)%7;
+	if($C_check[strlen($C_check)-1]!=$C_num){
+		echo "<script>\n alert('1Cookie失效或错误!'); \n history.go(-1); \n </script>";
 		exit(0);
-	}
+	} 
 	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
+	$C_len=strlen($C_info[1]);
 	for($i=0;$i<strlen($C_info[0]);$i++){
 		$tp=ord($C_info[0][$i]);
-		$C_res.=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
+		$C_res.=chr(39+($tp*$tp+ord($C_info[1][$i % $C_len])*$tp)%88);
 	}
-	if($C_check==$C_res){ 
-		$C_success=true; 
-		$login=$C_user; 
-	}
+	if(substr($C_check,0,-1)==sha1($C_res))
+		$login=$C_user;
 	else{   echo "<script>\n alert('Cookie失效或错误!'); \n history.go(-1); \n </script>";
 		exit(0);
 	}
 }
 $vcode="";
-if((!isset($C_success)||$C_success!=true)&&!isset($_COOKIE[$OJ_NAME."_user"])&&!isset($_COOKIE[$OJ_NAME."_check"])){
+if(!$use_cookie){
   if(isset($_POST[ 'vcode' ]))$vcode=trim($_POST['vcode']);
   if($OJ_VCODE&&( $vcode != $_SESSION[ $OJ_NAME . '_' . "vcode" ] || $vcode == "" || $vcode == null ) ) {
 	echo "<script language='javascript'>\n";
@@ -42,7 +46,6 @@ if((!isset($C_success)||$C_success!=true)&&!isset($_COOKIE[$OJ_NAME."_user"])&&!
   $sql = "SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
   $login = check_login( $user_id, $password );
 }
-
 if($login){
 	$_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
 	$result = pdo_query( $sql, $login );
@@ -55,22 +58,22 @@ if($login){
 	if($OJ_LONG_LOGIN){
 		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
 		$C_len=strlen($C_info[1]);
+		$C_res="";
 		for($i=0;$i<strlen($C_info[0]);$i++){
 			$tp=ord($C_info[0][$i]);
-			$C_res.=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
+			$C_res.=chr(39+($tp*$tp+ord($C_info[1][$i % $C_len])*$tp)%88);
 		}
+		$C_res=sha1($C_res);
 		$C_time=time()+86400*$OJ_KEEP_TIME;
 		setcookie($OJ_NAME."_user",$login,time()+$C_time);
 		setcookie($OJ_NAME."_check",$C_res.(strlen($C_res)*strlen($C_res))%7,$C_time);
 	}
-
 	echo "<script language='javascript'>\n";
 	if ( $OJ_NEED_LOGIN )
 		echo "window.location.href='index.php';\n";
 	else
 		echo "history.go(-2);\n";
 	echo "</script>";
-	
 } else {
 	if ( $view_errors ) {
 		require( "template/" . $OJ_TEMPLATE . "/error.php" );

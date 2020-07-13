@@ -233,7 +233,7 @@ function encoded_submit(){
 }
 
 function do_submit(){
-	<?php if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"<script>let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();</script>";?>
+	<?php if($OJ_LONG_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"<script>let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();</script>";?>
 	if(using_blockly) 
 		 translate();
 	if(typeof(editor) != "undefined"){ 

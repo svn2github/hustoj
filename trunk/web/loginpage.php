@@ -11,7 +11,10 @@ require_once('./include/cache_start.php');
 }
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/loginpage.php");
+if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))
+	require("include/login.php");
+else
+        require("template/".$OJ_TEMPLATE."/loginpage.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');

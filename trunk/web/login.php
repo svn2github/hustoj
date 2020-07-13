@@ -2,6 +2,22 @@
 require_once( "./include/db_info.inc.php" );
 require_once( './include/setlang.php' );
 $vcode = "";
+if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
+	$C_check=$_COOKIE[$OJ_NAME."_check"]; $C_user=$_COOKIE[$OJ_NAME."_user"];
+	if(array_pop($C_check)!=strlen($C_check)-1){
+		echo "<script>\n alert('Cookie失效或错误!'); \n history.go(-1); \n </script>";
+		exit(0);
+	}
+	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
+	foreach($i=0;$i<strlen($C_info[0]);$i++){
+		$tp=ord($C_info[0][i]);
+		$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
+	}
+	
+	$C_time=time()+86400*$OJ_KEEP_TIME;
+	setcookie($OJ_NAME."_user",$login,$C_time);
+	setcookie($OJ_NAME."_check",$C_res,$C_time);
+}
 if ( isset( $_POST[ 'vcode' ] ) )$vcode = trim( $_POST[ 'vcode' ] );
 if ( $OJ_VCODE && ( $vcode != $_SESSION[ $OJ_NAME . '_' . "vcode" ] || $vcode == "" || $vcode == null ) ) {
 	echo "<script language='javascript'>\n";
@@ -39,13 +55,13 @@ if ( $login ) {
 	if($OJ_COOKIE_LOGIN==true){
 		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
 		$C_len=strlen($C_info[1]);
-		foreach($i=0;$i<strlen($C_info[0]);$i++){
+		for($i=0;$i<strlen($C_info[0]);$i++){
 			$tp=ord($C_info[0][i]);
 			$C_res+=chr(($tp*$tp+$C_info[1][$i % $C_len]*$tp)%127);
 		}
 		$C_time=time()+86400*$OJ_KEEP_TIME;
 		setcookie($OJ_NAME."_user",$login,$C_time);
-		setcookie($OJ_NAME."_check",$C_res,$C_time);
+		setcookie($OJ_NAME."_check",$C_res+(strlen($C_res)*strlen($C_res))%7,$C_time);
 	}
 } else {
 	if ( $view_errors ) {

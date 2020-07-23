@@ -10,7 +10,7 @@ if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_
 	$C_num=strlen($C_check)-1;
 	$C_num=($C_num*$C_num)%7;
 	if($C_check[strlen($C_check)-1]!=$C_num){
-		echo "<script>\n alert('1Cookie失效或错误!'); \n history.go(-1); \n </script>";
+		echo "<script>\n alert('Cookie失效或错误!(-1)'); \n history.go(-1); \n </script>";
 		exit(0);
 	} 
 	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
@@ -21,7 +21,7 @@ if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_
 	}
 	if(substr($C_check,0,-1)==sha1($C_res))
 		$login=$C_user;
-	else{   echo "<script>\n alert('Cookie失效或错误!'); \n history.go(-1); \n </script>";
+	else{   echo "<script>\n alert('Cookie失效或错误!(-2)'); \n history.go(-1); \n </script>";
 		exit(0);
 	}
 }
@@ -69,10 +69,10 @@ if($login){
 		setcookie($OJ_NAME."_check",$C_res.(strlen($C_res)*strlen($C_res))%7,$C_time);
 	}
 	echo "<script language='javascript'>\n";
-	if ( $OJ_NEED_LOGIN )
+	if ($OJ_NEED_LOGIN)
 		echo "window.location.href='index.php';\n";
 	else
-		echo "history.go(-2);\n";
+		echo "setTimeout('history.go(-2)',500);\n";
 	echo "</script>";
 } else {
 	if ( $view_errors ) {

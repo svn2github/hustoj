@@ -7,7 +7,10 @@ int main(){
         printf("%d\n",a+b);
 	return 0;
 }
+
+```
 ------------------------------
+```
 
 		 C++语言:
 #include <iostream>
@@ -18,7 +21,9 @@ int main(){
         cout << a+b << endl;
 	return 0;
 }
+```
 ------------------------------
+```
 
 		 Java语言:
 import java.util.*;
@@ -32,7 +37,9 @@ public class Main{
 		}
 	}
 }
+```
 ------------------------------
+```
 
 		 Ruby语言:
 a=gets
@@ -45,7 +52,9 @@ while a != nil && a != "" && a != "\r" && a != "\n" do
 	puts sum.to_s
 	a=gets
 end
+```
 ------------------------------
+```
 
 		 Bash语言:
 #!/bin/bash
@@ -58,7 +67,9 @@ sum=$((${arr[0]}+${arr[1]}))
 echo "$sum"
 read -a arr
 done
+```
 ------------------------------
+```
 
 		 Python语言:
 #!/usr/bin/env python  
@@ -70,7 +81,9 @@ for x in raw_input().split():
     a.append(int(x))  
   
 print sum(a)
+```
 ------------------------------
+```
 
 		 PHP语言:
 <?php
@@ -83,11 +96,15 @@ $sum = solveMeFirst((int)$a[0],(int)$a[1]);
 print ($sum);
 fclose($handle);
 ?>
+```
 ------------------------------
+```
 
 		 Perl语言:
 while (<>) {($a, $b) = split; print $a+$b,"\n" }
+```
 ------------------------------
+```
 
 		 C#语言:
 using System;
@@ -112,7 +129,9 @@ namespace myApp
         }
     }
 }
+```
 ------------------------------
+```
 
 		 Obj-C语言:
 #include <stdio.h>
@@ -122,7 +141,9 @@ int main(){
         printf("%d\n",a+b);
 	return 0;
 }
+```
 ------------------------------
+```
 
 		 FreeBasic语言:
 
@@ -132,7 +153,9 @@ while not eof(1)
  input #1, a,b
  print ""&(a+b)
 wend
+```
 ------------------------------
+```
 
 		 Schema语言:
 (define a (read))
@@ -140,7 +163,9 @@ wend
 (write (+ a b))
 (newline)
 (exit 0)
+```
 ------------------------------
+```
 
 		 Clang编译器的C语言:
 #include <stdio.h>
@@ -150,7 +175,9 @@ int main(){
         printf("%d\n",a+b);
 	return 0;
 }
+```
 ------------------------------
+```
 
 		 Clang++编译器的C++语言:
 #include <iostream>
@@ -162,7 +189,9 @@ int main(){
 	return 0;
 }
 
+```
 ------------------------------
+```
 
 		 Lua语言:
 local count = 0
@@ -193,7 +222,9 @@ while true do
 	io.write(string.format("%d", sum))
 	count = count+1
 end
+```
 ------------------------------
+```
 
 		 Go语言:
 package main
@@ -204,7 +235,9 @@ func main() {
   fmt.Scanf("%d%d",&a,&b);
   fmt.Printf("%d\n",a+b)
 }
+```
 ------------------------------
+```
 JavaScript 语言：
 var line;
 while ((line = readline()) != '') {
@@ -219,7 +252,9 @@ while ((line = readline()) != '') {
 	print(sum.toString());
 }
 
+```
 ------------------------------
+```
 
 		 nodejs语言:
 var stdinstr = ""
@@ -237,6 +272,5 @@ process.stdin.on('data', function(chunk) {
 		console.log(a + b);
 	}
 });
-------------------------------
-
 ```
+------------------------------

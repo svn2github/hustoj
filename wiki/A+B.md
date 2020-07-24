@@ -1,5 +1,8 @@
+ C语言:
+--
+
 ```
-	 C语言:
+	
 #include <stdio.h>
 int main(){
     int a,b;
@@ -10,9 +13,11 @@ int main(){
 
 ```
 ------------------------------
+ C++语言
+--
 ```
 
-		 C++语言:
+		
 #include <iostream>
 using namespace std;
 int main(){
@@ -23,9 +28,9 @@ int main(){
 }
 ```
 ------------------------------
+Java语言
+--
 ```
-
-		 Java语言:
 import java.util.*;
 public class Main{
 	public static void main(String args[]){
@@ -39,9 +44,9 @@ public class Main{
 }
 ```
 ------------------------------
+Ruby语言
+--
 ```
-
-		 Ruby语言:
 a=gets
 while a != nil && a != "" && a != "\r" && a != "\n" do
 	arr = a.split(" ")
@@ -54,9 +59,11 @@ while a != nil && a != "" && a != "\r" && a != "\n" do
 end
 ```
 ------------------------------
+Bash语言
+--
 ```
 
-		 Bash语言:
+		 
 #!/bin/bash
 
 read -a arr
@@ -69,9 +76,9 @@ read -a arr
 done
 ```
 ------------------------------
+Python语言
+--
 ```
-
-		 Python语言:
 #!/usr/bin/env python  
 # coding=utf-8  
   
@@ -83,9 +90,9 @@ for x in raw_input().split():
 print sum(a)
 ```
 ------------------------------
+PHP语言
+--
 ```
-
-		 PHP语言:
 <?php
 function solveMeFirst($a,$b){
     return $a + $b;
@@ -98,15 +105,15 @@ fclose($handle);
 ?>
 ```
 ------------------------------
+Perl语言
+--
 ```
-
-		 Perl语言:
 while (<>) {($a, $b) = split; print $a+$b,"\n" }
 ```
 ------------------------------
+C#语言
+--
 ```
-
-		 C#语言:
 using System;
 
 namespace myApp
@@ -131,9 +138,9 @@ namespace myApp
 }
 ```
 ------------------------------
+Obj-C语言
+--
 ```
-
-		 Obj-C语言:
 #include <stdio.h>
 int main(){
     int a,b;
@@ -143,10 +150,9 @@ int main(){
 }
 ```
 ------------------------------
+FreeBasic语言
+--
 ```
-
-		 FreeBasic语言:
-
 dim a.b
 open "data.in" for input as #1
 while not eof(1)
@@ -155,9 +161,9 @@ while not eof(1)
 wend
 ```
 ------------------------------
+Schema语言
+--
 ```
-
-		 Schema语言:
 (define a (read))
 (define b (read))
 (write (+ a b))
@@ -165,9 +171,9 @@ wend
 (exit 0)
 ```
 ------------------------------
+Clang编译器的C语言
+--
 ```
-
-		 Clang编译器的C语言:
 #include <stdio.h>
 int main(){
     int a,b;
@@ -177,9 +183,9 @@ int main(){
 }
 ```
 ------------------------------
+Clang++编译器的C++语言
+--
 ```
-
-		 Clang++编译器的C++语言:
 #include <iostream>
 using namespace std;
 int main(){
@@ -191,9 +197,9 @@ int main(){
 
 ```
 ------------------------------
+Lua语言
+--
 ```
-
-		 Lua语言:
 local count = 0
 function string.split(str, delimiter)
 	if str==nil or str=='' or delimiter==nil then
@@ -224,9 +230,9 @@ while true do
 end
 ```
 ------------------------------
+Go语言
+--
 ```
-
-		 Go语言:
 package main
 import "fmt"
 func main() {
@@ -237,8 +243,9 @@ func main() {
 }
 ```
 ------------------------------
+JavaScript 语言
+--
 ```
-JavaScript 语言：
 var line;
 while ((line = readline()) != '') {
 	//print(line);
@@ -254,9 +261,9 @@ while ((line = readline()) != '') {
 
 ```
 ------------------------------
+nodejs语言
+--
 ```
-
-		 nodejs语言:
 var stdinstr = ""
 process.stdin.setEncoding("utf8")
 

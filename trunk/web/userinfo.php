@@ -16,6 +16,19 @@ if (!is_valid_user_name($user)){
 	echo "No such User!";
 	exit(0);
 }
+
+//检查用户当前是否在参加NOIP模式比赛，如果是则不显示用户信息以防看到提交结果 2020.7.25
+$now = strftime("%Y-%m-%d %H:%M",time());
+$sql = "select 1 from `solution` where  `user_id`=? and  problem_id>0 and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
+$rrs = pdo_query($sql, $user ,$now , $now , "%$OJ_NOIP_KEYWORD%");
+$flag = count($rrs) > 0 ;
+if($flag)
+{	
+	$view_errors =  "<h2> $MSG_NOIP_WARNING </h2>";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
+}
+
 $view_title=$user ."@".$OJ_NAME;
 $sql="SELECT `school`,`email`,`nick` FROM `users` WHERE `user_id`=?";
 $result=pdo_query($sql,$user);

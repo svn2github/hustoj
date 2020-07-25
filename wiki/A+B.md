@@ -1,8 +1,7 @@
  C语言:
 --
 
-```
-	
+```c
 #include <stdio.h>
 int main(){
     int a,b;
@@ -15,9 +14,7 @@ int main(){
 ------------------------------
  C++语言
 --
-```
-
-		
+```c++	
 #include <iostream>
 using namespace std;
 int main(){
@@ -30,7 +27,7 @@ int main(){
 ------------------------------
 Java语言
 --
-```
+```java
 import java.util.*;
 public class Main{
 	public static void main(String args[]){
@@ -46,7 +43,7 @@ public class Main{
 ------------------------------
 Ruby语言
 --
-```
+```ruby
 a=gets
 while a != nil && a != "" && a != "\r" && a != "\n" do
 	arr = a.split(" ")
@@ -61,9 +58,7 @@ end
 ------------------------------
 Bash语言
 --
-```
-
-		 
+```bash		 
 #!/bin/bash
 
 read -a arr
@@ -78,7 +73,7 @@ done
 ------------------------------
 Python语言
 --
-```
+```python
 #!/usr/bin/env python  
 # coding=utf-8  
   
@@ -92,7 +87,7 @@ print sum(a)
 ------------------------------
 PHP语言
 --
-```
+```php
 <?php
 function solveMeFirst($a,$b){
     return $a + $b;
@@ -107,13 +102,13 @@ fclose($handle);
 ------------------------------
 Perl语言
 --
-```
+```perl
 while (<>) {($a, $b) = split; print $a+$b,"\n" }
 ```
 ------------------------------
 C#语言
 --
-```
+```c#
 using System;
 
 namespace myApp
@@ -140,7 +135,7 @@ namespace myApp
 ------------------------------
 Obj-C语言
 --
-```
+```obj-c
 #include <stdio.h>
 int main(){
     int a,b;
@@ -152,7 +147,7 @@ int main(){
 ------------------------------
 FreeBasic语言
 --
-```
+```freebasic
 dim a.b
 open "data.in" for input as #1
 while not eof(1)
@@ -163,7 +158,7 @@ wend
 ------------------------------
 Schema语言
 --
-```
+```schema
 (define a (read))
 (define b (read))
 (write (+ a b))
@@ -173,7 +168,7 @@ Schema语言
 ------------------------------
 Clang编译器的C语言
 --
-```
+```c
 #include <stdio.h>
 int main(){
     int a,b;
@@ -185,7 +180,7 @@ int main(){
 ------------------------------
 Clang++编译器的C++语言
 --
-```
+```c++
 #include <iostream>
 using namespace std;
 int main(){
@@ -199,7 +194,7 @@ int main(){
 ------------------------------
 Lua语言
 --
-```
+```lua
 local count = 0
 function string.split(str, delimiter)
 	if str==nil or str=='' or delimiter==nil then
@@ -232,7 +227,7 @@ end
 ------------------------------
 Go语言
 --
-```
+```go
 package main
 import "fmt"
 func main() {
@@ -245,7 +240,7 @@ func main() {
 ------------------------------
 JavaScript 语言
 --
-```
+```javascript
 var line;
 while ((line = readline()) != '') {
 	//print(line);
@@ -263,7 +258,7 @@ while ((line = readline()) != '') {
 ------------------------------
 nodejs语言
 --
-```
+```javascript
 var stdinstr = ""
 process.stdin.setEncoding("utf8")
 

@@ -64,20 +64,24 @@ function fresh_result(solution_id) {
 				window.setTimeout("fresh_result("+solution_id+")",interval);
 			}
 			else {
-				console.log(ra[0]);
-				
+				//console.log(ra[0]);
 				switch (ra[0]) {
 					case 4:
+						row.cells[3].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
+						break;
+					case 5:
 					case 6:
 				  case 7:
+				  case 8:
+				  case 9:
 				  case 10:
-						row.cells[3].innerHTML="<a href='reinfo.php?sid="+solution_id+"' class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</a>";
+						row.cells[3].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</a>";
 						break;
 				 	case 11:
-						row.cells[3].innerHTML="<a href='ceinfo.php?sid="+solution_id+"' class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</a>";
+						row.cells[3].innerHTML = "<a href=ceinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
 						break;
 				  default:
-						row.cells[3].innerHTML="<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+ra[4]+"</span>";
+//						row.cells[3].innerHTML = "<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</span>";
 				}
 			
 				auto_refresh();

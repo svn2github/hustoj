@@ -1943,6 +1943,7 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);
 	execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
+	execute_cmd("mkdir -p %s/lib/x86_64-linux-gnu", work_dir);
 
 	// /etc/abrt/plugins/python.conf for Centos7
 	execute_cmd("mkdir -p %s/etc/abrt", work_dir);
@@ -1994,6 +1995,15 @@ void copy_python_runtime(char *work_dir)
 
 #endif
 
+	/*execute_cmd("/bin/mkdir -p %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libpthread* %s/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libdl.so.2 %s/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libutil.so.1 %s/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libexpat.so.1 %s/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libz.so.1 %s/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/libm.so.6 %s/lib/x86_64-linux-gnu/", work_dir);
+	*/
+	//execute_cmd("/bin/cp -a /lib/x86_64-linux-gnu/ %s/lib/x86_64-linux-gnu/", work_dir);
 
 	execute_cmd("cp -a /usr/lib64/libpython* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/local/lib/python* %s/usr/local/lib/", work_dir);
@@ -2182,6 +2192,7 @@ void copy_js_runtime(char *work_dir)
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 				  int &mem_lmt)
 {
+	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",NULL};
 	nice(19);
 	// now the user is "judger"
 	chdir(work_dir);
@@ -2303,7 +2314,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		{       if(python_free)
 			execl("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL);
 			else
-			execl("/python3", "/python3", "Main.py", (char *)NULL);
+			execle("/python3", "/python3", "Main.py", (char *)NULL, envp);
 		}
 		break;
 	case 7: //php
@@ -2425,7 +2436,7 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		LIM.rlim_cur = STD_F_LIM;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
-		ret = execute_cmd("%s/data/%d/spj '%s' '%s' %s", oj_home, problem_id,
+		ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id,
 						  infile, outfile, userfile);
 		if (DEBUG)
 			printf("spj1=%d\n", ret);

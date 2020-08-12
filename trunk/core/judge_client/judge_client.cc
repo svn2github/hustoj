@@ -2169,8 +2169,11 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib/ld-linux.so.*  %s/lib/", work_dir);
 
 #ifdef __x86_64__
-	execute_cmd("/bin/mkdir -p %s/usr/lib %s/lib/x86_64-linux-gnu/", work_dir, work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/lib/x86_64-linux-gnu/ %s/lib/x86_64-linux-gnu/", work_dir, work_dir);
 
+	//execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/  %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/libv8.so.*  %s/usr/lib/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libcares.so.* %s/usr/lib/x86_64-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libz.so.* %s/lib/x86_64-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libuv.so.* %s/lib/x86_64-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/librt.so.* %s/lib/x86_64-linux-gnu/", work_dir);

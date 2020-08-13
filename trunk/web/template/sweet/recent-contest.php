@@ -71,7 +71,7 @@ $limit = 0;
 </table>
 </div>
   
-<div align=center>DataSource:http://contests.acmicpc.info/contests.json  Spider Author:<a href="http://contests.acmicpc.info" >doraemonok</a></div>
+<div align=center>DataSource:http://algcontest.rainng.com/contests.json  Spider Author:<a href="https://github.com/Azure99/AlgContestInfo" >Azure99</a></div>
 
       </div>
 
@@ -84,7 +84,7 @@ $limit = 0;
     <?php include("template/$OJ_TEMPLATE/js.php");?>
 	<script>
 		var contestList = $("#contest-list");
-		$.get("./recent-contest.json",function(response){
+		$.get("https://algcontest.rainng.com/contests.json",function(response){
 			response.map(function(val){
 				var item = "<tr><td class='column-1'>"+val.oj+"</td>"+
 					"<td class='column-2'><a target='_blank' href='"+val.link+"'>"+val.name+"</a></td>"+

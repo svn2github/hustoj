@@ -377,17 +377,11 @@ for ($i=0; $i<$rows_cnt; $i++) {
   }
 
   $AC_RATE = intval($row['pass_rate']*100);
-  if (isset($OJ_MARK) && $OJ_MARK=="mark") {
-    if($AC_RATE > 99 || $AC_RATE == 0)
-      $mark = "";
-    else
-      $mark = " "."AC:".$AC_RATE."%";
-  }
-  else if (isset($OJ_MARK) && $OJ_MARK!="mark") {
+  if (isset($OJ_MARK) && $OJ_MARK!="mark") {
     $mark = "";
   }
   else {
-    if($AC_RATE > 99 || $AC_RATE == 0)
+    if($AC_RATE > 99)
       $mark = "";
     else
       $mark = " "."AC:".$AC_RATE."%";

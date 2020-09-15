@@ -3040,7 +3040,7 @@ int main(int argc, char **argv)
 
 	get_solution(solution_id, work_dir, lang);
 
-	//java is lucky
+	//java and other VM language are lucky to have the global bonus in judge.conf
 	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
 	{ //ObjectivC Clang Clang++ Go not VM or Script
 		// the limit for java

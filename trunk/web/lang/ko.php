@@ -20,24 +20,24 @@
 	$MSG_MAIL="E-mail";
 
 	//status.php
-	$MSG_Pending="Pending";
-	$MSG_Pending_Rejudging="Pending Rejudging";
-	$MSG_Compiling="Compiling";
-	$MSG_Running_Judging="Running & Judging";
-	$MSG_Accepted="Accepted";
-	$MSG_Presentation_Error="Presentation Error";
-	$MSG_Wrong_Answer="Wrong Answer";
-	$MSG_Time_Limit_Exceed="Time Limit Exceed";
-	$MSG_Memory_Limit_Exceed="Memory Limit Exceed";
-	$MSG_Output_Limit_Exceed="Output Limit Exceed";
-	$MSG_Runtime_Error="Runtime Error";
-	$MSG_Compile_Error="Compile Error";
-	$MSG_Runtime_Click="Runtime Error(Click)";
-	$MSG_Compile_Click="Compile Error(Click)";
-	$MSG_Compile_OK="Compile OK";
-	$MSG_Click_Detail="Click To View Detail";
+	$MSG_Pending="처리중";
+	$MSG_Pending_Rejudging="재채점 처리중";
+	$MSG_Compiling="컴파일중";
+	$MSG_Running_Judging="실행중 & 채점중";
+	$MSG_Accepted="정확한 풀이";
+	$MSG_Presentation_Error="출력값 비일치";
+	$MSG_Wrong_Answer="잘못된 풀이";
+	$MSG_Time_Limit_Exceed="시간초과";
+	$MSG_Memory_Limit_Exceed="메모리 제한 초과";
+	$MSG_Output_Limit_Exceed="출력 제한 초과";
+	$MSG_Runtime_Error="런타임 에러";
+	$MSG_Compile_Error="컴파일 에러";
+	$MSG_Runtime_Click="런타임 에러(클릭)";
+	$MSG_Compile_Click="컴파일 에러(클릭)";
+	$MSG_Compile_OK="컴파일 완료";
+	$MSG_Click_Detail="자세히 보기";
 	$MSG_Manual="수동채점";
-	$MSG_OK="OK";
+	$MSG_OK="확인";
 	$MSG_Explain="이유나 설명을 입력하세요";
 
 

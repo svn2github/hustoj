@@ -20,25 +20,25 @@
 	$MSG_MAIL="E-mail";
 
 	//status.php
-	$MSG_Pending="처리중";
-	$MSG_Pending_Rejudging="재채점 처리중";
+	$MSG_Pending="채점 대기중";
+	$MSG_Pending_Rejudging="재채점 대기중";
 	$MSG_Compiling="컴파일중";
-	$MSG_Running_Judging="실행중 & 채점중";
-	$MSG_Accepted="정확한 풀이";
-	$MSG_Presentation_Error="출력값 비일치";
-	$MSG_Wrong_Answer="잘못된 풀이";
-	$MSG_Time_Limit_Exceed="시간초과";
-	$MSG_Memory_Limit_Exceed="메모리 제한 초과";
-	$MSG_Output_Limit_Exceed="출력 제한 초과";
-	$MSG_Runtime_Error="런타임 에러";
+	$MSG_Running_Judging="채점중";
+	$MSG_Accepted="모두 맞음";
+	$MSG_Presentation_Error="출력형식 다름";
+	$MSG_Wrong_Answer="틀림";
+	$MSG_Time_Limit_Exceed="시간제한 초과";
+	$MSG_Memory_Limit_Exceed="메모리제한 초과";
+	$MSG_Output_Limit_Exceed="출력제한 초과";
+	$MSG_Runtime_Error="실행중 에러";
 	$MSG_Compile_Error="컴파일 에러";
-	$MSG_Runtime_Click="런타임 에러(클릭)";
+	$MSG_Runtime_Click="실행중 에러(클릭)";
 	$MSG_Compile_Click="컴파일 에러(클릭)";
 	$MSG_Compile_OK="컴파일 완료";
-	$MSG_Click_Detail="자세히 보기";
+	$MSG_Click_Detail="내용 확인";
 	$MSG_Manual="수동채점";
 	$MSG_OK="확인";
-	$MSG_Explain="이유나 설명을 입력하세요";
+	$MSG_Explain="이유나 설명을 입력하세요.";
 
 
 
@@ -53,7 +53,7 @@
 
 
 
-	$MSG_TEST_RUN="Test Running Done";
+	$MSG_TEST_RUN="테스트 실행 완료";
 
 	$MSG_RUNID="채점번호";
 	$MSG_USER="사용자ID";
@@ -99,7 +99,7 @@
 	$MSG_NO_PLS="허용된 프로그래밍 언어가 아닙니다!";
 	$MSG_TOO_SHORT="코드가 너무 짧습니다!";
 	$MSG_TOO_LONG="코드가 너무 깁니다!";
-	$MSG_BREAK_TIME="1초 이내에 다시 제출 할 수 없습니다.....";
+	$MSG_BREAK_TIME="1초 이내에 다시 제출 할 수 없습니다. 잠시 기다려주세요.";
 
 	//ranklist.php
 	$MSG_Number="순위";
@@ -128,10 +128,10 @@
 	$MSG_SPJ="Special Judge";
 	$MSG_HINT="도움";
 	$MSG_Source="출처";
-	$MSG_Time_Limit="실행시간 제한";
-	$MSG_Memory_Limit="메모리사용 제한";
+	$MSG_Time_Limit="시간제한";
+	$MSG_Memory_Limit="메모리제한";
 	$MSG_EDIT="수정";
-	$MSG_TESTDATA="테스트 데이터";
+	$MSG_TESTDATA="채점 데이터";
 
 	//admin menu
 	$MSG_SEEOJ="OJ확인";
@@ -143,15 +143,15 @@
 	$MSG_CONTENTS="내용";
 	$MSG_SAVE="저장";	
 	
-	$MSG_TEAMGENERATOR="팀만들기";
+	$MSG_TEAMGENERATOR="팀 생성기";
 	$MSG_SETMESSAGE="메시지설정";
 	$MSG_SETPASSWORD="비밀번호변경";
 	$MSG_REJUDGE="재채점";
 	$MSG_PRIVILEGE="권한설정";
-	$MSG_GIVESOURCE="소스코드주기";
-	$MSG_IMPORT="업로드";
-	$MSG_EXPORT="다운로드";
-	$MSG_UPDATE_DATABASE="DB UPDATE";
+	$MSG_GIVESOURCE="채점코드 소유자 변경";
+	$MSG_IMPORT="데이터 업로드";
+	$MSG_EXPORT="데이터 다운로드";
+	$MSG_UPDATE_DATABASE="데이터베이스 업데이트";
 	$MSG_ONLINE="Online";
 	$MSG_SET_LOGIN_IP="IP 변경";
 	$MSG_PRIVILEGE_TYPE="권한 종류";
@@ -237,18 +237,18 @@
 	$MSG_HELP_GIVESOURCE="특정 사용자 채점코드 밀어주기. 부진학생 도움용";
 	$MSG_HELP_EXPORT_PROBLEM="fps.xml 파일로 문제 다운로드";
 	$MSG_HELP_IMPORT_PROBLEM="fps.xml 파일로 문제 업로드";
-	$MSG_HELP_UPDATE_DATABASE="hustoj 업데이트(sudo update-hustoj) 후, 데이터베이스 업데이트. 한 번만 실행!";
-	$MSG_HELP_ONLINE="현재접속자";
-	$MSG_HELP_AC="통과했습니다.";
-	$MSG_HELP_PE="출력된 형식이 틀렸습니다. 출력형식/공백/줄바꿈 등을 다시 확인해주세요."; 
-	$MSG_HELP_WA="출력된 답이 틀렸습니다. 입력데이터의 범위, 출력해야 할 결과 등을 다시 확인해주세요."; 
-	$MSG_HELP_TLE="실행시간 초과: 실행 제한시간을 초과하였습니다."; 
-	$MSG_HELP_MLE="메모리사용 초과: 메모리사용 용량을 초과하였습니다."; 
-	$MSG_HELP_OLE="출력 초과: 너무 많이 출력하였습니다. 무한 루프 출력 등.";
-	$MSG_HELP_RE="실행중 오류: 프로그램을 실행하는 도중에 오류가 발생하였습니다.";
-	$MSG_HELP_CE="컴파일 오류: gcc/g++/gpc 컴파일러가 프로그램을 변환하지 못하였습니다. 링크를 눌러 오류메시지 확인."; 
+	$MSG_HELP_UPDATE_DATABASE="hustoj 업데이트(sudo update-hustoj) 후, 데이터베이스를 업데이트 합니다. 업데이트 후 한 번만 실행해주세요!";
+	$MSG_HELP_ONLINE="현재 접속자";
+	$MSG_HELP_AC="모두 정답을 출력했습니다.";
+	$MSG_HELP_PE="출력된 형식이 다릅니다. 출력형식/공백/줄바꿈 등을 다시 확인해주세요."; 
+	$MSG_HELP_WA="틀린 답을 출력했습니다. 입력데이터의 범위, 출력해야 할 결과 등을 다시 확인해주세요."; 
+	$MSG_HELP_TLE="실행 제한시간을 초과하였습니다."; 
+	$MSG_HELP_MLE="메모리사용 제한용량을 초과하였습니다."; 
+	$MSG_HELP_OLE="너무 많이 출력되었습니다. 무한 반복 출력 등.";
+	$MSG_HELP_RE="프로그램이 실행되는 도중에 에러가 발생하였습니다.";
+	$MSG_HELP_CE="컴파일러가 제출한 코드를 실행파일로 번역하지 못 했습니다. 링크를 눌러 컴파일 에러를 확인해주세요."; 
 
-	$MSG_HELP_MORE_TESTDATA_LATER="문제 등록 후, 채점데이터를 더 추가할 수 있습니다.";
+	$MSG_HELP_MORE_TESTDATA_LATER="문제를 등록한 후, 더 많은 채점 데이터를 추가할 수 있습니다.";
 	$MSG_HELP_ADD_FAQS="\"faqs.$OJ_LANG\"를 제목으로 공지사항을 등록하면 <a href=../faqs.php>$MSG_FAQ</a> 페이지를 통해 나타납니다.";
 	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> HUSTOJ Github 에서 <span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star를 부탁드립니다!</a></sub>";
 	$MSG_HELP_SPJ="자세한 내용은 <a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>"; 
@@ -257,7 +257,7 @@
 	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
 	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
 
-	$MSG_WARNING_ACCESS_DENIED=" 메시지를 볼 수 없습니다! 대상자가 아니거나 관리자에 의해 제한되었습니다.";
+	$MSG_WARNING_ACCESS_DENIED=" 볼 수 없습니다! 권한이 없거나 제한되어 있습니다.";
 
 	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
 	$MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";

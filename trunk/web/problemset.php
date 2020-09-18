@@ -94,7 +94,7 @@ else {  //page problems (not include in contests period)
 }
 
 $sql .= " ORDER BY `problem_id`";
-echo htmlentities( $sql);
+//echo htmlentities( $sql);
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$result = pdo_query($sql,$search,$search);
 }

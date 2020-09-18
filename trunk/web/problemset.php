@@ -86,7 +86,8 @@ else {  //page problems (not include in contests period)
 		SELECT  `problem_id` 
 		FROM contest c
 			INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id`
-			AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)
+			// AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)    // option style show all non-running contest
+			and (c.`end_time` >  '$now'  OR c.private =1)    // original style , hidden all private contest problems
 	)";
 }
 

@@ -35,9 +35,11 @@ else {
 		$result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 		$row = $result[0];
 		$page = intval($row[0]);
+	}else{
+		$page = 1;
 	}
 
-	if (!is_numeric($page) || $page<0)
+	if (!is_numeric($page) || $page<=0)
 		$page = '1';
 }
 //end of remember page
@@ -85,14 +87,14 @@ else {  //page problems (not include in contests period)
 	"WHERE `defunct`='N' and $filter_sql AND `problem_id` NOT IN (
 		SELECT  `problem_id` 
 		FROM contest c
-			INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id`
-			// AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)    // option style show all non-running contest
-			and (c.`end_time` >  '$now'  OR c.private =1)    // original style , hidden all private contest problems
-	)";
+			INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id` ".
+			// " AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)" .    // option style show all non-running contest
+			"and (c.`end_time` >  '$now'  OR c.private =1)" .    // original style , hidden all private contest problems
+	")";
 }
 
 $sql .= " ORDER BY `problem_id`";
-
+echo htmlentities( $sql);
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$result = pdo_query($sql,$search,$search);
 }

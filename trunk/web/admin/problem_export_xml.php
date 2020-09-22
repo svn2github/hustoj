@@ -213,7 +213,10 @@ if (isset($_POST ['do'])||isset($_GET['cid'])) {
 	}
   
 	?>
-   
+<!DOCTYPE fps PUBLIC 
+  "-//freeproblemset//An opensource XML standard for Algorithm Contest Problem Set//EN"
+  "http://hustoj.com/fps.current.dtd" >
+
 <fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
 	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
 	<?php

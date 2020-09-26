@@ -16,14 +16,18 @@ if(isset($OJ_LANG)){
 }
 require_once ("../include/problem.php");
 require_once ("../include/db_info.inc.php");
-function getLang($language){
+function getLang($language){  
 	$language_name=$GLOBALS['language_name'];
+	$language_ext=$GLOBALS['language_ext'];
 	
 	for($i=0;$i<count($language_name);$i++){
 		//echo "$language=$language_name[$i]=".($language==$language_name[$i]);
+		// compatibility with other onlinejudge FPS implementation might using extension name as language 
+		if($language==$language_ext[$i]){     
+			return $i;
+		}
+		// HUSTOJ classic using language_name
 		if($language==$language_name[$i]){
-			//$language=$i;
-			//echo $language;
 			return $i;
 		}
 	}

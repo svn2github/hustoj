@@ -111,7 +111,7 @@ systemctl enable hustoj
 systemctl enable nginx
 systemctl enable mysql
 systemctl enable php7.4-fpm
-systemctl enable judged
+#systemctl enable judged
 
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/

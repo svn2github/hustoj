@@ -105,7 +105,7 @@ update-rc.d hustoj defaults
 systemctl enable hustoj
 systemctl enable nginx
 systemctl enable mysql
-systemctl enable php7.3-fpm
+systemctl enable php7.2-fpm
 systemctl enable judged
 
 mkdir /var/log/hustoj/

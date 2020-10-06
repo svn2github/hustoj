@@ -282,7 +282,7 @@
       //document.getElementById("frmSolution").submit();
       $.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
       $("#Submit").prop('disabled', true);
-      $("#TestRub").prop('disabled', true);
+      $("#TestRun").prop('disabled', true);
       problem_id.value=-problem_id.value;
       count=20;
       handler_interval= window.setTimeout("resume();",1000);
@@ -291,7 +291,7 @@
     function resume(){
       count--;
       var s=$("#Submit")[0];
-      var t=$("#TestRub")[0];
+      var t=$("#TestRun")[0];
       if(count<0){
         s.disabled=false;
         if(t!=null)t.disabled=false;

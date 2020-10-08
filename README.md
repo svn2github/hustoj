@@ -150,7 +150,7 @@ Ubuntu18.04安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 	
 尤其**别装** `Apache` ，如果已经安装，请先停用或卸载，以免80端口冲突。
 
-**不要** 使用 `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
+**不要** 使用 `宝塔` `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
 
 **腾讯云用户请 [换软件源](https://developer.aliyun.com/mirror/ubuntu)** ，增加 `multiverse` 。
 

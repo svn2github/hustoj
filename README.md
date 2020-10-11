@@ -175,6 +175,15 @@ wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20.
 sudo bash install-ubuntu20.04.sh
 ```
 
+### 基于 Ubuntu 20.04 通过 Gitee 安装
+
+**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
+
+```bash
+wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
+sudo bash install-ubuntu20-gitee.sh
+```
+
 ### 基于 Ubuntu 18.04 通过 Gitee 安装
 
 **[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**

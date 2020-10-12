@@ -38,6 +38,11 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 Star us, please!
 
+## 推荐云服务商
+
+[UCloud年度大促](https://www.ucloud.cn/site/active/kuaijie.html?invitation_code=C1x6A291CBB02E8)
+[快杰云主机推广](https://www.ucloud.cn/site/active/ohost.html?invitation_code=C1x6A291CBB02E8)
+
 
 ## 目录
 

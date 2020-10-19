@@ -262,6 +262,11 @@
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
   $MSG_WARNING_ACCESS_DENIED="抱歉，您无法查看此消息！因为它不属于您，或者管理员不希望显示给您看。";
 
+  $MSG_WARNING_USER_ID_SHORT="用户名至少3位字符!";
+  $MSG_WARNING_PASSWORD_SHORT="密码至少6位!";
+  $MSG_WARNING_REPEAT_PASSWORD_DIFF="两次输入的密码不一致!";
+ 
+
   $MSG_LOSTPASSWORD_MAILBOX="请到您邮箱的垃圾邮件文件夹寻找验证码，并填写到这里";
   $MSG_LOSTPASSWORD_WILLBENEW="如果填写正确，通过下一步验证，这个验证码就自动成为您的新密码！";
 ?>

@@ -81,18 +81,18 @@
      <script>
 	function check(){
 		if($("#user_id").val().length<3) {
-			alert("用户名至少3位字符!");
+			alert("<?php echo $MSG_WARNING_USER_ID_SHORT?>");
 			$("#user_id").focus();
 			return false;
 		}
 		if($("#password").val().length<6) {
-			alert("密码至少6位!");
+			alert("<?php echo $MSG_WARNING_PASSWORD_SHORT?>");
 			$("#password").focus();
 			return false;
 		}
 		
 		if($("#password").val()!=$("#rptpassword").val()) {
-			alert("两次输入的密码不一致!");
+			alert("<?php echo $MSG_WARNING_REPEAT_PASSWORD_DIFF?>");
 			$("#rptpassword").focus();
 			return false;
 		}

@@ -248,6 +248,9 @@
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="Login from a diffrent ip ";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" during exam is not allowed ";
   $MSG_WARNING_ACCESS_DENIED="I am sorry, You could not view this message! Because it's not belong to you, or Administrator won't show you.";
+  $MSG_WARNING_USER_ID_SHORT="User ID should be NO less than 3 chars !";
+  $MSG_WARNING_PASSWORD_SHORT="Password should be NO less than 6 chars !";
+  $MSG_WARNING_REPEAT_PASSWORD_DIFF="The second password is different with the first one !";
 
   $MSG_LOSTPASSWORD_MAILBOX="Input the Code sended to your email (Trash Box )";
   $MSG_LOSTPASSWORD_WILLBENEW="if it's correct, it will be the new password";

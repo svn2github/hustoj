@@ -97,6 +97,7 @@
                     </div>
                     <br>
                     <button class="button-login"><?php echo $MSG_REGISTER;?></button>
+		    <div id='csrf' />
                 </form>		<br>
                 <script src="<?php echo $OJ_CDN_URL?>/include/md5-min.js"></script>
 	            <script>
@@ -105,6 +106,10 @@
 			            $("input[name=password]").val(hex_md5($("input[name=password]").val()));
 			            return true;
 		            }
+
+$(document).ready(function(){
+  $("#csrf").load("<?php echo $path_fix?>csrf.php");
+});
 	            </script>
         </div>
         </center>

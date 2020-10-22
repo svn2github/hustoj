@@ -241,8 +241,14 @@
 				}
 				?>
 			</center>
-
-			<div style="overflow: auto">
+			<div id="main" style="overflow: auto">
+			<div style="height: 100%; width: 300px; overflow: scroll; overflow:hidden;float:left" id="header">
+			     <div id="tbheader" style="poxition: relative; top: 100px; width: 300px; height: 100%; border: solid 1px green">
+			     </div>
+			</div>
+ 			<div style="height: 100%; width: 600px; overflow: scroll; position: static;" onscroll="syncScrolls()" id="data">
+ 				   <div style="poxition: relative; top: 100px; width: 1800px; height: 100%; border: solid 1px green">
+ 
 				<table id=rank>
 					<thead>
 						<tr class=toprow align=center>
@@ -340,6 +346,8 @@
 						?>
 					</tbody>
 				</table>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -352,7 +360,15 @@
 	<script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 	<script type="text/javascript">
+    function syncScrolls()
+    {
+        document.getElementById('header').scrollTop= document.getElementById('data').scrollTop
+    }
 		$(document).ready(function(){
+			$("#data")[0].style.width=($("#main")[0].clientWidth-300)+"px";		
+			$("#tbheader")[0].style.height=($("#main")[0].clientHeight)+"px";		
+			console.log("data:"+$("#data")[0].clientWidth);
+			console.log("main:"+$("#main")[0].clientWidth);
 			$.tablesorter.addParser({
 				//set a unique id
 				id: 'punish',
@@ -409,6 +425,7 @@
 		function metal() {
 			var tb = window.document.getElementById('rank');
 			var rows = tb.rows;
+			var header="";
 			try {
 				<?php 
 				//若有队伍从未进行过任何提交，数据库solution表里不会有数据，榜单上该队伍不存在，总rows数量不等于报名参赛队伍数量，奖牌比例的计算会出错
@@ -449,7 +466,18 @@
 						if(r>total*.45+1 && ac>0)
 							cell.className = "badge badge-info";
 					}
+
 				}
+				for (var i=0; i<rows.length; i++) {
+				    header+="<tr style='height:23px'>";
+				    for(var j=0;j<5;j++){
+					  header+=rows[i].cells[j].outerHTML;
+					  rows[i].cells[j].hidden=true;
+					  rows[i].cells[j].innerHTML="";
+				    }
+				    header+="</tr>";
+				}
+				$("#tbheader").append("<table class=oddrow >"+header+"</table>");
 			}
 			catch (e) {
 				//alert(e);

@@ -2413,7 +2413,11 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 {
 
 	pid_t pid;
-	printf("pid=%d\n", problem_id);
+	if (DEBUG) printf("pid=%d\n", problem_id);
+	// prevent privileges settings caused spj fail in [issues686]
+	execute_cmd("chown www-data:judge %s/data/%d/spj %s %s %s", oj_home, problem_id,infile, outfile, userfile);
+	execute_cmd("chmod 750 %s/data/%d/spj %s %s %s", oj_home, problem_id,infile, outfile, userfile);
+	
 	pid = fork();
 	int ret = 0;
 	if (pid == 0)

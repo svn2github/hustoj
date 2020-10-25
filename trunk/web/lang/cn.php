@@ -165,7 +165,7 @@
   $MSG_PLS_ADD="*请选择所有可以通过Ctrl +单击提交的语言。";
 	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
-  $MSG_NOIP_WARNING="NOIP 比赛进行中，结束后才能查看结果。";
+  $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." 比赛进行中，结束后才能查看结果。";
   
 	$MSG_SERVER_TIME="服务器时间";
 	$MSG_START_TIME="开始时间";

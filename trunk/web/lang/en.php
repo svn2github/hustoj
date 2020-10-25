@@ -152,7 +152,7 @@
 	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";	
 	$MSG_TIME_WARNING="Before Contest Start";
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
-  $MSG_NOIP_WARNING="NOIP Contest does not show result, until it's over.";
+  $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." Contest does not show result, until it's over.";
   
 	$MSG_SERVER_TIME="SERVER TIME";
 	$MSG_START_TIME="Start Time";

@@ -112,15 +112,24 @@ function is_running($cid){
 	$cnt=intval($row[0]);
 	return $cnt>0;
 }
-function check_ac($cid,$pid){
+function check_ac($cid,$pid,$noip){
 	//require_once("./include/db_info.inc.php");
 	global $OJ_NAME;
-	
+	if($noip){
+		$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? and `problem_id`!=0  AND `user_id`=?";
+		$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
+		$row=$result[0];
+		$sub=intval($row[0]);
+	if ($sub>0) return "<font color=blue >?</font>";
+	else return "";
+		
+	}
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
 	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
-	 $row=$result[0];
+	$row=$result[0];
 	$ac=intval($row[0]);
 	if ($ac>0) return "<font color=green>Y</font>";
+	
 	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`!=4 and `problem_id`!=0  AND `user_id`=?";
 	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	$row=$result[0];

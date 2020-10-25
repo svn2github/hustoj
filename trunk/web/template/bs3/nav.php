@@ -48,7 +48,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
 	      <?php if (isset($OJ_PRINTER)&& $OJ_PRINTER){ ?>
               <li <?php if ($url=="printer.php") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>printer.php"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> <?php echo $MSG_PRINTER?></a></li>
 	      <?php }?>
-	      <?php if(!isset($OJ_ON_SITE_CONTEST_ID)){?>
+	      <?php if(!isset($OJ_ON_SITE_CONTEST_ID)&&!isset($_GET['cid'])){?>
 	      <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
               		<li <?php if ($dir=="discuss3") echo " $ACTIVE";?>><a href="<?php echo $path_fix?>bbs.php"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><?php echo $MSG_BBS?></a></li>
               <?php }?>

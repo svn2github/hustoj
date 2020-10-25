@@ -184,6 +184,11 @@ if (isset($_GET['cid'])) {
 
 	$cnt = 0;
 	$noip = (time()<$end_time) && (stripos($view_title,$OJ_NOIP_KEYWORD)!==false);
+	if(isset($_SESSION[$OJ_NAME.'_'."administrator"])||
+		isset($_SESSION[$OJ_NAME.'_'."m$cid"])||
+		isset($_SESSION[$OJ_NAME.'_'."source_browser"])||
+		isset($_SESSION[$OJ_NAME.'_'."contest_creator"])
+	   ) $noip=false;
 	foreach($result as $row) {
 		$view_problemset[$cnt][0] = "";
 		if (isset($_SESSION[$OJ_NAME.'_'.'user_id']) && !$noip)

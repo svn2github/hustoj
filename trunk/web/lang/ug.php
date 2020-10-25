@@ -175,7 +175,7 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";
 	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
-  $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز NOIP";
+  $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز ".$OJ_NOIP_KEYWORD;
 
 	$MSG_SERVER_TIME="SERVER TIME";
 	$MSG_START_TIME="Start Time";

@@ -77,13 +77,13 @@
 							<td>
 								<?php echo $MSG_TITLE?>
 							</td>
-							<td class='hidden-xs'>
+							<td class='hidden-xs center'>
 								<?php echo $MSG_SOURCE?>
 							</td>
-							<td style="cursor:hand">
+							<td style="cursor:hand center">
 								<?php echo $MSG_SOVLED?>
 							</td>
-							<td style="cursor:hand">
+							<td style="cursor:hand center">
 								<?php echo $MSG_SUBMIT?>
 							</td>
 						</tr>

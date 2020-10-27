@@ -110,10 +110,6 @@
 </div>
 </center>
 
-<?php if (isset($OJ_ONLINE)&&$OJ_ONLINE){?>
-  <br><a class='btn ' href="../online.php" target="main"><b><?php echo $MSG_ONLINE?></b></a>
-<?php }?>
-
 <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
   <br><a class='btn btn-block btn-sm' href="https://github.com/zhblue/hustoj/" target="_blank"><b>HUSTOJ</b></a>
   <br><center><a class="btn btn-sm" target='_blank' href="https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md"><?php echo $MSG_ADMIN." ".$MSG_FAQ?></a></center>

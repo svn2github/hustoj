@@ -63,7 +63,10 @@
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 				echo "<br><br>";
+				if ( !$pr_flag ) {
+  					echo "<a class='btn btn-primary btn-sm' role='button' href='contest.php?cid=$cid'>$MSG_PROBLEM$MSG_LIST</a>";
 
+				}
 				if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
 				} else {
 					echo "<div class='btn-group' role='group'>";

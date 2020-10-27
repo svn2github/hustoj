@@ -73,6 +73,7 @@
 	$MSG_PROBLEM_ID="Problem ID";
 	$MSG_TITLE="Title";
 	$MSG_SOURCE="Source/Category";
+	$MSG_SUBMIT_NUM="Submit Num";
 	$MSG_SUBMIT="Submit";
 	
 	//submit.php

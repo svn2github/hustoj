@@ -87,6 +87,7 @@
 	$MSG_PROBLEM_ID="题目编号";
 	$MSG_TITLE="标题";
 	$MSG_SOURCE="来源/分类";
+	$MSG_SUBMIT_NUM="提交量";
 	$MSG_SUBMIT="提交";
 	
 	//submit.php

@@ -235,9 +235,15 @@ void init_mysql_conf() {
 
 		}
 #ifdef _mysql_h
+		if (oj_tot==1){
 		sprintf(query,
-				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",
+			"SELECT solution_id FROM solution WHERE language in (%s) and result<2 ORDER BY solution_id  limit %d",
+			oj_lang_set,  2 *max_running );
+		}else{
+		sprintf(query,
+				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY solution_id ASC limit %d",
 				oj_lang_set, oj_tot, oj_mod, 2 *max_running );
+		}
 #endif
 		sleep_tmp = sleep_time;
 			fclose(fp);

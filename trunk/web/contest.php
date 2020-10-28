@@ -206,7 +206,7 @@ if (isset($_GET['cid'])) {
 			$tpid = intval($row['problem_id']);
 			$sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`start_time`)
 				)
 			)";
 

@@ -384,9 +384,9 @@ void init_syscalls_limits(int lang)
 	if (lang==3)call_counter[220]= 100;
 	else call_counter[220]= 1;
 #else
-	call_counter[SYS_execve]= 1;
+	call_counter[SYS_execve %  call_array_size ]= 1;
 #endif
-	printf("SYS_execve:%d\n",SYS_execve);
+	printf("SYS_execve:%d\n",SYS_execve  % call_array_size );
 }
 
 int after_equal(char *c)

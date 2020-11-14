@@ -50,7 +50,12 @@ class TM{
                         $this->p_ac_sec[$pid]=$sec;
                         $this->solved++;
                         if(!isset($this->p_wa_num[$pid])) $this->p_wa_num[$pid]=0;
-                        if(isset($this->p_pass_rate[$pid]))$this->total-=$this->p_pass_rate[$pid]*100;
+                        if(isset($this->p_pass_rate[$pid])){
+				$this->total-=$this->p_pass_rate[$pid]*100;
+			}else{
+				$this->p_pass_rate[$pid]=$res;
+			}
+				
 			$this->total+=100;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
 //                      echo "Time:".$this->time."<br>";

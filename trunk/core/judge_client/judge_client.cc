@@ -2208,6 +2208,11 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		freopen("data.in", "r", stdin);
 	}
 	freopen("user.out", "w", stdout);
+	
+	execute_cmd("chgrp judge %s/user.out %s/data.in", work_dir,work_dir);
+	execute_cmd("chmod 740 %s/data.in", work_dir);
+	execute_cmd("chmod 760 %s/user.out", work_dir);
+	
 	freopen("error.out", "a+", stderr);
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
@@ -2269,8 +2274,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	// set the stack
-	LIM.rlim_cur = STD_MB << 7;
-	LIM.rlim_max = STD_MB << 7;
+	LIM.rlim_cur = STD_MB << 8;
+	LIM.rlim_max = STD_MB << 8;
 	setrlimit(RLIMIT_STACK, &LIM);
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;

@@ -10,14 +10,14 @@ function addproblem($title, $time_limit, $memory_limit, $description, $input, $o
 	//echo $sql;
 	$pid =pdo_query( $sql,$title,$time_limit,$memory_limit,$description,$input,$output,
 			$sample_input,$sample_output,$hint,$source,$spj ) ;
-	echo "<br>Add $pid  ";
-	if (isset ( $_POST ['contest_id'] )) {
+	echo "<br>Add Problem: $pid  ";
+	if (isset ( $_POST ['contest_id'] ) && intval($_POST ['contest_id']) >0 ) {
 		$cid =intval($_POST ['contest_id']);
 		$sql = "select count(*) FROM `contest_problem` WHERE `contest_id`=?";
 		$result = pdo_query( $sql,$cid ) ;
 		$row =$result[0];
 		$num = $row [0];
-		echo "Num=" . $num . ":";
+		echo "Contest Problem Num=" . $num . ":";
 		$sql = "INSERT INTO `contest_problem` (`problem_id`,`contest_id`,`num`) VALUES(?,?,?)";	
 		pdo_query($sql,$pid,$cid,$num);
 	}

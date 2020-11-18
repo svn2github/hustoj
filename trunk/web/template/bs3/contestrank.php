@@ -242,11 +242,13 @@
 				?>
 			</center>
 			<div id="main" style="overflow: auto">
+			<?php if (isset($OJ_CONTEST_RANK_FIX_HEADER)&&$OJ_CONTEST_RANK_FIX_HEADER){?>
 			<div style="height: 100%; width: 300px; overflow: scroll; overflow:hidden;float:left" id="header">
 			     <div id="tbheader" style="poxition: relative; top: 100px; width: 300px; height: 100%; border: solid 1px green">
 			     </div>
 			</div>
  			<div style="height: 100%; width: 600px; overflow: scroll; position: static;" onscroll="syncScrolls()" id="data">
+			<?php } ?>
  				   <div style="poxition: relative; top: 100px; width: 1800px; height: 100%; border: solid 1px green">
  
 				<table id=rank>
@@ -347,7 +349,9 @@
 					</tbody>
 				</table>
 				</div>
+			<?php if (isset($OJ_CONTEST_RANK_FIX_HEADER)&&$OJ_CONTEST_RANK_FIX_HEADER){?>
 				</div>
+			<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -365,10 +369,13 @@
         document.getElementById('header').scrollTop= document.getElementById('data').scrollTop
     }
 		$(document).ready(function(){
+			
+			<?php if (isset($OJ_CONTEST_RANK_FIX_HEADER)&&$OJ_CONTEST_RANK_FIX_HEADER){?>
 			$("#data")[0].style.width=($("#main")[0].clientWidth-300)+"px";		
 			$("#tbheader")[0].style.height=($("#main")[0].clientHeight)+"px";		
 			console.log("data:"+$("#data")[0].clientWidth);
 			console.log("main:"+$("#main")[0].clientWidth);
+			<?php } ?>
 			$.tablesorter.addParser({
 				//set a unique id
 				id: 'punish',
@@ -468,6 +475,7 @@
 					}
 
 				}
+				<?php if (isset($OJ_CONTEST_RANK_FIX_HEADER)&&$OJ_CONTEST_RANK_FIX_HEADER){?>
 				for (var i=0; i<rows.length; i++) {
 				    header+="<tr style='height:23px'>";
 				    for(var j=0;j<5;j++){
@@ -478,6 +486,7 @@
 				    header+="</tr>";
 				}
 				$("#tbheader").append("<table class=oddrow >"+header+"</table>");
+				<?php } ?>
 			}
 			catch (e) {
 				//alert(e);

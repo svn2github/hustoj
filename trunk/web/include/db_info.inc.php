@@ -65,7 +65,7 @@ static  $OJ_OI_MODE=false; //是否开启OI比赛模式，禁用排名、状态�
 static  $OJ_SHOW_METAL=true; //榜单上是否按比例显示奖牌
 static  $OJ_RANK_LOCK_DELAY=3600; //赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
 static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
-
+static $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
 static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。
 static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
 

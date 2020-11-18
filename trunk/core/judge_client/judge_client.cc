@@ -178,6 +178,7 @@ static int compile_chroot = 1;
 static int turbo_mode = 0;
 static int python_free=0;
 static const char *tbname = "solution";
+int num_of_test = 0;
 //static int sleep_tmp;
 
 static int py2=1; // caution: py2=1 means default using py3
@@ -2243,7 +2244,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	alarm(0);
-	alarm(1+ time_lmt / cpu_compensation);
+	alarm( num_of_test * time_lmt / cpu_compensation);
 
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
@@ -3123,6 +3124,18 @@ int main(int argc, char **argv)
 #endif
 		exit(-1);
 	}
+	
+	
+
+	for (;(dirp = readdir(dp)) != NULL;)
+	{
+
+		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
+		if (namelen == 0)
+			continue;
+		num_of_test++;
+	}
+	rewinddir(dp);
 
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
@@ -3158,7 +3171,6 @@ int main(int argc, char **argv)
 	// read files and run
 	// read files and run
 	double pass_rate = 0.0;
-	int num_of_test = 0;
 	int finalACflg = ACflg;
 	if (p_id == 0)
 	{ //custom input running
@@ -3192,6 +3204,7 @@ int main(int argc, char **argv)
 		clean_workdir(work_dir);
 		exit(0);
 	}
+	
 
 	for (; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && (dirp = readdir(dp)) != NULL;)
 	{
@@ -3226,7 +3239,7 @@ int main(int argc, char **argv)
 		else
 		{
 
-			num_of_test++;
+			//num_of_test++;
 
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,

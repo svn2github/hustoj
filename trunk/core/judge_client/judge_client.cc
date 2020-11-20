@@ -3313,8 +3313,10 @@ int main(int argc, char **argv)
 	}
 	else
 	{
+		if(ACflg==OJ_AC) pass_rate=1.0;
+		else pass_rate=0.0;
 		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
-						sim_s_id, 0);
+						sim_s_id, pass_rate);
 	}
 	FILE *df=fopen("diff.out","a");
 	fprintf(df,"time_space_table:\n%s\n",time_space_table);

@@ -292,10 +292,13 @@ void run_client(int runid, int clientid) {
 	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
 	//sprintf(err,"%s/run%d/error.out",oj_home,clientid);
 	//freopen(err,"a+",stderr);
-
+	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
+			     (char * const )"LANG=zh_CN.UTF-8",
+			     (char * const )"LANGUAGE=zh_CN.UTF-8",
+			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
-		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
-				oj_home, (char *) NULL);
+		execle("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
+				oj_home, (char *) NULL, envp);
 	//else
 	//	execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 	//			oj_home, "debug", (char *) NULL);

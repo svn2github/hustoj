@@ -2825,11 +2825,11 @@ void init_parameters(int argc, char **argv, int &solution_id,
 {
 	if (argc < 3)
 	{
-		fprintf(stderr, "Usage:%s solution_id runner_id.\n", argv[0]);
-		fprintf(stderr, "Multi:%s solution_id runner_id judge_base_path.\n",
+		fprintf(stderr, "Normal Usage:%s <solution_id> <runner_id>\n", argv[0]);
+		fprintf(stderr, "Multi OJ with Specific home :%s <solution_id> <runner_id> [judge_base_path].\n",
 				argv[0]);
 		fprintf(stderr,
-				"Debug:%s solution_id runner_id judge_base_path debug.\n",
+				"Debug with Specific home:%s <solution_id> <runner_id> [judge_base_path] [debug].\n",
 				argv[0]);
 		exit(1);
 	}

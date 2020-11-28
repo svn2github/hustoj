@@ -2196,7 +2196,10 @@ void copy_js_runtime(char *work_dir)
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 				  int &mem_lmt)
 {
-	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",NULL};
+	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
+			     (char * const )"LANG=zh_CN.UTF-8",
+			     (char * const )"LANGUAGE=zh_CN.UTF-8",
+			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	nice(19);
 	// now the user is "judger"
 	chdir(work_dir);
@@ -2295,7 +2298,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	case 14:
 	case 17:
 	case 19:
-		execl("./Main", "./Main", (char *)NULL);
+		execle("./Main", "./Main", (char *)NULL,envp);
 		break;
 	case 3:
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);

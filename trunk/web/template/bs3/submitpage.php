@@ -174,8 +174,8 @@
 
           if(ra[0]<4)tb.innerHTML+=loader;
           
-          tb.innerHTML+="Memory:"+ra[1]+"KB&nbsp;&nbsp;";
-          tb.innerHTML+="Time:"+ra[2]+"ms";
+          tb.innerHTML="Memory:"+ra[1];
+          tb.innerHTML+="Time:"+ra[2];
 
           if(ra[0]<4)
             window.setTimeout("fresh_result("+solution_id+")",2000);

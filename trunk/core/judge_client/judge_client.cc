@@ -164,6 +164,7 @@ static int time_limit_to_total= 0;
 static int total_time= 0;
 
 static int http_judge = 0;
+static int copy_data= 0;
 static char http_baseurl[BUFFER_SIZE/10];
 static char http_username[BUFFER_SIZE/10];
 static char http_password[BUFFER_SIZE/10];
@@ -498,6 +499,7 @@ void init_mysql_conf()
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
+			read_int(buf, "OJ_COPY_DATA", &copy_data);
 			
 			
 		}
@@ -1536,6 +1538,7 @@ void _get_custominput_mysql(int solution_id, char *work_dir)
 {
 	char sql[BUFFER_SIZE], src_pth[BUFFER_SIZE];
 	// get the source code
+	printf("geting custom input\n");
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	sprintf(sql, "SELECT input_text FROM custominput WHERE solution_id=%d",
@@ -1554,6 +1557,7 @@ void _get_custominput_mysql(int solution_id, char *work_dir)
 	}
 	if (res != NULL)
 	{
+		printf("no custom input\n");
 		mysql_free_result(res); // free the memory
 		res = NULL;
 	}
@@ -1745,7 +1749,7 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 	escape(fname, fname0);
 	//printf("%s\n%s\n",fname0,fname);
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
+	if(copy_data)execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
 	execute_cmd("/bin/cp %s/data/%d/*.dic %s/ 2>/dev/null", oj_home, p_id, work_dir);
 
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
@@ -2194,7 +2198,7 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/", work_dir);
 }
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
-				  int &mem_lmt)
+				  int &mem_lmt,char * data_file_path)
 {
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
 			     (char * const )"LANG=zh_CN.UTF-8",
@@ -2209,14 +2213,21 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("/bin/chown judge %s/data.db", work_dir);
 		freopen("Main.sql", "r", stdin);
 	}else{
-		freopen("data.in", "r", stdin);
+		if(copy_data)
+
+			freopen("data.in", "r", stdin);
+		else{
+			printf("infile: [%s]\n",data_file_path);
+			freopen(data_file_path,"r",stdin);
+		}
 	}
 	freopen("user.out", "w", stdout);
 	
-	execute_cmd("chgrp judge %s/user.out %s/data.in", work_dir,work_dir);
-	execute_cmd("chmod 740 %s/data.in", work_dir);
+	if (copy_data){
+		execute_cmd("chgrp judge %s/user.out %s/data.in", work_dir,work_dir);
+		execute_cmd("chmod 740 %s/data.in", work_dir);
+	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
-	
 	freopen("error.out", "a+", stderr);
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
@@ -3133,15 +3144,6 @@ int main(int argc, char **argv)
 	
 	
 
-	for (;(dirp = readdir(dp)) != NULL;)
-	{
-
-		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
-		if (namelen == 0)
-			continue;
-		num_of_test++;
-	}
-	rewinddir(dp);
 
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
@@ -3187,7 +3189,7 @@ int main(int argc, char **argv)
 
 		if (pidApp == 0)
 		{
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,(char *)"data.in");
 		}
 		else
 		{
@@ -3211,6 +3213,15 @@ int main(int argc, char **argv)
 		exit(0);
 	}
 	
+	for (;(dirp = readdir(dp)) != NULL;)
+	{
+
+		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
+		if (namelen == 0)
+			continue;
+		num_of_test++;
+	}
+	rewinddir(dp);
 
 	for (; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && (dirp = readdir(dp)) != NULL;)
 	{
@@ -3240,7 +3251,7 @@ int main(int argc, char **argv)
 		if (pidApp == 0)
 		{
 
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile);
 		}
 		else
 		{

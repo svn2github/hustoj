@@ -297,8 +297,8 @@ void run_client(int runid, int clientid) {
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
-		execle("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
-				oj_home, (char *) NULL, envp);
+		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
+				oj_home, (char *) NULL);
 	//else
 	//	execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 	//			oj_home, "debug", (char *) NULL);

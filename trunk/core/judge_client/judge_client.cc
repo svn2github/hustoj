@@ -1210,7 +1210,7 @@ int compile(int lang, char *work_dir)
 	//		"import py_compile; py_compile.compile(r'Main.py')", NULL };
 	const char *CP_PH[] = {"php", "-l", "Main.php", NULL};
 	const char *CP_PL[] = {"perl", "-c", "Main.pl", NULL};
-	const char *CP_CS[] = {"gmcs", "-warn:0", "Main.cs", NULL};
+	const char *CP_CS[] = {"mcs","-codepage:utf8", "-warn:0", "Main.cs", NULL};
 	const char *CP_OC[] = {"gcc", "-o", "Main", "Main.m",
 						   "-fconstant-string-class=NSConstantString", "-I",
 						   "/usr/include/GNUstep/", "-L", "/usr/lib/GNUstep/Libraries/",
@@ -2092,6 +2092,13 @@ void copy_mono_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib/ld-linux* %s/lib/", work_dir);
 #ifdef __x86_64__
 	execute_cmd("/bin/cp /lib64/ld-linux* %s/lib64/", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libm.so.6 %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/librt.so.1 %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libpthread.so.0 %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libc.so.6 %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.2 %s/lib64", work_dir);
 #endif
 	execute_cmd("/bin/mkdir -p %s/home/judge", work_dir);
 	execute_cmd("/bin/chown judge %s/home/judge", work_dir);
@@ -2203,7 +2210,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
-			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
+			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
 	nice(19);
 	// now the user is "judger"
 	chdir(work_dir);
@@ -2221,19 +2228,20 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 			freopen(data_file_path,"r",stdin);
 		}
 	}
-	freopen("user.out", "w", stdout);
+	execute_cmd("touch %s/user.out", work_dir);
 	
 	if (copy_data){
 		execute_cmd("chgrp judge %s/user.out %s/data.in", work_dir,work_dir);
 		execute_cmd("chmod 740 %s/data.in", work_dir);
 	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
+	freopen("user.out", "w", stdout);
 	freopen("error.out", "a+", stderr);
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (   
-		 lang != 3 && lang != 20 && !(lang ==6 && python_free )
+		 lang != 3 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
 		if(DEBUG)printf("Chrooting...\n");
 		chroot(work_dir);
@@ -2347,7 +2355,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execl("/perl", "/perl", "Main.pl", (char *)NULL);
 		break;
 	case 9: //Mono C#
-		execl("/mono", "/mono", "--debug", "Main.exe", (char *)NULL);
+		execle("/usr/bin/mono", "/usr/bin/mono","--debug",  "Main.exe", (char *)NULL,envp);
 		break;
 	case 12: //guile
 		execl("/guile", "/guile", "Main.scm", (char *)NULL);
@@ -3161,8 +3169,8 @@ int main(int argc, char **argv)
 		copy_php_runtime(work_dir);
 	if (lang == 8)
 		copy_perl_runtime(work_dir);
-	if (lang == 9)
-		copy_mono_runtime(work_dir);
+//	if (lang == 9)
+//		copy_mono_runtime(work_dir);
 	if (lang == 10)
 		copy_objc_runtime(work_dir);
 	if (lang == 11)

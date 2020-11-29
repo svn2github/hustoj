@@ -1,5 +1,5 @@
 <?php
-$cache_time = 30;
+$cache_time = 10;
 $OJ_CACHE_SHARE = false;
 
 require_once('./include/cache_start.php');
@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
 			SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' AND '$now'<`end_time`)
+				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' or '$now'<`end_time`)
 			)
 		)";
 

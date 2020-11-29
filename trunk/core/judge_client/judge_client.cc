@@ -2216,7 +2216,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	chdir(work_dir);
 	// open the files
 	if(lang==18){ 
-		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s/data.in", work_dir,work_dir);
+		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s", work_dir,data_file_path);
 		execute_cmd("/bin/chown judge %s/data.db", work_dir);
 		freopen("Main.sql", "r", stdin);
 	}else{

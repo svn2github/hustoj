@@ -208,7 +208,7 @@ $rank=1;
 //echo "<style> td{font-size:14} </style>";
 //echo "<title>Contest RankList -- $title</title>";
 echo "<center><h3>Contest RankList -- $title</h3></center>";
-echo "<table border=1><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark";
+echo "<table border=1><tr><td>Rank<td>User<td>Nick<td>Solved<td>Mark<td>Penalty";
 for ($i=0;$i<$pid_cnt;$i++)
 	echo "<td>$PID[$i]";
 echo "</tr>";
@@ -239,6 +239,7 @@ for ($i=0;$i<$user_cnt;$i++){
 	
 	echo $U[$i]->mark>0?intval($U[$i]->mark):0;
 	echo "</td>";
+	echo "<td>".sec2str($U[$i]->time)."</td>";
 	for ($j=0;$j<$pid_cnt;$j++){
 		echo "<td>";
 		if(isset($U[$i])){

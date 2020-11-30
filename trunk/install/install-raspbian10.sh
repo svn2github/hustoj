@@ -3,7 +3,12 @@ apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
-svn co https://github.com/zhblue/hustoj/trunk/trunk  src
+
+#using tgz src files
+wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+tar xzf hustoj.tar.gz
+svn up src
+
 for PKG in make flex g++ clang libmariadb++-dev php7.3-fpm php7.3-memcache php-zip php-xml php-mbstring memcached nginx mariadb-server-10 php7.3-mysql php7.0-gd fp-compiler openjdk-9-jdk
 do
 	apt-get install -y $PKG

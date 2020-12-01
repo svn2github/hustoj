@@ -87,6 +87,7 @@
 	$MSG_PROBLEM_ID="문제ID";
 	$MSG_TITLE="제목";
 	$MSG_SOURCE="출처/분류";
+	$MSG_SUBMIT_NUM="제출";	
 	$MSG_SUBMIT="제출";
 
 	//submit.php
@@ -106,6 +107,11 @@
 	$MSG_NICK="별명";
 	$MSG_SOVLED="통과";
 	$MSG_RATIO="정답률";
+	$MSG_DAY="일간-순위";
+	$MSG_WEEK="주간-순위";
+	$MSG_MONTH="월간-순위";
+	$MSG_YEAR="연간-순위";
+
 
 	//registerpage.php
 	$MSG_USER_ID="사용자ID";
@@ -200,6 +206,7 @@
 	$MSG_MODIFY_NOT_ALLOWED_FOR_EXAM="대회중에는 비밀번호를 변경할 수 없습니다.";
 	$MSG_MAIL_NOT_ALLOWED_FOR_EXAM="대회중에는 메일을 사용할 수 없습니다.";
 	$MSG_LOAD_TEMPLATE_CONFIRM="다시 작성하시겠습니까?\\n 작성했던 코드가 모두 삭제됩니다!";
+  $MSG_NO_MAIL_HERE="이 채점시스템은 메일을 지원하지 않습니다.";  
 
 	$MSG_BLOCKLY_OPEN="Blockly"; 
 	$MSG_BLOCKLY_TEST="Blockly 테스트 실행"; 
@@ -255,9 +262,11 @@
 	$MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";	
 
 	$MSG_WARNING_LOGIN_FROM_DIFF_IP="다른 컴퓨터/IP로 로그인했습니다.";
-	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 시험중에는 허용되지 않습니다.";
-
-	$MSG_WARNING_ACCESS_DENIED=" 볼 수 없습니다! 권한이 없거나 제한되어 있습니다.";
+	$MSG_WARNING_DURING_EXAM_NOT_ALLOWED="시험중에는 허용되지 않습니다.";
+	$MSG_WARNING_ACCESS_DENIED="볼 수 없습니다! 권한이 없거나 제한되어 있습니다.";
+  $MSG_WARNING_USER_ID_SHORT="사용자ID는 3문자 이상 입력해야 합니다!";
+  $MSG_WARNING_PASSWORD_SHORT="비밀번호는 6문자 이상 입력해야 합니다!";
+  $MSG_WARNING_REPEAT_PASSWORD_DIFF="비밀번호가 다릅니다!";
 
 	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
 	$MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";

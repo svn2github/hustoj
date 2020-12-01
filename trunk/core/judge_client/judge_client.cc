@@ -2800,7 +2800,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
-						"[ERROR] A Not allowed system call: runid:%d CALLID:%u [%u]\n"
+						"[ERROR] solution_id:%d called a Forbidden system call:%u [%u]\n"
 						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"

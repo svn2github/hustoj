@@ -25,23 +25,27 @@
   MathJax = {
     tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
   };
-  </script> 
+</script> 
+
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <style>
-.jumbotron1{ 
-    font-size: 18px; 
+<style>
+	.jumbotron1{ 
+  font-size: 18px; 
 }
 </style>
+
 <?php } ?>
+
 <!--数学公式js加载完毕-->
 </head>
+
 
 <body>
 	<div class="container">
 		<?php include("template/$OJ_TEMPLATE/nav.php");?>
 
 		<!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron"></div>
+    <!-- <div class="jumbotron"></div> -->
 
 		<div class="panel panel-default">
 			<div class="panel-heading">

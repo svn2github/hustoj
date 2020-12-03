@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
 			SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' or '$now'<`end_time`)
+				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' AND '$now'<`end_time`)
 			)
 		)";
 
@@ -42,7 +42,6 @@ else if (isset($_GET['cid']) && isset($_GET['pid'])) {
 	//contest
 	$cid = intval($_GET['cid']);
 	$pid = intval($_GET['pid']);
-
 
 	if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
 		$sql = "SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=?";
@@ -115,11 +114,11 @@ if (count($result)!=1) {
 		$result = pdo_query($sql,$id);
 
 		if ($i=count($result)) {
-			$view_errors .= "This problem is in Contest(s) below:<br>";
-
-			foreach ($result as $row) {
-				$view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".htmlentities($row[1],ENT_QUOTES,"utf-8")."</a><br>";
-			}
+    //  hide contest -- 2020.12.04
+		//	$view_errors .= "This problem is in Contest(s) below:<br>";
+		//	foreach ($result as $row) {
+		//		$view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".htmlentities($row[1],ENT_QUOTES,"utf-8")."</a><br>";
+		//	}
 		}
 		else {
 			$view_title = "<title>$MSG_NO_SUCH_PROBLEM!</title>";

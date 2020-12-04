@@ -30,10 +30,10 @@ if (isset($_GET['id'])) {
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=?";
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
-			SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' AND '$now'<`end_time`)
-			)
-		)";
+				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+					SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' or '$now'<`end_time`)    
+				)
+			)";        //////////  people should not see the problem used in contest before they end by modify url in browser address bar
 
 	$pr_flag = true;
 	$result = pdo_query($sql,$id);

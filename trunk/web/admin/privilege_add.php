@@ -63,16 +63,21 @@ if (isset($_POST['do'])) {
 			}
 		?>
 		</select>
-		<div class="col-sm-offset-9"><input id='value_input' type="hidden" class="form-control" name="valuestr" value="true"></div>
+		<div class="col-sm-offset-9"><input id='value_input' type="text" class="form-control" name="valuestr" value="true"></div>
 	</div>
 	<script>
 		function show_value_input(new_value){
 			if(new_value=='problem_start'||new_value=='problem_end') {
+				$("#value_input").val("1000");
 				$("#value_input").show();
 			}else{
+				$("#value_input").val("true");
 				$("#value_input").hide();
 			}
 		}
+		$(document).ready(function(){
+			 $("#value_input").hide();
+		});
 	</script>
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-2">

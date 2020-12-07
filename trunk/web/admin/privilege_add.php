@@ -18,15 +18,18 @@ if (isset($_POST['do'])) {
 
 	$user_id = $_POST['user_id'];
 	$rightstr = $_POST['rightstr'];
-
+	$valuestr = "true";
+	if(isset($_POST['valuestr']))
+		$valuestr = $_POST['valuestr'];
+	
 	if (isset($_POST['contest']))
 		$rightstr = "c$rightstr";
 
 	if (isset($_POST['psv']))
 		$rightstr = "s$rightstr";
 
-	$sql = "insert into `privilege` values(?,?,'N')";
-	$rows = pdo_query($sql,$user_id,$rightstr);
+	$sql = "insert into `privilege`(user_id,rightstr,valuestr,defunct) values(?,?,?,'N')";
+	$rows = pdo_query($sql,$user_id,$rightstr,$valuestr);
 	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Privilege Added!</h4></center>";
 }
 ?>
@@ -60,7 +63,7 @@ if (isset($_POST['do'])) {
 			}
 		?>
 		</select>
-		<input name="valuestr" value="true">
+		<div class="col-sm-offset-9"><input class="form-control" name="valuestr" value="true"></div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-2">

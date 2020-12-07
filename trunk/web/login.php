@@ -15,7 +15,7 @@ if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_
 		echo "<script>\n alert('Cookie失效或错误!(-1)'); \n history.go(-1); \n </script>";
 		exit(0);
 	} 
-	$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$C_user)[0];
+	$C_info=pdo_query("SELECT `password`,`accesstime` FROM `users` WHERE `user_id`=? and defunct='N'",$C_user)[0];
 	$C_len=strlen($C_info[1]);
 	for($i=0;$i<strlen($C_info[0]);$i++){
 		$tp=ord($C_info[0][$i]);

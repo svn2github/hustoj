@@ -42,7 +42,7 @@ fi
 
 mysql < src/install/db.sql
 echo "CREATE USER '$USER'@'localhost' identified by '$PASSWORD';grant all privileges on jol.* to '$USER'@'localhost' ;\n flush privileges;\n"|mysql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
 #cp src/install/nginx.default /etc/nginx/sites-available/default
 

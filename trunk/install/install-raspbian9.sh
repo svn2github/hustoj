@@ -40,7 +40,7 @@ else
 fi
 
 mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
 cp src/install/nginx.default /etc/nginx/sites-available/default
 /etc/init.d/nginx restart

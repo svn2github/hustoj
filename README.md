@@ -181,7 +181,7 @@ sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ### 基于 Ubuntu 20.04 安装
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20.04.sh
+wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh
 ```
 
@@ -210,7 +210,7 @@ sudo bash install-ubuntu18-gitee.sh
 **各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
+wget http://dl.hustoj.com/install-ubuntu18.04.sh
 sudo bash install-ubuntu18.04.sh
 ```
 ### Ubuntu 更换软件源
@@ -220,14 +220,14 @@ sudo bash install-ubuntu18.04.sh
 + 脚本一
 
 ```shell
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/sources.list.sh
+wget http://dl.hustoj.com/sources.list.sh
 sudo bash sources.list.sh
 ```
 
 + 脚本二
 
 ```shell
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/update-sources-ubuntu.sh
+wget http://dl.hustoj.com/update-sources-ubuntu.sh
 sudo bash update-sources-ubuntu.sh
 ```
     
@@ -236,7 +236,7 @@ sudo bash update-sources-ubuntu.sh
 国内桌面用户 `Deepin 15.9+` (内置QQ、微信、WPS方便出题人本地测试，最新15.11测试通过)
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-deepin15.9.sh
+wget http://dl.hustoj.com/install-deepin15.9.sh
 sudo bash install-deepin15.9.sh
 ```
     

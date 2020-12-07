@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 CREATE TABLE IF NOT EXISTS `privilege` (
   `user_id` char(48) NOT NULL DEFAULT '',
   `rightstr` char(30) NOT NULL DEFAULT '',
+  `valuestr` char(11) NOT NULL DEFAULT 'true',
   `defunct` char(1) NOT NULL DEFAULT 'N',
   KEY `user_id_index` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;

@@ -183,7 +183,8 @@ $tsql[34]="alter table privilege add index user_id_index(user_id);";
 $csql[34]="";
 $tsql[35]="ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DEFAULT '0';";
 $csql[35]="";
-
+$tsql[36]="alter table privilege add column valuestr char(11) not null default 'true' after rightstr; ";
+$csql[36]="";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

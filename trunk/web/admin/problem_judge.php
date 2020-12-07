@@ -84,11 +84,11 @@ if(isset($_POST['update_solution'])){
                 $sql="SELECT solution_id FROM solution WHERE language in ($oj_lang_set)
                         and (result<2 or (result<4 and NOW()-judgetime>60)) ";
 		if(isset($_SESSION[$OJ_NAME.'_'.'problem_start'])){
-			var $start=intval($_SESSION[$OJ_NAME.'_'.'problem_start']);
+			$start=intval($_SESSION[$OJ_NAME.'_'.'problem_start']);
 			$sql.="and problem_id>=$start ";
 		}
 		if(isset($_SESSION[$OJ_NAME.'_'.'problem_end'])){
-			var $end=intval($_SESSION[$OJ_NAME.'_'.'problem_end']);
+			$end=intval($_SESSION[$OJ_NAME.'_'.'problem_end']);
 			$sql.="and problem_id<=$end ";
 		}
 		

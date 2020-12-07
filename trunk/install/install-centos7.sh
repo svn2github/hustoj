@@ -36,7 +36,7 @@ svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
 cd src/install
 mysql -h localhost -uroot < db.sql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -uroot
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -uroot
 # mysqladmin -u root password $DBPASS
 cd ../../
 

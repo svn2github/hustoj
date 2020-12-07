@@ -48,20 +48,25 @@ if(!$use_cookie){
 	$user_id = stripslashes( $user_id );
 	$password = stripslashes( $password );
   }
-  $sql = "SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
+  $sql = "SELECT * FROM `privilege` WHERE `user_id`=?";
   $login = check_login( $user_id, $password );
 }
 if($login){
 	$_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
 	$result = pdo_query( $sql, $login );
 
-	foreach ( $result as $row )
-		$_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
+	foreach ( $result as $row ){
+		if(isset($row[ 'valuestr' ]))
+                        $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = $row[ 'valuestr' ];
+                else
+                        $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
+	}
+		
 	$sql="update users set accesstime=now() where user_id=?";
         $result = pdo_query( $sql, $login );
 
 	if($OJ_LONG_LOGIN){
-		$C_info=pdo_query("SELECT`password`,`accesstime`FROM`users`WHERE`user_id`=? and defunct='N'",$login)[0];
+		$C_info=pdo_query("SELECT `password` , `accesstime` FROM`users` WHERE`user_id`=? and defunct='N'",$login)[0];
 		$C_len=strlen($C_info[1]);
 		$C_res="";
 		for($i=0;$i<strlen($C_info[0]);$i++){

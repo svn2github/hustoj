@@ -62,3 +62,5 @@ alter table solution add column nick char(20) not null default '' after user_id 
 update solution s inner join users u on s.user_id=u.user_id set s.nick=u.nick;
 alter table privilege add index user_id_index(user_id);
 ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DEFAULT '0';
+alter table privilege add column valuestr char(11) not null default 'true' after rightstr; 
+                                                                                                         

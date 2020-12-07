@@ -51,7 +51,7 @@ if (isset($_POST['do'])) {
 
 	<div class="form-group">
 		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PRIVILEGE_TYPE?></label>
-		<select class="col-sm-3" name="rightstr" >
+		<select class="col-sm-3" name="rightstr" onchange="show_value_input(this.value)" >
 		<?php
 			$rightarray = array("administrator","problem_editor","source_browser","contest_creator","http_judge","password_setter","printer","balloon",'problem_start','problem_end');
 			while (list($key, $val)=each($rightarray)) {
@@ -63,8 +63,17 @@ if (isset($_POST['do'])) {
 			}
 		?>
 		</select>
-		<div class="col-sm-offset-9"><input class="form-control" name="valuestr" value="true"></div>
+		<div class="col-sm-offset-9"><input id='value_input' type="hidden" class="form-control" name="valuestr" value="true"></div>
 	</div>
+	<script>
+		function show_value_input(new_value){
+			if(new_value=='problem_start'||new_value=='problem_end') {
+				$("#value_input").show();
+			}else{
+				$("#value_input").hide();
+			}
+		}
+	</script>
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-2">
 			<input type='hidden' name='do' value='do'>

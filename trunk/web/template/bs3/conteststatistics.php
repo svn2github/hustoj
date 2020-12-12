@@ -255,15 +255,17 @@
 
 					<tbody>
 						<?php
-						for ($i=0;$i<$pid_cnt;$i++){
-							if(!isset($PID[$i])) $PID[$i]="";
+						for ($i=0; $i<$pid_cnt; $i++) {
+							if(!isset($PID[$i]))
+								$PID[$i] = "";
+
 							if ($i&1)
 								echo "<tr class='oddrow'>";
 							else
 								echo "<tr class='evenrow'>";
 
-							if (time() < $end_time) {  //during contest/exam time
-								echo "<a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a>";
+							if (time()<$end_time) {  //during contest/exam time
+								echo "<td class='text-center'><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></td>";
 							}
 							else {  //over contest/exam time
 								//check the problem will be use remained contest/exam
@@ -284,8 +286,10 @@
 									echo "<td class='text-center'><a href='problem.php?id=".$tpid."'>".$PID[$i]."</a></td>";
 							}
 
-							for ($j=0;$j<count($language_name)+11;$j++) {
-								if(!isset($R[$i][$j])) $R[$i][$j]="";
+							for ($j=0; $j<count($language_name)+11; $j++) {
+								if (!isset($R[$i][$j]))
+									$R[$i][$j]="";
+								
 								echo "<td class='text-center'>".$R[$i][$j]."</td>";
 							}
 							echo "</tr>";
@@ -294,8 +298,10 @@
 						echo "<tr class='evenrow'>";
 							echo "<td class='text-center'>Total</td>";
 
-							for ($j=0;$j<count($language_name)+11;$j++) {
-								if(!isset($R[$i][$j])) $R[$i][$j]="";
+							for ($j=0; $j<count($language_name)+11; $j++) {
+								if(!isset($R[$i][$j]))
+									$R[$i][$j]="";
+								
 								echo "<td class='text-center'>".$R[$i][$j]."</td>";
 							}
 						echo "</tr>";

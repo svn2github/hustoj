@@ -121,7 +121,7 @@
 	$MSG_VCODE="验证码";
 
 	//problem.php
-	$MSG_NO_SUCH_PROBLEM="题目不可用!";
+	$MSG_NO_SUCH_PROBLEM="题目当前不可用!<br>它可能被用于未来的比赛、过去的私有比赛，或者管理员由于尚未测试通过等其他原因暂时停止了该题目用于练习。";
 	$MSG_Description="题目描述"  ;
 	$MSG_Input="输入"  ;
 	$MSG_Output= "输出" ;
@@ -261,7 +261,7 @@
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="从不同的ip地址登录";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
-  $MSG_WARNING_ACCESS_DENIED="抱歉，您无法查看此消息！因为它不属于您，或者管理员不希望显示给您看。";
+  $MSG_WARNING_ACCESS_DENIED="抱歉，您无法查看此消息！因为它不属于您，或者管理员设定系统状态为不显示此类信息。";
 
   $MSG_WARNING_USER_ID_SHORT="用户名至少3位字符!";
   $MSG_WARNING_PASSWORD_SHORT="密码至少6位!";

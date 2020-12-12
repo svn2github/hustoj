@@ -31,12 +31,12 @@ if (isset($_GET['id'])) {
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-					SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' or '$now'<`end_time`)    
+					SELECT `contest_id` FROM `contest` WHERE ( `end_time`>'$now' or `private`='1' )    
 				)
 			)";        //////////  people should not see the problem used in contest before they end by modifying url in browser address bar
 				   /////////   if you give students opportunities to test their result out side the contest ,they can bypass the penalty time of 20 mins for
 	                           /////////   each non-AC sumbission in contest. if you give them opportunities to view problems before exam ,they will ask classmates to write
-	                           /////////    codes for them in advance
+	                           /////////   code for them in advance, if you want to share private contest problem to practice you should modify the contest into public
 
 	$pr_flag = true;
 	$result = pdo_query($sql,$id);

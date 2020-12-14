@@ -8,7 +8,9 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-
+// this is not a webshell , and it need administrator / problem editor  membership to use, 
+// if aliyun warn you about this file , don't panic   
+// 这不是后门(Webshell)文件，不要理会阿里云的误报。
     $charset = "UTF-8";
     //@setlocale(LC_CTYPE, 'C');
     header("Pragma: no-cache");

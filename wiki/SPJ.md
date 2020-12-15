@@ -59,3 +59,11 @@ A+B spj.c
  }
 ```
 
+
+TestLib Checker can be used by adding this script as the "spj" file
+```
+#!/bin/bash
+<path>/checker $1 $3 $2
+```
+and chmod +x spj
+

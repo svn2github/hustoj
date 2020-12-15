@@ -87,5 +87,5 @@ and chmod +x spj
 ```
 chmod +x spj
 ```
-最后给题目设定SPJ标识即可正常判题
+最后给题目设定SPJ标识即可正常判题。
 测试spj是否正常，可以提交满分程序得到AC，提交A+B得到WA

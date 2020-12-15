@@ -78,10 +78,14 @@ and chmod +x spj
  typedef unsigned long long uint64_t;
 编译成功checker执行程序后，编写一个spj脚本做参数转发
 内容是
+```
 #!/bin/bash
 <path>/checker $1 $3 $2
+```
 其中<path>是checker所在路径
 然后给spj增加执行权限
+```
 chmod +x spj
+```
 最后给题目设定SPJ标识即可正常判题
 测试spj是否正常，可以提交满分程序得到AC，提交A+B得到WA

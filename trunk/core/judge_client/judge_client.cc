@@ -3325,10 +3325,10 @@ int main(int argc, char **argv)
 		usedtime = total_time;
 	}
 	
-	if(usedtime > time_lmt * 1000) {
+/*	if(usedtime > time_lmt * 1000) {                  // show real time cost
 		usedtime = time_lmt * 1000;
 	}
-
+*/
 	if (oi_mode)
 	{
 		if (num_of_test > 0)

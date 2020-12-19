@@ -35,12 +35,12 @@ $sample_input = $_POST['sample_input'];
 $sample_output = $_POST['sample_output'];
 $test_input = $_POST['test_input'];
 $test_output = $_POST['test_output'];
-
+/* don't do this , we will left them empty for not generating invalid test data files 
 if ($sample_input=="") $sample_input="\n";
 if ($sample_output=="") $sample_output="\n";
 if ($test_input=="") $test_input="\n";
 if ($test_output=="") $test_output="\n";
-
+*/
 $hint = $_POST['hint'];
 $hint = str_replace("<p>", "", $hint); 
 $hint = str_replace("</p>", "<br />", $hint); 

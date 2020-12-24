@@ -514,7 +514,6 @@ void init_mysql_conf()
         }
 	if(turbo_mode==2) tbname="solution2";
 }
-
 int isInFile(const char fname[])
 {
 	int l = strlen(fname);
@@ -522,6 +521,14 @@ int isInFile(const char fname[])
 		return 0;
 	else
 		return l - 3;
+}
+int inFile(const struct dirent * dp){
+	int l = strlen(dp->d_name);
+	printf("file name:%s\n",dp->d_name);
+	printf("ext name:%s\n",dp->d_name + l - 3);
+	int ret = isInFile(dp->d_name);	
+	printf("\t:%d\n",ret);
+	return ret;
 }
 
 void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
@@ -3136,11 +3143,35 @@ int main(int argc, char **argv)
 	sprintf(fullpath, "%s/data/%d", oj_home, p_id); // the fullpath of data dir
 
 	// open DIRs
-	DIR *dp;
+	//DIR *dp;
 	dirent *dirp;
 	// using http to get remote test data files
 	if (p_id > 0 && http_judge && http_download)
 		get_test_file(work_dir, p_id);
+
+	
+	struct dirent **namelist;
+        int namelist_len;
+	namelist_len = scandir(fullpath,&namelist,inFile,alphasort);
+	if(p_id > 0 && namelist_len == -1 ){
+		
+		write_log("No such dir:%s!\n", fullpath);
+#ifdef _mysql_h
+		if (!http_judge)
+			mysql_close(conn);
+#endif
+		exit(-1);
+	
+	}else{
+		if(DEBUG){
+			printf("total test case:%d \n", namelist_len);
+			for(int i=0;i<namelist_len;i++){
+				printf("test file %d : %s\n",i+1,namelist[i]->d_name);
+			}
+		}
+		
+	}
+/*
 	if (p_id > 0 && (dp = opendir(fullpath)) == NULL)
 	{
 
@@ -3153,7 +3184,7 @@ int main(int argc, char **argv)
 	}
 	
 	
-
+*/
 
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
@@ -3222,7 +3253,7 @@ int main(int argc, char **argv)
 		clean_workdir(work_dir);
 		exit(0);
 	}
-	
+/*	
 	for (;(dirp = readdir(dp)) != NULL;)
 	{
 
@@ -3232,9 +3263,12 @@ int main(int argc, char **argv)
 		num_of_test++;
 	}
 	rewinddir(dp);
+*/	
+	num_of_test=namelist_len;
 
-	for (; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && (dirp = readdir(dp)) != NULL;)
+	for (int i=0 ; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && i < namelist_len ;i++)
 	{
+		dirp=namelist[i];
 
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
@@ -3365,6 +3399,7 @@ int main(int argc, char **argv)
 	{
 		print_call_array();
 	}
-	closedir(dp);
+	//closedir(dp);
+	free(namelist);
 	return 0;
 }

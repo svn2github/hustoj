@@ -161,7 +161,14 @@ function import_fps($tempfile) {
 
       foreach ($testinputs as $testNode) {
         //if($testNode->nodeValue)
-        mkdata($pid,"test".$testno++.".in",$testNode,$OJ_DATA);
+	$name=$testNode['name'];
+	if($name != ""){
+        		mkdata($pid,$name.".in",$testNode,$OJ_DATA);
+
+	}else{
+        		mkdata($pid,"test".$testno.".in",$testNode,$OJ_DATA);
+	}
+	$testno++;
       }
 
       unset($testinputs);
@@ -170,7 +177,14 @@ function import_fps($tempfile) {
   
       foreach ($testinputs as $testNode) {
         //if($testNode->nodeValue)
-        mkdata($pid,"test".$testno++.".out",$testNode,$OJ_DATA);
+	$name=$testNode['name'];
+	if($name != ""){
+        		mkdata($pid,$name.".out",$testNode,$OJ_DATA);
+
+	}else{
+        		mkdata($pid,"test".$testno.".out",$testNode,$OJ_DATA);
+	}
+	$testno++;
       }
 
       unset($testinputs);

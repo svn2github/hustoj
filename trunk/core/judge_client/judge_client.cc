@@ -524,10 +524,10 @@ int isInFile(const char fname[])
 }
 int inFile(const struct dirent * dp){
 	int l = strlen(dp->d_name);
-	printf("file name:%s\n",dp->d_name);
-	printf("ext name:%s\n",dp->d_name + l - 3);
+	if(DEBUG) printf("file name:%s\n",dp->d_name);
+	if(DEBUG) printf("ext name:%s\n",dp->d_name + l - 3);
 	int ret = isInFile(dp->d_name);	
-	printf("\t:%d\n",ret);
+	if(DEBUG) printf("\t:%d\n",ret);
 	return ret;
 }
 
@@ -3029,6 +3029,16 @@ void print_call_array()
 	}
 	printf("0};\n");
 }
+int mark_of_name(const char * name){
+	int mark;
+	printf("reading mark from %s \n",name);
+	if(sscanf(name,"%*[^\[][%d]",&mark)==1){
+		printf("reading mark %d \n",mark);
+		return mark;
+	}else{
+		return 10;
+	}
+}
 int main(int argc, char **argv)
 {
 
@@ -3220,6 +3230,7 @@ int main(int argc, char **argv)
 	// read files and run
 	// read files and run
 	double pass_rate = 0.0;
+	int mark=0,total_mark=0,get_mark=0;
 	int finalACflg = ACflg;
 	if (p_id == 0)
 	{ //custom input running
@@ -3273,7 +3284,8 @@ int main(int argc, char **argv)
 		namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
-
+		mark=mark_of_name(dirp->d_name);
+		total_mark+=mark;
 		if (http_judge && http_download && (!data_list_has(dirp->d_name)))
 			continue;
 
@@ -3325,6 +3337,7 @@ int main(int argc, char **argv)
 			if (ACflg == OJ_AC)
 			{
 				++pass_rate;
+				get_mark+=mark;
 			}
 			if (finalACflg < ACflg)
 			{
@@ -3367,8 +3380,13 @@ int main(int argc, char **argv)
 */
 	if (oi_mode)
 	{
-		if (num_of_test > 0)
+		if (num_of_test > 0){
 			pass_rate /= num_of_test;
+		}
+		if (total_mark > 0 ){
+			pass_rate =get_mark;
+			pass_rate /= total_mark;
+		}
 		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
 						sim_s_id, pass_rate);
 	}

@@ -74,11 +74,11 @@ function printTestCases($pid,$OJ_DATA) {
         $infile = "$OJ_DATA/$pid/".$ret.".in";
 
         if (file_exists($infile)) {
-          echo "<test_input><![CDATA[".fixcdata(file_get_contents($infile))."]]></test_input>\n";
+          echo "<test_input name=\"".$ret."\"><![CDATA[".fixcdata(file_get_contents($infile))."]]></test_input>\n";
         }
 
         if (file_exists($outfile)) {
-          echo "<test_output><![CDATA[".fixcdata(file_get_contents($outfile))."]]></test_output>\n";
+          echo "<test_output name=\"".$ret."\"><![CDATA[".fixcdata(file_get_contents($outfile))."]]></test_output>\n";
         }
         //break;
       }
@@ -253,7 +253,7 @@ else {
   "http://hustoj.com/fps.current.dtd" >
 
 <fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
-  <generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/">
+  <generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/" />
   <?php
   foreach ($result as  $row) {
   ?>

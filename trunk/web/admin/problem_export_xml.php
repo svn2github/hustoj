@@ -62,9 +62,11 @@ function printTestCases($pid,$OJ_DATA) {
   }
   else {
     $ret = "";
-    $pdir = opendir("$OJ_DATA/$pid/");
+    //$pdir = opendir("$OJ_DATA/$pid/");
+    $files = scandir("$OJ_DATA/$pid/"); //sorting file names by ascending order with default scandir function
 
-    while ($file=readdir($pdir)) {
+    //while ($file=readdir($pdir)) {
+    foreach ($files as $file) {
       $pinfo = pathinfo($file);
       
       if (isset($pinfo['extension']) && $pinfo['extension']=="in" && $pinfo['basename']!="sample.in") {
@@ -84,7 +86,7 @@ function printTestCases($pid,$OJ_DATA) {
       }
     }
     
-    closedir($pdir);
+    //closedir($pdir);
     return $ret;
   }
 }

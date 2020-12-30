@@ -18,7 +18,7 @@
       - [sim 简介](/Composition-Core?id=sim-简介)
       - [配置文件注释](/Composition-Core?id=配置文件注释)
     - [Web 解析](/Composition-web)
-    - [Core 与 Web 的连接方式解析](/Composition_Client)
+    - [Core 与 Web 的连接方式解析](/Composition-Client)
     - [数据库解析](/Composition-Database)
     - [LiveCD 解析](/Composition-LiveCD)
   - [FPS 格式解析](/FPS)

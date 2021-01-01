@@ -95,8 +95,8 @@ function fresh_result(solution_id) {
 						row.cells[3].innerHTML = "<b><span class='hidden' style='display:none' result='" + ra[0] + "' ></span><span class=\"" + judge_style[ra[0]] + "\">" + judge_icon[ra[0]] + judge_result[ra[0]] + "</span></b>";
 					}
 
-					row.cells[4].innerHTML = "<b>" + ra[1] + "KB</b>";
-					row.cells[5].innerHTML = "<b>" + ra[2] + "MS</b>";
+					row.cells[4].innerHTML = "<b>" + ra[1] + "</b>";
+					row.cells[5].innerHTML = "<b>" + ra[2] + "</b>";
 					row.cells[9].innerHTML = "<b>" + ra[3] + "</b>";
 
 				}

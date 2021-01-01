@@ -23,6 +23,13 @@ wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install+.sh -O in
 sudo bash install+.sh
 ```
 
+### 基于 Ubuntu 20.04 安装
+
+```bash
+wget http://dl.hustoj.com/install-ubuntu20.04.sh
+sudo bash install-ubuntu20.04.sh
+```
+
 ### 基于 Ubuntu 18.04 安装
 
 **腾讯云用户请[换软件源](https://developer.aliyun.com/mirror/ubuntu)**

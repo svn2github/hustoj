@@ -2,10 +2,10 @@
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
 <div class="padding">
-  <a href=ranklist.php?scope=d>Day</a>
-  <a href=ranklist.php?scope=w>Week</a>
-  <a href=ranklist.php?scope=m>Month</a>
-  <a href=ranklist.php?scope=y>Year</a>
+  <a href="ranklist.php?scope=d">Day</a>
+  <a href="ranklist.php?scope=w">Week</a>
+  <a href="ranklist.php?scope=m">Month</a>
+  <a href="ranklist.php?scope=y">Year</a>
   <form action="ranklist.php" class="ui mini form" method="get" role="form" style="margin-bottom: 25px; text-align: right; ">
     <div class="ui action left icon input inline" style="width: 180px; margin-right: 77px; ">
       <i class="search icon"></i><input name="prefix" placeholder="用户名" type="text" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>">
@@ -18,7 +18,6 @@
 	            <th style="width: 60px; ">#</th>
 	            <th style="width: 180px; ">用户名</th>
 	            <th>昵称</th>
-	            <th>个性签名</th>
               <th style="width: 100px; ">通过数</th>
               <th style="width: 100px; ">提交数</th>
               <th style="width: 100px; ">比率</th>

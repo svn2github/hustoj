@@ -78,4 +78,11 @@ judged 接受参数指定目录的情况下，还可以再接受一个 `debug` �
 `OJ_SHM_RUN=0`             |  是否使用 `/dev/shm` 的共享内存虚拟磁盘来运行答案，如果启用能提高判题速度，但需要较多内存。
 `OJ_USE_MAX_TIME=1`        |  是否使用所有测试数据中最大的运行时间作为最后运行时间，如果不启用则以所有测试数据的总时间作为超时判断依据。
 `OJ_LANG_SET=0,1,2,3,4`    |  判哪些语言的题目
-
+`OJ_COMPILE_CHROOT=1`      |  是否使用chroot构建编译环境，避免编译器攻击 (#include</dev/random>之类)
+`OJ_TURBO_MODE=0`          |  是否跳过中间状态的更新来加速判题（对增加判题机数量有帮助）
+`OJ_CPU_COMPENSATION=1.0`  |  CPU处理能力系数，如果CPU太快，应该TLE的程序能AC，则增大这个值；如果CPU太慢对应该AC的程序报TLE减小这个值。一般设定MIPS指数4000的CPU设为1.0。
+`OJ_UDP_ENABLE=1`          |  是否监听UPD端口已收取Web端发送的新提交通知，减少平均等待周期。
+`OJ_UDP_SERVER=127.0.0.1`  |  监听的IP地址
+`OJ_UDP_PORT=1536`         |  监听的端口
+`OJ_PYTHON_FREE=0`         |  是否允许Python程序调用非核心的三方库
+`OJ_COPY_DATA=0`           |  是否将测试数据复制到runX工作目录中供被测程序使用

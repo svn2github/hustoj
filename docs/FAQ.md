@@ -1,5 +1,61 @@
 # HUSTOJ FAQ
+    
+管理员如何添加，如何管理？
+--
 
+    查看安装说明[README],管理员登录后有Admin菜单。
+
+为什么我提交的答案始终在pending？
+--
+
+    判题程序judged需要用root帐号启动，请重启服务器或手动执行sudo judged。如果无效，请检查/home/judge/etc/judge.conf中的数据库账号配置,参考[Configuration]，修正后再次重启服务器或执行sudo pkill -9 judged等待一会儿再执行sudo judged
+
+为什么添加题目时出现warning,题目目录下数据没有自动生成？
+--
+您需要修改测试数据目录,给予php-fpm操作数据目录的权限。Ubuntu下php-fpm运行的用户身份是www-data
+```
+chgrp www-data -R /home/judge/data 
+chmod g+rw -R /home/judge/data
+
+```
+    
+    
+为什么我添加的题目普通用户看不到？
+--
+
+    题目默认为删除状态，只有管理员能访问，当管理员确认题目没有问题后，可以点击ProblemList中红色的Reserved,切换为绿色的Available启用题目。
+ 
+为何我的C/C++都能用，唯独Java总是CE/RE？
+--
+
+　　目前只支持sun原版jdk和openjdk，其他jdk暂不能保证支持。如果你用的是64位系统，你可能需要自己调整一下源代码。请联系我。
+  
+我是管理员，为什么不能查看别人的源码？  
+--
+
+    请给自己增加source_browser权限。issue1
+    
+如何更新到最新版本？
+--
+
+    svn up /var/www/JudgeOnline
+    或重新运行install.sh
+    升级并编译内核make.sh
+    然后用管理员登陆，后台执行update_database(更新数据库)。
+    
+如何从POJ的免费版迁移？
+--
+
+    参考[POJ2HUSTOJ]
+
+我有问题怎么办？
+--
+
+    到issues去提问，new issue
+如何获得管理员帐号？
+--
+    注册一个叫admin的用户，自动获得权限。
+    
 #### 改坏了代码怎么办？
 
 自己不小心改坏了 web 代码，可以使用 install 目录中的 fixing.sh 进行系统修复。

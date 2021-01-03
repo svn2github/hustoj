@@ -8,7 +8,7 @@
     - [Special Judge](/SpecialJudge)
     - [建立分布式判题系统](/MultiJudge)
     - [集成 Moodle](/MoodleIntegration)
-  - [常见问题](/FAQ)
+  - [常见问题](/FAQ?id=hustoj-faq)
 
 - 源码相关
   - [结构简析](/Composition)

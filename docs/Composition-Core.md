@@ -81,7 +81,7 @@ judged 接受参数指定目录的情况下，还可以再接受一个 `debug` �
 `OJ_COMPILE_CHROOT=1`      |  是否使用chroot构建编译环境，避免编译器攻击 (#include</dev/random>之类)
 `OJ_TURBO_MODE=0`          |  是否跳过中间状态的更新来加速判题（对增加判题机数量有帮助）
 `OJ_CPU_COMPENSATION=1.0`  |  CPU处理能力系数，如果CPU太快，应该TLE的程序能AC，则增大这个值；如果CPU太慢对应该AC的程序报TLE减小这个值。一般设定MIPS指数4000的CPU设为1.0。
-`OJ_UDP_ENABLE=1`          |  是否监听UPD端口已收取Web端发送的新提交通知，减少平均等待周期。
+`OJ_UDP_ENABLE=1`          |  是否监听UDP端口已收取Web端发送的新提交通知，减少平均等待周期。
 `OJ_UDP_SERVER=127.0.0.1`  |  监听的IP地址
 `OJ_UDP_PORT=1536`         |  监听的端口
 `OJ_PYTHON_FREE=0`         |  是否允许Python程序调用非核心的三方库

@@ -60,7 +60,7 @@ scp -r /home/judge/data root@判题机ip:/home/judge/
 或用同步命令：
 
 ```bash
-rsync -vzrtopgh –delete /home/judge/data root@判题机ip:/home/judge/
+rsync -vzrtopg –delete /home/judge/data root@判题机ip:/home/judge/
 ```
 
 #### 判题机获取

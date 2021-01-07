@@ -4,7 +4,7 @@
     require_once("../lang/$OJ_LANG.php");
   }
   $path_fix="../";
-
+  $OJ_TEMPLATE="bs3";
 ?>
 <html>
 <head>

@@ -270,4 +270,87 @@
 
 	$MSG_LOSTPASSWORD_MAILBOX=" Email로 전송된 코드를 입력하세요.";
 	$MSG_LOSTPASSWORD_WILLBENEW=" 입력된 코드가 정확하면 입력된 코드가 새로운 비밀번호로 저장됩니다.";
+
+
+	// template/../reinfo.php
+	$MSG_A_NOT_ALLOWED_SYSTEM_CALL="제출된 소스코드에 문제가 있는지 확인하고, 해결되지 않는다면 관리자에게 문의하십시오.";
+	$MSG_SEGMETATION_FAULT="배열이 범위를 벗어 났는지, 포인터가 비정상인지, 액세스해서는 안되는 메모리 영역에 액세스했는지 확인하십시오.";
+	$MSG_FLOATING_POINT_EXCEPTION="부동 소수점 오류입니다. 0으로 나누 었는지 확인하십시오.";
+	$MSG_BUFFER_OVERFLOW_DETECTED="버퍼 오버 플로우, 메모리 공간을 초과하였습니다. 문자열 길이가 배열을 초과하는지 확인하십시오";
+	$MSG_PROCESS_KILLED="메모리 또는 시간 때문에 프로세스가 종료되었습니다. 무한 루프가 있는지 확인하십시오.";
+	$MSG_ALARM_CLOCK="시간 초과 때문에 프로세스가 종료되었습니다. 무한 루프가 있는지 확인하십시오. 이 오류는 TLE와 동일합니다.";
+	$MSG_CALLID_20="배열이 범위를 벗어 났을 수 있습니다. 제목에 설명 된 데이터 양과 적용된 배열 크기 사이의 관계를 확인하십시오.";
+	$MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="배열이 범위를 벗어 났는지 확인하십시오.";
+	$MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="문자열의 범위를 벗어났습니다. subString, charAt 및 기타 메서드의 매개 변수를 확인하세요.";
+
+	// template/../ceinfo.php
+	$MSG_ERROR_EXPLAIN="설명";
+	$MSG_SYSTEM_OUT_PRINT="Java에서 System.out.print의 사용이 C 언어 printf와 다릅니다. System.out.format을 사용해 보십시오.";
+	$MSG_NO_SUCH_FILE_OR_DIRECTORY="서버는 Linux 시스템이며 Windows 고유의 비표준 헤더 파일을 사용할 수 없습니다.";
+	$MSG_NOT_A_STATEMENT="중괄호 {, }의 일치 여부를 확인하십시오.";
+	$MSG_EXPECTED_CLASS_INTERFACE_ENUM="Java 함수를 클래스 선언 외부에 배치하지 마십시오. 중괄호 } 의 끝 위치에 유의하십시오.";
+	$MSG_SUBMIT_JAVA_AS_C_LANG="자바 프로그램은 C언어로 제출하지 말아주세요.";
+	$MSG_DOES_NOT_EXIST_PACKAGE="철자 확인: 시스템 객체 'System'은 대문자 S로 시작합니다.";
+	$MSG_POSSIBLE_LOSS_OF_PRECISION="할당 정확도가 떨어집니다. 데이터 타입(유형)을 확인하십시오. 데이터 타입이 올바르다면 강제로 타입 변환을 사용할 수 있습니다.";
+	$MSG_INCOMPATIBLE_TYPES="Java에서 서로 다른 유형의 데이터를 할당할 수 없으며 정수는 부울 값으로 사용할 수 없습니다.";
+	$MSG_ILLEGAL_START_OF_EXPRESSION="문자열은 큰따옴표(\\\")로 묶어야 합니다.";
+	$MSG_CANNOT_FIND_SYMBOL="println()과 같은 함수를 호출하는 데 필요한 객체는 System.out입니다. 철자를 확인하거나 객체가 누락되진 않았는지 확인하십시오.";
+	$MSG_EXPECTED_SEMICOLON="세미콜론(;)이 없습니다.";
+	$MSG_DECLARED_JAVA_FILE_NAMED="Java에서 public class Main을 반드시 사용해야 합니다.";
+	$MSG_EXPECTED_WILDCARD_CHARACTER_AT_END_OF_INPUT="코드가 끝나지 않았습니다. 일치하는 대괄호 또는 세미콜론이 없습니다. 복사할 때 모든 코드가 선택되었는지 확인하십시오.";
+	$MSG_INVALID_CONVERSION="암시적 형 변환이 잘못되었습니다. (int *)malloc(....)와 같은 명시적 변환을 사용하십시오.";
+	$MSG_NO_RETURN_TYPE_IN_MAIN="C++ 표준에서 main() 함수는 반환 값을 가져야 합니다.";
+	$MSG_NOT_DECLARED_IN_SCOPE="변수가 선언되지 않았습니다. 철자 오류가 있는지 확인하십시오!";
+	$MSG_MAIN_MUST_RETURN_INT="표준 C 언어에서는 main() 함수의 반환 값 유형이 int여야 하며, 교재 및 VC에서 void를 사용하는 것은 비표준 사용법입니다.";
+	$MSG_PRINTF_NOT_DECLARED_IN_SCOPE="printf 함수는 선언 없이 호출되며, <stdio.h> 또는 <cstdio> 헤더파일에 포함되어 있습니다.";
+	$MSG_IGNOREING_RETURN_VALUE="경고: 함수의 반환 값은 무시하십시오. 함수가 잘못 사용되거나 반환 값이 비정상인 것으로 간주되지 않을 수 있습니다.";
+	$MSG_NOT_DECLARED_INT64="__int64가 선언되지 않았습니다. Microsoft VC의 __int64는 표준 C/C++에서 지원되지 않습니다. long long 을 사용하여 64비트 변수를 선언하십시오.";
+	$MSG_EXPECTED_SEMICOLON_BEFORE="세미콜론(;)이 이전 줄에 없습니다.";
+	$MSG_UNDECLARED_NAME="변수를 사용하기 전에 선언해야 합니다. 또는 철자가 잘못 적혀 있을 수 있습니다. 변수의 이름은 대/소문자를 구분합니다.";
+	$MSG_SCANF_NOT_DECLARED_IN_SCOPE="scanf 함수는 선언 없이 호출되며, <stdio.h> 또는 <cstdio> 헤더파일에 포함되어 있습니다.";
+	$MSG_MEMSET_NOT_DECLARED_IN_SCOPE="memset 함수는 선언 없이 호출되며, <stdlib.h> 또는 <cstdlib> 헤더파일에 포함되어 있습니다.";
+	$MSG_MALLOC_NOT_DECLARED_IN_SCOPE="malloc 함수는 선언 없이 호출되며, <stdlib.h> 또는 <cstdlib> 헤더파일에 포함되어 있습니다.";
+	$MSG_PUTS_NOT_DECLARED_IN_SCOPE="puts 함수는 선언 없이 호출되며, <stdio.h> 또는 <cstdio> 헤더파일에 포함되어 있습니다.";
+	$MSG_GETS_NOT_DECLARED_IN_SCOPE="gets 함수는 선언 없이 호출되며, <stdio.h> 또는 <cstdio> 헤더파일에 포함되어 있습니다.";
+	$MSG_STRING_NOT_DECLARED_IN_SCOPE="string 함수는 선언 없이 호출되며, <string.h> 또는 <cstring> 헤더파일에 포함되어 있습니다.";
+	$MSG_NO_TYPE_IMPORT_IN_C_CPP="Java 언어 프로그램을 C/C++로 제출하지 마십시오. 제출하기 전에 언어 유형을 선택하십시오.";
+	$MSG_ASM_UNDECLARED="어셈블리 언어 코드를 C/C++에 포함할 수 없습니다.";
+	$MSG_REDEFINITION_OF="함수 또는 변수가 반복적으로 정의되었습니다. 코드를 여러 번 붙여넣는지 확인합니다.";
+	$MSG_EXPECTED_DECLARATION_OR_STATEMENT="프로그램이 완료되지 않은 것 같습니다. 복사 및 붙여넣기 시 코드가 누락되었는지 확인합니다.";
+	$MSG_UNUSED_VARIABLE="경고: 선언 후 변수가 사용되지 않았습니다. 변수 명의 철자를 확인하거나 비슷한 이름의 변수를 잘못 사용하지 않았는지 확인하십시오.";
+	$MSG_IMPLICIT_DECLARTION_OF_FUNCTION="함수가 암시적으로 선언되었습니다. 함수명이 올바른지 확인하고, 올바른 헤더 파일을 포함했는지 확인하십시오.";
+	$MSG_ARGUMENTS_ERROR_IN_FUNCTION="함수 호출에 제공된 매개 변수 수가 잘못되었습니다. 잘못된 매개 변수가 사용되었는지 확인하십시오.";
+	$MSG_EXPECTED_BEFORE_NAMESPACE="C++ 언어 프로그램을 C로 제출하지 마십시오. 제출하기 전에 언어 유형을 선택하십시오.";
+	$MSG_STRAY_PROGRAM="인터넷에서 복사한 코드를 사용하지 마십시오. 주석 및 문자 문자열 이외의 프로그램에는 중국어 공백, 구두점 등을 표시할 수 없습니다. 프로그램을 작성할 때 중국어 입력 방법을 닫으십시오.";
+	$MSG_DIVISION_BY_ZERO="0으로 나누면 부동 소수점 오버플로가 발생합니다.";
+	$MSG_CANNOT_BE_USED_AS_A_FUNCTION="변수를 함수로 사용할 수 없습니다. 변수 및 함수 이름의 중복 또는 철자 오류가 있는지 확인합니다.";
+	$MSG_CANNOT_FIND_TYPE="scanf/printf의 형식 설명이 매개 변수 목록과 일치하지 않습니다. 주소 문자 \\\"&\\\"가 더 많거나 적거나 철자 오류일 수 있습니다.";
+	$MSG_JAVA_CLASS_ERROR="Java 언어 제출에는 하나의 공용 클래스만 포함될 수 있으며, 클래스 이름은 기본 클래스여야 합니다. 다른 클래스에 공용 키워드를 사용하지 마십시오.";
+	$MSG_EXPECTED_BRACKETS_TOKEN="소괄호 ')'가 누락되었습니다.";
+	$MSG_NOT_FOUND_SYMBOL="정의되지 않은 함수나 변수를 사용하고, 철자가 틀렸는 지 확인하고, 존재하지 않는 함수를 사용하지 마십시오. Java 메서드를 사용할 때 일반적으로 list1.add(...)와 같은 객체 이름을 제공해야합니다. Java 메소드 호출은 다음과 같은 매개 변수 유형에 민감합니다. 문자열 객체 (String)를 허용하는 메소드에 정수 (int)를 전달할 수 없습니다.";
+	$MSG_NEED_CLASS_INTERFACE_ENUM="키워드가 누락되었습니다. 클래스(class), 인터페이스(interface) 또는 열거형(enum)으로 선언해야 합니다.";
+	$MSG_CLASS_SYMBOL_ERROR="교과서의 예제를 사용하려면 관련 코드를 제출하고 공용 키워드를 제거해야 합니다.";
+	$MSG_INVALID_METHOD_DECLARATION="동일한 클래스 이름을 가진 메서드만 생성자이며 반환 값 유형은 작성하지 않습니다. 클래스 이름을 Main으로 변경하는 경우 생성자 이름도 변경하십시오.";
+	$MSG_EXPECTED_AMPERSAND_TOKEN="C++ 언어 프로그램을 C로 제출하지 마십시오. 제출하기 전에 언어 유형을 선택하십시오.";
+	$MSG_DECLARED_FUNCTION_ORDER="함수 및 메서드 선언 순서에 주의하십시오. 다른 메서드의 선언을 하나의 메서드로 나타낼 수 없습니다.";
+	$MSG_NEED_SEMICOLON="위에 표시된 줄 끝에 세미콜론(;)이 없습니다.";
+	$MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE="include 문은 독립적이어야 하며 다른 코드와 같은 줄에 배치해서는 안됩니다.";
+	$MSG_INT_HAS_NEXT="hasNext() 함수는 nextInt()로 변환되었습니다.";
+	$MSG_UNTERMINATED_COMMENT="주석이 끝나지 않았습니다. \\\"/*\\\"에 해당하는 끝 문자 \\\"*/\\\"이(가) 올바른지 확인하십시오.";
+	$MSG_EXPECTED_BRACES_TOKEN="int main으로 잘못 작성된 int main()과 같이 함수에 괄호 ()가 없습니다.";
+	$MSG_REACHED_END_OF_FILE_1="제출된 소스 코드가 그대로 복사되지 않았는지, 또는 닫힌 대괄호(})가 누락되었는지 확인하십시오.";
+	$MSG_SUBSCRIPT_ERROR="비-배열 변수 또는 포인터 변수를 배열처럼 접근할 수 없습니다.";
+	$MSG_EXPECTED_PERCENT_TOKEN="scanf의 첫번째 매개변수는 큰 따옴표(\\\")로 묶어야합니다.";
+	$MSG_EXPECTED_EXPRESSION_TOKEN="매개 변수 또는 표현식이 완료되지 않았습니다.";
+	$MSG_EXPECTED_BUT="구두점이나 기호가 잘못되었습니다.";
+	$MSG_REDEFINITION_MAIN="이 질문은 추가 코드 질문일 수 있습니다. 질문의 의미를 확인하려면 질문을 다시 검토하십시오. 시스템에서 정의한 main 함수를 제출하지 말고 지정된 형식으로 기능을 제출하십시오.";
+	$MSG_IOSTREAM_ERROR="C++ 프로그램을 C로 제출하지 마십시오.";
+	$MSG_EXPECTED_UNQUALIFIED_ID_TOKEN="배열 선언 후 세미콜론이 누락되었는지 여부를 확인합니다.";
+	$MSG_REACHED_END_OF_FILE_2="프로그램 끝에 괄호가 없습니다.";
+	$MSG_INVALID_SYMBOL="인터넷에서 복사 붙여넣기 하지 마십시오. 볼 수 없는 문자도 복사될 수 있습니다. 또는 중국어 구두점 또는 공백이 사용되는지 확인합니다.";
+	$MSG_DECLARED_FILE_NAMED="OJ에서 public class는 Main만 사용됩니다.";
+	$MSG_EXPECTED_IDENTIFIER="변수를 선언할 때 변수명을 작성하지 않았습니다. 혹은 괄호가 누락되었을 수 있습니다.";
+	$MSG_VARIABLY_MODIFIED="배열 크기에는 변수를 사용할 수 없습니다. const 변수를 포함하여 C 언어에서 전역 배열의 차원 크기로 변수를 사용할 수 없습니다.";
+
+	
 ?>

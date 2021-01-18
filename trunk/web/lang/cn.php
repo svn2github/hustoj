@@ -270,4 +270,87 @@
 
   $MSG_LOSTPASSWORD_MAILBOX="请到您邮箱的垃圾邮件文件夹寻找验证码，并填写到这里";
   $MSG_LOSTPASSWORD_WILLBENEW="如果填写正确，通过下一步验证，这个验证码就自动成为您的新密码！";
+
+  
+  // template/../reinfo.php
+  $MSG_A_NOT_ALLOWED_SYSTEM_CALL="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源,如果你是系统管理员，而且确认提交的答案没有问题，测试数据没有问题，可以发送'RE'到微信公众号onlinejudge，查看解决方案。";
+  $MSG_SEGMETATION_FAULT="段错误，检查是否有数组越界，指针异常，访问到不应该访问的内存区域";
+  $MSG_FLOATING_POINT_EXCEPTION="浮点错误，检查是否有除以零的情况";
+  $MSG_BUFFER_OVERFLOW_DETECTED="缓冲区溢出，检查是否有字符串长度超出数组的情况";
+  $MSG_PROCESS_KILLED="进程因为内存或时间原因被杀死，检查是否有死循环";
+  $MSG_ALARM_CLOCK="进程因为时间原因被杀死，检查是否有死循环，本错误等价于超时TLE";
+  $MSG_CALLID_20="可能存在数组越界，检查题目描述的数据量与所申请数组大小关系";
+  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="检查数组越界的情况";
+  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="字符串的字符下标越界，检查subString,charAt等方法的参数";
+
+  // template/../ceinfo.php
+  $MSG_ERROR_EXPLAIN="辅助解释";
+  $MSG_SYSTEM_OUT_PRINT="Java中System.out.print用法跟C语言printf不同，请试用System.out.format";
+  $MSG_NO_SUCH_FILE_OR_DIRECTORY="服务器为Linux系统，不能使用windows下特有的非标准头文件。";
+  $MSG_NOT_A_STATEMENT="检查大括号{}匹配情况，eclipse整理代码快捷键Ctrl+Shift+F";
+  $MSG_EXPECTED_CLASS_INTERFACE_ENUM="请不要将java函数（方法）放置在类声明外部，注意大括号的结束位置}";
+  $MSG_SUBMIT_JAVA_AS_C_LANG="请不要将java程序提交为C语言";
+  $MSG_DOES_NOT_EXIST_PACKAGE="检测拼写，如：系统对象System为大写S开头";
+  $MSG_POSSIBLE_LOSS_OF_PRECISION="赋值将会失去精度，检测数据类型，如确定无误可以使用强制类型转换";
+  $MSG_INCOMPATIBLE_TYPES="Java中不同类型的数据不能互相赋值，整数不能用作布尔值";
+  $MSG_ILLEGAL_START_OF_EXPRESSION="字符串应用英文双引号(\\\")引起";
+  $MSG_CANNOT_FIND_SYMBOL="拼写错误或者缺少调用函数所需的对象如println()需对System.out调用";
+  $MSG_EXPECTED_SEMICOLON="缺少分号。";
+  $MSG_DECLARED_JAVA_FILE_NAMED="Java必须使用public class Main。";
+  $MSG_EXPECTED_WILDCARD_CHARACTER_AT_END_OF_INPUT="代码没有结束，缺少匹配的括号或分号，检查复制时是否选中了全部代码。";
+  $MSG_INVALID_CONVERSION="隐含的类型转换无效，尝试用显示的强制类型转换如(int *)malloc(....)";
+  $MSG_NO_RETURN_TYPE_IN_MAIN="C++标准中，main函数必须有返回值";
+  $MSG_NOT_DECLARED_IN_SCOPE="变量没有声明过，检查下是否拼写错误！";
+  $MSG_MAIN_MUST_RETURN_INT="在标准C语言中，main函数返回值类型必须是int，教材和VC中使用void是非标准的用法";
+  $MSG_PRINTF_NOT_DECLARED_IN_SCOPE="printf函数没有声明过就进行调用，检查下是否导入了stdio.h或cstdio头文件";
+  $MSG_IGNOREING_RETURN_VALUE="警告：忽略了函数的返回值，可能是函数用错或者没有考虑到返回值异常的情况";
+  $MSG_NOT_DECLARED_INT64="__int64没有声明，在标准C/C++中不支持微软VC中的__int64,请使用long long来声明64位变量";
+  $MSG_EXPECTED_SEMICOLON_BEFORE="前一行缺少分号";
+  $MSG_UNDECLARED_NAME="变量使用前必须先进行声明，也有可能是拼写错误，注意大小写区分。";
+  $MSG_SCANF_NOT_DECLARED_IN_SCOPE="scanf函数没有声明过就进行调用，检查下是否导入了stdio.h或cstdio头文件";
+  $MSG_MEMSET_NOT_DECLARED_IN_SCOPE="memset函数没有声明过就进行调用，检查下是否导入了stdlib.h或cstdlib头文件";
+  $MSG_MALLOC_NOT_DECLARED_IN_SCOPE="malloc函数没有声明过就进行调用，检查下是否导入了stdlib.h或cstdlib头文件";
+  $MSG_PUTS_NOT_DECLARED_IN_SCOPE="puts函数没有声明过就进行调用，检查下是否导入了stdio.h或cstdio头文件";
+  $MSG_GETS_NOT_DECLARED_IN_SCOPE="gets函数没有声明过就进行调用，检查下是否导入了stdio.h或cstdio头文件";
+  $MSG_STRING_NOT_DECLARED_IN_SCOPE="string类函数没有声明过就进行调用，检查下是否导入了string.h或cstring头文件";
+  $MSG_NO_TYPE_IMPORT_IN_C_CPP="不要将Java语言程序提交为C/C++,提交前注意选择语言类型。";
+  $MSG_ASM_UNDECLARED="不允许在C/C++中嵌入汇编语言代码。";
+  $MSG_REDEFINITION_OF="函数或变量重复定义，看看是否多次粘贴代码。";
+  $MSG_EXPECTED_DECLARATION_OR_STATEMENT="程序好像没写完，看看是否复制粘贴时漏掉代码。";
+  $MSG_UNUSED_VARIABLE="警告：变量声明后没有使用，检查下是否拼写错误，误用了名称相似的变量。";
+  $MSG_IMPLICIT_DECLARTION_OF_FUNCTION="函数隐性声明，检查下是否导入了正确的头文件。或者缺少了题目要求的指定名称的函数。";
+  $MSG_ARGUMENTS_ERROR_IN_FUNCTION="函数调用时提供的参数数量不对，检查下是否用错参数。";
+  $MSG_EXPECTED_BEFORE_NAMESPACE="不要将C++语言程序提交为C,提交前注意选择语言类型。";
+  $MSG_STRAY_PROGRAM="中文空格、标点等不能出现在程序中注释和字符串以外的部分。编写程序时请关闭中文输入法。请不要使用网上复制来的代码。";
+  $MSG_DIVISION_BY_ZERO="除以零将导致浮点溢出。";
+  $MSG_CANNOT_BE_USED_AS_A_FUNCTION="变量不能当成函数用，检查变量名和函数名重复的情况，也可能是拼写错误。";
+  $MSG_CANNOT_FIND_TYPE="scanf/printf的格式描述和后面的参数表不一致，检查是否多了或少了取址符“&”，也可能是拼写错误。";
+  $MSG_JAVA_CLASS_ERROR="Java语言提交只能有一个public类，并且类名必须是Main，其他类请不要用public关键词";
+  $MSG_EXPECTED_BRACKETS_TOKEN="缺少右括号";
+  $MSG_NOT_FOUND_SYMBOL="使用了未定义的函数或变量，检出拼写是否有误，不要使用不存在的函数，Java调用方法通常需要给出对象名称如list1.add(...)。Java方法调用时对参数类型敏感，如:不能将整数(int)传送给接受字符串对象(String)的方法";
+  $MSG_NEED_CLASS_INTERFACE_ENUM="缺少关键字，应当声明为class、interface 或 enum";
+  $MSG_CLASS_SYMBOL_ERROR="使用教材上的例子，必须将相关类的代码一并提交，同时去掉其中的public关键词";
+  $MSG_INVALID_METHOD_DECLARATION="只有跟类名相同的方法为构造方法，不写返回值类型。如果将类名修改为Main,请同时修改构造方法名称。";
+  $MSG_EXPECTED_AMPERSAND_TOKEN="不要将C++语言程序提交为C,提交前注意选择语言类型。";
+  $MSG_DECLARED_FUNCTION_ORDER="请注意函数、方法的声明前后顺序，不能在一个方法内出现另一个方法的声明。";
+  $MSG_NEED_SEMICOLON="上面标注的这一行，最后缺少分号。";
+  $MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE="include语句必须独立一行，不能与后面的语句放在同一行";
+  $MSG_INT_HAS_NEXT="hasNext() 应该改为nextInt()";
+  $MSG_UNTERMINATED_COMMENT="注释没有结束，请检查“/*”对应的结束符“*/”是否正确";
+  $MSG_EXPECTED_BRACES_TOKEN="函数声明缺少小括号()，如int main()写成了int main";
+  $MSG_REACHED_END_OF_FILE_1="检查提交的源码是否没有复制完整，或者缺少了结束的大括号";
+  $MSG_SUBSCRIPT_ERROR="不能对非数组或指针的变量进行下标访问";
+  $MSG_EXPECTED_PERCENT_TOKEN="scanf的格式部分需要用双引号引起";
+  $MSG_EXPECTED_EXPRESSION_TOKEN="参数或表达式没写完";
+  $MSG_EXPECTED_BUT="错误的标点或符号";
+  $MSG_REDEFINITION_MAIN="这道题目可能是附加代码题，请重新审题，看清题意，不要提交系统已经定义的main函数，而应提交指定格式的某个函数。";
+  $MSG_IOSTREAM_ERROR="请不要将C++程序提交为C";
+  $MSG_EXPECTED_UNQUALIFIED_ID_TOKEN="留意数组声明后是否少了分号";
+  $MSG_REACHED_END_OF_FILE_2="程序末尾缺少大括号";
+  $MSG_INVALID_SYMBOL="检查是否使用了中文标点或空格";
+  $MSG_DECLARED_FILE_NAMED="OJ中public类只能是Main";
+  $MSG_EXPECTED_IDENTIFIER="声明变量时，可能没有声明变量名或缺少括号。";
+  $MSG_VARIABLY_MODIFIED="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
+
+  
 ?>

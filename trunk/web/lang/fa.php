@@ -260,4 +260,88 @@
 
   $MSG_LOSTPASSWORD_MAILBOX="Input the Code sended to your email (Trash Box )";
   $MSG_LOSTPASSWORD_WILLBENEW="if it's correct, it will be the new password";
+
+
+	// template/../reinfo.php
+	$MSG_A_NOT_ALLOWED_SYSTEM_CALL="Use the operating system calls prohibited by the system to see if you have unauthorized access to resources such as files or processes. If you are a system administrator and confirm that there is no problem with the submitted answer and the test data has no problem, you can send'RE' to the WeChat official account onlinejudge, view the solution.";
+	$MSG_SEGMETATION_FAULT="Check whether the array is out of bounds, the pointer is abnormal, and the memory area that should not be accessed is accessed.";
+	$MSG_FLOATING_POINT_EXCEPTION="Floating point error, check for division by zero.";
+	$MSG_BUFFER_OVERFLOW_DETECTED="Buffer overflow, check whether the string length exceeds the array.";
+	$MSG_PROCESS_KILLED="The process is killed because of memory or time, check whether there is an infinite loop.";
+	$MSG_ALARM_CLOCK="The process was killed due to time. Check whether there is an infinite loop. This error is equivalent to timeout TLE.";
+	$MSG_CALLID_20="The array may be out of bounds, check the relationship between the amount of data described in the title and the size of the applied array.";
+	$MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="Check if the array is out of bounds.";
+	$MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="The character subscript of the string is out of range, check the parameters of subString, charAt and other methods.";
+
+	// template/../ceinfo.php
+	$MSG_ERROR_EXPLAIN="Expain";
+	$MSG_SYSTEM_OUT_PRINT="The usage of System.out.print in Java is different from that of C language printf, please try System.out.format";
+	$MSG_NO_SUCH_FILE_OR_DIRECTORY="The server is a Linux system and cannot use non-standard header files unique to Windows.";
+	$MSG_NOT_A_STATEMENT="Check the matching of braces {}, eclipse sorts the code shortcut key Ctrl+Shift+F";
+	$MSG_EXPECTED_CLASS_INTERFACE_ENUM="Please do not place java functions (methods) outside the class declaration, pay attention to the ending position of the braces }";
+	$MSG_SUBMIT_JAVA_AS_C_LANG="Please do not submit java program as C language.";
+	$MSG_DOES_NOT_EXIST_PACKAGE="Check spelling, such as: the system object System starts with a capital S";
+	$MSG_POSSIBLE_LOSS_OF_PRECISION="Assignment will lose precision, check the data type, if it is correct, you can use coercive type conversion.";
+	$MSG_INCOMPATIBLE_TYPES="Different types of data in Java cannot be assigned to each other, and integers cannot be used as Boolean values.";
+	$MSG_ILLEGAL_START_OF_EXPRESSION="String should be surrounded by English double quotation marks (\\\")";
+	$MSG_CANNOT_FIND_SYMBOL="Misspelling or missing objects required to call the function such as println() need to call System.out";
+	$MSG_EXPECTED_SEMICOLON="The semicolon is missing.";
+	$MSG_DECLARED_JAVA_FILE_NAMED="Java must use public class Main.";
+	$MSG_EXPECTED_WILDCARD_CHARACTER_AT_END_OF_INPUT="The code is not over, missing matching brackets or semicolons, check whether all the codes are selected when copying.";
+	$MSG_INVALID_CONVERSION="The implicit type conversion is invalid, try to use explicit coercion such as (int *)malloc(....)";
+	$MSG_NO_RETURN_TYPE_IN_MAIN="In the C++ standard, the main function must have a return value.";
+	$MSG_NOT_DECLARED_IN_SCOPE="The variable has not been declared, check for spelling errors!";
+	$MSG_MAIN_MUST_RETURN_INT="In the standard C language, the return value type of the main function must be int, and the use of void in teaching materials and VC is a non-standard usage.";
+	$MSG_PRINTF_NOT_DECLARED_IN_SCOPE="The printf function is called without a declaration, and check whether the <stdio.h> or <cstdio> header file is imported.";
+	$MSG_IGNOREING_RETURN_VALUE="Warning: Ignore the return value of the function, it may be that the function is used incorrectly or the return value is not considered abnormal.";
+	$MSG_NOT_DECLARED_INT64="__int64 is not declared. The __int64 in Microsoft VC is not supported in standard C/C++, please use long long to declare 64-bit variables.";
+	$MSG_EXPECTED_SEMICOLON_BEFORE="The semicolon is missing from the previous line.";
+	$MSG_UNDECLARED_NAME="Variables must be declared before they are used, or they may be spelled incorrectly. Pay attention to case sensitivity.";
+	$MSG_SCANF_NOT_DECLARED_IN_SCOPE="The scanf function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
+	$MSG_MEMSET_NOT_DECLARED_IN_SCOPE="The memset function is called without being declared, and check whether the <stdlib.h> or <cstdlib> header file is imported.";
+	$MSG_MALLOC_NOT_DECLARED_IN_SCOPE="The malloc function is called without being declared, and check whether the <stdlib.h> or <cstdlib> header file is imported.";
+	$MSG_PUTS_NOT_DECLARED_IN_SCOPE="The puts function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
+	$MSG_GETS_NOT_DECLARED_IN_SCOPE="The gets function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
+	$MSG_STRING_NOT_DECLARED_IN_SCOPE="The string function is called without being declared, and check whether the <string.h> or <cstring> header file is imported.";
+	$MSG_NO_TYPE_IMPORT_IN_C_CPP="Don't submit Java language programs as C/C++, please choose the language type before submitting.";
+	$MSG_ASM_UNDECLARED="It is not allowed to embed assembly language code in C/C++.";
+	$MSG_REDEFINITION_OF="The function or variable is repeatedly defined, and see if the code is pasted multiple times.";
+	$MSG_EXPECTED_DECLARATION_OR_STATEMENT="The program does not seem to be finished. Check if the code is missing when copying and pasting.";
+	$MSG_UNUSED_VARIABLE="Warning: Variables are not used after declaration. Check for spelling errors and misuse variables with similar names.";
+	$MSG_IMPLICIT_DECLARTION_OF_FUNCTION="Function implicit declaration, check whether the correct header file is imported. Or the function with the specified name required by the title is missing.";
+	$MSG_ARGUMENTS_ERROR_IN_FUNCTION="The number of parameters provided in the function call is incorrect. Check whether the wrong parameters are used.";
+	$MSG_EXPECTED_BEFORE_NAMESPACE="Don't submit C++ language program as C, please choose the language type before submitting.";
+	$MSG_STRAY_PROGRAM="Chinese spaces, punctuation, etc. cannot appear in the program other than comments and character strings. Please close the Chinese input method when writing a program. Please do not use the code copied from the Internet.";
+	$MSG_DIVISION_BY_ZERO="Division by zero will cause a floating point overflow.";
+	$MSG_CANNOT_BE_USED_AS_A_FUNCTION="Variables cannot be used as functions. Check for duplicates of variable and function names, or spelling errors.";
+	$MSG_CANNOT_FIND_TYPE="The format description of scanf/printf is inconsistent with the following parameter list. Check whether there is more or less address character \\\"&\\\", or it may be a spelling error.";
+	$MSG_JAVA_CLASS_ERROR="Java language submission can only have one public class, and the class name must be Main, please do not use public keywords for other classes.";
+	$MSG_EXPECTED_BRACKETS_TOKEN="Missing closing brackets";
+	$MSG_NOT_FOUND_SYMBOL="Use an undefined function or variable, check whether the spelling is wrong, do not use a non-existent function, Java call methods usually need to give the object name such as list1.add(...). Java method calls are sensitive to parameter types, such as: cannot pass an integer (int) to a method that accepts a string object (String).";
+	$MSG_NEED_CLASS_INTERFACE_ENUM="Keyword is missing, it should be declared as class, interface or enum.";
+	$MSG_CLASS_SYMBOL_ERROR="To use the examples on the textbook, you must submit the relevant code and remove the public keyword.";
+	$MSG_INVALID_METHOD_DECLARATION="Only the method with the same class name is the constructor, and the return value type is not written. If you change the class name to Main, please also change the name of the constructor.";
+	$MSG_EXPECTED_AMPERSAND_TOKEN="Don't submit C++ language program as C, please choose the language type before submitting.";
+	$MSG_DECLARED_FUNCTION_ORDER="Please pay attention to the order of the declaration of functions and methods. The declaration of another method cannot appear in one method.";
+	$MSG_NEED_SEMICOLON="The line marked above lacks a semicolon at the end.";
+	$MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE="The include statement must be on its own line and cannot be placed on the same line as the following statement";
+	$MSG_INT_HAS_NEXT="hasNext() should be changed to nextInt()";
+	$MSG_UNTERMINATED_COMMENT="The comment is not over, please check whether the ending character \\\"*/\\\" corresponding to \\\"/*\\\" is correct";
+	$MSG_EXPECTED_BRACES_TOKEN="Function declaration lacks parentheses (), such as int main() written as int main";
+	$MSG_REACHED_END_OF_FILE_1="Check whether the submitted source code is not copied intact, or the closing brace is missing.";
+	$MSG_SUBSCRIPT_ERROR="Cannot perform subscript access to non-array or pointer variables";
+	$MSG_EXPECTED_PERCENT_TOKEN="The format part of scanf needs to be enclosed in double quotes";
+	$MSG_EXPECTED_EXPRESSION_TOKEN="The parameter or expression is not finished";
+	$MSG_EXPECTED_BUT="Wrong punctuation or symbols.";
+	$MSG_REDEFINITION_MAIN="This question may be an additional code question. Please review the question again to see the meaning of the question. Do not submit the main function defined by the system, but submit a function in the specified format.";
+	$MSG_IOSTREAM_ERROR="Please do not submit C++ programs as C.";
+	$MSG_EXPECTED_UNQUALIFIED_ID_TOKEN="Pay attention to whether the semicolon is missing after the array declaration.";
+	$MSG_REACHED_END_OF_FILE_2="Missing braces at the end of the program.";
+	$MSG_INVALID_SYMBOL="Check if Chinese punctuation or spaces are used.";
+	$MSG_DECLARED_FILE_NAMED="The public class in OJ can only be Main.";
+	$MSG_EXPECTED_IDENTIFIER="It may not have declare a variable name or missing parentheses when declaring a variable.";
+	$MSG_VARIABLY_MODIFIED="Variables cannot be used for array size. Variables cannot be used as the dimension size of global arrays in C language, including const variables.";
+
+
+
  ?>

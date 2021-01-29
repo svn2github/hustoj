@@ -1302,7 +1302,7 @@ int compile(int lang, char *work_dir)
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{
 			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
-			execute_cmd("chown judge *");
+			//execute_cmd("chown judge *");
 			execute_cmd("mount -o bind /bin bin");
 			execute_cmd("mount -o remount,ro bin");
 			execute_cmd("mount -o bind /usr usr");

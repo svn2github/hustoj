@@ -2,6 +2,8 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
+
 ## 版权说明
 
 HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
@@ -12,7 +14,7 @@ HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用�
 
 论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 
 
-如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](http://zhblue.github.io/hustoj) 可能有帮助。
+如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://zhblue.github.io/hustoj) 可能有帮助。
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
@@ -92,10 +94,21 @@ Star us, please!
 
 ## 更新日志
 
-### 2020年
+<details open>
+<summary><b>2021年</b></summary>
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+01-01 | 更新 | 新的模板 [`syzoj`](https://github.com/zhblue/hustoj/pull/722) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="bshark";` 即可。
+
+</details>
+
+<details>
+<summary><b>2020年</b></summary>
+
+日期   | 类型 | 更新内容
+----- | :--: | :-------
+12-30 | 更新 | 新版 wiki 已经迁移至本仓库，可通过 <https://zhblue.github.io/hustoj/> 访问。
 12-29 | 更新 | 导入导出FPS(xml)时，增加文件名，默认排序。
 12-28 | 更新 | 增加手工指定测试数据分值的特性，文件名test01[60].in 代表1号数据60分。
 12-27 | 补丁 | 修补龙芯上因为系统调用而提前超时的问题。
@@ -117,7 +130,10 @@ Star us, please!
 01-23 | 更新 | 修订了[Moodle集成代码](https://github.com/zhblue/hustoj/blob/master/wiki/MoodleIntegration.md)，实现HUSTOJ给moodle系统作业自动判分。
 01-20 | 更新 | 删除 `noip` 模式比赛的多余提交记录，允许自定义 `noip` 关键词，增加 `privilege` 表 `user_id` 索引。
 
-### 2019年
+</details>
+
+<details>
+<summary><b>2019年</b></summary>
 
 日期  | 类型 | 更新内容
 ----- | :--: | :-------
@@ -146,11 +162,13 @@ Star us, please!
 04-13 | 更新 | 支持 SQL 判题，基于 `SQLite3` ，支持龙芯3A3000（致谢江苏航天龙梦信息技术有限公司提供龙芯主机！）。
 03-14 | 更新 | 主线支持  树莓派(arm)  <b>龙芯(loongson-2f)</b>  i386 x86_64 
 
+</details>
+
 ## 安装说明
 
 ### 视频教程
 
-Ubuntu18.04安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
+Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 
 ### 注意事项
 
@@ -180,12 +198,16 @@ sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 
 ### 基于 Ubuntu 20.04 安装
 
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
+
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh
 ```
 
 ### 基于 Ubuntu 20.04 通过 Gitee 安装
+
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
 
 **[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 

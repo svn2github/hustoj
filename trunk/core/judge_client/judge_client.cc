@@ -495,7 +495,7 @@ void init_mysql_conf()
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
-			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
+		//read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
@@ -1193,8 +1193,8 @@ void umount(char *work_dir)
 	execute_cmd("/bin/umount -r %s/bin 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -r %s/proc 2>/dev/null", work_dir);
 	chdir(work_dir);
-	//execute_cmd("/bin/umount -r bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
-	execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -r bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+	//execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -r %s/log/* 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -r %s/log/etc/alternatives 2>/dev/null", work_dir);
 }
@@ -1407,7 +1407,7 @@ int compile(int lang, char *work_dir)
 		if (DEBUG)
 			printf("status=%d\n", status);
 		execute_cmd("/bin/umount -r bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
-		execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
+		//execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
 		umount(work_dir);
 
 		return status;

@@ -2,7 +2,8 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
-**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议
+[卸载阿里云盾](#卸载阿里云盾)。**
 
 ## 版权说明
 
@@ -67,6 +68,8 @@ Star us, please!
 [基于其他发行版安装](#基于其他发行版安装)
 
 [LiveCD下载安装](#livecd下载安装)
+
+[卸载阿里云盾](#卸载阿里云盾)
 
 [装后须知](#装后须知)
 
@@ -198,7 +201,8 @@ sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 
 ### 基于 Ubuntu 20.04 安装
 
-**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议
+[卸载阿里云盾](#卸载阿里云盾)。**
 
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh
@@ -207,7 +211,8 @@ sudo bash install-ubuntu20.04.sh
 
 ### 基于 Ubuntu 20.04 通过 Gitee 安装
 
-**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议卸载阿里云盾。**
+**重要提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，可能会造成 `systemd` 和 `umount` 进程卡CPU 100%，目前未找到解决方法，建议
+[卸载阿里云盾](#卸载阿里云盾)。**
 
 **[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
@@ -359,6 +364,25 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 
 建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/) 和 [freeeproblemset项目](https://github.com/zhblue/freeproblemset)
 
+### 卸载阿里云盾
+
+逐条执行下列代码删除阿里云盾：
+
+```
+# 卸载云盾
+wget http://update.aegis.aliyun.com/download/uninstall.sh
+chmod +x uninstall.sh
+./uninstall.sh
+wget http://update.aegis.aliyun.com/download/quartz_uninstall.sh
+chmod +x quartz_uninstall.sh
+./quartz_uninstall.sh
+# 删除残留
+pkill aliyun-service
+rm -rf /etc/init.d/agentwatch /usr/sbin/aliyun-service
+rm -rf /usr/local/aegis*
+```
+
+重启后若执行 `ps -aux | grep -E 'aliyun|AliYunDun'` 显示没有阿里云盾相关进程即为卸载成功。
 
 ## 装后须知
 

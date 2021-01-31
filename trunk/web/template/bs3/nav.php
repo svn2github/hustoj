@@ -41,7 +41,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
 
             <?php if(!isset($OJ_ON_SITE_CONTEST_ID)){?>
               <li <?php if ($url=="faqs.php") echo " $ACTIVE"; ?>>
-                <a href="<?php echo $path_fix?> faqs.php">
+                <a href="<?php echo $path_fix?>faqs.php">
                   <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> <?php echo $MSG_FAQ?>
                 </a>
               </li>

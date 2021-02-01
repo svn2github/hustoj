@@ -1184,21 +1184,17 @@ void update_problem(int pid,int cid) {
 }
 void umount(char *work_dir)
 {
-	execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/dev 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/lib 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/lib64 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/etc/alternatives 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/usr 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/bin 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
 	chdir(work_dir);
-	execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
-	//execute_cmd("/bin/umount -f %s/* 2>/dev/null", work_dir);
-	execute_cmd("/bin/rm -r %s/* ", work_dir);
-	execute_cmd("/bin/umount -f %s/log/* 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -f %s/log/etc/alternatives 2>/dev/null", work_dir);
-	execute_cmd("/bin/rm -r %s/log/* ", work_dir);
+	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
+	if(strlen(work_dir)>0){
+		execute_cmd("/bin/umount -l %s/proc 2>/dev/null", work_dir);
+	}
+	execute_cmd("/bin/umount -l %s/dev 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
+	chdir(work_dir);
+	execute_cmd("/bin/umount -l usr dev");
+	execute_cmd("/bin/rmdir %s/* ", work_dir);
+	execute_cmd("/bin/rmdir %s/log/* ", work_dir);
 }
 int compile(int lang, char *work_dir)
 {
@@ -1303,28 +1299,29 @@ int compile(int lang, char *work_dir)
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{
-			execute_cmd("mkdir -p bin usr lib lib64 etc/alternatives proc tmp dev");
-			//execute_cmd("chown judge *");
-			execute_cmd("mount -o bind /bin bin");
-			execute_cmd("mount -o remount,ro bin");
-			execute_cmd("mount -o bind /usr usr");
-			execute_cmd("mount -o remount,ro usr");
-			execute_cmd("mount -o bind /lib lib");
-			execute_cmd("mount -o remount,ro lib");
+			 if (access("usr", 0) == -1){
+				execute_cmd("mkdir -p usr etc/alternatives proc tmp dev");
+				//execute_cmd("chown judge *");
+				execute_cmd("mount -o bind /usr usr");
+				execute_cmd("mount -o remount,ro usr");
+				execute_cmd("ln -s usr/bin bin");
+				execute_cmd("ln -s usr/lib lib");
+				execute_cmd("ln -s usr/lib32 lib32");
+				execute_cmd("ln -s usr/libx32 libx32");
 #ifndef __i386__
-			execute_cmd("mount -o bind /lib64 lib64");
-			execute_cmd("mount -o remount,ro lib64");
+				execute_cmd("ln -s usr/lib64 lib64");
 #endif
-			execute_cmd("cp /etc/alternatives/* etc/alternatives");
-			execute_cmd("cp /etc/fpc* etc/");
-			execute_cmd("mount -t proc /proc proc");
-			if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
-			{
-				execute_cmd("mount -o bind /dev dev");
-				execute_cmd("mount -o remount,ro dev");
+				execute_cmd("cp /etc/alternatives/* etc/alternatives");
+				execute_cmd("cp /etc/fpc* etc/");
+				execute_cmd("mount -o bind /proc proc");
+				if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+				{
+					execute_cmd("mount -o bind /dev dev");
+					execute_cmd("mount -o remount,ro dev");
+				}
+				//execute_cmd("mount -o remount,ro proc");
 			}
-			//execute_cmd("mount -o remount,ro proc");
-			chroot(work_dir);
+				chroot(work_dir);
 		}
 		while (setgid(1536) != 0)
 			sleep(1);
@@ -1407,7 +1404,7 @@ int compile(int lang, char *work_dir)
 			status = get_file_size("ce.txt");
 		if (DEBUG)
 			printf("status=%d\n", status);
-		execute_cmd("/bin/umount -r bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+		execute_cmd("/bin/umount -l bin usr lib lib64 etc/alternatives dev 2>/dev/null");
 		//execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
 		umount(work_dir);
 
@@ -2840,7 +2837,8 @@ void clean_workdir(char *work_dir)
 	umount(work_dir);
 	if (DEBUG)
 	{
-		execute_cmd("/bin/rm -f %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rmdir %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
 		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
 	}
@@ -2848,7 +2846,8 @@ void clean_workdir(char *work_dir)
 	{
 		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
-		execute_cmd("/bin/rm -f %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rmdir %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
 	}
 }
 

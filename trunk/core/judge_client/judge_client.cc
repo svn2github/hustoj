@@ -1314,6 +1314,7 @@ int compile(int lang, char *work_dir)
 			execute_cmd("mount -o remount,ro lib64");
 #endif
 			execute_cmd("cp /etc/alternatives/* etc/alternatives");
+			execute_cmd("cp /etc/fpc* etc/");
 			execute_cmd("mount -o remount,ro etc/alternatives");
 			execute_cmd("mount -t proc /proc proc");
 			if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 && lang != 17)

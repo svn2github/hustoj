@@ -1195,8 +1195,10 @@ void umount(char *work_dir)
 	chdir(work_dir);
 	execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
 	//execute_cmd("/bin/umount -f %s/* 2>/dev/null", work_dir);
+	execute_cmd("/bin/rm -r %s/* ", work_dir);
 	execute_cmd("/bin/umount -f %s/log/* 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -f %s/log/etc/alternatives 2>/dev/null", work_dir);
+	execute_cmd("/bin/rm -r %s/log/* ", work_dir);
 }
 int compile(int lang, char *work_dir)
 {

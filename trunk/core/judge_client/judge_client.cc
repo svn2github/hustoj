@@ -1184,19 +1184,19 @@ void update_problem(int pid,int cid) {
 }
 void umount(char *work_dir)
 {
-	execute_cmd("/bin/umount -r %s/proc 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/dev 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/lib 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/lib64 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/etc/alternatives 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/usr 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/bin 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/proc 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/dev 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/lib 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/lib64 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/etc/alternatives 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/usr 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/bin 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/proc 2>/dev/null", work_dir);
 	chdir(work_dir);
-	execute_cmd("/bin/umount -r bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
-	//execute_cmd("/bin/umount -r %s/* 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/log/* 2>/dev/null", work_dir);
-	execute_cmd("/bin/umount -r %s/log/etc/alternatives 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f bin usr lib lib64 etc/alternatives proc dev 2>/dev/null");
+	//execute_cmd("/bin/umount -f %s/* 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/log/* 2>/dev/null", work_dir);
+	execute_cmd("/bin/umount -f %s/log/etc/alternatives 2>/dev/null", work_dir);
 }
 int compile(int lang, char *work_dir)
 {
@@ -2839,7 +2839,7 @@ void clean_workdir(char *work_dir)
 	umount(work_dir);
 	if (DEBUG)
 	{
-		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rm -f %s/log/* 2>/dev/null", work_dir);
 		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
 	}
@@ -2847,7 +2847,7 @@ void clean_workdir(char *work_dir)
 	{
 		execute_cmd("mkdir %s/log/ 2>/dev/null", work_dir);
 		execute_cmd("/bin/mv %s/* %s/log/ 2>/dev/null", work_dir, work_dir);
-		execute_cmd("/bin/rm -rf %s/log/* 2>/dev/null", work_dir);
+		execute_cmd("/bin/rm -f %s/log/* 2>/dev/null", work_dir);
 	}
 }
 

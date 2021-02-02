@@ -1,9 +1,9 @@
-<?php @session_start();
+<?php 
 //ini_set("display_errors", "Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
+//error_reporting(E_ALL);
 //header('X-Frame-Options:SAMEORIGIN');
-
 //for people using hustoj out of China , be careful of the last two line of this file !
-
+@session_start();
 // connect db 
 static 	$DB_HOST="localhost";  //数据库服务器ip或域名
 static 	$DB_NAME="jol";   //数据库名

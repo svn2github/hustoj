@@ -1230,6 +1230,12 @@ int compile(int lang, char *work_dir)
 	const char *CP_GO[] = {"go", "build", "-o", "Main", "Main.go", NULL};
 	const char *CP_FORTRAN[] = {"f95", "-static", "-o", "Main", "Main.f95", NULL};
 
+	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
+			     (char * const )"USER=judge",
+			     (char * const )"GOCACHE=/tmp",
+			     (char * const )"LANG=zh_CN.UTF-8",
+			     (char * const )"LANGUAGE=zh_CN.UTF-8",
+			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
 	char javac_buf[7][32];
 	char *CP_J[7];
 
@@ -1382,7 +1388,7 @@ int compile(int lang, char *work_dir)
 		//	execvp(CP_JS[0], (char * const *) CP_JS);
 		//	break;
 		case 17:
-			execvp(CP_GO[0], (char *const *)CP_GO);
+			execvpe(CP_GO[0], (char *const *)CP_GO,envp);
 			break;
 		case 19:
 			execvp(CP_FORTRAN[0], (char *const *)CP_FORTRAN);

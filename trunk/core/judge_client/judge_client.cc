@@ -1300,8 +1300,8 @@ int compile(int lang, char *work_dir)
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
 		{
 			 if (access("usr", 0) == -1){
-				execute_cmd("mkdir -p usr etc/alternatives proc tmp dev");
-				//execute_cmd("chown judge *");
+				execute_cmd("mkdir -p root/.cache/go-build usr etc/alternatives proc tmp dev");
+				execute_cmd("chown judge -R root tmp ");
 				execute_cmd("mount -o bind /usr usr");
 				execute_cmd("mount -o remount,ro usr");
 				execute_cmd("ln -s usr/bin bin");
@@ -1314,7 +1314,7 @@ int compile(int lang, char *work_dir)
 				execute_cmd("cp /etc/alternatives/* etc/alternatives");
 				execute_cmd("cp /etc/fpc* etc/");
 				execute_cmd("mount -o bind /proc proc");
-				if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+				if (lang > 2 && lang != 6 && lang != 10 && lang != 13 && lang != 14 )
 				{
 					execute_cmd("mount -o bind /dev dev");
 					execute_cmd("mount -o remount,ro dev");

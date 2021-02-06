@@ -236,7 +236,7 @@
     }
 
     function do_submit(){
-      <?php if($OJ_LONG_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();";?>
+      <?php if($OJ_LONG_LOGIN==true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();";?>
       if(using_blockly) 
         translate();
      

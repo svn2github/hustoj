@@ -20,7 +20,6 @@ static  $OJ_LANG="en";  //默认语言
 static  $OJ_SIM=false;  //显示相似度
 static  $OJ_DICT=false; //显示在线翻译
 static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/
-static  $OJ_EDITE_AREA=true; //true: syntax highlighting is active
 static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="white.css";

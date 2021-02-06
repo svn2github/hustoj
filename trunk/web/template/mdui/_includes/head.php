@@ -9,8 +9,13 @@
 <title><?php echo ($page_title?$page_title.' - ':'').$OJ_NAME; ?></title>
 
 <!-- MDUI -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css">
-<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+<?php if($MDUI_OFFLINE) { ?>
+    <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/css/mdui.min.css">
+    <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/js/mdui.min.js"></script>
+<?php } else { ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+<?php } ?>
 <script>
 var $ = mdui.$;
 </script>
@@ -39,14 +44,21 @@ var $ = mdui.$;
 </style>
 
 <!-- Fonts -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    as="style" onload="this.onload=null, this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
+<?php if(isset($MDUI_OFFLINE) && $MDUI_OFFLINE) { ?>
+    <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/css/fonts.css">
+<?php } else { ?>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        as="style" onload="this.onload=null, this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
+<?php } ?>
 
 <!-- Styles -->
 <style>
     code {
-        font-family: 'Roboto Mono', 'Consolas', monospace;
+        font-family: 'Roboto Mono', 'Consolas', monospace !important;
+    }
+    body {
+        font-family: 'Open Sans', 'Roboto', 'Noto', 'Helvetica', 'Arial', sans-serif !important;
     }
 </style>
 
@@ -85,15 +97,28 @@ if($OJ_ONLINE){
 
 <!-- KaTeX -->
 <script> var katex_options = { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true} ] }; </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
-    as="style" onload="this.onload=null, this.rel='stylesheet'">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, katex_options);"></script>
+<?php if(isset($MDUI_OFFLINE) && $MDUI_OFFLINE) { ?>
+    <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/css/katex.min.css"
+        as="style" onload="this.onload=null, this.rel='stylesheet'">
+    <script defer src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/js/katex.min.js"></script>
+    <script defer src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/js/auto-render.min.js"
+        onload="renderMathInElement(document.body, katex_options);"></script>
+<?php } else { ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+        as="style" onload="this.onload=null, this.rel='stylesheet'">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, katex_options);"></script>
+<?php } ?>
 
 <!-- Highlight.js -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/styles/atom-one-light.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/highlight.min.js"
-    onload="hljs.initHighlightingOnLoad();"></script>
-<!-- Pascal --><script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/languages/delphi.min.js"></script>
-
+<?php if(isset($MDUI_OFFLINE) && $MDUI_OFFLINE) { ?>
+    <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/css/atom-one-light.min.css">
+    <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/js/highlight.pack.js"
+        onload="hljs.initHighlightingOnLoad();"></script>
+<?php } else { ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/styles/atom-one-light.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/highlight.min.js"
+        onload="hljs.initHighlightingOnLoad();"></script>
+    <!-- Pascal --><script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@10.5.0/languages/delphi.min.js"></script>
+<?php } ?>

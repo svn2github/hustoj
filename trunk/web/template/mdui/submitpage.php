@@ -397,11 +397,21 @@
     <script language="Javascript" type="text/javascript" src="include/base64.js"></script>
 
     <?php if($OJ_ACE_EDITOR){ ?>
-        <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/ace.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/ext-language_tools.min.js"></script>
+        <?php if(isset($MDUI_OFFLINE) && $MDUI_OFFLINE) { ?>
+            <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/ace.min.js"></script>
+            <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/ext-language_tools.min.js"></script>
+            <script>
+                ace.config.set('basePath', '<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/');
+            </script>
+        <?php } else { ?>
+            <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/ace.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/ext-language_tools.min.js"></script>
+            <script>
+                ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-min-noconflict/');
+            </script>
+        <?php } ?>
         <script>
             ace.require("ace/ext/language_tools");
-            ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/');
             var editor = ace.edit("source");
             editor.setTheme("ace/theme/chrome");
             switchLang(<?php echo isset($lastlang) ? $lastlang : 0 ;  ?>);

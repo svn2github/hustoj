@@ -9,6 +9,7 @@
 <title><?php echo ($page_title?$page_title.' - ':'').$OJ_NAME; ?></title>
 
 <!-- MDUI -->
+	<?php include("template/$OJ_TEMPLATE/css.php");?>
 <?php if($MDUI_OFFLINE) { ?>
     <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/css/mdui.min.css">
     <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/js/mdui.min.js"></script>

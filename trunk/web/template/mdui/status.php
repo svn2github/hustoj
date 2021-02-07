@@ -108,7 +108,7 @@
         </div>
 
         <div class="mdui-table-fluid mdui-m-y-4">
-            <table class="mdui-table mdui-table-hoverable mdui-center" width=80%>
+            <table id="result-tab" class="mdui-table mdui-table-hoverable mdui-center" width=80%>
                 <thead>
                     <tr>
                         <th class="mdui-table-col-numeric">提交编号</th>
@@ -165,6 +165,23 @@
             ?>
         </div>
     </div>
+
+<script>
+	var i = 0;
+	var judge_result = [<?php
+	foreach ($judge_result as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+
+	var judge_color = [<?php
+	foreach ($judge_color as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+</script>
+
+<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
 </body>
 
 </html>

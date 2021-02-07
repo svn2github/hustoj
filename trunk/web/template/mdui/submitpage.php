@@ -398,8 +398,8 @@
 
     <?php if($OJ_ACE_EDITOR){ ?>
         <?php if(isset($MDUI_OFFLINE) && $MDUI_OFFLINE) { ?>
-            <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/ace.min.js"></script>
-            <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/ext-language_tools.min.js"></script>
+            <script src="<?php echo $OJ_CDN_URL.$path_fix."/"; ?>/ace/ace.min.js"></script>
+            <script src="<?php echo $OJ_CDN_URL.$path_fix."/"; ?>/ace/ext-language_tools.min.js"></script>
             <script>
                 ace.config.set('basePath', '<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"; ?>/assets/ace/');
             </script>

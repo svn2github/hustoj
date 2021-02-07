@@ -181,6 +181,7 @@
 	''];
 </script>
 
+<?php include("template/$OJ_TEMPLATE/css.php");?>
 <script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
 </body>
 

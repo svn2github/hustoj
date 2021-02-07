@@ -443,8 +443,8 @@ for ($i=0; $i<$rows_cnt; $i++) {
   
   if ($flag) {
     if ($row['result']>=4) {
-      $view_status[$i][4] = "<div id=center>".$row['memory']." KB</div>";
-      $view_status[$i][5] = "<div id=center>".$row['time']." ms</div>";
+      $view_status[$i][4] = "<div id=center>".$row['memory']."KB</div>";
+      $view_status[$i][5] = "<div id=center>".$row['time']."ms</div>";
       //echo "=========".$row['memory']."========";
     }
     else {

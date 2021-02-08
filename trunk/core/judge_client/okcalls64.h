@@ -17,7 +17,7 @@
  * along with HUSTOJ. if not, see <http://www.gnu.org/licenses/>.
  */
 //c & c++
-int LANG_CV[CALL_ARRAY_SIZE] = {0,1,2,3,5,8,9,10,11,12,20,21,59,63,89,158,231,275,292,511,
+int LANG_CV[CALL_ARRAY_SIZE] = {0,1,2,3,5,8,9,10,11,12,20,21,59,63,89,99,158,231,275,292,511,
         SYS_read, SYS_write, SYS_mprotect, SYS_munmap, SYS_brk, SYS_arch_prctl, SYS_pread64, SYS_open, SYS_writev,
         SYS_time, SYS_futex, SYS_set_thread_area, SYS_access, SYS_clock_gettime, SYS_exit_group, SYS_mq_open,
         SYS_ioprio_get, SYS_unshare, SYS_set_robust_list, SYS_splice, SYS_close, SYS_stat, SYS_fstat, SYS_execve,

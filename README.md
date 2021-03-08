@@ -102,6 +102,7 @@ Star us, please!
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+03-08 | 补丁 | 修复在Ubuntu20.04上运行sqlite3
 02-06 | 更新 | 新的模板 [`mdui`](https://github.com/zhblue/hustoj/pull/742) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="mdui";` 即可。*如需内网使用，请在 `/home/judge/src/web/include/db_info.inc.php` 末尾添加 `$MDUI_OFFLINE=true;` 即可。* (Author: [@renbaoshuo](https://github.com/renbaoshuo))
 01-01 | 更新 | 新的模板 [`syzoj`](https://github.com/zhblue/hustoj/pull/722) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="syzoj";` 即可。 (Author: [@renbaoshuo](https://github.com/renbaoshuo))
 

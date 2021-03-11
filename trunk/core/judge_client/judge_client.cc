@@ -25,6 +25,9 @@
  */
 
 #include <stdio.h>
+#include <syslog.h>
+#include <errno.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
@@ -53,6 +56,7 @@
 #define STD_F_LIM (STD_MB << 5) //default file size limit 32m ,2^5=32
 #define STD_M_LIM (STD_MB << 7) //default memory limit 128m ,2^7=128
 #define BUFFER_SIZE 4096		//default size of char buffer 5120 bytes
+#define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
 #define OJ_WT0 0
 #define OJ_WT1 1
@@ -148,6 +152,7 @@ static char db_name[BUFFER_SIZE/10];
 static char oj_home[BUFFER_SIZE/10];
 static char data_list[BUFFER_SIZE][BUFFER_SIZE];
 static int data_list_len = 0;
+static char lock_file[BUFFER_SIZE]="/home/judge/run0/judge_client.pid";
 
 static int port_number;
 static int max_running;
@@ -193,6 +198,35 @@ static char jresult[14][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE"
 static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
+
+int lockfile(int fd) {
+	struct flock fl;
+	fl.l_type = F_WRLCK;
+	fl.l_start = 0;
+	fl.l_whence = SEEK_SET;
+	fl.l_len = 0;
+	return (fcntl(fd, F_SETLK, &fl));
+}
+
+int already_running() {
+	int fd;
+	char buf[16];
+	fd = open(lock_file, O_RDWR | O_CREAT, LOCKMODE);
+	if (fd < 0) {
+		exit(1);
+	}
+	if (lockfile(fd) < 0) {
+		if (errno == EACCES || errno == EAGAIN) {
+			close(fd);
+			return 1;
+		}
+		exit(1);
+	}
+	ftruncate(fd, 0);
+	sprintf(buf, "%d", getpid());
+	write(fd, buf, strlen(buf) + 1);
+	return (0);
+}
 void print_arm_regs(long long unsigned int *d){
 	for(int i=0;i<32;i++){
 		printf("[%d]:%lld ",i,d[i]%CALL_ARRAY_SIZE);
@@ -495,7 +529,7 @@ void init_mysql_conf()
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
-			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
+			//read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
@@ -3070,6 +3104,14 @@ int main(int argc, char **argv)
 #endif
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
+	sprintf(lock_file,"%s/judge_client.pid",work_dir);
+
+	if ( already_running()) {
+		syslog(LOG_ERR | LOG_DAEMON,
+				"This working directory is occupied !\n");
+		printf("%s already has one judge_client in it!\n",work_dir);
+		return 1;
+	}
 
 	if (shm_run){
 		mk_shm_workdir(work_dir);

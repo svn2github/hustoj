@@ -3111,7 +3111,7 @@ int main(int argc, char **argv)
 #endif
 	//set work directory to start running & judging
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
-	sprintf(lock_file,"%s/judge_client.pid",work_dir);
+	sprintf(lock_file,"%s/client%s.pid",oj_home,argv[2]);
 
 	if ( already_running()) {
 		syslog(LOG_ERR | LOG_DAEMON,

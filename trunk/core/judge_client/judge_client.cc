@@ -213,6 +213,7 @@ int already_running() {
 	char buf[16];
 	fd = open(lock_file, O_RDWR | O_CREAT, LOCKMODE);
 	if (fd < 0) {
+		if(DEBUG)printf("%s open fail.\n",lock_file);
 		exit(1);
 	}
 	if (lockfile(fd) < 0) {
@@ -220,6 +221,8 @@ int already_running() {
 			close(fd);
 			return 1;
 		}
+		
+		if(DEBUG)printf("%s lock fail.\n",lock_file);
 		exit(1);
 	}
 	ftruncate(fd, 0);
@@ -2844,7 +2847,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM
-				ACflg = OJ_RE;
+			//	ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
 						"[ERROR] solution_id:%d called a Forbidden system call:%u [%u]\n"
@@ -2856,8 +2859,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 				write_log(error);
 				print_runtimeerror(infile+strlen(oj_home)+5,error);
+				//ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+				//continue;
 				ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+		
 			}
+			call_id=0;
 #ifdef __mips__
 //		   }
 		}

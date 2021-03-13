@@ -72,12 +72,22 @@ if(isset($_POST['startdate'])){
   $pieces = explode(",",$plist );
 
   if(count($pieces)>0 && intval($pieces[0])>0){
+     
+     
     $sql_1 = "INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) VALUES (?,?,?)";
     $plist="";
+    $pid=0;
     for($i=0; $i<count($pieces); $i++){
-      if($plist)$plist.=",";
-      $plist.=$pieces[$i];
-      pdo_query($sql_1,$cid,$pieces[$i],$i);
+      $sql="select problem_id from problem where problem_id=?";
+      $has=pdo_query($sql,$pieces[$i]);
+      if(count($has) > 0) {
+         if($plist) $plist.=",";
+         $plist.=intval($pieces[$i]);
+         pdo_query($sql_1,$cid,$pieces[$i],$pid);
+         $pid++;
+      }else{
+         print("Problem not exists:".$pieces[$i]."<br>\n");
+      }
     }
     //echo $sql_1;
     $sql = "UPDATE `problem` SET defunct='N' WHERE `problem_id` IN ($plist)";

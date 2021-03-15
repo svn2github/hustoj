@@ -326,7 +326,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
 
   if ($row['contest_id']>0) {
     if (isset($end_time) && time() < $end_time) {
-      $view_status[$i][2] = "<div class=center><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
+      $view_status[$i][2] = "<div><a href='problem.php?cid=".$row['contest_id']."&pid=".$row['num']."'>";
       if (isset($cid)) {
         $view_status[$i][2] .= $PID[$row['num']];
       }

@@ -95,7 +95,7 @@ int LANG_OV[CALL_ARRAY_SIZE] = {
         SYS_getcwd, SYS_readlink, SYS_mmap, SYS_gettimeofday, SYS_getrlimit, 0 };
 //freebasic
 int LANG_BASICV[CALL_ARRAY_SIZE] = {
-        SYS_read, SYS_write, SYS_mprotect, SYS_ptrace, SYS_brk, SYS_setfsuid, SYS_capget, SYS_rt_sigaction,
+       0,1,3,4,5,9,10,12,13,14,17,21,59,158,173,218,231,257,273,302,SYS_read, SYS_write, SYS_mprotect, SYS_ptrace, SYS_brk, SYS_setfsuid, SYS_capget, SYS_rt_sigaction,
         SYS_rt_sigprocmask, SYS_sched_get_priority_max, SYS_arch_prctl, SYS_ioctl, SYS_pread64, SYS_ioperm,
         SYS_create_module, SYS_init_module, SYS_getxattr, SYS_lgetxattr, SYS_llistxattr, SYS_removexattr, SYS_open,
         SYS_futex, SYS_set_thread_area, SYS_access, SYS_set_tid_address, SYS_exit_group, SYS_mq_open,

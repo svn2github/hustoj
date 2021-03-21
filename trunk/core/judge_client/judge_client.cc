@@ -922,7 +922,7 @@ void _addceinfo_mysql(int solution_id)
 	while (fgets(cend, 1024, fp))
 	{
 		cend += strlen(cend);
-		if (cend - ceinfo > 40000)
+		if (cend - ceinfo > 16384)
 			break;
 	}
 	*cend = '\0';
@@ -988,7 +988,7 @@ void _addceinfo_http(int solution_id)
 	while (fgets(cend, 1024, fp))
 	{
 		cend += strlen(cend);
-		if (cend - ceinfo > 40000)
+		if (cend - ceinfo > 16384)
 			break;
 	}
 	*cend='\0';
@@ -1033,7 +1033,7 @@ void _addreinfo_mysql(int solution_id, const char *filename)
 	while (fgets(rend, 1024, fp))
 	{
 		rend += strlen(rend);
-		if (rend - reinfo > 40000)
+		if (rend - reinfo > 16384)
 			break;
 	}
 	*rend = '\0';
@@ -1066,7 +1066,7 @@ void _addreinfo_http(int solution_id, const char *filename)
 	while (fgets(rend, 1024, fp))
 	{
 		rend += strlen(rend);
-		if (rend - reinfo > 40000)
+		if (rend - reinfo > 16384)
 			break;
 	}
 	*rend = '\0';

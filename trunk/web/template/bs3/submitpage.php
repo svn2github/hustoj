@@ -295,7 +295,7 @@
       if(count<0){
         s.disabled=false;
         if(t!=null)t.disabled=false;
-        
+     
         s.value="<?php echo $MSG_SUBMIT?>";
         
         if(t!=null)t.value="<?php echo $MSG_TR?>";
@@ -303,6 +303,9 @@
         if( handler_interval) window.clearInterval( handler_interval);
         
         if($("#vcode")!=null) $("#vcode").click();
+        
+        $("#csrf").load("csrf.php?"+sid);
+        
       }else{
         s.value="<?php echo $MSG_SUBMIT?>("+count+")";
         

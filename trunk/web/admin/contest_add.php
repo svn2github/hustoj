@@ -188,7 +188,8 @@ else{
     <p align=left>
       <?php echo $MSG_CONTEST."-".$MSG_PROBLEM_ID?>
       <?php echo "( Add problemIDs with coma , )"?><br>
-      <input class=input-xxlarge placeholder="Example:1000,1001,1002" type=text style="width:100%" name=cproblem value="<?php echo isset($plist)?$plist:""?>">
+      <input id="plist" onchange="showTitles()" class=input-xxlarge placeholder="Example:1000,1001,1002" type=text style="width:100%" name=cproblem value="<?php echo isset($plist)?$plist:""?>">
+      <div id="ptitles"></div>
     </p>
     <br>
     <p align=left>
@@ -250,6 +251,25 @@ else{
   </form>
 </div>
 
+<script>
+	function showTitles(){
+		let ts=$("#ptitles");
+		let pids=$("#plist").val().split(",");
+		let html="";
+		pids.forEach(function(v,i,a){
+			let title=$.ajax({url:"ajax.php",method:"post",data:{"pid":v,"m":"problem_get_title"},async:false}).responseText;
+			html+=(v)+":<a href='../problem.php?id="+v+"' target='_blank'>"+title+"</a><br>\n";
+			console.log(v);
+		});
+		ts.html(html);
+		
+	}
+	$(document).ready(function(){
+		showTitles();
+	
+	});
+
+</script>
 <?php }
 require_once("../oj-footer.php");
 ?>

@@ -48,10 +48,10 @@ if(!$use_cookie){
 	$user_id = stripslashes( $user_id );
 	$password = stripslashes( $password );
   }
-  $sql = "SELECT * FROM `privilege` WHERE `user_id`=?";
   $login = check_login( $user_id, $password );
 }
 if($login){
+  	$sql = "SELECT * FROM `privilege` WHERE `user_id`=?";
 	$_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
 	$result = pdo_query( $sql, $login );
 
@@ -61,6 +61,13 @@ if($login){
                 else
                         $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
 	}
+        if(isset($_SESSION[ $OJ_NAME . '_vip' ])){  // VIP mark can access all [VIP] marked contest
+		$sql="select contest_id from contest where title like '%[VIP]%'";
+		$result=pdo_query($sql);
+		foreach ($result as $row){
+			$_SESSION[ $OJ_NAME . '_c' .$row['contest_id'] ] = true;
+		}
+	};
 		
 	$sql="update users set accesstime=now() where user_id=?";
         $result = pdo_query( $sql, $login );

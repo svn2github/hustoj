@@ -1,11 +1,9 @@
 <?php
-require_once("admin-header.php");
-
-if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
+require_once("../include/db_info.inc.php");
+if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))){
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
 }
-
 if($_SERVER['REQUEST_METHOD']=="POST"){
 	$m=$_POST["m"];	
 	if($m=="problem_add_source"){
@@ -19,5 +17,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		$time=intval($_POST['t']);	
 		$sql= "update problem set time_limit=? where problem_id=?";		
 		echo pdo_query($sql,$time,$pid);
+	}
+	if($m=="problem_get_title"){
+		$pid=intval($_POST['pid']); 
+		$sql= "select title from problem where problem_id=?";		
+		echo pdo_query($sql,$pid)[0][0];
 	}
 }

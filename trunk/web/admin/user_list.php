@@ -68,7 +68,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       <td>LastLogin</td> 
       <td>Signed Up</td> 
       <td>Use</td>
-      <td>PasswordRest</td>
+      <td>PasswordReset</td>
       <td>AddPrivilege</td>
       </tr>
     <?php

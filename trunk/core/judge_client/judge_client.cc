@@ -183,6 +183,7 @@ static int use_ptrace = 1;
 static int compile_chroot = 0;
 static int turbo_mode = 0;
 static int python_free=0;
+static int use_docker=0;
 static const char *tbname = "solution";
 int num_of_test = 0;
 //static int sleep_tmp;
@@ -537,6 +538,7 @@ void init_mysql_conf()
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
 			read_int(buf, "OJ_COPY_DATA", &copy_data);
+			read_int(buf, "OJ_USE_DOCKER",&use_docker);
 			
 			
 		}
@@ -2293,6 +2295,9 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	   ){
 		if(DEBUG)printf("Chrooting...\n");
 		chroot(work_dir);
+	}else{
+		if(DEBUG)printf("Skiping chroot...\n");
+	
 	}
 	while (setgid(1536) != 0)
 		sleep(1);

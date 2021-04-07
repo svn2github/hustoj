@@ -302,7 +302,7 @@ void run_client(int runid, int clientid) {
 	if(use_docker){
 		char docker_v[BUFFER_SIZE];
 		sprintf(docker_v,"%s:/home/judge",oj_home);
-		execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm", "--net=host", "-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
+		execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", "-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
 	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, (char *) NULL);

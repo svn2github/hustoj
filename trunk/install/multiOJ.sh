@@ -4,7 +4,7 @@ function judge_round(){
   do
      etc=`dirname "$config"`
      home=`dirname "$etc"`
-     sudo judgeonce "$home" debug 1
+     sudo judged "$home" debug 1
      sleep 1
   done
 }

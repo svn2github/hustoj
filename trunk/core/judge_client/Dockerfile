@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
-RUN     apt-get update && \
+RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
+	apt-get update && \
 	DEBIAN_FRONTEND=noninteractive \
     	apt-get -y install --no-install-recommends \
         libmysqlclient-dev \
@@ -15,6 +16,7 @@ RUN     apt-get update && \
 	mono-devel \
 	busybox \
         openjdk-11-jdk\
+	subversion \
 	wget
 
 RUN     useradd -m -u 1536 judge

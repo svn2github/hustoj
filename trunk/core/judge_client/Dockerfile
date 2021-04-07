@@ -8,16 +8,21 @@ RUN     apt-get update && \
         flex \
         gcc \
         g++ \
+        iptables \
         python \
         python3 \
+	fp-compiler \
+	mono-devel \
+	busybox \
+        openjdk-11-jdk\
 	wget
 
 RUN     useradd -m -u 1536 judge
 RUN     cd /home/judge/ && \ 
 	wget dl.hustoj.com/hustoj.tar.gz && \
         tar xzf hustoj.tar.gz && \
+	svn up src &&\
 	cd src/core/judge_client && \
 	make && \
 	cp judge_client /usr/bin/
-
 

@@ -1340,7 +1340,7 @@ int compile(int lang, char *work_dir)
 		execute_cmd("/bin/chown judge %s ", work_dir);
 		execute_cmd("/bin/chmod 750 %s ", work_dir);
 
-		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11)
+		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11 && lang != 5 )
 		{
 			 if (access("usr", 0) == -1){
 				execute_cmd("mkdir -p root/.cache/go-build usr etc/alternatives proc tmp dev");
@@ -2289,7 +2289,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (   
-		 lang != 3 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
+		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
 		if(DEBUG)printf("Chrooting...\n");
 		chroot(work_dir);
@@ -3259,7 +3259,7 @@ int main(int argc, char **argv)
 	//create chroot for ruby bash python
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
-	if (lang == 5)
+	if (lang == 5 && !use_docker)
 		copy_bash_runtime(work_dir);
 	if (lang == 6 && !python_free)
 		copy_python_runtime(work_dir);

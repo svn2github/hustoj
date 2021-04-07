@@ -87,6 +87,7 @@ static int  oj_redisport;
 static char oj_redisauth[BUFFER_SIZE];
 static char oj_redisqname[BUFFER_SIZE];
 static int turbo_mode = 0;
+static int use_docker = 0;
 
 
 static bool STOP = false;
@@ -231,6 +232,7 @@ void init_mysql_conf() {
                         read_buf(buf, "OJ_REDISAUTH", oj_redisauth);
                         read_buf(buf, "OJ_REDISQNAME", oj_redisqname);
                         read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
+                        read_int(buf, "OJ_USE_DOCKER", &use_docker);
 
 
 		}
@@ -297,8 +299,14 @@ void run_client(int runid, int clientid) {
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
+	if(use_docker){
+		char docker_v[BUFFER_SIZE];
+		sprintf(docker_v,"%s:/home/judge",oj_home);
+		execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm", "--net=host", "-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
+	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, (char *) NULL);
+	}
 	//else
 	//	execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 	//			oj_home, "debug", (char *) NULL);

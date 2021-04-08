@@ -1299,8 +1299,8 @@ int compile(int lang, char *work_dir)
 		LIM.rlim_max = cpu;
 		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
-		//alarm(0);
-		//alarm(cpu);
+		alarm(0);
+		alarm(cpu);
 		LIM.rlim_max = 500 * STD_MB;
 		LIM.rlim_cur = 500 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);

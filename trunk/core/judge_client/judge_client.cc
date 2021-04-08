@@ -1293,18 +1293,19 @@ int compile(int lang, char *work_dir)
 	if (pid == 0)
 	{
 		struct rlimit LIM;
-		int cpu = 20;
+		int cpu = 50;
 		if (lang == 3)
-			cpu = 30;
+			cpu = 60;
 		LIM.rlim_max = cpu;
 		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
-		alarm(cpu);
-		LIM.rlim_max = 100 * STD_MB;
-		LIM.rlim_cur = 100 * STD_MB;
+		//alarm(0);
+		//alarm(cpu);
+		LIM.rlim_max = 500 * STD_MB;
+		LIM.rlim_cur = 500 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
 
-		if (lang == 3 || lang == 17)
+		if (lang == 2 || lang == 3 || lang == 17)
 		{
 #ifdef __mips__
 			LIM.rlim_max = STD_MB << 12;
@@ -3118,11 +3119,11 @@ int main(int argc, char **argv)
 	sprintf(work_dir, "%s/run%s/", oj_home, argv[2]);
 	sprintf(lock_file,"%s/client%s.pid",oj_home,argv[2]);
 
-	if ( already_running()) {
+	while ( already_running()) {
 		syslog(LOG_ERR | LOG_DAEMON,
 				"This working directory is occupied !\n");
 		printf("%s already has one judge_client in it!\n",work_dir);
-		return 1;
+		sleep(5);
 	}
 
 	if (shm_run){

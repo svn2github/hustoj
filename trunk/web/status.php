@@ -458,7 +458,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
       $view_status[$i][6] = $language_name[$row['language']];
     }
     else {
-      if(time() < $end_time
+      if( (isset($end_time) && time() < $end_time)
 		||(isset($_SESSION[$OJ_NAME.'_'.'user_id']) && strtolower($row['user_id'])==strtolower($_SESSION[$OJ_NAME.'_'.'user_id'])) 
 		||isset($_SESSION[$OJ_NAME.'_'.'source_browser'])
 	)

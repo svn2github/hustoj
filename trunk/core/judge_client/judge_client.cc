@@ -3265,8 +3265,10 @@ int main(int argc, char **argv)
 	//create chroot for ruby bash python
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
-	if (lang == 5 && !use_docker)
-		copy_bash_runtime(work_dir);
+	if (lang == 5){
+		execute_cmd("/usr/bin/dos2unix Main.sh", work_dir);
+		if(!use_docker)	copy_bash_runtime(work_dir);
+	}
 	if (lang == 6 && !python_free)
 		copy_python_runtime(work_dir);
 	if (lang == 7)

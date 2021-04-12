@@ -1927,7 +1927,7 @@ void copy_bash_runtime(char *work_dir)
 	//const char * ruby_run="/usr/bin/ruby";
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/cp `which bc`  %s/bin/", work_dir);
-	execute_cmd("/usr/bin/dos2unix Main.sh", work_dir);
+	execute_cmd("busybox dos2unix Main.sh", work_dir);
 	execute_cmd("/bin/ln -s /bin/busybox %s/bin/grep", work_dir);
 	execute_cmd("/bin/ln -s /bin/busybox %s/bin/awk", work_dir);
 	execute_cmd("/bin/cp /bin/sed %s/bin/sed", work_dir);
@@ -3266,7 +3266,7 @@ int main(int argc, char **argv)
 	if (lang == 4)
 		copy_ruby_runtime(work_dir);
 	if (lang == 5){
-		execute_cmd("/usr/bin/dos2unix Main.sh", work_dir);
+		execute_cmd("busybox dos2unix Main.sh", work_dir);
 		if(!use_docker)	copy_bash_runtime(work_dir);
 	}
 	if (lang == 6 && !python_free)

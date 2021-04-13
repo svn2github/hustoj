@@ -248,8 +248,8 @@ begin
 	set new.s_id=0;
  end if;
  
-end;//
-delimiter ;
+end//
+
 CREATE PROCEDURE DEFAULT_ADMINISTRATOR(user_name VARCHAR(48))
 BEGIN
     DECLARE privileged_count INT DEFAULT 0;
@@ -257,5 +257,6 @@ BEGIN
     IF privileged_count=0 THEN
         INSERT INTO privilege values(user_name, 'administrator', 'true', 'N');
     end if;
-end;
+end//
  
+delimiter ;

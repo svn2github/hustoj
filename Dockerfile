@@ -2,9 +2,15 @@ FROM ubuntu:18.04
 
 COPY trunk/install/sources.list.sh /opt/sources.list.sh
 
+ARG APT_MIRROR="Y"
+ARG APT_CA="N"
+
+RUN [ "$APT_CA" = "Y" ] && apt-get -y update && apt install -y ca-certificates
+
 # Linux: Aliyun Apt Mirrors.
-RUN bash /opt/sources.list.sh && \
-    apt-get -y update  && \
+RUN [ "$APT_MIRROR" != "N" ] && bash /opt/sources.list.sh || true
+
+RUN apt-get -y update  && \
     apt-get -y upgrade && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get -y install --no-install-recommends \

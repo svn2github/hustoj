@@ -5,7 +5,7 @@ COPY trunk/install/sources.list.sh /opt/sources.list.sh
 ARG APT_MIRROR="Y"
 ARG APT_CA="N"
 
-RUN [ "$APT_CA" = "Y" ] && apt-get -y update && apt install -y ca-certificates
+RUN [ "$APT_CA" = "Y" ] && apt-get -y update && apt install -y ca-certificates  || true
 
 # Linux: Aliyun Apt Mirrors.
 RUN [ "$APT_MIRROR" != "N" ] && bash /opt/sources.list.sh || true

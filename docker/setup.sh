@@ -6,7 +6,7 @@ chown -R mysql:mysql /var/run/mysqld
 chmod -R 755         /var/run/mysqld
 service mysql start
 mysql < /trunk/install/db.sql
-mysql -e "insert into jol.privilege values('admin','administrator','N');"
+mysql -e "insert into jol.privilege ( user_id, rightstr ) values('admin','administrator');"
 
 # Hustoj basic file system
 useradd -m -u 1536 judge

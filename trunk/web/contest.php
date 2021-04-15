@@ -278,7 +278,7 @@ else {
 			$mycontests=substr($mycontests,1);
 
 		if (isset($_GET['my']))
-			$wheremy = " and contest_id in ($mycontests)";
+	  		if(isset($_GET['my'])) $wheremy=" and( contest_id in ($mycontests) or user_id='".$_SESSION[$OJ_NAME.'_user_id']."')";
 	}
 
   $sql = "SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC LIMIT 1000";

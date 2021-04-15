@@ -128,7 +128,7 @@ int LANG_GOV[CALL_ARRAY_SIZE] = {
         SYS_arch_prctl, SYS_pread64, SYS_gettid, SYS_futex, SYS_sched_getaffinity, SYS_clock_gettime, SYS_exit_group,
         SYS_sched_yield, SYS_openat, SYS_readlinkat, SYS_clone, SYS_execve, SYS_fcntl, SYS_mmap, 0 };
 //sqlite3
-int LANG_SQLV[CALL_ARRAY_SIZE] = {0,1,3,4,5,6,9,10,12,13,14,16,17,21,39,41,42,59,72,79,102,158,218,231,257,273,302,
+int LANG_SQLV[CALL_ARRAY_SIZE] = {0,18,75,87,1,3,4,5,6,9,10,12,13,14,16,17,21,39,41,42,59,72,79,102,107,158,218,231,257,273,302,
         SYS_read, SYS_write, SYS_mprotect, SYS_getuid, SYS_geteuid, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask,
         SYS_arch_prctl, SYS_ioctl, SYS_pread64, SYS_open, SYS_futex, SYS_access, SYS_set_tid_address, SYS_exit_group,
         SYS_set_robust_list, SYS_close, SYS_stat, SYS_socket, SYS_connect, SYS_fstat, SYS_execve, SYS_semget, SYS_fcntl,

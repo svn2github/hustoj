@@ -432,18 +432,17 @@ rm -rf /usr/local/aegis*
 sudo bash /home/judge/src/install/bak.sh
 ```
 
-备份后的数据在 `/var/backups/` 目录下。
+备份后的数据在 `/var/backups/` 目录下, 命名格式为 hustoj_%Y%m%d.tar.bz2。
 
 百度学习crontab的用法后，可以使用 `sudo crontab -e` 定制自动备份计划，部分安装脚本中包含了自动备份，但可能需要运行上面的语句一次来激活。
 
-
+## 迁移到CentOS
 如果你需要进行跨系统迁移（如从 Ubuntu 迁移到 CentOS ），可以尝试使用下面的脚本backup+.sh进行备份, 对应的*.tar.gz，备份的文件需要用restore+.sh还原。
 
 ```shell
-sudo bash /home/judge/src/install/backup+.sh
+sudo bash /home/judge/src/install/backup+.sh  #备份后的归档在 `/home/judge/backup` 命名格式为 +%Y-%m-%d-%H-%M-%S.tar.gz
 ```
 
-备份后的归档在 `/home/judge/backup` ，命名格式为 hustoj_%Y%m%d.tar.bz2
 
 ## 迁移
 
@@ -458,7 +457,10 @@ sudo bash /home/judge/src/install/restore.sh hustoj_%Y%m%d.tar.bz2
 脚本的第一个参数为恢复的目标归档，如果没有参数则默认为按名字排序后字典序最大的归档
 
 *如果是backup+.sh备份的.tar.gz文件，用restore+.sh还原。
-
+```shell
+cd /home/judge/backup
+sudo bash /home/judge/src/install/restore+.sh +%Y-%m-%d-%H-%M-%S.tar.gz
+```
 
 ## 更新升级
 

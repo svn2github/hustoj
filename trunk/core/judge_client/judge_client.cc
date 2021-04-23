@@ -228,9 +228,9 @@ int already_running() {
 		if(DEBUG)printf("%s lock fail.\n",lock_file);
 		exit(1);
 	}
-	ftruncate(fd, 0);
+	if(ftruncate(fd, 0)) printf("close file fail 0 \n");
 	sprintf(buf, "%d", getpid());
-	write(fd, buf, strlen(buf) + 1);
+	if(write(fd, buf, strlen(buf) + 1) >= (unsigned int)strlen(buf)) printf("buffer size overflow!...\n");
 	return (0);
 }
 void print_arm_regs(long long unsigned int *d){
@@ -285,8 +285,8 @@ void write_log(const char *_fmt, ...)
 	FILE *fp = fopen(buffer, "ae+");
 	if (fp == NULL)
 	{
-		fprintf(stderr, "openfile error!\n");
-		system("pwd");
+		fprintf(stderr, "%s/log/client.log openfile error!\n",oj_home);
+		exit(-6);
 	}
 	va_start(ap, _fmt);
 	//l =
@@ -468,14 +468,14 @@ void read_double(char *buf, const char *key, double *value)
 {
 	char buf2[BUFFER_SIZE];
 	if (read_buf(buf, key, buf2))
-		sscanf(buf2, "%lf", value);
+		if(1!=sscanf(buf2, "%lf", value)) printf("double value read fail\n");
 }
 
 void read_int(char *buf, const char *key, int *value)
 {
 	char buf2[BUFFER_SIZE];
 	if (read_buf(buf, key, buf2))
-		sscanf(buf2, "%d", value);
+		if(1!=sscanf(buf2, "%d", value)) printf("int value read fail\n");
 }
 
 FILE *read_cmd_output(const char *fmt, ...)
@@ -550,7 +550,7 @@ void init_judge_conf()
 	
  	if(strcmp(http_username,"IP")==0){
                   FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
-                  fscanf(fjobs, "%s", http_username);
+                  if(1!=fscanf(fjobs, "%s", http_username)) printf("IP read fail...\n");
                   pclose(fjobs);
         }
 	if(turbo_mode==2) tbname="solution2";
@@ -830,7 +830,7 @@ bool check_login()
 		" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	int ret = 0;
 	FILE *fjobs = read_cmd_output(cmd, http_baseurl);
-	fscanf(fjobs, "%d", &ret);
+	if(1!=fscanf(fjobs, "%d", &ret)) printf("http login fail..");
 	pclose(fjobs);
 
 	return ret;
@@ -1225,14 +1225,13 @@ void update_problem(int pid,int cid) {
 }
 void umount(char *work_dir)
 {
-	chdir(work_dir);
+	if(chdir(work_dir)) exit(-1);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
 	if(strlen(work_dir)>0){
 		execute_cmd("/bin/umount -l %s/proc 2>/dev/null", work_dir);
 	}
 	execute_cmd("/bin/umount -l %s/dev 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
-	chdir(work_dir);
 	execute_cmd("/bin/umount -l usr dev");
 	execute_cmd("/bin/rmdir %s/* ", work_dir);
 	execute_cmd("/bin/rmdir %s/log/* ", work_dir);
@@ -1335,12 +1334,12 @@ int compile(int lang, char *work_dir)
 			setrlimit(RLIMIT_AS, &LIM);
 		if (lang != 2 && lang != 11)
 		{
-			freopen("ce.txt", "w", stderr);
+			stderr=freopen("ce.txt", "w", stderr);
 			//freopen("/dev/null", "w", stdout);
 		}
 		else
 		{
-			freopen("ce.txt", "w", stdout);
+			stdout=freopen("ce.txt", "w", stdout);
 		}
 		execute_cmd("/bin/chown judge %s ", work_dir);
 		execute_cmd("/bin/chmod 750 %s ", work_dir);
@@ -1369,7 +1368,7 @@ int compile(int lang, char *work_dir)
 				}
 				//execute_cmd("mount -o remount,ro proc");
 			}
-				chroot(work_dir);
+			if(chroot(work_dir)) printf("warning chroot fail!\n");
 		}
 		while (setgid(1536) != 0)
 			sleep(1);
@@ -1485,7 +1484,7 @@ int get_proc_status(int pid, const char *mark)
 		buf[strlen(buf) - 1] = 0;
 		if (strncmp(buf, mark, m) == 0)
 		{
-			sscanf(buf + m + 1, "%d", &ret);
+			if(1!=sscanf(buf + m + 1, "%d", &ret)) printf("proc read fail\n");
 		}
 	}
 	if (pf)
@@ -1696,10 +1695,10 @@ void _get_solution_info_http(int solution_id, int & p_id, char * user_id,
 	const char *cmd =
 		"wget --post-data=\"getsolutioninfo=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	FILE *pout = read_cmd_output(cmd, solution_id, http_baseurl);
-	fscanf(pout, "%d", &p_id);
-	fscanf(pout, "%s", user_id);
-	fscanf(pout, "%d", &lang);
-	fscanf(pout, "%d", &cid);
+	if(1!=fscanf(pout, "%d", &p_id))  printf("http problem_id read fail...\n");
+	if(1!=fscanf(pout, "%s", user_id)) printf("http user_id read fail ... \n") ;
+	if(1!=fscanf(pout, "%d", &lang))   printf("http language read fail ... \n") ;
+	if(1!=fscanf(pout, "%d", &cid))    printf("http contest_id read fail ... \n") ;
 	pclose(pout);
 }
 void get_solution_info(int solution_id, int & p_id, char * user_id,
@@ -1746,9 +1745,9 @@ void _get_problem_info_http(int p_id, double &time_lmt, int &mem_lmt,
 	const char *cmd =
 		"wget --post-data=\"getprobleminfo=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
 	FILE *pout = read_cmd_output(cmd, p_id, http_baseurl);
-	fscanf(pout, "%lf", &time_lmt);
-	fscanf(pout, "%d", &mem_lmt);
-	fscanf(pout, "%d", &isspj);
+	if(1!=fscanf(pout, "%lf", &time_lmt)) printf("http read time_limit fail...\n");
+	if(1!=fscanf(pout, "%d", &mem_lmt)  ) printf("http read memory_limit fail...\n");
+	if(1!=fscanf(pout, "%d", &isspj)    ) printf("http read special judge fail...\n");
 	pclose(pout);
 	if(DEBUG) printf("time_lmt:%g\n",time_lmt);
 }
@@ -2264,21 +2263,21 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
-	nice(19);
+	if(nice(19)) printf("renice fail... \n");
 	// now the user is "judger"
-	chdir(work_dir);
+	if(chdir(work_dir)) exit(-4);
 	// open the files
 	if(lang==18){ 
 		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s", work_dir,data_file_path);
 		execute_cmd("/bin/chown judge %s/data.db", work_dir);
-		freopen("Main.sql", "r", stdin);
+		stdin=freopen("Main.sql", "r", stdin);
 	}else{
 		if(copy_data)
 
-			freopen("data.in", "r", stdin);
+			stdin=freopen("data.in", "r", stdin);
 		else{
 			printf("infile: [%s]\n",data_file_path);
-			freopen(data_file_path,"r",stdin);
+			stdin=freopen(data_file_path,"r",stdin);
 		}
 	}
 	execute_cmd("touch %s/user.out", work_dir);
@@ -2288,8 +2287,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("chmod 740 %s/data.in", work_dir);
 	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
-	freopen("user.out", "w", stdout);
-	freopen("error.out", "a+", stderr);
+	stdout=freopen("user.out", "w", stdout);
+	stderr=freopen("error.out", "a+", stderr);
 	// trace me
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
@@ -2297,7 +2296,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
 		if(DEBUG)printf("Chrooting...\n");
-		chroot(work_dir);
+		if(chroot(work_dir)) printf("danger .....................chroot fail....................line 2298 \n");
 	}else{
 		if(DEBUG)printf("Skiping chroot...\n");
 	
@@ -2933,7 +2932,7 @@ void init_parameters(int argc, char **argv, int &solution_id,
 	else
 		strcpy(oj_home, "/home/judge");
 
-	chdir(oj_home); // change the dir// init our work
+	if(chdir(oj_home)) exit(-2); // change the dir// init our work
 
 	solution_id = atoi(argv[1]);
 	runner_id = atoi(argv[2]);
@@ -2968,7 +2967,7 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id)
 		pf = fopen("sim", "r");
 		if (pf)
 		{
-			fscanf(pf, "%d%d", &sim, &sim_s_id);
+			if(2==fscanf(pf, "%d%d", &sim, &sim_s_id));
 			fclose(pf);
 		}
 	}
@@ -2993,7 +2992,7 @@ int count_in_files(char *dirpath)
 	const char *cmd = "ls -l %s/*.in|wc -l";
 	int ret = 0;
 	FILE *fjobs = read_cmd_output(cmd, dirpath);
-	fscanf(fjobs, "%d", &ret);
+	if(1!=fscanf(fjobs, "%d", &ret)) printf("warning count files fail");;
 	pclose(fjobs);
 
 	return ret;
@@ -3001,7 +3000,7 @@ int count_in_files(char *dirpath)
 
 int get_test_file(char *work_dir, int p_id)
 {
-	char filename[BUFFER_SIZE/10];
+	char filename[BUFFER_SIZE];
 	char localfile[BUFFER_SIZE];
 	time_t remote_date, local_date;
 	int ret = 0;
@@ -3011,10 +3010,10 @@ int get_test_file(char *work_dir, int p_id)
 	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL)
 	{
 
-		sscanf(filename, "%ld", &remote_date);
+		if(1!=sscanf(filename, "%ld", &remote_date)) printf("http remote time stamp read fail\n");
 		if (fgets(filename, BUFFER_SIZE - 1, fjobs) == NULL)
 			break;
-		sscanf(filename, "%s", filename);
+		if(1!=sscanf(filename, "%s", filename)) printf("http filename read fail\n");
 		if (http_judge && (!data_list_has(filename)))
 			data_list_add(filename);
 		sprintf(localfile, "%s/data/%d/%s", oj_home, p_id, filename);
@@ -3136,10 +3135,10 @@ int main(int argc, char **argv)
 	
 	clean_workdir(work_dir);
 	
-	chdir(work_dir);
+	if(chdir(work_dir)) exit(-3);
 
 	if (http_judge)
-		system("/bin/ln -s ../cookie ./");
+		if(!system("/bin/ln -s ../cookie ./")) printf("cookie link fail \n");
 	get_solution_info(solution_id, p_id, user_id, lang,cid);
 	//get the limit
 

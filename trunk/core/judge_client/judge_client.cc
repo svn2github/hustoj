@@ -493,7 +493,7 @@ FILE *read_cmd_output(const char *fmt, ...)
 	return ret;
 }
 // read the configue file
-void init_mysql_conf()
+void init_judge_conf()
 {
 	FILE *fp = NULL;
 	char buf[BUFFER_SIZE];
@@ -3107,7 +3107,7 @@ int main(int argc, char **argv)
 
 	init_parameters(argc, argv, solution_id, runner_id);
 
-	init_mysql_conf();
+	init_judge_conf();
 
 #ifdef _mysql_h
 	if (!http_judge && !init_mysql_conn())

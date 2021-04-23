@@ -188,7 +188,7 @@ void read_int(char * buf, const char * key, int * value) {
 
 }
 // read the configue file
-void init_mysql_conf() {
+void init_judge_conf() {
 	FILE *fp = NULL;
 	char buf[BUFFER_SIZE];
 	host_name[0] = 0;
@@ -294,10 +294,10 @@ void run_client(int runid, int clientid) {
 	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
 	//sprintf(err,"%s/run%d/error.out",oj_home,clientid);
 	//freopen(err,"a+",stderr);
-	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
-			     (char * const )"LANG=zh_CN.UTF-8",
-			     (char * const )"LANGUAGE=zh_CN.UTF-8",
-			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
+//	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
+//			     (char * const )"LANG=zh_CN.UTF-8",
+//			     (char * const )"LANGUAGE=zh_CN.UTF-8",
+//			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
 	if(use_docker){
 		char docker_v[BUFFER_SIZE];
@@ -716,7 +716,7 @@ int main(int argc, char** argv) {
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;
 #ifdef _mysql_h
-	init_mysql_conf();	// set the database info
+	init_judge_conf();	// set the database info
 #endif
 	if(oj_udp){
 		oj_udp_fd = socket(AF_INET, SOCK_DGRAM, 0);

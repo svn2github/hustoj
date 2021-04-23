@@ -29,7 +29,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
-#include <mysql/mysql.h>
+#ifdef OJ_USE_MYSQL
+	#include <mysql/mysql.h>
+#endif
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
@@ -715,9 +717,7 @@ int main(int argc, char** argv) {
 //	struct timespec final_sleep;
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;
-#ifdef _mysql_h
 	init_judge_conf();	// set the database info
-#endif
 	if(oj_udp){
 		oj_udp_fd = socket(AF_INET, SOCK_DGRAM, 0);
 		if(oj_udp_fd<0) 

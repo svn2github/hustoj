@@ -43,10 +43,10 @@ $sql = "";
 if(isset($_GET['keyword']) && $_GET['keyword']!=""){
   $keyword = $_GET['keyword'];
   $keyword = "%$keyword%";
-  $sql = "SELECT `user_id`,`nick`,`accesstime`,`reg_time`,`ip`,`school`,`defunct` FROM `users` WHERE (user_id LIKE ?) OR (nick LIKE ?) OR (school LIKE ?) ORDER BY `user_id` DESC";
+  $sql = "SELECT `user_id`,`nick`,email,`accesstime`,`reg_time`,`ip`,`school`,`defunct` FROM `users` WHERE (user_id LIKE ?) OR (nick LIKE ?) OR (school LIKE ?) ORDER BY `user_id` DESC";
   $result = pdo_query($sql,$keyword,$keyword,$keyword);
 }else{
-  $sql = "SELECT `user_id`,`nick`,`accesstime`,`reg_time`,`ip`,`school`,`defunct` FROM `users` ORDER BY `reg_time` DESC LIMIT $sid, $idsperpage";
+  $sql = "SELECT `user_id`,`nick`,email,`accesstime`,`reg_time`,`ip`,`school`,`defunct` FROM `users` ORDER BY `reg_time` DESC LIMIT $sid, $idsperpage";
   $result = pdo_query($sql);
 }
 ?>
@@ -62,24 +62,27 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
   <table width=100% border=1 style="text-align:center;">
     <tr>
       <td>ID</td>
-      <td>NICK</td>
-      <td>SCHOOL</td>
-      <td>LOGIN</td> 
-      <td>SIGN UP</td> 
-      <td>USE</td>
-      <td>P/W</td>
-      <td>PRIVILEGE</td>
+      <td>Nick</td>
+      <td>Email</td>
+      <td>School</td>
+      <td>LastLogin</td> 
+      <td>Signed Up</td> 
+      <td>Use</td>
+      <td>PasswordReset</td>
+      <td>AddPrivilege</td>
       </tr>
     <?php
     foreach($result as $row){
       echo "<tr>";
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
         echo "<td>".$row['nick']."</td>";
+        echo "<td>".$row['email']."</td>";
         echo "<td>".$row['school']."</td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-        echo "<td><a href=user_df_change.php?cid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Locked</span>")."</a></td>";
+        echo "<td><a href=user_df_change.php?cid=".$row['user_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".
+                  ($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Locked</span>")."</a></td>";
       }
       else {
         echo "<td>".($row['defunct']=="N"?"<span>Available</span>":"<span>Locked</span>")."</td>";        

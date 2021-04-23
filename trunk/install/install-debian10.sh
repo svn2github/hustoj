@@ -3,8 +3,11 @@ apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
-
-svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
+#using tgz src files
+wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+tar xzf hustoj.tar.gz
+svn up src
+#svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 for PKG in make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml mariadb-server libmariadb-dev libmariadbclient-dev libmariadb-dev default-libmysqlclient-dev
 do
    apt-get install -y $PKG 
@@ -44,8 +47,8 @@ else
 fi
 
 mysql < src/install/db.sql
-echo "grant all privileges on jol.* to '$USER' identified by '$PASSWORD';\n flush privileges;\n"|mysql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "CREATE USER '$USER'@'localhost' identified by '$PASSWORD';grant all privileges on jol.* to '$USER'@'localhost' ;\n flush privileges;\n"|mysql
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"

@@ -82,9 +82,10 @@
             $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
             $result=pdo_query($sql);
             echo "<option value=''>none</option>";
-            if (count($result)==0){
-            }else{
-              foreach($result as $row){
+            if (count($result)==0) {
+            }
+            else {
+              foreach ($result as $row) {
                 echo "<option value='{$row['contest_id']}'>{$row['contest_id']} {$row['title']}</option>";
               }
             }?>

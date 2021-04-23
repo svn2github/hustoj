@@ -3,14 +3,20 @@ apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
-svn co https://github.com/zhblue/hustoj/trunk/trunk  src
-for PKG in make flex g++ clang libmariadb++-dev php7.3-fpm php7.3-memcache php-zip php-xml php-mbstring memcached nginx mariadb-server-10 php7.3-mysql php7.0-gd fp-compiler openjdk-9-jdk
+
+#using tgz src files
+wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+tar xzf hustoj.tar.gz
+svn up src
+
+for PKG in make flex g++ clang libmariadb++-dev  mariadb-server php7.3-fpm php7.3-memcache php-zip php-xml php-mbstring memcached nginx php7.3-mysql php7.0-gd fp-compiler openjdk-9-jdk
 do
 	apt-get install -y $PKG
 done
 
-USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
-PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
+USER="hustoj"
+PASSWORD=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
+
 mkdir etc data log
 
 cp src/install/java0.policy  /home/judge/etc
@@ -34,10 +40,28 @@ else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    80m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
 fi
 
-mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+mysql < src/install/db.sql
+echo "CREATE USER '$USER'@'localhost' identified by '$PASSWORD';grant all privileges on jol.* to '$USER'@'localhost' ;\n flush privileges;\n"|mysql
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
-cp src/install/nginx.default /etc/nginx/sites-available/default
+#cp src/install/nginx.default /etc/nginx/sites-available/default
+
+if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
+	echo "default site modified!"
+else
+	echo "modify the default site"
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
+	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
+	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
+	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
+	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
+	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.0:php7.4:g" /etc/nginx/sites-enabled/default
+	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
+fi
+
+
+
 /etc/init.d/nginx restart
 sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php7.0/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php7.0/fpm/php.ini

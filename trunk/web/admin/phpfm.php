@@ -8,7 +8,9 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-
+// this is not a webshell , and it need administrator / problem editor  membership to use, 
+// if aliyun warn you about this file , don't panic   
+// 这不是后门(Webshell)文件，不要理会阿里云的误报。
     $charset = "UTF-8";
     //@setlocale(LC_CTYPE, 'C');
     header("Pragma: no-cache");
@@ -3432,13 +3434,9 @@ function dir_list_form() {
                     <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" id=\"ANI0\" value=\"".et('SelAll')."\">
                     <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" value=\"".et('SelInverse')."\">
                     <input type=\"button\" style=\"width:80\" onclick=\"test(4)\" value=\"".et('Rem')."\">
-                 <!--   <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(5)\" value=\"".et('Copy')."\">
-                    <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(6)\" value=\"".et('Move')."\">   -->
                     <input type=\"button\" style=\"width:100\" onclick=\"test_prompt(71)\" value=\"".et('Compress')."\">";
             if ($islinux) $out .= "
                     <input type=\"button\" style=\"width:100\" onclick=\"resolveIDs()\" value=\"".et('ResolveIDs')."\">";
-            $out .= "
-                    <input type=\"button\" style=\"width:100\" onclick=\"chmod_form()\" value=\"".et('Perms')."\">";
             $out .= "
                 </nobr></td>
                 </tr>
@@ -3566,13 +3564,9 @@ function dir_list_form() {
                       <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" id=\"ANI1\" value=\"".et('SelAll')."\">
                       <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" value=\"".et('SelInverse')."\">
                       <input type=\"button\" style=\"width:80\" onclick=\"test(4)\" value=\"".et('Rem')."\">
-                      <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(5)\" value=\"".et('Copy')."\">
-                      <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(6)\" value=\"".et('Move')."\">
                       <input type=\"button\" style=\"width:100\" onclick=\"test_prompt(71)\" value=\"".et('Compress')."\">";
             if ($islinux) $out .= "
                       <input type=\"button\" style=\"width:100\" onclick=\"resolveIDs()\" value=\"".et('ResolveIDs')."\">";
-            $out .= "
-                      <input type=\"button\" style=\"width:100\" onclick=\"chmod_form()\" value=\"".et('Perms')."\">";
             $out .= "
                 </nobr></td>
                 </tr>";

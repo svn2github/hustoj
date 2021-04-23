@@ -26,11 +26,11 @@ function crypto_rand_secure($min, $max) {
         $bits = (int) $log + 1; // length in bits
         $filter = (int) (1 << $bits) - 1; // set all lower bits to 1
         do {
-			if(function_exists("openssl_random_pseudo_bytes")){
-				$rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
-			}else{
-				$rnd = hexdec(bin2hex(rand()."_".rand()));
-			}
+      if(function_exists("openssl_random_pseudo_bytes")){
+        $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+      }else{
+        $rnd = hexdec(bin2hex(rand()."_".rand()));
+      }
             $rnd = $rnd & $filter; // discard irrelevant bits
         } while ($rnd >= $range);
         return $min + $rnd;
@@ -49,85 +49,94 @@ function getToken($length=32){
 
 function pwGen($password,$md5ed=False) 
 {
-	if (!$md5ed) $password=md5($password);
-	$salt = sha1(rand());
-	$salt = substr($salt, 0, 4);
-	$hash = base64_encode( sha1($password . $salt, true) . $salt ); 
-	return $hash; 
+  if (!$md5ed) $password=md5($password);
+  $salt = sha1(rand());
+  $salt = substr($salt, 0, 4);
+  $hash = base64_encode( sha1($password . $salt, true) . $salt ); 
+  return $hash; 
 }
 
 function pwCheck($password,$saved)
 {
-	if (isOldPW($saved)){
-		if(!isOldPW($password)) $mpw = md5($password);
-		else $mpw=$password;
-		if ($mpw==$saved) return True;
-		else return False;
-	}
-	$svd=base64_decode($saved);
-	$salt=substr($svd,20);
-	if(!isOldPW($password)) $password=md5($password);
-	$hash = base64_encode( sha1(($password) . $salt, true) . $salt );
-	if (strcmp($hash,$saved)==0) return True;
-	else return False;
+  if (isOldPW($saved)){
+    if(!isOldPW($password)) $mpw = md5($password);
+    else $mpw=$password;
+    if ($mpw==$saved) return True;
+    else return False;
+  }
+  $svd=base64_decode($saved);
+  $salt=substr($svd,20);
+  if(!isOldPW($password)) $password=md5($password);
+  $hash = base64_encode( sha1(($password) . $salt, true) . $salt );
+  if (strcmp($hash,$saved)==0) return True;
+  else return False;
 }
 
 function isOldPW($password)
 {
-	if(strlen($password)!=32) return false;
-	for ($i=strlen($password)-1;$i>=0;$i--)
-	{
-		$c = $password[$i];
-		if ('0'<=$c && $c<='9') continue;
-		if ('a'<=$c && $c<='f') continue;
-		if ('A'<=$c && $c<='F') continue;
-		return False;
-	}
-	return True;
+  if(strlen($password)!=32) return false;
+  for ($i=strlen($password)-1;$i>=0;$i--)
+  {
+    $c = $password[$i];
+    if ('0'<=$c && $c<='9') continue;
+    if ('a'<=$c && $c<='f') continue;
+    if ('A'<=$c && $c<='F') continue;
+    return False;
+  }
+  return True;
 }
 
 function is_valid_user_name($user_name){
-	$len=strlen($user_name);
-	for ($i=0;$i<$len;$i++){
-		if (
-			($user_name[$i]>='a' && $user_name[$i]<='z') ||
-			($user_name[$i]>='A' && $user_name[$i]<='Z') ||
-			($user_name[$i]>='0' && $user_name[$i]<='9') ||
-			$user_name[$i]=='_'||
-			($i==0 && $user_name[$i]=='*') 
-		);
-		else return false;
-	}
-	return true;
+  $len=strlen($user_name);
+  for ($i=0;$i<$len;$i++){
+    if (
+      ($user_name[$i]>='a' && $user_name[$i]<='z') ||
+      ($user_name[$i]>='A' && $user_name[$i]<='Z') ||
+      ($user_name[$i]>='0' && $user_name[$i]<='9') ||
+      $user_name[$i]=='_'||
+      ($i==0 && $user_name[$i]=='*') 
+    );
+    else return false;
+  }
+  return true;
 }
 
 function sec2str($sec){
-	return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
+  return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
 }
 function is_running($cid){
    $now=strftime("%Y-%m-%d %H:%M",time());
-	$sql="SELECT count(*) FROM `contest` WHERE `contest_id`=? AND `end_time`>?";
-	$result=pdo_query($sql,$cid,$now);
-	$row=$result[0];
-	$cnt=intval($row[0]);
-	return $cnt>0;
+  $sql="SELECT count(*) FROM `contest` WHERE `contest_id`=? AND `end_time`>?";
+  $result=pdo_query($sql,$cid,$now);
+  $row=$result[0];
+  $cnt=intval($row[0]);
+  return $cnt>0;
 }
-function check_ac($cid,$pid){
-	//require_once("./include/db_info.inc.php");
-	global $OJ_NAME;
-	
-	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
-	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
-	 $row=$result[0];
-	$ac=intval($row[0]);
-	if ($ac>0) return "<font color=green>Y</font>";
-	$sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`!=4 and `problem_id`!=0  AND `user_id`=?";
-	$result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
-	$row=$result[0];
-	$sub=intval($row[0]);
-	
-	if ($sub>0) return "<font color=red>N</font>";
-	else return "";
+function check_ac($cid,$pid,$noip){
+  //require_once("./include/db_info.inc.php");
+  global $OJ_NAME;
+  if($noip){
+    $sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? and `problem_id`!=0  AND `user_id`=?";
+    $result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
+    $row=$result[0];
+    $sub=intval($row[0]);
+  if ($sub>0) return "<div class='label label-default'>?</div>";
+  else return "";
+    
+  }
+  $sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`='4' AND `user_id`=?";
+  $result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
+  $row=$result[0];
+  $ac=intval($row[0]);
+  if ($ac>0) return "<div class='label label-success'>Y</div>";
+  
+  $sql="SELECT count(*) FROM `solution` WHERE `contest_id`=? AND `num`=? AND `result`!=4 and `problem_id`!=0  AND `user_id`=?";
+  $result=pdo_query($sql,$cid,$pid,$_SESSION[$OJ_NAME.'_'.'user_id']);
+  $row=$result[0];
+  $sub=intval($row[0]);
+  
+  if ($sub>0) return "<div class='label label-danger'>N</div>";
+  else return "";
 }
 
 

@@ -25,7 +25,7 @@ $row = $result[0];
 
 $ids = intval($row['ids']);
 
-$idsperpage = 10;
+$idsperpage = 25;
 $pages = intval(ceil($ids/$idsperpage));
 
 if(isset($_GET['page'])){ $page = intval($_GET['page']);}
@@ -81,7 +81,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<td>".$row['start_time']."</td>";
       echo "<td>".$row['end_time']."</td>";
       $cid = $row['contest_id'];
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'."m$cid"])){
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."m$cid"])){
         echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a></td>";
         echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a></td>";
         echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">Edit</a></td>";

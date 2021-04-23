@@ -122,7 +122,7 @@ public class Main{
 }</font></pre>
 
 			<hr>
-			<font color=green>Q</font>:Compile Error 메시지는 언제 받나요?!<br>
+			<font color=green>Q</font>:컴파일 에러는 언제 발생하나요?!<br>
 			<font color=red>A</font>:GNU 와 MS-VC++ 는 다음과 같이 다릅니다.:<br>
 			<ul>
 				<li>
@@ -139,32 +139,32 @@ public class Main{
 			<font color=green>Q</font>:채점 코드 제출 후 받게 되는 메시지들은 어떤 의미인가요?<br>
 			<font color=red>A</font>:채점 코드 제출 후 받게 되는 메시지들의 의미는 다음과 같습니다.:<br>
 			<br>
-				- <font color=blue>Pending</font> : 채점 코드가 제출되어 채점을 기다리고 있는 상태입니다. 대부분의 경우 조금만 기다리면 채점이 진행됩니다.
+				- <font color=blue>채점 대기중</font> : 코드가 제출되고 채점을 기다리고 있는 상태입니다. 대부분의 경우 조금만 기다리면 채점이 진행됩니다.
 			<br>
-				- <font color=blue>Pending Rejudge</font> : 채점 데이터가 갱신되어 제출된 코드들의 재채점을 기다리고 있는 상태입니다.
+				- <font color=blue>재채점 대기중</font> : 채점 데이터가 갱신되어 재채점을 기다리고 있는 상태입니다.
 			<br>
-				- <font color=blue>Compiling</font> : 제출된 코드를 채점하기 위해 컴파일 중이라는 의미입니다.
+				- <font color=blue>컴파일중</font> : 제출된 코드를 컴파일 중이라는 의미입니다.
 			<br>
-				- <font color="blue">Running &amp; Judging</font>: 채점 시스템에 의해 채점이 진행되고 있는 상태라는 의미입니다.
+				- <font color="blue">채점중</font>: 채점이 진행되고 있는 상태라는 의미입니다.
 			<br>
-				- <font color=blue>Accepted</font> : 통과! 모든 채점 데이터에 대해서 정확한 답을 출력했다는 의미입니다.
+				- <font color=blue>모두 맞음</font> : 모든 채점 데이터에 대해서 정확한 답을 출력했다는 의미입니다.
 			<br>
-				- <font color=blue>Presentation Error</font> : 제출한 코드에 의해 출력된 결과가 문제에서 출력해야하는 출력형식과 다르게 출력되었다는 의미입니다. 문제의 출력형식에서 요구하는 형식과 똑같아야 합니다. 답 출력 후 출력형식에는 없는 공백문자나 줄 바꿈이 더 출력되지는 않았는지 확인해 보아야 합니다.
+				- <font color=blue>출력형식 다름</font> : 출력된 결과가 문제에서 출력해야하는 출력형식과 다르게 출력되었다는 의미입니다. 문제의 출력형식에서 요구하는 형식과 똑같아야 합니다. 답 출력 후 출력형식에는 없는 공백문자나 줄 바꿈이 더 출력되지는 않았는지 확인해 보아야 합니다.
 			<br>
-				- <font color=blue>Wrong Answer</font> : 입력된 채점 데이터에 대해서 틀린 답을 출력한 것을 의미합니다. 채점 시스템에 등록하는 채점 데이터들은 외부로 공개하지 않는 것이 일반적입니다. 제출한 코드가 틀린 답을 출력하는 경우가 어떤 경우일지 더 생각해 보아야 합니다.
+				- <font color=blue>틀림</font> : 틀린 답을 출력한 것을 의미합니다. 채점 시스템에 등록하는 채점 데이터들은 외부로 공개하지 않는 것이 일반적입니다. 제출한 코드가 틀린 답을 출력하는 경우가 어떤 경우일지 더 생각해 보아야 합니다.
 			<br>
-				- <font color=blue>Time Limit Exceeded</font> : 제출한 프로그램이 제한시간 이내에 답을 출력하지 못했다는 것을 의미합니다. 좀 더 빠르면서도 정확한 결과를 출력하도록 소스 코드를 수정해야합니다.
+				- <font color=blue>시간제한 초과</font> : 제한시간 이내에 답을 출력하지 못했다는 것을 의미합니다. 좀 더 빠르면서도 정확한 결과를 출력하도록 소스 코드를 수정해야합니다.
 			<br>
-				- <font color=blue>Memory Limit Exceeded</font> : 제출한 프로그램이 제한메모리 보다 더 많은 메모리를 사용했다는 것을 의미합니다. 일반적으로는 배열 크기를 더 적게 사용하는 코드로 소스 코드를 수정해야합니다.
+				- <font color=blue>메모리제한 초과</font> : 제출한 프로그램이 제한된 메모리용량보다 더 많은 기억공간을 사용했다는 것을 의미합니다. 일반적으로는 메모리를 더 적게 사용하는 코드로 수정해야합니다.
 			<br>
-				- <font color=blue>Output Limit Exceeded</font>: 제출한 프로그램이 제한된 출력량을 넘겨 답을 출력했다는 의미입니다. 대부분의 경우 무한 반복 실행 구조에 의해 발생합니다. 채점 시스템의 출력 제한 바이트 수는 1M bytes 입니다.
+				- <font color=blue>출력제한 초과</font>: 제출한 프로그램이 제한된 출력량 이상으로 결과를 출력했다는 것을 의미합니다. 대부분의 경우 무한 반복 실행 구조에 의해 발생합니다. 채점 시스템의 출력 제한 바이트 수는 1M bytes 입니다.
 			<br>
-				- <font color=blue>Runtime Error</font> : 제출한 프로그램이 실행되는 도중에 오류가 발생했다는 것을 의미합니다. 예를 들어, 'segmentation fault(허용되지 않는 메모리 영역에 접근하는 경우: 배열 인덱스 초과 등)','floating point exception(실수 계산 예외: 0 으로 나누는 등)','used forbidden functions(제한된 함수를 사용한 경우: 파일 처리 함수 등이 사용된 경우 등)', 'tried to access forbidden memories(허용되지 않는 시스템 메모리 영역 등에 접근하는 경우 등)' 등에 의해 발생합니다.
+				- <font color=blue>실행중 에러</font> : 제출한 프로그램이 실행되는 도중에 오류가 발생했다는 것을 의미합니다. 예를 들어, 'segmentation fault(허용되지 않는 메모리 영역에 접근하는 경우: 배열 인덱스 초과 등)','floating point exception(실수 계산 예외: 0 으로 나누는 등)','used forbidden functions(제한된 함수를 사용한 경우: 파일 처리 함수 등이 사용된 경우 등)', 'tried to access forbidden memories(허용되지 않는 시스템 메모리 영역 등에 접근하는 경우 등)' 등에 의해 발생합니다.
 			<br>
-				- <font color=blue>Compile Error</font> : 제출한 소스코드를 ANSI 표준(gcc/g++/gpc) 컴파일러로 컴파일하지 못했다는 것을 의미합니다. 컴파일 오류 메시지가 아닌 오류 경고(warning)는 이 메시지를 출력하지 않습니다. 메시지 부분을 누르면 컴파일 오류 메시지를 확인할 수도 있습니다.<br>
+				- <font color=blue>컴파일 에러</font> : 제출한 소스코드를 ANSI 표준(gcc/g++/gpc) 컴파일러로 컴파일하지 못했다는 것을 의미합니다. 컴파일 오류 메시지가 아닌 오류 경고(warning)는 이 메시지를 출력하지 않습니다. 메시지 부분을 누르면 컴파일 오류 메시지를 확인할 수도 있습니다.<br>
 
 			<hr>
-			<font color=green>Q</font>: 온라인 대회(Online Contests)에는 어떻게 참가하나요?<br>
+			<font color=green>Q</font>: 온라인 대회(Online Contests)는 어떻게 참가하나요?<br>
 			<font color=red>A</font>: 먼저 <a href=registerpage.php>회원가입</a> 을 통해 계정을 만들어야 온라인 대회에 참여할 수 있게 됩니다.<br>
 			<br>
 			<hr>
@@ -180,7 +180,7 @@ public class Main{
 						<td align=right width=65%>
 							<a href="index.php">
 								<font color=red><?php echo $OJ_NAME?></font>
-								<font color=red>20.01.01</font>
+								<font color=red>20.09.15</font>
 							</a>
 						</td>
 					</tr>

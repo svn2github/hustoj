@@ -1,9 +1,8 @@
-<?php @session_start();
+<?php 
 //ini_set("display_errors", "Off");  //set this to "On" for debugging  ,especially when no reason blank shows up.
+//error_reporting(E_ALL);
 //header('X-Frame-Options:SAMEORIGIN');
-
 //for people using hustoj out of China , be careful of the last two line of this file !
-
 // connect db 
 static 	$DB_HOST="localhost";  //数据库服务器ip或域名
 static 	$DB_NAME="jol";   //数据库名
@@ -20,7 +19,6 @@ static  $OJ_LANG="en";  //默认语言
 static  $OJ_SIM=false;  //显示相似度
 static  $OJ_DICT=false; //显示在线翻译
 static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/
-static  $OJ_EDITE_AREA=true; //true: syntax highlighting is active
 static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it onece.
 static  $OJ_CSS="white.css";
@@ -28,6 +26,7 @@ static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
 static  $OJ_APPENDCODE=false;  // 代码预定模板
 if (!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模式需要允许javascript操作cookie保存当前语言。
+@session_start();
 static  $OJ_CE_PENALTY=false;  // 编译错误是否罚时
 static  $OJ_PRINTER=false;  //启用打印服务
 static  $OJ_MAIL=false; //内邮
@@ -44,15 +43,18 @@ static  $OJ_REDISPORT=6379;
 static  $OJ_REDISQNAME="hustoj";
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_CDN_URL="";  //  http://cdn.hustoj.com/  https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/web/ 
-static  $OJ_TEMPLATE="bs3"; //使用的默认模板, [bs3 ie ace sweet sae mario] work with discuss3, [classic bs] work with discuss
+static  $OJ_TEMPLATE="bs3"; //使用的默认模板,template目录下的每个子目录都是一个模板, [bs3 ie ace sweet sae mario] work with discuss3, [classic bs] work with discuss 
 //if(isset($_GET['tp'])) $OJ_TEMPLATE=$_GET['tp'];
 if ($OJ_TEMPLATE == "classic") $OJ_CSS="hoj.css";
 static  $OJ_LOGIN_MOD="hustoj";
 static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
 static  $OJ_NEED_LOGIN=false; //需要登录才能访问
+static  $OJ_LONG_LOGIN=false; //启用长时间登录信息保留
+static  $OJ_KEEP_TIME="30";  //登录Cookie有效时间(单位:天(day),仅在上一行为true时生效)
 static  $OJ_RANK_LOCK_PERCENT=0; //比赛封榜时间比例
 static  $OJ_SHOW_DIFF=false; //是否显示WA的对比说明
+static  $OJ_DOWNLOAD=false; //是否允许下载WA的测试数据
 static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
 static  $OJ_MATHJAX=false;  // 激活mathjax
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
@@ -62,7 +64,7 @@ static  $OJ_OI_MODE=false; //是否开启OI比赛模式，禁用排名、状态�
 static  $OJ_SHOW_METAL=true; //榜单上是否按比例显示奖牌
 static  $OJ_RANK_LOCK_DELAY=3600; //赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
 static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
-
+static $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
 static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。
 static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
 
@@ -72,7 +74,7 @@ static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
 /* share code */
 static  $OJ_SHARE_CODE=false; // 代码分享功能
 /* recent contest */
-static  $OJ_RECENT_CONTEST=false; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
+static  $OJ_RECENT_CONTEST=true; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
 //CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌

@@ -1,0 +1,17 @@
+name: docker build test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: docker build
+      run: docker build . -t hustoj-dev --build-arg APT_MIRROR="N"

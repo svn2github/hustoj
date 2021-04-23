@@ -27,7 +27,7 @@
       <div class="jumbotron">
 	
 <pre id='errtxt' class="alert alert-error"><?php echo $view_reinfo?></pre>
-<div id='errexp'>Explain:</div>
+<div id='errexp'><!--Explain:--></div>
 
       </div>
 
@@ -39,38 +39,41 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	
 	  <script>
-var pats=new Array();
-var exps=new Array();
-pats[0]=/A Not allowed system call.* /;
-exps[0]="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源,如果你是系统管理员，而且确认提交的答案没有问题，测试数据没有问题，可以发送'RE'到微信公众号onlinejudge，查看解决方案。";
-pats[1]=/Segmentation fault/;
-exps[1]="段错误，检查是否有数组越界，指针异常，访问到不应该访问的内存区域";
-pats[2]=/Floating point exception/;
-exps[2]="浮点错误，检查是否有除以零的情况";
-pats[3]=/buffer overflow detected/;
-exps[3]="缓冲区溢出，检查是否有字符串长度超出数组的情况";
-pats[4]=/Killed/;
-exps[4]="进程因为内存或时间原因被杀死，检查是否有死循环";
-pats[5]=/Alarm clock/;
-exps[5]="进程因为时间原因被杀死，检查是否有死循环，本错误等价于超时TLE";
-pats[6]=/CALLID:20/;
-exps[6]="可能存在数组越界，检查题目描述的数据量与所申请数组大小关系";
-function explain(){
-//alert("asdf");
-var errmsg=$("#errtxt").text();
-var expmsg="辅助解释：<br><hr>";
-for(var i=0;i<pats.length;i++){
-var pat=pats[i];
-var exp=exps[i];
-var ret=pat.exec(errmsg);
-if(ret){
-expmsg+=ret+":"+exp+"<br><hr />";
-}
-}
-document.getElementById("errexp").innerHTML=expmsg;
-//alert(expmsg);
-}
-explain();
+    var pats=new Array();
+    var exps=new Array();
+    pats[0]=/A Not allowed system call.* /;
+    exps[0]="<?php echo $MSG_A_NOT_ALLOWED_SYSTEM_CALL ?>";
+    pats[1]=/Segmentation fault/;
+    exps[1]="<?php echo $MSG_SEGMETATION_FAULT ?>";
+    pats[2]=/Floating point exception/;
+    exps[2]="<?php echo $MSG_FLOATING_POINT_EXCEPTION ?>";
+    pats[3]=/buffer overflow detected/;
+    exps[3]="<?php echo $MSG_BUFFER_OVERFLOW_DETECTED ?>";
+    pats[4]=/Killed/;
+    exps[4]="<?php echo $MSG_PROCESS_KILLED ?>";
+    pats[5]=/Alarm clock/;
+    exps[5]="<?php echo $MSG_ALARM_CLOCK ?>";
+    pats[6]=/CALLID:20/;
+    exps[6]="<?php echo $MSG_CALLID_20 ?>";
+    pats[7]=/ArrayIndexOutOfBoundsException/;
+    exps[7]="<?php echo $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION ?>";
+    pats[8]=/StringIndexOutOfBoundsException/;
+    exps[8]="<?php echo $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION ?>";
+    function explain(){
+      var errmsg = $("#errtxt").text();
+      var expmsg = "";
+      for(var i=0; i<pats.length; i++){
+        var pat = pats[i];
+        var exp = exps[i];
+        var ret = pat.exec(errmsg);
+        if(ret){
+          expmsg += ret+" : "+exp+"<br><hr />";
+        }
+      }
+      document.getElementById("errexp").innerHTML=expmsg;
+    }
+
+    explain();
 </script>
   </body>
 </html>

@@ -184,10 +184,15 @@ if (isset($_GET['cid'])) {
 
 	$cnt = 0;
 	$noip = (time()<$end_time) && (stripos($view_title,$OJ_NOIP_KEYWORD)!==false);
+	if(isset($_SESSION[$OJ_NAME.'_'."administrator"])||
+		isset($_SESSION[$OJ_NAME.'_'."m$cid"])||
+		isset($_SESSION[$OJ_NAME.'_'."source_browser"])||
+		isset($_SESSION[$OJ_NAME.'_'."contest_creator"])
+	   ) $noip=false;
 	foreach($result as $row) {
 		$view_problemset[$cnt][0] = "";
-		if (isset($_SESSION[$OJ_NAME.'_'.'user_id']) && !$noip)
-			$view_problemset[$cnt][0] = check_ac($cid,$cnt);
+		if (isset($_SESSION[$OJ_NAME.'_'.'user_id']))
+			$view_problemset[$cnt][0] = check_ac($cid,$cnt,$noip);
 		else
 			$view_problemset[$cnt][0] = "";
 
@@ -201,7 +206,7 @@ if (isset($_GET['cid'])) {
 			$tpid = intval($row['problem_id']);
 			$sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`=? AND `problem_id` IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`end_time`)
+					SELECT `contest_id` FROM `contest` WHERE (`defunct`='N' AND now()<`start_time`)
 				)
 			)";
 
@@ -273,7 +278,7 @@ else {
 			$mycontests=substr($mycontests,1);
 
 		if (isset($_GET['my']))
-			$wheremy = " and contest_id in ($mycontests)";
+	  		if(isset($_GET['my'])) $wheremy=" and( contest_id in ($mycontests) or user_id='".$_SESSION[$OJ_NAME.'_user_id']."')";
 	}
 
   $sql = "SELECT * FROM `contest` WHERE `defunct`='N' ORDER BY `contest_id` DESC LIMIT 1000";

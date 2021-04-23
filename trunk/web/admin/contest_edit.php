@@ -73,23 +73,28 @@ if(isset($_POST['startdate'])){
 
   if(count($pieces)>0 && strlen($pieces[0])>0){
     $sql_1 = "INSERT INTO `contest_problem`(`contest_id`,`problem_id`,`num`) VALUES (?,?,?)";
-    for($i=0; $i<count($pieces); $i++){
-      $pid=intval($pieces[$i]);
-      pdo_query($sql_1,$cid,$pid,$i);
-      $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
-      pdo_query($sql,$pid,$cid,$pid,$cid);
-      $sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
-      pdo_query($sql,$pid,$cid,$pid,$cid);
-    }
-  
-    pdo_query("update solution set num=-1 where contest_id=?",$cid);
-  
+    
     $plist="";
+    pdo_query("update solution set num=-1 where contest_id=?",$cid);
+    $num=0;
     for($i=0; $i<count($pieces); $i++){
-      if($plist) $plist.=",";
-      $plist .= $pieces[$i];
-      $sql_2 = "update solution set num=? where contest_id=? and problem_id=?;";
-      pdo_query($sql_2,$i,$cid,$pieces[$i]);
+      $sql="select problem_id from problem where problem_id=?";
+      $pid=intval($pieces[$i]);
+      $has=pdo_query($sql,$pid);
+      if(count($has) > 0) {
+         if($plist) $plist.=",";
+         $plist.=intval($pieces[$i]);
+         pdo_query($sql_1,$cid,$pieces[$i],$num);
+	 $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=? AND `result`=4) WHERE `problem_id`=? and contest_id=?";
+	 pdo_query($sql,$pid,$cid,$pid,$cid);
+	 $sql="UPDATE `contest_problem` SET `c_submit`=(SELECT count(1) FROM `solution` WHERE `problem_id`=? and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+	 pdo_query($sql,$pid,$cid,$pid,$cid);
+      	 $sql_2 = "update solution set num=? where contest_id=? and problem_id=?;";
+      	 pdo_query($sql_2,$num,$cid,$pid);
+         $num++;
+      }else{
+         print("Problem not exists:".$pieces[$i]."<br>\n");
+      }
     }
 
     $sql = "update `problem` set defunct='N' where `problem_id` in ($plist)";
@@ -172,7 +177,8 @@ if(isset($_POST['startdate'])){
     <p align=left>
       <?php echo $MSG_CONTEST."-".$MSG_PROBLEM_ID?>
       <?php echo "( Add problemIDs with coma , )"?><br>
-      <input class=input-xxlarge type=text style="width:100%" name=cproblem value='<?php echo $plist?>'>
+      <input id="plist" onchange="showTitles()" class=input-xxlarge type=text style="width:100%" name=cproblem value='<?php echo $plist?>'>
+      <div id="ptitles"></div>
     </p>
     <br>
     <p align=left>
@@ -236,6 +242,25 @@ if(isset($_POST['startdate'])){
     </p>
   </form>
 </div>
+<script>
+	function showTitles(){
+		let ts=$("#ptitles");
+		let pids=$("#plist").val().split(",");
+		let html="";
+		pids.forEach(function(v,i,a){
+			let title=$.ajax({url:"ajax.php",method:"post",data:{"pid":v,"m":"problem_get_title"},async:false}).responseText;
+			html+=(v)+":<a href='../problem.php?id="+v+"' target='_blank'>"+title+"</a><br>\n";
+			console.log(v);
+		});
+		ts.html(html);
+		
+	}
+	$(document).ready(function(){
+		showTitles();
+	
+	});
+
+</script>
 </body>
 </html>
 

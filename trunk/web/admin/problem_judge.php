@@ -55,7 +55,7 @@ if(isset($_POST['update_solution'])){
 		echo "0";
 }else if(isset($_POST['getpending'])){
         $max_running=intval($_POST['max_running']);
-        if($OJ_REDIS){
+        if($OJ_REDIS && !isset($_SESSION[$OJ_NAME.'_'.'problem_start'])){
            $redis = new Redis();
            $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
 	   if(isset($OJ_REDISAUTH)) $redis->auth($OJ_REDISAUTH);
@@ -82,7 +82,17 @@ if(isset($_POST['update_solution'])){
 				}
 				
                 $sql="SELECT solution_id FROM solution WHERE language in ($oj_lang_set)
-                        and (result<2 or (result<4 and NOW()-judgetime>60)) ORDER BY result ASC,solution_id ASC limit $max_running";
+                        and (result<2 or (result<4 and NOW()-judgetime>60)) ";
+		if(isset($_SESSION[$OJ_NAME.'_'.'problem_start'])){
+			$start=intval($_SESSION[$OJ_NAME.'_'.'problem_start']);
+			$sql.="and problem_id>=$start ";
+		}
+		if(isset($_SESSION[$OJ_NAME.'_'.'problem_end'])){
+			$end=intval($_SESSION[$OJ_NAME.'_'.'problem_end']);
+			$sql.="and problem_id<=$end ";
+		}
+		
+		$sql.=" ORDER BY result ASC,solution_id ASC limit $max_running";
                 $result=pdo_query($sql);
                 foreach($result as $row){
                         echo $row['solution_id']."\n";

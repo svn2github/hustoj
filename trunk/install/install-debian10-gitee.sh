@@ -47,7 +47,7 @@ fi
 
 mysql < src/install/db.sql
 echo "grant all privileges on jol.* to '$USER' identified by '$PASSWORD';\n flush privileges;\n"|mysql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"

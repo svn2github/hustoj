@@ -25,23 +25,27 @@
   MathJax = {
     tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
   };
-  </script> 
+</script> 
+
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <style>
-.jumbotron1{ 
-    font-size: 18px; 
+<style>
+	.jumbotron1{ 
+  font-size: 18px; 
 }
 </style>
+
 <?php } ?>
+
 <!--数学公式js加载完毕-->
 </head>
+
 
 <body>
 	<div class="container">
 		<?php include("template/$OJ_TEMPLATE/nav.php");?>
 
 		<!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron"></div>
+    <!-- <div class="jumbotron"></div> -->
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -63,12 +67,17 @@
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 				echo "<br><br>";
-
+        if($pr_flag){
+					echo "<a class='btn btn-info btn-sm' href='submitpage.php?id=$id' role='button'>$MSG_SUBMIT</a>";
+        }else{
+					echo "<a class='btn btn-info btn-sm' href='submitpage.php?cid=$cid&pid=$pid&langmask=$langmask' role='button'>$MSG_SUBMIT</a>";
+  					echo "<a class='btn btn-primary btn-sm' role='button' href='contest.php?cid=$cid'>$MSG_PROBLEM$MSG_LIST</a>";
+        }
 				if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
 				} else {
 					echo "<div class='btn-group' role='group'>";
   				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
-  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT: ".$row['submit']."</a>";
+  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT_NUM: ".$row['submit']."</a>";
   				echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
 				}
 

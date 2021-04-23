@@ -21,7 +21,13 @@ if ($num==0){
 $row=$result[0];
 $title=$row[0];
 $end_time=strtotime($row[1]);
-if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
+	$noip = (time()<$end_time) && (stripos($title,$OJ_NOIP_KEYWORD)!==false);
+	if(isset($_SESSION[$OJ_NAME.'_'."administrator"])||
+		isset($_SESSION[$OJ_NAME.'_'."m$cid"])||
+		isset($_SESSION[$OJ_NAME.'_'."source_browser"])||
+		isset($_SESSION[$OJ_NAME.'_'."contest_creator"])
+	   ) $noip=false;
+if($noip){
       $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);

@@ -18,15 +18,18 @@ if (isset($_POST['do'])) {
 
 	$user_id = $_POST['user_id'];
 	$rightstr = $_POST['rightstr'];
-
+	$valuestr = "true";
+	if(isset($_POST['valuestr']))
+		$valuestr = $_POST['valuestr'];
+	
 	if (isset($_POST['contest']))
 		$rightstr = "c$rightstr";
 
 	if (isset($_POST['psv']))
 		$rightstr = "s$rightstr";
 
-	$sql = "insert into `privilege` values(?,?,'N')";
-	$rows = pdo_query($sql,$user_id,$rightstr);
+	$sql = "insert into `privilege`(user_id,rightstr,valuestr,defunct) values(?,?,?,'N')";
+	$rows = pdo_query($sql,$user_id,$rightstr,$valuestr);
 	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Privilege Added!</h4></center>";
 }
 ?>
@@ -48,9 +51,9 @@ if (isset($_POST['do'])) {
 
 	<div class="form-group">
 		<label class="col-sm-offset-3 col-sm-3 control-label"><?php echo $MSG_PRIVILEGE_TYPE?></label>
-		<select class="col-sm-3" name="rightstr">
+		<select class="col-sm-3" name="rightstr" onchange="show_value_input(this.value)" >
 		<?php
-			$rightarray = array("administrator","problem_editor","source_browser","contest_creator","http_judge","password_setter","printer","balloon");
+			$rightarray = array("administrator","problem_editor","source_browser","contest_creator","http_judge","password_setter","printer","balloon","vip",'problem_start','problem_end');
 			while (list($key, $val)=each($rightarray)) {
 				if (isset($rightstr) && ($rightstr == $val)) {
 					echo '<option value="'.$val.'" selected>'.$val.'</option>';
@@ -60,7 +63,22 @@ if (isset($_POST['do'])) {
 			}
 		?>
 		</select>
+		<div class="col-sm-offset-9"><input id='value_input' type="text" class="form-control" name="valuestr" value="true"></div>
 	</div>
+	<script>
+		function show_value_input(new_value){
+			if(new_value=='problem_start'||new_value=='problem_end') {
+				$("#value_input").val("1000");
+				$("#value_input").show();
+			}else{
+				$("#value_input").val("true");
+				$("#value_input").hide();
+			}
+		}
+		$(document).ready(function(){
+			 $("#value_input").hide();
+		});
+	</script>
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-2">
 			<input type='hidden' name='do' value='do'>

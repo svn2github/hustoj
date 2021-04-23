@@ -6,7 +6,12 @@ apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
 
-svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
+#using tgz src files
+wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+tar xzf hustoj.tar.gz
+svn up src
+#svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
+
 for pkg in "net-tools make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap"
 do
 	while ! apt-get install -y $pkg 
@@ -40,8 +45,13 @@ chmod 700 etc/judge.conf
 
 sed -i "s/DB_USER[[:space:]]*=[[:space:]]*\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
+
 chmod 700 src/web/include/db_info.inc.php
 chown -R www-data src/web/
+
+chown -R root:root src/web/.svn
+chmod 750 -R src/web/.svn
+
 chown www-data src/web/upload data
 if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
@@ -50,7 +60,7 @@ else
 fi
 
 mysql -h localhost -u$USER -p$PASSWORD < src/install/db.sql
-echo "insert into jol.privilege values('admin','administrator','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"
@@ -100,8 +110,7 @@ update-rc.d hustoj defaults
 systemctl enable hustoj
 systemctl enable nginx
 systemctl enable mysql
-systemctl enable php7.3-fpm
-systemctl enable judged
+systemctl enable php7.2-fpm
 
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/

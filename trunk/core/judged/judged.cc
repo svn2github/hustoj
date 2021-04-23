@@ -29,7 +29,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
-#include <mysql/mysql.h>
+#ifdef OJ_USE_MYSQL
+	#include <mysql/mysql.h>
+#endif
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
@@ -87,6 +89,7 @@ static int  oj_redisport;
 static char oj_redisauth[BUFFER_SIZE];
 static char oj_redisqname[BUFFER_SIZE];
 static int turbo_mode = 0;
+static int use_docker = 0;
 
 
 static bool STOP = false;
@@ -187,7 +190,7 @@ void read_int(char * buf, const char * key, int * value) {
 
 }
 // read the configue file
-void init_mysql_conf() {
+void init_judge_conf() {
 	FILE *fp = NULL;
 	char buf[BUFFER_SIZE];
 	host_name[0] = 0;
@@ -231,13 +234,20 @@ void init_mysql_conf() {
                         read_buf(buf, "OJ_REDISAUTH", oj_redisauth);
                         read_buf(buf, "OJ_REDISQNAME", oj_redisqname);
                         read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
+                        read_int(buf, "OJ_USE_DOCKER", &use_docker);
 
 
 		}
 #ifdef _mysql_h
+		if (oj_tot==1){
 		sprintf(query,
-				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY result ASC,solution_id ASC limit %d",
+			"SELECT solution_id FROM solution WHERE language in (%s) and result<2 ORDER BY solution_id  limit %d",
+			oj_lang_set,  2 *max_running );
+		}else{
+		sprintf(query,
+				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY solution_id ASC limit %d",
 				oj_lang_set, oj_tot, oj_mod, 2 *max_running );
+		}
 #endif
 		sleep_tmp = sleep_time;
 			fclose(fp);
@@ -251,8 +261,8 @@ void run_client(int runid, int clientid) {
 	LIM.rlim_cur = 800;
 	setrlimit(RLIMIT_CPU, &LIM);
 
-	LIM.rlim_max = 800 * STD_MB;
-	LIM.rlim_cur = 800 * STD_MB;
+	LIM.rlim_max = 1024 * STD_MB;
+	LIM.rlim_cur = 1024 * STD_MB;
 	setrlimit(RLIMIT_FSIZE, &LIM);
 #ifdef __mips__
 	LIM.rlim_max = STD_MB << 12;
@@ -286,10 +296,19 @@ void run_client(int runid, int clientid) {
 	//write_log("sid=%s\tclient=%s\toj_home=%s\n",runidstr,buf,oj_home);
 	//sprintf(err,"%s/run%d/error.out",oj_home,clientid);
 	//freopen(err,"a+",stderr);
-
+//	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
+//			     (char * const )"LANG=zh_CN.UTF-8",
+//			     (char * const )"LANGUAGE=zh_CN.UTF-8",
+//			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
+	if(use_docker){
+		char docker_v[BUFFER_SIZE];
+		sprintf(docker_v,"%s:/home/judge",oj_home);
+		execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", "-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
+	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, (char *) NULL);
+	}
 	//else
 	//	execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 	//			oj_home, "debug", (char *) NULL);
@@ -698,9 +717,7 @@ int main(int argc, char** argv) {
 //	struct timespec final_sleep;
 //	final_sleep.tv_sec=0;
 //	final_sleep.tv_nsec=500000000;
-#ifdef _mysql_h
-	init_mysql_conf();	// set the database info
-#endif
+	init_judge_conf();	// set the database info
 	if(oj_udp){
 		oj_udp_fd = socket(AF_INET, SOCK_DGRAM, 0);
 		if(oj_udp_fd<0) 

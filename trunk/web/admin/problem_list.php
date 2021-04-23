@@ -88,6 +88,14 @@ echo "</select>";
       }
       ?>
     </tr>
+        <tr>
+      <td colspan=2 style="height:40px;">Checked to</td>
+      <td colspan=6>
+        <input type=submit name='problem2contest' value='New Contest'>
+        <input type=submit name='enable' value='Available' onclick='$("form").attr("action","problem_df_change.php")'>
+        <input type=submit name='disable' value='Reserved' onclick='$("form").attr("action","problem_df_change.php")'>
+      </td>
+    </tr>
     <?php
     foreach($result as $row){
       echo "<tr>";

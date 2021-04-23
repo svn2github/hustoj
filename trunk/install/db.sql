@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 CREATE TABLE IF NOT EXISTS `privilege` (
   `user_id` char(48) NOT NULL DEFAULT '',
   `rightstr` char(30) NOT NULL DEFAULT '',
+  `valuestr` char(11) NOT NULL DEFAULT 'true',
   `defunct` char(1) NOT NULL DEFAULT 'N',
   KEY `user_id_index` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
@@ -247,17 +248,15 @@ begin
 	set new.s_id=0;
  end if;
  
-end;//
-delimiter ;
+end//
 
-DELIMITER //
 CREATE PROCEDURE DEFAULT_ADMINISTRATOR(user_name VARCHAR(48))
 BEGIN
     DECLARE privileged_count INT DEFAULT 0;
     SET privileged_count=(SELECT COUNT(1) FROM `privilege`);
     IF privileged_count=0 THEN
-        INSERT INTO `privilege` values(user_name,'administrator','N');
+        INSERT INTO privilege values(user_name, 'administrator', 'true', 'N');
     end if;
-end //
-
-CALL DEFAULT_ADMINISTRATOR('admin');
+end//
+ 
+delimiter ;

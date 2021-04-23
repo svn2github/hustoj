@@ -31,7 +31,7 @@
 	</script>
 		<br>
 		<a href=gpl-2.0.txt><span class=green>GPL2.0</span></a> 20012-2022 licensed by<a href='https://www.github.com/zhblue/hustoj/'>HUSTOJ Project</a><br>
-		<a herf="https://www.github.com/MX-Qulin">Mario Template By MX-Qulin</a> 
+		<a href="https://www.github.com/MX-Qulin">Mario Template By MX-Qulin</a> 
      <?php if ($OJ_SAE) {
                    echo "<a href=http://sae.sina.com.cn><img bolder=0 src=http://static.sae.sina.com.cn/image/poweredby/poweredby.png></a>";
             

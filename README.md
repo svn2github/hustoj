@@ -2,17 +2,19 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
+
+
 ## 版权说明
 
 HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
 
 HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
 
-注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
+## 注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
 
 论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 
 
-如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://github.com/zhblue/hustoj/blob/master/wiki/hustoj%E6%96%87%E6%A1%A3%E5%A4%A7%E5%85%A8.pdf) 可能有帮助。
+如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://zhblue.github.io/hustoj) 可能有帮助。
 
 PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
 
@@ -21,8 +23,6 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 关注后回复： 新装系统、升级、目录等关键词，系统会自动回复相关帮助。
 
 有问题请先查阅 **[FAQ常见问答](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)** 和 **[Wiki使用技巧](https://github.com/zhblue/hustoj/tree/master/wiki)** 或使用搜索引擎。 
-
-新版 `wiki` ：<https://hustoj.wiki>
 
 
 如果这个项目对你有用，请：
@@ -34,9 +34,12 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 * 每天扫一扫本页底部的支付宝红包
 * 在您的论文参考文献中写出本项目的网址
 
-[热烈祝贺 CCPC2019 顺利举办！](http://rank.ccpc.io/)
-
 Star us, please!
+
+## 推荐云服务商
+
+[UCloud年度大促](https://www.ucloud.cn/site/active/kuaijie.html?invitation_code=C1x6A291CBB02E8)
+[快杰云主机推广](https://www.ucloud.cn/site/active/ohost.html?invitation_code=C1x6A291CBB02E8)
 
 
 ## 目录
@@ -49,9 +52,9 @@ Star us, please!
 
 [校园网安装](#校园网安装)
 
-[基于 Ubuntu 20.04 安装](#基于-ubuntu-2004-安装)
+[基于 Ubuntu 20.04 安装](#基于-ubuntu-2004-安装)  ***各类公有云首选, 各类软件最新，有问题提交issues，第一时间处理***
 
-[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装)  ***各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机***
+[基于 Ubuntu 18.04 安装](#基于-ubuntu-1804-安装)  ***本地、内网部署首选，实际部署数量最多，稳定可靠***
 
 **[Ubuntu 更换软件源](#ubuntu-更换软件源)**
 
@@ -64,6 +67,8 @@ Star us, please!
 [基于其他发行版安装](#基于其他发行版安装)
 
 [LiveCD下载安装](#livecd下载安装)
+
+[卸载阿里云盾](#卸载阿里云盾)
 
 [装后须知](#装后须知)
 
@@ -91,10 +96,39 @@ Star us, please!
 
 ## 更新日志
 
-### 2020年
+<details open>
+<summary><b>2021年</b></summary>
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+04-08 | 更新 | 增加可选的docker作为judge_client外部容器，以增强安全性。
+03-26 | 更新 | 增加权限类型VIP,拥有VIP权限的账户，可以参加所有标题含`[VIP]`标记的私有比赛。
+03-08 | 补丁 | 修复在Ubuntu20.04上运行sqlite3
+02-06 | 更新 | 新的模板 [`mdui`](https://github.com/zhblue/hustoj/pull/742) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="mdui";` 即可。*如需内网使用，请在 `/home/judge/src/web/include/db_info.inc.php` 末尾添加 `$MDUI_OFFLINE=true;` 即可。* (Author: [@renbaoshuo](https://github.com/renbaoshuo))
+01-01 | 更新 | 新的模板 [`syzoj`](https://github.com/zhblue/hustoj/pull/722) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="syzoj";` 即可。 (Author: [@renbaoshuo](https://github.com/renbaoshuo))
+
+</details>
+
+<details>
+<summary><b>2020年</b></summary>
+
+日期   | 类型 | 更新内容
+----- | :--: | :-------
+12-30 | 更新 | 新版 wiki 已经迁移至本仓库，可通过 <https://zhblue.github.io/hustoj/> 访问。
+12-29 | 更新 | 导入导出FPS(xml)时，增加文件名，默认排序。
+12-28 | 更新 | 增加手工指定测试数据分值的特性，文件名test01[60].in 代表1号数据60分。
+12-27 | 补丁 | 修补龙芯上因为系统调用而提前超时的问题。
+12-21 | 补丁 | 修补手工添加题目失败的问题。
+12-07 | 更新 | HTTP判题机可以通过账号的problem_start/problem_end限制其领取任务的题目号范围，配合judge.conf中的HTTP_DOWNLOAD=0可以让不方便更新判题数据的判题机发挥部分功效。
+11-30 | 更新 | 优化s树莓派4安装脚本，修补漏洞、合并关于下载排名文件的更新。
+11-29 | 更新 | 优化输入数据提供方式，提高整体判题效率。
+11-28 | 补丁 | 修复18.04以上系统里C++编译错误，对C/C++输出中文尝试支持。
+11-22 | 补丁 | 修复部分RuntimeError, 更合理的限时控制。
+09-23 | 更新 | 针对Github国内访问缓慢，安装脚本SVN超时的情况进行了安装脚本优化，解决了18.04/20.04安装失败的问题。
+09-20 | 补丁 | 修复私有比赛题目不正确列出的问题。
+08-08 | 补丁 | 增加了环境"PYTHONIOENCODING=utf-8"，修复Python3环境下不能输出中文字符的问题。
+07-13 | 更新 | 允许长时间维持登录状态,管理员可自定义维持时间. 开启方式:修改 `/home/judge/src/web/include/db_info.inc.php`,设置 `OJ_COOKIE_LOGIN=true;`,自定义`OJ_KEEP_TIME`为**自最后一次登陆起**最长允许保持登录的时间
+07-12 | 更新 | 允许在WA掉的时候，ShOW_DIFF打开的情况下，下载出错的一组测试数，zip方式打包.in/.out文件
 02-10 | 更新 | 新的模板 `bshark` 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="bshark";`
 01-31 | 更新 | @melongist 增加了很多页面美化。
 01-27 | 更新 | 题目限时增强为浮点型，3位小数精度，即标称毫秒(ms)。
@@ -102,7 +136,10 @@ Star us, please!
 01-23 | 更新 | 修订了[Moodle集成代码](https://github.com/zhblue/hustoj/blob/master/wiki/MoodleIntegration.md)，实现HUSTOJ给moodle系统作业自动判分。
 01-20 | 更新 | 删除 `noip` 模式比赛的多余提交记录，允许自定义 `noip` 关键词，增加 `privilege` 表 `user_id` 索引。
 
-### 2019年
+</details>
+
+<details>
+<summary><b>2019年</b></summary>
 
 日期  | 类型 | 更新内容
 ----- | :--: | :-------
@@ -131,7 +168,13 @@ Star us, please!
 04-13 | 更新 | 支持 SQL 判题，基于 `SQLite3` ，支持龙芯3A3000（致谢江苏航天龙梦信息技术有限公司提供龙芯主机！）。
 03-14 | 更新 | 主线支持  树莓派(arm)  <b>龙芯(loongson-2f)</b>  i386 x86_64 
 
+</details>
+
 ## 安装说明
+
+### 视频教程
+
+Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 
 ### 注意事项
 
@@ -141,7 +184,7 @@ Star us, please!
 	
 尤其**别装** `Apache` ，如果已经安装，请先停用或卸载，以免80端口冲突。
 
-**不要** 使用 `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
+**不要** 使用 `宝塔` `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
 
 **腾讯云用户请 [换软件源](https://developer.aliyun.com/mirror/ubuntu)** ，增加 `multiverse` 。
 
@@ -162,8 +205,22 @@ sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ### 基于 Ubuntu 20.04 安装
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20.04.sh
+wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh
+```
+
+提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，小概率可能会造成 `systemd` 和 `umount` 进程卡CPU 100%
+可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
+或2:[卸载阿里云盾](#卸载阿里云盾)。**
+
+### 基于 Ubuntu 20.04 通过 Gitee 安装
+
+
+**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
+
+```bash
+wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
+sudo bash install-ubuntu20-gitee.sh
 ```
 
 ### 基于 Ubuntu 18.04 通过 Gitee 安装
@@ -182,7 +239,7 @@ sudo bash install-ubuntu18-gitee.sh
 **各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18.04.sh
+wget http://dl.hustoj.com/install-ubuntu18.04.sh
 sudo bash install-ubuntu18.04.sh
 ```
 ### Ubuntu 更换软件源
@@ -192,14 +249,14 @@ sudo bash install-ubuntu18.04.sh
 + 脚本一
 
 ```shell
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/sources.list.sh
+wget http://dl.hustoj.com/sources.list.sh
 sudo bash sources.list.sh
 ```
 
 + 脚本二
 
 ```shell
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/update-sources-ubuntu.sh
+wget http://dl.hustoj.com/update-sources-ubuntu.sh
 sudo bash update-sources-ubuntu.sh
 ```
     
@@ -208,7 +265,7 @@ sudo bash update-sources-ubuntu.sh
 国内桌面用户 `Deepin 15.9+` (内置QQ、微信、WPS方便出题人本地测试，最新15.11测试通过)
 
 ```bash
-wget https://github.com/zhblue/hustoj/raw/master/trunk/install/install-deepin15.9.sh
+wget http://dl.hustoj.com/install-deepin15.9.sh
 sudo bash install-deepin15.9.sh
 ```
     
@@ -309,6 +366,25 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 
 建好系统需要题目，请访问[TK题库](http://tk.hustoj.com/) 和 [freeeproblemset项目](https://github.com/zhblue/freeproblemset)
 
+### 卸载阿里云盾
+
+逐条执行下列代码删除阿里云盾：
+
+```
+# 卸载云盾
+wget http://update.aegis.aliyun.com/download/uninstall.sh
+chmod +x uninstall.sh
+./uninstall.sh
+wget http://update.aegis.aliyun.com/download/quartz_uninstall.sh
+chmod +x quartz_uninstall.sh
+./quartz_uninstall.sh
+# 删除残留
+pkill aliyun-service
+rm -rf /etc/init.d/agentwatch /usr/sbin/aliyun-service
+rm -rf /usr/local/aegis*
+```
+
+重启后若执行 `ps -aux | grep -E 'aliyun|AliYunDun'` 显示没有阿里云盾相关进程即为卸载成功。
 
 ## 装后须知
 
@@ -356,27 +432,35 @@ Linux新手请看[鸟哥的私房菜](http://cn.linux.vbird.org/linux_basic/linu
 sudo bash /home/judge/src/install/bak.sh
 ```
 
-备份后的数据在 `/var/backups/` 目录下。
+备份后的数据在 `/var/backups/` 目录下, 命名格式为 hustoj_%Y%m%d.tar.bz2。
 
 百度学习crontab的用法后，可以使用 `sudo crontab -e` 定制自动备份计划，部分安装脚本中包含了自动备份，但可能需要运行上面的语句一次来激活。
 
-## 迁移
-
-如果你需要进行跨系统迁移（如从 Ubuntu 迁移到 CentOS ），可以尝试使用下面的脚本进行备份
+## 迁移到CentOS
+如果你需要进行跨系统迁移（如从 Ubuntu 迁移到 CentOS ），可以尝试使用下面的脚本backup+.sh进行备份, 对应的*.tar.gz，备份的文件需要用restore+.sh还原。
 
 ```shell
-sudo bash /home/judge/src/install/backup+.sh
+sudo bash /home/judge/src/install/backup+.sh  #备份后的归档在 `/home/judge/backup` 命名格式为 +%Y-%m-%d-%H-%M-%S.tar.gz
 ```
 
-备份后的归档在 `/home/judge/backup` ，命名格式为 hustoj_%Y%m%d.tar.bz2
+
+## 迁移
+
+首先在新服务器上做全新安装和测试，没有问题后，再迁移数据。
 
 将你需要迁移的归档复制到目标系统的`/home/judge/backup`目录下，执行下面的脚本进行恢复
 
 ```shell
-sudo bash /home/judge/src/install/restore.sh <hustoj_%Y%m%d.tar.bz2>
+cd /home/judge/backup
+sudo bash /home/judge/src/install/restore.sh hustoj_%Y%m%d.tar.bz2
 ```
-
 脚本的第一个参数为恢复的目标归档，如果没有参数则默认为按名字排序后字典序最大的归档
+
+*如果是backup+.sh备份的.tar.gz文件，用restore+.sh还原。
+```shell
+cd /home/judge/backup
+sudo bash /home/judge/src/install/restore+.sh +%Y-%m-%d-%H-%M-%S.tar.gz
+```
 
 ## 更新升级
 

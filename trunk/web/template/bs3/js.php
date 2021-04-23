@@ -12,7 +12,7 @@ $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/ms
 /*
 
 <!--  to enable mathjax in hustoj:
-svn export http://github.com/mathjax/MathJax/trunk /home/judge/src/web/mathjax
+svn export http://github.com/mathjax/MathJax/trunk/es5 /home/judge/src/web/mathjax
 <script type="text/javascript"
   src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>

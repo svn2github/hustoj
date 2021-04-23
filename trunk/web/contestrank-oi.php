@@ -1,5 +1,5 @@
 <?php
-        $OJ_CACHE_SHARE=true;
+        $OJ_CACHE_SHARE=false;
         $cache_time=10;
         require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
@@ -50,7 +50,12 @@ class TM{
                         $this->p_ac_sec[$pid]=$sec;
                         $this->solved++;
                         if(!isset($this->p_wa_num[$pid])) $this->p_wa_num[$pid]=0;
-                        if(isset($this->p_pass_rate[$pid]))$this->total-=$this->p_pass_rate[$pid]*100;
+                        if(isset($this->p_pass_rate[$pid])){
+				$this->total-=$this->p_pass_rate[$pid]*100;
+			}else{
+				$this->p_pass_rate[$pid]=$res;
+			}
+				
 			$this->total+=100;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
 //                      echo "Time:".$this->time."<br>";
@@ -114,7 +119,13 @@ if ($start_time>time()){
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
-if(time()<$end_time && stripos($title,$OJ_NOIP_KEYWORD)!==false){
+	$noip = (time()<$end_time) && (stripos($title,$OJ_NOIP_KEYWORD)!==false);
+	if(isset($_SESSION[$OJ_NAME.'_'."administrator"])||
+		isset($_SESSION[$OJ_NAME.'_'."m$cid"])||
+		isset($_SESSION[$OJ_NAME.'_'."source_browser"])||
+		isset($_SESSION[$OJ_NAME.'_'."contest_creator"])
+	   ) $noip=false;
+if ($noip) {
       $view_errors =  "<h2>$MSG_NOIP_WARNING</h2>";
       require("template/".$OJ_TEMPLATE."/error.php");
       exit(0);

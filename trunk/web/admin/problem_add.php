@@ -35,7 +35,12 @@ $sample_input = $_POST['sample_input'];
 $sample_output = $_POST['sample_output'];
 $test_input = $_POST['test_input'];
 $test_output = $_POST['test_output'];
-
+/* don't do this , we will left them empty for not generating invalid test data files 
+if ($sample_input=="") $sample_input="\n";
+if ($sample_output=="") $sample_output="\n";
+if ($test_input=="") $test_input="\n";
+if ($test_output=="") $test_output="\n";
+*/
 $hint = $_POST['hint'];
 $hint = str_replace("<p>", "", $hint); 
 $hint = str_replace("</p>", "<br />", $hint); 
@@ -46,7 +51,7 @@ $source = $_POST['source'];
 $spj = $_POST['spj'];
 
 
-if(get_magic_quotes_gpc()){
+if (get_magic_quotes_gpc()) {
   $title = stripslashes($title);
   $time_limit = stripslashes($time_limit);
   $memory_limit = stripslashes($memory_limit);
@@ -79,11 +84,11 @@ if(strlen($test_output) && !strlen($test_input)) $test_input = "0";
 if(strlen($test_input)) mkdata($pid,"test.in", $test_input, $OJ_DATA);
 if(strlen($test_output)) mkdata($pid,"test.out", $test_output, $OJ_DATA);
 
-$sql = "insert into `privilege` (`user_id`,`rightstr`) values(?,?)";
+$sql = "INSERT INTO `privilege` (`user_id`,`rightstr`) VALUES(?,?)";
 pdo_query($sql, $_SESSION[$OJ_NAME.'_'.'user_id'], "p$pid");
 $_SESSION[$OJ_NAME.'_'."p$pid"] = true;
   
-echo "<a href='javascript:phpfm($pid);'>Add more TestData now!</a>";
+echo "&nbsp;&nbsp;- <a href='javascript:phpfm($pid);'>Add more TestData now!</a>";
 /*  */
 ?>
 

@@ -26,34 +26,34 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
 
-      <form action="register.php" method="post" role="form" class="form-horizontal">
+      <form action="register.php" onsubmit="return check();" method="post" role="form" class="form-horizontal">
         
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_REG_INFO?></label>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_USER_ID?></label>
-          <div class="col-sm-4"><input name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text" required ></div>
+          <div class="col-sm-4"><input id="user_id" name="user_id" class="form-control" placeholder="<?php echo $MSG_USER_ID?>*" type="text" required ></div>
         </div>
           <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_NICK?></label>
-          <div class="col-sm-4"><input name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text" required ></div>
+          <div class="col-sm-4"><input id="nick" name="nick" class="form-control" placeholder="<?php echo $MSG_NICK?>*" type="text" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_PASSWORD?></label>
-          <div class="col-sm-4"><input name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
+          <div class="col-sm-4"><input id="password" name="password" class="form-control" placeholder="<?php echo $MSG_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_REPEAT_PASSWORD?></label>
-          <div class="col-sm-4"><input name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
+          <div class="col-sm-4"><input id="rptpassword" name="rptpassword" class="form-control" placeholder="<?php echo $MSG_REPEAT_PASSWORD?>*" type="password"  autocomplete="off" required ></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_SCHOOL?></label>
-          <div class="col-sm-4"><input name="school" class="form-control" placeholder="<?php echo $MSG_SCHOOL?>" type="text"></div>
+          <div class="col-sm-4"><input id="school" name="school" class="form-control" placeholder="<?php echo $MSG_SCHOOL?>" type="text"></div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_EMAIL?></label>
-          <div class="col-sm-4"><input name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"  required ></div>
+          <div class="col-sm-4"><input id="email" name="email" class="form-control" placeholder="<?php echo $MSG_EMAIL?>" type="text"  required ></div>
         </div>
 
         <?php if($OJ_VCODE){?>
@@ -78,7 +78,27 @@
         </div>
         
       </form>
-      
+     <script>
+	function check(){
+		if($("#user_id").val().length<3) {
+			alert("<?php echo $MSG_WARNING_USER_ID_SHORT?>");
+			$("#user_id").focus();
+			return false;
+		}
+		if($("#password").val().length<6) {
+			alert("<?php echo $MSG_WARNING_PASSWORD_SHORT?>");
+			$("#password").focus();
+			return false;
+		}
+		
+		if($("#password").val()!=$("#rptpassword").val()) {
+			alert("<?php echo $MSG_WARNING_REPEAT_PASSWORD_DIFF?>");
+			$("#rptpassword").focus();
+			return false;
+		}
+	}
+
+     </script> 
     </div>
   </div> <!-- /container -->
 

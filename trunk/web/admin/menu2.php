@@ -4,7 +4,7 @@
     require_once("../lang/$OJ_LANG.php");
   }
   $path_fix="../";
-
+  $OJ_TEMPLATE="bs3";
 ?>
 <html>
 <head>
@@ -66,8 +66,10 @@
       <?php echo $MSG_PROBLEM."-".$MSG_ADMIN ?> <span class="caret"></span>
     </button>
     <div class="dropdown-menu">
-<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])) {?>
+<?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])) {?>
       <a class="dropdown-item btn-sm" href="problem_list.php" target="main" title="<?php echo $MSG_HELP_PROBLEM_LIST?>"><b><?php echo $MSG_PROBLEM."-".$MSG_LIST?></b></a>
+<?php }
+      if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])) {?>
       <a class="dropdown-item btn-sm" href="problem_add_page.php" target="main" title="<?php echo html_entity_decode($MSG_HELP_ADD_PROBLEM)?>"><b><?php echo $MSG_PROBLEM."-".$MSG_ADD?></b></a>
       <a class="dropdown-item btn-sm" href="problem_import.php" target="main" title="<?php echo $MSG_HELP_IMPORT_PROBLEM?>"><b><?php echo $MSG_PROBLEM."-".$MSG_IMPORT?></b></a>
       <a class="dropdown-item btn-sm" href="problem_export.php" target="main" title="<?php echo $MSG_HELP_EXPORT_PROBLEM?>"><b><?php echo $MSG_PROBLEM."-".$MSG_EXPORT?></b></a>
@@ -107,10 +109,6 @@
 
 </div>
 </center>
-
-<?php if (isset($OJ_ONLINE)&&$OJ_ONLINE){?>
-  <br><a class='btn ' href="../online.php" target="main"><b><?php echo $MSG_ONLINE?></b></a>
-<?php }?>
 
 <?php if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){?>
   <br><a class='btn btn-block btn-sm' href="https://github.com/zhblue/hustoj/" target="_blank"><b>HUSTOJ</b></a>

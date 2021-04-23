@@ -71,19 +71,19 @@
 					<thead>
 						<tr class='toprow'>
 							<td></td>
-							<td class='hidden-xs'>
+							<td class='hidden-xs center'>
 								<?php echo $MSG_PROBLEM_ID?>
 							</td>
-							<td>
+							<td class='center'>
 								<?php echo $MSG_TITLE?>
 							</td>
-							<td class='hidden-xs'>
+							<td class='hidden-xs center'>
 								<?php echo $MSG_SOURCE?>
 							</td>
-							<td style="cursor:hand">
+							<td style="cursor:hand" class='center'>
 								<?php echo $MSG_SOVLED?>
 							</td>
-							<td style="cursor:hand">
+							<td style="cursor:hand" class='center'>
 								<?php echo $MSG_SUBMIT?>
 							</td>
 						</tr>

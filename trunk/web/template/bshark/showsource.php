@@ -77,8 +77,8 @@ var is_look = 1;
 if (is_look==0) fresh_res = '----';
      if (is_look==1) {
      document.getElementById("status_show").innerHTML = judge_result[fresh_res];
-     document.getElementById("stime").innerHTML = stime+'ms';
-     document.getElementById("smemory").innerHTML = smemory+'KB';
+     document.getElementById("stime").innerHTML = stime+'';
+     document.getElementById("smemory").innerHTML = smemory+'';
      document.getElementById("status_show").className = "badge badge-"+color[fresh_res];
      }
      else {
@@ -101,8 +101,8 @@ $.ajax({
      smemory = msg.split(",")[1];
      if (is_look==1) {
      document.getElementById("status_show").innerHTML = judge_result[fresh_res];
-     document.getElementById("stime").innerHTML = stime+'ms';
-     document.getElementById("smemory").innerHTML = smemory+'KB';
+     document.getElementById("stime").innerHTML = stime+'';
+     document.getElementById("smemory").innerHTML = smemory+'';
      document.getElementById("status_show").className = "badge badge-"+color[fresh_res];
      }
      else {

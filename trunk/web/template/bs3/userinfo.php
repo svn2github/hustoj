@@ -34,8 +34,8 @@
 echo "<a href=mail.php?to_user=$user>$MSG_MAIL</a>";
 ?>
 </caption>
-<tr ><td width=15%><?php echo $MSG_Number?><td width=25% align=center><?php echo $Rank?><td width=70% align=center>Solved Problems List</tr>
-<tr ><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></a>
+<tr ><td width=15%><?php echo $MSG_Number?></td><td width=25% align=center><?php echo $Rank?></td><td width=70% align=center>Solved Problems List</td></tr>
+<tr ><td><?php echo $MSG_SOVLED?><td align=center><a href='status.php?user_id=<?php echo $user?>&jresult=4'><?php echo $AC?></td></a>
 <td rowspan=14 align=center>
 <script language='javascript'>
 function p(id,c){
@@ -53,14 +53,14 @@ if ($result=pdo_query($sql,$user)){
 <div id=submission style="width:600px;height:300px" ></div>
 </td>
 </tr>
-<tr ><td><?php echo $MSG_SUBMIT?><td align=center><a href='status.php?user_id=<?php echo $user?>'><?php echo $Submit?></a></tr>
+<tr ><td><?php echo $MSG_SUBMIT?></td><td align=center><a href='status.php?user_id=<?php echo $user?>'><?php echo $Submit?></a></td></tr>
 <?php
 foreach($view_userstat as $row){
 //i++;
-echo "<tr ><td>".$jresult[$row[0]]."<td align=center><a href=status.php?user_id=$user&jresult=".$row[0]." >".$row[1]."</a></tr>";
+echo "<tr ><td>".$jresult[$row[0]]."</td><td align=center><a href=status.php?user_id=$user&jresult=".$row[0]." >".$row[1]."</a></td></tr>";
 }
 //}
-echo "<tr id=pie ><td>Statistics<td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></tr>";
+echo "<tr id=pie ><td>Statistics</td><td><div id='PieDiv' style='position:relative;height:105px;width:120px;'></div></td></tr>";
 ?>
 <script type="text/javascript" src="include/wz_jsgraphics.js"></script>
 <script type="text/javascript" src="include/pie.js"></script>
@@ -85,11 +85,12 @@ mypie.drawPie(y,x);
 //mypie.clearPie();
 </script>
 <tr ><td>School:<td align=center><?php echo $school?></tr>
-<tr ><td>Email:<td align=center>***<?php// echo $email?></tr>
+<tr ><td>Email:<td align=center>[email protected]<?php// echo $email?></tr>
 </table>
 <?php
 if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-?><table border=1><tr class=toprow><td>UserID<td>Password<td>IP<td>Time</tr>
+?><table border=1>
+<thead><tr class=toprow><th>UserID</th><th>Password</th><th>IP</th><th>Time</th></tr></thead>
 <tbody>
 <?php
 $cnt=0;

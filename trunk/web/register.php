@@ -21,11 +21,11 @@ if($OJ_LOGIN_MOD!="hustoj"){
 	$err_cnt++;
 }
 
-if($len>20){
+if($len>20){ 
 	$err_str=$err_str."User ID Too Long!\\n";
 	$err_cnt++;
 }else if ($len<3){
-	$err_str=$err_str."User ID Too Short!\\n";
+	$err_str=$err_str." $MSG_WARNING_USER_ID_SHORT\\n";
 	$err_cnt++;
 }
 if (!is_valid_user_name($user_id)){
@@ -39,12 +39,12 @@ if ($len>100){
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
 if (strcmp($_POST['password'],$_POST['rptpassword'])!=0){
-	$err_str=$err_str."Password Not Same!\\n";
+	$err_str=$err_str."$MSG_WARNING_REPEAT_PASSWORD_DIFF!\\n";
 	$err_cnt++;
 }
 if (strlen($_POST['password'])<6){
 	$err_cnt++;
-	$err_str=$err_str."Password should be Longer than 6!\\n";
+	$err_str=$err_str."$MSG_WARNING_PASSWORD_SHORT \\n";
 }
 $len=strlen($_POST['school']);
 if ($len>100){

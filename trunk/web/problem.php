@@ -1,10 +1,11 @@
 <?php
-$cache_time = 30;
+$cache_time = 10;
 $OJ_CACHE_SHARE = false;
 
 require_once('./include/cache_start.php');
 require_once('./include/db_info.inc.php');
 require_once('./include/const.inc.php');
+require_once('./include/my_func.inc.php');
 require_once('./include/setlang.php');
 if(isset($OJ_LANG)){
 	require_once("./lang/$OJ_LANG.php");
@@ -29,10 +30,13 @@ if (isset($_GET['id'])) {
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=?";
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
-			SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-				SELECT `contest_id` FROM `contest` WHERE (`start_time`<= '$now' AND '$now'<`end_time`)
-			)
-		)";
+				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
+					SELECT `contest_id` FROM `contest` WHERE ( `end_time`>'$now' or `private`='1' )    
+				)
+			)";        //////////  people should not see the problem used in contest before they end by modifying url in browser address bar
+				   /////////   if you give students opportunities to test their result out side the contest ,they can bypass the penalty time of 20 mins for
+	                           /////////   each non-AC sumbission in contest. if you give them opportunities to view problems before exam ,they will ask classmates to write
+	                           /////////   code for them in advance, if you want to share private contest problem to practice you should modify the contest into public
 
 	$pr_flag = true;
 	$result = pdo_query($sql,$id);
@@ -41,7 +45,6 @@ else if (isset($_GET['cid']) && isset($_GET['pid'])) {
 	//contest
 	$cid = intval($_GET['cid']);
 	$pid = intval($_GET['pid']);
-
 
 	if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
 		$sql = "SELECT langmask,private,defunct FROM `contest` WHERE `defunct`='N' AND `contest_id`=?";
@@ -114,11 +117,11 @@ if (count($result)!=1) {
 		$result = pdo_query($sql,$id);
 
 		if ($i=count($result)) {
-			$view_errors .= "This problem is in Contest(s) below:<br>";
-
-			foreach ($result as $row) {
-				$view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".htmlentities($row[1],ENT_QUOTES,"utf-8")."</a><br>";
-			}
+    //  hide contest -- 2020.12.04
+		//	$view_errors .= "This problem is in Contest(s) below:<br>";
+		//	foreach ($result as $row) {
+		//		$view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".htmlentities($row[1],ENT_QUOTES,"utf-8")."</a><br>";
+		//	}
 		}
 		else {
 			$view_title = "<title>$MSG_NO_SUCH_PROBLEM!</title>";
@@ -136,6 +139,15 @@ if (count($result)!=1) {
 else {
 	$row = $result[0];
 	$view_title = $row['title'];     
+}
+//检查当前题目是不是在NOIP模式比赛中，如果是则不显示AC数量 2020.7.11 by ivan_zhou
+$now = strftime("%Y-%m-%d %H:%M",time());
+$sql = "select 1 from `contest_problem` where (`problem_id`= ? or `num` = ? and `contest_id`=?) and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
+$rrs = pdo_query($sql, $id ,$pid , $cid ,$now , $now , "%$OJ_NOIP_KEYWORD%");
+$flag = count($rrs) > 0 ;
+if($flag)
+{	
+	$row[ 'accepted' ]='<font color="red"> ? </font>';
 }
 
 /////////////////////////Template

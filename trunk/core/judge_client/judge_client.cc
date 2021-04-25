@@ -173,6 +173,8 @@ static int total_time= 0;
 static int http_judge = 0;
 static int copy_data= 0;
 static char http_baseurl[BUFFER_SIZE/10];
+static char http_apipath[BUFFER_SIZE/10];
+static char http_loginpath[BUFFER_SIZE/10];
 static char http_username[BUFFER_SIZE/10];
 static char http_password[BUFFER_SIZE/10];
 static int http_download = 1;
@@ -526,6 +528,8 @@ void init_judge_conf()
 			read_buf(buf, "OJ_JAVA_XMX", java_xmx);
 			read_int(buf, "OJ_HTTP_JUDGE", &http_judge);
 			read_buf(buf, "OJ_HTTP_BASEURL", http_baseurl);
+			read_buf(buf, "OJ_HTTP_APIPATH", http_apipath);
+			read_buf(buf, "OJ_HTTP_LOGINPATH", http_loginpath);
 			read_buf(buf, "OJ_HTTP_USERNAME", http_username);
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
 			read_int(buf, "OJ_HTTP_DOWNLOAD", &http_download);
@@ -827,9 +831,9 @@ int compare(const char *file1, const char *file2, const char * infile)
 bool check_login()
 {
 	const char *cmd =
-		" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+		" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	int ret = 0;
-	FILE *fjobs = read_cmd_output(cmd, http_baseurl);
+	FILE *fjobs = read_cmd_output(cmd, http_baseurl, http_apipath);
 	if(1!=fscanf(fjobs, "%d", &ret)) printf("http login fail..");
 	pclose(fjobs);
 
@@ -840,9 +844,9 @@ void login()
 	if (!check_login())
 	{
 		const char *cmd =
-			"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/login.php\"";
+			"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 		FILE *fjobs = read_cmd_output(cmd, http_username, http_password,
-									  http_baseurl);
+									  http_baseurl, http_loginpath);
 		//fscanf(fjobs,"%d",&ret);
 		pclose(fjobs);
 	}
@@ -887,9 +891,9 @@ void _update_solution_http(int solution_id, int result, int time, int memory,
 						   int sim, int sim_s_id, double pass_rate)
 {
 	const char *cmd =
-		" wget --post-data=\"update_solution=1&sid=%d&result=%d&time=%d&memory=%d&sim=%d&simid=%d&pass_rate=%f\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+		" wget --post-data=\"update_solution=1&sid=%d&result=%d&time=%d&memory=%d&sim=%d&simid=%d&pass_rate=%f\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	FILE *fjobs = read_cmd_output(cmd, solution_id, result, time, memory, sim,
-								  sim_s_id, pass_rate, http_baseurl);
+								  sim_s_id, pass_rate, http_baseurl, http_apipath);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
@@ -1004,8 +1008,8 @@ void _addceinfo_http(int solution_id)
 	free(ceinfo_encode);
 
 	const char *cmd =
-		" wget --post-file=\"ce.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *fjobs = read_cmd_output(cmd, http_baseurl);
+		" wget --post-file=\"ce.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *fjobs = read_cmd_output(cmd, http_baseurl, http_apipath);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
@@ -1082,8 +1086,8 @@ void _addreinfo_http(int solution_id, const char *filename)
 	free(reinfo_encode);
 
 	const char *cmd =
-		" wget --post-file=\"re.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *fjobs = read_cmd_output(cmd, http_baseurl);
+		" wget --post-file=\"re.post\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *fjobs = read_cmd_output(cmd, http_baseurl, http_apipath);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
@@ -1150,8 +1154,8 @@ void _update_user_http(char *user_id)
 {
 
 	const char *cmd =
-		" wget --post-data=\"updateuser=1&user_id=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *fjobs = read_cmd_output(cmd, user_id, http_baseurl);
+		" wget --post-data=\"updateuser=1&user_id=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *fjobs = read_cmd_output(cmd, user_id, http_baseurl, http_apipath);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
@@ -1172,8 +1176,8 @@ void update_user(char *user_id)
 
 void _update_problem_http(int pid,int cid) {
 	const char * cmd =
-			" wget --post-data=\"updateproblem=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE * fjobs = read_cmd_output(cmd, pid, http_baseurl);
+			" wget --post-data=\"updateproblem=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE * fjobs = read_cmd_output(cmd, pid, http_baseurl, http_apipath);
 	//fscanf(fjobs,"%d",&ret);
 	pclose(fjobs);
 }
@@ -1559,8 +1563,8 @@ void _get_solution_http(int solution_id, char *work_dir, int lang)
 	//login();
 
 	const char *cmd2 =
-		"wget --post-data=\"getsolution=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O %s \"%s/admin/problem_judge.php\"";
-	FILE *pout = read_cmd_output(cmd2, solution_id, src_pth, http_baseurl);
+		"wget --post-data=\"getsolution=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O %s \"%s%s\"";
+	FILE *pout = read_cmd_output(cmd2, solution_id, src_pth, http_baseurl, http_apipath);
 
 	pclose(pout);
 }
@@ -1625,8 +1629,8 @@ void _get_custominput_http(int solution_id, char *work_dir)
 	//login();
 
 	const char *cmd2 =
-		"wget --post-data=\"getcustominput=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O %s \"%s/admin/problem_judge.php\"";
-	FILE *pout = read_cmd_output(cmd2, solution_id, src_pth, http_baseurl);
+		"wget --post-data=\"getcustominput=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O %s \"%s%s\"";
+	FILE *pout = read_cmd_output(cmd2, solution_id, src_pth, http_baseurl, http_apipath);
 
 	pclose(pout);
 }
@@ -1693,8 +1697,8 @@ void _get_solution_info_http(int solution_id, int & p_id, char * user_id,
 	login();
 
 	const char *cmd =
-		"wget --post-data=\"getsolutioninfo=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *pout = read_cmd_output(cmd, solution_id, http_baseurl);
+		"wget --post-data=\"getsolutioninfo=1&sid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *pout = read_cmd_output(cmd, solution_id, http_baseurl, http_apipath);
 	if(1!=fscanf(pout, "%d", &p_id))  printf("http problem_id read fail...\n");
 	if(1!=fscanf(pout, "%s", user_id)) printf("http user_id read fail ... \n") ;
 	if(1!=fscanf(pout, "%d", &lang))   printf("http language read fail ... \n") ;
@@ -1743,8 +1747,8 @@ void _get_problem_info_http(int p_id, double &time_lmt, int &mem_lmt,
 	//login();
 
 	const char *cmd =
-		"wget --post-data=\"getprobleminfo=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *pout = read_cmd_output(cmd, p_id, http_baseurl);
+		"wget --post-data=\"getprobleminfo=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *pout = read_cmd_output(cmd, p_id, http_baseurl, http_apipath);
 	if(1!=fscanf(pout, "%lf", &time_lmt)) printf("http read time_limit fail...\n");
 	if(1!=fscanf(pout, "%d", &mem_lmt)  ) printf("http read memory_limit fail...\n");
 	if(1!=fscanf(pout, "%d", &isspj)    ) printf("http read special judge fail...\n");
@@ -3005,8 +3009,8 @@ int get_test_file(char *work_dir, int p_id)
 	time_t remote_date, local_date;
 	int ret = 0;
 	const char *cmd =
-		" wget --post-data=\"gettestdatalist=1&time=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE *fjobs = read_cmd_output(cmd, p_id, http_baseurl);
+		" wget --post-data=\"gettestdatalist=1&time=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE *fjobs = read_cmd_output(cmd, p_id, http_baseurl, http_apipath);
 	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL)
 	{
 
@@ -3031,8 +3035,8 @@ int get_test_file(char *work_dir, int p_id)
 				continue;
 			execute_cmd("/bin/mkdir -p %s/data/%d", oj_home, p_id);
 			const char *cmd2 =
-				" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s/admin/problem_judge.php\"";
-			execute_cmd(cmd2, p_id, filename, localfile, http_baseurl);
+				" wget --post-data=\"gettestdata=1&filename=%d/%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O \"%s\"  \"%s%s\"";
+			execute_cmd(cmd2, p_id, filename, localfile, http_baseurl, http_apipath);
 			ret++;
 
 			if (strcmp(filename, "spj.c") == 0)

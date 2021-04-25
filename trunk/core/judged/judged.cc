@@ -75,6 +75,8 @@ static int oj_tot;
 static int oj_mod;
 static int http_judge = 0;
 static char http_baseurl[BUFFER_SIZE];
+static char http_apipath[BUFFER_SIZE];
+static char http_loginpath[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
 
@@ -220,9 +222,12 @@ void init_judge_conf() {
 
 			read_int(buf, "OJ_HTTP_JUDGE", &http_judge);
 			read_buf(buf, "OJ_HTTP_BASEURL", http_baseurl);
+			read_buf(buf, "OJ_HTTP_APIPATH", http_apipath);
+			read_buf(buf, "OJ_HTTP_LOGINPATH", http_loginpath);
 			read_buf(buf, "OJ_HTTP_USERNAME", http_username);
 			read_buf(buf, "OJ_HTTP_PASSWORD", http_password);
 			read_buf(buf, "OJ_LANG_SET", oj_lang_set);
+			
 			
 			read_int(buf, "OJ_UDP_ENABLE", &oj_udp);
                         read_buf(buf, "OJ_UDP_SERVER", oj_udpserver);
@@ -372,10 +377,10 @@ int read_int_http(FILE * f) {
 }
 bool check_login() {
 	const char * cmd =
-			"wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+			"wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	int ret = 0;
 
-	FILE * fjobs = read_cmd_output(cmd, http_baseurl);
+	FILE * fjobs = read_cmd_output(cmd, http_baseurl, http_apipath);
 	ret = read_int_http(fjobs);
 	pclose(fjobs);
 
@@ -385,8 +390,8 @@ void login() {
 	if (!check_login()) {
 		char cmd[BUFFER_SIZE];
 		sprintf(cmd,
-				"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/login.php\"",
-				http_username, http_password, http_baseurl);
+				"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"",
+				http_username, http_password, http_baseurl, http_loginpath);
 		system(cmd);
 	}
 
@@ -397,8 +402,8 @@ int _get_jobs_http(int * jobs) {
 	int i = 0;
 	char buf[BUFFER_SIZE];
 	const char * cmd =
-			"wget --post-data=\"getpending=1&oj_lang_set=%s&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
-	FILE * fjobs = read_cmd_output(cmd, oj_lang_set, max_running, http_baseurl);
+			"wget --post-data=\"getpending=1&oj_lang_set=%s&max_running=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
+	FILE * fjobs = read_cmd_output(cmd, oj_lang_set, max_running, http_baseurl, http_apipath);
 	while (fscanf(fjobs, "%s", buf) != EOF) {
 		//puts(buf);
 		int sid = atoi(buf);
@@ -497,9 +502,9 @@ bool _check_out_mysql(int solution_id, int result) {
 bool _check_out_http(int solution_id, int result) {
 	login();
 	const char * cmd =
-			"wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s/admin/problem_judge.php\"";
+			"wget --post-data=\"checkout=1&sid=%d&result=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	int ret = 0;
-	FILE * fjobs = read_cmd_output(cmd, solution_id, result, http_baseurl);
+	FILE * fjobs = read_cmd_output(cmd, solution_id, result, http_baseurl, http_apipath);
 	fscanf(fjobs, "%d", &ret);
 	pclose(fjobs);
 

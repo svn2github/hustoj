@@ -539,7 +539,7 @@ void init_judge_conf()
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
-			//read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
+			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);

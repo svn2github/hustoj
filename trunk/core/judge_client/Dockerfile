@@ -19,6 +19,7 @@ RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
         openjdk-11-jdk\
 	subversion \
 	wget
+RUN     apt-get -y install sqlite3
 RUN     useradd -m -u 1536 judge
 RUN     cd /home/judge/ && \ 
 	wget dl.hustoj.com/hustoj.tar.gz && \

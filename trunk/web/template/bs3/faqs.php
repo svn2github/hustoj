@@ -68,10 +68,11 @@
 				</tr>
 			</table>
 			<p> Our compiler software version:<br>
-				<font color=blue>gcc (Ubuntu/Linaro 4.4.4-14ubuntu5) 4.4.5</font><br>
-				<font color=blue>glibc 2.3.6</font><br>
-				<font color=blue>Free Pascal Compiler version 2.4.0-2 [2010/03/06] for i386<br> java version "1.7"<br>
-				</font>
+				<font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
+				<font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
+				<font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
+				<font color=blue>Openjdk "14.0.2"</font><br>
+				<font color=blue>Python 3.8.5</font><br>
 			</p>
 			<hr>
 			<font color=green>Q</font>:Where is the input and the output?<br>

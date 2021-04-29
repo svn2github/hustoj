@@ -61,11 +61,12 @@
   </tr>
 </table>
 <p align="right"><b> :سىستىما تىل تەرجىمىتېر نەشىر نۇسخا پايدىلىنىش كۆرسەتكۈچى<br>
-  <font color=blue>gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3)</font><br>
-  <font color=blue>glibc 2.19</font><br>
-<font color=blue>Free Pascal Compiler version 2.6.2<br>
-openjdk 1.7.0_151<br>
-</font></p>
+				<font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
+				<font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
+				<font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
+				<font color=blue>Openjdk "14.0.2"</font><br>
+				<font color=blue>Python 3.8.5</font><br>
+</p>
 <hr>
 <p align="right"><b> پروگىرامما قانداق يېزىش چىقىرىش ئىلىپ بارىدۇ ؟ قانداق پىرىنسىپقا بويسىنىدۇ ؟:<font color=green>Q</font><br>
   ئۆلچەملىك كىرگۈزۈش ئارقىلىق ئۇچۇرنى ئوقۇيدۇ stdin('Standard Input') :<font color=red>A</font><br>

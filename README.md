@@ -101,6 +101,7 @@ Star us, please!
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+05-02 | 补丁 | 禁止查看进行中的比赛所用的题目在比赛之前提交的源码，避免训练中偷懒复制老代码。
 04-08 | 更新 | 增加可选的docker作为judge_client外部容器，以增强安全性。
 03-26 | 更新 | 增加权限类型VIP,拥有VIP权限的账户，可以参加所有标题含`[VIP]`标记的私有比赛。
 03-08 | 补丁 | 修复在Ubuntu20.04上运行sqlite3
@@ -189,6 +190,7 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 **腾讯云用户请 [换软件源](https://developer.aliyun.com/mirror/ubuntu)** ，增加 `multiverse` 。
 
 阿里云用户请百度 `阿里云 80端口`
+
 
 ### 校园网安装
 

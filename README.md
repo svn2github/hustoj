@@ -390,6 +390,9 @@ rm -rf /usr/local/aegis*
 
 ## 装后须知
 
+[Python重度用户注意查阅](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md#python%E5%88%A4%E9%A2%98%E5%A5%BD%E6%85%A2%E5%A5%BD%E6%85%A2%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F)
+--
+
 常见问题自动应答微信公众号: `hustoj`
 <img src="http://hustoj.com/wx.jpg" height="180">
 

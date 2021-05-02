@@ -10,6 +10,13 @@ When people asked question, we put the answer here
 新版本
 ----
 
+Python判题好慢好慢，如何加速？
+--
+如果你的系统主要为Python服务，可以修改/home/judge/etc/judge.conf 设定 OJ_PYTHON_FREE=1
+为了增加安全性，请在/home/judge/src/core/judge_client目录运行`sudo bash docker.sh`，然后修改/home/judge/etc/judge.conf 设定 OJ_USE_DOCKER=1
+这样设定后，可以提高Python的判题速度，并提供额外的安全防护。
+
+
 为什么提交后没有记录？
 --
 可能是没有填些验证码，或者昵称过长，或者是数据库结构不是最新版（Web代码和数据库版本不一致）。

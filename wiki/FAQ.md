@@ -217,7 +217,8 @@ Runtime Error:[ERROR] A Not allowed system call: runid:10735 CALLID:20 如何解
 如何让判题程序忽略行尾的空白字符
 --
 
-	在judge_client.cc头部增加宏定义 IGNORE_ESOL
+在judge_client.cc头部增加宏定义 IGNORE_ESOL 或者修改 Makefile 增加 -DIGNORE_ESOL 参数。
+	
 
 配置文件里的字段什么含义?
 --

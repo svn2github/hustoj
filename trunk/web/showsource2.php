@@ -20,6 +20,7 @@ $result=pdo_query($sql,$id);
 $slanguage=$row['language'];
 $sresult=$row['result'];
 $stime=$row['time'];
+$owner=$row['user_id'];
 $smemory=$row['memory'];
 $sproblem_id=$row['problem_id'];
 $view_user_id=$suser_id=$row['user_id'];
@@ -30,6 +31,7 @@ if(!isset($_SESSION[$OJ_NAME."_source_browser"])){
 		$sql="select start_time,end_time from contest where contest_id=?";
 		$result=pdo_query($sql,$contest_id);
 		if($result){
+			$row=$result[0];
 			$start_time = strtotime($row['start_time']);
 			$end_time = strtotime($row['end_time']);
 			$now=time();
@@ -90,7 +92,7 @@ if (isset($OJ_AUTO_SHARE)&&$OJ_AUTO_SHARE&&isset($_SESSION[$OJ_NAME.'_'.'user_id
 	
 }
 $view_source="No source code available!";
-if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $owner==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 
 		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=?";

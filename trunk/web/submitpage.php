@@ -49,7 +49,7 @@ if (isset($_GET['sid'])) {
 	$row = $result[0];
 	$cid = intval($row['contest_id']);
 	$sproblem_id= intval($row['problem_id']);
-	$contest=$cid;
+	$contest_id=$cid;
 	if ($row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id'])
 		$ok = true;
 
@@ -58,6 +58,7 @@ if (isset($_GET['sid'])) {
 			$sql="select start_time,end_time from contest where contest_id=?";
 			$result=pdo_query($sql,$contest_id);
 			if($result){
+				$row=$result[0];
 				$start_time = strtotime($row['start_time']);
 				$end_time = strtotime($row['end_time']);
 				$now=time();
@@ -66,16 +67,19 @@ if (isset($_GET['sid'])) {
 					
 				}else{			// 属于进行中的比赛，可以看
 							
+		//			echo $now.'-'.$end_time;
 					$need_check_using=false;
 				
 				}
 			}
 
 		}else{ //非比赛提交.考察是否有进行中的比赛在使用
+		//			echo $now.'+'.$end_time;
 
 					$need_check_using=true;
 		}
 		// 检查是否使用中
+		//echo $now.'*'.$end_time;
 		$now = strftime("%Y-%m-%d %H:%M", time());
 		$sql="select contest_id from contest where contest_id in (select contest_id from contest_problem where problem_id=?) 
 									and start_time < '$now' and end_time > '$now' ";

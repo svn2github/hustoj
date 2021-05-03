@@ -20,6 +20,7 @@ $row=$result[0];
 $slanguage=$row['language'];
 $sresult=$row['result'];
 $stime=$row['time'];
+$owner=$row['user_id'];
 $smemory=$row['memory'];
 $sproblem_id=$row['problem_id'];
 $view_user_id=$suser_id=$row['user_id'];
@@ -30,10 +31,12 @@ if(!isset($_SESSION[$OJ_NAME."_source_browser"])){
 		$sql="select start_time,end_time from contest where contest_id=?";
 		$result=pdo_query($sql,$contest_id);
 		if($result){
+			$row=$result[0];
 			$start_time = strtotime($row['start_time']);
 			$end_time = strtotime($row['end_time']);
 			$now=time();
 			if( $end_time < $now ){ // 当前提交，属于已经结束的比赛，考察是否有进行中的比赛在使用。
+				echo $now."-".$end_time;
 				$need_check_using=true;
 				
 			}else{			// 属于进行中的比赛，可以看
@@ -107,7 +110,7 @@ if(isset($_SESSION[$OJ_NAME.'_'.'s'.$sproblem_id])){
 
 }
 $view_source="No source code available!";
-if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $row['user_id']==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&$row && $owner ==$_SESSION[$OJ_NAME.'_'.'user_id']) $ok=true;
 if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 
 		$sql="SELECT `source` FROM `source_code_user` WHERE `solution_id`=?";

@@ -119,7 +119,8 @@ systemctl enable php7.4-fpm
 
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
-
+cd /home/judge/src/install
+./docker.sh
 cls
 reset
 

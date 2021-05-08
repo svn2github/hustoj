@@ -125,6 +125,7 @@ if test -f  /.dockerenv ;then
 else
 	./docker.sh
 	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
+	 sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
 fi
 cls
 reset

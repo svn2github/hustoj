@@ -120,7 +120,12 @@ systemctl enable php7.4-fpm
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
-./docker.sh
+if test -f  /.dockerenv ;then
+	"Already in docker, skip docker installation."
+else
+	./docker.sh
+	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
+fi
 cls
 reset
 

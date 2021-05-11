@@ -16,7 +16,7 @@ RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
 	mono-devel \
 	busybox \
 	dos2unix \
-        openjdk-11-jdk\
+        openjdk-14-jdk\
 	subversion \
 	wget
 RUN     apt-get -y install sqlite3

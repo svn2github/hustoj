@@ -56,7 +56,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
               </li>
             <?php }?>
 
-            <?php// if (!isset($OJ_ON_SITE_CONTEST_ID)&&!isset($_GET['cid'])){?>
+            <?php // if (!isset($OJ_ON_SITE_CONTEST_ID)&&!isset($_GET['cid'])){?>
             <?php if (!isset($OJ_ON_SITE_CONTEST_ID)){?>            
               <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
                 <li <?php if ($dir=="discuss3") echo " $ACTIVE";?>>

@@ -9,14 +9,6 @@ require_once('./include/memcache.php');
 require_once('./include/setlang.php');
 
 $view_title = "Problem Set";
-$first = 1000;
-//if($OJ_SAE) $first=1;
-$sql = "select max(`problem_id`) as upid FROM `problem`";
-$page_cnt = 50;  //50 prlblems per page
-$result = mysql_query_cache($sql);
-$row = $result[0];
-$cnt = $row['upid']-$first;
-$cnt = $cnt/$page_cnt;
 
 //remember page
 $page = "1";
@@ -44,7 +36,16 @@ else {
 }
 //end of remember page
 
-$pstart = $first+$page_cnt*intval($page)-$page_cnt;
+//Page Setting
+$sql = "select count(`problem_id`) as upid FROM `problem` WHERE `defunct`='N'";
+$page_cnt = 50;  //50 prlblems per page
+$result = mysql_query_cache($sql);
+$row = $result[0];
+$cnt = $row['upid'] / $page_cnt;
+
+if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
+
+$pstart = $page_cnt*intval($page)-$page_cnt+1; //start 1
 $pend = $pstart+$page_cnt;
 
 //all submit
@@ -75,25 +76,37 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 
 }
 else {
-	$filter_sql = " `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
+	//$filter_sql = " `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
+	$filter_sql = "A.ROWNUM >='" . strval($pstart) . "' AND A.ROWNUM < '". strval($pend) . "' ";
 }
 
+// Problem Page Navigator
+//if($OJ_SAE) $first=1;
 if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
-	$sql = "SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` WHERE $filter_sql ";
+	// Reset Page Count
+	$sql = "select count(`problem_id`) as upid FROM `problem`";
+	$result = mysql_query_cache($sql);
+	$row = $result[0];
+	$cnt = $row['upid'] / $page_cnt;
+
+	if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
+
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
 }
 else {  //page problems (not include in contests period)
 	$now = strftime("%Y-%m-%d %H:%M",time());
-	$sql = "SELECT `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem` ".
-	"WHERE `defunct`='N' and $filter_sql AND `problem_id` NOT IN (
-		SELECT  `problem_id` 
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` " .
+	"FROM `problem`, (SELECT @ROWNUM := 0) TEMP " .
+	"WHERE `defunct`='N' AND `problem_id` NOT IN (
+		SELECT  `problem_id`
 		FROM contest c
 			INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id` ".
 			 " AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)" .    // option style show all non-running contest
 			//"and (c.`end_time` >  '$now'  OR c.private =1)" .    // original style , hidden all private contest problems
-	")";
+	") ORDER BY `problem_id` ) A WHERE $filter_sql";
 }
+// End Page Setting
 
-$sql .= " ORDER BY `problem_id`";
 //echo htmlentities( $sql);
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$result = pdo_query($sql,$search,$search);

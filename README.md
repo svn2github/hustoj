@@ -10,6 +10,14 @@ HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.
 
 HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
 
+## 感谢下述及其他被使用到的开源代码项目贡献者
+
+* linux apache nginx php mysql mariadb memcached
+* bootstrap kindeditor ace blockly codemirror katex syzoj phpfilemanager
+* sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
+
+排名不分先后本列表欢迎补充
+
 ## 注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
 
 论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 

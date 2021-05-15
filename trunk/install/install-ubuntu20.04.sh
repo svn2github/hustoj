@@ -12,7 +12,7 @@ tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 
-for pkg in net-tools make flex g++ libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
+for pkg in net-tools make g++ libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
 do
 	while ! apt-get install -y "$pkg" 
 	do
@@ -121,7 +121,8 @@ mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
 if test -f  /.dockerenv ;then
-	"Already in docker, skip docker installation."
+	echo "Already in docker, skip docker installation, install some compilers ... "
+	apt-get intall -f flex fp-compiler openjdk-11-jdk mono-devel
 else
 	./docker.sh
 	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf

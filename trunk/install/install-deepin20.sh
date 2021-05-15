@@ -9,7 +9,7 @@ wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
 tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
-for PKG in make flex g++ clang libmariadb++-dev php-fpm nginx mariadb-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
+for PKG in make g++ clang libmariadb++-dev php-fpm nginx mariadb-server php-mysql php-common php-gd php-zip php-mbstring php-xml
 do
    apt-get install -y $PKG 
 done
@@ -97,12 +97,21 @@ cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
 
 systemctl enable nginx
-systemctl enable mysql
+systemctl enable mariadb
 systemctl enable php7.3-fpm
 systemctl enable judged
 
+cd /home/judge/src/install
+if test -f  /.dockerenv ;then
+	echo "Already in docker, skip docker installation, install some compilers ... "
+	apt-get intall -f flex fp-compiler openjdk-14-jdk mono-devel
+else
+	./docker.sh
+	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
+	 sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
+fi
 cls
-
+reset
 
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"

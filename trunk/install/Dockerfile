@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
+RUN     sed -i 's/archive.ubuntu/mirrors.163/g' /etc/apt/sources.list &&\
 	apt-get update && \
 	DEBIAN_FRONTEND=noninteractive \
     	apt-get -y install --no-install-recommends \
@@ -27,6 +27,19 @@ RUN     cd /home/judge/ && \
 RUN	svn up /home/judge/src 
 RUN     cd /home/judge/src/core/ && \
 	bash make.sh 
+
+# for more compilers
+
+RUN     apt-get -y install ruby
+RUN     apt-get -y install gobjc
+RUN     apt-get -y install clang
+RUN     apt-get -y install guile-3.0
+RUN     apt-get -y install lua5.3
+RUN     apt-get -y install nodejs
+RUN     apt-get -y install golang
+RUN     apt-get -y install sqlite3
+RUN     apt-get -y install gfortran
+RUN     apt-get -y install octave
 	
  
 

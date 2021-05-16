@@ -28,18 +28,18 @@ RUN	svn up /home/judge/src
 RUN     cd /home/judge/src/core/ && \
 	bash make.sh 
 
-# for more compilers
+# for more compilers, remove # and run "docker build -t hustoj ."
 
-RUN     apt-get -y install ruby
-RUN     apt-get -y install gobjc
-RUN     apt-get -y install clang
-RUN     apt-get -y install guile-3.0
-RUN     apt-get -y install lua5.3
-RUN     apt-get -y install nodejs
-RUN     apt-get -y install golang
-RUN     apt-get -y install sqlite3
-RUN     apt-get -y install gfortran
-RUN     apt-get -y install octave
+#RUN     apt-get -y install ruby
+#RUN     apt-get -y install gobjc
+#RUN     apt-get -y install clang
+#RUN     apt-get -y install guile-3.0
+#RUN     apt-get -y install lua5.3
+#RUN     apt-get -y install nodejs
+#RUN     apt-get -y install golang
+#RUN     apt-get -y install sqlite3
+#RUN     apt-get -y install gfortran
+#RUN     apt-get -y install octave
 	
  
 

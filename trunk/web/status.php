@@ -202,21 +202,15 @@ if (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0&&!isset($_SESSION[$O
 
 if (isset($_GET['user_id'])) {
   $user_id = trim($_GET['user_id']);
-  if (is_valid_user_name($user_id) && $user_id!="") {
-    if ($OJ_MEMCACHE) {
-      $sql = $sql."AND `user_id`='".addslashes($user_id) ."' ";
-    }
-    else {
+  if ( $user_id!="" && is_valid_user_name($user_id)) {
       $sql = $sql."AND `user_id`=? ";
-    }
-    
-    if ($str2!="")
-      $str2 = $str2."&";
-    
-    $str2 = $str2."user_id=".urlencode($user_id);
+      if ($str2!="")
+      		$str2 = $str2."&";
+      $str2 = $str2."user_id=".urlencode($user_id);
   }
-  else
-    $user_id = "";
+  else{
+	  $user_id = "";
+  }
 }
 
 if (isset($_GET['language']))
@@ -268,9 +262,8 @@ $sql = $sql.$order_str." LIMIT 50";
 
 if (isset($_GET['user_id'])) {
   $result = pdo_query($sql,$user_id);
-}
-else {
-  $result = mysql_query_cache($sql);
+}else{
+  $result = pdo_query($sql);
 }
   
 if ($result)

@@ -4,7 +4,7 @@
 	function check_login($user_id,$password){
 		global $view_errors,$OJ_EXAM_CONTEST_ID,$MSG_WARNING_DURING_EXAM_NOT_ALLOWED,$MSG_WARNING_LOGIN_FROM_DIFF_IP;	
 		$pass2 = 'No Saved';
-		session_destroy();
+		if(isset($_SESSION))session_destroy();
 		session_start();
 		$sql="SELECT `user_id`,`password` FROM `users` WHERE `user_id`=? and defunct='N' ";
 		$result=pdo_query($sql,$user_id);

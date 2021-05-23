@@ -141,16 +141,17 @@ else {
 	$row = $result[0];
 	$view_title = $row['title'];     
 }
-//检查当前题目是不是在NOIP模式比赛中，如果是则不显示AC数量 2020.7.11 by ivan_zhou
-$now = strftime("%Y-%m-%d %H:%M",time());
-$sql = "select 1 from `contest_problem` where (`problem_id`= ? ) and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
-$rrs = pdo_query($sql, $id ,$now , $now , "%$OJ_NOIP_KEYWORD%");
-$flag = count($rrs) > 0 ;
-if($flag)
-{	
-	$row[ 'accepted' ]='<font color="red"> ? </font>';
+if( isset($OJ_NOIP_KEYWORD) && $OJ_NOIP_KEYWORD ){
+	//检查当前题目是不是在NOIP模式比赛中，如果是则不显示AC数量 2020.7.11 by ivan_zhou
+	$now = strftime("%Y-%m-%d %H:%M",time());
+	$sql = "select 1 from `contest_problem` where (`problem_id`= ? ) and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
+	$rrs = pdo_query($sql, $id ,$now , $now , "%$OJ_NOIP_KEYWORD%");
+	$flag = count($rrs) > 0 ;
+	if($flag)
+	{	
+		$row[ 'accepted' ]='<font color="red"> ? </font>';
+	}
 }
-
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/problem.php");
 /////////////////////////Common foot

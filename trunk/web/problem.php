@@ -89,6 +89,7 @@ else if (isset($_GET['cid']) && isset($_GET['pid'])) {
 		)";
 		
 		$result = pdo_query($sql,$cid,$pid);
+		$id = $result[0]['problem_id'];
 	}
 
 	//public

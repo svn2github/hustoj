@@ -136,7 +136,7 @@ require_once(dirname(__FILE__) . "/pdo.php");
 
 require_once(dirname(__FILE__) . "/logger.php");
 
-$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
+$logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NAME . '_' . 'user_id']:"guest", 
 					$OJ_LOG_FILE, 
 					$OJ_LOG_DATETIME_FORMAT, 
 					$OJ_LOG_ENABLED, 

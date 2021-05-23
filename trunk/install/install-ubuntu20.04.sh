@@ -124,7 +124,7 @@ if test -f  /.dockerenv ;then
 	echo "Already in docker, skip docker installation, install some compilers ... "
 	apt-get intall -f flex fp-compiler openjdk-14-jdk mono-devel
 else
-	./docker.sh
+	bash docker.sh
 	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
 	 sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
 fi

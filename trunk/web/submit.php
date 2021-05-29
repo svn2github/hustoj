@@ -6,10 +6,10 @@ if(isset($OJ_CSRF) && $OJ_CSRF && $OJ_TEMPLATE=="bs3" && !isset($_SESSION[$OJ_NA
   require_once(dirname(__FILE__)."/include/csrf_check.php");
 
 if (!isset($_SESSION[$OJ_NAME . '_' . 'user_id'])) {
-  require_once "oj-header.php";
-  echo "<a href='loginpage.php'>$MSG_Login</a>";
-  require_once "oj-footer.php";
-  exit(0);
+ 
+	$view_errors = "<a href=loginpage.php>$MSG_Login</a>";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
 }
 
 require_once "include/memcache.php";

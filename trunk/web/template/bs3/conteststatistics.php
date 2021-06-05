@@ -287,10 +287,10 @@
 									echo "<td class='text-center'><a href='problem.php?id=".$tpid."'>".$PID[$i]."</a></td>";
 							}
 
-							for ($j=0; $j<count($language_name)+13; $j++) {
+							for ($j=0; $j<count($language_name)+11; $j++) {
 							 //	if (!isset($R[$i][$j]))
 							 //		$R[$i][$j]="";
-								if ($j<12 || isset($R[$pid_cnt][$j]) )	
+								if ($j<11 || isset($R[$pid_cnt][$j]) )	
 									echo "<td class='text-center'>".$R[$i][$j]."</td>";
 							}
 							echo "</tr>";
@@ -299,11 +299,11 @@
 						echo "<tr class='evenrow'>";
 							echo "<td class='text-center'>Total</td>";
 
-							for ($j=0 ; $j<count($language_name)+ 13; $j++) {
+							for ($j=0 ; $j<count($language_name)+ 11; $j++) {
 							//	if(!isset($R[$i][$j]))
 							//		$R[$i][$j]="";
 										
-								if ($j<12 || isset($R[$pid_cnt][$j]) )	
+								if ($j<11 || isset($R[$pid_cnt][$j]) )	
 									echo "<td class='text-center'>".$R[$i][$j]."</td>";
 								
 							}

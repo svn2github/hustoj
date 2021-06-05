@@ -189,6 +189,8 @@ static int turbo_mode = 0;
 static int python_free=0;
 static int use_docker=0;
 static const char *tbname = "solution";
+static char cc_std[BUFFER_SIZE/10];
+static char cpp_std[BUFFER_SIZE/10];
 int num_of_test = 0;
 //static int sleep_tmp;
 
@@ -510,6 +512,13 @@ void init_judge_conf()
 	sleep_time = 3;
 	strcpy(java_xms, "-Xms32m");
 	strcpy(java_xmx, "-Xmx256m");
+	strcpy(cc_std,"-std=c99");
+	if(__GNUC__ > 9 || (  __GNUC__ == 9 &&  __GNUC_MINOR__ >= 3 ) ){ 
+		// ubuntu20.04 introduce g++9.3
+		strcpy(cpp_std,"-std=c++17");
+	}else{
+		strcpy(cpp_std,"-std=c++11");
+	}
 	sprintf(buf, "%s/etc/judge.conf", oj_home);
 	fp = fopen("./etc/judge.conf", "re");
 	if (fp != NULL)
@@ -545,6 +554,8 @@ void init_judge_conf()
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
 			read_int(buf, "OJ_COPY_DATA", &copy_data);
 			read_int(buf, "OJ_USE_DOCKER",&use_docker);
+			read_buf(buf, "OJ_CC_STD", cc_std);
+			read_buf(buf, "OJ_CPP_STD", cpp_std);
 			
 			
 		}
@@ -1246,9 +1257,9 @@ int compile(int lang, char *work_dir)
 	int pid;
 
 	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", "-O2", "-fmax-errors=10", "-Wall",
-						  "-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL};
+						  "-lm", "--static", cc_std , "-DONLINE_JUDGE", NULL};
 	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",
-						  "-lm", "--static", "-std=c++11", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
+						  "-lm", "--static", cpp_std, "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
 	const char *CP_P[] =
 		{"fpc", "Main.pas", "-Cs32000000", "-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL};
 	//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
@@ -3004,18 +3015,18 @@ int count_in_files(char *dirpath)
 
 int get_test_file(char *work_dir, int p_id)
 {
-	char filename[BUFFER_SIZE];
+	char filename[BUFFER_SIZE/2];
 	char localfile[BUFFER_SIZE];
 	time_t remote_date, local_date;
 	int ret = 0;
 	const char *cmd =
 		" wget --post-data=\"gettestdatalist=1&time=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	FILE *fjobs = read_cmd_output(cmd, p_id, http_baseurl, http_apipath);
-	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL)
+	while (fgets(filename, sizeof(filename) - 1, fjobs) != NULL)
 	{
 
 		if(1!=sscanf(filename, "%ld", &remote_date)) printf("http remote time stamp read fail\n");
-		if (fgets(filename, BUFFER_SIZE - 1, fjobs) == NULL)
+		if (fgets(filename, sizeof(filename) - 1, fjobs) == NULL)
 			break;
 		if(1!=sscanf(filename, "%s", filename)) printf("http filename read fail\n");
 		if (http_judge && (!data_list_has(filename)))

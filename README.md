@@ -109,6 +109,7 @@ Star us, please!
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+06-05 | 更新 | Ubuntu20.04的机器上，让C++的标准升级为C++17，允许用OJ_CPP_STD进行覆盖。
 05-02 | 补丁 | 禁止查看进行中的比赛所用的题目在比赛之前提交的源码，避免训练中偷懒复制老代码。
 04-08 | 更新 | 增加可选的docker作为judge_client外部容器，以增强安全性。[参考用法](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md#python%E5%88%A4%E9%A2%98%E5%A5%BD%E6%85%A2%E5%A5%BD%E6%85%A2%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F)
 03-26 | 更新 | 增加权限类型VIP,拥有VIP权限的账户，可以参加所有标题含`[VIP]`标记的私有比赛。

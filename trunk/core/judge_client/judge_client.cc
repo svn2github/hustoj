@@ -515,8 +515,10 @@ void init_judge_conf()
 	strcpy(cc_std,"-std=c99");
 	if(__GNUC__ > 9 || (  __GNUC__ == 9 &&  __GNUC_MINOR__ >= 3 ) ){ 
 		// ubuntu20.04 introduce g++9.3
+		strcpy(cc_std,"-std=c17");
 		strcpy(cpp_std,"-std=c++17");
 	}else{
+		strcpy(cc_std,"-std=c99");
 		strcpy(cpp_std,"-std=c++11");
 	}
 	sprintf(buf, "%s/etc/judge.conf", oj_home);

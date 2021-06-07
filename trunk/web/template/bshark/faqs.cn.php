@@ -50,26 +50,11 @@
   </tr>
 </table>
 <p>  编译器版本为（系统可能升级编译器版本，这里仅供参考）:<br>
-<table class="table table-hover">
-  <tr>
-    <td>gcc</td>
-    <td>gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3)
-	  </td>
-  </tr>
-  <tr>
-    <td>glibc</td>
-    <td>glibc 2.19</td>
-  </tr>
-  <tr>
-    <td>FPC</td>
-    <td>Free Pascal Compiler version 2.6.2</td>
-  </tr>
-  <tr>
-    <td>openjdk</td>
-    <td>openjdk 1.7.0_151
-    </td>
-  </tr>
-</table>
+<font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
+<font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
+<font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
+<font color=blue>Openjdk "14.0.2"</font><br>
+<font color=blue>Python 3.8.5</font><br>
 </p>
 </div><div class="faqs-card">
 <p>Q:程序怎样取得输入、进行输出?<br>

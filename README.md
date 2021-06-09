@@ -202,20 +202,9 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 阿里云用户请百度 `阿里云 80端口`
 
 
-### 校园网安装
-
-近期 `Github` 的 SVN 访问缓慢，可以到  [Releases](https://github.com/zhblue/hustoj/releases) 中下载 `tar.gz` 版本，然后用 `install` 目录下的 `*-bytgz.sh` 脚本安装。
-
-但是注意这样安装的实例，将来升级时只能手工升级。
-
-以 `Ubuntu 18.04` 为例：下载好 [Releases](https://github.com/zhblue/hustoj/releases) 中的 `Source code(tar.gz)`，然后准备好 `install-ubuntu18-bytgz.sh`
-
-```bash
-sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
-```
 
 ### 基于 Ubuntu 20.04 安装
-**各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
+**各类公有云首选, 最容易，成功率最高，近期部署数量最多，开发者原型机**
 	
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh
@@ -247,11 +236,25 @@ sudo bash install-ubuntu18-gitee.sh
 **[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
 
-
-```bash
+	```bash
 wget http://dl.hustoj.com/install-ubuntu18.04.sh
 sudo bash install-ubuntu18.04.sh
 ```
+	
+### 校园网安装
+
+近期 `Github` 的 SVN 访问缓慢，可以到  [Releases](https://github.com/zhblue/hustoj/releases) 中下载 `tar.gz` 版本，然后用 `install` 目录下的 `*-bytgz.sh` 脚本安装。
+
+但是注意这样安装的实例，将来升级时只能手工升级。
+
+以 `Ubuntu 18.04` 为例：下载好 [Releases](https://github.com/zhblue/hustoj/releases) 中的 `Source code(tar.gz)`，然后准备好 `install-ubuntu18-bytgz.sh`
+
+```bash
+sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
+```
+	
+	
+	
 ### Ubuntu 更换软件源
 
 下列两个脚本可以二选一，对于使用**腾讯云镜像**和**Ubuntu 原版镜像的用户**，推荐使用脚本二。

@@ -215,20 +215,20 @@ sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ```
 
 ### 基于 Ubuntu 20.04 安装
-
+**各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
+	
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh
 ```
-
+	
+脚本运行完成直接浏览器输入ip地址即可访问，如不能打开请检查访问策略、防火墙设置是否打开80端口。
+	
 提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，小概率可能会造成 `systemd` 和 `umount` 进程卡CPU 100%
 可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
 或2:[卸载阿里云盾](#卸载阿里云盾)。**
 
 ### 基于 Ubuntu 20.04 通过 Gitee 安装
-
-
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
 ```bash
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
@@ -236,8 +236,6 @@ sudo bash install-ubuntu20-gitee.sh
 ```
 
 ### 基于 Ubuntu 18.04 通过 Gitee 安装
-
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
 ```bash
 wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
@@ -248,7 +246,7 @@ sudo bash install-ubuntu18-gitee.sh
 
 **[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
-**各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
+
 
 ```bash
 wget http://dl.hustoj.com/install-ubuntu18.04.sh

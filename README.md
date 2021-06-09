@@ -233,10 +233,8 @@ sudo bash install-ubuntu18-gitee.sh
 
 ### 基于 Ubuntu 18.04 安装
 
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
 
-
-	```bash
+```bash
 wget http://dl.hustoj.com/install-ubuntu18.04.sh
 sudo bash install-ubuntu18.04.sh
 ```

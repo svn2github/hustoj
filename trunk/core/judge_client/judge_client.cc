@@ -189,6 +189,7 @@ static int turbo_mode = 0;
 static int python_free=0;
 static int use_docker=0;
 static const char *tbname = "solution";
+static char cc_opt[BUFFER_SIZE/10];
 static char cc_std[BUFFER_SIZE/10];
 static char cpp_std[BUFFER_SIZE/10];
 int num_of_test = 0;
@@ -513,6 +514,7 @@ void init_judge_conf()
 	strcpy(java_xms, "-Xms32m");
 	strcpy(java_xmx, "-Xmx256m");
 	strcpy(cc_std,"-std=c99");
+	strcpy(cc_opt,"-O2");
 	if(__GNUC__ > 9 || (  __GNUC__ == 9 &&  __GNUC_MINOR__ >= 3 ) ){ 
 		// ubuntu20.04 introduce g++9.3
 		strcpy(cc_std,"-std=c17");
@@ -558,6 +560,7 @@ void init_judge_conf()
 			read_int(buf, "OJ_USE_DOCKER",&use_docker);
 			read_buf(buf, "OJ_CC_STD", cc_std);
 			read_buf(buf, "OJ_CPP_STD", cpp_std);
+			read_buf(buf, "OJ_CC_OPT", cc_opt);
 			
 			
 		}
@@ -1258,9 +1261,9 @@ int compile(int lang, char *work_dir)
 	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
 	int pid;
 
-	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", "-O2", "-fmax-errors=10", "-Wall",
+	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", cc_opt, "-fmax-errors=10", "-Wall",
 						  "-lm", "--static", cc_std , "-DONLINE_JUDGE", NULL};
-	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",
+	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",cc_opt,
 						  "-lm", "--static", cpp_std, "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
 	const char *CP_P[] =
 		{"fpc", "Main.pas", "-Cs32000000", "-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL};

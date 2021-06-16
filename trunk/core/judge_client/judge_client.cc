@@ -2553,11 +2553,14 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		sprintf(tpjpath,"%s/data/%d/tpj", oj_home, problem_id);
 
 		if( access( tpjpath , X_OK ) == 0 ){
-			ret = execute_cmd("%s/data/%d/tpj %s %s %s", oj_home, problem_id, infile, userfile, outfile);    // testlib style
+			ret = execute_cmd("%s/data/%d/tpj %s %s %s 2>> diff.out ", oj_home, problem_id, infile, userfile, outfile);    // testlib style
 			if (DEBUG) printf("testlib spj return: %d\n", ret);
-		}else{	
+		}else if (access( spjpath , X_OK ) == 0 ) {	
 			ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id, infile, outfile, userfile);    // hustoj style
 			if (DEBUG) printf("hustoj spj return: %d\n", ret);
+		}else{
+			printf("spj tpj not found problem: %d\n", problem_id);		
+			ret=1;
 		}
 		if (ret)
 			exit(1);

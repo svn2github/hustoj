@@ -1366,7 +1366,7 @@ int compile(int lang, char *work_dir)
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11 && lang != 5 )
 		{
-			 if (access("usr", 0) == -1){
+			 if (access("usr", F_OK ) == -1){
 				execute_cmd("mkdir -p root/.cache/go-build usr etc/alternatives proc tmp dev");
 				execute_cmd("chown judge -R root tmp ");
 				execute_cmd("mount -o bind /usr usr");
@@ -2518,6 +2518,8 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 {
 
 	pid_t pid;
+	char spjpath[BUFFER_SIZE/2];
+	char tpjpath[BUFFER_SIZE/2];
 	if (DEBUG) printf("pid=%d\n", problem_id);
 	// prevent privileges settings caused spj fail in [issues686]
 	execute_cmd("chown www-data:judge %s/data/%d/spj %s %s %s", oj_home, problem_id,infile, outfile, userfile);
@@ -2547,11 +2549,16 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		LIM.rlim_max = STD_F_LIM + STD_MB;
 		LIM.rlim_cur = STD_F_LIM;
 		setrlimit(RLIMIT_FSIZE, &LIM);
+		sprintf(spjpath,"%s/data/%d/spj", oj_home, problem_id);
+		sprintf(tpjpath,"%s/data/%d/tpj", oj_home, problem_id);
 
-		ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id,
-						  infile, outfile, userfile);
-		if (DEBUG)
-			printf("spj1=%d\n", ret);
+		if( access( tpjpath , X_OK ) == 0 ){
+			ret = execute_cmd("%s/data/%d/tpj %s %s %s", oj_home, problem_id, infile, userfile, outfile);    // testlib style
+			if (DEBUG) printf("testlib spj return: %d\n", ret);
+		}else{	
+			ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id, infile, outfile, userfile);    // hustoj style
+			if (DEBUG) printf("hustoj spj return: %d\n", ret);
+		}
 		if (ret)
 			exit(1);
 		else
@@ -2564,7 +2571,7 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		waitpid(pid, &status, 0);
 		ret = WEXITSTATUS(status);
 		if (DEBUG)
-			printf("spj2=%d\n", ret);
+			printf("recorded spj: %d\n", ret);
 	}
 	return ret;
 }
@@ -3044,7 +3051,7 @@ int get_test_file(char *work_dir, int p_id)
 		stat(localfile, &fst);
 		local_date = fst.st_mtime;
 
-		if (access(localfile, 0) == -1 || local_date < remote_date)
+		if (access(localfile, F_OK ) == -1 || local_date < remote_date)
 		{
 
 			if (strcmp(filename, "spj") == 0)
@@ -3058,7 +3065,7 @@ int get_test_file(char *work_dir, int p_id)
 			if (strcmp(filename, "spj.c") == 0)
 			{
 				//   sprintf(localfile,"%s/data/%d/spj.c",oj_home,p_id);
-				if (access(localfile, 0) == 0)
+				if (access(localfile, F_OK ) == 0)
 				{
 					const char *cmd3 = "gcc -o %s/data/%d/spj %s/data/%d/spj.c";
 					execute_cmd(cmd3, oj_home, p_id, oj_home, p_id);
@@ -3067,7 +3074,7 @@ int get_test_file(char *work_dir, int p_id)
 			if (strcmp(filename, "spj.cc") == 0)
 			{
 				//     sprintf(localfile,"%s/data/%d/spj.cc",oj_home,p_id);
-				if (access(localfile, 0) == 0)
+				if (access(localfile, F_OK ) == 0)
 				{
 					const char *cmd4 =
 						"g++ -o %s/data/%d/spj %s/data/%d/spj.cc";
@@ -3375,7 +3382,7 @@ int main(int argc, char **argv)
 
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 					  userfile, runner_id);
-		if (access(outfile, 0) == -1)
+		if (access(outfile, R_OK ) == -1)
 		{
 			//out file does not exist
 			char error[BUFFER_SIZE];

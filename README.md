@@ -109,6 +109,7 @@ Star us, please!
 
 日期   | 类型 | 更新内容
 ----- | :--: | :-------
+06-19 | 更新 | 允许在docker内使用外部的judge_client判题，方便更新judge_client。judge.conf新增选项：OJ_INTERNAL_CLIENT=1
 06-16 | 更新 | 允许使用"tpj"作为文件名，命名一个基于testlib.h的spj，当"tpj"文件存在时，优先用tpj进行特判。	
 06-12 | 更新 | gcc/g++ 优化级别可配置，默认-O2,允许用OJ_CC_OPT进行覆盖。
 06-06 | 更新 | Ubuntu20.04的机器上，让C的标准升级为C17，允许用OJ_CC_STD进行覆盖。

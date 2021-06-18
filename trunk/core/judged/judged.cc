@@ -60,7 +60,7 @@
 #define OJ_RE 10
 #define OJ_CE 11
 #define OJ_CO 12
-static char lock_file[BUFFER_SIZE]=LOCKFILE;
+static char lock_file[BUFFER_SIZE+32]=LOCKFILE;
 static char host_name[BUFFER_SIZE];
 static char user_name[BUFFER_SIZE];
 static char password[BUFFER_SIZE];
@@ -92,6 +92,7 @@ static char oj_redisauth[BUFFER_SIZE];
 static char oj_redisqname[BUFFER_SIZE];
 static int turbo_mode = 0;
 static int use_docker = 0;
+static int internal_client = 1;
 
 
 static bool STOP = false;
@@ -102,7 +103,7 @@ static MYSQL *conn;
 static MYSQL_RES *res;
 static MYSQL_ROW row;
 //static FILE *fp_log;
-static char query[BUFFER_SIZE];
+static char query[BUFFER_SIZE*4];
 #endif
 void wait_udp_msg(int fd)
 {
@@ -240,6 +241,8 @@ void init_judge_conf() {
                         read_buf(buf, "OJ_REDISQNAME", oj_redisqname);
                         read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
                         read_int(buf, "OJ_USE_DOCKER", &use_docker);
+                        read_int(buf, "OJ_INTERNAL_CLIENT", &internal_client);
+			
 
 
 		}
@@ -307,9 +310,14 @@ void run_client(int runid, int clientid) {
 //			     (char * const )"LC_ALL=zh_CN.UTF-8",NULL};
 	//if (!DEBUG)
 	if(use_docker){
-		char docker_v[BUFFER_SIZE];
+		char docker_v[BUFFER_SIZE*3];
 		sprintf(docker_v,"%s:/home/judge",oj_home);
-		execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", "-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
+		if(internal_client)
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host",
+				       	"-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
+		else
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", 
+					"-v", docker_v, "hustoj", "/home/judge/src/core/judge_client/judge_client", runidstr, buf, (char *) NULL);
 	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 				oj_home, (char *) NULL);
@@ -357,7 +365,7 @@ int init_mysql() {
 }
 #endif
 FILE * read_cmd_output(const char * fmt, ...) {
-	char cmd[BUFFER_SIZE];
+	char cmd[BUFFER_SIZE*2];
 
 	FILE * ret = NULL;
 	va_list ap;
@@ -388,7 +396,7 @@ bool check_login() {
 }
 void login() {
 	if (!check_login()) {
-		char cmd[BUFFER_SIZE];
+		char cmd[BUFFER_SIZE*5];
 		sprintf(cmd,
 				"wget --post-data=\"user_id=%s&password=%s\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"",
 				http_username, http_password, http_baseurl, http_loginpath);

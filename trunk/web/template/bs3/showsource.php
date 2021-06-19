@@ -26,21 +26,21 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 	
-<link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
-<link href='highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
-<script src='highlight/scripts/shCore.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCss.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushDelphi.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushRuby.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushBash.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPython.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPhp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushSql.js' type='text/javascript'></script>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shCore.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushJava.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushDelphi.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushRuby.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushBash.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPython.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPhp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushVb.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushSql.js' type='text/javascript'></script>
 <script language='javascript'>
 SyntaxHighlighter.config.bloggerMode = false;
 SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';

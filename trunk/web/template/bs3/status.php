@@ -232,7 +232,7 @@
 	''];
 </script>
 
-<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
+<script src="<?php echo $OJ_CDN_URL?>template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
 
 </body>
 

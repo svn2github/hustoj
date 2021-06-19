@@ -65,8 +65,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>
 
-    <script src="ace/ace.js"></script>
-    <script src="ace/ext-language_tools.js"></script>
+    <script src="<?php echo $OJ_CDN_URL?>ace/ace.js"></script>
+    <script src="<?php echo $OJ_CDN_URL?>ace/ext-language_tools.js"></script>
     <script>
         $("#language").on("change",changeLanguage);
         //初始化对象

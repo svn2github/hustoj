@@ -192,18 +192,18 @@ function explain(){
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include("template/$OJ_TEMPLATE/js.php");?>	    
-<script src='highlight/scripts/shCore.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCss.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushJava.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushDelphi.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushRuby.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushBash.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPython.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPhp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushVb.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shCore.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushJava.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushDelphi.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushRuby.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushBash.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPython.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPhp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushPerl.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCSharp.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushVb.js' type='text/javascript'></script>
 
 <script>
 $(document).ready(function(){

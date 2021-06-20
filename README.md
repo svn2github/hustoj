@@ -107,8 +107,9 @@ Star us, please!
 <details open>
 <summary><b>2021年</b></summary>
 
-日期   | 类型 | 更新内容
------ | :--: | :-------
+  日期  | 类型 |  更新内容
+------- | :--: | :-------
+06-20 | 补丁 | 修复bs3部分静态资源不走CDN的问题。
 06-19 | 更新 | 允许设置不参与ranklist排名的管理员列表，$OJ_RANK_HIDDEN="'admin','zhblue'";
 06-18 | 更新 | 允许在docker内使用外部的judge_client判题，方便更新judge_client。judge.conf新增选项：OJ_INTERNAL_CLIENT=1
 06-16 | 更新 | 允许使用"tpj"作为文件名，命名一个基于testlib.h的spj，当"tpj"文件存在时，优先用tpj进行特判。	

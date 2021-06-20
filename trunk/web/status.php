@@ -157,7 +157,7 @@ else {
     }else if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
                   $sql="WHERE (contest_id=0 or contest_id is null)  ";
     }else{
-        $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
+        $sql="WHERE problem_id>0   ";
     }
 }
 
@@ -316,6 +316,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
     else
       $view_status[$i][1] = "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."'>".$row['user_id']."</a>";
   }
+  $view_status[$i]['nick']=$row['nick'];
 
   if ($row['contest_id']>0) {
     if (isset($end_time) && time() < $end_time) {

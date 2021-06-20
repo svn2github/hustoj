@@ -78,6 +78,7 @@ static  $OJ_SHARE_CODE=false; // 代码分享功能
 static  $OJ_RECENT_CONTEST=true; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
+//0表示根据榜单上的出现的队伍总数计算，不计打星队伍
 static $OJ_ON_SITE_TEAM_TOTAL=0;
 
 static $OJ_OPENID_PWD='8a367fe87b1e406ea8e94d7d508dcf01';

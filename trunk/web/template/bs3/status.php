@@ -136,7 +136,7 @@
 						<td class="text-center">
 							<?php echo $MSG_PROBLEM_ID?>
 						</td>
-						<td class="text-right">
+						<td class="text-center">
 							<?php echo $MSG_RESULT?>
 						</td>
 						<td class="text-right">

@@ -31,6 +31,9 @@
 							<th>
 								<?php echo $MSG_USER?>
 							</th>
+						<th>
+							<?php echo $MSG_NICK?>
+						</th>
 							<th>
 								<?php echo $MSG_PROBLEM?>
 							</th>

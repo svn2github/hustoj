@@ -1,114 +1,125 @@
-judge_result = Array("等待", "等待重判", "编译中", "运行并评判", "答案正确", "格式错误", "答案错误", "时间超限", "内存超限",
-	"输出超限", "运行错误", "编译错误", "运行错误(点击看详细)", "编译错误(点击看详细)", "编译成功", "点击看详细", "人工判题");
-judge_icon = Array(
-	"<i class=\"hourglass half icon\"></i>",
-	"<i class=\"hourglass half icon\"></i>",
-	"<i class=\"spinner icon\"></i>",
-	"<i class=\"spinner icon\"></i>",
-	"<i class=\"checkmark icon\"></i>",
-	"<i class=\"server icon\"></i>",
-	"<i class=\"remove icon\"></i>",
-	"<i class=\"clock icon\"></i>",
-	"<i class=\"microchip icon\"></i>",
-	"<i class=\"print icon\"></i>",
-	"<i class=\"bomb icon\"></i>",
-	"<i class=\"code icon\"></i>",
-	"<i class=\"ban icon\"></i>",
-	"<i class=\"file outline icon\"></i>",
-	"<i class=\"server icon\"></i>",
-	"<i class=\"folder open outline icon\"></i>",
-	"<i class=\"minus icon\"></i>",
-	"<i class=\"ban icon\"></i>"
-);
-judge_style = Array("waiting",
-	"status waiting",
-	"status compiling",
-	"status running",
-	"status accepted",
-	"status judgement_failed",
-	"status wrong_answer",
-	"status time_limit_exceeded",
-	"status memory_limit_exceeded",
-	"status output_limit_exceeded",
-	"status runtime_error",
-	"status compile_error",
-	"status invalid_interaction",
-	"status file_error",
-	"status system_error",
-	"status no_testdata",
-	"status partially_correct",
-	"status skipped");
-
 var i = 0;
-var interval = 500;
+var interval = 800;
 
 function auto_refresh() {
-	var tb = window.document.getElementById('vueAppFuckSafari');
+	interval = 800;
+	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
-	for(var i = rows.length - 1; i > 0; i--) {
-		var result = $(rows[i].cells[3].children[0].innerHTML).attr("result");
-		var sid = rows[i].cells[0].children[0].innerHTML;
-		if(result < 4) {
-			window.setTimeout("fresh_result(" + sid + ")", interval);
-			console.log("auto_refresh " + sid + " actived!");
+	for (var i=rows.length-1; i>0; i--) {
+		var result = $(rows[i].cells[4].children[0]).attr("result");
+		rows[i].cells[4].className = "td_result";
+		var sid = rows[i].cells[0].innerHTML;
+		
+		if (result<4) {
+			window.setTimeout("fresh_result("+sid+")",interval);
+			console.log("auto_refresh "+sid+" actived!");
+			break;
 		}
 	}
 }
 
 function findRow(solution_id) {
-	var tb = window.document.getElementById('vueAppFuckSafari');
+	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
-	for(var i = 1; i < rows.length; i++) {
-		var cell = rows[i].cells[0].children[0];
-		if(cell.innerHTML == solution_id) return rows[i];
+	for (var i=1; i<rows.length; i++) {
+		var cell = rows[i].cells[0];
+		if (cell.innerHTML==solution_id)
+			return rows[i];
 	}
 }
 
 function fresh_result(solution_id) {
-	//console.log("fresh_result " + solution_id + " actived!");
-	var result_now = -1;
-	result_now = $(findRow(solution_id).cells[3].children[0].innerHTML).attr("result");
 	var xmlhttp;
-	if(window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
-	} else { // code for IE6, IE5
+	}
+	else {// code for IE6, IE5
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
+
 	xmlhttp.onreadystatechange = function() {
-		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			var tb = window.document.getElementById('vueAppFuckSafari');
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			var tb = window.document.getElementById('result-tab');
 			var row = findRow(solution_id);
+			//alert(row);
 			var r = xmlhttp.responseText;
 			var ra = r.split(",");
-			console.log("ra:" + ra[0] + " res:" + result_now);
-			if(ra[0] != result_now) {
-				console.log("rewrite");
-				if(ra[0] < 4) {
-					row.cells[3].innerHTML = "<b><span class='hidden' style='display:none' result='" + ra[0] + "' ></span><span class=\"" + judge_style[ra[0]] + "\">" + judge_icon[ra[0]] + judge_result[ra[0]] + "</span></b>";
-					row.cells[4].innerHTML = "<b>---</b>";
-					row.cells[5].innerHTML = "<b>---</b>";
-					row.cells[9].innerHTML = "<b>" + ra[3] + "</b>";
-				} else {
-					if(ra[4] < 98 && ra[4] != 0) {
-						row.cells[3].innerHTML = "<b><span class='hidden' style='display:none' result='" + ra[0] + "' ></span><span class=\"" + judge_style[ra[0]] + "\">" + judge_icon[ra[0]] + judge_result[ra[0]] + ra[4] + "%" + "</span></b>";
-					} else {
-						row.cells[3].innerHTML = "<b><span class='hidden' style='display:none' result='" + ra[0] + "' ></span><span class=\"" + judge_style[ra[0]] + "\">" + judge_icon[ra[0]] + judge_result[ra[0]] + "</span></b>";
-					}
+			ra[0] = parseInt(ra[0]);
+			// alert(r);
+			// alert(judge_result[r]);
+			var loader = "<img width=18 src=image/loader.gif>";
+			row.cells[5].innerHTML = ra[1];
+			row.cells[6].innerHTML = ra[2];
 
-					row.cells[4].innerHTML = "<b>" + ra[1] + "</b>";
-					row.cells[5].innerHTML = "<b>" + ra[2] + "</b>";
-					row.cells[9].innerHTML = "<b>" + ra[3] + "</b>";
-
+			if(ra[3]!="none")
+				row.cells[10].innerHTML = ra[3];
+			
+			if (ra[0]<4) {
+				//console.log(loader);
+				if (-1==row.cells[4].innerHTML.indexOf("loader")) {
+					//console.log(row.cells[3].innerHTML);
+			 		row.cells[4].innerHTML += loader;
 				}
+				interval *= 1.5;
+				window.setTimeout("fresh_result("+solution_id+")",interval);
 			}
-			if(ra[0] < 4) {
-				window.setTimeout("fresh_result(" + solution_id + ")", interval);
-			} else {
+			else {
+				//console.log(ra[0]);
+				switch (ra[0]) {
+					case 4:
+						row.cells[4].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
+						break;
+					case 5:
+					case 6:
+				  case 7:
+				  case 8:
+				  case 9:
+				  case 10:
+						row.cells[4].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</a>";
+						break;
+				 	case 11:
+						row.cells[4].innerHTML = "<a href=ceinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
+						break;
+				  default:
+//						row.cells[4].innerHTML = "<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</span>";
+				}
+			
 				auto_refresh();
 			}
 		}
 	}
-	xmlhttp.open("GET", "status-ajax.php?solution_id=" + solution_id, true);
+	xmlhttp.open("GET","status-ajax.php?solution_id="+solution_id,true);
 	xmlhttp.send();
 }
+
+var hj_ss = "<select class='http_judge form-control' length='2' name='result'>";
+
+for (var i=0; i<10; i++) {
+  hj_ss += "	<option value='"+i+"'>"+judge_result[i]+" </option>";
+}
+
+hj_ss += "</select>";
+hj_ss += "<input name='manual' type='hidden'>";
+hj_ss += "<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
+hj_ss += "<input type='button' class='http_judge btn' name='manual' value='确定' onclick='http_judge(this)' >";
+
+$(".http_judge_form").append(hj_ss);
+
 auto_refresh();
+
+$(".td_result").mouseover(function () {
+  //$(this).children(".btn").hide(300);
+  $(this).find("form").show(600);
+  var sid = $(this).find("span[class=original]").attr("sid");
+  $(this).find("span[class=original]").load("status-ajax.php?q=user_id&solution_id="+sid);
+});
+
+$(".http_judge_form").hide();
+
+function http_judge(btn) {
+  var sid = $(btn).parent()[0].children[0].value;
+  $.post("admin/problem_judge.php",$(btn).parent().serialize(),function(data,textStatus) {
+    if(textStatus=="success")window.setTimeout("fresh_result("+sid+")",1000);
+	})
+  return false;
+}

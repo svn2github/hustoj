@@ -11,14 +11,14 @@
     <title><?php echo htmlentities(str_replace("\n\r","\n",$view_user),ENT_QUOTES,"utf-8")?></title>  
 </head>
 <body>
-<link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
-<link href='highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
-<script src='highlight/scripts/shCore.js' type='text/javascript'></script>
-<script src='highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shCore.js' type='text/javascript'></script>
+<script src='<?php echo $OJ_CDN_URL?>highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
 <script language='javascript'>
 function draw(){
     SyntaxHighlighter.config.bloggerMode = false;
-    SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
+    SyntaxHighlighter.config.clipboardSwf = '<?php echo $OJ_CDN_URL?>highlight/scripts/clipboard.swf';
     SyntaxHighlighter.highlight();
 }
 </script>

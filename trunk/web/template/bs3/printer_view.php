@@ -18,7 +18,7 @@
 <script language='javascript'>
 function draw(){
 	SyntaxHighlighter.config.bloggerMode = false;
-	SyntaxHighlighter.config.clipboardSwf = 'highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.config.clipboardSwf = '<?php echo $OJ_CDN_URL?>highlight/scripts/clipboard.swf';
 	SyntaxHighlighter.highlight();
 }
 </script>

@@ -16,8 +16,8 @@
       <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<link href='highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
-<link href='highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+<link href='<?php echo $OJ_CDN_URL?>highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
   </head>
 
   <body>

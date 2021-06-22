@@ -2,6 +2,21 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
+自带的6种模板演示
+
+http://bs3.hustoj.com/
+
+http://mario.hustoj.com/
+
+http://syzoj.hustoj.com/
+
+http://bshark.hustoj.com/
+
+http://sweet.hustoj.com/
+
+http://mdui.hustoj.com/
+
+
 
 
 ## 版权说明
@@ -109,6 +124,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+06-22 | 补丁 | 修复其他模板运行结果自动刷新的问题。
 06-20 | 补丁 | 修复其他模板部分静态资源不走CDN的问题。
 06-20 | 补丁 | 修复bs3部分静态资源不走CDN的问题。
 06-19 | 更新 | 允许设置不参与ranklist排名的管理员列表，$OJ_RANK_HIDDEN="'admin','zhblue'";

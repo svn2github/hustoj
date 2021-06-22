@@ -109,6 +109,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+06-20 | 补丁 | 修复其他模板部分静态资源不走CDN的问题。
 06-20 | 补丁 | 修复bs3部分静态资源不走CDN的问题。
 06-19 | 更新 | 允许设置不参与ranklist排名的管理员列表，$OJ_RANK_HIDDEN="'admin','zhblue'";
 06-18 | 更新 | 允许在docker内使用外部的judge_client判题，方便更新judge_client。judge.conf新增选项：OJ_INTERNAL_CLIENT=1

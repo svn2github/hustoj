@@ -7,6 +7,7 @@ function auto_refresh() {
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {
 		var result = $(rows[i].cells[4].children[0]).attr("result");
+		result=$(rows[i].cells[4]).find("span").attr("result");
 		rows[i].cells[4].className = "td_result";
 		var sid = rows[i].cells[0].innerHTML;
 		

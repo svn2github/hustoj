@@ -7,8 +7,9 @@ function auto_refresh() {
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {
 		var result = $(rows[i].cells[4].children[0]).attr("result");
+		result=$(rows[i].cells[4]).find("span").attr("result");
 		rows[i].cells[4].className = "td_result";
-		var sid = rows[i].cells[0].innerHTML;
+		var sid = $(rows[i].cells[0]).text();
 		
 		if (result<4) {
 			window.setTimeout("fresh_result("+sid+")",interval);
@@ -23,7 +24,7 @@ function findRow(solution_id) {
 	var rows = tb.rows;
 	for (var i=1; i<rows.length; i++) {
 		var cell = rows[i].cells[0];
-		if (cell.innerHTML==solution_id)
+		if ($(cell).text()==solution_id)
 			return rows[i];
 	}
 }

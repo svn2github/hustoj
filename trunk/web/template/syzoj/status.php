@@ -71,7 +71,7 @@
   </form>
 
 
-  <table id="vueAppFuckSafari" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
+  <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
 		<th>编号</th>
@@ -133,6 +133,20 @@
   </div>
 </div>
 
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.35" ></script>
+<script>
+	var i = 0;
+	var judge_result = [<?php
+	foreach ($judge_result as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+
+	var judge_color = [<?php
+	foreach ($judge_color as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+</script>
+	<script src="template/bs3/auto_refresh.js?v=0.42" ></script>
 
 <?php include("template/$OJ_TEMPLATE/footer.php");

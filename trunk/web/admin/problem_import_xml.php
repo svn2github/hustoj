@@ -141,6 +141,7 @@ function import_fps($tempfile) {
     $hint = getValue ($searchNode,'hint');
     $source = getValue ($searchNode,'source');				
     $spjcode = getValue ($searchNode,'spj');
+    $tpjcode = getValue ($searchNode,'tpj');
     $spj = trim($spjcode)?1:0;
 
     if (!hasProblem($title)) {
@@ -254,9 +255,29 @@ function import_fps($tempfile) {
               echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
             }
             else {
-              unlink("$basedir/spj.cc");
+              //unlink("$basedir/spj.cc");
             }
           }
+          $basedir = "$OJ_DATA/$pid";
+	  if($tpjcode){
+		  $fp = fopen("$basedir/tpj.cc","w");
+		  fputs($fp, $tpjcode);
+		  fclose($fp);
+		  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+		  if (!file_exists("$basedir/tpj")) {
+		    $fp = fopen("$basedir/tpj.c","w");
+		    fputs($fp, $spjcode);
+		    fclose($fp);
+		    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
+
+		    if (!file_exists("$basedir/tpj")) {
+		      echo "you need to compile $basedir/tpj.cc for tpj[  g++ -o $basedir/tpj $basedir/tpj.cc   ]<br> and rejudge $pid";
+		    }
+		    else {
+		      //unlink("$basedir/spj.cc");
+		    }
+		  }
+	  }
         }
       }
 

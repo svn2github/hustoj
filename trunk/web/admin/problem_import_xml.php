@@ -141,8 +141,10 @@ function import_fps($tempfile) {
     $hint = getValue ($searchNode,'hint');
     $source = getValue ($searchNode,'source');				
     $spjcode = getValue ($searchNode,'spj');
+    if($spjcode) $spjlang=getAttribute($searchNode,'spj','language');
     $tpjcode = getValue ($searchNode,'tpj');
-    $spj = trim($spjcode)?1:0;
+    if($tpjcode) $tpjlang=getAttribute($searchNode,'tpj','language');
+    $spj = trim($spjcode.$tpjcode)?1:0;
 
     if (!hasProblem($title)) {
       $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
@@ -240,43 +242,48 @@ function import_fps($tempfile) {
 
       if (!isset($OJ_SAE) || !$OJ_SAE) {
         if ($spj) {
-          $basedir = "$OJ_DATA/$pid";
-          $fp = fopen("$basedir/spj.cc","w");
-          fputs($fp, $spjcode);
-          fclose($fp);
-          ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
-          if (!file_exists("$basedir/spj")) {
-            $fp = fopen("$basedir/spj.c","w");
-            fputs($fp, $spjcode);
-            fclose($fp);
-            ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
+		if($spjcode){
+		  if($spjlang=="C++"){
+			  $basedir = "$OJ_DATA/$pid";
+			  $fp = fopen("$basedir/spj.cc","w");
+			  fputs($fp, $spjcode);
+			  fclose($fp);
+			  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+		  }else{
+			    $fp = fopen("$basedir/spj.c","w");
+			    fputs($fp, $spjcode);
+			    fclose($fp);
+			    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
 
-            if (!file_exists("$basedir/spj")) {
-              echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
-            }
-            else {
-              //unlink("$basedir/spj.cc");
-            }
-          }
-          $basedir = "$OJ_DATA/$pid";
-	  if($tpjcode){
-		  $fp = fopen("$basedir/tpj.cc","w");
-		  fputs($fp, $tpjcode);
-		  fclose($fp);
-		  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
-		  if (!file_exists("$basedir/tpj")) {
-		    $fp = fopen("$basedir/tpj.c","w");
-		    fputs($fp, $spjcode);
-		    fclose($fp);
-		    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
-
-		    if (!file_exists("$basedir/tpj")) {
-		      echo "you need to compile $basedir/tpj.cc for tpj[  g++ -o $basedir/tpj $basedir/tpj.cc   ]<br> and rejudge $pid";
+		  }
+		    if (!file_exists("$basedir/spj")) {
+		      echo "you need to compile $basedir/spj.cc for spj[  g++ -o $basedir/spj $basedir/spj.cc   ]<br> and rejudge $pid";
 		    }
 		    else {
 		      //unlink("$basedir/spj.cc");
 		    }
+  
+		}
+          $basedir = "$OJ_DATA/$pid";
+	  if($tpjcode){
+		  if($tpjlang=="C++"){
+			  $fp = fopen("$basedir/tpj.cc","w");
+			  fputs($fp, $tpjcode);
+			  fclose($fp);
+			  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+		  }else{
+			    $fp = fopen("$basedir/tpj.c","w");
+			    fputs($fp, $spjcode);
+			    fclose($fp);
+			    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
 		  }
+	    if (!file_exists("$basedir/tpj")) {
+	      echo "you need to compile $basedir/tpj.cc for tpj[  g++ -o $basedir/tpj $basedir/tpj.cc   ]<br> and rejudge $pid";
+	    }
+	    else {
+	      //unlink("$basedir/spj.cc");
+	    }
+		  
 	  }
         }
       }

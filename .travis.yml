@@ -26,4 +26,4 @@ jobs:
       script:
       - git fetch --unshallow
       - git gc --prune=now
-      - travis_wait 30 git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master
+      - travis_wait 300 git push --force https://zhblue:$GITEE_PASSWORD@gitee.com/zhblue/hustoj.git master

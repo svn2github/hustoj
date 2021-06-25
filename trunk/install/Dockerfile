@@ -24,7 +24,8 @@ RUN     useradd -m -u 1536 judge
 RUN     cd /home/judge/ && \ 
 	wget dl.hustoj.com/hustoj.tar.gz && \
         tar xzf hustoj.tar.gz 
-RUN	svn up /home/judge/src 
+#Github update
+#RUN	svn up /home/judge/src 
 RUN     cd /home/judge/src/core/ && \
 	bash make.sh 
 

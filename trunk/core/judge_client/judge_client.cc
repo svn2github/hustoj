@@ -3273,20 +3273,7 @@ int main(int argc, char **argv)
 		}
 		
 	}
-/*
-	if (p_id > 0 && (dp = opendir(fullpath)) == NULL)
-	{
 
-		write_log("No such dir:%s!\n", fullpath);
-#ifdef _mysql_h
-		if (!http_judge)
-			mysql_close(conn);
-#endif
-		exit(-1);
-	}
-	
-	
-*/
 
 	int ACflg, PEflg;
 	ACflg = PEflg = OJ_AC;
@@ -3358,18 +3345,14 @@ int main(int argc, char **argv)
 		clean_workdir(work_dir);
 		exit(0);
 	}
-/*	
-	for (;(dirp = readdir(dp)) != NULL;)
-	{
 
-		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
-		if (namelen == 0)
-			continue;
-		num_of_test++;
-	}
-	rewinddir(dp);
-*/	
 	num_of_test=namelist_len;
+	// report Runtime Error , if no test file is found.
+        if( num_of_test == 0 ){
+                print_runtimeerror((char *)"no test data ",(char *)" no *.in file found");
+                ACflg = OJ_RE;
+                finalACflg = OJ_RE;
+        }
 
 	for (int i=0 ; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && i < namelist_len ;i++)
 	{

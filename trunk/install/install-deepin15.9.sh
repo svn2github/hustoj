@@ -9,7 +9,7 @@ wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
 tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
-for PKG in make flex g++ clang libmariadb++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
+for PKG in make flex g++ clang libmariadb++-dev php-fpm nginx mariadb-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-8-jdk mono-devel php-mbstring php-xml
 do
    apt-get install -y $PKG 
 done

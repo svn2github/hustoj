@@ -20,7 +20,7 @@ static  $OJ_SIM=false;  //显示相似度
 static  $OJ_DICT=false; //显示在线翻译
 static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/
 static  $OJ_ACE_EDITOR=true;
-static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it onece.
+static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it once.
 static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
@@ -64,9 +64,10 @@ static  $OJ_OI_MODE=false; //是否开启OI比赛模式，禁用排名、状态�
 static  $OJ_SHOW_METAL=true; //榜单上是否按比例显示奖牌
 static  $OJ_RANK_LOCK_DELAY=3600; //赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
 static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
-static $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
+static  $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
 static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。
 static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
+static  $OJ_RANK_HIDDEN="'admin'";  // 管理员不显示在排名中
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
@@ -77,8 +78,7 @@ static  $OJ_SHARE_CODE=false; // 代码分享功能
 static  $OJ_RECENT_CONTEST=true; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
 
 //$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
-//CCPC比赛的一种做法是比赛结束后导出终榜看AC至少1题的不打星的队伍数，现场修改此值即可正确计算奖牌
-//0表示根据榜单上的出现的队伍总数计算(包含了AC0题的队伍和打星队伍)
+//0表示根据榜单上的出现的队伍总数计算，不计打星队伍
 static $OJ_ON_SITE_TEAM_TOTAL=0;
 
 static $OJ_OPENID_PWD='8a367fe87b1e406ea8e94d7d508dcf01';
@@ -136,7 +136,7 @@ require_once(dirname(__FILE__) . "/pdo.php");
 
 require_once(dirname(__FILE__) . "/logger.php");
 
-$logger=new Logger($_SESSION[$OJ_NAME . '_' . 'user_id'], 
+$logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NAME . '_' . 'user_id']:"guest", 
 					$OJ_LOG_FILE, 
 					$OJ_LOG_DATETIME_FORMAT, 
 					$OJ_LOG_ENABLED, 

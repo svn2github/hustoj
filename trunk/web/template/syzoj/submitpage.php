@@ -10,7 +10,7 @@
     
 <center>
 
-<script src="include/checksource.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>include/checksource.js"></script>
 <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span>
@@ -301,10 +301,10 @@ function loadFromBlockly(){
 //  $("#Submit").prop('disabled', false);
 }
 </script>
-<script language="Javascript" type="text/javascript" src="include/base64.js"></script>
+<script language="Javascript" type="text/javascript" src="<?php echo $OJ_CDN_URL?>include/base64.js"></script>
 <?php if($OJ_ACE_EDITOR){ ?>
-<script src="ace/ace.js"></script>
-<script src="ace/ext-language_tools.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>ace/ace.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>ace/ext-language_tools.js"></script>
 <script>
     ace.require("ace/ext/language_tools");
     var editor = ace.edit("source");

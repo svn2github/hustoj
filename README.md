@@ -2,6 +2,21 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
+自带的6种模板演示
+
+http://bs3.hustoj.com/
+
+http://mario.hustoj.com/
+
+http://syzoj.hustoj.com/
+
+http://bshark.hustoj.com/
+
+http://sweet.hustoj.com/
+
+http://mdui.hustoj.com/
+
+
 
 
 ## 版权说明
@@ -9,6 +24,14 @@
 HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
 
 HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
+
+## 感谢下述及其他被使用到的开源代码项目贡献者
+
+* linux apache nginx php mysql mariadb memcached
+* bootstrap kindeditor ace blockly codemirror katex syzoj phpfilemanager
+* sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
+
+排名不分先后本列表欢迎补充
 
 ## 注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
 
@@ -99,9 +122,19 @@ Star us, please!
 <details open>
 <summary><b>2021年</b></summary>
 
-日期   | 类型 | 更新内容
------ | :--: | :-------
-04-08 | 更新 | 增加可选的docker作为judge_client外部容器，以增强安全性。
+  日期  | 类型 |  更新内容
+------- | :--: | :-------
+06-22 | 补丁 | 修复其他模板运行结果自动刷新的问题。
+06-20 | 补丁 | 修复其他模板部分静态资源不走CDN的问题。
+06-20 | 补丁 | 修复bs3部分静态资源不走CDN的问题。
+06-19 | 更新 | 允许设置不参与ranklist排名的管理员列表，$OJ_RANK_HIDDEN="'admin','zhblue'";
+06-18 | 更新 | 允许在docker内使用外部的judge_client判题，方便更新judge_client。judge.conf新增选项：OJ_INTERNAL_CLIENT=1
+06-16 | 更新 | 允许使用"tpj"作为文件名，命名一个基于testlib.h的spj，当"tpj"文件存在时，优先用tpj进行特判。	
+06-12 | 更新 | gcc/g++ 优化级别可配置，默认-O2,允许用OJ_CC_OPT进行覆盖。
+06-06 | 更新 | Ubuntu20.04的机器上，让C的标准升级为C17，允许用OJ_CC_STD进行覆盖。
+06-05 | 更新 | Ubuntu20.04的机器上，让C++的标准升级为C++17，允许用OJ_CPP_STD进行覆盖。
+05-02 | 补丁 | 禁止查看进行中的比赛所用的题目在比赛之前提交的源码，避免训练中偷懒复制老代码。
+04-08 | 更新 | 增加可选的docker作为judge_client外部容器，以增强安全性。[参考用法](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md#python%E5%88%A4%E9%A2%98%E5%A5%BD%E6%85%A2%E5%A5%BD%E6%85%A2%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F)
 03-26 | 更新 | 增加权限类型VIP,拥有VIP权限的账户，可以参加所有标题含`[VIP]`标记的私有比赛。
 03-08 | 补丁 | 修复在Ubuntu20.04上运行sqlite3
 02-06 | 更新 | 新的模板 [`mdui`](https://github.com/zhblue/hustoj/pull/742) 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="mdui";` 即可。*如需内网使用，请在 `/home/judge/src/web/include/db_info.inc.php` 末尾添加 `$MDUI_OFFLINE=true;` 即可。* (Author: [@renbaoshuo](https://github.com/renbaoshuo))
@@ -190,6 +223,44 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 
 阿里云用户请百度 `阿里云 80端口`
 
+
+
+### 基于 Ubuntu 20.04 安装
+**各类公有云首选, 最容易，成功率最高，近期部署数量最多，开发者原型机**
+	
+```bash
+wget http://dl.hustoj.com/install-ubuntu20.04.sh
+sudo bash install-ubuntu20.04.sh
+```
+	
+脚本运行完成直接浏览器输入ip地址即可访问，如不能打开请检查访问策略、防火墙设置是否打开80端口。
+	
+提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，小概率可能会造成 `systemd` 和 `umount` 进程卡CPU 100%
+可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
+或2:[卸载阿里云盾](#卸载阿里云盾)。**
+
+### 基于 Ubuntu 20.04 通过 Gitee 安装
+
+```bash
+wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
+sudo bash install-ubuntu20-gitee.sh
+```
+
+### 基于 Ubuntu 18.04 通过 Gitee 安装
+
+```bash
+wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
+sudo bash install-ubuntu18-gitee.sh
+```
+
+### 基于 Ubuntu 18.04 安装
+
+
+```bash
+wget http://dl.hustoj.com/install-ubuntu18.04.sh
+sudo bash install-ubuntu18.04.sh
+```
+	
 ### 校园网安装
 
 近期 `Github` 的 SVN 访问缓慢，可以到  [Releases](https://github.com/zhblue/hustoj/releases) 中下载 `tar.gz` 版本，然后用 `install` 目录下的 `*-bytgz.sh` 脚本安装。
@@ -201,47 +272,9 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 ```bash
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ```
-
-### 基于 Ubuntu 20.04 安装
-
-```bash
-wget http://dl.hustoj.com/install-ubuntu20.04.sh
-sudo bash install-ubuntu20.04.sh
-```
-
-提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，小概率可能会造成 `systemd` 和 `umount` 进程卡CPU 100%
-可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
-或2:[卸载阿里云盾](#卸载阿里云盾)。**
-
-### 基于 Ubuntu 20.04 通过 Gitee 安装
-
-
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
-
-```bash
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
-sudo bash install-ubuntu20-gitee.sh
-```
-
-### 基于 Ubuntu 18.04 通过 Gitee 安装
-
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
-
-```bash
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
-sudo bash install-ubuntu18-gitee.sh
-```
-
-### 基于 Ubuntu 18.04 安装
-
-**[腾讯云用户请点我查看换软件源方法](https://developer.aliyun.com/mirror/ubuntu)**
-
-**各类公有云首选, 最容易，成功率最高，实际部署数量最多，开发者原型机**
-
-```bash
-wget http://dl.hustoj.com/install-ubuntu18.04.sh
-sudo bash install-ubuntu18.04.sh
-```
+	
+	
+	
 ### Ubuntu 更换软件源
 
 下列两个脚本可以二选一，对于使用**腾讯云镜像**和**Ubuntu 原版镜像的用户**，推荐使用脚本二。
@@ -387,6 +420,9 @@ rm -rf /usr/local/aegis*
 重启后若执行 `ps -aux | grep -E 'aliyun|AliYunDun'` 显示没有阿里云盾相关进程即为卸载成功。
 
 ## 装后须知
+
+[Python重度用户注意查阅](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md#python%E5%88%A4%E9%A2%98%E5%A5%BD%E6%85%A2%E5%A5%BD%E6%85%A2%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F)
+--
 
 常见问题自动应答微信公众号: `hustoj`
 <img src="http://hustoj.com/wx.jpg" height="180">

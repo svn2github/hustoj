@@ -10,9 +10,17 @@ When people asked question, we put the answer here
 新版本
 ----
 
+Python判题好慢好慢，如何加速？
+--
+如果你的系统主要为Python服务，可以修改`/home/judge/etc/judge.conf` 设定 `OJ_PYTHON_FREE=1`
+为了增加安全性，请在`/home/judge/src/install`目录运行`sudo bash docker.sh`，然后修改`/home/judge/etc/judge.conf` 设定 `OJ_USE_DOCKER=1`
+这样设定后，可以提高Python的判题速度，并提供额外的安全防护。
+推荐使用Ubuntu20.04作为基础系统，这个针对Python优化的方案在其他发行版未经测试。
+
+
 为什么提交后没有记录？
 --
-可能是没有填些验证码，或者昵称过长，或者是数据库结构不是最新版（Web代码和数据库版本不一致）。
+可能是没有填写验证码，或者昵称过长，或者是数据库结构不是最新版（Web代码和数据库版本不一致）。
 建议后台-系统管理-系统-更新数据库-Update点击一次。
 
 
@@ -209,7 +217,8 @@ Runtime Error:[ERROR] A Not allowed system call: runid:10735 CALLID:20 如何解
 如何让判题程序忽略行尾的空白字符
 --
 
-	在judge_client.cc头部增加宏定义 IGNORE_ESOL
+在judge_client.cc头部增加宏定义 IGNORE_ESOL 或者修改 Makefile 增加 -DIGNORE_ESOL 参数。
+	
 
 配置文件里的字段什么含义?
 --

@@ -157,7 +157,7 @@ else {
     }else if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
                   $sql="WHERE (contest_id=0 or contest_id is null)  ";
     }else{
-        $sql="WHERE  (contest_id=0 or contest_id is null)  and problem_id>0   ";
+        $sql="WHERE problem_id>0   ";
     }
 }
 
@@ -202,21 +202,15 @@ if (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0&&!isset($_SESSION[$O
 
 if (isset($_GET['user_id'])) {
   $user_id = trim($_GET['user_id']);
-  if (is_valid_user_name($user_id) && $user_id!="") {
-    if ($OJ_MEMCACHE) {
-      $sql = $sql."AND `user_id`='".addslashes($user_id) ."' ";
-    }
-    else {
+  if ( $user_id!="" && is_valid_user_name($user_id)) {
       $sql = $sql."AND `user_id`=? ";
-    }
-    
-    if ($str2!="")
-      $str2 = $str2."&";
-    
-    $str2 = $str2."user_id=".urlencode($user_id);
+      if ($str2!="")
+      		$str2 = $str2."&";
+      $str2 = $str2."user_id=".urlencode($user_id);
   }
-  else
-    $user_id = "";
+  else{
+	  $user_id = "";
+  }
 }
 
 if (isset($_GET['language']))
@@ -268,9 +262,8 @@ $sql = $sql.$order_str." LIMIT 50";
 
 if (isset($_GET['user_id'])) {
   $result = pdo_query($sql,$user_id);
-}
-else {
-  $result = mysql_query_cache($sql);
+}else{
+  $result = pdo_query($sql);
 }
   
 if ($result)
@@ -323,6 +316,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
     else
       $view_status[$i][1] = "<a href='userinfo.php?user=".$row['user_id']."' title='".$row['nick']."'>".$row['user_id']."</a>";
   }
+  $view_status[$i]['nick']=$row['nick'];
 
   if ($row['contest_id']>0) {
     if (isset($end_time) && time() < $end_time) {
@@ -468,7 +462,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
 
       if ($row["problem_id"]>0) {
         if ($row['contest_id']>0) {
-         if (time()<$end_time || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))
+         if (isset($end_time)&&time()<$end_time || isset($_SESSION[$OJ_NAME.'_'.'source_browser']))
             $view_status[$i][6] .= "/<a target=_self href=\"submitpage.php?cid=".$row['contest_id']."&pid=".$row['num']."&sid=".$row['solution_id']."\">Edit</a>";
           else
             $view_status[$i][6] .= "";

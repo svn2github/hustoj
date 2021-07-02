@@ -1,49 +1,5 @@
 <?php
 //a:9:{s:4:"lang";s:2:"en";s:9:"auth_pass";s:32:"d41d8cd98f00b204e9800998ecf8427e";s:8:"quota_mb";i:0;s:17:"upload_ext_filter";a:0:{}s:19:"download_ext_filter";a:0:{}s:15:"error_reporting";i:1;s:7:"fm_root";s:0:"";s:17:"cookie_cache_time";i:2592000;s:7:"version";s:5:"0.9.8";}
-/*--------------------------------------------------
- | PHP FILE MANAGER
- +--------------------------------------------------
- | phpFileManager 0.9.8
- | By Fabricio Seger Kolling
- | Copyright (c) 2004-2013 Fabrício Seger Kolling
- | E-mail: dulldusk@gmail.com
- | URL: http://phpfm.sf.net
- | Last Changed: 2013-10-15
- +--------------------------------------------------
- | OPEN SOURCE CONTRIBUTIONS
- +--------------------------------------------------
- | TAR/GZIP/BZIP2/ZIP ARCHIVE CLASSES 2.0
- | By Devin Doucette
- | Copyright (c) 2004 Devin Doucette
- | E-mail: darksnoopy@shaw.ca
- | URL: http://www.phpclasses.org
- +--------------------------------------------------
- | It is the AUTHOR'S REQUEST that you keep intact the above header information
- | and notify him if you conceive any BUGFIXES or IMPROVEMENTS to this program.
- +--------------------------------------------------
- | LICENSE
- +--------------------------------------------------
- | Licensed under the terms of any of the following licenses at your choice:
- | - GNU General Public License Version 2 or later (the "GPL");
- | - GNU Lesser General Public License Version 2.1 or later (the "LGPL");
- | - Mozilla Public License Version 1.1 or later (the "MPL").
- | You are not required to, but if you want to explicitly declare the license
- | you have chosen to be bound to when using, reproducing, modifying and
- | distributing this software, just include a text file titled "LEGAL" in your version
- | of this software, indicating your license choice. In any case, your choice will not
- | restrict any recipient of your version of this software to use, reproduce, modify
- | and distribute this software under any of the above licenses.
- +--------------------------------------------------
- | CONFIGURATION AND INSTALATION NOTES
- +--------------------------------------------------
- | This program does not include any instalation or configuration
- | notes because it simply does not require them.
- | Just throw this file anywhere in your webserver and enjoy !!
- +--------------------------------------------------
-*/
-// +--------------------------------------------------
-// | Header and Globals
-// +--------------------------------------------------	
 require_once("../include/db_info.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
@@ -52,7 +8,9 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
 }
-
+// this is not a webshell , and it need administrator / problem editor  membership to use, 
+// if aliyun warn you about this file , don't panic   
+// 这不是后门(Webshell)文件，不要理会阿里云的误报。
     $charset = "UTF-8";
     //@setlocale(LC_CTYPE, 'C');
     header("Pragma: no-cache");
@@ -123,15 +81,16 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
     if(isset($_GET['pid'])){
 		$current_dir="$OJ_DATA/".intval($_GET['pid'])."/";
     }else{
-	$pid=explode("/",$current_dir);
-	$pid=$pid[count($pid)-2];
+	$pid=intval(basename($current_dir));
+	if($pid==0) $pid=intval(basename($dir_dest));
 
 	$current_dir="$OJ_DATA/".intval($pid)."/";
     }
+    $dir_dest=$current_dir;
     if (!isset($current_dir)){
         $current_dir = $path_info["dirname"]."/";
         if (!$islinux) $current_dir = ucfirst($current_dir);
-        //@chmod($current_dir,0755);
+        //@chmod($current_dir,0711);
     } else $current_dir = format_path($current_dir);
     // Auto Expand Local Path
     if (!isset($expanded_dir_list)){
@@ -187,12 +146,12 @@ if ($loggedon==$auth_pass){
                 case 3: download(); break;
                 case 4: view(); break;
                 case 5: server_info(); break;
-                case 6: execute_cmd(); break;
+                //case 6: execute_cmd(); break;
                 case 7: edit_file_form(); break;
-                case 8: chmod_form(); break;
-                case 9: shell_form(); break;
+                //case 8: chmod_form(); break;
+                //case 9: shell_form(); break;
                 case 10: upload_form(); break;
-                case 11: execute_file(); break;
+                //case 11: execute_file(); break;
                 default: frameset();
             }
     }
@@ -208,6 +167,7 @@ class config {
     var $filename;
     function config(){
         global $fm_self;
+	global $OJ_LANG;
         $this->data = array(
             'lang'=>'en',
             'auth_pass'=>md5(''),
@@ -228,6 +188,7 @@ class config {
         }
         if (is_array($data)&&count($data)==count($this->data)) $this->data = $data;
         else $this->save();
+	if($OJ_LANG == "cn" ) $this->data['lang']="cn";
     }
     function save(){
         $objdata = "<?php".chr(13).chr(10)."//".serialize($this->data).chr(13).chr(10);
@@ -360,7 +321,8 @@ function et($tag){
     $en['RenderTime'] = 'Time to render this page';
     $en['Seconds'] = 'sec';
     $en['ErrorReport'] = 'Error Reporting';
-
+    $en['Random-data'] = 'Random-data generator';
+    
     // chinese
 	$cn['Version'] = '版本';
     $cn['DocRoot'] = '根目录';
@@ -468,6 +430,7 @@ function et($tag){
     $cn['RenderTime'] = '页面执行时间';
     $cn['Seconds'] = '秒';
     $cn['ErrorReport'] = '错误报告';
+    $en['Random-data'] = '随机测试数据生成器';
 
     // Portuguese by - Fabricio Seger Kolling
     $pt['Version'] = 'Versão';
@@ -2336,7 +2299,7 @@ function total_size($arg) {
 }
 function total_delete($arg) {
     if (file_exists($arg)) {
-        @chmod($arg,0755);
+        @chmod($arg,0711);
         if (is_dir($arg)) {
             $handle = opendir($arg);
             while($aux = readdir($handle)) {
@@ -2351,7 +2314,7 @@ function total_copy($orig,$dest) {
     $ok = true;
     if (file_exists($orig)) {
         if (is_dir($orig)) {
-            mkdir($dest,0755);
+            mkdir($dest,0711);
             $handle = opendir($orig);
             while(($aux = readdir($handle))&&($ok)) {
                 if ($aux != "." && $aux != "..") $ok = total_copy($orig."/".$aux,$dest."/".$aux);
@@ -2404,19 +2367,21 @@ function save_upload($temp_file,$filename,$dir_dest) {
     }
     if (!$is_denied){
         if (!check_limit($filesize)){
+	//echo "file:$file";
             if (file_exists($file)){
                 if (unlink($file)){
                     if (copy($temp_file,$file)){
-                        @chmod($file,0755);
+                        @chmod($file,0611);
                         $out = 6;
                     } else $out = 2;
                 } else $out = 5;
             } else {
                 if (copy($temp_file,$file)){
-                    @chmod($file,0755);
+                    @chmod($file,0611);
                     $out = 1;
                 } else $out = 2;
             }
+	if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$file);
         } else $out = 3;
     } else $out = 4;
     return $out;
@@ -2435,7 +2400,7 @@ function zip_extract(){
                 foreach(explode('/',$complete_path) AS $k) {
                     $tmp .= $k.'/';
                     if(!file_exists($tmp)) {
-                        @mkdir($current_dir.$tmp, 0755);
+                        @mkdir($current_dir.$tmp, 0611);
                     }
                 }
             }
@@ -2486,13 +2451,13 @@ function replace_double($sub,$str){
     return $out;
 }
 function remove_special_chars($str){
-    $str = trim($str);
-    $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?/\\",
-                      "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_________________");
-    $str = str_replace("..","",$str);
-    $str = str_replace("\\","",$str);
-    $str = str_replace("/","",$str);
-    $str = str_replace("\$","",$str);
+   // $str = trim($str);
+   // $str = strtr($str,"¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ!@#%&*()[]{}+=?/\\",
+   //                   "YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy_________________");
+    $str = mb_ereg_replace ("\\.\\.","",$str);
+    $str = mb_ereg_replace("\\\\","",$str);
+    $str = mb_ereg_replace ("/","",$str);
+    $str = mb_ereg_replace ("\\$","",$str);
     return $str;
 }
 function format_path($str){
@@ -3449,10 +3414,10 @@ function dir_list_form() {
         $out .= "
             <tr>
             <td bgcolor=\"#DDDDDD\" colspan=50><nobr>
-            <input type=button onclick=\"test_prompt(1)\" value=\"".et('CreateDir')."\">
             <input type=button onclick=\"test_prompt(2)\" value=\"".et('CreateArq')."\">
             <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">
             <b>$ip</b>
+            <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
             </nobr>";
         $uplink = "";
         if ($current_dir != $fm_current_root){
@@ -3469,13 +3434,9 @@ function dir_list_form() {
                     <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" id=\"ANI0\" value=\"".et('SelAll')."\">
                     <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" value=\"".et('SelInverse')."\">
                     <input type=\"button\" style=\"width:80\" onclick=\"test(4)\" value=\"".et('Rem')."\">
-                 <!--   <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(5)\" value=\"".et('Copy')."\">
-                    <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(6)\" value=\"".et('Move')."\">   -->
                     <input type=\"button\" style=\"width:100\" onclick=\"test_prompt(71)\" value=\"".et('Compress')."\">";
             if ($islinux) $out .= "
                     <input type=\"button\" style=\"width:100\" onclick=\"resolveIDs()\" value=\"".et('ResolveIDs')."\">";
-            $out .= "
-                    <input type=\"button\" style=\"width:100\" onclick=\"chmod_form()\" value=\"".et('Perms')."\">";
             $out .= "
                 </nobr></td>
                 </tr>
@@ -3603,13 +3564,9 @@ function dir_list_form() {
                       <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" id=\"ANI1\" value=\"".et('SelAll')."\">
                       <input type=\"button\" style=\"width:80\" onclick=\"selectANI(this)\" value=\"".et('SelInverse')."\">
                       <input type=\"button\" style=\"width:80\" onclick=\"test(4)\" value=\"".et('Rem')."\">
-                      <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(5)\" value=\"".et('Copy')."\">
-                      <input type=\"button\" style=\"width:80\" onclick=\"sel_dir(6)\" value=\"".et('Move')."\">
                       <input type=\"button\" style=\"width:100\" onclick=\"test_prompt(71)\" value=\"".et('Compress')."\">";
             if ($islinux) $out .= "
                       <input type=\"button\" style=\"width:100\" onclick=\"resolveIDs()\" value=\"".et('ResolveIDs')."\">";
-            $out .= "
-                      <input type=\"button\" style=\"width:100\" onclick=\"chmod_form()\" value=\"".et('Perms')."\">";
             $out .= "
                 </nobr></td>
                 </tr>";
@@ -3653,12 +3610,12 @@ function upload_form(){
         echo "
         <table height=\"100%\" border=0 cellspacing=0 cellpadding=2 align=center>
         <form name=\"upload_form\" action=\"".$path_info["basename"]."\" method=\"post\" ENCTYPE=\"multipart/form-data\">
-        <input type=hidden name=dir_dest value=\"$current_dir\">
+        <input type=hidden name=dir_dest value=\"".basename($current_dir)."\">
         <input type=hidden name=action value=10>
         <tr><th colspan=2>".et('Upload')."</th></tr>
-        <tr><td align=right><b>".et('Destination').":<td><b><nobr>$current_dir</nobr>";
+        <tr><td align=right><b>".et('Destination').":<td><b><nobr>".basename($current_dir)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
-            echo "<tr><td width=1 align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
+            echo "<tr><td align=right><b>".et('File').":<td><nobr><input type=\"file\" name=\"file$x\"></nobr>";
             $test_js .= "(document.upload_form.file$x.value.length>0)||";
         }
         echo "
@@ -3690,7 +3647,7 @@ function upload_form(){
         </script>";
     } else {
         $out = "<tr><th colspan=2>".et('UploadEnd')."</th></tr>
-                <tr><th colspan=2><nobr>".et('Destination').": $dir_dest</nobr>";
+                <tr><th colspan=2><nobr>".et('Destination').": ".basename($dir_dest)."</nobr>";
         for ($x=0;$x<$num_uploads;$x++){
             $temp_file = $_FILES["file".$x]["tmp_name"];
             $filename = $_FILES["file".$x]["name"];
@@ -3840,7 +3797,7 @@ function chmod_form(){
     <TABLE BORDER=\"0\" CELLSPACING=\"0\" CELLPADDING=\"4\" ALIGN=CENTER>
     <tr><th colspan=4>".et('Perms')."</th></tr>
     <TR ALIGN=\"LEFT\" VALIGN=\"MIDDLE\">
-    <TD><input type=\"text\" name=\"t_total\" value=\"0755\" size=\"4\" onKeyUp=\"octalchange()\"> </TD>
+    <TD><input type=\"text\" name=\"t_total\" value=\"0711\" size=\"4\" onKeyUp=\"octalchange()\"> </TD>
     <TD><input type=\"text\" name=\"sym_total\" value=\"\" size=\"12\" READONLY=\"1\"></TD>
     </TR>
     </TABLE>
@@ -4431,8 +4388,8 @@ function frame3(){
             if (strlen($cmd_arg)){
                 $cmd_arg = format_path($current_dir.$cmd_arg);
                 if (!file_exists($cmd_arg)){
-                    @mkdir($cmd_arg,0755);
-                    @chmod($cmd_arg,0755);
+                  //  @mkdir($cmd_arg,0711);
+                    @chmod($cmd_arg,0711);
                     reloadframe("parent",2,"&ec_dir=".$cmd_arg);
                 } else alert(et('FileDirExists').".");
             }
@@ -4577,7 +4534,8 @@ function frame3(){
                         $zipfile->extract_files();
                     }
                     unset($zipfile);
- 		    system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(function_exists("system"))system("/home/judge/src/install/ans2out ".$current_dir);
+ 		    if(file_exists("/usr/bin/dos2unix")&&function_exists("system")) system("/usr/bin/dos2unix ".$current_dir."/*");
                     reloadframe("parent",2);
                 }
             }
@@ -5177,7 +5135,7 @@ class tar_file extends archive
                     {
                         if(!is_dir($file['name']))
                         {
-                            mkdir($file['name'],0755);
+                            mkdir($file['name'],0711);
                             //mkdir($file['name'],$file['stat'][2]);
                             //chown($file['name'],$file['stat'][4]);
                             //chgrp($file['name'],$file['stat'][5]);

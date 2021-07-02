@@ -221,7 +221,8 @@
 					</div>
 			</div>
 			</center>
-			<?php }?>
+			<?php } 
+			?>
 			<br>
 			<center>
 				<h4><?php if (isset($locked_msg)) echo $locked_msg;?></h4>
@@ -238,7 +239,7 @@
 							<th class='text-center'>RE</th>
 							<th class='text-center'>CE</th>
 							<th class='text-center'>TR</th>
-							<th class='text-center'></th>							
+							<th class='text-center'>|</th>
 							<th class='text-center'>Total</th>
 							<?php 
 							$i = 0;
@@ -246,7 +247,7 @@
 								if (isset($R[$pid_cnt][$i+11]) )	
 									echo "<th class='text-center'>$language_name[$i]</th>";
 								else
-									echo "<th class='text-center'></th>";
+									echo "";//"<th class='text-center'></th>";
 								$i++;
 							}
 							?>
@@ -287,10 +288,10 @@
 							}
 
 							for ($j=0; $j<count($language_name)+11; $j++) {
-								if (!isset($R[$i][$j]))
-									$R[$i][$j]="";
-								
-								echo "<td class='text-center'>".$R[$i][$j]."</td>";
+							 //	if (!isset($R[$i][$j]))
+							 //		$R[$i][$j]="";
+								if ($j<11 || isset($R[$pid_cnt][$j]) )	
+									echo "<td class='text-center'>".$R[$i][$j]."</td>";
 							}
 							echo "</tr>";
 						}
@@ -298,11 +299,13 @@
 						echo "<tr class='evenrow'>";
 							echo "<td class='text-center'>Total</td>";
 
-							for ($j=0; $j<count($language_name)+11; $j++) {
-								if(!isset($R[$i][$j]))
-									$R[$i][$j]="";
+							for ($j=0 ; $j<count($language_name)+ 11; $j++) {
+							//	if(!isset($R[$i][$j]))
+							//		$R[$i][$j]="";
+										
+								if ($j<11 || isset($R[$pid_cnt][$j]) )	
+									echo "<td class='text-center'>".$R[$i][$j]."</td>";
 								
-								echo "<td class='text-center'>".$R[$i][$j]."</td>";
 							}
 						echo "</tr>";
 

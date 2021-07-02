@@ -254,7 +254,7 @@ else {
   "-//freeproblemset//An opensource XML standard for Algorithm Contest Problem Set//EN"
   "http://hustoj.com/fps.current.dtd" >
 
-<fps version="1.3" url="https://github.com/zhblue/freeproblemset/">
+<fps version="1.4" url="https://github.com/zhblue/freeproblemset/">
   <generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/" />
   <?php
   foreach ($result as  $row) {
@@ -321,6 +321,19 @@ else {
       echo "<spj language=\"C++\"><![CDATA[";
       echo fixcdata(file_get_contents ($filecc ));
       echo "]]></spj>";
+    }
+    $filec = "$OJ_DATA/".$row['problem_id']."/tpj.c";
+    $filecc = "$OJ_DATA/".$row['problem_id']."/tpj.cc";
+
+    if (file_exists($filec)) {
+      echo "<tpj language=\"C\"><![CDATA[";
+      echo fixcdata(file_get_contents($filec));
+      echo "]]></tpj>";
+    }
+    else if (file_exists($filecc)) {
+      echo "<tpj language=\"C++\"><![CDATA[";
+      echo fixcdata(file_get_contents ($filecc ));
+      echo "]]></tpj>";
     }
   }
 ?>

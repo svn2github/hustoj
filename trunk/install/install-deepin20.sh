@@ -1,27 +1,23 @@
 #!/bin/bash
-sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
-
 apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
-cd /home/judge/ || exit
+cd /home/judge/
 
-#svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
-
-git clone https://gitee.com/zhblue/hustoj.git git
-cp -a git/trunk src
-
-for pkg in net-tools make flex g++ libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
+#using tgz src files
+wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+tar xzf hustoj.tar.gz
+svn up src
+#svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
+for PKG in make g++ clang libmariadb++-dev php-fpm nginx mariadb-server php-mysql php-common php-gd php-zip php-mbstring php-xml
 do
-	while ! apt-get install -y "$pkg" 
-	do
-		echo "Network fail, retry... you might want to change another apt source for install"
-	done
+   apt-get install -y $PKG 
 done
 
-USER=$(grep user /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
-PASSWORD=$(grep password /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
-CPU=$(grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}')
+USER="hustoj"
+PASSWORD=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
+
+CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
 
 mkdir etc data log backup
 
@@ -45,48 +41,41 @@ chmod 700 etc/judge.conf
 sed -i "s/DB_USER[[:space:]]*=[[:space:]]*\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
-chown -R www-data src/web/
-chown www-data:judge src/web/upload
-chown www-data:judge data
-chmod 711 -R data
+chown www-data src/web/include/db_info.inc.php
+chown www-data src/web/upload data
 if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    80m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
 fi
 
-mysql -h localhost -u"$USER" -p"$PASSWORD" < src/install/db.sql
-echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u"$USER" -p"$PASSWORD" 
-
+mysql < src/install/db.sql
+echo "grant all privileges on jol.* to '$USER' identified by '$PASSWORD';\n flush privileges;\n"|mysql
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
-	echo "default site modified!"
+	echo "hustoj nginx config added!"
 else
-	echo "modify the default site"
-	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;\n\n\tlocation /recent-contest.json {\n\t\tproxy_pass http://contests.acmicpc.info/contests.json;\n\t}#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
-	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
-	sed -i "s:php7.0:php7.4:g" /etc/nginx/sites-enabled/default
+	sed -i "s:}#added_by_hustoj::g" /etc/nginx/sites-enabled/default
+	#sed -i "s:php7.0:php7.2:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
+	/etc/init.d/nginx restart
+	sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini
 fi
-/etc/init.d/nginx restart
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.4/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.4/fpm/php.ini
-WWW_CONF=$(find /etc/php -name www.conf)
-sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' "$WWW_CONF"
-sed -i 's/pm.max_children = 5/pm.max_children = 200/g' "$WWW_CONF"
- 
-COMPENSATION=$(grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}')
+COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
-PHP_FPM=$(find /etc/init.d/ -name "php*-fpm")
-$PHP_FPM restart
-PHP_FPM=$(service --status-all|grep php|awk '{print $4}')
-if [ "$PHP_FPM" != ""  ]; then service "$PHP_FPM" restart ;else echo "NO PHP FPM";fi;
+sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
 
-cd src/core || exit 
+/etc/init.d/php7.0-fpm restart
+service php7.0-fpm restart
+
+cd src/core
 chmod +x ./make.sh
 ./make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then
@@ -106,15 +95,21 @@ ln -s /usr/bin/mcs /usr/bin/gmcs
 /usr/bin/judged
 cp /home/judge/src/install/hustoj /etc/init.d/hustoj
 update-rc.d hustoj defaults
-systemctl enable hustoj
+
 systemctl enable nginx
-systemctl enable mysql
-systemctl enable php7.4-fpm
-#systemctl enable judged
+systemctl enable mariadb
+systemctl enable php7.3-fpm
+systemctl enable judged
 
-mkdir /var/log/hustoj/
-chown www-data -R /var/log/hustoj/
-
+cd /home/judge/src/install
+if test -f  /.dockerenv ;then
+	echo "Already in docker, skip docker installation, install some compilers ... "
+	apt-get intall -f flex fp-compiler openjdk-14-jdk mono-devel
+else
+	./docker.sh
+	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
+	 sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
+fi
 cls
 reset
 

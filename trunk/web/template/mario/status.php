@@ -74,10 +74,13 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 ?>
 </div>
 <div id=center>
-<table class=content-box-header align=center width=80%>
+<table id=result-tab class=content-box-header align=center width=80%>
 <tr  class='toprow'>
 <th ><?php echo $MSG_RUNID?>
 <th ><?php echo $MSG_USER?>
+						<th>
+							<?php echo $MSG_NICK?>
+						</th>
 <th ><?php echo $MSG_PROBLEM?>
 <th ><?php echo $MSG_RESULT?>
 <th ><?php echo $MSG_MEMORY?>
@@ -147,5 +150,21 @@ echo "[<a href=status.php?".$str2."&top=".$bottom."&prevtop=$top>Next Page</a>]"
 </div><!--end foot-->
 </div><!--end main-->
 </div><!--end wrapper-->
+<script>
+	var i = 0;
+	var judge_result = [<?php
+	foreach ($judge_result as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+
+	var judge_color = [<?php
+	foreach ($judge_color as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+</script>
+<script src="<?php echo $OJ_CDN_URL?>template/bs3/jquery.min.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>template/bs3/auto_refresh.js"></script>
 </body>
 </html>

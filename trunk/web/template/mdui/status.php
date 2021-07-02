@@ -113,6 +113,9 @@
                     <tr>
                         <th class="mdui-table-col-numeric">提交编号</th>
                         <th>用户</th>
+						<th>
+							<?php echo $MSG_NICK?>
+						</th>
                         <th>题目编号</th>
                         <th>结果</th>
                         <th>内存</th>

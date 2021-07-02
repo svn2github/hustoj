@@ -189,6 +189,9 @@ static int turbo_mode = 0;
 static int python_free=0;
 static int use_docker=0;
 static const char *tbname = "solution";
+static char cc_opt[BUFFER_SIZE/10];
+static char cc_std[BUFFER_SIZE/10];
+static char cpp_std[BUFFER_SIZE/10];
 int num_of_test = 0;
 //static int sleep_tmp;
 
@@ -510,6 +513,16 @@ void init_judge_conf()
 	sleep_time = 3;
 	strcpy(java_xms, "-Xms32m");
 	strcpy(java_xmx, "-Xmx256m");
+	strcpy(cc_std,"-std=c99");
+	strcpy(cc_opt,"-O2");
+	if(__GNUC__ > 9 || (  __GNUC__ == 9 &&  __GNUC_MINOR__ >= 3 ) ){ 
+		// ubuntu20.04 introduce g++9.3
+		strcpy(cc_std,"-std=c17");
+		strcpy(cpp_std,"-std=c++17");
+	}else{
+		strcpy(cc_std,"-std=c99");
+		strcpy(cpp_std,"-std=c++11");
+	}
 	sprintf(buf, "%s/etc/judge.conf", oj_home);
 	fp = fopen("./etc/judge.conf", "re");
 	if (fp != NULL)
@@ -539,12 +552,15 @@ void init_judge_conf()
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
-			//read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
+			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
 			read_int(buf, "OJ_PYTHON_FREE", &python_free);
 			read_int(buf, "OJ_COPY_DATA", &copy_data);
 			read_int(buf, "OJ_USE_DOCKER",&use_docker);
+			read_buf(buf, "OJ_CC_STD", cc_std);
+			read_buf(buf, "OJ_CPP_STD", cpp_std);
+			read_buf(buf, "OJ_CC_OPT", cc_opt);
 			
 			
 		}
@@ -1245,10 +1261,10 @@ int compile(int lang, char *work_dir)
 	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
 	int pid;
 
-	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", "-O2", "-fmax-errors=10", "-Wall",
-						  "-lm", "--static", "-std=c99", "-DONLINE_JUDGE", NULL};
-	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",
-						  "-lm", "--static", "-std=c++11", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
+	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", cc_opt, "-fmax-errors=10", "-Wall",
+						  "-lm", "--static", cc_std , "-DONLINE_JUDGE", NULL};
+	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",cc_opt,
+						  "-lm", "--static", cpp_std, "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
 	const char *CP_P[] =
 		{"fpc", "Main.pas", "-Cs32000000", "-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL};
 	//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };
@@ -1350,7 +1366,7 @@ int compile(int lang, char *work_dir)
 
 		if (compile_chroot && lang != 3 && lang != 9 && lang != 6 && lang != 11 && lang != 5 )
 		{
-			 if (access("usr", 0) == -1){
+			 if (access("usr", F_OK ) == -1){
 				execute_cmd("mkdir -p root/.cache/go-build usr etc/alternatives proc tmp dev");
 				execute_cmd("chown judge -R root tmp ");
 				execute_cmd("mount -o bind /usr usr");
@@ -2502,6 +2518,8 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 {
 
 	pid_t pid;
+	char spjpath[BUFFER_SIZE/2];
+	char tpjpath[BUFFER_SIZE/2];
 	if (DEBUG) printf("pid=%d\n", problem_id);
 	// prevent privileges settings caused spj fail in [issues686]
 	execute_cmd("chown www-data:judge %s/data/%d/spj %s %s %s", oj_home, problem_id,infile, outfile, userfile);
@@ -2531,11 +2549,19 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		LIM.rlim_max = STD_F_LIM + STD_MB;
 		LIM.rlim_cur = STD_F_LIM;
 		setrlimit(RLIMIT_FSIZE, &LIM);
+		sprintf(spjpath,"%s/data/%d/spj", oj_home, problem_id);
+		sprintf(tpjpath,"%s/data/%d/tpj", oj_home, problem_id);
 
-		ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id,
-						  infile, outfile, userfile);
-		if (DEBUG)
-			printf("spj1=%d\n", ret);
+		if( access( tpjpath , X_OK ) == 0 ){
+			ret = execute_cmd("%s/data/%d/tpj %s %s %s 2>> diff.out ", oj_home, problem_id, infile, userfile, outfile);    // testlib style
+			if (DEBUG) printf("testlib spj return: %d\n", ret);
+		}else if (access( spjpath , X_OK ) == 0 ) {	
+			ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id, infile, outfile, userfile);    // hustoj style
+			if (DEBUG) printf("hustoj spj return: %d\n", ret);
+		}else{
+			printf("spj tpj not found problem: %d\n", problem_id);		
+			ret=1;
+		}
 		if (ret)
 			exit(1);
 		else
@@ -2548,7 +2574,7 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		waitpid(pid, &status, 0);
 		ret = WEXITSTATUS(status);
 		if (DEBUG)
-			printf("spj2=%d\n", ret);
+			printf("recorded spj: %d\n", ret);
 	}
 	return ret;
 }
@@ -3004,18 +3030,18 @@ int count_in_files(char *dirpath)
 
 int get_test_file(char *work_dir, int p_id)
 {
-	char filename[BUFFER_SIZE];
+	char filename[BUFFER_SIZE/2];
 	char localfile[BUFFER_SIZE];
 	time_t remote_date, local_date;
 	int ret = 0;
 	const char *cmd =
 		" wget --post-data=\"gettestdatalist=1&time=1&pid=%d\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
 	FILE *fjobs = read_cmd_output(cmd, p_id, http_baseurl, http_apipath);
-	while (fgets(filename, BUFFER_SIZE - 1, fjobs) != NULL)
+	while (fgets(filename, sizeof(filename) - 1, fjobs) != NULL)
 	{
 
 		if(1!=sscanf(filename, "%ld", &remote_date)) printf("http remote time stamp read fail\n");
-		if (fgets(filename, BUFFER_SIZE - 1, fjobs) == NULL)
+		if (fgets(filename, sizeof(filename) - 1, fjobs) == NULL)
 			break;
 		if(1!=sscanf(filename, "%s", filename)) printf("http filename read fail\n");
 		if (http_judge && (!data_list_has(filename)))
@@ -3028,7 +3054,7 @@ int get_test_file(char *work_dir, int p_id)
 		stat(localfile, &fst);
 		local_date = fst.st_mtime;
 
-		if (access(localfile, 0) == -1 || local_date < remote_date)
+		if (access(localfile, F_OK ) == -1 || local_date < remote_date)
 		{
 
 			if (strcmp(filename, "spj") == 0)
@@ -3042,7 +3068,7 @@ int get_test_file(char *work_dir, int p_id)
 			if (strcmp(filename, "spj.c") == 0)
 			{
 				//   sprintf(localfile,"%s/data/%d/spj.c",oj_home,p_id);
-				if (access(localfile, 0) == 0)
+				if (access(localfile, F_OK ) == 0)
 				{
 					const char *cmd3 = "gcc -o %s/data/%d/spj %s/data/%d/spj.c";
 					execute_cmd(cmd3, oj_home, p_id, oj_home, p_id);
@@ -3051,7 +3077,7 @@ int get_test_file(char *work_dir, int p_id)
 			if (strcmp(filename, "spj.cc") == 0)
 			{
 				//     sprintf(localfile,"%s/data/%d/spj.cc",oj_home,p_id);
-				if (access(localfile, 0) == 0)
+				if (access(localfile, F_OK ) == 0)
 				{
 					const char *cmd4 =
 						"g++ -o %s/data/%d/spj %s/data/%d/spj.cc";
@@ -3359,7 +3385,7 @@ int main(int argc, char **argv)
 
 		prepare_files(dirp->d_name, namelen, infile, p_id, work_dir, outfile,
 					  userfile, runner_id);
-		if (access(outfile, 0) == -1)
+		if (access(outfile, R_OK ) == -1)
 		{
 			//out file does not exist
 			char error[BUFFER_SIZE];

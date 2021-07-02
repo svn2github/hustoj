@@ -355,7 +355,7 @@
   ''];
 </script>
 
-<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js" ></script>
+<script src="<?php echo $OJ_CDN_URL?>template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js" ></script>
 
 <script>
   var diff = new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();

@@ -62,6 +62,6 @@ if(count($data)>0){
         header('Content-Length: ' . filesize($zipname));
         readfile($zipname);
         unlink($zipname);
-        die;
+        die();
 }
 ?>

@@ -227,8 +227,7 @@
 			$.post( "admin/phpfm.php", {
 				'frame': 3,
 				'pid': pid,
-				'pass': '',
-				'csrf': '<?php echo $token?>'
+				'pass': ''
 			}, function ( data, status ) {
 				if ( status == "success" ) {
 					document.location.href = "admin/phpfm.php?frame=3&pid=" + pid;

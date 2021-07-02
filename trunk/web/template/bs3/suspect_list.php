@@ -171,7 +171,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include("template/$OJ_TEMPLATE/js.php");?>      
 
-<script src="include/sortTable.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>include/sortTable.js"></script>
 
 <script>
   var diff = new Date("<?php echo date("Y/m/d H:i:s")?>").getTime()-new Date().getTime();

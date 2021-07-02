@@ -6,8 +6,8 @@ function auto_refresh() {
 	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {
-		var result = $(rows[i].cells[3].children[0]).attr("result");
-		rows[i].cells[3].className = "td_result";
+		var result = $(rows[i].cells[4].children[0]).attr("result");
+		rows[i].cells[4].className = "td_result";
 		var sid = rows[i].cells[0].innerHTML;
 		
 		if (result<4) {
@@ -48,17 +48,17 @@ function fresh_result(solution_id) {
 			// alert(r);
 			// alert(judge_result[r]);
 			var loader = "<img width=18 src=image/loader.gif>";
-			row.cells[4].innerHTML = ra[1];
-			row.cells[5].innerHTML = ra[2];
+			row.cells[5].innerHTML = ra[1];
+			row.cells[6].innerHTML = ra[2];
 
 			if(ra[3]!="none")
-				row.cells[9].innerHTML = ra[3];
+				row.cells[10].innerHTML = ra[3];
 			
 			if (ra[0]<4) {
 				//console.log(loader);
-				if (-1==row.cells[3].innerHTML.indexOf("loader")) {
+				if (-1==row.cells[4].innerHTML.indexOf("loader")) {
 					//console.log(row.cells[3].innerHTML);
-			 		row.cells[3].innerHTML += loader;
+			 		row.cells[4].innerHTML += loader;
 				}
 				interval *= 1.5;
 				window.setTimeout("fresh_result("+solution_id+")",interval);
@@ -67,7 +67,7 @@ function fresh_result(solution_id) {
 				//console.log(ra[0]);
 				switch (ra[0]) {
 					case 4:
-						row.cells[3].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
+						row.cells[4].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
 						break;
 					case 5:
 					case 6:
@@ -75,13 +75,13 @@ function fresh_result(solution_id) {
 				  case 8:
 				  case 9:
 				  case 10:
-						row.cells[3].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</a>";
+						row.cells[4].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</a>";
 						break;
 				 	case 11:
-						row.cells[3].innerHTML = "<a href=ceinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
+						row.cells[4].innerHTML = "<a href=ceinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
 						break;
 				  default:
-//						row.cells[3].innerHTML = "<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</span>";
+//						row.cells[4].innerHTML = "<span class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+" AC:"+ra[4].trim()+"%</span>";
 				}
 			
 				auto_refresh();

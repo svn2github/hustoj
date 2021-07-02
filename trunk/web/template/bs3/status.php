@@ -131,9 +131,12 @@
 							<?php echo $MSG_USER?>
 						</td>
 						<td class="text-center">
+							<?php echo $MSG_NICK?>
+						</td>
+						<td class="text-center">
 							<?php echo $MSG_PROBLEM_ID?>
 						</td>
-						<td class="text-left">
+						<td class="text-center">
 							<?php echo $MSG_RESULT?>
 						</td>
 						<td class="text-right">
@@ -145,10 +148,10 @@
 						<td class="text-right"> 
 							<?php echo $MSG_LANG?>
 						</td>
-						<td class="text-right">
+						<td class="text-center">
 							<?php echo $MSG_CODE_LENGTH?>
 						</td>
-						<td class="text-center">
+						<td class="text-left">
 							<?php echo $MSG_SUBMIT_TIME?>
 						</td>
 						<?php	if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
@@ -232,7 +235,7 @@
 	''];
 </script>
 
-<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
+<script src="<?php echo $OJ_CDN_URL?>template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.40"></script>
 
 </body>
 

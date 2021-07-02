@@ -22,7 +22,7 @@
     <li class="page-item"><a class="page-link" href='contestrank-oi.php?cid=<?php echo $view_cid?>'>OI-<?php echo $MSG_STANDING;?></a></li>
     <li class="page-item"><a class="page-link" href='conteststatistics.php?cid=<?php echo $view_cid?>'><?php echo $MSG_STATISTICS;?></a></li>
     </ul><?php } ?>
-    <table class="table table-hover" style="width:100%">
+    <table id="result-tab" class="table table-hover" style="width:100%">
     <thead>
 						<tr class='toprow'>
 							<th>
@@ -31,6 +31,9 @@
 							<th>
 								<?php echo $MSG_USER?>
 							</th>
+						<th>
+							<?php echo $MSG_NICK?>
+						</th>
 							<th>
 								<?php echo $MSG_PROBLEM?>
 							</th>
@@ -173,4 +176,19 @@ echo "<input type=submit class='form-control btn btn-info' value='$MSG_SEARCH'><
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>
     </body>
+<script>
+	var i = 0;
+	var judge_result = [<?php
+	foreach ($judge_result as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+
+	var judge_color = [<?php
+	foreach ($judge_color as $result) {
+		echo "'$result',";
+	} ?>
+	''];
+</script>
+<script src="<?php echo $OJ_CDN_URL?>template/bs3/auto_refresh.js"></script>
 </html>

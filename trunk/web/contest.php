@@ -238,7 +238,7 @@ else {
 	if (isset($_GET['page']))
 		$page = intval($_GET['page']);
 
-	$page_cnt = 10;
+	$page_cnt = 25;
 	$pstart = $page_cnt*$page-$page_cnt;
 	$pend = $page_cnt;
 	$rows = pdo_query("select count(1) from contest where defunct='N'");

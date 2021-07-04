@@ -46,6 +46,15 @@ if (get_magic_quotes_gpc ()) {
 $pid=addproblem ( $title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA );
 $basedir = "$OJ_DATA/$pid";
 mkdir ( $basedir );
+chdir($basedir);
+$loj_id=intval($_POST['loj_id']);
+if(strstr($url,"uoj")){ 
+	$fileCon = file_get_contents("https://uoj.ac/download.php?type=problem&id=$loj_id");
+}else{
+	$fileCon = file_get_contents("https://darkbzoj.tk/data/$loj_id.zip");
+}
+//var_dump($fileCon);
+file_put_contents($basedir."/data.zip",$fileCon);
 if(strlen($sample_output)&&!strlen($sample_input)) $sample_input="0";
 if(strlen($sample_input)) mkdata($pid,"sample.in",$sample_input,$OJ_DATA);
 if(strlen($sample_output))mkdata($pid,"sample.out",$sample_output,$OJ_DATA);
@@ -56,7 +65,6 @@ if(strlen($test_output))mkdata($pid,"test.out",$test_output,$OJ_DATA);
 $sql="insert into `privilege` (`user_id`,`rightstr`)  values(?,?)";
 pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id'],"p$pid");
 $_SESSION[$OJ_NAME.'_'."p$pid"]=true;
-$loj_id=intval($_POST['loj_id']);
 //print_r($_POST);
 echo "<br>".$loj_id."<br>";
 echo "<a href='javascript:phpfm($pid);'>Add more TestData now !</a>";

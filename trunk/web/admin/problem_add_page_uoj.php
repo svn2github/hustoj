@@ -19,7 +19,19 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 include_once("kindeditor.php") ;
 ?>
 <?php require_once("../include/simple_html_dom.php");
-  $url=$_POST ['url'];
+  function pregReplaceImg2($content,$prefix)
+        {
+            $contentAlter = preg_replace_callback('/(<[img|IMG].*?src=[\'\"])([\s\S]*?)([\'\"])[\s\S]*?/i', function($match)use($prefix){
+                if(strstr($match[2], 'http://') == false && strstr($match[1], 'https://') == false)
+                    return $match[1].$prefix.$match[2].$match[3];
+                else
+                    return $match[1].$match[2].$match[3];
+            } , $content);
+            return $contentAlter;
+        }
+
+
+$url=$_POST ['url'];
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
 	echo "Please Input like http://uoj.ac/problem/1";
@@ -56,6 +68,9 @@ include_once("kindeditor.php") ;
   
   $element=$html->find('article',0);
   $descriptionHTML=$element->outertext;
+  $descriptionHTML=pregReplaceImg2($descriptionHTML,"https://darkbzoj.tk/");
+
+
   $element=$html->find('div[class=ui bottom attached segment font-content]',1);
   $inputHTML=$element->outertext;
   $element=$html->find('div[class=ui bottom attached segment font-content]',2);

@@ -27,7 +27,7 @@
   };
 </script> 
 
-<script id="MathJax-script" async src="template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
+<script id="MathJax-script" async src="<?php echo $OJ_CDN_URL?>/template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
 <style>
 	.jumbotron1{ 
   font-size: 18px; 

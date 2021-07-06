@@ -16,7 +16,7 @@ http://sweet.hustoj.com/
 
 http://mdui.hustoj.com/
 
-
+> 修改 db_info.inc.php 中 `$OJ_TEMPLATE` 的值，即可使用上述模板。
 
 
 ## 版权说明

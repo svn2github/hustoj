@@ -102,14 +102,14 @@ for (var i=0; i<10; i++) {
 hj_ss += "</select>";
 hj_ss += "<input name='manual' type='hidden'>";
 hj_ss += "<input class='http_judge form-control' size=5 title='输入判定原因与提示' name='explain' type='text'>";
-hj_ss += "<input type='button' class='http_judge btn' name='manual' value='确定' onclick='http_judge(this)' >";
+hj_ss += "<input type='button' class='http_judge label' name='manual' value='确定' onclick='http_judge(this)' >";
 
 $(".http_judge_form").append(hj_ss);
 
 auto_refresh();
 
 $(".td_result").mouseover(function () {
-  //$(this).children(".btn").hide(300);
+  //$(this).children(".label").hide(300);
   $(this).find("form").show(600);
   var sid = $(this).find("span[class=original]").attr("sid");
   $(this).find("span[class=original]").load("status-ajax.php?q=user_id&solution_id="+sid);

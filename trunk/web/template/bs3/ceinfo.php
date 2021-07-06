@@ -166,6 +166,8 @@ pats[i]=/应在名为.*的文件中声明/;
 exps[i++]="<?php echo $MSG_DECLARED_FILE_NAMED; ?>";
 pats[i]=/variably modified/;
 exps[i++]="<?php echo $MSG_VARIABLY_MODIFIED; ?>";
+pats[i]=/gets' was not declared in this scope/;
+exps[i++]="<?php echo $MSG_FUNCTION_GETS_REMOVIED; ?>";
 
 
 function explain(){

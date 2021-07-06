@@ -9,6 +9,11 @@ When people asked question, we put the answer here
 
 新版本
 ----
+C++ 中的gets函数哪里去了？为何编译报错？
+--
+根据 https://zh.cppreference.com/w/cpp/io/c/gets , gets函数已经被移除。
+可以使用`#define gets(S) fgets(S,sizeof(S),stdin)` 作为兼容性宏替换。
+
 
 Python判题好慢好慢，如何加速？
 --

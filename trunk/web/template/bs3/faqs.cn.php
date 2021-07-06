@@ -33,7 +33,7 @@
 	      <hr>
 	      
 <p><font color=green>Q</font>:gets函数没有了吗?<br>
-   gets函数因为不能限制输入的长度，造成了历史上大量的缓冲区溢出漏洞，因此在最新版本中被彻底删除了，请使用fgets这个函数取代。
+   <font color=red>A</font>:gets函数因为不能限制输入的长度，造成了历史上大量的缓冲区溢出漏洞，因此在最新版本中被彻底删除了，请使用fgets这个函数取代。
    或者使用下面的宏定义来取代：<br>
    <pre>#define gets(S) fgets(S,sizeof(S),stdin)</pre><br>
 </p>	      

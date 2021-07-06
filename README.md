@@ -568,6 +568,8 @@ sudo bash /home/judge/src/install/fixing.sh
 
 ## 硬件需求
 
+x86 arm mips 架构处理器， 1G以上内存，10G外部存储。
+
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" />
 
 更严谨的请求数 QPS 测试,请参考 @muzea 的 [HUSTOJ web 跑分小工具](https://github.com/muzea/hustoj-benchmark) 。

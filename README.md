@@ -2,70 +2,13 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
-自带的6种模板演示
-
-http://bs3.hustoj.com/
-
-http://mario.hustoj.com/
-
-http://syzoj.hustoj.com/
-
-http://bshark.hustoj.com/
-
-http://sweet.hustoj.com/
-
-http://mdui.hustoj.com/
-
-> 修改 db_info.inc.php 中 `$OJ_TEMPLATE` 的值，即可使用上述模板。
-
-
-## 版权说明
-
-HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
-
-HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
-
-## 感谢下述及其他被使用到的开源代码项目贡献者
-
-* linux apache nginx php mysql mariadb memcached
-* bootstrap kindeditor ace blockly codemirror katex syzoj phpfilemanager
-* sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
-
-排名不分先后本列表欢迎补充
-
-## 注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
-
-论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 
-
-如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://zhblue.github.io/hustoj) 可能有帮助。
-
-PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
-
-常见问题自动应答微信公众号:`hustoj`          <img src="http://hustoj.com/wx.jpg" height="180" />
-
-关注后回复： 新装系统、升级、目录等关键词，系统会自动回复相关帮助。
-
-有问题请先查阅 **[FAQ常见问答](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)** 和 **[Wiki使用技巧](https://github.com/zhblue/hustoj/tree/master/wiki)** 或使用搜索引擎。 
-
-
-如果这个项目对你有用，请：
-
-* 挥动鼠标，右上角给个 `Star` !
-* 保留网站页脚的二维码
-* 访问 [tk题库](http://tk.hustoj.com) ，充值下载题目
-* 向同学同事推荐这个项目
-* 每天扫一扫本页底部的支付宝红包
-* 在您的论文参考文献中写出本项目的网址
-
-Star us, please!
-
-## 推荐云服务商
-
-[UCloud年度大促](https://www.ucloud.cn/site/active/kuaijie.html?invitation_code=C1x6A291CBB02E8)
-[快杰云主机推广](https://www.ucloud.cn/site/active/ohost.html?invitation_code=C1x6A291CBB02E8)
-
-
 ## 目录
+
+[模板演示](#自带的6种模板演示)
+
+[版权说明](#版权说明)
+
+[致谢](#感谢下述及其他被使用到的开源代码项目贡献者)
 
 [更新日志](#更新日志)
 
@@ -116,6 +59,64 @@ Star us, please!
 [求助 报错](https://github.com/zhblue/hustoj/issues/new/choose)
 
 如果您喜欢在线聊天，希望问题获得及时反馈，不介意付费获得服务，请加官方QQ群 `23361372` ：[点我加群](https://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a)
+
+
+## 自带的6种模板演示
+
+http://bs3.hustoj.com/
+
+http://mario.hustoj.com/
+
+http://syzoj.hustoj.com/
+
+http://bshark.hustoj.com/
+
+http://sweet.hustoj.com/
+
+http://mdui.hustoj.com/
+
+> 修改 `db_info.inc.php` 中 `$OJ_TEMPLATE` 的值，即可使用上述模板。
+
+
+## 版权说明
+
+HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.0.txt) Free Software.
+
+HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
+
+## 感谢下述及其他被使用到的开源代码项目贡献者
+
+* linux apache nginx php mysql mariadb memcached
+* bootstrap kindeditor ace blockly codemirror katex syzoj phpfilemanager
+* sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
+
+排名不分先后本列表欢迎补充
+
+## 注意：基于本项目源码从事科研、论文、系统开发，请在文中或系统中表明来自于本项目的内容和创意。
+
+论文请引用参考文献 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) 
+
+如果打算进行二次开发， [Wiki](https://github.com/zhblue/hustoj/tree/master/wiki) 和这份 [文档](https://zhblue.github.io/hustoj) 可能有帮助。
+
+PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙视，呵呵。
+
+常见问题自动应答微信公众号:`hustoj`          <img src="http://hustoj.com/wx.jpg" height="180" />
+
+关注后回复： 新装系统、升级、目录等关键词，系统会自动回复相关帮助。
+
+有问题请先查阅 **[FAQ常见问答](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)** 和 **[Wiki使用技巧](https://github.com/zhblue/hustoj/tree/master/wiki)** 或使用搜索引擎。 
+
+
+如果这个项目对你有用，请：
+
+* 挥动鼠标，右上角给个 `Star` !
+* 保留网站页脚的二维码
+* 访问 [tk题库](http://tk.hustoj.com) ，充值下载题目
+* 向同学同事推荐这个项目
+* 每天扫一扫本页底部的支付宝红包
+* 在您的论文参考文献中写出本项目的网址
+
+Star us, please!
 
 ## 更新日志
 
@@ -564,3 +565,9 @@ sudo bash /home/judge/src/install/fixing.sh
 访问[TK题库免费专区](http://tk.hustoj.com/problemset.php?search=free)
 
 FQ访问[谷歌代码存档版](http://code.google.com/p/freeproblemset)，下载老版本 FPS 共享题库。
+	
+	
+## 推荐云服务商
+
+[UCloud年度大促](https://www.ucloud.cn/site/active/kuaijie.html?invitation_code=C1x6A291CBB02E8)
+[快杰云主机推广](https://www.ucloud.cn/site/active/ohost.html?invitation_code=C1x6A291CBB02E8)

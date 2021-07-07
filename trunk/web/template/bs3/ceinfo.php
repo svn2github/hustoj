@@ -168,6 +168,8 @@ pats[i]=/variably modified/;
 exps[i++]="<?php echo $MSG_VARIABLY_MODIFIED; ?>";
 pats[i]=/gets' was not declared in this scope/;
 exps[i++]="<?php echo $MSG_FUNCTION_GETS_REMOVIED; ?>";
+pats[i]=/redefinition of/;
+exps[i++]="重复定义了函数，有些题目要求不提交main函数，提交前请进行确认。";
 
 
 function explain(){

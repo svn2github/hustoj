@@ -2585,7 +2585,7 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 {
 	//usedtime-=1000;
 	int comp_res;
-	if (!oi_mode)
+	if (num_of_test == 0 )
 		num_of_test = 1.0;
 	
 	if (ACflg == OJ_AC){

@@ -27,7 +27,7 @@
   };
 </script> 
 
-<script id="MathJax-script" async src="<?php echo $OJ_CDN_URL?>/template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
+<script id="MathJax-script" async src="template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
 <style>
 	.jumbotron1{ 
   font-size: 18px; 
@@ -67,6 +67,7 @@
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 				echo "<br><br>";
+					echo "<div class='btn-group' role='group'>";
         if($pr_flag){
 					echo "<a class='btn btn-info btn-sm' href='submitpage.php?id=$id' role='button'>$MSG_SUBMIT</a>";
         }else{
@@ -75,7 +76,6 @@
         }
 				if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
 				} else {
-					echo "<div class='btn-group' role='group'>";
   				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
   				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT_NUM: ".$row['submit']."</a>";
   				echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
@@ -85,7 +85,18 @@
         	require_once("include/set_get_key.php");
  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
+	      			if(count($used_in_contests)>0){
+					echo "<hr><br>Used in:";
+					foreach($used_in_contests as $contests){
+						echo "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
+					
+					}
+					//echo "</div>";
+
 				}
+	      
+	      
+	      }
 
 				echo "</div>";
 				echo "</center>";

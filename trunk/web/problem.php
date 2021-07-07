@@ -26,6 +26,9 @@ if (isset($_GET['id'])) {
 	$id = intval($_GET['id']);
 	//require("oj-header.php");
 	
+	$sql="select c.contest_id,c.title from contest c inner join contest_problem cp on c.private=1 and c.contest_id=cp.contest_id and cp.problem_id=? ";
+	$used_in_contests=pdo_query($sql,$id);
+
 	if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=?";
 	else

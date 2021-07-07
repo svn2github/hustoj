@@ -352,5 +352,6 @@
   $MSG_EXPECTED_IDENTIFIER="声明变量时，可能没有声明变量名或缺少括号。";
   $MSG_VARIABLY_MODIFIED="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
   $MSG_FUNCTION_GETS_REMOVIED=" std::gets 于 C++11 被弃用，并于 C++14 移除。可使用 std::fgets 替代。或者增加宏定义 #define gets(S) fgets(S,sizeof(S),stdin) ";
+  $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
   
 ?>

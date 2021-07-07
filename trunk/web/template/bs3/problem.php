@@ -86,7 +86,7 @@
  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
 	      			if(count($used_in_contests)>0){
-					echo "<hr><br>Used in:";
+					echo "<hr><br>$MSG_PROBLEM_USED_IN:";
 					foreach($used_in_contests as $contests){
 						echo "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
 					

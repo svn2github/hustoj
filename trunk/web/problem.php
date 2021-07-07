@@ -119,7 +119,7 @@ if (count($result)!=1) {
 	      	if(count($used_in_contests)>0){
 
 	      		if (!(isset($OJ_EXAM_CONTEST_ID)||isset($OJ_ON_SITE_CONTEST_ID))) {
-					$view_errors.= "<hr><br>Used in:";
+					$view_errors.= "<hr><br>$MSG_PROBLEM_USED_IN:";
 					foreach($used_in_contests as $contests){
 						$view_errors.= "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
 					

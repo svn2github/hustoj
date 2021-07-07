@@ -571,7 +571,7 @@ sudo bash /home/judge/src/install/fixing.sh
 
 x86 arm mips 架构处理器， 1G以上内存，10G外部存储。
 
-[阿里云](https://www.aliyun.com/)，[腾讯云](https://cloud.tencent.com/)，[华为云](https://activity.huaweicloud.com/)，最小学生机均可稳定运行。
+[阿里云](https://www.aliyun.com/)，[腾讯云](https://curl.qcloud.com/kevnXODi)，[华为云](https://activity.huaweicloud.com/)，最小学生机均可稳定运行。
 
 <img src="https://raw.githubusercontent.com/zhblue/hustoj/master/wiki/hardware.png" />
 

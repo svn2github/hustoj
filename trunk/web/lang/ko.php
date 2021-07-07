@@ -352,5 +352,9 @@
 	$MSG_EXPECTED_IDENTIFIER="변수를 사용하기 전에 미리 선언하지 않았거나 변수를 선언할 때 소괄호 기호 () 를 누락했을 수 있습니다.";
 	$MSG_VARIABLY_MODIFIED="배열 크기를 변수로 지정할 수 없습니다. C 에서는 전역 배열의 크기를 선언할 때, 변수를 사용할 수 없습니다. const 형 변수도 사용할 수 없습니다.";
 
+	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
+
+	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
 	
 ?>
+

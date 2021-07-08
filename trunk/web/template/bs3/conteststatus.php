@@ -256,6 +256,9 @@
               <?php echo $MSG_USER?>
             </td>
             <td class="text-center">
+              <?php echo $MSG_NICK?>
+            </td>
+            <td class="text-center">
               <?php echo $MSG_PROBLEM_ID?>
             </td>
             <td class="text-center">

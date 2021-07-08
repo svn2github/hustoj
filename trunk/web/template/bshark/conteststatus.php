@@ -99,6 +99,7 @@ echo "<input type=submit class='form-control btn btn-info' value='$MSG_SEARCH'><
 							<th>
 								<?php echo $MSG_USER?>
 							</th>
+		<th><?php echo $MSG_NICK?></th>
 							<th>
 								<?php echo $MSG_PROBLEM?>
 							</th>

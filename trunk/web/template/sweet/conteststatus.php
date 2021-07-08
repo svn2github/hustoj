@@ -104,6 +104,7 @@ echo "<input type=submit class='form-control' value='$MSG_SEARCH'></form>";
 <tr class='toprow' >
 <th ><?php echo $MSG_RUNID?>
 <th ><?php echo $MSG_USER?>
+		<th><?php echo $MSG_NICK?></th>
 <th ><?php echo $MSG_PROBLEM?>
 <th ><?php echo $MSG_RESULT?>
 <th class='hidden-xs' ><?php echo $MSG_MEMORY?>

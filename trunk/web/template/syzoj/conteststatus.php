@@ -85,6 +85,7 @@
       <tr>
 		<th>编号</th>
 		<th>用户</th>
+		<th><?php echo $MSG_NICK?></th>
         <th>题目</th>
         <th>结果</th>
         <th>内存</th>

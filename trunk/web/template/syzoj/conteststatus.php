@@ -80,7 +80,7 @@
 
 
 
-  <table id="vueAppFuckSafari" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
+  <table id="result-tab"  class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
 		<th>编号</th>

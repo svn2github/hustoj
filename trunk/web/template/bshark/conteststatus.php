@@ -90,7 +90,7 @@ echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
 }
 echo "<input type=submit class='form-control btn btn-info' value='$MSG_SEARCH'></form>";
 ?><br>
-    <table class="table table-hover" style="width:100%">
+    <table   id="result-tab"  class="table table-hover" style="width:100%">
     <thead>
 						<tr class='toprow'>
 							<th>

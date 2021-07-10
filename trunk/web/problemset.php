@@ -74,8 +74,19 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$pstart = 0;
 	$pend = 100;
 
-}
-else {
+}else if (isset($_GET['list']) && trim($_GET['list']!="")){
+        $plist= explode(",",$_GET['list']);
+	$pids="0";
+	foreach($plist as $pid){
+	  $pid=intval($pid);
+     	  $pids.=",$pid";
+	}
+	$filter_sql = " problem_id in ($pids)";
+	$pstart = 0;
+	$pend = 100;
+	//echo $filter_sql ;
+
+}else {
 	//$filter_sql = " `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 	$filter_sql = "A.ROWNUM >='" . strval($pstart) . "' AND A.ROWNUM < '". strval($pend) . "' ";
 }

@@ -133,7 +133,8 @@ class BBCode
     // begin with the empty string
     $output = '';
     $input_ptr = 0;
-
+    $plist_color = Array('panel panel-warning','panel-danger','panel-success','panel-primary');
+    global $colorIndex;
     $stack = [];
     for ($match_idx = 0; $match_idx < $match_count; $match_idx ++)
     {
@@ -277,7 +278,7 @@ class BBCode
 	    $pnum= mb_substr_count($url,"&#44;")+1;
 //	    var_dump($plist);
             // emit the tag
-	    $output = $output . '<div class="panel panel-success"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" href="problemset.php?list=' . $url . '">' 
+	    $output = $output . '<div class="panel '.$plist_color[$colorIndex++%count($plist_color)].'"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" href="problemset.php?list=' . $url . '">' 
 		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div></div>';
             // advance ptr (again)
             $input_ptr = $search_offset + strlen($search_match);

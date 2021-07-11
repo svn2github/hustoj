@@ -1,3 +1,7 @@
+<?php 
+if(!isset($_GET['ajax'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +70,7 @@
 						</td>
 					</tr>
 				</table>
-
+<?php } ?>
 				<table id='problemset' width='90%' class='table table-striped'>
 					<thead>
 						<tr class='toprow'>
@@ -110,6 +114,10 @@
 						?>
 					</tbody>
 				</table>
+<?php 
+if(!isset($_GET['ajax'])){
+
+?>
 			</center>
 		</div>
 
@@ -130,3 +138,4 @@
 	</script>
 </body>
 </html>
+<?php } ?>

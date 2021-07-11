@@ -135,6 +135,7 @@ class BBCode
     $input_ptr = 0;
     $plist_color = Array('panel-success','panel-info','panel-warning','panel-danger');
     global $colorIndex;
+   
     $stack = [];
     for ($match_idx = 0; $match_idx < $match_count; $match_idx ++)
     {
@@ -275,11 +276,15 @@ class BBCode
               // $buffer is the url
               $url = $buffer;
 	    }
-	    $pnum= mb_substr_count($url,"&#44;")+1;
-//	    var_dump($plist);
+	    if(!isset($colorIndex)) $colorIndex =0;
+	    $plist=html_entity_decode($url);
+	    $pnum= count(explode(",",html_entity_decode($url)));
+	    //var_dump($colorIndex);
             // emit the tag
-	    $output = $output . '<div class="panel '.$plist_color[$colorIndex++%count($plist_color)].'"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" href="problemset.php?list=' . $url . '">' 
-		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div></div>';
+	    $output = $output . '<div class="panel '.$plist_color[$colorIndex%count($plist_color)].
+		    				'"><div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\')"><h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '">' 
+		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div><div id="plist'.$colorIndex.'" > </div></div>';
+	    $colorIndex++;
             // advance ptr (again)
             $input_ptr = $search_offset + strlen($search_match);
             // update search position

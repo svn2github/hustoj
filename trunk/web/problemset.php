@@ -172,9 +172,11 @@ foreach ($result as $row) {
 	$view_problemset[$i][5] = "<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
 	$i++;
 }
-
-require("template/".$OJ_TEMPLATE."/problemset.php");
-
+if(isset($_GET['ajax'])){
+	require("template/bs3/problemset.php");
+}else{
+	require("template/".$OJ_TEMPLATE."/problemset.php");
+}
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');
 ?>

@@ -6,6 +6,7 @@ require_once( './include/cache_start.php' );
 require_once( './include/db_info.inc.php' );
 require_once( './include/memcache.php' );
 require_once( './include/setlang.php' );
+require_once( './include/bbcode.php' );
 $view_title = "Welcome To Online Judge";
 $result = false;
 if ( isset( $OJ_ON_SITE_CONTEST_ID ) ) {
@@ -31,7 +32,7 @@ if ( !$result ) {
 	foreach ( $result as $row ) {
 		$view_news .= "<div class='panel panel-default'>";
 		$view_news .= "<div class='panel-heading'><big>" . $row[ 'title' ] . "</big>-<small>" . $row[ 'user_id' ] . "</small></div>";
-		$view_news .= "<div class='panel-body'>" . $row[ 'content' ] . "</div>";
+		$view_news .= "<div class='panel-body'>" . bbcode_to_html($row[ 'content' ]) . "</div>";
 		$view_news .= "</div>";
 	}
 	

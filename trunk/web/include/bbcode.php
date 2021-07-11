@@ -133,7 +133,7 @@ class BBCode
     // begin with the empty string
     $output = '';
     $input_ptr = 0;
-    $plist_color = Array('panel panel-warning','panel-danger','panel-success','panel-primary');
+    $plist_color = Array('panel-success','panel-info','panel-warning','panel-danger');
     global $colorIndex;
     $stack = [];
     for ($match_idx = 0; $match_idx < $match_count; $match_idx ++)

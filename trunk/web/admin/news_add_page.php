@@ -30,7 +30,7 @@ if(isset($_GET['cid'])){
       <input type=text name=title size=71 value='<?php echo isset($title)?$title."-Copy":""?>'>
     </p>
     <p align=left>
-      <textarea class=kindeditor name=content>
+      <textarea class=kindeditor name=content rows=41 >
         <?php echo isset($content)?$content:""?>
       </textarea>
     </p>

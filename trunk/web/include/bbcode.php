@@ -282,7 +282,9 @@ class BBCode
 	    //var_dump($colorIndex);
             // emit the tag
 	    $output = $output . '<div class="panel '.$plist_color[$colorIndex%count($plist_color)].
-		    				'"><div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\')"><h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '">' 
+		    		'"><div class="panel-heading" title="Click to expand"  onclick="$(\'#plist'.
+				$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.
+				'\')"><h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '">' 
 		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div><div id="plist'.$colorIndex.'" > </div></div>';
 	    $colorIndex++;
             // advance ptr (again)

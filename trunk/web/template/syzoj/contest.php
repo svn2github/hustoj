@@ -36,7 +36,8 @@
         <div class="row">
             <div class="column">
                 <div class="ui buttons">
-                    <a class="ui small blue button" href="contestrank.php?cid=<?php echo $view_cid?>">排行榜</a>
+                    <a class="ui small blue button" href="contestrank.php?cid=<?php echo $view_cid?>">ACM排行榜</a>
+                    <a class="ui small yellow button" href="contestrank-oi.php?cid=<?php echo $view_cid?>">OI排行榜</a>
                     <a class="ui small positive button" href="status.php?cid=<?php echo $view_cid?>">提交记录</a>
                     <!-- <a class="ui small pink button" href="conteststatistics.php?cid=<?php echo $view_cid?>">比赛统计</a> -->
                 </div>

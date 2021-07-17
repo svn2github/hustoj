@@ -76,6 +76,7 @@
                     <thead>
                         <tr>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) echo "<th class=\"one wide\" style=\"text-align: center\">状态</th>" ?>
+                            <th class="two wide" style="text-align: center"></th>
                             <th class="two wide" style="text-align: center">题目编号</th>
                             <th>题目</th>
                             <th>分类</th>

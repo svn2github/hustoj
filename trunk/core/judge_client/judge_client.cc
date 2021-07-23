@@ -2374,8 +2374,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	setrlimit(RLIMIT_NPROC, &LIM);
 
 	// set the stack
-	LIM.rlim_cur = STD_MB << 8;
-	LIM.rlim_max = STD_MB << 8;
+	LIM.rlim_cur = STD_MB << 10;
+	LIM.rlim_max = STD_MB << 10;
 	setrlimit(RLIMIT_STACK, &LIM);
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;

@@ -790,5 +790,8 @@ int main(int argc, char** argv) {
                 }
 		j = 1;
 	}
+#ifdef _mysql_h
+	mysql_close(conn);
+#endif
 	return 0;
 }

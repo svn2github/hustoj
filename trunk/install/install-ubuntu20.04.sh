@@ -1,4 +1,11 @@
 #!/bin/bash
+
+#detect and refuse to run under WSL
+if [ -d /mnt/c ]; then
+    echo "WSL is NOT supported."
+    exit 1
+fi
+
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
 apt-get update

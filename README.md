@@ -241,7 +241,10 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 
 
 ### 基于 Ubuntu 20.04 安装
+	
 **各类公有云首选, 最容易，成功率最高，近期部署数量最多，开发者原型机**
+	
+**仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
 	
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh

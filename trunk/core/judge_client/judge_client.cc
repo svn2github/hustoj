@@ -2400,9 +2400,9 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execl("/usr/bin/java", "/usr/bin/java",java_xmx ,
+		execle("/usr/bin/java", "/usr/bin/java",java_xmx ,
 				"-Djava.security.manager",
-				"-Djava.security.policy=./java.policy", "Main", (char *) NULL);
+				"-Djava.security.policy=./java.policy", "Main", (char *) NULL,envp);
 		break;
 	case 4:
 		//system("/ruby Main.rb<data.in");

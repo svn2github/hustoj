@@ -37,9 +37,13 @@ cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
 chmod +x src/install/ans2out
 
+// create enough runX dirs for each CPU core
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
-	mkdir run0 run1 run2 run3
-	chown judge run0 run1 run2 run3
+	for N in `seq 0 $(($CPU-1))`
+	do
+	   mkdir run$N
+	   chown judge run$N
+	done
 fi
 
 sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf

@@ -313,10 +313,10 @@ void run_client(int runid, int clientid) {
 		char docker_v[BUFFER_SIZE*3];
 		sprintf(docker_v,"%s:/home/judge",oj_home);
 		if(internal_client)
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host",
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host",
 				       	"-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
 		else
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", 
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host", 
 					"-v", docker_v, "hustoj", "/home/judge/src/core/judge_client/judge_client", runidstr, buf, (char *) NULL);
 	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
@@ -602,7 +602,7 @@ int work() {
 		if(DEBUG)
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 	}
-	while ((tmp_pid = waitpid(-1, NULL,WNOHANG)) > 0) {
+	while ((tmp_pid = waitpid(-1, NULL, 0 )) > 0) {
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){
 			

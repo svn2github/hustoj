@@ -37,7 +37,7 @@ cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
 chmod +x src/install/ans2out
 
-// create enough runX dirs for each CPU core
+# create enough runX dirs for each CPU core
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
 	for N in `seq 0 $(($CPU-1))`
 	do

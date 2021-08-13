@@ -61,7 +61,7 @@ function submitSolution($pid,$solution,$language) {
 
   $sql = "INSERT INTO solution(problem_id,user_id,nick,in_date,language,ip,code_length,result) VALUES(?,?,?,NOW(),?,'127.0.0.1',?,14)";
   $insert_id = pdo_query($sql, $pid,$_SESSION[$OJ_NAME.'_'.'user_id'],$nick, $language, $len);
-#  echo "submiting$language.....$insert_id";
+//  echo "submiting$language.....$insert_id";
 
   $sql = "INSERT INTO `source_code`(`solution_id`,`source`) VALUES(?,?)";
   pdo_query($sql ,$insert_id, $solution);

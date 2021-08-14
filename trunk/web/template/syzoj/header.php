@@ -1,23 +1,23 @@
-<?php 
-	$url=basename($_SERVER['REQUEST_URI']);
-	$dir=basename(getcwd());
-	if($dir=="discuss3") $path_fix="../";
-	else $path_fix="";
- 	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
+<?php
+        $url=basename($_SERVER['REQUEST_URI']);
+        $dir=basename(getcwd());
+        if($dir=="discuss3") $path_fix="../";
+        else $path_fix="";
+        if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
                   $url!='loginpage.php'&&
                   $url!='lostpassword.php'&&
                   $url!='lostpassword2.php'&&
                   $url!='registerpage.php'
                   ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
- 
+
            header("location:".$path_fix."loginpage.php");
            exit();
         }
 
-	if($OJ_ONLINE){
-		require_once($path_fix.'include/online.php');
-		$on = new online();
-	}
+        if($OJ_ONLINE){
+                require_once($path_fix.'include/online.php');
+                $on = new online();
+        }
 ?>
 
 <!DOCTYPE html>
@@ -37,24 +37,26 @@
         <div class="ui container">
             <a class="header item" href="/"><span
                     style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $OJ_NAME?></span></a>
-            <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> 首页</a>
+            <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
-                href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i> 题库</a>
+                href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i><?php echo $MSG_PROBLEMS?> </a>
+            <a class="item <?php if ($url=="category.php") echo "active";?>"
+                href="<?php echo $path_fix?>category.php"><i class="globe icon"></i><?php echo $MSG_SOURCE?></a>
             <a class="item <?php if ($url=="contest.php") echo "active";?>" href="<?php echo $path_fix?>contest.php"><i
-                    class="calendar icon"></i> 比赛</a>
+                    class="calendar icon"></i> <?php echo $MSG_CONTEST?></a>
             <a class="item <?php if ($url=="status.php") echo "active";?>" href="<?php echo $path_fix?>status.php"><i
-                    class="tasks icon"></i> 评测</a>
+                    class="tasks icon"></i><?php echo $MSG_STATUS?></a>
             <a class="item <?php if ($url=="ranklist.php") echo "active";?>"
-                href="<?php echo $path_fix?>ranklist.php"><i class="signal icon"></i> 排名</a>
+                href="<?php echo $path_fix?>ranklist.php"><i class="signal icon"></i> <?php echo $MSG_RANKLIST?></a>
             <!--<a class="item <?php //if ($url=="contest.php") echo "active";?>" href="/discussion/global"><i class="comments icon"></i> 讨论</a>-->
             <a class="item <?php if ($url=="faqs.php") echo "active";?>" href="<?php echo $path_fix?>faqs.php"><i
-                    class="help circle icon"></i> 帮助</a>
+                    class="help circle icon"></i> <?php echo $MSG_FAQ?></a>
 
             <?php if(isset($_GET['cid'])){
-            	$cid=intval($_GET['cid']);
+                $cid=intval($_GET['cid']);
             ?>
-            <a id="back_to_contest" class="item" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>"><i
-                    class="arrow left icon"></i> 返回比赛</a>
+            <a id="back_to_contest" class="item active" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>" ><i
+                    class="arrow left icon"></i><?php echo $MSG_CONTEST.$MSG_PROBLEMS.$MSG_LIST?></a>
             <?php }?>
             <div class="right menu">
                 <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) { ?>
@@ -78,11 +80,11 @@
 
                 <div class="item">
                     <a class="ui button" style="margin-right: 0.5em; " href="<?php echo $path_fix?>/loginpage.php">
-                        登录
+                       <?php echo $MSG_LOGIN?>
                     </a>
                     <?php if(isset($OJ_REGISTER)&&$OJ_REGISTER ){ ?>
                     <a class="ui primary button" href="<?php echo $path_fix?>/registerpage.php">
-                        注册
+                       <?php echo $MSG_REGISTER?>
                     </a>
                     <?php } ?>
                 </div>

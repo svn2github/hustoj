@@ -63,6 +63,8 @@
 								else echo "<td";
 								if (trim($table_cell) == "<div class='label label-danger'>N</div>")
 									echo " style='border-left: 2px solid #db2828;'";
+								if (trim($table_cell) == "<div class='label label-success'>Y</div>")
+									echo " style='border-left: 2px solid #47af50;'";
 								echo ">";
 								if (trim($table_cell) != "<div class='label label-danger'>N</div>")
 								echo "\t" . $table_cell;

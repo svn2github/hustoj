@@ -17,7 +17,7 @@
 
     /* The followings is not finished */
     
-    $THEME_CAPTCHA = "hard"; // Img CAPTCHA is too ugly, you can use any item in ["none", "easy", "medium", "hard", "hard++"]
+    $THEME_CAPTCHA = "none"; // Img CAPTCHA is too ugly, you can use any item in ["none", "easy", "medium", "hard", "hard++"]
     /* CAPTCHA example
     1. none: None captcha
     2. easy: 1+2=?, 5-1=?

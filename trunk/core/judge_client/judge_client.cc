@@ -2447,7 +2447,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
 		break;
 	case 20: //octave
-		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "Main.m", (char *)NULL);
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file", "-W", "-q", "-H", "Main.m", (char *)NULL);
 		break;
 	}
 	//sleep(1);

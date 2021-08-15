@@ -12,12 +12,12 @@
     /* ================================
     You cannot modify the following configuration, otherwise unknown bugs may occur
     */
-    $THEME_BSHARK_VERSION = "V20.6.7";
+    $THEME_BSHARK_VERSION = "V21.8.15";
     // You can visit https://vt-dev-team.github.io/bshark/version.html to check the lastest version
 
     /* The followings is not finished */
     
-    $THEME_CAPTCHA = "none"; // Img CAPTCHA is too ugly, you can use any item in ["none", "easy", "medium", "hard", "hard++"]
+    $THEME_CAPTCHA = "hard"; // Img CAPTCHA is too ugly, you can use any item in ["none", "easy", "medium", "hard", "hard++"]
     /* CAPTCHA example
     1. none: None captcha
     2. easy: 1+2=?, 5-1=?

@@ -15,10 +15,14 @@
 <?php echo $MSG_USER?><input class="form-control" name="prefix" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>" >
 <input type=submit class="form-control btn btn-outline-primary" value=Search >
 </form>
-    <a href=ranklist.php?scope=d>Day</a>
-<a href=ranklist.php?scope=w>Week</a>
-<a href=ranklist.php?scope=m>Month</a>
-<a href=ranklist.php?scope=y>Year</a>
+<div class="btn-group" role="group" style="float: left">
+    <a href=ranklist.php?scope=d class="btn btn-light btn-sm">Day</a>
+<a href=ranklist.php?scope=w class="btn btn-light btn-sm">Week</a>
+<a href=ranklist.php?scope=m class="btn btn-light btn-sm">Month</a>
+<a href=ranklist.php?scope=y class="btn btn-light btn-sm">Year</a>
+</div>
+<br>
+<div style="clear:both"></div>
 <hr/>
 <?php
 echo "<ul class=\"pagination\">";

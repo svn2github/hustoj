@@ -17,7 +17,7 @@ require("./template/$OJ_TEMPLATE/theme.conf.php");?>
 <link id="shardsop" rel="stylesheet" href="<?php echo $OJ_CDN_URL?>template/bshark/shards/css/shards.min.css">
 
 <!-- 主题核心css文件（light and dark） -->
-<link href="<?php echo $OJ_CDN_URL?>template/bshark/main-<?php echo $THEME_MOD;?>.css" rel="stylesheet">
+<link href="<?php echo $OJ_CDN_URL?>template/bshark/main-<?php echo $THEME_MOD;?>.css?ver=3" rel="stylesheet">
 
 <!-- Highlightjs 核心文件 -->
 <link href="<?php echo $OJ_CDN_URL?>template/bshark/highlight/styles/tomorrow.css" rel="stylesheet">

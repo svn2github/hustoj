@@ -30,8 +30,10 @@ Problem <span class=blue><b><?php echo $id?></b></span>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
-<span id="language_span"><?php echo $MSG_LANG;?>:
-<select class="custom-select" style="width:200px" id="language" name="language" onChange="reloadtemplate($(this).val());" >
+<div class="form-group">
+	<label for="language" class="col-form-label"><?php echo $MSG_LANG;?></label>
+	<select class="custom-select" style="width:200px" id="language" name="language" onChange="reloadtemplate($(this).val());" >
+</div>
 <?php
 $lang_count=count($language_ext);
 if(isset($_GET['langmask']))

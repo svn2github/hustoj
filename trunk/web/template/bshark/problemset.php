@@ -56,14 +56,15 @@
 						<?php
 						$cnt = 0;
 						foreach ( $view_problemset as $row ) {
-							if ( $cnt )
-								echo "<tr class='oddrow'>";
-							else
-								echo "<tr class='evenrow'>";
+							echo "<tr>";
 							$i = 0;
 							foreach ( $row as $table_cell ) {
-								if ( $i == 1 || $i == 3 )echo "<td  class='hidden-xs'>";
-								else echo "<td>";
+								if ( $i == 1 || $i == 3 )echo "<td class='hidden-xs'";
+								else echo "<td";
+								if (trim($table_cell) == "<div class='label label-danger'>N</div>")
+									echo " style='border-left: 2px solid #db2828;'";
+								echo ">";
+								if (trim($table_cell) != "<div class='label label-danger'>N</div>")
 								echo "\t" . $table_cell;
 								echo "</td>";
 								$i++;

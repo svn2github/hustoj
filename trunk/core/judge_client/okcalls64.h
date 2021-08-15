@@ -139,7 +139,8 @@ int LANG_FV[CALL_ARRAY_SIZE] = {
         SYS_exit_group, SYS_fstat, SYS_execve, SYS_uname, SYS_readlink, 0 };
 //octave
 int LANG_MV[CALL_ARRAY_SIZE] = {
-        0, SYS_write, SYS_mprotect, SYS_getuid, SYS_munmap, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask,
+         0,1,3,4,5,6,8,9,10,11,12,13,14,16,17,21,39,41,42,44,47,49,51,54,56,59,63,79,89,102,158,202,204,217,218,231,257,273,302,318,
+		  SYS_write, SYS_mprotect, SYS_getuid, SYS_munmap, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask,
         SYS_arch_prctl, SYS_ioctl, SYS_writev, SYS_futex, SYS_sched_getaffinity, SYS_access, SYS_set_tid_address,
         SYS_exit_group, SYS_openat, SYS_set_robust_list, SYS_close, SYS_prlimit64, 318, SYS_getpid, SYS_stat,
         SYS_socket, SYS_connect, SYS_recvfrom, SYS_shutdown, SYS_fstat, SYS_getpeername, SYS_clone, SYS_execve,

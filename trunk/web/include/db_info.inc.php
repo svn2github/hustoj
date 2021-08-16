@@ -18,13 +18,13 @@ static  $OJ_ONLINE=false;  //是否记录在线情况
 static  $OJ_LANG="en";  //默认语言
 static  $OJ_SIM=false;  //显示相似度
 static  $OJ_DICT=false; //显示在线翻译
-static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/
+static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/   -524288 to get matlab(octave)
 static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it once.
 static  $OJ_CSS="white.css";
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
-static  $OJ_APPENDCODE=false;  // 代码预定模板
+static  $OJ_APPENDCODE=true;  // 代码预定模板
 if (!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模式需要允许javascript操作cookie保存当前语言。
 @session_start();
 static  $OJ_CE_PENALTY=false;  // 编译错误是否罚时
@@ -53,10 +53,10 @@ static  $OJ_NEED_LOGIN=false; //需要登录才能访问
 static  $OJ_LONG_LOGIN=false; //启用长时间登录信息保留
 static  $OJ_KEEP_TIME="30";  //登录Cookie有效时间(单位:天(day),仅在上一行为true时生效)
 static  $OJ_RANK_LOCK_PERCENT=0; //比赛封榜时间比例
-static  $OJ_SHOW_DIFF=false; //是否显示WA的对比说明
+static  $OJ_SHOW_DIFF=true; //是否显示WA的对比说明
 static  $OJ_DOWNLOAD=false; //是否允许下载WA的测试数据
 static  $OJ_TEST_RUN=false; //提交界面是否允许测试运行
-static  $OJ_MATHJAX=false;  // 激活mathjax
+static  $OJ_MATHJAX=true;  // 激活mathjax
 static  $OJ_BLOCKLY=false; //是否启用Blockly界面
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
 static  $OJ_OI_1_SOLUTION_ONLY=false; //比赛是否采用noip中的仅保留最后一次提交的规则。true则在新提交发生时，将本场比赛该题老的提交删除。
@@ -67,7 +67,7 @@ static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有�
 static  $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
 static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。
 static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
-static  $OJ_RANK_HIDDEN="'admin'";  // 管理员不显示在排名中
+static  $OJ_RANK_HIDDEN="'admin','zhblue'";  // 管理员不显示在排名中
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID

@@ -26,7 +26,7 @@
     <thead>
 						<tr class='toprow'>
 							<th>
-								<?php echo $MSG_RUNID?>
+								#
 							</th>
 							<th>
 								<?php echo $MSG_USER?>
@@ -61,13 +61,11 @@
 						<?php
 						$cnt = 0;
 						foreach ( $view_status as $row ) {
-							if ( $cnt )
-								echo "<tr class='oddrow'>";
-							else
-								echo "<tr class='evenrow'>";
+							echo "<tr>";
 							$i = 0;
 							foreach ( $row as $table_cell ) {
-							    if ($i==9) continue;
+								if ($i > 9)
+									continue;
 								if ( $i > 3 && $i != 8 && $i!=6)
 									echo "<td class='hidden-xs'>";
 								else

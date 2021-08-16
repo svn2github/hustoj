@@ -257,22 +257,8 @@ sudo bash install-ubuntu20.04.sh
 可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
 或2:[卸载阿里云盾](#卸载阿里云盾)。**
 
-### 基于 Ubuntu 20.04 通过 Gitee 安装
-
-```bash
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu20-gitee.sh
-sudo bash install-ubuntu20-gitee.sh
-```
-
-### 基于 Ubuntu 18.04 通过 Gitee 安装
-
-```bash
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
-sudo bash install-ubuntu18-gitee.sh
-```
-
-### 基于 Ubuntu 18.04 安装
-
+	
+### 基于 Ubuntu 18.04 安装   即将脱离维护期，不推荐
 
 ```bash
 wget http://dl.hustoj.com/install-ubuntu18.04.sh

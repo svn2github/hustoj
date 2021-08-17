@@ -663,7 +663,6 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
  int p=system(diff);
  if (p) return OJ_PE;
  else return OJ_AC;
-
  }
  */
 const char *getFileNameFromPath(const char *path)
@@ -1227,7 +1226,6 @@ void _update_problem_mysql(int p_id,int cid) {
 	/*	sprintf(sql,
 			"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d) WHERE `problem_id`=%d",
 			p_id, p_id);
-
 	
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
@@ -1253,6 +1251,7 @@ void umount(char *work_dir)
 	execute_cmd("/bin/umount -l %s/dev 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -l usr dev");
+	execute_cmd("/bin/umount -l lib lib64");
 	execute_cmd("/bin/rmdir %s/* ", work_dir);
 	execute_cmd("/bin/rmdir %s/log/* ", work_dir);
 }
@@ -1865,8 +1864,8 @@ void copy_shell_runtime(char *work_dir)
 #endif
 
 #ifdef __x86_64__
-//	execute_cmd("mount -o bind /lib %s/lib", work_dir);
-//	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
+	execute_cmd("mount -o bind /lib %s/lib", work_dir);
+	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
 #endif
 	//	execute_cmd("/bin/cp /lib32 %s/", work_dir);
 	execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
@@ -2327,7 +2326,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
 		
-		if(chroot(work_dir)) exit(-127);
+		if(chroot(work_dir));
 	}else{
 		if(DEBUG)printf("Skiping chroot...\n");
 	
@@ -2425,13 +2424,13 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	case 6: //Python
 		if (!py2)
 		{       if(python_free)
-			execl("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL);
+			execle("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL,envp);
 			else
-			execl("/python2", "/python2", "Main.py", (char *)NULL);
+			execle("/python2", "/python2", "Main.py", (char *)NULL,envp);
 		}
 		else
 		{       if(python_free)
-			execl("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL);
+			execle("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL,envp);
 			else
 			execle("/python3", "/python3", "Main.py", (char *)NULL, envp);
 		}
@@ -2839,7 +2838,6 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			break;
 		}
 		/*     comment from http://www.felix021.com/blog/read.php?1662
-
 		 WIFSTOPPED: return true if the process is paused or stopped while ptrace is watching on it
 		 WSTOPSIG: get the signal if it was stopped by signal
 		 */
@@ -3287,7 +3285,6 @@ int main(int argc, char **argv)
 /*
 	if (p_id > 0 && (dp = opendir(fullpath)) == NULL)
 	{
-
 		write_log("No such dir:%s!\n", fullpath);
 #ifdef _mysql_h
 		if (!http_judge)
@@ -3372,7 +3369,6 @@ int main(int argc, char **argv)
 /*	
 	for (;(dirp = readdir(dp)) != NULL;)
 	{
-
 		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;

@@ -1989,6 +1989,7 @@ void copy_guile_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/mkdir -p %s/proc", work_dir);
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/share", work_dir);
 	execute_cmd("/bin/cp -a /usr/share/guile %s/usr/share/", work_dir);
@@ -2002,7 +2003,7 @@ void copy_guile_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/libgmp* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
-	execute_cmd("/bin/cp /usr/bin/guile* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/guile* %s/usr/bin", work_dir);
 #ifdef __x86_64__
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libguile* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgc* %s/usr/lib/", work_dir);
@@ -2145,7 +2146,7 @@ void copy_mono_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/mkdir %s/usr", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir %s/proc", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/lib/mono/2.0", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/mono %s/usr/lib/", work_dir);
@@ -2155,7 +2156,7 @@ void copy_mono_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
-	execute_cmd("/bin/cp /usr/bin/mono* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/mono* %s/usr", work_dir);
 
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /lib/libglib* %s/lib/", work_dir);
@@ -2428,16 +2429,12 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		break;
 	case 6: //Python
 		if (!py2)
-		{       if(python_free)
-			execle("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL,envp);
-			else
-			execle("/python2", "/python2", "Main.py", (char *)NULL,envp);
+		{     
+			execle("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL,envp);	
 		}
 		else
-		{       if(python_free)
+		{      
 			execle("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL,envp);
-			else
-			execle("/python3", "/python3", "Main.py", (char *)NULL, envp);
 		}
 		break;
 	case 7: //php

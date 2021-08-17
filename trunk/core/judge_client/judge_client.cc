@@ -1550,13 +1550,14 @@ void _get_solution_mysql(int solution_id, char *work_dir, int lang)
 	res = mysql_store_result(conn);
 
 	// create the src file
-	if (DEBUG)
-		printf("Main=%s", src_pth);
+	
 	if (res != NULL)
 	{
 		row = mysql_fetch_row(res);
 		if(row != NULL) {
 			sprintf(src_pth, "Main.%s", lang_ext[lang]);
+			if (DEBUG)
+				printf("Main=%s", src_pth);
 			FILE *fp_src = fopen(src_pth, "we");
 			fprintf(fp_src, "%s", row[0]);
 			mysql_free_result(res); // free the memory
@@ -1864,8 +1865,8 @@ void copy_shell_runtime(char *work_dir)
 #endif
 
 #ifdef __x86_64__
-	execute_cmd("mount -o bind /lib %s/lib", work_dir);
-	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
+//	execute_cmd("mount -o bind /lib %s/lib", work_dir);
+//	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
 #endif
 	//	execute_cmd("/bin/cp /lib32 %s/", work_dir);
 	execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
@@ -2283,7 +2284,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
-	if(nice(19)) printf("renice fail... \n");
+	if(nice(19)!=19) printf("......................renice fail... \n");
 	// now the user is "judger"
 	if(chdir(work_dir)) exit(-4);
 	// open the files
@@ -2307,6 +2308,16 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("chmod 740 %s/data.in", work_dir);
 	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
+	if (   
+		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
+	   ){
+		
+		if(DEBUG)printf("chroot...............................................\n");
+	
+	}else{
+		if(DEBUG)printf("Skiping chroot........................................\n");
+	
+	}
 	stdout=freopen("user.out", "w", stdout);
 	stderr=freopen("error.out", "a+", stderr);
 	// trace me
@@ -2315,8 +2326,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	if (   
 		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
-		if(DEBUG)printf("Chrooting...\n");
-		if(chroot(work_dir)) printf("danger .....................chroot fail....................line 2298 \n");
+		
+		if(chroot(work_dir)) exit(-127);
 	}else{
 		if(DEBUG)printf("Skiping chroot...\n");
 	
@@ -2400,16 +2411,16 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execl("/usr/bin/java", "/usr/bin/java",java_xmx ,
+		execle("/usr/bin/java", "/usr/bin/java",java_xmx ,
 				"-Djava.security.manager",
-				"-Djava.security.policy=./java.policy", "Main", (char *) NULL);
+				"-Djava.security.policy=./java.policy", "Main", (char *) NULL,envp);
 		break;
 	case 4:
 		//system("/ruby Main.rb<data.in");
-		execl("/ruby", "/ruby", "Main.rb", (char *)NULL);
+		execle("/ruby", "/ruby", "Main.rb", (char *)NULL,envp);
 		break;
 	case 5: //bash
-		execl("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL);
+		execle("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL,envp);
 		break;
 	case 6: //Python
 		if (!py2)
@@ -2426,28 +2437,28 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		}
 		break;
 	case 7: //php
-		execl("/php", "/php", "Main.php", (char *)NULL);
+		execle("/php", "/php", "Main.php", (char *)NULL,  envp);
 		break;
 	case 8: //perl
-		execl("/perl", "/perl", "Main.pl", (char *)NULL);
+		execle("/perl", "/perl", "Main.pl", (char *)NULL,  envp);
 		break;
 	case 9: //Mono C#
 		execle("/usr/bin/mono", "/usr/bin/mono","--debug",  "Main.exe", (char *)NULL,envp);
 		break;
 	case 12: //guile
-		execl("/guile", "/guile", "Main.scm", (char *)NULL);
+		execle("/guile", "/guile", "Main.scm", (char *)NULL,envp);
 		break;
 	case 15: //guile
-		execl("/lua", "/lua", "Main", (char *)NULL);
+		execle("/lua", "/lua", "Main", (char *)NULL,envp);
 		break;
 	case 16: //Node.js
-		execl("/nodejs", "/nodejs", "Main.js", (char *)NULL);
+		execle("/nodejs", "/nodejs", "Main.js", (char *)NULL,envp);
 		break;
 	case 18: //sqlite3
-		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
+		execle("/sqlite3", "/sqlite3", "data.db", (char *)NULL,envp);
 		break;
 	case 20: //octave
-		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "Main.m", (char *)NULL);
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file", "-W", "-q", "-H", "Main.m", (char *)NULL);
 		break;
 	}
 	//sleep(1);
@@ -2585,7 +2596,7 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 {
 	//usedtime-=1000;
 	int comp_res;
-	if (!oi_mode)
+	if (num_of_test == 0 )
 		num_of_test = 1.0;
 	
 	if (ACflg == OJ_AC){

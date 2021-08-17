@@ -218,7 +218,7 @@ int lockfile(int fd) {
 
 int already_running() {
 	int fd;
-	char buf[16];
+	char buf[BUFFER_SIZE];
 	fd = open(lock_file, O_RDWR | O_CREAT, LOCKMODE);
 	if (fd < 0) {
 		if(DEBUG)printf("%s open fail.\n",lock_file);
@@ -235,7 +235,9 @@ int already_running() {
 	}
 	if(ftruncate(fd, 0)) printf("close file fail 0 \n");
 	sprintf(buf, "%d", getpid());
-	if(write(fd, buf, strlen(buf) + 1) >= (unsigned int)strlen(buf)) printf("buffer size overflow!...\n");
+
+	int size=write(fd, buf, strlen(buf)+1);
+	printf("written %d \n",size);
 	return (0);
 }
 void print_arm_regs(long long unsigned int *d){
@@ -312,7 +314,7 @@ int execute_cmd(const char *fmt, ...)
 	va_start(ap, fmt);
 	vsprintf(cmd, fmt, ap);
 	if (DEBUG)
-		printf("%s\n", cmd);
+		fprintf(stderr,"%s\n", cmd);
 	ret = system(cmd);
 	va_end(ap);
 	return ret;
@@ -1549,6 +1551,7 @@ void _get_solution_mysql(int solution_id, char *work_dir, int lang)
 	mysql_real_query(conn, sql, strlen(sql));
 	res = mysql_store_result(conn);
 
+	sprintf(src_pth, "Main.%s", lang_ext[lang]);
 	// create the src file
 	if (DEBUG)
 		printf("Main=%s", src_pth);
@@ -1556,7 +1559,6 @@ void _get_solution_mysql(int solution_id, char *work_dir, int lang)
 	{
 		row = mysql_fetch_row(res);
 		if(row != NULL) {
-			sprintf(src_pth, "Main.%s", lang_ext[lang]);
 			FILE *fp_src = fopen(src_pth, "we");
 			fprintf(fp_src, "%s", row[0]);
 			mysql_free_result(res); // free the memory
@@ -1864,8 +1866,8 @@ void copy_shell_runtime(char *work_dir)
 #endif
 
 #ifdef __x86_64__
-	execute_cmd("mount -o bind /lib %s/lib", work_dir);
-	execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
+//		execute_cmd("mount -o bind /lib %s/lib", work_dir);
+//		execute_cmd("mount -o bind /lib64 %s/lib64", work_dir);
 #endif
 	//	execute_cmd("/bin/cp /lib32 %s/", work_dir);
 	execute_cmd("/bin/cp /bin/busybox %s/bin/", work_dir);
@@ -2096,9 +2098,11 @@ void copy_python_runtime(char *work_dir)
 void copy_php_runtime(char *work_dir)
 {
 
-	copy_shell_runtime(work_dir);
+	copy_bash_runtime(work_dir);
 	execute_cmd("/bin/mkdir %s/usr", work_dir);
 	execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
+	execute_cmd("/bin/mkdir -p %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/lib/x86_64-linux-gnu", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libedit* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libdb* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libgssapi_krb5* %s/usr/lib/", work_dir);
@@ -2111,7 +2115,37 @@ void copy_php_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/*/libk5crypto* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libxml2* %s/usr/lib/", work_dir);
 #ifdef __x86_64__
-	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libargon2.so.1 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libresolv.so.2 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libm.so.6 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libdl.so.2 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libpcre2-8.so.0 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libz.so.1 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libsodium.so.23 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libc.so.6 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libpthread.so.0 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libicuuc.so.66 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/liblzma.so.5 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libicudata.so.66 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libxml2.so* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libicuuc.so* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libicudata.so* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libstdc++.so* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libssl* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libcrypto* %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libgcc_s.so.1 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libtinfo.so.6 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libdl.so.2 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib/x86_64-linux-gnu/libc.so.6 %s/lib/x86_64-linux-gnu", work_dir);
+	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.2 %s/lib64", work_dir);
+	execute_cmd("/bin/cp /usr/lib64/libtinfo.so.5 %s/usr/lib64", work_dir);
+	execute_cmd("/bin/cp /usr/lib64/libtinfo.so.6 %s/usr/lib64", work_dir);
+	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.2 %s/lib64", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libtinfo.so* %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/x86_64-linux-gnu/", work_dir);
+	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libxml2.so* %s/usr/lib/x86_64-linux-gnu/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicuuc.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libstdc++.so* %s/usr/lib/", work_dir);
@@ -2283,7 +2317,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
-	if(nice(19)) printf("renice fail... \n");
+	if(nice(19)!=19) printf("renice fail... \n");
 	// now the user is "judger"
 	if(chdir(work_dir)) exit(-4);
 	// open the files
@@ -2307,6 +2341,14 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("chmod 740 %s/data.in", work_dir);
 	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
+	// pre print debug info before redirect output	
+	if (   
+		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
+	   ){
+		printf("will chroot........................................................\n");
+	}else{
+		printf("will not chroot........................................................\n");
+	}
 	stdout=freopen("user.out", "w", stdout);
 	stderr=freopen("error.out", "a+", stderr);
 	// trace me
@@ -2315,11 +2357,9 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	if (   
 		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
-		if(DEBUG)printf("Chrooting...\n");
-		if(chroot(work_dir)) printf("danger .....................chroot fail....................line 2298 \n");
+		if(chroot(work_dir)) exit(126);
 	}else{
-		if(DEBUG)printf("Skiping chroot...\n");
-	
+                execute_cmd("touch %s/not_chroot.log", work_dir);	
 	}
 	while (setgid(1536) != 0)
 		sleep(1);
@@ -2426,7 +2466,8 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		}
 		break;
 	case 7: //php
-		execl("/php", "/php", "Main.php", (char *)NULL);
+		execle("/php", "/php", "Main.php", (char *)NULL, envp);
+		//execute_cmd("/php Main.php>user.out");
 		break;
 	case 8: //perl
 		execl("/perl", "/perl", "Main.pl", (char *)NULL);

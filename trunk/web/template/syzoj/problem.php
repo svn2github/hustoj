@@ -34,23 +34,6 @@ div[class*=ace_br] {
 </style>
 <script src="https://cdnjs.loli.net/ajax/libs/ace/1.4.1/ace.js"></script>
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>clipboard.min.js"></script>
-<?php if (isset($OJ_MATHJAX)&&$OJ_MATHJAX){?>
-    <!--以下为了加载公式的使用而既加入-->
-<script>
-  MathJax = {
-    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-  };
-</script> 
-
-<script id="MathJax-script" async src="template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
-<style>
-	.jumbotron1{ 
-  font-size: 18px; 
-}
-</style>
-
-<?php } ?>
-
 <div class="ui center aligned grid">
     <div class="row">
       <h1 class="ui header">

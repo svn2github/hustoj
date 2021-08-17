@@ -31,16 +31,16 @@ RUN     cd /home/judge/src/core/ && \
 
 # for more compilers, VMs and runtimes , remove # and run "docker build -t hustoj ."
 
-#RUN     apt-get -y install ruby
-#RUN     apt-get -y install gobjc
-#RUN     apt-get -y install clang
-#RUN     apt-get -y install guile-3.0
-#RUN     apt-get -y install lua5.3
-#RUN     apt-get -y install nodejs
-#RUN     apt-get -y install golang
-#RUN     apt-get -y install sqlite3
-#RUN     apt-get -y install gfortran
-#RUN     apt-get -y install octave
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ruby
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gobjc
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends clang
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends guile-3.0
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends lua5.3
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends nodejs
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends golang
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends sqlite3
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gfortran
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends octave
 	
  
 

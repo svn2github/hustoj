@@ -52,19 +52,6 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_Compile_Error="كاللڭىزدا  مەسىلە بار...ئالدامچىلار بايرىمىغا مۇبارەك";
 	$MSG_Compile_OK="كاللىڭىزدا مەسىلە بار...ئالدامچىلار بايرىمىغا مۇبارەك";
 }
-//New year
-if(date('m')==1 && date('d') == 1){
-        $MSG_Accepted="يىڭى يىل مۇبارەك";
-	$MSG_Presentation_Error="يىڭى يىل مۇبارەك";
-	$MSG_Wrong_Answer="يىڭى يىل  مۇبارەك";
-	$MSG_Time_Limit_Exceed=" يىڭى يىل مۇبارەك ";
-	$MSG_Memory_Limit_Exceed="يىڭى يىل مۇبارەك ";
-	$MSG_Output_Limit_Exceed="يىڭى يىل مۇبارەك ";
-	$MSG_Runtime_Error="يىڭى يىل مۇبارەك";
-	$MSG_Compile_Error="يىڭى يىل مۇبارەك";
-	$MSG_Compile_OK="يىڭى يىل مۇبارەك";
-}
-
 
 	$MSG_TEST_RUN="ئۈلگە مۇۋەپپىقىيەتلىك ئۆتتى";
 
@@ -100,26 +87,30 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_PROBLEM_ID="مەسلە نۇمۇرى";
 	$MSG_TITLE="ماۋزۇ";
 	$MSG_SOURCE="مەنبە";
+	$MSG_SUBMIT_NUM="تاپشۇرۇش نۇمۇرى";
 	$MSG_SUBMIT="تاپشۇرۇش";
 
 	//submit.php
-	$MSG_VCODE_WRONG="Verification Code Wrong!";
-	$MSG_LINK_ERROR="Where do find this link? No such problem.";
-	$MSG_PROBLEM_RESERVED="Problem disabled.";
-	$MSG_NOT_IN_CONTEST="You Can't Submit Now Because Your are not invited by the contest or the contest is not running!!";
-	$MSG_NOT_INVITED="You are not invited!";
-	$MSG_NO_PROBLEM="No Such Problem!";
-	$MSG_NO_PLS="Using unknown programing language!";
-	$MSG_TOO_SHORT="Code too short!";
-	$MSG_TOO_LONG="Code too long!";
-	$MSG_BREAK_TIME="You should not submit more than twice in 1 seconds.....";
+	$MSG_VCODE_WRONG="دەلىللەش كودى خاتا!";
+	$MSG_LINK_ERROR="قەيەردىن بۇ ئۇلانمىنى تاپقىلى بولىدۇ؟ بۇ مەسىلە يوق.";
+	$MSG_PROBLEM_RESERVED="سوئال چەكلەنگەن";
+	$MSG_NOT_IN_CONTEST="سىز دەرھال تاپشۇرسىڭىز بولمايدۇ، چۈنكى سىز مۇسابىقىگە تەكلىپ قىلىنمىدىڭىز ياكى مۇسابىقىگە قاتناشمىدىڭىز!";
+	$MSG_NOT_INVITED="مۇسابىقىگە تەكلىپ قىلىنمىدىڭىز";
+	$MSG_NO_PROBLEM="بۇنداق سوئال يوق!";
+	$MSG_NO_PLS="نامەلۇم پېروگىرامما تىلى!";
+	$MSG_TOO_SHORT="كود بەك قىسقا!";
+	$MSG_TOO_LONG="كود بەك ئۇزۇن!";
+	$MSG_BREAK_TIME="سىز 10 سىكونت ئىچىدە بىر قېتىمدىن ئارتۇق تاپشۇرماسلىقىڭىز كېرەك...";
 
 	//ranklist.php
 	$MSG_Number="نۇمۇر";
 	$MSG_NICK="نامى";
 	$MSG_SOVLED="يېشلگىنى";
 	$MSG_RATIO="نىسبىتى";
-
+	$MSG_DAY="كۈنلۈك مەرتىۋە";
+ 	$MSG_WEEK="ھەپتىلىك مەرتىۋە";
+	$MSG_MONTH="ئايلىق مەرتىۋە";
+	$MSG_YEAR="يىللىق مەرتىۋە";
 	//registerpage.php
 	$MSG_USER_ID="ئابۇنىت نۇمۇرى";
 	$MSG_PASSWORD="مەخپى نۇمۇر";
@@ -143,18 +134,18 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_Source= "مەنبە";
 	$MSG_Time_Limit="ۋاقىت چەكلىمىسى";
 	$MSG_Memory_Limit="ساقلىغۇچ چەكلىمىسى";
-	$MSG_EDIT= "Edit";
-	$MSG_TESTDATA= "TestDATA";
+	$MSG_EDIT= "تەھرىرلەش";
+	$MSG_TESTDATA= "سىناق مەلۇمات";
 
 	//admin menu
 	$MSG_SEEOJ="باش بەت";
 	$MSG_ADD=" قوشۇش  ";
-	$MSG_MENU="menu";
-	$MSG_EXPLANATION="explanation";
+	$MSG_MENU="تىزىملىك";
+	$MSG_EXPLANATION="چۈشەنچە";
 	$MSG_LIST=" جەدۋەل ";
 	$MSG_NEWS=" ئۇقتۇرۇش ";
-	$MSG_CONTENTS="Contents";
-	$MSG_SAVE="Save";	
+	$MSG_CONTENTS="مەزمۇن";
+	$MSG_SAVE="ساقلاش";	
 
 	$MSG_TEAMGENERATOR=" گورۇپ نۇمۇرى چىقارغۇچ ";
 	$MSG_SETMESSAGE=" ئۇچۇر يېزىش ";
@@ -167,35 +158,35 @@ if(date('m')==1 && date('d') == 1){
 	$MSG_UPDATE_DATABASE=" سان-سىپىرنى يېڭىلاش ";
 	$MSG_ONLINE=" سىمدا ";
 	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
-	$MSG_PRIVILEGE_TYPE="Privilege Type";
+	$MSG_PRIVILEGE_TYPE="ھوقۇق تۈرى";
 
-	//contest.php
+  //contest.php
   $MSG_PRIVATE_WARNING="مۇسابىقە باشلانمىدى ياكى سوئال شەخىسكە تەۋە";
-	$MSG_PRIVATE_USERS_ADD="*Enter userIDs with newline, or you can copy and paste from a spreadsheet.";
-	$MSG_PLS_ADD="*Please select all languages that can be submitted with Ctrl + click.";
-	$MSG_TIME_WARNING="Before Contest Start";  
+  $MSG_PRIVATE_USERS_ADD="ئوقۇغۇچىلار ئوقۇش نومۇرىنى Excel دىن تەرتىپ بويىچە كۆچۈرۈپ كېلىپ، ئۇلاردىن ئوقۇش نومۇرى ئارقىلىق UID قىلىپ تىزىمغا ئالدۇرۇلغىلى بولىدۇ، Private نىڭ مۇسابىقىسىگە كىرىپ مەشغۇلات ۋە سىناق قىلغىلى بولىدۇ. ";
+  $MSG_PLS_ADD="Ctrl + تاق چېكىش ئارقىلىق تاپشۇرغىلى بولىدىغان بارلىق تىللارنى تاللاڭ. ";
+		$MSG_TIME_WARNING="مۇسابىقە باشلىنىشتىن بۇرۇن.";  
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
   $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز ".$OJ_NOIP_KEYWORD;
 
-	$MSG_SERVER_TIME="SERVER TIME";
-	$MSG_START_TIME="Start Time";
-	$MSG_END_TIME="End Time";
-	$MSG_CONTEST_ID="CONTEST ID";
-	$MSG_CONTEST_NAME="CONTEST NAME";
-	$MSG_CONTEST_STATUS="STATUS";
-	$MSG_CONTEST_OPEN="OPEN";
-	$MSG_CONTEST_CREATOR="CREATOR";
-	$MSG_CONTEST_PENALTY="TIME PENALTY";
-	$MSG_IP_VERIFICATION="IP VERIFICATION";
-	$MSG_CONTEST_SUSPECT1="IP addresses with multiple IDs. If multiple IDs are accessed at the same computer during the contest/exam, it logged.";
-	$MSG_CONTEST_SUSPECT2="IDs with multiple IP addresses. If switch to another computer during the contest/exam, it logged.";
+	$MSG_SERVER_TIME="مۇلازىمىتېر ۋاقتى";
+	$MSG_START_TIME="باشلىنىش ۋاقتى";
+	$MSG_END_TIME="ئاياغلىشىش ۋاقتى";
+	$MSG_CONTEST_ID="سىناق نۇمۇرى";
+	$MSG_CONTEST_NAME="سىناق نامى";
+	$MSG_CONTEST_STATUS="ھالەت";
+	$MSG_CONTEST_OPEN="ئوچۇق";
+	$MSG_CONTEST_CREATOR="ئىجادچى";
+	$MSG_CONTEST_PENALTY="يىغىندى ۋاقىت";
+	$MSG_IP_VERIFICATION="IP دەلىلەش";
+	$MSG_CONTEST_SUSPECT1="كۆپ ID لىق IP ئادرېسى بار. ئەگەر مۇسابىقە، ئىمتىھان مەزگىلىدە ئوخشاش بىر كومپيۇتېردا نۇرغۇن ID نى زىيارەت قىلغان بولسىڭىز، بۇ ID خاتىرىلىنىدۇ. ";
+	$MSG_CONTEST_SUSPECT2="كۆپلىگەن IP ئادرېسىغا ئىگە ID. ئەگەر مۇسابىقە، ئىمتىھان مەزگىلىدە باشقا بىر كومپيۇتېرغا ئالماشسا، ئۇ خاتىرىلىنىدۇ. ";
 		
-	$MSG_SECONDS="seconds";
-	$MSG_MINUTES="minutes";
-	$MSG_HOURS="hours";
-	$MSG_DAYS="days";
-	$MSG_MONTHS="months";
-	$MSG_YEARS="years";
+	$MSG_SECONDS="سېكۇنىت";
+	$MSG_MINUTES="مىنۇت";
+	$MSG_HOURS="سائەت";
+	$MSG_DAYS="كۈن";
+	$MSG_MONTHS="ئاي";
+	$MSG_YEARS="يىل";
 	
   $MSG_Public="ئاشكارە";
   $MSG_Private="خۇسۇسىي";
@@ -213,7 +204,8 @@ if(date('m')==1 && date('d') == 1){
   $MSG_MODIFY_NOT_ALLOWED_FOR_EXAM="ئىمتاھان مەزگىلىدە ئابۇنىت ئۇچۇرىنى ئۆزگەرتىشكە بولمايدۇ";
   $MSG_MAIL_NOT_ALLOWED_FOR_EXAM="ئىمتاھان تۈگىمىگىچە ئېلخەت ئىشلىتىشكە بولمايدۇ";
   $MSG_LOAD_TEMPLATE_CONFIRM="ئىلگىرىكى نۇسخىنى چۈشۈرمەكچىمۇ\\n ئۇنداقتا سىز ھازىرقى كودىڭىزنى يۇيۇۋىتىسىز ";
-
+  $MSG_NO_MAIL_HERE="OJ ئىچكى خەت چەك قوللىمايدۇ";
+  
   $MSG_BLOCKLY_OPEN="كۆرۈنمە";
   $MSG_BLOCKLY_TEST="كورۈنمە يۈرگۈزۈش";
   $MSG_MY_SUBMISSIONS=" تاپشۇرغىنىم";
@@ -261,7 +253,7 @@ if(date('m')==1 && date('d') == 1){
   $MSG_HELP_RE="يۈرۈش خاتا.گەرچە كودىڭىز توغرا تەرجىمە بولۇنسىمۇ،يۈرۈش جەريانىدا خاتالىق كۆرۈلدى.سەۋەبى بەلكىم تۆۋەندىكىچە:قائىدىگە ئىخلاپ ساقلىغۇچ زىيارىتى ياكى ئىندىكىس،چەكلەنگەن فۇنكىسىيەنى ئىشلىتىش،پويىنتېر ئۇچۇپ يۈرۈش ...";
   $MSG_HELP_CE="كودىڭىز تەرجىمىدە مەغلۇپ بولدى.كودىڭىزدا ئېغىر دەرجىدە تىل خاتالىق بار،بۇيەرنى چىكىپ تەپسىلاتىنى كۆرۈڭ";
   
-	$MSG_HELP_MORE_TESTDATA_LATER="كۆپلىگەن سىناق نۇقتىلىرىنى سوئال كىرگۈزۈپ بولغاندىن كىيىن قوشۇش";
+  $MSG_HELP_MORE_TESTDATA_LATER="كۆپلىگەن سىناق نۇقتىلىرىنى سوئال كىرگۈزۈپ بولغاندىن كىيىن قوشۇش";
   $MSG_HELP_ADD_FAQS="Add a news which titled \"faqs.$OJ_LANG\", it apears as <a href=../faqs.php>$MSG_FAQ</a>";
 	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> Please give us a <span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star @HUSTOJ Github!</a></sub>";
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>ئىزدەڭ hustoj special judge</a>تېخىمۇ كۆپ تەپسىلات ";
@@ -269,94 +261,97 @@ if(date('m')==1 && date('d') == 1){
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="ئادىرىستىن تىزىملاپ كىرىشip ئوخشىمىغان";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" ئىمتاھان ۋاقتىدا رۇخسەت يوق  ";
-  $MSG_WARNING_ACCESS_DENIED="I am sorry, You could not view this message! Because it's not belong to you, or Administrator won't show you.";
+  $MSG_WARNING_ACCESS_DENIED="كەچۈرۈڭ، سىز بۇ خەۋەرنى تەكشۈرۈشكە ئامالسىز. چۈنكى ئۇ سىزگە تەۋە ئەمەس، ياكى باشقۇرغۇچى سېستىما ھالىتىنى بەلگىلەپ بۇ تۈردىكى ئۇچۇرلارنى كۆرسەتمەيدۇ.";
 
+  $MSG_WARNING_USER_ID_SHORT="ئابۇنىت نامى كەمىدە 3 ھەرپ";
+  $MSG_WARNING_PASSWORD_SHORT="شىفىر كەمىدە 6 ھەرپ";
+  $MSG_WARNING_REPEAT_PASSWORD_DIFF="ئىككى شىفىر ماس ئەمەس";
+  
+  
   $MSG_LOSTPASSWORD_MAILBOX="  دەلىللەش كودىنى ئېلخېتىڭىزگە يوللاندى،تەكشۈرۈپ ئېلىڭ";
   $MSG_LOSTPASSWORD_WILLBENEW=" ئەگەر توغرا بولسا ،كىيىنكى قەدەمدە مۇقۇملاش ئارقىلىق دەلىللەش كودى سىزنىڭ يېڭى مەخپى شىفىرىڭىزگە ئايلىنىدۇ";
 
 
   // template/../reinfo.php
-  $MSG_A_NOT_ALLOWED_SYSTEM_CALL="Use the operating system calls prohibited by the system to see if you have unauthorized access to resources such as files or processes. If you are a system administrator and confirm that there is no problem with the submitted answer and the test data has no problem, you can send'RE' to the WeChat official account onlinejudge, view the solution.";
-  $MSG_SEGMETATION_FAULT="Check whether the array is out of bounds, the pointer is abnormal, and the memory area that should not be accessed is accessed.";
-  $MSG_FLOATING_POINT_EXCEPTION="Floating point error, check for division by zero.";
-  $MSG_BUFFER_OVERFLOW_DETECTED="Buffer overflow, check whether the string length exceeds the array.";
-  $MSG_PROCESS_KILLED="The process is killed because of memory or time, check whether there is an infinite loop.";
-  $MSG_ALARM_CLOCK="The process was killed due to time. Check whether there is an infinite loop. This error is equivalent to timeout TLE.";
-  $MSG_CALLID_20="The array may be out of bounds, check the relationship between the amount of data described in the title and the size of the applied array.";
-  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="Check if the array is out of bounds.";
-  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="The character subscript of the string is out of range, check the parameters of subString, charAt and other methods.";
+  $MSG_A_NOT_ALLOWED_SYSTEM_CALL="سىستېما چەكلىگەن مەشغۇلات سىستېمىسىنى يۆتكەپ ئىشلىتىپ، ھوقۇق دائىرىسىدىن ھالقىپ ھۆججەت ياكى جەريان قاتارلىق بايلىقلارنى زىيارەت قىلغان-قىلمىغانلىقىغا قاراپ بېقىڭ، ئەگەر سىز سىستېما باشقۇرغۇچى بولسىڭىز ھەمدە تاپشۇرغان جاۋابتا مەسىلە يوق، سىناق سانلىق مەلۇماتىدا مەسىلە يوق دەپ جەزىملەشتۈرسىڭىز، RE نى ئۈندىدار كۆپچىلىك نومۇرى onlinejudge غا يوللاپ، ھەل قىلىش لايىھەسىنى كۆرۈپ باقسىڭىز بولىدۇ. ";
+  $MSG_SEGMETATION_FAULT="بۆلەك خاتالىقى، سانلار گۇرۇپپىسى پاسىلىدىن ھالقىپ كەتكەن، ئىسترېلكىسى بىنورمال، زىيارەت قىلىشقا تېگىشلىك بولمىغان ئىچكى ساقلىغۇچ رايونىنى زىيارەت قىلغان-قىلمىغانلىقىنى تەكشۈرۈش ";
+  $MSG_FLOATING_POINT_EXCEPTION="لەيلىمە نۇقتا خاتالىقى، نۆلنى بۆلۈش ئەھۋالىنىڭ بار-يوقلۇقىنى تەكشۈرۈش. ";
+  $MSG_BUFFER_OVERFLOW_DETECTED="بۇففېر رايونى تېشىپ كېتىش، ھەرپ-بەلگە تىزىقى ئۇزۇنلۇقىنىڭ سانلار گۇرۇپپىسىدىن ئېشىپ كەتكەن ياكى كەتمىگەنلىكىنى تەكشۈرۈش. ";
+  $MSG_PROCESS_KILLED="جەريان ئىچكى ساقلىغۇچ ياكى ۋاقىت سەۋەبىدىن ئۆلتۈرۈلدى، ئۆلۈك ئايلىنىشنىڭ بار-يوقلۇقى تەكشۈرۈڭ.";
+  $MSG_ALARM_CLOCK="جەريان ۋاقىت سەۋەبىدىن ئۆلتۈرۈلۈپ، ئۆلۈك ئايلىنىشنىڭ بار-يوقلۇقى تەكشۈرۈلىدۇ، بۇ خاتالىق ۋاقىت ئېشىپ كەتكەن TLE بىلەن تەڭ قىممەتتە بولىدۇ ";
+  $MSG_CALLID_20="بەلكىم سانلار گۇرۇپپىسى پاسىلدىن ھالقىپ كەتكەن بولۇشى مۇمكىن، تەكشۈرۈش تېمىسىدا تەسۋىرلەنگەن سانلىق مەلۇمات مىقدارى بىلەن ئىلتىماس قىلىنغان سانلار گۇرۇپپىسىنىڭ چوڭ-كىچىكلىك مۇناسىۋىتىنى تەكشۈرۈش كېرەك ";
+  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="سانلار گۇرۇپپىسىنىڭ چېگرىدىن ئۆتۈش ئەھۋالىنى تەكشۈرۈڭ.";
+  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="ھەرپ-بەلگە تىزىقى ئاستىدىكى بەلگە چېگرادىن ئۆتۈپ، subString, charAt قاتارلىق ئۇسۇللارنىڭ پارامېتىرلىرىنى تەكشۈرۈڭ.";
 
 	// template/../ceinfo.php
-	$MSG_ERROR_EXPLAIN="Expain";
-	$MSG_SYSTEM_OUT_PRINT="The usage of System.out.print in Java is different from that of C language printf, please try System.out.format";
-	$MSG_NO_SUCH_FILE_OR_DIRECTORY="The server is a Linux system and cannot use non-standard header files unique to Windows.";
-	$MSG_NOT_A_STATEMENT="Check the matching of braces {}, eclipse sorts the code shortcut key Ctrl+Shift+F";
-	$MSG_EXPECTED_CLASS_INTERFACE_ENUM="Please do not place java functions (methods) outside the class declaration, pay attention to the ending position of the braces }";
-	$MSG_SUBMIT_JAVA_AS_C_LANG="Please do not submit java program as C language.";
-	$MSG_DOES_NOT_EXIST_PACKAGE="Check spelling, such as: the system object System starts with a capital S";
-	$MSG_POSSIBLE_LOSS_OF_PRECISION="Assignment will lose precision, check the data type, if it is correct, you can use coercive type conversion.";
-	$MSG_INCOMPATIBLE_TYPES="Different types of data in Java cannot be assigned to each other, and integers cannot be used as Boolean values.";
-	$MSG_ILLEGAL_START_OF_EXPRESSION="String should be surrounded by English double quotation marks (\\\")";
-	$MSG_CANNOT_FIND_SYMBOL="Misspelling or missing objects required to call the function such as println() need to call System.out";
-	$MSG_EXPECTED_SEMICOLON="The semicolon is missing.";
-	$MSG_DECLARED_JAVA_FILE_NAMED="Java must use public class Main.";
-	$MSG_EXPECTED_WILDCARD_CHARACTER_AT_END_OF_INPUT="The code is not over, missing matching brackets or semicolons, check whether all the codes are selected when copying.";
-	$MSG_INVALID_CONVERSION="The implicit type conversion is invalid, try to use explicit coercion such as (int *)malloc(....)";
-	$MSG_NO_RETURN_TYPE_IN_MAIN="In the C++ standard, the main function must have a return value.";
-	$MSG_NOT_DECLARED_IN_SCOPE="The variable has not been declared, check for spelling errors!";
-	$MSG_MAIN_MUST_RETURN_INT="In the standard C language, the return value type of the main function must be int, and the use of void in teaching materials and VC is a non-standard usage.";
-	$MSG_PRINTF_NOT_DECLARED_IN_SCOPE="The printf function is called without a declaration, and check whether the <stdio.h> or <cstdio> header file is imported.";
-	$MSG_IGNOREING_RETURN_VALUE="Warning: Ignore the return value of the function, it may be that the function is used incorrectly or the return value is not considered abnormal.";
-	$MSG_NOT_DECLARED_INT64="__int64 is not declared. The __int64 in Microsoft VC is not supported in standard C/C++, please use long long to declare 64-bit variables.";
-	$MSG_EXPECTED_SEMICOLON_BEFORE="The semicolon is missing from the previous line.";
-	$MSG_UNDECLARED_NAME="Variables must be declared before they are used, or they may be spelled incorrectly. Pay attention to case sensitivity.";
-	$MSG_SCANF_NOT_DECLARED_IN_SCOPE="The scanf function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
-	$MSG_MEMSET_NOT_DECLARED_IN_SCOPE="The memset function is called without being declared, and check whether the <stdlib.h> or <cstdlib> header file is imported.";
-	$MSG_MALLOC_NOT_DECLARED_IN_SCOPE="The malloc function is called without being declared, and check whether the <stdlib.h> or <cstdlib> header file is imported.";
-	$MSG_PUTS_NOT_DECLARED_IN_SCOPE="The puts function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
-	$MSG_GETS_NOT_DECLARED_IN_SCOPE="The gets function is called without being declared, and check whether the <stdio.h> or <cstdio> header file is imported.";
-	$MSG_STRING_NOT_DECLARED_IN_SCOPE="The string function is called without being declared, and check whether the <string.h> or <cstring> header file is imported.";
-	$MSG_NO_TYPE_IMPORT_IN_C_CPP="Don't submit Java language programs as C/C++, please choose the language type before submitting.";
-	$MSG_ASM_UNDECLARED="It is not allowed to embed assembly language code in C/C++.";
-	$MSG_REDEFINITION_OF="The function or variable is repeatedly defined, and see if the code is pasted multiple times.";
-	$MSG_EXPECTED_DECLARATION_OR_STATEMENT="The program does not seem to be finished. Check if the code is missing when copying and pasting.";
-	$MSG_UNUSED_VARIABLE="Warning: Variables are not used after declaration. Check for spelling errors and misuse variables with similar names.";
-	$MSG_IMPLICIT_DECLARTION_OF_FUNCTION="Function implicit declaration, check whether the correct header file is imported. Or the function with the specified name required by the title is missing.";
-	$MSG_ARGUMENTS_ERROR_IN_FUNCTION="The number of parameters provided in the function call is incorrect. Check whether the wrong parameters are used.";
-	$MSG_EXPECTED_BEFORE_NAMESPACE="Don't submit C++ language program as C, please choose the language type before submitting.";
-	$MSG_STRAY_PROGRAM="Chinese spaces, punctuation, etc. cannot appear in the program other than comments and character strings. Please close the Chinese input method when writing a program. Please do not use the code copied from the Internet.";
-	$MSG_DIVISION_BY_ZERO="Division by zero will cause a floating point overflow.";
-	$MSG_CANNOT_BE_USED_AS_A_FUNCTION="Variables cannot be used as functions. Check for duplicates of variable and function names, or spelling errors.";
-	$MSG_CANNOT_FIND_TYPE="The format description of scanf/printf is inconsistent with the following parameter list. Check whether there is more or less address character \\\"&\\\", or it may be a spelling error.";
-	$MSG_JAVA_CLASS_ERROR="Java language submission can only have one public class, and the class name must be Main, please do not use public keywords for other classes.";
-	$MSG_EXPECTED_BRACKETS_TOKEN="Missing closing brackets";
-	$MSG_NOT_FOUND_SYMBOL="Use an undefined function or variable, check whether the spelling is wrong, do not use a non-existent function, Java call methods usually need to give the object name such as list1.add(...). Java method calls are sensitive to parameter types, such as: cannot pass an integer (int) to a method that accepts a string object (String).";
-	$MSG_NEED_CLASS_INTERFACE_ENUM="Keyword is missing, it should be declared as class, interface or enum.";
-	$MSG_CLASS_SYMBOL_ERROR="To use the examples on the textbook, you must submit the relevant code and remove the public keyword.";
-	$MSG_INVALID_METHOD_DECLARATION="Only the method with the same class name is the constructor, and the return value type is not written. If you change the class name to Main, please also change the name of the constructor.";
-	$MSG_EXPECTED_AMPERSAND_TOKEN="Don't submit C++ language program as C, please choose the language type before submitting.";
-	$MSG_DECLARED_FUNCTION_ORDER="Please pay attention to the order of the declaration of functions and methods. The declaration of another method cannot appear in one method.";
-	$MSG_NEED_SEMICOLON="The line marked above lacks a semicolon at the end.";
-	$MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE="The include statement must be on its own line and cannot be placed on the same line as the following statement";
-	$MSG_INT_HAS_NEXT="hasNext() should be changed to nextInt()";
-	$MSG_UNTERMINATED_COMMENT="The comment is not over, please check whether the ending character \\\"*/\\\" corresponding to \\\"/*\\\" is correct";
-	$MSG_EXPECTED_BRACES_TOKEN="Function declaration lacks parentheses (), such as int main() written as int main";
-	$MSG_REACHED_END_OF_FILE_1="Check whether the submitted source code is not copied intact, or the closing brace is missing.";
-	$MSG_SUBSCRIPT_ERROR="Cannot perform subscript access to non-array or pointer variables";
-	$MSG_EXPECTED_PERCENT_TOKEN="The format part of scanf needs to be enclosed in double quotes";
-	$MSG_EXPECTED_EXPRESSION_TOKEN="The parameter or expression is not finished";
-	$MSG_EXPECTED_BUT="Wrong punctuation or symbols.";
-	$MSG_REDEFINITION_MAIN="This question may be an additional code question. Please review the question again to see the meaning of the question. Do not submit the main function defined by the system, but submit a function in the specified format.";
-	$MSG_IOSTREAM_ERROR="Please do not submit C++ programs as C.";
-	$MSG_EXPECTED_UNQUALIFIED_ID_TOKEN="Pay attention to whether the semicolon is missing after the array declaration.";
-	$MSG_REACHED_END_OF_FILE_2="Missing braces at the end of the program.";
-	$MSG_INVALID_SYMBOL="Check if Chinese punctuation or spaces are used.";
-	$MSG_DECLARED_FILE_NAMED="The public class in OJ can only be Main.";
-	$MSG_EXPECTED_IDENTIFIER="It may not have declare a variable name or missing parentheses when declaring a variable.";
-	$MSG_VARIABLY_MODIFIED="Variables cannot be used for array size. Variables cannot be used as the dimension size of global arrays in C language, including const variables.";
-
-	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
-
-	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
+	$MSG_ERROR_EXPLAIN="چۈشەنچە";
+	$MSG_SYSTEM_OUT_PRINT ="Java دا System.out.print ئىشلىتىش ئۇسۇلى C تىلى printf بىلەن ئوخشىمايدۇ، System.out.format نى سىناپ كۆرۈڭ. ";
+	$MSG_NO_SUCH_FILE_OR_DIRECTORY ="مۇلازىمېتىر لىنۇكىس سىستېمىسى بولۇپ ، Windows قا خاس بولغان ئۆلچەمسىز باش ھۆججەتلىرىنى ئىشلىتىشكە بولمايدۇ. ";
+	$MSG_NOT_A_STATEMENT ="چوڭ تىرناق {} نى ماسلىشىش ئەھۋالىنى تەكشۈرۈڭ، eclipse كودنى رەتلەش تېز كۇنۇپكىسى Ctrl + Shift + F ";
+	$MSG_EXPECTED_CLASS_INTERFACE_ENUM ="java فۇنكىسىيەسىنى (ئۇسۇلى) تۈر باياناتىنىڭ سىرتىغا قويماڭ، چوڭ تىرناقنىڭ ئاخىرلىشىش ئورنىغا دىققەت قىلىڭ. ";
+	$MSG_SUBMIT_JAVA_AS_C_LANG ="java پروگراممىسىنى C تىلى قىلىپ تاپشۇرماڭ. ";
+	$MSG_DOES_NOT_EXIST_PACKAGE ="ئىملا تەكشۈرۈش، مەسىلەن: سېستىما ئوبىكتى System چوڭ يېزىش S دىن باشلىنىدۇ. ";
+	$MSG_POSSIBLE_LOSS_OF_PRECISION ="مەجبۇرىي قىممەت بېرىش ئېنىقلىق دەرىجىسىنى يوقىتىدۇ، سانلىق مەلۇمات تۈرىنى تەكشۈرۈڭ، ئەگەر خاتالىق يوقلۇقى بېكىتىلسە، مەجبۇرىي تىپىنى ئالماشتۇرلىدۇ. ";
+	$MSG_INCOMPATIBLE_TYPES ="Java دىكى ئوخشىمىغان تۈردىكى سانلىق مەلۇماتلارغا ئۆز ئارا قىممەت بەرگىلى بولمايدۇ، پۈتۈن ساننى بور قىممىتى قىلغىلى بولمايدۇ. ";
+	$MSG_ILLEGAL_START_OF_EXPRESSION ="ھەرپ-بەلگە تىزىقىنى ئىنگلىزچە قوش تىرناق (/) دىن پايدىلىنىپ كەلتۈرۈپ چىقىرىدۇ. ";
+	$MSG_CANNOT_FIND_SYMBOL ="ئىملا خاتالىقى ياكى يۆتكەپ ئىشلىتىش فونكسىيىسى كەمچىل بولغان ئوبيېكتلار، مەسىلەن () System. out نى يۆتكەپ ئىشلىتىشكە توغرا كېلىدۇ. ";
+	$MSG_EXPECTED_SEMICOLON ="چېكىت كام.";
+	$MSG_DECLARED_JAVA_FILE_NAMED ="Java چوقۇم public class Main نى ئىشلىتىش كېرەك. ";
+	$MSG_EXPECTED_WILDCARD_CHARACTER_AT_END_OF_INPUT ="كود ئاخىرلاشمىدى، ماس كېلىدىغان تىرناق ياكى چېكىتلىك پەش كەم، كۆچۈرگەندە بارلىق كودنى تاللىغان-تاللىمىغانلىقىنى تەكشۈرۈڭ.";
+	$MSG_INVALID_CONVERSION ="يوشۇرۇن تىپ ئالماشتۇرۇش ئىناۋەتسىز، كۆرسىتىلگەن مەجبۇرىي تىپ ئارقىلىق (int* )malloc(...)";
+	$MSG_NO_RETURN_TYPE_IN_MAIN ="+ C ئۆلچىمىدە، main فۇنكسىيەسىنىڭ چوقۇم قايتىش قىممىتى بولۇشى كېرەك. ";
+	$MSG_NOT_DECLARED_IN_SCOPE ="ئۆزگەرگۈچى مىقدار بايانات ئېلان قىلىپ باقمىغان، ئىملا خاتالىقىنى تەكشۈرۈپ بېقىڭ! ";
+	$MSG_MAIN_MUST_RETURN_INT ="ئۆلچەملىك C تىلىدا، main فۇنكىسىيەسىنىڭ قايتىش قىممىتى تىپى چوقۇم int بولۇشى كېرەك، دەرسلىك ۋە VC دا void غەيرى ئۆلچەملىك ئىشلىتىش ئۇسۇلى قوللىنىلىدۇ. ";
+	$MSG_PRINTF_NOT_DECLARED_IN_SCOPE ="printf فونكىسىيىسى بايانات ئېلان قىلمايلا يۆتكەپ ئىشلىتىلدى، stdio. h ياكى cstdio باش ھۆججىتىنى كىرگۈزدىمۇ يوق؟ ";
+	$MSG_IGNOREING_RETURN_VALUE ="ئاگاھلاندۇرۇش: فۇنكسىيەنىڭ قايتىش قىممىتىگە سەل قارالسا، بەلكىم فۇنكسىيە خاتا ئىشلىتىلگەن ياكى قايتىش قىممىتىنىڭ نورمالسىزلىقىنى ئويلاشمىغان بولۇشى مۇمكىن ";
+	$MSG_NOT_DECLARED_INT64 ="-int64 دە بايانات يوق، ئۆلچەملىك C/C + دا مىكروسوفتنىڭ VCدىكى int64 نى قوللىمايدۇ، long long ئىشلىتىپ 64 خانىلىق ئۆزگەرگۈچى مىقدارنى بايان قىلىڭ. ";
+	$MSG_EXPECTED_SEMICOLON_BEFORE ="ئالدىنقى قۇردا ئايرىش چېكتى كام.";
+	$MSG_UNDECLARED_NAME ="ئۆزگەرگۈچى مىقدارنى ئىشلىتىشتىن بۇرۇن چوقۇم ئاۋۋال بايانات ئېلان قىلىش كېرەك، بەلكىم ئىملا خاتالىقى بولۇشى مۇمكىن، چوڭ-كىچىك قىلىپ پەرقلەندۈرۈشكە دىققەت قىلىش كېرەك. ";
+	$MSG_SCANF_NOT_DECLARED_IN_SCOPE ="scanf فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، stdio.h ياكى cstdio باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_MEMSET_NOT_DECLARED_IN_SCOPE ="memset فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، stdlib.h ياكى cstdlib باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_MALLOC_NOT_DECLARED_IN_SCOPE ="malloc فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، stdlib.h ياكى cstdlib باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_PUTS_NOT_DECLARED_IN_SCOPE ="puts فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، stdio.h ياكى cstdio باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_GETS_NOT_DECLARED_IN_SCOPE ="gets فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، stdio.h ياكى cstdio باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_STRING_NOT_DECLARED_IN_SCOPE ="string فۇنكىسىيەسى ئېنىقلىما بېرىلمىدى، string.h ياكى cstring باش ھۆججىتىنى كىرگۈزگەن-كىرگۈزمىگەنلىكىنى تەكشۈرۈڭ. ";
+	$MSG_NO_TYPE_IMPORT_IN_C_CPP ="Java تىل پروگراممىسىنى C/C + + قىلىپ تاپشۇرماڭ، تاپشۇرۇشتىن بۇرۇن تىل تىپىنى تاللاشقا دىققەت قىلىڭ. ";
+	$MSG_ASM_UNDECLARED ="C/C + نىڭ ئىچىگە ئاسسېمبل تىلى كودىنى كىرگۈزۈشكە بولمايدۇ. ";
+	$MSG_REDEFINITION_OF ="فۇنكىسىيە ياكى ئۆزگەرگۈچى مىقدار تەكرار ئېنىقلىما بېرىپ، كودنى كۆپ قېتىم چاپلىغان ياكى چاپلىمىغانلىقىغا قاراپ بېقىڭ. ";
+	$MSG_EXPECTED_DECLARATION_OR_STATEMENT ="پروگرامما يېزىلىپ بولمىغان ئوخشايدۇ، كۆچۈرۈپ چاپلىغاندا كودىنى چۈشۈرۈپ قويغان ياكى قويمىغانلىقىغا قاراپ بېقىڭ. ";
+	$MSG_UNUSED_VARIABLE ="ئەسكەرتىش: ئۆزگەرگۈچى مىقدار ئېنىقلىما بېرىلگەندىن كېيىن ئىشلىتىلمىدى، ئىملا خاتالىقىنىڭ بار-يوقلۇقى تەكشۈرۈڭ، نامى ئوخشاپ كېتىدىغان ئۆزگەرگۈچى مىقدار خاتا ئىشلىتىلدىمۇ يوق؟";
+	$MSG_IMPLICIT_DECLARTION_OF_FUNCTION ="فۇنكسىيە يوشۇرۇن باياناتى، تەكشۈرۈش ئاستىدا توغرا بولغان باش ھۆججەت كىرگۈزۈلگەن-كىرگۈزۈلمىگەنلىكىنى تەكشۈرۈش. ياكى تېما تەلەپ قىلغان بەلگىلەنگەن ئىسىمنىڭ فۇنكىسىيەسى كەم بولۇپ قالدى. ";
+	$MSG_ARGUMENTS_ERROR_IN_FUNCTION ="فۇنكسىيەنى يۆتكەپ ئىشلەتكەندە تەمىنلىگەن پارامېتىرنىڭ سانى توغرا بولمىسا، پارامېتىرنى خاتا ئىشلەتكەن-ئىشلەتمىگەنلىكىنى تەكشۈرۈش كېرەك. ";
+	$MSG_EXPECTED_BEFORE_NAMESPACE ="C پىلوس + تىل پروگراممىسىنى C غا تاپشۇرماڭ، تاپشۇرۇشتىن بۇرۇن تىل تۈرىنى تاللاشقا دىققەت قىلىڭ. ";
+	$MSG_STRAY_PROGRAM ="جۇڭگو يېزىقىدىكى بوش ئورۇن، تىنىش بەلگىلىرى پروگراممىدا ئىزاھلانغان ۋە ھەرپ-بەلگە تىزىقىدىن باشقا قىسىملاردا كۆرۈلسە بولمايدۇ. پروگرامما تۈزگەندە خەنزۇچە خەت كىرگۈزگۈچنى ئېتىۋېتىڭ. توردا كۆچۈرۈپ كەلگەن كودنى ئىشلەتمەڭ. ";
+	$MSG_DIVISION_BY_ZERO ="نۆلنى بۆلگەندە لەيلىمە نۇقتىنىڭ تېشىپ كېتىشىنى كەلتۈرۈپ چىقاردى.";
+	$MSG_CANNOT_BE_USED_AS_A_FUNCTION ="ئۆزگەرگۈچى مىقدارنى فونكىسىيە ئورنىدا ئىشلەتكىلى بولمايدۇ، ئۆزگەرگۈچى مىقدار نامى ۋە فونكىسىيە نامى تەكرارلىنىش ئەھۋالىنى تەكشۈرۈش بەلكىم ئىملا خاتالىقى بولۇشى مۇمكىن. ";
+	$MSG_CANNOT_FIND_TYPE ="scanf/printfنىڭ فورمات تەسۋىرى كېيىنكى پارامېتىر جەدۋىلى بىلەن بىردەك ئەمەس، ئادرېس ئېلىش بەلگىسى« & » نى ئارتۇق ياكى ئاز ئېلىشمۇ ئىملا خاتالىقى بولۇشى مۇمكىن. ";
+	$MSG_JAVA_CLASS_ERROR ="Java تىلىدا پەقەت بىرلا public تۈرى بار، ھەمدە تۈر نامى چوقۇم Main بولۇشى كېرەك، باشقا تۈرلەردە public ئاچقۇچلۇق سۆزىنى ئىشلەتمەڭ. ";
+	$MSG_EXPECTED_BRACKETS_TOKEN ="ئوڭ تىرناق كەم";
+	$MSG_NOT_FOUND_SYMBOL ="ئېنىقلىمىسىز فۇنكسىيە ياكى ئۆزگەرگۈچى مىقدار ئىشلىتىلگەن، ئىملادا خاتالىق بار-يوقلۇقى تەكشۈرۈڭ، مەۋجۇت بولمىغان فۇنكسىيەنى ئىشلەتمەڭ، Java يۆتكەپ ئىشلىتىش ئۇسۇلى ئادەتتە ئوبيېكت نامى قوشۇلىدۇ، مەسىلەن list1.add(some..) ئۇسۇلىنى يۆتكەپ ئىشلەتكەندە پارامېتىر تىپىغا سەزگۈر، مەسىلەن: پۈتۈن سان (int) نى ھەرپ-بەلگە تىزىقىنى قوبۇل قىلىش ئوبيېكتى (String) غا يەتكۈزۈپ بەرمەسلىك كىرەك.";
+	$MSG_NEED_CLASS_INTERFACE_ENUM ="ئاچقۇچلۇق سۆز كەم، class، interfac ياكى enum دەپ ئېلان قىلىش كېرەك ";
+	$MSG_CLASS_SYMBOL_ERROR ="دەرسلىكتىكى مىساللارنى ئىشلەتكەندە، چوقۇم مۇناسىۋەتلىك تۈردىكى كودنى قوشۇپ تاپشۇرۇش، شۇنىڭ بىلەن بىر ۋاقىتتا ئۇنىڭدىكى public ئاچقۇچلۇق سۆزىنى چىقىرىۋېتىش كېرەك ";
+	$MSG_INVALID_METHOD_DECLARATION ="پەقەت تۈر نامى بىلەن ئوخشاش ئۇسۇل قۇرۇلما ئۇسۇلى بولۇپ، قايتىش قىممىتى تىپى يېزىلمايدۇ. ئەگەر تۈر نامى Main دەپ ئۆزگەرتىلسە، قۇرۇلما ئۇسۇلىنىڭ نامىنى بىرلا ۋاقىتتا ئۆزگەرتىڭ. ";
+	$MSG_EXPECTED_AMPERSAND_TOKEN ="C پىلوس + تىل پروگراممىسىنى C غا تاپشۇرماڭ، تاپشۇرۇشتىن بۇرۇن تىل تۈرىنى تاللاشقا دىققەت قىلىڭ. ";
+	$MSG_DECLARED_FUNCTION_ORDER ="فۇنكىسىيە، ئۇسۇل باياناتىنىڭ ئالدى-كەينىدىكى تەرتىپلەرگە دىققەت قىلىڭ، بىر ئۇسۇل ئىچىدە يەنە بىر ئۇسۇلنىڭ باياناتىنى چىقارغىلى بولمايدۇ. ";
+	$MSG_NEED_SEMICOLON ="يۇقىرىدا ئەسكەرتىلگەن بۇ قۇرنىڭ ئەڭ ئاخىرىدا ئايرىما چېكىت كەم. ";
+	$MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE ="include جۈملىسى چوقۇم بىر قۇر مۇستەقىل بولۇشى، كەينىدىكى جۈملىلەر بىلەن بىر قۇرغا قويۇلماسلىقى كېرەك. ";
+	$MSG_INT_HAS_NEXT ="hasNext () نى next Int () غا ئۆزگەرتىش كېرەك. ";
+	$MSG_UNTERMINATED_COMMENT ="ئىزاھات ئاخىرلاشمىدى، « /* » غا ماس كېلىدىغان ئاخىرلاشتۇرۇش بەلگىسى« /* » نىڭ توغرا ياكى ئەمەسلىكىنى تەكشۈرۈڭ ";
+	$MSG_EXPECTED_BRACES_TOKEN ="فۇنكسىيە باياناتىدا كىچىك تىرناق () كەم بولۇپ قالغان، مەسىلەن () int main دەپ يېزىلىپ قالغان. ";
+	$MSG_REACHED_END_OF_FILE_1 ="تاپشۇرغان ئەسلى كودنى تولۇق كۆچۈرمىگەن ياكى ئاخىرلاشقان چوڭ تىرناق كەم بولۇپ قالغان-قالمىغانلىقىنى تەكشۈرۈڭ";
+	$MSG_SUBSCRIPT_ERROR ="سانلار گۇرۇپپىسى ياكى ئىسترېلكىسىز ئۆزگەرگۈچى مىقدارغا قارىتا زىيارەت قىلىشقا بولمايدۇ. ";
+	$MSG_EXPECTED_PERCENT_TOKEN ="scanf نىڭ فورمات قىسمىنى قوش تىرناق ئارقىلىق كەلتۈرۈپ چىقىرىشقا توغرا كېلىدۇ. ";
+	$MSG_EXPECTED_EXPRESSION_TOKEN ="پارامېتىر ياكى ئىپادىلەش شەكلىنى يېزىپ بولالمىدى";
+	$MSG_EXPECTED_BUT ="خاتا بەلگە ياكى ھەرپ";
+	$MSG_REDEFINITION_MAIN ="بۇ تېما بەلكىم قوشۇمچە كود سوئالى بولۇشى مۇمكىن، تېمىنى قايتا كۆرۈپ، سوئالنىڭ مەنىسىنى ئېنىق كۆرۈڭ، سىستېما ئېنىقلىما بېرىپ بولغان main فۇنكىسىيەسىنى تاپشۇرماڭ، بەلكى بەلگىلەنگەن فورماتنىڭ مەلۇم فۇنكىسىيەسىنى تاپشۇرىشىڭىز كېرەك. ";
+	$MSG_IOSTREAM_ERROR ="C پىلوس + پروگراممىسىنى C غا تاپشۇرماڭ. ";
+	$MSG_EXPECTED_UNQUALIFIED_ID_TOKEN ="سانلار گۇرۇپپىسى باياناتىدىن كېيىن چېكىت پەش كەم بولۇپ قالغان-قالمىغانلىقىغا دىققەت قىلىش كېرەك. ";
+	$MSG_REACHED_END_OF_FILE_2 ="پروگرامما ئاخىرىدا چوڭ تىرناق كەم";
+	$MSG_INVALID_SYMBOL ="خەنزۇچە تىنىش بەلگىسى ياكى بوش ئورۇن ئىشلەتكەن-ئىشلەتمىگەنلىكىنى تەكشۈرۈڭ.";
+	$MSG_DECLARED_FILE_NAMED ="OJ دىكى public تۈرى پەقەت Main. ";
+	$MSG_EXPECTED_IDENTIFIER ="ئۆزگەرگۈچى مىقدارنى ئەسكەرتكەندە، ئۆزگەرگۈچى مىقدارنىڭ نامىنى ئەسكەرتمەسلىك ياكى تىرناق كەم بولۇش مۇمكىن. ";
+	$MSG_VARIABLY_MODIFIED ="سانلار گۇرۇپپىسىنىڭ چوڭ-كىچىكلىكىدە ئۆزگەرگۈچى مىقدار ئىشلىتىشكە بولمايدۇ، C تىلدا ئۆزگەرگۈچى مىقدارنى ئومۇمىي سانلار گۇرۇپپىسىنىڭ ئۆلچىمى قىلىشقا بولمايدۇ، const ئۆزگەرگۈچى مىقدارنى ئۆز ئىچىگە ئالىدۇ ";
+	$MSG_FUNCTION_GETS_REMOVIED ="std: gets بولسا C++11 دىن تاشلىۋېتىلىپ، C++14 دىن چىقىرىۋېتىلىدۇ. std::fgets نى ئىشلىتىشكە بولىدۇ. ياكى ماكرو ئېنىقلىما #define gets(S) fgets(S,sizeof(S),stdin)";
+	$MSG_PROBLEM_USED_IN ="سۇئال ئاللىقاچان شەخسىي مۇسابىقىدە ئىشلىتىلدى. ";
 
  ?>

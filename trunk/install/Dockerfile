@@ -29,7 +29,7 @@ RUN     cd /home/judge/ && \
 RUN     cd /home/judge/src/core/ && \
 	bash make.sh 
 
-# for more compilers, remove # and run "docker build -t hustoj ."
+# for more compilers, VMs and runtimes , remove # and run "docker build -t hustoj ."
 
 #RUN     apt-get -y install ruby
 #RUN     apt-get -y install gobjc

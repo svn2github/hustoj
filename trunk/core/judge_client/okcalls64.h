@@ -63,7 +63,8 @@ int LANG_YV[CALL_ARRAY_SIZE] = {
         SYS_sysinfo, 0 };
 //php
 int LANG_PHV[CALL_ARRAY_SIZE] = {
-        0, SYS_write, SYS_mprotect, SYS_munmap, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask,
+        0,1,3,4,5,6,8,9,10,11,12,13,14,16,17,21,59,79,99,158,202,218,231,257,273,302,318,
+	SYS_write, SYS_mprotect, SYS_munmap, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask,
         SYS_sched_get_priority_max, SYS_arch_prctl, SYS_ioctl, SYS_pread64, SYS_getxattr, SYS_open, SYS_writev,
         SYS_time, SYS_futex, SYS_set_thread_area, SYS_access, SYS_getdents64, SYS_set_tid_address, SYS_exit_group,
         SYS_openat, SYS_set_robust_list, SYS_close, SYS_getpid, SYS_stat, SYS_fstat, SYS_clone, SYS_execve, SYS_lstat,

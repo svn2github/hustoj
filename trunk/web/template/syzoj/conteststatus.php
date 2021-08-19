@@ -5,7 +5,7 @@
 
   <!-- <form action="" class="ui mini form" method="get" role="form" id="form"> -->
   <form id=simform class="ui mini form" action="status.php" method="get">
-  
+
     <input type="hidden" name="cid" value="<?php echo $cid; ?>" />
     <div class="inline fields" style="margin-bottom: 25px; white-space: nowrap; ">
       <label style="font-size: 1.2em; margin-right: 1px; ">题目：</label>
@@ -80,12 +80,12 @@
 
 
 
-  <table id="result-tab"  class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
+  <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
-		<th>编号</th>
-		<th>用户</th>
-		<th><?php echo $MSG_NICK?></th>
+                <th>编号</th>
+                <th>用户</th>
+                <th><?php echo $MSG_NICK?></th>
         <th>题目</th>
         <th>结果</th>
         <th>内存</th>
@@ -98,7 +98,7 @@
     </thead>
     <tbody>
       <!-- <tr v-for="item in items" :config="displayConfig" :show-rejudge="false" :data="item" is='submission-item'>
-	  </tr> -->
+          </tr> -->
     <?php
     foreach($view_status as $row){
     $i=0;
@@ -119,27 +119,41 @@
     </tbody>
   </table>
   <div style="margin-bottom: 30px; ">
-  
+
   <div style="text-align: center; ">
-	<div class="ui pagination menu" style="box-shadow: none; ">
-	  <a class="icon item" href="<?php echo "status.php?".$str2;?>" id="page_prev">  
+        <div class="ui pagination menu" style="box-shadow: none; ">
+          <a class="icon item" href="<?php echo "status.php?".$str2;?>" id="page_prev">
     首页
-	  </a>
-	  <?php
+          </a>
+          <?php
       if (isset($_GET['prevtop']))
       echo "<a class=\"item\" href=\"status.php?".$str2."&top=".intval($_GET['prevtop'])."\">上一页</a>";
       else
       echo "<a class=\"item\" href=\"status.php?".$str2."&top=".($top+20)."\">上一页</a>";
 
       ?>
-      
-	  <a class="icon item" href="<?php echo "status.php?".$str2."&top=".$bottom."&prevtop=$top"; ?>" id="page_next">
-	    下一页
-	  </a>  
-	</div>
+
+          <a class="icon item" href="<?php echo "status.php?".$str2."&top=".$bottom."&prevtop=$top"; ?>" id="page_next">
+            下一页
+          </a>
+        </div>
   </div>
 </div>
 
-	<script src="template/<?php echo $OJ_TEMPLATE?>/auto_refresh.js?v=0.34" ></script>
+<script>
+        var i = 0;
+        var judge_result = [<?php
+        foreach ($judge_result as $result) {
+                echo "'$result',";
+        } ?>
+        ''];
+
+        var judge_color = [<?php
+        foreach ($judge_color as $result) {
+                echo "'$result',";
+        } ?>
+        ''];
+</script>
+        <script src="template/bs3/auto_refresh.js?v=0.43" ></script>
 
 <?php include("template/$OJ_TEMPLATE/footer.php");?>

@@ -157,7 +157,7 @@ else {
     }else if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
                   $sql="WHERE (contest_id=0 or contest_id is null)  ";
     }else{
-        $sql="WHERE problem_id>0 and contest_id is null ";
+        $sql="WHERE problem_id>0 and (contest_id=0 or contest_id is null) ";
     }
 }
 

@@ -125,3 +125,4 @@ reset
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"
+echo "DO NOT POST THESE INFOMANTION ON ANY PUBLIC CHANNEL!"

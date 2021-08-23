@@ -22,10 +22,10 @@ cd $TARGET/
 mkdir src
 svn co https://github.com/zhblue/hustoj/trunk/trunk/core src/core
 svn co https://github.com/zhblue/hustoj/trunk/trunk/install src/install
-apt-get install -y make flex g++ clang libmysqlclient-dev libmysql++-dev fp-compiler
-apt-get install -y openjdk-7-jdk
-apt-get install -y openjdk-8-jdk
-
+apt-get install -y make flex g++ libmysqlclient-dev libmysql++-dev
+cd src/install
+sudo bash docker.sh
+cd ../..
 CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
 mkdir etc data log
 cp src/install/java0.policy  $TARGET/etc
@@ -42,6 +42,8 @@ sed -i "s/OJ_HTTP_PASSWORD=admin/OJ_HTTP_PASSWORD=$PASSWORD/g" etc/judge.conf
 sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 COMPENSATION=`grep 'mips' /proc/cpuinfo|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
+sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" etc/judge.conf
+
 cd src/core
 chmod +x ./make.sh
 if [ ! -e /usr/bin/judged ] ; then

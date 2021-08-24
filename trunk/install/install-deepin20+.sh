@@ -56,6 +56,9 @@ fi
 mysql < src/install/db.sql
 echo "grant all privileges on jol.* to '$USER' identified by '$PASSWORD';\n flush privileges;\n"|mysql
 echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+
+PHP_VER=`grep 'php.*fpm\.sock' /etc/nginx/sites-enabled/default |awk -F/ '{print $4}'|awk -F- '{print $1}'|cut -c4-6`
+
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"
 else
@@ -69,15 +72,15 @@ else
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 	/etc/init.d/nginx restart
 	sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.0/fpm/php.ini
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.0/fpm/php.ini
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/$PHP_VER/fpm/php.ini
 fi
 COMPENSATION=`grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/5000)}'`
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf
 
 sed -i 's/pm.max_children = 5/pm.max_children = 200/g' `find /etc/php -name www.conf`
 
-/etc/init.d/php7.0-fpm restart
-service php7.0-fpm restart
+/etc/init.d/php$PHP_VER-fpm restart
+service php$PHP_VER-fpm restart
 
 cd src/core
 chmod +x ./make.sh
@@ -102,7 +105,7 @@ update-rc.d hustoj defaults
 
 systemctl enable nginx
 systemctl enable mariadb
-systemctl enable php7.3-fpm
+systemctl enable php$PHP_VER-fpm
 systemctl enable judged
 
 cd /home/judge/src/install

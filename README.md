@@ -30,7 +30,7 @@
 
 [Ubuntu 更换软件源](#ubuntu-更换软件源)
 
-[基于Deepin深度安装](#基于-deepin-20-安装)
+[基于Deepin深度安装](#基于 Deepin 20+ 安装)
 
 [基于CentOS安装](#基于-centos-安装)
 
@@ -381,7 +381,7 @@ docker run -d \
 
 ### 基于其他发行版安装
 
-其他的发行版，如树莓派的 `raspbian8/9` , `ubuntu14.04`的安装脚本在 `install` 目录可以找到，但是不完善，安装后需要部分手工修复调整。
+其他的发行版，如Debian10+(Debian10/11) 树莓派的 `raspbian8/9` , `ubuntu14.04`的安装脚本在 `install` 目录可以找到，但是可能存在少量细节不完善，安装后需要部分手工修复调整。
 
 <https://www.youtube.com/watch?v=hRap7ettUWc>
 

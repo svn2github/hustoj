@@ -41,14 +41,12 @@ include_once("kindeditor.php") ;
           </h3>
         </center>
       </p>
-
-      <p align=left>
-        <?php echo $MSG_Time_Limit?><br>
-        <input class="input input-mini" type=text name=time_limit size=20 value='<?php echo htmlentities($row['time_limit'],ENT_QUOTES,"UTF-8")?>'> sec<br><br>
-        <?php echo $MSG_Memory_Limit?><br>
-        <input class="input input-mini" type=text name=memory_limit size=20 value='<?php echo htmlentities($row['memory_limit'],ENT_QUOTES,"UTF-8")?>'> MB<br><br>
-      </p>
-
+        <p align=left>
+          <?php echo $MSG_Time_Limit?><br>
+          <input class="input input-mini" type=number min="0.001" max="300" step="0.001" name=time_limit size=20 value=1> sec<br><br>
+          <?php echo $MSG_Memory_Limit?><br>
+          <input class="input input-mini" type=number min="1" max="1024" step="1" name=memory_limit size=20 value=128> MB<br><br>
+        </p>
       <p align=left>
         <?php echo "<h4>".$MSG_Description."</h4>"?>
         <textarea class="kindeditor" rows=13 name=description cols=80><?php echo htmlentities($row['description'],ENT_QUOTES,"UTF-8")?></textarea><br>

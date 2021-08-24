@@ -30,7 +30,7 @@
 
 [Ubuntu 更换软件源](#ubuntu-更换软件源)
 
-[基于Deepin深度15安装](#基于-deepin-15-安装)
+[基于Deepin深度安装](#基于-deepin-20-安装)
 
 [基于CentOS安装](#基于-centos-安装)
 
@@ -298,13 +298,13 @@ wget http://dl.hustoj.com/update-sources-ubuntu.sh
 sudo bash update-sources-ubuntu.sh
 ```
     
-### 基于 Deepin 15+ 安装
+### 基于 Deepin 20+ 安装
 
-国内桌面用户 `Deepin 15.9+` (内置QQ、微信、WPS方便出题人本地测试，最新15.11测试通过)
+国内桌面用户 `Deepin 20+` (内置QQ、微信、WPS方便出题人本地测试，最新20测试通过)
 
 ```bash
-wget http://dl.hustoj.com/install-deepin15.9.sh
-sudo bash install-deepin15.9.sh
+wget http://dl.hustoj.com/install-deepin20+.sh
+sudo bash install-deepin20+.sh
 ```
     
 ### 基于 CentOS 安装

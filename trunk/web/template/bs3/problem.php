@@ -9,7 +9,7 @@
 	<link rel="icon" href="../../favicon.ico">
 
 	<title>
-		<? echo $row['title']." - ".$MSG_PROBLEM." - ".$OJ_NAME; ?>
+		<?php echo $row['title']." - ".$MSG_PROBLEM." - ".$OJ_NAME; ?>
 	</title>
 
 	<?php include("template/$OJ_TEMPLATE/css.php");?>

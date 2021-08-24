@@ -141,7 +141,13 @@ for line in sys.stdin:
     a = line.split()
     print(int(a[0]) + int(a[1]))
 </pre>
-	      
+	    为了方便使用本地文件调试，C/C++也可以用下面的方法来仅在本地运行时进行输入、输出重定向。
+<pre>
+#ifdnef ONLINE_JUDGE
+    freopen("sample.in", "r", stdin);
+    freopen("sample.out", "w", stdout);
+#endif
+</pre>
 	
 <hr>
 <font color=green>Q</font>:为什么我的程序在自己的电脑上正常编译，而系统告诉我编译错误!<br>

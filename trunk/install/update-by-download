@@ -1,0 +1,30 @@
+#!/bin/bash
+DATE=`date +%Y%m%d`
+if [ `whoami` = "root" ];then
+	cd /home/judge/
+	cp src/web/include/db_info.inc.php etc/
+	
+	if wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz; then
+		mv src old.$DATE
+		if tar xzf hustoj.tar.gz ;then
+			cp etc/db_info.inc.php src/web/include/
+			cp -a old.$DATE/src/upload/* src/web/upload
+			chown -R www-data src
+			cd /home/judge/src/core
+			pkill -9 judged
+			bash make.sh
+			cd ../install
+			mysql jol< update.sql
+			judged
+		else
+			mv old.$DATE src
+			echo "Extraction of source tgz failed!"
+		fi
+
+		web_user=`ls -l /home/judge/src/web/include/db_info.inc.php | awk -F ' ' '{print $3}'`
+		mkdir /var/log/hustoj/
+		chown -R $web_user /var/log/hustoj
+	fi
+else
+	echo "Usage:sudo $0"
+fi

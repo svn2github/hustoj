@@ -65,6 +65,9 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_CODE_LENGTH="كود ئۇزۇنلۇقى";
 	$MSG_SUBMIT_TIME="تەكشۈرگەن ۋاقىت";
 
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
+
 	//problemstatistics.php
 	$MSG_PD="كۈتۈۋاتىدۇ";
 	$MSG_PR="قايتا تەكشۈرۈشنى كۈتۈۋاتىدۇ...";

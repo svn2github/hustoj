@@ -35,6 +35,7 @@
 	$MSG_Runtime_Click="运行错误(点击看详细)";
 	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
+	$MSG_MANUAL_CONFIRMATION="自动评测通过，等待人工确认";
         $MSG_Click_Detail="点击看详细";
         $MSG_Manual="人工判题";
         $MSG_OK="确定";
@@ -80,6 +81,7 @@
 	$MSG_CE="编译错误";
 	$MSG_CO="编译成功";
 	$MSG_TR="测试运行";
+	$MSG_MC="待裁判确认";
 	$MSG_RESET="重置";	
 	
 	//problemset.php

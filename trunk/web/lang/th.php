@@ -43,14 +43,8 @@
 
 
 
-
-
-
-
-
-
-
-
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
 
 
 	$MSG_TEST_RUN="Test Running Done";

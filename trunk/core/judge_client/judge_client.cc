@@ -74,6 +74,8 @@
 #define OJ_CE 11
 #define OJ_CO 12
 #define OJ_TR 13
+#define OJ_HM 14
+
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
  */
@@ -192,6 +194,8 @@ static const char *tbname = "solution";
 static char cc_opt[BUFFER_SIZE/10];
 static char cc_std[BUFFER_SIZE/10];
 static char cpp_std[BUFFER_SIZE/10];
+static int auto_result = 4;
+
 int num_of_test = 0;
 //static int sleep_tmp;
 
@@ -561,8 +565,7 @@ void init_judge_conf()
 			read_buf(buf, "OJ_CC_STD", cc_std);
 			read_buf(buf, "OJ_CPP_STD", cpp_std);
 			read_buf(buf, "OJ_CC_OPT", cc_opt);
-			
-			
+			read_buf(buf, "OJ_AUTO_RESULT", &auto_result);
 		}
 		fclose(fp);
 	}
@@ -677,7 +680,6 @@ const char *getFileNameFromPath(const char *path)
 
 void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,const char * infile)
 {
-
 	execute_cmd("echo '========[%s]========='>>diff.out", getFileNameFromPath(path));
 	execute_cmd("echo '------test in top 100 lines------'>>diff.out");
 	execute_cmd("head -100 %s >>diff.out",infile);

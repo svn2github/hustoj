@@ -35,7 +35,7 @@
            <strong >错误信息</strong>
         </p>
         <div class="ui existing segment">
-          <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; "><code><?php echo $view_reinfo?></code></pre>
+          <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; " id="errtxt"><code><?php echo $view_reinfo?></code></pre>
         </div>
     </div>
 

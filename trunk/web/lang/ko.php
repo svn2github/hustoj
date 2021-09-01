@@ -41,16 +41,8 @@
 	$MSG_Explain="이유나 설명을 입력하세요.";
 
 
-
-
-
-
-
-
-
-
-
-
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
 
 
 	$MSG_TEST_RUN="테스트 실행 완료";

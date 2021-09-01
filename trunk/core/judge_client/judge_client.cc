@@ -194,7 +194,7 @@ static const char *tbname = "solution";
 static char cc_opt[BUFFER_SIZE/10];
 static char cc_std[BUFFER_SIZE/10];
 static char cpp_std[BUFFER_SIZE/10];
-static int auto_result = 4;
+static int auto_result = OJ_AC ;
 
 int num_of_test = 0;
 //static int sleep_tmp;
@@ -919,6 +919,8 @@ void update_solution(int solution_id, int result, int time, int memory, int sim,
 {
 	if (result == OJ_TL && memory == 0)
 		result = OJ_ML;
+	if (result == OJ_AC )
+		result=auto_result;
 	if (http_judge)
 	{
 		_update_solution_http(solution_id, result, time, memory, sim, sim_s_id,

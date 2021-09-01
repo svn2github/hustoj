@@ -40,7 +40,10 @@
  	$MSG_OK="OK";
  	$MSG_Explain="Type reason or explaination";
         $MSG_TEST_RUN="Test Running Done";
-  	
+
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
+	
  	$MSG_RUNID="RunID";
 	$MSG_USER="User";
 	$MSG_PROBLEM="Problem";

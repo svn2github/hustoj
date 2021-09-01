@@ -74,7 +74,7 @@
 #define OJ_CE 11
 #define OJ_CO 12
 #define OJ_TR 13
-#define OJ_HM 14
+#define OJ_MC 14                  // 等待裁判手工确认
 
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39

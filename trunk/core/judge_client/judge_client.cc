@@ -565,7 +565,7 @@ void init_judge_conf()
 			read_buf(buf, "OJ_CC_STD", cc_std);
 			read_buf(buf, "OJ_CPP_STD", cpp_std);
 			read_buf(buf, "OJ_CC_OPT", cc_opt);
-			read_buf(buf, "OJ_AUTO_RESULT", &auto_result);
+			read_int(buf, "OJ_AUTO_RESULT", &auto_result);
 		}
 		fclose(fp);
 	}

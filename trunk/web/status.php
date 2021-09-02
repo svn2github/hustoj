@@ -89,8 +89,6 @@ if (isset($OJ_LANG)) {
 
 require_once("./include/const.inc.php");
 
-if ($OJ_TEMPLATE!="classic")
-  $judge_color = Array("label gray","label label-info","label label-warning","label label-warning","label label-success","label label-danger","label label-danger","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-info");
 
 $str2 = "";
 $lock = false;

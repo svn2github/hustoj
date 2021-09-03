@@ -75,7 +75,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
     foreach($result as $row){
       echo "<tr>";
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
-        echo "<td>".$row['nick']."</td>";
+        echo "<td><span fd='nick' user_id='".$row['user_id']."'>".$row['nick']."</span></td>";
         echo "<td>".$row['email']."</td>";
         echo "<td>".$row['school']."</td>";
         echo "<td>".$row['accesstime']."</td>";
@@ -114,3 +114,34 @@ if(!(isset($_GET['keyword']) && $_GET['keyword']!=""))
 ?>
 
 </div>
+<script>
+function admin_mod(){
+        $("span[fd=nick]").each(function(){
+                let sp=$(this);
+                let user_id=$(this).attr('user_id');
+                $(this).dblclick(function(){
+                        let nick=sp.text();
+                        console.log("user_id:"+user_id+"  nick:"+nick);
+                        sp.html("<form onsubmit='return false;'><input type=hidden name='m' value='user_update_nick'><input type='hidden' name='user_id' value='"+user_id+"'><input type='text' name='nick' value='"+nick+"' selected='true' class='input-mini' size=2 ></form>");
+                        let ipt=sp.find("input[name=nick]");
+                        ipt.focus();
+                        ipt[0].select();
+                        sp.find("input").change(function(){
+                                let newnick=sp.find("input[name=nick]").val();
+                                $.post("ajax.php",sp.find("form").serialize()).done(function(){
+                                        console.log("new nick:"+newnick);
+                                        sp.html(newnick);
+                                });
+
+                        });
+                });
+
+
+        });
+
+}
+$(document).ready(function(){
+        admin_mod();
+});
+
+</script>

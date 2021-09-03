@@ -54,7 +54,7 @@
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ -fno-asm -Wall -lm --static -std=c++11 -DONLINE_JUDGE -o Main Main.cc</font></td>
+    <td><font color=blue>g++ -fno-asm -Wall -lm --static -std=c++14 -DONLINE_JUDGE -o Main Main.cc</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>
@@ -73,7 +73,7 @@
 <font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
 <font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
 <font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
-<font color=blue>Openjdk "14.0.2"</font><br>
+<font color=blue>Openjdk 16</font><br>
 <font color=blue>Python 3.8.5</font><br>
 	      </p>
 	      

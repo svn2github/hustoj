@@ -355,5 +355,5 @@
   $MSG_VARIABLY_MODIFIED="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
   $MSG_FUNCTION_GETS_REMOVIED=" std::gets 于 C++11 被弃用，并于 C++14 移除。可使用 std::fgets 替代。或者增加宏定义 #define gets(S) fgets(S,sizeof(S),stdin) ";
   $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
-  
+  $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
 ?>

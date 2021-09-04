@@ -342,6 +342,6 @@
 	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
 
 	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
-
+        $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="Mails can only be sent between teachers and student, not between students.";
 
  ?>

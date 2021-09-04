@@ -84,7 +84,10 @@ if(isset($_POST['to_user'])){
 	$sql="select 1 from privilege where (rightstr='source_browser' or rightstr='administrator') and (user_id=? or user_id=? )";
 	$res=pdo_query($sql,$from_user,$to_user);
 	if ($res&&count($res)<1){
-			$view_title= "Mail can only send to or from a Code Reviewer!";
+		//$view_title= "Mail can only send to or from a Code Reviewer!";
+		$view_errors=$MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT;
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
 	}else{
 		if($res)
 		$sql="insert into mail(to_user,from_user,title,content,in_date)

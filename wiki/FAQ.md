@@ -9,6 +9,21 @@ When people asked question, we put the answer here
 
 新版本
 ----
+正式比赛需要注意哪些问题？
+--
+正式比赛推荐激活db_info.inc.php中的两个参数。
+```
+//static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
+//static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
+```
+对于公网上的系统，推荐使用阿里云的RDS作为数据库服务器，然后根据比赛规模分别部署一定数量的判题机和Web服务器，通过域名解析进行Web访问的负载均衡。
+Web服务器和判题机都和RDS配置在同一专用网络中，使用mysql直连数据库。
+Web服务器都增加Memcached做页面缓存。
+判题机测试数据提前复制，并配置证书登陆、编写rsync脚本方便覆盖同步。
+判题机开启UDP监听(judge.conf:OJ_UDP_ENABLE等参数)，Web服务器配置好UDP任务推送(db_info.inc.php:$OJ_UDP等参数)。
+安装配置完成后，可以从任意一台Web服务器导入一个特制的FPS文件，这个文件中可以提前复制粘贴数百份solution。
+导入后，可以模拟大量提交，然后观察全部判题队列的运行时间，推算平均判题速度，观察判题机分配是否均匀，判题结果是否一致，耗时内存是否接近。
+
 NOI SCP CCF 新标准使用C++14，如何在hustoj中更改默认的编译参数。
 --
 最新版本已经更新默认C++标准为C++14，直接升级即可。

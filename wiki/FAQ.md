@@ -9,6 +9,12 @@ When people asked question, we put the answer here
 
 新版本
 ----
+NOI SCP CCF 新标准使用C++14，如何在hustoj中更改默认的编译参数。
+--
+最新版本已经更新默认C++标准为C++14，直接升级即可。
+对于2021年7月份之后安装的用户，judge.conf中自己增加一个OJ_CPP_STD=c++14即可。
+
+
 C++ 中的gets函数哪里去了？为何编译报错？
 --
 根据 https://zh.cppreference.com/w/cpp/io/c/gets , gets函数已经被移除。

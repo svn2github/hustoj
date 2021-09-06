@@ -129,6 +129,9 @@ systemctl enable mysql
 systemctl enable php7.4-fpm
 #systemctl enable judged
 
+/etc/init.d/mysql start
+
+
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
@@ -149,4 +152,5 @@ echo "password:$PASSWORD"
 echo "DO NOT POST THESE INFOMANTION ON ANY PUBLIC CHANNEL!"
 echo "Register a user as 'admin' on http://127.0.0.1/ "
 echo "打开http://127.0.0.1/ 注册用户admin，获得管理员权限。"
+echo "不要在QQ群或其他地方公开发送以上信息，否则可能导致系统安全受到威胁。"
 

@@ -169,7 +169,7 @@
 	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." 比赛进行中，结束后才能查看结果。";
-  
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." 比赛,不显示提示信息。";
 	$MSG_SERVER_TIME="服务器时间";
 	$MSG_START_TIME="开始时间";
 	$MSG_END_TIME="结束时间";

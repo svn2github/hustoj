@@ -161,7 +161,7 @@
 	$MSG_TIME_WARNING="대회 시작전입니다.";
 	$MSG_WATCH_RANK="대회순위 보기";
 	$MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." 대회는 종료 전까지 결과를 보여주지 않습니다.";
-
+        $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." Contest does not show hint.";
 	$MSG_SERVER_TIME="현재 시간";
 	$MSG_START_TIME="시작 시간";
 	$MSG_END_TIME="종료 시간";

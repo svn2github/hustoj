@@ -155,7 +155,7 @@
 	$MSG_TIME_WARNING="Before Contest Start";
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." Contest does not show result, until it's over.";
-  
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." Contest does not show hint.";
 	$MSG_SERVER_TIME="SERVER TIME";
 	$MSG_START_TIME="Start Time";
 	$MSG_END_TIME="End Time";

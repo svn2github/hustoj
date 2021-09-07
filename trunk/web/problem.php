@@ -154,6 +154,7 @@ if( isset($OJ_NOIP_KEYWORD) && $OJ_NOIP_KEYWORD ){
 	if($flag)
 	{	
 		$row[ 'accepted' ]='<font color="red"> ? </font>';
+		$row[ 'hint' ]="NOIP无提示";
 	}
 }
 /////////////////////////Template

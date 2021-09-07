@@ -171,7 +171,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 		$MSG_TIME_WARNING="مۇسابىقە باشلىنىشتىن بۇرۇن.";  
   $MSG_WATCH_RANK="بۇ يەرنى بىسىپ شەرەپ تاختىسىنى كۆرۈڭ";
   $MSG_NOIP_WARNING="مۇسابىقىسى ئاخىرلاشمىغىچە نەتىجىنى كۆرەلمەيسىز ".$OJ_NOIP_KEYWORD;
-
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." Contest does not show hint.";
 	$MSG_SERVER_TIME="مۇلازىمىتېر ۋاقتى";
 	$MSG_START_TIME="باشلىنىش ۋاقتى";
 	$MSG_END_TIME="ئاياغلىشىش ۋاقتى";

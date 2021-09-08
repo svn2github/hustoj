@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 RUN     sed -i 's/archive.ubuntu/mirrors.163/g' /etc/apt/sources.list &&\
-	apt-get update && apt-get upgrade
+	apt-get update && apt-get -y upgrade
 	
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends libmysqlclient-dev 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        libmysql++-dev 

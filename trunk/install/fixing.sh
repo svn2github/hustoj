@@ -4,8 +4,13 @@ USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
 if [ `whoami` = "root" ];then
 	cd /home/judge/
-	if svn co https://github.com/zhblue/hustoj/trunk/trunk new ; then
-		if test -e /home/judge/src/web/include/db_info.inc.php ;then
+        mkdir new
+        cd new
+	wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
+	tar xzf hustoj.tar.gz
+	mv src/* ./
+	cd ..
+	if test -e /home/judge/src/web/include/db_info.inc.php ;then
 		    echo 'db_info.inc.php exists !';
 		    cp src/web/include/db_info.inc.php new/web/include/
 		else

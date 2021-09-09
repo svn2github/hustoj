@@ -67,7 +67,8 @@ function fresh_result(solution_id) {
 			else {
 				//console.log(ra[0]);
 				switch (ra[0]) {
-					case 4:
+					case  4:
+					case 14:
 						row.cells[4].innerHTML = "<a href=reinfo.php?sid="+solution_id+" class='"+judge_color[ra[0]]+"'>"+judge_result[ra[0]]+"</a>";
 						break;
 					case 5:

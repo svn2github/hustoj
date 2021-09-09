@@ -17,11 +17,10 @@ if [ `whoami` = "root" ];then
 		   echo 'db_info.inc.php not found';
 		   sed -i "s/DB_USER[[:space:]]*=[[:space:]]*\"root\"/DB_USER=\"$USER\"/g" new/web/include/db_info.inc.php
 		   sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$PASSWORD\"/g" new/web/include/db_info.inc.php
-		fi
-		cp -a src/web/upload/* new/web/upload/
-		mv src "old.$DATE"
-		mv new src
 	fi
+	cp -a src/web/upload/* new/web/upload/
+	mv src "old.$DATE"
+	mv new src
 	chown www-data:www-data -R src
 else
 	echo "usage: sudo $0"

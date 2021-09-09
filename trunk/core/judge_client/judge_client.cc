@@ -570,7 +570,7 @@ void init_judge_conf()
 		fclose(fp);
 	}
 //	fclose(fp);
-	
+	if(use_docker)shm_run=0;
  	if(strcmp(http_username,"IP")==0){
                   FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
                   if(1!=fscanf(fjobs, "%s", http_username)) printf("IP read fail...\n");

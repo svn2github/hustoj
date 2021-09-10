@@ -9,6 +9,20 @@ When people asked question, we put the answer here
 
 新版本
 ----
+测试文件的大小、数量有什么限制？
+--
+一般情况下，单个测试文件大小建议不超过10M，测试文件总量10组（.in + .out）。
+源码中对测试文件大小有个上限 STD_F_LIM = 32M
+[定义](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L58)
+[生效](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L2371)
+* 在OJ_OI_MODE=1的情况下，题目限时是依赖于OJ_TIME_LIMIT_TO_TOTAL的：
+* 当OJ_TIME_LIMIT_TO_TOTAL=1 限时应用于所有数据的总耗时
+* 当OJ_TIME_LIMIT_TO_TOTAL=0，限时应用于每组测试文件。
+* 状态页status.php(solution表)中记录的时间，取决于OJ_USE_MAX_TIME：
+* 当OJ_USE_MAX_TIME=0时，记录的是总耗时。
+* 当OJ_USE_MAX_TIME=1时，记录的是最高耗时。
+因此，当测试数据组数较多时，推荐设定OJ_USE_MAX_TIME=0，OJ_TIME_LIMIT_TO_TOTAL=1 。
+
 为什么我的系统卡在编译中
 --
 * 如果修改了数据库密码，请注意除了db_info.inc.php需要修改，还需要修改judge.conf中的数据库密码，并需要重启judged进程。

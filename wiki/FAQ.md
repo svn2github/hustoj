@@ -9,6 +9,14 @@ When people asked question, we put the answer here
 
 新版本
 ----
+为什么我的系统卡在编译中
+--
+* 如果修改了数据库密码，请注意除了db_info.inc.php需要修改，还需要修改judge.conf中的数据库密码，并需要重启judged进程。
+* 如果judge.conf中启用了OJ_USE_DOCKER=1，请确保禁用了OJ_SHM_RUN=0，并检查run0等目录是真实的目录而非软连接。
+* 如果如果OJ_USE_DOCKER=0时系统正常，OJ_USE_DOCKER=1时卡住，请检查install目录下的Dockerfile文件内容是否符合需求，并再次运行docker.sh确认运行结果正常。
+* 修改OJ_USER_DOCKER参数，需要重启judged生效，方法是sudo pkill -9 judged && sudo judged
+
+
 正式比赛或大规模系统需要注意哪些问题？
 --
 * 正式比赛推荐激活db_info.inc.php中的两个参数。

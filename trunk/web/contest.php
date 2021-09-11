@@ -212,7 +212,7 @@ if (isset($_GET['cid'])) {
 
 			$tresult = pdo_query($sql, $tpid);
 
-			if (intval($tresult) != 0 || $view_private ) { //if the problem will be use remained contes/exam or this contest is private 
+			if (intval($tresult) != 0 ) { //if the problem will be use remained contes/exam 
 				$view_problemset[$cnt][1] = $PID[$cnt]; //hide the title after contest
 				$view_problemset[$cnt][2] = '----';
 			}

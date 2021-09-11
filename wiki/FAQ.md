@@ -37,7 +37,7 @@ When people asked question, we put the answer here
 --
 * 一般推荐用英文命名，相同文件名的.in .out文件为一组。
 * 不支持.ans的扩展名，请在上传前用Windows的命令行统一修改`ren *.ans *.out`。
-* 支持在文件名中使用方括号`[]`来标注分数。如 `test01[20].in / test01[20].out`将视为分数是20分。
+* 支持在文件名中使用方括号`[]`来标注分数。如 `test01[20].in / test01[20].out`将视为分数是20分,未标注的文件按10分计分，系统最终根据所有文件的总分和运行得分，记录提交的通过率pass_rate放入solution表，用于前台显示。
 * 评测的时候根据所有.in文件的字典序来评测, 因此test10先于test2评测, 后于test02评测。
 
 为什么我的系统卡在编译中

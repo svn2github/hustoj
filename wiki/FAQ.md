@@ -33,6 +33,13 @@ When people asked question, we put the answer here
 * 当OJ_USE_MAX_TIME=1时，记录的是最高耗时。
 因此，当测试数据组数较多时，推荐设定OJ_USE_MAX_TIME=0，OJ_TIME_LIMIT_TO_TOTAL=1 。
 
+测试文件的文件名命名有什么规则？
+--
+* 一般推荐用英文命名，相同文件名的.in .out文件为一组。
+* 不支持.ans的扩展名，请在上传前用Windows的命令行统一修改`ren *.ans *.out`。
+* 支持在文件名中使用方括号`[]`来标注分数。如 `test01[20].in / test01[20].out`将视为分数是20分。
+* 评测的时候根据所有.in文件的字典序来评测, 因此test10先于test2评测, 后于test02评测。
+
 为什么我的系统卡在编译中
 --
 * 如果修改了数据库密码，请注意除了db_info.inc.php需要修改，还需要修改judge.conf中的数据库密码，并需要重启judged进程。

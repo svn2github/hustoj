@@ -22,7 +22,7 @@ When people asked question, we put the answer here
 测试文件的大小、数量有什么限制？
 --
 一般情况下，单个测试文件大小建议不超过10M，测试文件总量10组（.in + .out）。
-源码中对测试文件大小有个上限 STD_F_LIM = 32M
+* 源码中对测试文件大小有个上限 STD_F_LIM = 32M
 [定义](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L58)
 [生效](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L2371)
 * 在OJ_OI_MODE=1的情况下，题目限时是依赖于OJ_TIME_LIMIT_TO_TOTAL的：

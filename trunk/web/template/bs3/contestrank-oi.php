@@ -446,7 +446,7 @@
 							cell.className = "badge btn-warning center-block";
 
 						if (r>total*.05+1 && r<=total*.20+1)
-							cell.className = "badge center-block";
+							cell.className = "badge btn-success center-block";
 
 						if(r>total*.20+1 && r<=total*.45+1)
 							cell.className = "badge btn-danger center-block";

@@ -3421,24 +3421,25 @@ int main(int argc, char **argv)
 
 		init_syscalls_limits(lang);
 
-		pid_t pidApp = fork();
+		pid_t pidApp = fork();                  //创建子进程，这里程序将自身复制一份，两份同时运行，进程根据返回值确定自己的身份
 
-		if (pidApp == 0)
+		if (pidApp == 0)                        //返回值是0，我就是子进程 
 		{
 
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile);
 		}
 		else
-		{
+		{                                       //返回值非0 ，我是父进程，返回值就是上面那个子进程的pid
 
 			//num_of_test++;
-
+                        //看护子进程，不让他做奇怪的事
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
 			total_time+=usedtime;
 			printf("time:%d/%d\n",usedtime,total_time);
+			//判断用户程序输出是否正确，给出结果
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test);

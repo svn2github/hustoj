@@ -285,9 +285,9 @@ long get_file_size(const char *filename)
 void write_log(const char *_fmt, ...)
 {
 	va_list ap;
-	char fmt[4096];
-	strncpy(fmt, _fmt, 4096);
-	char buffer[4096];
+	char fmt[BUFFER_SIZE];
+	strncpy(fmt, _fmt,BUFFER_SIZE);
+	char buffer[BUFFER_SIZE];
 	//      time_t          t = time(NULL);
 	//int l;
 	sprintf(buffer, "%s/log/client.log", oj_home);

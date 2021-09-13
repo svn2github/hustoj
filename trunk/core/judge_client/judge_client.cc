@@ -700,7 +700,7 @@ void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path)
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
- *
+ * 参考zoj的文件流式比较器，有更低的内存占用
  */
 int compare_zoj(const char *file1, const char *file2,const char * infile)
 {
@@ -783,14 +783,14 @@ void delnextline(char s[])
 		s[--L] = 0;
 }
 
-int compare(const char *file1, const char *file2, const char * infile)
+int compare(const char *file1, const char *file2, const char * infile)  
 {
 #ifdef ZOJ_COM
 	//compare ported and improved from zoj don't limit file size
 	return compare_zoj(file1, file2,infile);
 #endif
 #ifndef ZOJ_COM
-	//the original compare from the first version of hustoj has file size limit
+	//the original compare from the first version of hustoj has file size limit  原始的内存中比较，速度更快但耗用更多内存
 	//and waste memory
 	FILE *f1, *f2;
 	char *s1, *s2, *p1, *p2;
@@ -843,7 +843,7 @@ int compare(const char *file1, const char *file2, const char * infile)
 #endif
 }
 
-bool check_login()
+bool check_login()   // http模式中检测是否已经登陆
 {
 	const char *cmd =
 		" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
@@ -854,7 +854,7 @@ bool check_login()
 
 	return ret;
 }
-void login()
+void login()  //http登陆
 {
 	if (!check_login())
 	{
@@ -985,6 +985,7 @@ char to_hex(char code)
 
 /* Returns a url-encoded version of str */
 /* IMPORTANT: be sure to free() the returned string after use */
+// 用url编码字符串
 char *url_encode(char *str)
 {
 	char *pstr = str, *buf = (char *)malloc(strlen(str) * 3 + 1), *pbuf = buf;
@@ -1243,7 +1244,7 @@ void update_problem(int pid,int cid) {
 #endif
 	}
 }
-void umount(char *work_dir)
+void umount(char *work_dir)  //清理可能存在的热加载目录
 {
 	if(chdir(work_dir)) exit(-1);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
@@ -1514,7 +1515,7 @@ int get_proc_status(int pid, const char *mark)
 }
 
 #ifdef _mysql_h
-int init_mysql_conn()
+int init_mysql_conn()   //连接数据库
 {
 
 	conn = mysql_init(NULL);
@@ -1601,7 +1602,7 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
-	if(lang == 6 ){	
+	if(lang == 6 ){    // 从源码中搜索python2字样，失败的结果非零默认python3,成功的结果为0是python2
 		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
 	}
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
@@ -1823,13 +1824,13 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 	escape(fname, fname0);
 	//printf("%s\n%s\n",fname0,fname);
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	if(copy_data)execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
+	if(copy_data) execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);   // 如果开启了COPY_DATA则复制测试数据
 	execute_cmd("/bin/cp %s/data/%d/*.dic %s/ 2>/dev/null", oj_home, p_id, work_dir);
  	execute_cmd("chown judge %s/*.dic ", work_dir);
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
 	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
 }
-
+// 以下 copy_开头的函数均为准备相应语言的chroot环境，复制动态链接库等，如果使用的系统不是Ubuntu则路径有所区别，可以用ldd/find查看实际位置。
 void copy_shell_runtime(char *work_dir)
 {
 
@@ -2284,15 +2285,19 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/usr/bin", work_dir);
 }
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
-				  int &mem_lmt,char * data_file_path)
+				  int &mem_lmt,char * data_file_path)   // 为每个测试数据运行一次提交的答案
 {
+	//准备环境变量处理中文，如果希望使用非中文的语言环境，可能需要修改这些环境变量
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
 	if(nice(19)!=19) printf("......................renice fail... \n");
 	// now the user is "judger"
-	if(chdir(work_dir)) exit(-4);
+	if(chdir(work_dir)){
+		write_log("Working directory :%s switch fail...",work_dir);		
+		exit(-4);
+	}
 	// open the files
 	if(lang==18){ 
 		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s", work_dir,data_file_path);
@@ -2718,6 +2723,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				   //	|PTRACE_O_TRACECLONE
 				   //	|PTRACE_O_TRACEFORK
 				   //	|PTRACE_O_TRACEVFORK
+			           //   有的发行版带的PTRACE不识别以上宏，因此注释掉
 			);
 		}
 

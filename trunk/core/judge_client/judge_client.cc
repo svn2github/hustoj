@@ -76,10 +76,7 @@
 #define OJ_TR 13     //测试运行结束
 #define OJ_MC 14     // 等待裁判手工确认
 
-/*copy from ZOJ
- http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
- */
-#ifdef __arm__
+#ifdef __arm__             // arm 的寄存器结构
 struct user_regs_struct {
         long uregs[18];
 };
@@ -89,7 +86,7 @@ struct user_regs_struct {
 #define REG_SYSCALL ARM_r7
 #endif
 
-#ifdef __aarch64__
+#ifdef __aarch64__          //arm64的寄存器结构  
 #define NT_PRSTATUS	1
 #define NT_ARM_SYSTEM_CALL	0x404
 #define ARM_cpsr	uregs[16]
@@ -116,7 +113,7 @@ struct user_regs_struct {
 
 #endif 
 
-#ifdef __mips__
+#ifdef __mips__                 //mips 龙芯的寄存器结构
 	typedef unsigned long long uint64_t;
 	struct user_regs_struct{
 		uint64_t uregs[38];
@@ -131,14 +128,14 @@ struct user_regs_struct {
 
 #endif
 
-#ifdef __i386
+#ifdef __i386          //32位x86寄存器
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
 #define REG_ARG0 ebx
 #define REG_ARG1 ecx
 #endif
 
-#ifdef __x86_64__
+#ifdef __x86_64__      //64位x86寄存器
 #define REG_SYSCALL orig_rax
 #define REG_RET rax
 #define REG_ARG0 rdi
@@ -149,17 +146,18 @@ struct user_regs_struct {
 
 
 static int DEBUG = 0;
-static char host_name[BUFFER_SIZE/10];
-static char user_name[BUFFER_SIZE/10];
-static char password[BUFFER_SIZE/10];
-static char db_name[BUFFER_SIZE/10];
-static char oj_home[BUFFER_SIZE/10];
-static char data_list[BUFFER_SIZE][BUFFER_SIZE];
-static int data_list_len = 0;
-static char lock_file[BUFFER_SIZE]="/home/judge/run0/judge_client.pid";
+static char host_name[BUFFER_SIZE/10];     //数据库服务器地址
+static int port_number;                    //端口
+static char user_name[BUFFER_SIZE/10];     //用户名
+static char password[BUFFER_SIZE/10];      //密码
+static char db_name[BUFFER_SIZE/10];       //库名
+static char oj_home[BUFFER_SIZE/10];       //判题系统主目录
+static char data_list[BUFFER_SIZE][BUFFER_SIZE]; //测试数据列表
+static int data_list_len = 0;                    //列表长度
+static char lock_file[BUFFER_SIZE]="/home/judge/run0/judge_client.pid";     //工作目录锁定文件
 
-static int port_number;
-static int max_running;
+
+static int max_running;       
 static int sleep_time;
 static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
@@ -206,7 +204,7 @@ static int py2=1; // caution: py2=1 means default using py3
 #ifdef _mysql_h
 MYSQL *conn;
 #endif
-static char jresult[14][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR"};
+static char jresult[14][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR","MC"};
 static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
@@ -306,7 +304,7 @@ void write_log(const char *_fmt, ...)
 	va_end(ap);
 	fclose(fp);
 }
-int execute_cmd(const char *fmt, ...)
+int execute_cmd(const char *fmt, ...)   //执行命令获得返回值
 {
 	char cmd[BUFFER_SIZE];
 
@@ -326,7 +324,7 @@ const int call_array_size = CALL_ARRAY_SIZE;
 unsigned int call_id = 0;
 int call_counter[call_array_size] = {0};
 static char LANG_NAME[BUFFER_SIZE];
-void init_syscalls_limits(int lang)
+void init_syscalls_limits(int lang)      //白名单初始化
 {
 	int i;
 	memset(call_counter, 0, sizeof(call_counter));
@@ -504,7 +502,7 @@ FILE *read_cmd_output(const char *fmt, ...)
 	return ret;
 }
 // read the configue file
-void init_judge_conf()
+void init_judge_conf()   //读取判题主目录etc中的配置文件judge.conf
 {
 	FILE *fp = NULL;
 	char buf[BUFFER_SIZE];
@@ -586,7 +584,7 @@ int isInFile(const char fname[])
 	else
 		return l - 3;
 }
-int inFile(const struct dirent * dp){
+int inFile(const struct dirent * dp){   //获得测试数据目录中测试数据列表
 	int l = strlen(dp->d_name);
 	if(DEBUG) printf("file name:%s\n",dp->d_name);
 	if(DEBUG) printf("ext name:%s\n",dp->d_name + l - 3);

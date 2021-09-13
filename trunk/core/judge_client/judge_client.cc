@@ -60,21 +60,21 @@
 #define BUFFER_SIZE 4096		//default size of char buffer 5120 bytes
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
-#define OJ_WT0 0
-#define OJ_WT1 1
-#define OJ_CI 2
-#define OJ_RI 3
-#define OJ_AC 4
-#define OJ_PE 5
-#define OJ_WA 6
-#define OJ_TL 7
-#define OJ_ML 8
-#define OJ_OL 9
-#define OJ_RE 10
-#define OJ_CE 11
-#define OJ_CO 12
-#define OJ_TR 13
-#define OJ_MC 14                  // 等待裁判手工确认
+#define OJ_WT0 0     //提交排队
+#define OJ_WT1 1     //重判排队
+#define OJ_CI 2      //编译中（任务已派发）
+#define OJ_RI 3      //运行中
+#define OJ_AC 4      //答案正确
+#define OJ_PE 5      //格式错误
+#define OJ_WA 6      //答案错误
+#define OJ_TL 7      //时间超限
+#define OJ_ML 8      //内存超限
+#define OJ_OL 9      //输出超限
+#define OJ_RE 10     //运行错误
+#define OJ_CE 11     //编译错误
+#define OJ_CO 12     //
+#define OJ_TR 13     //测试运行结束
+#define OJ_MC 14     // 等待裁判手工确认
 
 /*copy from ZOJ
  http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39

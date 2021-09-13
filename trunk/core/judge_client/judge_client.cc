@@ -72,7 +72,7 @@
 #define OJ_OL 9      //输出超限
 #define OJ_RE 10     //运行错误
 #define OJ_CE 11     //编译错误
-#define OJ_CO 12     //
+#define OJ_CO 12     //编译完成
 #define OJ_TR 13     //测试运行结束
 #define OJ_MC 14     // 等待裁判手工确认
 

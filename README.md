@@ -2,6 +2,11 @@
 
 > 流行的OJ系统，跨平台、易安装、有题库。
 
+常见问题请先查阅
+--
+**[FAQ](https://github.com/zhblue/hustoj/blob/master/wiki/FAQ.md)**
+
+
 ## 目录
 
 **[模板演示](#自带的6种模板演示)**

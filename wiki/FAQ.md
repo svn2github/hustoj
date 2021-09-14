@@ -1,13 +1,4 @@
-#summary FAQ常见问答
-#labels Featured,FAQ
-
-= Introduction =
-
-When people asked question, we put the answer here
-
-这里是常见问答。
-
-新版本
+常见问答
 ----
 题目的限时和内存限制的精度是怎样的？
 --

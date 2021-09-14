@@ -2701,7 +2701,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 					int &topmemory, int mem_lmt, int &usedtime, double time_lmt, int &p_id,
 					int &PEflg, char *work_dir)
 {
-	// parent
+	// 父进程中的保姆程序
 	int tempmemory = 0;
 
 	if (DEBUG)
@@ -2715,7 +2715,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 	{
 		// check the usage
 
-		wait4(pidApp, &status, __WALL, &ruse);
+		wait4(pidApp, &status, __WALL, &ruse);     //等待子进程切换内核态（调用系统API或者运行状态变化）
 		if (first)
 		{ //
 			ptrace(PTRACE_SETOPTIONS, pidApp, NULL, PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEEXIT
@@ -2749,7 +2749,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		}
 		//sig = status >> 8;/*status >> 8 EXITCODE*/
 
-		if (WIFEXITED(status))
+		if (WIFEXITED(status))  // 子进程已经退出
 			break;
 		if ((lang < 4||lang == 5 || lang == 9) && get_file_size("error.out") && !oi_mode)
 		{
@@ -2770,7 +2770,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
 		 *  Runtime Error:Unknown signal xxx need be added here  
                  */
-		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)
+		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)  // 进程休眠或等待IO
 			//go on and on
 			;
 		else
@@ -2784,7 +2784,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 			if (ACflg == OJ_AC)
 			{
-				switch (exitcode)
+				switch (exitcode)                  // 根据退出的原因给出判题结果
 				{
 				case SIGCHLD:
 				case SIGALRM:
@@ -2806,14 +2806,14 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				}
 				print_runtimeerror(infile+strlen(oj_home)+5,strsignal(exitcode));
 			}
-			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+			ptrace(PTRACE_KILL, pidApp, NULL, NULL);    // 杀死出问题的进程
 
 			break;
 		}
 		if (WIFSIGNALED(status))
 		{
 			/*  WIFSIGNALED: if the process is terminated by signal
-			 *
+			 *  由外部信号触发的进程终止
 			 *  psignal(int sig, char *s)，like perror(char *s)，print out s, with error msg from system of sig  
 			 * sig = 5 means Trace/breakpoint trap
 			 * sig = 11 means Segmentation fault
@@ -2828,7 +2828,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 			if (ACflg == OJ_AC)
 			{
-				switch (sig)
+				switch (sig)      //根据原因给出结论
 				{
 				case SIGCHLD:
 				case SIGALRM:
@@ -2857,7 +2857,6 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 	if (!use_ptrace){
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		continue;
-		
 	}
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
@@ -2903,7 +2902,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				call_counter[call_id]--;
 			}
 			else
-			{ //do not limit JVM syscall for using different JVM
+			{ //do not limit JVM syscall for using different JVM 对于非法的系统调用，给出具体编号给管理员参考
 			//	ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
@@ -2911,7 +2910,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"
-						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
+						"中文解释查看知乎 https://zhuanlan.zhihu.com/p/24498599\n",
 						solution_id, call_id,(unsigned int)reg.REG_SYSCALL);
 
 				write_log(error);
@@ -2926,12 +2925,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 //		   }
 		}
 #endif
-		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);    // 继续等待下一次的系统调用或其他中断
 		first = false;
 		//usleep(1);
 	}
-	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation;
-	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation;
+	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation; // 统计用户态耗时，在更快速的CPU上加以cpu_compensation倍数放大
+	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation; // 统计内核态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 
 	//clean_session(pidApp);
 }

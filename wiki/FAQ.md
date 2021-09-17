@@ -18,7 +18,7 @@
 以下权限是手动指派：
 * "administrator" 管理员，除查看源码外的所有权限。
 * "problem_editor"：题目编辑者，添加和编辑题目。
-* "source_browser"：查看审核所有提交，对比可疑的相似代码。
+* "source_browser"：查看审核所有提交的源代码，对比可疑的相似代码。
 * "contest_creator"：组织创建比赛，编辑比赛。
 * "http_judge"：HTTP远程判题账号。
 * "password_setter"：重置普通账户密码。
@@ -27,6 +27,8 @@
 * "vip"：可以参与所有标题含有VIP字样的私有比赛。
 * "problem_start"：HTTP远程判题账户的任务起始题号。
 * "problem_end"：HTTP远程判题账户的任务结束题号。
+
+新赋予的权限需要重新登陆获得！
 
 以下权限是系统自动生成：
 * p+数字：题目的独立编辑权，管理员可以编辑所有题目，problem_editor只能编辑自己添加的题目。

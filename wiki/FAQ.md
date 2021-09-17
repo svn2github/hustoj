@@ -2,8 +2,8 @@
 ----
 如何让学生账号在比赛中也能看到和练习一样的详细错误信息？
 --
-编辑db_info.inc.php,设置 $OJ_SHOW_DIFF=true;
-打开文件reinfo.php
+* 编辑db_info.inc.php,设置 $OJ_SHOW_DIFF=true;
+* 打开文件reinfo.php
 在27行和60行有两处详细注释，根据注释进行调整。
 
 

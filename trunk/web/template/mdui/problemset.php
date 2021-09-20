@@ -93,16 +93,15 @@
                     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
                        if (isset($sub_arr[$row['problem_id']])) {
                             if (isset($acc_arr[$row['problem_id']])) 
-                                $view_problemset[$i][0] = "<td style="color: green;">AC</td>";
+                               echo "<td style="color: green;">AC</td>";
                             else
-                                $view_problemset[$i][0] = "<td style="color: red;">WA</td>";
+                               echo "<td style="color: red;">WA</td>";
                         }
                         else {
-                            $view_problemset[$i][0] = "<td>WA</td>";
+                             echo "<td>WA</td>";
                         }
                     }
-                    echo $view_problemset[$i][0];
-                    
+                   
                     echo '<td>'.$row["problem_id"].'</td>';
                     echo '<td><a class="mdui-text-color-theme-accent" href="problem.php?id='.$row["problem_id"].'">'.$row["title"].'</a></td>';
                     echo '<td><a class="mdui-text-color-theme-accent" href="problemset.php?search='.urlencode($row["source"]).'">'.$row["source"].'</td>';

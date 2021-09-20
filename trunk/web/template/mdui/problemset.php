@@ -91,13 +91,17 @@
                 foreach ( $result as $row ) {
                     echo "<tr>";
                     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
-                        if (isset($sub_arr[$row['problem_id']])) {
-                            echo '<td style="color: green;">AC</td>';
+                       if (isset($sub_arr[$row['problem_id']])) {
+                            if (isset($acc_arr[$row['problem_id']])) 
+                                $view_problemset[$i][0] = "<td style="color: green;">AC</td>";
+                            else
+                                $view_problemset[$i][0] = "<td style="color: red;">WA</td>";
                         }
                         else {
-                            echo '<td></td>';
+                            $view_problemset[$i][0] = "<div class=none> </div>";
                         }
                     }
+                   
                     echo '<td>'.$row["problem_id"].'</td>';
                     echo '<td><a class="mdui-text-color-theme-accent" href="problem.php?id='.$row["problem_id"].'">'.$row["title"].'</a></td>';
                     echo '<td><a class="mdui-text-color-theme-accent" href="problemset.php?search='.urlencode($row["source"]).'">'.$row["source"].'</td>';

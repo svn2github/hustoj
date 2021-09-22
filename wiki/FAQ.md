@@ -1,5 +1,11 @@
 常见问答
 ----
+判题核心的原理是怎样的？
+--
+* 参考一下[wiki](https://github.com/zhblue/hustoj/blob/master/wiki/ojback.md)
+* 阅读一下judge_client.cc中的注释。
+
+
 如何让学生账号在比赛中也能看到和练习一样的详细错误信息？
 --
 * 编辑db_info.inc.php,设置 $OJ_SHOW_DIFF=true;

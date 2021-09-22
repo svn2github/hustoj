@@ -48,7 +48,7 @@ div[class*=ace_br] {
             //echo "<title>$MSG_PROBLEM ".$PID[$pid].": ".$row['title']." </title>";
             echo "问题 ".$PID[$pid].": ".$row['title'];
           }
-          if($row['defunct']==Y)
+          if($row['defunct']=="Y")
           echo "<span class=\"ui tiny red label\">未公开</span>";
         ?>
       </h1>

@@ -2470,7 +2470,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		break;
 	}
 	//sleep(1);
-	printf("Execution error!\nYou need to install compiler VM or runtime for your language.");
+	printf("Execution error, USE_DOCKER:%d !\nYou need to install compiler VM or runtime for your language.",use_docker);
 	fflush(stderr);
 	exit(0);
 }

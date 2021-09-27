@@ -139,13 +139,14 @@ switch($OJ_FRIENDLY_LEVEL) {
 	case 9:
 	case 8:
 	case 7:
+	   $OJ_DOWNLOAD=true;
 	case 6:
+	   $OJ_GUEST=true;
 	case 5:
 	   $OJ_LONG_LOGIN=true; 
 	case 4:
 	   $OJ_TEST_RUN=true; 
 	case 3:
-	   $OJ_DOWNLOAD=true;
 	   $OJ_AUTO_SHARE=true;
 	case 2:
 	   $OJ_SHOW_DIFF=true; 

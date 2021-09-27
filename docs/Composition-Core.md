@@ -86,3 +86,9 @@ judged 接受参数指定目录的情况下，还可以再接受一个 `debug` �
 `OJ_UDP_PORT=1536`         |  监听的端口
 `OJ_PYTHON_FREE=0`         |  是否允许Python程序调用非核心的三方库
 `OJ_COPY_DATA=0`           |  是否将测试数据复制到runX工作目录中供被测程序使用
+`OJ_USE_DOCKER=0`          |  是否使用Docker来增强安全性和判题效率
+`OJ_INTERNAL_CLIENT=0`     |  是否使用docker容器内置的judge_client, 如果设0, 则需要保证/home/judge/src/core/judge_client/judge_client是与数据库结构一致的版本
+`OJ_CC_STD=-std=c99`       |  GCC编译使用的语言标准
+`OJ_CPP_STD=-std=c++17`    |  G++编译使用的标准,默认C++14,即CCF官方2021年标准
+`OJ_CC_OPT=-O2`            |  GCC/C++编译优化级别, 注意在高版本的标准中O2优化可能导致部分不严谨的语句产生意想不到的结果
+

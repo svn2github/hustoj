@@ -147,6 +147,7 @@ switch($OJ_FRIENDLY_LEVEL) {
 	case 4:
 	   $OJ_TEST_RUN=true; 
 	case 3:
+	   $OJ_MAIL=true;
 	   $OJ_AUTO_SHARE=true;
 	case 2:
 	   $OJ_SHOW_DIFF=true; 

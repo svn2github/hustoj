@@ -130,11 +130,33 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //pdo_query("set names utf8");	
 
 
-
 //sychronize php and mysql server with timezone settings, dafault setting for China
 //if you are not from China, comment out these two lines or modify them.
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
+
+switch($OJ_FRIENDLY_LEVEL) {
+	case 9:
+	case 8:
+	case 7:
+	case 6:
+	case 5:
+	   $OJ_LONG_LOGIN=true; 
+	case 4:
+	   $OJ_TEST_RUN=true; 
+	case 3:
+	   $OJ_DOWNLOAD=true;
+	   $OJ_AUTO_SHARE=true;
+	case 2:
+	   $OJ_SHOW_DIFF=true; 
+	case 1:
+	   $OJ_LANG="cn";
+	case 0:
+	   date_default_timezone_set("PRC");
+	   pdo_query("SET time_zone ='+8:00'");
+}
+
+   
 
 require_once(dirname(__FILE__) . "/logger.php");
 

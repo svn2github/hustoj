@@ -139,25 +139,25 @@ require_once(dirname(__FILE__) . "/pdo.php");
 // 傻瓜级保姆配置系统
 switch($OJ_FRIENDLY_LEVEL) {
 	case 9:
+	   $OJ_BBS="discuss3";
 	case 8:
-	case 7:
 	   $OJ_DOWNLOAD=true;
-	case 6:
+	case 7:
 	   $OJ_GUEST=true;
-	case 5:
+	case 6:
 	   $OJ_LONG_LOGIN=true; 
-	case 4:
+	case 5:
 	   $OJ_TEST_RUN=true; 
-	case 3:
+	case 4:
 	   $OJ_MAIL=true;
 	   $OJ_AUTO_SHARE=true;
-	case 2:
+	case 3:
 	   $OJ_SHOW_DIFF=true; 
 	   $OJ_VCODE=false;
 	   $OJ_TEMPLATE="syzoj";
-	case 1:
+	case 2:
 	   $OJ_LANG="cn";
-	case 0:
+	case 1:
 	   date_default_timezone_set("PRC");
 	   pdo_query("SET time_zone ='+8:00'");
 }

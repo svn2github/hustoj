@@ -151,6 +151,8 @@ switch($OJ_FRIENDLY_LEVEL) {
 	   $OJ_AUTO_SHARE=true;
 	case 2:
 	   $OJ_SHOW_DIFF=true; 
+	   $OJ_VCODE=false;
+	   $OJ_TEMPLATE="syzoj";
 	case 1:
 	   $OJ_LANG="cn";
 	case 0:

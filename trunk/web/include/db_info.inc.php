@@ -135,6 +135,8 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
 
+
+// 傻瓜级保姆配置系统
 switch($OJ_FRIENDLY_LEVEL) {
 	case 9:
 	case 8:

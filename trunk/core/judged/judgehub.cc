@@ -43,23 +43,8 @@ static int  oj_udpport=2008;
 static int  oj_udp_fd;
 static char oj_hub_base[BUFFER_SIZE]="/var/www/virtual";
 
-static int  oj_redis = 0;
-static char oj_redisserver[BUFFER_SIZE];
-static int  oj_redisport;
-static char oj_redisauth[BUFFER_SIZE];
-static char oj_redisqname[BUFFER_SIZE];
-
-
 static bool STOP = false;
 static int DEBUG = 0;
-static int ONCE = 0;
-#ifdef _mysql_h
-static MYSQL *conn;
-static MYSQL_RES *res;
-static MYSQL_ROW row;
-//static FILE *fp_log;
-static char query[BUFFER_SIZE*4];
-#endif
 void wait_udp_msg(int fd)
 {
     char buf[BUFFER_SIZE];  //......1024..
@@ -99,11 +84,10 @@ void write_log(const char *fmt, ...) {
         char buffer[4096];
 //      time_t          t = time(NULL);
 //      int             l;
-        sprintf(buffer, "%s/log/client.log", oj_home);
+        sprintf(buffer, "/var/log/judgehub.log");
         FILE *fp = fopen(buffer, "ae+");
         if (fp == NULL) {
                 fprintf(stderr, "openfile error!\n");
-                system("pwd");
         }
         va_start(ap, fmt);
         vsprintf(buffer, fmt, ap);
@@ -124,29 +108,6 @@ int lockfile(int fd) {
         return (fcntl(fd, F_SETLK, &fl));
 }
 
-int already_running() {
-        int fd;
-        char buf[16];
-        fd = open(lock_file, O_RDWR | O_CREAT, LOCKMODE);
-        if (fd < 0) {
-                syslog(LOG_ERR | LOG_DAEMON, "can't open %s: %s", LOCKFILE,
-                                strerror(errno));
-                exit(1);
-        }
-        if (lockfile(fd) < 0) {
-                if (errno == EACCES || errno == EAGAIN) {
-                        close(fd);
-                        return 1;
-                }
-                syslog(LOG_ERR | LOG_DAEMON, "can't lock %s: %s", LOCKFILE,
-                                strerror(errno));
-                exit(1);
-        }
-        ftruncate(fd, 0);
-        sprintf(buf, "%d", getpid());
-        write(fd, buf, strlen(buf) + 1);
-        return (0);
-}
 int daemon_init(void)
 
 {
@@ -161,8 +122,6 @@ int daemon_init(void)
         /* child continues */
 
         setsid(); /* become session leader */
-
-        chdir(oj_home); /* change working directory */
 
         umask(0); /* clear file mode creation mask */
 
@@ -203,15 +162,17 @@ int main(int argc, char** argv) {
         if (!DEBUG)
                 daemon_init();
         oj_udp_fd = socket(AF_INET, SOCK_DGRAM, 0);
-        if(oj_udp_fd<0)
+        if(oj_udp_fd<0){
                 printf("udp fd open failed! \n");
+                exit(-1);
+        }
         struct sockaddr_in ser_addr;
         memset(&ser_addr, 0, sizeof(ser_addr));
         ser_addr.sin_family = AF_INET;
         ser_addr.sin_addr.s_addr = inet_addr(oj_udpserver);
         ser_addr.sin_port = htons(oj_udpport);
         struct timeval timeOut;
-        timeOut.tv_sec = sleep_time;                 //..5s..
+        timeOut.tv_sec = 60 ;                 //..5s..
         timeOut.tv_usec = 0;
         if (setsockopt(oj_udp_fd, SOL_SOCKET, SO_RCVTIMEO, &timeOut, sizeof(timeOut)) < 0)
         {
@@ -223,8 +184,6 @@ int main(int argc, char** argv) {
         //signal(SIGQUIT, call_for_exit);
         //signal(SIGINT, call_for_exit);
         //signal(SIGTERM, call_for_exit);
-        int j = 1;
-        int n = 0;
         while (!STOP) {                 // start to run until call for exit
                 printf("waiting task:%d\n",oj_udpport);
                         if(STOP) return 100;

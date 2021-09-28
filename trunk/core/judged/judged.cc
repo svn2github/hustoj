@@ -37,7 +37,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
+#ifdef OJ_USE_MYSQL
+	#include <mysql/mysql.h>
+#endif
 
 #define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"

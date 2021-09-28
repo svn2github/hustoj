@@ -29,9 +29,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
-#ifdef OJ_USE_MYSQL
-	#include <mysql/mysql.h>
-#endif
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>

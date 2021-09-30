@@ -38,11 +38,11 @@ php方面的适配：
 
 新的提交运行流程：
 --
-1 submit.php接受到提交，插入数据库
-2 submit.php发送hustoj子路径到UDP端口
-3 监听UDP端口的judgehub接受到消息，拼接计算出启动judged所需参数，启动judged
-4 judged根据judge.conf配置的方式完成判题任务后退出
-5 judgehub等待下一个消息触发
+* submit.php接受到提交，插入数据库
+* submit.php发送hustoj子路径到UDP端口
+* 监听UDP端口的judgehub接受到消息，拼接计算出启动judged所需参数，启动judged
+* judged根据judge.conf配置的方式完成判题任务后退出
+* judgehub等待下一个消息触发
 
 可能存在的问题与处理：
 --

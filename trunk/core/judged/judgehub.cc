@@ -168,6 +168,8 @@ int main(int argc, char** argv) {
         DEBUG = argc>3 ;
         if(argc >1){
                 strcpy(oj_hub_base,argv[1]);
+        }else{
+                printf("check out https://github.com/zhblue/hustoj/blob/master/wiki/JudgeHub.md \n");
         }
         if(argc >2){
                 sscanf(argv[2],"%d",&oj_udpport);

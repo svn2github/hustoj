@@ -17,7 +17,7 @@ a.k.a Judge Farm Keeper
 代码实现：
 --
 
-实现上述方案的代码即为judgehub，它的命令行参数如下：
+实现上述方案的代码即为[judgehub](https://github.com/zhblue/hustoj/blob/master/trunk/core/judged/judgehub.cc)，它的命令行参数如下：
 judgehub [farmpath] [udpport] [debug]
 
 farmpath：

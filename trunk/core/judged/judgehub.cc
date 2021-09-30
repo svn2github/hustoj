@@ -73,11 +73,13 @@ void wait_udp_msg(int fd)
         }else{
                 struct timeval now;
                 gettimeofday(&now,NULL);
-                printf(" now_time:%d\n",now.tv_sec);
-                printf("cnf_mtime:%d\n",cnfstat.st_mtime);
+                printf(" now_time:%ld\n",now.tv_sec);
+                printf("cnf_mtime:%ld\n",cnfstat.st_mtime);
                 if(fork()==0){
                         printf("%s\n",cmd);
                         exit(system(cmd));
+                }else{
+                        waitpid(-1, NULL, WNOHANG);
                 }
         }
         memset(buf, 0, BUFFER_SIZE);
@@ -201,10 +203,10 @@ int main(int argc, char** argv) {
         //signal(SIGTERM, call_for_exit);
         while (!STOP) {                 // start to run until call for exit
                 printf("waiting task:%d\n",oj_udpport);
-                        if(STOP) return 100;
-                        wait_udp_msg(oj_udp_fd);
-                        if(DEBUG) printf("udp job ... \n");
-
+                if(STOP) return 100;
+                wait_udp_msg(oj_udp_fd);
+                if(DEBUG) printf("udp job ... \n");
+                waitpid(-1, NULL, WNOHANG);
         }
         return 0;
 }

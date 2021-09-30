@@ -52,6 +52,7 @@ php方面的适配：
 
 其他人可能向UDP端口发送未经授权的消息，可能导致缓冲区溢出。因此judgehub仅可在回环地址127.0.0.1上监听，或在可信网络内使用。通过简单的校验代码，如判断judge.conf文件是否存在，来决定是否启动judged进程。
 
-
+版权声明
+--
 * 任何人或组织，若依据本文内容实现类似的功能或编写论文，请在源码参考文献中引用本文的URL以及 [基于开放式云平台的开源在线评测系统设计与实现](http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFD2012&filename=JSJA2012S3088) ，并认真履行GPL协议。
 

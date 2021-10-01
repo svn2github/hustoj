@@ -160,6 +160,10 @@ switch($OJ_FRIENDLY_LEVEL) {
 	case 1:
 	   date_default_timezone_set("PRC");
 	   pdo_query("SET time_zone ='+8:00'");
+	case 0:
+        default:
+           ;
+
 }
 
    

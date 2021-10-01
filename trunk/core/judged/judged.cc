@@ -771,10 +771,10 @@ int main(int argc, char** argv) {
 			}
 	
 
-			if(ONCE) break;
+			if(ONCE && j==0) break;
 		}
 		turbo_mode2();
-		if(ONCE) break;
+		if(ONCE && j==0) break;
                 if(n==0){
 			printf("workcnt:%d\n",workcnt);
 			if(oj_udp&&oj_udp_ret==0){

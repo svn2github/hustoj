@@ -184,7 +184,7 @@ $logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NA
 $logger->info();
 /*
 // these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
-$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["SERVER_NAME"]).".php";
+$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename(strtolower($_SERVER["HTTP_HOST"])).".php";
 if(file_exists($OJ_SaaS_CONF)){
 	include_once($OJ_SaaS_CONF);
 }

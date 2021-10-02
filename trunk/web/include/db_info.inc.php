@@ -182,3 +182,10 @@ $logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NA
 					$OJ_LOG_URL_PARAM_ENABLED,
 					$OJ_LOG_TRACE_ENABLED);
 $logger->info();
+/*
+// these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
+$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["SERVER_NAME"]).".php";
+if(file_exists($OJ_SaaS_CONF)){
+	include_once($OJ_SaaS_CONF);
+}
+*/

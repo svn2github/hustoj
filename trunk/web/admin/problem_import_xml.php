@@ -230,7 +230,7 @@ function import_fps($tempfile) {
 	$save_url .= $ymd . "/";
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
-	$newpath = $save_path."/$pid"."_".$testno."_".$new_file_name
+	$newpath = $save_path."/$pid"."_".$testno."_".$new_file_name;
          if ($OJ_SAE)
             $newpath = "saestor://web/upload/".$newpath;
 	 else

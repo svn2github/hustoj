@@ -17,9 +17,13 @@ require_once ("../include/const.inc.php");
 <?php
 
 function image_save_file($filepath ,$base64_encoded_img) {
-  $fp = fopen($filepath ,"wb");
-  fwrite($fp,base64_decode($base64_encoded_img));
-  fclose($fp);
+	$dirpath=dirname($filepath);
+	if (!file_exists($dirpath)) {
+		mkdir($dirpath);
+	}
+	  $fp = fopen($filepath ,"wb");
+	  fwrite($fp,base64_decode($base64_encoded_img));
+	  fclose($fp);
 }
 
 require_once ("../include/problem.php");
@@ -221,19 +225,18 @@ function import_fps($tempfile) {
           }
 
           $testno++;
- 
-          $newpath = "../upload/pimg".$pid."_".$testno.".".$ext;
-      
-          if ($OJ_SAE)
-            $newpath = "saestor://web/upload/pimg".$pid."_".$testno.".".$ext;
-
+ $ymd = date("Ymd");
+	$save_path .= $ymd . "/";
+	$save_url .= $ymd . "/";
+	//新文件名
+	$new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
+	$newpath = $save_path."/$pid"."_".$testno."_".$new_file_name
+         if ($OJ_SAE)
+            $newpath = "saestor://web/upload/".$newpath;
+	 else
+            $newpath="../upload/".$newpath;
+		
           image_save_file($newpath,$base64);
-
-          $newpath = dirname($_SERVER['REQUEST_URI'] )."/../upload/pimg".$pid."_".$testno.".".$ext;
-
-          if ($OJ_SAE)
-            $newpath=$SAE_STORAGE_ROOT."upload/pimg".$pid."_".$testno.".".$ext;
-
           $sql = "UPDATE problem SET description=replace(description,?,?) WHERE problem_id=?";  
           pdo_query($sql,$src,$newpath,$pid);
 

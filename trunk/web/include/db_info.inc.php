@@ -136,15 +136,22 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
 
+/*
+// these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
+$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename(strtolower($_SERVER["HTTP_HOST"])).".php";
+if(file_exists($OJ_SaaS_CONF)){
+	include_once($OJ_SaaS_CONF);
+}
+*/
 
 // 傻瓜级保姆配置系统
 switch($OJ_FRIENDLY_LEVEL) {
 	case 9:
-	   $OJ_BBS="discuss3";
+	   $OJ_GUEST=true;
 	case 8:
 	   $OJ_DOWNLOAD=true;
 	case 7:
-	   $OJ_GUEST=true;
+	   $OJ_BBS="discuss3";
 	case 6:
 	   $OJ_LONG_LOGIN=true; 
 	case 5:
@@ -182,10 +189,4 @@ $logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NA
 					$OJ_LOG_URL_PARAM_ENABLED,
 					$OJ_LOG_TRACE_ENABLED);
 $logger->info();
-/*
-// these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
-$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename(strtolower($_SERVER["HTTP_HOST"])).".php";
-if(file_exists($OJ_SaaS_CONF)){
-	include_once($OJ_SaaS_CONF);
-}
-*/
+

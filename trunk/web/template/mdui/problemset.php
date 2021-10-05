@@ -93,9 +93,9 @@
                     if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
                        if (isset($sub_arr[$row['problem_id']])) {
                             if (isset($acc_arr[$row['problem_id']])) 
-                               echo "<td style="color: green;">AC</td>";
+                               echo "<td style='color: green;'>AC</td>";
                             else
-                               echo "<td style="color: red;">WA</td>";
+                               echo "<td style='color: red;'>WA</td>";
                         }
                         else {
                              echo "<td>WA</td>";

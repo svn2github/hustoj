@@ -6,7 +6,7 @@
     <div class="row" style="white-space: nowrap; ">
       <div class="seven wide column">
           <form action="" method="get">
-            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px; ">
+            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px;float:left ">
               <div class="ui left icon input" style="width: 100%; ">
                 <input class="prompt" style="width: 100%; " type="text" value="" placeholder=" 题目名 …" name="search">
                 <i class="search icon"></i>
@@ -14,18 +14,17 @@
               <div class="results" style="width: 100%; "></div>
             </div>
           </form>
-        <form class=form-inline action=problem.php>
-	  <input class="ui search" type='text' name='id' placeholder="<?php echo $MSG_PROBLEM_ID?>">				<button class="form-control" type='submit'><?php echo $MSG_SEARCH?></button>&nbsp;&nbsp;
-	</form>
-          <!-- <form action="<%= syzoj.utils.makeUrl(['problems', 'search']) %>" method="get">
-            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px; ">
-              <div class="ui left icon input" style="width: 100%; ">
-                <input class="prompt" style="width: 100%; " type="text" value="<%= req.query.keyword %>" placeholder="ID / 题目名 …" name="keyword">
+
+          <form action="problem.php" method="get">
+            <div class="ui search" style="width: 120px; height: 28px; margin-top: -5.3px; ">
+              <div class="ui icon input" style="width: 100%; ">
+                <input class="prompt" style="width: 100%; " type="text" value="" placeholder="ID" name="id">
                 <i class="search icon"></i>
               </div>
               <div class="results" style="width: 100%; "></div>
             </div>
-          </form> -->
+          </form>
+
       </div>
 
 

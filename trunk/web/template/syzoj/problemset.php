@@ -14,7 +14,9 @@
               <div class="results" style="width: 100%; "></div>
             </div>
           </form>
-
+        <form class=form-inline action=problem.php>
+	  <input class="ui search" type='text' name='id' placeholder="<?php echo $MSG_PROBLEM_ID?>">				<button class="form-control" type='submit'><?php echo $MSG_SEARCH?></button>&nbsp;&nbsp;
+	</form>
           <!-- <form action="<%= syzoj.utils.makeUrl(['problems', 'search']) %>" method="get">
             <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px; ">
               <div class="ui left icon input" style="width: 100%; ">

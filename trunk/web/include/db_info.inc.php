@@ -136,43 +136,48 @@ require_once(dirname(__FILE__) . "/pdo.php");
 //date_default_timezone_set("PRC");
 //pdo_query("SET time_zone ='+8:00'");
 
-/*
 // these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
-$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename(strtolower($_SERVER["HTTP_HOST"])).".php";
-if(file_exists($OJ_SaaS_CONF)){
-	include_once($OJ_SaaS_CONF);
-}
-*/
+$OJ_SaaS_ENABLE=false;
 
+if($OJ_SaaS_ENABLE){
+	$domain=basename($_SERVER["HTTP_HOST"]);
+	$DOMAIN="my.hustoj.com";
+	$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
+	if(file_exists($OJ_SaaS_CONF)){
+		require_once($OJ_SaaS_CONF);
+	}else{
+	//      echo $OJ_SaaS_CONF;
+	}
+}
 // 傻瓜级保姆配置系统
 switch($OJ_FRIENDLY_LEVEL) {
-	case 9:
-	   $OJ_GUEST=true;
-	case 8:
-	   $OJ_DOWNLOAD=true;
-	case 7:
-	   $OJ_BBS="discuss3";
-	case 6:
-	   $OJ_LONG_LOGIN=true; 
-	case 5:
-	   $OJ_TEST_RUN=true; 
-	case 4:
-	   $OJ_MAIL=true;
-	   $OJ_AUTO_SHARE=true;
-	case 3:
-	   $OJ_SHOW_DIFF=true; 
-	   $OJ_VCODE=false;
-	   $OJ_TEMPLATE="syzoj";
-	case 2:
-	   $OJ_LANG="cn";
-	case 1:
-	   date_default_timezone_set("PRC");
-	   pdo_query("SET time_zone ='+8:00'");
-	case 0:
+        case 9:
+           $OJ_GUEST=true;
+        case 8:
+           $OJ_DOWNLOAD=true;
+        case 7:
+           $OJ_BBS="discuss3";
+        case 6:
+           $OJ_LONG_LOGIN=true;
+        case 5:
+           $OJ_TEST_RUN=true;
+        case 4:
+           $OJ_MAIL=true;
+           $OJ_AUTO_SHARE=true;
+        case 3:
+           $OJ_SHOW_DIFF=true;
+           $OJ_VCODE=false;
+        case 2:
+           $OJ_LANG="cn";
+        case 1:
+           date_default_timezone_set("PRC");
+           pdo_query("SET time_zone ='+8:00'");
+        case 0:
         default:
            ;
 
 }
+
 
    
 

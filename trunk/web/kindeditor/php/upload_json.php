@@ -97,10 +97,10 @@ if (empty($_FILES) === false) {
 		alert("上传文件大小超过限制。");
 	}
 	//检查目录名
-	$dir_name = empty($_GET['dir']) ? 'image' : trim($_GET['dir']);
-	if (empty($ext_arr[$dir_name])) {
-		alert("目录名不正确。");
-	}
+	$dir_name = ($domain==""?"image":$domain) ;
+//	if (empty($ext_arr[$dir_name])) {
+//		alert("目录名不正确。");
+//	}
 	//获得文件扩展名
 	$temp_arr = explode(".", $file_name);
 	$file_ext = array_pop($temp_arr);

@@ -146,6 +146,7 @@
 	$MSG_IMPORT="นำเข้า";
 	$MSG_EXPORT="ส่งออก";
 	$MSG_UPDATE_DATABASE="ปรับปรุงฐานข้อมูล";
+	$MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="ผู้ที่อยู่ในระบบ";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";

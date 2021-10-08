@@ -102,11 +102,11 @@ if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
 
 	if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
 
-	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
 }
 else {  //page problems (not include in contests period)
 	$now = strftime("%Y-%m-%d %H:%M",time());
-	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` " .
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct " .
 	"FROM `problem`, (SELECT @ROWNUM := 0) TEMP " .
 	"WHERE `defunct`='N' AND `problem_id` NOT IN (
 		SELECT  `problem_id`

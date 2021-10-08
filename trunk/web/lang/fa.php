@@ -144,6 +144,7 @@
 	$MSG_IMPORT="وارد کردن";
 	$MSG_EXPORT="صادر کردن";
 	$MSG_UPDATE_DATABASE="به روز رسانی پایگاه داد";
+        $MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="بر خط";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";

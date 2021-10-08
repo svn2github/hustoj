@@ -30,7 +30,7 @@ $config = array(
 $bak = new DatabaseTool($config);
 $bak->backup();
 ?>
-<button onclick="phpfm(0)" >查看备份文件</button>
+<button onclick="phpfm(0)" >View Backup Files</button>
 <script src='../template/bs3/jquery.min.js' ></script>
 
 <script>

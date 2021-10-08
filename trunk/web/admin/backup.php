@@ -36,7 +36,7 @@ $bak->backup();
 
 function addFileToZip($path, $zip) {
 	global $OJ_DATA;
-	if ($path==$OJ_DATA."/0") return;
+	if ($path=="data/0") return;
 	$handler = opendir($path); //打开当前文件夹由$path指定。
 	/*
 	循环的读取文件夹下的所有文件和文件夹
@@ -60,8 +60,10 @@ $zip = new ZipArchive();
 $ztar=dirname($target)."/data".(date('Y-m-d H:i:s')).".zip";;
 //echo $ztar;
 if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
-	addFileToZip($OJ_DATA, $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
-	addFileToZip(realpath(dirname(__FILE__)."/../upload/$domain/"), $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
+	chdir( dirname($OJ_DATA) );
+	addFileToZip("data", $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
+	chdir(realpath(dirname(__FILE__)."/../upload"));
+	addFileToZip($domain, $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
 	$zip->close(); //关闭处理的zip文件
 }
 

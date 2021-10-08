@@ -4,7 +4,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         global $DB_NAME,$DB_USER,$DB_PASS,$DOMAIN;
         $NEW_USER="hustoj_".$user_id;
         $NEW_PASS=substr(pwGen($user_id),10);
-        $FARMBASE="/home/saas/";
+        $FARMBASE="/home/saas";
         $templates=array("bs3","mdui","bshark","sweet","syzoj","mario");
         if(!in_array($template,$templates)) $template="bs3";
         pdo_query("create database `jol_$user_id`;\n");
@@ -21,7 +21,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         $CONF_STR.="\$DB_NAME='jol_$user_id';\n";   //数据库名
         $CONF_STR.="\$DB_USER='$NEW_USER';\n";   //数据库名
         $CONF_STR.="\$DB_PASS='$NEW_PASS';\n";   //数据库名
-        $CONF_STR.="\$OJ_DATA='/home/saas/$user_id/data';\n";  //:测试数据目录
+        $CONF_STR.="\$OJ_DATA='$FARMBASE/$user_id/data';\n";  //:测试数据目录
         $CONF_STR.="\$OJ_JUDGE_HUB_PATH='$user_id';\n";  //:OJ在farmpath中的子目录名
         $CONF_STR.="\$OJ_LANGMASK=2097084;\n";  //:语言类型
         $CONF_STR.="\$OJ_TEMPLATE='$template';\n";  //:模板名

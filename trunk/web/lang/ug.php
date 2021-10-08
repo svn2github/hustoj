@@ -160,6 +160,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_IMPORT=" يوللاش ";
 	$MSG_EXPORT=" چىقىرىش ";
 	$MSG_UPDATE_DATABASE=" سان-سىپىرنى يېڭىلاش ";
+        $MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE=" سىمدا ";
 	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
 	$MSG_PRIVILEGE_TYPE="ھوقۇق تۈرى";

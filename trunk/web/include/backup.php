@@ -184,7 +184,7 @@ class DatabaseTool
             $str .= $data[$i] . "\r\n";
             $i++;
         }
-        echo file_put_contents($this->config['target'], $str) ? '备份成功!花费时间' . (microtime(true) - $this->begin) . 'ms' : '备份失败!';
+        echo file_put_contents($this->config['target'], $str) ? 'Backup Finished! Time' . (microtime(true) - $this->begin) . 'ms' : 'Fail!';
     }
 
     /**

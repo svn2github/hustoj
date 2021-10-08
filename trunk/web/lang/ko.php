@@ -150,6 +150,7 @@
 	$MSG_IMPORT="데이터 업로드";
 	$MSG_EXPORT="데이터 다운로드";
 	$MSG_UPDATE_DATABASE="데이터베이스 업데이트";
+        $MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="Online";
 	$MSG_SET_LOGIN_IP="IP 변경";
 	$MSG_PRIVILEGE_TYPE="권한 종류";

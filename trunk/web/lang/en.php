@@ -146,6 +146,7 @@
 	$MSG_IMPORT="Import";
 	$MSG_EXPORT="Export";
 	$MSG_UPDATE_DATABASE="Update Database";
+	$MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="Online";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";

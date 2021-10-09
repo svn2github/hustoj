@@ -27,7 +27,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         $CONF_STR.="\$OJ_TEMPLATE='$template';\n";  //:模板名
         $CONF_STR.="\$OJ_FRIENDLY_LEVEL=$friendly;\n";  //友善级别
 
-        $CONF_FILE=dirname(__FILE__)."/../SaaS/$user_id.".$DOMAIN.".php";
+        $CONF_FILE=realpath(dirname(__FILE__)."/../SaaS/$user_id.".$DOMAIN.".php");
 //if ($user_id=="zhblue")       echo "<textarea>".$sql."</textarea>";
 //      echo "<pre>".htmlentities($CONF_STR);
 //      echo "</pre>".$CONF_FILE;
@@ -35,6 +35,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         mkdir($FARMBASE."/$user_id/etc",0700,true);
         mkdir($FARMBASE."/$user_id/run0",0700,true);
         mkdir($FARMBASE."/$user_id/log",0700,true);
+        mkdir(dirname($CONF_FILE),0700,true);
         file_put_contents($CONF_FILE,$CONF_STR);
         $CONF_STR="OJ_HOST_NAME=127.0.0.1\n";
         $CONF_STR.="OJ_DB_NAME=jol_".$user_id."\n";

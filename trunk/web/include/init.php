@@ -12,7 +12,18 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
 	$OJ_LANG="cn";
 }
 
+if($OJ_SaaS_ENABLE){
+	$domain=basename($_SERVER["HTTP_HOST"]);
+	$DOMAIN="my.hustoj.com";
+	$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
+	if(file_exists($OJ_SaaS_CONF)){
+		require_once($OJ_SaaS_CONF);
+	}else{
+	//	echo $OJ_SaaS_CONF;
+	}
+}
 
+$OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 require_once(dirname(__FILE__) . "/logger.php");
 
 $logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NAME . '_' . 'user_id']:"guest", 
@@ -27,16 +38,6 @@ $logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NA
 					$OJ_LOG_TRACE_ENABLED);
 $logger->info();
 // these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
-if($OJ_SaaS_ENABLE){
-	$domain=basename($_SERVER["HTTP_HOST"]);
-	$DOMAIN="my.hustoj.com";
-	$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
-	if(file_exists($OJ_SaaS_CONF)){
-		require_once($OJ_SaaS_CONF);
-	}else{
-	//	echo $OJ_SaaS_CONF;
-	}
-}
 // 傻瓜级保姆配置系统
 switch($OJ_FRIENDLY_LEVEL) {
 	case 9:

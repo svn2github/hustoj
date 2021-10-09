@@ -61,8 +61,10 @@ $ztar=dirname($target)."/data".(date('Y-m-d H:i:s')).".zip";;
 //echo $ztar;
 if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
 	chdir( dirname($OJ_DATA) );
+	if(file_exists("data"))
 	addFileToZip("data", $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
 	chdir(realpath(dirname(__FILE__)."/../upload"));
+	if(file_exists($domain))
 	addFileToZip($domain, $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
 	$zip->close(); //关闭处理的zip文件
 }

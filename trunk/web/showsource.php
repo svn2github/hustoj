@@ -26,7 +26,7 @@ $sproblem_id=$row['problem_id'];
 $view_user_id=$suser_id=$row['user_id'];
 $contest_id=intval($row['contest_id']);
 $need_check_using=true;
-if(!isset($_SESSION[$OJ_NAME."_source_browser"])){
+if( $OJ_FRIENDLY_LEVEL <= 3 && !isset($_SESSION[$OJ_NAME."_source_browser"])){
 	if ( $contest_id > 0 ){
 		$sql="select start_time,end_time from contest where contest_id=?";
 		$result=pdo_query($sql,$contest_id);

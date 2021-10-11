@@ -192,9 +192,9 @@ if (isset($_GET['cid'])) {
 	foreach($result as $row) {
 		$view_problemset[$cnt][0] = "";
 		if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-//			if($noip)
-//                          $view_problemset[$cnt][0] = "?";
-//                        else
+			if($noip)
+                          $view_problemset[$cnt][0] = "?";
+                        else
                           $view_problemset[$cnt][0] = check_ac($cid,$cnt,$noip);
 		}else
 			$view_problemset[$cnt][0] = "";
@@ -279,8 +279,7 @@ else {
 
 		if (strlen($mycontests)>0)
 			$mycontests=substr($mycontests,1);
-
-		if (isset($_GET['my']))
+		if (isset($_GET['my'])&&$mycontests!="")
 	  		if(isset($_GET['my'])) $wheremy=" and( contest_id in ($mycontests) or user_id='".$_SESSION[$OJ_NAME.'_user_id']."')";
 	}
 

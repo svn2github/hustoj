@@ -30,6 +30,7 @@
             <form class=form-inline method=post action=contest.php>
               <input class="form-control" name=keyword value="<?php if(isset($_POST['keyword'])) echo htmlentities($_POST['keyword'],ENT_QUOTES,"UTF-8")?>" placeholder="<?php echo $MSG_CONTEST_NAME?>">
               <button class="form-control" type=submit><?php echo $MSG_SEARCH?></button>
+	      <a href="contest.php" ><?php echo $MSG_VIEW_ALL_CONTESTS ?></a>
             </form>
           </td>
         </tr>

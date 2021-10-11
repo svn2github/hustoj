@@ -177,6 +177,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_START_TIME="باشلىنىش ۋاقتى";
 	$MSG_END_TIME="ئاياغلىشىش ۋاقتى";
 	$MSG_CONTEST_ID="سىناق نۇمۇرى";
+	$MSG_VIEW_ALL_CONTESTS="Show All Contests";
 	$MSG_CONTEST_NAME="سىناق نامى";
 	$MSG_CONTEST_STATUS="ھالەت";
 	$MSG_CONTEST_OPEN="ئوچۇق";

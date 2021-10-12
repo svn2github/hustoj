@@ -20,7 +20,13 @@ tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 
-for pkg in net-tools make g++ libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
+#手工解决阿里云软件源的包依赖问题
+wget https://mirrors.aliyun.com/ubuntu/pool/main/o/openssl/libssl-dev_1.1.1f-1ubuntu2.9_amd64.deb
+dpkg -i libssl-dev_1.1.1f-1ubuntu2.9_amd64.deb
+apt-get install -y libmysqlclient-dev
+apt-get install -y libmysql++-dev 
+
+for pkg in net-tools make g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
 do
 	while ! apt-get install -y "$pkg" 
 	do

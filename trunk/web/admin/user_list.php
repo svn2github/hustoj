@@ -77,7 +77,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
         echo "<td><span fd='nick' user_id='".$row['user_id']."'>".$row['nick']."</span></td>";
         echo "<td>".$row['email']."</td>";
-        echo "<td>".$row['school']."</td>";
+        echo "<td><span fd='school' user_id='".$row['user_id']."'>".$row['school']."</span></td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
@@ -116,6 +116,26 @@ if(!(isset($_GET['keyword']) && $_GET['keyword']!=""))
 </div>
 <script>
 function admin_mod(){
+        $("span[fd=school]").each(function(){
+                let sp=$(this);
+                let user_id=$(this).attr('user_id');
+                $(this).dblclick(function(){
+                        let school=sp.text();
+                        sp.html("<form onsubmit='return false;'><input type=hidden name='m' value='user_update_school'><input type='hidden' name='user_id' value='"+user_id+"'><input type='text' name='school' value='"+school+"' selected='true' class='input-large' size=20 ></form>");
+                        let ipt=sp.find("input[name=school]");
+                        ipt.focus();
+                        ipt[0].select();
+                        sp.find("input").change(function(){
+                                let newschool=sp.find("input[name=school]").val();
+                                $.post("ajax.php",sp.find("form").serialize()).done(function(){
+                                        console.log("new school"+newschool);
+                                        sp.html(newschool);
+                                });
+
+                        });
+                });
+        });
+        
         $("span[fd=nick]").each(function(){
                 let sp=$(this);
                 let user_id=$(this).attr('user_id');

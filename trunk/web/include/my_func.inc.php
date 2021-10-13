@@ -16,7 +16,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         $csql=file_get_contents("/home/judge/src/install/db.sql");
         $sql.=mb_substr($csql,64);
         pdo_query($sql);
-        $CONF_STR="<?php \$OJ_NAME=\"".ucwords($user_id)."'s OJ\";\n";
+        $CONF_STR="<?php \$OJ_NAME='$user_id';\n";
         $CONF_STR.="\$DB_HOST='localhost';\n";  //数据库服务器ip或域名
         $CONF_STR.="\$DB_NAME='jol_$user_id';\n";   //数据库名
         $CONF_STR.="\$DB_USER='$NEW_USER';\n";   //数据库名

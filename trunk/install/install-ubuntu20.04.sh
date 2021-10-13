@@ -21,8 +21,7 @@ svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 
 #手工解决阿里云软件源的包依赖问题
-wget https://mirrors.aliyun.com/ubuntu/pool/main/o/openssl/libssl-dev_1.1.1f-1ubuntu2.9_amd64.deb
-dpkg -i libssl-dev_1.1.1f-1ubuntu2.9_amd64.deb
+apt install libssl1.1=1.1.1f-1ubuntu2.8 -y  
 apt-get install -y libmysqlclient-dev
 apt-get install -y libmysql++-dev 
 

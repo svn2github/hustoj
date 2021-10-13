@@ -27,7 +27,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         $CONF_STR.="\$OJ_TEMPLATE='$template';\n";  //:模板名
         $CONF_STR.="\$OJ_FRIENDLY_LEVEL=$friendly;\n";  //友善级别
 
-        $CONF_FILE=realpath(dirname(__FILE__)."/../SaaS/$user_id.".$DOMAIN.".php");
+        $CONF_FILE=realpath(dirname(__FILE__)."/../")."/SaaS/$user_id.".$DOMAIN.".php";
 //if ($user_id=="zhblue")       echo "<textarea>".$sql."</textarea>";
 //      echo "<pre>".htmlentities($CONF_STR);
 //      echo "</pre>".$CONF_FILE;

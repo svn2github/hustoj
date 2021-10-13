@@ -36,7 +36,7 @@
     <div class="ui fixed borderless menu" style="position: fixed; height: 49px; ">
         <div class="ui container">
             <a class="header item" href="/"><span
-                    style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $OJ_NAME?></span></a>
+                    style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?></span></a>
 	    <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
                 href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i><?php echo $MSG_PROBLEMS?> </a>

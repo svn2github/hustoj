@@ -1824,11 +1824,37 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 	escape(fname, fname0);
 	//printf("%s\n%s\n",fname0,fname);
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	if(copy_data) execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);   // 如果开启了COPY_DATA则复制测试数据
+	char noip_file_name[BUFFER_SIZE];
+	sprintf(noip_file_name,"%s/data/%d/input.name",oj_home,p_id);
+	if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+ 	if (access(noip_file_name, R_OK ) != -1){
+		if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		FILE * fpname=fopen(noip_file_name,"r");
+		if(fscanf(fpname,"%s",noip_file_name)){
+		    execute_cmd("/bin/cp '%s' %s/%s", infile, work_dir,noip_file_name);   // 如果存在input.name则复制测试数据
+		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		}
+		fclose(fpname);
+	}else{
+		if(copy_data) execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);   // 如果开启了COPY_DATA则复制测试数据
+	}
 	execute_cmd("/bin/cp %s/data/%d/*.dic %s/ 2>/dev/null", oj_home, p_id, work_dir);
  	execute_cmd("chown judge %s/*.dic ", work_dir);
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
-	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+
+	sprintf(noip_file_name,"%s/data/%d/output.name",oj_home,p_id);
+	if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+ 	if (access(noip_file_name, R_OK ) != -1){
+		
+		FILE * fpname=fopen(noip_file_name,"r");
+		if(fscanf(fpname,"%s",noip_file_name)){
+		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		    sprintf(userfile, "%s/run%d/%s", oj_home, runner_id,noip_file_name);
+		}
+		fclose(fpname);
+	}else{
+		sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+	}
 }
 // 以下 copy_开头的函数均为准备相应语言的chroot环境，复制动态链接库等，如果使用的系统不是Ubuntu则路径有所区别，可以用ldd/find查看实际位置。
 void copy_shell_runtime(char *work_dir)
@@ -2285,7 +2311,7 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/bin/nodejs %s/usr/bin", work_dir);
 }
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
-				  int &mem_lmt,char * data_file_path)   // 为每个测试数据运行一次提交的答案
+				  int &mem_lmt,char * data_file_path,int p_id)   // 为每个测试数据运行一次提交的答案
 {
 	//准备环境变量处理中文，如果希望使用非中文的语言环境，可能需要修改这些环境变量
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
@@ -2304,12 +2330,16 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("/bin/chown judge %s/data.db", work_dir);
 		stdin=freopen("Main.sql", "r", stdin);
 	}else{
-		if(copy_data)
-
-			stdin=freopen("data.in", "r", stdin);
-		else{
-			printf("infile: [%s]\n",data_file_path);
-			stdin=freopen(data_file_path,"r",stdin);
+		char noip_file_name[BUFFER_SIZE];
+		sprintf(noip_file_name,"%s/data/%d/input.name",oj_home,p_id);
+		if(DEBUG) printf("---------NOIP filename:%s\n",noip_file_name);
+		if (access(noip_file_name, R_OK ) == -1){   //不存在指定文件名，使用标准输入
+			if(copy_data){
+				stdin=freopen("data.in", "r", stdin);
+			}else{
+				printf("infile: [%s]\n",data_file_path);
+				stdin=freopen(data_file_path,"r",stdin);
+			}
 		}
 	}
 	execute_cmd("touch %s/user.out", work_dir);
@@ -3353,7 +3383,7 @@ int main(int argc, char **argv)
 
 		if (pidApp == 0)
 		{
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,(char *)"data.in");
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,(char *)"data.in",p_id);
 		}
 		else
 		{
@@ -3425,7 +3455,7 @@ int main(int argc, char **argv)
 		if (pidApp == 0)                        //返回值是0，我就是子进程 
 		{
 
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile,p_id);
 		}
 		else
 		{                                       //返回值非0 ，我是父进程，返回值就是上面那个子进程的pid

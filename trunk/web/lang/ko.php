@@ -216,6 +216,13 @@
 	$MSG_BALLOON="Balloon";
 	$MSG_BALLOON_DONE="Balloon Sent";
 	$MSG_BALLOON_PENDING="Balloon Pending";
+	$MSG_DATE="Date";
+	$MSG_SIGN="Signature";
+	$MSG_RECENT_PROBLEM="Recent Problems";
+	$MSG_RECENT_CONTEST="Recent Contest";
+	$MSG_PASS_RATE="Pass Rate";
+	$MSG_SHOW_TAGS="Show Tags";
+	$MSG_SHOW_ALL_TAGS="All Tags";
 
 	$MSG_HELP_SEEOJ="OJ 확인";
 	$MSG_HELP_ADD_NEWS="첫 페이지 공지사항 추가";

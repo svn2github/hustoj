@@ -230,6 +230,7 @@
   $MSG_SIGN="个性签名";
   $MSG_RECENT_PROBLEM="最近更新";
   $MSG_RECENT_CONTEST="近期比赛";
+  $MSG_PASS_RATE="通过率";
 
 	  
   $MSG_HELP_SEEOJ="跳转回到前台";

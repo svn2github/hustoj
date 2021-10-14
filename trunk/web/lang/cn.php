@@ -228,7 +228,10 @@
   $MSG_DATE="日期";
   $MSG_TIME="时间";
   $MSG_SIGN="个性签名";
+  $MSG_RECENT_PROBLEM="最近更新";
+  $MSG_RECENT_CONTEST="近期比赛";
 
+	  
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";
   $MSG_HELP_NEWS_LIST="管理已经发布的新闻";

@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=1200">
     <title><?php echo $show_title ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php");?>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="<?php echo $OJ_CDN_URL?>/include/jquery-latest.js"></script>
 </head>
 
 <body style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; ">
@@ -72,9 +72,6 @@
 				<?php if($_SERVER['HTTP_HOST']==$DOMAIN)
 					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
 				<?php } ?>
-
-				
-				
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="<?php echo $path_fix ?>/admin"><i class="settings icon"></i>后台管理</a>
                             <?php } ?>

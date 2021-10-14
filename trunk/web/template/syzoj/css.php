@@ -5,9 +5,9 @@
 ?>
 <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/style.css">
 <link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/tomorrow.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.js"></script>
+<link rel="stylesheet" href="<?php echo $path_fix."template/$OJ_TEMPLATE"?>/css/semantic.min.css">
+<link rel="stylesheet" href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/katex.min.css">
+<script defer src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/katex.js"></script>
 <script>
 var katex_config = {
 	delimiters: 
@@ -17,9 +17,9 @@ var katex_config = {
 	]
 };
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, katex_config)"></script>
-<link href="https://cdn.jsdelivr.net/npm/morris.js@0.5.0/morris.min.css" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Mono" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Lato:400,700,400italic,700italic&subset=latin" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=latin-ext" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Exo+2:600" rel="stylesheet">
+<script defer src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/auto-render.min.js" onload="renderMathInElement(document.body, katex_config)"></script>
+<link href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/morris.min.css" rel="stylesheet">
+<link href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/FiraMono.css" rel="stylesheet">
+<link href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/latin.css" rel="stylesheet">
+<link href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/latin-ext.css" rel="stylesheet">
+<link href="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE"?>/css/Exo.css" rel="stylesheet">

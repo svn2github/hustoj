@@ -12,15 +12,18 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
 	$OJ_LANG="cn";
 }
 
+$domain=basename($_SERVER["HTTP_HOST"]);
+
 if($OJ_SaaS_ENABLE){
-	$domain=basename($_SERVER["HTTP_HOST"]);
 	$DOMAIN="my.hustoj.com";
-	$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
+	$OJ_SaaS_CONF=realpath(dirname(__FILE__)."/..")."/SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
 	if(file_exists($OJ_SaaS_CONF)){
 		require_once($OJ_SaaS_CONF);
 	}else{
 	//	echo $OJ_SaaS_CONF;
 	}
+}else{
+	$DOMAIN=$domain;
 }
 
 $OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";

@@ -213,6 +213,14 @@
   $MSG_BALLOON_DONE="Balloon Sent";
   $MSG_BALLOON_PENDING="Balloon Pending";
 
+
+  $MSG_DATE="Date";
+  
+  $MSG_SIGN="Signature";
+  $MSG_RECENT_PROBLEM="Recent Problems";
+  $MSG_RECENT_CONTEST="Recent Contest";
+
+
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
   $MSG_HELP_NEWS_LIST="edit or shutdown published news";

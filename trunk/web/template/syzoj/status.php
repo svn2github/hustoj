@@ -6,12 +6,12 @@
   <!-- <form action="" class="ui mini form" method="get" role="form" id="form"> -->
   <form id=simform class="ui mini form" action="status.php" method="get">
     <div class="inline fields" style="margin-bottom: 25px; white-space: nowrap; ">
-      <label style="font-size: 1.2em; margin-right: 1px; ">题目：</label>
+      <label style="font-size: 1.2em; margin-right: 1px; "><?php echo $MSG_PROBLEM_ID?>：</label>
       <div class="field"><input name="problem_id" style="width: 100px; " type="text" value="<?php echo  htmlspecialchars($problem_id, ENT_QUOTES) ?>"></div>
-        <label style="font-size: 1.2em; margin-right: 1px; ">提交者：</label>
+        <label style="font-size: 1.2em; margin-right: 1px; "><?php echo $MSG_USER?>：</label>
         <div class="field"><input name="user_id" style="width: 100px; " type="text" value="<?php echo  htmlspecialchars($user_id, ENT_QUOTES) ?>"></div>
 
-        <label style="font-size: 1.2em; margin-right: 1px; ">语言：</label>
+        <label style="font-size: 1.2em; margin-right: 1px; "><?php echo $MSG_LANG?>：</label>
         <select class="form-control" size="1" name="language" style="width: 110px;font-size: 1em ">
           <option value="-1">All</option>
           <?php
@@ -65,7 +65,7 @@
           ?>
       <button class="ui labeled icon mini button" type="submit" style="margin-left: 20px;">
         <i class="search icon"></i>
-        查询
+       <?php echo $MSG_SEARCH;?>
       </button>
     </div>
   </form>
@@ -74,19 +74,23 @@
   <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
-		<th>编号</th>
-		<th>用户</th>
+		<th><?php echo $MSG_RUNID?></th>
+		<th><?php echo $MSG_USER?></th>
 						<th>
 							<?php echo $MSG_NICK?>
 						</th>
-        <th>题目</th>
-        <th>结果</th>
-        <th>内存</th>
-        <th>时间</th>
-        <th>代码</th>
-        <th>代码长度</th>
-        <th>提交时间</th>
-        <th>判题机</th>
+        <th><?php echo $MSG_PROBLEM_ID?></th>
+        <th><?php echo $MSG_RESULT?></th>
+        <th><?php echo $MSG_MEMORY?></th>
+        <th><?php echo $MSG_TIME?></th>
+        <th><?php echo $MSG_LANG?></th>
+        <th><?php echo $MSG_CODE_LENGTH?></th>
+        <th><?php echo $MSG_SUBMIT_TIME?></th>
+       <?php	if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
+							echo "<th class='text-left'>";
+								echo $MSG_JUDGER;
+							echo "</th>";
+						} ?>
       </tr>
     </thead>
     <tbody>

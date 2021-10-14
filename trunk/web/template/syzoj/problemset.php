@@ -109,13 +109,13 @@
       <tr>
 
         <?php if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){?>
-          <th class="one wide">提交状态</th>
+          <th class="one wide"><?php echo $MSG_STATUS?></th>
         <?php } ?>
-        <th class="one wide">编号</th>
-        <th class="left aligned">题目名称</th>
-        <th class="one wide">通过</th>
-        <th class="one wide">提交</th>
-        <th class="one wide">通过率</th>
+        <th class="one wide"><?php echo $MSG_PROBLEM_ID?></th>
+        <th class="left aligned"><?php echo $MSG_TITLE?></th>
+        <th class="one wide"><?php echo $MSG_SOVLED?></th>
+        <th class="one wide"><?php echo $MSG_SUBMIT?></th>
+        <th class="one wide"><?php echo $MSG_PASS_RATE?></th>
       </tr>
     </thead>
     <tbody>

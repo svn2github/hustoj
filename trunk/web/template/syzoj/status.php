@@ -1,4 +1,4 @@
-<?php $show_title="评测列表 - $OJ_NAME"; ?>
+<?php $show_title="<?php echo $MSG_STATUS?> - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <script src="https://cdnjs.loli.net/ajax/libs/textfit/2.3.1/textFit.min.js"></script>
 <div class="padding">
@@ -120,18 +120,18 @@
   <div style="text-align: center; ">
 	<div class="ui pagination menu" style="box-shadow: none; ">
 	  <a class="icon item" href="<?php echo "status.php?".$str2;?>" id="page_prev">  
-    首页
+    Top
 	  </a>
 	  <?php
       if (isset($_GET['prevtop']))
-      echo "<a class=\"item\" href=\"status.php?".$str2."&top=".intval($_GET['prevtop'])."\">上一页</a>";
+      echo "<a class=\"item\" href=\"status.php?".$str2."&top=".intval($_GET['prevtop'])."\">Prev</a>";
       else
-      echo "<a class=\"item\" href=\"status.php?".$str2."&top=".($top+20)."\">上一页</a>";
+      echo "<a class=\"item\" href=\"status.php?".$str2."&top=".($top+20)."\">Prev</a>";
 
       ?>
       
 	  <a class="icon item" href="<?php echo "status.php?".$str2."&top=".$bottom."&prevtop=$top"; ?>" id="page_next">
-	    下一页
+	    Next
 	  </a>  
 	</div>
   </div>

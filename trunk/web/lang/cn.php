@@ -145,7 +145,7 @@
 	$MSG_MENU="菜单";
 	$MSG_EXPLANATION="内容描述";
 	$MSG_LIST="列表";
-	$MSG_NEWS="新闻";
+	$MSG_NEWS="公告";
 	$MSG_CONTENTS="内容";
 	$MSG_SAVE="保存";	
 

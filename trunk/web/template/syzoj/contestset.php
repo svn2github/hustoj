@@ -1,4 +1,4 @@
-<?php $show_title="比赛列表 - $OJ_NAME"; ?>
+<?php $show_title="<?php echo $MSG_CONTESTS?> - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="padding">
 <div class="ui grid" style="margin-bottom: 10px; ">
@@ -51,12 +51,12 @@
     <table class="ui very basic center aligned table">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>比赛名称</th>
-          <th>开始时间</th>
-          <th>结束时间</th>
-          <th>权限</th>
-          <th>创建者</th>
+          <th><?php echo $MSG_CONTEST_ID?></th>
+          <th><?php echo $MSG_CONTEST_NAME?></th>
+          <th><?php echo $MSG_START_TIME?></th>
+          <th><?php echo $MSG_END_TIME?></th>
+          <th><?php echo $MSG_CONTEST_OPEN?></th>
+          <th><?php echo $MSG_CONTEST_CREATOR?></th>
         </tr>
       </thead>
       <tbody>

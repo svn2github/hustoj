@@ -225,6 +225,9 @@
   $MSG_BALLOON_DONE="气球已发放";
   $MSG_BALLOON_PENDING="气球待发放";
 
+  $MSG_DATE="日期";
+  $MSG_TIME="时间";
+
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";
   $MSG_HELP_NEWS_LIST="管理已经发布的新闻";

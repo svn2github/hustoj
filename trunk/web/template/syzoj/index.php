@@ -8,8 +8,8 @@
                 <table class="ui very basic table">
                     <thead>
                         <tr>
-                            <th>标题</th>
-                            <th>时间</th>
+                            <th><?php echo $MSG_TITLE;?></th>
+                            <th><?php echo $MSG_TIME;?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,14 +28,14 @@
                     </tbody>
                 </table>
             </div>
-            <h4 class="ui top attached block header"><i class="ui signal icon"></i>排名</h4>
+            <h4 class="ui top attached block header"><i class="ui signal icon"></i><?php echo $MSG_RANKLIST;?></h4>
             <div class="ui bottom attached segment">
                 <table class="ui very basic center aligned table" style="table-layout: fixed; ">
                     <thead>
                         <tr>
                             <th style="width: 50px; ">#</th>
-                            <th style="width: 170px; ">用户名</th>
-                            <th>个性签名</th>
+                            <th style="width: 170px; "><?php echo $MSG_USER_ID;?></th>
+                            <th><?php echo $MSG_SIGN ;?></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -220,6 +220,7 @@
   $MSG_RECENT_CONTEST="Recent Contest";
   $MSG_PASS_RATE="Pass Rate";
   $MSG_SHOW_TAGS="Show Tags";
+  $MSG_SHOW_TAGS="All Tags";
 
 
   $MSG_HELP_SEEOJ="watch the front pages";

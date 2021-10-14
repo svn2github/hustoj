@@ -227,6 +227,7 @@
 
   $MSG_DATE="日期";
   $MSG_TIME="时间";
+  $MSG_SIGN="个性签名";
 
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";

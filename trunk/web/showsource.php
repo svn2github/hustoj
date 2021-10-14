@@ -21,6 +21,7 @@ $slanguage=$row['language'];
 $sresult=$row['result'];
 $stime=$row['time'];
 $owner=$row['user_id'];
+$nick=$row['nick'];
 $smemory=$row['memory'];
 $sproblem_id=$row['problem_id'];
 $view_user_id=$suser_id=$row['user_id'];

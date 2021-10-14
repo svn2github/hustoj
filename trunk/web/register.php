@@ -74,6 +74,12 @@ if ($rows_cnt == 1){
 	print "history.go(-1);\n</script>";
 	exit(0);
 }
+if ($domain==$DOMAIN && $OJ_NAME==$user_id){
+        print "<script language='javascript'>\n";
+        print "alert('User Existed!\\n');\n";
+        print "history.go(-1);\n</script>";
+        exit(0);
+}
 $nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));

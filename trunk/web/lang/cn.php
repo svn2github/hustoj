@@ -158,6 +158,7 @@
 	$MSG_IMPORT="导入";
 	$MSG_EXPORT="导出";
 	$MSG_UPDATE_DATABASE="更新数据库";
+	$MSG_BACKUP_DATABASE="备份数据库";
 	$MSG_ONLINE="在线";
 	$MSG_SET_LOGIN_IP="指定登录IP";
 	$MSG_PRIVILEGE_TYPE="权限 类型";
@@ -173,6 +174,7 @@
 	$MSG_SERVER_TIME="服务器时间";
 	$MSG_START_TIME="开始时间";
 	$MSG_END_TIME="结束时间";
+	$MSG_VIEW_ALL_CONTESTS="显示所有作业比赛";
 	$MSG_CONTEST_ID="作业比赛编号";
 	$MSG_CONTEST_NAME="作业比赛名称";
 	$MSG_CONTEST_STATUS="作业比赛状态";

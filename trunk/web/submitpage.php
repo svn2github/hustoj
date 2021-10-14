@@ -75,8 +75,10 @@ if (isset($_GET['sid'])) {
 
 		}else{ //非比赛提交.考察是否有进行中的比赛在使用
 		//			echo $now.'+'.$end_time;
-
-					$need_check_using=true;
+			if(isset($_SESSION[$OJ_NAME.'_'.'source_browser']))
+				$need_check_using=false;
+			else
+				$need_check_using=true;
 		}
 		// 检查是否使用中
 		//echo $now.'*'.$end_time;
@@ -86,7 +88,7 @@ if (isset($_GET['sid'])) {
 		if($need_check_using){
 			//echo $sql;
 			$result=pdo_query($sql,$sproblem_id);
-			if(count($result)>0){
+			if(count($result)>0  && !isset($_SESSION[$OJ_NAME.'_'.'source_browser'])){
 					$view_errors = "<center>";
 					$view_errors .= "<h3>$MSG_CONTEST_ID : ".$result[0][0]."</h3>";
 					$view_errors .= "<p> $MSG_SOURCE_NOT_ALLOWED_FOR_EXAM </p>";

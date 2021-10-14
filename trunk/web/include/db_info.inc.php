@@ -104,7 +104,6 @@ static  $OJ_QQ_ASEC='df709a1253ef8878548920718085e84b';
 static  $OJ_QQ_CBURL='192.168.0.108';
 
 /* log */
-$OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 static  $OJ_LOG_ENABLED=false;
 static  $OJ_LOG_DATETIME_FORMAT="Y-m-d H:i:s";
 static  $OJ_LOG_PID_ENABLED=false;
@@ -114,79 +113,13 @@ static  $OJ_LOG_URL_HOST_ENABLED=false;
 static  $OJ_LOG_URL_PARAM_ENABLED=false;
 static  $OJ_LOG_TRACE_ENABLED=false;
 
-//if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
-if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
-	$OJ_LANG=$_SESSION[$OJ_NAME . '_' . 'OJ_LANG'];
-} else if (isset($_COOKIE['lang']) && in_array($_COOKIE['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
-	$OJ_LANG=$_COOKIE['lang'];
-} else if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
-	$OJ_LANG=$_GET['lang'];
-} else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
-	$OJ_LANG="cn";
-}
+
+static $OJ_SaaS_ENABLE=true;
+
 
 require_once(dirname(__FILE__) . "/pdo.php");
-
-// use db
-//pdo_query("set names utf8");	
+require_once(dirname(__FILE__) . "/init.php");
 
 
-//sychronize php and mysql server with timezone settings, dafault setting for China
-//if you are not from China, comment out these two lines or modify them.
-//date_default_timezone_set("PRC");
-//pdo_query("SET time_zone ='+8:00'");
 
-/*
-// these lines can help you make a SaaS platform of HUSTOJ with the help of JudgeHub
-$OJ_SaaS_CONF=dirname(__FILE__)."/../SaaS/".basename(strtolower($_SERVER["HTTP_HOST"])).".php";
-if(file_exists($OJ_SaaS_CONF)){
-	include_once($OJ_SaaS_CONF);
-}
-*/
-
-// 傻瓜级保姆配置系统
-switch($OJ_FRIENDLY_LEVEL) {
-	case 9:
-	   $OJ_GUEST=true;
-	case 8:
-	   $OJ_DOWNLOAD=true;
-	case 7:
-	   $OJ_BBS="discuss3";
-	case 6:
-	   $OJ_LONG_LOGIN=true; 
-	case 5:
-	   $OJ_TEST_RUN=true; 
-	case 4:
-	   $OJ_MAIL=true;
-	   $OJ_AUTO_SHARE=true;
-	case 3:
-	   $OJ_SHOW_DIFF=true; 
-	   $OJ_VCODE=false;
-	   $OJ_TEMPLATE="syzoj";
-	case 2:
-	   $OJ_LANG="cn";
-	case 1:
-	   date_default_timezone_set("PRC");
-	   pdo_query("SET time_zone ='+8:00'");
-	case 0:
-        default:
-           ;
-
-}
-
-   
-
-require_once(dirname(__FILE__) . "/logger.php");
-
-$logger=new Logger(isset($_SESSION[$OJ_NAME . '_' . 'user_id'])?$_SESSION[$OJ_NAME . '_' . 'user_id']:"guest", 
-					$OJ_LOG_FILE, 
-					$OJ_LOG_DATETIME_FORMAT, 
-					$OJ_LOG_ENABLED, 
-					$OJ_LOG_PID_ENABLED,
-					$OJ_LOG_USER_ENABLED,
-					$OJ_LOG_URL_ENABLED,
-					$OJ_LOG_URL_HOST_ENABLED,
-					$OJ_LOG_URL_PARAM_ENABLED,
-					$OJ_LOG_TRACE_ENABLED);
-$logger->info();
 

@@ -1,4 +1,78 @@
 <?php
+function create_subdomain($user_id,$template="bs3",$friendly="0"){
+        $user_id=strtolower($user_id);
+        global $DB_NAME,$DB_USER,$DB_PASS,$DOMAIN;
+        $NEW_USER="hustoj_".$user_id;
+        $NEW_PASS=substr(pwGen($user_id),10);
+        $FARMBASE="/home/saas";
+        $templates=array("bs3","mdui","bshark","sweet","syzoj","mario");
+        if(!in_array($template,$templates)) $template="bs3";
+        pdo_query("create database `jol_$user_id`;\n");
+        pdo_query("drop USER '$NEW_USER'@'localhost';");
+        pdo_query("create USER '$NEW_USER'@'localhost' identified by '$NEW_PASS';");
+        pdo_query("grant all privileges on jol_${user_id}.* to '$NEW_USER'@'localhost' ;");
+        pdo_query("flush privileges;\n");
+        $sql="use `jol_$user_id`;\n";
+        $csql=file_get_contents("/home/judge/src/install/db.sql");
+        $sql.=mb_substr($csql,64);
+        pdo_query($sql);
+        $CONF_STR="<?php \$OJ_NAME='$user_id';\n";
+        $CONF_STR.="\$DB_HOST='localhost';\n";  //数据库服务器ip或域名
+        $CONF_STR.="\$DB_NAME='jol_$user_id';\n";   //数据库名
+        $CONF_STR.="\$DB_USER='$NEW_USER';\n";   //数据库名
+        $CONF_STR.="\$DB_PASS='$NEW_PASS';\n";   //数据库名
+        $CONF_STR.="\$OJ_DATA='$FARMBASE/$user_id/data';\n";  //:测试数据目录
+        $CONF_STR.="\$OJ_JUDGE_HUB_PATH='$user_id';\n";  //:OJ在farmpath中的子目录名
+        $CONF_STR.="\$OJ_LANGMASK=2097084;\n";  //:语言类型
+        $CONF_STR.="\$OJ_TEMPLATE='$template';\n";  //:模板名
+        $CONF_STR.="\$OJ_FRIENDLY_LEVEL=$friendly;\n";  //友善级别
+
+        $CONF_FILE=realpath(dirname(__FILE__)."/../")."/SaaS/$user_id.".$DOMAIN.".php";
+//if ($user_id=="zhblue")       echo "<textarea>".$sql."</textarea>";
+//      echo "<pre>".htmlentities($CONF_STR);
+//      echo "</pre>".$CONF_FILE;
+        mkdir($FARMBASE."/$user_id/data",0700,true);
+        mkdir($FARMBASE."/$user_id/etc",0700,true);
+        mkdir($FARMBASE."/$user_id/run0",0700,true);
+        mkdir($FARMBASE."/$user_id/log",0700,true);
+        mkdir(dirname($CONF_FILE),0700,true);
+        file_put_contents($CONF_FILE,$CONF_STR);
+        $CONF_STR="OJ_HOST_NAME=127.0.0.1\n";
+        $CONF_STR.="OJ_DB_NAME=jol_".$user_id."\n";
+        $CONF_STR.="OJ_USER_NAME=".$NEW_USER."\n";
+        $CONF_STR.="OJ_PASSWORD=".$NEW_PASS."\n";
+        $CONF_STR.="OJ_USE_DOCKER=1\n";
+        $CONF_STR.="OJ_HTTP_USERNAME=CF-T8\n";
+        $CONF_STR.="OJ_LANG_SET=0,1,6\n";
+        $CONF_STR.="OJ_OI_MODE=1\n";
+
+
+        $CONF_FILE=$FARMBASE."/".$user_id."/etc/judge.conf";
+//      echo "<pre>".htmlentities($CONF_STR);
+//      echo "</pre>".$CONF_FILE;
+        file_put_contents($CONF_FILE,$CONF_STR);
+
+        $CONF_STR='
+grant {
+    permission java.io.FilePermission "./-", "read,write";
+    permission java.io.FilePermission "/usr/lib/jvm", "read";
+};
+        ';
+
+        $CONF_FILE=$FARMBASE."/".$user_id."/etc/java0.policy";
+//      echo "<pre>".htmlentities($CONF_STR);
+//      echo "</pre>".$CONF_FILE;
+        file_put_contents($CONF_FILE,$CONF_STR);
+        $DB_NAME="jol_".$user_id;
+        $sql="delete from jol_${user_id}.privilege where user_id='".$user_id."'; ";
+        pdo_query($sql);
+        $sql="INSERT INTO jol_${user_id}.privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'administrator', 'true', 'N');";
+        pdo_query($sql);
+        $sql="INSERT INTO jol_${user_id}.privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'source_browser', 'true', 'N');";
+        pdo_query($sql);
+
+}
+
 function send_udp_message($host, $port, $message)
 {
     $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);

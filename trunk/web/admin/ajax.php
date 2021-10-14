@@ -31,5 +31,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		$sql= "update solution set nick=? where user_id=?";
                 pdo_query($sql,$nick,$user_id);
         }
-
+	if($m=="user_update_school"){
+                $user_id=$_POST['user_id'];
+                $school=$_POST['school'];
+                $sql= "update users set school=? where user_id=?";
+                echo pdo_query($sql,$school,$user_id);
+        }
 }

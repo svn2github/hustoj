@@ -63,7 +63,23 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
                 }
            $redis->close();     
         }
+	if (isset($OJ_UDP) && $OJ_UDP) {
+	  $JUDGE_SERVERS = explode(",",$OJ_UDPSERVER);
+	  $JUDGE_TOTAL = count($JUDGE_SERVERS);
 
+	  $select = $insert_id%$JUDGE_TOTAL;
+	  $JUDGE_HOST = $JUDGE_SERVERS[$select];
+
+	  if (strstr($JUDGE_HOST,":")!==false) {
+	    $JUDGE_SERVERS = explode(":",$JUDGE_HOST);
+	    $JUDGE_HOST = $JUDGE_SERVERS[0];
+	    $OJ_UDPPORT = $JUDGE_SERVERS[1];
+	  }
+	  if(isset($OJ_JUDGE_HUB_PATH))
+		send_udp_message($JUDGE_HOST, $OJ_UDPPORT, $OJ_JUDGE_HUB_PATH);
+	  else
+		send_udp_message($JUDGE_HOST, $OJ_UDPPORT, 0 );
+	}
 }
 ?>
 <div class="container">

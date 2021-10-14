@@ -146,6 +146,7 @@
 	$MSG_IMPORT="นำเข้า";
 	$MSG_EXPORT="ส่งออก";
 	$MSG_UPDATE_DATABASE="ปรับปรุงฐานข้อมูล";
+	$MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="ผู้ที่อยู่ในระบบ";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";
@@ -162,6 +163,7 @@
 	$MSG_START_TIME="Start Time";
 	$MSG_END_TIME="End Time";
 	$MSG_CONTEST_ID="CONTEST ID";
+	$MSG_VIEW_ALL_CONTESTS="Show All Contests";
 	$MSG_CONTEST_NAME="CONTEST NAME";
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";

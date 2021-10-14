@@ -279,8 +279,7 @@ else {
 
 		if (strlen($mycontests)>0)
 			$mycontests=substr($mycontests,1);
-
-		if (isset($_GET['my']))
+		if (isset($_GET['my'])&&$mycontests!="")
 	  		if(isset($_GET['my'])) $wheremy=" and( contest_id in ($mycontests) or user_id='".$_SESSION[$OJ_NAME.'_user_id']."')";
 	}
 

@@ -63,6 +63,10 @@ if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
   ){}else{
     $profile.= "&nbsp;<li><a href='./sharecodelist.php'>代码分享</a></li>";
   }
+  // SaaS MyOJ	
+  if($OJ_SaaS_ENABLE && $_SERVER['HTTP_HOST']==$DOMAIN)$profile.= "&nbsp;<li><a href='http://".$sid.".$DOMAIN'>My OJ</a></li>&nbsp;";
+
+
   $profile.= "&nbsp;<li><a href=".$path_fix."logout.php>$MSG_LOGOUT</a></li>&nbsp;";
 
 }else{

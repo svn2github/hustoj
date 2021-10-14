@@ -36,7 +36,7 @@
     <div class="ui fixed borderless menu" style="position: fixed; height: 49px; ">
         <div class="ui container">
             <a class="header item" href="/"><span
-                    style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $OJ_NAME?></span></a>
+                    style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?></span></a>
 	    <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
                 href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i><?php echo $MSG_PROBLEMS?> </a>
@@ -68,6 +68,13 @@
                         <div class="menu">
                             <a class="item" href="<?php echo $path_fix?>modifypage.php"><i
                                     class="edit icon"></i>修改资料</a>
+				<?php if ($OJ_SaaS_ENABLE){ ?>
+				<?php if($_SERVER['HTTP_HOST']==$DOMAIN)
+					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
+				<?php } ?>
+
+				
+				
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="<?php echo $path_fix ?>/admin"><i class="settings icon"></i>后台管理</a>
                             <?php } ?>

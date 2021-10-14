@@ -96,7 +96,7 @@
                     </div>
                 </form>
             </div>
-            <h4 class="ui top attached block header"><i class="ui calendar icon"></i><?php echo ;?></h4>
+            <h4 class="ui top attached block header"><i class="ui calendar icon"></i><?php echo $MSG_RECENT_CONTEST ;?></h4>
             <div class="ui bottom attached center aligned segment">
                 <table class="ui very basic center aligned table">
                     <thead>

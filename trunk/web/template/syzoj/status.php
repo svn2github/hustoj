@@ -1,4 +1,4 @@
-<?php $show_title="<?php echo $MSG_STATUS?> - $OJ_NAME"; ?>
+<?php $show_title="$MSG_STATUS - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <script src="https://cdnjs.loli.net/ajax/libs/textfit/2.3.1/textFit.min.js"></script>
 <div class="padding">

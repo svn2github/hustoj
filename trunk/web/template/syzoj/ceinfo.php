@@ -23,7 +23,7 @@
     </div>
     <div style="margin-top: 0px; margin-bottom: 14px; " >
         <p v-if="title" class="transition visible">
-           <strong v-html="title">辅助解释</strong>
+           <strong v-html="title"><?php echo $MSG_ERROR_EXPLAIN;?></strong>
         </p>
         <div class="ui existing segment">
           <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; "><code><div id='errexp'></div></code></pre>

@@ -1,4 +1,4 @@
-<?php $show_title="<?php echo $MSG_PROBLEMS;?> - $OJ_NAME"; ?>
+<?php $show_title="$MSG_PROBLEMS - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="padding">
 

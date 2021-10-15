@@ -1,4 +1,4 @@
-<?php $show_title="$MSG_CONTESTS - $OJ_NAME"; ?>
+<?php $show_title="$MSG_CONTEST - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="padding">
 <div class="ui grid" style="margin-bottom: 10px; ">

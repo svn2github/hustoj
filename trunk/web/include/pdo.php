@@ -43,6 +43,6 @@ function pdo_query($sql){
 //		$view_errors="SQL:".$sql."\n".$e->getMessage();
 //	echo htmlentities($view_errors."\n\n");
 	if(stripos($sql,"create") === 0||stripos($sql,"drop") === 0) echo "continue\n";
-	else exit(0);
+	//else exit(0);
     }
 }

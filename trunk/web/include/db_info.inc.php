@@ -21,7 +21,7 @@ static  $OJ_DICT=false; //显示在线翻译
 static  $OJ_LANGMASK=1637684; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/   -524288 to get matlab(octave)
 static  $OJ_ACE_EDITOR=true;
 static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it once.
-static  $OJ_CSS="white.css";
+static  $OJ_CSS="white.css";  // bing.css kawai.css dark.css blue.css
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
 static  $OJ_APPENDCODE=true;  // 代码预定模板
@@ -45,8 +45,7 @@ static  $OJ_REDISQNAME="hustoj";
 static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
 static  $OJ_CDN_URL="";  //  http://cdn.hustoj.com/  https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/web/ 
 static  $OJ_TEMPLATE="syzoj"; //使用的默认模板,template目录下的每个子目录都是一个模板, [bs3 mdui sweet syzoj mario bshark] work with discuss3
-//if(isset($_GET['tp'])) $OJ_TEMPLATE=$_GET['tp'];
-if ($OJ_TEMPLATE == "classic") $OJ_CSS="hoj.css";
+
 static  $OJ_LOGIN_MOD="hustoj";
 static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核

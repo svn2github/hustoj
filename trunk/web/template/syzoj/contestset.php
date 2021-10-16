@@ -53,8 +53,7 @@
         <tr>
           <th><?php echo $MSG_CONTEST_ID?></th>
           <th><?php echo $MSG_CONTEST_NAME?></th>
-          <th><?php echo $MSG_START_TIME?></th>
-          <th><?php echo $MSG_END_TIME?></th>
+          <th><?php echo $MSG_TIME?></th>
           <th><?php echo $MSG_CONTEST_OPEN?></th>
           <th><?php echo $MSG_CONTEST_CREATOR?></th>
         </tr>

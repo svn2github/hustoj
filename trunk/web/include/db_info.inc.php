@@ -113,7 +113,7 @@ static  $OJ_LOG_URL_PARAM_ENABLED=false;
 static  $OJ_LOG_TRACE_ENABLED=false;
 
 
-static $OJ_SaaS_ENABLE=true;
+static $OJ_SaaS_ENABLE=false;
 
 
 require_once(dirname(__FILE__) . "/pdo.php");

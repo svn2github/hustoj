@@ -26,7 +26,7 @@
             <div><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?> is powered by <a style="color: inherit !important;" class=" " title="GitHub"
                     target="_blank" rel="noreferrer noopener" href="https://github.com/zhblue/hustoj">HUSTOJ</a>, Theme
                 by <a style="color: inherit !important;" href="https://github.com/syzoj">SYZOJ</a></div>
-	    <div> Running on <a href='https://debian.org' target='_blank'>Debian11</a> / <a href='https://www.loongson.cn' target='_blank'>Loongson 3A3000</a> </div>	
+	 <!--   <div> Running on <a href='https://debian.org' target='_blank'>Debian11</a> / <a href='https://www.loongson.cn' target='_blank'>Loongson 3A3000</a> </div> -->	
             <?php if ($OJ_BEIAN) { ?>
             <div>
                 <a href="https://beian.miit.gov.cn/" style="text-decoration: none; color: #444444;"

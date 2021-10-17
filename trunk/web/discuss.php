@@ -84,7 +84,7 @@ $cnt=0;
 $isadmin = isset($_SESSION[$OJ_NAME.'_'.'administrator']);
 ?>
 <table style="clear:both; width:100%">
-<tr align=center class='toprow'>
+<tr align=center class='ui top'>
         <td width="2%"><?php if ($isadmin) echo "<input type=checkbox>"; ?></td>
         <td width="3%"></td>
         <td width="4%">Prob</td>

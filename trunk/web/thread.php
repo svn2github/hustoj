@@ -30,7 +30,7 @@
 	?></div><?php }
 ?>
 <table style="width:100%; clear:both">
-<tr align=center class='toprow'>
+<tr align=center class='ui top'>
 	<td style="text-align:left">
 	<a href="discuss.php<?php if ($row['pid']!=0 && $row['cid']!=null) echo "?pid=".$row['pid']."&cid=".$row['cid'];
 	else if ($row['pid']!=0) echo"?pid=".$row['pid']; else if ($row['cid']!=null) echo"?cid=".$row['cid'];?>">

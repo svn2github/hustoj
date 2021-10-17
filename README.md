@@ -142,7 +142,9 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
-10-15 | 更新 | Syzoj模板国际化字符串替换
+10-17 | 更新 | 给默认syzoj添加discuss
+10-16 | 更新 | 设置默认模板为syzoj
+10-15 | 更新 | syzoj模板国际化字符串替换
 10-12 | 更新 | SaaS模式实例 MyOJ 上线 http://my.hustoj.com/
 09-30 | 更新 | 增加JudgeHub程序，为SaaS建立技术平台。
 09-28 | 更新 | 增加友善级别$OJ_FRENDLY_LEVEL,辅助初级用户快速配置系统。

@@ -16,7 +16,6 @@ if ($row[0]=='N'){
 	$sql="UPDATE `contest` SET `defunct`='Y' WHERE `contest_id`=?";
 }else{ 
 	$sql="UPDATE `contest` SET `defunct`='N' WHERE `contest_id`=?";
-	if($domain==$DOMAIN)    create_subdomain($cid);
 }
 pdo_query($sql,$cid);
 

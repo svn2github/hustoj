@@ -47,7 +47,7 @@
                 <button name="submit" type="reset" class="ui button">重置</button>
             </form>
 </div>
-<?php if ($OJ_SaaS_ENABLE){ ?>
+<?php if ($OJ_SaaS_ENABLE && $domain==$DOMAIN){ ?>
   <div class="center">  <label >My OJ:</label>
           <form action="saasinit.php" method="post" role="form" class="ui form">
                 <div class="field">

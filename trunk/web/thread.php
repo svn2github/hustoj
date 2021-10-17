@@ -1,5 +1,5 @@
 <?php
-        require_once("include/db_info.inc.php");
+    	require_once("discuss_func.inc.php");
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$tid=intval($_REQUEST['tid']);
         if(isset($_GET['cid']))$cid=intval($_GET['cid']);	

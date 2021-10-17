@@ -1,5 +1,6 @@
 <?php
-	require_once("oj-header.php");
+	require_once("discuss_func.inc.php");
+	require_once("include/db_info.inc.php");
 	$tid=intval($_REQUEST['tid']);
 	echo "<title>HUST Online Judge WebBoard</title>";
 	$sql="SELECT `title`, `cid`, `pid`, `status`, `top_level` FROM `topic` WHERE `tid` = ? AND `status` <= 1";
@@ -90,4 +91,4 @@
 </center>
 </div>
 
-<?php require_once("../oj-footer.php")?>
+<?php require_once("template/$OJ_TEMPLATE/discuss.php")?>

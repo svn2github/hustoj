@@ -1,5 +1,12 @@
 <?php
 require_once("include/db_info.inc.php");
+if(isset($OJ_BBS)&&!$OJ_BBS){
+	
+	
+	 $view_errors= "$MSG_BBS_NOT_ALLOWED_FOR_EXAM  || $MSG_BBS is not available.";
+     require("template/".$OJ_TEMPLATE."/error.php");
+     exit(0);
+}
 function problem_exist($pid,$cid){
 	if ($pid=='') $pid=0;
 	if ($cid!='')

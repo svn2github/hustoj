@@ -1,6 +1,5 @@
 <?php
-	require_once("include/db_info.inc.php");
-
+	require_once("discuss_func.inc.php");
 	echo "<title>HUST Online Judge WebBoard >> New Thread</title>";
 	if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 		echo "<a href=loginpage.php>Please Login First</a>";

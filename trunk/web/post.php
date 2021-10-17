@@ -1,5 +1,5 @@
 <?php
-        session_start();
+        require_once("discuss_func.inc.php");
         require_once("include/db_info.inc.php");
         if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
                 require_once("oj-header.php");

@@ -88,8 +88,8 @@ $i++;
 <div style="font-size:90%; width:100%; text-align:center">[<a href="#">Top</a>]  [<a href="#">Previous Page</a>]  [<a href="#">Next Page</a>] </div>
 <?php if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){?>
 <div style="font-size:80%;"><div style="margin:0 10px">New Reply:</div></div>
-<form action="post.php?action=reply" method=post>
-<input type=hidden name=tid value=<?php echo $tid;?>>
+<form action="post.php?action=reply" method="post">
+<input type="hidden" name="tid" value="<?php echo $tid;?>" >
 <div><textarea id="replyContent" name=content style="border:1px dashed #8080FF; width:700px; height:200px; font-size:75%;margin:0 10px; padding:10px"></textarea></div>
 <div><input type="submit" style="margin:5px 10px" value="Submit"></input></div>
 </form>

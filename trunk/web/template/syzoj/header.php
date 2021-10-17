@@ -52,6 +52,9 @@
             <a class="item <?php if ($url=="faqs.php") echo "active";?>" href="<?php echo $path_fix?>faqs.php"><i
                     class="help circle icon"></i> <?php echo $MSG_FAQ?></a>
 
+              <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
+                  <a class='item' href="discuss.php"><i class="clipboard icon"></i> <?php echo $MSG_BBS?></a>
+              <?php }?>
             <?php if(isset($_GET['cid'])){
             	$cid=intval($_GET['cid']);
             ?>
@@ -68,11 +71,10 @@
                         <div class="menu">
                             <a class="item" href="<?php echo $path_fix?>modifypage.php"><i
                                     class="edit icon"></i><?php echo $MSG_REG_INFO;?></a>
-				
-				<?php if($OJ_SaaS_ENABLE && $domain==$DOMAIN)
-					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";
-				 ?>
-				
+				<?php if ($OJ_SaaS_ENABLE){ ?>
+				<?php if($_SERVER['HTTP_HOST']==$DOMAIN)
+					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
+				<?php } ?>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="<?php echo $path_fix ?>/admin"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
                             <?php } ?>

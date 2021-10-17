@@ -11,6 +11,7 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
 } else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
 	$OJ_LANG="cn";
 }
+require(dirname(__FILE__)."/../lang/$OJ_LANG.php");
 
 $domain=basename($_SERVER["HTTP_HOST"]);
 

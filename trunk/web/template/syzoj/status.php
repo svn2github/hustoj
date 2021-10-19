@@ -1,6 +1,6 @@
 <?php $show_title="$MSG_STATUS - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
-<script src="https://cdnjs.loli.net/ajax/libs/textfit/2.3.1/textFit.min.js"></script>
+<script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
 <div class="padding">
 
   <!-- <form action="" class="ui mini form" method="get" role="form" id="form"> -->

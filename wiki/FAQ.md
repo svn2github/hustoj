@@ -203,7 +203,7 @@ sudo apt-get update
 ```
 如果没有产生关于无法访问的报错，就说明是正常的，可以直接运行首页的脚本。
 如果有报错，请检查dns是否正确，/etc/apt/source.list的内容是否正确。
-百度您的操作系统名称+版本号+软件源，如：Ubuntu 20.04 软件源，可能会找到修复的方法。
+百度您的操作系统名称+版本号+软件源，如：[Ubuntu 20.04 软件源](https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=Ubuntu%2020.04%20%E8%BD%AF%E4%BB%B6%E6%BA%90)，可能会找到修复的方法。
 
 请问如何重启判题机？
 --

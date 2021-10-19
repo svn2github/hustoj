@@ -196,11 +196,14 @@ $OJ_SIM=true;
 
 不能访问github，国内网，如何通过gitee安装？
 --
+没关系，最新的脚本不能访问Github也能按照，只要确保你的软件源是完整可用的。
+通过下面语句可以测试软件源是否正常。
 ```
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
-sudo bash install-ubuntu18-gitee.sh
+sudo apt-get update
 ```
-
+如果没有产生关于无法访问的报错，就说明是正常的，可以直接运行首页的脚本。
+如果有报错，请检查dns是否正确，/etc/apt/source.list的内容是否正确。
+百度您的操作系统名称+版本号+软件源，如：Ubuntu 20.04 软件源，可能会找到修复的方法。
 
 请问如何重启判题机？
 --

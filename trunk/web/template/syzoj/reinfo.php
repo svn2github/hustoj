@@ -1,7 +1,7 @@
 <?php $show_title=$id." - 错误信息 - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
-<script src="https://cdnjs.loli.net/ajax/libs/textfit/2.3.1/textFit.min.js"></script>
+<script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
 <style>
 .single-subtask {
     box-shadow: none !important;

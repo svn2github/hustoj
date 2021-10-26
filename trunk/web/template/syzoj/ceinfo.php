@@ -1,7 +1,7 @@
 <?php $show_title=$id." - 编译信息 - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
-<script src="https://cdnjs.loli.net/ajax/libs/textfit/2.3.1/textFit.min.js"></script>
+<script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
 <link href='<?php echo $OJ_CDN_URL?>highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
 <link href='<?php echo $OJ_CDN_URL?>highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
 <div class="padding">

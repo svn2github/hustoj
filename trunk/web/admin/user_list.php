@@ -76,7 +76,11 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<tr>";
         echo "<td><a href='../userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a></td>";
         echo "<td><span fd='nick' user_id='".$row['user_id']."'>".$row['nick']."</span></td>";
-        echo "<td>".$row['email']."</td>";
+        if($OJ_SaaS_ENABLE && $domain == $DOMAIN){
+                echo "<td><a href='http://".$row['user_id'].".$DOMAIN' target=_blank >".$row['email']."&nbsp;</a></td>";
+        }else{
+                echo "<td>".$row['email']."</td>";
+        }
         echo "<td><span fd='school' user_id='".$row['user_id']."'>".$row['school']."</span></td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";

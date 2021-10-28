@@ -82,6 +82,7 @@ function formatTimeLength($length) {
 	}
 	return $result;
 }
+$now = time();
 
 if (isset($_GET['cid'])) {
 	$cid = intval($_GET['cid']);

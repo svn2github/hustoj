@@ -167,7 +167,7 @@ static int sim_enable = 0;
 static int oi_mode = 0;
 static int full_diff = 0;
 static int use_max_time = 0;
-static int time_limit_to_total= 0;
+static int time_limit_to_total= 1;
 static int total_time= 0;
 
 static int http_judge = 0;

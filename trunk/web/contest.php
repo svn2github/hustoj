@@ -112,10 +112,7 @@ if (isset($_GET['cid'])) {
 		$password = stripslashes($password);
 	}
 
-	$now = time();
-	$start_time = $now;
-	$end_time = $now;
-	
+
 	if ($rows_cnt==0) {
 		$view_title = "比赛已经关闭!";
 	}

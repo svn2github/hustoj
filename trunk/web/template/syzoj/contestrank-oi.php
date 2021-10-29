@@ -18,8 +18,7 @@
 <script src="template/<?php echo $OJ_TEMPLATE?>/js/respond.min.js"></script>
 <![endif]-->
 </head>
-
-<body>
+<?php include(dirname(__FILE__)."/header.php");?>	
 
 <div class="container">
 <div class="jumbotron">
@@ -95,5 +94,5 @@ echo "</tbody></table>";
 </div>
 
 </div> <!-- /container -->
-</body>
+<?php include(dirname(__FILE__)."/footer.php");?>	
 </html>

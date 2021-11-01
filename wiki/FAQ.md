@@ -166,8 +166,8 @@ Python判题好慢好慢，如何加速？
 可以，设置db_info.inc.php中的选项，
 https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L51
 ```
-static $OJ_REGISTER=true; //允许注册新用户
-static $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
+static $OJ_REGISTER=true; //true允许注册新用户,false禁止注册
+static $OJ_REG_NEED_CONFIRM=true; //true新注册用户需要审核,false无需审核直接登陆
 ```
 关闭注册后，管理员可以在后台“比赛队账户生成器”，生成指定数量的账户用于分配。
 http://xxxx.xxxxx/admin/team_generate.php

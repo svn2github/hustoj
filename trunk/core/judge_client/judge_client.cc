@@ -2933,7 +2933,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 			else
 			{ //do not limit JVM syscall for using different JVM 对于非法的系统调用，给出具体编号给管理员参考
-			//	ACflg = OJ_RE;
+				ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
 						"[ERROR] solution_id:%d called a Forbidden system call:%u [%u]\n"

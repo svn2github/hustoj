@@ -23,8 +23,10 @@ if(isset($_POST['manual'])){
              $sql="INSERT INTO runtimeinfo VALUES(?,?)";
              pdo_query($sql,$sid,$reinfo);
         }
-	trigger_judge($sid);
-        echo "<script>history.go(-1);</script>";
+	if (isset($OJ_UDP) && $OJ_UDP) {
+           trigger_judge($sid);
+        }
+	echo "<script>history.go(-1);</script>";
 }
 
 if(isset($_POST['update_solution'])){

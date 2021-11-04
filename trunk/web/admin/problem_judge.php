@@ -23,7 +23,7 @@ if(isset($_POST['manual'])){
              $sql="INSERT INTO runtimeinfo VALUES(?,?)";
              pdo_query($sql,$sid,$reinfo);
         }
-	trigger_judge();
+	trigger_judge($sid);
         echo "<script>history.go(-1);</script>";
 }
 

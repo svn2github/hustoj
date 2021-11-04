@@ -1,4 +1,6 @@
-<?php require_once("../include/db_info.inc.php");
+<?php 
+require_once("../include/db_info.inc.php");
+require_once("../include/my_func.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'http_judge']))){
 	echo "0";
 	exit(1);
@@ -21,6 +23,7 @@ if(isset($_POST['manual'])){
              $sql="INSERT INTO runtimeinfo VALUES(?,?)";
              pdo_query($sql,$sid,$reinfo);
         }
+	trigger_judge();
         echo "<script>history.go(-1);</script>";
 }
 

@@ -76,9 +76,9 @@
 					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
 				<?php } ?>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
-                            <a class="item" href="<?php echo $path_fix ?>/admin"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
+                            <a class="item" href="admin"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
                             <?php } ?>
-                            <a class="item" href="<?php echo $path_fix?>/logout.php"><i class="power icon"></i><?php echo $MSG_LOGOUT;?></a>
+                            <a class="item" href="logout.php"><i class="power icon"></i><?php echo $MSG_LOGOUT;?></a>
                         </div>
                     </div>
                 </a>
@@ -86,11 +86,11 @@
 
 
                 <div class="item">
-                    <a class="ui button" style="margin-right: 0.5em; " href="<?php echo $path_fix?>/loginpage.php">
+                    <a class="ui button" style="margin-right: 0.5em; " href="loginpage.php">
                        <?php echo $MSG_LOGIN?> 
                     </a>
                     <?php if(isset($OJ_REGISTER)&&$OJ_REGISTER ){ ?>
-                    <a class="ui primary button" href="<?php echo $path_fix?>/registerpage.php">
+                    <a class="ui primary button" href="registerpage.php">
                        <?php echo $MSG_REGISTER?> 
                     </a>
                     <?php } ?>

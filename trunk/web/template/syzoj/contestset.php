@@ -9,6 +9,7 @@
               <div class="ui left icon input" style="width: 100%; ">
                 <input class="prompt" style="width: 100%; " type="text" value="" placeholder=" 比赛名 …" name="keyword">
                 <i class="search icon"></i>
+                <a href="contest.php" ><?php echo $MSG_VIEW_ALL_CONTESTS ?></a>
               </div>
               <div class="results" style="width: 100%; "></div>
             </div>

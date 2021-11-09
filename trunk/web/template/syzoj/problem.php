@@ -94,7 +94,8 @@ div[class*=ace_br] {
       </div>
      
       <?php
-        if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
+        if ( isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']])  ) {  //only  the original editor can edit this  problem
+        
         require_once("include/set_get_key.php");
       ?>
       

@@ -142,7 +142,7 @@ chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
 if test -f  /.dockerenv ;then
 	echo "Already in docker, skip docker installation, install some compilers ... "
-	apt-get intall -f flex fp-compiler openjdk-14-jdk mono-devel
+	apt-get intall -y flex fp-compiler openjdk-14-jdk mono-devel
 else
 	bash docker.sh
 	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf

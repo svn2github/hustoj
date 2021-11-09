@@ -1,5 +1,15 @@
 常见问答
 ----
+
+明明已经过了10秒,为什么系统还是说我提交过于频繁?
+--
+* `sudo apt-get install tzdata`  时区选择北京或上海
+* 修改db_info.inc.php 
+```
+- 老版本打开末尾关于时区的两行代码
+- 新版本把OJ_FRIENDLY_LEVEL调到1
+```
+
 判题核心的原理是怎样的？
 --
 * 参考一下[wiki](https://github.com/zhblue/hustoj/blob/master/wiki/ojback.md)

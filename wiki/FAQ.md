@@ -1,5 +1,10 @@
 常见问答
 ----
+人多的时候，随机出现`"No input file specified"`
+--
+编辑`/etc/php/7.4/fpm/pool.d/www.conf`
+修改设定 rlimit_files = 1024 为一个更大的值，如65535。修改后重启php-fpm进程（`sudo service php7.4-fpm restart`）生效。
+
 
 明明已经过了10秒,为什么系统还是说我提交过于频繁?
 --

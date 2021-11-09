@@ -118,7 +118,7 @@ echo "</select>";
         <?php
         }
       }
-      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']]) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
+      if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']]) ){
         echo "<td><a href=problem_edit.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">Edit</a>";
         echo "<td><a href='javascript:phpfm(".$row['problem_id'].");'>TestData</a>";
       }

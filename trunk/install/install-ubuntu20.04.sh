@@ -25,7 +25,7 @@ apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
 apt-get install -y libmysqlclient-dev
 apt-get install -y libmysql++-dev 
 
-for pkg in net-tools make g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
+for pkg in net-tools make g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap tzdata
 do
 	while ! apt-get install -y "$pkg" 
 	do

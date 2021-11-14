@@ -3512,6 +3512,9 @@ int main(int argc, char **argv)
 	{
 		if (DEBUG)
 			printf("add RE info of %d..... \n", solution_id);
+		FILE *df=fopen("error.out","a");
+                fprintf(df,"----time_space_table:----\n%s\n",time_space_table);
+                fclose(df);
 		addreinfo(solution_id);
 	}
 	if (use_max_time)
@@ -3551,7 +3554,7 @@ int main(int argc, char **argv)
 	fclose(df);
 	if(DEBUG) printf("ACflg:%d\n",ACflg);
 	if(DEBUG) printf("finalACflg:%d\n",finalACflg);
-	if(ACflg != 10 && finalACflg!= 10 ) adddiffinfo(solution_id);
+	if(ACflg != OJ_RE && finalACflg!= OJ_RE ) adddiffinfo(solution_id);
 	if(!turbo_mode)update_user(user_id);
 	if(!turbo_mode)update_problem(p_id,cid);
 	clean_workdir(work_dir);

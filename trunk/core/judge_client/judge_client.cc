@@ -3465,6 +3465,7 @@ int main(int argc, char **argv)
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
+			kill(pidApp,9);
 			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
 			total_time+=usedtime;
 			printf("time:%d/%d\n",usedtime,total_time);

@@ -41,7 +41,7 @@
                     <tbody>
 
                         <?php
-                        $sql_users = "select * FROM `users` ORDER BY `solved` DESC LIMIT 15";
+                        $sql_users = "select * FROM `users` where defunct='N' ORDER BY `solved` DESC LIMIT 15";
                         $result_users = mysql_query_cache( $sql_users );
                         if ( $result_users ) {
                             $i = 1;
@@ -107,7 +107,7 @@
                     </thead>
                     <tbody>
                     <?php
-                        $sql_contests = "select * FROM `contest` ORDER BY `contest_id` DESC LIMIT 5";
+                        $sql_contests = "select * FROM `contest` where defunct='N' ORDER BY `contest_id` DESC LIMIT 5";
                         $result_contests = mysql_query_cache( $sql_contests );
                         if ( $result_contests ) {
                             $i = 1;

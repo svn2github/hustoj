@@ -91,21 +91,15 @@ public class Main {
     }
 }</code></pre>
         </div>
-        <p><strong>python2 (.py)</strong></p>
-        <div class="ui existing segment">
-            <pre style="margin-top: 0; margin-bottom: 0; ">
-<code class="lang-c">import sys
-for line in sys.stdin:
-    print(sum(map(int, line.split())))</code></pre>
-        </div>
         <p><strong>python3 (.py)</strong></p>
         <div class="ui existing segment">
             <pre style="margin-top: 0; margin-bottom: 0; ">
-<code class="lang-c">while True:
-    raw = input()
-    if raw == '':
-        break
-    print(sum(map(int, raw.split())))</code></pre>
+<code class="lang-c">import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
+for line in sys.stdin:
+    a = line.split()
+    print(int(a[0]) + int(a[1]))</code></pre>
         </div>
     </div>
 </div>

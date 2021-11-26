@@ -40,7 +40,10 @@
  	$MSG_OK="OK";
  	$MSG_Explain="Type reason or explaination";
         $MSG_TEST_RUN="Test Running Done";
-  	
+
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
+	
  	$MSG_RUNID="RunID";
 	$MSG_USER="User";
 	$MSG_PROBLEM="Problem";
@@ -143,6 +146,7 @@
 	$MSG_IMPORT="Import";
 	$MSG_EXPORT="Export";
 	$MSG_UPDATE_DATABASE="Update Database";
+	$MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="Online";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";
@@ -154,11 +158,12 @@
 	$MSG_TIME_WARNING="Before Contest Start";
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." Contest does not show result, until it's over.";
-  
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." Contest does not show hint.";
 	$MSG_SERVER_TIME="SERVER TIME";
 	$MSG_START_TIME="Start Time";
 	$MSG_END_TIME="End Time";
 	$MSG_CONTEST_ID="CONTEST ID";
+	$MSG_VIEW_ALL_CONTESTS="Show All Contests";
 	$MSG_CONTEST_NAME="CONTEST NAME";
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";
@@ -208,6 +213,16 @@
   $MSG_BALLOON_DONE="Balloon Sent";
   $MSG_BALLOON_PENDING="Balloon Pending";
 
+
+  $MSG_DATE="Date";
+  $MSG_SIGN="Signature";
+  $MSG_RECENT_PROBLEM="Recent Problems";
+  $MSG_RECENT_CONTEST="Recent Contest";
+  $MSG_PASS_RATE="Pass Rate";
+  $MSG_SHOW_TAGS="Show Tags";
+  $MSG_SHOW_ALL_TAGS="All Tags";
+
+
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
   $MSG_HELP_NEWS_LIST="edit or shutdown published news";
@@ -245,6 +260,8 @@
 	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> Please give us a <span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star @HUSTOJ Github!</a></sub>";
   $MSG_HELP_SPJ="<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>search hustoj special judge</a>for more details"; 
   $MSG_HELP_BALLOON_SCHOOL="School Field of the Printer/Balloon privileged Accout, will be used as filter in task list.";
+  $MSG_HRLP_BACKUP_DATABASE="Backup Database , TestData and Pictures to the 0 problem testdata directory";
+
   
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="Login from a diffrent ip ";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" during exam is not allowed ";
@@ -336,6 +353,9 @@
 	$MSG_DECLARED_FILE_NAMED="The public class in OJ can only be Main.";
 	$MSG_EXPECTED_IDENTIFIER="It may not have declare a variable name or missing parentheses when declaring a variable.";
 	$MSG_VARIABLY_MODIFIED="Variables cannot be used for array size. Variables cannot be used as the dimension size of global arrays in C language, including const variables.";
+	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
 
+	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
+        $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="Mails can only be sent between teachers and student, not between students.";
 
  ?>

@@ -1,14 +1,147 @@
-#summary FAQ常见问答
-#labels Featured,FAQ
-
-= Introduction =
-
-When people asked question, we put the answer here
-
-这里是常见问答。
-
-新版本
+常见问答
 ----
+人多的时候，随机出现`"No input file specified"`
+--
+编辑`/etc/php/7.4/fpm/pool.d/www.conf`
+修改设定 rlimit_files = 1024 为一个更大的值，如65535。修改后重启php-fpm进程（`sudo service php7.4-fpm restart`）生效。
+
+
+明明已经过了10秒,为什么系统还是说我提交过于频繁?
+--
+* `sudo apt-get install tzdata`  时区选择北京或上海
+* 修改db_info.inc.php 
+```
+- 老版本打开末尾关于时区的两行代码
+- 新版本把OJ_FRIENDLY_LEVEL调到1
+```
+
+判题核心的原理是怎样的？
+--
+* 参考一下[wiki](https://github.com/zhblue/hustoj/blob/master/wiki/ojback.md)
+* 阅读一下judge_client.cc中的注释。
+
+
+如何让学生账号在比赛中也能看到和练习一样的详细错误信息？
+--
+* 编辑db_info.inc.php,设置 $OJ_SHOW_DIFF=true;
+* 打开文件reinfo.php
+在27行和60行有两处详细注释，根据注释进行调整。
+
+
+如何获得管理员权限？
+--
+* 操作系统Ubuntu的管理员权限是通过在安装过程中产生的账号运行sudo su切换到root。
+* OJ的管理员是安装完成后，第一个注册的用户用admin作为用户名注册，自动获得管理权限。
+* LiveCD的judge用户不能登陆，用户名ubuntu的密码是freeproblemset。
+
+权限表里的记录都是什么含义?
+--
+以下权限是手动指派：
+* "administrator" 管理员，除查看源码外的所有权限。
+* "problem_editor"：题目编辑者，添加和编辑题目。
+* "source_browser"：查看审核所有提交的源代码，对比可疑的相似代码。
+* "contest_creator"：组织创建比赛，编辑比赛。
+* "http_judge"：HTTP远程判题账号。
+* "password_setter"：重置普通账户密码。
+* "printer"：现场赛打印员，注意该账户的school字段用于分配打印任务，如果只有一个打印区则置空。
+* "balloon"：气球配送员，注意该账户的school字段用于分配气球任务，如果只有一个气球配送区则置空。
+* "vip"：可以参与所有标题含有VIP字样的私有比赛。
+* "problem_start"：HTTP远程判题账户的任务起始题号。
+* "problem_end"：HTTP远程判题账户的任务结束题号。
+
+新赋予的权限需要重新登陆获得！
+
+以下权限是系统自动生成：
+* p+数字：题目的独立编辑权，管理员可以编辑所有题目，problem_editor只能编辑自己添加的题目。
+* m+数字: 比赛的独立编辑权，管理员可以编辑所有比赛，contest_creator只能编辑自己添加的比赛。
+* c+数字：比赛的参与权，私有比赛只有有权限或者知道密码的用户可以参与。
+
+
+如何使用题单功能？
+--
+在新闻内容中编写,格式为:
+```
+[plist=题号列表]题单名[/plist]
+```
+也可以在题目列表里，勾选题目后，点击NewProblemList按钮（仅限bs3模板使用）。
+
+
+脚本把OJ装在哪里了？可以卸载么？
+--
+* 脚本安装默认位置在/home/judge，其中src是全部源码，data是测试数据,etc目录是判题端的配置文件，install目录是各种工具脚本。
+* src/web/upload目录存放着所有上传的图片，包括新闻与题目的图片。
+* Ubuntu中默认的数据库文件放置在/var/lib/mysql，但是不建议直接备份库文件，而是推荐用install目录中的bak.sh进行备份。
+* 如果想卸载，可以参考src/install/uninstall.sh，注意卸载脚本不考虑服务器上可能存在的其他Web系统，请谨慎使用。
+* 对于正在运行中的生产服务器，任何操作前请做好离线备份。
+* 备份文件一定要解压查看内部是否包含全部数据，关注备份的大小（大系统备份应该有上百兆），有条件找虚拟机实测还原是否成功
+
+
+题目的限时和内存限制的精度是怎样的？
+--
+* 题目限时允许设定的字面精度是0.001s,但是由于操作系统内核参数的限定，实测的精度通常为4ms。
+* judge.conf中有个OJ_CPU_COMPENSATION来标注当前系统的CPU速度，安装脚本自动根据BogoMIPS的值来设定。
+* 当BogoMIPS的值为5000时，这个值为1.000，当CPU的速度更快时，这个值为大于1.000的值。
+* 最终系统记录的时间，将按照这个系数进行调整，对于对时间精度要求较高的场合，如正式比赛，或者判题机配置不均衡的情况，可以通过手工调节该参数，让不同的判题机对于相同题目的运行结果趋于一致。
+
+内存限制的精度是1MB，对于本地native的编译型语言c/c++/pascal/freebasic/clang等是考察程序本身的内存申请空间; 对于虚拟机和脚本语言，则包含了虚拟机本身或解释器本身的内存消耗。
+
+
+测试文件的大小、数量有什么限制？
+--
+一般情况下，单个测试文件大小建议不超过10M，测试文件总量10组（.in + .out）。
+* 源码中对测试文件大小有个上限 STD_F_LIM = 32M
+[定义](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L58)
+[生效](https://github.com/zhblue/hustoj/blob/master/trunk/core/judge_client/judge_client.cc#L2371)
+* 在OJ_OI_MODE=1的情况下，题目限时是依赖于OJ_TIME_LIMIT_TO_TOTAL的：
+* 当OJ_TIME_LIMIT_TO_TOTAL=1 限时应用于所有数据的总耗时
+* 当OJ_TIME_LIMIT_TO_TOTAL=0，限时应用于每组测试文件。
+* 状态页status.php(solution表)中记录的时间，取决于OJ_USE_MAX_TIME：
+* 当OJ_USE_MAX_TIME=0时，记录的是总耗时。
+* 当OJ_USE_MAX_TIME=1时，记录的是最高耗时。
+因此，当测试数据组数较多时，推荐设定OJ_USE_MAX_TIME=0，OJ_TIME_LIMIT_TO_TOTAL=1 。
+
+测试文件的文件名命名有什么规则？
+--
+* 一般推荐用英文命名，相同文件名的.in .out文件为一组。
+* 不支持.ans的扩展名，请在上传前用Windows的命令行统一修改`ren *.ans *.out`。
+* 支持在文件名中使用方括号`[]`来标注分数。如 `test01[20].in / test01[20].out`将视为分数是20分,未标注的文件按10分计分，系统最终根据所有文件的总分和运行得分，记录提交的通过率pass_rate放入solution表，用于前台显示。
+* 评测的时候根据所有.in文件的字典序来评测, 因此test10先于test2评测, 后于test02评测。
+
+为什么我的系统卡在编译中
+--
+* 如果修改了数据库密码，请注意除了db_info.inc.php需要修改，还需要修改judge.conf中的数据库密码，并需要重启judged进程。
+* 如果judge.conf中启用了OJ_USE_DOCKER=1，请确保禁用了OJ_SHM_RUN=0，并检查run0等目录是真实的目录而非软连接。
+* 如果如果OJ_USE_DOCKER=0时系统正常，OJ_USE_DOCKER=1时卡住，请检查install目录下的Dockerfile文件内容是否符合需求，并再次运行docker.sh确认运行结果正常。
+* 修改OJ_USER_DOCKER参数，需要重启judged生效，方法是sudo pkill -9 judged && sudo judged
+
+
+正式比赛或大规模系统需要注意哪些问题？
+--
+* 正式比赛推荐激活db_info.inc.php中的两个参数。
+```
+//static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
+//static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
+```
+* 对于公网上的系统，推荐使用阿里云的RDS作为数据库服务器，然后根据比赛规模分别部署一定数量的判题机和Web服务器，通过域名解析进行Web访问的负载均衡。
+* Web服务器和判题机都和RDS配置在同一专用网络中，使用mysql直连数据库。
+* Web服务器都增加Memcached做页面缓存。
+* 可以配置php用Memcached存放session数据。
+* 判题机测试数据提前复制，并配置证书登陆、编写rsync脚本方便覆盖同步。
+* 判题机开启UDP监听(judge.conf:OJ_UDP_ENABLE等参数)，Web服务器配置好UDP任务推送(db_info.inc.php:$OJ_UDP等参数)。
+* 安装配置完成后，可以从任意一台Web服务器导入一个特制的FPS文件，这个文件中可以提前复制粘贴数百份solution。
+* 导入后，可以模拟大量提交，然后观察全部判题队列的运行时间，推算平均判题速度，观察判题机分配是否均匀，判题结果是否一致，耗时内存是否接近。
+
+NOI SCP CCF 新标准使用C++14，如何在hustoj中更改默认的编译参数。
+--
+最新版本已经更新默认C++标准为C++14，直接升级即可。
+对于2021年7月份之后安装的用户，judge.conf中自己增加一个`OJ_CPP_STD=-std=c++14`即可。
+
+
+C++ 中的gets函数哪里去了？为何编译报错？
+--
+根据 https://zh.cppreference.com/w/cpp/io/c/gets , gets函数已经被移除。
+可以使用`#define gets(S) fgets(S,sizeof(S),stdin)` 作为兼容性宏替换。
+
 
 Python判题好慢好慢，如何加速？
 --
@@ -49,8 +182,8 @@ Python判题好慢好慢，如何加速？
 可以，设置db_info.inc.php中的选项，
 https://github.com/zhblue/hustoj/blob/master/trunk/web/include/db_info.inc.php#L51
 ```
-static $OJ_REGISTER=true; //允许注册新用户
-static $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
+static $OJ_REGISTER=true; //true允许注册新用户,false禁止注册
+static $OJ_REG_NEED_CONFIRM=true; //true新注册用户需要审核,false无需审核直接登陆
 ```
 关闭注册后，管理员可以在后台“比赛队账户生成器”，生成指定数量的账户用于分配。
 http://xxxx.xxxxx/admin/team_generate.php
@@ -79,11 +212,14 @@ $OJ_SIM=true;
 
 不能访问github，国内网，如何通过gitee安装？
 --
+没关系，最新的脚本不能访问Github也能按照，只要确保你的软件源是完整可用的。
+通过下面语句可以测试软件源是否正常。
 ```
-wget https://gitee.com/zhblue/hustoj/raw/master/trunk/install/install-ubuntu18-gitee.sh
-sudo bash install-ubuntu18-gitee.sh
+sudo apt-get update
 ```
-
+如果没有产生关于无法访问的报错，就说明是正常的，可以直接运行首页的脚本。
+如果有报错，请检查dns是否正确，/etc/apt/source.list的内容是否正确。
+百度您的操作系统名称+版本号+软件源，如：[Ubuntu 20.04 软件源](https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=Ubuntu%2020.04%20%E8%BD%AF%E4%BB%B6%E6%BA%90)，可能会找到修复的方法。
 
 请问如何重启判题机？
 --

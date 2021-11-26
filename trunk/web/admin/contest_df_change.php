@@ -12,11 +12,15 @@ if ($num<1){
 	exit(0);
 }
 $row=$result[0];
-if ($row[0]=='N') 
+if ($row[0]=='N'){
 	$sql="UPDATE `contest` SET `defunct`='Y' WHERE `contest_id`=?";
-else 
+}else{ 
 	$sql="UPDATE `contest` SET `defunct`='N' WHERE `contest_id`=?";
+}
 pdo_query($sql,$cid);
+
+
+
 ?>
 <script language=javascript>
 	history.go(-1);

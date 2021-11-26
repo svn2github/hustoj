@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><?php echo $MSG_NEWS;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
+        <?php require("./include/bbcode.php");?>
     </head>
     
     <body>
@@ -13,7 +14,7 @@
                 <div class="card">
   <div class="card-body">
     <h4><?php echo $MSG_NEWS;?> - <?php echo $news_title;?></h4>
-    <?php echo $news_content;?>
+    <?php echo bbcode_to_html($news_content);?>
     </div>
     </div>
     </div>

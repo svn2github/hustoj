@@ -82,6 +82,7 @@ function formatTimeLength($length) {
 	}
 	return $result;
 }
+$now = time();
 
 if (isset($_GET['cid'])) {
 	$cid = intval($_GET['cid']);
@@ -91,8 +92,17 @@ if (isset($_GET['cid'])) {
 	//check contest valid
 	$sql = "SELECT * FROM `contest` WHERE `contest_id`=?";
 	$result = pdo_query($sql,$cid);
-
 	$rows_cnt = count($result);
+	
+	if($rows_cnt>0){
+		$row = $result[0];
+		$start_time = strtotime($row['start_time']);
+		$end_time = strtotime($row['end_time']);
+		$view_description = $row['description'];
+		$view_title = $row['title'];
+		$view_start_time = $row['start_time'];
+		$view_end_time = $row['end_time'];
+	}
 	$contest_ok = true;
 	$password = "";
 
@@ -103,11 +113,12 @@ if (isset($_GET['cid'])) {
 		$password = stripslashes($password);
 	}
 
+
 	if ($rows_cnt==0) {
 		$view_title = "比赛已经关闭!";
 	}
 	else{
-		$row = $result[0];
+		
 		$view_private = $row['private'];
 
 		if ($password!="" && $password==$row['password'])
@@ -121,14 +132,6 @@ if (isset($_GET['cid'])) {
 
 		if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']))
 			$contest_ok = true;
-
-		$now = time();
-		$start_time = strtotime($row['start_time']);
-		$end_time = strtotime($row['end_time']);
-		$view_description = $row['description'];
-		$view_title = $row['title'];
-		$view_start_time = $row['start_time'];
-		$view_end_time = $row['end_time'];
 
 		if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time) {
 			$view_errors = "<center>";
@@ -191,9 +194,12 @@ if (isset($_GET['cid'])) {
 	   ) $noip=false;
 	foreach($result as $row) {
 		$view_problemset[$cnt][0] = "";
-		if (isset($_SESSION[$OJ_NAME.'_'.'user_id']))
-			$view_problemset[$cnt][0] = check_ac($cid,$cnt,$noip);
-		else
+		if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+			if($noip)
+                          $view_problemset[$cnt][0] = "?";
+                        else
+                          $view_problemset[$cnt][0] = check_ac($cid,$cnt,$noip);
+		}else
 			$view_problemset[$cnt][0] = "";
 
 
@@ -212,8 +218,8 @@ if (isset($_GET['cid'])) {
 
 			$tresult = pdo_query($sql, $tpid);
 
-			if (intval($tresult) != 0) { //if the problem will be use remained contes/exam
-				$view_problemset[$cnt][1] = $PID[$cnt]; //hide
+			if (intval($tresult) != 0 ) { //if the problem will be use remained contes/exam 
+				$view_problemset[$cnt][1] = $PID[$cnt]; //hide the title after contest
 				$view_problemset[$cnt][2] = '----';
 			}
 			else {
@@ -238,7 +244,7 @@ else {
 	if (isset($_GET['page']))
 		$page = intval($_GET['page']);
 
-	$page_cnt = 10;
+	$page_cnt = 25;
 	$pstart = $page_cnt*$page-$page_cnt;
 	$pend = $page_cnt;
 	$rows = pdo_query("select count(1) from contest where defunct='N'");
@@ -276,8 +282,7 @@ else {
 
 		if (strlen($mycontests)>0)
 			$mycontests=substr($mycontests,1);
-
-		if (isset($_GET['my']))
+		if (isset($_GET['my'])&&$mycontests!="")
 	  		if(isset($_GET['my'])) $wheremy=" and( contest_id in ($mycontests) or user_id='".$_SESSION[$OJ_NAME.'_user_id']."')";
 	}
 

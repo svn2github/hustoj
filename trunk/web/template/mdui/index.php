@@ -24,7 +24,7 @@
                         .'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'
                         .'</div>'
                         .'<div class="mdui-panel-item-body">'
-                        .$row["content"]
+                        .bbcode_to_html($row["content"])
                         .'</div>'
                         .'</div>';
                 }

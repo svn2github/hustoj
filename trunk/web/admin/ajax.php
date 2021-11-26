@@ -23,4 +23,18 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		$sql= "select title from problem where problem_id=?";		
 		echo pdo_query($sql,$pid)[0][0];
 	}
+        if($m=="user_update_nick"){
+                $user_id=$_POST['user_id'];
+                $nick=$_POST['nick'];
+                $sql= "update users set nick=? where user_id=?";
+                echo pdo_query($sql,$nick,$user_id);
+		$sql= "update solution set nick=? where user_id=?";
+                pdo_query($sql,$nick,$user_id);
+        }
+	if($m=="user_update_school"){
+                $user_id=$_POST['user_id'];
+                $school=$_POST['school'];
+                $sql= "update users set school=? where user_id=?";
+                echo pdo_query($sql,$school,$user_id);
+        }
 }

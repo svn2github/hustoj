@@ -89,8 +89,6 @@ if (isset($OJ_LANG)) {
 
 require_once("./include/const.inc.php");
 
-if ($OJ_TEMPLATE!="classic")
-  $judge_color = Array("label gray","label label-info","label label-warning","label label-warning","label label-success","label label-danger","label label-danger","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-info");
 
 $str2 = "";
 $lock = false;
@@ -157,7 +155,7 @@ else {
     }else if ($_SESSION[$OJ_NAME.'_'.'user_id']!="guest")
                   $sql="WHERE (contest_id=0 or contest_id is null)  ";
     }else{
-        $sql="WHERE problem_id>0   ";
+        $sql="WHERE problem_id>0 and (contest_id=0 or contest_id is null) ";
     }
 }
 

@@ -1,4 +1,4 @@
-<?php $show_title="问题列表 - $OJ_NAME"; ?>
+<?php $show_title="$MSG_PROBLEMS - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="padding">
 
@@ -6,24 +6,25 @@
     <div class="row" style="white-space: nowrap; ">
       <div class="seven wide column">
           <form action="" method="get">
-            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px; ">
+            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px;float:left ">
               <div class="ui left icon input" style="width: 100%; ">
-                <input class="prompt" style="width: 100%; " type="text" value="" placeholder=" 题目名 …" name="search">
+                <input class="prompt" style="width: 100%; " type="text" value="" placeholder=" <?php echo $MSG_TITLE;?> …" name="search">
                 <i class="search icon"></i>
               </div>
               <div class="results" style="width: 100%; "></div>
             </div>
           </form>
 
-          <!-- <form action="<%= syzoj.utils.makeUrl(['problems', 'search']) %>" method="get">
-            <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px; ">
-              <div class="ui left icon input" style="width: 100%; ">
-                <input class="prompt" style="width: 100%; " type="text" value="<%= req.query.keyword %>" placeholder="ID / 题目名 …" name="keyword">
+          <form action="problem.php" method="get">
+            <div class="ui search" style="width: 120px; height: 28px; margin-top: -5.3px; ">
+              <div class="ui icon input" style="width: 100%; ">
+                <input class="prompt" style="width: 100%; " type="text" value="" placeholder="ID" name="id">
                 <i class="search icon"></i>
               </div>
               <div class="results" style="width: 100%; "></div>
             </div>
-          </form> -->
+          </form>
+
       </div>
 
 
@@ -54,20 +55,12 @@
             });
           });
           </script>
-          <label>显示分类标签</label>
+          <label><?php echo $MSG_SHOW_TAGS;?></label>
           
         </div>
         <div style="margin-left: 10px; display: inline-block; ">
-              <!-- <a style="margin-left: 10px; " href="<%= syzoj.utils.makeUrl(['problems', 'tag', tags[0].id, 'edit']) %>" class="ui labeled icon mini blue button"><i class="write icon"></i> 编辑标签</a> -->
-            <a style="margin-left: 10px; " href="category.php" class="ui labeled icon mini green button"><i class="plus icon"></i> 查看全部标签</a>
-          <!-- <div style="margin-left: 10px; " class="ui mini buttons">
-            <div class="ui labeled icon mini dropdown button" id="add_problem_dropdown"><i class="plus icon"></i> 添加题目
-            <div class="menu">
-              <a class="item" href="<%= syzoj.utils.makeUrl(['problem', 0, 'edit']) %>"><i class="file icon"></i> 新建题目</a>
-              <a class="item" href="<%= syzoj.utils.makeUrl(['problem', 0, 'import']) %>"><i class="cloud download icon"></i> 导入题目</a>
-            </div>
-            </div>
-          </div> -->
+               <a style="margin-left: 10px; " href="category.php" class="ui labeled icon mini green button"><i class="plus icon"></i> <?php echo $MSG_SHOW_ALL_TAGS;?></a>
+          
         </div>
 
       </div>
@@ -108,13 +101,13 @@
       <tr>
 
         <?php if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){?>
-          <th class="one wide">提交状态</th>
+          <th class="one wide"><?php echo $MSG_STATUS?></th>
         <?php } ?>
-        <th class="one wide">编号</th>
-        <th class="left aligned">题目名称</th>
-        <th class="one wide">通过</th>
-        <th class="one wide">提交</th>
-        <th class="one wide">通过率</th>
+        <th class="one wide"><?php echo $MSG_PROBLEM_ID?></th>
+        <th class="left aligned"><?php echo $MSG_TITLE?></th>
+        <th class="one wide"><?php echo $MSG_SOVLED?></th>
+        <th class="one wide"><?php echo $MSG_SUBMIT?></th>
+        <th class="one wide"><?php echo $MSG_PASS_RATE?></th>
       </tr>
     </thead>
     <tbody>

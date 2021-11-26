@@ -133,13 +133,14 @@ if (isset($_GET['cid'])) {
 		$view_title = $row['title'];
 		$view_start_time = $row['start_time'];
 		$view_end_time = $row['end_time'];
+		$user_id = $row['user_id'];
 
-		if (!isset($_SESSION[$OJ_NAME.'_'.'administrator']) && $now<$start_time) {
+		if (! ( isset($_SESSION[$OJ_NAME.'_'.'administrator'])|| $user_id == $_SESSION[$OJ_NAME.'_user_id']  ) ) {
 			$view_errors = "<center>";
 			$view_errors .= "<h3>$MSG_CONTEST_ID : $view_cid - $view_title</h3>";
 			$view_errors .= "<p>$view_description</p>";
 			$view_errors .= "<br>";
-			$view_errors .= "<span class=text-success>$MSG_TIME_WARNING</span>";
+			$view_errors .= "<span class=text-success>$MSG_ADMIN $MSG_CONTEST_CREATOR only </span>";
 			$view_errors .= "</center>";
 			$view_errors .= "<br><br>";
 

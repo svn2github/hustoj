@@ -3,13 +3,13 @@
 <div class="padding">
     <div class="ui three column grid">
         <div class="eleven wide column">
-            <h4 class="ui top attached block header"><i class="ui info icon"></i>公告</h4>
+            <h4 class="ui top attached block header"><i class="ui info icon"></i><?php echo $MSG_NEWS;?></h4>
             <div class="ui bottom attached segment">
                 <table class="ui very basic table">
                     <thead>
                         <tr>
-                            <th>标题</th>
-                            <th>时间</th>
+                            <th><?php echo $MSG_TITLE;?></th>
+                            <th><?php echo $MSG_TIME;?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,20 +28,20 @@
                     </tbody>
                 </table>
             </div>
-            <h4 class="ui top attached block header"><i class="ui signal icon"></i>排名</h4>
+            <h4 class="ui top attached block header"><i class="ui signal icon"></i><?php echo $MSG_RANKLIST;?></h4>
             <div class="ui bottom attached segment">
                 <table class="ui very basic center aligned table" style="table-layout: fixed; ">
                     <thead>
                         <tr>
                             <th style="width: 50px; ">#</th>
-                            <th style="width: 170px; ">用户名</th>
-                            <th>个性签名</th>
+                            <th style="width: 170px; "><?php echo $MSG_USER_ID;?></th>
+                            <th><?php echo $MSG_SIGN ;?></th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <?php
-                        $sql_users = "select * FROM `users` ORDER BY `solved` DESC LIMIT 15";
+                        $sql_users = "select * FROM `users` where defunct='N' ORDER BY `solved` DESC LIMIT 15";
                         $result_users = mysql_query_cache( $sql_users );
                         if ( $result_users ) {
                             $i = 1;
@@ -58,18 +58,18 @@
             </div>
         </div>
         <div class="right floated five wide column">
-            <h4 class="ui top attached block header"><i class="ui rss icon"></i>最近更新</h4>
+            <h4 class="ui top attached block header"><i class="ui rss icon"></i> <?php echo $MSG_RECENT_PROBLEM;?> </h4>
             <div class="ui bottom attached segment">
                 <table class="ui very basic center aligned table">
                     <thead>
                         <tr>
-                            <th width="70%">题目</th>
-                            <th width="30%">更新时间</th>
+                            <th width="70%"><?php echo $MSG_TITLE;?></th>
+                            <th width="30%"><?php echo $MSG_TIME;?></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $sql_problems = "select * FROM `problem` ORDER BY `problem_id` DESC LIMIT 5";
+                        $sql_problems = "select * FROM `problem` where defunct='N' ORDER BY `problem_id` DESC LIMIT 5";
                         $result_problems = mysql_query_cache( $sql_problems );
                         if ( $result_problems ) {
                             $i = 1;
@@ -84,30 +84,30 @@
                     </tbody>
                 </table>
             </div>
-            <h4 class="ui top attached block header"><i class="ui search icon"></i>题目跳转</h4>
+            <h4 class="ui top attached block header"><i class="ui search icon"></i><?php echo $MSG_SEARCH;?></h4>
             <div class="ui bottom attached segment">
                 <form action="problem.php" method="get">
                     <div class="ui search" style="width: 100%; ">
                         <div class="ui left icon input" style="width: 100%; ">
-                            <input class="prompt" style="width: 100%; " type="text" placeholder="题目号 …" name="id">
+                            <input class="prompt" style="width: 100%; " type="text" placeholder="<?php echo $MSG_PROBLEM_ID ;?> …" name="id">
                             <i class="search icon"></i>
                         </div>
                         <div class="results" style="width: 100%; "></div>
                     </div>
                 </form>
             </div>
-            <h4 class="ui top attached block header"><i class="ui calendar icon"></i>近期比赛</h4>
+            <h4 class="ui top attached block header"><i class="ui calendar icon"></i><?php echo $MSG_RECENT_CONTEST ;?></h4>
             <div class="ui bottom attached center aligned segment">
                 <table class="ui very basic center aligned table">
                     <thead>
                         <tr>
-                            <th>比赛名称</th>
-                            <th>开始时间</th>
+                            <th><?php echo $MSG_CONTEST_NAME;?></th>
+                            <th><?php echo $MSG_START_TIME;?></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $sql_contests = "select * FROM `contest` ORDER BY `contest_id` DESC LIMIT 5";
+                        $sql_contests = "select * FROM `contest` where defunct='N' ORDER BY `contest_id` DESC LIMIT 5";
                         $result_contests = mysql_query_cache( $sql_contests );
                         if ( $result_contests ) {
                             $i = 1;

@@ -29,6 +29,15 @@
 <center>
   <font size="+3"><?php echo $OJ_NAME?> Online Judge FAQ</font>
 </center>
+	      
+	      <hr>
+	      
+<p><font color=green>Q</font>:gets函数没有了吗?<br>
+   <font color=red>A</font>:gets函数因为不能限制输入的长度，造成了历史上大量的缓冲区溢出漏洞，因此在最新版本中被彻底删除了，请使用fgets这个函数取代。
+   或者使用下面的宏定义来取代：<br>
+   <pre>#define gets(S) fgets(S,sizeof(S),stdin)</pre><br>
+</p>	      
+	      
 <hr>
 <p><font color=green>Q</font>:这个在线裁判系统使用什么样的编译器和编译选项?<br>
   <font color=red>A</font>:系统运行于<a href="http://www.debian.org/">Debian</a>/<a href="http://www.ubuntu.com">Ubuntu</a>
@@ -45,7 +54,7 @@
   </tr>
   <tr>
     <td>C++:</td>
-    <td><font color=blue>g++ -fno-asm -Wall -lm --static -std=c++11 -DONLINE_JUDGE -o Main Main.cc</font></td>
+    <td><font color=blue>g++ -fno-asm -Wall -lm --static -std=c++14 -DONLINE_JUDGE -o Main Main.cc</font></td>
   </tr>
   <tr>
     <td>Pascal:</td>
@@ -64,7 +73,7 @@
 <font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
 <font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
 <font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
-<font color=blue>Openjdk "14.0.2"</font><br>
+<font color=blue>Openjdk 16</font><br>
 <font color=blue>Python 3.8.5</font><br>
 	      </p>
 	      
@@ -132,7 +141,13 @@ for line in sys.stdin:
     a = line.split()
     print(int(a[0]) + int(a[1]))
 </pre>
-	      
+	    为了方便使用本地文件调试，C/C++也可以用下面的方法来仅在本地运行时进行输入、输出重定向。
+<pre>
+#ifdnef ONLINE_JUDGE
+    freopen("sample.in", "r", stdin);
+    freopen("sample.out", "w", stdout);
+#endif
+</pre>
 	
 <hr>
 <font color=green>Q</font>:为什么我的程序在自己的电脑上正常编译，而系统告诉我编译错误!<br>

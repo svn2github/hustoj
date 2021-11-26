@@ -5,11 +5,15 @@ HUSTOJ 支持一台数据库服务器，多台 `web` 服务器和多台判题服
 ### 创建用于从远程连接数据库的帐号
 
 ```sql
-GRANT ALL PRIVILEGES ON jol.* TO ‘judge’@’%’
-IDENTIFIED BY ‘judge_pass’ WITHOUT GRANT OPTION;
+CREATE USER 'judge'@'%' identified by 'judge_pass';
+GRANT ALL PRIVILEGES ON jol.* TO ‘judge’@’%’ WITHOUT GRANT OPTION;
 flush privileges;
 ```
-其中 `jol` 为数据库， `judge` 为帐号，`judge_pass` 为密码。注意检查 `/etc/mysql/my.cnf` 确保 `bind-address = 0.0.0.0` 。高负载的情况下最好设置更多的连接数：`max_connections = 512` 。
+其中 `jol` 为数据库， `judge` 为帐号，`judge_pass` 为密码。
+
+* 注意检查 `/etc/mysql/mysql.conf.d/mysqld.cnf` 确保在mysqld段落里存在设定 `bind-address = 0.0.0.0` 。
+
+高负载的情况下最好设置更多的连接数：`max_connections = 512` 。
 
 ### 配置各 web 程序连接到数据库
 

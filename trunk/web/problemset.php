@@ -74,8 +74,19 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$pstart = 0;
 	$pend = 100;
 
-}
-else {
+}else if (isset($_GET['list']) && trim($_GET['list']!="")){
+        $plist= explode(",",$_GET['list']);
+	$pids="0";
+	foreach($plist as $pid){
+	  $pid=intval($pid);
+     	  $pids.=",$pid";
+	}
+	$filter_sql = " problem_id in ($pids)";
+	$pstart = 0;
+	$pend = 100;
+	//echo $filter_sql ;
+
+}else {
 	//$filter_sql = " `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 	$filter_sql = "A.ROWNUM >='" . strval($pstart) . "' AND A.ROWNUM < '". strval($pend) . "' ";
 }
@@ -91,17 +102,17 @@ if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
 
 	if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
 
-	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
 }
 else {  //page problems (not include in contests period)
 	$now = strftime("%Y-%m-%d %H:%M",time());
-	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted` " .
+	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct " .
 	"FROM `problem`, (SELECT @ROWNUM := 0) TEMP " .
 	"WHERE `defunct`='N' AND `problem_id` NOT IN (
 		SELECT  `problem_id`
 		FROM contest c
 			INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id` ".
-			 " AND (c.`defunct` = 'N' AND c.`start_time`<='$now' AND '$now'<c.`end_time`)" .    // option style show all non-running contest
+			 " AND (c.`defunct` = 'N' AND '$now'<c.`end_time`)" .    // option style show all non-running contest
 			//"and (c.`end_time` >  '$now'  OR c.private =1)" .    // original style , hidden all private contest problems
 	") ORDER BY `problem_id` ) A WHERE $filter_sql";
 }
@@ -153,7 +164,7 @@ foreach ($result as $row) {
 		if ($label_theme=="")
 			$label_theme = "default";
 
-		$view_problemset[$i][3] .= "<a title='".htmlentities($cat,ENT_QUOTES,'UTF-8')."' class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,10,'utf8')."</a>&nbsp;";
+		$view_problemset[$i][3] .= "<a title='".htmlentities($cat,ENT_QUOTES,'UTF-8')."' class='label label-$label_theme' style='display: inline-block;' href='problemset.php?search=".htmlentities(urlencode($cat),ENT_QUOTES,'UTF-8')."'>".mb_substr($cat,0,10,'utf8')."</a>&nbsp;";
 	}
 
 	$view_problemset[$i][3] .= "</div >";
@@ -161,9 +172,11 @@ foreach ($result as $row) {
 	$view_problemset[$i][5] = "<div class='center'><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></div>";
 	$i++;
 }
-
-require("template/".$OJ_TEMPLATE."/problemset.php");
-
+if(isset($_GET['ajax'])){
+	require("template/bs3/problemset.php");
+}else{
+	require("template/".$OJ_TEMPLATE."/problemset.php");
+}
 if(file_exists('./include/cache_end.php'))
 	require_once('./include/cache_end.php');
 ?>

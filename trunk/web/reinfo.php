@@ -22,9 +22,11 @@ if(!isset($_GET['sid'])){
 }
 
 function is_valid($str2){
-  global $_SESSION,$OJ_NAME;
+  global $_SESSION,$OJ_NAME,$OJ_FRIENDLY_LEVEL;
   if(isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) return true;
     //return true; // 如果希望能让任何人都查看对比和RE,放开行首注释，并设定$OJ_SHOW_DIFF=true; if you fail to view diff , try remove the // at beginning of this line.
+  if($OJ_FRIENDLY_LEVEL>3) return true;
+  
   $n = strlen($str2);
   $str = str_split($str2);
   $m = 1;
@@ -57,11 +59,14 @@ if((isset($_SESSION[$OJ_NAME.'_'.'user_id']) && $row && ($row['user_id']==$_SESS
 }
 
 $view_reinfo = "";
-if(isset($_SESSION[$OJ_NAME.'_'.'source_browser']) || ($ok&&$lang!=3&&$contest_id==0&& // 防止打表过数据弱的题目
+if(  ($ok && $OJ_FRIENDLY_LEVEL>2) ||
+    (
+      isset($_SESSION[$OJ_NAME.'_'.'source_browser']) || ($ok&&$lang!=3&&$contest_id==0&& // 防止打表过数据弱的题目
   !(                                                                                   // 默认禁止java和比赛中查看WA对比和RE详情
     (isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||                              // 如果希望教学中无论练习或比赛均开放数据对比与运行错误，可以将这里
-    (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)                          // 的所有条件简化为 $ok，即60行到65行简化为: if($ok){
-  ))                                                                                   // if you want a friendly WA and RE, change line 60-65 to "if($ok){"
+    (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)                          // 的所有条件简化为 $ok，即63行到69行简化为: if($ok){
+  ))  
+     )                   // if you want a friendly WA and RE, change line 63-69 to "if($ok){"
   ){
 
   if($row['user_id']!=$_SESSION[$OJ_NAME.'_'.'user_id']){

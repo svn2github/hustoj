@@ -5,27 +5,11 @@
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>bootstrap.min.js"></script>
 
 <?php
-if(file_exists("./admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
-if(file_exists("../admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
-/*
-
-<!--  to enable mathjax in hustoj:
-svn export http://github.com/mathjax/MathJax/trunk/es5 /home/judge/src/web/mathjax
-<script type="text/javascript"
-  src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-or
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
--->
-
-
-*/
-
+$msg_path=realpath(dirname(__FILE__)."/../../admin/msg/$domain.txt");
+if(file_exists($msg_path))
+	$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":$msg_path);
+else
+	$view_marquee_msg="";
 ?>
 
 <script>
@@ -40,7 +24,7 @@ $(document).ready(function(){
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
   $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj' >HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
   $("body").append("<center><?php echo $MSG_HELP_HUSTOJ?></center>");  
-  $("body").append("<div class=center > <img src='http://hustoj.com/wx.jpg' width='120px'><img src='http://hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge</div>");
+  $("body").append("<div class=center > <img src='http://cdn.hustoj.com/wx.jpg' width='120px'><img src='http://cdn.hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge</div>");
   
   <?php if(isset($OJ_BEIAN)&&$OJ_BEIAN){ ?>
          $("body").append("<br><center><a href='http://beian.miit.gov.cn/' target='_blank'><?php echo $OJ_BEIAN?></a></center>");
@@ -63,7 +47,7 @@ $(".hint pre").each(function(){
 });
 
   console.log("If you want to change the appearance of the web pages, make a copy of bs3 under template directory.\nRename it to whatever you like, and change the $OJ_TEMPLATE value in db_info.inc.php\nAfter that modify files under your own directory .\n");
-  console.log("To enable mathjax in hustoj, check line 15 in /home/judge/src/web/template/bs3/js.php");
+  console.log("To enable mathjax in hustoj, set \n static  $OJ_MATHJAX=true;  // 激活mathjax \n in db_info.inc.php");
 function admin_mod(){
 	$("div[fd=source]").each(function(){
 		let pid=$(this).attr('pid');	

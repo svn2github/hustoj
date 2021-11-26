@@ -43,14 +43,8 @@
 
 
 
-
-
-
-
-
-
-
-
+  	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
+	$MSG_MC="ManualConfirm";
 
 
 	$MSG_TEST_RUN="Test Running Done";
@@ -152,6 +146,7 @@
 	$MSG_IMPORT="นำเข้า";
 	$MSG_EXPORT="ส่งออก";
 	$MSG_UPDATE_DATABASE="ปรับปรุงฐานข้อมูล";
+	$MSG_BACKUP_DATABASE="Backup Database";
 	$MSG_ONLINE="ผู้ที่อยู่ในระบบ";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";
@@ -163,11 +158,12 @@
 	$MSG_TIME_WARNING="Before Contest Start";  
   $MSG_WATCH_RANK="Click HERE to watch contest rank.";
   $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." Contest does not show result, until it's over.";
-  
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." Contest does not show hint.";
 	$MSG_SERVER_TIME="SERVER TIME";
 	$MSG_START_TIME="Start Time";
 	$MSG_END_TIME="End Time";
 	$MSG_CONTEST_ID="CONTEST ID";
+	$MSG_VIEW_ALL_CONTESTS="Show All Contests";
 	$MSG_CONTEST_NAME="CONTEST NAME";
 	$MSG_CONTEST_STATUS="STATUS";
 	$MSG_CONTEST_OPEN="OPEN";
@@ -215,6 +211,13 @@
   $MSG_BALLOON="Balloon";
   $MSG_BALLOON_DONE="Balloon Sent";
   $MSG_BALLOON_PENDING="Balloon Pending";
+  $MSG_DATE="Date";
+  $MSG_SIGN="Signature";
+  $MSG_RECENT_PROBLEM="Recent Problems";
+  $MSG_RECENT_CONTEST="Recent Contest";
+  $MSG_PASS_RATE="Pass Rate";
+  $MSG_SHOW_TAGS="Show Tags";
+  $MSG_SHOW_ALL_TAGS="All Tags";
 
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
@@ -342,5 +345,8 @@
 	$MSG_EXPECTED_IDENTIFIER="It may not have declare a variable name or missing parentheses when declaring a variable.";
 	$MSG_VARIABLY_MODIFIED="Variables cannot be used for array size. Variables cannot be used as the dimension size of global arrays in C language, including const variables.";
 
+	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
+
+	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
 
  ?>

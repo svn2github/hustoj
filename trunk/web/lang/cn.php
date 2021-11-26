@@ -35,6 +35,7 @@
 	$MSG_Runtime_Click="运行错误(点击看详细)";
 	$MSG_Compile_Click="编译错误(点击看详细)";
 	$MSG_Compile_OK="编译成功";
+	$MSG_MANUAL_CONFIRMATION="自动评测通过，等待人工确认";
         $MSG_Click_Detail="点击看详细";
         $MSG_Manual="人工判题";
         $MSG_OK="确定";
@@ -80,6 +81,7 @@
 	$MSG_CE="编译错误";
 	$MSG_CO="编译成功";
 	$MSG_TR="测试运行";
+	$MSG_MC="待裁判确认";
 	$MSG_RESET="重置";	
 	
 	//problemset.php
@@ -143,7 +145,7 @@
 	$MSG_MENU="菜单";
 	$MSG_EXPLANATION="内容描述";
 	$MSG_LIST="列表";
-	$MSG_NEWS="新闻";
+	$MSG_NEWS="公告";
 	$MSG_CONTENTS="内容";
 	$MSG_SAVE="保存";	
 
@@ -156,6 +158,7 @@
 	$MSG_IMPORT="导入";
 	$MSG_EXPORT="导出";
 	$MSG_UPDATE_DATABASE="更新数据库";
+	$MSG_BACKUP_DATABASE="备份数据库";
 	$MSG_ONLINE="在线";
 	$MSG_SET_LOGIN_IP="指定登录IP";
 	$MSG_PRIVILEGE_TYPE="权限 类型";
@@ -167,10 +170,11 @@
 	$MSG_TIME_WARNING="比赛开始前。";
   $MSG_WATCH_RANK="点击这里查看做题排名。";
   $MSG_NOIP_WARNING=$OJ_NOIP_KEYWORD." 比赛进行中，结束后才能查看结果。";
-  
+  $MSG_NOIP_NOHINT=$OJ_NOIP_KEYWORD." 比赛,不显示提示信息。";
 	$MSG_SERVER_TIME="服务器时间";
 	$MSG_START_TIME="开始时间";
 	$MSG_END_TIME="结束时间";
+	$MSG_VIEW_ALL_CONTESTS="显示所有作业比赛";
 	$MSG_CONTEST_ID="作业比赛编号";
 	$MSG_CONTEST_NAME="作业比赛名称";
 	$MSG_CONTEST_STATUS="作业比赛状态";
@@ -221,6 +225,15 @@
   $MSG_BALLOON_DONE="气球已发放";
   $MSG_BALLOON_PENDING="气球待发放";
 
+  $MSG_DATE="日期";
+  $MSG_TIME="时间";
+  $MSG_SIGN="个性签名";
+  $MSG_RECENT_PROBLEM="最近更新";
+  $MSG_RECENT_CONTEST="近期比赛";
+  $MSG_PASS_RATE="通过率";
+  $MSG_SHOW_TAGS="显示分类标签";
+  $MSG_SHOW_ALL_TAGS="所有标签";
+	  
   $MSG_HELP_SEEOJ="跳转回到前台";
   $MSG_HELP_ADD_NEWS="添加首页显示的新闻";
   $MSG_HELP_NEWS_LIST="管理已经发布的新闻";
@@ -258,6 +271,7 @@
 	$MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> 请到 HUSTOJ 来，给我们加个<span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star!</a></sub>"; 
   $MSG_HELP_SPJ="特殊裁判的使用，请参考<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>搜索hustoj special judge</a>"; 
   $MSG_HELP_BALLOON_SCHOOL="打印，气球帐号的School字段用于过滤任务列表，例如填zjicm则只显示帐号为zjicm开头的任务";
+  $MSG_HRLP_BACKUP_DATABASE="备份数据库,测试数据和图片到0题目录";
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="从不同的ip地址登录";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
@@ -351,6 +365,7 @@
   $MSG_DECLARED_FILE_NAMED="OJ中public类只能是Main";
   $MSG_EXPECTED_IDENTIFIER="声明变量时，可能没有声明变量名或缺少括号。";
   $MSG_VARIABLY_MODIFIED="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
-
-  
+  $MSG_FUNCTION_GETS_REMOVIED=" std::gets 于 C++11 被弃用，并于 C++14 移除。可使用 std::fgets 替代。或者增加宏定义 #define gets(S) fgets(S,sizeof(S),stdin) ";
+  $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
+  $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
 ?>

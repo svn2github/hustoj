@@ -1,7 +1,15 @@
 #!/bin/bash
+
+#detect and refuse to run under WSL
+if [ -d /mnt/c ]; then
+    echo "WSL is NOT supported."
+    exit 1
+fi
+
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
-apt-get update
+apt-get update && apt-get -y upgrade
+
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/ || exit
@@ -12,7 +20,12 @@ tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 
-for pkg in net-tools make g++ libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap
+#手工解决阿里云软件源的包依赖问题
+apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
+apt-get install -y libmysqlclient-dev
+apt-get install -y libmysql++-dev 
+
+for pkg in net-tools make g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap tzdata
 do
 	while ! apt-get install -y "$pkg" 
 	do
@@ -30,9 +43,13 @@ cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
 chmod +x src/install/ans2out
 
+# create enough runX dirs for each CPU core
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then
-	mkdir run0 run1 run2 run3
-	chown judge run0 run1 run2 run3
+	for N in `seq 0 $(($CPU-1))`
+	do
+	   mkdir run$N
+	   chown judge run$N
+	done
 fi
 
 sed -i "s/OJ_USER_NAME=root/OJ_USER_NAME=$USER/g" etc/judge.conf
@@ -117,12 +134,15 @@ systemctl enable mysql
 systemctl enable php7.4-fpm
 #systemctl enable judged
 
+/etc/init.d/mysql start
+
+
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
 if test -f  /.dockerenv ;then
 	echo "Already in docker, skip docker installation, install some compilers ... "
-	apt-get intall -f flex fp-compiler openjdk-14-jdk mono-devel
+	apt-get intall -y flex fp-compiler openjdk-14-jdk mono-devel
 else
 	bash docker.sh
 	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
@@ -134,3 +154,28 @@ reset
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"
+echo "DO NOT POST THESE INFOMANTION ON ANY PUBLIC CHANNEL!"
+echo "Register a user as 'admin' on http://127.0.0.1/ "
+echo "打开http://127.0.0.1/ 注册用户admin，获得管理员权限。"
+echo "不要在QQ群或其他地方公开发送以上信息，否则可能导致系统安全受到威胁。"
+echo "█████████████████████████████████████████"
+echo "████ ▄▄▄▄▄ ██▄▄ ▀  █▀█▄▄██ ███ ▄▄▄▄▄ ████"
+echo "████ █   █ █▀▄  █▀██ ██▄▄  █▄█ █   █ ████"
+echo "████ █▄▄▄█ █▄▀ █▄█▀█  ▄▄█▀▀▄██ █▄▄▄█ ████"
+echo "████▄▄▄▄▄▄▄█▄▀▄█ █ █▄█▄▀ █ ▀▄█▄▄▄▄▄▄▄████"
+echo "████ ▄▀▀█▄▄ █▄ █▄▄▄█▄█▀███▄  ██▀ ▄▀▀█████"
+echo "████▀█▀▀▀▀▄▀▀▄▀ ▄▄█▄ █▀▀ ▄▀▀▄  █▄▄▀▄█████"
+echo "████▄█ ▀▄▀▄▄ ▄ █▀█▀█ ▄▀▄ █▀▀▄█  ███  ████"
+echo "████▄ █▄ █▄▀▀▄██▀▄ ▄ ▄▄█▄█▀█▀   ▄█▀▄▀████"
+echo "████▄▄█   ▄▄██ █▄▄▀  ▄▀█▀▀▀ ▄█▀▄▄▀█ ▀████"
+echo "█████▄   ▀▄▄█ ▄▀▄▄▀▄▄▄▀▄▀█▀  ▀▀█▄█▀█▄████"
+echo "████ ▀ █▄▀▄▄█▀▀▄▀▀▄▄▄ ▀▀█▀ ▀▄▄█▀ ▀█ █████"
+echo "████ █▀   ▄ ▄ ▀█▀▄█ █▄▄███▀██▀▀██ ▀▄█████"
+echo "████▄▄▄██▄▄█ ▀█▄▄▄▀█ █▀▀█▀ █ ▄▄▄ █▀▄▀████"
+echo "████ ▄▄▄▄▄ █ ▄  ▄▄▀  ▄ ▀▄▄▄▄ █▄█   ▄█████"
+echo "████ █   █ ██ ▄▄▀▀█ ▀▀▀▀▀ ▄▀  ▄  ▀███████"
+echo "████ █▄▄▄█ █▀▄▄▄▀▀█ ▀▄ ▄▀██▄█ ██ █ █▄████"
+echo "████▄▄▄▄▄▄▄█▄███▄█▄▄▄████▄▄▄▄▄▄█▄██▄█████"
+echo "█████████████████████████████████████████"
+echo "            QQ扫码加官方群"
+

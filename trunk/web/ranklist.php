@@ -22,6 +22,7 @@
 		}
  	}
         $view_title= $MSG_RANKLIST;
+	if(!isset($OJ_RANK_HIDDEN)) $OJ_RANK_HIDDEN="'admin','zhblue'";
 
         $scope="";
         if(isset($_GET['scope']))
@@ -29,10 +30,11 @@
         if($scope!=""&&$scope!='d'&&$scope!='w'&&$scope!='m')
                 $scope='y';
 	$where="";
+
 	if(isset($_GET['prefix'])){
 		$prefix=$_GET['prefix'];
 		$where="where user_id like ?";
-	}else{
+	}else{	
 		$where="where user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ";
 	}
         $rank = 0;

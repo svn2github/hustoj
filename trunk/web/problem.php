@@ -26,12 +26,15 @@ if (isset($_GET['id'])) {
 	$id = intval($_GET['id']);
 	//require("oj-header.php");
 	
+	$sql="select c.contest_id,c.title from contest c inner join contest_problem cp on c.contest_id=cp.contest_id and cp.problem_id=?  WHERE ( c.`end_time`>'$now' and c.defunct='N' ) or c.`private`='1' ";
+	$used_in_contests=pdo_query($sql,$id);
+
 	if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=?";
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (
-					SELECT `contest_id` FROM `contest` WHERE ( `end_time`>'$now' or `private`='1' )    
+					SELECT `contest_id` FROM `contest` WHERE ( `end_time`>'$now' and defunct='N' ) or `private`='1'    
 				)
 			)";        //////////  people should not see the problem used in contest before they end by modifying url in browser address bar
 				   /////////   if you give students opportunities to test their result out side the contest ,they can bypass the penalty time of 20 mins for
@@ -112,17 +115,18 @@ if (count($result)!=1) {
 
 	if (isset($_GET['id'])) {
 		$id = intval($_GET['id']);
-		$sql = "SELECT contest.`contest_id`, contest.`title`,contest_problem.num FROM `contest_problem`, `contest` 
-			WHERE contest.contest_id=contest_problem.contest_id and `problem_id`=? and defunct='N' ORDER BY `num`";
-		//echo $sql;
-		$result = pdo_query($sql,$id);
 
-		if ($i=count($result)) {
-    //  hide contest -- 2020.12.04
-		//	$view_errors .= "This problem is in Contest(s) below:<br>";
-		//	foreach ($result as $row) {
-		//		$view_errors .= "<a href=problem.php?cid=$row[0]&pid=$row[2]>Contest $row[0]:".htmlentities($row[1],ENT_QUOTES,"utf-8")."</a><br>";
-		//	}
+	      	if(count($used_in_contests)>0){
+
+	      		if (!(isset($OJ_EXAM_CONTEST_ID)||isset($OJ_ON_SITE_CONTEST_ID))) {
+					$view_errors.= "<hr><br>$MSG_PROBLEM_USED_IN:";
+					foreach($used_in_contests as $contests){
+						$view_errors.= "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
+					
+					}
+					//echo "</div>";
+			}
+
 		}
 		else {
 			$view_title = "<title>$MSG_NO_SUCH_PROBLEM!</title>";
@@ -149,7 +153,8 @@ if( isset($OJ_NOIP_KEYWORD) && $OJ_NOIP_KEYWORD ){
 	$flag = count($rrs) > 0 ;
 	if($flag)
 	{	
-		$row[ 'accepted' ]='<font color="red"> ? </font>';
+		$row[ 'accepted' ] = '<font color="red"> ? </font>';
+		$row[ 'hint' ] = $MSG_NOIP_NOHINT;
 	}
 }
 /////////////////////////Template

@@ -60,24 +60,23 @@
 #define BUFFER_SIZE 4096		//default size of char buffer 5120 bytes
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
-#define OJ_WT0 0
-#define OJ_WT1 1
-#define OJ_CI 2
-#define OJ_RI 3
-#define OJ_AC 4
-#define OJ_PE 5
-#define OJ_WA 6
-#define OJ_TL 7
-#define OJ_ML 8
-#define OJ_OL 9
-#define OJ_RE 10
-#define OJ_CE 11
-#define OJ_CO 12
-#define OJ_TR 13
-/*copy from ZOJ
- http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/tracer.cc?spec=svn367&r=367#39
- */
-#ifdef __arm__
+#define OJ_WT0 0     //提交排队
+#define OJ_WT1 1     //重判排队
+#define OJ_CI 2      //编译中（任务已派发）
+#define OJ_RI 3      //运行中
+#define OJ_AC 4      //答案正确
+#define OJ_PE 5      //格式错误
+#define OJ_WA 6      //答案错误
+#define OJ_TL 7      //时间超限
+#define OJ_ML 8      //内存超限
+#define OJ_OL 9      //输出超限
+#define OJ_RE 10     //运行错误
+#define OJ_CE 11     //编译错误
+#define OJ_CO 12     //编译完成
+#define OJ_TR 13     //测试运行结束
+#define OJ_MC 14     // 等待裁判手工确认
+
+#ifdef __arm__             // arm 的寄存器结构
 struct user_regs_struct {
         long uregs[18];
 };
@@ -87,7 +86,7 @@ struct user_regs_struct {
 #define REG_SYSCALL ARM_r7
 #endif
 
-#ifdef __aarch64__
+#ifdef __aarch64__          //arm64的寄存器结构  
 #define NT_PRSTATUS	1
 #define NT_ARM_SYSTEM_CALL	0x404
 #define ARM_cpsr	uregs[16]
@@ -114,7 +113,7 @@ struct user_regs_struct {
 
 #endif 
 
-#ifdef __mips__
+#ifdef __mips__                 //mips 龙芯的寄存器结构
 	typedef unsigned long long uint64_t;
 	struct user_regs_struct{
 		uint64_t uregs[38];
@@ -129,14 +128,14 @@ struct user_regs_struct {
 
 #endif
 
-#ifdef __i386
+#ifdef __i386          //32位x86寄存器
 #define REG_SYSCALL orig_eax
 #define REG_RET eax
 #define REG_ARG0 ebx
 #define REG_ARG1 ecx
 #endif
 
-#ifdef __x86_64__
+#ifdef __x86_64__      //64位x86寄存器
 #define REG_SYSCALL orig_rax
 #define REG_RET rax
 #define REG_ARG0 rdi
@@ -147,17 +146,18 @@ struct user_regs_struct {
 
 
 static int DEBUG = 0;
-static char host_name[BUFFER_SIZE/10];
-static char user_name[BUFFER_SIZE/10];
-static char password[BUFFER_SIZE/10];
-static char db_name[BUFFER_SIZE/10];
-static char oj_home[BUFFER_SIZE/10];
-static char data_list[BUFFER_SIZE][BUFFER_SIZE];
-static int data_list_len = 0;
-static char lock_file[BUFFER_SIZE]="/home/judge/run0/judge_client.pid";
+static char host_name[BUFFER_SIZE/10];     //数据库服务器地址
+static int port_number;                    //端口
+static char user_name[BUFFER_SIZE/10];     //用户名
+static char password[BUFFER_SIZE/10];      //密码
+static char db_name[BUFFER_SIZE/10];       //库名
+static char oj_home[BUFFER_SIZE/10];       //判题系统主目录
+static char data_list[BUFFER_SIZE][BUFFER_SIZE]; //测试数据列表
+static int data_list_len = 0;                    //列表长度
+static char lock_file[BUFFER_SIZE]="/home/judge/run0/judge_client.pid";     //工作目录锁定文件
 
-static int port_number;
-static int max_running;
+
+static int max_running;       
 static int sleep_time;
 static int java_time_bonus = 5;
 static int java_memory_bonus = 512;
@@ -167,7 +167,7 @@ static int sim_enable = 0;
 static int oi_mode = 0;
 static int full_diff = 0;
 static int use_max_time = 0;
-static int time_limit_to_total= 0;
+static int time_limit_to_total= 1;
 static int total_time= 0;
 
 static int http_judge = 0;
@@ -192,6 +192,8 @@ static const char *tbname = "solution";
 static char cc_opt[BUFFER_SIZE/10];
 static char cc_std[BUFFER_SIZE/10];
 static char cpp_std[BUFFER_SIZE/10];
+static int auto_result = OJ_AC ;
+
 int num_of_test = 0;
 //static int sleep_tmp;
 
@@ -202,7 +204,7 @@ static int py2=1; // caution: py2=1 means default using py3
 #ifdef _mysql_h
 MYSQL *conn;
 #endif
-static char jresult[14][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR"};
+static char jresult[15][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR","MC"};
 static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
 			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
 //static char buf[BUFFER_SIZE];
@@ -235,7 +237,7 @@ int already_running() {
 	}
 	if(ftruncate(fd, 0)) printf("close file fail 0 \n");
 	sprintf(buf, "%d", getpid());
-	if(write(fd, buf, strlen(buf) + 1) >= (unsigned int)strlen(buf)) printf("buffer size overflow!...\n");
+	if(write(fd, buf, strlen(buf) + 1)>=BUFFER_SIZE) printf("buffer size overflow!...\n");
 	return (0);
 }
 void print_arm_regs(long long unsigned int *d){
@@ -281,9 +283,9 @@ long get_file_size(const char *filename)
 void write_log(const char *_fmt, ...)
 {
 	va_list ap;
-	char fmt[4096];
-	strncpy(fmt, _fmt, 4096);
-	char buffer[4096];
+	char fmt[BUFFER_SIZE];
+	strncpy(fmt, _fmt,BUFFER_SIZE);
+	char buffer[BUFFER_SIZE];
 	//      time_t          t = time(NULL);
 	//int l;
 	sprintf(buffer, "%s/log/client.log", oj_home);
@@ -302,7 +304,7 @@ void write_log(const char *_fmt, ...)
 	va_end(ap);
 	fclose(fp);
 }
-int execute_cmd(const char *fmt, ...)
+int execute_cmd(const char *fmt, ...)   //执行命令获得返回值
 {
 	char cmd[BUFFER_SIZE];
 
@@ -322,7 +324,7 @@ const int call_array_size = CALL_ARRAY_SIZE;
 unsigned int call_id = 0;
 int call_counter[call_array_size] = {0};
 static char LANG_NAME[BUFFER_SIZE];
-void init_syscalls_limits(int lang)
+void init_syscalls_limits(int lang)      //白名单初始化
 {
 	int i;
 	memset(call_counter, 0, sizeof(call_counter));
@@ -500,7 +502,7 @@ FILE *read_cmd_output(const char *fmt, ...)
 	return ret;
 }
 // read the configue file
-void init_judge_conf()
+void init_judge_conf()   //读取判题主目录etc中的配置文件judge.conf
 {
 	FILE *fp = NULL;
 	char buf[BUFFER_SIZE];
@@ -518,7 +520,7 @@ void init_judge_conf()
 	if(__GNUC__ > 9 || (  __GNUC__ == 9 &&  __GNUC_MINOR__ >= 3 ) ){ 
 		// ubuntu20.04 introduce g++9.3
 		strcpy(cc_std,"-std=c17");
-		strcpy(cpp_std,"-std=c++17");
+		strcpy(cpp_std,"-std=c++14");    // CCF NOI change settings for NOIP to C++14 on 2021-9-1
 	}else{
 		strcpy(cc_std,"-std=c99");
 		strcpy(cpp_std,"-std=c++11");
@@ -561,13 +563,12 @@ void init_judge_conf()
 			read_buf(buf, "OJ_CC_STD", cc_std);
 			read_buf(buf, "OJ_CPP_STD", cpp_std);
 			read_buf(buf, "OJ_CC_OPT", cc_opt);
-			
-			
+			read_int(buf, "OJ_AUTO_RESULT", &auto_result);
 		}
 		fclose(fp);
 	}
 //	fclose(fp);
-	
+	if(use_docker)shm_run=0;
  	if(strcmp(http_username,"IP")==0){
                   FILE * fjobs = read_cmd_output("ifconfig|grep 'inet'|awk -F: '{printf $2}'|awk  '{printf $1}'");
                   if(1!=fscanf(fjobs, "%s", http_username)) printf("IP read fail...\n");
@@ -583,7 +584,7 @@ int isInFile(const char fname[])
 	else
 		return l - 3;
 }
-int inFile(const struct dirent * dp){
+int inFile(const struct dirent * dp){   //获得测试数据目录中测试数据列表
 	int l = strlen(dp->d_name);
 	if(DEBUG) printf("file name:%s\n",dp->d_name);
 	if(DEBUG) printf("ext name:%s\n",dp->d_name + l - 3);
@@ -663,7 +664,6 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
  int p=system(diff);
  if (p) return OJ_PE;
  else return OJ_AC;
-
  }
  */
 const char *getFileNameFromPath(const char *path)
@@ -678,7 +678,6 @@ const char *getFileNameFromPath(const char *path)
 
 void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,const char * infile)
 {
-
 	execute_cmd("echo '========[%s]========='>>diff.out", getFileNameFromPath(path));
 	execute_cmd("echo '------test in top 100 lines------'>>diff.out");
 	execute_cmd("head -100 %s >>diff.out",infile);
@@ -687,7 +686,7 @@ void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,con
 	execute_cmd("echo '------user out top 100 lines-----'>>diff.out");
 	execute_cmd("head -100 user.out>>diff.out");
 	execute_cmd("echo '------diff out 200 lines-----'>>diff.out");
-	execute_cmd("diff '%s' user.out -y|head -200>>diff.out", path);
+	execute_cmd("diff '%s' user.out -y|grep \\||head -200>>diff.out", path);
 	execute_cmd("echo '=============================='>>diff.out");
 }
 void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path)
@@ -701,7 +700,7 @@ void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path)
 /*
  * translated from ZOJ judger r367
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
- *
+ * 参考zoj的文件流式比较器，有更低的内存占用
  */
 int compare_zoj(const char *file1, const char *file2,const char * infile)
 {
@@ -784,14 +783,14 @@ void delnextline(char s[])
 		s[--L] = 0;
 }
 
-int compare(const char *file1, const char *file2, const char * infile)
+int compare(const char *file1, const char *file2, const char * infile)  
 {
 #ifdef ZOJ_COM
 	//compare ported and improved from zoj don't limit file size
 	return compare_zoj(file1, file2,infile);
 #endif
 #ifndef ZOJ_COM
-	//the original compare from the first version of hustoj has file size limit
+	//the original compare from the first version of hustoj has file size limit  原始的内存中比较，速度更快但耗用更多内存
 	//and waste memory
 	FILE *f1, *f2;
 	char *s1, *s2, *p1, *p2;
@@ -844,7 +843,7 @@ int compare(const char *file1, const char *file2, const char * infile)
 #endif
 }
 
-bool check_login()
+bool check_login()   // http模式中检测是否已经登陆
 {
 	const char *cmd =
 		" wget --post-data=\"checklogin=1\" --load-cookies=cookie --save-cookies=cookie --keep-session-cookies -q -O - \"%s%s\"";
@@ -855,7 +854,7 @@ bool check_login()
 
 	return ret;
 }
-void login()
+void login()  //http登陆
 {
 	if (!check_login())
 	{
@@ -918,6 +917,8 @@ void update_solution(int solution_id, int result, int time, int memory, int sim,
 {
 	if (result == OJ_TL && memory == 0)
 		result = OJ_ML;
+	if (result == OJ_AC )
+		result=auto_result;
 	if (http_judge)
 	{
 		_update_solution_http(solution_id, result, time, memory, sim, sim_s_id,
@@ -984,6 +985,7 @@ char to_hex(char code)
 
 /* Returns a url-encoded version of str */
 /* IMPORTANT: be sure to free() the returned string after use */
+// 用url编码字符串
 char *url_encode(char *str)
 {
 	char *pstr = str, *buf = (char *)malloc(strlen(str) * 3 + 1), *pbuf = buf;
@@ -1227,7 +1229,6 @@ void _update_problem_mysql(int p_id,int cid) {
 	/*	sprintf(sql,
 			"UPDATE `problem` SET `submit`=(SELECT count(*) FROM `solution` WHERE `problem_id`=%d) WHERE `problem_id`=%d",
 			p_id, p_id);
-
 	
 	if (mysql_real_query(conn, sql, strlen(sql)))
 		write_log(mysql_error(conn));
@@ -1243,7 +1244,7 @@ void update_problem(int pid,int cid) {
 #endif
 	}
 }
-void umount(char *work_dir)
+void umount(char *work_dir)  //清理可能存在的热加载目录
 {
 	if(chdir(work_dir)) exit(-1);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
@@ -1253,6 +1254,7 @@ void umount(char *work_dir)
 	execute_cmd("/bin/umount -l %s/dev 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -l %s/usr 2>/dev/null", work_dir);
 	execute_cmd("/bin/umount -l usr dev");
+	execute_cmd("/bin/umount -l lib lib64");
 	execute_cmd("/bin/rmdir %s/* ", work_dir);
 	execute_cmd("/bin/rmdir %s/log/* ", work_dir);
 }
@@ -1513,7 +1515,7 @@ int get_proc_status(int pid, const char *mark)
 }
 
 #ifdef _mysql_h
-int init_mysql_conn()
+int init_mysql_conn()   //连接数据库
 {
 
 	conn = mysql_init(NULL);
@@ -1550,13 +1552,14 @@ void _get_solution_mysql(int solution_id, char *work_dir, int lang)
 	res = mysql_store_result(conn);
 
 	// create the src file
-	if (DEBUG)
-		printf("Main=%s", src_pth);
+	
 	if (res != NULL)
 	{
 		row = mysql_fetch_row(res);
 		if(row != NULL) {
 			sprintf(src_pth, "Main.%s", lang_ext[lang]);
+			if (DEBUG)
+				printf("Main=%s", src_pth);
 			FILE *fp_src = fopen(src_pth, "we");
 			fprintf(fp_src, "%s", row[0]);
 			mysql_free_result(res); // free the memory
@@ -1599,7 +1602,7 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
-	if(lang == 6 ){	
+	if(lang == 6 ){    // 从源码中搜索python2字样，失败的结果非零默认python3,成功的结果为0是python2
 		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
 	}
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
@@ -1821,13 +1824,39 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 	escape(fname, fname0);
 	//printf("%s\n%s\n",fname0,fname);
 	sprintf(infile, "%s/data/%d/%s.in", oj_home, p_id, fname);
-	if(copy_data)execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);
+	char noip_file_name[BUFFER_SIZE];
+	sprintf(noip_file_name,"%s/data/%d/input.name",oj_home,p_id);
+	if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+ 	if (access(noip_file_name, R_OK ) != -1){
+		if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		FILE * fpname=fopen(noip_file_name,"r");
+		if(fscanf(fpname,"%s",noip_file_name)){
+		    execute_cmd("/bin/cp '%s' %s/%s", infile, work_dir,noip_file_name);   // 如果存在input.name则复制测试数据
+		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		}
+		fclose(fpname);
+	}else{
+		if(copy_data) execute_cmd("/bin/cp '%s' %s/data.in", infile, work_dir);   // 如果开启了COPY_DATA则复制测试数据
+	}
 	execute_cmd("/bin/cp %s/data/%d/*.dic %s/ 2>/dev/null", oj_home, p_id, work_dir);
  	execute_cmd("chown judge %s/*.dic ", work_dir);
 	sprintf(outfile, "%s/data/%d/%s.out", oj_home, p_id, fname0);
-	sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
-}
 
+	sprintf(noip_file_name,"%s/data/%d/output.name",oj_home,p_id);
+	if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+ 	if (access(noip_file_name, R_OK ) != -1){
+		
+		FILE * fpname=fopen(noip_file_name,"r");
+		if(fscanf(fpname,"%s",noip_file_name)){
+		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
+		    sprintf(userfile, "%s/run%d/%s", oj_home, runner_id,noip_file_name);
+		}
+		fclose(fpname);
+	}else{
+		sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+	}
+}
+// 以下 copy_开头的函数均为准备相应语言的chroot环境，复制动态链接库等，如果使用的系统不是Ubuntu则路径有所区别，可以用ldd/find查看实际位置。
 void copy_shell_runtime(char *work_dir)
 {
 
@@ -1969,14 +1998,14 @@ void copy_ruby_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("mkdir -p %s/usr", work_dir);
+	execute_cmd("mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);
 	execute_cmd("cp -a /usr/lib/libruby* %s/usr/lib/", work_dir);
 	execute_cmd("cp -a /usr/lib/ruby* %s/usr/lib/", work_dir);
 	execute_cmd("cp -a /usr/lib64/ruby* %s/usr/lib64/", work_dir);
 	execute_cmd("cp -a /usr/lib64/libruby* %s/usr/lib64/", work_dir);
-	execute_cmd("cp -a /usr/bin/ruby* %s/", work_dir);
+	execute_cmd("cp -a /usr/bin/ruby* %s/usr/bin", work_dir);
 #ifdef __x86_64__
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libruby* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgmp* %s/usr/lib/", work_dir);
@@ -1989,6 +2018,7 @@ void copy_guile_runtime(char *work_dir)
 	copy_shell_runtime(work_dir);
 	execute_cmd("/bin/mkdir -p %s/proc", work_dir);
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/share", work_dir);
 	execute_cmd("/bin/cp -a /usr/share/guile %s/usr/share/", work_dir);
@@ -2002,7 +2032,7 @@ void copy_guile_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/libgmp* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/*/libltdl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libltdl* %s/usr/lib/", work_dir);
-	execute_cmd("/bin/cp /usr/bin/guile* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/guile* %s/usr/bin", work_dir);
 #ifdef __x86_64__
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libguile* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/x86_64-linux-gnu/libgc* %s/usr/lib/", work_dir);
@@ -2017,6 +2047,7 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("mkdir -p %s/usr/include", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
 	
+	execute_cmd("mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib", work_dir);
 	execute_cmd("mkdir -p %s/usr/lib64", work_dir);
 	execute_cmd("mkdir -p %s/usr/local/lib", work_dir);
@@ -2034,7 +2065,7 @@ void copy_python_runtime(char *work_dir)
 	execute_cmd("mkdir -p %s/usr/share/abrt/conf.d/plugins", work_dir);
 	execute_cmd("cp -a /usr/share/abrt/conf.d/plugins/python.conf %s/usr/share/abrt/conf.d/plugins/python.conf", work_dir);
 	if(!py2){	
-		execute_cmd("cp /usr/bin/python2* %s/", work_dir);
+		execute_cmd("cp /usr/bin/python2* %s/usr/bin", work_dir);
 		execute_cmd("cp -a /usr/lib/python2* %s/usr/lib/", work_dir);
 		execute_cmd("cp -a /usr/lib64/python2.7  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
@@ -2043,7 +2074,7 @@ void copy_python_runtime(char *work_dir)
 		execute_cmd("cp -a /usr/local/lib/python2* %s/usr/local/lib/", work_dir);
 #endif
 	}else{
-		execute_cmd("cp /usr/bin/python3* %s/", work_dir);
+		execute_cmd("cp /usr/bin/python3* %s/usr/bin", work_dir);
 		execute_cmd("cp -a /usr/lib/python3* %s/usr/lib/", work_dir);
 		execute_cmd("cp -a /usr/lib64/python3.6  %s/usr/lib64/", work_dir);
 #if (defined __mips__)
@@ -2097,7 +2128,7 @@ void copy_php_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/mkdir %s/usr", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libedit* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libdb* %s/usr/lib/", work_dir);
@@ -2118,17 +2149,17 @@ void copy_php_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libssl* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libcrypto* %s/usr/lib/", work_dir);
 #endif
-	execute_cmd("/bin/cp /usr/bin/php* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/php* %s/usr/bin", work_dir);
 	execute_cmd("chmod +rx %s/Main.php", work_dir);
 }
 void copy_perl_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/mkdir %s/usr", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir %s/usr/lib", work_dir);
 	execute_cmd("/bin/cp /usr/lib/libperl* %s/usr/lib/", work_dir);
-	execute_cmd("/bin/cp /usr/bin/perl* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/perl* %s/usr/bin", work_dir);
 }
 void copy_freebasic_runtime(char *work_dir)
 {
@@ -2144,7 +2175,7 @@ void copy_mono_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/mkdir %s/usr", work_dir);
+	execute_cmd("/bin/mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir %s/proc", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/lib/mono/2.0", work_dir);
 	execute_cmd("/bin/cp -a /usr/lib/mono %s/usr/lib/", work_dir);
@@ -2154,7 +2185,7 @@ void copy_mono_runtime(char *work_dir)
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 
 	execute_cmd("/bin/mount -o bind /proc %s/proc", work_dir);
-	execute_cmd("/bin/cp /usr/bin/mono* %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/mono* %s/usr", work_dir);
 
 	execute_cmd("/bin/cp /usr/lib/libgthread* %s/usr/lib/", work_dir);
 	execute_cmd("/bin/cp /lib/libglib* %s/lib/", work_dir);
@@ -2181,15 +2212,17 @@ void copy_lua_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
+	execute_cmd("mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/local/lib", work_dir);
 	execute_cmd("/bin/mkdir -p %s/usr/local/bin", work_dir);
-	execute_cmd("/bin/cp /usr/bin/lua %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/lua %s/usr/bin", work_dir);
 }
 void copy_sql_runtime(char *work_dir)
 {
 
 	copy_shell_runtime(work_dir);
-	execute_cmd("/bin/cp /usr/bin/sqlite3 %s/", work_dir);
+	execute_cmd("mkdir -p %s/usr/bin", work_dir);
+	execute_cmd("/bin/cp /usr/bin/sqlite3 %s/usr/bin", work_dir);
 #ifdef __mips__
 	execute_cmd("/bin/cp /lib64/libedit.so.0 %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /lib64/libm.so.6 %s/lib64/", work_dir);
@@ -2228,6 +2261,7 @@ void copy_js_runtime(char *work_dir)
 {
 
 	//copy_shell_runtime(work_dir);
+	execute_cmd("mkdir -p %s/usr/bin", work_dir);
 	execute_cmd("mkdir -p %s/dev", work_dir);
 	execute_cmd("/bin/mount -o bind /dev %s/dev", work_dir);
 	execute_cmd("/bin/mount -o remount,ro %s/dev", work_dir);
@@ -2274,30 +2308,38 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.* %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so.* %s/lib/x86_64-linux-gnu/", work_dir);
 #endif
-	execute_cmd("/bin/cp /usr/bin/nodejs %s/", work_dir);
+	execute_cmd("/bin/cp /usr/bin/nodejs %s/usr/bin", work_dir);
 }
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
-				  int &mem_lmt,char * data_file_path)
+				  int &mem_lmt,char * data_file_path,int p_id)   // 为每个测试数据运行一次提交的答案
 {
+	//准备环境变量处理中文，如果希望使用非中文的语言环境，可能需要修改这些环境变量
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
 			     (char * const )"LANG=zh_CN.UTF-8",
 			     (char * const )"LANGUAGE=zh_CN.UTF-8",
 			     (char * const )"LC_ALL=zh_CN.utf-8",NULL};
-	if(nice(19)) printf("renice fail... \n");
+	if(nice(19)!=19) printf("......................renice fail... \n");
 	// now the user is "judger"
-	if(chdir(work_dir)) exit(-4);
+	if(chdir(work_dir)){
+		write_log("Working directory :%s switch fail...",work_dir);		
+		exit(-4);
+	}
 	// open the files
 	if(lang==18){ 
 		execute_cmd("/usr/bin/sqlite3 %s/data.db < %s", work_dir,data_file_path);
 		execute_cmd("/bin/chown judge %s/data.db", work_dir);
 		stdin=freopen("Main.sql", "r", stdin);
 	}else{
-		if(copy_data)
-
-			stdin=freopen("data.in", "r", stdin);
-		else{
-			printf("infile: [%s]\n",data_file_path);
-			stdin=freopen(data_file_path,"r",stdin);
+		char noip_file_name[BUFFER_SIZE];
+		sprintf(noip_file_name,"%s/data/%d/input.name",oj_home,p_id);
+		if(DEBUG) printf("---------NOIP filename:%s\n",noip_file_name);
+		if (access(noip_file_name, R_OK ) == -1){   //不存在指定文件名，使用标准输入
+			if(copy_data){
+				stdin=freopen("data.in", "r", stdin);
+			}else{
+				printf("infile: [%s]\n",data_file_path);
+				stdin=freopen(data_file_path,"r",stdin);
+			}
 		}
 	}
 	execute_cmd("touch %s/user.out", work_dir);
@@ -2307,6 +2349,16 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execute_cmd("chmod 740 %s/data.in", work_dir);
 	}
 	execute_cmd("chmod 760 %s/user.out", work_dir);
+	if (   
+		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
+	   ){
+		
+		if(DEBUG)printf("chroot...............................................\n");
+	
+	}else{
+		if(DEBUG)printf("Skiping chroot........................................\n");
+	
+	}
 	stdout=freopen("user.out", "w", stdout);
 	stderr=freopen("error.out", "a+", stderr);
 	// trace me
@@ -2315,11 +2367,12 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	if (   
 		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
 	   ){
-		if(DEBUG)printf("Chrooting...\n");
-		if(chroot(work_dir)) printf("danger .....................chroot fail....................line 2298 \n");
+		
+		if(chroot(work_dir));
 	}else{
-		if(DEBUG)printf("Skiping chroot...\n");
-	
+		if(lang==7){
+			if(chroot(work_dir));
+		}
 	}
 	while (setgid(1536) != 0)
 		sleep(1);
@@ -2400,57 +2453,54 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execl("/usr/bin/java", "/usr/bin/java",java_xmx ,
-				"-Djava.security.manager",
-				"-Djava.security.policy=./java.policy", "Main", (char *) NULL);
+		execle("/usr/bin/java", "/usr/bin/java",java_xmx ,
+				"-Djava.security.manager", "-Djava.security.policy=./java.policy",  // this line might be removed in later java version
+		       "Main", (char *) NULL,envp);
 		break;
 	case 4:
 		//system("/ruby Main.rb<data.in");
-		execl("/ruby", "/ruby", "Main.rb", (char *)NULL);
+		execle("/usr/bin/ruby", "/usr/bin/ruby", "Main.rb", (char *)NULL,envp);
 		break;
 	case 5: //bash
-		execl("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL);
+		execle("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL,envp);
 		break;
 	case 6: //Python
 		if (!py2)
-		{       if(python_free)
-			execl("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL);
-			else
-			execl("/python2", "/python2", "Main.py", (char *)NULL);
+		{     
+			execle("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL,envp);	
 		}
 		else
-		{       if(python_free)
-			execl("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL);
-			else
-			execle("/python3", "/python3", "Main.py", (char *)NULL, envp);
+		{      
+			execle("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL,envp);
 		}
 		break;
 	case 7: //php
-		execl("/php", "/php", "Main.php", (char *)NULL);
+		execle("/usr/bin/php", "/usr/bin/php", "Main.php", (char *)NULL,  envp);
 		break;
 	case 8: //perl
-		execl("/perl", "/perl", "Main.pl", (char *)NULL);
+		execle("/usr/bin/perl", "/usr/bin/perl", "Main.pl", (char *)NULL,  envp);
 		break;
 	case 9: //Mono C#
 		execle("/usr/bin/mono", "/usr/bin/mono","--debug",  "Main.exe", (char *)NULL,envp);
 		break;
 	case 12: //guile
-		execl("/guile", "/guile", "Main.scm", (char *)NULL);
+		execle("/usr/bin/guile", "/usr/bin/guile", "Main.scm", (char *)NULL,envp);
 		break;
 	case 15: //guile
-		execl("/lua", "/lua", "Main", (char *)NULL);
+		execle("/usr/bin/lua", "/usr/bin/lua", "Main", (char *)NULL,envp);
 		break;
 	case 16: //Node.js
-		execl("/nodejs", "/nodejs", "Main.js", (char *)NULL);
+		execle("/usr/bin/nodejs", "/usr/bin/nodejs", "Main.js", (char *)NULL,envp);
 		break;
 	case 18: //sqlite3
-		execl("/sqlite3", "/sqlite3", "data.db", (char *)NULL);
+		execle("/usr/bin/sqlite3", "/usr/bin/sqlite3", "data.db", (char *)NULL,envp);
 		break;
 	case 20: //octave
-		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "Main.m", (char *)NULL);
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file", "-W", "-q", "-H", "Main.m", (char *)NULL);
 		break;
 	}
 	//sleep(1);
+	printf("Execution error, USE_DOCKER:%d !\nYou need to install compiler VM or runtime for your language.",use_docker);
 	fflush(stderr);
 	exit(0);
 }
@@ -2585,7 +2635,7 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 {
 	//usedtime-=1000;
 	int comp_res;
-	if (!oi_mode)
+	if (num_of_test == 0 )
 		num_of_test = 1.0;
 	
 	if (ACflg == OJ_AC){
@@ -2681,7 +2731,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 					int &topmemory, int mem_lmt, int &usedtime, double time_lmt, int &p_id,
 					int &PEflg, char *work_dir)
 {
-	// parent
+	// 父进程中的保姆程序
 	int tempmemory = 0;
 
 	if (DEBUG)
@@ -2695,7 +2745,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 	{
 		// check the usage
 
-		wait4(pidApp, &status, __WALL, &ruse);
+		wait4(pidApp, &status, __WALL, &ruse);     //等待子进程切换内核态（调用系统API或者运行状态变化）
 		if (first)
 		{ //
 			ptrace(PTRACE_SETOPTIONS, pidApp, NULL, PTRACE_O_TRACESYSGOOD | PTRACE_O_TRACEEXIT
@@ -2703,6 +2753,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				   //	|PTRACE_O_TRACECLONE
 				   //	|PTRACE_O_TRACEFORK
 				   //	|PTRACE_O_TRACEVFORK
+			           //   有的发行版带的PTRACE不识别以上宏，因此注释掉
 			);
 		}
 
@@ -2728,7 +2779,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		}
 		//sig = status >> 8;/*status >> 8 EXITCODE*/
 
-		if (WIFEXITED(status))
+		if (WIFEXITED(status))  // 子进程已经退出
 			break;
 		if ((lang < 4||lang == 5 || lang == 9) && get_file_size("error.out") && !oi_mode)
 		{
@@ -2749,7 +2800,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
 		 *  Runtime Error:Unknown signal xxx need be added here  
                  */
-		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)
+		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)  // 进程休眠或等待IO
 			//go on and on
 			;
 		else
@@ -2763,7 +2814,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 			if (ACflg == OJ_AC)
 			{
-				switch (exitcode)
+				switch (exitcode)                  // 根据退出的原因给出判题结果
 				{
 				case SIGCHLD:
 				case SIGALRM:
@@ -2785,14 +2836,14 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				}
 				print_runtimeerror(infile+strlen(oj_home)+5,strsignal(exitcode));
 			}
-			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
+			ptrace(PTRACE_KILL, pidApp, NULL, NULL);    // 杀死出问题的进程
 
 			break;
 		}
 		if (WIFSIGNALED(status))
 		{
 			/*  WIFSIGNALED: if the process is terminated by signal
-			 *
+			 *  由外部信号触发的进程终止
 			 *  psignal(int sig, char *s)，like perror(char *s)，print out s, with error msg from system of sig  
 			 * sig = 5 means Trace/breakpoint trap
 			 * sig = 11 means Segmentation fault
@@ -2807,7 +2858,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			}
 			if (ACflg == OJ_AC)
 			{
-				switch (sig)
+				switch (sig)      //根据原因给出结论
 				{
 				case SIGCHLD:
 				case SIGALRM:
@@ -2828,7 +2879,6 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			break;
 		}
 		/*     comment from http://www.felix021.com/blog/read.php?1662
-
 		 WIFSTOPPED: return true if the process is paused or stopped while ptrace is watching on it
 		 WSTOPSIG: get the signal if it was stopped by signal
 		 */
@@ -2837,7 +2887,6 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 	if (!use_ptrace){
 		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 		continue;
-		
 	}
 #ifdef __mips__
 //		if(exitcode!=5&&exitcode!=133){
@@ -2883,15 +2932,15 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 				call_counter[call_id]--;
 			}
 			else
-			{ //do not limit JVM syscall for using different JVM
-			//	ACflg = OJ_RE;
+			{ //do not limit JVM syscall for using different JVM 对于非法的系统调用，给出具体编号给管理员参考
+				ACflg = OJ_RE;
 				char error[BUFFER_SIZE];
 				sprintf(error,
 						"[ERROR] solution_id:%d called a Forbidden system call:%u [%u]\n"
 						" TO FIX THIS , ask admin to add the CALLID into corresponding LANG_XXV[] located at okcalls32/64.h ,\n"
 						"and recompile judge_client. \n"
 						"if you are admin and you don't know what to do ,\n"
-						"chinese explaination can be found on https://zhuanlan.zhihu.com/p/24498599\n",
+						"中文解释查看知乎 https://zhuanlan.zhihu.com/p/24498599\n",
 						solution_id, call_id,(unsigned int)reg.REG_SYSCALL);
 
 				write_log(error);
@@ -2906,12 +2955,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 //		   }
 		}
 #endif
-		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
+		ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);    // 继续等待下一次的系统调用或其他中断
 		first = false;
 		//usleep(1);
 	}
-	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation;
-	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation;
+	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation; // 统计用户态耗时，在更快速的CPU上加以cpu_compensation倍数放大
+	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation; // 统计内核态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 
 	//clean_session(pidApp);
 }
@@ -3276,7 +3325,6 @@ int main(int argc, char **argv)
 /*
 	if (p_id > 0 && (dp = opendir(fullpath)) == NULL)
 	{
-
 		write_log("No such dir:%s!\n", fullpath);
 #ifdef _mysql_h
 		if (!http_judge)
@@ -3335,7 +3383,7 @@ int main(int argc, char **argv)
 
 		if (pidApp == 0)
 		{
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,(char *)"data.in");
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,(char *)"data.in",p_id);
 		}
 		else
 		{
@@ -3361,7 +3409,6 @@ int main(int argc, char **argv)
 /*	
 	for (;(dirp = readdir(dp)) != NULL;)
 	{
-
 		int namelen = isInFile(dirp->d_name); // check if the file is *.in or not
 		if (namelen == 0)
 			continue;
@@ -3370,6 +3417,13 @@ int main(int argc, char **argv)
 	rewinddir(dp);
 */	
 	num_of_test=namelist_len;
+
+	if( num_of_test == 0 ){
+		print_runtimeerror((char *)"no test data ",(char *)" no *.in file found");
+		ACflg = OJ_RE;
+		finalACflg = OJ_RE;
+		
+	}
 
 	for (int i=0 ; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && i < namelist_len ;i++)
 	{
@@ -3396,24 +3450,26 @@ int main(int argc, char **argv)
 
 		init_syscalls_limits(lang);
 
-		pid_t pidApp = fork();
+		pid_t pidApp = fork();                  //创建子进程，这里程序将自身复制一份，两份同时运行，进程根据返回值确定自己的身份
 
-		if (pidApp == 0)
+		if (pidApp == 0)                        //返回值是0，我就是子进程 
 		{
 
-			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile);
+			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile,p_id);
 		}
 		else
-		{
+		{                                       //返回值非0 ，我是父进程，返回值就是上面那个子进程的pid
 
 			//num_of_test++;
-
+                        //看护子进程，不让他做奇怪的事
 			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
+			kill(pidApp,9);
 			printf("%s: mem=%d time=%d\n",infile+strlen(oj_home)+5,topmemory,usedtime);	
 			total_time+=usedtime;
 			printf("time:%d/%d\n",usedtime,total_time);
+			//判断用户程序输出是否正确，给出结果
 			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test);
@@ -3457,6 +3513,9 @@ int main(int argc, char **argv)
 	{
 		if (DEBUG)
 			printf("add RE info of %d..... \n", solution_id);
+		FILE *df=fopen("error.out","a");
+                fprintf(df,"----time_space_table:----\n%s\n",time_space_table);
+                fclose(df);
 		addreinfo(solution_id);
 	}
 	if (use_max_time)
@@ -3496,7 +3555,7 @@ int main(int argc, char **argv)
 	fclose(df);
 	if(DEBUG) printf("ACflg:%d\n",ACflg);
 	if(DEBUG) printf("finalACflg:%d\n",finalACflg);
-	if(ACflg != 10 && finalACflg!= 10 ) adddiffinfo(solution_id);
+	if(ACflg != OJ_RE && finalACflg!= OJ_RE ) adddiffinfo(solution_id);
 	if(!turbo_mode)update_user(user_id);
 	if(!turbo_mode)update_problem(p_id,cid);
 	clean_workdir(work_dir);

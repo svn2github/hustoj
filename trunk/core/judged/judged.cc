@@ -29,9 +29,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
-#ifdef OJ_USE_MYSQL
-	#include <mysql/mysql.h>
-#endif
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
@@ -40,7 +37,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
+#ifdef OJ_USE_MYSQL
+	#include <mysql/mysql.h>
+#endif
 
 #define BUFFER_SIZE 1024
 #define LOCKFILE "/var/run/judged.pid"
@@ -313,10 +312,10 @@ void run_client(int runid, int clientid) {
 		char docker_v[BUFFER_SIZE*3];
 		sprintf(docker_v,"%s:/home/judge",oj_home);
 		if(internal_client)
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host",
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host",
 				       	"-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
 		else
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--rm","--cap-add","SYS_PTRACE", "--net=host", 
+			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host", 
 					"-v", docker_v, "hustoj", "/home/judge/src/core/judge_client/judge_client", runidstr, buf, (char *) NULL);
 	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
@@ -602,7 +601,7 @@ int work() {
 		if(DEBUG)
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 	}
-	while ((tmp_pid = waitpid(-1, NULL,WNOHANG)) > 0) {
+	while ((tmp_pid = waitpid(-1, NULL, 0 )) > 0) {
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){
 			
@@ -772,10 +771,10 @@ int main(int argc, char** argv) {
 			}
 	
 
-			if(ONCE) break;
+			if(ONCE && j==0) break;
 		}
 		turbo_mode2();
-		if(ONCE) break;
+		if(ONCE && j==0) break;
                 if(n==0){
 			printf("workcnt:%d\n",workcnt);
 			if(oj_udp&&oj_udp_ret==0){
@@ -790,5 +789,8 @@ int main(int argc, char** argv) {
                 }
 		j = 1;
 	}
+#ifdef _mysql_h
+	mysql_close(conn);
+#endif
 	return 0;
 }

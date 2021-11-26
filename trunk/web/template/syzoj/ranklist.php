@@ -8,19 +8,19 @@
   <a href="ranklist.php?scope=y">Year</a>
   <form action="ranklist.php" class="ui mini form" method="get" role="form" style="margin-bottom: 25px; text-align: right; ">
     <div class="ui action left icon input inline" style="width: 180px; margin-right: 77px; ">
-      <i class="search icon"></i><input name="prefix" placeholder="用户名" type="text" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>">
-      <button class="ui mini button" type="submit">查找用户</button>
+      <i class="search icon"></i><input name="prefix" placeholder="<?php echo $MSG_USER?>" type="text" value="<?php echo htmlentities(isset($_GET['prefix'])?$_GET['prefix']:"",ENT_QUOTES,"utf-8") ?>">
+      <button class="ui mini button" type="submit"><?php echo $MSG_SEARCH?></button>
     </div>
   </form>
 	    <table class="ui very basic center aligned table" style="table-layout: fixed; ">
 	        <thead>
 	        <tr>
-	            <th style="width: 60px; ">#</th>
-	            <th style="width: 180px; ">用户名</th>
-	            <th>昵称</th>
-              <th style="width: 100px; ">通过数</th>
-              <th style="width: 100px; ">提交数</th>
-              <th style="width: 100px; ">比率</th>
+	            <th style="width: 60px; "><?php echo $MSG_Number?></th>
+	            <th style="width: 180px; "><?php echo $MSG_USER?></th>
+	            <th><?php echo $MSG_NICK?></th>
+              <th style="width: 100px; "><?php echo $MSG_SOVLED?></th>
+              <th style="width: 100px; "><?php echo $MSG_SUBMIT?></th>
+              <th style="width: 100px; "><?php echo $MSG_RATIO?></th>
 	        </tr>
 	        </thead>
 	        <tbody>

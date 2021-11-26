@@ -9,7 +9,7 @@
 	<link rel="icon" href="../../favicon.ico">
 
 	<title>
-		<?php echo $OJ_NAME?> <?php echo $OJ_BBS?>
+		<?php echo $row['title']." - ".$MSG_PROBLEM." - ".$OJ_NAME; ?>
 	</title>
 
 	<?php include("template/$OJ_TEMPLATE/css.php");?>
@@ -27,7 +27,7 @@
   };
 </script> 
 
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script id="MathJax-script" async src="template/<?php echo $OJ_TEMPLATE?>/tex-chtml.js"></script>
 <style>
 	.jumbotron1{ 
   font-size: 18px; 
@@ -67,6 +67,7 @@
 
 				if ( $row[ 'spj' ] )echo "&nbsp;&nbsp;<span class=red>Special Judge</span>";
 				echo "<br><br>";
+					echo "<div class='btn-group' role='group'>";
         if($pr_flag){
 					echo "<a class='btn btn-info btn-sm' href='submitpage.php?id=$id' role='button'>$MSG_SUBMIT</a>";
         }else{
@@ -75,17 +76,27 @@
         }
 				if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
 				} else {
-					echo "<div class='btn-group' role='group'>";
-  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
-  				echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT_NUM: ".$row['submit']."</a>";
-  				echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
+					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id']."&jresult=4>$MSG_SOVLED: ".$row['accepted']."</a>";
+					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT_NUM: ".$row['submit']."</a>";
+					echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
 				}
 
-	      if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])) {
+	      if ( isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']])  ) {  //only  the original editor can edit this  problem
         	require_once("include/set_get_key.php");
  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
+	      			if(count($used_in_contests)>0){
+					echo "<hr><br>$MSG_PROBLEM_USED_IN:";
+					foreach($used_in_contests as $contests){
+						echo "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
+					
+					}
+					//echo "</div>";
+
 				}
+	      
+	      
+	      }
 
 				echo "</div>";
 				echo "</center>";

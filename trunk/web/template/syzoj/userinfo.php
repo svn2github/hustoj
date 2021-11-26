@@ -14,6 +14,16 @@
             <div class="ui card" style="width: 100%; " id="user_card">
                 <div class="blurring dimmable image" id="avatar_container" style="height:325px">
                     <?php $default = ""; $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=500"; ?>
+		<?php  
+		    // 如果email填写的是qq邮箱，取QQ头像显示
+                    $qq=stripos($email,"@qq.com");
+                    if($qq>0){
+                         $qq=urlencode(substr($email,0,$qq));
+                         $grav_url="https://q1.qlogo.cn/g?b=qq&nk=$qq&s=5";
+                    };
+
+                ?>
+
                     <img style="margin-top: -100%; " src="<?php echo $grav_url; ?>">
                 </div>
                 <div class="content">

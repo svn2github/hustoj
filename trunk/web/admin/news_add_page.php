@@ -21,6 +21,17 @@ if(isset($_GET['cid'])){
   $content = $row['content'];
   $defunct = $row['defunct'];
 }
+$plist = "";
+if(isset($_POST['pid'])){
+	sort($_POST['pid']);
+	foreach($_POST['pid'] as $i){
+	  if($plist)
+	    $plist.=','.intval($i);
+	  else
+	    $plist = $i;
+	}
+	$content="[plist=".$plist."]".htmlentities($_POST['keyword'],ENT_QUOTES,"utf-8")."[/plist]";
+}
 ?>
 
 <div class="container">
@@ -30,7 +41,7 @@ if(isset($_GET['cid'])){
       <input type=text name=title size=71 value='<?php echo isset($title)?$title."-Copy":""?>'>
     </p>
     <p align=left>
-      <textarea class=kindeditor name=content>
+      <textarea class=kindeditor name=content rows=41 >
         <?php echo isset($content)?$content:""?>
       </textarea>
     </p>

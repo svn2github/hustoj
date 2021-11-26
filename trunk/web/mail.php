@@ -5,11 +5,14 @@
 	require_once('./include/db_info.inc.php');
 	require_once('./include/my_func.inc.php');
 	require_once('./include/setlang.php');
-	 
+	if(!isset($OJ_FRIENDLY_LEVEL)) $OJ_FRIENDLY_LEVEL=0;
+
 	if(
-		(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
-		(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
-		
+		$OJ_FRIENDLY_LEVEL<2
+		&&(
+			(isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+			(isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)
+		)
 	  ){
 		header("Content-type: text/html; charset=utf-8");
 		$view_errors=$MSG_MAIL_NOT_ALLOWED_FOR_EXAM;
@@ -84,7 +87,10 @@ if(isset($_POST['to_user'])){
 	$sql="select 1 from privilege where (rightstr='source_browser' or rightstr='administrator') and (user_id=? or user_id=? )";
 	$res=pdo_query($sql,$from_user,$to_user);
 	if ($res&&count($res)<1){
-			$view_title= "Mail can only send to or from a Code Reviewer!";
+		//$view_title= "Mail can only send to or from a Code Reviewer!";
+		$view_errors=$MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT;
+  		require("template/".$OJ_TEMPLATE."/error.php");
+		exit ();
 	}else{
 		if($res)
 		$sql="insert into mail(to_user,from_user,title,content,in_date)

@@ -88,6 +88,7 @@ echo "<input type=submit value='$MSG_SEARCH'></form>";
 <tr  class='toprow'>
 <td ><?php echo $MSG_RUNID?>
 <td ><?php echo $MSG_USER?>
+<td><?php echo $MSG_NICK?></td>
 <td ><?php echo $MSG_PROBLEM?>
 <td ><?php echo $MSG_RESULT?>
 <td ><?php echo $MSG_MEMORY?>

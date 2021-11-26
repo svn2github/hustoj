@@ -1,24 +1,22 @@
 FROM ubuntu:20.04
 RUN     sed -i 's/archive.ubuntu/mirrors.163/g' /etc/apt/sources.list &&\
-	apt-get update && \
-	DEBIAN_FRONTEND=noninteractive \
-    	apt-get -y install --no-install-recommends \
-        libmysqlclient-dev \
-        libmysql++-dev \
-        make \
-        flex \
-        gcc \
-        g++ \
-        iptables \
-        python \
-        python3 \
-	fp-compiler \
-	mono-devel \
-	busybox \
-	dos2unix \
-        openjdk-14-jdk\
-	subversion \
-	wget
+	apt-get update && apt-get -y upgrade
+	
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends libmysqlclient-dev 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        libmysql++-dev 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        make 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        flex 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        gcc 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        g++ 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends       python 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        python3 
+#RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	fp-compiler 
+#RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	mono-devel 
+#RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	busybox 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	dos2unix
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        openjdk-16-jdk
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	subversion 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends	wget
 RUN     apt-get -y install sqlite3
 RUN     useradd -m -u 1536 judge
 RUN     cd /home/judge/ && \ 
@@ -26,21 +24,25 @@ RUN     cd /home/judge/ && \
         tar xzf hustoj.tar.gz 
 #Github update
 #RUN	svn up /home/judge/src 
-RUN     cd /home/judge/src/core/ && \
-	bash make.sh 
+RUN     cd /home/judge/src/core/ && bash make.sh 
 
-# for more compilers, remove # and run "docker build -t hustoj ."
+# for more compilers, VMs and runtimes , remove # and run "docker build -t hustoj ."
 
-#RUN     apt-get -y install ruby
-#RUN     apt-get -y install gobjc
-#RUN     apt-get -y install clang
-#RUN     apt-get -y install guile-3.0
-#RUN     apt-get -y install lua5.3
-#RUN     apt-get -y install nodejs
-#RUN     apt-get -y install golang
-#RUN     apt-get -y install sqlite3
-#RUN     apt-get -y install gfortran
-#RUN     apt-get -y install octave
-	
- 
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ruby
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gobjc
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends clang
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends guile-3.0
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends lua5.3
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends nodejs
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends golang
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends sqlite3
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gfortran
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends octave
+
+# make Chinese Character works in Docker
+RUN apt-get install -y locales locales-all
+RUN locale-gen zh_CN.UTF-8 && dpkg-reconfigure locales && /usr/sbin/update-locale LANG=zh_CN.UTF-8
+ENV LANG zh_CN.UTF-8  
+ENV LANGUAGE zh_CN:zh  
+ENV LC_ALL zh_CN.UTF-8 
 

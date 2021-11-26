@@ -1,6 +1,6 @@
 
-update contest set start_time='2099-01-01 00:00:00' where start_time='0000-00-00 00:00:00';
-update contest set end_time='2099-01-01 00:00:00' where end_time='0000-00-00 00:00:00';
+update contest set start_time='2000-01-01 00:00:00' where start_time<'1000-01-01 00:00:00';
+update contest set end_time='2099-01-01 00:00:00' where end_time<'1000-01-01 00:00:00';
  
 CREATE TABLE `topic` ( `tid` int(11) NOT NULL auto_increment, `title` varbinary(60) NOT NULL, `status` int(2) NOT NULL default '0', `top_level` int(2) NOT NULL default '0', `cid` int(11) default NULL, `pid` int(11) NOT NULL, `author_id` varchar(20) NOT NULL, PRIMARY KEY (`tid`), KEY `cid` (`cid`,`pid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ;
 

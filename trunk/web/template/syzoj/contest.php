@@ -36,7 +36,8 @@
         <div class="row">
             <div class="column">
                 <div class="ui buttons">
-                    <a class="ui small blue button" href="contestrank.php?cid=<?php echo $view_cid?>">排行榜</a>
+                    <a class="ui small blue button" href="contestrank.php?cid=<?php echo $view_cid?>">ACM排行榜</a>
+                    <a class="ui small yellow button" href="contestrank-oi.php?cid=<?php echo $view_cid?>">OI排行榜</a>
                     <a class="ui small positive button" href="status.php?cid=<?php echo $view_cid?>">提交记录</a>
                     <!-- <a class="ui small pink button" href="conteststatistics.php?cid=<?php echo $view_cid?>">比赛统计</a> -->
                 </div>
@@ -75,7 +76,9 @@
                 <table class="ui selectable celled table">
                     <thead>
                         <tr>
-                            <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) echo "<th class=\"one wide\" style=\"text-align: center\">状态</th>" ?>
+                            <th class="one wide" style="text-align: center">
+                                    <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) echo "状态" ?>
+                            </th>
                             <th class="two wide" style="text-align: center">题目编号</th>
                             <th>题目</th>
                             <th>分类</th>

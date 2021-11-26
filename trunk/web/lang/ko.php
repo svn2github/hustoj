@@ -357,5 +357,7 @@
 
 	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
 	
+	$REFRESH_PRIVILEGE="새로 고침 권한";
+	
 ?>
 

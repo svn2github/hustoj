@@ -27,6 +27,7 @@
       <div class="jumbotron">
 	<?php echo $view_errors?>
         <p>
+		<img src="refresh-privilege.php" height="0px" width="0px" alt="auto try obtain new privielges on error" >
         </p>
       </div>
 

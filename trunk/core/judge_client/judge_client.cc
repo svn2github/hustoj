@@ -2308,7 +2308,7 @@ void copy_js_runtime(char *work_dir)
 	execute_cmd("/bin/cp /lib64/ld-linux-x86-64.so.* %s/lib64/", work_dir);
 	execute_cmd("/bin/cp /usr/lib/x86_64-linux-gnu/libicudata.so.* %s/lib/x86_64-linux-gnu/", work_dir);
 #endif
-	execute_cmd("/bin/cp /usr/bin/nodejs %s/usr/bin", work_dir);
+	execute_cmd("/bin/cp /usr/bin/node %s/usr/bin", work_dir);
 }
 void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 				  int &mem_lmt,char * data_file_path,int p_id)   // 为每个测试数据运行一次提交的答案
@@ -2490,7 +2490,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execle("/usr/bin/lua", "/usr/bin/lua", "Main", (char *)NULL,envp);
 		break;
 	case 16: //Node.js
-		execle("/usr/bin/nodejs", "/usr/bin/nodejs", "Main.js", (char *)NULL,envp);
+		execle("/usr/bin/node", "/usr/bin/node", "Main.js", (char *)NULL,envp);
 		break;
 	case 18: //sqlite3
 		execle("/usr/bin/sqlite3", "/usr/bin/sqlite3", "data.db", (char *)NULL,envp);

@@ -1537,6 +1537,23 @@ int init_mysql_conn()   //连接数据库
 	}
 	return 1;
 }
+int check_mysql_conn(){
+        MYSQL_RES *res;
+        const char * sql="select 1";
+        while(mysql_real_query(conn,sql,strlen(sql))){
+                if(DEBUG){
+                        printf("..update failed! %s\n",mysql_error(conn));
+                        write_log("\n.......Mysql time out !---- retry............\n");
+                }
+                mysql_close(conn);
+                init_mysql_conn();
+                sleep(1);
+        }
+        res = mysql_store_result(conn);
+        mysql_free_result(res);
+        return 0;
+}
+
 #endif
 
 #ifdef _mysql_h
@@ -3496,6 +3513,11 @@ int main(int argc, char **argv)
 
 			ACflg = OJ_AC;
 		}
+#ifdef _mysql_h
+		if (!http_judge)
+                         check_mysql_conn();
+#endif
+
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)
 		ACflg = OJ_PE;

@@ -3357,36 +3357,38 @@ int main(int argc, char **argv)
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
-
-	//create chroot for ruby bash python
-	if (lang == 4)
-		copy_ruby_runtime(work_dir);
 	if (lang == 5){
-		execute_cmd("busybox dos2unix Main.sh", work_dir);
-		if(!use_docker)	copy_bash_runtime(work_dir);
+			execute_cmd("busybox dos2unix Main.sh", work_dir);
 	}
-	if (lang == 6 && !python_free)
-		copy_python_runtime(work_dir);
-	if (lang == 7)
-		copy_php_runtime(work_dir);
-	if (lang == 8)
-		copy_perl_runtime(work_dir);
-//	if (lang == 9)
-//		copy_mono_runtime(work_dir);
-	if (lang == 10)
-		copy_objc_runtime(work_dir);
-	if (lang == 11)
-		copy_freebasic_runtime(work_dir);
-	if (lang == 12)
-		copy_guile_runtime(work_dir);
-	if (lang == 15)
-		copy_lua_runtime(work_dir);
-	if (lang == 16)
-		copy_js_runtime(work_dir);
-	if (lang == 18)
-		copy_sql_runtime(work_dir);
-	// read files and run
-	// read files and run
+	if(!use_docker){
+		//create chroot for ruby bash python
+		if (lang == 4)
+			copy_ruby_runtime(work_dir);
+		if (lang == 5){
+			copy_bash_runtime(work_dir);
+		}
+		if (lang == 6 && !python_free)
+			copy_python_runtime(work_dir);
+		if (lang == 7)
+			copy_php_runtime(work_dir);
+		if (lang == 8)
+			copy_perl_runtime(work_dir);
+	//	if (lang == 9)
+	//		copy_mono_runtime(work_dir);
+		if (lang == 10)
+			copy_objc_runtime(work_dir);
+		if (lang == 11)
+			copy_freebasic_runtime(work_dir);
+		if (lang == 12)
+			copy_guile_runtime(work_dir);
+		if (lang == 15)
+			copy_lua_runtime(work_dir);
+		if (lang == 16)
+			copy_js_runtime(work_dir);
+		if (lang == 18)
+			copy_sql_runtime(work_dir);
+	}
+	
 	// read files and run
 	double pass_rate = 0.0;
 	int mark=0,total_mark=0,get_mark=0;

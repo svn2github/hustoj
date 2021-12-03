@@ -20,6 +20,7 @@ $row=$result[0];
 $slanguage=$row['language'];
 $sresult=$row['result'];
 $stime=$row['time'];
+$nick=$row['nick'];
 $smemory=$row['memory'];
 $sproblem_id=$row['problem_id'];
 $view_user_id=$suser_id=$row['user_id'];
@@ -50,7 +51,7 @@ if (isset($_SESSION[$OJ_NAME.'_'.'source_browser'])) $ok=true;
 		if ($brush=='freebasic') $brush='vb';
 		ob_start();
 		echo "/**************************************************************\n";
-		echo "\tProblem: $sproblem_id\n\tUser: $suser_id\n";
+	        echo "\tProblem: $sproblem_id\n\tUser: $suser_id\n\tNick:$nick\n";
 		echo "\tLanguage: ".$language_name[$slanguage]."\n\tResult: ".$judge_result[$sresult]."\n";
 		if ($sresult==4){
 			echo "\tTime:".$stime." ms\n";

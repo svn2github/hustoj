@@ -46,7 +46,7 @@ if (count($result)>0) {
 	}
 	else {
 		if (isset($_GET['q']) && "user_id"==$_GET['q']) {
-			echo $row['user_id'];
+			echo $row['user_id']."[".$row['nick']."]";      // ajax onmouseover show who was copycated or shared the code to him
 		}
 		else {
 			$contest_id = $row['contest_id'];

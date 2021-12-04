@@ -1,5 +1,12 @@
 常见问答
 ----
+不小心删除了admin的权限，如何修复？
+--
+```
+sudo su
+cd /home/judge/src/install
+echo "insert into jol.privilege values('admin','administrator','true','N');" | ./mysql.sh
+```
 人多的时候，随机出现`"No input file specified"`
 --
 编辑`/etc/php/7.4/fpm/pool.d/www.conf`

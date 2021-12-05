@@ -31,9 +31,9 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
 //if ($user_id=="zhblue")       echo "<textarea>".$sql."</textarea>";
 //      echo "<pre>".htmlentities($CONF_STR);
 //      echo "</pre>".$CONF_FILE;
+        mkdir($FARMBASE."/$user_id/run0",0755,true);
         mkdir($FARMBASE."/$user_id/data",0700,true);
         mkdir($FARMBASE."/$user_id/etc",0700,true);
-        mkdir($FARMBASE."/$user_id/run0",0700,true);
         mkdir($FARMBASE."/$user_id/log",0700,true);
         mkdir(dirname($CONF_FILE),0700,true);
         file_put_contents($CONF_FILE,$CONF_STR);

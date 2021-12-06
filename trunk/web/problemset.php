@@ -94,7 +94,7 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 // Problem Page Navigator
 //if($OJ_SAE) $first=1;
 if ($OJ_FREE_PRACTICE){  // open free practice without limit of contest using
-        $sql = "SELECT * FROM `problem` WHERE defunct='N' and `problem_id`=?";
+	$sql = "SELECT count(problem_id) as upid FROM `problem` WHERE defunct='N' ";
         $result = mysql_query_cache($sql);
         $row = $result[0];
         $cnt = $row['upid'] / $page_cnt;

@@ -26,8 +26,6 @@ if($OJ_SaaS_ENABLE){
 }else{
 	$DOMAIN=$domain;
 }
-// if using EXAM or ON site auto turn off free practice
-if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTICE=false;
 
 $OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 require_once(dirname(__FILE__) . "/logger.php");
@@ -52,6 +50,7 @@ switch($OJ_FRIENDLY_LEVEL) {
 	   $OJ_DOWNLOAD=true;
 	case 7:
 	   $OJ_BBS="discuss3";
+	   $OJ_FREE_PRACTICE=true;
 	case 6:
 	   $OJ_LONG_LOGIN=true; 
 	case 5:
@@ -68,3 +67,7 @@ switch($OJ_FRIENDLY_LEVEL) {
 	   date_default_timezone_set("PRC");
 	   pdo_query("SET time_zone ='+8:00'");
 }
+
+// if using EXAM or ON site auto turn off free practice
+if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTICE=false;
+

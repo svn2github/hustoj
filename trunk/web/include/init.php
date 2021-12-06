@@ -23,6 +23,7 @@ if($OJ_SaaS_ENABLE){
 	}else{
 	//	echo $OJ_SaaS_CONF;
 	}
+	if($domain==$DOMAIN)  $MSG_REG_INFO.="/初始化MyOJ";
 }else{
 	$DOMAIN=$domain;
 }

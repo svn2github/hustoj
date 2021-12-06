@@ -93,7 +93,15 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 
 // Problem Page Navigator
 //if($OJ_SAE) $first=1;
-if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
+if ($OJ_FREE_PRACTICE){  // open free practice without limit of contest using
+        $sql = "SELECT * FROM `problem` WHERE defunct='N' and `problem_id`=?";
+        $result = mysql_query_cache($sql);
+        $row = $result[0];
+        $cnt = $row['upid'] / $page_cnt;
+        if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
+        $sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE defunct='N' and  $filter_sql";
+
+}else if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
 	// Reset Page Count
 	$sql = "select count(`problem_id`) as upid FROM `problem`";
 	$result = mysql_query_cache($sql);
@@ -103,8 +111,8 @@ if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
 	if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
 
 	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct FROM `problem`, (SELECT @ROWNUM := 0) TEMP ORDER BY `problem_id`) A WHERE $filter_sql";
-}
-else {  //page problems (not include in contests period)
+
+}else {  //page problems (not include in contests period)
 	$now = strftime("%Y-%m-%d %H:%M",time());
 	$sql = "SELECT * FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, `problem_id`,`title`,`source`,`submit`,`accepted`,defunct " .
 	"FROM `problem`, (SELECT @ROWNUM := 0) TEMP " .

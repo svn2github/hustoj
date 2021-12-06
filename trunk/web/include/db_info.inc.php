@@ -69,10 +69,12 @@ static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式
 static  $OJ_BEIAN=false;  // 如果有备案号，填写备案号
 static  $OJ_RANK_HIDDEN="'admin','zhblue'";  // 管理员不显示在排名中
 static  $OJ_FRIENDLY_LEVEL=0; //系统友好级别，暂定0-9级，级别越高越傻瓜，系统易用度高的同时将降低安全性，仅供非专业用途，造成泄题、抄袭概不负责。
-
+static  $OJ_FREE_PRACTICE=false; //自由练习，不受比赛作业用题限制
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
+
+
 
 /* share code */
 static  $OJ_SHARE_CODE=false; // 代码分享功能

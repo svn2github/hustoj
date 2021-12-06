@@ -26,6 +26,8 @@ if($OJ_SaaS_ENABLE){
 }else{
 	$DOMAIN=$domain;
 }
+// if using EXAM or ON site auto turn off free practice
+if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTICE=false;
 
 $OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 require_once(dirname(__FILE__) . "/logger.php");

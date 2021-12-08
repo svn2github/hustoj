@@ -77,7 +77,7 @@
                                 echo "<tr>"."<td>"
                                     ."<a href=\"problem.php?id=".$row["problem_id"]."\">"
                                     .$row["title"]."</a></td>"
-                                    ."<td>".$row["in_date"]."</td>"."</tr>";
+                                    ."<td>".substr($row["in_date"],0,10)."</td>"."</tr>";
                             }
                         }
                     ?>

@@ -63,8 +63,8 @@
                 <table class="ui very basic center aligned table">
                     <thead>
                         <tr>
-                            <th width="70%"><?php echo $MSG_TITLE;?></th>
-                            <th width="30%"><?php echo $MSG_TIME;?></th>
+                            <th width="60%"><?php echo $MSG_TITLE;?></th>
+                            <th width="40%"><?php echo $MSG_TIME;?></th>
                         </tr>
                     </thead>
                     <tbody>

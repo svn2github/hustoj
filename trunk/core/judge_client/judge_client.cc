@@ -1262,11 +1262,18 @@ int compile(int lang, char *work_dir)
 {
 	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
 	int pid;
+        char fmax_errors[BUFFER_SIZE];
 
-	const char *CP_C[] = {"gcc", "Main.c", "-o", "Main", cc_opt, "-fmax-errors=10", "-Wall",
-						  "-lm", "--static", cc_std , "-DONLINE_JUDGE", NULL};
-	const char *CP_X[] = {"g++", "-fno-asm", "-fmax-errors=10", "-Wall",cc_opt,
-						  "-lm", "--static", cpp_std, "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
+        if(__GNUC__ > 4 || (  __GNUC__ == 4 &&  __GNUC_MINOR__ >= 8 ) ){
+                sprintf(fmax_errors,"-fmax-errors=10");
+        }else{
+                sprintf(fmax_errors,"-Wformat");
+        }
+        const char *CP_C[] = {"gcc", "-fno-asm", cc_opt , fmax_errors , cc_std  ,
+                                                   "-Wall", "-lm", "--static", "-DONLINE_JUDGE", "-o", "Main", "Main.c",  NULL};
+        const char *CP_X[] = {"g++", "-fno-asm", cc_opt , fmax_errors , cpp_std ,
+                                                   "-Wall", "-lm", "--static", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
+
 	const char *CP_P[] =
 		{"fpc", "Main.pas", "-Cs32000000", "-Sh", "-O2", "-Co", "-Ct", "-Ci", NULL};
 	//      const char * CP_J[] = { "javac", "-J-Xms32m", "-J-Xmx256m","-encoding","UTF-8", "Main.java",NULL };

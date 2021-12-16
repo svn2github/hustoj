@@ -367,6 +367,12 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_FUNCTION_GETS_REMOVIED ="std: gets بولسا C++11 دىن تاشلىۋېتىلىپ، C++14 دىن چىقىرىۋېتىلىدۇ. std::fgets نى ئىشلىتىشكە بولىدۇ. ياكى ماكرو ئېنىقلىما #define gets(S) fgets(S,sizeof(S),stdin)";
 	$MSG_PROBLEM_USED_IN ="سۇئال ئاللىقاچان شەخسىي مۇسابىقىدە ئىشلىتىلدى. ";
 	
-	$REFRESH_PRIVILEGE="ئىمتىيازنى يېڭىلاش";
-
+	$MSG_REFRESH_PRIVILEGE="ئىمتىيازنى يېڭىلاش";
+	$MSG_NEW_CONTEST="New Contest";
+	$MSG_AVAILABLE="Available";
+	$MSG_RESERVED="Reserved";
+	$MSG_NEW_PROBLEM_LIST="NewProblemList";
+	$MSG_DELETE="Delete";
+	$MSG_EDIT="Edit";
+	$MSG_TEST_DATA="TestData";
  ?>

@@ -375,4 +375,6 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_DELETE="Delete";
 	$MSG_EDIT="Edit";
 	$MSG_TEST_DATA="TestData";
+        $MSG_CHECK_TO="Batch Operation";
+
  ?>

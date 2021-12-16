@@ -358,6 +358,14 @@
 	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
         $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="Mails can only be sent between teachers and student, not between students.";
 		
-	$REFRESH_PRIVILEGE="Refresh Privilege";
+	$MSG_REFRESH_PRIVILEGE="Refresh Privilege";
+	$MSG_NEW_CONTEST="New Contest";
+	$MSG_AVAILABLE="Available";
+	$MSG_RESERVED="Reserved";
+	$MSG_NEW_PROBLEM_LIST="NewProblemList";
+	$MSG_DELETE="Delete";
+	$MSG_EDIT="Edit";
+	$MSG_TEST_DATA="TestData";
+
 
  ?>

@@ -377,5 +377,5 @@
   $MSG_DELETE="删除";
   $MSG_EDIT="编辑";
   $MSG_TEST_DATA="管理测试数据";
-
+  $MSG_CHECK_TO="批量选择操作";
 ?>

@@ -88,13 +88,13 @@ echo "</select>";
       <?php
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
-          echo "<td>STATUS</td><td>DELETE</td>";
-        echo "<td>EDIT</td><td>TESTDATA</td>";
+          echo "<td>$MSG_STATUS</td><td>$MSG_DELETE</td>";
+        echo "<td>$MSG_EDIT</td><td>$MSG_TESTDATA</td>";
       }
       ?>
     </tr>
-            <tr>
-      <td colspan=2 style="height:40px;">Checked to</td>
+        <tr>
+        <td colspan=2 style="height:40px;"><?php echo "$MSG_CHECK_TO"?></td>
       <td colspan=6>
       <input type=submit name='problem2contest' value='<?php echo $MSG_NEW_CONTEST?>'>
       <input type=submit name='enable' value='<?php echo $MSG_AVAILABLE ?>' onclick='$("form").attr("action","problem_df_change.php")'>

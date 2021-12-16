@@ -357,7 +357,13 @@
 
 	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
 	
-	$REFRESH_PRIVILEGE="새로 고침 권한";
-	
+	$MSG_REFRESH_PRIVILEGE="새로 고침 권한";
+	$MSG_NEW_CONTEST="New Contest";
+	$MSG_AVAILABLE="Available";
+	$MSG_RESERVED="Reserved";
+	$MSG_NEW_PROBLEM_LIST="NewProblemList";
+	$MSG_DELETE="Delete";
+	$MSG_EDIT="Edit";
+	$MSG_TEST_DATA="TestData";
 ?>
 

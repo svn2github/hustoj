@@ -67,7 +67,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       <td>END</td>
       <td>OPEN</td>
       <td>NOW</td>
-      <td>EDIT</td>
+      <td><?php echo $MSG_EDIT ?></td>
       <td>COPY</td>
       <td>EXPORT</td>
       <td>LOGS</td>
@@ -82,9 +82,9 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       echo "<td>".$row['end_time']."</td>";
       $cid = $row['contest_id'];
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."m$cid"])){
-        echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class=green>Public</span>":"<span class=red>Private<span>")."</a></td>";
-        echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>Available</span>":"<span class=red>Reserved</span>")."</a></td>";
-        echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">Edit</a></td>";
+        echo "<td><a href=contest_pr_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['private']=="0"?"<span class=green>$MSG_Public</span>":"<span class=red>$MSG_Private<span>")."</a></td>";
+        echo "<td><a href=contest_df_change.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>$MSG_AVAILABLE </span>":"<span class=red>$MSG_RESERVED </span>")."</a></td>";
+        echo "<td><a href=contest_edit.php?cid=".$row['contest_id'].">$MSG_EDIT</a></td>";
         echo "<td><a href=contest_add.php?cid=".$row['contest_id'].">Copy</a></td>";
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])){
           echo "<td><a href=\"problem_export_xml.php?cid=".$row['contest_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey']."\">Export</a></td>";

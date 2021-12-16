@@ -369,5 +369,13 @@
   $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
   $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
   
-  $REFRESH_PRIVILEGE="刷新权限";
+  $MSG_REFRESH_PRIVILEGE="刷新权限";
+  $MSG_NEW_CONTEST="创建新比赛";
+  $MSG_AVAILABLE="启用";
+  $MSG_RESERVED="保留";
+  $MSG_NEW_PROBLEM_LIST="创建新题单";
+  $MSG_DELETE="删除";
+  $MSG_EDIT="编辑";
+  $MSG_TEST_DATA="管理测试数据";
+
 ?>

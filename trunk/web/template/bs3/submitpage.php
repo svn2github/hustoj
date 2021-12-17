@@ -384,7 +384,9 @@
       editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
-        enableLiveAutocompletion: true
+        enableLiveAutocompletion: true,
+        fontSize: "20px"
+
       });
     </script>
   <?php }?>

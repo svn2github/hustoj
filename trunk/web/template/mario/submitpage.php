@@ -14,25 +14,7 @@
 	?>
 <div id=main>
 	<center>
-<?php
-if($OJ_EDITE_AREA){
-?>
-<script language="Javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
-<script language="Javascript" type="text/javascript">
-editAreaLoader.init({
-	        id: "source"            
-	        ,start_highlight: true 
-	        ,allow_resize: "both"
-	        ,allow_toggle: true
-	        ,word_wrap: true
-	        ,language: "en"
-	        ,syntax: "cpp"  
-			,font_size: "8"
-	        ,syntax_selection_allow: "basic,c,cpp,java,pas,perl,php,python,ruby"
-			,toolbar: "search, go_to_line, fullscreen, |, undo, redo, |, select_font,syntax_selection,|, change_smooth_selection, highlight, reset_highlight, word_wrap, |, help"          
-	});
-</script>
-<?php }?>
+
 <script src="include/checksource.js">
 </script>
 <form action="submit.php" method="post" 
@@ -96,5 +78,26 @@ Language:
 </div><!--end foot-->
 </div><!--end main-->
 </div><!--end wrapper-->
+	<?php
+if($OJ_ACE_EDITOR){
+?>
+<script src="ace/ace.js"></script>
+<script src="ace/ext-language_tools.js"></script>
+<script>
+    ace.require("ace/ext/language_tools");
+    var editor = ace.edit("source");
+    editor.setTheme("ace/theme/chrome");
+    switchLang(<?php echo $lastlang ?>);
+    editor.setOptions({
+	enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: false,
+        fontFamily: "Consolas",
+        fontSize: "20px"
+    });
+   reloadtemplate($("#language").val()); 
+     
+</script>
+<?php }?>
 </body>
 </html>

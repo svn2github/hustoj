@@ -418,7 +418,9 @@
             editor.setOptions({
                 enableBasicAutocompletion: true,
                 enableSnippets: true,
-                enableLiveAutocompletion: true
+                enableLiveAutocompletion: false,
+                fontFamily: "Consolas",
+                fontSize: "20px"
             });
         </script>
     <?php }?>

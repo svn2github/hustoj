@@ -311,11 +311,11 @@ function loadFromBlockly(){
     editor.setTheme("ace/theme/chrome");
     switchLang(<?php echo $lastlang ?>);
     editor.setOptions({
-	    enableBasicAutocompletion: true,
-	    enableSnippets: true,
-	    enableLiveAutocompletion: true,
-            fontSize: "20px"
-
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: false,
+        fontFamily: "Consolas",
+        fontSize: "20px"
     });
    reloadtemplate($("#language").val()); 
      

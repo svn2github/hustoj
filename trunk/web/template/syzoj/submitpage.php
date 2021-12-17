@@ -313,7 +313,9 @@ function loadFromBlockly(){
     editor.setOptions({
 	    enableBasicAutocompletion: true,
 	    enableSnippets: true,
-	    enableLiveAutocompletion: true
+	    enableLiveAutocompletion: true,
+            fontSize: "20px"
+
     });
    reloadtemplate($("#language").val()); 
      

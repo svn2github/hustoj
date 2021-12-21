@@ -285,8 +285,8 @@ class BBCode
 	    //var_dump($colorIndex);
             // emit the tag
 	    $output = $output . '<div class="panel '.$plist_color[$colorIndex%count($plist_color)].
-		    				'"><div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\')"><h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '">' 
-		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div><div id="plist'.$colorIndex.'" > </div></div>';
+		    				'"><div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\').toggle()"><h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '">' 
+		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4>  </div><div id="plist'.$colorIndex.'"  style="display:none"  > </div></div>';
 	    $colorIndex++;
             // advance ptr (again)
             $input_ptr = $search_offset + strlen($search_match);

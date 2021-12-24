@@ -2,7 +2,7 @@
 if [ "$1" = "" ]; then
    echo "Usage: $0 standard-execute-binary"
    echo "Example: after compiled your standard program by 'gcc -o main main.cc' "
-   echo "         type '$0 main'  "
+   echo "         TYPE ---> '$0 main' "
    echo "         will generate .out files for each .in files in "`pwd`
    exit 1
 fi

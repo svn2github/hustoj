@@ -38,8 +38,7 @@ if(count($data)>0){
    }
    $infile="$OJ_DATA/$pid/$name.in"; 
    $outfile="$OJ_DATA/$pid/$name.out"; 
-   $out=file_get_contents($filename.".in");
-   echo $filename;
+   
    $zipname = tempnam(__dir__.'/upload', '');
    $zip = new ZipArchive();
 

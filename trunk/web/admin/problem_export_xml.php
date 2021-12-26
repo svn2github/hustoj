@@ -122,6 +122,7 @@ function getSolution($pid,$lang) {
 }
 
 function fixurl($img_url) {
+  if(substr($img_url,0,4)=="data") return $img_url;
   $img_url = html_entity_decode($img_url,ENT_QUOTES,"UTF-8");
 
   if (substr($img_url,0,4)!="http") {
@@ -169,6 +170,7 @@ function fixImageURL(&$html,&$did) {
   $imgs = array_unique($images[1]);
 
   foreach ($imgs as $img) {
+    if(substr($img,0,4)=="data") continue;                      // skip image from paste clips
     $html = str_replace($img,fixurl($img),$html); 
     //print_r($did);
 

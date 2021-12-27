@@ -48,7 +48,7 @@ fi
 
 mysql < src/install/db.sql
 echo "CREATE USER '$USER'@'localhost' identified by '$PASSWORD';grant all privileges on jol.* to '$USER'@'localhost' ;\n flush privileges;\n"|mysql
-echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u$USER -p$PASSWORD 
+echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql
 
 PHP_VER=`grep 'php.*fpm\.sock' /etc/nginx/sites-enabled/default |awk -F/ '{print $4}'|awk -F- '{print $1}'|cut -c4-6`
 

@@ -217,6 +217,21 @@ div[class*=ace_br] {
   editor.container.style.fontFamily = "'Roboto Mono', 'Bitstream Vera Sans Mono', 'Menlo', 'Consolas', 'Lucida Console', monospace";
   editor.setShowPrintMargin(false);
   editor.renderer.updateFontSize();
+  function transform(){
+        let height=document.body.clientHeight;
+        let width=parseInt(document.body.clientWidth*0.618);
+        let width2=parseInt(document.body.clientWidth*0.382);
+        let submitURL=$("#submit")[0].href;
+        console.log(width);
+        let main=$("#main");
+        let problem=main.html();
+        main.removeClass("container");
+        main.css("width",width2);
+        main.css("margin-left","10px");
+        main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
+        //main.css("float","left");
+        $("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
+  }
 
   function submit_code() {
     if (!$('#submit_code input[name=answer]').val().trim() && !editor.getValue().trim()) return false;

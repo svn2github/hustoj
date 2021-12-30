@@ -19,7 +19,7 @@ require_once ("../include/const.inc.php");
 function image_save_file($filepath ,$base64_encoded_img) {
 	$dirpath=dirname($filepath);
 	if (!file_exists($dirpath)) {
-		mkdir($dirpath);
+		 mkdir($dirpath,0755,true);
 	}
 	  $fp = fopen($filepath ,"wb");
 	  fwrite($fp,base64_decode($base64_encoded_img));

@@ -29,10 +29,10 @@ if (isset($_GET['id'])) {
 	$sql="select c.contest_id,c.title from contest c inner join contest_problem cp on c.contest_id=cp.contest_id and cp.problem_id=?  WHERE ( c.`end_time`>'$now' and c.defunct='N' ) or c.`private`='1' ";
 	$used_in_contests=pdo_query($sql,$id);
 
-	if ($OJ_FREE_PRACTICE)
-                $sql = "SELECT * FROM `problem` WHERE defunct='N' and `problem_id`=?";
-	else if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
+	if (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=?";
+	else if ($OJ_FREE_PRACTICE)
+                $sql = "SELECT * FROM `problem` WHERE defunct='N' and `problem_id`=?";
 	else
 		$sql = "SELECT * FROM `problem` WHERE `problem_id`=? AND `defunct`='N' AND `problem_id` NOT IN (
 				SELECT `problem_id` FROM `contest_problem` WHERE `contest_id` IN (

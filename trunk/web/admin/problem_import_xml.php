@@ -224,10 +224,9 @@ function import_fps($tempfile) {
             exit(1);
           }
 
-          $testno++;
+        $testno++;
  	$ymd =$domain."/". date("Ymd");
-	$save_path .= $ymd . "/";
-	$save_url .= $ymd . "/";
+	$save_path = $ymd . "/";
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
 	$newpath = $save_path."/$pid"."_".$testno."_".$new_file_name;

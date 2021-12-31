@@ -80,12 +80,12 @@ div[class*=ace_br] {
 
           <?php
             if($pr_flag){
-              echo "<a class=\"small ui primary button\" href=\"submitpage.php?id=$id\">提交</a>";
+              echo "<a  id='submit'  class=\"small ui primary button\" href=\"submitpage.php?id=$id\">提交</a>";
               echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$id\">提交记录</a>";
               echo "<a class=\"small ui orange button\" href=\"problemstatus.php?id=$id\">统计</a>";
-			  echo "<a class=\"small ui red button\" href=\"discuss.php?pid=$id\">$MSG_BBS</a>";
+	      echo "<a class=\"small ui red button\" href=\"discuss.php?pid=$id\">$MSG_BBS</a>";
             }else{
-              echo "<a href=\"contest.php?cid=$cid\" class=\"ui orange button\">返回比赛</a>";
+              echo "<a  id='submit'  href=\"contest.php?cid=$cid\" class=\"ui orange button\">返回比赛</a>";
               echo "<a class=\"small ui primary button\" href=\"submitpage.php?cid=$cid&pid=$pid&langmask=$langmask\">提交</a>";
               echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$PID[$pid]&cid=$cid\">提交记录</a>";
             }

@@ -4,7 +4,7 @@ RUN     sed -i 's/archive.ubuntu/mirrors.163/g' /etc/apt/sources.list &&\
 	
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends libmysqlclient-dev 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        libmysql++-dev 
-RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        make 
+RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        build-essential 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        flex 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        gcc 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        g++ 

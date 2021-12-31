@@ -3,7 +3,7 @@ apt-get update
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/
-
+chgrp www-data /home/judge/
 #using tgz src files
 wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
 tar xzf hustoj.tar.gz

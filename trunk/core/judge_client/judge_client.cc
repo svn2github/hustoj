@@ -1270,7 +1270,7 @@ int compile(int lang, char *work_dir)
                 sprintf(fmax_errors,"-Wformat");
         }
         const char *CP_C[] = {"gcc", "-fno-asm", cc_opt , fmax_errors , cc_std  ,
-                                                   "-Wall", "-lm", "--static", "-DONLINE_JUDGE", "-o", "Main", "Main.c",  NULL};
+                                                   "-Wall", "--static", "-DONLINE_JUDGE", "-o", "Main", "Main.c",  "-lm",  NULL};    // 看起来别扭，但是gcc非要-lm选项在Main.c后面才认
         const char *CP_X[] = {"g++", "-fno-asm", cc_opt , fmax_errors , cpp_std ,
                                                    "-Wall", "-lm", "--static", "-DONLINE_JUDGE", "-o", "Main", "Main.cc", NULL};
 

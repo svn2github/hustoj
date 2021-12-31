@@ -270,7 +270,7 @@ function reloadtemplate(lang){
    switchLang(lang);
 }
 function openBlockly(){
-   $("#frame_source").hide();
+   $("#source").hide();
    $("#TestRun").hide();
    $("#language")[0].scrollIntoView();
    $("#language").val(6).hide();

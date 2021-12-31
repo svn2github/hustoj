@@ -9,9 +9,10 @@ wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
 tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/ src
-for PKG in make g++ clang libmariadb++-dev php-fpm nginx mariadb-server php-mysql php-common php-gd php-zip php-mbstring php-xml
+for PKG in build-essential libmariadb++-dev php-fpm nginx mariadb-server php-mysql php-common php-gd php-zip php-mbstring php-xml
 do
    apt-get install -y $PKG 
+   apt-get install -f
 done
 
 USER="hustoj"

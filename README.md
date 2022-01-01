@@ -139,9 +139,18 @@ Star us, please!
 
 <details open>
 <summary><b>2021年</b></summary>
+日期  | 类型 |  更新内容
+------- | :--: | :-------
+01-01 | 补丁 | 修复Docker中-lm不能加载sqrt函数的问题
+
+</details>
+
+<details>
+<summary><b>2021年</b></summary>
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+12-31 | 更新 | 增加UOS20安装脚本
 12-21 | 更新 | 让题单plist元素可以收缩，标题链接打开新窗口。
 12-18 | 更新 | 给admin下的problem_list等页增加汉化
 12-16 | 补丁 | 给龙芯补充新的系统调用

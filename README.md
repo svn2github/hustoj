@@ -138,8 +138,8 @@ Star us, please!
 ## 更新日志
 
 <details open>
-<summary><b>2021年</b></summary>
-日期  | 类型 |  更新内容
+<summary><b>2022年</b></summary>
+  日期  | 类型 |  更新内容
 ------- | :--: | :-------
 01-01 | 补丁 | 修复Docker中-lm不能加载sqrt函数的问题
 

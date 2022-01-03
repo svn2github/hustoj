@@ -19,12 +19,11 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 require_once 'JSON.php';
 
 $php_path = dirname(__FILE__) . '/';
-$php_url = dirname($_SERVER['PHP_SELF']) . '/';
 
 //文件保存目录路径
 $save_path = $php_path . '../../upload/';
 //文件保存目录URL
-$save_url = $php_url . '../../upload/';
+$save_url = dirname(dirname(dirname($_SERVER['PHP_SELF']) )) . '/upload/';
 //定义允许上传的文件扩展名
 $ext_arr = array(
 	'image' => array('gif', 'jpg', 'jpeg', 'png', 'bmp'),

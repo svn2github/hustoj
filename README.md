@@ -280,7 +280,7 @@ wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh
 ```
 	
-脚本运行完成直接浏览器输入ip地址即可访问，如不能打开请检查访问策略、防火墙设置是否打开80端口。
+脚本运行完成直接浏览器输入ip地址即可访问，如不能打开请检查**访问策略**、**防火墙**设置是否打开80端口。
 	
 提醒：阿里云的 Ubuntu 20.04 预装了 `apparmor` ，小概率可能会造成 `systemd` 和 `umount` 进程卡CPU 100%
 可能的解决方案1:安装docker(运行judge_client目录下的docker.sh)并启用OJ_USE_DOCKER=1
@@ -334,8 +334,17 @@ sudo bash update-sources-ubuntu.sh
 wget http://dl.hustoj.com/install-deepin20+.sh
 sudo bash install-deepin20+.sh
 ```
+	
+### 基于 UOS 20+ 安装
+
+国内桌面用户 `UOS 20+` (内置QQ、微信、WPS方便出题人本地测试，最新20测试通过)
+
+```bash
+wget http://dl.hustoj.com/install-uos20.sh
+sudo bash install-uos20.sh
+```
     
-### 基于 CentOS 安装
+### 基于 CentOS 安装 CentOS发行策略改变，未来前景不确定，不推荐
 
 假如你不得已非要用centos7 （有的语言可能不支持，但是某些机架式服务器的Raid卡Ubuntu不认只能装CentOS），可以用下面脚本快速安装OJ：  
 

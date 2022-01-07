@@ -100,4 +100,4 @@
         </div>
     </div>
     <div style="margin-top: 28px; ">
-        <div class="ui main container">
+        <div id="main" class="ui main container">

@@ -1,23 +1,23 @@
-<?php 
-	$url=basename($_SERVER['REQUEST_URI']);
-	$dir=basename(getcwd());
-	if($dir=="discuss3") $path_fix="../";
-	else $path_fix="";
- 	if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
+<?php
+        $url=basename($_SERVER['REQUEST_URI']);
+        $dir=basename(getcwd());
+        if($dir=="discuss3") $path_fix="../";
+        else $path_fix="";
+        if(isset($OJ_NEED_LOGIN)&&$OJ_NEED_LOGIN&&(
                   $url!='loginpage.php'&&
                   $url!='lostpassword.php'&&
                   $url!='lostpassword2.php'&&
                   $url!='registerpage.php'
                   ) && !isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
- 
+
            header("location:".$path_fix."loginpage.php");
            exit();
         }
 
-	if($OJ_ONLINE){
-		require_once($path_fix.'include/online.php');
-		$on = new online();
-	}
+        if($OJ_ONLINE){
+                require_once($path_fix.'include/online.php');
+                $on = new online();
+        }
 ?>
 
 <!DOCTYPE html>
@@ -29,15 +29,18 @@
     <meta name="viewport" content="width=1200">
     <title><?php echo $show_title ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php");?>
-    <script src="<?php echo $OJ_CDN_URL?>/include/jquery-latest.js"></script>
+    <script src="<?php echo "$OJ_CDN_URL/template/$OJ_TEMPLATE/"?>jquery.min.js"></script>
 </head>
 
-<body style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; ">
-    <div class="ui fixed borderless menu" style="position: fixed; height: 49px; ">
+<?php
+        if(!isset($_GET['spa'])){
+?>
+    <body style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; ">
+    <div class="ui fixed borderless menu" style="position: fixed; height: 49px; z-index:99999">
         <div class="ui container">
             <a class="header item" href="/"><span
                     style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?></span></a>
-	    <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
+            <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
                 href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i><?php echo $MSG_PROBLEMS?> </a>
             <a class="item <?php if ($url=="category.php") echo "active";?>"
@@ -56,7 +59,7 @@
                   <a class='item' href="discuss.php"><i class="clipboard icon"></i> <?php echo $MSG_BBS?></a>
               <?php }?>
             <?php if(isset($_GET['cid'])){
-            	$cid=intval($_GET['cid']);
+                $cid=intval($_GET['cid']);
             ?>
             <a id="back_to_contest" class="item active" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>" ><i
                     class="arrow left icon"></i><?php echo $MSG_CONTEST.$MSG_PROBLEMS.$MSG_LIST?></a>
@@ -71,10 +74,10 @@
                         <div class="menu">
                             <a class="item" href="<?php echo $path_fix?>modifypage.php"><i
                                     class="edit icon"></i><?php echo $MSG_REG_INFO;?></a>
-				<?php if ($OJ_SaaS_ENABLE){ ?>
-				<?php if($_SERVER['HTTP_HOST']==$DOMAIN)
-					echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
-				<?php } ?>
+                                <?php if ($OJ_SaaS_ENABLE){ ?>
+                                <?php if($_SERVER['HTTP_HOST']==$DOMAIN)
+                                        echo  "<a class='item' href='http://".  $_SESSION[$OJ_NAME.'_'.'user_id'].".$DOMAIN'><i class='globe icon' ></i>MyOJ</a>";?>
+                                <?php } ?>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="admin/"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
                             <?php } ?>
@@ -87,11 +90,11 @@
 
                 <div class="item">
                     <a class="ui button" style="margin-right: 0.5em; " href="loginpage.php">
-                       <?php echo $MSG_LOGIN?> 
+                       <?php echo $MSG_LOGIN?>
                     </a>
                     <?php if(isset($OJ_REGISTER)&&$OJ_REGISTER ){ ?>
                     <a class="ui primary button" href="registerpage.php">
-                       <?php echo $MSG_REGISTER?> 
+                       <?php echo $MSG_REGISTER?>
                     </a>
                     <?php } ?>
                 </div>
@@ -101,3 +104,4 @@
     </div>
     <div style="margin-top: 28px; ">
         <div id="main" class="ui main container">
+<?php } ?>

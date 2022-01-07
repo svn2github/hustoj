@@ -41,7 +41,7 @@
 
 
 <body>
-	<div class="container">
+	<div id="main" class="container">
 		<?php include("template/$OJ_TEMPLATE/nav.php");?>
 
 		<!-- Main component for a primary marketing message or call to action -->

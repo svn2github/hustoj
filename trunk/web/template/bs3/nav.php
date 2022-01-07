@@ -19,9 +19,10 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
     require_once($path_fix.'include/online.php');
     $on = new online();
   }
+  if(!isset($_GET[spa])){
 ?>
       <!-- Static navbar -->
-      <nav class="navbar navbar-default" role="navigation" >
+      <nav class="navbar navbar-default" role="navigation" style="position:fixed;width:100%;margin-bottom:50px">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -128,3 +129,7 @@ if(stripos($_SERVER['REQUEST_URI'],"template")!==false)exit();
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
+<br>
+<br>
+<br>
+<?php  } ?>

@@ -20,28 +20,23 @@
 </head>
 
 <body>
-  <div class="container">
+<div <?php if (!isset($_GET['spa'])) echo 'class="container"' ?> >
     <?php include("template/$OJ_TEMPLATE/nav.php");?>     
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div <?php if (!isset($_GET['spa'])) echo 'class="jumbotron"' ?> >
       <center>
         <script src="<?php echo $OJ_CDN_URL?>include/checksource.js"></script>
         
         <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
           <?php if (isset($id)){?>
-            <br>
             <?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo $id?></span>
-            <br>
             <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" >
-            <br>
           <?php } else {
           //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
           //if ($pid>25) $pid=25;
           ?>
-            <br>
             <?php echo $MSG_PROBLEM_ID." : "?> <span class=blue><?php echo chr($pid+ord('A'))?></span>
-            <br> of Contest <span class=blue> <?php echo $cid?> </span>
-            <br>
+             of Contest <span class=blue> <?php echo $cid?> </span>
             <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
             <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
           <?php }?>
@@ -69,8 +64,10 @@
             </select>
           </span>
 
-          <?php if($OJ_ACE_EDITOR){ ?>
-            <pre style="width:80%;height:600;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
+	  <?php if($OJ_ACE_EDITOR){
+			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="550px"
+		?>
+	    <pre style="width:80%;height:<?php echo $height?>;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
             <input type=hidden id="hide_source" name="source" value=""/>
           <?php }else{ ?>
             <textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"> <?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
@@ -88,7 +85,6 @@
             <?php echo $MSG_VCODE?>:
             <input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
           <?php }?>
-          <br><br>
 
           <input id="Submit" class="btn btn-info btn-sm" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 

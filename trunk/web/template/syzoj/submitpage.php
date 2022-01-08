@@ -14,12 +14,12 @@
 <form id=frmSolution action="submit.php" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
 Problem <span class=blue><b><?php echo $id?></b></span>
-<input id=problem_id type='hidden' value='<?php echo $id?>' name="id" ><br>
+<input id=problem_id type='hidden' value='<?php echo $id?>' name="id" >
 <?php }else{
 //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //if ($pid>25) $pid=25;
 ?>
-Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span><br>
+Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contest <span class=blue><b><?php echo $cid?></b></span>
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
@@ -47,13 +47,15 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
 <?php }?>
 
-<br>
 </span>
-<?php if($OJ_ACE_EDITOR){ ?>
-	<pre style="width:80%;height:600" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre><br>
+<?php if($OJ_ACE_EDITOR){ 
+
+			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="500px";
+	?>
+	<pre style="width:90%;height:<?php echo $height?>" cols=180 rows=16 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
 	<input type=hidden id="hide_source" name="source" value=""/>
 <?php }else{ ?>
-	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea><br>
+	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
 <?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
@@ -62,10 +64,9 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:
 <?php echo $view_sample_output?>
 </textarea>
-<br>
 <?php } ?>
 <!-- <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" > -->
-<div class="ui center aligned vertical segment" style="padding-bottom: 0; ">
+<div class="center aligned vertical segment" >
 <button type="submit" class="ui labeled icon button"  onclick="do_submit();"><i class="ui edit icon"></i>提交</button>
 <!--div onclick="show_custom_test()" class="ui positive button">自定义测试</div-->
 </div>
@@ -315,7 +316,7 @@ function loadFromBlockly(){
         enableSnippets: true,
         enableLiveAutocompletion: false,
         fontFamily: "Consolas",
-        fontSize: "20px"
+        fontSize: "18px"
     });
    reloadtemplate($("#language").val()); 
      

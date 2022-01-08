@@ -97,7 +97,7 @@
 	      
 	      
 	      }
-
+                     echo "<a class='btn btn-danger btn-sm' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
 				echo "</div>";
 				echo "</center>";
 				# end of head

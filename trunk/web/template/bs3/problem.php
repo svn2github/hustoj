@@ -80,7 +80,7 @@
 					echo "<a class='btn btn-primary btn-sm' role='button' href=status.php?problem_id=".$row['problem_id'].">$MSG_SUBMIT_NUM: ".$row['submit']."</a>";
 					echo "<a class='btn btn-primary btn-sm' role='button' href=problemstatus.php?id=".$row['problem_id'].">$MSG_STATISTICS</a>";
 				}
-
+ 	      echo "<a class='btn btn-danger btn-sm' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
 	      if ( isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$row['problem_id']])  ) {  //only  the original editor can edit this  problem
         	require_once("include/set_get_key.php");
  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
@@ -97,7 +97,7 @@
 	      
 	      
 	      }
-                     echo "<a class='btn btn-danger btn-sm' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
+                    
 				echo "</div>";
 				echo "</center>";
 				# end of head

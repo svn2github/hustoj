@@ -46,6 +46,12 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php echo $MSG_VCODE?>:
 <input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
 <?php }?>
+<!-- <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" > -->
+<button type="submit" class="ui primary icon button"  onclick="do_submit();">提交</button>
+<?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
+<input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
+<input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
+<?php }?>
 
 </span>
 <?php if($OJ_ACE_EDITOR){ 
@@ -65,15 +71,6 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php echo $view_sample_output?>
 </textarea>
 <?php } ?>
-<!-- <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" > -->
-<div class="center aligned vertical segment" >
-<button type="submit" class="ui labeled icon button"  onclick="do_submit();"><i class="ui edit icon"></i>提交</button>
-<!--div onclick="show_custom_test()" class="ui positive button">自定义测试</div-->
-</div>
-<?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
-<input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
-<input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
-<?php }?>
 
 <!-- <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>

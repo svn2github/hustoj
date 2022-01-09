@@ -63,6 +63,13 @@
               ?>
             </select>
           </span>
+		
+          <?php if($OJ_VCODE){?>
+            <?php echo $MSG_VCODE?>:
+            <input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
+          <?php }?>
+
+          <input id="Submit" class="btn btn-info btn-sm" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 
 	  <?php if($OJ_ACE_EDITOR){
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="550px";
@@ -81,12 +88,6 @@
             <textarea style="width:30%" cols=10 rows=5 id="out" name="out" disabled="true" >SHOULD BE:<?php echo $view_sample_output?></textarea>
           <?php } ?>
 
-          <?php if($OJ_VCODE){?>
-            <?php echo $MSG_VCODE?>:
-            <input name="vcode" size=4 type=text> <img id="vcode" alt="click to change" onclick="this.src='vcode.php?'+Math.random()">*
-          <?php }?>
-
-          <input id="Submit" class="btn btn-info btn-sm" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
 
           <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
             <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">

@@ -37,7 +37,7 @@ $url=$_POST ['url'];
 	echo "Please Input like http://uoj.ac/problem/1";
 	exit(1);
   }
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $loj_id=intval(substr($url,strrpos($url,"/")+1));

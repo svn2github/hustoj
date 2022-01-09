@@ -20,7 +20,7 @@ if(isset($_POST['do'])){
 	$user_id = $_POST['user_id'];
   $ip = $_POST['ip'];
 
-  if(get_magic_quotes_gpc()){
+  if(false){
 		$user_id = stripslashes($user_id);
 		$ip = stripslashes($ip);
 	}

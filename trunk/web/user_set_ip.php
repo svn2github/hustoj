@@ -103,7 +103,7 @@ if (isset($_GET['cid'])) {
 	if (isset($_POST['password']))
 		$password = $_POST['password'];
 
-	if (get_magic_quotes_gpc()) {
+	if (false) {
 		$password = stripslashes($password);
 	}
 
@@ -186,7 +186,7 @@ if ((isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.
 	$user_id = $_POST['user_id'];
   $ip = $_POST['ip'];
 
-  if(get_magic_quotes_gpc()){
+  if(false){
 		$user_id = stripslashes($user_id);
 		$ip = stripslashes($ip);
 	}

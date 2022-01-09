@@ -51,7 +51,7 @@ $source = $_POST['source'];
 $spj = $_POST['spj'];
 
 
-if (get_magic_quotes_gpc()) {
+if (false) {
   $title = stripslashes($title);
   $time_limit = stripslashes($time_limit);
   $memory_limit = stripslashes($memory_limit);

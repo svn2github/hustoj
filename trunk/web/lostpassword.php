@@ -15,7 +15,7 @@ $lost_email=$_POST['email'];
                 echo "</script>";
                 exit(0);
     }
-  if(get_magic_quotes_gpc()){
+  if(false){
         $lost_user_id=stripslashes($lost_user_id);
         $lost_email=stripslashes($lost_email);
   }

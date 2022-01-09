@@ -84,7 +84,7 @@ include_once("kindeditor.php");
 								            if ($isadmin == 0) {
 								                if (isset($_POST['password'])) {
 								                    $passwd = $_POST['password'];
-								                    if (get_magic_quotes_gpc ()) {
+								                    if (false) {
 		$user_id = stripslashes ( $user_id);
 		$passwd = stripslashes ( $passwd);
 	}

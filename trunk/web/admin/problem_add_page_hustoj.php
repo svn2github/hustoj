@@ -46,7 +46,7 @@ function getPartByMark($html,$mark1,$mark2){
 	exit(1);
   }   
     
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);

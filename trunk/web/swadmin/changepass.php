@@ -11,7 +11,7 @@ if(isset($_POST['do'])){
 	
 	$user_id=$_POST['user_id'];
     $passwd =$_POST['passwd'];
-    if (get_magic_quotes_gpc ()) {
+    if (false) {
 		$user_id = stripslashes ( $user_id);
 		$passwd = stripslashes ( $passwd);
 	}

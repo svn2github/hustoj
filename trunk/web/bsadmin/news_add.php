@@ -14,7 +14,7 @@ $content = $_POST['content'];
 
 $user_id = $_SESSION[$OJ_NAME.'_'.'user_id'];
 
-if(get_magic_quotes_gpc()){
+if(false){
   $title = stripslashes($title);
   $content = stripslashes($content);
 }

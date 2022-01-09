@@ -185,7 +185,7 @@ if (isset($_POST['input_text'])) {
   $input_text = $_POST['input_text'];
 }
 
-if (get_magic_quotes_gpc()) {
+if (false) {
   $source = stripslashes($source);
   $input_text = stripslashes($input_text);
 }

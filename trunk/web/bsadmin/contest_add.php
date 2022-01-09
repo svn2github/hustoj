@@ -78,7 +78,7 @@ if(isset($_POST['startdate'])){
   $description = $_POST['description'];
  // $ctype = $_POST['ctype'];         //If there is a type field in the database, it can be turned on
   
-  if(get_magic_quotes_gpc()){
+  if(false){
     $title = stripslashes($title);
     $private = stripslashes($private);
     $password = stripslashes($password);

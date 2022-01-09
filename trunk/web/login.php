@@ -44,7 +44,7 @@ if(!$use_cookie){
   require_once( "./include/login-" . $OJ_LOGIN_MOD . ".php" );
   $user_id = $_POST[ 'user_id' ];
   $password = $_POST[ 'password' ];
-  if ( get_magic_quotes_gpc() ) {
+  if ( false ) {
 	$user_id = stripslashes( $user_id );
 	$password = stripslashes( $password );
   }

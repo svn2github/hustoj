@@ -17,7 +17,7 @@ if(isset($_POST['do'])){
   $msg = str_replace("</p>", "<br />", $msg);
   $msg = str_replace(",", "&#44;", $msg);
 
-  if(get_magic_quotes_gpc()){
+  if(false){
     $title = stripslashes($title);
   }
 

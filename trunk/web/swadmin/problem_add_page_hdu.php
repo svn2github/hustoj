@@ -25,7 +25,7 @@ include_once("kindeditor.php") ;
 	echo "Please Input like http://acm.hdu.edu.cn/showproblem.php?pid=1000";
 	exit(1);
   }
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);

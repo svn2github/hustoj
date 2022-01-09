@@ -77,7 +77,7 @@ if(isset($_POST['to_user'])){
 	$title = $_POST ['title'];
 	$content = $_POST ['content'];
 	$from_user=$_SESSION[$OJ_NAME.'_'.'user_id'];
-	if (get_magic_quotes_gpc ()) {
+	if (false) {
 		$to_user = stripslashes ( $to_user);
 		$title = stripslashes ( $title);
 		$content = stripslashes ( $content );

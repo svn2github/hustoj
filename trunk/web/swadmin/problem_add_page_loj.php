@@ -25,7 +25,7 @@ include_once("kindeditor.php") ;
 	echo "Please Input like https://loj.ac/problem/1";
 	exit(1);
   }
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $loj_id=intval(substr($url,23));

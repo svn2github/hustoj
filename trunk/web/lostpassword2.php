@@ -15,7 +15,7 @@ $lost_key=$_POST['lost_key'];
                 echo "</script>";
                 exit(0);
     }
-  if(get_magic_quotes_gpc()){
+  if(false){
         $lost_user_id=stripslashes($lost_user_id);
         $lost_key=stripslashes($lost_key);
   }

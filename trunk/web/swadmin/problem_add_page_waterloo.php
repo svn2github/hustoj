@@ -39,7 +39,7 @@ include_once("kindeditor.php") ;
 	exit(1);
   }   
     
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);

@@ -25,7 +25,7 @@ include_once("kindeditor.php") ;
 	echo "Please Input like http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1001";
 	exit(1);
   } 
-  if (get_magic_quotes_gpc ()) {
+  if (false) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);

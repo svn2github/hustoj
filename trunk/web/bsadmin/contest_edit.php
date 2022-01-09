@@ -77,7 +77,7 @@ if(isset($_POST['startdate'])){
   $password = $_POST['password'];
   $description = $_POST['description'];
  
-  if(get_magic_quotes_gpc()){
+  if(false){
     $title = stripslashes($title);
     $private = stripslashes($private);    
     $password = stripslashes($password);

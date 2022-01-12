@@ -117,7 +117,8 @@ int LANG_LUAV[CALL_ARRAY_SIZE] = {
         SYS_access, SYS_exit_group, SYS_dup3, SYS_close, SYS_stat, SYS_fstat, SYS_execve, SYS_mmap, 0 };
 //nodejs javascript
 int LANG_JSV[CALL_ARRAY_SIZE] = {
-        0, SYS_write, SYS_mprotect, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_munmap, SYS_brk,
+	0,1,3,4,5,9,10,11,12,13,14,16,17,21,28,39,56,59,79,89,102,104,107,108,158,202,218,229,231,232,233,257,273,290,291,293,302,318,332
+        , SYS_write, SYS_mprotect, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_munmap, SYS_brk,
         SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_arch_prctl, SYS_ioctl, SYS_setrlimit, SYS_pread64, SYS_gettid,
         SYS_open, SYS_writev, SYS_futex, SYS_access, SYS_set_tid_address, SYS_clock_gettime, SYS_clock_getres,
         SYS_exit_group, SYS_epoll_wait, SYS_epoll_ctl, SYS_set_robust_list, SYS_eventfd2, SYS_epoll_create1, SYS_pipe2,

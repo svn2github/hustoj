@@ -11,7 +11,7 @@ for INFILE in `ls *.in`
 do
         OUTFILE=`basename -s .in $INFILE`.out
         if $EXEC < $INFILE > $OUTFILE ; then
-                echo "make out for $INFILE -> $OUTFILE"
+                echo "make out for $INFILE -> $OUTFILE <br>"
         else
                 echo "make out for $INFILE .....failed"
         fi

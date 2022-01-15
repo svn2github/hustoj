@@ -17,7 +17,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
     header("Cache-Control: no-store");
 	header("Content-Type: text/html; charset=".$charset);
 	//@ini_set('default_charset', $charset);
-    if (false) {
+    if (@get_magic_quotes_gpc()) {
         function stripslashes_deep($value){
             return is_array($value)? array_map('stripslashes_deep', $value):$value;
         }
@@ -117,6 +117,22 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
     } elseif (isset($set_resolveIDs)){
         $resolveIDs=($resolveIDs)?0:1;
         setcookie("resolveIDs", $resolveIDs, time()+$cookie_cache_time, "/");
+    }
+    if(isset($_GET['generate'])){
+	    //echo "Generate out in $current_dir......";
+	    chdir($current_dir);
+	    if(file_exists($current_dir."/Main.c")){
+	    	if(!$OJ_SaaS_ENABLE)system("/home/judge/src/install/gcc.sh $current_dir");
+	    	system("/home/judge/src/install/makeout.sh Main");
+	    }else if(file_exists($current_dir."/Main.cc")){
+	    	if(!$OJ_SaaS_ENABLE)system("/home/judge/src/install/g++.sh $current_dir");
+	    	system("/home/judge/src/install/makeout.sh Main");
+	    }
+    }
+    if(isset($_GET['ans2out'])){
+	    //echo "Generate out in $current_dir......";
+	    chdir($current_dir);
+	    system("/home/judge/src/install/ans2out $current_dir");
     }
     if ($resolveIDs){
         exec("cat /etc/passwd",$mat_passwd);
@@ -322,6 +338,8 @@ function et($tag){
     $en['Seconds'] = 'sec';
     $en['ErrorReport'] = 'Error Reporting';
     $en['Random-data'] = 'Random-data generator';
+    $en['GenerateOut'] = 'Generate Out files';
+    $en['Ans2out'] = '.ans -&gt; .out';
     
     // chinese
 	$cn['Version'] = '版本';
@@ -430,7 +448,9 @@ function et($tag){
     $cn['RenderTime'] = '页面执行时间';
     $cn['Seconds'] = '秒';
     $cn['ErrorReport'] = '错误报告';
-    $en['Random-data'] = '随机测试数据生成器';
+    $cn['Random-data'] = '随机测试数据生成器';
+    $cn['GenerateOut'] = '用标程Main覆盖生成Out文件';
+    $cn['Ans2out'] = '.ans改名.out';
 
     // Portuguese by - Fabricio Seger Kolling
     $pt['Version'] = 'Versão';
@@ -3017,6 +3037,16 @@ function dir_list_form() {
         function go(arg) {
             document.location.href='".addslashes($path_info["basename"])."?frame=3&pid='+arg;
         }
+        function ans2out() {
+	    if(confirm('可能覆盖已有.out文件，请三思而行！\\n Are you sure about overwrite all .out files ?')){
+            	document.location.href='".addslashes($path_info["basename"])."?frame=3&ans2out=1&current_dir=".addslashes($current_dir)."';
+            }
+        }
+        function generate() {
+	    if(confirm('将覆盖所有.out文件，请三思而行！\\n Are you sure about overwrite all .out files ?')){
+            	document.location.href='".addslashes($path_info["basename"])."?frame=3&generate=1&current_dir=".addslashes($current_dir)."';
+            }
+        }
         function resolveIDs() {
             document.location.href='".addslashes($path_info["basename"])."?frame=3&set_resolveIDs=1&current_dir=".addslashes($current_dir)."';
         }
@@ -3415,8 +3445,11 @@ function dir_list_form() {
             <tr>
             <td bgcolor=\"#DDDDDD\" colspan=50><nobr>
             <input type=button onclick=\"test_prompt(2)\" value=\"".et('CreateArq')."\">
-            <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">
-            <b>$ip</b>
+	    <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">";
+	if(!$OJ_SaaS_ENABLE)$out.="<input type=button onclick=\"generate()\" value=\"".et('GenerateOut')."\">";
+	$out.="<input type=button onclick=\"ans2out()\" value=\"".et('Ans2out')."\">";
+	
+        $out.="<b></b>
             <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
             </nobr>";
         $uplink = "";

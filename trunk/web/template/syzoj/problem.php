@@ -32,7 +32,6 @@ div[class*=ace_br] {
     box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05);
 }
 </style>
-<script src="https://cdnjs.loli.net/ajax/libs/ace/1.4.1/ace.js"></script>
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>clipboard.min.js"></script>
 <div class="ui center aligned grid">
     <div class="row">

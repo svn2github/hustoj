@@ -386,5 +386,5 @@
   $MSG_SUCCESS="成功";
   $MSG_FAIL="失败";
   $MSG_TEXT_COMPARE="文本比较";
-
+  $MSG_JUDGE_STYLE="评测方式";
 ?>

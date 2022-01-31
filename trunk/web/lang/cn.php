@@ -373,7 +373,7 @@
   $MSG_REFRESH_PRIVILEGE="刷新权限";
   $MSG_NEW_CONTEST="创建新比赛";
   $MSG_AVAILABLE="启用";
-  $MSG_RESERVED="保留";
+  $MSG_RESERVED="未启用";
   $MSG_NEW_PROBLEM_LIST="创建新题单";
   $MSG_DELETE="删除";
   $MSG_EDIT="编辑";

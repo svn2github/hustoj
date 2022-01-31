@@ -374,5 +374,6 @@
 	$MSG_COPY="Copy";
 	$MSG_SUCCESS="Success";
 	$MSG_FAIL="Fail";
+	$MSG_TEXT_COMPARE="Text Compare";
 
  ?>

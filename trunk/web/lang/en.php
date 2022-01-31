@@ -375,5 +375,5 @@
 	$MSG_SUCCESS="Success";
 	$MSG_FAIL="Fail";
 	$MSG_TEXT_COMPARE="Text Compare";
-
+        $MSG_JUDGE_STYLE="Judge Style";
  ?>

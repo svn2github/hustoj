@@ -58,8 +58,8 @@ div[class*=ace_br] {
          <!-- <span class="ui label">标准输入输出</span> -->
       </div>
       <div class="row" style="margin-top: -23px">
-          <span class="ui label">题目类型：传统</span>
-          <span class="ui label">评测方式：<?php if($row['spj']) echo "Special Judge"; else echo "文本比较" ; ?></span>
+        <!--   <span class="ui label">题目类型：传统</span> -->
+          <span class="ui label"><?php echo $MSG_JUDGE_STYLE ?>：<?php if($row['spj']) echo "$MSG_SPJ"; else echo "$MSG_TEXT_COMPARE" ; ?></span>
           <span class="ui label"><?php echo $MSG_Creator ?>：<span id='creator'></span></span>
       </div>
       <div class="row" style="margin-top: -23px">

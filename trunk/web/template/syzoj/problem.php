@@ -3,7 +3,7 @@
             $show_title="P$id - ".$row['title']." - $OJ_NAME";
           }else{
             $id=$row['problem_id'];
-            $show_title="问题 ".$PID[$pid].": ".$row['title']." - $OJ_NAME";
+            $show_title="$MSG_PROBLEM ".$PID[$pid].": ".$row['title']." - $OJ_NAME";
           }
 ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
@@ -53,14 +53,9 @@ div[class*=ace_br] {
       </h1>
     </div>
       <div class="row" style="margin-top: -15px">
-          <span class="ui label">内存限制：<?php echo $row['memory_limit']; ?> MB</span>
-          <span class="ui label">时间限制：<?php echo $row['time_limit']; ?> S</span>
-          <!-- <span class="ui label">题目类型：交互</span> -->
-          <!-- <span class="ui label">输入文件: <%= problem.file_io_input_name %></span>
-          <span class="ui label">输出文件: <%= problem.file_io_output_name %></span> -->
-          <!-- echo "<br><span class=green>$MSG_SUBMIT: </span>".$row['submit']."&nbsp;&nbsp;";
-          echo "<span class=green>$MSG_SOVLED: </span>".$row['accepted']."<br>"; -->
-          <span class="ui label">标准输入输出</span>
+          <span class="ui label"><?php echo $MSG_Memory_Limit ?>：<?php echo $row['memory_limit']; ?> MB</span>
+          <span class="ui label"><?php echo $MSG_Time_Limit ?>：<?php echo $row['time_limit']; ?> S</span>
+         <!-- <span class="ui label">标准输入输出</span> -->
       </div>
       <div class="row" style="margin-top: -23px">
           <span class="ui label">题目类型：传统</span>
@@ -68,8 +63,8 @@ div[class*=ace_br] {
           <span class="ui label">上传者：<span id='creator'></span></span>
       </div>
       <div class="row" style="margin-top: -23px">
-          <span class="ui label">提交：<?php echo $row['submit']; ?></span>
-          <span class="ui label">通过：<?php echo $row['accepted']; ?></span>
+          <span class="ui label"><?php echo $MSG_SUBMIT ?>：<?php echo $row['submit']; ?></span>
+          <span class="ui label"><?php echo $MSG_SOVLED ?>：<?php echo $row['accepted']; ?></span>
       </div>
 </div>  
 <div class="ui grid">
@@ -109,14 +104,14 @@ div[class*=ace_br] {
 
   <div class="row">
     <div class="column">
-      <h4 class="ui top attached block header">题目描述</h4>
+      <h4 class="ui top attached block header"><?php echo $MSG_Description?></h4>
       <div class="ui bottom attached segment font-content"><?php echo $row['description']; ?></div>
     </div>
   </div>
   <?php if($row['input']){ ?>
     <div class="row">
       <div class="column">
-          <h4 class="ui top attached block header">输入格式</h4>
+          <h4 class="ui top attached block header"><?php echo $MSG_Input?></h4>
           <div class="ui bottom attached segment font-content"><?php echo $row['input']; ?></div>
       </div>
     </div>
@@ -124,7 +119,7 @@ div[class*=ace_br] {
   <?php if($row['output']){ ?>
     <div class="row">
         <div class="column">
-          <h4 class="ui top attached block header">输出格式</h4>
+          <h4 class="ui top attached block header"><?php echo $MSG_Output?></h4>
           <div class="ui bottom attached segment font-content"><?php echo $row['output']; ?></div>
         </div>
     </div>
@@ -139,7 +134,7 @@ div[class*=ace_br] {
   <?php if(strlen($sinput)){ ?>
     <div class="row">
         <div class="column">
-          <h4 class="ui top attached block header">输入样例
+          <h4 class="ui top attached block header"><?php echo $MSG_Sample_Input?> 
           <span class="copy" id="copyin" data-clipboard-text="<?php echo ($sinput); ?>">复制</span>
           </h4>
           <!-- <span class=copy id=\"copyin\" data-clipboard-text=\"".($sinput)."\">复制</span> -->
@@ -153,7 +148,7 @@ div[class*=ace_br] {
   <?php if(strlen($sinput)){ ?>
     <div class="row">
         <div class="column">
-          <h4 class="ui top attached block header">输出样例
+          <h4 class="ui top attached block header"><?php echo $MSG_Sample_Output?>
           <span class="copy" id="copyout" data-clipboard-text="<?php echo ($soutput); ?>">复制</span>
           </h4>
           <!-- <span class=copy id=\"copyout\" data-clipboard-text=\"".($soutput)."\">复制</span> -->
@@ -168,7 +163,7 @@ div[class*=ace_br] {
   <?php if($row['hint']){ ?>
     <div class="row">
         <div class="column">
-          <h4 class="ui top attached block header">数据范围与提示</h4>
+          <h4 class="ui top attached block header"><?php echo $MSG_HINT?></h4>
           <div class="ui bottom attached segment font-content"><?php echo $row['hint']; ?></div>
         </div>
     </div>
@@ -183,7 +178,7 @@ div[class*=ace_br] {
     <div class="row">
       <div class="column">
         <h4 class="ui block header top attached" id="show_tag_title_div" style="margin-bottom: 0; margin-left: -1px; margin-right: -1px; ">
-        分类标签
+        <?php echo $MSG_SOURCE?>
         </h4>
         <div class="ui bottom attached segment" id="show_tag_div">
 

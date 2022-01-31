@@ -368,5 +368,11 @@
 	$MSG_EDIT="Edit";
 	$MSG_TEST_DATA="TestData";
         $MSG_CHECK_TO="Batch Operation";
+// syzoj/problem.php
+	$MSG_SUBMIT_RECORD="Submit Record";
+	$MSG_RETURN_CONTEST="Return to contest";
+	$MSG_COPY="Copy";
+	$MSG_SUCCESS="Success";
+	$MSG_FAIL="Fail";
 
  ?>

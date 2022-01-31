@@ -75,13 +75,13 @@ div[class*=ace_br] {
           <?php
             if($pr_flag){
               echo "<a  id='submit'  class=\"small ui primary button\" href=\"submitpage.php?id=$id\">$MSG_SUBMIT</a>";
-              echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$id\">提交记录</a>";
+              echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$id\">$MSG_SUBMIT_RECORD</a>";
               echo "<a class=\"small ui orange button\" href=\"problemstatus.php?id=$id\">$MSG_STATISTICS</a>";
 	      echo "<a class=\"small ui red button\" href=\"discuss.php?pid=$id\">$MSG_BBS</a>";
             }else{
-              echo "<a  id='submit'  href=\"contest.php?cid=$cid\" class=\"ui orange button\">返回比赛</a>";
+              echo "<a  id='submit'  href=\"contest.php?cid=$cid\" class=\"ui orange button\">$MSG_RETURN_CONTEST</a>";
               echo "<a class=\"small ui primary button\" href=\"submitpage.php?cid=$cid&pid=$pid&langmask=$langmask\">$MSG_SUBMIT</a>";
-              echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$PID[$pid]&cid=$cid\">提交记录</a>";
+              echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$PID[$pid]&cid=$cid\">$MSG_SUBMIT_RECORD</a>";
             }
 	      echo "<a class='small ui positive button' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
           ?>
@@ -95,8 +95,8 @@ div[class*=ace_br] {
       ?>
       
         <div class="ui buttons right floated">
-            <a class="small ui button" href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>">编辑题目</a>
-            <a class="small ui button" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'>测试数据</a>
+            <a class="small ui button" href="admin/problem_edit.php?id=<?php echo $id?>&getkey=<?php echo $_SESSION[$OJ_NAME.'_'.'getkey']?>"><?php echo $MSG_EDIT.$MSG_PROBLEM?></a>
+            <a class="small ui button" href='javascript:phpfm(<?php echo $row['problem_id'];?>)'><?php echo $MSG_TEST_DATA?></a>
         </div>
       <?php }?>
     </div>
@@ -135,9 +135,9 @@ div[class*=ace_br] {
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Sample_Input?> 
-          <span class="copy" id="copyin" data-clipboard-text="<?php echo ($sinput); ?>">复制</span>
+          <span class="copy" id="copyin" data-clipboard-text="<?php echo ($sinput); ?>"><?php echo $MSG_COPY; ?></span>
           </h4>
-          <!-- <span class=copy id=\"copyin\" data-clipboard-text=\"".($sinput)."\">复制</span> -->
+          <!-- <span class=copy id=\"copyin\" data-clipboard-text=\"".($sinput)."\"><?php echo $MSG_COPY; ?></span> -->
           <div class="ui bottom attached segment font-content">
             <!-- <pre><?php echo ($sinput); ?></pre> -->
             <pre style="margin-top: 0; margin-bottom: 0; "><code class="lang-plain"><?php echo ($sinput); ?></code></pre>
@@ -149,9 +149,9 @@ div[class*=ace_br] {
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Sample_Output?>
-          <span class="copy" id="copyout" data-clipboard-text="<?php echo ($soutput); ?>">复制</span>
+          <span class="copy" id="copyout" data-clipboard-text="<?php echo ($soutput); ?>"><?php echo $MSG_COPY; ?></span>
           </h4>
-          <!-- <span class=copy id=\"copyout\" data-clipboard-text=\"".($soutput)."\">复制</span> -->
+          <!-- <span class=copy id=\"copyout\" data-clipboard-text=\"".($soutput)."\"><?php echo $MSG_COPY; ?></span> -->
           <div class="ui bottom attached segment font-content">
             <!-- <div class="ui existing segment"> -->
               <pre style="margin-top: 0; margin-bottom: 0; "><code class="lang-plain"><?php echo ($soutput); ?></code></pre>
@@ -276,25 +276,25 @@ div[class*=ace_br] {
   <script>
     var clipboardin=new Clipboard(copyin);
     clipboardin.on('success', function(e){
-      $("#copyin").text("复制成功!"); 
-          setTimeout(function () {$("#copyin").text("复制"); }, 1500);    
+      $("#copyin").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
+          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
       console.log(e);
     });
     clipboardin.on('error', function(e){
-      $("#copyin").text("复制失败!"); 
-          setTimeout(function () {$("#copyin").text("复制"); }, 1500);
+      $("#copyin").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
+          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);
       console.log(e);
     });
 
     var clipboardout=new Clipboard(copyout);
     clipboardout.on('success', function(e){
-      $("#copyout").text("复制成功!"); 
-          setTimeout(function () {$("#copyout").text("复制"); }, 1500);    
+      $("#copyout").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
+          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
       console.log(e);
     });
     clipboardout.on('error', function(e){
-      $("#copyout").text("复制失败!"); 
-          setTimeout(function () {$("#copyout").text("复制"); }, 1500);
+      $("#copyout").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
+          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);
       console.log(e);
     });
 

@@ -379,4 +379,12 @@
   $MSG_EDIT="编辑";
   $MSG_TEST_DATA="管理测试数据";
   $MSG_CHECK_TO="批量选择操作";
+
+  $MSG_SUBMIT_RECORD="提交记录";
+  $MSG_RETURN_CONTEST="返回比赛";
+  $MSG_COPY="复制";
+  $MSG_SUCCESS="成功";
+  $MSG_FAIL="失败";
+
+
 ?>

@@ -48,7 +48,7 @@ div[class*=ace_br] {
             echo "$MSG_PROBLEM ".$PID[$pid].": ".$row['title'];
           }
           if($row['defunct']=="Y")
-          echo "<span class=\"ui tiny red label\">未公开</span>";
+          echo "<span class=\"ui tiny red label\">$MSG_Reserved</span>";
         ?>
       </h1>
     </div>

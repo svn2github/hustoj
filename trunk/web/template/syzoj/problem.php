@@ -45,7 +45,7 @@ div[class*=ace_br] {
           }else{
             $id=$row['problem_id'];
             //echo "<title>$MSG_PROBLEM ".$PID[$pid].": ".$row['title']." </title>";
-            echo "问题 ".$PID[$pid].": ".$row['title'];
+            echo "$MSG_PROBLEM ".$PID[$pid].": ".$row['title'];
           }
           if($row['defunct']=="Y")
           echo "<span class=\"ui tiny red label\">未公开</span>";
@@ -60,7 +60,7 @@ div[class*=ace_br] {
       <div class="row" style="margin-top: -23px">
           <span class="ui label">题目类型：传统</span>
           <span class="ui label">评测方式：<?php if($row['spj']) echo "Special Judge"; else echo "文本比较" ; ?></span>
-          <span class="ui label">上传者：<span id='creator'></span></span>
+          <span class="ui label"><?php echo $MSG_Creator ?>：<span id='creator'></span></span>
       </div>
       <div class="row" style="margin-top: -23px">
           <span class="ui label"><?php echo $MSG_SUBMIT ?>：<?php echo $row['submit']; ?></span>

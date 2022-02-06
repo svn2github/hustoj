@@ -1,4 +1,4 @@
-<?php $show_title=$id." - 错误信息 - $OJ_NAME"; ?>
+<?php $show_title=$id." - $MSG_ERROR_INFO - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
 <script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
@@ -32,7 +32,7 @@
 <div class="padding">
     <div style="margin-top: 0px; margin-bottom: 14px; " v-if="content != null && content !== ''">
     <p class="transition visible">
-           <strong >错误信息</strong>
+           <strong ><?php echo "$MSG_ERROR_INFO";?> </strong>
         </p>
         <div class="ui existing segment">
           <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; " id="errtxt"><code><?php echo $view_reinfo?></code></pre>
@@ -41,7 +41,7 @@
 
     <div style="margin-top: 0px; margin-bottom: 14px; " v-if="content != null && content !== ''">
     <p class="transition visible">
-           <strong >辅助解释</strong>
+           <strong ><?php echo "$MSG_INFO_EXPLAINATION";?></strong>
         </p>
         <div class="ui existing segment">
           <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; "><code><div id='errexp'></div></code></pre>

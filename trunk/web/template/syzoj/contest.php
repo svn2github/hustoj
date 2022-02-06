@@ -45,26 +45,26 @@
 
                     <?php
           if ($now>$end_time)
-          echo "<span class=\"ui small button grey\">已结束</span>";
+          echo "<span class=\"ui small button grey\">$MSG_Ended</span>";
           else if ($now<$start_time)
-          echo "<span class=\"ui small button red\">未开始</span>";
+          echo "<span class=\"ui small button red\">$MSG_Contest_Pending</span>";
           else
-          echo "<span class=\"ui small button green\">进行中</span>";
+          echo "<span class=\"ui small button green\">$MSG_Running</span>";
           ?>
                     <?php
           if ($view_private=='0')
-          echo "<span class=\"ui small button blue\">公开</span>";
+          echo "<span class=\"ui small button blue\">$MSG_Public</span>";
           else
-          echo "<span class=\"ui small button pink\">私有</span>";
+          echo "<span class=\"ui small button pink\">$MSG_Private</span>";
           ?>
-                    <span class="ui small button">当前时间：<span id=nowdate><?php echo date("Y-m-d H:i:s")?></span></span>
+                    <span class="ui small button"><?php echo $MSG_Server_Time ?>:<span id=nowdate><?php echo date("Y-m-d H:i:s")?></span></span>
                 </div>
             </div>
         </div>
         <?php if($view_description){ ?>
         <div class="row">
             <div class="column">
-                <h4 class="ui top attached block header">信息与公告</h4>
+                <h4 class="ui top attached block header"><?php echo $MSG_Contest_Infomation ?></h4>
                 <div class="ui bottom attached segment font-content">
                     <?php echo $view_description?>
                 </div>
@@ -79,11 +79,11 @@
                             <th class="one wide" style="text-align: center">
                                     <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) echo "状态" ?>
                             </th>
-                            <th class="two wide" style="text-align: center">题目编号</th>
-                            <th>题目</th>
-                            <th>分类</th>
-                            <th class="one wide center aligned">正确</th>
-                            <th class="one wide center aligned">提交</th>
+                            <th class="two wide" style="text-align: center"><?php echo $MSG_PROBLEM_ID ?></th>
+                            <th><?php echo $MSG_TITLE ?></th>
+                            <th><?php echo $MSG_SOURCE ?></th>
+                            <th class="one wide center aligned"><?php echo $MSG_AC ?></th>
+                            <th class="one wide center aligned"><?php echo $MSG_SUBMIT_NUM ?></th>
                         </tr>
                     </thead>
                     <tbody>

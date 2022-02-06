@@ -364,4 +364,16 @@
 	$MSG_FAIL="Fail";
 	$MSG_TEXT_COMPARE="Text Compare";
         $MSG_JUDGE_STYLE="Judge Style";
+	// reinfo.php 
+	$MSG_ERROR_INFO="Runtion information";
+	$MSG_INFO_EXPLAINATION="Explaination";
+	// ceinfo.php
+	$MSG_COMPILE_INFO="Compile information";
+	$MSG_SOURCE_CODE="Source code";
+	//contest.php
+	$MSG_Contest_Pending="Pending";
+	$MSG_Server_Time="Server Current Time";
+	$MSG_Contest_Infomation="Contest Information";
+	// sourcecompare.php
+	$MSG_Source_Compare="Source Code Comparation";
  ?>

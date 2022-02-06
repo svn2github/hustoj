@@ -388,4 +388,5 @@
 	$MSG_Contest_Infomation="Contest Information";
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
+        $MSG_BACK="Return to Last Page";
  ?>

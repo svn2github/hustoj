@@ -393,5 +393,7 @@
   // ceinfo.php
   $MSG_COMPILE_INFO="编译信息";
   $MSG_SOURCE_CODE="源代码";
-
+  $MSG_Contest_Pending="未开始";
+  $MSG_Server_Time="当前时间";
+  $MSG_Contest_Infomation="信息与公告";
 ?>

@@ -1,4 +1,4 @@
-<?php $show_title=$id." - 源代码对比 - $OJ_NAME"; ?>
+<?php $show_title=$id." - $MSG_Source_Compare - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <link type="text/css" rel="stylesheet" href="mergely/codemirror.css" />
 <link type="text/css" rel="stylesheet" href="mergely/mergely.css" />

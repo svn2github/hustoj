@@ -390,4 +390,8 @@
   // reinfo.php 
   $MSG_ERROR_INFO="错误信息";
   $MSG_INFO_EXPLAINATION="辅助解释";
+  // ceinfo.php
+  $MSG_COMPILE_INFO="编译信息";
+  $MSG_SOURCE_CODE="源代码";
+
 ?>

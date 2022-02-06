@@ -396,4 +396,5 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_Contest_Infomation="Contest Information";
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
+        $MSG_BACK="Return to Last Page";
  ?>

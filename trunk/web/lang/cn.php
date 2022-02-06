@@ -399,5 +399,5 @@
   $MSG_Contest_Infomation="信息与公告";
   // sourcecompare.php
   $MSG_Source_Compare="源代码对比";
-
+  $MSG_BACK="返回上一页";
 ?>

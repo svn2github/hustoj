@@ -1,4 +1,4 @@
-<?php $show_title=$id." - 编译信息 - $OJ_NAME"; ?>
+<?php $show_title=$id." - $MSG_COMPILE_INFO - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
 <script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
@@ -7,7 +7,7 @@
 <div class="padding">
     <div style="margin-top: 0px; margin-bottom: 14px; padding-bottom: 0px; " >
         <p class="transition visible">
-           <strong >源代码</strong>
+           <strong ><?php echo $MSG_SOURCE_CODE ?></strong>
         </p>
         <div class="ui existing segment">
           <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; "><code><div class="brush:c" id='source' name="source"></div></code></pre>
@@ -15,7 +15,7 @@
     </div>
     <div style="margin-top: 0px; margin-bottom: 14px; " >
         <p class="transition visible">
-           <strong >编译信息</strong>
+           <strong ><?php echo $MSG_COMPILE_INFO ?></strong>
         </p>
         <div class="ui existing segment">
           <pre v-if="escape" style="margin-top: 0; margin-bottom: 0; "><code><div id='errtxt'><?php echo $view_reinfo?></div></code></pre>

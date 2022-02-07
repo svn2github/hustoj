@@ -1,4 +1,4 @@
-<?php $show_title="错误信息 - $OJ_NAME"; ?>
+<?php $show_title="$MSG_ERROR_INFO - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="ui negative icon message">
   <i class="remove icon"></i>
@@ -9,7 +9,7 @@
       <!-- <p><%= err.details %></p> -->
     <p>
         <!-- <a href="<%= err.nextUrls[text] %>" style="margin-right: 5px; "><%= text %></a> -->
-      <a href="/">返回上一页</a>
+      <a href="javascript:history.go(-1)"><?php echo $MSG_BACK?></a>
     </p>
   </div>
 </div>

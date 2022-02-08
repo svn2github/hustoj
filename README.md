@@ -79,17 +79,17 @@
 
 ## 自带的6种模板演示
 
-http://bs3.hustoj.com/
+[bs3原版](http://bs3.hustoj.com/)
 
-http://mario.hustoj.com/
+[卡通马里奥主题](http://mario.hustoj.com/) added by[@manni](https://github.com/manni)
 
-http://syzoj.hustoj.com/
+[syzoj主题](http://syzoj.hustoj.com/) added by[@renbaoshuo](https://github.com/renbaoshuo)
 
-http://bshark.hustoj.com/
+[bshark主题]http://bshark.hustoj.com/ added by [@yemaster](https://github.com/yemaster)
 
-http://sweet.hustoj.com/
+[sweet主题](http://sweet.hustoj.com/)
 
-http://mdui.hustoj.com/
+[mdui主题](http://mdui.hustoj.com/) added by[@renbaoshuo](https://github.com/renbaoshuo)
 
 > 修改 `db_info.inc.php[默认位置/home/judge/src/web/include]` 中 `$OJ_TEMPLATE` 的值，即可使用上述模板。
 
@@ -104,7 +104,7 @@ HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用�
 
 * masteroj uoj loj syzoj zoj qduoj openJudger
 * linux apache nginx php mysql mariadb memcached
-* bootstrap kindeditor ace blockly codemirror katex syzoj phpfilemanager
+* bootstrap kindeditor ace blockly codemirror katex phpfilemanager mdui
 * sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
 
 排名不分先后本列表欢迎补充
@@ -126,7 +126,7 @@ PS: GPL保证你可以合法忽略以上注意事项但不能保证你不受鄙�
 
 如果这个项目对你有用，请：
 
-* 挥动鼠标，右上角给个 `Star` !
+* 挥动鼠标，右上角给个 `**Star**` !
 * 保留网站页脚的二维码
 * 访问 [tk题库](http://tk.hustoj.com) ，充值下载题目
 * 向同学同事推荐这个项目
@@ -210,7 +210,7 @@ Star us, please!
 07-13 | 更新 | 允许长时间维持登录状态,管理员可自定义维持时间. 开启方式:修改 `/home/judge/src/web/include/db_info.inc.php`,设置 `OJ_COOKIE_LOGIN=true;`,自定义`OJ_KEEP_TIME`为**自最后一次登陆起**最长允许保持登录的时间
 07-12 | 更新 | 允许在WA掉的时候，ShOW_DIFF打开的情况下，下载出错的一组测试数，zip方式打包.in/.out文件
 02-10 | 更新 | 新的模板 `bshark` 基本可用，如需启用新模板，只需修改 `/home/judge/src/web/include/db_info.inc.php` ，设置 `$OJ_TEMPLATE="bshark";`
-01-31 | 更新 | @melongist 增加了很多页面美化。
+01-31 | 更新 | [@melongist](https://github.com/melongist) 增加了很多页面美化。
 01-27 | 更新 | 题目限时增强为浮点型，3位小数精度，即标称毫秒(ms)。
 01-26 | 更新 | 允许为每个Web添加多个UDP通知对象，每个判题服务器允许使用不同的UDP端口监听消息。阿里云+腾讯云测试通过。
 01-23 | 更新 | 修订了[Moodle集成代码](https://github.com/zhblue/hustoj/blob/master/wiki/MoodleIntegration.md)，实现HUSTOJ给moodle系统作业自动判分。
@@ -224,7 +224,7 @@ Star us, please!
 日期  | 类型 | 更新内容
 ----- | :--: | :-------
 12-19 | 更新 | 增加了 `judge.conf` 中的注释，提供了备案号变量 `$OJ_BEIAN` ，对系统判题时间分辨率进行了更新优化，提高灵活度。
-11-23 | 喜讯 | `hustoj` 在首届深度软件开发大赛中获得三等奖。
+11-23 | 喜讯 | `hustoj` 在首届深度软件开发大赛中获得**三等奖**。
 11-21 | 补丁 | 修复比赛中点击 `Edit` 按钮后可以选择出题人禁用的语言提交【感谢湘潭大学谢老师的报告】。
 11-20 | 更新 | 在运行结果对比输出（`OJ_SHOW_DIFF`）中提示每个数据点的结果(AC/WA/TLE...)。
 11-16 | 优化 | [@muzea](https://github.com/muzea) 开发了从 GitHub 到 [Gitee](https://gitee.com/zhblue/hustoj) 的同步机制，并部署了CI。

@@ -81,15 +81,15 @@
 
 [bs3原版](http://bs3.hustoj.com/)
 
-[卡通马里奥主题](http://mario.hustoj.com/) added by[@manni](https://github.com/manni)
-
-[syzoj主题](http://syzoj.hustoj.com/) added by[@renbaoshuo](https://github.com/renbaoshuo)
-
-[bshark主题]http://bshark.hustoj.com/ added by [@yemaster](https://github.com/yemaster)
-
 [sweet主题](http://sweet.hustoj.com/)
 
-[mdui主题](http://mdui.hustoj.com/) added by[@renbaoshuo](https://github.com/renbaoshuo)
+[卡通马里奥主题](http://mario.hustoj.com/)  added by[@manni](https://github.com/manni)
+
+[syzoj主题](http://syzoj.hustoj.com/)  added by[@renbaoshuo](https://github.com/renbaoshuo)
+
+[bshark主题](http://bshark.hustoj.com/)  added by [@yemaster](https://github.com/yemaster)
+
+[mdui主题](http://mdui.hustoj.com/)  added by[@renbaoshuo](https://github.com/renbaoshuo)
 
 > 修改 `db_info.inc.php[默认位置/home/judge/src/web/include]` 中 `$OJ_TEMPLATE` 的值，即可使用上述模板。
 
@@ -148,6 +148,7 @@ Star us, please!
 01-10 | 更新 | 移除部分老式代码，为php8.1进行兼容性调整，增加适用于Ubuntu22.04lts的安装脚本。
 01-03 | 补丁 | 修复图片上传路径的问题
 01-01 | 补丁 | 修复Docker中-lm不能加载sqrt函数的问题
+ 1月  | 喜讯 | star过2.5k!
 
 </details>
 
@@ -200,6 +201,7 @@ Star us, please!
 12-27 | 补丁 | 修补龙芯上因为系统调用而提前超时的问题。
 12-21 | 补丁 | 修补手工添加题目失败的问题。
 12-07 | 更新 | HTTP判题机可以通过账号的problem_start/problem_end限制其领取任务的题目号范围，配合judge.conf中的HTTP_DOWNLOAD=0可以让不方便更新判题数据的判题机发挥部分功效。
+12月  | 喜讯 | star过2.0k!
 11-30 | 更新 | 优化s树莓派4安装脚本，修补漏洞、合并关于下载排名文件的更新。
 11-29 | 更新 | 优化输入数据提供方式，提高整体判题效率。
 11-28 | 补丁 | 修复18.04以上系统里C++编译错误，对C/C++输出中文尝试支持。

@@ -104,7 +104,7 @@ HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用�
 
 * masteroj uoj loj syzoj zoj qduoj openJudger
 * linux apache nginx php mysql mariadb memcached
-* bootstrap kindeditor ace blockly codemirror katex phpfilemanager mdui
+* bootstrap kindeditor ACEeditor blockly codemirror katex phpfilemanager mdui
 * sim gcc clang openjdk freepascal mono docker SyntaxHighlighter 
 
 排名不分先后本列表欢迎补充

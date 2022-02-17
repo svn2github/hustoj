@@ -384,6 +384,10 @@
   $MSG_TEST_DATA="管理测试数据";
   $MSG_CHECK_TO="批量选择操作";
 
+  //bbcode.php
+  $MSG_TOTAL="共";
+  $MSG_NUMBER_OF_PROBLEMS="题";
+
   $MSG_SUBMIT_RECORD="提交记录";
   $MSG_RETURN_CONTEST="返回比赛";
   $MSG_COPY="复制";

@@ -382,6 +382,10 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_TEST_DATA="TestData";
 	$MSG_CHECK_TO="Batch Operation";
 
+	//bbcode.php
+	$MSG_TOTAL="Total";
+	$MSG_NUMBER_OF_PROBLEMS="Problems";
+
 	$MSG_SUBMIT_RECORD="Submit Record";
 	$MSG_RETURN_CONTEST="Return to contest";
 	$MSG_COPY="Copy";

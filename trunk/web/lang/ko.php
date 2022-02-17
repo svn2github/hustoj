@@ -370,6 +370,10 @@
   $MSG_TEST_DATA="채점 데이터";
   $MSG_CHECK_TO="일괄 작업";
 
+  //bbcode.php
+  $MSG_TOTAL="";
+  $MSG_NUMBER_OF_PROBLEMS="문제";
+
 	$MSG_SUBMIT_RECORD="Submit Record";
 	$MSG_RETURN_CONTEST="Return to contest";
 	$MSG_COPY="Copy";

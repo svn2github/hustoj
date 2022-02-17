@@ -344,12 +344,15 @@
 	$MSG_DECLARED_FILE_NAMED="The public class in OJ can only be Main.";
 	$MSG_EXPECTED_IDENTIFIER="It may not have declare a variable name or missing parentheses when declaring a variable.";
 	$MSG_VARIABLY_MODIFIED="Variables cannot be used for array size. Variables cannot be used as the dimension size of global arrays in C language, including const variables.";
-
 	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
-
 	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
+	$MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="Mails can only be sent between teachers and student, not between students.";
 	
 	$MSG_REFRESH_PRIVILEGE="Refresh Privilege";
+
+	$MSG_SAVED_DATE="Saved Date";
+	$MSG_PROBLEM_STATUS="Problem Status";
+
 	$MSG_NEW_CONTEST="New Contest";
 	$MSG_AVAILABLE="Available";
 	$MSG_RESERVED="Reserved";
@@ -357,15 +360,15 @@
 	$MSG_DELETE="Delete";
 	$MSG_EDIT="Edit";
 	$MSG_TEST_DATA="TestData";
-        $MSG_CHECK_TO="Batch Operation";
-// syzoj/problem.php
+	$MSG_CHECK_TO="Batch Operation";
+
 	$MSG_SUBMIT_RECORD="Submit Record";
 	$MSG_RETURN_CONTEST="Return to contest";
 	$MSG_COPY="Copy";
 	$MSG_SUCCESS="Success";
 	$MSG_FAIL="Fail";
 	$MSG_TEXT_COMPARE="Text Compare";
-        $MSG_JUDGE_STYLE="Judge Style";
+	$MSG_JUDGE_STYLE="Judge Style";
 	// reinfo.php 
 	$MSG_ERROR_INFO="Runtion information";
 	$MSG_INFO_EXPLAINATION="Explaination";
@@ -378,5 +381,5 @@
 	$MSG_Contest_Infomation="Contest Information";
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
-        $MSG_BACK="Return to Last Page";
+	$MSG_BACK="Return to Last Page";
  ?>

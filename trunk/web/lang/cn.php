@@ -371,6 +371,10 @@
   $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
   
   $MSG_REFRESH_PRIVILEGE="刷新权限";
+  
+  $MSG_SAVED_DATE="节省时间";
+  $MSG_PROBLEM_STATUS="当前状态";
+
   $MSG_NEW_CONTEST="创建新比赛";
   $MSG_AVAILABLE="启用";
   $MSG_RESERVED="未启用";

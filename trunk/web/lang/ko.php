@@ -81,6 +81,7 @@
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT_NUM="제출";	
 	$MSG_SUBMIT="제출";
+	$MSG_SHOW_OFF="제출창";
 
 	//submit.php
 	$MSG_VCODE_WRONG="확인코드가 다릅니다.";

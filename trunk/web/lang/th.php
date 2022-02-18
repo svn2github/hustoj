@@ -81,7 +81,9 @@
 	$MSG_PROBLEM_ID="หมายเลขโจทย์";
 	$MSG_TITLE="ชื่อ";
 	$MSG_SOURCE="ที่มา";
+	$MSG_SUBMIT_NUM="Submit Num";
 	$MSG_SUBMIT="ส่ง";
+	$MSG_SHOW_OFF="ShowOff!";
 	
 	//submit.php
 	$MSG_VCODE_WRONG="Verification Code Wrong!";

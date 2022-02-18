@@ -93,6 +93,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_SOURCE="مەنبە";
 	$MSG_SUBMIT_NUM="تاپشۇرۇش نۇمۇرى";
 	$MSG_SUBMIT="تاپشۇرۇش";
+	$MSG_SHOW_OFF="ShowOff!";
 
 	//submit.php
 	$MSG_VCODE_WRONG="دەلىللەش كودى خاتا!";

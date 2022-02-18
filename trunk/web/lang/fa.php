@@ -79,7 +79,9 @@
 	$MSG_PROBLEM_ID="شناسه مسئله";
 	$MSG_TITLE="عنوان";
 	$MSG_SOURCE="منبع";
+	$MSG_SUBMIT_NUM="Submit Num";
 	$MSG_SUBMIT="ارسال";
+	$MSG_SHOW_OFF="ShowOff!";
 	
 	//submit.php
 	$MSG_VCODE_WRONG="Verification Code Wrong!";

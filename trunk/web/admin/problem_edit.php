@@ -45,7 +45,7 @@ include_once("kindeditor.php") ;
           <?php echo $MSG_Time_Limit?><br>
           <input class="input input-mini" type=number min="0.001" max="300" step="0.001" name=time_limit size=20 value="<?php echo $row['time_limit']?>"> sec<br><br>
           <?php echo $MSG_Memory_Limit?><br>
-          <input class="input input-mini" type=number min="1" max="1024" step="1" name=memory_limit size=20 value="<?php echo $row['memory_limit']?>"> MB<br><br>
+          <input class="input input-mini" type=number min="1" max="1024" step="1" name=memory_limit size=20 value="<?php echo $row['memory_limit']?>"> MiB<br><br>
         </p>
       <p align=left>
         <?php echo "<h4>".$MSG_Description."</h4>"?>

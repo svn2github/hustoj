@@ -169,7 +169,7 @@ foreach ($result as $row) {
   $view_solution[$j][2] = "<a href='userinfo.php?user=".$row['user_id']."'>".$row['user_id']."</a>";
 
   if ($flag)
-    $view_solution[$j][3] = "$s_memory KB";
+    $view_solution[$j][3] = "$s_memory KiB";
   else
     $view_solution[$j][3] = "------";
 

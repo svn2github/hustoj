@@ -3,7 +3,7 @@
 require_once("./include/db_info.inc.php");
 require_once("./include/my_func.inc.php");
 
-if($OJ_SaaS_ENABLE){
+if(isset($OJ_SaaS_ENABLE) && $OJ_SaaS_ENABLE){
         if($_SERVER['HTTP_HOST']==$DOMAIN && isset($_SESSION[$OJ_NAME.'_user_id'])){
                 $template="bs3";
                 $friendly=0;

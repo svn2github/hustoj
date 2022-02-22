@@ -19,7 +19,8 @@ if ($row[0]=='N'){
 }else{
         $sql="UPDATE `users` SET `defunct`='N' WHERE `user_id`=?";
         pdo_query($sql,$cid);
-        create_subdomain($cid,'syzoj',3);
+        if(isset($OJ_SaaS_ENABLE) && $OJ_SaaS_ENABLE)
+		create_subdomain($cid,'syzoj',3);
 ?>
         <a href="user_list.php">Back</a>
 <?php

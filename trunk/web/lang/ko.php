@@ -81,6 +81,7 @@
 	$MSG_SOURCE="출처/분류";
 	$MSG_SUBMIT_NUM="제출";	
 	$MSG_SUBMIT="제출";
+	$MSG_SHOW_OFF="제출창";
 
 	//submit.php
 	$MSG_VCODE_WRONG="확인코드가 다릅니다.";
@@ -352,28 +353,35 @@
 	$MSG_DECLARED_FILE_NAMED="채점 코드는 public class Main 이어야 합니다.";
 	$MSG_EXPECTED_IDENTIFIER="변수를 사용하기 전에 미리 선언하지 않았거나 변수를 선언할 때 소괄호 기호 () 를 누락했을 수 있습니다.";
 	$MSG_VARIABLY_MODIFIED="배열 크기를 변수로 지정할 수 없습니다. C 에서는 전역 배열의 크기를 선언할 때, 변수를 사용할 수 없습니다. const 형 변수도 사용할 수 없습니다.";
-
-	$MSG_FUNCTION_GETS_REMOVIED="The function std::gets is removed from C++14, use fgets to replace it. Or add #define gets(S) fgets(S,sizeof(S),stdin)";
-
-	$MSG_PROBLEM_USED_IN="This problem is used in private contest";
+  $MSG_FUNCTION_GETS_REMOVIED="std::gets 함수는 C++14 에서 지원되지 않습니다. fgets나 #define gets(S) fgets(S,sizeof(S),stdin)를 사용하세요.";
+  $MSG_PROBLEM_USED_IN="비공개 대회에 등록되어 있습니다.";
+  $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="메일은 교사와 학생 사이에서만 주고 받을 수 있습니다. 학생들끼리는 불가능합니다.";
 	
-	$MSG_REFRESH_PRIVILEGE="새로 고침 권한";
-	$MSG_NEW_CONTEST="New Contest";
-	$MSG_AVAILABLE="Available";
-	$MSG_RESERVED="Reserved";
-	$MSG_NEW_PROBLEM_LIST="NewProblemList";
-	$MSG_DELETE="Delete";
-	$MSG_EDIT="Edit";
-	$MSG_TEST_DATA="TestData";
-        $MSG_CHECK_TO="Batch Operation";
-// syzoj/problem.php
+  $MSG_REFRESH_PRIVILEGE="권한 갱신";
+
+  $MSG_SAVED_DATE="저장 일시";
+  $MSG_PROBLEM_STATUS="문제 상태";
+  
+  $MSG_NEW_CONTEST="대회-등록";
+  $MSG_AVAILABLE="보임";
+  $MSG_RESERVED="숨겨짐";
+  $MSG_NEW_PROBLEM_LIST="공지사항-등록";
+  $MSG_DELETE="삭제";
+  $MSG_EDIT="수정";
+  $MSG_TEST_DATA="채점 데이터";
+  $MSG_CHECK_TO="일괄 작업";
+
+  //bbcode.php
+  $MSG_TOTAL="";
+  $MSG_NUMBER_OF_PROBLEMS="문제";
+
 	$MSG_SUBMIT_RECORD="Submit Record";
 	$MSG_RETURN_CONTEST="Return to contest";
 	$MSG_COPY="Copy";
 	$MSG_SUCCESS="Success";
 	$MSG_FAIL="Fail";
 	$MSG_TEXT_COMPARE="Text Compare";
-        $MSG_JUDGE_STYLE="Judge Style";
+	$MSG_JUDGE_STYLE="Judge Style";
 	// reinfo.php 
 	$MSG_ERROR_INFO="Runtion information";
 	$MSG_INFO_EXPLAINATION="Explaination";
@@ -386,5 +394,5 @@
 	$MSG_Contest_Infomation="Contest Information";
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
-        $MSG_BACK="Return to Last Page";
+	$MSG_BACK="Return to Last Page";
 ?>

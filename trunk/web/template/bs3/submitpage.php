@@ -382,7 +382,7 @@
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: false,
-        fontFamily: "Consolas",
+        //fontFamily: "Consolas",
         fontSize: "20px"
       });
     </script>

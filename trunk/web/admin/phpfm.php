@@ -339,7 +339,7 @@ function et($tag){
     $en['ErrorReport'] = 'Error Reporting';
     $en['Random-data'] = 'Random-data generator';
     $en['GenerateOut'] = 'Generate Out files';
-    $en['Ans2out'] = '.ans -&gt; .out';
+    $en['Ans2out'] = '*.ans -> *.out';
     
     // chinese
 	$cn['Version'] = '版本';

@@ -84,11 +84,11 @@ echo "</select>";
       <td width=60px><?php echo $MSG_PROBLEM_ID?><input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
       <td><?php echo $MSG_TITLE?></td>
       <td><?php echo $MSG_AC?></td>
-      <td></td>
+      <td><?php echo $MSG_SAVED_DATE?></td>
       <?php
       if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){
         if(isset($_SESSION[$OJ_NAME.'_'.'administrator']) ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))
-          echo "<td>$MSG_STATUS</td><td>$MSG_DELETE</td>";
+          echo "<td>$MSG_PROBLEM_STATUS</td><td>$MSG_DELETE</td>";
         echo "<td>$MSG_EDIT</td><td>$MSG_TESTDATA</td>";
       }
       ?>
@@ -129,7 +129,7 @@ echo "</select>";
   }
 ?>
     <tr>
-      <td colspan=2 style="height:40px;">Checked to</td>
+      <td colspan=2 style="height:40px;"><?php echo "$MSG_CHECK_TO"?></td>
       <td colspan=6>
       <input type=submit name='problem2contest' value='<?php echo $MSG_NEW_CONTEST?>'>
       <input type=submit name='enable' value='<?php echo $MSG_AVAILABLE ?>' onclick='$("form").attr("action","problem_df_change.php")'>

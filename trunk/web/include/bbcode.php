@@ -1,5 +1,4 @@
 <?php
-
 /******************************************************************************
 php-bbcode
   BBCode to HTML conversion, in PHP7.
@@ -117,6 +116,9 @@ class BBCode
   // Renders a BBCode string to HTML, for inclusion into a document.
   static public function bbcode_to_html($input) : string
   {
+    global $MSG_TOTAL;
+    global $MSG_NUMBER_OF_PROBLEMS;
+
     // split input string into array using regex, UTF-8 aware
     //  this should give us tokens to work with
 
@@ -287,7 +289,7 @@ class BBCode
 	    $output = $output . '<div class="panel '.$plist_color[$colorIndex%count($plist_color)].'">'
 				.'<div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\').toggle()"  style="cursor: pointer" >'
 		                .'<h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '"  target="_blank">' 
-		    		. self::encode($buffer) . '</a> <span class="pull-right">共'.$pnum.'题</span> </h4> '
+		    		. self::encode($buffer) . '</a> <span class="pull-right">'.$MSG_TOTAL.' '.$pnum.' '.$MSG_NUMBER_OF_PROBLEMS.'</span> </h4> '
 				.' </div><div id="plist'.$colorIndex.'"  style="display:none"  > </div></div>';
 	    $colorIndex++;
             // advance ptr (again)

@@ -93,6 +93,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_SOURCE="مەنبە";
 	$MSG_SUBMIT_NUM="تاپشۇرۇش نۇمۇرى";
 	$MSG_SUBMIT="تاپشۇرۇش";
+	$MSG_SHOW_OFF="ShowOff!";
 
 	//submit.php
 	$MSG_VCODE_WRONG="دەلىللەش كودى خاتا!";
@@ -366,8 +367,13 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_VARIABLY_MODIFIED ="سانلار گۇرۇپپىسىنىڭ چوڭ-كىچىكلىكىدە ئۆزگەرگۈچى مىقدار ئىشلىتىشكە بولمايدۇ، C تىلدا ئۆزگەرگۈچى مىقدارنى ئومۇمىي سانلار گۇرۇپپىسىنىڭ ئۆلچىمى قىلىشقا بولمايدۇ، const ئۆزگەرگۈچى مىقدارنى ئۆز ئىچىگە ئالىدۇ ";
 	$MSG_FUNCTION_GETS_REMOVIED ="std: gets بولسا C++11 دىن تاشلىۋېتىلىپ، C++14 دىن چىقىرىۋېتىلىدۇ. std::fgets نى ئىشلىتىشكە بولىدۇ. ياكى ماكرو ئېنىقلىما #define gets(S) fgets(S,sizeof(S),stdin)";
 	$MSG_PROBLEM_USED_IN ="سۇئال ئاللىقاچان شەخسىي مۇسابىقىدە ئىشلىتىلدى. ";
-	
+	$MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="Mails can only be sent between teachers and student, not between students.";
+
 	$MSG_REFRESH_PRIVILEGE="ئىمتىيازنى يېڭىلاش";
+
+	$MSG_SAVED_DATE="Saved Date";
+	$MSG_PROBLEM_STATUS="Problem Status";
+	
 	$MSG_NEW_CONTEST="New Contest";
 	$MSG_AVAILABLE="Available";
 	$MSG_RESERVED="Reserved";
@@ -375,15 +381,19 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_DELETE="Delete";
 	$MSG_EDIT="Edit";
 	$MSG_TEST_DATA="TestData";
-        $MSG_CHECK_TO="Batch Operation";
-// syzoj/problem.php
+	$MSG_CHECK_TO="Batch Operation";
+
+	//bbcode.php
+	$MSG_TOTAL="Total";
+	$MSG_NUMBER_OF_PROBLEMS="Problems";
+
 	$MSG_SUBMIT_RECORD="Submit Record";
 	$MSG_RETURN_CONTEST="Return to contest";
 	$MSG_COPY="Copy";
 	$MSG_SUCCESS="Success";
 	$MSG_FAIL="Fail";
 	$MSG_TEXT_COMPARE="Text Compare";
-        $MSG_JUDGE_STYLE="Judge Style";
+	$MSG_JUDGE_STYLE="Judge Style";
 	// reinfo.php 
 	$MSG_ERROR_INFO="Runtion information";
 	$MSG_INFO_EXPLAINATION="Explaination";
@@ -396,5 +406,5 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_Contest_Infomation="Contest Information";
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
-        $MSG_BACK="Return to Last Page";
+	$MSG_BACK="Return to Last Page";
  ?>

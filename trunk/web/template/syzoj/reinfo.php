@@ -83,7 +83,15 @@
       document.getElementById("errexp").innerHTML=expmsg;
     }
 
+ function showDownload(){
+      var errmsg = $("#errtxt").html();
+      errmsg=errmsg.replace(/========\[(.*)\]=========/g,"<a href='download.php?sid=<?php echo $id?>&name=$1'>$1</a>");
+      $("#errtxt").html(errmsg);
+ }
+
     explain();
+    
+    <?php if(isset($OJ_DOWNLOAD)&&$OJ_DOWNLOAD) echo  "showDownload();" ?>
 </script>
 <?php include("template/$OJ_TEMPLATE/footer.php");?>
 

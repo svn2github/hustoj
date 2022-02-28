@@ -72,7 +72,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </textarea>
 <?php } ?>
 
-<!-- <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
 <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
 <span class="btn" id=result>状态</span>
 <?php }?>
@@ -80,7 +80,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
 	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">
 <div id="blockly" class="center">Blockly</div>
-<?php }?> -->
+<?php }?> 
 </form>
 </center>
 
@@ -136,8 +136,8 @@ function fresh_result(solution_id)
 		tb.innerHTML="<"+tag+" href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</"+tag+">";
 	}
 	if(ra[0]<4)tb.innerHTML+=loader;
-	tb.innerHTML+="Memory:"+ra[1]+"kb&nbsp;&nbsp;";
-	tb.innerHTML+="Time:"+ra[2]+"ms";
+	tb.innerHTML+="Memory:"+ra[1]+"&nbsp;&nbsp;";
+	tb.innerHTML+="Time:"+ra[2]+"";
 	if(ra[0]<4)
 	window.setTimeout("fresh_result("+solution_id+")",2000);
 	else{

@@ -46,8 +46,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php echo $MSG_VCODE?>:
 <input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
 <?php }?>
-<!-- <input id="Submit" class="btn btn-info" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" > -->
-<button type="submit" class="ui primary icon button"  onclick="do_submit();">提交</button>
+<button  id="Submit" type="submit" class="ui primary icon button"  onclick="do_submit();">提交</button>
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
 <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
@@ -241,12 +240,12 @@ function resume(){
 	if(count<0){
 		s.disabled=false;
 		if(t!=null)t.disabled=false;
-		s.value="<?php echo $MSG_SUBMIT?>";
+		 $("#Submit").text("<?php echo $MSG_SUBMIT?>");
 		if(t!=null)t.value="<?php echo $MSG_TR?>";
 		if( handler_interval) window.clearInterval( handler_interval);
 		if($("#vcode")!=null) $("#vcode").click();
 	}else{
-		s.value="<?php echo $MSG_SUBMIT?>("+count+")";
+		 $("#Submit").text("<?php echo $MSG_SUBMIT?>("+count+")");
 		if(t!=null)t.value="<?php echo $MSG_TR?>("+count+")";
 		window.setTimeout("resume();",1000);
 	}

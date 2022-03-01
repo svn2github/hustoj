@@ -185,13 +185,17 @@ $tsql[35]="ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) 
 $csql[35]="";
 $tsql[36]="alter table privilege add column valuestr char(11) not null default 'true' after rightstr; ";
 $csql[36]="";
+
+$tsql[37]="ALTER TABLE `news` ADD COLUMN `menu` int(11) NOT NULL DEFAULT 0 AFTER `importance`; ";
+$csql[37]="";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
-		if(pdo_query($tsql[$i])){
+    echo "<br><br>";
+		if(pdo_query($tsql[$i], true)){
 				echo $csql[$i]."<br>";
-				pdo_query($csql[$i]);
+				pdo_query($csql[$i], true);
 		}else{
 				echo $tsql[$i]."<br>";
 		}

@@ -12,6 +12,8 @@ require_once("../include/my_func.inc.php");
 //contest_id
 $title = $_POST['title'];
 $content = $_POST['content'];
+$showInMenu = $_POST['showInMenu'];
+$menu = $showInMenu == "on" ? 1 : 0;
 
 $user_id = $_SESSION[$OJ_NAME.'_'.'user_id'];
 
@@ -27,8 +29,8 @@ $content = str_replace(",", "&#44;", $content);
 $title=RemoveXSS($title);
 $content=RemoveXSS($content);
 
-$sql = "INSERT INTO news(`user_id`,`title`,`content`,`time`) VALUES(?,?,?,now())";
-pdo_query($sql,$user_id,$title,$content);
+$sql = "INSERT INTO news(`user_id`,`title`,`content`,`time`,`menu`) VALUES(?,?,?,now(),?)";
+pdo_query($sql,$user_id,$title,$content,$menu);
 
 echo "<script>window.location.href=\"news_list.php\";</script>";
 ?>

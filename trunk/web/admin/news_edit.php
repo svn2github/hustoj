@@ -21,6 +21,8 @@ if(isset($_POST['news_id'])){
 
   $title = $_POST['title'];
   $content = $_POST['content'];
+  $showInMenu = $_POST['showInMenu'];
+  $menu = $showInMenu == "on" ? 1 : 0;
 
   $content = str_replace("<p>", "", $content);
   $content = str_replace("</p>", "<br />", $content);
@@ -39,9 +41,9 @@ if(isset($_POST['news_id'])){
   $title = RemoveXSS($title);
   $content = RemoveXSS($content);
 
-  $sql = "UPDATE `news` SET `title`=?,`time`=now(),`content`=?,user_id=? WHERE `news_id`=?";
+  $sql = "UPDATE `news` SET `title`=?,`time`=now(),`content`=?,user_id=?,`menu`=? WHERE `news_id`=?";
   //echo $sql;
-  pdo_query($sql,$title,$content,$user_id,$news_id) ;
+  pdo_query($sql,$title,$content,$user_id,$menu,$news_id);
 
   header("location:news_list.php");
   exit();
@@ -58,6 +60,7 @@ if(isset($_POST['news_id'])){
 
   $title = htmlentities($row['title'],ENT_QUOTES,"UTF-8");
   $content = $row['content'];
+  $showInMenu = $row['menu'] == 1;
 }
 ?>
 
@@ -66,6 +69,11 @@ if(isset($_POST['news_id'])){
     <p align=left>
       <label class="col control-label"><?php echo $MSG_TITLE?></label>
       <input type=text name=title size=71 value='<?php echo $title?>'>
+    </p>
+    <p align=left>
+      <label class="col control-label"><?php echo $MSG_NEWS_MENU?>
+        <input style="display: inline-block;" type="checkbox" name=showInMenu <?php if($showInMenu) { echo "checked"; } ?> />
+      </label>
     </p>
     <p align=left>
       <textarea class=kindeditor name=content rows=41 >

@@ -1,4 +1,15 @@
 <?php
+        function get_menu_news() {
+            $result = "";
+            $sql_news_menu = "select `news_id`,`title` FROM `news` WHERE `menu`=1 AND `title`!='faqs.cn' ORDER BY `importance` ASC,`time` DESC LIMIT 10";
+            $sql_news_menu_result = mysql_query_cache( $sql_news_menu );
+            if ( $sql_news_menu_result ) {
+                foreach ( $sql_news_menu_result as $row ) {
+                    $result .= '<a class="item" href="/viewnews.php?id=' . $row['news_id'] . '">' . $row['title'] . '</a>';
+                }
+            }
+            return $result;
+        }
         $url=basename($_SERVER['REQUEST_URI']);
         $dir=basename(getcwd());
         if($dir=="discuss3") $path_fix="../";
@@ -17,6 +28,37 @@
         if($OJ_ONLINE){
                 require_once($path_fix.'include/online.php');
                 $on = new online();
+        }
+
+        $sql_news_menu_result_html = "";
+
+        if ($OJ_MENU_NEWS) {
+            if ($OJ_REDIS) {
+                $redis = new Redis();
+                $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
+
+                if (isset($OJ_REDISAUTH)) {
+                  $redis->auth($OJ_REDISAUTH);
+                }
+                $redisDataKey = $OJ_REDISQNAME . '_MENU_NEWS_CACHE';
+                if ($redis->exists($redisDataKey)) {
+                    $sql_news_menu_result_html = $redis->get($redisDataKey);
+                } else {
+                    $sql_news_menu_result_html = get_menu_news();
+                    $redis->set($redisDataKey, $sql_news_menu_result_html);
+                    $redis->expire($redisDataKey, 300);
+                }
+
+                $redis->close();
+            } else {
+                $sessionDataKey = $OJ_NAME.'_'."_MENU_NEWS_CACHE";
+                if (isset($_SESSION[$sessionDataKey])) {
+                    $sql_news_menu_result_html = $_SESSION[$sessionDataKey];
+                } else {
+                    $sql_news_menu_result_html = get_menu_news();
+                    $_SESSION[$sessionDataKey] = $sql_news_menu_result_html;
+                }
+            }
         }
 ?>
 
@@ -64,6 +106,7 @@
             <a id="back_to_contest" class="item active" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>" ><i
                     class="arrow left icon"></i><?php echo $MSG_CONTEST.$MSG_PROBLEMS.$MSG_LIST?></a>
             <?php }?>
+            <?php echo $sql_news_menu_result_html; ?>
             <div class="right menu">
                 <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) { ?>
                 <a href="<?php echo $path_fix?>/userinfo.php?user=<?php echo $_SESSION[$OJ_NAME.'_'.'user_id']?>"

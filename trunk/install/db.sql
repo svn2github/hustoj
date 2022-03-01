@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `content` text NOT NULL,
   `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00',
   `importance` tinyint(4) NOT NULL DEFAULT '0',
+  `menu` int(11) NOT NULL DEFAULT '0',
   `defunct` char(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`news_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8mb4;

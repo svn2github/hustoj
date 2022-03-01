@@ -150,6 +150,7 @@
 	$MSG_ONLINE="بر خط";
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";
+	$MSG_NEWS_MENU="Show in menu";
 
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";

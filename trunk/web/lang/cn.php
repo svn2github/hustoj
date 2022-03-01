@@ -163,6 +163,7 @@
 	$MSG_ONLINE="在线";
 	$MSG_SET_LOGIN_IP="指定登录IP";
 	$MSG_PRIVILEGE_TYPE="权限 类型";
+	$MSG_NEWS_MENU="是否展示到菜单";
 
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";

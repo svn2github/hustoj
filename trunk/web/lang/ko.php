@@ -155,6 +155,7 @@
 	$MSG_ONLINE="Online";
 	$MSG_SET_LOGIN_IP="IP 변경";
 	$MSG_PRIVILEGE_TYPE="권한 종류";
+	$MSG_NEWS_MENU="Show in menu";
 
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";

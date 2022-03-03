@@ -311,7 +311,7 @@ function loadFromBlockly(){
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: false,
-        fontFamily: "Consolas",
+        // fontFamily: "Consolas",  // MacOS missing align
         fontSize: "18px"
     });
    reloadtemplate($("#language").val()); 

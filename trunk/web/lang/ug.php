@@ -165,6 +165,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_ONLINE=" سىمدا ";
 	$MSG_SET_LOGIN_IP="ئادېرسنى تەڭشەش IP ";
 	$MSG_PRIVILEGE_TYPE="ھوقۇق تۈرى";
+	$MSG_NEWS_MENU="Show in menu";
 
   //contest.php
   $MSG_PRIVATE_WARNING="مۇسابىقە باشلانمىدى ياكى سوئال شەخىسكە تەۋە";

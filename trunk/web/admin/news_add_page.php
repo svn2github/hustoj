@@ -41,6 +41,11 @@ if(isset($_POST['pid'])){
       <input type=text name=title size=71 value='<?php echo isset($title)?$title."-Copy":""?>'>
     </p>
     <p align=left>
+      <label class="col control-label"><?php echo $MSG_NEWS_MENU?>
+        <input style="display: inline-block;" type="checkbox" name=showInMenu />
+      </label>
+    </p>
+    <p align=left>
       <textarea class=kindeditor name=content rows=41 >
         <?php echo isset($content)?$content:""?>
       </textarea>

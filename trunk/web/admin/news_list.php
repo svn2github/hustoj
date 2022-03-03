@@ -43,10 +43,10 @@ $sql = "";
 if(isset($_GET['keyword']) && $_GET['keyword']!=""){
   $keyword = $_GET['keyword'];
   $keyword = "%$keyword%";
-  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` WHERE (title LIKE ?) OR (content LIKE ?) ORDER BY `news_id` DESC";
+  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct`,`menu` FROM `news` WHERE (title LIKE ?) OR (content LIKE ?) ORDER BY `news_id` DESC";
   $result = pdo_query($sql,$keyword,$keyword);
 }else{
-  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct` FROM `news` ORDER BY `news_id` DESC LIMIT $sid, $idsperpage";
+  $sql = "SELECT `news_id`,`user_id`,`title`,`time`,`defunct`,`menu` FROM `news` ORDER BY `news_id` DESC LIMIT $sid, $idsperpage";
   $result = pdo_query($sql);
 }
 ?>
@@ -66,6 +66,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
       <td>UPDATE</td>
       <td>NOW</td>
       <td>COPY</td>
+      <td>MENU</td>
     </tr>
     <?php
     foreach($result as $row){
@@ -75,6 +76,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
         echo "<td>".$row['time']."</td>";
         echo "<td><a href=news_df_change.php?id=".$row['news_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".($row['defunct']=="N"?"<span class=green>On</span>":"<span class=red>Off</span>")."</a>"."</td>";
         echo "<td><a href=news_add_page.php?cid=".$row['news_id'].">Copy</a></td>";
+        echo "<td>" . ($row['menu'] == 1 ? "YES" : "NO") . "</td>";
       echo "</tr>";
     }
     ?>

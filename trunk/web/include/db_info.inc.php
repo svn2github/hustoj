@@ -116,7 +116,7 @@ static  $OJ_LOG_TRACE_ENABLED=false;
 
 
 static $OJ_SaaS_ENABLE=false;
-
+static $OJ_MENU_NEWS=false;
 
 require_once(dirname(__FILE__) . "/pdo.php");
 require_once(dirname(__FILE__) . "/init.php");

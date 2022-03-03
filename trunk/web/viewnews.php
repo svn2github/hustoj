@@ -21,6 +21,13 @@ $sql = "select * "
 . "WHERE `defunct`!='Y' && `news_id`='$news_id'"
 . "ORDER BY `importance` ASC,`time` DESC "
 . "LIMIT 50";
+if ($OJ_MENU_NEWS) {
+	$sql = "select * "
+	. "FROM `news` "
+	. "WHERE (`defunct`!='Y' or `menu` = 1) && `news_id`='$news_id'"
+	. "ORDER BY `importance` ASC,`time` DESC "
+	. "LIMIT 50";
+}
 $result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
 if ( !$result ) {
 	$new_title = $news_content = "公告不存在!";

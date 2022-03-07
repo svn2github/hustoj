@@ -264,7 +264,14 @@ else {
 
   <item>
     <title><![CDATA[<?php echo $row['title']?>]]></title>
-    <time_limit unit="s"><![CDATA[<?php echo $row['time_limit']?>]]></time_limit>
+    <time_limit unit="s"><![CDATA[<?php    // 兼容老版本和QDUOJ之类的其他OJ   
+            $time=$row['time_limit'];     
+            if (intval($time)==$time)
+                    echo intval($time);
+            else
+                    echo $time;
+?>]]></time_limit>
+
     <memory_limit unit="mb"><![CDATA[<?php echo $row['memory_limit']?>]]></memory_limit>
 
     <?php

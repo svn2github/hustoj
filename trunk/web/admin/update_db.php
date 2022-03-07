@@ -193,7 +193,7 @@ if(isset($_POST['do'])){
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
     echo "<br><br>";
-		if(pdo_query($tsql[$i], true)){
+		if(pdo_query($tsql[$i])){
 				echo $csql[$i]."<br>";
 				pdo_query($csql[$i], true);
 		}else{

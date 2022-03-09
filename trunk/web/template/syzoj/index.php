@@ -41,7 +41,7 @@
                     <tbody>
 
                         <?php
-                        $sql_users = "select * FROM `users` where defunct='N' ORDER BY `solved` DESC LIMIT 15";
+                        $sql_users = "select * FROM `users` where user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ORDER BY `solved` DESC LIMIT 15";
                         $result_users = mysql_query_cache( $sql_users );
                         if ( $result_users ) {
                             $i = 1;

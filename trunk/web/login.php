@@ -3,7 +3,7 @@ require_once( "./include/db_info.inc.php" );
 require_once( './include/setlang.php' );
 $use_cookie=false;
 $login=false;
-if($OJ_COOKIE_LOGIN=true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
+if($OJ_LONG_LOGIN&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"])){
 	$C_check=$_COOKIE[$OJ_NAME."_check"]; 
 	$C_user=$_COOKIE[$OJ_NAME."_user"];
 	$use_cookie=true;

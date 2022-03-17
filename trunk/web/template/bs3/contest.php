@@ -27,9 +27,10 @@
   <div class="jumbotron">
     <center>
     <div>
-      <h3><?php echo $MSG_CONTEST_ID?> : <?php echo $view_cid?> - <?php echo $view_title ?></h3>
+    <h3><?php echo $MSG_CONTEST_ID?> : <?php echo $view_cid?></h3> <br><h2> <?php echo $view_title ?></h2>
       <p>
-        <?php echo $view_description?>
+        <?php echo $view_description?><br>
+                --  <?php echo $view_contest_creator?>
       </p>
       <br>
       <?php echo $MSG_SERVER_TIME?> : <span id=nowdate > <?php echo date("Y-m-d H:i:s")?></span>

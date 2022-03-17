@@ -21,6 +21,7 @@
         box-shadow: none;
     }
     </style>
+    <?php include("template/$OJ_TEMPLATE/js.php");?>
     <div class="footer">
         <div class="ui center aligned container">
             <div><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?> is powered by <a style="color: inherit !important;" class=" " title="GitHub"

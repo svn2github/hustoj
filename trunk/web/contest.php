@@ -120,7 +120,7 @@ if (isset($_GET['cid'])) {
 	else{
 		
 		$view_private = $row['private'];
-
+ 		$view_contest_creator= $row['user_id'];
 		if ($password!="" && $password==$row['password'])
 			$_SESSION[$OJ_NAME.'_'.'c'.$cid] = true;
 

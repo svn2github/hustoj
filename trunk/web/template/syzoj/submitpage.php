@@ -46,7 +46,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php echo $MSG_VCODE?>:
 <input name="vcode" size=4 type=text><img id="vcode" alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()">
 <?php }?>
-<button  id="Submit" type="submit" class="ui primary icon button"  onclick="do_submit();">提交</button>
+<button  id="Submit" type="button" class="ui primary icon button"  onclick="do_submit();">提交</button>
 <?php if (isset($OJ_ENCODE_SUBMIT)&&$OJ_ENCODE_SUBMIT){?>
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
 <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>

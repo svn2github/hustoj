@@ -5,9 +5,9 @@
 
 <?php
 if(file_exists("./admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg.txt");
+$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg/$domain.txt");
 if(file_exists("../admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg.txt");
+$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg/$domain.txt");
 
 
 ?>
@@ -30,9 +30,7 @@ $(document).ready(function(){
   $(".jumbotron").prepend(msg);
   $("form").append("<div id='csrf' />");
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
-  $("body").append("<div class=center ><a href=setlang.php?lang=cn>中文</a>&nbsp;&nbsp;<a href=setlang.php?lang=en>English</a>&nbsp;&nbsp;</div>");
-  $("body").append("<div id=footer class=center >GPLv2 licensed by <a href='https://github.com/zhblue/hustoj'  target='_blank'>HUSTOJ</a> "+(new Date()).getFullYear()+" </div>");
-  $("body").append("<div>&nbsp;&nbsp;</div>");
+
 });
 
 $(".hint pre").each(function(){

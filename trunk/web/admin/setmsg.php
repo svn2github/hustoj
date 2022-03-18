@@ -10,6 +10,7 @@ echo "<center><h3>".$MSG_NEWS."-".$MSG_SETMESSAGE."</h3></center>";
 
 if(isset($_POST['do'])){
   require_once("../include/check_post_key.php");
+  mkdir("msg");
   $fp = fopen($OJ_SAE?"saestor://web/msg.txt":"msg/$domain.txt","w");
   $msg = $_POST['msg'];
 

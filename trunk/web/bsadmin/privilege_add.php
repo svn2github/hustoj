@@ -64,16 +64,24 @@ require_once("../include/set_get_key.php");
 								</div>
 								<div class="card-body">
 								    <?php 
-								    if(isset($_POST['do'])){
+if (isset($_POST['do'])) {
 	require_once("../include/check_post_key.php");
-	$user_id=$_POST['user_id'];
-	$rightstr =$_POST['rightstr'];
-	if(isset($_POST['contest'])) $rightstr="c$rightstr";
-	if(isset($_POST['psv'])) $rightstr="s$rightstr";
-	$sql="insert into `privilege` values(?,?,'N')";
-	$rows=pdo_query($sql,$user_id,$rightstr);
-	echo "$user_id $rightstr added!";
+
+	$user_id = $_POST['user_id'];
+	$rightstr = $_POST['rightstr'];
+	$valuestr = "true";
+	if(isset($_POST['valuestr']))
+		$valuestr = $_POST['valuestr'];
 	
+	if (isset($_POST['contest']))
+		$rightstr = "c$rightstr";
+
+	if (isset($_POST['psv']))
+		$rightstr = "s$rightstr";
+
+	$sql = "insert into `privilege`(user_id,rightstr,valuestr,defunct) values(?,?,?,'N')";
+	$rows = pdo_query($sql,$user_id,$rightstr,$valuestr);
+	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Privilege Added!</h4></center>";
 }
 ?>
                             <form method=post>

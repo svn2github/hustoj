@@ -5,7 +5,7 @@
           $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
           if(!$result) return false;
           $row=$result[0];
-          if(intval($row[0])==0) return false;
+          //if(intval($row[0])==0) return false;
           $retmsg="<span id=red>(".$row[0].")</span>";
           return $retmsg;
         }

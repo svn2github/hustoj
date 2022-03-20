@@ -1,4 +1,15 @@
 <?php
+        function checkmail(){  // check if has mail
+          global $OJ_NAME;
+          $sql="SELECT count(1) FROM `mail` WHERE new_mail=1 AND `to_user`=?";
+          $result=pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+          if(!$result) return false;
+          $row=$result[0];
+          if(intval($row[0])==0) return false;
+          $retmsg="<span id=red>(".$row[0].")</span>";
+          return $retmsg;
+        }
+
         function get_menu_news() {
             $result = "";
             $sql_news_menu = "select `news_id`,`title` FROM `news` WHERE `menu`=1 AND `title`!='faqs.cn' ORDER BY `importance` ASC,`time` DESC LIMIT 10";
@@ -123,7 +134,20 @@
                                 <?php } ?>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="admin/"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
-                            <?php } ?>
+                            <?php } 
+                              if((isset($OJ_EXAM_CONTEST_ID)&&$OJ_EXAM_CONTEST_ID>0)||
+                                     (isset($OJ_ON_SITE_CONTEST_ID)&&$OJ_ON_SITE_CONTEST_ID>0)||
+                                     (isset($OJ_MAIL)&&!$OJ_MAIL)){
+                                      // mail can not use in contest or mail is turned off
+                              }else{
+                                    $mail=checkmail();
+                                    if($mail) echo "<a class='item mail' href=".$path_fix."mail.php><i class='mail icon'></i>$MSG_MAIL$mail</a>";
+                              }
+
+
+                            
+                            
+                            ?>
                             <a class="item" href="logout.php"><i class="power icon"></i><?php echo $MSG_LOGOUT;?></a>
                         </div>
                     </div>

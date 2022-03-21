@@ -1,7 +1,3 @@
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>bootstrap.min.js"></script>
 
 <?php
 if(file_exists("./admin/msg.txt"))
@@ -12,10 +8,11 @@ $view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/ms
 
 ?>
 <!--  to enable mathjax in hustoj:
-svn export http://github.com/mathjax/MathJax/trunk /home/judge/src/web/mathjax-->
+svn export http://github.com/mathjax/MathJax/trunk /home/judge/src/web/mathjax
 <script type="text/javascript"
   src="mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+-->
 <!--
 or
 <script type="text/javascript"

@@ -137,7 +137,9 @@
 	$MSG_NEWS="News";
 	$MSG_CONTENTS="Contents";
 	$MSG_SAVE="Save";	
-
+        $MSG_DELETED="Deleted";	
+        $MSG_NORMAL="Normal";	
+        
 	$MSG_TEAMGENERATOR="TeamGenerator";
 	$MSG_SETMESSAGE="SetMessage";
 	$MSG_SETPASSWORD="ChangePassWD";

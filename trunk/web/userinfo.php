@@ -59,9 +59,9 @@ $Submit=$row['Submit'];
 // update solved 
 $sql="UPDATE `users` SET `solved`='".strval($AC)."',`submit`='".strval($Submit)."' WHERE `user_id`=?";
 $result=pdo_query($sql,$user);
-$sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>?";
+$sql="SELECT count(*) as `Rank` FROM `users` WHERE `solved`>? and defunct='N' and user_id not in (".$OJ_RANK_HIDDEN.") ";
 $result=pdo_query($sql,$AC);
- $row=$result[0];
+$row=$result[0];
 $Rank=intval($row[0])+1;
 
  if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])){

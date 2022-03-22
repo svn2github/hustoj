@@ -149,7 +149,9 @@
 	$MSG_NEWS="公告";
 	$MSG_CONTENTS="内容";
 	$MSG_SAVE="保存";	
-
+        $MSG_DELETED="已删除";	
+        $MSG_NORMAL="正常";	
+        
 	$MSG_TEAMGENERATOR="比赛队帐号生成器";
 	$MSG_SETMESSAGE="设置公告";
 	$MSG_SETPASSWORD="修改密码";

@@ -141,7 +141,9 @@
 	$MSG_NEWS="공지사항";
 	$MSG_CONTENTS="내용";
 	$MSG_SAVE="저장";	
-	
+	$MSG_DELETED="Deleted";	
+        $MSG_NORMAL="Normal";	
+
 	$MSG_TEAMGENERATOR="팀 생성기";
 	$MSG_SETMESSAGE="메시지설정";
 	$MSG_SETPASSWORD="비밀번호변경";

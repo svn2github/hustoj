@@ -136,7 +136,9 @@
 	$MSG_NEWS="خبرها";
 	$MSG_CONTENTS="Contents";
 	$MSG_SAVE="Save";	
-		
+	$MSG_DELETED="Deleted";	
+        $MSG_NORMAL="Normal";	
+	
 	$MSG_TEAMGENERATOR="ساخت تیم";
 	$MSG_SETMESSAGE="تنظیم پیام";
 	$MSG_SETPASSWORD="تغییر رمز";

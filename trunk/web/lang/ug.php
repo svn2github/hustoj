@@ -151,6 +151,8 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_NEWS=" ئۇقتۇرۇش ";
 	$MSG_CONTENTS="مەزمۇن";
 	$MSG_SAVE="ساقلاش";	
+        $MSG_DELETED="Deleted";	
+        $MSG_NORMAL="Normal";	
 
 	$MSG_TEAMGENERATOR=" گورۇپ نۇمۇرى چىقارغۇچ ";
 	$MSG_SETMESSAGE=" ئۇچۇر يېزىش ";

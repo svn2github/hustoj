@@ -138,7 +138,9 @@
 	$MSG_NEWS="ข่าวประกาศ";
 	$MSG_CONTENTS="Contents";
 	$MSG_SAVE="Save";	
-	
+	$MSG_DELETED="Deleted";	
+        $MSG_NORMAL="Normal";	
+
 	$MSG_TEAMGENERATOR="ตัวสร้างทีม";
 	$MSG_SETMESSAGE="ข้อความต้อนรับ";
 	$MSG_SETPASSWORD="เปลี่ยนรหัสผ่าน";

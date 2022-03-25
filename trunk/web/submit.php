@@ -67,12 +67,9 @@ if (isset($res) && count($res)<1 && !isset($_SESSION[$OJ_NAME.'_'.'administrator
   require "template/".$OJ_TEMPLATE."/error.php";
   exit(0);
 }
-
-if (false&&$res[0][1]!='N' && !isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
-  //  echo "res:$res,count:".count($res);
-  //  echo "$sql";
+// 已停用的题目只有管理员或者出题人可以提交
+if ($res[0][1]!='N' && !(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor']) ) ) {
   $view_errors = $MSG_PROBLEM_RESERVED."<br>";
-
   if (isset($_POST['ajax'])) {
     echo $view_errors;
   }

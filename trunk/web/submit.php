@@ -54,7 +54,7 @@ if (isset($_POST['cid'])) {
 }
 else {
   $id = intval($_POST['id']);
-  $sql = "SELECT `problem_id` FROM `problem` WHERE `problem_id`='$id' ";
+  $sql = "SELECT `problem_id`,defunct FROM `problem` WHERE `problem_id`='$id' ";
     
   if(!isset($_SESSION[$OJ_NAME.'_'.'administrator']))
     $sql .= " and defunct='N'";

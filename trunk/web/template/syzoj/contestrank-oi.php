@@ -18,7 +18,7 @@
 				<tr>
 					<th>#</th>
 					<th>用户</th>
-					<th>姓名</th>
+					<th>昵称</th>
 					<th>用时</th>
 					<th>总分</th>
 					<?php

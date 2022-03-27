@@ -10,6 +10,13 @@ sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
 apt-get update && apt-get -y upgrade
 
+apt-get install -y software-properties-common
+add-apt-repository universe
+add-apt-repository multiverse
+add-apt-repository restricted
+
+apt-get update && apt-get -y upgrade
+
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/ || exit

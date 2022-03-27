@@ -16,7 +16,7 @@
             $sql_news_menu_result = mysql_query_cache( $sql_news_menu );
             if ( $sql_news_menu_result ) {
                 foreach ( $sql_news_menu_result as $row ) {
-                    $result .= '<a class="item" href="/viewnews.php?id=' . $row['news_id'] . '">' . $row['title'] . '</a>';
+                    $result .= '<a class="item" href="/viewnews.php?id=' . $row['news_id'] . '">' ."<i class='star icon'></i>" . $row['title'] . '</a>';
                 }
             }
             return $result;

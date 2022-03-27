@@ -10,6 +10,14 @@ sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
 apt-get update && apt-get -y upgrade
 
+apt-get install -y software-properties-common
+add-apt-repository universe
+add-apt-repository multiverse
+add-apt-repository restricted
+
+
+apt-get update && apt-get -y upgrade
+
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
 cd /home/judge/ || exit
@@ -30,6 +38,7 @@ do
 	while ! apt-get install -y "$pkg" 
 	do
 		echo "Network fail, retry... you might want to change another apt source for install"
+		echo "Or you might need to add [universe] [multiverse] to your /etc/apt/sources.list"
 	done
 done
 

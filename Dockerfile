@@ -28,9 +28,8 @@ RUN apt-get -y update  && \
         make \
         flex \
         gcc \
-        g++ \
-        openjdk-11-jdk
-
+        g++ 
+      
 COPY trunk /trunk
 
 COPY docker/ /opt/docker/

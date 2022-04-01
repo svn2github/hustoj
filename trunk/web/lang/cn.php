@@ -42,16 +42,16 @@
         $MSG_Explain="输入判定原因与提示";
   
 	//fool's day
-	if(date('m')==4&&date('d')==1&&rand(0,100)<10){
-  	$MSG_Accepted="人品问题-愚人节快乐";
-		$MSG_Presentation_Error="人品问题-愚人节快乐";
-		$MSG_Wrong_Answer="人品问题-愚人节快乐";
-		$MSG_Time_Limit_Exceed="人品问题-愚人节快乐";
-		$MSG_Memory_Limit_Exceed="人品问题-愚人节快乐";
-		$MSG_Output_Limit_Exceed="人品问题-愚人节快乐";
-		$MSG_Runtime_Error="人品问题-愚人节快乐";
-		$MSG_Compile_Error="人品问题-愚人节快乐";
-		$MSG_Compile_OK="人品问题-愚人节快乐";
+	if(date('m')==4&&date('d')==1&&rand(0,100)<5){
+  	        $MSG_Accepted="<span title=愚人节快乐>似乎好像是正确</span>";
+		//$MSG_Presentation_Error="人品问题-愚人节快乐";
+		//$MSG_Wrong_Answer="人品问题-愚人节快乐";
+		//$MSG_Time_Limit_Exceed="人品问题-愚人节快乐";
+		//$MSG_Memory_Limit_Exceed="人品问题-愚人节快乐";
+		//$MSG_Output_Limit_Exceed="人品问题-愚人节快乐";
+		//$MSG_Runtime_Error="人品问题-愚人节快乐";
+		//$MSG_Compile_Error="人品问题-愚人节快乐";
+		//$MSG_Compile_OK="人品问题-愚人节快乐";
 	}
   
         $MSG_TEST_RUN="运行完成";

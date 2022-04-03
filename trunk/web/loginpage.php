@@ -1,6 +1,7 @@
 <?php
 $cache_time=1;
 require_once('./include/cache_start.php');
+require_once('./include/memcache.php');
     require_once("./include/db_info.inc.php");
 	require_once("./include/setlang.php");
 	$view_title= "LOGIN";

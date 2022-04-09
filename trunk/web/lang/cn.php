@@ -375,7 +375,7 @@
   
   $MSG_REFRESH_PRIVILEGE="刷新权限";
   
-  $MSG_SAVED_DATE="节省时间";
+  $MSG_SAVED_DATE="保存时间";
   $MSG_PROBLEM_STATUS="当前状态";
 
   $MSG_NEW_CONTEST="创建新比赛";

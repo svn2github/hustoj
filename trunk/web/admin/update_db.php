@@ -195,7 +195,7 @@ if(isset($_POST['do'])){
     echo "<br><br>";
 		if(pdo_query($tsql[$i])){
 				echo $csql[$i]."<br>";
-				pdo_query($csql[$i], true);
+				pdo_query($csql[$i]);
 		}else{
 				echo $tsql[$i]."<br>";
 		}

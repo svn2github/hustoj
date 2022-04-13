@@ -71,7 +71,7 @@ $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $sql="UPDATE `users` SET"
 ."`password`=?,"
-."`nick`=?,"
+."`nick`=?,"    //删除此行和81行含的,$nick禁用昵称修改
 ."`school`=?,"
 ."`email`=?"
 ."WHERE `user_id`=?"
@@ -79,7 +79,9 @@ $sql="UPDATE `users` SET"
 //echo $sql;
 //exit(0);
 pdo_query($sql,$password,$nick,$school,$email,$user_id);
-$sql="update solution set nick=? where user_id=?";
-pdo_query($sql,$nick,$user_id);
+if($nick!=""){
+	$sql="update solution set nick=? where user_id=?";
+	pdo_query($sql,$nick,$user_id);
+}
 header("Location: ./");
 ?>

@@ -299,3 +299,19 @@ div[class*=ace_br] {
     });
 
   </script>
+<?php if (isset($OJ_MATHJAX)&&$OJ_MATHJAX){?>
+    <!--以下为了加载公式的使用而既加入-->
+<script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+  };
+</script>
+
+<script id="MathJax-script" async src="template/bs3/tex-chtml.js"></script>
+<style>
+        .jumbotron1{
+  font-size: 18px;
+}
+</style>
+
+<?php } ?>

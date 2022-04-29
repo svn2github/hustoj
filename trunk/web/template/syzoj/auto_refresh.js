@@ -2,7 +2,7 @@ var i = 0;
 var interval = 800;
 
 function auto_refresh() {
-	interval = 800;
+	interval *=2 ;
 	var tb = window.document.getElementById('result-tab');
 	var rows = tb.rows;
 	for (var i=rows.length-1; i>0; i--) {

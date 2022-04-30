@@ -1553,8 +1553,9 @@ int check_mysql_conn(){
                         write_log("\n.......Mysql time out !---- retry............\n");
                 }
                 mysql_close(conn);
+		sleep(1);
                 init_mysql_conn();
-                sleep(1);
+                
         }
         res = mysql_store_result(conn);
         mysql_free_result(res);

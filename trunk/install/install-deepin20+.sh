@@ -106,7 +106,7 @@ update-rc.d hustoj defaults
 systemctl enable nginx
 systemctl enable mariadb
 systemctl enable php$PHP_VER-fpm
-systemctl enable judged
+systemctl enable hustoj
 
 cd /home/judge/src/install
 if test -f  /.dockerenv ;then

@@ -227,7 +227,7 @@ if (isset($_POST['do']) || isset($_GET['cid'])) {
     $row = $result[0];
     $filename = '-'.$row['title'];
     
-    $sql = "SELECT * FROM problem WHERE problem_id IN(SELECT problem_id FROM contest_problem WHERE contest_id=?)";
+    $sql = "SELECT * FROM problem p inner join (select problem_id id,num from contest_problem where contest_id=?) cp on p.problem_id=cp.id order by cp.num ";
     $result = pdo_query($sql,$cid);
   }
   else {

@@ -143,7 +143,10 @@ systemctl enable mysql
 systemctl enable php7.4-fpm
 #systemctl enable judged
 
-/etc/init.d/mysql start
+sed -i "s#interactive_timeout=120#interactive_timeout=20#g" /etc/mysql/mysql.conf.d/mysqld.cnf
+sed -i "s#wait_timeout=120#wait_timeout=20#g" /etc/mysql/mysql.conf.d/mysqld.cnf
+
+/etc/init.d/mysql restart
 
 
 mkdir /var/log/hustoj/

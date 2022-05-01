@@ -47,7 +47,7 @@ top:BEGIN
              (assignment,userid,timecreated,timemodified,status,attemptnumber)
        values( as_id    ,u_id  ,nowtime    ,nowtime     ,'new' ,0);
        insert into  moodle.mdl_assign_grades(assignment,userid,timecreated,timemodified,grader,grade,attemptnumber)
-       select ma.id,mas.userid,UNIX_TIMESTAMP( NOW( ) ),UNIX_TIMESTAMP( NOW( ) ),2,mark,0
+       select ma.id,mas.userid,UNIX_TIMESTAMP( NOW( ) ),UNIX_TIMESTAMP( NOW( ) ),2,mark,mas.attemptnumber
                 from  moodle.mdl_assign ma
                 inner join  moodle.mdl_assign_submission mas on
                 mas.assignment=ma.id and mas.status='new' 

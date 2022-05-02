@@ -1260,7 +1260,7 @@ void umount(char *work_dir)  //清理可能存在的热加载目录
 }
 int compile(int lang, char *work_dir)
 {
-	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
+	if( lang == 16 ) return 0; // python / js don't compile
 	int pid;
         char fmax_errors[BUFFER_SIZE];
 
@@ -1280,8 +1280,8 @@ int compile(int lang, char *work_dir)
 
 	const char *CP_R[] = {"ruby", "-c", "Main.rb", NULL};
 	const char *CP_B[] = {"chmod", "+rx", "Main.sh", NULL};
-	//const char * CP_Y[] = { "python", "-c",
-	//		"import py_compile; py_compile.compile(r'Main.py')", NULL };
+	const char * CP_Y[] = { "python3", "-c",
+			"import py_compile; py_compile.compile(r'Main.py')", NULL };
 	const char *CP_PH[] = {"php", "-l", "Main.php", NULL};
 	const char *CP_PL[] = {"perl", "-c", "Main.pl", NULL};
 	const char *CP_CS[] = {"mcs","-codepage:utf8", "-warn:0", "Main.cs", NULL};
@@ -1426,9 +1426,9 @@ int compile(int lang, char *work_dir)
 		case 5:
 			execvp(CP_B[0], (char *const *)CP_B);
 			break;
-		//case 6:
-		//	execvp(CP_Y[0], (char * const *) CP_Y);
-		//	break;
+		case 6:
+			execvp(CP_Y[0], (char * const *) CP_Y);
+			break;
 		case 7:
 			execvp(CP_PH[0], (char *const *)CP_PH);
 			break;

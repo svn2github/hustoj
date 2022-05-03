@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND noninteractive
 RUN     sed -i 's/archive.ubuntu/mirrors.163/g' /etc/apt/sources.list &&\
 	apt-get update && apt-get -y upgrade
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        apt-utils 	

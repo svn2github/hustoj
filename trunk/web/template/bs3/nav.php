@@ -5,9 +5,9 @@
       $sql_news_menu_result = mysql_query_cache( $sql_news_menu );
       if ( $sql_news_menu_result ) {
           foreach ( $sql_news_menu_result as $row ) {
-                  $result .= '<div><a class="item" href="/viewnews.php?id=' . $row['news_id'] . '">'
+                  $result .= '<li><a class="item" href="/viewnews.php?id=' . $row['news_id'] . '">'
                           ."<span class='glyphicon glyphicon-star' aria-hidden='true'>"
-                          . $row['title'] . '</a></div>';
+                          . $row['title'] . '</a></li>';
           }
       }
       return $result;
@@ -63,7 +63,7 @@
                 $_SESSION[$sessionDataKey] = $sql_news_menu_result_html;
             }
         }
-          $sql_news_menu_result_html=" <li>$sql_news_menu_result_html</li>";
+         // $sql_news_menu_result_html=" <li>$sql_news_menu_result_html</li>";
     }
 
   if(!isset($_GET['spa']))

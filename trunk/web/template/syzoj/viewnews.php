@@ -1,6 +1,5 @@
 <?php $show_title="公告 - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
-<?php include("include/bbcode.php");?>
 <div class="padding">
     <h1><?php echo $news_title ?></h1>
     <p style="margin-bottom: -5px; ">

@@ -2,7 +2,7 @@
 function pdo_query($sql){
     $num_args = func_num_args();
     $args = func_get_args();       //获得传入的所有参数的数组
-    $args=array_slice($args,1,--$num_args);
+    $args = array_slice($args,1,--$num_args);
     
     global $DB_HOST,$DB_NAME,$DB_USER,$DB_PASS,$dbh,$OJ_SAE,$OJ_TEMPLATE;
     try{

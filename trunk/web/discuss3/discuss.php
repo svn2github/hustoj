@@ -66,7 +66,7 @@ if(isset($_REQUEST['cid'])){
 		WHERE `t`.`status`!=2  ";
 	//echo $sql;
 }
-if (array_key_exists("cid",$_REQUEST)&&$_REQUEST['cid']!='') 
+if (isset($_REQUEST["cid"])&&$_REQUEST['cid']!='') 
 	$sql.= " AND ( `cid` = '".intval($_REQUEST['cid'])."'";
 else 
 	$sql.=" AND (`cid`=0 ";

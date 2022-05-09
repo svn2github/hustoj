@@ -17,7 +17,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
     header("Cache-Control: no-store");
 	header("Content-Type: text/html; charset=".$charset);
 	//@ini_set('default_charset', $charset);
-    if (@get_magic_quotes_gpc()) {
+    if (false) {   // php8.0 removed get_magic_quotes_gpc
         function stripslashes_deep($value){
             return is_array($value)? array_map('stripslashes_deep', $value):$value;
         }

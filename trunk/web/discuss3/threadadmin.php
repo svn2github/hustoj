@@ -33,7 +33,7 @@
                 $tid = intval($_REQUEST['tid']);
                 $toplevel = -1; $stat = -1;
                 if ($_REQUEST['action']=='sticky') 
-                        if(array_key_exists('level',$_REQUEST)&&is_numeric($_REQUEST['level']) &&$_REQUEST['level']>=0 &&$_REQUEST['level']<4)
+                        if(isset($_REQUEST['level'])&&is_numeric($_REQUEST['level']) &&$_REQUEST['level']>=0 &&$_REQUEST['level']<4)
                                 $toplevel = intval($_REQUEST['level']);
                         else
                                 err_msg("Invalid sticky level.");

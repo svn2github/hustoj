@@ -974,7 +974,7 @@ class simple_html_dom_node
 			case 'innertext': return $this->innertext();
 			case 'plaintext': return $this->text();
 			case 'xmltext': return $this->xmltext();
-			default: return array_key_exists($name, $this->attr);
+			default: return property_exists($this,$name);
 		}
 	}
 
@@ -1008,7 +1008,7 @@ class simple_html_dom_node
 			case 'plaintext': return true;
 		}
 		//no value attr: nowrap, checked selected...
-		return (array_key_exists($name, $this->attr)) ? true : isset($this->attr[$name]);
+		return (isset($this->attr[$name])) ? true : isset($this->attr[$name]);
 	}
 
 	function __unset($name)
@@ -2351,3 +2351,4 @@ class simple_html_dom
 		$this->load_file($args);
 	}
 }
+

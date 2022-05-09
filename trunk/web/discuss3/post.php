@@ -24,12 +24,12 @@
         
         $tid=null;
         if ($_REQUEST['action']=='new'){
-                if (array_key_exists('title',$_POST) && array_key_exists('content', $_POST) && $_POST['title']!='' && $_POST['content']!=''){
-                        if(array_key_exists('pid',$_REQUEST)&&$_REQUEST['pid']!='')
+                if (isset($POST['title']) && isset($_POST['content']) && $_POST['title']!='' && $_POST['content']!=''){
+                        if(isset($_REQUEST['pid'])&&$_REQUEST['pid']!='')
                                 $pid=intval($_REQUEST['pid']);
                         else
                                 $pid=0;
-                        if(array_key_exists('cid',$_REQUEST)&&$_REQUEST['cid']!='')
+                        if(isset($_REQUEST['cid'])&&$_REQUEST['cid']!='')
                                 $cid=intval($_REQUEST['cid']);
                         else
                                 $cid=0;
@@ -59,7 +59,7 @@
         }
         if ($_REQUEST['action']=='reply' || !is_null($tid)){
                 if(is_null($tid)) $tid=intval($_POST['tid']);
-                if (!is_null($tid) && array_key_exists('content', $_POST) && $_POST['content']!=''){
+                if (!is_null($tid) && isset($_POST['content']) && $_POST['content']!=''){
 			$rows=pdo_query("select tid from topic where tid=?",$tid);
 			if(isset($rows[0])){
 				$ip = ($_SERVER['REMOTE_ADDR']);

@@ -27,7 +27,7 @@ if(isset($_GET['cid'])){
 if($OJ_BBS=="discuss"){
   echo ("<script>location.href='discuss/discuss.php?".$parm."';</script>");
 }else if ($OJ_BBS=="discuss3"){
-   echo ("<script>location.href='discuss3/discuss.php?".$parm."';</script>");
+   echo ("<script>location.href='discuss.php?".$parm."';</script>");
 }else{
 	
 	if(isset($_GET['pid'])){

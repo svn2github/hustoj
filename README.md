@@ -143,6 +143,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+05-09 | 更新 | 增加了ubuntu20.04下的宝塔安装脚本与配套说明
 01-15 | 更新 | 测试数据文件管理器中增加生成.out文件和.ans文件批量改名功能。
 01-12 | 补丁 | 修复nodejs，增加部分系统调用。
 01-10 | 更新 | 移除部分老式代码，为php8.1进行兼容性调整，增加适用于Ubuntu22.04lts的安装脚本。
@@ -266,13 +267,20 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 	
 尤其**别装** `Apache` ，如果已经安装，请先停用或卸载，以免80端口冲突。
 
-**不要** 使用 `宝塔` `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
+**不要** 使用 `LNMP` `LAMP` `Cpanel` 或其他面板程序提供的 `Mysql` `Nginx` `Apache` `PHP` 环境，安装脚本已经包含所有必须环境的安装。
 
 **腾讯云用户请 [换软件源](https://developer.aliyun.com/mirror/ubuntu)** ，增加 `multiverse` 。
 
 阿里云用户请百度 `阿里云 80端口`
 
-
+### 基于 Ubuntu 22.04 安装
+	
+**仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
+	
+```bash
+wget http://dl.hustoj.com/install-ubuntu22.04.sh
+sudo bash install-ubuntu22.04.sh
+```
 
 ### 基于 Ubuntu 20.04 安装
 	
@@ -310,7 +318,15 @@ sudo bash install-ubuntu18.04.sh
 ```bash
 sudo bash install-ubuntu18-bytgz.sh 19.06.04.tar.gz
 ```
+### 基于 Ubuntu 20.04+宝塔 安装
 	
+*先看*[宝塔系统安装HUSTOJ指南.docx](https://github.com/zhblue/hustoj/files/8649129/HUSTOJ.docx)
+
+	
+```bash
+wget http://dl.hustoj.com/install-ubuntu-bt.sh
+sudo bash install-ubuntu-bt.sh
+```	
 	
 	
 ### Ubuntu 更换软件源

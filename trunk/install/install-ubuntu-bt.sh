@@ -5,6 +5,12 @@ if [ -d /mnt/c ]; then
     echo "WSL is NOT supported."
     exit 1
 fi
+echo "Welcome to install HUSTOJ on your BT panel,please prepare your database account!"
+echo "Press Ctrl+C to Stop..."
+echo "Input your database username:"
+read USER
+echo "Input your database password:"
+read PASSWORD
 
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 
@@ -41,10 +47,7 @@ do
                 echo "Or you might need to add [universe] [multiverse] to your /etc/apt/sources.list"
         done
 done
-echo "Input your database username:"
-read USER
-echo "Input your database password:"
-read PASSWORD
+
 
 CPU=$(grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}')
 

@@ -24,7 +24,7 @@
         
         $tid=null;
         if ($_REQUEST['action']=='new'){
-                if (isset($_POST['title']) && isset(,$_POST('content']) && $_POST['title']!='' && $_POST['content']!=''){
+                if (isset($_POST['title']) && isset($_POST['content']) && $_POST['title']!='' && $_POST['content']!=''){
                         if(isset($_REQUEST['pid'])&&$_REQUEST['pid']!='')
                                 $pid=intval($_REQUEST['pid']);
                         else

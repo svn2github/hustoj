@@ -271,12 +271,12 @@ function openBlockly(){
    $("#TestRun").hide();
    $("#language")[0].scrollIntoView();
    $("#language").val(6).hide();
-   $("#language_span").hide();
+   //$("#language_span").hide();
    $("#EditAreaArroundInfos_source").hide();
    $('#blockly').html('<iframe name=\'frmBlockly\' width=90% height=580 src=\'blockly/demos/code/index.html\'></iframe>'); 
   $("#blockly_loader").hide();
   $("#transrun").show();
-  $("#Submit").prop('disabled', true);
+  //$("#Submit").prop('disabled', true);
   using_blockly=true;
   
 }

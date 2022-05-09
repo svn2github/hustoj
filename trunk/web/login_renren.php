@@ -17,7 +17,7 @@ function http_request($url,$is_post=False){
 require_once("./include/db_info.inc.php");
 require_once("./include/my_func.inc.php");
 
-if(array_key_exists('code',$_GET)){
+if(isset($_GET['code'])){
     $code = $_GET['code'];
     $GURL = "https://graph.renren.com/oauth/token?";
     $vars = array(
@@ -29,7 +29,7 @@ if(array_key_exists('code',$_GET)){
     $GURL = $GURL.http_build_query($vars);
     $ret = http_request($GURL,True);
     $data = json_decode($ret);
-    if (array_key_exists('user',$data)){
+    if (isset($data['user'])){
         // register this user and login it
         $uname = "renren_".$data->user->id;
         $nick = "Renren_".$data->user->name;

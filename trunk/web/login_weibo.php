@@ -17,7 +17,7 @@ function http_request($url,$is_post=False){
 require_once("./include/db_info.inc.php");
 require_once("./include/my_func.inc.php");
 
-if(array_key_exists('code',$_GET)){
+if(isset($_GET['code'])){
     $code = $_GET['code'];
     $GURL = "https://api.weibo.com/oauth2/access_token?";
     $vars = array(
@@ -29,7 +29,7 @@ if(array_key_exists('code',$_GET)){
     $GURL = $GURL.http_build_query($vars);
     $ret = http_request($GURL,True);
     $data = json_decode($ret);
-    if (array_key_exists('uid',$data)){
+    if (isset($data['uid'])){
         $token = $data->access_token;
         $uid = $data->uid;
         $vars = array(

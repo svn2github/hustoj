@@ -116,6 +116,9 @@ update-rc.d hustoj defaults
 #systemctl enable judged
 PHP_INI=`find /www/ -name php.ini`
 sed -i 's/passthru,exec,system,/passthru,exec,/g'  $PHP_INI
+#shutdown warning message for php in BT Panel
+sed -i 's#//ini_set("display_errors", "Off");#//ini_set("display_errors", "Off");#g" /home/judge/src/web/include/db_info.inc.php
+
 
 mkdir /var/log/hustoj/
 chown www -R /var/log/hustoj/

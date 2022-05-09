@@ -71,7 +71,7 @@ if (isset($_REQUEST["cid"])&&$_REQUEST['cid']!='')
 else 
 	$sql.=" AND (`cid`=0 ";
 $sql.=" OR `top_level` = 3 )";
-if (array_key_exists("pid",$_REQUEST)&&$_REQUEST['pid']!=''){
+if (isset($_REQUEST["pid"])&&$_REQUEST['pid']!=''){
   $sql.=" AND ( `pid` = '".intval($_REQUEST['pid'])."' OR `top_level` >= 2 )";
   $level="";
 }else{

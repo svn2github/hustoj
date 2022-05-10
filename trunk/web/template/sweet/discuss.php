@@ -1,7 +1,7 @@
 <?php 
    $view_discuss=ob_get_contents();
     ob_end_clean();
-require_once("../lang/$OJ_LANG.php");
+require_once("lang/$OJ_LANG.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +11,10 @@ require_once("../lang/$OJ_LANG.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title><?php echo $OJ_NAME?></title>  
-    <?php include("../template/$OJ_TEMPLATE/css.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/css.php");?>	    
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,7 +27,7 @@ require_once("../lang/$OJ_LANG.php");
   <body>
 
     <div class="container">
-    <?php include("../template/$OJ_TEMPLATE/nav.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 	<?php echo $view_discuss?>
@@ -39,6 +39,6 @@ require_once("../lang/$OJ_LANG.php");
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <?php include("../template/$OJ_TEMPLATE/js.php");?>	    
+    <?php include("template/$OJ_TEMPLATE/js.php");?>	    
   </body>
 </html>

@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><?php echo $MSG_NEWS;?> - <?php echo $OJ_NAME;?></title>
         <?php require("./template/bshark/header-files.php");?>
-        <?php require("./include/bbcode.php");?>
+
     </head>
     
     <body>

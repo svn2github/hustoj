@@ -135,8 +135,8 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	    system("/home/judge/src/install/ans2out $current_dir");
     }
     if ($resolveIDs){               // php8 default disabled exec()
-        $mat_passwd=file_get_contents("/etc/passwd");
-        $mat_group=file_get_contents("/etc/group");
+        $mat_passwd=explode("\n",file_get_contents("/etc/passwd"));
+        $mat_group=explode("\n",file_get_contents("/etc/group"));
     }
     $fm_color['Bg'] = "EEEEEE";
     $fm_color['Text'] = "000000";

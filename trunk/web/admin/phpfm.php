@@ -4052,9 +4052,7 @@ function edit_file_form(){
         fputs($fh,$file_data,strlen($file_data));
         fclose($fh);
     }
-    $fh=fopen($file,"r");
-    $file_data=fread($fh, filesize($file));
-    fclose($fh);
+    $file_data=file_get_contents($file);
     html_header();
     echo "<body marginwidth=\"0\" marginheight=\"0\">
     <table border=0 cellspacing=0 cellpadding=5 align=center>

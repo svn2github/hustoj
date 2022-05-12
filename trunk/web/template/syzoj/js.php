@@ -1,9 +1,10 @@
 
 <?php
-if(file_exists("./admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"./admin/msg/$domain.txt");
-if(file_exists("../admin/msg.txt"))
-$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":"../admin/msg/$domain.txt");
+$msg_path=realpath(dirname(__FILE__)."/../../admin/msg/$domain.txt");
+if(file_exists($msg_path))
+	$view_marquee_msg=file_get_contents($OJ_SAE?"saestor://web/msg.txt":$msg_path);
+else
+	$view_marquee_msg="";
 
 
 ?>

@@ -1330,7 +1330,7 @@ int compile(int lang, char *work_dir)
 		LIM.rlim_cur = cpu;
 		setrlimit(RLIMIT_CPU, &LIM);
 		alarm(0);
-		alarm(cpu);
+		if(cpu>0)alarm(cpu);
 		LIM.rlim_max = 500 * STD_MB;
 		LIM.rlim_cur = 500 * STD_MB;
 		setrlimit(RLIMIT_FSIZE, &LIM);
@@ -2419,10 +2419,17 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);
 	alarm(0);
-	if ( num_of_test >0 )
-		alarm( num_of_test * time_lmt / cpu_compensation);
-	else
-		alarm( time_lmt / cpu_compensation);
+	if ( num_of_test >0 ){
+		if(num_of_test * time_lmt / cpu_compensation>1)
+			alarm( num_of_test * time_lmt / cpu_compensation);
+		else
+			alarm(1);
+	}else{
+		if(time_lmt / cpu_compensation>1)
+			alarm( time_lmt / cpu_compensation);
+		else
+			alarm(1);
+	}
 	// file limit
 	LIM.rlim_max = STD_F_LIM + STD_MB;
 	LIM.rlim_cur = STD_F_LIM;
@@ -2984,6 +2991,9 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		first = false;
 		//usleep(1);
 	}
+	
+	ptrace(PTRACE_KILL, pidApp, NULL, NULL);    // 杀死出问题的进程
+
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation; // 统计用户态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation; // 统计内核态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 

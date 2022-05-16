@@ -100,7 +100,7 @@ else
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
-	sed -i "s:php7.0:php8.1:g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.4:php8.1:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart

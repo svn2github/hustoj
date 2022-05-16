@@ -19,6 +19,7 @@ apt-get update && apt-get -y upgrade
 
 apt-get install -y subversion
 /usr/sbin/useradd -m -u 1536 judge
+
 cd /home/judge/ || exit
 
 #using tgz src files
@@ -39,6 +40,8 @@ do
 		echo "Network fail, retry... you might want to change another apt source for install"
 	done
 done
+
+chgrp www-data  /home/judge
 
 USER=$(grep user /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
 PASSWORD=$(grep password /etc/mysql/debian.cnf|head -1|awk  '{print $3}')

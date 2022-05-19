@@ -7,8 +7,11 @@ if [ $# != 1 ] ; then
 fi 
 DATE=`date +%Y%m%d`
 BAKDATE=`echo $1 |awk -F\. '{print $1}'|awk -F_ '{print $2}'`
-USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
-PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
+config="/home/judge/etc/judge.conf"
+SERVER=`cat $config|grep 'OJ_HOST_NAME' |awk -F= '{print $2}'`
+USER=`cat $config|grep 'OJ_USER_NAME' |awk -F= '{print $2}'`
+PASSWORD=`cat $config|grep 'OJ_PASSWORD' |awk -F= '{print $2}'`
+DATABASE=`cat $config|grep 'OJ_DB_NAME' |awk -F= '{print $2}'`
 mkdir hustoj-restore
 cd hustoj-restore
 MAIN="../$1"
@@ -19,4 +22,4 @@ mv home/judge/data /home/judge/
 mv /home/judge/src/web/upload /home/judge/src/web/upload.del.$DATE
 mv home/judge/src/web/upload /home/judge/src/web/
 bzip2 -d var/backups/db_${BAKDATE}.sql.bz2
-mysql -h localhost -u$USER -p$PASSWORD jol < var/backups/db_${BAKDATE}.sql
+mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < var/backups/db_${BAKDATE}.sql

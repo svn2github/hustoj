@@ -57,9 +57,11 @@ sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/site
 sed -i "s#DB_USER[[:space:]]*=[[:space:]]*\"root\"#DB_USER=\"$USERNAME\"#g"                  /home/judge/src/web/include/db_info.inc.php
 sed -i "s#DB_PASS[[:space:]]*=[[:space:]]*\"root\"#DB_PASS=\"$PASSWORD\"#g"                  /home/judge/src/web/include/db_info.inc.php
 
-#nginx & php
+# Nginx & PHP starting test
 PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
 service nginx start
 service $PHP_SERVICE start
-curl http://127.0.0.1/status.php
+apt-get install curl
+cd /home/judge/src/web
+for page in *.php;do curl http://127.0.0.1/$page;done;

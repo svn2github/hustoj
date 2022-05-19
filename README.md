@@ -9,7 +9,7 @@
 
 ## 目录
 
-**[模板演示](#自带的6种模板演示)**
+**[模板演示](#自带的模板演示)**
 
 **[版权说明](#版权说明)**
 
@@ -82,8 +82,6 @@
 [bs3原版](http://bs3.hustoj.com/)
 
 [sweet主题](http://sweet.hustoj.com/)
-
-[卡通马里奥主题](http://mario.hustoj.com/)  added by[@manni](https://github.com/manni)
 
 [syzoj主题](http://syzoj.hustoj.com/)  added by[@renbaoshuo](https://github.com/renbaoshuo)
 

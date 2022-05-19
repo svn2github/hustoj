@@ -241,9 +241,7 @@ div[class*=ace_br] {
   });
   </script>
 
-  <script src="https://cdn.staticfile.org/css-element-queries/0.4.0/ResizeSensor.min.js"></script>
-
-  
+    
 <?php include("template/$OJ_TEMPLATE/footer.php");?>
 
   <script>

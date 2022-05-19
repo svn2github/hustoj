@@ -62,6 +62,6 @@ PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
 service nginx start
 service $PHP_SERVICE start
-apt-get install curl
+apt-get -y install curl
 cd /home/judge/src/web
 for page in *.php;do curl http://127.0.0.1/$page;done;

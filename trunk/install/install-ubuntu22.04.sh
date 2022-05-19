@@ -7,13 +7,14 @@ if [ -d /mnt/c ]; then
 fi
 
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
+sed -i 's/cn.archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 
 apt-get update && apt-get -y upgrade
 
 apt-get install -y software-properties-common
-add-apt-repository universe
-add-apt-repository multiverse
-add-apt-repository restricted
+add-apt-repository -y universe
+add-apt-repository -y multiverse
+add-apt-repository -y restricted
 
 apt-get update && apt-get -y upgrade
 

@@ -200,18 +200,7 @@ div[class*=ace_br] {
 </div>
 
   <script type="text/javascript">
-  var editor = ace.edit("editor");
-  var lastSubmitted = '';
-
-  editor.setTheme("ace/theme/tomorrow");
-  editor.getSession().setMode("ace/mode/" + $('#languages-menu .item.active').data('mode'));
-  editor.getSession().setUseSoftTabs(false);
-
-  editor.container.style.lineHeight = 1.6;
-  editor.container.style.fontSize = '14px';
-  editor.container.style.fontFamily = "'Roboto Mono', 'Bitstream Vera Sans Mono', 'Menlo', 'Consolas', 'Lucida Console', monospace";
-  editor.setShowPrintMargin(false);
-  editor.renderer.updateFontSize();
+  
   function transform(){
         let height=document.body.clientHeight;
         let width=parseInt(document.body.clientWidth*0.618);
@@ -236,7 +225,7 @@ div[class*=ace_br] {
     return true;
   }
 
-  $('#languages-menu')[0].scrollTop = $('#languages-menu .active')[0].offsetTop - $('#languages-menu')[0].firstElementChild.offsetTop;
+ // $('#languages-menu')[0].scrollTop = $('#languages-menu .active')[0].offsetTop - $('#languages-menu')[0].firstElementChild.offsetTop;
 
   $(function () {
     $('#languages-menu .item').click(function() {

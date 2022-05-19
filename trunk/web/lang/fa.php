@@ -377,7 +377,7 @@
 	$MSG_TEXT_COMPARE="Text Compare";
 	$MSG_JUDGE_STYLE="Judge Style";
 	// reinfo.php 
-	$MSG_ERROR_INFO="Runtion information";
+	$MSG_ERROR_INFO="Runtime information";
 	$MSG_INFO_EXPLAINATION="Explaination";
 	// ceinfo.php
 	$MSG_COMPILE_INFO="Compile information";

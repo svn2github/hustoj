@@ -56,3 +56,10 @@ sed -i "s#OJ_SHM_RUN[[:space:]]*=[[:space:]]*1#OJ_SHM_RUN=0#g"                  
 sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/sites-available/default
 sed -i "s#DB_USER[[:space:]]*=[[:space:]]*\"root\"#DB_USER=\"$USERNAME\"#g"                  /home/judge/src/web/include/db_info.inc.php
 sed -i "s#DB_PASS[[:space:]]*=[[:space:]]*\"root\"#DB_PASS=\"$PASSWORD\"#g"                  /home/judge/src/web/include/db_info.inc.php
+
+#nginx & php
+PHP_INIT=`find /etc/init.d -name "php*-fpm"`
+PHP_SERVICE=`basename $PHP_INIT`
+service nginx start
+service $PHP_SERVICE start
+curl http://127.0.0.1/status.php

@@ -40,7 +40,8 @@ function pdo_query($sql){
 	    $sth->closeCursor();
 	    return $result;
     }catch(PDOException $e){
-//		$view_errors="SQL:".$sql."\n".$e->getMessage();
+//	    echo "<span class=red>".$e->getMessage()."</span>";    // open this line to debug SQL fail problems 
+//	$view_errors="SQL:".$sql."\n".$e->getMessage();
 //	echo htmlentities($view_errors."\n\n");
 	if(stripos($sql,"create") === 0||stripos($sql,"drop") === 0) echo "continue\n";
 	//else exit(0);

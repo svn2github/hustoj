@@ -61,7 +61,7 @@ foreach ( $result as $row ) {
 	array_push( $chart_data_ac, array( $row[ 'md' ], $row[ 'c' ] ) );
 }
 if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
-	$sql = "select avg(sp) sp from (select  avg(1) sp,judgetime from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 60 * 60) order by sp) tt;";
+	$sql = "select avg(sp) sp from (select  avg(1) sp,judgetime DIV 3600 from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 3600) order by sp) tt;";
 	$result = mysql_query_cache( $sql );
 	$speed = ( $result[ 0 ][ 0 ] ? $result[ 0 ][ 0 ] : 0 ) . '/min';
 } else {

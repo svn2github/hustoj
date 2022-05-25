@@ -64,7 +64,7 @@ if(isset($_POST['do'])){
 			<button name="do" type="hidden" value="do" class="btn btn-default btn-block" ><?php echo $MSG_SAVE?></button>
 		</div>
 		<div class="col-sm-2">
-			<button name="submit" type="reset" class="btn btn-default btn-block"><?php echo $MSG_RESET?></button>
+			<button name="submit" type="button" onclick='$("input[name=passwd]").attr("type","text");' class="btn btn-default btn-block">Show</button>
 		</div>
 	</div>
 </form>

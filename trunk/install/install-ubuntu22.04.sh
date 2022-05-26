@@ -33,8 +33,8 @@ svn up src
 apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
 apt-get install -y libmysqlclient-dev
 apt-get install -y libmysql++-dev 
-
-for pkg in net-tools make g++ php8.1-fpm nginx mysql-server php8.1-mysql php8.1-common php8.1-gd php8.1-zip php8.1-mbstring php8.1-xml php8.1-curl php8.1-intl php8.1-xmlrpc php8.1-soap tzdata
+PHP_VER=8.1
+for pkg in net-tools make g++ php$PHP_VER-fpm nginx mysql-server php$PHP_VER-mysql php$PHP_VER-common php$PHP_VER-gd php$PHP_VER-zip php$PHP_VER-mbstring php$PHP_VER-xml php$PHP_VER-curl php$PHP_VER-intl php$PHP_VER-xmlrpc php$PHP_VER-soap tzdata
 do
 	while ! apt-get install -y "$pkg" 
 	do
@@ -101,12 +101,12 @@ else
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
-	sed -i "s:php7.4:php8.1:g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.4:php$PHP_VER:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 /etc/init.d/nginx restart
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/8.1/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/8.1/fpm/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/$PHP_VER/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/$PHP_VER/fpm/php.ini
 WWW_CONF=$(find /etc/php -name www.conf)
 sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' "$WWW_CONF"
 sed -i 's/pm.max_children = 5/pm.max_children = 200/g' "$WWW_CONF"
@@ -142,7 +142,7 @@ update-rc.d hustoj defaults
 systemctl enable hustoj
 systemctl enable nginx
 systemctl enable mysql
-systemctl enable php8.1-fpm
+systemctl enable php$PHP_VER-fpm
 #systemctl enable judged
 
 sed -i "s#interactive_timeout=120#interactive_timeout=20#g" /etc/mysql/mysql.conf.d/mysqld.cnf

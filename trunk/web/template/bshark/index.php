@@ -1,4 +1,11 @@
-<?php
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><?php echo $MSG_HOME;?> - <?php echo $OJ_NAME;?></title>
+        <?php require("./template/bshark/header-files.php");?>
+	<?php
 if ($THEME_HOME_STATISTICS == "show") {
 $sql='SELECT COUNT(1) FROM `problem`';
 $result=pdo_query($sql);
@@ -31,12 +38,6 @@ $res=$result;
 }
 ?>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><?php echo $MSG_HOME;?> - <?php echo $OJ_NAME;?></title>
-        <?php require("./template/bshark/header-files.php");?>
         <style>
             .faqs-card {
                 border-radius: 20px;

@@ -223,6 +223,7 @@
   $MSG_PASS_RATE="Pass Rate";
   $MSG_SHOW_TAGS="Show Tags";
   $MSG_SHOW_ALL_TAGS="All Tags";
+  $MSG_RESERVED="Reserved";
 
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
@@ -360,7 +361,7 @@
 
 	$MSG_NEW_CONTEST="New Contest";
 	$MSG_AVAILABLE="Available";
-	$MSG_RESERVED="Reserved";
+	
 	$MSG_NEW_PROBLEM_LIST="NewProblemList";
 	$MSG_DELETE="Delete";
 	$MSG_EDIT="Edit";

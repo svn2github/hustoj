@@ -227,6 +227,7 @@
 	$MSG_PASS_RATE="Pass Rate";
 	$MSG_SHOW_TAGS="Show Tags";
 	$MSG_SHOW_ALL_TAGS="All Tags";
+        $MSG_RESERVED="숨겨짐";
 
 	$MSG_HELP_SEEOJ="OJ 확인";
 	$MSG_HELP_ADD_NEWS="첫 페이지 공지사항 추가";
@@ -367,7 +368,7 @@
   
   $MSG_NEW_CONTEST="대회-등록";
   $MSG_AVAILABLE="보임";
-  $MSG_RESERVED="숨겨짐";
+
   $MSG_NEW_PROBLEM_LIST="공지사항-등록";
   $MSG_DELETE="삭제";
   $MSG_EDIT="수정";

@@ -121,6 +121,14 @@ echo "insert into jol.privilege values('admin','administrator','true','N');" | .
 * 如果如果OJ_USE_DOCKER=0时系统正常，OJ_USE_DOCKER=1时卡住，请检查install目录下的Dockerfile文件内容是否符合需求，并再次运行docker.sh确认运行结果正常。
 * 修改OJ_USER_DOCKER参数，需要重启judged生效，方法是sudo pkill -9 judged && sudo judged
 
+为什么 提交代码/在某些特定页面 显示“连接已重置“ (connection_reset) ?
+--
+* 请确认”连接已重置“是特定操作(可永远复现)后出现的
+* 请确认OJ还有能正常访问的页面
+* 如果符合以上两条, 那么可能是您所在的区域的网管启用了WAF, 监测到传向OJ的流量中有违禁内容, 所以进行了reset.
+* 解决方法: 联系网管, 让他添加白名单...
+* 参考:[一个案例](https://github.com/zhblue/hustoj/issues/837)
+
 
 正式比赛或大规模系统需要注意哪些问题？
 --
@@ -217,6 +225,7 @@ $OJ_SIM=true;
 ```
 * 抄袭只对不同账号间生效，自己抄袭自己不计。拥有Source_browser权限的账号可以看到具体数值和对比。
 
+
 不能访问github，国内网，如何通过gitee安装？
 --
 没关系，最新的脚本不能访问Github也能按照，只要确保你的软件源是完整可用的。
@@ -228,6 +237,7 @@ sudo apt-get update
 如果有报错，请检查dns是否正确，/etc/apt/source.list的内容是否正确。
 百度您的操作系统名称+版本号+软件源，如：[Ubuntu 20.04 软件源](https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=Ubuntu%2020.04%20%E8%BD%AF%E4%BB%B6%E6%BA%90)，可能会找到修复的方法。
 
+
 请问如何重启判题机？
 --
 ```
@@ -235,8 +245,10 @@ sudo pkill -9 judged
 sudo judged
 ```
 
+
 XXXXX 这个文件是在哪的
 --
+在终端中执行:
 ```
    sudo find /home/judge -name "XXXXX"
 ```
@@ -299,11 +311,13 @@ OJ_CPU_COMPENSATION=1.0
 * 参考db.sql中的建表语句，对比修订当前库表结构
 * 处理掉从老版本MySQL里带来，在新版MySQL中不再合法的日期数据，如：'0000-00-00'，然后参考前面的方案解决。
 
+
 比赛后题目看不见了？
 --
 * 比赛的题目在比赛添加后，直到结束前，是不能在练习中看到和提交的，否则比赛将泄题或罚时被绕过。
 * 私有比赛的题目，在比赛结束后，仍然保留，即使比赛被隐藏也是一样，这是为了防止下一届新生提前获知测试内容。
 * 如果希望私有比赛后，题目公开可做，请将比赛切换为公开。
+
 
 关于NOIP赛制
 --
@@ -312,6 +326,7 @@ OJ_CPU_COMPENSATION=1.0
 * 设置db_info.inc.php中的 $OJ_OI_1_SOLUTION_ONLY=true; //比赛是否采用noip中的仅保留最后一次提交的规则。
 * 添加比赛时，比赛标题中包含"NOIP"这个关键词  // 赛后才能看结果
 * "NOIP"这个敏感词在db_info.inc.php中可以修改
+
 
 随机的CE编译错误
 --

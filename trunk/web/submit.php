@@ -252,7 +252,7 @@ if ($len > 65536) {
 
 if (!$OJ_BENCHMARK_MODE) {
   // last submit
-  $now = strftime("%Y-%m-%d %X", time()-10);
+  $now = strftime("%Y-%m-%d %X", time()-$OJ_SUBMIT_COOLDOWN_TIME);
   $sql = "SELECT `in_date` FROM `solution` WHERE `user_id`=? AND in_date>? ORDER BY `in_date` DESC LIMIT 1";
   $res = pdo_query($sql, $user_id, $now);
 

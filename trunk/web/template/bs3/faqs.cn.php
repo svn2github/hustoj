@@ -89,6 +89,11 @@
 #include &lt;iostream&gt;
 using namespace std;
 int main(){
+    // io speed up
+    const char endl = '\n';
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int a,b;
     while(cin >> a >> b)
         cout << a+b << endl;

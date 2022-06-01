@@ -73,13 +73,6 @@
   </form>
 
 
-  <form id=simform class=form-inline action="status.php" method="get">
-
-
-
-
-
-
   <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>

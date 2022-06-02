@@ -58,7 +58,7 @@ mysql < src/install/db.sql
 echo "grant all privileges on jol.* to '$USER' identified by '$PASSWORD';\n flush privileges;\n"|mysql
 echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql 
 
-PHP_VER=`grep 'php.*fpm\.sock' /etc/nginx/sites-enabled/default |awk -F/ '{print $4}'|awk -F- '{print $1}'|cut -c4-6`
+PHP_VER=`find /etc/init.d -name "php*"|grep -e '[[:digit:]]\.[[:digit:]]' -o`
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"

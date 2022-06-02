@@ -7,6 +7,7 @@ if [ -d /mnt/c ]; then
 fi
 
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
+sed -i 's/cn.archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 
 apt-get update && apt-get -y upgrade
 

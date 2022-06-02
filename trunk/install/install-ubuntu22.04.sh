@@ -33,7 +33,8 @@ svn up src
 apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
 apt-get install -y libmysqlclient-dev
 apt-get install -y libmysql++-dev 
-PHP_VER=8.1
+PHP_VER=`apt-cache search php-fpm|grep -e '[[:digit:]]\.[[:digit:]]' -o`
+if [ "$PHP_VER" = "" ] ; then PHP_VER="8.1"; fi
 for pkg in net-tools make g++ php$PHP_VER-fpm nginx mysql-server php$PHP_VER-mysql php$PHP_VER-common php$PHP_VER-gd php$PHP_VER-zip php$PHP_VER-mbstring php$PHP_VER-xml php$PHP_VER-curl php$PHP_VER-intl php$PHP_VER-xmlrpc php$PHP_VER-soap tzdata
 do
 	while ! apt-get install -y "$pkg" 

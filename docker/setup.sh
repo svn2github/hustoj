@@ -25,6 +25,8 @@ mv /trunk /home/judge/src
 chmod -R 700 /home/judge/etc
 chmod -R 700 /home/judge/backup
 chmod -R 700 /home/judge/src/web/include/
+chown judge /home/judge/run0
+chmod 750 /home/judge/run0
 chown -R www-data:www-data /home/judge/data
 chown -R www-data:www-data /home/judge/src/web 
 

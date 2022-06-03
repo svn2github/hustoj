@@ -14,6 +14,7 @@ mysql -e "insert into jol.solution (solution_id,user_id,problem_id,ip) values(1,
 # Hustoj basic file system
 useradd -m -u 1536 judge
 mkdir -p /home/judge/etc
+mkdir -p /home/judge/run0
 mkdir -p /home/judge/data/1
 echo "1 2" >  /home/judge/data/1/1.in
 echo "3" >  /home/judge/data/1/1.out

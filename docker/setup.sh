@@ -93,7 +93,8 @@ cd /home/judge/src/web
 chmod 755 /home/judge
 for page in *.php;
   do 
-  curl http://127.0.0.1/$page | grep HUSTOJ
+  curl http://127.0.0.1/$page 
 done;
 curl http://127.0.0.1/ | grep 'HelloWorld'
 judge_client 1 0 /home/judge/ debug
+cat /home/judge/run0/log/ce.txt

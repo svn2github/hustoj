@@ -45,9 +45,20 @@ chmod +x /usr/bin/sim.sh
 CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
 USERNAME=`cat /etc/mysql/debian.cnf |grep user    |head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
+PHP_VER=`apt-cache search php-fpm|grep -e '[[:digit:]]\.[[:digit:]]' -o`
+if [ "$PHP_VER" = "" ] ; then PHP_VER="8.1"; fi
+
+for pkg in net-tools make g++ php$PHP_VER-fpm nginx mysql-server php$PHP_VER-mysql php$PHP_VER-common php$PHP_VER-gd php$PHP_VER-zip php$PHP_VER-mbstring php$PHP_VER-xml php$PHP_VER-curl php$PHP_VER-intl php$PHP_VER-xmlrpc php$PHP_VER-soap tzdata
+do
+	while ! apt-get install -y "$pkg" 
+	do
+		echo "Network fail, retry... you might want to change another apt source for install"
+	done
+done
+
 cp /home/judge/src/install/java0.policy  /home/judge/etc/
 cp /home/judge/src/install/judge.conf    /home/judge/etc/
-cp /home/judge/src/install/default.conf  /etc/nginx/sites-available/default
+
 sed -i "s#OJ_USER_NAME[[:space:]]*=[[:space:]]*root#OJ_USER_NAME=$USERNAME#g"    /home/judge/etc/judge.conf
 sed -i "s#OJ_PASSWORD[[:space:]]*=[[:space:]]*root#OJ_PASSWORD=$PASSWORD#g"      /home/judge/etc/judge.conf
 sed -i "s#OJ_COMPILE_CHROOT[[:space:]]*=[[:space:]]*1#OJ_COMPILE_CHROOT=0#g"     /home/judge/etc/judge.conf
@@ -57,10 +68,20 @@ sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/site
 sed -i "s#DB_USER[[:space:]]*=[[:space:]]*\"root\"#DB_USER=\"$USERNAME\"#g"                  /home/judge/src/web/include/db_info.inc.php
 sed -i "s#DB_PASS[[:space:]]*=[[:space:]]*\"root\"#DB_PASS=\"$PASSWORD\"#g"                  /home/judge/src/web/include/db_info.inc.php
 
+	echo "modify the default site"
+	sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
+	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
+	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default
+	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
+	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
+	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.4:php$PHP_VER:g" /etc/nginx/sites-enabled/default
+	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
+  
 # Nginx & PHP starting test
 PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
-service nginx start
+service nginx restart
 service $PHP_SERVICE start
 apt-get -y install curl
 cd /home/judge/src/web

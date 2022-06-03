@@ -91,6 +91,9 @@ service $PHP_SERVICE start
 apt-get -y install curl
 cd /home/judge/src/web
 chmod 755 /home/judge
-for page in *.php;do curl http://127.0.0.1/$page;done;
+for page in *.php;
+  do 
+  curl http://127.0.0.1/$page | grep HUSTOJ
+done;
 curl http://127.0.0.1/ | grep 'HelloWorld'
 judge_client 1 0 /home/judge/ debug

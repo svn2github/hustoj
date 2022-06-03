@@ -8,7 +8,7 @@ service mysql start
 mysql < /trunk/install/db.sql
 mysql -e "insert into jol.privilege ( user_id, rightstr ) values('admin','administrator');"
 mysql -e "insert into jol.problem(problem_id,title,time_limit,memory_limit) values(1,1,1,5);"
-mysql -e "insert into jol.source_code values(1,'#include<stdio.h>\nint main(){\nint a,b;\nscanf(\"%d%d\",&a,&b);\nprintf(\"%d\\n\",a+b);\n}\n');"
+mysql -e "insert into jol.source_code values(1,'#include<stdio.h>\nint main(){\nint a,b;\nscanf(\"%d%d\",&a,&b);\nprintf(\"%d\\\\n\",a+b);\n}\n');"
 mysql -e "insert into jol.solution (solution_id,user_id,problem_id,ip) values(1,1,1,1);"
 
 # Hustoj basic file system

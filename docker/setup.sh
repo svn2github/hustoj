@@ -85,5 +85,6 @@ service $PHP_SERVICE start
 apt-get -y install curl
 cd /home/judge/src/web
 chmod 755 /home/judge
-sudo -u www-data ls /home/judge/src/web/
 for page in *.php;do curl http://127.0.0.1/$page;done;
+curl http://127.0.0.1/ | grep 'HelloWorld'
+

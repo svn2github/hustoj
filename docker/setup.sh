@@ -99,4 +99,5 @@ for page in *.php;
 done;
 curl http://127.0.0.1/ | grep 'HelloWorld'
 judge_client 1 0 /home/judge/ debug
+ls -lh /home/judge/run0/log/
 cat /home/judge/run0/log/ce.txt

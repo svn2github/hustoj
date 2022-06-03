@@ -7,11 +7,16 @@ chmod -R 755         /var/run/mysqld
 service mysql start
 mysql < /trunk/install/db.sql
 mysql -e "insert into jol.privilege ( user_id, rightstr ) values('admin','administrator');"
+mysql -e "insert into problem(problem_id,title,time_limit,memory_limit) values(1,1,1,1);"
+mysql -e "insert into source_code_user values(1,'#include<stdio.h>\nint main(){\nint a,b;\nscanf("%%d%%d",&a,&b);\nprintf("%%d\\n",a+b);\n}\n');"
+mysql -e "insert into solution (solution_id,user_id,problem_id,ip) values(1,1,1,1);"
 
 # Hustoj basic file system
 useradd -m -u 1536 judge
 mkdir -p /home/judge/etc
-mkdir -p /home/judge/data
+mkdir -p /home/judge/data/1
+echo "1 2" >  /home/judge/data/1/1.in
+echo "3" >  /home/judge/data/1/1.out
 mkdir -p /home/judge/log
 mkdir -p /home/judge/backup
 mkdir -p /var/log/hustoj
@@ -87,4 +92,4 @@ cd /home/judge/src/web
 chmod 755 /home/judge
 for page in *.php;do curl http://127.0.0.1/$page;done;
 curl http://127.0.0.1/ | grep 'HelloWorld'
-
+judge_client 1 0 /home/judge/ debug

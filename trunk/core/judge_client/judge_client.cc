@@ -3615,7 +3615,7 @@ int main(int argc, char **argv)
 	fprintf(df,"time_space_table:\n%s\n",time_space_table);
 	fclose(df);
 	if(DEBUG) printf("ACflg:%d\n",ACflg);
-	if(DEBUG) printf("finalACflg:%d\n",finalACflg);
+	printf("final result:%d\n",finalACflg);
 	if(ACflg != OJ_RE && finalACflg!= OJ_RE ) adddiffinfo(solution_id);
 	if(!turbo_mode)update_user(user_id);
 	if(!turbo_mode)update_problem(p_id,cid);

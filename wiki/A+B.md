@@ -276,6 +276,29 @@ process.stdin.on('data', function(chunk) {
 });
 ```
 ------------------------------
-```
-
+Cobol
+```Cobol
+       IDENTIFICATION   DIVISION.
+       PROGRAM-ID.      'HELLOWORLD'.
+       ENVIRONMENT      DIVISION.
+       DATA             DIVISION.
+       FILE             SECTION.
+       WORKING-STORAGE  SECTION.
+       01 L PIC X(25).
+       01 A PIC 9999.
+       01 B PIC 9999.
+       01 C PIC ZZZ9.
+       01 S  PIC X(20).
+       01 C-EDITED  PIC X(20).
+	   PROCEDURE        DIVISION.
+       MAIN-PROCEDURE.
+            INPUTNUMBER SECTION.
+            ACCEPT L.
+            UNSTRING L 
+				DELIMITED BY ' '
+				INTO A B.
+            COMPUTE C=A+B.
+            UNSTRING C DELIMITED BY ALL SPACES INTO S,C-EDITED.
+            DISPLAY C-EDITED.
+            STOP RUN.
 ```

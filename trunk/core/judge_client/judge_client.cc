@@ -205,8 +205,8 @@ static int py2=1; // caution: py2=1 means default using py3
 MYSQL *conn;
 #endif
 static char jresult[15][4]={"PD","PR","CI","RJ","AC","PE","WA","TLE","MLE","OLE","RE","CE","CO","TR","MC"};
-static char lang_ext[21][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
-			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m"};
+static char lang_ext[22][8] = {"c", "cc", "pas", "java", "rb", "sh", "py",
+			       "php", "pl", "cs", "m", "bas", "scm", "c", "cc", "lua", "js", "go","sql","f95","m","cob"};
 //static char buf[BUFFER_SIZE];
 
 int lockfile(int fd) {
@@ -337,39 +337,39 @@ void init_syscalls_limits(int lang)      //白名单初始化
 			call_counter[i] = 0;
 		}
 	}
-	else if (lang <= 1 || lang == 13 || lang == 14)
+	else if (lang <= LANG_CPP || lang == LANG_CLANG || lang == LANG_CLANGPP )
 	{ // C & C++
 		for (i = 0; i == 0 || LANG_CV[i]; i++)
 		{
 			call_counter[LANG_CV[i]] = HOJ_MAX_LIMIT;
 		}
 	}
-	else if (lang == 2)
+	else if (lang == LANG_PASCAL )
 	{ // Pascal
 		for (i = 0; i == 0 || LANG_PV[i]; i++)
 			call_counter[LANG_PV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 3)
+	else if (lang == LANG_JAVA)
 	{ // Java
 		for (i = 0; i == 0 || LANG_JV[i]; i++)
 			call_counter[LANG_JV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 4)
+	else if (lang == LANG_RUBY)
 	{ // Ruby
 		for (i = 0; i == 0 || LANG_RV[i]; i++)
 			call_counter[LANG_RV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 5)
+	else if (lang == LANG_BASH)
 	{ // Bash
 		for (i = 0; i == 0 || LANG_BV[i]; i++)
 			call_counter[LANG_BV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 6)
+	else if (lang == LANG_PYTHON)
 	{ // Python
 		for (i = 0; i == 0 || LANG_YV[i]; i++)
 			call_counter[LANG_YV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 7)
+	else if (lang == LANG_PHP)
 	{ // php
 		for (i = 0; i == 0 || LANG_PHV[i]; i++)
 			call_counter[LANG_PHV[i]] = HOJ_MAX_LIMIT;
@@ -424,10 +424,10 @@ void init_syscalls_limits(int lang)      //白名单初始化
 		for (i = 0; i == 0 || LANG_FV[i]; i++)
 			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 20 )
-	{ //go
-		for (i = 0; i == 0 || LANG_MV[i]; i++)
-			call_counter[LANG_MV[i]] = HOJ_MAX_LIMIT;
+	else if (lang == LANG_COBOL )
+	{ //cobol
+		for (i = 0; i == 0 || LANG_CBV[i]; i++)
+			call_counter[LANG_CBV[i]] = HOJ_MAX_LIMIT;
 	}
 #ifdef __aarch64__
 	if (lang==3)call_counter[220]= 100;
@@ -1298,6 +1298,7 @@ int compile(int lang, char *work_dir)
 	//const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
 	const char *CP_GO[] = {"go", "build", "-o", "Main", "Main.go", NULL};
 	const char *CP_FORTRAN[] = {"f95", "-static", "-o", "Main", "Main.f95", NULL};
+	const char *CP_COBOL[] = {"cobc","-x", "-static", "-o", "Main", "Main.cob", NULL};
 
 	char * const envp[]={(char * const )"PYTHONIOENCODING=utf-8",
 			     (char * const )"USER=judge",
@@ -1462,6 +1463,9 @@ int compile(int lang, char *work_dir)
 			break;
 		case 19:
 			execvp(CP_FORTRAN[0], (char *const *)CP_FORTRAN);
+			break;
+		case LANG_COBOL:
+			execvp(CP_COBOL[0], (char *const *)CP_COBOL);
 			break;
 		default:
 			printf("nothing to do!\n");
@@ -2390,7 +2394,13 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	ptrace(PTRACE_TRACEME, 0, NULL, NULL);
 	// run me
 	if (   
-		(!use_docker) && lang != 3 && lang != 5 && lang != 20 && lang != 9 && !(lang ==6 && python_free )
+		(!use_docker) 
+			&& lang != 3 
+			&& lang != 5 
+			&& lang != LANG_COBOL 
+			&& lang != 20 
+			&& lang != 9 
+			&& !(lang ==6 && python_free )
 	   ){
 		
 		if(chroot(work_dir));
@@ -2479,6 +2489,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	case 14:
 	case 17:
 	case 19:
+	case LANG_COBOL:
 		execle("./Main", "./Main", (char *)NULL,envp);
 		break;
 	case 3:

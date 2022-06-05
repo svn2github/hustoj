@@ -2395,17 +2395,17 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	// run me
 	if (   
 		(!use_docker) 
-			&& lang != 3 
-			&& lang != 5 
+			&& lang != LANG_JAVA
+			&& lang != LANG_BASH
 			&& lang != LANG_COBOL 
-			&& lang != 20 
-			&& lang != 9 
-			&& !(lang ==6 && python_free )
+			&& lang != LANG_MATLAB 
+			&& lang != LANG_CSHARP
+			&& !(lang == LANG_PYTHON && python_free )
 	   ){
 		
 		if(chroot(work_dir));
 	}else{
-		if(lang==7){
+		if(lang==LANG_PHP){
 			if(chroot(work_dir));
 		}
 	}
@@ -2447,19 +2447,19 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	// proc limit
 	switch (lang)
 	{
-	case 17:
-	case 9: //C#
-	case 3: //java
+	case LANG_GO:
+	case LANG_CSHARP: //C#
+	case LANG_JAVA: //java
 		LIM.rlim_cur = LIM.rlim_max = 880;
 		break;
-	case 4: //ruby
-	case 6:  //python
-	case 12:
-	case 16:
-	case 20:
+	case LANG_RUBY: //ruby
+	case LANG_PYTHON:  //python
+	case LANG_SCHEME:
+	case LANG_JS:
+	case LANG_MATLAB:
 		LIM.rlim_cur = LIM.rlim_max = 200;
 		break;
-	case 5: //bash
+	case LANG_BASH: //bash
 		LIM.rlim_cur = LIM.rlim_max = 3;
 		break;
 	default:
@@ -2475,24 +2475,24 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	// set the memory
 	LIM.rlim_cur = STD_MB * mem_lmt / 2 * 3;
 	LIM.rlim_max = STD_MB * mem_lmt * 2;
-	if (lang < 3 || lang == 10 || lang == 13 || lang == 14 || lang == 17)
+	if (lang < LANG_JAVA || lang == LANG_OBJC || lang == LANG_CLANG || lang == LANG_CLANGPP || lang == LANG_GO)
 		setrlimit(RLIMIT_AS, &LIM);
 
 	switch (lang)
 	{
-	case 0:
-	case 1:
-	case 2:
-	case 10:
-	case 11:
-	case 13:
-	case 14:
-	case 17:
-	case 19:
+	case LANG_C:
+	case LANG_CPP:
+	case LANG_PASCAL:
+	case LANG_OBJC:
+	case LANG_FREEBASIC:
+	case LANG_CLANG:
+	case LANG_CLANGPP:
+	case LANG_GO:
+	case LANG_FORTRAN:
 	case LANG_COBOL:
 		execle("./Main", "./Main", (char *)NULL,envp);
 		break;
-	case 3:
+	case LANG_JAVA:
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
@@ -2500,14 +2500,14 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 				"-Djava.security.manager", "-Djava.security.policy=./java.policy",  // this line might be removed in later java version
 		       "Main", (char *) NULL,envp);
 		break;
-	case 4:
+	case LANG_RUBY:
 		//system("/ruby Main.rb<data.in");
 		execle("/usr/bin/ruby", "/usr/bin/ruby", "Main.rb", (char *)NULL,envp);
 		break;
-	case 5: //bash
+	case LANG_BASH: //bash
 		execle("/bin/bash", "/bin/bash", "Main.sh", (char *)NULL,envp);
 		break;
-	case 6: //Python
+	case LANG_PYTHON: //Python
 		if (!py2)
 		{     
 			execle("/usr/bin/python2", "/usr/bin/python2", "Main.py", (char *)NULL,envp);	
@@ -2517,28 +2517,28 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 			execle("/usr/bin/python3", "/usr/bin/python3", "Main.py", (char *)NULL,envp);
 		}
 		break;
-	case 7: //php
+	case LANG_PHP: //php
 		execle("/usr/bin/php", "/usr/bin/php", "Main.php", (char *)NULL,  envp);
 		break;
-	case 8: //perl
+	case LANG_PERL: //perl
 		execle("/usr/bin/perl", "/usr/bin/perl", "Main.pl", (char *)NULL,  envp);
 		break;
-	case 9: //Mono C#
+	case LANG_CSHARP: //Mono C#
 		execle("/usr/bin/mono", "/usr/bin/mono","--debug",  "Main.exe", (char *)NULL,envp);
 		break;
-	case 12: //guile
+	case LANG_SCHEME: //guile
 		execle("/usr/bin/guile", "/usr/bin/guile", "Main.scm", (char *)NULL,envp);
 		break;
-	case 15: //guile
+	case LANG_LUA: //lua
 		execle("/usr/bin/lua", "/usr/bin/lua", "Main", (char *)NULL,envp);
 		break;
-	case 16: //Node.js
+	case LANG_JS: //Node.js
 		execle("/usr/bin/node", "/usr/bin/node", "Main.js", (char *)NULL,envp);
 		break;
-	case 18: //sqlite3
+	case LANG_SQL: //sqlite3
 		execle("/usr/bin/sqlite3", "/usr/bin/sqlite3", "data.db", (char *)NULL,envp);
 		break;
-	case 20: //octave
+	case LANG_MATLAB: //octave
 		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file", "-W", "-q", "-H", "Main.m", (char *)NULL);
 		break;
 	}
@@ -2730,11 +2730,11 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 		ACflg = comp_res;
 	}
 	//jvm popup messages, if don't consider them will get miss-WrongAnswer
-	if (lang == 3)
+	if (lang == LANG_JAVA )
 	{
 		comp_res = fix_java_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
 	}
-	if (lang == 6)
+	if (lang == LANG_PYTHON )
 	{
 		comp_res = fix_python_mis_judge(work_dir, ACflg, topmemory, mem_lmt);
 	}
@@ -2801,7 +2801,15 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		}
 
 		//jvm gc ask VM before need,so used kernel page fault times and page size
-		if (lang == 3 || lang == 7 || lang == 9 || lang == 13 || lang == 14 || lang == 16 || lang == 17 || lang == 20)
+		if (lang == LANG_JAVA || 
+		    lang == LANG_PHP || 
+		    lang == LANG_CSHARP || 
+		    lang == LANG_CLANG || lang == LANG_CLANGPP || 
+		    lang == LANG_JS || 
+		    lang == LANG_GO || 
+		    lang == LANG_MATLAB||
+		    lang == LANG_COBOL
+		    )
 		{
 			tempmemory = get_page_fault_mem(ruse, pidApp);
 		}
@@ -2824,7 +2832,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		if (WIFEXITED(status))  // 子进程已经退出
 			break;
-		if ((lang < 4||lang == 5 || lang == 9) && get_file_size("error.out") && !oi_mode)
+		if ((lang < LANG_RUBY ||lang == LANG_BASH || lang == LANG_CSHARP ) && get_file_size("error.out") && !oi_mode)
 		{
 			ACflg = OJ_RE;
 			//addreinfo(solution_id);
@@ -2843,7 +2851,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
 		 *  Runtime Error:Unknown signal xxx need be added here  
                  */
-		if ((lang >= 3 && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)  // 进程休眠或等待IO
+		if (((lang >= LANG_JAVA && lang!= LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP) && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)  // 进程休眠或等待IO
 			//go on and on
 			;
 		else
@@ -2936,7 +2944,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 	//https://github.com/strace/strace/blob/master/linux/mips/syscallent-n32.h#L344
 		ptrace(PTRACE_GETREGS, pidApp, NULL, &reg);
 		call_id=(unsigned int)reg.REG_SYSCALL;
-		if( (call_id > 1000 && call_id <5000 )|| (lang == 6 && call_id < 5500)  || call_id> 6500){
+		if( (call_id > 1000 && call_id <5000 )|| (lang == LANG_PYTHON && call_id < 5500)  || call_id> 6500){
 		    // not a valid syscall
 			ptrace(PTRACE_SYSCALL, pidApp, NULL, NULL);
 			continue;
@@ -3282,7 +3290,7 @@ int main(int argc, char **argv)
 	get_solution(solution_id, work_dir, lang);
 
 	//java and other VM language are lucky to have the global bonus in judge.conf
-	if (lang >= 3 && lang != 10 && lang != 13 && lang != 14 && lang != 17)
+	if (lang >= LANG_JAVA && lang != LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP && lang != LANG_GO)
 	{ //ObjectivC Clang Clang++ Go not VM or Script
 		// the limit for java
 		time_lmt = time_lmt + java_time_bonus;
@@ -3386,35 +3394,35 @@ int main(int argc, char **argv)
 	ACflg = PEflg = OJ_AC;
 	int namelen;
 	int usedtime = 0, topmemory = 0;
-	if (lang == 5){
+	if (lang == LANG_BASH){
 			execute_cmd("busybox dos2unix Main.sh", work_dir);
 	}
 	if(!use_docker){
 		//create chroot for ruby bash python
-		if (lang == 4)
+		if (lang == LANG_RUBY)
 			copy_ruby_runtime(work_dir);
-		if (lang == 5){
+		if (lang == LANG_BASH){
 			copy_bash_runtime(work_dir);
 		}
-		if (lang == 6 && !python_free)
+		if (lang == LANG_PYTHON && !python_free)
 			copy_python_runtime(work_dir);
-		if (lang == 7)
+		if (lang == LANG_PHP)
 			copy_php_runtime(work_dir);
-		if (lang == 8)
+		if (lang == LANG_PERL)
 			copy_perl_runtime(work_dir);
-	//	if (lang == 9)
+	//	if (lang == LANG_CSHARP)
 	//		copy_mono_runtime(work_dir);
-		if (lang == 10)
+		if (lang == LANG_OBJC)
 			copy_objc_runtime(work_dir);
-		if (lang == 11)
+		if (lang == LANG_FREEBASIC)
 			copy_freebasic_runtime(work_dir);
-		if (lang == 12)
+		if (lang == LANG_SCHEME)
 			copy_guile_runtime(work_dir);
-		if (lang == 15)
+		if (lang == LANG_LUA)
 			copy_lua_runtime(work_dir);
-		if (lang == 16)
+		if (lang == LANG_JS)
 			copy_js_runtime(work_dir);
-		if (lang == 18)
+		if (lang == LANG_SQL)
 			copy_sql_runtime(work_dir);
 	}
 	

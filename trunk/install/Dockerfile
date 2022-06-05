@@ -39,6 +39,7 @@ RUN     cd /home/judge/src/core/ && bash make.sh
 #RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends sqlite3
 #RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gfortran
 #RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends octave
+#RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gnucobol
 
 # make Chinese Character works in Docker
 RUN apt-get install -y locales locales-all

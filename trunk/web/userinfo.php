@@ -2,7 +2,7 @@
  $cache_time=10; 
  $OJ_CACHE_SHARE=false;
 	require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
+        require_once('./include/db_info.inc.php');
 	require_once('./include/setlang.php');
 	require_once("./include/const.inc.php");
 	require_once("./include/my_func.inc.php");
@@ -22,7 +22,7 @@ $now = strftime("%Y-%m-%d %H:%M",time());
 $sql = "select 1 from `solution` where  `user_id`=? and  problem_id>0 and `contest_id` IN (select `contest_id` from `contest` where `start_time` < ? and `end_time` > ? and `title` like ?)";
 $rrs = pdo_query($sql, $user ,$now , $now , "%$OJ_NOIP_KEYWORD%");
 $flag = count($rrs) > 0 ;
-if($flag)
+if($flag&&!isset($_SESSION[$OJ_NAME.'_'.'administrator'])) // administrator need to view userinfo 
 {	
 	$view_errors =  "<h2> $MSG_NOIP_WARNING </h2>";
 	require("template/".$OJ_TEMPLATE."/error.php");

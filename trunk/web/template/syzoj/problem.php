@@ -48,7 +48,7 @@ div[class*=ace_br] {
             echo "$MSG_PROBLEM ".$PID[$pid].": ".$row['title'];
           }
           if($row['defunct']=="Y")
-          echo "<span class=\"ui tiny red label\">$MSG_Reserved</span>";
+          echo "<span class=\"p-label ui tiny red label\">$MSG_Reserved</span>";
         ?>
       </h1>
     </div>
@@ -68,7 +68,7 @@ div[class*=ace_br] {
       </div>
 </div>  
 <div class="ui grid">
-  <div class="row"> 
+  <div class="row" id="submit-buttons"> 
     <div class="column">
       <div class="ui buttons">
 

@@ -56,9 +56,11 @@ body {
 .btn-success{
     background-color:#33cc99;
 }
-.jumbotron{
-    color:#000;
-    background-color:#ddd;
+.container .jumbotron{
+   padding: 5px;
+   background-image: url(../../image/background.jpg);
+   border: 1px solid #eee;
+   margin-top:50px;
 }
 .btn-danger{
     background-color:#d3406d;

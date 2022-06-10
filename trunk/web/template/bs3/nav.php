@@ -70,7 +70,7 @@
   {
 ?>
     <!-- Static navbar -->
-    <nav class="navbar navbar-default" role="navigation" style="position:fixed;z-index:9999;width:100%;margin-bottom:50px">
+    <nav class="navbar navbar-default" role="navigation" >
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

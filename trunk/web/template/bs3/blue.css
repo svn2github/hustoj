@@ -18,6 +18,12 @@
 .center{
    text-align: center
 }
+.container .jumbotron{
+   padding: 5px;
+   background-image: url(../../image/background.jpg);
+   border: 1px solid #eee;
+   margin-top:50px;
+}
 .sampledata {
     background: none repeat scroll 0 0 #ccccFF;
     font-family: Monospace;

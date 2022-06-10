@@ -70,7 +70,7 @@
   {
 ?>
     <!-- Static navbar -->
-    <nav class="navbar navbar-default" role="navigation" >
+    <nav class="navbar navbar-default" role="navigation" >  <!-- if want to keep it while scroll down add: style="position:fixed;z-index:99;width:100%;margin-bottom:50px" -->
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

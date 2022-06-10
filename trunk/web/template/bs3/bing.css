@@ -67,6 +67,7 @@ opacity: 0.9;
 .jumbotron{
     color:#000;
     background-color:#ddd;
+    margin-top:50px;
 }
 .btn-danger{
     background-color:#d3406d;

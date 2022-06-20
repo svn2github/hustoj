@@ -186,8 +186,8 @@ $csql[35]="";
 $tsql[36]="alter table privilege add column valuestr char(11) not null default 'true' after rightstr; ";
 $csql[36]="";
 
-$tsql[37]="ALTER TABLE `news` ADD COLUMN `menu` int(11) NOT NULL DEFAULT 0 AFTER `importance`; ";
-$csql[37]="";
+$tsql[37]="alter table news modify column `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00';";
+$csql[37]="ALTER TABLE `news` ADD COLUMN `menu` int(11) NOT NULL DEFAULT 0 AFTER `importance`;";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

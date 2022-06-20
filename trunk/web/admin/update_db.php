@@ -192,14 +192,12 @@ if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
 	for($i=0;isset($tsql[$i]);$i++){
-    echo "<br><br>";
-		if(pdo_query($tsql[$i])){
-				echo $csql[$i]."<br>";
-				pdo_query($csql[$i]);
-		}else{
-				echo $tsql[$i]."<br>";
+		echo $tsql[$i]."<hr>";
+		pdo_query($tsql[$i]);
+		if($csql[$i]){
+			echo $csql[$i]."<hr>";
+			pdo_query($csql[$i]);
 		}
-		
 	}
 }
 ?>

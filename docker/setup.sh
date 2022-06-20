@@ -98,7 +98,7 @@ for page in index.php problem.php category.php status.php ranklist.php contest.p
   curl http://127.0.0.1/$page | grep HUSTOJ
 done;
 curl http://127.0.0.1/ | grep 'HelloWorld'
-judge_client 1 0 /home/judge/
+judge_client 1 0 /home/judge/ | grep "final result:4"
 #ls -lh /home/judge/run0/log/
 #cat /home/judge/run0/log/ce.txt
 #cat /home/judge/run0/log/Main.c

@@ -1,5 +1,11 @@
 #!/usr/bin/bash
 
+if lsb_release -a|grep Ubuntu ; then
+   echo "This script is designed for CentOS"
+   echo "Ubuntu use restore.sh instead, please."
+   exit 1
+fi
+
 # Get backup archive file
 if [ ${#} -gt 0 ];then
     archive=${1};

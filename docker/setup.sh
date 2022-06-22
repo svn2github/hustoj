@@ -93,7 +93,7 @@ service $PHP_SERVICE start
 apt-get -y install curl
 cd /home/judge/src/web
 chmod 755 /home/judge
-for page in index.php problem.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
+for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
   do 
   curl http://127.0.0.1/$page | grep HUSTOJ
 done;

@@ -38,7 +38,7 @@ else {
 
 //Page Setting
 $sql = "select count(`problem_id`) as upid FROM `problem` WHERE `defunct`='N'";
-$page_cnt = 50;  //50 prlblems per page
+$page_cnt = 50;  //50 problems per page
 $result = mysql_query_cache($sql);
 $row = $result[0];
 $cnt = $row['upid'] / $page_cnt;

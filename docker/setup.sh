@@ -90,15 +90,15 @@ PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
 service nginx restart
 service $PHP_SERVICE start
-apt-get -y install curl
+
 cd /home/judge/src/web
 chmod 755 /home/judge
-for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php 
+for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
   do 
-  curl http://127.0.0.1/$page | grep HUSTOJ
+  w3m -dump http://127.0.0.1/$page | grep HUSTOJ
 done;
-w3m -dump http://127.0.0.1/registerpage.php
-curl http://127.0.0.1/ | grep 'HelloWorld'
+
+w3m -dump http://127.0.0.1/ | grep 'HelloWorld'
 judge_client 1 0 /home/judge/ | grep "final result:4"
 #ls -lh /home/judge/run0/log/
 #cat /home/judge/run0/log/ce.txt

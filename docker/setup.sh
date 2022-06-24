@@ -56,7 +56,7 @@ PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
 PHP_VER=`apt-cache search php-fpm|grep -e '[[:digit:]]\.[[:digit:]]' -o`
 if [ "$PHP_VER" = "" ] ; then PHP_VER="8.1"; fi
 
-for pkg in sudo net-tools make g++ php$PHP_VER-fpm nginx mysql-server php$PHP_VER-mysql php$PHP_VER-common php$PHP_VER-gd php$PHP_VER-zip php$PHP_VER-mbstring php$PHP_VER-xml php$PHP_VER-curl php$PHP_VER-intl php$PHP_VER-xmlrpc php$PHP_VER-soap tzdata
+for pkg in sudo w3m net-tools make g++ php$PHP_VER-fpm nginx mysql-server php$PHP_VER-mysql php$PHP_VER-common php$PHP_VER-gd php$PHP_VER-zip php$PHP_VER-mbstring php$PHP_VER-xml php$PHP_VER-curl php$PHP_VER-intl php$PHP_VER-xmlrpc php$PHP_VER-soap tzdata
 do
 	while ! apt-get install -y "$pkg" 
 	do
@@ -97,6 +97,7 @@ for page in index.php problemset.php category.php status.php ranklist.php contes
   do 
   curl http://127.0.0.1/$page | grep HUSTOJ
 done;
+w3m -dump http://127.0.0.1/registerpage.php
 curl http://127.0.0.1/ | grep 'HelloWorld'
 judge_client 1 0 /home/judge/ | grep "final result:4"
 #ls -lh /home/judge/run0/log/

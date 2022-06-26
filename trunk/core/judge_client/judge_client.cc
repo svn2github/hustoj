@@ -374,52 +374,52 @@ void init_syscalls_limits(int lang)      //白名单初始化
 		for (i = 0; i == 0 || LANG_PHV[i]; i++)
 			call_counter[LANG_PHV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 8)
+	else if (lang == LANG_PERL )
 	{ // perl
 		for (i = 0; i == 0 || LANG_PLV[i]; i++)
 			call_counter[LANG_PLV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 9)
+	else if (lang == LANG_CSHARP )
 	{ // mono c#
 		for (i = 0; i == 0 || LANG_CSV[i]; i++)
 			call_counter[LANG_CSV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 10)
+	else if (lang == LANG_OBJC )
 	{ //objective c
 		for (i = 0; i == 0 || LANG_OV[i]; i++)
 			call_counter[LANG_OV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 11)
+	else if (lang == LANG_FREEBASIC)
 	{ //free basic
 		for (i = 0; i == 0 || LANG_BASICV[i]; i++)
 			call_counter[LANG_BASICV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 12)
+	else if (lang == LANG_SCHEME )
 	{ //scheme guile
 		for (i = 0; i == 0 || LANG_SV[i]; i++)
 			call_counter[LANG_SV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 15)
+	else if (lang == LANG_LUA )
 	{ //lua
 		for (i = 0; i == 0 || LANG_LUAV[i]; i++)
 			call_counter[LANG_LUAV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 16)
+	else if (lang == LANG_JS )
 	{ //nodejs
 		for (i = 0; i == 0 || LANG_JSV[i]; i++)
 			call_counter[LANG_JSV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 17)
+	else if (lang == LANG_GO )
 	{ //go
 		for (i = 0; i == 0 || LANG_GOV[i]; i++)
 			call_counter[LANG_GOV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 18)
+	else if (lang == LANG_SQL )
 	{ //go
 		for (i = 0; i == 0 || LANG_SQLV[i]; i++)
 			call_counter[LANG_SQLV[i]] = HOJ_MAX_LIMIT;
 	}
-	else if (lang == 19)
+	else if (lang == LANG_FORTRAN )
 	{ //go
 		for (i = 0; i == 0 || LANG_FV[i]; i++)
 			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
@@ -1409,16 +1409,16 @@ int compile(int lang, char *work_dir)
 
 		switch (lang)
 		{
-		case 0:
+		case LANG_C:
 			execvp(CP_C[0], (char *const *)CP_C);
 			break;
-		case 1:
+		case LANG_CPP :
 			execvp(CP_X[0], (char *const *)CP_X);
 			break;
-		case 2:
+		case LANG_PASCAL :
 			execvp(CP_P[0], (char *const *)CP_P);
 			break;
-		case 3:
+		case LANG_JAVA:
 			execvp(CP_J[0], (char *const *)CP_J);
 			break;
 		case 4:

@@ -1421,47 +1421,47 @@ int compile(int lang, char *work_dir)
 		case LANG_JAVA:
 			execvp(CP_J[0], (char *const *)CP_J);
 			break;
-		case 4:
+		case LANG_RUBY :
 			execvp(CP_R[0], (char *const *)CP_R);
 			break;
-		case 5:
+		case LANG_BASH :
 			execvp(CP_B[0], (char *const *)CP_B);
 			break;
-		case 6:
+		case LANG_PYTHON :
 			execvp(CP_Y[0], (char * const *) CP_Y);
 			break;
-		case 7:
+		case LANG_PHP :
 			execvp(CP_PH[0], (char *const *)CP_PH);
 			break;
-		case 8:
+		case LANG_PERL :
 			execvp(CP_PL[0], (char *const *)CP_PL);
 			break;
-		case 9:
+		case LANG_CSHARP :
 			execvp(CP_CS[0], (char *const *)CP_CS);
 			break;
 
-		case 10:
+		case LANG_OBJC :
 			execvp(CP_OC[0], (char *const *)CP_OC);
 			break;
-		case 11:
+		case LANG_FREEBASIC :
 			execvp(CP_BS[0], (char *const *)CP_BS);
 			break;
-		case 13:
+		case LANG_CLANG:
 			execvp(CP_CLANG[0], (char *const *)CP_CLANG);
 			break;
-		case 14:
+		case LANG_CLANGPP:
 			execvp(CP_CLANG_CPP[0], (char *const *)CP_CLANG_CPP);
 			break;
-		case 15:
+		case LANG_LUA :
 			execvp(CP_LUA[0], (char *const *)CP_LUA);
 			break;
 		//case 16:
 		//	execvp(CP_JS[0], (char * const *) CP_JS);
 		//	break;
-		case 17:
+		case LANG_GO :
 			execvpe(CP_GO[0], (char *const *)CP_GO,envp);
 			break;
-		case 19:
+		case LANG_FORTRAN :
 			execvp(CP_FORTRAN[0], (char *const *)CP_FORTRAN);
 			break;
 		case LANG_COBOL:

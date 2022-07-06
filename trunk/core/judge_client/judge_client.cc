@@ -2832,10 +2832,12 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 
 		if (WIFEXITED(status)) { // 子进程已经退出 ，返回值不为0则判RE
                         exitcode = WEXITSTATUS(status);
-                        if(exitcode) ACflg=OJ_RE;
-                        char error[BUFFER_SIZE];
-                        sprintf(error, "\t    non-zero return = %d \n", exitcode);
-                        print_runtimeerror(infile+strlen(oj_home)+5,error);
+			char error[BUFFER_SIZE];
+                        if(exitcode){
+				ACflg=OJ_RE;
+                        	sprintf(error, "\t    non-zero return = %d \n", exitcode);
+                        	print_runtimeerror(infile+strlen(oj_home)+5,error);
+			}
                         break;
                 }
 		if ((lang < LANG_RUBY ||lang == LANG_BASH || lang == LANG_CSHARP ) && get_file_size("error.out") && !oi_mode)

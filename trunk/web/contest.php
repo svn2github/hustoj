@@ -195,10 +195,14 @@ if (isset($_GET['cid'])) {
 	foreach($result as $row) {
 		$view_problemset[$cnt][0] = "";
 		if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-			if($noip)
-                          $view_problemset[$cnt][0] = "?";
+                        $ac=check_ac($cid,$cnt,$noip);
+                        $sub="";
+                        if($ac!="") $sub="?";
+                        if($noip)
+                          	$view_problemset[$cnt][0] = "$sub";
                         else
-                          $view_problemset[$cnt][0] = check_ac($cid,$cnt,$noip);
+                          	$view_problemset[$cnt][0] = "$ac" ;
+
 		}else
 			$view_problemset[$cnt][0] = "";
 

@@ -34,7 +34,11 @@ header("Pramga: no-cache");
 	$imgtype = 'gif';
 	$len = 4;
 	$vcodetype = 'n';
+	if(isset($_SESSION[ $OJ_NAME . '_' . "vfail" ]) && $_SESSION[ $OJ_NAME . '_' . "vfail" ]){
+		$len = 8;
+		$vcodetype = 'c';
 	
+	}
 	$width = 15 * $len;
 	$height = 24;
 	/* 生成随机字符串并写入SESSION */

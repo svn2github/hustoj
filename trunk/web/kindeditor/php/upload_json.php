@@ -96,10 +96,10 @@ if (empty($_FILES) === false) {
 		alert("上传文件大小超过限制。");
 	}
 	//检查目录名
-	$dir_name = ($domain==""?"image":$domain) ;
-//	if (empty($ext_arr[$dir_name])) {
-//		alert("目录名不正确。");
-//	}
+	$dir_name="image";
+	/* if (empty($ext_arr[$dir_name])) {
+		alert("目录名不正确。".$ext_arr[$dir_name]."dirname[".($dir_name)."]");
+	} */
 	//获得文件扩展名
 	$temp_arr = explode(".", $file_name);
 	$file_ext = array_pop($temp_arr);
@@ -109,12 +109,15 @@ if (empty($_FILES) === false) {
 	if (in_array($file_ext, $ext_arr[$dir_name]) === false) {
 		alert("上传文件扩展名是不允许的扩展名。\n只允许" . implode(",", $ext_arr[$dir_name]) . "格式。");
 	}
+	if(strlen($domain)>0){
+		$dir_name="$domain/$dir_name";
+	}
 	//创建文件夹
 	if ($dir_name !== '') {
 		$save_path .= $dir_name . "/";
 		$save_url .= $dir_name . "/";
 		if (!file_exists($save_path)) {
-			mkdir($save_path);
+			mkdir($save_path,0744,true);
 		}
 	}
 	$ymd = date("Ymd");

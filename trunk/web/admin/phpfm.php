@@ -4657,7 +4657,7 @@ function frameset(){
  */
 class archive
 {
-    function __construct($name)
+    function archive($name)
     {
         $this->options = array(
             'basedir'=>".",

@@ -40,6 +40,7 @@ if (!$OJ_BENCHMARK_MODE) {
     $err_str = $err_str.$MSG_VCODE_WRONG."\\n";
     $err_cnt++;
     $view_errors = $err_str;
+    $_SESSION[ $OJ_NAME . '_' . "vfail" ]=true;
     require "template/".$OJ_TEMPLATE."/error.php";
 
     exit(0);

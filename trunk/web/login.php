@@ -34,6 +34,7 @@ $vcode="";
 if(!$use_cookie){
   if(isset($_POST[ 'vcode' ]))$vcode=trim($_POST['vcode']);
   if($OJ_VCODE&&( $vcode != $_SESSION[ $OJ_NAME . '_' . "vcode" ] || $vcode == "" || $vcode == null ) ) {
+	$_SESSION[ $OJ_NAME . '_' . "vfail" ]=true;
 	echo "<script language='javascript'>\n";
 	echo "alert('Verify Code Wrong!');\n";
 	echo "history.go(-1);\n";

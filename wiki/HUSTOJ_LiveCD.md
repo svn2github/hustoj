@@ -2,6 +2,8 @@
 #labels Featured,LiveCD,Phase-Deploy
 
 Download:
+22.04 LTS 版本（zhblue密码freeproblemset）
+链接: https://pan.baidu.com/s/1C9UhVuxkxQdmIgTcfcY2hQ?pwd=hust 提取码: hust 复制这段内容后打开百度网盘手机App，操作更方便哦
 
 16.04 LTS 版本(ubuntu密码freeproblemset,OJ自行注册admin用户，自动成为管理员，不含vjudge) https://proxy.us.storage.wooden.fish/aria2/hustoj20180331-16.04.iso 
 

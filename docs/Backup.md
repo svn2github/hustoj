@@ -14,6 +14,27 @@ sudo bash /home/judge/src/install/bak.sh
 
 ## 还原
 
+如果你需要进行系统迁移（如从 `18.04` 迁移到 `22.04`），可以尝试使用下面的脚本进行备份
+
+```bash
+sudo bash /home/judge/src/install/bak.sh
+```
+
+备份后的归档在 `/var/backups` ，命名格式为 `hustoj_%Y%m%d.tar.bz2`
+
+目标系统先用脚本安装最新版本系统。
+
+将你需要迁移的归档复制到目标系统的 `/home/judge/backup` 目录下，执行下面的脚本进行恢复
+
+```bash
+cd /home/judge/backup
+sudo bash ../src/install/restore.sh hustoj_20220711.tar.bz2
+```
+脚本的第一个参数为恢复的目标归档。
+
+
+#### 用带有+的脚本进行备份，则用带+的脚本还原
+
 如果你需要进行跨系统迁移（如从 `Ubuntu` 迁移到 `CentOS`），可以尝试使用下面的脚本进行备份
 
 ```bash

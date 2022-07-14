@@ -18,9 +18,7 @@
 ?>
 <center>
 <div style="width:90%">
-<?php
-if ($prob_exist){?>
-		<div style="text-align:left;font-size:80%">
+	<div style="text-align:left;font-size:80%">
 		[ <a href="newpost.php<?php
 		if ($pid!=0 && $cid!=null) 
 			echo "?pid=".$pid."&cid=".$cid;
@@ -29,6 +27,9 @@ if ($prob_exist){?>
 		else if ($cid!=0) 
 			echo "?cid=".$cid;?>
 		">New Thread</a> ]</div>
+<?php
+if ($prob_exist){?>
+		
 		<div style="float:left;text-align:left;font-size:80%">
 		Location :
 		<?php if ($cid!=null) echo "<a href=\"discuss.php?cid=".$cid."\">Contest ".$cid."</a>"; else echo "<a href=\"discuss.php\">MainBoard</a>";

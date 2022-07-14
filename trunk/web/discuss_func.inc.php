@@ -24,7 +24,7 @@ function problem_exist($pid,$cid){
 		return true;
 	$sql.=" LIMIT 1";
 	//echo $sql;
-	$result=pdo_query($sql) or print "db error";
+	$result=pdo_query($sql);
 	return count($result)>0;
 }
 function err_msg($msg){

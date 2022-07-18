@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+07-18 | 更新 | 存档很少人用的blockly目录到blockly.tar.gz, 未来从web目录中删除，留一个web下载链接在db_info.inc.php供需要的用户下载。
 07-14 | 补丁 | 修复了论坛无贴打不开的问题。
 07-10 | 补丁 | 修复了php8.1(Ubuntu22.04) 不能上传图片和不能压缩文件的问题。
 06-05 | 更新 | 新增了HelloWorld公告，Cobol，Github的自动化集成测试增加判题测试，基于docker/Ubuntu22.04.

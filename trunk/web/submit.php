@@ -42,9 +42,11 @@ if (!$OJ_BENCHMARK_MODE) {
     $view_errors = $err_str;
     $_SESSION[ $OJ_NAME . '_' . "vfail" ]=true;
     require "template/".$OJ_TEMPLATE."/error.php";
-
     exit(0);
+  }else{
+          $_SESSION[ $OJ_NAME . '_' . "vfail" ]=false;
   }
+
 }
 
 $test_run = false;

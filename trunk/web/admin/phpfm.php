@@ -3450,7 +3450,7 @@ function dir_list_form() {
 	
         $out.="<b></b>
             <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
-            <b><a href='../problem.php?id=$pid' target='_blank'>See This Problem</a></b>
+            <b><a href='../problem.php?id=$pid' target='_self'>See This Problem</a></b>
             </nobr>";
         $uplink = "";
         if ($current_dir != $fm_current_root){

@@ -312,7 +312,6 @@ function et($tag){
     $en['ConfTrySave'] = 'File without write permisson.\\nTry to save anyway';
     $en['ConfSaved'] = 'Configurations saved';
     $en['PassSaved'] = 'Password saved';
-    $en['FileDirExists'] = 'File or directory already exists';
     $en['NoPhpinfo'] = 'Function phpinfo disabled';
     $en['NoReturn'] = 'no return';
     $en['FileSent'] = 'File sent';
@@ -3451,7 +3450,7 @@ function dir_list_form() {
 	
         $out.="<b></b>
             <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
-            <b><a href='../problem.php?id=$pid' target='_blank'>".et('Random-data')."</a></b>
+            <b><a href='../problem.php?id=$pid' target='_blank'>See This Problem</a></b>
             </nobr>";
         $uplink = "";
         if ($current_dir != $fm_current_root){

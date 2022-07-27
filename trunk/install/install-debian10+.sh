@@ -102,4 +102,4 @@ echo "Note: skip-networking is needed for Andorid based Linux Deploy to start ma
 echo "Remember your database account for HUST Online Judge:"
 echo "username:$USER"
 echo "password:$PASSWORD"
-echo "DO NOT POST THESE INFOMANTION ON ANY PUBLIC CHANNEL!"
+echo "DO NOT POST THESE INFORMATION ON ANY PUBLIC CHANNEL!"

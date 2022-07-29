@@ -42,7 +42,7 @@ $page_cnt = 50;  //50 problems per page
 $result = mysql_query_cache($sql);
 $row = $result[0];
 $cnt = $row['upid'] / $page_cnt;
-
+if ($page > $cnt) $page = $cnt;
 if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
 
 $pstart = $page_cnt*intval($page)-$page_cnt+1; //start 1

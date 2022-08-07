@@ -2544,7 +2544,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execle("/usr/bin/sqlite3", "/usr/bin/sqlite3", "data.db", (char *)NULL,envp);
 		break;
 	case LANG_MATLAB: //octave
-		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli", "--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file", "-W", "-q", "-H", "Main.m", (char *)NULL);
+		execl("/usr/bin/octave-cli", "/usr/bin/octave-cli",  "-W", "-q", "-H", "Main.m", (char *)NULL); //"--no-init-file", "--no-init-path", "--no-line-editing", "--no-site-file"
 		break;
 	}
 	//sleep(1);

@@ -132,6 +132,7 @@ if grep "bak.sh" /var/spool/cron/crontabs/root ; then
 	echo "auto backup added!"
 else
 	crontab -l > conf && echo "1 0 * * * /home/judge/src/install/bak.sh" >> conf && crontab conf && rm -f conf
+	service cron reload
 fi
 ln -s /usr/bin/mcs /usr/bin/gmcs
 

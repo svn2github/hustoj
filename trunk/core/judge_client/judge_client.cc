@@ -424,6 +424,11 @@ void init_syscalls_limits(int lang)      //白名单初始化
 		for (i = 0; i == 0 || LANG_FV[i]; i++)
 			call_counter[LANG_FV[i]] = HOJ_MAX_LIMIT;
 	}
+	else if (lang == LANG_MATLAB )
+        { //matlab
+                for (i = 0; i == 0 || LANG_MV[i]; i++)
+                        call_counter[LANG_MV[i]] = HOJ_MAX_LIMIT;
+        }
 	else if (lang == LANG_COBOL )
 	{ //cobol
 		for (i = 0; i == 0 || LANG_CBV[i]; i++)

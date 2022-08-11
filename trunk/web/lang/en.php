@@ -127,7 +127,7 @@
 	$MSG_Memory_Limit="Memory Limit";
 	$MSG_EDIT="Edit";
 	$MSG_TESTDATA="TestData";
-	
+	$MSG_CLICK_VIEW_HINT="Click to View Spoiler";
 	//admin menu
 	$MSG_SEEOJ="SeeOJ";
 	$MSG_ADD="Add";

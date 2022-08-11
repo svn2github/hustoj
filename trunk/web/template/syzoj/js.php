@@ -32,14 +32,15 @@ $(document).ready(function(){
 });
 
 $(".hint pre").each(function(){
-	var plus="<span class='glyphicon glyphicon-plus'>Click</span>";
-	var content=$(this);
-	$(this).before(plus);
-	$(this).prev().click(function(){
-		content.toggle();
-	});
-	
+        var plus="<span class='glyphicon glyphicon-plus'><?php echo $MSG_CLICK_VIEW_HINT?></span>";
+        var content=$(this);
+        $(this).before(plus);
+        $(this).prev().click(function(){
+                content.toggle();
+        });
+        $(this).hide();
 });
+
 
   console.log("If you want to change the appearance of the web pages, make a copy of bs3 under template directory.\nRename it to whatever you like, and change the $OJ_TEMPLATE value in db_info.inc.php\nAfter that modify files under your own directory .\n");
   console.log("To enable mathjax in hustoj, check line 15 in /home/judge/src/web/template/bs3/js.php");

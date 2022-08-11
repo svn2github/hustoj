@@ -164,7 +164,7 @@ div[class*=ace_br] {
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_HINT?></h4>
-          <div class="ui bottom attached segment font-content"><?php echo $row['hint']; ?></div>
+          <div class="ui bottom attached segment font-content hint"><?php echo $row['hint']; ?></div>
         </div>
     </div>
   <?php }?>

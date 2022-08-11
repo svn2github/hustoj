@@ -181,7 +181,7 @@
 								<?php echo $MSG_HINT?>
 							</h4>
 						</div>
-						<div class='panel-body content'>
+						<div class='panel-body content hint'>
 							<?php echo $row['hint']?>
 						</div>
 					</div>

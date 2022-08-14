@@ -71,7 +71,9 @@
         <p>
           <?php echo "<h4>".$MSG_SPJ."</h4>"?>
           <?php echo "(".$MSG_HELP_SPJ.")"?><br>
-          <?php echo "No "?><input type=radio name=spj value='0' checked><?php echo "/ Yes "?><input type=radio name=spj value='1'><br><br>
+	  <input type=radio name=spj value='0' checked ><?php echo $MSG_NJ?><br> 
+	  <input type=radio name=spj value='1' ><?php echo $MSG_SPJ?><br>
+	  <input type=radio name=spj value='2' ><?php echo $MSG_RTJ?><br>
         </p>
         <p align=left>
           <?php echo "<h4>".$MSG_SOURCE."</h4>"?>

@@ -119,7 +119,10 @@
 	$MSG_Sample_Output= "نمونه خروجی";
 	$MSG_Test_Input= "Test Input" ;
 	$MSG_Test_Output= "Test Output" ;
-	$MSG_SPJ= "Special Judge" ;
+	$MSG_NJ= "Normal Judger" ;
+	$MSG_SPJ= "Special Judger" ;
+	$MSG_RTJ= "Raw Text Judger" ;
+        $MSG_CLICK_VIEW_HINT="Click to View Spoiler";
 	$MSG_HINT= "تذکر";
 	$MSG_Source= "منبع";
 	$MSG_Time_Limit="محدودیت زمانی";

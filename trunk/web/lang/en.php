@@ -120,14 +120,16 @@
 	$MSG_Sample_Output= "Sample Output" ;
 	$MSG_Test_Input= "Test Input" ;
 	$MSG_Test_Output= "Test Output" ;
-	$MSG_SPJ= "Special Judge" ;
+	$MSG_NJ= "Normal Judger" ;
+	$MSG_SPJ= "Special Judger" ;
+	$MSG_RTJ= "Raw Text Judger" ;
 	$MSG_HINT= "HINT" ;
 	$MSG_Source= "Source" ;
 	$MSG_Time_Limit="Time Limit";
 	$MSG_Memory_Limit="Memory Limit";
 	$MSG_EDIT="Edit";
 	$MSG_TESTDATA="TestData";
-	$MSG_CLICK_VIEW_HINT="Click to View Spoiler";
+	
 	//admin menu
 	$MSG_SEEOJ="SeeOJ";
 	$MSG_ADD="Add";

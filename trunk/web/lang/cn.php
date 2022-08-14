@@ -132,14 +132,17 @@
 	$MSG_Sample_Output= "样例输出" ;
 	$MSG_Test_Input= "测试输入" ;
 	$MSG_Test_Output= "测试输出" ;
+	$MSG_NJ= "普通裁判" ;
 	$MSG_SPJ= "特殊裁判" ;
+	$MSG_RTJ= "文本裁判" ;
 	$MSG_HINT= "提示" ;
 	$MSG_Source= "来源" ;
 	$MSG_Time_Limit="时间限制";
 	$MSG_Memory_Limit="内存限制";
 	$MSG_EDIT="编辑";
 	$MSG_TESTDATA="测试数据";
-        $MSG_CLICK_VIEW_HINT="点击查看剧透级题解";
+	$MSG_CLICK_VIEW_HINT="点击查看剧透级题解";
+
 	//admin menu
 	$MSG_SEEOJ="查看前台";
 	$MSG_ADD="添加";
@@ -166,7 +169,7 @@
 	$MSG_SET_LOGIN_IP="指定登录IP";
 	$MSG_PRIVILEGE_TYPE="权限 类型";
 	$MSG_NEWS_MENU="是否展示到菜单";
-        
+
   //contest.php
   $MSG_PRIVATE_WARNING="比赛尚未开始或私有，不能查看题目。";
   $MSG_PRIVATE_USERS_ADD="*可以将学生学号从Excel整列复制过来，然后要求他们用学号做UserID注册,就能进入Private的比赛作为作业和测验。";

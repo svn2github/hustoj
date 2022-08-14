@@ -3666,9 +3666,10 @@ int main(int argc, char **argv)
 							sim_s_id, pass_rate);
 		}
 	}else{
-			
+			char src_pth[BUFFER_SIZE];
 			printf("raw text judge %d \n",p_id);
-			mark=raw_text_judge(infile, outfile, (char *)"Main.c");
+        		sprintf(src_pth, "Main.%s", lang_ext[lang]);
+			mark=raw_text_judge(infile, outfile, src_pth);
 			printf("raw_text_mark:%d\n",mark);
 			if(mark>=0 && mark<=100) pass_rate=mark;
 			pass_rate/=100.0;

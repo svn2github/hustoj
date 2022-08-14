@@ -134,7 +134,10 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_Sample_Output= "ئۈلگە چىقىرىش";
 	$MSG_Test_Input= "سىناق كىرگۈزۈش" ;
 	$MSG_Test_Output= "سىناق چىقىرىش" ;
+	$MSG_NJ= "Normal Judger" ;
 	$MSG_SPJ= "ئالاھېدە تەكشۈرۈش" ;
+	$MSG_RTJ= "Raw Text Judger" ;
+        $MSG_CLICK_VIEW_HINT="Click to View Spoiler";
 	$MSG_HINT= "كۆرسەتمە";
 	$MSG_Source= "مەنبە";
 	$MSG_Time_Limit="ۋاقىت چەكلىمىسى";

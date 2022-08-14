@@ -203,8 +203,13 @@ div[class*=ace_br] {
   
   function transform(){
         let height=document.body.clientHeight;
-        let width=parseInt(document.body.clientWidth*0.618);
-        let width2=parseInt(document.body.clientWidth*0.382);
+<?php if ( $row[ 'spj' ]==2 ) {?>
+			let width=parseInt(document.body.clientWidth*0.3);
+			let width2=parseInt(document.body.clientWidth*0.7);
+<?php }else{ ?>
+			let width=parseInt(document.body.clientWidth*0.6);
+			let width2=parseInt(document.body.clientWidth*0.4);
+<?php } ?>
         let submitURL=$("#submit")[0].href;
         console.log(width);
         let main=$("#main");

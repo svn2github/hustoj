@@ -121,7 +121,10 @@
 	$MSG_Sample_Output= "ตัวอย่างข้อมูลส่งออก";
 	$MSG_Test_Input= "Test Input" ;
 	$MSG_Test_Output= "Test Output" ;
-	$MSG_SPJ= "Special Judge" ;
+	$MSG_NJ= "Normal Judger" ;
+	$MSG_SPJ= "Special Judger" ;
+	$MSG_RTJ= "Raw Text Judger" ;
+        $MSG_CLICK_VIEW_HINT="Click to View Spoiler";
 	$MSG_HINT= "คำใบ้";
 	$MSG_Source= "แหล่งที่มา" ;
 	$MSG_Time_Limit="จำกัดเวลา";

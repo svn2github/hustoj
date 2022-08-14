@@ -1772,7 +1772,7 @@ void get_solution_info(int solution_id, int & p_id, char * user_id,
 
 #ifdef _mysql_h
 void _get_problem_info_mysql(int p_id, double &time_lmt, int &mem_lmt,
-							 int &isspj)
+							 int &spj)
 {
 	// get the problem info from Table:problem
 	char sql[BUFFER_SIZE];
@@ -1786,7 +1786,7 @@ void _get_problem_info_mysql(int p_id, double &time_lmt, int &mem_lmt,
 	row = mysql_fetch_row(res);
 	time_lmt = atof(row[0]);
 	mem_lmt = atoi(row[1]);
-	isspj = (row[2][0] == '1');
+	spj = atoi(row[2]);
 	if (res != NULL)
 	{
 		mysql_free_result(res); // free the memory
@@ -1795,7 +1795,7 @@ void _get_problem_info_mysql(int p_id, double &time_lmt, int &mem_lmt,
 }
 #endif
 void _get_problem_info_http(int p_id, double &time_lmt, int &mem_lmt,
-							int &isspj)
+							int &spj)
 {
 	//login();
 
@@ -1804,21 +1804,21 @@ void _get_problem_info_http(int p_id, double &time_lmt, int &mem_lmt,
 	FILE *pout = read_cmd_output(cmd, p_id, http_baseurl, http_apipath);
 	if(1!=fscanf(pout, "%lf", &time_lmt)) printf("http read time_limit fail...\n");
 	if(1!=fscanf(pout, "%d", &mem_lmt)  ) printf("http read memory_limit fail...\n");
-	if(1!=fscanf(pout, "%d", &isspj)    ) printf("http read special judge fail...\n");
+	if(1!=fscanf(pout, "%d", &spj)    ) printf("http read special judge fail...\n");
 	pclose(pout);
 	if(DEBUG) printf("time_lmt:%g\n",time_lmt);
 }
 
-void get_problem_info(int p_id, double &time_lmt, int &mem_lmt, int &isspj)
+void get_problem_info(int p_id, double &time_lmt, int &mem_lmt, int &spj)
 {
 	if (http_judge)
 	{
-		_get_problem_info_http(p_id, time_lmt, mem_lmt, isspj);
+		_get_problem_info_http(p_id, time_lmt, mem_lmt, spj);
 	}
 	else
 	{
 #ifdef _mysql_h
-		_get_problem_info_mysql(p_id, time_lmt, mem_lmt, isspj);
+		_get_problem_info_mysql(p_id, time_lmt, mem_lmt, spj);
 #endif
 	}
 	if (time_lmt <= 0)
@@ -2611,8 +2611,43 @@ int fix_java_mis_judge(char *work_dir, int &ACflg, int &topmemory,
 	}
 	return comp_res;
 }
+int raw_text_judge( char *infile, char *outfile, char *userfile){
+	int mark=0;
+	int total=0;
+	FILE *in=fopen(infile,"r");
+	if(fscanf(in,"%d",&total)!=1) return -1;
+	fclose(in);
+	FILE *out=fopen(outfile,"r");
+	int num=0;
+	char user_answer[4096];
+	int m[total+1];
+	char ans[total+1][128];
+	for(int i=0;i<total;i++){
+		if(fscanf(out,"%d",&num)!=1) return -2;
+		if(i==num-1){
+			if(fscanf(out,"%*[^\[][%d] %s",&m[num],ans[num])!=2) return -3;
+		}
+	}
+	fclose(out);
+	FILE *user=fopen(userfile,"r");
+	FILE *df=fopen("diff.out","a");
+	for(int i=1;i<=total;i++){
+		if(fscanf(user,"%d %s",&num,user_answer)!=2) continue;
+		if(num>0&&num<=total){
+			if(strcasecmp(ans[num],user_answer)==0 || strcasecmp(ans[num],"*")==0){
+				mark+=m[num];
+			}else{
+				fprintf(df,"%d:%s[%s] -%d\n",i,ans[i],user_answer,m[i]);
+			}
+			m[num]=0;
+		}
+	}
+	fclose(user);
+	fclose(df);
+	return mark;
+}
 int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
-				  char *userfile)
+				  char *userfile,double* pass_rate,int spj)
 {
 
 	pid_t pid;
@@ -2656,6 +2691,8 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 		}else if (access( spjpath , X_OK ) == 0 ) {	
 			ret = execute_cmd("%s/data/%d/spj %s %s %s", oj_home, problem_id, infile, outfile, userfile);    // hustoj style
 			if (DEBUG) printf("hustoj spj return: %d\n", ret);
+		}else if(spj == 2){
+
 		}else{
 			printf("spj tpj not found problem: %d\n", problem_id);		
 			ret=1;
@@ -2676,10 +2713,10 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 	}
 	return ret;
 }
-void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
+void judge_solution(int &ACflg, int &usedtime, double time_lmt, int spj,
 					int p_id, char *infile, char *outfile, char *userfile, int &PEflg,
 					int lang, char *work_dir, int &topmemory, int mem_lmt,
-					int solution_id, int num_of_test)
+					int solution_id, int num_of_test,double * pass_rate)
 {
 	//usedtime-=1000;
 	int comp_res;
@@ -2707,9 +2744,9 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int isspj,
 	// compare
 	if (ACflg == OJ_AC)
 	{
-		if (isspj)
+		if (spj)
 		{
-			comp_res = special_judge(oj_home, p_id, infile, outfile, userfile);
+			comp_res = special_judge(oj_home, p_id, infile, outfile, userfile,pass_rate,spj);
 
 			if (comp_res == 0)
 				comp_res = OJ_AC;
@@ -2774,7 +2811,7 @@ void clean_session(pid_t p)
 	execute_cmd("ps aux |grep \\^judge|awk '{print $2}'|xargs kill");
 }
 
-void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
+void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 					char *userfile, char *outfile, int solution_id, int lang,
 					int &topmemory, int mem_lmt, int &usedtime, double time_lmt, int &p_id,
 					int &PEflg, char *work_dir)
@@ -2853,7 +2890,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int isspj,
 			break;
 		}
 
-		if (!isspj && get_file_size(userfile) > get_file_size(outfile) * 2 + 1024)
+		if (!spj && get_file_size(userfile) > get_file_size(outfile) * 2 + 1024)
 		{
 			ACflg = OJ_OL;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);
@@ -3247,7 +3284,7 @@ int main(int argc, char **argv)
 	char user_id[BUFFER_SIZE];
 	int solution_id = 1000;
 	int runner_id = 0;
-	int p_id,  mem_lmt, lang, isspj, sim, sim_s_id, max_case_time = 0,cid=0;
+	int p_id,  mem_lmt, lang, spj, sim, sim_s_id, max_case_time = 0,cid=0;
 	double time_lmt;
 	char time_space_table[BUFFER_SIZE*100];
 	int time_space_index=0;
@@ -3292,11 +3329,11 @@ int main(int argc, char **argv)
 	{
 		time_lmt = 5;
 		mem_lmt = 128;
-		isspj = 0;
+		spj = 0;
 	}
 	else
 	{
-		get_problem_info(p_id, time_lmt, mem_lmt, isspj);
+		get_problem_info(p_id, time_lmt, mem_lmt, spj);
 	}
 	//copy source file
 
@@ -3332,7 +3369,7 @@ int main(int argc, char **argv)
 	int Compile_OK;
 
 	Compile_OK = compile(lang, work_dir);
-	if (Compile_OK != 0)
+	if (Compile_OK != 0 && !spj)
 	{
 		addceinfo(solution_id);
 		update_solution(solution_id, OJ_CE, 0, 0, 0, 0, 0.0);
@@ -3456,7 +3493,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
+			watch_solution(pidApp, infile, ACflg, spj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 		}
@@ -3523,15 +3560,18 @@ int main(int argc, char **argv)
 
 		if (pidApp == 0)                        //返回值是0，我就是子进程 
 		{
-
+			if(spj==2){
+			       	exit(0);
+			}
 			run_solution(lang, work_dir, time_lmt, usedtime, mem_lmt,infile,p_id);
+
 		}
 		else
 		{                                       //返回值非0 ，我是父进程，返回值就是上面那个子进程的pid
 
 			//num_of_test++;
                         //看护子进程，不让他做奇怪的事
-			watch_solution(pidApp, infile, ACflg, isspj, userfile, outfile,
+			if(spj!=2)watch_solution(pidApp, infile, ACflg, spj, userfile, outfile,
 						   solution_id, lang, topmemory, mem_lmt, usedtime, time_lmt,
 						   p_id, PEflg, work_dir);
 			kill(pidApp,9);
@@ -3539,9 +3579,9 @@ int main(int argc, char **argv)
 			total_time+=usedtime;
 			printf("time:%d/%d\n",usedtime,total_time);
 			//判断用户程序输出是否正确，给出结果
-			judge_solution(ACflg, usedtime, time_lmt, isspj, p_id, infile,
+			judge_solution(ACflg, usedtime, time_lmt, spj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
-						   mem_lmt, solution_id, num_of_test);
+						   mem_lmt, solution_id, num_of_test,&pass_rate);
 			time_space_index+=sprintf(time_space_table+time_space_index,"%s:%s mem=%dk time=%dms\n",infile+strlen(oj_home)+5,jresult[ACflg],topmemory/1024,usedtime);
 			if (use_max_time)
 			{
@@ -3605,24 +3645,36 @@ int main(int argc, char **argv)
 		usedtime = time_lmt * 1000;
 	}
 */
-	if (oi_mode)
-	{
-		if (num_of_test > 0){
-			pass_rate /= num_of_test;
+	if(spj!=2){
+		if (oi_mode)
+		{
+			if (num_of_test > 0){
+				pass_rate /= num_of_test;
+			}
+			if (total_mark > 0 ){
+				pass_rate =get_mark;
+				pass_rate /= total_mark;
+			}
+			update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
+							sim_s_id, pass_rate);
 		}
-		if (total_mark > 0 ){
-			pass_rate =get_mark;
-			pass_rate /= total_mark;
+		else
+		{
+			if(ACflg==OJ_AC) pass_rate=1.0;
+			else pass_rate=0.0;
+			update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
+							sim_s_id, pass_rate);
 		}
-		update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
-						sim_s_id, pass_rate);
-	}
-	else
-	{
-		if(ACflg==OJ_AC) pass_rate=1.0;
-		else pass_rate=0.0;
-		update_solution(solution_id, ACflg, usedtime, topmemory >> 10, sim,
-						sim_s_id, pass_rate);
+	}else{
+			
+			printf("raw text judge %d \n",p_id);
+			mark=raw_text_judge(infile, outfile, (char *)"Main.c");
+			printf("raw_text_mark:%d\n",mark);
+			if(mark>=0 && mark<=100) pass_rate=mark;
+			pass_rate/=100.0;
+			if(mark==100) finalACflg=ACflg=OJ_AC;else finalACflg=ACflg=OJ_WA;
+			update_solution(solution_id, finalACflg,usedtime,mark,sim,sim_s_id, pass_rate);
+
 	}
 	FILE *df=fopen("diff.out","a");
 	fprintf(df,"time_space_table:\n%s\n",time_space_table);

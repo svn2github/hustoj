@@ -124,7 +124,7 @@ if ($OJ_FREE_PRACTICE){  // open free practice without limit of contest using
 	") ORDER BY `problem_id` ) A WHERE $filter_sql";
 }
 // End Page Setting
-
+pdo_query("SET sort_buffer_size = 1024*1024");   // Out of sort memory, consider increasing server sort buffer size
 //echo htmlentities( $sql);
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$result = pdo_query($sql,$search,$search);

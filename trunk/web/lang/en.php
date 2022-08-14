@@ -123,6 +123,7 @@
 	$MSG_NJ= "Normal Judger" ;
 	$MSG_SPJ= "Special Judger" ;
 	$MSG_RTJ= "Raw Text Judger" ;
+        $MSG_CLICK_VIEW_HINT="Click to View Spoiler";
 	$MSG_HINT= "HINT" ;
 	$MSG_Source= "Source" ;
 	$MSG_Time_Limit="Time Limit";

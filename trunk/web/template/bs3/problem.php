@@ -43,7 +43,7 @@
 <body>
 	<div id="main" class="container">
 		<?php include("template/$OJ_TEMPLATE/nav.php");?>
-		<br><br><br>
+
 		<!-- Main component for a primary marketing message or call to action -->
     <!-- <div class="jumbotron"></div> -->
 
@@ -85,7 +85,7 @@
         	require_once("include/set_get_key.php");
  					echo "<a class='btn btn-success btn-sm' role='button' href=admin/problem_edit.php?id=$id&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">EDIT</a>";
  					echo "<a class='btn btn-success btn-sm' role='button' href=javascript:phpfm(".$row['problem_id'].")>TESTDATA</a>";
-	      			if($cid==0 && count($used_in_contests)>0){
+	      			if(count($used_in_contests)>0){
 					echo "<hr><br>$MSG_PROBLEM_USED_IN:";
 					foreach($used_in_contests as $contests){
 						echo "<a class='label label-warning' href='contest.php?cid=". $contests[0]."'>".$contests[1]." </a><br>";	
@@ -319,8 +319,13 @@
 			}
 		  function transform(){
 			let height=document.body.clientHeight;
-			let width=parseInt(document.body.clientWidth*0.618);
-			let width2=parseInt(document.body.clientWidth*0.382);
+<?php if ( $row[ 'spj' ]==2 ) {?>
+			let width=parseInt(document.body.clientWidth*0.3);
+			let width2=parseInt(document.body.clientWidth*0.7);
+<?php }else{ ?>
+			let width=parseInt(document.body.clientWidth*0.6);
+			let width2=parseInt(document.body.clientWidth*0.4);
+<?php } ?>
 			let submitURL=$("#submit")[0].href;
 			console.log(width);
 			let main=$("#main");

@@ -25,7 +25,7 @@ Even more, the latest hustoj is now possible running on SAE(sina application Eng
     OJ_HTTP_USERNAME=admin
     OJ_HTTP_PASSWORD=admin
 ```
-OJ_HTTP_JUDGE for enable this feature
+OJ_HTTP_JUDGE for enable this feature, WARNING: THIS will DISABLE the MYSQL connection , if you are using mysql connection for remote judge, do NOT set this.
 
 OJ_HTTP_BASEURL give the URL of the OJ-web
 

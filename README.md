@@ -141,7 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
-08-14 | 更新 | spj扩展了2=RawTextJudge，用于选择填空题的判题。
+08-14 | 更新 | spj扩展了2=RawTextJudge，用于[选择填空题](https://github.com/zhblue/hustoj/blob/master/wiki/RTJ.md)的判题。
 07-18 | 更新 | 存档很少人用的blockly目录到blockly.tar.gz, 未来从web目录中删除，留一个web下载链接在db_info.inc.php供需要的用户下载。
 07-14 | 补丁 | 修复了论坛无贴打不开的问题。
 07-10 | 补丁 | 修复了php8.1(Ubuntu22.04) 不能上传图片和不能压缩文件的问题。

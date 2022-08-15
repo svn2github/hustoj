@@ -1,4 +1,5 @@
 <?php 
+  require_once(dirname(__FILE__)."/../../include/memcache.php");
   function get_menu_news() {
       $result = "";
       $sql_news_menu = "select `news_id`,`title` FROM `news` WHERE `menu`=1 AND `title`!='faqs.cn' ORDER BY `importance` ASC,`time` DESC LIMIT 10";

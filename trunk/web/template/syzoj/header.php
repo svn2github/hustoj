@@ -1,4 +1,5 @@
 <?php
+        require_once(dirname(__FILE__)."/../../include/memcache.php");
         function checkmail(){  // check if has mail
           global $OJ_NAME;
           $sql="SELECT count(1) FROM `mail` WHERE new_mail=1 AND `to_user`=?";

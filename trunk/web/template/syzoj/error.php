@@ -5,7 +5,7 @@
 <div class="ui negative icon message">
   <i class="remove icon"></i>
   <div class="content">
-    <div class="header" style="margin-bottom: 10px; " ondbclick='$(this).load("refresh-privilege.php")'>
+    <div class="header" style="margin-bottom: 10px; " ondblclick='$(this).load("refresh-privilege.php")'>
       <?php echo $view_errors;?>
     </div>
       <!-- <p><%= err.details %></p> -->

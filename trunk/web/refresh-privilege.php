@@ -26,7 +26,7 @@ if($user_id){
 		}
 	};
 	?>
-	<script>alert("Done!!");</script>
+	<script>console.log("Privilege refreshed !!");</script>
 	<?php
 }else {
 	// 没登录的

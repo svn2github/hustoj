@@ -25,3 +25,4 @@ while ! docker build -t hustoj .
 do
 		echo "Network fail, retry... you might want to make sure https://hub.docker.com/ is available"
 done
+ 

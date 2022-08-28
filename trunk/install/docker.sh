@@ -7,8 +7,8 @@ do
 done
 
 echo "{
-    \"registry-mirrors\": [\"https://y0qd3iq.mirror.aliyuncs.com\"]
-    \"live-restore\":true,
+    \"registry-mirrors\": [\"https://y0qd3iq.mirror.aliyuncs.com\"],
+    \"live-restore\":true
 }" > /etc/docker/daemon.json
 
 systemctl restart docker

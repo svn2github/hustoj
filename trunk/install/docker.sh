@@ -8,7 +8,10 @@ done
 
 echo "{
     \"registry-mirrors\": [\"https://y0qd3iq.mirror.aliyuncs.com\"]
+    \"live-restore\":true,
 }" > /etc/docker/daemon.json
+
+systemctl restart docker
 
 while ! docker build -t hustoj .
 do

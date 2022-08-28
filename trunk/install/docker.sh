@@ -6,10 +6,18 @@ do
 		echo "Network fail, retry... you might want to make sure docker.io is available in your apt source"
 done
 
-echo "{
-    \"registry-mirrors\": [\"https://y0qd3iq.mirror.aliyuncs.com\"],
-    \"live-restore\":true
-}" > /etc/docker/daemon.json
+cat > /etc/docker/daemon.json <<EOF
+{
+  "registry-mirrors": [
+     "https://y0qd3iq.mirror.aliyuncs.com"
+  ],
+  "live-restore": true,
+  "log-opts": {
+     "max-size": "512m",
+     "max-file": "3"
+  }
+}
+EOF
 
 systemctl restart docker
 

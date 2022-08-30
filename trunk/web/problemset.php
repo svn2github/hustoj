@@ -43,7 +43,7 @@ $result = mysql_query_cache($sql);
 $row = $result[0];
 $cnt = $row['upid'] / $page_cnt;
 if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
-if ($page > $cnt+1 ) $page = $cnt+1 ;
+if ($page > $cnt+1 && ! isset($_SESSION[$OJ_NAME.'_administrator']) ) $page = $cnt+1 ;
 $pstart = $page_cnt*intval($page)-$page_cnt+1; //start 1
 $pend = $pstart+$page_cnt;
 

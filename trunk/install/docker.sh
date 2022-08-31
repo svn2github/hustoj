@@ -12,7 +12,7 @@ cat > /etc/docker/daemon.json <<EOF
 	"live-restore": true,
 	"log-opts": {
 		"max-size": "512m",
-		"max-file": "3" 
+		"max-file": "3"
 	}
 }
 EOF

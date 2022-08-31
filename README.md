@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+08-31 | 补丁 | QQ邮箱作为发件邮箱，不能发送找回密码邮件。
 08-30 | 补丁 | 修复管理员前台不能翻页到最后几页，看不全题目。
 08-29 | 补丁 | docker镜像切换阿里云后自动重新加载。
 08-14 | 更新 | spj扩展了2=RawTextJudge，用于[选择填空题](https://github.com/zhblue/hustoj/blob/master/wiki/RTJ.md)的判题。

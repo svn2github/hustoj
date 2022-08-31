@@ -159,7 +159,9 @@ if (!$this->smtp_putcmd("HELO", $helo)) {
 return $this->smtp_error("sending HELO command");
 
 }
-
+    
+$this->smtp_ok();    // QQ mail need this line
+ 
 #auth
 
 if($this->auth){

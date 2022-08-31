@@ -90,7 +90,7 @@ $header .= $additional_headers;
 
 $header .= "Date: ".date("r")."\r\n";
 
-$header .= "X-Mailer:By Redhat (PHP/".phpversion().")\r\n";
+$header .= "X-Mailer: HUSTOJ password recovery\r\n";
 
 list($msec, $sec) = explode(" ", microtime());
 

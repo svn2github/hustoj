@@ -19,7 +19,7 @@ $err_str="";
 $err_cnt=0;
 $len;
 
-if (!$_SESSION[$OJ_NAME.'_'.'user_id']) {
+if (!$_SESSION[$OJ_NAME.'_'.'user_id']||$OJ_TEMPLATE!="bshark") {
     die();
 }
 $user_id=$_SESSION[$OJ_NAME.'_'.'user_id'];

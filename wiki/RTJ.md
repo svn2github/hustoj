@@ -36,3 +36,5 @@ test.out
 2 B
 3 C
 ```
+
+[或可参考](https://github.com/zhblue/hustoj/blob/master/wiki/ChoiceAndFillinBlank.md)

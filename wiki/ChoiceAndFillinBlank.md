@@ -15,8 +15,8 @@
 
 输出文件为n行 【题号】空格【分数】空格【正确答案】
 ----
-如果正确答案是【*】，表示任何答案都得分。
 ![AFVQQ2EQ_{MI C S72FM SP](https://user-images.githubusercontent.com/3926566/188343740-17d37284-7cc1-4e41-ac00-756d8843bad3.png)
+如果正确答案是【*】，表示任何答案都得分。
 
 
 选增模板template.c，供学生填写

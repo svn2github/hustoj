@@ -37,7 +37,7 @@ if(!isset($_SESSION[$OJ_NAME."_source_browser"])){
 			$end_time = strtotime($row['end_time']);
 			$now=time();
 			if( $end_time < $now ){ // 当前提交，属于已经结束的比赛，考察是否有进行中的比赛在使用。
-				echo $now."-".$end_time;
+				//echo $now."-".$end_time;
 				$need_check_using=true;
 				
 			}else{			// 属于进行中的比赛，可以看

@@ -26,7 +26,7 @@
 .mynav {
    margin-top: 20px
 }
-.panel{
+.panel-default{
    padding: 5px;
    background-image: url(../../image/background.jpg);
    border: 1px solid #eee;

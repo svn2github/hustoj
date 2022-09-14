@@ -54,6 +54,13 @@
 .btn-success{
     background-color:#33cc99;
 }
+.panel{
+   padding: 5px;
+   background-image: url(../../image/background.jpg);
+   border: 1px solid #eee;
+   margin-top:50px;
+}
+
 .jumbotron{
     background-color:#efefef;
     margin-top:50px;

@@ -18,7 +18,7 @@
 .center{
    text-align: center
 }
-.panel{
+.panel-default{
    padding: 5px;
    background-image: url(../../image/background.jpg);
    border: 1px solid #eee;

@@ -38,6 +38,13 @@
 		$where="where user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ";
 	}
         $rank = 0;
+
+                $sql = "SELECT count(1) as `mycount` FROM `users`";
+                $result = mysql_query_cache($sql);
+                $row=$result[0];
+                $view_total=$row['mycount'];
+
+
         if(isset( $_GET ['start'] ))
                 $rank = intval ( $_GET ['start'] );
 
@@ -51,7 +58,7 @@
 
                 $sql = "SELECT `user_id`,`nick`,`solved`,`submit` FROM `users` $where ORDER BY `solved` DESC,submit,reg_time  LIMIT  " . strval ( $rank ) . ",$page_size";
 
-                if($scope){
+                if($scope && $view_total < 1000 ){
                         $s="";
                         switch ($scope){
                                 case 'd':
@@ -122,13 +129,6 @@
 
 //                      $i++;
                 }
-
-                $sql = "SELECT count(1) as `mycount` FROM `users`";
-        //        $result = mysql_query ( $sql );
-          // require("./include/memcache.php");
-                $result = mysql_query_cache($sql);
-                 $row=$result[0];
-                $view_total=$row['mycount'];
 
 
 

@@ -1,4 +1,4 @@
-<?php $show_title="排名 - $OJ_NAME"; ?>
+<?php $show_title="$MSG_RANKLIST - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
 <div class="padding">

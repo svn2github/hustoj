@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `solution` (
   `num` tinyint(4) NOT NULL DEFAULT '-1',
   `code_length` int(11) NOT NULL DEFAULT 0,
   `judgetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `pass_rate` DECIMAL(3,2) UNSIGNED NOT NULL DEFAULT 0,
+  `pass_rate` DECIMAL(4,3) UNSIGNED NOT NULL DEFAULT 0,
   `lint_error` int UNSIGNED NOT NULL DEFAULT 0,
   `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL',
   PRIMARY KEY (`solution_id`),

@@ -11,6 +11,7 @@ ALTER TABLE `problem` CHANGE `time_limit` `time_limit` DECIMAL(10,3) NOT NULL DE
 alter table privilege add column valuestr char(11) not null default 'true' after rightstr; 
 alter table news modify column `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00';
 ALTER TABLE `news` ADD COLUMN `menu` int(11) NOT NULL DEFAULT 0 AFTER `importance`;
+alter table solution modify column pass_rate decimal(4,3) not null default 0.0;
 #create fulltext index problem_title_source_index on problem(title,source);
 
                                                                                                          

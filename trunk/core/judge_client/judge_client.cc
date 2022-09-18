@@ -2611,8 +2611,8 @@ int fix_java_mis_judge(char *work_dir, int &ACflg, int &topmemory,
 	}
 	return comp_res;
 }
-int raw_text_judge( char *infile, char *outfile, char *userfile){
-	int mark=0;
+float raw_text_judge( char *infile, char *outfile, char *userfile){
+	float mark=0;
 	int total=0;
 	FILE *in=fopen(infile,"r");
 	if(fscanf(in,"%d",&total)!=1) return -1;
@@ -2620,12 +2620,12 @@ int raw_text_judge( char *infile, char *outfile, char *userfile){
 	FILE *out=fopen(outfile,"r");
 	int num=0;
 	char user_answer[4096];
-	int m[total+1];
+	float m[total+1];
 	char ans[total+1][128];
 	for(int i=0;i<total;i++){
 		if(fscanf(out,"%d",&num)!=1) return -2;
 		if(i==num-1){
-			if(fscanf(out,"%*[^\[][%d] %s",&m[num],ans[num])!=2) return -3;
+			if(fscanf(out,"%*[^\[][%f] %s",&m[num],ans[num])!=2) return -3;
 		}
 	}
 	fclose(out);
@@ -2636,8 +2636,9 @@ int raw_text_judge( char *infile, char *outfile, char *userfile){
 		if(num>0&&num<=total){
 			if(strcasecmp(ans[num],user_answer)==0 || strcasecmp(ans[num],"*")==0){
 				mark+=m[num];
+				printf("raw_text_judge%d:%.1f\n",num,m[num]);
 			}else{
-				fprintf(df,"%d:%s[%s] -%d\n",i,ans[i],user_answer,m[i]);
+				fprintf(df,"%d:%s[%s] -%.1f\n",i,ans[i],user_answer,m[i]);
 			}
 			m[num]=0;
 		}
@@ -3478,7 +3479,8 @@ int main(int argc, char **argv)
 	
 	// read files and run
 	double pass_rate = 0.0;
-	int mark=0,total_mark=0,get_mark=0;
+	float mark=0;
+	int total_mark=0,get_mark=0;
 	int finalACflg = ACflg;
 	if (p_id == 0)
 	{ //custom input running
@@ -3670,11 +3672,11 @@ int main(int argc, char **argv)
 			printf("raw text judge %d \n",p_id);
         		sprintf(src_pth, "Main.%s", lang_ext[lang]);
 			mark=raw_text_judge(infile, outfile, src_pth);
-			printf("raw_text_mark:%d\n",mark);
+			printf("raw_text_mark:%.1f\n",mark);
 			if(mark>=0 && mark<=100) pass_rate=mark;
 			pass_rate/=100.0;
 			if(mark==100) finalACflg=ACflg=OJ_AC;else finalACflg=ACflg=OJ_WA;
-			update_solution(solution_id, finalACflg,usedtime,mark,sim,sim_s_id, pass_rate);
+			update_solution(solution_id, finalACflg,mark*10-((int)mark)*10,mark,sim,sim_s_id, pass_rate);
 
 	}
 	FILE *df=fopen("diff.out","a");

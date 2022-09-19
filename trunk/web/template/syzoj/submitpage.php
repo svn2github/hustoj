@@ -51,7 +51,11 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <input class="btn btn-success" title="WAF gives you reset ? try this." type=button value="Encoded <?php echo $MSG_SUBMIT?>"  onclick="encoded_submit();">
 <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse"/>
 <?php }?>
-
+<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
+<span class="btn" id=result>状态</span>
+<?php }?>
+	
 </span>
 <?php if($OJ_ACE_EDITOR){ 
 
@@ -71,10 +75,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 </textarea>
 <?php } ?>
 
-<?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
-<input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-<span class="btn" id=result>状态</span>
-<?php }?>
+
 <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
 	<input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">
 	<input id="transrun" type=button  class="btn" onclick="loadFromBlockly() " value="<?php echo $MSG_BLOCKLY_TEST?>" style="display:none;color:white;background-color:rgb(90,164,139)">

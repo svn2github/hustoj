@@ -70,6 +70,11 @@
           <?php }?>
 
           <input id="Submit" class="btn btn-info btn-sm" type=button value="<?php echo $MSG_SUBMIT?>" onclick="do_submit();" >
+		
+          <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
+            <input id="TestRun" class="btn btn-warning btn-sm" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
+            <span class="btn" id=result>状态</span>
+          <?php }?>
 
 	  <?php if($OJ_ACE_EDITOR){
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="550px";
@@ -94,10 +99,6 @@
             <input type=hidden id="encoded_submit_mark" name="reverse2" value="reverse">
           <?php }?>
 
-          <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
-            <input id="TestRun" class="btn btn-info" type=button value="<?php echo $MSG_TR?>" onclick=do_test_run();>
-            <span class="btn" id=result>状态</span>
-          <?php }?>
 
           <?php if (isset($OJ_BLOCKLY)&&$OJ_BLOCKLY){?>
             <input id="blockly_loader" type=button class="btn" onclick="openBlockly()" value="<?php echo $MSG_BLOCKLY_OPEN?>" style="color:white;background-color:rgb(169,91,128)">

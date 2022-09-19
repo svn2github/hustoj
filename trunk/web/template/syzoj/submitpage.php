@@ -315,7 +315,9 @@ function loadFromBlockly(){
         fontSize: "18px"
     });
    reloadtemplate($("#language").val()); 
-     
+   $(document).ready(function(){
+   	$("#source").css("height",window.innerHeight-180);  
+   });
 </script>
 <?php }?>
 

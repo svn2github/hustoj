@@ -12,6 +12,7 @@ cd /home/judge/src/core
 pkill -9 judged
 bash make.sh
 cd ../install
+chmod +x g++.sh gcc.sh makeout.sh
 mysql jol< update.sql
 judged
 

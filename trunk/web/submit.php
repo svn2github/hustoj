@@ -52,9 +52,9 @@ if (!$OJ_BENCHMARK_MODE) {
 $test_run = false;
 if (isset($_POST['cid'])) {
   $pid = intval($_POST['pid']);
-  $cid = abs(intval($_POST['cid']));
+  $cid = intval($_POST['cid']);
   $test_run = $cid<0;
-    
+  if($test_run) $cid =-$cid ;
   $sql = "SELECT `problem_id`,'N' FROM `contest_problem` WHERE `num`='$pid' AND contest_id=$cid";
 }
 else {

@@ -284,6 +284,8 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 ### 基于 Ubuntu 22.04 安装
 	
 **仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
+
+**建议服务器配置双核2G内存以上**
 	
 ```bash
 wget http://dl.hustoj.com/install-ubuntu22.04.sh
@@ -296,6 +298,8 @@ sudo bash install-ubuntu22.04.sh
 	
 **仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
 	
+**建议服务器配置单核2G内存以上**
+
 ```bash
 wget http://dl.hustoj.com/install-ubuntu20.04.sh
 sudo bash install-ubuntu20.04.sh

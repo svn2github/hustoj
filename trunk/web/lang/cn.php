@@ -61,7 +61,7 @@
 	$MSG_PROBLEM="问题";
 	$MSG_RESULT="结果";
 	$MSG_MEMORY="内存";
-	$MSG_TIME="耗时";
+	//$MSG_TIME="耗时";  // overided by line 236
 	$MSG_LANG="语言";
 	$MSG_CODE_LENGTH="代码长度";
 	$MSG_SUBMIT_TIME="提交时间";

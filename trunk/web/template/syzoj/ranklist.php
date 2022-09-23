@@ -41,10 +41,10 @@
     <div style="margin-bottom: 30px; ">
   
   <div style="text-align: center; ">
-	<div class="ui pagination menu" style="box-shadow: none; ">      
+	<div class="ui pagination" style="box-shadow: none; ">      
     <?php
     for($i = 0; $i <$view_total ; $i += $page_size) {
-    $str= "<a class=\"icon item\" href='./ranklist.php?start=" . strval ( $i ).($scope?"&scope=$scope":"") . "'>";
+    $str= "<a class=\"ui button\" href='./ranklist.php?start=" . strval ( $i ).($scope?"&scope=$scope":"") . "'>";
     $str.= strval ( $i + 1 );
     $str.= "-";
     $str.= strval ( $i + $page_size );

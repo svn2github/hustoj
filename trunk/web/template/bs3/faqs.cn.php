@@ -43,7 +43,7 @@
   <font color=red>A</font>:系统运行于<a href="http://www.debian.org/">Debian</a>/<a href="http://www.ubuntu.com">Ubuntu</a>
 	Linux. 使用<a href="http://gcc.gnu.org/">GNU GCC/G++</a> 作为C/C++编译器,
 	<a href="http://www.freepascal.org">Free Pascal</a> 作为pascal 编译器 ，用
-	<a href="http://openjdk.java.net/">openjdk-7</a> 编译 Java. 对应的编译选项如下:<br>
+	<a href="http://openjdk.java.net/">openjdk-17.0.4</a> 编译 Java. 对应的编译选项如下:<br>
 </p>
 <table border="1">
   <tr>
@@ -70,10 +70,10 @@
 </table>
 <p>  编译器版本为（系统可能升级编译器版本，这里仅供参考）:<br>
 	
-<font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
+<font color=blue>Gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)</font><br>
 <font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
 <font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
-<font color=blue>Openjdk 16</font><br>
+<font color=blue>Openjdk 17</font><br>
 <font color=blue>Python 3.8.5</font><br>
 	      </p>
 	      

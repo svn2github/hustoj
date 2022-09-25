@@ -68,10 +68,10 @@
 				</tr>
 			</table>
 			<p> Our compiler software version:<br>
-				<font color=blue>Gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)</font><br>
+				<font color=blue>Gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)</font><br>
 				<font color=blue>Glibc 2.31-0ubuntu9.2</font><br>
 				<font color=blue>Free Pascal Compiler version 3.0.4+dfsg-23 [2019/11/25] for x86_64</font><br>
-				<font color=blue>Openjdk "14.0.2"</font><br>
+				<font color=blue>Openjdk "17.0.4+8-1~20.04"</font><br>
 				<font color=blue>Python 3.8.5</font><br>
 			</p>
 			<hr>

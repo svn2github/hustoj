@@ -40,7 +40,7 @@ else {
 }
 
 $view_src = "";
-
+$lastlang = 1;
 if (isset($_GET['sid'])) {
   $sid = intval($_GET['sid']);
 	$sql = "SELECT * FROM `solution` WHERE `solution_id`=?";
@@ -132,13 +132,24 @@ if (isset($_GET['sid'])) {
 		if ($row)
 			$view_src = $row['source'];
 
-		$sql = "SELECT langmask FROM contest WHERE contest_id=?";
+                if(isset($cid)&&$cid>0){
 
-		$result = pdo_query($sql,$cid);
-		$row = $result[0];
+                        $sql = "SELECT langmask FROM contest WHERE contest_id=?";
 
-		if ($row)
-			$_GET['langmask'] = $row['langmask'];
+                        $result = pdo_query($sql,$cid);
+                        $row = $result[0];
+
+                        if ($row)
+                                $_GET['langmask'] = $row['langmask'];
+                }
+                $sql="select language from solution where solution_id=?";
+                $result=pdo_query($sql,$sid);
+                $row=$result[0];
+                if($row)
+                    $lastlang=intval($row['language']);
+                //echo $lastlang;
+
+		
 	}
 }
 
@@ -170,7 +181,7 @@ if (isset($sample_sql)) {
 	$problem_id = $row[2];
 }
 
-$lastlang = 1;  // 默认语言 default language : 0=C  1=C++ 3=Java  6=Python
+  
 if (!$view_src) {
 	if (isset($_COOKIE['lastlang']) && $_COOKIE['lastlang']!="undefined") {
 		$lastlang = intval($_COOKIE['lastlang']);
@@ -183,7 +194,7 @@ if (!$view_src) {
 			$lastlang = $result[0][0];
 		}
 		else {
-			$lastlang = 0;
+			$lastlang = 1;   // 默认语言 default language : 0=C  1=C++ 3=Java  6=Python
 		}
 		//echo "last=$lastlang";
 	}

@@ -1663,6 +1663,8 @@ void _get_custominput_mysql(int solution_id, char *work_dir)
 		FILE *fp_src = fopen(src_pth, "w");
 		fprintf(fp_src, "%s", row[0]);
 		fclose(fp_src);
+		sprintf(sql, "DELETE FROM custominput WHERE solution_id=%d", solution_id);
+		mysql_real_query(conn, sql, strlen(sql));
 	}
 	if (res != NULL)
 	{

@@ -5,6 +5,8 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'http_judge']))){
 	echo "0";
 	exit(1);
 }
+header('Content-Type: text/plain');
+
 if(isset($_POST['manual'])){
 
         $sid=intval($_POST['sid']);

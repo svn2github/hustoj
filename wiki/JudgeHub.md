@@ -18,11 +18,11 @@ a.k.a Judge Farm Keeper
 --
 
 实现上述方案的代码即为[judgehub](https://github.com/zhblue/hustoj/blob/master/trunk/core/judged/judgehub.cc)，它的命令行参数如下：
-judgehub [farmpath] [udpport] [debug]
+judgehub [farmbase] [udpport] [debug]
 
-farmpath：
+farmbase：
 --
-在虚拟主机系统中，虚拟主机往往集中存放在特定目录下，如常见的/var/www/virtual，judgehub要为所有的虚拟主机提供判题服务，自然需要知道这个基础路径。而具体是哪个子目录下存在hustoj的主目录，则作为消息的内容发送到udp端口上。
+在虚拟主机系统中，虚拟主机往往集中存放在特定目录下，如常见的/home/saas，judgehub要为所有的虚拟主机提供判题服务，自然需要知道这个基础路径。而具体是哪个子目录下存在hustoj的主目录，则作为消息的内容发送到udp端口上。
 
 udpport：
 --

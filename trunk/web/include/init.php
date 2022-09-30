@@ -16,7 +16,7 @@ require(dirname(__FILE__)."/../lang/$OJ_LANG.php");
 $domain=basename($_SERVER["HTTP_HOST"]);
 
 if($OJ_SaaS_ENABLE){
-	$DOMAIN="my.hustoj.com";
+	$DOMAIN="my.hustoj.com";   //   如启用，需要替换为SaaS服务的主域名。
 	$OJ_SaaS_CONF=realpath(dirname(__FILE__)."/..")."/SaaS/".basename($_SERVER["HTTP_HOST"]).".php";
 	if(file_exists($OJ_SaaS_CONF)){
 		require_once($OJ_SaaS_CONF);

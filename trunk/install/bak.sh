@@ -9,7 +9,7 @@ PASSWORD=`cat $config|grep 'OJ_PASSWORD' |awk -F= '{print $2}'`
 DATABASE=`cat $config|grep 'OJ_DB_NAME' |awk -F= '{print $2}'`
 
 mysqldump -h $SERVER  -R $DATABASE -u$USER -p$PASSWORD | bzip2 >/var/backups/db_${DATE}.sql.bz2
-if tar cjf /var/backups/hustoj_${DATE}.tar.bz2 /home/judge/data /home/judge/src /home/judge/etc /var/backups/db_${DATE}.sql.bz2; then
+if tar cjf /var/backups/hustoj_${DATE}.tar.bz2 /home/judge/data /home/judge/src /home/judge/etc /var/backups/db_${DATE}.sql.bz2 --exclude=/home/judge/src/install/*.bz2 ; then
 	rm /var/backups/hustoj_${OLD3}.tar.bz2
 	rm /var/backups/db_${OLD}.sql.bz2
 fi

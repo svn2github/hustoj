@@ -42,7 +42,7 @@
 static char oj_udpserver[BUFFER_SIZE]="127.0.0.1";
 static int  oj_udpport=2008;
 static int  oj_udp_fd;
-static char oj_hub_base[BUFFER_SIZE]="/var/www/virtual";
+static char oj_hub_base[BUFFER_SIZE]="/home/saas";
 
 static bool STOP = false;
 static int DEBUG = 0;

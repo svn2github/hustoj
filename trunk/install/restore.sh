@@ -15,8 +15,8 @@ DATABASE=`cat $config|grep 'OJ_DB_NAME' |awk -F= '{print $2}'`
 mkdir hustoj-restore
 cd hustoj-restore
 MAIN="../$1"
-tar xjf $MAIN
 /home/judge/src/install/bak.sh
+tar xjf $MAIN
 mv /home/judge/data /home/judge/data.del.$DATE
 mv home/judge/data /home/judge/
 mv /home/judge/src/web/upload /home/judge/src/web/upload.del.$DATE

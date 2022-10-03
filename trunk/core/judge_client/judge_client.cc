@@ -1892,6 +1892,7 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 		fclose(fpname);
 	}else{
 		sprintf(userfile, "%s/run%d/user.out", oj_home, runner_id);
+		execute_cmd("rm %s",userfile);
 	}
 }
 // 以下 copy_开头的函数均为准备相应语言的chroot环境，复制动态链接库等，如果使用的系统不是Ubuntu则路径有所区别，可以用ldd/find查看实际位置。

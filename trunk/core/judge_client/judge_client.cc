@@ -1867,7 +1867,7 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 		if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
 		FILE * fpname=fopen(noip_file_name,"r");
 		if(fscanf(fpname,"%s",noip_file_name)){
-		    execute_cmd("/bin/cp '%s' %s/%s", infile, work_dir,noip_file_name);   // 如果存在input.name则复制测试数据
+		    execute_cmd("/bin/cp '%s' %s/%s", infile, work_dir,basename(noip_file_name));   // 如果存在input.name则复制测试数据
 		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
 		}
 		fclose(fpname);
@@ -1885,7 +1885,7 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 		if(fscanf(fpname,"%s",noip_file_name)){
 		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
 		    if(!strstr("noip_file_name","//")){
-                            sprintf(userfile, "%s/run%d/%s", oj_home, runner_id,noip_file_name);
+                            sprintf(userfile, "%s/run%d/%s", oj_home, runner_id,basename(noip_file_name));
                             execute_cmd("rm %s",userfile);
                     }
 		}

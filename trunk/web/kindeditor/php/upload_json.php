@@ -6,12 +6,14 @@
  * 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。
  *
  */
+@session_start();
 require_once("../../include/db_info.inc.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])
       ||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])
      )){
         echo "<a href='../loginpage.php'>Please Login First!</a>";
+	echo $_SESSION[$OJ_NAME.'_'.'administrator']."[$OJ_NAME]";
         exit(1);
 }
 
@@ -85,7 +87,7 @@ if (empty($_FILES) === false) {
 	}
 	//检查目录写权限
 	if (@is_writable($save_path) === false) {
-		alert("上传目录没有写权限。在服务器上执行下述命令解决该问题:\n chown www-data -R /home/judge/src/web/upload \n");
+		alert("上传目录没有写权限。在服务器上执行下述命令解决该问题:\n chown www-data -R \"$php_path\" \n");
 	}
 	//检查是否已上传
 	if (@is_uploaded_file($tmp_name) === false) {
@@ -95,16 +97,23 @@ if (empty($_FILES) === false) {
 	if ($file_size > $max_size) {
 		alert("上传文件大小超过限制。");
 	}
-	//检查目录名
-	$dir_name="image";
-	/* if (empty($ext_arr[$dir_name])) {
-		alert("目录名不正确。".$ext_arr[$dir_name]."dirname[".($dir_name)."]");
-	} */
 	//获得文件扩展名
 	$temp_arr = explode(".", $file_name);
 	$file_ext = array_pop($temp_arr);
 	$file_ext = trim($file_ext);
 	$file_ext = strtolower($file_ext);
+	//检查目录名
+	$dir_name="";
+	foreach($ext_arr as $key => $value){
+	   if(in_array($file_ext,$value)){
+			$dir_name=$key;
+			break;
+	   }
+	}
+	if($dir_name=="") $dir_name="image";
+	if (empty($ext_arr[$dir_name])) {
+		alert("目录名不正确。".$ext_arr[$dir_name]."dirname[".($dir_name)."]");
+	}
 	//检查扩展名
 	if (in_array($file_ext, $ext_arr[$dir_name]) === false) {
 		alert("上传文件扩展名是不允许的扩展名。\n只允许" . implode(",", $ext_arr[$dir_name]) . "格式。");

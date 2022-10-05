@@ -13,7 +13,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
       ||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])
      )){
         echo "<a href='../loginpage.php'>Please Login First!</a>";
-	echo $_SESSION[$OJ_NAME.'_'.'administrator']."[$OJ_NAME]";
+	//echo $_SESSION[$OJ_NAME.'_'.'administrator']."[$OJ_NAME]";
         exit(1);
 }
 

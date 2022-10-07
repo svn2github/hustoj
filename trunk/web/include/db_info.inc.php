@@ -71,7 +71,7 @@ static  $OJ_RANK_HIDDEN="'admin','zhblue'";  // 管理员不显示在排名中
 static  $OJ_FRIENDLY_LEVEL=0; //系统友好级别，暂定0-9级，级别越高越傻瓜，系统易用度高的同时将降低安全性，仅供非专业用途，造成泄题、抄袭概不负责。
 static  $OJ_FREE_PRACTICE=false; //自由练习，不受比赛作业用题限制
 static  $OJ_SUBMIT_COOLDOWN_TIME=1; //提交冷却时间，连续两次提交的最小间隔，单位秒。
-static  $OJ_MARKDOWN=false; // 开启MARKDOWN，开启后在后台编辑题目时默认为源码模式，用[md] # Markdown [/md] 格式插入markdown代码。
+static  $OJ_MARKDOWN=false; // 开启MARKDOWN，开启后在后台编辑题目时默认为源码模式，用[md] # Markdown [/md] 格式插入markdown代码, 如果需要用到[]也可以用<div class='md'> </div>。
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID
 

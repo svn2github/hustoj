@@ -259,8 +259,34 @@ class BBCode
             // Unrecognized type!
             $output .= self::encode($match);
           }
+	} elseif ($name === 'md') {
+          // markdown handling.  : [md]title[/md] .
+          
+          $buffer = null;
+          $i = $match_idx + 1;
+          if ($i < $match_count) {
+            list($search_match, $search_offset) = $matches[0][$i];
+            $search_tag = self::decode_tag($search_match);
+            if (! $search_tag['open'] && $search_tag['name'] === 'md') {
+              $buffer = substr($input, $input_ptr, $search_offset - $input_ptr);
+            }
+          }
+
+          // matched something in the middle
+          if (isset($buffer)) {
+            //var_dump($colorIndex);
+            $output = $output . '<div class="md" >'.$buffer.'</div>';
+            // emit the tag
+            // advance ptr (again)
+            $input_ptr = $search_offset + strlen($search_match);
+            // update search position
+            $match_idx = $i;
+          } else {
+            // Unrecognized type!
+            $output .= self::encode($match);
+          }
         } elseif ($name === 'plist') {
-          // URL handling.  Two modes: [a=url]title[/a] and [a]url[/a].
+          // Problem list handling.  modes: [plist=1000,1001,1002]title[/plist].
           //  Verify enclosing value first.
           $buffer = null;
           $i = $match_idx + 1;
@@ -271,7 +297,6 @@ class BBCode
               $buffer = substr($input, $input_ptr, $search_offset - $input_ptr);
             }
           }
-
           // matched something in the middle
           if (isset($buffer)) {
             if (isset($args['default'])) {
@@ -300,7 +325,6 @@ class BBCode
             // Unrecognized type!
             $output .= self::encode($match);
           }
-
         } elseif ($name === 'a') {
           // URL handling.  Two modes: [a=url]title[/a] and [a]url[/a].
           //  Verify enclosing value first.
@@ -386,17 +410,14 @@ class BBCode
         }
       }
     }
-
     // pick up any stray chars and HTML-encode them
     $output .= self::encode(substr($input, $input_ptr));
-
     // Close any remaining stray tags left on the stack
     while ($stack)
     {
       $tag = array_pop($stack);
       $output = $output . '</' . $tag . '>';
     }
-
     return $output;
   }
 }

@@ -1,6 +1,10 @@
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>jquery.min.js"></script>
 
+<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
+<script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>marked.min.js"></script>
+<?php } ?>
+
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>bootstrap.min.js"></script>
 

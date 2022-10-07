@@ -12,6 +12,11 @@
 				uploadJson : '../kindeditor/php/upload_json.php',
 				fileManagerJson : '../kindeditor/php/file_manager_json.php',
 				allowFileManager : false,
+				filterMode:false,
+<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN)
+                                echo "designMode:false,";
+?>
+
 				afterCreate : function() {
 					var self = this;
 					K.ctrl(document, 13, function() {

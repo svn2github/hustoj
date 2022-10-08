@@ -114,7 +114,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content'>
-							<?php echo $row['description']?>
+							<?php echo bbcode_to_html($row['description'])?>
 						</div>
 					</div>
 
@@ -127,7 +127,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content'>
-							<?php echo $row['input']?>
+							<?php echo bbcode_to_html($row['input'])?>
 						</div>
 					</div>
 					<?php }
@@ -139,7 +139,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content'>
-							<?php echo $row['output']?>
+							<?php echo bbcode_to_html($row['output'])?>
 						</div>
 					</div>
 					<?php }    
@@ -182,7 +182,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content hint'>
-							<?php echo $row['hint']?>
+							<?php echo bbcode_to_html($row['hint'])?>
 						</div>
 					</div>
 					<?php }
@@ -248,6 +248,12 @@
 
 		$( document ).ready( function () {
 			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
+<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
+                        $("div.md").each(function(){
+                                $(this).html(marked.parse($(this).html()));
+                        });
+<?php } ?>
+
 		} );
 		function CopyToClipboard (input) {
 			var textToClipboard = input;

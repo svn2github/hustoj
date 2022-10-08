@@ -33,6 +33,8 @@ div[class*=ace_br] {
 }
 </style>
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>clipboard.min.js"></script>
+<script src="<?php echo $OJ_CDN_URL.$path_fix."template/bs3/"?>jquery.min.js"></script>
+<script src="<?php echo $OJ_CDN_URL.$path_fix."template/bs3/"?>marked.min.js"></script>
 <div class="ui center aligned grid">
     <div class="row">
       <h1 class="ui header">
@@ -105,14 +107,14 @@ div[class*=ace_br] {
   <div class="row">
     <div class="column">
       <h4 class="ui top attached block header"><?php echo $MSG_Description?></h4>
-      <div class="ui bottom attached segment font-content"><?php echo $row['description']; ?></div>
+      <div class="ui bottom attached segment font-content"><?php echo bbcode_to_html($row['description']); ?></div>
     </div>
   </div>
   <?php if($row['input']){ ?>
     <div class="row">
       <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Input?></h4>
-          <div class="ui bottom attached segment font-content"><?php echo $row['input']; ?></div>
+          <div class="ui bottom attached segment font-content"><?php echo bbcode_to_html($row['input']); ?></div>
       </div>
     </div>
   <?php }?>
@@ -120,7 +122,7 @@ div[class*=ace_br] {
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Output?></h4>
-          <div class="ui bottom attached segment font-content"><?php echo $row['output']; ?></div>
+          <div class="ui bottom attached segment font-content"><?php echo bbcode_to_html($row['output']); ?></div>
         </div>
     </div>
   <?php }?>
@@ -164,7 +166,7 @@ div[class*=ace_br] {
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_HINT?></h4>
-          <div class="ui bottom attached segment font-content hint"><?php echo $row['hint']; ?></div>
+          <div class="ui bottom attached segment font-content hint"><?php echo bbcode_to_html($row['hint']); ?></div>
         </div>
     </div>
   <?php }?>
@@ -261,6 +263,12 @@ div[class*=ace_br] {
 
   $(document).ready(function(){
     $("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
+<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
+                        $("div.md").each(function(){
+                                $(this).html(marked.parse($(this).text()));
+                        });
+<?php } ?>
+
   });
   </script>   
 

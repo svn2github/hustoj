@@ -173,7 +173,6 @@ else{
   }
   else if(isset($_POST['problem2contest'])){
     $plist = "";
-    //echo $_POST['pid'];
     sort($_POST['pid']);
     foreach($_POST['pid'] as $i){       
       if($plist)

@@ -49,8 +49,8 @@ $this->pass = $pass;
 
 #
 
-$this->host_name = "localhost"; //is used in HELO command 
-$this->log_file = "";
+$this->host_name = "HUSTOJ"; //is used in HELO command 
+$this->log_file = "";  //"/home/judge/log/mail.log";
 
 $this->sock = FALSE;
 
@@ -160,7 +160,7 @@ return $this->smtp_error("sending HELO command");
 
 }
     
-$this->smtp_ok();    // QQ mail need this line
+if($this->relay_host =="smtp.qq.com") $this->smtp_ok();    // QQ mail need this line
  
 #auth
 

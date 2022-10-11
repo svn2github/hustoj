@@ -54,7 +54,7 @@ include_once("kindeditor.php");
 						<div class="col-lg-12">
 							<div class="card alert">
 								<div class="card-header">
-									<h4>编辑问题 P<?php echo $_GET['id']?$_GET['id']:$_POST["problem_id"];?></h4>
+									<h4>编辑问题 P<?php echo $_GET['id']?intval($_GET['id']):intval($_POST["problem_id"]);?></h4>
 									<div class="card-header-right-icon">
 										<ul>
 											<li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li> 

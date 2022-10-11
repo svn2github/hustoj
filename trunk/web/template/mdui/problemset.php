@@ -64,7 +64,7 @@
                     <label class="mdui-textfield-label">题目搜索</label>
                     <input class="mdui-textfield-input" name="search" type="text"
                         style="width: calc(100% - 40px); display: inline-block;"
-                        value="<?php echo $_GET["search"] ?>">
+                        value="<?php echo htmlentities($_GET["search"], ENT_QUOTES, 'UTF-8'); ?>">
                     <button class="mdui-btn mdui-btn-icon" type="sumbit">
                         <i class="mdui-icon material-icons" style="top: 35%; left: 40%;">search</i>
                     </button>

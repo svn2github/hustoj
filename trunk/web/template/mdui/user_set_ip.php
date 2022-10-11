@@ -93,7 +93,7 @@
             <div class="mdui-card mdui-col-sm-6" style="text-align: left;">
                 <div class="mdui-card-primary">
                 <?php if ($result2 == "changed") { ?>
-                    <script> mdui.alert("成功将用户 <?php echo $_POST['user_id']; ?> 的登录 IP 修改为 <?php echo $ip; ?> ."); </script>
+                    <script> mdui.alert("成功将用户 <?php echo htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8'); ?> 的登录 IP 修改为 <?php echo $ip; ?> ."); </script>
                 <?php } ?>
                     <div class="mdui-card-primary-title" style="text-align: center">指定登录 IP</div>
                     <!-- <div class="mdui-card-primary-subtitle"></div> -->
@@ -110,7 +110,7 @@
                             <label class="mdui-textfield-label">用户名</label>
                             <?php if (isset($_POST["user_id"])) { ?>
                                 <input class="mdui-textfield-input" name="user_id" type="text"
-                                    value="<?php echo $_POST["user_id"]; ?>" required />
+                                    value="<?php echo htmlentities($_POST["user_id"], ENT_QUOTES, 'UTF-8'); ?>" required />
                             <?php } else if (isset($_GET["user_id"])) { ?>
                                 <input class="mdui-textfield-input" name="user_id" type="text"
                                     value="<?php echo htmlentities($_GET["user_id"],ENT_QUOTES,'UTF-8') ; ?>" required />

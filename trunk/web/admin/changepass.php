@@ -17,14 +17,12 @@ if(isset($OJ_LANG)){
 <div class='container'>
 
 <?php
-if(isset($_POST['do'])){
-	//echo $_POST['user_id'];
+if(isset($_POST['do'])){	
 	require_once("../include/check_post_key.php");
-	//echo $_POST['passwd'];
 	require_once("../include/my_func.inc.php");
 	
 	$user_id = $_POST['user_id'];
-  $passwd = $_POST['passwd'];
+        $passwd = $_POST['passwd'];
 
   if(false){
 		$user_id = stripslashes($user_id);
@@ -35,9 +33,9 @@ if(isset($_POST['do'])){
 	$sql = "update `users` set `password`=? where `user_id`=?  and user_id not in( select user_id from privilege where rightstr='administrator')";
 	
 	if(pdo_query($sql,$passwd,$user_id) == 1)
-		echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Password Changed!</h4></center>";
+		echo "<center><h4 class='text-danger'>User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')."'s Password Changed!</h4></center>";
   else
-  	echo "<center><h4 class='text-danger'>There is No such User ".$_POST['user_id']."! or User ".$_POST['user_id']." is administrator!</h4></center>";
+  	echo "<center><h4 class='text-danger'>There is No such User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')."! or User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')." is administrator!</h4></center>";
 }
 ?>
 

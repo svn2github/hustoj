@@ -275,7 +275,6 @@ $this->log_write("Error: Cannot resolve MX \"".$domain."\"\n");
 return FALSE;
 
 }
-//专注与php学习 http://www.daixiaorui.com 欢迎您的访问
 
 foreach ($MXHOSTS as $host) {
 
@@ -334,6 +333,8 @@ function smtp_ok()
 {
 
 $response = str_replace("\r\n", "", fgets($this->sock, 512));
+    
+$this->log_write("Info  : Remote host returned \"".$response."\"\n");
 
 $this->smtp_debug($response."\n");
 

@@ -18,9 +18,7 @@ if(isset($OJ_LANG)){
 
 <?php
 if(isset($_POST['do'])){
-  //echo $_POST['user_id'];
   require_once("../include/check_post_key.php");
-  //echo $_POST['passwd'];
   require_once("../include/my_func.inc.php");
 
   $pieces = explode("\n", trim($_POST['ulist']));

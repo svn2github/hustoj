@@ -101,7 +101,7 @@
 
 	  <?php
 	  if ($result2=="changed")
-	  	echo "<center><h4 class='text-danger'>User ".$_POST['user_id']."'s Login IP Changed to ".$ip."</h4></center>";
+	  	echo "<center><h4 class='text-danger'>User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')."'s Login IP Changed to ".$ip."</h4></center>";
 	  else
 	  	echo "<center><h4 class='text-danger'>Login IP Change</h4></center>";
 	 	?>
@@ -122,7 +122,7 @@
 			<div class="form-group">
 				<label class="col-sm-offset-2 col-sm-3 control-label"><?php echo "New IP"?></label>
 				<?php if(isset($_POST['ip'])) { ?>
-				<div class="col-sm-3"><input name="ip" class="form-control" value="<?php echo $_POST['ip']?>" type="text"  autocomplete="off" required ></div>
+				<div class="col-sm-3"><input name="ip" class="form-control" value="<?php echo htmlentities($_POST['ip'], ENT_QUOTES, 'UTF-8')?>" type="text"  autocomplete="off" required ></div>
 				<?php } else { ?>
 				<div class="col-sm-3"><input name="ip" class="form-control" placeholder="<?php echo "?.?.?.?*"?>" type="text"  autocomplete="off" required ></div>
 				<?php } ?>

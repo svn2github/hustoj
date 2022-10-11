@@ -55,7 +55,7 @@ include_once("kindeditor.php");
 						<div class="col-lg-12">
 							<div class="card alert">
 								<div class="card-header">
-									<h4><?php echo $MSG_CONTEST.$MSG_EDIT;?> C<?php echo $_GET['cid'];?></h4>
+									<h4><?php echo $MSG_CONTEST.$MSG_EDIT;?> C<?php echo intval($_GET['cid']);?></h4>
 									<div class="card-header-right-icon">
 										<ul>
 											<li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li> 

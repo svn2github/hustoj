@@ -64,7 +64,7 @@
                 echo '<div class="mdui-btn-group mdui-float-right">';
 
                 $qs="";
-                $nstart=isset($_GET["start"])?$_GET["start"]:0;
+                $nstart=isset($_GET["start"])?intval($_GET["start"]):0;
                 if(isset($_GET['prefix'])){
                     $qs.="&prefix=".htmlentities($_GET['prefix'],ENT_QUOTES,"utf-8");
                 }

@@ -113,7 +113,7 @@
                                     value="<?php echo $_POST["user_id"]; ?>" required />
                             <?php } else if (isset($_GET["user_id"])) { ?>
                                 <input class="mdui-textfield-input" name="user_id" type="text"
-                                    value="<?php echo $_GET["user_id"]; ?>" required />
+                                    value="<?php echo htmlentities($_GET["user_id"],ENT_QUOTES,'UTF-8') ; ?>" required />
                             <?php } else { ?>
                                 <input class="mdui-textfield-input" name="user_id" type="text" required />
                             <?php } ?>

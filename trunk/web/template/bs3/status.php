@@ -103,16 +103,7 @@
 						<option value=100 ".($showsim==100?'selected':'').">100</option>
 					</select>&nbsp;&nbsp;&nbsp;&nbsp;";
 				
-					/* if (isset($_GET['cid']))
-					echo "<input type=hidden name=cid value='".$_GET['cid']."'>";
-					if (isset($_GET['language']))
-						echo "<input type=hidden name=language value='".$_GET['language']."'>";
-					if (isset($_GET['user_id']))
-						echo "<input type=hidden name=user_id value='".$_GET['user_id']."'>";
-					if (isset($_GET['problem_id']))
-						echo "<input type=hidden name=problem_id value='".$_GET['problem_id']."'>";
-					//echo "<input type=submit>";
-					*/
+					
 				}
 				echo "<input type=submit class='form-control' value='$MSG_SEARCH'>";
 				?>

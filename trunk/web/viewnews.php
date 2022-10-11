@@ -2,7 +2,7 @@
 ////////////////////////////Common head
 $cache_time = 30;
 $OJ_CACHE_SHARE = true;
-$news_id=$_GET["id"];
+$news_id=intval($_GET["id"]);
 require_once( './include/cache_start.php' );
 require_once( './include/db_info.inc.php' );
 require_once( './include/bbcode.php' );

@@ -77,6 +77,20 @@
       </center>
       <?php require_once("../include/set_post_key.php");?>
     </form>
+    - Import Problem from QDUOJ - json - zip<br><br>
+    <form class='form-inline' action='problem_import_qduoj.php' method=post enctype="multipart/form-data">
+      <div class='form-group'>
+        <input class='form-control' type=file name=fps>
+      </div>
+      <br><br>
+      <br><br><br>
+      <center>
+      <div class='form-group'>
+        <button class='btn btn-default btn-sm' type=submit>Upload to HUSTOJ</button>
+      </div>
+      </center>
+      <?php require_once("../include/set_post_key.php");?>
+    </form>
     <?php } ?>
 
     <br><br>

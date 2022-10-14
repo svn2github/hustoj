@@ -218,4 +218,20 @@ class smtp {
         }
     }
 }
+function email($address,$mailtitle,$mailcontent){
+
+        //******************** 配置信息 ********************************
+        $smtpserver = "smtp.qiye.aliyun.com";//SMTP服务器
+        $smtpserverport =25;//SMTP服务器端口
+        $smtpusermail = "mailer@yourdomain.com";//SMTP服务器的用户邮箱
+        $smtpemailto =$address;//发送给谁
+        $smtpuser = "$smtpusermail";           //SMTP服务器的用户帐号
+        $smtppass = "your_smpt_auth_password";      //SMTP服务器的用户密码或者由邮箱系统生成的口令
+        $mailtype = "TXT";//邮件格式（HTML/TXT）,TXT为文本邮件
+        //************************ 配置信息 ****************************
+        $smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
+        $smtp->debug =false;//是否显示发送的调试信息
+        $state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+}
+
 ?>

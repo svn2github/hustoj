@@ -42,8 +42,8 @@
 
       <div class="ui message">
         <a href="registerpage.php">注册账号</a>
-        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-        <!-- <a href="lostpassword.php">忘记密码</a> -->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="lostpassword.php">忘记密码</a>
       </div>
     </div>
   </div>

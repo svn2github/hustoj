@@ -2390,13 +2390,13 @@ function save_upload($temp_file,$filename,$dir_dest) {
             if (file_exists($file)){
                 if (unlink($file)){
                     if (copy($temp_file,$file)){
-                        @chmod($file,0711);
+                        @chmod($file,0744);
                         $out = 6;
                     } else $out = 2;
                 } else $out = 5;
             } else {
                 if (copy($temp_file,$file)){
-                    @chmod($file,0711);
+                    @chmod($file,0744);
                     $out = 1;
                 } else $out = 2;
             }

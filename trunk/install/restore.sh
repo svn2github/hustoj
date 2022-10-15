@@ -19,8 +19,10 @@ MAIN="../$1"
 tar xjf $MAIN
 mv /home/judge/data /home/judge/data.del.$DATE
 mv home/judge/data /home/judge/
+chown www-data -R /home/judge/data
 mv /home/judge/src/web/upload /home/judge/src/web/upload.del.$DATE
 mv home/judge/src/web/upload /home/judge/src/web/
+chown www-data -R /home/judge/src/web/
 bzip2 -d var/backups/db_${BAKDATE}.sql.bz2
 mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < var/backups/db_${BAKDATE}.sql
 mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < /home/judge/src/install/update.sql

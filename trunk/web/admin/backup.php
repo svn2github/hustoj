@@ -1,26 +1,26 @@
-<?php 
+<?php
 require_once("admin-header.php");
 
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
-	echo "<a href='../loginpage.php'>Please Login First!</a>";
-	exit(1);
+        echo "<a href='../loginpage.php'>Please Login First!</a>";
+        exit(1);
 }
 ?>
 
 <div class="container">
-<br> 
-<br> 
-<br> 
-<br> 
+<br>
+<br>
+<br>
+<br>
 
 <?php
 if(isset($_POST['do'])){
 
 require_once(dirname(__FILE__)."/../include/backup.php");
-$target=$OJ_DATA."/0/".$DB_NAME.(date('Y-m-d H:i:s')).".sql";
+$target=$OJ_DATA."/0/".$DB_NAME."_".(date('Y-m-d H:i:s')).".sql";
 $dirpath=dirname($target);
 if (!file_exists($dirpath)) {
-	mkdir($dirpath);
+        mkdir($dirpath);
 }
 $config = array(
         'host' => $DB_HOST,
@@ -33,40 +33,46 @@ $config = array(
     );
 $bak = new DatabaseTool($config);
 $bak->backup();
+$db_file=$target;
 
-function addFileToZip($path, $zip) {
-	global $OJ_DATA;
-	if ($path=="data/0") return;
-	$handler = opendir($path); //打开当前文件夹由$path指定。
-	/*
-	循环的读取文件夹下的所有文件和文件夹
-	其中$filename = readdir($handler)是每次循环的时候将读取的文件名赋值给$filename，
-	为了不陷于死循环，所以还要让$filename !== false。
-	一定要用!==，因为如果某个文件名如果叫'0'，或者某些被系统认为是代表false，用!=就会停止循环
-	*/
-	while (($filename = readdir($handler)) !== false) {
-		if ($filename != "." && $filename != "..") {//文件夹文件名字为'.'和‘..’，不要对他们进行操作
-			if (is_dir($path . "/" . $filename)) {// 如果读取的某个对象是文件夹，则递归
-				addFileToZip($path . "/" . $filename, $zip);
-			} else { //将文件加入zip对象
-				$zip->addFile($path . "/" . $filename);
-			}
-		}
-	}
-	@closedir($path);
+function addDirToZip($path, $zip) {
+        global $OJ_DATA;
+        if ($path=="data/0") return;
+        $handler = opendir($path); //打开当前文件夹由$path指定。
+        /*
+        循环的读取文件夹下的所有文件和文件夹
+        其中$filename = readdir($handler)是每次循环的时候将读取的文件名赋值给$filename，
+        为了不陷于死循环，所以还要让$filename !== false。
+        一定要用!==，因为如果某个文件名如果叫'0'，或者某些被系统认为是代表false，用!=就会停止循环
+        */
+        while (($filename = readdir($handler)) !== false) {
+                if ($filename != "." && $filename != "..") {//文件夹文件名字为'.'和‘..’，不要对他们进行操作
+                        if (is_dir($path . "/" . $filename)) {// 如果读取的某个对象是文件夹，则递归
+                                addDirToZip($path . "/" . $filename, $zip);
+                        } else { //将文件加入zip对象
+                                $zip->addFile($path . "/" . $filename);
+                        }
+                }
+        }
+        @closedir($path);
 }
- 
+
 $zip = new ZipArchive();
-$ztar=dirname($target)."/data".(date('Y-m-d H:i:s')).".zip";;
+$ztar=dirname($target)."/backup_".(date('Y-m-d H:i:s')).".zip";;
 //echo $ztar;
 if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
-	chdir( dirname($OJ_DATA) );
-	if(file_exists("data"))
-	addFileToZip("data", $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
-	chdir(realpath(dirname(__FILE__)."/../upload"));
-	if(file_exists($domain))
-	addFileToZip($domain, $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
-	$zip->close(); //关闭处理的zip文件
+        chdir( dirname($OJ_DATA) );
+        if(is_dir("data"))
+                addDirToZip("data", $zip); //测试数据
+        chdir(realpath(dirname(dirname(__FILE__))));
+        if(is_dir("upload"))
+                addDirToZip("upload", $zip); //题目图片
+        chdir($OJ_DATA."/0");
+        //echo $db_file;
+        if(file_exists($db_file)){
+                $zip->addFile($db_file);
+        }
+        $zip->close(); //关闭处理的zip文件
 }
 
 ?>
@@ -75,10 +81,10 @@ if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
 <?php
 }else{
 ?>
-<br> 
-<br> 
+<br>
+<br>
    <form method="post" action="backup.php">
-	<input type="submit" name="do" value="Backup">
+        <input type="submit" name="do" value="Backup">
    </form>
 
 <?php

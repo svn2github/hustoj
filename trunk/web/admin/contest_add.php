@@ -70,7 +70,7 @@ if(isset($_POST['startdate'])){
   $sql = "DELETE FROM `contest_problem` WHERE `contest_id`=$cid";
   $plist = trim($_POST['cproblem']);
   $pieces = explode(",",$plist );
-
+  $pieces = array_unique($pieces);
   if(count($pieces)>0 && intval($pieces[0])>0){
      
      

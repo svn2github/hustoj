@@ -160,7 +160,7 @@
                 <a href="<?php echo $path_fix?>ranklist.php"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <?php echo $MSG_RANKLIST?></a>
               </li>
               <li <?php if ($url=="contest.php") echo " $ACTIVE";?>>
-                <a href="<?php echo $path_fix?>contest.php<?php if(isset($_SESSION[$OJ_NAME."_user_id"])) echo "?my"  ?>"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <?php echo $MSG_CONTEST?></a>
+                <a href="<?php echo $path_fix?>contest.php<?php if(isset($_SESSION[$OJ_NAME."_user_id"])) echo "?my"  ?>"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> <?php echo $MSG_CONTEST?></a>
               </li>
           <?php
             }

@@ -5,14 +5,14 @@ require_once( './include/db_info.inc.php' );
 require_once( './include/memcache.php' );
 require_once( './include/setlang.php' );
 require_once( './include/bbcode.php' );
+require_once("./include/db_info.inc.php");
+require_once("./include/setlang.php");
+$view_title= "LOGIN";
 
-    require_once("./include/db_info.inc.php");
-	require_once("./include/setlang.php");
-	$view_title= "LOGIN";
-
-	if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	echo "<a href=logout.php>Please logout First!</a>";
-	exit(1);
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+		header("location:index.php");
+		echo "<a href=logout.php>Please logout First!</a>";
+		exit(1);
 }
 
 /////////////////////////Template

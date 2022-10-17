@@ -18,6 +18,7 @@ if(isset($_POST['do'])){
 
 require_once(dirname(__FILE__)."/../include/backup.php");
 $target=$OJ_DATA."/0/".$DB_NAME."_".(date('Y-m-d H:i:s')).".sql";
+$db_file=basename($target);
 $dirpath=dirname($target);
 if (!file_exists($dirpath)) {
         mkdir($dirpath);
@@ -33,7 +34,6 @@ $config = array(
     );
 $bak = new DatabaseTool($config);
 $bak->backup();
-$db_file=$target;
 
 function addDirToZip($path, $zip) {
         global $OJ_DATA;
@@ -68,7 +68,6 @@ if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
         if(is_dir("upload"))
                 addDirToZip("upload", $zip); //题目图片
         chdir($OJ_DATA."/0");
-        //echo $db_file;
         if(file_exists($db_file)){
                 $zip->addFile($db_file);
         }

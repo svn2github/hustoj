@@ -104,7 +104,7 @@ if(isset($_POST['startdate'])){
   $sql = "DELETE FROM `privilege` WHERE `rightstr`=?";
   pdo_query($sql,"c$cid");
   $pieces = explode("\n", trim($_POST['ulist']));
-  
+  $pieces = array_unique($pieces);
   if(count($pieces)>0 && strlen($pieces[0])>0){
     $sql_1 = "INSERT INTO `privilege`(`user_id`,`rightstr`) VALUES (?,?)";
     for($i=0; $i<count($pieces); $i++){

@@ -79,7 +79,7 @@
                         $sql="SELECT users.`user_id`,`nick`,s.`solved`,t.`submit` FROM `users`
                                         inner join
                                         (select count(distinct problem_id) solved ,user_id from solution 
-						where in_date>str_to_date('$s','%Y-%m-%d') and result=4 
+						where user_id not in (".$OJ_RANK_HIDDEN.") and in_date>str_to_date('$s','%Y-%m-%d') and result=4 
 						group by user_id order by solved desc limit " . strval ( $rank ) . ",$page_size) s 
 					on users.user_id=s.user_id
                                         inner join

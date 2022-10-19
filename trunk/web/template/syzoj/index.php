@@ -39,7 +39,7 @@
                         if ( $result_news ) {
                             foreach ( $result_news as $row ) {
                                 echo "<tr>"."<td>"
-                                    .bbcode_to_html($row["content"])."</td>";
+                                    .bbcode_to_html($row["content"])."</td></tr>";
                             }
                         }
                         ?>

@@ -80,7 +80,7 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	  $pid=intval($pid);
      	  $pids.=",$pid";
 	}
-	$filter_sql = " problem_id in ($pids)  order by accepted desc"; // 如果希望按给定顺序改成 order by FIELD(problem_id,$pids);
+	$filter_sql = " problem_id in ($pids) order by FIELD(problem_id,$pids)"; // 如果希望按难度顺序改成 order by accepted desc ;
 	$pstart = 0;
 	$pend = 100;
 	//echo $filter_sql ;

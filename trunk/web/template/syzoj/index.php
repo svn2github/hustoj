@@ -28,28 +28,18 @@
                     </tbody>
                 </table>
             </div>
-            <h4 class="ui top attached block header"><i class="ui signal icon"></i><?php echo $MSG_RANKLIST;?></h4>
+            <h4 class="ui top attached block header"><i class="ui star icon"></i><?php echo $OJ_INDEX_NEWS_TITLE;?></h4>
             <div class="ui bottom attached segment">
-                <table class="ui very basic center aligned table" style="table-layout: fixed; ">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px; ">#</th>
-                            <th style="width: 170px; "><?php echo $MSG_USER_ID;?></th>
-                            <th><?php echo $MSG_SIGN ;?></th>
-                        </tr>
-                    </thead>
+                <table class="ui very basic left aligned table" style="table-layout: fixed; ">
                     <tbody>
 
                         <?php
-                        $sql_users = "select * FROM `users` where user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ORDER BY `solved` DESC LIMIT 15";
-                        $result_users = mysql_query_cache( $sql_users );
-                        if ( $result_users ) {
-                            $i = 1;
-                            foreach ( $result_users as $row ) {
-                                echo "<tr>"."<td>".$i++."</td>"."<td>"
-                                    ."<a href=\"userinfo.php?user=".$row["user_id"]."\">"
-                                    .$row["user_id"]."</a></td>"
-                                    ."<td>".$row["school"]."</td>"."</tr>";
+                        $sql_news = "select * FROM `news` WHERE `defunct`!='Y' AND `title`='$OJ_INDEX_NEWS_TITLE' ORDER BY `importance` ASC,`time` DESC LIMIT 10";
+                        $result_news = mysql_query_cache( $sql_news );
+                        if ( $result_news ) {
+                            foreach ( $result_news as $row ) {
+                                echo "<tr>"."<td>"
+                                    .bbcode_to_html($row["content"])."</td>";
                             }
                         }
                         ?>

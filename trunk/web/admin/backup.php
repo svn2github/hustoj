@@ -65,8 +65,13 @@ if ($zip->open($ztar, ZipArchive::CREATE) === TRUE) {
         if(is_dir("data"))
                 addDirToZip("data", $zip); //测试数据
         chdir(realpath(dirname(dirname(__FILE__))));
-        if(is_dir("upload"))
-                addDirToZip("upload", $zip); //题目图片
+        if($OJ_SaaS_ENABLE && $DOMAIN!=$domain){
+                if(is_dir("upload/$domain"))
+                        addDirToZip("upload/$domain", $zip); //子域题目图片
+        }else{
+                if(is_dir("upload/"))
+                        addDirToZip("upload", $zip); //题目图片
+        }
         chdir($OJ_DATA."/0");
         if(file_exists($db_file)){
                 $zip->addFile($db_file);

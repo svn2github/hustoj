@@ -221,16 +221,17 @@ class smtp {
 function email($address,$mailtitle,$mailcontent){
 
         //******************** 配置信息 ********************************
-        $smtpserver = "smtp.qiye.aliyun.com";//SMTP服务器
-        $smtpserverport =25;//SMTP服务器端口
-        $smtpusermail = "mailer@yourdomain.com";//SMTP服务器的用户邮箱
-        $smtpemailto =$address;//发送给谁
-        $smtpuser = "$smtpusermail";           //SMTP服务器的用户帐号
-        $smtppass = "your_smpt_auth_password";      //SMTP服务器的用户密码或者由邮箱系统生成的口令
+        $smtpserver = "smtp.qiye.aliyun.com";           //SMTP服务器，通常在邮箱的smtp/pop3设置中可以查询到，推荐用企业邮箱发信，避免被识别为垃圾邮件
+        $smtpserverport =25;                           //SMTP服务器端口，通常是25，有点服务器支持80、465以适应不同的网络防火墙配置
+        $smtpusermail = "mailer@yourdomain.com";      //SMTP服务器的用户邮箱
+        $smtppass = "your_smpt_auth_password";       //SMTP服务器的用户密码或者由邮箱系统生成的口令
+        //通常只需修改上面的4个设置。
+        $smtpuser = "$smtpusermail";           //SMTP服务器的用户帐号,通常就是邮箱，个别情况服务器支持一个账号多个邮箱地址的可能不同。
+        $smtpemailto =$address;               //发送给谁
         $mailtype = "TXT";//邮件格式（HTML/TXT）,TXT为文本邮件
         //************************ 配置信息 ****************************
         $smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
-        $smtp->debug =false;//是否显示发送的调试信息
+        $smtp->debug =false;                 //是否显示发送的调试信息，发信界面卡住，发信失败，可打开进行调试
         $state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
 }
 

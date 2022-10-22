@@ -1,3 +1,5 @@
+<?php $show_title="找回密码 - $OJ_NAME"; ?>
+<?php include("template/$OJ_TEMPLATE/header.php");?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,9 +24,8 @@
   <body>
 
     <div class="container">
-    <?php include("template/$OJ_TEMPLATE/nav.php");?>	    
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="padding">
  <form action=lostpassword2.php method=post>
 <center>
 <table algin=center>

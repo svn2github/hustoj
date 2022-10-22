@@ -50,7 +50,7 @@ div[class*=ace_br] {
             echo "$MSG_PROBLEM ".$PID[$pid].": ".$row['title'];
           }
           if($row['defunct']=="Y")
-          echo "<span class=\"p-label ui tiny red label\">$MSG_Reserved</span>";
+          echo "<span class=\"p-label ui tiny red label\">$MSG_RESERVED</span>";
         ?>
       </h1>
     </div>

@@ -304,7 +304,8 @@
   $MSG_CALLID_20="可能存在数组越界，检查题目描述的数据量与所申请数组大小关系";
   $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="检查数组越界的情况";
   $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="字符串的字符下标越界，检查subString,charAt等方法的参数";
-
+  $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="二进制输出错误，检查是否误将数值类型作为字符输出，或者输出了不打印字符的情况。";
+  
   // template/../ceinfo.php
   $MSG_ERROR_EXPLAIN="辅助解释";
   $MSG_SYSTEM_OUT_PRINT="Java中System.out.print用法跟C语言printf不同，请试用System.out.format";

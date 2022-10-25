@@ -69,6 +69,8 @@
     exps[7]="<?php echo $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION ?>";
     pats[8]=/StringIndexOutOfBoundsException/;
     exps[8]="<?php echo $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION ?>";
+    pats[9]=/Binary files/;
+    exps[9]="<?php echo $MSG_WRONG_OUTPUT_TYPE_EXCEPTION ?>";
     function explain(){
       var errmsg = $("#errtxt").text();
       var expmsg = "";

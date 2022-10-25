@@ -304,7 +304,7 @@
  $MSG_CALLID_20 ="可能存在數組越界，檢查題目描述的數據量與所申請數組大小關係";
  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION ="檢查數組越界的情況";
  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION ="字符串的字符下標越界，檢查subString,charAt等方法的參數";
- $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="Are you using an number as a char? Did you print out any Non-printable characters?";
+ $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="二進製輸出錯誤，檢查是否誤將數值類型作為字符輸出，或者輸出了不打印字符的情況。";
 	
  // template/../ceinfo.php
  $MSG_ERROR_EXPLAIN ="輔助解釋";

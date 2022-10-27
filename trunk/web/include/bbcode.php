@@ -310,7 +310,7 @@ class BBCode
 	    $plist=html_entity_decode($url);
 	    $pnum= count(explode(",",html_entity_decode($url)));
 	    //var_dump($colorIndex);
-            // emit the tag
+            // emit the tag 如果希望题单只显示一列，修改下面的col-lg-6为col-lg-12
 	    $output = $output . '<div class="col-xs-12 col-lg-6"><div class="panel '.$plist_color[$colorIndex%count($plist_color)].'">'
 				.'<div class="panel-heading" onclick="$(\'#plist'.$colorIndex.'\').load(\'problemset.php?ajax=1&list='.$url.'\').toggle()"  style="cursor: pointer" >'
 		                .'<h4 class="panel-title" ><a class="collapsed" href="problemset.php?list=' . $url . '"  target="_blank">' 

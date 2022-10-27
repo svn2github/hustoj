@@ -20,7 +20,9 @@ apt-get install -y software-properties-common
 add-apt-repository universe
 add-apt-repository multiverse
 add-apt-repository restricted
-
+# 解决宝塔收集用户信息问题
+chattr +i /www/server/panel/script/site_task.py
+chattr +i -R /www/server/panel/logs/request
 
 apt-get update && apt-get -y upgrade
 

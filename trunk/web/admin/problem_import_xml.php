@@ -84,7 +84,9 @@ function submitSolution($pid,$solution,$language) {
 
 <?php
 function getValue($Node, $TagName) {
-  return $Node->$TagName;
+  $value=mb_ereg_replace("<div[a-z -=\"]*>","",$Node->$TagName);
+  $value=mb_ereg_replace("</div>","",$value);
+  return $value;
 }
 
 function getAttribute($Node, $TagName,$attribute) {

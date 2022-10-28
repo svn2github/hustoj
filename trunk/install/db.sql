@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `solution` (
   KEY `pid` (`problem_id`),
   KEY `res` (`result`),
   KEY `cid` (`contest_id`)
-) ENGINE=MyISAM row_format=fixed AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `source_code` (
   `solution_id` int(11) NOT NULL,

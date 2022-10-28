@@ -1265,7 +1265,7 @@ void umount(char *work_dir)  //清理可能存在的热加载目录
 }
 int compile(int lang, char *work_dir)
 {
-	if( lang == 16 ) return 0; // python / js don't compile
+	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
 	int pid;
         char fmax_errors[BUFFER_SIZE];
 
@@ -2506,8 +2506,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		sprintf(java_xmx, "-Xmx%dM", mem_lmt);
 		//sprintf(java_xmx, "-XX:MaxPermSize=%dM", mem_lmt);
 
-		execle("/usr/bin/java", "/usr/bin/java",java_xmx ,
-				"-Djava.security.manager", "-Djava.security.policy=./java.policy",  // this line might be removed in later java version
+		execle("/usr/bin/java", "/usr/bin/java",java_xmx , // the security manager has been removed in later java version
 		       "Main", (char *) NULL,envp);
 		break;
 	case LANG_RUBY:

@@ -282,7 +282,7 @@
 	$MSG_CALLID_20="The array may be out of bounds, check the relationship between the amount of data described in the title and the size of the applied array.";
 	$MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="Check if the array is out of bounds.";
 	$MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="The character subscript of the string is out of range, check the parameters of subString, charAt and other methods.";
-
+        $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="Are you using an number as a char? Did you print out any Non-printable characters?";
 	// template/../ceinfo.php
 	$MSG_ERROR_EXPLAIN="Expain";
 	$MSG_SYSTEM_OUT_PRINT="The usage of System.out.print in Java is different from that of C language printf, please try System.out.format";

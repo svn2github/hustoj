@@ -303,7 +303,7 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
   $MSG_CALLID_20="بەلكىم سانلار گۇرۇپپىسى پاسىلدىن ھالقىپ كەتكەن بولۇشى مۇمكىن، تەكشۈرۈش تېمىسىدا تەسۋىرلەنگەن سانلىق مەلۇمات مىقدارى بىلەن ئىلتىماس قىلىنغان سانلار گۇرۇپپىسىنىڭ چوڭ-كىچىكلىك مۇناسىۋىتىنى تەكشۈرۈش كېرەك ";
   $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="سانلار گۇرۇپپىسىنىڭ چېگرىدىن ئۆتۈش ئەھۋالىنى تەكشۈرۈڭ.";
   $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="ھەرپ-بەلگە تىزىقى ئاستىدىكى بەلگە چېگرادىن ئۆتۈپ، subString, charAt قاتارلىق ئۇسۇللارنىڭ پارامېتىرلىرىنى تەكشۈرۈڭ.";
-
+  $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="Are you using an number as a char? Did you print out any Non-printable characters?";
 	// template/../ceinfo.php
 	$MSG_ERROR_EXPLAIN="چۈشەنچە";
 	$MSG_SYSTEM_OUT_PRINT ="Java دا System.out.print ئىشلىتىش ئۇسۇلى C تىلى printf بىلەن ئوخشىمايدۇ، System.out.format نى سىناپ كۆرۈڭ. ";

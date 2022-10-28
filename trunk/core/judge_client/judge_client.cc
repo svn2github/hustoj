@@ -1265,7 +1265,7 @@ void umount(char *work_dir)  //清理可能存在的热加载目录
 }
 int compile(int lang, char *work_dir)
 {
-	if( lang == 6 || lang == 16 ) return 0; // python / js don't compile
+	if( lang == LANG_PYTHON || lang == LANG_JS ) return 0; // python / js don't compile
 	int pid;
         char fmax_errors[BUFFER_SIZE];
 

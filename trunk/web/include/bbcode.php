@@ -421,9 +421,16 @@ class BBCode
     return $output;
   }
 }
-
+function filterDIV($input){
+  $value=mb_ereg_replace("<div[a-z -=\"]*>","",$input);
+  $value=mb_ereg_replace("</div>","",$value);
+  return $value;
+}
 // procedural
 function bbcode_to_html($input) : string
 {
+  global $OJ_DIV_FILTER;
+  if(isset($OJ_DIV_FILTER)&&$OJ_DIV_FILTER) $input=filterDIV($input);
   return BBCode::bbcode_to_html($input);
 }
+

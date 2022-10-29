@@ -13,7 +13,7 @@ $cur_path = "template/$OJ_TEMPLATE/"
 
 
 </head>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="<?php echo $OJ_CDN_URL?>template/bs3/jquery.min.js"></script>
 <body>
 
 <div class="cotn_principal">

@@ -83,7 +83,7 @@
     <meta name="viewport" content="width=1200">
     <title><?php echo $show_title ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php");?>
-    <script src="<?php echo "$OJ_CDN_URL/template/$OJ_TEMPLATE/"?>jquery.min.js"></script>
+    <script src="<?php echo "$OJ_CDN_URL/include/"?>jquery-latest.js"></script>
 
 <!-- Scripts -->
 <script>

@@ -78,7 +78,7 @@ scp -r root@主机ip:/home/judge/data /home/judge/
 或用同步命令：
 
 ```bash
-rsync -vzrtopg –progress –delete root@主机ip:/home/judge/data /home/judge/
+rsync -vzrtopg --progress --delete root@主机ip:/home/judge/data /home/judge/
 ```
 
 ### 在各判题机重启判题程序

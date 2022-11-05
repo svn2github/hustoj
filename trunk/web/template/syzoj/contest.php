@@ -87,7 +87,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <pre><code>
+                   
                         <?php
                         foreach($view_problemset as $row){
                           echo "<tr>";
@@ -97,7 +97,7 @@
                           echo "</tr>";
                         }
                         ?>
-                        </pre></code>
+                       
                     </tbody>
                 </table>
             </div>

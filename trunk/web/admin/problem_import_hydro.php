@@ -143,7 +143,7 @@ else {
 			}
 			echo "${time}s-${memory}m";
 			pdo_query("update problem set time_limit=?,memory_limit=? where problem_id=?",$time,$memory,$pid);
-		}else if($pid!="" && strpos($file_path,"testdata")!== false){
+		}else if($pid!="" && strpos($file_path,"testdata") !== false && basename($file_name) != "testdata" ){
 	  		echo ".";
 			mkdir($OJ_DATA."/$pid/");
 		        file_put_contents($OJ_DATA."/$pid/".basename($file_name),$file_content);

@@ -109,7 +109,7 @@ else {
   mkdir($tempdir);
   $tempfile = $_FILES ["fps"] ["tmp_name"];
   if (get_extension( $_FILES ["fps"] ["name"])=="zip") {
-    echo "&nbsp;&nbsp;- zip file, only fps/xml files in root dir are supported";
+    echo "&nbsp;&nbsp;- zip file, only QDUOJ exported file is supported";
     $resource = zip_open($tempfile);
 
     $i = 1;

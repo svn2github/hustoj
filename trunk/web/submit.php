@@ -256,14 +256,26 @@ if ($len > 65536) {
 if (!$OJ_BENCHMARK_MODE) {
   // last submit
   $now = strftime("%Y-%m-%d %X", time()-$OJ_SUBMIT_COOLDOWN_TIME);
-  $sql = "SELECT `in_date` FROM `solution` WHERE `user_id`=? AND in_date>? ORDER BY `in_date` DESC LIMIT 1";
+  $sql = "SELECT `in_date`,solution_id FROM `solution` WHERE `user_id`=? AND in_date>? ORDER BY `in_date` DESC LIMIT 1";
   $res = pdo_query($sql, $user_id, $now);
 
   if (count($res)==1) {
+    /*
     $view_errors = $MSG_BREAK_TIME."<br>";
     require "template/".$OJ_TEMPLATE."/error.php";
     exit(0);
-  }
+       // 预防WAF抽风
+    */
+	$statusURI = "status.php?user_id=".$_SESSION[$OJ_NAME.'_'.'user_id'];
+	if (isset($cid)) {
+		$statusURI .= "&cid=$cid&fixed=";
+	}
+	if (!$test_run) {
+		header("Location: $statusURI");
+	} else {
+		echo $res[0][1];
+	}
+   }
 }
 
 if (~$OJ_LANGMASK&(1<<$language)) {

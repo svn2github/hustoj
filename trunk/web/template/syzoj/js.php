@@ -28,9 +28,9 @@ $(document).ready(function(){
   $(".jumbotron").prepend(msg);
   $("form").append("<div id='csrf' />");
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
-  let left=window.innerWidth-parseInt($("#menu").css("width")) - 200;
+  let left=window.innerWidth-parseInt($("#menu").css("width")) - 100;
   left/=2;
-  $("#menu").attr("style","margin-left:"+left+"!important");
+  $("#menu").attr("style","margin-left:"+left+"px!important");
 
 
 });

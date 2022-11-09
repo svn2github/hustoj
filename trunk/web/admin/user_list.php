@@ -81,6 +81,7 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
         }else{
                 echo "<td>".$row['email']."</td>";
         }
+        if($row['school']=="") $row['school']="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
         echo "<td><span fd='school' user_id='".$row['user_id']."'>".$row['school']."</span></td>";
         echo "<td>".$row['accesstime']."</td>";
         echo "<td>".$row['reg_time']."</td>";

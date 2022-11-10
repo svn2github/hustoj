@@ -33,7 +33,7 @@
 
 	if(isset($_GET['prefix'])){
 		$prefix=$_GET['prefix'];
-		$where="where user_id like ?";
+		$where="where user_id like ? and user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ";
 	}else{	
 		$where="where user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N' ";
 	}

@@ -87,6 +87,7 @@
 						where in_date>str_to_date('$s','%Y-%m-%d') 
 						group by user_id order by submit desc ) t 
 					on users.user_id=t.user_id
+					and users.user_id not in (".$OJ_RANK_HIDDEN.") and defunct='N'
                                 ORDER BY s.`solved` DESC,t.submit,reg_time  LIMIT  0,50
                          ";
 //                      echo $sql;

@@ -97,6 +97,7 @@ function fresh_result(solution_id) {
 var hj_ss = "<select class='http_judge form-control' length='2' name='result'>";
 
 for (var i=0; i<10; i++) {
+  if(i==3 || i==4 ) continue;	
   hj_ss += "	<option value='"+i+"'>"+judge_result[i]+" </option>";
 }
 

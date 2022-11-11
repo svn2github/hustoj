@@ -10,10 +10,7 @@ $view_title = "Welcome To Online Judge";
 
 require_once("./include/const.inc.php");
 
-if (isset($OJ_OI_MODE)&&$OJ_OI_MODE) {
-  header("location:index.php");
-  exit();
-}
+
 
 if (isset($_GET['id']))
   $id = intval($_GET['id']);

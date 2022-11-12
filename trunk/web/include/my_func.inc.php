@@ -72,7 +72,9 @@ grant {
         pdo_query($sql);
 
 }
-
+function mb_trim($string, $trim_chars = '\s'){
+    return preg_replace('/^['.$trim_chars.']*(?U)(.*)['.$trim_chars.']*$/u', '\\1',$string);
+}
 function send_udp_message($host, $port, $message)
 {
     $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);

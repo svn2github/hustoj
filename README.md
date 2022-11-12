@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+11-12 | 补丁 | 修补中间大量隐藏问题，后面正常的题目不显示的问题。
 11-06 | 更新 | 增加简单的导入HydroOJ打包zip(yaml+目录)格式题目的功能，目前不支持图片等高级特性,老版本需要自行安装php-yaml(sudo apt install php-yaml)。
 10-19 | 更新 | 将syzoj首页中的排名更换为标题为HelloWorld!的新闻内容，可在db_info.inc.php中配置$OJ_INDEX_NEWS_TITLE的值来选择要在首页显示的新闻。
 10-18 | 更新 | 增加以csv格式导入用户列表的功能，如有中文内容，需以UTF-8编码。

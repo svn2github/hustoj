@@ -24,13 +24,13 @@ function import_user($filename) {
             // 每个单独的数组都被存入到嵌套的数组中
             if ($data[0] == "学号") continue;
             echo $data[0] . "<br>\n";
-            $user_id = trim($data[0]);
-            $nick = $data[1];
-            $password = pwGen(trim($data[2]));
+            $user_id = mb_trim($data[0]);
+            $nick = mb_trim($data[1]);
+            $password = pwGen(mb_trim($data[2]));
             $school = "";
             $email = "";
-            if (isset($data[3])) $school = trim($data[3]);
-            if (isset($data[4])) $email = trim($data[4]);
+            if (isset($data[3])) $school = mb_trim($data[3]);
+            if (isset($data[4])) $email = mb_trim($data[4]);
             if (mb_strlen($nick, 'utf-8') > 20) {
                 $new_len = mb_strlen($nick, 'utf-8');
                 if ($new_len > $max_length) {

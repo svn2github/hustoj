@@ -17,36 +17,45 @@ function get_extension($file) {
     return $info['extension'];
 }
 function import_user($filename) {
+    $check=false;
     if (($h = fopen("{$filename}", "r")) !== FALSE) {
         // 文件中的每一行数据都被转换为我们调用的单个数组$data
         // 数组的每个元素以逗号分隔
         while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
             // 每个单独的数组都被存入到嵌套的数组中
-            if ($data[0] == "学号") continue;
-            echo $data[0] . "<br>\n";
-            $user_id = mb_trim($data[0]);
-            $nick = mb_trim($data[1]);
-            $password = pwGen(mb_trim($data[2]));
-            $school = "";
-            $email = "";
-            if (isset($data[3])) $school = mb_trim($data[3]);
-            if (isset($data[4])) $email = mb_trim($data[4]);
-            if (mb_strlen($nick, 'utf-8') > 20) {
-                $new_len = mb_strlen($nick, 'utf-8');
-                if ($new_len > $max_length) {
-                    $max_length = $new_len;
-                    $longer = "ALTER TABLE `users` MODIFY COLUMN `nick` varchar($max_length) NULL DEFAULT '' ";
-                    pdo_query($longer);
+                if ($data[0] == "学号") {
+                        $check=true;
+                        continue;
                 }
+            if($check){
+                    echo $data[0] . "<br>\n";
+                    $user_id = mb_trim($data[0]);
+                    $nick = $data[1];
+                    $password = pwGen(trim($data[2]));
+                    $school = "";
+                    $email = "";
+                    if (isset($data[3])) $school = $data[3];
+                    if (isset($data[4])) $email = $data[4];
+                    if (mb_strlen($nick, 'utf-8') > 20) {
+                        $new_len = mb_strlen($nick, 'utf-8');
+                        if ($new_len > $max_length) {
+                            $max_length = $new_len;
+                            $longer = "ALTER TABLE `users` MODIFY COLUMN `nick` varchar($max_length) NULL DEFAULT '' ";
+                            pdo_query($longer);
+                        }
+                    }
+                    $ip = "127.0.0.1";
+                    $sql = "INSERT INTO `users`(" . "`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)" . "VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
+                    pdo_query($sql, $user_id, $email, $ip, $password, $nick, $school, $email, $ip, $password, $nick, $school);
+            }else{
+                echo "请用下载的模板填写，保存为UTF-8编码。";
             }
-            $ip = "127.0.0.1";
-            $sql = "INSERT INTO `users`(" . "`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)" . "VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
-            pdo_query($sql, $user_id, $email, $ip, $password, $nick, $school, $email, $ip, $password, $nick, $school);
         }
         // 关闭文件
         fclose($h);
     }
 }
+
 if (isset($_FILES["fps"])) {
     if ($_FILES["fps"]["error"] > 0) {
         echo "&nbsp;&nbsp;- Error: " . $_FILES["fps"]["error"] . "File size is too big, change in PHP.ini<br />";
@@ -85,7 +94,7 @@ if (isset($_FILES["fps"])) {
 <h1>导入用户csv文件</h1>
     <form class='form-inline' action='user_import.php' method=post enctype="multipart/form-data">
       <div class='form-group'>
-        <input class='form-control' type=file name=fps >
+        <input class='form-control' type=file name='fps' >
       </div>
       <br><br>
       <br><br><br>

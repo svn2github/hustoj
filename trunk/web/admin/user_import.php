@@ -25,6 +25,7 @@ function import_user($filename) {
             // 每个单独的数组都被存入到嵌套的数组中
                 if ($data[0] == "学号") {
                         $check=true;
+                        echo "导入名单：<hr>\n";
                         continue;
                 }
             if($check){
@@ -48,7 +49,8 @@ function import_user($filename) {
                     $sql = "INSERT INTO `users`(" . "`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)" . "VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
                     pdo_query($sql, $user_id, $email, $ip, $password, $nick, $school, $email, $ip, $password, $nick, $school);
             }else{
-                echo "请用下载的模板填写，保存为UTF-8编码。";
+                echo "<h1>请用下载的模板填写，保存为UTF-8编码。</h1>";
+                break;
             }
         }
         // 关闭文件

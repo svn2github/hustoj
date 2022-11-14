@@ -47,26 +47,6 @@ if ($page > $cnt+1 && ! isset($_SESSION[$OJ_NAME.'_administrator']) ) $page = $c
 $pstart = $page_cnt*intval($page)-$page_cnt+1; //start 1
 $pend = $pstart+$page_cnt;
 
-//all submit
-$sub_arr = Array();
-if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	$sql = "SELECT `problem_id` FROM `solution` WHERE `user_id`=? GROUP BY `problem_id`";
-	$result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
-
-	foreach ($result as $row)
-		$sub_arr[$row[0]] = true;
-}
-
-//all ac
-$acc_arr=Array();
-if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
-	$sql = "SELECT `problem_id` FROM `solution` WHERE `user_id`=? AND `result`=4 GROUP BY `problem_id`";
-	$result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
-
-	foreach ($result as $row)
-		$acc_arr[$row[0]] = true;
-}
-
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$search = "%".($_GET['search'])."%";
 	$filter_sql = " ( title like ? or source like ?)";
@@ -88,6 +68,26 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 }else {
 	//$filter_sql = " `problem_id`>='".strval($pstart)."' AND `problem_id`<'".strval($pend)."' ";
 	$filter_sql = "A.ROWNUM >='" . strval($pstart) . "' AND A.ROWNUM < '". strval($pend) . "' ";
+}
+
+//all submit
+$sub_arr = Array();
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
+        $sql = "SELECT distinct `problem_id` FROM `solution` WHERE `user_id`=? ";
+        if(isset($pids)&&$pids!="") $sql.=" and problem_id in ($pids)";
+        $result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+        foreach ($result as $row)
+                $sub_arr[$row[0]] = true;
+}
+
+//all ac
+$acc_arr=Array();
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
+        $sql = "SELECT distinct `problem_id` FROM `solution` WHERE `user_id`=? AND `result`=4 ";
+        if(isset($pids)&&$pids!="") $sql.=" and problem_id in ($pids)";
+        $result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+        foreach ($result as $row)
+                $acc_arr[$row[0]] = true;
 }
 
 // Problem Page Navigator

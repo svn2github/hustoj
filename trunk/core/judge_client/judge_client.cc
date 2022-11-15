@@ -2906,7 +2906,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
 		 *  Runtime Error:Unknown signal xxx need be added here  
                  */
-		if (((lang >= LANG_JAVA && lang!= LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP) && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133)  // 进程休眠或等待IO
+		if (((lang >= LANG_JAVA && lang!= LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP) && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133 || exitcode == 23)  // 进程休眠或等待IO
 			//go on and on
 			;
 		else

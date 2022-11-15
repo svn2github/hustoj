@@ -22,21 +22,28 @@ function import_user($filename) {
         // 文件中的每一行数据都被转换为我们调用的单个数组$data
         // 数组的每个元素以逗号分隔
         while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
-            // 每个单独的数组都被存入到嵌套的数组中
+         // 每个单独的数组都被存入到嵌套的数组中
                 if ($data[0] == "学号") {
                         $check=true;
                         echo "导入名单：<hr>\n";
+                        $gb2312=false;
+                        continue;
+                }else if (iconv("gb2312","utf-8",$data[0])=="学号") {
+                        $check=true;
+                        $gb2312=true;
                         continue;
                 }
             if($check){
                     echo $data[0] . "<br>\n";
                     $user_id = mb_trim($data[0]);
                     $nick = $data[1];
+                    if($gb2312) $nick=iconv("gb2312","utf-8",$nick);
                     $password = pwGen(trim($data[2]));
                     $school = "";
                     $email = "";
                     if (isset($data[3])) $school = $data[3];
                     if (isset($data[4])) $email = $data[4];
+                    if($gb2312) $school=iconv("gb2312","utf-8",$school);
                     if (mb_strlen($nick, 'utf-8') > 20) {
                         $new_len = mb_strlen($nick, 'utf-8');
                         if ($new_len > $max_length) {
@@ -45,6 +52,7 @@ function import_user($filename) {
                             pdo_query($longer);
                         }
                     }
+
                     $ip = "127.0.0.1";
                     $sql = "INSERT INTO `users`(" . "`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`)" . "VALUES(?,?,?,NOW(),?,NOW(),?,?)on DUPLICATE KEY UPDATE `email`=?,`ip`=?,`accesstime`=NOW(),`password`=?,`reg_time`=now(),nick=?,`school`=?";
                     pdo_query($sql, $user_id, $email, $ip, $password, $nick, $school, $email, $ip, $password, $nick, $school);

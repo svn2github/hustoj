@@ -2828,6 +2828,14 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 		printf("pid=%d judging %s\n", pidApp, infile);
 
 	int status, sig, exitcode;
+	char white_code[256]={0};
+        white_code[0]=1;  // add more if new signal complain
+        white_code[5]=1;
+        white_code[17]=1;
+        white_code[23]=1;
+        white_code[133]=1;
+        char buf[BUFFER_SIZE];
+
 	struct user_regs_struct reg;
 	struct rusage ruse;
 	int first = true;
@@ -2902,15 +2910,17 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 			break;
 		}
 
-		exitcode = WEXITSTATUS(status);
-		/*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
-		 *  Runtime Error:Unknown signal xxx need be added here  
+                exitcode = WEXITSTATUS(status) % 256 ;
+                /*exitcode == 5 waiting for next CPU allocation          * ruby using system to run,exit 17 ok
+                 *  Runtime Error:Unknown signal xxx need be added here
                  */
-		if (((lang >= LANG_JAVA && lang!= LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP) && exitcode == 17) || exitcode == 0x05 || exitcode == 0 || exitcode == 133 || exitcode == 23)  // 进程休眠或等待IO
-			//go on and on
-			;
-		else
-		{
+                if (white_code[exitcode]
+                        // || ( (exitcode == 17||exitcode == 23) && (lang >= LANG_JAVA && lang!= LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP) )
+                   ){  // 进程休眠或等待IO
+                        //go on and on
+                        ;
+                }else{
+
 
 			if (DEBUG)
 			{
@@ -2941,6 +2951,9 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 					ACflg = OJ_RE;
 				}
 				print_runtimeerror(infile+strlen(oj_home)+5,strsignal(exitcode));
+				sprintf(buf,"adding: ' white_code[%d]=1; ' after judge_client:2836 for ",exitcode);
+                                print_runtimeerror(buf,strsignal(exitcode));
+
 			}
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);    // 杀死出问题的进程
 

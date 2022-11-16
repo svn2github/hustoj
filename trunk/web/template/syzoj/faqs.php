@@ -20,10 +20,11 @@
         <p>请使用<strong>标准输入输出</strong>。</p>
 <h2 class="ui header">Q: cin/cout为什么会超时（TLE）?</h2>
 <p>A: cin/cout因为默认同步stdin/stdout而变慢，并产生更多的系统调用而受到性能影响，可以在main函数开头加入下面代码加速：
-    <div class="ques-view">
-        ios::sync_with_stdio(false);<br>
-        cin.tie(0);
-     </div>
+       <div class="ui existing segment">
+            <pre style="margin-top: 0; margin-bottom: 0; ">ios::sync_with_stdio(false);
+cin.tie(0);</pre>
+        </div>
+
         * 另外，请使用'\n'而不是 endl ，因为endl默认会增加刷新操作，而导致输出缓冲失效，降低效率。
     </p>
 

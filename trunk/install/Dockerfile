@@ -48,3 +48,8 @@ ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh  
 ENV LC_ALL zh_CN.UTF-8 
 
+# override endl not to flush the io buffer
+RUN  echo "std::ostream& endl(std::ostream& s) { \
+s<<'\\\\n'; \
+return s; \
+}" >> /usr/include/c++/9/iostream

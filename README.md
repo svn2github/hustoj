@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+11-16 | 补丁 | 给Docker容器中的/usr/include/c++/9/iostream打补丁，禁用endl的cout.flush()操作，提高cout性能。
 11-15 | 补丁 | 修复新版本golang报错Urgent I/O condition和 Forbidden system call:35 [35]
 11-12 | 补丁 | 修补中间的特定数量题目以后，大序号的题目不显示的问题。
 11-06 | 更新 | 增加简单的导入HydroOJ打包zip(yaml+目录)格式题目的功能，目前不支持图片等高级特性,老版本需要自行安装php-yaml(sudo apt install php-yaml)。

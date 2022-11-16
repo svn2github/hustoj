@@ -18,8 +18,17 @@
             这里给出的编译器版本仅供参考，请以实际编译器版本为准。
         </p>
         <p>请使用<strong>标准输入输出</strong>。</p>
- <h2 class="ui header">Q:gets函数没有了吗?</h2>
-<p>A:gets函数因为不能限制输入的长度，造成了历史上大量的缓冲区溢出漏洞，因此在最新版本中被彻底删除了，请使用fgets这个函数取代。 或者使用下面的宏定义来取代：
+<h2 class="ui header">Q: cin/cout为什么会超时（TLE）?</h2>
+<p>A: cin/cout因为默认同步stdin/stdout而变慢，并产生更多的系统调用而受到性能影响，可以在main函数开头加入下面代码加速：
+    <div class="ques-view">
+        ios::sync_with_stdio(false);<br>
+        cin.tie(0);
+     </div>
+        * 另外，请使用'\n'而不是 endl ，因为endl默认会增加刷新操作，而导致输出缓冲失效，降低效率。
+    </p>
+
+<h2 class="ui header">Q: gets函数没有了吗?</h2>
+<p>A: gets函数因为不能限制输入的长度，造成了历史上大量的缓冲区溢出漏洞，因此在最新版本中被彻底删除了，请使用fgets这个函数取代。 或者使用下面的宏定义来取代：
     <div class="ques-view">   #define gets(S) fgets(S,sizeof(S),stdin)  </div>
     </p>
         <h2 class="ui header">个人资料<br></h2>

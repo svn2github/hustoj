@@ -31,7 +31,7 @@
           <?php echo $MSG_Time_Limit?><br>
           <input class="input input-mini" type=number min="0.001" max="300" step="0.001" name=time_limit size=20 value=1> sec<br><br>
           <?php echo $MSG_Memory_Limit?><br>
-          <input class="input input-mini" type=number min="1" max="1024" step="1" name=memory_limit size=20 value=128> MiB<br><br>
+          <input class="input input-mini" type=number min="1" max="2048" step="1" name=memory_limit size=20 value=128> MiB<br><br>
         </p>
  
         <p align=left>

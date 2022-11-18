@@ -79,6 +79,7 @@ chmod 700 etc/judge.conf
 sed -i "s/DB_USER[[:space:]]*=[[:space:]]*\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
+chgrp www /home/judge
 chown -R www src/web/
 
 chown -R root:root src/web/.svn

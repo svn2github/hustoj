@@ -67,7 +67,7 @@
         <i class="search icon"></i>
        <?php echo $MSG_SEARCH;?>
       </button>
-		<span class='ui mini grey button'>AVG:<?php echo round($avg_delay,2)?>s </span>
+		<span class='ui mini grey button'>AWT:<?php echo round($avg_delay,2)?>s </span>
 		 <script>var AWT=<?php echo round($avg_delay*500,0) ?>;</script>
     </div>
   </form>

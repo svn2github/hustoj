@@ -63,10 +63,11 @@
           </select>";
           }
           ?>
-      <button class="ui labeled icon mini button" type="submit" style="margin-left: 20px;">
+      <button class="ui labeled icon mini green button" type="submit" style="margin-left: 20px;">
         <i class="search icon"></i>
        <?php echo $MSG_SEARCH;?>
       </button>
+		<span class='ui mini grey button'>AVG:<?php echo round($avg_delay,2)?>s </span>
     </div>
   </form>
 

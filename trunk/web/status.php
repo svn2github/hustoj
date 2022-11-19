@@ -283,6 +283,8 @@ else {
 $view_status = Array();
 
 $last = 0;
+$avg_delay=0;
+$total_count=0;
 for ($i=0; $i<$rows_cnt; $i++) {
   $row = $result[$i];
   //$view_status[$i]=$row;
@@ -377,7 +379,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
       $MSG_Tips = "";
   }
 
-  $AC_RATE = intval($row['pass_rate']*100);
+  $AC_RATE = floatval($row['pass_rate']*100);
   if (isset($OJ_MARK) && $OJ_MARK!="mark") {
     $mark = "";
   }
@@ -480,15 +482,20 @@ for ($i=0; $i<$rows_cnt; $i++) {
     $view_status[$i][6] = "----";
     $view_status[$i][7] = "----";
   }
-
+  
+    $used=(strtotime($row['judgetime'])-strtotime($row['in_date']));
+  if($used>0){
+    $avg_delay+=floatval($used);
+    $total_count++;
+  }
   if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
-    $view_status[$i][8] = $row['in_date']."[".(strtotime($row['judgetime'])-strtotime($row['in_date']))."]";
+    $view_status[$i][8] = $row['in_date']."[".$used."]";
     $view_status[$i][9] = $row['judger'];
   }
   else
     $view_status[$i][8]= $row['in_date'];
 }
-
+$avg_delay/= $total_count;
 ?>
 
 <?php

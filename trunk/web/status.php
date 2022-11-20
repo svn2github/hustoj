@@ -495,7 +495,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
   else
     $view_status[$i][8]= $row['in_date'];
 }
-$avg_delay/= $total_count;
+if($total_count>0)$avg_delay/= $total_count;
 ?>
 
 <?php

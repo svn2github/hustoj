@@ -3602,6 +3602,17 @@ int main(int argc, char **argv)
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test,&pass_rate);
 			time_space_index+=sprintf(time_space_table+time_space_index,"%s:%s mem=%dk time=%dms\n",infile+strlen(oj_home)+5,jresult[ACflg],topmemory/1024,usedtime);
+			
+			/*   // full diff code backup
+			 if( ACflg != OJ_AC ){
+                                FILE *DF=fopen("diff.out","a");
+                                fprintf(DF,"%s:%s mem=%dk time=%dms\n",infile+strlen(oj_home)+5,jresult[ACflg],topmemory/1024,usedtime);
+                                fprintf(DF,"=============================================================\n");
+                                fclose(DF);
+                        }			
+			*/
+			
+			
 			if (use_max_time)
 			{
 				max_case_time =

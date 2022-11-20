@@ -37,9 +37,10 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
                 echo "<script>location.href='$url';</script>";
         }else if (isset($_POST['result'])){
                 $result=intval($_POST['result']);
-                $sql="UPDATE `solution` SET `result`=1 WHERE `result`=? and problem_id>0" ;
+                $to=intval($_POST['to']);
+                $sql="UPDATE `solution` SET `result`=$to WHERE `result`=? and problem_id>0" ;
                 pdo_query($sql,$result) ;
-                $url="../status.php?jresult=1";
+                $url="../status.php?jresult=$to";
                 echo "<script>location.href='$url';</script>";
         }else if (isset($_POST['rjcid'])){
                 $rjcid=intval($_POST['rjcid']);
@@ -89,9 +90,27 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
                 <input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
                 <input type=submit value=submit>
         </form>
-        <li><?php echo "Stuck on running "?>
+        <li><?php echo "$MSG_Manual"?>
         <form action='rejudge.php' method=post>
-                <input type=input name='result' placeholder="3" value="3">      <input type='hidden' name='do' value='do'>
+		<select name='result'>      
+			<?php
+				for($i=0;$i<4;$i++){
+					echo "<option value='$i' ".($i==3?"selected":"").">".$jresult[$i]."</option>\n";
+				}
+	
+			?>
+		</select>
+		<input type='hidden' name='do' value='do'> - &gt;
+		<select name='to'>      
+			<?php
+				$i=1;
+				echo "<option value='$i'>".$jresult[$i]."</option>\n";
+				for($i=4;$i<14;$i++){
+					echo "<option value='$i' ".($i==6?"selected":"").">".$jresult[$i]."</option>\n";
+				}
+	
+			?>
+		</select>
                 <input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
                 <input type=submit value=submit>
         </form>

@@ -8,6 +8,7 @@ if [ "$IN_SCREEN" == "no" ] ;then
         echo "not in screen";
         apt update
         apt install screen
+        chmod +x $0
         screen $0 $*
 else
         echo "in screen";

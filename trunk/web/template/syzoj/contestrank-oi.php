@@ -68,7 +68,7 @@
 					echo sec2str($U[$i]->time);
 					echo "</td>";
 
-					echo "<td>";
+					echo "<td class='ui small header'>";
 					echo "<a href=status.php?user_id=$uuid&cid=$cid>" . ($U[$i]->total) . "</a>";
 					echo "</td>";
 

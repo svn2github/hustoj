@@ -52,4 +52,4 @@ ENV LC_ALL zh_CN.UTF-8
 RUN  echo "std::ostream& endl(std::ostream& s) { \
 s<<'\\\\n'; \
 return s; \
-}" >> /usr/include/c++/9/iostream
+}" >> `find /usr/include/c++/ -name iostream`

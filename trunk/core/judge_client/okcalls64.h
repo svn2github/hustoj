@@ -125,7 +125,7 @@ int LANG_JSV[CALL_ARRAY_SIZE] = {
         SYS_gettimeofday, SYS_getrlimit, 0 };
 //go-lang
 int LANG_GOV[CALL_ARRAY_SIZE] = {
-        0, 3, 35, SYS_write, SYS_mprotect, SYS_munmap, SYS_rt_sigaction, SYS_sigaltstack, SYS_rt_sigprocmask,
+        0, 3, 35,511, SYS_write, SYS_mprotect, SYS_munmap, SYS_rt_sigaction, SYS_sigaltstack, SYS_rt_sigprocmask,
         SYS_arch_prctl, SYS_pread64, SYS_gettid, SYS_futex, SYS_sched_getaffinity, SYS_clock_gettime, SYS_exit_group,
         SYS_sched_yield, SYS_openat, SYS_readlinkat, SYS_clone, SYS_execve, SYS_fcntl, SYS_mmap, 0 };
 //sqlite3

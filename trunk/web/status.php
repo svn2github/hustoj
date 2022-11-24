@@ -100,7 +100,9 @@ if (isset($_GET['cid'])) {
   $cid = intval($_GET['cid']);
   $sql = $sql." AND `contest_id`='$cid' and num>=0 ";
   $str2 = $str2."&cid=$cid";
-  $sql_lock = "SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
+  $sql_lock = "SELECT *  FROM `contest` WHERE `contest_id`=?";
+
+  $view_cid = $cid;
   $result = pdo_query($sql_lock,$cid);
   $rows_cnt = count($result);
   $start_time = 0;
@@ -108,10 +110,13 @@ if (isset($_GET['cid'])) {
 
   if ($rows_cnt>0) {
     $row = $result[0];
-    $start_time = strtotime($row[0]);
-    $title = $row[1];
-    $end_time = strtotime($row[2]);       
-    
+    $title = $row['title'];
+		$start_time = strtotime($row['start_time']);
+		$end_time = strtotime($row['end_time']);
+		$view_description = $row['description'];
+		$view_title = $row['title'];
+		$view_start_time = $row['start_time'];
+		$view_end_time = $row['end_time'];
 	$noip = (time()<$end_time) && (stripos($title,$OJ_NOIP_KEYWORD)!==false);
 	if(isset($_SESSION[$OJ_NAME.'_'."administrator"])||
 		isset($_SESSION[$OJ_NAME.'_'."m$cid"])||
@@ -495,7 +500,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
   else
     $view_status[$i][8]= $row['in_date'];
 }
-if($total_count>0)$avg_delay/= $total_count;
+$avg_delay/= $total_count;
 ?>
 
 <?php

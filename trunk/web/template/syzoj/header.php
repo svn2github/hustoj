@@ -107,6 +107,7 @@
             {
               echo '<a class="item" href="moodle"><i class="group icon"></i>Moodle</a>';
             }
+	    if(!isset($_GET['cid'])){
           ?>
         
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
@@ -125,13 +126,19 @@
 
               <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
                   <a class='item' href="discuss.php"><i class="clipboard icon"></i> <?php echo $MSG_BBS?></a>
-              <?php }?>
+	      <?php }
+
+	    }
+		?>
             <?php if(isset($_GET['cid'])){
                 $cid=intval($_GET['cid']);
             ?>
-            <a id="back_to_contest" class="item active" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>" ><i
-                    class="arrow left icon"></i><?php echo $MSG_CONTEST.$MSG_PROBLEMS.$MSG_LIST?></a>
-            <?php }?>
+            <a id="" class="item" href="<?php echo $path_fix?>contest.php" ><i class="arrow left icon"></i><?php echo $MSG_CONTEST.$MSG_LIST?></a>
+            <a id="" class="item active" href="<?php echo $path_fix?>contest.php?cid=<?php echo $cid?>" ><i class="list icon"></i><?php echo $MSG_PROBLEMS.$MSG_LIST?></a>
+            <a id="" class="item active" href="<?php echo $path_fix?>status.php?cid=<?php echo $cid?>" ><i class="tasks icon"></i><?php echo $MSG_STATUS.$MSG_LIST?></a>
+            <a id="" class="item active" href="<?php echo $path_fix?>contestrank.php?cid=<?php echo $cid?>" ><i class="signal icon"></i><?php echo $MSG_RANKLIST?></a>
+            <a id="" class="item active" href="<?php echo $path_fix?>contestrank-oi.php?cid=<?php echo $cid?>" ><i class="signal icon"></i>OI-<?php echo $MSG_RANKLIST?></a>
+            <?php }  ?>
             <?php echo $sql_news_menu_result_html; ?>
             <div class="right menu">
                 <?php if(isset($_SESSION[$OJ_NAME.'_'.'user_id'])) { ?>

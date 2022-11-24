@@ -3,6 +3,7 @@
 <script src="template/<?php echo $OJ_TEMPLATE?>/js/textFit.min.js"></script>
 <div class="padding">
 
+    <h1>Contest<?php echo $view_cid?> - <?php echo $view_title ?></h1>
   <!-- <form action="" class="ui mini form" method="get" role="form" id="form"> -->
   <form id=simform class="ui mini form" action="status.php" method="get">
 

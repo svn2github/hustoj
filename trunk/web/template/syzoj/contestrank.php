@@ -8,8 +8,7 @@
 }
 </style>
 <div style="margin-bottom:40px; ">
-    <h1 style="text-align: center;">Contest RankList -- <?php echo $title?></h1>
-    <a class='ui small blue button' href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
+    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   <a class='ui small blue button' href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a> </h1>
 </div>
 <div class="padding" style="overflow-y:auto;">
     <?php if($user_cnt>0){ ?>

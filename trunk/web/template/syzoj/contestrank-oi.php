@@ -8,7 +8,7 @@
 	}
 </style>
 <div style="margin-bottom:40px; ">
-	<h1 style="text-align: center;">OI Contest RankList -- <?php echo $title ?></h1>
+	<h1 style="text-align:left;">Contest<?php echo $cid ?> -- <?php echo $title ?></h1>
 <!-- 	<a href="contestrank.xls.php?cid=<?php echo $cid ?>" >Download</a> -->
 </div>
 <div class="padding" style="overflow-y:auto;">

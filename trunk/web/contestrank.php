@@ -107,6 +107,7 @@ if ($rows_cnt>0) {
 	$start_time = strtotime($row['start_time']);
 	$end_time = strtotime($row['end_time']);
 	$title = $row['title'];
+	$view_title = $title;
 }
 
 if (!$OJ_MEMCACHE)

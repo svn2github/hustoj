@@ -292,7 +292,8 @@
 	$MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="배열 크기를 벗어난 위치에 접근했는지 확인해주세요.";
 	$MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="문자열에 대한 참조번호가 크기를 벗어났습니다. subString, charAt 등에 사용된 매개 변수를 확인해주세요.";
         $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="Are you using an number as a char? Did you print out any Non-printable characters?";
-	
+	$MSG_NON_ZERO_RETURN="Do NOT return non-zero value in your main() function , or system will regard it as an error. ";
+
 	// template/../ceinfo.php
 	$MSG_ERROR_EXPLAIN="설명";
 	$MSG_SYSTEM_OUT_PRINT="Java System.out.print 는 C printf 와 다릅니다. System.out.format 을 사용해주세요.";

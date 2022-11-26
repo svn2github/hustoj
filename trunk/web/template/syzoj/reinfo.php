@@ -51,7 +51,7 @@
 <script>
     var pats=new Array();
     var exps=new Array();
-    pats[0]=/A Not allowed system call.* /;
+    pats[0]=/A Not allowed system call/;
     exps[0]="<?php echo $MSG_A_NOT_ALLOWED_SYSTEM_CALL ?>";
     pats[1]=/Segmentation fault/;
     exps[1]="<?php echo $MSG_SEGMETATION_FAULT ?>";

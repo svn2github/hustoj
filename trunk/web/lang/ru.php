@@ -305,6 +305,8 @@
  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION =" Проверить, что массив выходит за границы ";
  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION =" Нижний индекс строки выходит за границы, проверьте параметры таких методов, как subString, charAt ";
  $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="Are you using an number as a char? Did you print out any Non-printable characters?";
+ $MSG_NON_ZERO_RETURN="Do NOT return non-zero value in your main() function , or system will regard it as an error. ";
+
  // шаблон/../ceinfo.php
  $MSG_ERROR_EXPLAIN =" Вспомогательное пояснение ";
  $MSG_SYSTEM_OUT_PRINT =" Использование System.out.print в Java отличается от использования printf языка C, попробуйте System.out.format ";

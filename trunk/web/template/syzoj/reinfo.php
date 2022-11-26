@@ -71,6 +71,9 @@
     exps[8]="<?php echo $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION ?>";
     pats[9]=/Binary files/;
     exps[9]="<?php echo $MSG_WRONG_OUTPUT_TYPE_EXCEPTION ?>";
+    pats[10]=/non-zero return/;
+    exps[10]="<?php echo $MSG_NON_ZERO_RETURN ?>";
+ 
     function explain(){
       var errmsg = $("#errtxt").text();
       var expmsg = "";

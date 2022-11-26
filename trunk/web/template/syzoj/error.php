@@ -7,7 +7,7 @@
   <div class="content">
     <div class="header" style="margin-bottom: 10px; " ondblclick='$(this).load("refresh-privilege.php")'>
       <?php echo $view_errors;?>
-      <?php if ($OJ_LANG=="cn") echo "如果你是管理员，希望解决这个问题，请打开<a href='http://hustoj.com' target='_blank'>HUSTOJ常见问题</a>，按Ctrl+F查找上面错误信息中的关键词。";?>
+      <?php if ($OJ_LANG=="cn") echo "<br>如果你是管理员，希望解决这个问题，请打开<a href='http://hustoj.com' target='_blank'>HUSTOJ常见问题</a>，按Ctrl+F查找上面错误信息中的关键词。";?>
     </div>
       <!-- <p><%= err.details %></p> -->
     <p>

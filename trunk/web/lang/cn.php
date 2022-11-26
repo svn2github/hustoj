@@ -305,7 +305,9 @@
   $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION="检查数组越界的情况";
   $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION="字符串的字符下标越界，检查subString,charAt等方法的参数";
   $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="二进制输出错误，检查是否误将数值类型作为字符输出，或者输出了不打印字符的情况。";
-  
+  $MSG_NON_ZERO_RETURN="Main函数不能返回非零的值，否则视同程序出错。";
+
+
   // template/../ceinfo.php
   $MSG_ERROR_EXPLAIN="辅助解释";
   $MSG_SYSTEM_OUT_PRINT="Java中System.out.print用法跟C语言printf不同，请试用System.out.format";
@@ -377,7 +379,7 @@
   $MSG_FUNCTION_GETS_REMOVIED=" std::gets 于 C++11 被弃用，并于 C++14 移除。可使用 std::fgets 替代。或者增加宏定义 #define gets(S) fgets(S,sizeof(S),stdin) ";
   $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
   $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
-  $MSG_NON_ZERO_RETURN="Main函数不能返回非零的值，否则视同程序出错。";
+  
 
   $MSG_REFRESH_PRIVILEGE="刷新权限";
   

@@ -261,8 +261,8 @@
  $MSG_HELP_ADD_SOLUTION_VIEW ="給用戶添加單個題目的答案查看權限。 ";
  $MSG_HELP_PRIVILEGE_LIST ="查看已有的特殊權限列表、進行刪除操作。 ";
  $MSG_HELP_GIVESOURCE ="將導入系統的標程贈與指定帳號，用於訓練後輔助未通過的人學習參考。 ";
- $MSG_HELP_EXPORT_PROBLEM ="將系統中的題目以fps.xml文件的形式導出。 ";
- $MSG_HELP_IMPORT_PROBLEM ="導入從官方群共享或tk.hustoj.com下載到的fps.xml文件。 ";
+ $MSG_HELP_EXPORT_PROBLEM ="將系統中的題目以fps.xml档案的形式導出。 ";
+ $MSG_HELP_IMPORT_PROBLEM ="導入從官方群共享或tk.hustoj.com下載到的fps.xml档案。 ";
  $MSG_HELP_UPDATE_DATABASE ="更新數據庫結構，在每次升級（sudo update-hustoj）之後或者導入老系統數據庫備份，應至少操作一次。 ";
  $MSG_HELP_ONLINE ="查看在線用戶";
  $MSG_HELP_AC ="答案正確，請再接再厲。 ";
@@ -290,12 +290,12 @@
  $MSG_WARNING_REPEAT_PASSWORD_DIFF ="兩次輸入的密碼不一致! ";
  
  
- $MSG_LOSTPASSWORD_MAILBOX ="請到您郵箱的垃圾郵件文件夾尋找驗證碼，並填寫到這裡";
+ $MSG_LOSTPASSWORD_MAILBOX ="請到您郵箱的垃圾郵件档案夾尋找驗證碼，並填寫到這裡";
  $MSG_LOSTPASSWORD_WILLBENEW ="如果填寫正確，通過下一步驗證，這個驗證碼就自動成為您的新密碼！ ";
  
  
  // template/../reinfo.php
- $MSG_A_NOT_ALLOWED_SYSTEM_CALL ="使用了系統禁止的操作系統調用，看看是否越權訪問了文件或進程等資源,如果你是系統管理員，而且確認提交的答案沒有問題，測試數據沒有問題，可以發送'RE'到微信公眾號onlinejudge，查看解決方案。 ";
+ $MSG_A_NOT_ALLOWED_SYSTEM_CALL ="使用了系統禁止的操作系統調用，看看是否越權訪問了档案或進程等資源,如果你是系統管理員，而且確認提交的答案沒有問題，測試數據沒有問題，可以發送'RE'到微信公眾號onlinejudge，查看解決方案。 ";
  $MSG_SEGMETATION_FAULT ="段錯誤，檢查是否有數組越界，指針異常，訪問到不應該訪問的內存區域";
  $MSG_FLOATING_POINT_EXCEPTION ="浮點錯誤，檢查是否有除以零的情況";
  $MSG_BUFFER_OVERFLOW_DETECTED ="緩衝區溢出，檢查是否有字符串長度超出數組的情況";
@@ -305,14 +305,15 @@
  $MSG_ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION ="檢查數組越界的情況";
  $MSG_STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION ="字符串的字符下標越界，檢查subString,charAt等方法的參數";
  $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="二進製輸出錯誤，檢查是否誤將數值類型作為字符輸出，或者輸出了不打印字符的情況。";
+ $MSG_NON_ZERO_RETURN="Main函數不能返回非零的值，否則視同程式出錯。";
 	
  // template/../ceinfo.php
  $MSG_ERROR_EXPLAIN ="輔助解釋";
  $MSG_SYSTEM_OUT_PRINT =" Java中System.out.print用法跟C語言printf不同，請試用System.out.format ";
- $MSG_NO_SUCH_FILE_OR_DIRECTORY ="服務器為Linux系統，不能使用windows下特有的非標準頭文件。 ";
+ $MSG_NO_SUCH_FILE_OR_DIRECTORY ="服務器為Linux系統，不能使用windows下特有的非標準頭档案。 ";
  $MSG_NOT_A_STATEMENT ="檢查大括號{}匹配情況，eclipse整理代碼快捷鍵Ctrl+Shift+F ";
  $MSG_EXPECTED_CLASS_INTERFACE_ENUM ="請不要將java函數（方法）放置在類聲明外部，注意大括號的結束位置} ";
- $MSG_SUBMIT_JAVA_AS_C_LANG ="請不要將java程序提交為C語言";
+ $MSG_SUBMIT_JAVA_AS_C_LANG ="請不要將java程式提交為C語言";
  $MSG_DOES_NOT_EXIST_PACKAGE ="檢測拼寫，如：系統對象System為大寫S開頭";
  $MSG_POSSIBLE_LOSS_OF_PRECISION ="賦值將會失去精度，檢測數據類型，如確定無誤可以使用強制類型轉換";
  $MSG_INCOMPATIBLE_TYPES =" Java中不同類型的數據不能互相賦值，整數不能用作布爾值";
@@ -325,26 +326,26 @@
  $MSG_NO_RETURN_TYPE_IN_MAIN =" C++標準中，main函數必須有返回值";
  $MSG_NOT_DECLARED_IN_SCOPE ="變量沒有聲明過，檢查下是否拼寫錯誤！ ";
  $MSG_MAIN_MUST_RETURN_INT ="在標準C語言中，main函數返回值類型必須是int，教材和VC中使用void是非標準的用法";
- $MSG_PRINTF_NOT_DECLARED_IN_SCOPE =" printf函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭文件";
+ $MSG_PRINTF_NOT_DECLARED_IN_SCOPE =" printf函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭档案";
  $MSG_IGNOREING_RETURN_VALUE ="警告：忽略了函數的返回值，可能是函數用錯或者沒有考慮到返回值異常的情況";
  $MSG_NOT_DECLARED_INT64 =" __int64沒有聲明，在標準C/C++中不支持微軟VC中的__int64,請使用long long來聲明64位變量";
  $MSG_EXPECTED_SEMICOLON_BEFORE ="前一行缺少分號";
  $MSG_UNDECLARED_NAME ="變量使用前必須先進行聲明，也有可能是拼寫錯誤，注意大小寫區分。 ";
- $MSG_SCANF_NOT_DECLARED_IN_SCOPE =" scanf函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭文件";
- $MSG_MEMSET_NOT_DECLARED_IN_SCOPE =" memset函數沒有聲明過就進行調用，檢查下是否導入了stdlib.h或cstdlib頭文件";
- $MSG_MALLOC_NOT_DECLARED_IN_SCOPE =" malloc函數沒有聲明過就進行調用，檢查下是否導入了stdlib.h或cstdlib頭文件";
- $MSG_PUTS_NOT_DECLARED_IN_SCOPE =" puts函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭文件";
- $MSG_GETS_NOT_DECLARED_IN_SCOPE =" gets函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭文件";
- $MSG_STRING_NOT_DECLARED_IN_SCOPE =" string類函數沒有聲明過就進行調用，檢查下是否導入了string.h或cstring頭文件";
- $MSG_NO_TYPE_IMPORT_IN_C_CPP ="不要將Java語言程序提交為C/C++,提交前註意選擇語言類型。 ";
+ $MSG_SCANF_NOT_DECLARED_IN_SCOPE =" scanf函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭档案";
+ $MSG_MEMSET_NOT_DECLARED_IN_SCOPE =" memset函數沒有聲明過就進行調用，檢查下是否導入了stdlib.h或cstdlib頭档案";
+ $MSG_MALLOC_NOT_DECLARED_IN_SCOPE =" malloc函數沒有聲明過就進行調用，檢查下是否導入了stdlib.h或cstdlib頭档案";
+ $MSG_PUTS_NOT_DECLARED_IN_SCOPE =" puts函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭档案";
+ $MSG_GETS_NOT_DECLARED_IN_SCOPE =" gets函數沒有聲明過就進行調用，檢查下是否導入了stdio.h或cstdio頭档案";
+ $MSG_STRING_NOT_DECLARED_IN_SCOPE =" string類函數沒有聲明過就進行調用，檢查下是否導入了string.h或cstring頭档案";
+ $MSG_NO_TYPE_IMPORT_IN_C_CPP ="不要將Java語言程式提交為C/C++,提交前註意選擇語言類型。 ";
  $MSG_ASM_UNDECLARED ="不允許在C/C++中嵌入彙編語言代碼。 ";
  $MSG_REDEFINITION_OF ="函數或變量重複定義，看看是否多次粘貼代碼。 ";
- $MSG_EXPECTED_DECLARATION_OR_STATEMENT ="程序好像沒寫完，看看是否複製粘貼時漏掉代碼。 ";
+ $MSG_EXPECTED_DECLARATION_OR_STATEMENT ="程式好像沒寫完，看看是否複製粘貼時漏掉代碼。 ";
  $MSG_UNUSED_VARIABLE ="警告：變量聲明後沒有使用，檢查下是否拼寫錯誤，誤用了名稱相似的變量。 ";
- $MSG_IMPLICIT_DECLARTION_OF_FUNCTION ="函數隱性聲明，檢查下是否導入了正確的頭文件。或者缺少了題目要求的指定名稱的函數。 ";
+ $MSG_IMPLICIT_DECLARTION_OF_FUNCTION ="函數隱性聲明，檢查下是否導入了正確的頭档案。或者缺少了題目要求的指定名稱的函數。 ";
  $MSG_ARGUMENTS_ERROR_IN_FUNCTION ="函數調用時提供的參數數量不對，檢查下是否用錯參數。 ";
- $MSG_EXPECTED_BEFORE_NAMESPACE ="不要將C++語言程序提交為C,提交前註意選擇語言類型。 ";
- $MSG_STRAY_PROGRAM ="中文空格、標點等不能出現在程序中註釋和字符串以外的部分。編寫程序時請關閉中文輸入法。請不要使用網上複製來的代碼。 ";
+ $MSG_EXPECTED_BEFORE_NAMESPACE ="不要將C++語言程式提交為C,提交前註意選擇語言類型。 ";
+ $MSG_STRAY_PROGRAM ="中文空格、標點等不能出現在程式中註釋和字符串以外的部分。編寫程式時請關閉中文輸入法。請不要使用網上複製來的代碼。 ";
  $MSG_DIVISION_BY_ZERO ="除以零將導致浮點溢出。 ";
  $MSG_CANNOT_BE_USED_AS_A_FUNCTION ="變量不能當成函數用，檢查變量名和函數名重複的情況，也可能是拼寫錯誤。 ";
  $MSG_CANNOT_FIND_TYPE =" scanf/printf的格式描述和後面的參數表不一致，檢查是否多了或少了取址符“&”，也可能是拼寫錯誤。 ";
@@ -354,7 +355,7 @@
  $MSG_NEED_CLASS_INTERFACE_ENUM ="缺少關鍵字，應當聲明為class、interface 或enum ";
  $MSG_CLASS_SYMBOL_ERROR ="使用教材上的例子，必須將相關類的代碼一併提交，同時去掉其中的public關鍵詞";
  $MSG_INVALID_METHOD_DECLARATION ="只有跟類名相同的方法為構造方法，不寫返回值類型。如果將類名修改為Main,請同時修改構造方法名稱。 ";
- $MSG_EXPECTED_AMPERSAND_TOKEN ="不要將C++語言程序提交為C,提交前註意選擇語言類型。 ";
+ $MSG_EXPECTED_AMPERSAND_TOKEN ="不要將C++語言程式提交為C,提交前註意選擇語言類型。 ";
  $MSG_DECLARED_FUNCTION_ORDER ="請注意函數、方法的聲明前後順序，不能在一個方法內出現另一個方法的聲明。 ";
  $MSG_NEED_SEMICOLON ="上面標註的這一行，最後缺少分號。 ";
  $MSG_EXTRA_TOKEN_AT_END_OF_INCLUDE =" include語句必須獨立一行，不能與後面的語句放在同一行";
@@ -367,9 +368,9 @@
  $MSG_EXPECTED_EXPRESSION_TOKEN ="參數或表達式沒寫完";
  $MSG_EXPECTED_BUT ="錯誤的標點或符號";
  $MSG_REDEFINITION_MAIN ="這道題目可能是附加代碼題，請重新審題，看清題意，不要提交系統已經定義的main函數，而應提交指定格式的某個函數。 ";
- $MSG_IOSTREAM_ERROR ="請不要將C++程序提交為C ";
+ $MSG_IOSTREAM_ERROR ="請不要將C++程式提交為C ";
  $MSG_EXPECTED_UNQUALIFIED_ID_TOKEN ="留意數組聲明後是否少了分號";
- $MSG_REACHED_END_OF_FILE_2 ="程序末尾缺少大括號";
+ $MSG_REACHED_END_OF_FILE_2 ="程式末尾缺少大括號";
  $MSG_INVALID_SYMBOL ="檢查是否使用了中文標點或空格";
  $MSG_DECLARED_FILE_NAMED =" OJ中public類只能是Main ";
  $MSG_EXPECTED_IDENTIFIER ="聲明變量時，可能沒有聲明變量名或缺少括號。 ";

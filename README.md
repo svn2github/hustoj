@@ -98,7 +98,7 @@ HUSTOJ is an [GPL](https://github.com/zhblue/hustoj/blob/master/trunk/web/gpl-2.
 
 HUSTOJ 是采用 GPL 的自由软件。(仅限原创部分代码，其中使用了其他开源项目的组件，请遵循原组件的协议。)
 
-## 感谢下述及其他被使用到的开源代码项目贡献者
+## 感谢下述及其他被使用到的开源代码项目贡献者，来自这些项目的代码及衍生代码遵循其原有开源协议，不受本项目的GPL授权影响。
 
 * masteroj uoj loj syzoj zoj qduoj openJudger
 * linux apache nginx php mysql mariadb memcached

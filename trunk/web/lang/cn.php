@@ -278,12 +278,12 @@
   $MSG_HELP_ADD_FAQS="管理员可以添加一条新闻，命名为\"faqs.$OJ_LANG\" 来取代<a href=../faqs.php>$MSG_FAQ</a>的内容。";
   $MSG_HELP_HUSTOJ="<sub><a target='_blank' href='https://github.com/zhblue/hustoj'><span class='glyphicon glyphicon-heart' aria-hidden='true'></span> 请到 HUSTOJ 来，给我们加个<span class='glyphicon glyphicon-star' aria-hidden='true'></span>Star!</a></sub>"; 
   $MSG_HELP_SPJ="特殊裁判的使用，请参考<a href='https://cn.bing.com/search?q=hustoj+special+judge' target='_blank'>搜索hustoj special judge</a>"; 
-  $MSG_HELP_BALLOON_SCHOOL="打印，气球帐号的School字段用于过滤任务列表，例如填zjicm则只显示帐号为zjicm开头的任务";
+  $MSG_HELP_BALLOON_SCHOOL="打印，气球帐号的School字段用于过滤任务列表，例如填[东校区]则只显示帐号为[东校区]开头的任务";
   $MSG_HRLP_BACKUP_DATABASE="备份数据库,测试数据和图片到0题目录";
 
   $MSG_WARNING_LOGIN_FROM_DIFF_IP="从不同的ip地址登录";
   $MSG_WARNING_DURING_EXAM_NOT_ALLOWED=" 在考试期间不被允许 ";
-  $MSG_WARNING_ACCESS_DENIED="抱歉，您无法查看此消息！因为它不属于您，或者管理员设定系统状态为不显示此类信息。";
+  $MSG_WARNING_ACCESS_DENIED="抱歉，您无法查看此消息！因为它不属于您，或者管理员设定系统状态为不显示此类信息。如果你是管理员，请给自己增加source_browser权限，然后重新登录。如果希望学生能看出错对比，编辑db_info.inc.php,设置 $OJ_SHOW_DIFF=true; 更多细节查看hustoj.com。";
 
   $MSG_WARNING_USER_ID_SHORT="用户名至少3位字符!";
   $MSG_WARNING_PASSWORD_SHORT="密码至少6位!";

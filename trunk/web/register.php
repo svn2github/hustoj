@@ -22,7 +22,7 @@ if($OJ_LOGIN_MOD!="hustoj"){
 	$err_cnt++;
 }
 
-if($len>20){ 
+if($len>48){ 
 	$err_str=$err_str."User ID Too Long!\\n";
 	$err_cnt++;
 }else if ($len<3){
@@ -35,7 +35,7 @@ if (!is_valid_user_name($user_id)){
 }
 $nick=trim($_POST['nick']);
 $len=strlen($nick);
-if ($len>100){
+if ($len>20){
 	$err_str=$err_str."Nick Name Too Long!\\n";
 	$err_cnt++;
 }else if ($len==0) $nick=$user_id;
@@ -48,7 +48,7 @@ if (strlen($_POST['password'])<6){
 	$err_str=$err_str."$MSG_WARNING_PASSWORD_SHORT \\n";
 }
 $len=strlen($_POST['school']);
-if ($len>100){
+if ($len>20){
 	$err_str=$err_str."School Name Too Long!\\n";
 	$err_cnt++;
 }

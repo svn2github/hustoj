@@ -106,6 +106,10 @@ $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);
 
 if(!isset($OJ_REG_NEED_CONFIRM)||!$OJ_REG_NEED_CONFIRM){
+	$sql="SELECT `user_id` FROM `users` WHERE `users`.`user_id` = ?";
+        $result=pdo_query($sql,$user_id);
+        $rows_cnt=count($result);
+        if ($rows_cnt == 1){
 		$_SESSION[$OJ_NAME.'_'.'user_id']=$user_id;
 		$sql="SELECT `rightstr` FROM `privilege` WHERE `user_id`=?";
 		//echo $sql."<br />";
@@ -117,6 +121,7 @@ if(!isset($OJ_REG_NEED_CONFIRM)||!$OJ_REG_NEED_CONFIRM){
 		$_SESSION[$OJ_NAME.'_'.'ac']=Array();
 		$_SESSION[$OJ_NAME.'_'.'sub']=Array();
 	        if($OJ_SaaS_ENABLE && $domain==$DOMAIN)  header("location:modifypage.php#MyOJ");
+	}
 }
 ?>
 <script>history.go(-2);</script>

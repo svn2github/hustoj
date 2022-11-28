@@ -67,6 +67,7 @@
     </div>
   </div>
 
+<?php if (!isset($_GET['search'])){ ?>
 
 <div style="margin-bottom: 30px; ">
     
@@ -92,8 +93,8 @@
     </a>  
   </div>
 </div>
-
 </div>
+<?php } ?>
 
 
   <table class="ui very basic center aligned table">
@@ -173,6 +174,7 @@
 
     </tbody>
   </table><br>
+<?php if (!isset($_GET['search'])){ ?>
   <div style="margin-bottom: 30px; ">
     
     <?php
@@ -197,6 +199,7 @@
     </a>  
   </div>
 </div>
+<?php } ?>
 <script type="text/javascript" src="include/jquery.tablesorter.js"></script>
 
 </div>

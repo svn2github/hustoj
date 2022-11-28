@@ -12,7 +12,7 @@ $delay=pdo_query($sql);
 </head>
 
 <body>
-  <br>
+
 <table class="table">
   <tbody>
     <tr>

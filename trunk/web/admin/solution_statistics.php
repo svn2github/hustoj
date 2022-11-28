@@ -89,7 +89,7 @@ if(isset($_POST['pids'])){
 	<center>
 	<form action=solution_statistics.php method='post' class="form-search form-inline">
 	  <input type="text" name=pids class="form-control" placeholder="1000,1001" size=128 >
-              <textarea name='ulist' rows='10' style='width:100%;' placeholder='user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?></textarea>
+              <textarea name='ulist' rows='10' style='width:100%;' placeholder='user1<?php echo "\n"?>user2<?php echo "\n"?>user3<?php echo "\n"?>'></textarea>
 	  <button type="submit" class="form-control"><?php echo $MSG_SEARCH?></button>
 	</form>
 	</center>

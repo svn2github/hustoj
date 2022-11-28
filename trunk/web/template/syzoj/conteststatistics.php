@@ -1,5 +1,5 @@
 <?php 
-  $show_title="$MSG_ERROR_INFO - $OJ_NAME";
+  $show_title="$MSG_STATISTICS - $OJ_NAME";
   include("template/$OJ_TEMPLATE/header.php");
 ?>
 <div class="container">

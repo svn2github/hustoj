@@ -2,6 +2,9 @@
   if(isset($OJ_LANG)){
     require_once("../lang/$OJ_LANG.php");
   }
+$sql="select avg(usedtime) delay from (select judgetime-in_date usedtime from solution where result >=4  order by solution_id desc limit 10 ) c";
+$delay=pdo_query($sql);
+
 ?>
 <html>
 <head>
@@ -12,6 +15,16 @@
   <br>
 <table class="table">
   <tbody>
+    <tr>
+    <td ><center><a class='btn btn-info btn-sm' href='help.php'>System Status </a></center></td><td>
+		    Delay:<?php echo $delay[0][0] ?>s/judge &nbsp;&nbsp;  
+		    CPU:<?php echo sys_getloadavg()[0];?>tasks/1min  &nbsp;&nbsp; 
+		    FreeMem:<?php system(" free -h|grep Mem|awk '{print $7\"/\"$2 }'");?>&nbsp;&nbsp;  
+		    FreeDisk:<?php system("df -h|grep '/dev/'|grep -v 'shm'|awk '{print $4 \"/\" $2}'");?>&nbsp;&nbsp;  
+
+	</td>
+			
+    </tr>
     <tr>
       <td><a class='btn btn-block btn-sm' href="../status.php" target="_top"><b><?php echo $MSG_SEEOJ?></b></a></td>
       <td><p><?php echo $MSG_HELP_SEEOJ?></p></td>

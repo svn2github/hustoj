@@ -2,6 +2,8 @@
 DATE=`date +%Y%m%d%H%M`
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
+WWW=`ps aux|grep php-fpm|head -1|awk '{print $1}'`
+
 if [ `whoami` = "root" ];then
 	cd /home/judge/
         mkdir new
@@ -21,7 +23,7 @@ if [ `whoami` = "root" ];then
 	cp -a src/web/upload/* new/web/upload/
 	mv src "old.$DATE"
 	mv new src
-	chown www-data:www-data -R src
+	chown $WWW:$WWW -R src
 else
 	echo "usage: sudo $0"
 fi

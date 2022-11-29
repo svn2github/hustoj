@@ -9,7 +9,7 @@ if [ "$IN_SCREEN" == "no" ] ;then
         apt update
         apt install screen
         chmod +x $0
-        screen $0 $*
+        screen bash $0 $*
 else
         echo "in screen";
         OSID=`lsb_release -is|tr 'UDC' 'udc'`

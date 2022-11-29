@@ -1,10 +1,12 @@
 #/bin/bash
-if [ $# != 1 ] ; then 
-  echo "USAGE: sudo $0 TAGZNAME" 
-  echo " e.g.: sudo $0 hustoj_xxxxxxx.tar.bz2" 
+TARBZNAME=`find -name "hustoj_*.tar.bz2"`
+if [ $# != 1 ] ; then
+  echo "USAGE: sudo $0 $TARBZNAME"
+  echo " e.g.: sudo $0 hustoj_xxxxxxx.tar.bz2"
   echo " tar.bz2 should be created by bak.sh, default location : /var/backups/ "
-  exit 1; 
-fi 
+  exit 1;
+fi
+
 DATE=`date +%Y%m%d`
 BAKDATE=`echo $1 |awk -F\. '{print $1}'|awk -F_ '{print $2}'`
 config="/home/judge/etc/judge.conf"

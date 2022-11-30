@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+11-30 | 更新 | syzoj皮肤增加了利用localStorage自动保存临时代码的功能。
 11-18 | 更新 | 管理后台帮助页首行增加服务器状态。
 11-16 | 补丁 | 给Docker容器中的/usr/include/c++/9/iostream打补丁，禁用endl的cout.flush()操作，提高cout性能。
 11-15 | 补丁 | 修复新版本golang报错Urgent I/O condition和 Forbidden system call:35 [35]

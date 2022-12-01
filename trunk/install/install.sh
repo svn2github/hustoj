@@ -19,6 +19,6 @@ else
         wget -O "$INSTALL" "$URL"
         chmod +x "$INSTALL"
         "./$INSTALL"
-        sleep 10;
+        sleep 60;
 fi
 

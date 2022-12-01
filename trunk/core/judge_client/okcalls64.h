@@ -44,7 +44,7 @@ int LANG_RV[CALL_ARRAY_SIZE] = {
         SYS_getrusage, 0 };
 //bash
 int LANG_BV[CALL_ARRAY_SIZE] = {
-        0, SYS_write, SYS_mprotect, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_munmap, SYS_getppid,
+        0, 202,218,262,273,318,334,SYS_write, SYS_mprotect, SYS_getuid, SYS_getgid, SYS_geteuid, SYS_getegid, SYS_munmap, SYS_getppid,
         SYS_getpgrp, SYS_brk, SYS_rt_sigaction, SYS_rt_sigprocmask, SYS_arch_prctl, SYS_ioctl, SYS_pread64,
         SYS_afs_syscall, SYS_getxattr, SYS_open, SYS_access, SYS_pipe, SYS_clock_nanosleep, SYS_exit_group, SYS_openat,
         SYS_close, SYS_prlimit64, SYS_dup2, SYS_getpid, SYS_stat, SYS_socket, SYS_connect, SYS_fstat, SYS_clone,

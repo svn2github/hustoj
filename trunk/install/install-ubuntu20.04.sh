@@ -89,6 +89,7 @@ fi
 
 mysql -h localhost -u"$USER" -p"$PASSWORD" < src/install/db.sql
 echo "insert into jol.privilege values('admin','administrator','true','N');"|mysql -h localhost -u"$USER" -p"$PASSWORD" 
+echo "insert into jol.privilege values('admin','source_browser','true','N');"|mysql -h localhost -u"$USER" -p"$PASSWORD" 
 
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "default site modified!"

@@ -4,6 +4,8 @@ $cache_time = 10;
 require_once('./include/cache_start.php');
 require_once('./include/db_info.inc.php');
 require_once('./include/setlang.php');
+require_once("./include/memcache.php");
+ 
 $view_title = $MSG_CONTEST . $MSG_RANKLIST;
 $title = "";
 require_once("./include/const.inc.php");
@@ -37,8 +39,7 @@ function saveShareCode($title,$code,$language,$user_id){
 function getShareCodeBySid($OJ_MEMCACHE,$sid){
     if ($OJ_MEMCACHE) {
         $sql = "SELECT * FROM share_code where share_id = '$sid';";
-        require("./include/memcache.php");
-        $share_info = mysql_query_cache($sql);
+         $share_info = mysql_query_cache($sql);
     } else {
         $sql = "SELECT * FROM share_code where share_id = ?";
         $share_info = pdo_query($sql, $sid);

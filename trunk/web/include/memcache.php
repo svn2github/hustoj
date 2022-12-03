@@ -5,9 +5,9 @@
     global $memcache;
     if ($OJ_MEMCACHE){
 	$memcache = new Memcache;
-	if($OJ_SAE)
+	if($OJ_SAE){
 				$memcache=memcache_init();
-		else{
+	}else{
 				$memcache->connect($OJ_MEMSERVER,  $OJ_MEMPORT);
 	}
     }

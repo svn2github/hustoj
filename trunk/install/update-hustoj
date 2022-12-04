@@ -16,7 +16,7 @@ chmod +x g++.sh gcc.sh makeout.sh
 mysql jol< update.sql
 judged
 
-web_user=`ls -l /home/judge/src/web/include/db_info.inc.php | awk -F ' ' '{print $3}'`
+web_user=`grep www /etc/passwd|awk -F: '{print $1}'`
 mkdir /var/log/hustoj/
 chown -R $web_user /var/log/hustoj
 

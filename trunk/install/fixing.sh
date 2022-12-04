@@ -2,7 +2,7 @@
 DATE=`date +%Y%m%d%H%M`
 USER=`cat /etc/mysql/debian.cnf |grep user|head -1|awk  '{print $3}'`
 PASSWORD=`cat /etc/mysql/debian.cnf |grep password|head -1|awk  '{print $3}'`
-WWW=`ps aux|grep php-fpm|head -1|awk '{print $1}'`
+WWW=`grep www /etc/passwd|awk -F: '{print $1}'`
 
 if [ `whoami` = "root" ];then
 	cd /home/judge/

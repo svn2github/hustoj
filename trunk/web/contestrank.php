@@ -6,6 +6,7 @@ require_once('./include/db_info.inc.php');
 require_once('./include/setlang.php');
 require_once("./include/const.inc.php");
 require_once("./include/my_func.inc.php");
+require_once("./include/memcache.php");
 
 $view_title = $MSG_CONTEST.$MSG_RANKLIST;
 
@@ -150,7 +151,7 @@ if (time()>$view_lock_time && time()<$end_time+$OJ_RANK_LOCK_DELAY) {
 
 if ($OJ_MEMCACHE) {
 	$sql = "SELECT count(1) as pbc FROM `contest_problem` WHERE `contest_id`='$cid'";
-	//require("./include/memcache.php");
+	
 	$result = mysql_query_cache($sql);
 	
 	if ($result)

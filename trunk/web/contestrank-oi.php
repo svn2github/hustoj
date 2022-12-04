@@ -2,13 +2,14 @@
         $OJ_CACHE_SHARE=false;
         $cache_time=10;
         require_once('./include/cache_start.php');
-    require_once('./include/db_info.inc.php');
+        require_once('./include/db_info.inc.php');
         require_once('./include/setlang.php');
         $view_title= $MSG_CONTEST.$MSG_RANKLIST;
 	$show_title= $view_title;
         $title="";
         require_once("./include/const.inc.php");
         require_once("./include/my_func.inc.php");
+        require_once("./include/memcache.php");
 class TM{
         var $solved=0;
         var $time=0;
@@ -83,7 +84,6 @@ $cid=intval($_GET['cid']);
 
 if($OJ_MEMCACHE){
 		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
-        require("./include/memcache.php");
         $result = mysql_query_cache($sql);
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;

@@ -193,8 +193,12 @@ $tsql[38]="delete from $DB_NAME.source_code where solution_id in (select solutio
 $csql[38]="";
 $tsql[39]="delete from $DB_NAME.source_code_user where solution_id in (select solution_id from $DB_NAME.solution where problem_id=0 and result>4);";
 $csql[39]="";
-$tsql[40]="";
-$csql[40]="delete from $DB_NAME.solution where problem_id=0 and result>4;";
+$tsql[40]="delete from $DB_NAME.runtimeinfo where solution_id in (select solution_id from $DB_NAME.solution where problem_id=0 and result>4);";
+$csql[40]="delete from $DB_NAME.runtimeinfo where solution_id not in (select solution_id from  $DB_NAME.solution);";
+$tsql[41]="delete from $DB_NAME.compileinfo where solution_id in (select solution_id from $DB_NAME.solution where problem_id=0 and result>4);";
+$csql[41]="delete from $DB_NAME.compileinfo where solution_id not in (select solution_id from  $DB_NAME.solution);";
+$tsql[42]="";
+$csql[42]="delete from $DB_NAME.solution where problem_id=0 and result>4;";
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";

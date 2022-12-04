@@ -8,11 +8,7 @@
 }
 </style>
 <div style="margin-bottom:40px; ">
-    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   
-         <a class='ui small blue button' href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
-         <a class='ui small blue button' href="contestrank4.php?cid=<?php echo $cid?>" >补题</a>
-
- </h1>
+    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   <a class='ui small blue button' href="contestrank.php?cid=<?php echo $cid?>" >Back</a> </h1>
 </div>
 <div class="padding" style="overflow-y:auto;">
     <?php if($user_cnt>0){ ?>
@@ -78,7 +74,9 @@
                   echo sec2str($U[$i]->time);
                 echo "</td>";
                 
-                for ($j=0;$j<$pid_cnt;$j++){
+		for ($k=0;$k<$pid_cnt;$k++){
+			$j=$pida[$k];
+			//echo "$j";
                   if(isset($U[$i])){
                     if (isset($U[$i]->p_ac_sec[$j])&&$U[$i]->p_ac_sec[$j]>0){
 		   	if($uuid==$first_blood[$j]){

@@ -8,7 +8,7 @@
 }
 </style>
 <div style="margin-bottom:40px; ">
-    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   <a class='ui small blue button' href="contestrank.php?cid=<?php echo $cid?>" >Back</a> </h1>
+    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?> 补题榜  <a class='ui small blue button' href="contestrank.php?cid=<?php echo $cid?>" >Back</a> </h1>
 </div>
 <div class="padding" style="overflow-y:auto;">
     <?php if($user_cnt>0){ ?>

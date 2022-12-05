@@ -183,6 +183,7 @@
 	$MSG_IP_VERIFICATION="IP검증";
 	$MSG_CONTEST_SUSPECT1="여러 개의 ID가 사용된 IP 주소. 대회 중에 같은 컴퓨터에서 다른 ID로 접근하면 기록됩니다.";
 	$MSG_CONTEST_SUSPECT2="여러 개의 IP 주소에서 접속된 ID. 대회 중에 다른 컴퓨터로 바꾸면 기록됩니다.";
+        $MSG_REVIEW_CONTESTRANK="RankList of the Reviewers"; // rank of people who reviewed problems of contest after it's over
 
 	$MSG_SECONDS="초";
 	$MSG_MINUTES="분";

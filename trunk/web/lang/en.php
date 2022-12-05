@@ -179,6 +179,7 @@
 	$MSG_IP_VERIFICATION="IP VERIFICATION";
 	$MSG_CONTEST_SUSPECT1="IP addresses with multiple IDs. If multiple IDs are accessed at the same computer during the contest/exam, it logged.";
 	$MSG_CONTEST_SUSPECT2="IDs with multiple IP addresses. If switch to another computer during the contest/exam, it logged.";
+        $MSG_REVIEW_CONTESTRANK="RankList of the Reviewers"; // rank of people who reviewed problems of contest after it's over
 
 	$MSG_SECONDS="seconds";
 	$MSG_MINUTES="minutes";

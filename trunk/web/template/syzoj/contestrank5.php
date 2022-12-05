@@ -8,10 +8,9 @@
 	}
 </style>
 <div style="margin-bottom:40px; ">
-	<h1 style="text-align:left;">Contest<?php echo $cid ?> -- <?php echo $title ?>
-	<a class='ui small green button' href="contestrank5.php?cid=<?php echo $cid?>" ><?php echo $MSG_REVIEW_CONTESTRANK ?></a>
-<!-- 	<a href="contestrank.xls.php?cid=<?php echo $cid ?>" >Download</a> -->
-	</h1>
+<h1 style="text-align:left;">Contest<?php echo $cid ?> -- <?php echo $title ?> -- <?php echo $MSG_REVIEW_CONTESTRANK ?>
+<a class='ui small blue button' href="contestrank-oi.php?cid=<?php echo $cid?>" ><?php echo $MSG_BACK ?></a> 
+</h1>
 </div>
 <div class="padding" style="overflow-y:auto;">
 	<?php if ($user_cnt > 0) { ?>
@@ -74,7 +73,8 @@
 					echo "<a href=status.php?user_id=$uuid&cid=$cid>" . ($U[$i]->total) . "</a>";
 					echo "</td>";
 
-					for ($j = 0; $j < $pid_cnt; $j++) {
+					for ($k=0;$k<$pid_cnt;$k++){
+						$j=$pida[$k];
 						if (isset($U[$i])) {
 							if (isset($U[$i]->p_ac_sec[$j]) && $U[$i]->p_ac_sec[$j] > 0) {
 								if ($uuid == $first_blood[$j]) {

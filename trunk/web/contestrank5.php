@@ -81,6 +81,11 @@ function s_cmp($A,$B){
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
 
+$pida=array();
+$result=pdo_query("select num,problem_id from contest_problem where contest_id=? order by num",$cid);
+foreach($result as $row){
+   $pida[$row['num']]=$row['problem_id'];
+}
 
 if($OJ_MEMCACHE){
 		$sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`='$cid'";
@@ -164,7 +169,19 @@ else
 $pid_cnt=intval($row['pbc']);
 
 
-require("./include/contest_solutions.php");
+if(!isset($OJ_RANK_HIDDEN)) $OJ_RANK_HIDDEN="'admin','zhblue'";
+$sql="SELECT
+        user_id,nick,solution.result,solution.num,solution.in_date,solution.pass_rate,solution.problem_id
+                FROM
+                   solution where unix_timestamp(in_date)>=".$start_time." and  problem_id in (".implode(",",$pida).")  and user_id not in ( $OJ_RANK_HIDDEN )
+        ORDER BY user_id,solution_id";
+if($OJ_MEMCACHE){
+        $result = mysql_query_cache($sql,$cid);
+}else{
+	$result = pdo_query($sql,$cid);
+}   
+        if($result) $rows_cnt=count($result);
+        else $rows_cnt=0;
 //echo $sql;
 //$result=pdo_query($sql);
 
@@ -188,9 +205,9 @@ for ($i=0;$i<$rows_cnt;$i++){
         }
 	if($row['result']!=4 && $row['pass_rate']>=0.99) $row['pass_rate']=0;
         if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
-        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
+        	   $U[$user_cnt]->Add($row['problem_id'],strtotime($row['in_date'])-$start_time,0);
         else
-        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);
+        	   $U[$user_cnt]->Add($row['problem_id'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);
        
 }
 usort($U,"s_cmp");
@@ -221,7 +238,7 @@ foreach ($fb as $row){
 
 
 /////////////////////////Template
-require("template/".$OJ_TEMPLATE."/contestrank-oi.php");
+require("template/".$OJ_TEMPLATE."/contestrank5.php");
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
         require_once('./include/cache_end.php');

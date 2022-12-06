@@ -681,7 +681,7 @@ const char *getFileNameFromPath(const char *path)
 	return path;
 }
 
-void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,const char * infile)
+void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,const char * infile,const char * userfile)
 {
 	execute_cmd("echo '========[%s]========='>>diff.out", getFileNameFromPath(path));
 	execute_cmd("echo  '\\n------test in top 100 lines------'>>diff.out");
@@ -689,16 +689,16 @@ void make_diff_out_full(FILE *f1, FILE *f2, int c1, int c2, const char *path,con
 	execute_cmd("echo  '\\n------test out top 100 lines-----'>>diff.out");
 	execute_cmd("head -100 '%s'>>diff.out", path);
 	execute_cmd("echo  '\\n------user out top 100 lines-----'>>diff.out");
-	execute_cmd("head -100 user.out>>diff.out");
+	execute_cmd("head -100 %s >>diff.out",userfile);
 	execute_cmd("echo  '\\n------diff out 200 lines-----'>>diff.out");
-	execute_cmd("diff '%s' user.out -y|grep \\||head -200>>diff.out", path);
+	execute_cmd("diff '%s' %s -y|grep \\||head -200>>diff.out", path,userfile);
 	execute_cmd("echo  '\\n=============================='>>diff.out");
 }
-void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path)
+void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path,const char * userfile )
 {
 	execute_cmd("echo '========[%s]========='>>diff.out", getFileNameFromPath(path));
 	execute_cmd("echo 'Expected						      |	Yours'>>diff.out");
-	execute_cmd("diff '%s' user.out -y|head -100>>diff.out", path);
+	execute_cmd("diff '%s' %s -y|head -100>>diff.out", path,userfile);
 	execute_cmd("echo '\n=============================='>>diff.out");
 }
 
@@ -707,7 +707,7 @@ void make_diff_out_simple(FILE *f1, FILE *f2, int c1, int c2, const char *path)
  * http://code.google.com/p/zoj/source/browse/trunk/judge_client/client/text_checker.cc#25
  * 参考zoj的文件流式比较器，有更低的内存占用
  */
-int compare_zoj(const char *file1, const char *file2,const char * infile)
+int compare_zoj(const char *file1, const char *file2,const char * infile,const char * userfile)
 {
 	int ret = OJ_AC;
 	int c1, c2;
@@ -769,9 +769,9 @@ end:
 	if (ret == OJ_WA || ret == OJ_PE)
 	{
 		if (full_diff)
-			make_diff_out_full(f1, f2, c1, c2, file1,infile);
+			make_diff_out_full(f1, f2, c1, c2, file1,infile,userfile);
 		else
-			make_diff_out_simple(f1, f2, c1, c2, file1);
+			make_diff_out_simple(f1, f2, c1, c2, file1,userfile);
 	}
 	if (f1)
 		fclose(f1);
@@ -788,11 +788,11 @@ void delnextline(char s[])
 		s[--L] = 0;
 }
 
-int compare(const char *file1, const char *file2, const char * infile)  
+int compare(const char *file1, const char *file2, const char * infile,const char * userfile)  
 {
 #ifdef ZOJ_COM
 	//compare ported and improved from zoj don't limit file size
-	return compare_zoj(file1, file2,infile);
+	return compare_zoj(file1, file2,infile,userfile);
 #endif
 #ifndef ZOJ_COM
 	//the original compare from the first version of hustoj has file size limit  原始的内存中比较，速度更快但耗用更多内存
@@ -1868,6 +1868,7 @@ void prepare_files(char *filename, int namelen, char *infile, int &p_id,
 		FILE * fpname=fopen(noip_file_name,"r");
 		if(fscanf(fpname,"%s",noip_file_name)){
 		    execute_cmd("/bin/cp '%s' %s/%s", infile, work_dir,basename(noip_file_name));   // 如果存在input.name则复制测试数据
+		     execute_cmd("/usr/bin/chown judge %s/%s", work_dir,basename(noip_file_name));   // 修改属主
 		    if(DEBUG) printf("NOIP filename:%s\n",noip_file_name);
 		}
 		fclose(fpname);
@@ -2764,7 +2765,7 @@ void judge_solution(int &ACflg, int &usedtime, double time_lmt, int spj,
 		}
 		else
 		{
-			comp_res = compare(outfile, userfile,infile);
+			comp_res = compare(outfile, userfile,infile,userfile);
 		}
 		if (comp_res == OJ_WA)
 		{
@@ -2839,8 +2840,10 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 	struct user_regs_struct reg;
 	struct rusage ruse;
 	int first = true;
+	int tick=0;
 	while (1)
 	{
+		tick++;
 		// check the usage
 
 		wait4(pidApp, &status, __WALL, &ruse);     //等待子进程切换内核态（调用系统API或者运行状态变化）
@@ -2903,7 +2906,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 			break;
 		}
 
-		if (!spj && get_file_size(userfile) > get_file_size(outfile) * 2 + 1024)
+		if (((tick & 0xff)==0x00) &&(!spj) && get_file_size(userfile) > get_file_size(outfile) * 2 + 1024)
 		{
 			ACflg = OJ_OL;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);

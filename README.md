@@ -141,6 +141,7 @@ Star us, please!
 
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+12-06 | 致敬 | 长者一路走好！
 11-30 | 更新 | syzoj皮肤增加了利用localStorage自动保存临时代码的功能。
 11-18 | 更新 | 管理后台帮助页首行增加服务器状态。
 11-16 | 补丁 | 给Docker容器中的/usr/include/c++/9/iostream打补丁，禁用endl的cout.flush()操作，提高cout性能。

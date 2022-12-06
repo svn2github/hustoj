@@ -40,7 +40,8 @@
         $MSG_Manual="人工判题";
         $MSG_OK="确定";
         $MSG_Explain="输入判定原因与提示";
-  
+        $MSG_MARK="得分";
+
 	//fool's day
 	if(date('m')==4&&date('d')==1&&rand(0,100)<5){
   	        $MSG_Accepted="<span title=愚人节快乐>似乎好像是正确</span>";

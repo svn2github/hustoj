@@ -23,7 +23,7 @@
 				            <td class='text-center'><?php echo $MSG_NICK?></td>
 				            <td class='text-center'><?php echo $MSG_SOVLED?></td>
 				            <td class='text-center'><?php echo $MSG_CONTEST_PENALTY?></td>
-						<td class='text-center'><?php echo "Mark"?></td>
+						<td class='text-center'><?php echo $MSG_MARK ?></td>
 					<?php
 					for ($i = 0; $i < $pid_cnt; $i++)
 						echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></th>";

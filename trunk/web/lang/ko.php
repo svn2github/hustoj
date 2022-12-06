@@ -39,7 +39,7 @@
 	$MSG_Manual="수동채점";
 	$MSG_OK="확인";
 	$MSG_Explain="이유나 설명을 입력하세요.";
-
+        $MSG_MARK="Mark";
 
   	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
 	$MSG_MC="ManualConfirm";

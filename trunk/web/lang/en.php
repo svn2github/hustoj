@@ -40,7 +40,7 @@
  	$MSG_OK="OK";
  	$MSG_Explain="Type reason or explaination";
         $MSG_TEST_RUN="Test Running Done";
-
+        $MSG_MARK="Mark";
   	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
 	$MSG_MC="ManualConfirm";
 	

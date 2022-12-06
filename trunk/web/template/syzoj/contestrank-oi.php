@@ -18,11 +18,12 @@
 		<table class="ui very basic center aligned table" sylye="margin:30px">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>用户</th>
-					<th>昵称</th>
-					<th>用时</th>
-					<th>总分</th>
+					    <td class="{sorter:'false'} text-center"><?php echo $MSG_STANDING?></td>
+				            <td class='text-center'><?php echo $MSG_USER?></td>
+				            <td class='text-center'><?php echo $MSG_NICK?></td>
+				            <td class='text-center'><?php echo $MSG_SOVLED?></td>
+				            <td class='text-center'><?php echo $MSG_CONTEST_PENALTY?></td>
+						<td class='text-center'><?php echo "Mark"?></td>
 					<?php
 					for ($i = 0; $i < $pid_cnt; $i++)
 						echo "<th><a href=problem.php?cid=$cid&pid=$i>$PID[$i]</a></th>";

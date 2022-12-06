@@ -8,7 +8,7 @@
 }
 </style>
 <div style="margin-bottom:40px; ">
-    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?> 补题榜  
+    <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?> - <?php echo $MSG_REVIEW_CONTESTRANK ?>  
      <a class='ui small blue button' href="contestrank.php?cid=<?php echo $cid?>" >Back</a> 
 </h1>
 </div>

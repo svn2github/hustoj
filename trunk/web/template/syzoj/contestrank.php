@@ -10,7 +10,7 @@
 <div style="margin-bottom:40px; ">
     <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   
          <a class='ui small blue button' href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
-         <a class='ui small green button' href="contestrank4.php?cid=<?php echo $cid?>" >补题榜</a>
+         <a class='ui small green button' href="contestrank4.php?cid=<?php echo $cid?>" ><?php echo $MSG_REVIEW_CONTESTRANK ?></a>
 
  </h1>
 </div>

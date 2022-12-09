@@ -76,7 +76,7 @@ $cid = intval($_GET['cid']);
 
 if ($OJ_MEMCACHE) {
 	$sql = "SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=$cid";
-	require("./include/memcache.php");
+	
 	$result = mysql_query_cache($sql);
 
 	if ($result)

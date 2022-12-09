@@ -77,7 +77,7 @@
 如果您喜欢在线聊天，希望问题获得及时反馈，不介意付费获得服务，请加官方QQ群 `23361372` ：[点我加群](https://shang.qq.com/wpa/qunwpa?idkey=d52c3b12ddaffb43420d308d39118fafe5313e271769277a5ac49a6fae63cf7a)
 
 
-## 自带的6种模板演示
+## 自带的5种模板演示
 
 [bs3原版](http://bs3.hustoj.com/)
 

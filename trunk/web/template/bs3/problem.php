@@ -323,26 +323,21 @@
 			selection.removeAllRanges ();
 			selection.addRange (rangeToSelect);
 			}
-		  function transform(){
-			let height=window.innerHeight;
-<?php if ( $row[ 'spj' ]==2 ) {?>
-			let width=parseInt(document.body.clientWidth*0.3);
-			let width2=parseInt(document.body.clientWidth*0.7);
-<?php }else{ ?>
+			function transform(){
+        let height=document.body.clientHeight;
 			let width=parseInt(document.body.clientWidth*0.6);
 			let width2=parseInt(document.body.clientWidth*0.4);
-<?php } ?>
-			let submitURL=$("#submit")[0].href;
-			console.log(width);
-			let main=$("#main");
-			let problem=main.html();
-			//main.removeClass("container");
-			main.css("width",width2);
-			main.css("margin-left","10px");
-			main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
-			//main.css("float","left");
-			$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
-  		  }
+        let submitURL=$("#submit")[0].href;
+        console.log(width);
+        let main=$("#main");
+        let problem=main.html();
+  //      main.removeClass("container");
+        main.css("width",width2);
+        main.css("margin-left","10px");
+        main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
+        //main.css("float","left");
+        $("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
+  }
 
 	</script>
 

@@ -330,13 +330,20 @@
         let submitURL=$("#submit")[0].href;
         console.log(width);
         let main=$("#main");
-        let problem=main.html();
-  //      main.removeClass("container");
-        main.css("width",width2);
-        main.css("margin-left","10px");
-        main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
-        //main.css("float","left");
-        $("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
+        let problem=main.html();   
+        
+        if (window.screen.width < 500){
+        	main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;z-index:1000;top:49px;'></div>");
+                $("#submitPage").html("<iframe id='ansFrame' src='"+submitURL+"&spa' width='100%' height='"+window.screen.height+"px' ></iframe>");
+                window.setTimeout('$("#ansFrame")[0].scrollIntoView()',1000);
+	}else{
+		main.css("width",width2);
+		main.css("margin-left","10px");
+       	 	main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
+		$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
+	}
+	      
+
   }
 
 	</script>

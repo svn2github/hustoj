@@ -127,7 +127,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content'>
-							<?php echo bbcode_to_html($row['input'])?>
+							<?php echo $row['input']?>
 						</div>
 					</div>
 					<?php }
@@ -139,7 +139,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content'>
-							<?php echo bbcode_to_html($row['output'])?>
+							<?php echo $row['output']?>
 						</div>
 					</div>
 					<?php }    
@@ -182,7 +182,7 @@
 							</h4>
 						</div>
 						<div class='panel-body content hint'>
-							<?php echo bbcode_to_html($row['hint'])?>
+							<?php echo $row['hint']?>
 						</div>
 					</div>
 					<?php }
@@ -248,12 +248,12 @@
 
 		$( document ).ready( function () {
 			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
-<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
-                        $("div.md").each(function(){
-                                $(this).html(marked.parse($(this).html()));
-                        });
+<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?> 
+			$("div.md").each(function(){
+				$(this).html(marked.parse($(this).text()));
+			
+			});
 <?php } ?>
-
 		} );
 		function CopyToClipboard (input) {
 			var textToClipboard = input;
@@ -324,7 +324,7 @@
 			selection.addRange (rangeToSelect);
 			}
 		  function transform(){
-			let height=document.innerHeight;
+			let height=window.innerHeight;
 <?php if ( $row[ 'spj' ]==2 ) {?>
 			let width=parseInt(document.body.clientWidth*0.3);
 			let width2=parseInt(document.body.clientWidth*0.7);
@@ -336,12 +336,13 @@
 			console.log(width);
 			let main=$("#main");
 			let problem=main.html();
-			//main.removeClass("container");
+		//	main.removeClass("container");
 			main.css("width",width2);
 			main.css("margin-left","10px");
 			main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
 			//main.css("float","left");
 			$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
+			 
   		  }
 
 	</script>

@@ -359,12 +359,42 @@
       $("#language").val(6);
     }
 
+   function autoSave(){
+        var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+        var problem_id=$("#"+mark).val();
+	if(!!localStorage){
+		let key="source:"+location.href;
+		if(typeof(editor) != "undefined")
+			$("#hide_source").val(editor.getValue());
+		localStorage.setItem(key,$("#hide_source").val());
+		console.log("autosaving "+key+"..."+new Date());
+	}
+   }
     function loadFromBlockly(){
       translate();
       do_test_run();
       $("#frame_source").hide();
      //  $("#Submit").prop('disabled', false);
     }
+   $(document).ready(function(){
+   	$("#source").css("height",window.parent.innerHeight-220);  
+	if(!!localStorage){
+		let key="source:"+location.href;
+		let saved=localStorage.getItem(key);
+		if(saved!=null){
+			let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
+			if(load){
+				console.log("loading "+load);
+				
+				if(typeof(editor) != "undefined")
+					editor.setValue(saved);
+			
+			}
+
+		}
+	}
+	window.setInterval('autoSave();',5000);
+   });
   </script>
 
   <script language="Javascript" type="text/javascript" src="<?php echo $OJ_CDN_URL?>include/base64.js"></script>

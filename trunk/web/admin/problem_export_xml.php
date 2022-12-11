@@ -264,6 +264,7 @@ else {
 
   <item>
     <title><![CDATA[<?php echo $row['title']?>]]></title>
+    <url><![CDATA[<?php echo 'http://'.$_SERVER['HTTP_HOST'].dirname(dirname($_SERVER['REQUEST_URI']))."problem.php?id=".$row['problem_id']?>]]></url>
     <time_limit unit="s"><![CDATA[<?php    // 兼容老版本和QDUOJ之类的其他OJ   
             $time=$row['time_limit'];     
             if (intval($time)==$time)

@@ -74,7 +74,7 @@
   </form>
 
 
-  <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
+  <table id="result-tab" class="very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
                 <th>编号</th>
@@ -82,12 +82,12 @@
                 <th><?php echo $MSG_NICK?></th>
         <th>题目</th>
         <th>结果</th>
-        <th>内存</th>
-        <th>时间</th>
+        <th class='hidden-xs'>内存</th>
+        <th class='hidden-xs'>时间</th>
         <th>代码</th>
-        <th>代码长度</th>
-        <th>提交时间</th>
-        <th>判题机</th>
+        <th class='hidden-xs'>代码长度</th>
+        <th class='hidden-xs'>提交时间</th>
+        <th class='hidden-xs'>判题机</th>
       </tr>
     </thead>
     <tbody>
@@ -98,7 +98,7 @@
     $i=0;
     echo "<tr>";
     foreach($row as $table_cell){
-      if($i>3&&$i!=8)
+      if($i>3&&$i!=7)
         echo "<td class='hidden-xs'><b>";
       else
         echo "<td><b>";

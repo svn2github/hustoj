@@ -268,6 +268,7 @@ if (!$OJ_BENCHMARK_MODE) {
     */
 	$statusURI = "status.php?user_id=".$_SESSION[$OJ_NAME.'_'.'user_id'];
 	if (isset($cid)) {
+		if(isset($_GET['spa'])) $statusURI .="&spa";
 		$statusURI .= "&cid=$cid&fixed=";
 	}
 	if (!$test_run) {
@@ -394,6 +395,7 @@ elseif (file_exists($file)) {
 //echo $file;
 
 $statusURI = "status.php?user_id=".$_SESSION[$OJ_NAME.'_'.'user_id'];
+if(isset($_GET['spa'])) $statusURI .="&spa";
 
 if (isset($cid)) {
   $statusURI .= "&cid=$cid&fixed=";

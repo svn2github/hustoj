@@ -448,7 +448,7 @@ function et($tag){
     $cn['Seconds'] = '秒';
     $cn['ErrorReport'] = '错误报告';
     $cn['Random-data'] = '随机测试数据生成器';
-    $cn['GenerateOut'] = '用标程Main覆盖生成Out文件';
+    $cn['GenerateOut'] = '用标程Main.c/Main.cc覆盖生成Out文件';
     $cn['Ans2out'] = '.ans改名.out';
 
     // Portuguese by - Fabricio Seger Kolling

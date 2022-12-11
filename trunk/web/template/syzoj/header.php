@@ -75,14 +75,28 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="cn" style="position: fixed; width: 100%; overflow: hidden; ">
+<html lang="cn" style="position:fixed; width: 100%; overflow: hidden; ">
 
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title><?php echo $show_title ?></title>
     <?php include("template/$OJ_TEMPLATE/css.php");?>
+	<style>
+@media (max-width: 991px) {
+	.mobile-only {
+		display:block !important;
+	}
+
+	.desktop-only {
+	    display:none !important;
+	}
+}
+
+
+
+</style>
     <script src="<?php echo "$OJ_CDN_URL/include/"?>jquery-latest.js"></script>
 
 <!-- Scripts -->
@@ -98,10 +112,10 @@
 ?>
     <body style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; ">
     <div id="page-header" class="ui fixed borderless menu" style="position: fixed; height: 49px; z-index:99999">
-        <div id="menu" class="ui container" style="margin-left:calc(10%)!important">
-            <a class="header item" href="/"><span
+        <div id="menu" class="ui stackable mobile ui container computer" style="margin-left:calc(10%)!important">
+            <a class="header item"  href="/"><span
                     style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?></span></a>
-            <a class="item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
+            <a class="desktop-only item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>
           <?php
             if(file_exists("moodle"))  // 如果存在moodle目录，自动添加链接
             {
@@ -118,10 +132,10 @@
                     class="trophy icon"></i> <?php echo $MSG_CONTEST?></a>
             <a class="item <?php if ($url=="status.php") echo "active";?>" href="<?php echo $path_fix?>status.php"><i
                     class="tasks icon"></i><?php echo $MSG_STATUS?></a>
-            <a class="item <?php if ($url=="ranklist.php") echo "active";?>"
+            <a class="desktop-only item <?php if ($url=="ranklist.php") echo "active";?> "
                 href="<?php echo $path_fix?>ranklist.php"><i class="signal icon"></i> <?php echo $MSG_RANKLIST?></a>
             <!--<a class="item <?php //if ($url=="contest.php") echo "active";?>" href="/discussion/global"><i class="comments icon"></i> 讨论</a>-->
-            <a class="item <?php if ($url=="faqs.php") echo "active";?>" href="<?php echo $path_fix?>faqs.php"><i
+            <a class="desktop-only item <?php if ($url=="faqs.php") echo "active";?>" href="<?php echo $path_fix?>faqs.php"><i
                     class="help circle icon"></i> <?php echo $MSG_FAQ?></a>
 
               <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>

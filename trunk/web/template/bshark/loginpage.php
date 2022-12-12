@@ -71,6 +71,13 @@
                         <i class="iconfont icon-key"></i>
                         <input placeholder="<?php echo $MSG_PASSWORD;?>"  autocomplete="new-password" type="password" name="password">
                     </div>
+<?php if ($OJ_VCODE) { ?>
+              <div class="input-o">
+                <input name="vcode" placeholder="验证码" type="text">
+              </div>
+                <img id="vcode-img" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="30px">
+<?php } ?>
+
                     <button class="button-login"><?php echo $MSG_LOGIN;?></button>
                 </form>		
                 <script src="<?php echo $OJ_CDN_URL?>/include/md5-min.js"></script>

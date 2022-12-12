@@ -84,7 +84,7 @@ div[class*=ace_br] {
               echo "<a id='submit'  class=\"small ui primary button\" href=\"submitpage.php?cid=$cid&pid=$pid&langmask=$langmask\">$MSG_SUBMIT</a>";
               echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$PID[$pid]&cid=$cid\">$MSG_SUBMIT_RECORD</a>";
             }
-	      echo "<a class='small ui positive button' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
+	      echo "<a class='small ui primary button' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
           ?>
           
       </div>
@@ -206,7 +206,7 @@ div[class*=ace_br] {
               echo "<a id='submit'  class=\"small ui primary button\" href=\"submitpage.php?cid=$cid&pid=$pid&langmask=$langmask\">$MSG_SUBMIT</a>";
               echo "<a class=\"small ui positive button\" href=\"status.php?problem_id=$PID[$pid]&cid=$cid\">$MSG_SUBMIT_RECORD</a>";
             }
-	      echo "<a class='small ui positive button' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
+	      echo "<a class='small ui primary button' href='#' onclick='transform()' role='button'>$MSG_SHOW_OFF</a>";
           ?>
           
       </div>

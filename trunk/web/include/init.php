@@ -28,6 +28,16 @@ if($OJ_SaaS_ENABLE){
 	$DOMAIN=$domain;
 }
 
+$ip = $_SERVER['REMOTE_ADDR'];
+if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+  $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  $tmp_ip = explode(',', $REMOTE_ADDR);
+  $ip = htmlentities($tmp_ip[0], ENT_QUOTES, "UTF-8");
+}
+
+
+
+
 $OJ_LOG_FILE="/var/log/hustoj/{$OJ_NAME}.log";
 require_once(dirname(__FILE__) . "/logger.php");
 

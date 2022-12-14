@@ -75,6 +75,7 @@ static  $OJ_SUBMIT_COOLDOWN_TIME=1; //提交冷却时间，连续两次提交的
 static  $OJ_MARKDOWN=false; // 开启MARKDOWN，开启后在后台编辑题目时默认为源码模式，用[md] # Markdown [/md] 格式插入markdown代码, 如果需要用到[]也可以用<div class='md'> </div>。
 static  $OJ_INDEX_NEWS_TITLE='HelloWorld!';   // 在syzoj的首页显示哪一篇标题的文章（可以有多个相同标题）
 static  $OJ_DIV_FILTER=true;   // 过滤题面中的div，修复显示异常，特别是来自其他OJ系统的题面。
+static  $OJ_LIMIT_TO_1_IP=true;  // 限制用户同一时刻只能在一个IP地址登录
 
 //static  $OJ_EXAM_CONTEST_ID=1000; // 启用考试状态，填写考试比赛ID
 //static  $OJ_ON_SITE_CONTEST_ID=1000; //启用现场赛状态，填写现场赛比赛ID

@@ -17,8 +17,12 @@ echo "delete from compileinfo where solution_id in (select solution_id from solu
 echo "delete from solution where problem_id=0 and result>4 "|mysql -h $SERVER -P $PORT -u$USER -p$PASSWORD $DATABASE 
 
 echo "optimize table compileinfo,contest,contest_problem,loginlog,news,privilege,problem,solution,source_code,users,topic,reply,online,sim,mail;"|mysql -h $SERVER -P $PORT -u$USER -p$PASSWORD $DATABASE 
+
+echo "这里有警告是正常现象，请勿担心，下面的打包压缩耗时较长，请耐心等待备份结束，重新回到命令行提示符。"
+
 mysqldump -h $SERVER -P $PORT -R $DATABASE -u$USER -p$PASSWORD | bzip2 >/var/backups/db_${DATE}.sql.bz2
 if tar cjf /var/backups/hustoj_${DATE}.tar.bz2 /home/judge/data /home/judge/src /home/judge/etc /var/backups/db_${DATE}.sql.bz2 --exclude=/home/judge/src/install/*.bz2 ; then
 	rm /var/backups/hustoj_${OLD3}.tar.bz2  2> /dev/null
 	rm /var/backups/db_${OLD}.sql.bz2  2> /dev/null
 fi
+echo "备份完成，请检查并用FileZilla通过sftp下载备份文件：/var/backups/hustoj_${DATE}.tar.bz2"

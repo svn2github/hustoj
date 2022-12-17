@@ -230,30 +230,21 @@ for ($i=0; $i<$pid_cnt; $i++) {
 	$first_blood[$i] = "";
 }
 
-if ($OJ_MEMCACHE) {
-	$sql = "select s.num,s.user_id from solution s ,
-	(select num,min(solution_id) minId from solution where contest_id=$cid and result=4 GROUP BY num ) c where s.solution_id = c.minId";
-	$fb = mysql_query_cache($sql);
-
-	if ($fb)
-		$rows_cnt = count($fb);
-	else
-		$rows_cnt = 0;
+if($OJ_MEMCACHE){
+        $sql="select s.problem_id,s.user_id from solution s ,
+        (select problem_id,min(solution_id) minId from solution where  unix_timestamp(in_date)>=".$start_time." and  problem_id in (".implode(",",$pida).")  and user_id not in ( $OJ_RANK_HIDDEN ) and result=4 GROUP BY problem_id ) c where s.solution_id = c.minId";
+        $fb = mysql_query_cache($sql);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
+}else{
+        $sql="select s.problem_id,s.user_id from solution s ,
+        (select problem_id,min(solution_id) minId from solution where  unix_timestamp(in_date)>=".$start_time." and  problem_id in (".implode(",",$pida).")  and user_id not in ( $OJ_RANK_HIDDEN ) and result=4 GROUP BY problem_id ) c where s.solution_id = c.minId";
+        $fb = pdo_query($sql);
+        if($fb) $rows_cnt=count($fb);
+        else $rows_cnt=0;
 }
-else {
-	$sql = "select s.num,s.user_id from solution s ,
-	(select num,min(solution_id) minId from solution where contest_id=? and result=4 GROUP BY num ) c where s.solution_id = c.minId";
-	$fb = pdo_query($sql,$cid);
-
-	if ($fb)
-		$rows_cnt = count($fb);
-	else
-		$rows_cnt = 0;
-}
-
-for ($i=0; $i<$rows_cnt; $i++) {
-	$row = $fb[$i];
-	$first_blood[$row['num']] = $row['user_id'];
+foreach ($fb as $row){
+         $first_blood[$row['problem_id']]=$row['user_id'];
 }
 
 /////////////////////////Template

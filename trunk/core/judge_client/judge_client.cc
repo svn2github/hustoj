@@ -184,6 +184,7 @@ static int shm_run = 0;
 
 static char record_call = 0;
 static int use_ptrace = 1;
+static int ignore_esol= 1;
 static int compile_chroot = 0;
 static int turbo_mode = 0;
 static int python_free=0;
@@ -559,6 +560,7 @@ void init_judge_conf()   //读取判题主目录etc中的配置文件judge.conf
 			read_int(buf, "OJ_USE_MAX_TIME", &use_max_time);
 			read_int(buf, "OJ_TIME_LIMIT_TO_TOTAL", &time_limit_to_total);
 			read_int(buf, "OJ_USE_PTRACE", &use_ptrace);
+			read_int(buf, "OJ_IGNORE_ESOL", &ignore_esol);
 			read_int(buf, "OJ_COMPILE_CHROOT", &compile_chroot);
 			read_int(buf, "OJ_TURBO_MODE", &turbo_mode);
 			read_double(buf, "OJ_CPU_COMPENSATION", &cpu_compensation);
@@ -620,28 +622,25 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
 					c2 = fgetc(f2);
 				} while (isspace(c2));
 				continue;
-#ifdef IGNORE_ESOL
-			}
-			else if (isspace(c1) && isspace(c2))
-			{
-				while (c2 == '\n' && isspace(c1) && c1 != '\n')
-					c1 = fgetc(f1);
-				while (c1 == '\n' && isspace(c2) && c2 != '\n')
-					c2 = fgetc(f2);
+			}else if(ignore_esol){			
+				if (isspace(c1) && isspace(c2))
+				{
+					while (c2 == '\n' && isspace(c1) && c1 != '\n')
+						c1 = fgetc(f1);
+					while (c1 == '\n' && isspace(c2) && c2 != '\n')
+						c2 = fgetc(f2);
 
-#else
-			}
-			else if ((c1 == '\r' && c2 == '\n'))
-			{
-				c1 = fgetc(f1);
-			}
-			else if ((c2 == '\r' && c1 == '\n'))
-			{
-				c2 = fgetc(f2);
-#endif
-			}
-			else
-			{
+				}
+			}else if(!ignore_esol){
+				if ((c1 == '\r' && c2 == '\n'))
+				{
+					c1 = fgetc(f1);
+				}
+				else if ((c2 == '\r' && c1 == '\n'))
+				{
+					c2 = fgetc(f2);
+				}
+			}else{
 				if (DEBUG)
 					printf("%d=%c\t%d=%c", c1, c1, c2, c2);
 				;

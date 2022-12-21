@@ -52,7 +52,6 @@
 #include <assert.h>
 #include "okcalls.h"
 
-#define IGNORE_ESOL //ignore the ending space char of lines while comparing
 #define STD_MB 1048576LL
 #define STD_T_LIM 2
 #define STD_F_LIM (STD_MB << 5) //default file size limit 32m ,2^5=32
@@ -631,6 +630,12 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
 						c2 = fgetc(f2);
 
 				}
+				else{
+					if (DEBUG)
+						printf("%d=%c\t%d=%c", c1, c1, c2, c2);
+					;
+					ret = OJ_PE;
+				}
 			}else if(!ignore_esol){
 				if ((c1 == '\r' && c2 == '\n'))
 				{
@@ -640,11 +645,12 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, int &ret)
 				{
 					c2 = fgetc(f2);
 				}
-			}else{
-				if (DEBUG)
-					printf("%d=%c\t%d=%c", c1, c1, c2, c2);
-				;
-				ret = OJ_PE;
+				else{
+					if (DEBUG)
+						printf("%d=%c\t%d=%c", c1, c1, c2, c2);
+					;
+					ret = OJ_PE;
+				}
 			}
 		}
 		if (isspace(c1))

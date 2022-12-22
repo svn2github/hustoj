@@ -6,6 +6,17 @@
     width: 80%;
     height: 600px;
 }
+	  
+.ace_gutter-cell {   /* 行号 */
+   background-color: #ffeeee;
+}
+.ace_content{    /* 代码 */
+   background-color: #eeffee;
+}
+.ace-chrome .ace_marker-layer .ace_active-line{   /*当前行*/
+   background-color: rgba(0,0,199,0.3);
+}
+
   </style>
     
 <center>

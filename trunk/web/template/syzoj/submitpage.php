@@ -335,7 +335,7 @@ function loadFromBlockly(){
 		if(typeof(editor) != "undefined")
 			$("#hide_source").val(editor.getValue());
 		localStorage.setItem(key,$("#hide_source").val());
-		console.log("autosaving "+key+"..."+new Date());
+		//console.log("autosaving "+key+"..."+new Date());
 	}
    }
    $(document).ready(function(){
@@ -343,7 +343,7 @@ function loadFromBlockly(){
 	if(!!localStorage){
 		 let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
 		let saved=localStorage.getItem(key);
-		 if(saved!=null&&saved!=""){
+		 if(saved!=null&&saved!=""&&saved!=editor.getValue()){
 			let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
 			if(load){
 				console.log("loading "+load);

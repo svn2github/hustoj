@@ -43,6 +43,9 @@ do
 		echo "Network fail, retry... you might want to change another apt source for install"
 	done
 done
+service php$PHP_VER-fpm start
+service mysql start
+service nginx start
 
 chgrp www-data  /home/judge
 

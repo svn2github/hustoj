@@ -232,14 +232,14 @@ if (isset($_GET['cid'])) {
 			}
 		}
 
-		$view_problemset[$cnt][3] = $row['source'];
+		//$view_problemset[$cnt][3] = $row['source'];
 
 		if (!$noip)
-			$view_problemset[$cnt][4] = $row['accepted'];
+			$view_problemset[$cnt][3] = $row['accepted'];
 		else
-			$view_problemset[$cnt][4] = "";
+			$view_problemset[$cnt][3] = "";
     
-    $view_problemset[$cnt][5] = $row['submit'];
+    $view_problemset[$cnt][4] = $row['submit'];
     $cnt++;
   }
 }

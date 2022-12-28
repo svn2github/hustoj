@@ -173,7 +173,7 @@ div[class*=ace_br] {
     $color=array("blue","teal","orange","pink","olive","red","violet","yellow","green","purple");
     $tcolor=0;
   ?>
-  <?php if($row['source']){
+  <?php if($row['source'] && !isset($_GET['cid']) ){
     $cats=explode(" ",$row['source']);
   ?>
     <div class="row">

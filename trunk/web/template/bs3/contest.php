@@ -102,7 +102,7 @@
           <td></td>
           <td style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" ><?php echo $MSG_PROBLEM_ID?></td>
           <td><?php echo $MSG_TITLE?></td>
-          <td><?php echo $MSG_SOURCE?></td>
+        <!--  <td><?php echo $MSG_SOURCE?></td>  -->
           <td style="cursor:hand" onclick="sortTable('problemset', 4, 'int');"><?php echo $MSG_SOVLED?></td>
           <td style="cursor:hand" onclick="sortTable('problemset', 5, 'int');"><?php echo $MSG_SUBMIT?></td>
         </tr>

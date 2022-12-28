@@ -4,6 +4,8 @@
 
 Dockerfile
 --
+下面这个Dockerfile用于构建包含hustoj的镜像，其内容可以按需进行扩充和修改，协议采用GPLv2。
+
 ```
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND noninteractive
@@ -38,6 +40,7 @@ ENTRYPOINT ["/start.sh"]
 
 linux install cmd lines
 --
+下面的Linux命令可以下载上面的Dockerfile，并构建一个名为worker的镜像，运行一个名为hustojcontainer的容器，工作在宿主机的8080端口。
 ```
 mkdir hustoj
 cd hustoj
@@ -49,6 +52,7 @@ docker ps
 
 linux restart cmd line
 --
+当宿主机重启或dockerd服务重启，需要手工启动容器hustojcontainer。
 ```
 docker start hustojcontainer
 ```

@@ -57,7 +57,7 @@ echo "&nbsp;&nbsp;<span class=red>Private</font>";
 <td width='5' lay-data="{field:'u1',width:10}">
 <td lay-data="{field:'u2',sort: true}" style="cursor:hand" onclick="sortTable('problemset', 1, 'int');" ><?php echo $MSG_PROBLEM_ID?>
 <td width='60%' lay-data="{field:'u3',}"><?php echo $MSG_TITLE?></td>
-<td width='10%' lay-data="{field:'u6',}"><?php echo $MSG_SOURCE?></td>
+<!--  <td width='10%' lay-data="{field:'u6',}"><?php echo $MSG_SOURCE?></td>  -->
 <td lay-data="{field:'u4',sort: true}" style="cursor:hand" onclick="sortTable('problemset', 4, 'int');" width='5%'><?php echo $MSG_AC?></td>
 <td lay-data="{field:'u5',sort: true}" style="cursor:hand" onclick="sortTable('problemset', 5, 'int');" width='5%'><?php echo $MSG_SUBMIT?></td>
 </tr>

@@ -94,7 +94,7 @@
                     <th></th>
                     <th style="cursor: hand;" onclick="sortTable('problemset', 1, 'int');">题目编号</th>
                     <th>标题</th>
-                    <th>分类</th>
+                 <!--    <th>分类</th>  -->
                     <th style="cursor: hand;" onclick="sortTable('problemset', 4, 'int');">通过</th>
                     <th style="cursor: hand;" onclick="sortTable('problemset', 5, 'int');">提交</th>
                 </tr>

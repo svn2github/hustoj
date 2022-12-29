@@ -30,8 +30,8 @@ tar xzf hustoj.tar.gz
 svn up src
 #svn co https://github.com/zhblue/hustoj/trunk/trunk/  src
 
-#手工解决阿里云软件源的包依赖问题
-apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
+#手工解决阿里云软件源的包依赖问题 apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
+
 apt-get install -y libmysqlclient-dev
 apt-get install -y libmysql++-dev 
 PHP_VER=`apt-cache search php-fpm|grep -e '[[:digit:]]\.[[:digit:]]' -o`

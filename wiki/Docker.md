@@ -11,7 +11,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
         apt-get update && apt-get -y upgrade
-RUN     DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        wget w3m
+RUN     DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends wget w3m apt-utils
 
 # make Chinese Character works in Docker
 RUN apt-get install -y locales locales-all

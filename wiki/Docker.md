@@ -20,6 +20,8 @@ ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN:zh
 ENV LC_ALL zh_CN.UTF-8
 
+VOLUME ["/home/judge","/var/backups","/var/lib/mysql"]
+
 RUN wget dl.hustoj.com/install-ubuntu22.04.sh
 RUN bash install-ubuntu22.04.sh
 RUN sed -i 's|DB_HOST="localhost"|DB_HOST="127.0.0.1"|g' /home/judge/src/web/include/db_info.inc.php

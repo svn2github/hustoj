@@ -2412,6 +2412,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	if (   
 		(!use_docker) 
 			&& lang != LANG_JAVA
+			&& lang != LANG_PHP
 			&& lang != LANG_BASH
 			&& lang != LANG_COBOL 
 			&& lang != LANG_MATLAB 
@@ -2421,9 +2422,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		
 		if(chroot(work_dir));
 	}else{
-		if(lang==LANG_PHP){
-			if(chroot(work_dir));
-		}
+		// vm script language don't chroot within docker
 	}
 	while (setgid(1536) != 0)
 		sleep(1);

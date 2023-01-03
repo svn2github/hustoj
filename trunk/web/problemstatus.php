@@ -69,6 +69,10 @@ $result = pdo_query( $sql, $id);
 foreach ($result as $row) {
   $view_problem[$i][0] = $jresult[$row[0]];
   $view_problem[$i][1] = "<a href=status.php?problem_id=$id&jresult=".$row[0].">".$row[1]."</a>";
+  
+  $view_problem_title[$i] = $jresult[$row[0]]; 
+  $view_problem_number[$i] = $row[1];
+   
   $i++;
 }
 //}

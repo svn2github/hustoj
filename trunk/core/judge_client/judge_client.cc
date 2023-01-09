@@ -2544,7 +2544,7 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 		execle("/usr/bin/guile", "/usr/bin/guile", "Main.scm", (char *)NULL,envp);
 		break;
 	case LANG_LUA: //lua
-		execle("/usr/bin/lua", "/usr/bin/lua", "Main", (char *)NULL,envp);
+		execle("/usr/bin/lua", "/usr/bin/lua", "Main.lua", (char *)NULL,envp);
 		break;
 	case LANG_JS: //Node.js
 		execle("/usr/bin/node", "/usr/bin/node", "Main.js", (char *)NULL,envp);

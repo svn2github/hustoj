@@ -46,7 +46,7 @@
 						<?php
 						$nowStart = 0;
 						if (isset($_GET["start"]))
-							$nowStart = isset($_GET["start"]);
+							$nowStart = intval($_GET["start"]);
 						$qs = "";
 						if (isset($_GET['prefix'])) {
 							$qs .= "&prefix=" . htmlentities($_GET['prefix'], ENT_QUOTES, "utf-8");

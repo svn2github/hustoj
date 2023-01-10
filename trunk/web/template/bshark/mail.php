@@ -13,7 +13,7 @@ if ($_GET["friend"]) {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>聊天 - MasterOJ</title>
+        <title><?php echo $MSG_MAIL;?> - <?php echo $OJ_NAME; ?></title>
         <?php require("./template/bshark/header-files.php");?>
             <style type="text/css">
         .item-right {
@@ -37,7 +37,7 @@ if ($_GET["friend"]) {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: #fcfcfc;
 }
  
 .userlist li a {
@@ -48,12 +48,12 @@ if ($_GET["friend"]) {
 }
  
 .userlist li a:hover {
-    background-color: #e1e1e1;
+    background-color: #f1f1f1;
     color: #000;
 }
  
 .active {
-    background-color: #e1e1e1;
+    background-color: #f1f1f1;
     color: #000;
 }
         .info-tip{
@@ -82,11 +82,12 @@ a:hover {
     
     <body>
         <?php require("./template/bshark/nav.php");?>
-        <div class="row" style="margin: 3% 7% 5% 7%">
-            <div class="col-md-12">
+        <div class="ui container bsharkMain">
+        <div class="ui grid">
+            <div class="sixteen wide column">
                 <div class="card">
-                    <div class="card-body" style="">
-                        <div class="">
+                    <div class="card-body" style="padding: 0">
+                        <div style="max-width: 800px">
                             <?php 
                                 if ($_POST["content"]) {
                                     $from_user = $user_id;
@@ -94,7 +95,7 @@ a:hover {
                                     $content = $_POST["content"];
                                     $content = str_replace("<p>","",$content);
                                     $content = str_replace("</p>","",$content);
-                                    $title = '一次私密聊天';
+                                    $title = '无标题!';
                                     $in_date = date('Y-m-d H:i:s');
                                     $new_mail = 1;
                                     $reply = 0;
@@ -105,23 +106,20 @@ a:hover {
                                     header("Location:".$url);
                                 }
                             ?>
-                            <div class="row" style="width:100%;line-height:center"><div style="width:70%;height:40px;background-color:#222;display:inline-block"><p style="color:#fff;font-size:20px;margin-top:5px" align=center><span><?php 
+                            <div style="width:100%;line-height:center;height:36px;background-color:#2185d0;display:inline-block"><p style="color:#fff;font-size:20px;margin: 0;line-height: 36px;" align=center><span><?php 
                             if ($friend) echo $friend;
                             else echo "暂无联系人";
-                            ?></span></p></div><div style="width:30%;height:40px;background-color:#222;display:inline-block;border-left:2px solid #fff"><p style="color:#fff;font-size:20px;margin-top:5px" align=center><span>软件介绍</span></p></div></div>
-                            <div class="row" style="width:100%;height:500px;">
-                                
-                                <div class="" style="width:26%;border:2px solid #000;">
+                            ?></span></p></div>
+                            <div style="width:100%;height:500px;">
+                                <div style="width:36%;border:1px solid #aaa;float: left;height: 100%;">
                                     <ul class="userlist" style="height:50px;background-color:#fff">
                                         <li>
                                             <a>
                                                 <form>
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="basic-addon1"><i class="iconfont icon-user"></i></span>
-                                                            </div>
-                                                            <input type="text" name="friend" class="form-control" placeholder="输入用户名直接聊天">
-                                                        </div>
+                                                    <div class="ui left icon mini input">
+                                                        <input type="text" name="friend" placeholder="<?php echo "输入" . $MSG_USER_ID . "开始聊天";?>">
+                                                        <i class="user icon"></i>
+                                                    </div>
                                                 </form>
                                             </a>
                                         </li>
@@ -137,7 +135,7 @@ a:hover {
                                                 if ($kkk[strtolower($this_f)]=='666') continue;
                                                 else $kkk[strtolower($this_f)]='666';
                                                 ?>
-                                                <a href="?friend=<?php echo $this_f;?>" class="<?php if ($this_f==$friend) echo 'active';?>"><div style="position:relative;width:48px;height:48px;display:inline;"><img src="<?php $logopng = 'http://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160';echo $logopng;?>" width=48 height=48 style="border:1px solid #222;display:inline;border-radius:50%;float:left;">
+                                                <a href="?friend=<?php echo $this_f;?>" class="<?php if ($this_f==$friend) echo 'active';?>"><div style="position:relative;width:42px;height:42px;display:inline;"><img src="<?php $logopng = 'http://q.qlogo.cn/headimg_dl?dst_uin=1440169768&spec=160';echo $logopng;?>" width=42 height=42 style="border:1px solid #222;display:inline;border-radius:50%;float:left;">
                                                 <?php 
                                                 if (count(pdo_query('select * from `mail` where `from_user`=? and `to_user`=? and `new_mail`=1',$this_f, $user_id))>0) {?>
                                                 <span class="info-tip"></span><?php
@@ -158,7 +156,7 @@ a:hover {
                                         ?>
                                     </ul>
                                 </div>
-                                <div style="width:44%;border:2px solid #000;position:relative">
+                                <div style="width:64%;border:1px solid #ccc;position:relative;float:left;height: 100%;">
                                     <div style="margin:10px 10px 0px 10px;width:98%;height:290px;overflow:auto" id='infos'>
                                         <?php 
                                             if ($friend && $is_friend) {
@@ -188,7 +186,7 @@ a:hover {
                                                 }
                                             }
                                             else {
-                                                echo "<h4><b>暂无联系人或联系人不存在</b></h4>从列表中选择联系人，或者输入用户名后按回车直接聊天";
+                                                echo "<h2><b>暂无联系人或联系人不存在</b></h2>从列表中选择联系人，或者输入用户名后按回车直接聊天";
                                             }
                                         ?>
                                     </div>
@@ -200,12 +198,6 @@ a:hover {
                                     ?>
                                     </div>
                                 </div>
-                                
-                                <div class="" style="width:30%;border:2px solid #000;padding:10px">
-                                    <p><b>Master Talk</b><br>一个自主研发的轻量级聊天系统。界面简洁。功能强大。
-                                    <h6>与好友聊天</h6>从列表中选择一个好友,或者输入用户名后按回车直接聊天。如果您想找好友，您可以试试随机选择(<a href="/user/chat/<?php echo pdo_query('select * from `users` order by rand() limit 1')[0]['user_id'];?>">点我随机聊天</a>),找到您的有缘人吧
-                                    <h6>客户端</h6><ul><li><i class="fa fa-windows"></i>Windows X86_64</li><li><i class="fa fa-windows"></i>Linux X86_64</li><li><i class="fa fa-windows"></i>Mac X86_64</li></ul></p>
-                                </div>
                             </div>
                             
                         </div>
@@ -213,6 +205,7 @@ a:hover {
                 </div>
             </div>
         </div>
+    </div>
 <?php require("./template/bshark/footer.php");?>
 <?php require("./template/bshark/footer-files.php");?>
     <script type="text/javascript">

@@ -1,7 +1,13 @@
-window.onscroll = function () {
-    var sl = -Math.max(document.body.scrollLeft, document.documentElement.scrollLeft);
-    document.getElementById('navbar').style.left = sl + 'px';
-}
+console.log('%cbshark%cby yemaster',
+    'background-color: #2180db;padding: 2px 4px;color: #fff;',
+    'background-color: #eee;padding: 2px 4px;color: #222324;')
+
+$('.ui.dropdown')
+    .dropdown({
+        on: "hover"
+    })
+    ;
+
 function totop() {
     var scrollToTop = window.setInterval(function () {
         var pos = window.pageYOffset;

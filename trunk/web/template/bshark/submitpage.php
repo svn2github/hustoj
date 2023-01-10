@@ -145,7 +145,7 @@
 				</div>
 				<div class="card" style="padding: 0;">
 					<div class="ui vertical fluid menu problemAction">
-						<a href="<?php if (isset($id)) { 
+						<a href="<?php if (isset($id)) {
 							echo "problem.php?id=$id";
 						} else {
 							echo "problem.php?cid=$cid&pid=$pid";
@@ -244,7 +244,7 @@
 			if (mark == 'problem_id')
 				problem_id.value = '<?php if (isset($id))
 					echo $id ?> ';
-																																																												else
+																																																																	else
 				problem_id.value = '<?php if (isset($cid))
 					echo $cid ?> ';
 
@@ -273,7 +273,7 @@
 			if (mark == 'problem_id')
 				problem_id.value = '<?php if (isset($id))
 					echo $id ?> ';
-																																																												else
+																																																																	else
 				problem_id.value = '<?php if (isset($cid))
 					echo $cid ?> ';
 				document.getElementById("frmSolution").target = "_self";
@@ -325,8 +325,39 @@
 		function switchLang(lang) {
 			var langnames = new Array("c_cpp", "c_cpp", "pascal", "java", "ruby", "sh", "python", "php", "perl", "csharp", "objectivec", "vbscript", "scheme", "c_cpp", "c_cpp", "lua", "javascript", "golang");
 			editor.getSession().setMode("ace/mode/" + langnames[lang]);
-
 		}
+		function autoSave() {
+			var mark = "<?php echo isset($id) ? 'problem_id' : 'cid'; ?>";
+			var problem_id = $("#" + mark).val();
+			if (!!localStorage) {
+				let key = "<?php echo $_SESSION[$OJ_NAME . '_user_id'] ?>source:" + location.href;
+				if (typeof (editor) != "undefined")
+					$("#hide_source").val(editor.getValue());
+				localStorage.setItem(key, $("#hide_source").val());
+				//console.log("autosaving "+key+"..."+new Date());
+			}
+		}
+		$(document).ready(function () {
+			if (!!localStorage) {
+				let key = "<?php echo $_SESSION[$OJ_NAME . '_user_id'] ?>source:" + location.href;
+				let saved = localStorage.getItem(key);
+				if (saved != null && saved != "" && saved != editor.getValue()) {
+					Swal.fire({
+						text: "发现自动保存的源码，是否加载？（仅有一次机会）",
+						icon: 'info',
+						showCancelButton: true,
+						confirmButtonColor: '#2180db',
+						cancelButtonColor: '#aaa'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							if (typeof (editor) != "undefined")
+								editor.setValue(saved);
+						}
+					})
+				}
+			}
+		})
+		window.setInterval('autoSave();', 5000);
 		function reloadtemplate(lang) {
 			console.log("lang=" + lang);
 			document.cookie = "lastlang=" + lang.value;

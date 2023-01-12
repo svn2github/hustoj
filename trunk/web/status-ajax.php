@@ -38,7 +38,10 @@ if (count($result)>0) {
 		$row = $result[0];
 		
 		if ($row) {
-			echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
+			if(strpos($row['error'],"judge")!==false) echo "error1";
+                        else if(strpos($row['error'],"php")!==false) echo "error2";
+                        else if(strpos($row['error'],"PASS")!==false) echo "error3";
+                        else echo htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
 			$sql = "delete from custominput where solution_id=?";
 			pdo_query($sql,$solution_id);     
 		}

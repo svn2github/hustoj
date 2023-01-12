@@ -75,18 +75,19 @@ sed -i "s/OJ_RUNNING=1/OJ_RUNNING=$CPU/g" etc/judge.conf
 
 chmod 700 backup
 chmod 700 etc/judge.conf
+chown 
 
 sed -i "s/DB_USER[[:space:]]*=[[:space:]]*\"root\"/DB_USER=\"$USER\"/g" src/web/include/db_info.inc.php
 sed -i "s/DB_PASS[[:space:]]*=[[:space:]]*\"root\"/DB_PASS=\"$PASSWORD\"/g" src/web/include/db_info.inc.php
 chmod 700 src/web/include/db_info.inc.php
-chown -R www-data src/web/
+chown -R www-data:www-data src/web/
 
 chown -R root:root src/web/.svn
 chmod 750 -R src/web/.svn
 
-chown www-data:judge src/web/upload
-chown www-data:judge data
-chmod 711 -R data
+chown www-data:www-data src/web/upload
+chown www-data:www-data data
+chmod 750 -R data
 if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else

@@ -9,7 +9,10 @@ wget -O hustoj.tar.gz http://dl.hustoj.com/hustoj.tar.gz
 tar xzf hustoj.tar.gz
 svn up src
 
-for PKG in make flex g++ clang libmariadb++-dev  mariadb-server php7.3-fpm php7.3-memcache php-zip php-xml php-mbstring memcached nginx php7.3-mysql php7.0-gd fp-compiler openjdk-9-jdk
+PHP_VER=`apt-cache search php-fpm|grep -e '[[:digit:]]\.[[:digit:]]' -o`
+if [ "$PHP_VER" = "" ] ; then PHP_VER="7.4"; fi
+
+for PKG in make flex g++ clang libmariadb++-dev  mariadb-server php${PHP_VER}-fpm php${PHP_VER}-memcache php-zip php-xml php-mbstring memcached nginx php${PHP_VER}-mysql php${PHP_VER}-gd fp-compiler openjdk-9-jdk
 do
 	apt-get install -y $PKG
 done
@@ -56,19 +59,19 @@ else
 	sed -i "s:#\tinclude snippets:\tinclude snippets:g" /etc/nginx/sites-enabled/default
 	sed -i "s|#\tfastcgi_pass unix|\tfastcgi_pass unix|g" /etc/nginx/sites-enabled/default
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
-	sed -i "s:php7.0:php7.4:g" /etc/nginx/sites-enabled/default
+	sed -i "s:php7.0:php${PHP_VER}:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
 fi
 
 
 
 /etc/init.d/nginx restart
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php7.0/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php7.0/fpm/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php${PHP_VER}/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php${PHP_VER}/fpm/php.ini
 sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' `find /etc/php -name www.conf`
  
-/etc/init.d/php7.0-fpm restart
-service php7.0-fpm restart
+/etc/init.d/php${PHP_VER}-fpm restart
+service php${PHP_VER}-fpm restart
 cd src/core
 bash ./make.sh
 if grep "/usr/bin/judged" /etc/rc.local ; then

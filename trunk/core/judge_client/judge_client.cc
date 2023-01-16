@@ -1643,6 +1643,7 @@ void get_solution(int solution_id, char *work_dir, int lang)
 	}
 	if(lang == 6 ){    // 从源码中搜索python2字样，失败的结果非零默认python3,成功的结果为0是python2
 		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
+                execute_cmd("sed -i 's/import.*os//g' %s/%s", work_dir, src_pth);
 	}
 	execute_cmd("chown judge %s/%s", work_dir, src_pth);
 }

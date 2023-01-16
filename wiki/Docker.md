@@ -58,3 +58,5 @@ linux restart cmd line
 ```
 docker start hustojcontainer
 ```
+
+# 最后，强烈建议用物理机或者云服务器直接部署，不要用docker部署。无论哪种情况，请做好数据备份。

@@ -156,10 +156,7 @@
                                 <?php
                                 $cnt = 0;
                                 for ($i = 0; $i < $user_cnt; $i++) {
-                                    if ($i & 1)
-                                        echo "<tr class='oddrow'>";
-                                    else
-                                        echo "<tr class='evenrow'>";
+                                    echo "<tr>";
 
                                     $nick = $U[$i]->nick;
                                     echo "<td>";
@@ -171,7 +168,7 @@
 
                                     $uuid = $U[$i]->user_id;
                                     if (isset($_GET['user_id']) && $uuid == $_GET['user_id'])
-                                        echo "<tdbgcolor=#ffff77>";
+                                        echo "<td class='positive'>";
                                     else
                                         echo "<td>";
                                     echo "<a name=\"$uuid\" href=userinfo.php?user=$uuid>$uuid</a>";

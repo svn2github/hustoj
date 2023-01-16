@@ -83,11 +83,11 @@ a:hover {
     <body>
         <?php require("./template/bshark/nav.php");?>
         <div class="ui container bsharkMain">
-        <div class="ui grid">
-            <div class="sixteen wide column">
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
                 <div class="card">
                     <div class="card-body" style="padding: 0">
-                        <div style="max-width: 800px">
+                        <div>
                             <?php 
                                 if ($_POST["content"]) {
                                     $from_user = $user_id;
@@ -157,7 +157,7 @@ a:hover {
                                     </ul>
                                 </div>
                                 <div style="width:64%;border:1px solid #ccc;position:relative;float:left;height: 100%;">
-                                    <div style="margin:10px 10px 0px 10px;width:98%;height:290px;overflow:auto" id='infos'>
+                                    <div style="width:98%;height:290px;overflow:auto" id='infos'>
                                         <?php 
                                             if ($friend && $is_friend) {
                                                 pdo_query('UPDATE `mail` SET `new_mail`=0 WHERE `from_user`=? AND `to_user`=?',$friend,$user_id);

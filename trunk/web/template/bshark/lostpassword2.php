@@ -1,13 +1,10 @@
-<?php
-require("./include/set_get_key.php");
-?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>
-        <?php echo $MSG_REGISTER; ?> - <?php echo $OJ_NAME; ?>
+        <?php echo $MSG_LOST_PASSWORD; ?> - <?php echo $OJ_NAME; ?>
     </title>
     <?php require("./template/bshark/header-files.php"); ?>
     <style>
@@ -81,61 +78,41 @@ require("./include/set_get_key.php");
         .more-links a {
             color: #ccc;
         }
+
+        p {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
     <center>
-        <div style="margin-top:20px;">
+        <div style="margin-top:10%;">
             <h2 style="color:#fff">
-                <?php echo $MSG_REGISTER; ?>
+                <?php echo $MSG_LOST_PASSWORD; ?> - 验证<?php echo $MSG_EMAIL; ?>
             </h2>
-            <form action="/register.php" method="post" role="form">
-                <div class="input-o" style="display:inline-block">
+            <form action=lostpassword2.php method=post>
+                <div class="input-o">
                     <i class="iconfont icon-user"></i>
                     <input placeholder="<?php echo $MSG_USER_ID; ?>" autocomplete="off" name="user_id" type="text">
                 </div>
-                <br>
-                <div class="input-o" style="display:inline-block">
-                    <i class="iconfont icon-user"></i>
-                    <input placeholder="<?php echo $MSG_NICK; ?>" autocomplete="off" name="nick" type="text">
-                </div>
-                <br>
-                <div class="input-o" style="display:inline-block">
-                    <i class="iconfont icon-key"></i>
-                    <input placeholder="<?php echo $MSG_PASSWORD; ?>" autocomplete="new-password" type="password"
-                        name="password">
-                </div>
-                <br>
-                <div class="input-o" style="display:inline-block">
-                    <i class="iconfont icon-key"></i>
-                    <input placeholder="<?php echo $MSG_REPEAT_PASSWORD; ?>" autocomplete="new-password" type="password"
-                        name="rptpassword">
-                </div>
-                <br>
-                <div class="input-o" style="display:inline-block">
-                    <i class="iconfont icon-shu"></i>
-                    <input placeholder="<?php echo $MSG_SCHOOL; ?>" autocomplete="off" type="text" name="school"
-                        required>
-                </div>
-                <br>
                 <div class="input-o" style="display:inline-block">
                     <i class="iconfont icon-mail"></i>
-                    <input placeholder="<?php echo $MSG_EMAIL; ?>" autocomplete="off" type="email" name="email"
-                        required>
+                    <input placeholder="<?php echo $MSG_LOSTPASSWORD_MAILBOX ?>" autocomplete="off" type="text"
+                        name="lost_key">
                 </div>
-                <br>
-                <?php if ($OJ_VCODE) { ?>
-                    <div class="input-o" style="position: relative;">
-                        <i class="iconfont icon-ecurityCode"></i>
-                        <input name="vcode" placeholder="<?php echo $MSG_VCODE; ?>" type="text">
-                        <img id="vcode-img" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="26px"
-                            style="position: absolute; right: 10px; ">
-                    </div>
-                <?php } ?>
-                <button class="button-login">
-                    <?php echo $MSG_REGISTER; ?>
-                </button>
+                <p>
+                    <?php echo $MSG_LOSTPASSWORD_WILLBENEW ?>
+                </p>
+                <?php //if ($OJ_VCODE) { ?>
+                <div class="input-o" style="position: relative;">
+                    <i class="iconfont icon-ecurityCode"></i>
+                    <input name="vcode" placeholder="<?php echo $MSG_VCODE; ?>" type="text">
+                    <img id="vcode-img" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="26px"
+                        style="position: absolute; right: 10px; ">
+                </div>
+                <?php //} ?>
+                <button class="button-login" type=submit><?php echo $MSG_SUBMIT; ?></button>
                 <div class="more-links">
                     <div class="ui two column grid">
                         <div class="column left aligned">
@@ -149,18 +126,9 @@ require("./include/set_get_key.php");
                     </div>
                 </div>
             </form>
-            <script src="<?php echo $OJ_CDN_URL ?>/include/md5-min.js"></script>
-            <script>
-                function jsMd5() {
-                    if ($("input[name=password]").val() == "") return false;
-                    $("input[name=password]").val(hex_md5($("input[name=password]").val()));
-                    return true;
-                }
-            </script>
         </div>
     </center>
-    <?php require("./template/bshark/footer-files.php"); ?>
-
+    <?php require("./template/bshark/footer.php"); ?>
 </body>
 
 </html>

@@ -100,7 +100,7 @@
                 <?php if ($OJ_VCODE) { ?>
                     <div class="input-o" style="position: relative;">
                         <i class="iconfont icon-ecurityCode"></i>
-                        <input name="vcode" placeholder="验证码" type="text">
+                        <input name="vcode" placeholder="<?php echo $MSG_VCODE; ?>" type="text">
                         <img id="vcode-img" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="26px"
                             style="position: absolute; right: 10px; ">
                     </div>
@@ -108,9 +108,14 @@
 
                 <button class="button-login"><?php echo $MSG_LOGIN; ?></button>
                 <div class="more-links">
-                    <div class="ui two column grid">
+                    <div class="ui three column grid">
                         <div class="column left aligned">
                             <a href="<?php echo $OJ_HOME; ?>">返回<?php echo $MSG_HOME; ?></a>
+                        </div>
+                        <div class="column center aligned">
+                            <a href="lostpassword.php">
+                                <?php echo $MSG_LOST_PASSWORD; ?>
+                            </a>
                         </div>
                         <div class="column right aligned">
                             <a href="registerpage.php">

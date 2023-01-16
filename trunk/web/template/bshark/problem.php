@@ -1,13 +1,3 @@
-<?php
-function make($str)
-{
-	$newstr = $str;
-	$newstr = preg_replace("/<p.*?>|<\/p>/is", "", $newstr);
-	$newstr = preg_replace("/<div.*?>|<\/div>/is", "", $newstr);
-	/*$newstr = preg_replace("/<span.*?>|<\/span>/is","", $newstr);*/
-	return $newstr;
-}
-?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -16,6 +6,7 @@ function make($str)
 	<title>
 		<?php echo $MSG_PROBLEM; ?> - <?php echo $OJ_NAME; ?>
 	</title>
+	<?php require("./template/bshark/header-files.php"); ?>
 	<?php if (isset($OJ_MATHJAX) && $OJ_MATHJAX) { ?>
 		<!--以下为了加载公式的使用而既加入-->
 		<script>
@@ -27,7 +18,6 @@ function make($str)
 		<script id="MathJax-script" async src="template/<?php echo $OJ_TEMPLATE ?>/tex-chtml.js"></script>
 
 	<?php } ?>
-	<?php require("./template/bshark/header-files.php"); ?>
 	<style>
 		h4 {
 			margin-top: 10px;
@@ -57,6 +47,7 @@ function make($str)
 		<div class="ui stackable grid">
 			<div class="eleven wide column">
 				<div class="card">
+					<!--StartMarkForVirtualJudge-->
 					<div class="card-body">
 						<div class="problemHead">
 							<?php
@@ -106,7 +97,7 @@ function make($str)
 								<?php echo $MSG_Description; ?>
 							</h4>
 							<?php
-							echo make($row['description']);
+							echo bbcode_to_html($row['description']);
 						}
 						?>
 						<?php
@@ -116,7 +107,7 @@ function make($str)
 								<?php echo $MSG_Input; ?>
 							</h4>
 							<?php
-							echo $row['input'];
+							echo bbcode_to_html($row['input']);
 						}
 						?>
 						<?php
@@ -126,7 +117,7 @@ function make($str)
 								<?php echo $MSG_Output; ?>
 							</h4>
 							<?php
-							echo $row['output'];
+							echo bbcode_to_html($row['output']);
 						}
 						$sinput = str_replace("<", "&lt;", $row['sample_input']);
 						$sinput = str_replace(">", "&gt;", $sinput);
@@ -153,8 +144,8 @@ function make($str)
 									<?php
 									if (strlen($soutput)) {
 										?><h4><?php echo $MSG_Sample_Output; ?><a class="ui mini blue button"
-													href="javascript:void(0)" id="qwqa2">复制</a></h4><blockquote id="sampleOutput"><pre><?php
-													echo $soutput . '</pre></blockquote>';
+																						href="javascript:void(0)" id="qwqa2">复制</a></h4><blockquote id="sampleOutput"><pre><?php
+																						echo $soutput . '</pre></blockquote>';
 									}
 									?>
 								</div>
@@ -163,7 +154,7 @@ function make($str)
 						<?php
 						if ($row['hint']) {
 							?><h4><?php echo $MSG_HINT; ?></h4><?php
-							   echo $row['hint'];
+							   echo bbcode_to_html($row['hint']);
 						}
 						?>
 						<?php
@@ -176,6 +167,7 @@ function make($str)
 						}
 						?>
 					</div>
+					<!--EndMarkForVirtualJudge-->
 				</div>
 			</div>
 			<div class="five wide column">
@@ -196,8 +188,8 @@ function make($str)
 						if (isset($_SESSION[$OJ_NAME . '_' . 'administrator']) || isset($_SESSION[$OJ_NAME . '_' . 'problem_manager'])) {
 							require_once("include/set_get_key.php");
 							?> 
-										<a href="bsadmin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>" class="item"><?php echo $MSG_EDIT; ?></a>
-										<a href='javascript:phpfm(<?php echo $row['problem_id']; ?>)' class="item"><?php echo $MSG_TESTDATA; ?></a>
+																			<a href="swadmin/problem_edit.php?id=<?php echo $id ?>&getkey=<?php echo $_SESSION[$OJ_NAME . '_' . 'getkey'] ?>" class="item"><?php echo $MSG_EDIT; ?></a>
+																			<a href='javascript:phpfm(<?php echo $row['problem_id']; ?>)' class="item"><?php echo $MSG_TESTDATA; ?></a>
 						<?php } ?>
 					</div>
 				</div>
@@ -219,6 +211,15 @@ function make($str)
 			}
 		});
 	}
+
+	$(document).ready(function () {
+<?php if (isset($OJ_MARKDOWN) && $OJ_MARKDOWN) { ?>
+				$("div.md").each(function () {
+					$(this).html(marked.parse($(this).html()));
+				});
+<?php } ?>
+
+	});
 
 	function CopyToClipboard(input) {
 		var textToClipboard = input;
@@ -256,7 +257,7 @@ function make($str)
 		}
 
 		if (success) {
-			console.log(input);
+			console.log("Success");
 		}
 		else {
 			console.log("Can't");

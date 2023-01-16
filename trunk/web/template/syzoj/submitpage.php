@@ -341,18 +341,15 @@ function loadFromBlockly(){
    $(document).ready(function(){
    	$("#source").css("height",window.innerHeight-180);  
 	if(!!localStorage){
-		 let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
+		let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
 		let saved=localStorage.getItem(key);
-		 if(saved!=null&&saved!=""&&saved!=editor.getValue()){
-			let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
-			if(load){
+		if(saved!=null&&saved!=""&&saved!=editor.getValue()){
+			//let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
+			//if(load){
 				console.log("loading "+load);
-				
 				if(typeof(editor) != "undefined")
-					editor.setValue(saved);
-			
-			}
-
+					editor.setValue(saved);	
+			//}
 		}
 	}
 	window.setInterval('autoSave();',5000);

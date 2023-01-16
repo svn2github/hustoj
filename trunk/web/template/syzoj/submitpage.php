@@ -343,14 +343,15 @@ function loadFromBlockly(){
 	if(!!localStorage){
 		let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
 		let saved=localStorage.getItem(key);
-		if(saved!=null&&saved!=""&&saved!=editor.getValue()){
-			//let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
-			//if(load){
-				console.log("loading "+load);
-				if(typeof(editor) != "undefined")
-					editor.setValue(saved);	
-			//}
-		}
+		   if(saved!=null&&saved!=""&&saved.length>editor.getValue().length){
+                        //let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
+                        //if(load){
+                                console.log("loading "+saved.length);
+                                if(typeof(editor) != "undefined")
+                                        editor.setValue(saved);
+                        //}
+                }
+
 	}
 	window.setInterval('autoSave();',5000);
    });

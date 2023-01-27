@@ -31,20 +31,21 @@
       $section=8;
       $start=$page>$section?$page-$section:1;
       $end=$page+$section>$view_total_page?$view_total_page:$page+$section;
+      $MY=isset($_GET['my'])?"&my":"";
     ?>
 <div style="text-align: center; ">
   <div class="ui pagination menu" style="box-shadow: none; ">
-    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "contest.php?page=".($page-1); ?>" id="page_prev">  
+    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "contest.php?page=".strval($page-1).$MY ?>" id="page_prev">
       <i class="left chevron icon"></i>
     </a>
     <?php
       for ($i=$start;$i<=$end;$i++){
-        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"contest.php?page=".$i."\">".$i."</a>";
+        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"contest.php?page=".$i.$MY."\">".$i."</a>";
       }
     ?>
-    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "contest.php?page=".($page+1); ?>" id="page_next">
+    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "contest.php?page=".strval($page+1).$MY; ?>" id="page_next">
     <i class="right chevron icon"></i>
-    </a>  
+    </a>
   </div>
 </div>
 

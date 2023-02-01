@@ -25,6 +25,8 @@ mysqldump -h $SERVER -P $PORT -R $DATABASE -u$USER -p$PASSWORD | bzip2 >/var/bac
 if tar cjf /var/backups/hustoj_${DATE}.tar.bz2 /home/judge/data /home/judge/src /home/judge/etc /var/backups/db_${DATE}.sql.bz2; then
 	rm /var/backups/hustoj_${OLD3}.tar.bz2  2> /dev/null
 	rm /var/backups/db_${OLD}.sql.bz2  2> /dev/null
+	# 如果经常遇到磁盘空间不足，可以尝试启用下面的内容
+	# find /var/backups/ -maxdepth 2 -ctime 5 -name "*.bz2" -exec rm -f {} \;
 fi
 echo "备份完成，请检查并用FileZilla通过sftp下载备份文件：/var/backups/hustoj_${DATE}.tar.bz2"
 echo "After the backup is complete, please check and download the backup file via sftp with FileZilla: /var/backups/hustoj_${DATE}.tar.bz2"

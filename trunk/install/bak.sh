@@ -16,6 +16,7 @@ echo "delete from compileinfo where solution_id in (select solution_id from solu
 
 echo "delete from solution where problem_id=0 and result>4 "|mysql -h $SERVER -P $PORT -u$USER -p$PASSWORD $DATABASE 
 
+echo "repair table compileinfo,contest,contest_problem,loginlog,news,privilege,problem,solution,source_code,users,topic,reply,online,sim,mail;"|mysql -h $SERVER -P $PORT -u$USER -p$PASSWORD $DATABASE 
 echo "optimize table compileinfo,contest,contest_problem,loginlog,news,privilege,problem,solution,source_code,users,topic,reply,online,sim,mail;"|mysql -h $SERVER -P $PORT -u$USER -p$PASSWORD $DATABASE 
 
 echo "这里有警告是正常现象，请勿担心，下面的打包压缩耗时较长，请耐心等待备份结束，重新回到命令行提示符。"

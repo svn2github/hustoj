@@ -75,8 +75,8 @@ $csql[5]="";
 $tsql[6]="select langmask from $DB_NAME.contest limit 1;";
 $csql[6]="ALTER TABLE $DB_NAME.`contest` ADD COLUMN `langmask` TINYINT  NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask' AFTER `private`;";
 
-$csql[7]="";
-$tsql[7]="optimize table $DB_NAME.`compileinfo`,`contest` ,`contest_problem` ,`loginlog`,`news`,`privilege`,`problem` ,`solution`,`source_code`,`users`,`topic`,`reply`,`online`,`sim`,`mail`;";
+$tsql[7]="repair table $DB_NAME.`compileinfo`,$DB_NAME.`contest` ,$DB_NAME.`contest_problem` ,$DB_NAME.`loginlog`,$DB_NAME.`news`,$DB_NAME.`privilege`,$DB_NAME.`problem` ,$DB_NAME.`solution`,$DB_NAME.`source_code`,$DB_NAME.`users`,$DB_NAME.`topic`,$DB_NAME.`reply`,$DB_NAME.`sim`,$DB_NAME.`mail`;";
+$csql[7]="optimize table $DB_NAME.`compileinfo`,$DB_NAME.`contest` ,$DB_NAME.`contest_problem` ,$DB_NAME.`loginlog`,$DB_NAME.`news`,$DB_NAME.`privilege`,$DB_NAME.`problem` ,$DB_NAME.`solution`,$DB_NAME.`source_code`,$DB_NAME.`users`,$DB_NAME.`topic`,$DB_NAME.`reply`,$DB_NAME.`sim`,$DB_NAME.`mail`;";
 
 $csql[8]="";
 $tsql[8]="ALTER TABLE $DB_NAME.`contest` MODIFY COLUMN `langmask` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'bits for LANG to mask';";

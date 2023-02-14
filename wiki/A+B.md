@@ -276,7 +276,15 @@ process.stdin.on('data', function(chunk) {
 });
 ```
 ------------------------------
+Octave
+--
+```
+a = scanf("%d", [1, 2]);
+printf("%d\n", sum(a));
+```
+------------------------------
 Cobol
+--
 ```Cobol
        IDENTIFICATION   DIVISION.
        PROGRAM-ID.      'HELLOWORLD'.

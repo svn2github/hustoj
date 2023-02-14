@@ -4678,7 +4678,27 @@ class archive
         $this->storeonly = array();
         $this->error = array();
     }
-
+ function archive($name)
+    {
+        $this->options = array(
+            'basedir'=>".",
+            'name'=>$name,
+            'prepend'=>"",
+            'inmemory'=>0,
+            'overwrite'=>0,
+            'recurse'=>1,
+            'storepaths'=>1,
+            'level'=>3,
+            'method'=>1,
+            'sfx'=>"",
+            'type'=>"",
+            'comment'=>""
+        );
+        $this->files = array();
+        $this->exclude = array();
+        $this->storeonly = array();
+        $this->error = array();
+    }
     function set_options($options)
     {
         foreach($options as $key => $value)

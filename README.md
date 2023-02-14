@@ -136,7 +136,15 @@ Star us, please!
 ## 更新日志
 
 <details open>
-	
+
+<summary><b>2023年</b></summary>
+  日期  | 类型 |  更新内容
+------- | :--: | :-------
+02-14 | 补丁 | 修复测试数据压缩操作失败问题。
+
+</details>
+
+<details>	
 <summary><b>2022年</b></summary>
 
   日期  | 类型 |  更新内容

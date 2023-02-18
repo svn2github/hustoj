@@ -12,6 +12,11 @@ alter table privilege add column valuestr char(11) not null default 'true' after
 alter table news modify column `time` datetime NOT NULL DEFAULT '2016-05-13 19:24:00';
 ALTER TABLE `news` ADD COLUMN `menu` int(11) NOT NULL DEFAULT 0 AFTER `importance`;
 alter table solution modify column pass_rate decimal(4,3) not null default 0.0;
+alter table problem add column remote_oj varchar(16) default NULL after solved;
+alter table problem add column remote_id varchar(16) default NULL after remote_oj;
+alter table solution add column remote_oj char(16) not null default '' after judger;
+alter table solution add column remote_oj char(16) not null default '' after remote_oj;
+
 #create fulltext index problem_title_source_index on problem(title,source);
 
                                                                                                          

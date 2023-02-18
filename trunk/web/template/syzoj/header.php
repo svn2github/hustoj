@@ -82,16 +82,16 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title><?php echo $show_title ?></title>
-    <?php include("template/$OJ_TEMPLATE/css.php");?>
-	<style>
+    <?php include(dirname(__FILE__)."/css.php");?>
+        <style>
 @media (max-width: 991px) {
-	.mobile-only {
-		display:block !important;
-	}
+        .mobile-only {
+                display:block !important;
+        }
 
-	.desktop-only {
-	    display:none !important;
-	}
+        .desktop-only {
+            display:none !important;
+        }
 }
 
 
@@ -121,9 +121,9 @@
             {
               echo '<a class="item" href="moodle"><i class="group icon"></i>Moodle</a>';
             }
-	    if(!isset($_GET['cid'])){
+            if(!isset($_GET['cid'])){
           ?>
-        
+
             <a class="item <?php if ($url=="problemset.php") echo "active";?>"
                 href="<?php echo $path_fix?>problemset.php"><i class="list icon"></i><?php echo $MSG_PROBLEMS?> </a>
             <a class="item <?php if ($url=="category.php") echo "active";?>"
@@ -140,10 +140,10 @@
 
               <?php if (isset($OJ_BBS)&& $OJ_BBS){ ?>
                   <a class='item' href="discuss.php"><i class="clipboard icon"></i> <?php echo $MSG_BBS?></a>
-	      <?php }
+              <?php }
 
-	    }
-		?>
+            }
+                ?>
             <?php if(isset($_GET['cid'])){
                 $cid=intval($_GET['cid']);
             ?>
@@ -152,9 +152,9 @@
             <a id="" class="item active" href="<?php echo $path_fix?>status.php?cid=<?php echo $cid?>" ><i class="tasks icon"></i><?php echo $MSG_STATUS.$MSG_LIST?></a>
             <a id="" class="item active" href="<?php echo $path_fix?>contestrank.php?cid=<?php echo $cid?>" ><i class="numbered list icon"></i><?php echo $MSG_RANKLIST?></a>
             <a id="" class="item active" href="<?php echo $path_fix?>contestrank-oi.php?cid=<?php echo $cid?>" ><i class="child icon"></i>OI-<?php echo $MSG_RANKLIST?></a>
-		    <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
-			    <a id="" class="item active" href="<?php echo $path_fix?>conteststatistics.php?cid=<?php echo $cid?>" ><i class="eye icon"></i><?php echo $MSG_STATISTICS?></a>
-		    <?php }  ?>
+                    <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
+                            <a id="" class="item active" href="<?php echo $path_fix?>conteststatistics.php?cid=<?php echo $cid?>" ><i class="eye icon"></i><?php echo $MSG_STATISTICS?></a>
+                    <?php }  ?>
             <?php }  ?>
             <?php echo $sql_news_menu_result_html; ?>
             <div class="right menu">
@@ -173,7 +173,7 @@
                                 <?php } ?>
                             <?php if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])||isset($_SESSION[$OJ_NAME.'_'.'contest_creator'])||isset($_SESSION[$OJ_NAME.'_'.'problem_editor'])){ ?>
                             <a class="item" href="admin/"><i class="settings icon"></i><?php echo $MSG_ADMIN;?></a>
-                            <?php } 
+                            <?php }
 if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
   echo "<a class=item href='balloon.php'><i class='golf ball icon'></i>$MSG_BALLOON</a>";
 }
@@ -187,8 +187,8 @@ if(isset($_SESSION[$OJ_NAME.'_'.'balloon'])){
                               }
 
 
-                            
-                            
+
+
                             ?>
                             <a class="item" href="logout.php"><i class="power icon"></i><?php echo $MSG_LOGOUT;?></a>
                         </div>

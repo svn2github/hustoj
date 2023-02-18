@@ -67,8 +67,8 @@
         <i class="search icon"></i>
        <?php echo $MSG_SEARCH;?>
       </button>
-		<span class='ui mini grey button'>AWT:<?php echo round($avg_delay,2)?>s </span>
-		 <script>var AWT=<?php echo round($avg_delay*500,0) ?>;</script>
+                <span class='ui mini grey button'>AWT:<?php echo round($avg_delay,2)?>s </span>
+                 <script>var AWT=<?php echo round($avg_delay*500,0) ?>;</script>
     </div>
   </form>
 
@@ -76,11 +76,11 @@
   <table id="result-tab" class="ui very basic center aligned table" style="white-space: nowrap; " id="table">
     <thead>
       <tr>
-		<th><?php echo $MSG_RUNID?></th>
-		<th><?php echo $MSG_USER?></th>
-						<th>
-							<?php echo $MSG_NICK?>
-						</th>
+                <th><?php echo $MSG_RUNID?></th>
+                <th><?php echo $MSG_USER?></th>
+                                                <th>
+                                                        <?php echo $MSG_NICK?>
+                                                </th>
         <th><?php echo $MSG_PROBLEM_ID?></th>
         <th><?php echo $MSG_RESULT?></th>
         <th><?php echo $MSG_MEMORY?></th>
@@ -88,16 +88,16 @@
         <th><?php echo $MSG_LANG?></th>
         <th><?php echo $MSG_CODE_LENGTH?></th>
         <th><?php echo $MSG_SUBMIT_TIME?></th>
-       <?php	if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
-							echo "<th class='text-left'>";
-								echo $MSG_JUDGER;
-							echo "</th>";
-						} ?>
+       <?php    if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {
+                                                        echo "<th class='text-left'>";
+                                                                echo $MSG_JUDGER;
+                                                        echo "</th>";
+                                                } ?>
       </tr>
     </thead>
     <tbody>
       <!-- <tr v-for="item in items" :config="displayConfig" :show-rejudge="false" :data="item" is='submission-item'>
-	  </tr> -->
+          </tr> -->
     <?php
     foreach($view_status as $row){
     $i=0;
@@ -118,41 +118,41 @@
     </tbody>
   </table>
   <div style="margin-bottom: 30px; ">
-  
+
   <div style="text-align: center; ">
-	<div class="ui pagination menu" style="box-shadow: none; ">
-	  <a class="icon item" href="<?php echo "status.php?".$str2;?>" id="page_prev">  
+        <div class="ui pagination menu" style="box-shadow: none; ">
+          <a class="icon item" href="<?php echo "status.php?".$str2;?>" id="page_prev">
     Top
-	  </a>
-	  <?php
+          </a>
+          <?php
       if (isset($_GET['prevtop']))
       echo "<a class=\"item\" href=\"status.php?".$str2."&top=".intval($_GET['prevtop'])."\">Prev</a>";
       else
       echo "<a class=\"item\" href=\"status.php?".$str2."&top=".($top+20)."\">Prev</a>";
 
       ?>
-      
-	  <a class="icon item" href="<?php echo "status.php?".$str2."&top=".$bottom."&prevtop=$top"; ?>" id="page_next">
-	    Next
-	  </a>  
-	</div>
+
+          <a class="icon item" href="<?php echo "status.php?".$str2."&top=".$bottom."&prevtop=$top"; ?>" id="page_next">
+            Next
+          </a>
+        </div>
   </div>
 </div>
 
 <script>
-	var i = 0;
-	var judge_result = [<?php
-	foreach ($judge_result as $result) {
-		echo "'$result',";
-	} ?>
-	''];
+        var i = 0;
+        var judge_result = [<?php
+        foreach ($judge_result as $result) {
+                echo "'$result',";
+        } ?>
+        ''];
 
-	var judge_color = [<?php
-	foreach ($judge_color as $result) {
-		echo "'$result',";
-	} ?>
-	''];
+        var judge_color = [<?php
+        foreach ($judge_color as $result) {
+                echo "'$result',";
+        } ?>
+        ''];
 </script>
-	<script src="template/bs3/auto_refresh.js?v=0.42" ></script>
+        <script src="template/bs3/auto_refresh.js?v=0.43" ></script>
 
 <?php include("template/$OJ_TEMPLATE/footer.php");

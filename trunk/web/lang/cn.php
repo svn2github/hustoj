@@ -41,7 +41,7 @@
         $MSG_OK="确定";
         $MSG_Explain="输入判定原因与提示";
         $MSG_MARK="得分";
-	$MSG_SUBMITING="提交中";
+	$MSG_SUBMITTING="提交中";
 	$MSG_REMOTE_PENDING="远程等待";
 	$MSG_REMOTE_JUDGING="远程判题";	
 	$MSG_RP="远程等待";

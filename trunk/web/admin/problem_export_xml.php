@@ -256,7 +256,7 @@ else {
   "-//freeproblemset//An opensource XML standard for Algorithm Contest Problem Set//EN"
   "http://hustoj.com/fps.current.dtd" >
 
-<fps version="1.4" url="https://github.com/zhblue/freeproblemset/">
+<fps version="1.5" url="https://github.com/zhblue/freeproblemset/">
   <generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/" />
   <?php
   foreach ($result as  $row) {
@@ -291,6 +291,8 @@ else {
     <?php printTestCases($row['problem_id'],$OJ_DATA)?>
     <hint><![CDATA[<?php echo $row['hint']?>]]></hint>
     <source><![CDATA[<?php echo fixcdata($row['source'])?>]]></source>
+    <remote_oj><![CDATA[<?php echo fixcdata($row['remote_oj'])?>]]></remote_oj>
+    <remote_id><![CDATA[<?php echo fixcdata($row['remote_id'])?>]]></remote_id>
 
     <?php
     $pid = $row['problem_id'];

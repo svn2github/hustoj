@@ -158,6 +158,9 @@ function import_fps($tempfile) {
     $hint = getValue ($searchNode,'hint');
     $source = getValue ($searchNode,'source');				
     $spjcode = getValue ($searchNode,'spj');
+    $remote_oj= getValue ($searchNode,'remote_oj');
+    $remote_id= getValue ($searchNode,'remote_id');
+ 
     if($spjcode) $spjlang=getAttribute($searchNode,'spj','language');
     $tpjcode = getValue ($searchNode,'tpj');
     if($tpjcode) $tpjlang=getAttribute($searchNode,'tpj','language');
@@ -165,7 +168,10 @@ function import_fps($tempfile) {
 
     if (!hasProblem($title)) {
       $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
-
+       if($remote_oj!=""){
+        $sql="update problem set remote_oj=?,remote_id=? where problem_id=?";
+        pdo_query($sql,$remote_oj,$remote_id,$pid);
+      }
       if ($spid==0)
       	$spid = $pid;
 

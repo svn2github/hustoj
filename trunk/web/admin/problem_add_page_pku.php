@@ -31,7 +31,8 @@ include_once("kindeditor.php") ;
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);
 //  echo $baseurl;
-  $html = file_get_html($url);
+  //$html = file_get_html($url);
+  $html = file_get_html($url, false,null,0, -1,true,true, DEFAULT_TARGET_CHARSET,false);
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
         
@@ -53,12 +54,13 @@ include_once("kindeditor.php") ;
   $element=$html->find('div[class=ptx]',1);
   $inputHTML=$element->outertext;
   $element=$html->find('div[class=ptx]',2);
-  $outputHTML=$element->outertext;
-  
+  $outputHTML=$element->outertext;  
   $element=$html->find('pre[class=sio]',0);
   $sample_input=$element->innertext;
   $element=$html->find('pre[class=sio]',1);
   $sample_output=$element->innertext;
+  $element=$html->find('div[class=ptx]',3);
+  $hint=htmlentities($element->outertext);  
 ?>
 <form method=POST action=problem_add.php>
 <input type=hidden name=problem_id value=New Problem>
@@ -80,7 +82,7 @@ Sample Output:<textarea rows=2 name=sample_output cols=80><?php echo $sample_out
 <p align=left>Test Input:<textarea rows=2 name=test_input cols=80></textarea>
 Test Output:<textarea rows=2 name=test_output cols=80></textarea>
 <br>
-Hint:<textarea rows=3 name=hint cols=2 ></textarea>
+Hint:<textarea rows=3 name=hint cols=2 ><?php echo $hint ?></textarea>
 SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'>
 Source:<textarea name=source rows=1 cols=3><?php echo $url ?></textarea>
 	<input type=hidden name=contest_id></input>

@@ -19,7 +19,8 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 include_once("kindeditor.php") ;
 ?>
 <?php require_once("../include/simple_html_dom.php");
-    $url=$_POST ['url'];
+  $url=$_POST ['url'];
+  $remote_id=mb_substr($url,mb_strpos($url,"=")+1);  
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
 	echo "Please Input like http://poj.org/problem?id=1000";
@@ -60,54 +61,31 @@ include_once("kindeditor.php") ;
   $sample_output=$element->innertext;
 ?>
 <form method=POST action=problem_add.php>
-<p align=center><font size=4 color=#333399>Add a Problem</font></p>
 <input type=hidden name=problem_id value=New Problem>
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>"></p>
-<p align=left>Time Limit:<input type=text name=time_limit size=20 value="<?php echo $tlimit?>">S</p>
-<p align=left>Memory Limit:<input type=text name=memory_limit size=20 value="<?php echo $mlimit?>">MByte</p>
-<p align=left>Description:<br>
-<textarea class="kindeditor" rows=13 name=description cols=80><?php echo $descriptionHTML;?></textarea>
-</p>
-<p align=left>Input:<br>
-<textarea class="kindeditor" rows=13 name=input cols=80><?php echo $inputHTML;?></textarea>
-</p>
-</p>
-<p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
-<textarea class="kindeditor" rows=13 name=output cols=80><?php echo $outputHTML;?></textarea>
-</p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?php echo $sample_input?></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
-<p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
-<p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
-<p align=left>Hint:<br>
-<?php
-$output = new FCKeditor('hint') ;
-$output->BasePath = '../fckeditor/' ;
-$output->Height = 300 ;
-$output->Width=600;
-$output->Value = '<p></p>' ;
-$output->Create() ;
-?>
-</p>
-<p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
-<p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
-<p align=left>contest:
-	<select  name=contest_id>
-<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
-$result=pdo_query($sql);
-echo "<option value=''>none</option>";
-if (count($result)==0){
-}else{
-	foreach($result as $row)
-		echo "<option value=".$row['contest_id'].">".$row['contest_id']. $row['title']."</option>";
-}
-?>
-	</select>
-</p>
-<div align=center>
-<?php require_once("../include/set_post_key.php");?>
+<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>">
+Time Limit:<input type=text class='input input-mini' name=time_limit size=20 value="<?php echo $tlimit?>">S
+Memory Limit:<input type=text class='input input-mini'  name=memory_limit size=20 value="<?php echo $mlimit?>">MB
+<br>POJ<input type=text name=remote_id value="<?php echo $remote_id?>" >
 <input type=submit value=Submit name=submit>
+<p align=left>Description:<br>
+<textarea class="kindeditor" rows=5 name=description cols=30><?php echo $descriptionHTML;?></textarea>
+<p align=left>Input:
+<textarea  rows=5 name=input cols=30 ><?php echo $inputHTML;?></textarea>
+Output:
+<textarea  rows=5 name=output cols=30><?php echo $outputHTML;?></textarea>
+</p>
+<p align=left>Sample Input:<textarea rows=2 name=sample_input cols=80><?php echo $sample_input?></textarea>
+Sample Output:<textarea rows=2 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
+<p align=left>Test Input:<textarea rows=2 name=test_input cols=80></textarea>
+Test Output:<textarea rows=2 name=test_output cols=80></textarea>
+<br>
+Hint:<textarea rows=3 name=hint cols=2 ></textarea>
+SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'>
+Source:<textarea name=source rows=1 cols=3><?php echo $url ?></textarea>
+	<input type=hidden name=contest_id></input>
+<input type=hidden name=remote_oj value="pku" >	
+<?php require_once("../include/set_post_key.php");?>
 </div></form>
 <p>
 

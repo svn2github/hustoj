@@ -263,7 +263,7 @@ $sql = $sql.$order_str." LIMIT 50";
 //echo $sql;
 
 
-if (isset($_GET['user_id'])) {
+if (isset($_GET['user_id'])&&$user_id!="") {
   $result = pdo_query($sql,$user_id);
 }else{
   $result = pdo_query($sql);

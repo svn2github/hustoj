@@ -43,7 +43,12 @@
         $MSG_MARK="Mark";
   	$MSG_MANUAL_CONFIRMATION="Manual Confirmation Pending...";
 	$MSG_MC="ManualConfirm";
-	
+
+	$MSG_SUBMITTING="Submitting";
+	$MSG_REMOTE_PENDING="Remote Pending";
+	$MSG_REMOTE_JUDGING="Remote Judging";	
+	$MSG_RP="$MSG_REMOTE_PENDING";
+
  	$MSG_RUNID="RunID";
 	$MSG_USER="User";
 	$MSG_PROBLEM="Problem";

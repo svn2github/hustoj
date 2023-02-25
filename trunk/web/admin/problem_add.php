@@ -83,6 +83,24 @@ if(strlen($sample_output)) mkdata($pid, "sample.out", $sample_output, $OJ_DATA);
 if(strlen($test_output) && !strlen($test_input)) $test_input = "0";
 if(strlen($test_input)) mkdata($pid,"test.in", $test_input, $OJ_DATA);
 if(strlen($test_output)) mkdata($pid,"test.out", $test_output, $OJ_DATA);
+if(isset($_POST['remote_oj'])){
+	$remote_oj=$_POST['remote_oj'];
+	$remote_id=intval($_POST['remote_id']);
+	$sql="update problem set remote_oj=?,remote_id=? where problem_id=?";
+	pdo_query($sql,$remote_oj,$remote_id,$pid);
+	?>
+<form method=POST action=problem_add_page_<?php echo $remote_oj?>.php>
+<?php 
+	$pre=mb_strpos($source,"=");
+	$pre=mb_substr($source,0,$pre+1);
+?>
+<input name=url type=text size=100  class="input input-xxlarge" value="<?php echo $pre.(++$remote_id) ?>">
+  <input type=submit>
+</form>
+<script>// $("form").submit();</script>
+
+	<?php
+}
 
 $sql = "INSERT INTO `privilege` (`user_id`,`rightstr`) VALUES(?,?)";
 pdo_query($sql, $_SESSION[$OJ_NAME.'_'.'user_id'], "p$pid");

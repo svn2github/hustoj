@@ -41,6 +41,10 @@
         $MSG_OK="确定";
         $MSG_Explain="输入判定原因与提示";
         $MSG_MARK="得分";
+	$MSG_SUBMITTING="提交中";
+	$MSG_REMOTE_PENDING="远程等待";
+	$MSG_REMOTE_JUDGING="远程判题";	
+	$MSG_RP="远程等待";
 
 	//fool's day
 	if(date('m')==4&&date('d')==1&&rand(0,100)<5){
@@ -250,6 +254,7 @@
   $MSG_HELP_NEWS_LIST="管理已经发布的新闻";
   $MSG_HELP_USER_LIST="对注册用户停用、启用帐号";
   $MSG_HELP_USER_ADD="添加用户";
+  $MSG_HELP_USER_IMPORT="导入用户";
   $MSG_HELP_ADD_PROBLEM="手动添加新的题目，多组测试数据在添加后从题目列表TestData按钮进入上传，新建题目<b>默认隐藏</b>，需在问题列表中点击红色<font color='red'>$MSG_RESERVED</font>切换为绿色<font color='green'>Available</font>启用。。";
   $MSG_HELP_PROBLEM_LIST="管理已有的题目和数据，上传数据可以用zip压缩不含目录的数据。";
   $MSG_HELP_ADD_CONTEST="规划新的比赛，用逗号分隔题号。可以设定私有比赛，用密码或名单限制参与者。";
@@ -300,6 +305,7 @@
   $MSG_A_NOT_ALLOWED_SYSTEM_CALL="使用了系统禁止的操作系统调用，看看是否越权访问了文件或进程等资源,如果你是系统管理员，而且确认提交的答案没有问题，测试数据没有问题，可以发送'RE'到微信公众号onlinejudge，查看解决方案。";
   $MSG_SEGMETATION_FAULT="段错误，检查是否有数组越界，指针异常，访问到不应该访问的内存区域";
   $MSG_FLOATING_POINT_EXCEPTION="浮点错误，检查是否有除以零的情况";
+  $MSG_WRONG_OUTPUT_TYPE_EXCEPTION="二进制输出错误，检查是否误将数值类型作为字符输出，或者输出了不打印字符的情况。";
   $MSG_BUFFER_OVERFLOW_DETECTED="缓冲区溢出，检查是否有字符串长度超出数组的情况";
   $MSG_PROCESS_KILLED="进程因为内存或时间原因被杀死，检查是否有死循环";
   $MSG_ALARM_CLOCK="进程因为时间原因被杀死，检查是否有死循环，本错误等价于超时TLE";
@@ -379,6 +385,7 @@
   $MSG_EXPECTED_IDENTIFIER="声明变量时，可能没有声明变量名或缺少括号。";
   $MSG_VARIABLY_MODIFIED="数组大小不能用变量，C 语言中不能使用变量作为全局数组的维度大小，包括 const 变量";
   $MSG_FUNCTION_GETS_REMOVIED=" std::gets 于 C++11 被弃用，并于 C++14 移除。可使用 std::fgets 替代。或者增加宏定义 #define gets(S) fgets(S,sizeof(S),stdin) ";
+  $MSG_NON_ZERO_RETURN="Main函数不能返回非零的值，否则视同程序出错。";
   $MSG_PROBLEM_USED_IN="题目已经用于私有比赛";
   $MSG_MAIL_CAN_ONLY_BETWEEN_TEACHER_AND_STUDENT="内邮仅限学生老师互相发送，不允许同学间发送！";
   

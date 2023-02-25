@@ -95,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `problem` (
   `accepted` int(11) DEFAULT '0',
   `submit` int(11) DEFAULT '0',
   `solved` int(11) DEFAULT '0',
+  `remote_oj` varchar(16) DEFAULT NULL,
+  `remote_id` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`problem_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4;
 
@@ -138,6 +140,8 @@ CREATE TABLE IF NOT EXISTS `solution` (
   `pass_rate` DECIMAL(4,3) UNSIGNED NOT NULL DEFAULT 0,
   `lint_error` int UNSIGNED NOT NULL DEFAULT 0,
   `judger` CHAR(16) NOT NULL DEFAULT 'LOCAL',
+  `remote_oj` char(16) not NULL DEFAULT '',
+  `remote_id` char(16) not NULL DEFAULT '',
   PRIMARY KEY (`solution_id`),
   KEY `uid` (`user_id`),
   KEY `pid` (`problem_id`),

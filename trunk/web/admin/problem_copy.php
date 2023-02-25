@@ -12,6 +12,7 @@ Copy from http://uoj.ac
   <input type=submit>
 </form>
 </li>
+<!––
 <li>
 Copy from http://ybt.ssoier.cn:8088/......
 <form method=POST action=problem_add_page_ybt.php>
@@ -19,6 +20,7 @@ Copy from http://ybt.ssoier.cn:8088/......
   <input type=submit>
 </form>
 </li>
+––>
 <li>
 Copy from http://hustoj......
 <form method=POST action=problem_add_page_hustoj.php>

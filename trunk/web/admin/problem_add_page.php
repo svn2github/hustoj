@@ -17,6 +17,9 @@
   }
   echo "<center><h3>".$MSG_PROBLEM."-".$MSG_ADD."</h3></center>";
   include_once("kindeditor.php") ;
+  $source=pdo_query("select source from problem order by problem_id desc limit 1"); //默认续用最后一次的分类标签
+  if(is_array($source)&&isset($source[0]))$source=$source[0][0];
+
 ?>
 
 <body leftmargin="30" >
@@ -77,7 +80,7 @@
         </p>
         <p align=left>
           <?php echo "<h4>".$MSG_SOURCE."</h4>"?>
-          <textarea name=source style="width:100%;" rows=1></textarea><br><br>
+          <textarea name=source style="width:100%;" rows=1><?php echo htmlentities($source,ENT_QUOTES,'UTF-8') ?></textarea><br><br>
         </p>
         <p align=left><?php echo "<h4>".$MSG_CONTEST."</h4>"?>
           <select name=contest_id>

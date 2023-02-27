@@ -28,9 +28,10 @@ include_once("kindeditor.php") ;
   if (false) {
 	$url = stripslashes ( $url);
   }
+  $remote_id=mb_substr($url,mb_strpos($url,"=")+1);  
   $baseurl=substr($url,0,strrpos($url,"/")+1);
   //echo $baseurl;
-  $html = file_get_html($url,'GB2312');
+  $html = file_get_html($url, false,null,0, -1,true,true, DEFAULT_TARGET_CHARSET,false);//file_get_html($url,'GB2312');
   
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
@@ -45,7 +46,7 @@ include_once("kindeditor.php") ;
   $mlimit=$element->plaintext;
   $mlimit=substr($mlimit, strpos($mlimit, "Memory"));
   $mlimit=substr($mlimit, strpos($mlimit, '/')+1,strpos($mlimit, ' K') - strpos($mlimit, '/'));
-  echo $mlimit;
+  //echo $mlimit;
   $tlimit/=1000;
   $mlimit/=1000;
   
@@ -64,13 +65,13 @@ include_once("kindeditor.php") ;
   $sample_output=$element->innertext;
 ?>
 <form method=POST action=problem_add.php>
-<p align=center><font size=4 color=#333399>Add a Problem</font></p>
 <input type=hidden name=problem_id value=New Problem>
-<p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>"></p>
-<p align=left>Time Limit:<input type=text name=time_limit size=20 value="<?php echo $tlimit?>">S</p>
-<p align=left>Memory Limit:<input type=text name=memory_limit size=20 value="<?php echo $mlimit?>">MByte</p>
-<p align=left>Description:<br><!--<textarea rows=13 name=description cols=80></textarea>-->
+<p align=left>Problem Id:&nbsp;&nbsp;New Problem from acm.hdu.edu.cn</p>
+HDU<input type=text name=remote_id value="<?php echo $remote_id?>" >
+<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>">
+Time Limit:<input type=text name=time_limit class='input input-mini' size=2 value="<?php echo $tlimit?>">S
+Memory Limit:<input type=text name=memory_limit class='input input-mini' size=2 value="<?php echo $mlimit?>">MByte
+<input type=submit value=Submit name=submit></p>
 <p align=left>Description:<br>
 <textarea class="kindeditor" rows=13 name=description cols=80><?php echo $descriptionHTML;?></textarea>
 </p>
@@ -81,31 +82,17 @@ include_once("kindeditor.php") ;
 <p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
 <textarea class="kindeditor" rows=13 name=output cols=80><?php echo $outputHTML;?></textarea>
 </p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?php echo $sample_input?></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
-<p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
-<p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
+<p align=left>Sample Input:<textarea rows=3 name=sample_input cols=80><?php echo $sample_input?></textarea>
+Sample Output:<textarea rows=3 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
+<p align=left>Test Input:<textarea rows=3 name=test_input cols=80></textarea>
+Test Output:<textarea rows=3 name=test_output cols=80></textarea></p>
 <p align=left>Hint:<br>
-<textarea class="kindeditor" rows=13 name=hint cols=80></textarea>
-</p>
-<p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
-<p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
-<p align=left>contest:
-	<select  name=contest_id>
-<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
-$result=pdo_query($sql);
-echo "<option value=''>none</option>";
-if (count($result)==0){
-}else{
-	foreach($result as $row)
-				echo "<option value='{$row['contest_id']}'>{$row['contest_id']} {$row['title']}</option>";
-}
-?>
-	</select>
-</p>
+<textarea rows=3 name=hint cols=30></textarea>
+SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
+<p align=left>Source:<textarea name=source rows=1 cols=70 ><?php echo htmlentities($url)?></textarea></p>
 <div align=center>
 <?php require_once("../include/set_post_key.php");?>
-<input type=submit value=Submit name=submit>
+<input type=hidden name=remote_oj value="hdu" >	
 </div></form>
 <p>
 

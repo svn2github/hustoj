@@ -141,7 +141,8 @@ Star us, please!
 	
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
-02-24 | 更新 | RemoteJudge 模块（vjudge-poj）
+02-27 | 更新 | RemoteJudge 模块（vjudge-hdu）
+02-25 | 更新 | RemoteJudge 模块（vjudge-poj）
 02-14 | 补丁 | 修复测试数据压缩操作失败问题。
 
 </details>

@@ -57,10 +57,9 @@ Copy from acm.pku.edu.cn
 </form>
 </li>
 
-<li>
 Copy from acm.hdu.edu.cn
 <form method=POST action=problem_add_page_hdu.php>
-  <input name=url type=text size=100>
+  <input name=url class="input input-xxlarge" value="https://acm.hdu.edu.cn/showproblem.php?pid=1000" type=text size=100>
   <input type=submit>
 </form>
 </li>

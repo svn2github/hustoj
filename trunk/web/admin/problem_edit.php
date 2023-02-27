@@ -45,7 +45,7 @@ include_once("kindeditor.php") ;
           <?php echo $MSG_Time_Limit?><br>
           <input class="input input-mini" type=number min="0.001" max="300" step="0.001" name=time_limit size=20 value="<?php echo $row['time_limit']?>"> sec<br><br>
           <?php echo $MSG_Memory_Limit?><br>
-          <input class="input input-mini" type=number min="1" max="2048" step="1" name=memory_limit size=20 value="<?php echo $row['memory_limit']?>"> MiB<br><br>
+          <input class="input input-mini" type=number min="1" max="1024" step="1" name=memory_limit size=20 value="<?php echo $row['memory_limit']?>"> MiB<br><br>
         </p>
       <p align=left>
         <?php echo "<h4>".$MSG_Description."</h4>"?>
@@ -80,14 +80,18 @@ include_once("kindeditor.php") ;
       <p>
         <?php echo "<h4>".$MSG_SPJ."</h4>"?>
         <?php echo "(".$MSG_HELP_SPJ.")"?><br>
-        <input type=radio name=spj value='0' <?php echo $row['spj']=="0"?"checked":""?> title='Normal Judger'><?php echo $MSG_NJ?><br> 
+        <input type=radio name=spj value='0' <?php echo $row['spj']=="0"?"checked":""?> title='Normal Judger'><?php echo $MSG_NJ?><br>
         <input type=radio name=spj value='1' <?php echo $row['spj']=="1"?"checked":""?> title='Special Judger'><?php echo $MSG_SPJ?><br>
-	<input type=radio name=spj value='2' <?php echo $row['spj']=="2"?"checked":""?> title='Raw Text Judger' ><?php echo $MSG_RTJ?><br>
+        <input type=radio name=spj value='2' <?php echo $row['spj']=="2"?"checked":""?> title='Raw Text Judger' ><?php echo $MSG_RTJ?><br>
       </p>
 
       <p align=left>
         <?php echo "<h4>".$MSG_SOURCE."</h4>"?>
-        <textarea name=source style="width:100%;" rows=1><?php echo htmlentities($row['source'],ENT_QUOTES,"UTF-8")?></textarea><br><br>
+        <textarea name=source style="width:100%;" rows=1><?php echo htmlentities($row['source'],ENT_QUOTES,"UTF-8")?></textarea><br>
+
+        <?php echo "<h4>".$MSG_REMOTE_OJ."</h4>"?>
+        <input name=remote_oj value='<?php echo htmlentities($row['remote_oj'],ENT_QUOTES,"UTF-8")?>' >
+        <input name=remote_id value='<?php echo htmlentities($row['remote_id'],ENT_QUOTES,"UTF-8")?>' ><br>
       </p>
 
       <div align=center>
@@ -102,7 +106,7 @@ include_once("kindeditor.php") ;
       require_once("../include/check_post_key.php");
       $id = intval($_POST['problem_id']);
 
-      if (!(isset($_SESSION[$OJ_NAME.'_'."p$id"]) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']) )) exit();  
+      if (!(isset($_SESSION[$OJ_NAME.'_'."p$id"]) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']) )) exit();
 
       $title = $_POST['title'];
       $title = str_replace(",", "&#44;", $title);
@@ -112,18 +116,18 @@ include_once("kindeditor.php") ;
       $memory_limit = $_POST['memory_limit'];
 
       $description = $_POST['description'];
-     // $description = str_replace("<p>", "", $description); 
+     // $description = str_replace("<p>", "", $description);
      // $description = str_replace("</p>", "<br />", $description);
       $description = str_replace(",", "&#44;", $description);
 
       $input = $_POST['input'];
-     // $input = str_replace("<p>", "", $input); 
+     // $input = str_replace("<p>", "", $input);
      // $input = str_replace("</p>", "<br />", $input);
       $input = str_replace(",", "&#44;", $input);
 
       $output = $_POST['output'];
-     // $output = str_replace("<p>", "", $output); 
-     // $output = str_replace("</p>", "<br />", $output); 
+     // $output = str_replace("<p>", "", $output);
+     // $output = str_replace("</p>", "<br />", $output);
       $output = str_replace(",", "&#44;", $output);
 
       $sample_input = $_POST['sample_input'];
@@ -132,11 +136,13 @@ include_once("kindeditor.php") ;
       if ($sample_output=="") $sample_output="\n";
 
       $hint = $_POST['hint'];
-     // $hint = str_replace("<p>", "", $hint); 
+     // $hint = str_replace("<p>", "", $hint);
     //  $hint = str_replace("</p>", "<br />", $hint);
       $hint = str_replace(",", "&#44;", $hint);
 
       $source = $_POST['source'];
+      $remote_oj= $_POST['remote_oj'];
+      $remote_id = $_POST['remote_id'];
       $spj = $_POST['spj'];
 
       if (false) {
@@ -151,7 +157,7 @@ include_once("kindeditor.php") ;
         //$test_input = stripslashes($test_input);
         //$test_output = stripslashes($test_output);
         $hint = stripslashes($hint);
-        $source = stripslashes($source); 
+        $source = stripslashes($source);
         $spj = stripslashes($spj);
       }
 
@@ -177,9 +183,9 @@ include_once("kindeditor.php") ;
 
       $spj = intval($spj);
 
-      $sql = "UPDATE `problem` SET `title`=?,`time_limit`=?,`memory_limit`=?, `description`=?,`input`=?,`output`=?,`sample_input`=?,`sample_output`=?,`hint`=?,`source`=?,`spj`=?,`in_date`=NOW() WHERE `problem_id`=?";
+      $sql = "UPDATE `problem` SET `title`=?,`time_limit`=?,`memory_limit`=?, `description`=?,`input`=?,`output`=?,`sample_input`=?,`sample_output`=?,`hint`=?,`source`=?,`spj`=?,remote_oj=?,remote_id=?,`in_date`=NOW() WHERE `problem_id`=?";
 
-      @pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint,$source,$spj,$id);
+      @pdo_query($sql,$title,$time_limit,$memory_limit,$description,$input,$output,$sample_input,$sample_output,$hint,$source,$spj,$remote_oj,$remote_id,$id);
 
       echo "Edit OK!<br>";
       echo "<a href='../problem.php?id=$id'>See The Problem!</a>";

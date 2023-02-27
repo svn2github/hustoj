@@ -183,14 +183,21 @@ div[class*=ace_br] {
         </h4>
         <div class="ui bottom attached segment" id="show_tag_div">
 
-          <?php foreach($cats as $cat){ 
+          <?php foreach($cats as $cat){
+            if(trim($cat)=="") continue;
             $label_theme=$color[$tcolor%count($color)];
             $tcolor++;
             ?>
-            <a href="<?php echo "problemset.php?search=".htmlentities($cat,ENT_QUOTES,'utf-8') ?>" class="ui medium <?php echo $label_theme; ?> label">
+            <a href="<?php
+                if(mb_ereg("^http",$cat))    // remote oj pop links
+                        echo htmlentities($cat,ENT_QUOTES,'utf-8').'" target="_blank' ;
+                else
+                        echo "problemset.php?search=".htmlentities($cat,ENT_QUOTES,'utf-8') ;
+            ?>" class="ui medium <?php echo $label_theme; ?> label">
               <?php echo htmlentities($cat,ENT_QUOTES,'utf-8'); ?>
             </a>
           <?php } ?>
+
 
         </div>
       <div class="ui buttons">

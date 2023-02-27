@@ -1,7 +1,7 @@
 <?php require_once ("admin-header.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
-	echo "<a href='../loginpage.php'>Please Login First!</a>";
-	exit(1);
+        echo "<a href='../loginpage.php'>Please Login First!</a>";
+        exit(1);
 }
 ?>
 <ol>
@@ -21,6 +21,15 @@ Copy from http://ybt.ssoier.cn:8088/......
 </form>
 </li>
 ––>
+<li>
+<!--
+Copy from http://ybt.ssoier.cn:8088/......
+<form method=POST action=problem_add_page_ybt.php>
+  <input name=url type=text size=100  class="input input-xxlarge" value="http://ybt.ssoier.cn:8088/problem_show.php?pid=1000">
+  <input type=submit>
+</form>
+</li>
+-->
 <li>
 Copy from http://hustoj......
 <form method=POST action=problem_add_page_hustoj.php>

@@ -141,6 +141,7 @@ Star us, please!
 	
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+02-28 | 补丁 | 万能头和iostream同时使用可能导致编译出错（更新Dockerfile，重新运行docker.sh）
 02-27 | 更新 | RemoteJudge 模块（vjudge-hdu）
 02-26 | 更新 | 新题分类默认继承最后一题
 02-25 | 更新 | RemoteJudge 模块（vjudge-poj）

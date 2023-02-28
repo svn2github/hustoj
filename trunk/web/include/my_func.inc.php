@@ -180,6 +180,15 @@ function isOldPW($password)
   return True;
 }
 
+/*
+如果希望允许用户名是中文，可以替换下面的is_valid_user_name函数为这个版本
+
+function is_valid_user_name($user_name){
+        $res = preg_match('/^[\x{4e00}-\x{9fa5}A-Za-z0-9 _:：,，.。…\/、~`＠＃￥％＆×＋｜｛｝＝－＊＾＄～!@#$%^&*()\+-—=（）！￥{}【】\[\]\|；;《》<>\?\？\·]+$/u', $user_name);
+        return $res ? TRUE : FALSE;
+
+}
+*/
 function is_valid_user_name($user_name){
   $len=strlen($user_name);
   for ($i=0;$i<$len;$i++){

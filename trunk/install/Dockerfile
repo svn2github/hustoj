@@ -49,4 +49,10 @@ ENV LANGUAGE zh_CN:zh
 ENV LC_ALL zh_CN.UTF-8 
 
 # override endl not to flush the io buffer
-RUN sed -i 's/return flush/return /g' `find /usr/include/c++/ -name ostream`
+RUN echo "#ifndef HUSTOJ">>`find /usr/include/c++/ -name iostream`
+RUN echo "#define HUSTOJ">>`find /usr/include/c++/ -name iostream`
+RUN echo "std::ostream& endl(std::ostream& s) {">>`find /usr/include/c++/ -name iostream`
+RUN echo "s<<'\\\\n'; ">>`find /usr/include/c++/ -name iostream`
+RUN echo "return s; ">>`find /usr/include/c++/ -name iostream`
+RUN echo "}">>`find /usr/include/c++/ -name iostream`
+RUN echo "#endif">>`find /usr/include/c++/ -name iostream`

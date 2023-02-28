@@ -49,7 +49,4 @@ ENV LANGUAGE zh_CN:zh
 ENV LC_ALL zh_CN.UTF-8 
 
 # override endl not to flush the io buffer
-RUN  echo "std::ostream& endl(std::ostream& s) { \
-s<<'\\\\n'; \
-return s; \
-}" >> `find /usr/include/c++/ -name iostream`
+RUN sed -i 's/return flush/return /g' `find /usr/include/c++/ -name ostream`

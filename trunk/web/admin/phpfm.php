@@ -127,7 +127,14 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
 	    }else if(file_exists($current_dir."/Main.cc")){
 	    	if(!$OJ_SaaS_ENABLE)system("/home/judge/src/install/g++.sh $current_dir");
 	    	system("/home/judge/src/install/makeout.sh Main");
-	    }
+	    }else{
+		echo "未找到Main.c或Main.cc,自动生成9组空文件。";
+                for($i=1;$i<10;$i++){
+                        touch("test_$i.in");
+                        touch("test_$i.out");
+                }
+            }
+
     }
     if(isset($_GET['ans2out'])){
 	    //echo "Generate out in $current_dir......";

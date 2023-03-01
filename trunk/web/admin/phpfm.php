@@ -3447,12 +3447,19 @@ function dir_list_form() {
 	    <input type=button onclick=\"upload()\" value=\"".et('Upload')."\">";
 	if(!$OJ_SaaS_ENABLE)$out.="<input type=button onclick=\"generate()\" value=\"".et('GenerateOut')."\">";
 	$out.="<input type=button onclick=\"ans2out()\" value=\"".et('Ans2out')."\">";
-	$pid=intval($_GET['pid']);
+	if(isset($_GET['pid'])){
+                $pid=intval($_GET['pid']);
+                $_SESSION[$OJ_NAME."_PID"]=$pid;
+        }else{
+                $pid=$_SESSION[$OJ_NAME."_PID"];
+        }
+        $title=pdo_query('select title from problem where problem_id=?',$pid)[0][0];
         $out.="<b></b>
-            <b><a href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
-            <b><a href='../problem.php?id=$pid' target='_self'>See This Problem</a></b>
+            <b><a class='btn' href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
+            <big><a href='../problem.php?id=$pid' target='_self'>$title</a></big>
             </nobr>";
         $uplink = "";
+
         if ($current_dir != $fm_current_root){
             $mat = explode("/",$current_dir);
             $dir_before = "";

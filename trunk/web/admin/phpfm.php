@@ -3455,8 +3455,8 @@ function dir_list_form() {
         }
         $title=pdo_query('select title from problem where problem_id=?',$pid)[0][0];
         $out.="<b></b>
-            <b><a class='btn' href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a></b>
-            <big><a href='../problem.php?id=$pid' target='_self'>$title</a></big>
+            <a class='btn' href='https://muzea-demo.github.io/random-data/' target='_blank'>".et('Random-data')."</a>
+            <b><a href='../problem.php?id=$pid' target='_self'><font color=blue>$title </font></a></b>
             </nobr>";
         $uplink = "";
 

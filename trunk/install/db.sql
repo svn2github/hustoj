@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `sim` (
 
 
 CREATE TABLE IF NOT EXISTS `solution` (
-  `solution_id` int(11) NOT NULL AUTO_INCREMENT,
+  `solution_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `problem_id` int(11) NOT NULL DEFAULT 0,
   `user_id` char(48) NOT NULL,
   `nick` char(20) NOT NULL DEFAULT '', 

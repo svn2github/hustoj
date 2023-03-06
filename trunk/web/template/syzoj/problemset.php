@@ -140,11 +140,7 @@
 
               echo "<div class=\"show_tag_controled\" style=\"float: right; \">";
               echo "<span class=\"ui header\">";
-              $category=array();
-              $cate=explode(" ",$row['source']);
-              foreach($cate as $cat){
-                array_push($category,trim($cat));	
-              }
+              
               $tcolor=0;
               foreach($category as $cat){
                 if(trim($cat)=="") continue;

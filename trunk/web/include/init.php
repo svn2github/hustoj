@@ -28,6 +28,10 @@ if($OJ_SaaS_ENABLE){
 	$DOMAIN=$domain;
 }
 
+if(strpos($_SERVER["HTTP_USER_AGENT"],"MSIE")){  // 360 or IE use bs3 instead
+    $OJ_TEMPLATE="bs3";
+}
+
 if(isset($_SESSION[$OJ_NAME.'_user_id'])&&isset($OJ_LIMIT_TO_1_IP)&& $OJ_LIMIT_TO_1_IP){
         $ip = ($_SERVER['REMOTE_ADDR']);
         if( isset($_SERVER['HTTP_X_FORWARDED_FOR'] )&&!empty( trim( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ){

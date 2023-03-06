@@ -5,6 +5,7 @@
 	require_once('./include/cache_start.php');
         require_once('./include/db_info.inc.php');
         require_once('./include/const.inc.php');
+	require_once('./include/curl.php');
         require_once('./include/memcache.php');
 	require_once('./include/setlang.php');
 	$view_title= "Welcome To Online Judge";
@@ -20,8 +21,13 @@
         foreach ($result as $row){
 		$cate=explode(" ",$row['source']);
 		foreach($cate as $cat){
-			array_push($category,trim($cat));	
-		}
+                        $cat=trim($cat);
+                        if(mb_ereg("^http",$cat)){
+                                $cat=get_domain($cat);
+                        }
+                        array_push($category,trim($cat));
+                }
+
 	}
 	$category=array_unique($category);
 	if (!$result){

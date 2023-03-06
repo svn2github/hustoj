@@ -4,7 +4,8 @@ $cache_time = 0;
 
 require_once('./include/db_info.inc.php');
 require_once('./include/const.inc.php');
-//require_once('./include/cache_start.php');
+require_once('./include/cache_start.php');
+require_once('./include/curl.php');
 require_once('./include/memcache.php');
 require_once('./include/setlang.php');
 
@@ -153,10 +154,13 @@ foreach ($result as $row) {
 
 	$category = array();
 	$cate = explode(" ",$row['source']);
-	foreach ($cate as $cat) {
-		array_push($category,trim($cat));	
-	}
-
+	foreach($cate as $cat){
+                        $cat=trim($cat);
+                        if(mb_ereg("^http",$cat)){
+                                $cat=get_domain($cat);
+                        }
+                        array_push($category,trim($cat));
+        }
 	$view_problemset[$i][1] = "<div fd='problem_id' class='center'>".$row['problem_id']."</div>";
 	$view_problemset[$i][2] = "<div class='left'><a href='problem.php?id=".$row['problem_id']."'>".$row['title']."</a></div>";;
 	$view_problemset[$i][3] = "<div pid='".$row['problem_id']."' fd='source' class='center'>";

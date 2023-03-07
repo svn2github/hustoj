@@ -422,8 +422,8 @@ class BBCode
   }
 }
 function filterDIV($input){
-  $value=mb_ereg_replace("<div[a-z -=\"]*>","",$input);
-  $value=mb_ereg_replace("</div>","",$value);
+  $value=mb_ereg_replace("<[dD][iI][vV][a-zA-Z -=\"\']*>","",$input);
+  $value=mb_ereg_replace("</[dD][iI][vV]>","",$value);
   return $value;
 }
 // procedural

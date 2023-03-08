@@ -9,6 +9,8 @@
 </style>
 <div style="margin-bottom:40px; ">
     <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?> - <?php echo $MSG_REVIEW_CONTESTRANK ?>  
+    <button  class='ui small yellow button' onclick='$("tr[class!=active]").toggle();'>Show/Hide</button>	    
+	    
      <a class='ui small blue button' href="contestrank.php?cid=<?php echo $cid?>" >Back</a> 
 </h1>
 </div>
@@ -16,7 +18,7 @@
     <?php if($user_cnt>0){ ?>
     <table class="ui very basic center aligned table" sylye="margin:30px">
         <thead>
-            <tr>
+            <tr class='active'>
                <td class="{sorter:'false'} text-center"><?php echo $MSG_STANDING?></td>
             <td class='text-center'><?php echo $MSG_USER?></td>
             <td class='text-center'><?php echo $MSG_NICK?></td>
@@ -26,7 +28,7 @@
                   for ($i=0;$i<$pid_cnt;$i++)
                   echo "<th><a href=problem.php?id=".$pida[$i].">$PID[$i]</a></th>";
                 ?>
-                <th></th>
+               
             </tr>
         </thead>
         <tbody>
@@ -36,7 +38,7 @@
                 $uuid=$U[$i]->user_id;
                 $nick=$U[$i]->nick;
                 $usolved=$U[$i]->solved;
-                echo "<tr>";
+                echo "<tr onclick='$(this).attr(\"class\",\"active\");'  ondblclick='$(this).attr(\"class\",\"\");' >";
 
                 echo "<td>";
                   if($nick[0]!="*"){
@@ -119,9 +121,7 @@
 
                   echo "</td>";
                 }
-                echo "<td>";
-                
-                echo "</td>";
+               
                 
                 echo "</tr>";
               }

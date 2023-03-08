@@ -333,9 +333,25 @@ if (~$OJ_LANGMASK&(1<<$language)) {
 
   $sql = "UPDATE solution SET result=0 WHERE solution_id=?";
   pdo_query($sql, $insert_id);
+	
+ ////remote oj
+  $result=0;
+  $sql="select remote_oj from problem where problem_id=?";
+  $remote_oj=pdo_query($sql,$id);
+  if(isset($remote_oj[0])){
+          $remote_oj=$remote_oj[0][0];
+          if($remote_oj!=""){
+                $result=16;
+                $sql="update solution set result=16,remote_oj=? where solution_id=?";
+                pdo_query($sql,$remote_oj,$insert_id);
+          }
+  }
+  $sql = "UPDATE solution SET result=? WHERE solution_id=?";
+  pdo_query($sql,$result,$insert_id);
+
 
   //using redis task queue
-  if ($OJ_REDIS) {
+  if ( $OJ_REDIS && $result==0 ) {
     $redis = new Redis();
     $redis->connect($OJ_REDISSERVER, $OJ_REDISPORT);
     
@@ -348,7 +364,7 @@ if (~$OJ_LANGMASK&(1<<$language)) {
   }
 }
 
-if (isset($OJ_UDP) && $OJ_UDP) {      
+if (isset($OJ_UDP) && $OJ_UDP && $result==0 ) {      
            trigger_judge($insert_id);     // moved to my_func.inc.php
 }
 

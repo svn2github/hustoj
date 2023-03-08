@@ -38,7 +38,7 @@
                 $uuid=$U[$i]->user_id;
                 $nick=$U[$i]->nick;
                 $usolved=$U[$i]->solved;
-                echo "<tr onclick='$(this).attr(\"class\",\"active\");'>";
+                 echo "<tr onclick='$(this).attr(\"class\",\"active\");'  ondblclick='$(this).attr(\"class\",\"\");' >";
 
                 echo "<td>";
                   if($nick[0]!="*"){

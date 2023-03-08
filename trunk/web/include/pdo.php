@@ -18,6 +18,7 @@ function pdo_query($sql){
 	    			if(stripos($sql,"create") === 0||stripos($sql,"drop") === 0|| stripos($sql,"grant") === 0){
 				$dbh=new PDO("mysql:host=".$DB_HOST, $DB_USER, $DB_PASS,array(PDO::ATTR_PERSISTENT=>true,PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
 //					echo "General SQL";
+				$sql="use $DB_NAME; ".$sql;
 				}else{
 				$dbh=new PDO("mysql:host=".$DB_HOST.';dbname='.$DB_NAME, $DB_USER, $DB_PASS,array(PDO::ATTR_PERSISTENT=>true,PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
 //					echo "$DB_NAME SQL";

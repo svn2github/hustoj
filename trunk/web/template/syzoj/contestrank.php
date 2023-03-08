@@ -11,7 +11,7 @@
     <h1 style="text-align: left;">Contest<?php echo $cid?> - <?php echo $title?>   
          <a class='ui small blue button' href="contestrank.xls.php?cid=<?php echo $cid?>" >Download</a>
          <a class='ui small green button' href="contestrank4.php?cid=<?php echo $cid?>" ><?php echo $MSG_REVIEW_CONTESTRANK ?></a>
-
+         <button  class='ui small yellow button' onclick='$("tr[class!=active]").toggle();'>Show/Hide</button>
  </h1>
 </div>
 <div class="padding" style="overflow-y:auto;">
@@ -38,7 +38,7 @@
                 $uuid=$U[$i]->user_id;
                 $nick=$U[$i]->nick;
                 $usolved=$U[$i]->solved;
-                echo "<tr>";
+                echo "<tr onclick='$(this).attr(\"class\",\"active\");'>";
 
                 echo "<td>";
                   if($nick[0]!="*"){

@@ -28,8 +28,8 @@
       <input type=hidden name=problem_id value="New Problem">
         <p align=left>
           <?php echo "<h3>".$MSG_TITLE."</h3>"?>
-          <input class="input input-xxlarge" style="width:100%;" type=text name=title><br><br>
-        </p>
+          <input class="input input-xxlarge" style="width:100%;" type=text name='title' > <input type=submit value='<?php echo $MSG_SAVE?>' name=submit> 
+	</p>
         <p align=left>
           <?php echo $MSG_Time_Limit?><br>
           <input class="input input-mini" type=number min="0.001" max="300" step="0.001" name=time_limit size=20 value=1> sec<br><br>

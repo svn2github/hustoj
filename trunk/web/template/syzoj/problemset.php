@@ -140,18 +140,7 @@
 
               echo "<div class=\"show_tag_controled\" style=\"float: right; \">";
               echo "<span class=\"ui header\">";
-              
-              $tcolor=0;
-              foreach($category as $cat){
-                if(trim($cat)=="") continue;
-                $hash_num=hexdec(substr(md5($cat),0,15));
-                $label_theme=$color[$tcolor%count($color)];
-                $tcolor++;
-                echo "<a href=\"problemset.php?search=".htmlentities($cat,ENT_QUOTES,'UTF-8')."\" class=\"ui tiny ".$label_theme." label\">";
-                         echo htmlentities($cat,ENT_QUOTES,'UTF-8');
-                echo "</a>";
-              }
-
+              echo  $view_problemset[$i][3];
               echo "</span></div>";
             echo "</td>";
             echo "<td><a href=\"status.php?problem_id=".$row['problem_id']."&jresult=4\">".$row['accepted']."</a></td>";

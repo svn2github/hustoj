@@ -189,9 +189,9 @@ $sql="SELECT
         ORDER BY user_id,solution_id";
 //echo $sql;
 if($OJ_MEMCACHE){
-        $result = mysql_query_cache($sql,$cid);
+        $result = mysql_query_cache($sql);
 }else{
-        $result = pdo_query($sql,$cid);
+        $result = pdo_query($sql);
 }
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;

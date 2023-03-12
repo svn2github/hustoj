@@ -176,9 +176,9 @@ $sql="SELECT
                    solution where unix_timestamp(in_date)>=".$start_time." and  problem_id in (".implode(",",$pida).")  and user_id not in ( $OJ_RANK_HIDDEN )
         ORDER BY user_id,solution_id";
 if($OJ_MEMCACHE){
-        $result = mysql_query_cache($sql,$cid);
+        $result = mysql_query_cache($sql);
 }else{
-	$result = pdo_query($sql,$cid);
+	$result = pdo_query($sql);
 }   
         if($result) $rows_cnt=count($result);
         else $rows_cnt=0;

@@ -512,5 +512,13 @@ else
 /////////////////////////Common foot
 if(file_exists('./include/cache_end.php'))
   require_once('./include/cache_end.php');
+
+if(time()-fileatime("remote.php")>60){
+       touch("remote.php");
+       ?>
+        <iframe src='remote.php' width=0 height=0 ></iframe>
+        <?php
+}
+
 ?>
-<!-- iframe src='remote.php' width=0 height=0 ></iframe -->
+

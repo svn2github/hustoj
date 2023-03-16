@@ -160,7 +160,7 @@ $remote_site="http://poj.org";
 $remote_user='hustoj';                // 请修改为你在poj.org注册的机器人账号
 $remote_pass='freeproblemset';         // 请修改为你在poj.org注册的机器人账号的密码
 $remote_cookie=$OJ_DATA.'/'.get_domain($remote_site).'.cookie';
-$remote_delay=3;
+$remote_delay=15;
 if(isset($_POST[$OJ_NAME.'_refer'])){
 	header("location:".$_SESSION[$OJ_NAME.'_refer']);
 	unset($_SESSION[$OJ_NAME.'_refer']);

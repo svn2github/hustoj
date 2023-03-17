@@ -78,9 +78,10 @@ if(  ($ok && $OJ_FRIENDLY_LEVEL>2) ||
 
   if(isset($result[0])){
     $row = $result[0];
+    $view_reinfo=htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
   }
 
-  if(strpos($row['error'],"judge")!==false) $view_reinfo =  "error1";
+  if(strpos($row['error'],"judge/")!==false) $view_reinfo =  "error1";
   else if(strpos($row['error'],"php")!==false) $view_reinfo =  "error2";
   else if(strpos($row['error'],"PASS")!==false) $view_reinfo =  "error3";
   else if($OJ_SHOW_DIFF && $row && ($ok||$isRE) && ($OJ_TEST_RUN||is_valid($row['error'])||$ok)){ 

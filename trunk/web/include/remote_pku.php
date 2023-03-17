@@ -131,12 +131,12 @@ function do_result_one($remote_site,$sid,$rid){
 			$reinfo=getPartByMark($reinfo,"<pre>","</pre>");
 			$sql="insert into compileinfo(solution_id,error) values(?,?) on duplicate key update error=? ";
 			pdo_query($sql,$sid,$reinfo,$reinfo);
-			$sql="update solution set result=?,pass_rate=?,time=?,memory=? where solution_id=?";
+			$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judgetime=now()  where solution_id=?";
 			pdo_query($sql,$result,0,$time,$memory,$sid);
 			return $result;	
 	}
 	if($result==4) $pass_rate=1;else $pass_rate=0;
-	$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judger=? where solution_id=?";
+	$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judger=?,judgetime=now()  where solution_id=?";
 	pdo_query($sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid);
 	echo $sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid;
 

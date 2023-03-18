@@ -186,8 +186,12 @@ if(isset($_POST[$OJ_NAME.'_refer'])){
 		unset($_SESSION[$OJ_NAME.'_refer']);
 	}
 }
-do_result($remote_site);
+if(time()-fileatime(__FILE__)>$remote_delay){
+	do_result($remote_site);
+	touch(__FILE__);
+}
 if(isset($_GET['check'])){
+	$remote_delay*=2;
 	echo "<meta http-equiv='refresh' content='$remote_delay'>";
 	echo "$remote_oj<br>";
 }

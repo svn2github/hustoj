@@ -19,7 +19,7 @@ function auto_refresh() {
         }
         if(i==0){
                 console.log("no more");
-                $("iframe").remove();
+                $("iframe").remove();   // 
         }
 
 }

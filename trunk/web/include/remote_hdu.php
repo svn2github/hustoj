@@ -133,11 +133,17 @@ function do_result_one($remote_site,$sid,$rid){
 			pdo_query($sql,$result,0,$time,$memory,get_domain($remote_site),$sid);
 			return $result;	
 	}
-	if($result==4) $pass_rate=1;else $pass_rate=0;
+	if($result==4){
+		$pass_rate=1;else $pass_rate=0;
+	}
 	$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judger=?,judgetime=now()  where solution_id=?";
 	pdo_query($sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid);
 	echo $sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid;
-
+	if($result==4){
+		$pid=pdo_query("select problem_id from solution where solution_id=?",$sid)[0][0];
+		$sql="update problem set accepted=(select count(1) from solution where result=4 and problem_id=?) where problem_id=?";
+		pdo_query($sql,$pid,$pid);
+	}
 	return $result;
 }
 function do_result($remote_site){

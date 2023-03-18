@@ -17,6 +17,11 @@ function auto_refresh() {
                         break;
                 }
         }
+        if(i==0){
+                console.log("no more");
+                $("iframe").remove();
+        }
+
 }
 
 function findRow(solution_id) {

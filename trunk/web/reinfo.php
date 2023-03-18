@@ -100,7 +100,7 @@ else{
 
 /////////////////////////Template
 
-if($OJ_SHOW_DIFF==false){
+if(!isset($_SESSION[$OJ_NAME.'_'.'source_browser']) && $OJ_SHOW_DIFF==false){
   $view_errors = $MSG_WARNING_ACCESS_DENIED;
   require("template/".$OJ_TEMPLATE."/error.php");
   exit(0);

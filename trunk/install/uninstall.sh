@@ -10,8 +10,8 @@ service nginx stop
 service memcache stop
 
 echo "drop database jol;"|mysql -h localhost -u$USER -p$PASSWORD 
-
-for PKG in  make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
+docker rmi hustoj
+for PKG in  docker.io make flex g++ clang libmysqlclient-dev libmysql++-dev php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip fp-compiler openjdk-11-jdk mono-devel php-mbstring php-xml
 do
 	apt-get purge -y $PKG
 done

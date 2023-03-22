@@ -99,7 +99,17 @@
 							<div colspan='1' class="col-md-12">
 								<form action='problemset.php'>
 									<div class="ui left icon fluid input">
-										<input type="text" name="search">
+										<input type="text" name="search" placeholder='keyword'>
+										<i class="search icon"></i>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="row">
+							<div colspan='1' class="col-md-12">
+								<form action='problem.php' >
+									<div class="ui left icon fluid input">
+										<input type="text" name="id" placeholder='ID'>
 										<i class="search icon"></i>
 									</div>
 								</form>

@@ -318,8 +318,8 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 **建议服务器配置双核2G内存以上**
 	
 ```bash
-wget http://dl.hustoj.com/install-ubuntu22.04.sh
-sudo bash install-ubuntu22.04.sh
+wget http://dl.hustoj.com/install.sh
+sudo bash install.sh
 ```
 
 ### 基于 Ubuntu 20.04 安装
@@ -331,8 +331,8 @@ sudo bash install-ubuntu22.04.sh
 **建议服务器配置单核2G内存以上**
 
 ```bash
-wget http://dl.hustoj.com/install-ubuntu20.04.sh
-sudo bash install-ubuntu20.04.sh
+wget http://dl.hustoj.com/install.sh
+sudo bash install.sh
 ```
 	
 脚本运行完成直接浏览器输入ip地址即可访问，如不能打开请检查**访问策略**、**防火墙**设置是否打开80端口。
@@ -345,8 +345,8 @@ sudo bash install-ubuntu20.04.sh
 ### 基于 Ubuntu 18.04 安装   即将脱离维护期，不推荐
 
 ```bash
-wget http://dl.hustoj.com/install-ubuntu18.04.sh
-sudo bash install-ubuntu18.04.sh
+wget http://dl.hustoj.com/install.sh
+sudo bash install.sh
 ```
 	
 ### 校园网安装

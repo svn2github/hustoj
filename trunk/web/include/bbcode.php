@@ -422,7 +422,7 @@ class BBCode
   }
 }
 function filterDIV($input){
-  $value=mb_ereg_replace("<[dD][iI][vV][a-zA-Z -=\"\']*>","",$input);
+  $value=mb_ereg_replace("<[dD][iI][vV][a-zA-Z -_=\"\']*>","",$input);
   $value=mb_ereg_replace("</[dD][iI][vV]>","",$value);
   $value=mb_ereg_replace("<([^>]+)<","&lt;\\1&lt;",$value); //fixing 0<m<7000
   $value=mb_ereg_replace(">([^<]+)>","&gt;\\1&gt;",$value); //fixing  7000>m>7000

@@ -7,9 +7,10 @@ if (!function_exists('str_contains')) {
 }
 function getPartByMark($html,$mark1,$mark2){
    $i=mb_strpos($html,$mark1);
-   $j=mb_strpos($html,$mark2,$i+mb_strlen($mark1)+1);
-  $descriptionHTML=mb_substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
-
+   $start=$i+mb_strlen($mark1)+1;
+   if($i>=0&&$start<=mb_strlen($html)) $j=mb_strpos($html,$mark2,$start);
+   else return $html;
+   $descriptionHTML=mb_substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
    return $descriptionHTML;
 }
 function get_domain($url){

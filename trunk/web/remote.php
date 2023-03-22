@@ -2,7 +2,7 @@
      require_once "include/db_info.inc.php";
      require_once "include/init.php";
         $remote_ojs=array(
-                "pku"
+                "pku","hdu"
         );
 foreach($remote_ojs as $remote_oj){
         $file="include/remote_$remote_oj.php";

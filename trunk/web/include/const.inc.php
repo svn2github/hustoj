@@ -5,7 +5,7 @@
 	}
 }
 $judge_result=Array($MSG_Pending,$MSG_Pending_Rejudging,$MSG_Compiling,$MSG_Running_Judging,$MSG_Accepted,$MSG_Presentation_Error,$MSG_Wrong_Answer,$MSG_Time_Limit_Exceed,$MSG_Memory_Limit_Exceed,$MSG_Output_Limit_Exceed,$MSG_Runtime_Error,$MSG_Compile_Error,$MSG_Compile_OK,$MSG_TEST_RUN,$MSG_MANUAL_CONFIRMATION,$MSG_SUBMITTING,$MSG_REMOTE_PENDING,$MSG_REMOTE_JUDGING);
-$jresult=Array($MSG_PD,$MSG_PR,$MSG_CI,$MSG_RJ,$MSG_AC,$MSG_PE,$MSG_WA,$MSG_TLE,$MSG_MLE,$MSG_OLE,$MSG_RE,$MSG_CE,$MSG_CO,$MSG_TR,$MSG_MC,$MSG_SUB,$MSG_RP,$MSG_RJ);
+$jresult=Array($MSG_PD,$MSG_PR,$MSG_CI,$MSG_RJ,$MSG_AC,$MSG_PE,$MSG_WA,$MSG_TLE,$MSG_MLE,$MSG_OLE,$MSG_RE,$MSG_CE,$MSG_CO,$MSG_TR,$MSG_MC,$MSG_SUBMITTING,$MSG_RP,$MSG_RJ);
 $judge_color = Array("label gray","label label-info","label label-warning","label label-warning","label label-success","label label-danger","label label-danger","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-warning","label label-info","label label-success","label lable-gray","label label-info","label label-warning");
 $language_name=Array("C","C++","Pascal","Java","Ruby","Bash","Python","PHP","Perl","C#","Obj-C","FreeBasic","Scheme","Clang","Clang++","Lua","JavaScript","Go","SQL","Fortran","Matlab","Cobol","UnknownLanguage");
 $language_ext=Array( "c", "cc", "pas", "java", "rb", "sh", "py", "php","pl", "cs","m","bas","scm","c","cc","lua","js","go","sql","f95","m","cob" );

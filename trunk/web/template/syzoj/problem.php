@@ -34,6 +34,7 @@ div[class*=ace_br] {
 </style>
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/$OJ_TEMPLATE/"?>clipboard.min.js"></script>
 <script src="<?php echo $OJ_CDN_URL.$path_fix."template/bs3/"?>marked.min.js"></script>
+<div class="padding ">
 <div class="ui center aligned grid">
     <div class="row">
       <h1 class="ui header">

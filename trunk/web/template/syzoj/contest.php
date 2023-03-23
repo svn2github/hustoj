@@ -81,7 +81,7 @@
                             </th>
                             <th class="two wide" style="text-align: center"><?php echo $MSG_PROBLEM_ID ?></th>
                             <th><?php echo $MSG_TITLE ?></th>
-                          <!--  <th><?php echo $MSG_SOURCE ?></th> -->
+                            <th><?php echo $MSG_SOURCE ?></th>  
                             <th class="one wide center aligned"><?php echo $MSG_AC ?></th>
                             <th class="one wide center aligned"><?php echo $MSG_SUBMIT_NUM ?></th>
                         </tr>

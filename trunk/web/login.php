@@ -56,7 +56,7 @@ if($login){
 	
         //session_id(session_create_id($login));
         //session_start();
- 
+        //session_regenerate_id();
 	
 	$_SESSION[ $OJ_NAME . '_' . 'user_id' ] = $login;
 	$result = pdo_query( $sql, $login );

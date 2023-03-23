@@ -134,7 +134,9 @@ function do_result_one($remote_site,$sid,$rid){
 			return $result;	
 	}
 	if($result==4){
-		$pass_rate=1;else $pass_rate=0;
+		$pass_rate=1;
+	}else{
+		$pass_rate=0;
 	}
 	$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judger=?,judgetime=now()  where solution_id=?";
 	pdo_query($sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid);

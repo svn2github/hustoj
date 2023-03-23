@@ -7,7 +7,6 @@
   <title>Problem Add</title>
 </head>
 <hr>
-
 <?php 
   require_once("../include/db_info.inc.php");
   require_once("admin-header.php");
@@ -19,9 +18,7 @@
   include_once("kindeditor.php") ;
   $source=pdo_query("select source from problem order by problem_id desc limit 1"); //默认续用最后一次的分类标签
   if(is_array($source)&&isset($source[0]))$source=$source[0][0];
-
 ?>
-
 <body leftmargin="30" >
   <div class="container">
     <form method=POST action=problem_add.php>
@@ -36,7 +33,6 @@
           <?php echo $MSG_Memory_Limit?><br>
           <input class="input input-mini" type=number min="1" max="2048" step="1" name=memory_limit size=20 value=128> MiB<br><br>
         </p>
- 
         <p align=left>
           <?php echo "<h4>".$MSG_Description."</h4>"?>
           <textarea class="kindeditor" rows=13 name=description cols=80></textarea><br>
@@ -102,7 +98,7 @@
           <?php require_once("../include/set_post_key.php");?>
           <input type=submit value='<?php echo $MSG_SAVE?>' name=submit>
         </div>
-      </input>
+     
     </form>
   </div>
 </body>

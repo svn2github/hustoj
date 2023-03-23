@@ -54,7 +54,7 @@ if(!$use_cookie){
 if($login){
   	$sql = "SELECT * FROM `privilege` WHERE `user_id`=?";
 	
-        //session_id(session_create_id($login));
+        //session_id(session_create_id($login));   // not working on 18.04 cause login fail
         //session_start();
         //session_regenerate_id();
 	

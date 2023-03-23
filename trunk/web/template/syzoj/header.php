@@ -121,7 +121,9 @@
 <?php
         if(!isset($_GET['spa'])){
 ?>
-    <body style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; background : url(<?php echo $OJ_BG;?>) no-repeat; background-size: 100%"">
+   
+<body id="MainBg-C" style="position: relative; margin-top: 49px; height: calc(100% - 49px); overflow-y: overlay; 
+background : url(<?php echo $OJ_BG;?>) no-repeat; background-size: 100%">
     <div id="page-header" class="ui fixed borderless menu" style="position: fixed; height: 49px; z-index:99999">
         <div id="menu" class="ui stackable mobile ui container computer" style="margin-left:calc(10%)!important">
             <a class="header item"  href="/"><span

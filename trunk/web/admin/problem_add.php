@@ -1,6 +1,6 @@
 <?php
 require_once ("admin-header.php");
-//require_once("../include/check_post_key.php");
+require_once("../include/check_post_key.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'contest_creator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']))) {
   echo "<a href='../loginpage.php'>Please Login First!</a>";
   exit(1);
@@ -91,8 +91,16 @@ if(isset($_POST['remote_oj'])){
 	?>
 <form method=POST action=problem_add_page_<?php echo $remote_oj?>.php>
 <?php 
-	$pre=mb_strpos($source,"=");
-	$pre=mb_substr($source,0,$pre+1);
+	if($remote_oj=="luogu"){
+		$pre=mb_strpos($source,"P");
+		$pre=mb_substr($source,0,$pre+1);
+		$remote_id=intval(mb_substr($_POST['remote_id'],1));
+		echo "remote id :$remote_id";
+	
+	}else{
+		$pre=mb_strpos($source,"=");
+		$pre=mb_substr($source,0,$pre+1);
+	}
 ?>
 <input name=url type=text size=100  class="input input-xxlarge" value="<?php echo $pre.(++$remote_id) ?>">
   <input type=submit>

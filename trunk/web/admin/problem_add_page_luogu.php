@@ -9,106 +9,79 @@
 <body leftmargin="30">
 <center>
 <?php require_once("../include/db_info.inc.php");?>
-
 <?php require_once("admin-header.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
-}?>
+}
+?>
 <?php
 include_once("kindeditor.php") ;
 ?>
-
-<table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse"  width="100%" height="50">
-<tr>
-<td width="100"></td>
-<td>
-<p align="center"><font color="#333399" size="4">Welcome To Administrator's Page of Judge Online of ACM ICPC,<?php echo $OJ_NAME?>.</font></td>
-<td width="100"></td>
-</tr>
-</table>
-</center>
-<hr>
-<h1>Add New problem</h1>
 <?php require_once("../include/simple_html_dom.php");
 function getPartByMark($html,$mark1,$mark2){
    $i=mb_strpos($html,$mark1);
-   $j=mb_strpos($html,$mark2,$i+mb_strlen($mark1)+1);
+   $start=$i+mb_strlen($mark1)+1;
+   if($i>=0&&$start<=mb_strlen($html)) $j=mb_strpos($html,$mark2,$start);
+   else return $html;
    $descriptionHTML=mb_substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
+   echo "[$star-$j]";
    return $descriptionHTML;
 }
-
   $url=$_POST ['url'];
-
+  $remote_id=basename($url);  
   if (!$url) $url=$_GET['url'];
   if (strpos($url, "http") === false){
-	echo "Please Input like https://www.luogu.org/problemnew/show/";
+	echo "Please Input like https://www.luogu.com.cn/problem/P1000";
 	exit(1);
-  }   
-    
+  } 
   if (false) {
 	$url = stripslashes ( $url);
   }
   $baseurl=substr($url,0,strrpos($url,"/")+1);
 //  echo $baseurl;
-  $html = file_get_html($url);
+  //$html = file_get_html($url);
+  $html = file_get_html($url, false,null,0, -1,true,true, DEFAULT_TARGET_CHARSET,false);
   foreach($html->find('img') as $element)
         $element->src=$baseurl.$element->src;
-  $element=$html->find('h1',0);
-  $title=$element->plaintext;
-  $i=1;
-  $sample_output=$sample_input=$descriptionHTML="";
+        
+  $element=$html->find('article',0);
+  $tlimit=1;
+  $mlimit=128;
+  $html=$element->innertext;
+ // $html=getPartByMark($html,"<h1>","</h1>");
+  $title=getPartByMark($html,"<h1>","</h1>");
+  $descriptionHTML="<div class='md'>".getPartByMark($html,"<h2>题目背景</h2>","<div>**广告**")."</div>";
   
-  $html=$html->innertext;
- // echo $i."-".strlen($html);
- 	 $descriptionHTML=getPartByMark($html,"题目描述","am-modal am-modal-prompt");
- // echo $i."-".strlen($descriptionHTML);
 
 ?>
 <form method=POST action=problem_add.php>
-<p align=center><font size=4 color=#333399>Add a Problem</font></p>
-<input type=hidden name=problem_id value=New Problem>
+<input type=hidden name=problem_id value="New Problem">
 <p align=left>Problem Id:&nbsp;&nbsp;New Problem</p>
-<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>"></p>
-<p align=left>Time Limit:<input type=text name=time_limit size=20 value=1>S</p>
-<p align=left>Memory Limit:<input type=text name=memory_limit size=20 value=128>MByte</p>
-<p align=left>Description:<br>
-<textarea class="kindeditor" rows=13 name=description cols=80><?php echo $descriptionHTML;?></textarea>
-</p>
-<p align=left>Input:<br>
-<textarea class="kindeditor" rows=13 name=input cols=80><?php echo $inputHTML;?></textarea>
-</p>
-</p>
-<p align=left>Output:<br><!--<textarea rows=13 name=output cols=80></textarea>-->
-<textarea class="kindeditor" rows=13 name=output cols=80><?php echo $outputHTML;?></textarea>
-</p>
-<p align=left>Sample Input:<br><textarea rows=13 name=sample_input cols=80><?php echo $sample_input?></textarea></p>
-<p align=left>Sample Output:<br><textarea rows=13 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
-<p align=left>Test Input:<br><textarea rows=13 name=test_input cols=80></textarea></p>
-<p align=left>Test Output:<br><textarea rows=13 name=test_output cols=80></textarea></p>
-<p align=left>Hint:<br>
-<textarea class="kindeditor" rows=13 name=hint cols=80></textarea>
-</p>
-<p>SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'></p>
-<p align=left>Source:<br><textarea name=source rows=1 cols=70></textarea></p>
-<p align=left>contest:
-	<select  name=contest_id>
-<?php $sql="SELECT `contest_id`,`title` FROM `contest` WHERE `start_time`>NOW() order by `contest_id`";
-$result=pdo_query($sql);
-echo "<option value=''>none</option>";
-if (count($result)==0){
-}else{
-	foreach($result as $row)
-			echo "<option value='{$row['contest_id']}'>{$row['contest_id']} {$row['title']}</option>";
-}
-?>
-	</select>
-</p>
-<div align=center>
-<?php require_once("../include/set_post_key.php");?>
+<p align=left>Title:<input type=text name=title size=71 value="<?php echo $title?>">
+Time Limit:<input type=text class='input input-mini' name=time_limit size=20 value="<?php echo $tlimit?>">S
+Memory Limit:<input type=text class='input input-mini'  name=memory_limit size=20 value="<?php echo $mlimit?>">MB
+<br>LUOGU<input type=text name=remote_id value="<?php echo $remote_id?>" >
 <input type=submit value=Submit name=submit>
+<p align=left>Description:<br>
+<textarea class="kindeditor" rows=5 name=description cols=30><?php echo $descriptionHTML;?></textarea>
+<p align=left>Input:
+<textarea  rows=5 name=input cols=30 ><?php echo $inputHTML;?></textarea>
+Output:
+<textarea  rows=5 name=output cols=30><?php echo $outputHTML;?></textarea>
+</p>
+<p align=left>Sample Input:<textarea rows=2 name=sample_input cols=80><?php echo $sample_input?></textarea>
+Sample Output:<textarea rows=2 name=sample_output cols=80><?php echo $sample_output?></textarea></p>
+<p align=left>Test Input:<textarea rows=2 name=test_input cols=80></textarea>
+Test Output:<textarea rows=2 name=test_output cols=80></textarea>
+<br>
+Hint:<textarea rows=3 name=hint cols=2 ><?php echo $hint ?></textarea>
+SpecialJudge: N<input type=radio name=spj value='0' checked>Y<input type=radio name=spj value='1'>
+Source:<textarea name=source rows=1 cols=3><?php echo $url ?></textarea>
+	<input type=hidden name=contest_id></input>
+<input type=hidden name=remote_oj value="luogu" >	
+<?php require_once("../include/set_post_key.php");?>
 </div></form>
 <p>
 
 </body></html>
-

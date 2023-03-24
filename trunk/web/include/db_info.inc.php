@@ -72,9 +72,9 @@ static  $OJ_RANK_HIDDEN="'admin','zhblue'";  // 管理员不显示在排名中
 static  $OJ_FRIENDLY_LEVEL=0; //系统友好级别，暂定0-9级，级别越高越傻瓜，系统易用度高的同时将降低安全性，仅供非专业用途，造成泄题、抄袭概不负责。
 static  $OJ_FREE_PRACTICE=false; //自由练习，不受比赛作业用题限制
 static  $OJ_SUBMIT_COOLDOWN_TIME=1; //提交冷却时间，连续两次提交的最小间隔，单位秒。
-static  $OJ_MARKDOWN=false; // 开启MARKDOWN，开启后在后台编辑题目时默认为源码模式，用[md] # Markdown [/md] 格式插入markdown代码, 如果需要用到[]也可以用<div class='md'> </div>。
+static  $OJ_MARKDOWN=true; // 开启MARKDOWN，开启后在后台编辑题目时默认为源码模式，用[md] # Markdown [/md] 格式插入markdown代码, 如果需要用到[]也可以用<div class='md'> </div>。
 static  $OJ_INDEX_NEWS_TITLE='HelloWorld!';   // 在syzoj的首页显示哪一篇标题的文章（可以有多个相同标题）
-static  $OJ_DIV_FILTER=true;   // 过滤题面中的div，修复显示异常，特别是来自其他OJ系统的题面。
+static  $OJ_DIV_FILTER=false;   // 过滤题面中的div，修复显示异常，特别是来自其他OJ系统的题面。
 static  $OJ_LIMIT_TO_1_IP=false;  // 限制用户同一时刻只能在一个IP地址登录
 static  $OJ_REMOTE_JUDGE=false; //是否启用Remote Judge ，启用哪些模块请在remote.php中设置
 

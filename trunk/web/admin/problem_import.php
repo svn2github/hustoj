@@ -75,8 +75,8 @@
       </center>
       <?php require_once("../include/set_post_key.php");?>
     </form>
-    - Import Problem from QDUOJ - json - zip<br><br>
-    <form class='form-inline' action='problem_import_qduoj.php' method=post enctype="multipart/form-data">
+    - Import Problem from unkownOJ - json - zip<br>曾经以为是QDUOJ，但似乎不是，暂留<br>
+    <form class='form-inline' action='problem_import_unkownoj.php.php' method=post enctype="multipart/form-data">
       <div class='form-group'>
         <input class='form-control' type=file name=fps>
       </div>

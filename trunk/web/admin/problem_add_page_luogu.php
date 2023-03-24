@@ -51,8 +51,11 @@ function getPartByMark($html,$mark1,$mark2){
   $html=$element->innertext;
  // $html=getPartByMark($html,"<h1>","</h1>");
   $title=getPartByMark($html,"<h1>","</h1>");
-  $descriptionHTML="<div class='md'>".getPartByMark($html,"<h2>题目背景</h2>","<div>**广告**")."</div>";
+  $descriptionHTML="<div class='md'>".getPartByMark($html,"<h2>题目背景</h2>","<h3>输入格式</h3>")."</div>";
   
+  $inputHTML=getPartByMark($html,"<h3>输入格式</h3>","<h3>输出格式</h3>");
+  $outputHTML=getPartByMark($html,"<h3>输出格式</h3>","<h2>输入输出样例</h2>");
+  $hint=getPartByMark($html,"<h2>输入输出样例</h2>","<div>**广告**");
 
 ?>
 <form method=POST action=problem_add.php>

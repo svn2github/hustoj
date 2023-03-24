@@ -89,7 +89,7 @@ function import_json($json) {
     $description = $qduoj_problem->{'description'}->{'value'};
     $input = $qduoj_problem->{'input_description'}->{'value'};
     $output = $qduoj_problem->{'output_description'}->{'value'};
-    var_dump($qduoj_problem->{'samples'});
+//    var_dump($qduoj_problem->{'samples'});
     $sample_input = $qduoj_problem->{'samples'}[0]->{"input"};
     $sample_output = $qduoj_problem->{'samples'}[0]->{"output"};
 //    echo $sample_input."<br>";
@@ -173,7 +173,7 @@ else {
     	system($cmd);
     
     }
-    //system ("rmdir $tempdir");
+    system ("rmdir $tempdir");
   }
   else {
   echo ($tempfile);

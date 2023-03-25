@@ -154,7 +154,8 @@ else {
 		 // $dir=$tempdir."/".basename($file_name,".json");
 		  mkdir("$OJ_DATA/$pid");
 		  array_push ($cmds,"mv $tempdir/$i/testcase/* $OJ_DATA/$pid/");
-		  array_push ($cmds,"rmdir $dir");
+		  array_push ($cmds,"rmdir $tempdir/$i/testcase");
+		  $i++;
 	  }else{
 	  	//echo "$file_name"."<br>";
 		mkdir($tempdir."/".dirname($file_name),0755,true);
@@ -169,11 +170,11 @@ else {
     zip_close($resource);
     unlink ( $_FILES ["fps"] ["tmp_name"] );
     foreach($cmds as $cmd){
-	//echo $cmd;
+//	echo $cmd."<br>";
     	system($cmd);
     
     }
-    system ("rmdir $tempdir");
+    //system ("rmdir $tempdir");
   }
   else {
   echo ($tempfile);

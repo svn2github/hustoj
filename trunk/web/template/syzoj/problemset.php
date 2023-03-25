@@ -142,7 +142,7 @@
               //echo "<span class=\"ui header\">";
               echo  $view_problemset[$i][3];
               //echo "</span></div>";
-	      echo "</span>";
+	      echo "</div>";
             echo "</td>";
             echo "<td><a href=\"status.php?problem_id=".$row['problem_id']."&jresult=4\">".$row['accepted']."</a></td>";
             echo "<td><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></td>";

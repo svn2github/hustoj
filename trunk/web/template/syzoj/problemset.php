@@ -139,9 +139,10 @@
               {echo "<a href=admin/problem_df_change.php?id=".$row['problem_id']."&getkey=".$_SESSION[$OJ_NAME.'_'.'getkey'].">".("<span class=\"ui tiny red label\">未公开</span>")."</a>";}
 
               echo "<div class=\"show_tag_controled\" style=\"float: right; \">";
-              echo "<span class=\"ui header\">";
+              //echo "<span class=\"ui header\">";
               echo  $view_problemset[$i][3];
-              echo "</span></div>";
+              //echo "</span></div>";
+	      echo "</span>";
             echo "</td>";
             echo "<td><a href=\"status.php?problem_id=".$row['problem_id']."&jresult=4\">".$row['accepted']."</a></td>";
             echo "<td><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></td>";

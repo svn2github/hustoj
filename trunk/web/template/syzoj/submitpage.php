@@ -322,7 +322,7 @@ function loadFromBlockly(){
     editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
-        enableLiveAutocompletion: false,
+        enableLiveAutocompletion: false,  //改为true,打开自动补齐功能，改为false关闭
         // fontFamily: "Consolas",  // MacOS missing align
         fontSize: "18px"
     });

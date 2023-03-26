@@ -41,6 +41,9 @@ RUN     cd /home/judge/src/core/ && bash make.sh
 #RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends octave
 #RUN     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gnucobol
 
+# install debian package of similarity-tester
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends similarity-tester
+RUN cp /usr/bin/sim_c++ /usr/bin/sim_cc
 # make Chinese Character works in Docker
 RUN apt-get install -y locales locales-all
 RUN locale-gen zh_CN.UTF-8 && dpkg-reconfigure locales && /usr/sbin/update-locale LANG=zh_CN.UTF-8

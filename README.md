@@ -496,11 +496,9 @@ docker run -d \
 
 ### LiveCD下载安装
 
-Linux不熟悉的用户推荐使用:
+[家宽下载](http://dl2.hustoj.com:8090/) Linux不熟悉的用户、内网用户、无网用户无法使用标准版Ubuntu安装时推荐使用。
 
 HUSTOJ_LiveCD(发送"livecd"到微信公众号 `onlinejudge` ，获得百度云下载链接)
-
-HUSTOJ_Windows（仅支持XP,QQ群23361372共享文件）进行安装。
 
 使用说明见iso中README,也可以参考[LiveCD简介](https://github.com/zhblue/hustoj/tree/master/wiki/HUSTOJ_LiveCD.md)  
 

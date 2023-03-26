@@ -24,7 +24,7 @@
 <script src="<?php echo $OJ_CDN_URL?>include/checksource.js"></script>
 <form id=frmSolution action="submit.php<?php if (isset($_GET['spa'])) echo "?spa" ?>" method="post" onsubmit='do_submit()'>
 <?php if (isset($id)){?>
-Problem <span class=blue><b><?php echo $id?></b></span>
+<span style="color:#0000ff">Problem <b><?php echo $id?></b></span>
 <input id=problem_id type='hidden' value='<?php echo $id?>' name="id" >
 <?php }else{
 //$PID="ABCDEFGHIJKLMNOPQRSTUVWXYZ";

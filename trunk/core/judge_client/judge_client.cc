@@ -3149,42 +3149,39 @@ void init_parameters(int argc, char **argv, int &solution_id,
 }
 int get_sim(int solution_id, int lang, int pid, int &sim_s_id)
 {
-	char src_pth[BUFFER_SIZE];
-	//char cmd[BUFFER_SIZE];
-	sprintf(src_pth, "Main.%s", lang_ext[lang]);
+        char src_pth[BUFFER_SIZE];
+        //char cmd[BUFFER_SIZE];
+        sprintf(src_pth, "Main.%s", lang_ext[lang]);
+        int sim = execute_cmd("/usr/bin/sim.sh %s %d", src_pth, pid);
+        FILE *pf;
+        pf = fopen("sim", "r");
+        if (!sim){
+                if(pf){
+                        execute_cmd("/bin/mkdir ../data/%d/ac/ 2>/dev/null", pid);
 
-	int sim = execute_cmd("/usr/bin/sim.sh %s %d", src_pth, pid);
-	if (!sim)
-	{
-		execute_cmd("/bin/mkdir ../data/%d/ac/ 2>/dev/null", pid);
-
-		execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s 2>/dev/null", src_pth, pid, solution_id,
-					lang_ext[lang]);
-		//c cpp will
-		if (lang == 0)
-			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
-						solution_id, lang_ext[lang], pid, solution_id,
-						lang_ext[lang + 1]);
-		if (lang == 1)
-			execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
-						solution_id, lang_ext[lang], pid, solution_id,
-						lang_ext[lang - 1]);
-	}
-	else
-	{
-
-		FILE *pf;
-		pf = fopen("sim", "r");
-		if (pf)
-		{
-			if(2==fscanf(pf, "%d%d", &sim, &sim_s_id));
-			fclose(pf);
-		}
-	}
-	if (solution_id <= sim_s_id)
-		sim = 0;
-	return sim;
+                execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s 2>/dev/null", src_pth, pid, solution_id,
+                                        lang_ext[lang]);
+                //c cpp will
+                if (lang == 0)
+                        execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
+                                                solution_id, lang_ext[lang], pid, solution_id,
+                                                lang_ext[lang + 1]);
+                if (lang == 1)
+                        execute_cmd("/bin/ln ../data/%d/ac/%d.%s ../data/%d/ac/%d.%s 2>/dev/null", pid,
+                                                solution_id, lang_ext[lang], pid, solution_id,
+                                                lang_ext[lang - 1]);
+                }
+        }else{
+                if (pf){
+                        if(2==fscanf(pf, "%d%d", &sim, &sim_s_id));
+                }
+        }
+        if(pf) fclose(pf);
+        if (solution_id <= sim_s_id)
+                sim = 0;
+        return sim;
 }
+
 void mk_shm_workdir(char *work_dir)
 {
 	char shm_path[BUFFER_SIZE];

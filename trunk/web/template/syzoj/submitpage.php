@@ -75,7 +75,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 	<pre style="width:90%;height:<?php echo $height?>" cols=180 rows=16 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
 	<input type=hidden id="hide_source" name="source" value=""/>
 <?php }else{ ?>
-	<textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
+	<textarea style="width:80%;height:600" cols=180 rows=25 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
 <?php }?>
 
 <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>
@@ -322,7 +322,7 @@ function loadFromBlockly(){
     editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
-        enableLiveAutocompletion: false,  //改为true,打开自动补齐功能，改为false关闭
+        enableLiveAutocompletion: true,  //改为true,打开自动补齐功能，改为false关闭
         // fontFamily: "Consolas",  // MacOS missing align
         fontSize: "18px"
     });

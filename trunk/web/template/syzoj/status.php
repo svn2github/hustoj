@@ -54,11 +54,10 @@
           echo "
           <select id=\"appendedInputButton\" class=\"form-control\" name=showsim onchange=\"document.getElementById('simform').submit();\" style=\"width: 110px;\">
           <option value=0 ".($showsim==0?'selected':'').">All</option>
-          <option value=50 ".($showsim==50?'selected':'').">50</option>
-          <option value=60 ".($showsim==60?'selected':'').">60</option>
-          <option value=70 ".($showsim==70?'selected':'').">70</option>
           <option value=80 ".($showsim==80?'selected':'').">80</option>
+          <option value=85 ".($showsim==85?'selected':'').">85</option>
           <option value=90 ".($showsim==90?'selected':'').">90</option>
+          <option value=95 ".($showsim==95?'selected':'').">95</option>
           <option value=100 ".($showsim==100?'selected':'').">100</option>
           </select>";
           }

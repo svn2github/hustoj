@@ -58,6 +58,9 @@ snippet pri\n\
 # protected\n\
 snippet pro\n\
 	protected\n\
+# printf\n\
+snippet printf\n\
+	printf(\"$1\",$2);\n\
 # public\n\
 snippet pub\n\
 	public\n\
@@ -67,6 +70,9 @@ snippet fr\n\
 # mutable\n\
 snippet mu\n\
 	mutable\n\
+# scanf\n\
+snippet scanf\n\
+	scanf(\"$1\",$2);\n\
 ## \n\
 ## Class\n\
 # class\n\

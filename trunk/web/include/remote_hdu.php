@@ -142,9 +142,15 @@ function do_result_one($remote_site,$sid,$rid){
 	pdo_query($sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid);
 	echo $sql,$result,$pass_rate,$time,$memory,get_domain($remote_site),$sid;
 	if($result==4){
-		$pid=pdo_query("select problem_id from solution where solution_id=?",$sid)[0][0];
-		$sql="update problem set accepted=(select count(1) from solution where result=4 and problem_id=?) where problem_id=?";
-		pdo_query($sql,$pid,$pid);
+                $pc=pdo_query("select problem_id,contest_id from solution where solution_id=?",$sid)[0];
+                $pid=$pc[0];
+                $cid=$pc[1];
+                $sql="update problem set accepted=(select count(1) from solution where result=4 and problem_id=?) where problem_id=?";
+                pdo_query($sql,$pid,$pid);
+                if($cid>0){
+                     $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=? AND `result`=4 and contest_id=?) WHERE `problem_id`=? and contest_id=?";
+                     pdo_query($sql,$pid,$cid, $pid,$cid);
+                }
 	}
 	return $result;
 }

@@ -30,6 +30,7 @@ function curl_get($url){
 	curl_setopt($curl, CURLOPT_COOKIEJAR, $remote_cookie);  // save coockies
 	curl_setopt($curl, CURLOPT_REFERER, "$url"); 
 	curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"); 
+	curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 	$data = curl_exec($curl);
@@ -46,6 +47,7 @@ function curl_post_urlencoded($url,$form){
 	curl_setopt($curl, CURLOPT_REFERER, "$url"); 
 	curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"); 
 	curl_setopt($curl, CURLOPT_HTTPHEADER, ["DNT: 1","Upgrade-Insecure-Requests: 1","Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,da;q=0.6,es;q=0.5","Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"]);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // 不要打印内容
 	//curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 	// 设置 post 方式提交
@@ -71,6 +73,7 @@ function curl_post($url,$form){
 	curl_setopt($curl, CURLOPT_REFERER, "http://poj.org/"); 
 	curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"); 
 	curl_setopt($curl, CURLOPT_HTTPHEADER, ["DNT: 1","Origin: http://poj.org","Upgrade-Insecure-Requests: 1","Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,da;q=0.6,es;q=0.5","Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"]);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // 不要打印内容
 	//curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 	// 设置 post 方式提交

@@ -221,7 +221,7 @@ if (isset($OJ_APPENDCODE) && $OJ_APPENDCODE && file_exists($append_file)) {
 //end of append
 
 $spj=pdo_query("select spj from problem where problem_id=?",$id);
-if(count($spj>0)) $spj=$spj[0][0];
+if(count($spj)>0) $spj=$spj[0][0];
 
 if ($language == 6 && $spj!= 2) {
   $source = "# coding=utf-8\n".$source;

@@ -22,6 +22,7 @@ if(isset($_POST['do'])){
   require_once("../include/my_func.inc.php");
 
   $pieces = explode("\n", trim($_POST['ulist']));
+  //想支持中文，修改下行代码为：$pieces = preg_replace("/[^\x20-\x7e\x{4e00}-\x{9fa5}]/u", " ", $pieces);  //修改代码支持user_id为中文
   $pieces = preg_replace("/[^\x20-\x7e]/", " ", $pieces);  //!!important
 
   $ulist = "";

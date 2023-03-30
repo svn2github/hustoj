@@ -3390,9 +3390,10 @@ int main(int argc, char **argv)
 	// compile
 	//      printf("%s\n",cmd);
 	// set the result to compiling
-	int Compile_OK;
-
-	Compile_OK = compile(lang, work_dir);
+	int Compile_OK = 0 ;
+        if(spj!=2){
+                Compile_OK = compile(lang, work_dir);
+        }
 	if (Compile_OK != 0 && !spj)
 	{
 		addceinfo(solution_id);

@@ -52,6 +52,20 @@ chgrp www-data  /home/judge
 USER=$(grep user /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
 PASSWORD=$(grep password /etc/mysql/debian.cnf|head -1|awk  '{print $3}')
 CPU=$(grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}')
+MEM=`free -m|grep Mem|awk '{print $2}'`
+
+if [ "$MEM" -lt "1000" ] ; then
+        echo "Memory size less than 1GB."
+        if grep 'performance_schema=OFF' /etc/mysql/mysql.conf.d/mysqld.cnf ; then
+                echo "already turn off"
+        else
+                echo "try turn off performance_schema"
+                sed -i 's/^\[mysqld\]/\[mysqld\]\nperformance_schema=OFF/' /etc/mysql/mysql.conf.d/mysqld.cnf
+                /etc/init.d/mysql restart
+        fi
+else
+        echo "Memory size : $MEM MB"
+fi
 
 mkdir etc data log backup
 

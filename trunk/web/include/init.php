@@ -31,6 +31,7 @@ if($OJ_SaaS_ENABLE){
 if(strpos($_SERVER["HTTP_USER_AGENT"],"MSIE")){  // 360 or IE use bs3 instead
     $OJ_TEMPLATE="bs3";
 }
+// $OJ_BG="/image/bg".date('H').".jpg";  //每个整点更换壁纸，需要准备bg[0~23].jpg在image目录
 
 if(isset($_SESSION[$OJ_NAME.'_user_id'])&&isset($OJ_LIMIT_TO_1_IP)&& $OJ_LIMIT_TO_1_IP){
         $ip = ($_SERVER['REMOTE_ADDR']);

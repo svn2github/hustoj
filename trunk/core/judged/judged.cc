@@ -78,6 +78,7 @@ static char http_apipath[BUFFER_SIZE];
 static char http_loginpath[BUFFER_SIZE];
 static char http_username[BUFFER_SIZE];
 static char http_password[BUFFER_SIZE];
+static int prefetch=80;
 
 static int  oj_udp = 0;
 static char oj_udpserver[BUFFER_SIZE];
@@ -249,11 +250,11 @@ void init_judge_conf() {
 		if (oj_tot==1){
 		sprintf(query,
 			"SELECT solution_id FROM solution WHERE language in (%s) and result<2 ORDER BY result, solution_id  limit %d",
-			oj_lang_set,  2 *max_running );
+			oj_lang_set,  prefetch * max_running );
 		}else{
 		sprintf(query,
 				"SELECT solution_id FROM solution WHERE language in (%s) and result<2 and MOD(solution_id,%d)=%d ORDER BY result, solution_id ASC limit %d",
-				oj_lang_set, oj_tot, oj_mod, 2 *max_running );
+				oj_lang_set, oj_tot, oj_mod, prefetch * max_running );
 		}
 #endif
 		sleep_tmp = sleep_time;
@@ -420,7 +421,7 @@ int _get_jobs_http(int * jobs) {
 	}
 	pclose(fjobs);
 	ret = i;
-	while (i <= max_running * 2)
+	while (i <= max_running * prefetch)
 		jobs[i++] = 0;
 	return ret;
 }
@@ -445,7 +446,7 @@ int _get_jobs_mysql(int * jobs) {
 	}                        
 	else i=0;
 	ret = i;
-	while (i <= max_running * 2)
+	while (i <= max_running * prefetch )
 		jobs[i++] = 0;
 	return ret;
 }
@@ -465,7 +466,7 @@ int _get_jobs_redis(int * jobs){
 
         }
         int i=ret;
-        while (i <= max_running * 2)
+        while (i <= max_running * prefetch )
                 jobs[i++] = 0;
         if(DEBUG) printf("redis return %d jobs",ret);
         return ret;
@@ -537,13 +538,13 @@ int work() {
 	int i = 0;
 	static pid_t ID[100];
 	int runid = 0;
-	int jobs[max_running * 2 + 1];
+	int jobs[max_running * prefetch + 1];
 	pid_t tmp_pid = 0;
 
 	//for(i=0;i<max_running;i++){
 	//      ID[i]=0;
 	//}
-	for(i=0;i<max_running *2 +1 ;i++)
+	for(i=0;i<max_running *prefetch +1 ;i++)
 		jobs[i]=0;
 
 	//sleep_time=sleep_tmp;

@@ -93,7 +93,7 @@ static char oj_redisqname[BUFFER_SIZE];
 static int turbo_mode = 0;
 static int use_docker = 0;
 static int internal_client = 1;
-
+static int oj_dedicated=0;
 
 static bool STOP = false;
 static int DEBUG = 0;
@@ -218,7 +218,8 @@ void init_judge_conf() {
 			read_int(buf, "OJ_RUNNING", &max_running);
 			read_int(buf, "OJ_SLEEP_TIME", &sleep_time);
 			read_int(buf, "OJ_TOTAL", &oj_tot);
-
+			read_int(buf, "OJ_DEDICATED", &oj_dedicated);
+			
 			read_int(buf, "OJ_MOD", &oj_mod);
 
 			read_int(buf, "OJ_HTTP_JUDGE", &http_judge);
@@ -602,7 +603,9 @@ int work() {
 		if(DEBUG)
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 	}
-	while ((tmp_pid = waitpid(-1, NULL, 0 )) > 0) {
+	int NOHANG=0;
+	if(oj_dedicated) NOHANG=WNOHANG;
+	while ((tmp_pid = waitpid(-1, NULL, NOHANG )) > 0) {       // if run dedicated judge using WNOHANG
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){
 			

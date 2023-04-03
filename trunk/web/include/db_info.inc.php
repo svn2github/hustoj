@@ -25,6 +25,7 @@ static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has A
 static  $OJ_CSS="white.css";  // bing.css kawai.css black.css blue.css green.css hznu.css
 static  $OJ_SAE=false; //using sina application engine
 static  $OJ_VCODE=false;  //验证码
+static 	$OJ_ZHUCE=true; //限制每小时同ip注册为2个
 static  $OJ_APPENDCODE=true;  // 代码预定模板
 if (!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模式需要允许javascript操作cookie保存当前语言。
 @session_start();

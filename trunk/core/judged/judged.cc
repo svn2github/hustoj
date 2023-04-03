@@ -604,7 +604,7 @@ int work() {
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 	}
 	int NOHANG=0;
-	if(oj_dedicated) NOHANG=WNOHANG;
+	if(oj_dedicated && (rand()%100>20) ) NOHANG=WNOHANG;    // CPU 占用大约80%左右，不要打满
 	while ((tmp_pid = waitpid(-1, NULL, NOHANG )) > 0) {       // if run dedicated judge using WNOHANG
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){

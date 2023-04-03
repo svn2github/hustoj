@@ -123,6 +123,7 @@ function  getMark($users,  $start,  $end, $s) {
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
+if(isset($OJ_NO_CONTEST_WATCHER)&&$OJ_NO_CONTEST_WATCHER) require_once("contest-check.php");
 //require_once("contest-header.php");
 $sql="SELECT `start_time`,`title`,`end_time` FROM `contest` WHERE `contest_id`=?";
 $result=pdo_query($sql,$cid) ;

@@ -80,7 +80,7 @@ function s_cmp($A,$B){
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
-
+if(isset($OJ_NO_CONTEST_WATCHER)&&$OJ_NO_CONTEST_WATCHER) require_once("contest-check.php");
 $pida=array();
 $result=pdo_query("select num,problem_id from contest_problem where contest_id=? order by num",$cid);
 foreach($result as $row){

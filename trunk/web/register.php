@@ -96,17 +96,17 @@ if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])&&!empty(trim($_SERVER['HTTP_X_FORWAR
 }
 
 // 检查IP是否已经注册过
-if ($OJ_ZHUCE) {
+if (isset($OJ_REG_SPEED) && $OJ_REG_SPEED > 0 ) {
 
     // 查询最近1小时内该IP地址已经注册的用户数量
     $sql = "SELECT COUNT(*) FROM `users` WHERE `ip` = ? AND `reg_time` > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
     $result = pdo_query($sql, $ip);
     $count = intval($result[0][0]);
     
-    if ($count > 2) {
-        // 如果数量大于2，则表示该IP地址在最近1小时内已经注册过2个账户
+    if ($count > $OJ_REG_SPEED ) {
+        // 如果数量大于$OJ_REG_SPEED ，则表示该IP地址在最近1小时内已经注册过$OJ_REG_SPEED个账户
         print "<script language='javascript'>\n";
-        print "alert('您的IP地址已经注册过两个账户，请稍后再试。\\n');\n";
+        print "alert('您的IP地址已经注册过$OJ_REG_SPEED个账户，请稍后再试。\\n');\n";
         print "history.go(-1);\n</script>";
         exit(0);
     }

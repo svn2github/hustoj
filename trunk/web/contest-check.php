@@ -1,8 +1,8 @@
 <?php  	
+  $now = time();
   $cid = intval($_GET['cid']);
 	$view_cid = $cid;
 	//print $cid;
-
 	//check contest valid
 	$sql = "SELECT * FROM `contest` WHERE `contest_id`=?";
 	$result = pdo_query($sql,$cid);

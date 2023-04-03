@@ -9,6 +9,7 @@
 // contest start time
 if (!isset($_GET['cid'])) die("No Such Contest!");
 $cid=intval($_GET['cid']);
+if(isset($OJ_NO_CONTEST_WATCHER)&&$OJ_NO_CONTEST_WATCHER) require_once("contest-check.php");
 
 $sql="SELECT title,end_time FROM `contest` WHERE `contest_id`=? AND `start_time`<NOW()";
 $result=pdo_query($sql,$cid);

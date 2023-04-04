@@ -535,6 +535,7 @@ bool check_out(int solution_id, int result) {
 	static int workcnt = 0;
 int work() {
 //      char buf[1024];
+	static int error=0;   // 出错计数器
 	int retcnt = 0;
 	int i = 0;
 	static pid_t ID[100];
@@ -569,6 +570,8 @@ int work() {
 					break; // got the client id
 				}
 			}
+			 if(use_docker && (i==max_running || ID[i]!=0)) error++; else error=0;  // check if docker service is hanged up
+
 		} else {                                             // have free client
 
 			for (i = 0; i < max_running; i++)     // find the client id
@@ -602,6 +605,12 @@ int work() {
 		}
 		if(DEBUG)
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
+                if(use_docker && error>=1024){ // reboot docker
+                        if(DEBUG) printf("---------------------------------------------rebooting docker service--------------------------------------\n");
+                        system("/usr/sbin/service docker restart");
+                        error=0;
+                }
+
 	}
 	int NOHANG=0;
 	if(oj_dedicated && (rand()%100>20) ) NOHANG=WNOHANG;    // CPU 占用大约80%左右，不要打满

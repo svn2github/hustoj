@@ -92,6 +92,7 @@ static char oj_redisauth[BUFFER_SIZE];
 static char oj_redisqname[BUFFER_SIZE];
 static int turbo_mode = 0;
 static int use_docker = 0;
+static char docker_path[BUFFER_SIZE];
 static int internal_client = 1;
 static int oj_dedicated=0;
 
@@ -205,8 +206,9 @@ void init_judge_conf() {
 	sleep_time = 1;
 	oj_tot = 1;
 	oj_mod = 0;
-	strcpy(oj_lang_set, "0,1,2,3");
+	strcpy(oj_lang_set, "0,1,3,6");
 	strcpy(oj_udpserver, "127.0.0.1");
+	strcpy(docker_path, "/usr/bin/docker");
 	fp = fopen("./etc/judge.conf", "r");
 	if (fp != NULL) {
 		while (fgets(buf, BUFFER_SIZE - 1, fp)) {
@@ -244,6 +246,7 @@ void init_judge_conf() {
                         read_int(buf, "OJ_USE_DOCKER", &use_docker);
                         read_int(buf, "OJ_INTERNAL_CLIENT", &internal_client);
 			
+                        read_buf(buf, "OJ_DOCKER_PATH", docker_path);
 
 
 		}
@@ -314,10 +317,10 @@ void run_client(int runid, int clientid) {
 		char docker_v[BUFFER_SIZE*3];
 		sprintf(docker_v,"%s:/home/judge",oj_home);
 		if(internal_client)
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host",
+			execl(docker_path,docker_path, "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host",
 				       	"-v", docker_v, "hustoj", "/usr/bin/judge_client", runidstr, buf, (char *) NULL);
 		else
-			execl("/usr/bin/docker","/usr/bin/docker", "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host", 
+			execl(docker_path,docker_path, "container","run" ,"--pids-limit", "100","--rm","--cap-add","SYS_PTRACE", "--net=host", 
 					"-v", docker_v, "hustoj", "/home/judge/src/core/judge_client/judge_client", runidstr, buf, (char *) NULL);
 	}else{
 		execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
@@ -326,7 +329,10 @@ void run_client(int runid, int clientid) {
 	//else
 	//	execl("/usr/bin/judge_client", "/usr/bin/judge_client", runidstr, buf,
 	//			oj_home, "debug", (char *) NULL);
-
+	if(use_docker){
+	
+		printf("DOCKER IS DOWN!\n");
+	}
 	//exit(0);
 }
 #ifdef _mysql_h
@@ -335,7 +341,7 @@ int executesql(const char * sql) {
 	if (mysql_real_query(conn, sql, strlen(sql))) {
 		if (DEBUG)
 			write_log("%s", mysql_error(conn));
-		sleep(20);
+		sleep(2);
 		conn = NULL;
 		return 1;
 	} else
@@ -431,7 +437,7 @@ int _get_jobs_mysql(int * jobs) {
 	if (mysql_real_query(conn, query, strlen(query))) {
 		if (DEBUG)
 			write_log("%s", mysql_error(conn));
-		sleep(20);
+		sleep(2);
 		return 0;
 	}
 	res = mysql_store_result(conn);
@@ -575,14 +581,16 @@ int work() {
 		} else {                                             // have free client
 
 			for (i = 0; i < max_running; i++)     // find the client id
-				if (ID[i] == 0)
+				if (ID[i] == 0){
 					break;    // got the client id
+				}
 		}
 		if(i<max_running){
 			if (workcnt < max_running && check_out(runid, OJ_CI)) {
 				workcnt++;
 				ID[i] = fork();                                   // start to fork
 				if (ID[i] == 0) {
+
 					if (DEBUG){
 						write_log("Judging solution %d", runid);
 						write_log("<<=sid=%d===clientid=%d==>>\n", runid, i);
@@ -601,19 +609,25 @@ int work() {
 						printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
 						
 				}
+				usleep(5000);
 			}
 		}
 		if(DEBUG)
 			  printf("workcnt:%d max_running:%d ! \n",workcnt,max_running);
-                if(use_docker && error>=1024){ // reboot docker
-                        if(DEBUG) printf("---------------------------------------------rebooting docker service--------------------------------------\n");
-                        system("/usr/sbin/service docker restart");
+                if(use_docker && (error>= max_running*prefetch )){ // reboot docker
+
+                        if(DEBUG) printf("---------------------------------------------restarting--------------------------------------\n");
+                        //system("/usr/sbin/service docker restart");
+#ifdef _mysql_h
+			executesql("update solution set result=1 where result >1 and result <4 ");
+#endif
+			sleep(1);
                         error=0;
                 }
 
 	}
 	int NOHANG=0;
-	if(oj_dedicated && (rand()%100>20) ) NOHANG=WNOHANG;    // CPU 占用大约80%左右，不要打满
+	if(oj_dedicated && (rand()%100>2) ) NOHANG=WNOHANG;    // CPU 占用大约80%左右，不要打满
 	while ((tmp_pid = waitpid(-1, NULL, NOHANG )) > 0) {       // if run dedicated judge using WNOHANG
 		for (i = 0; i < max_running; i++){     // get the client id
 			if (ID[i] == tmp_pid){

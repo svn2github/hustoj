@@ -172,8 +172,6 @@ sed -i "s#interactive_timeout=120#interactive_timeout=20#g" /etc/mysql/mysql.con
 sed -i "s#wait_timeout=120#wait_timeout=20#g" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 /etc/init.d/mysql start
-
-
 mkdir /var/log/hustoj/
 chown www-data -R /var/log/hustoj/
 cd /home/judge/src/install
@@ -183,9 +181,11 @@ if test -f  /.dockerenv ;then
 else
         sed -i 's/ubuntu:20/ubuntu:22/g' Dockerfile 
 	sed -i 's|/usr/include/c++/9|/usr/include/c++/11|g' Dockerfile 
-	bash docker.sh
-	 sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
-	 sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
+	bash podman.sh
+	sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
+	sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
+	sed -i "s/OJ_INTERNAL_CLIENT=1/OJ_INTERNAL_CLIENT=0/g" /home/judge/etc/judge.conf
+	sed -i "s|OJ_DOCKER_PATH=/usr/bin/docker|OJ_DOCKER_PATH=/usr/bin/podman|g" /home/judge/etc/judge.conf
 fi
 clear
 reset

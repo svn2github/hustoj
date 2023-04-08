@@ -205,6 +205,7 @@ function encoded_submit(){
 }
 
 function do_submit(){
+	 $("#Submit").attr("disabled","true");   // mouse has a bad key1
 	if(using_blockly) 
 		 translate();
 	if(typeof(editor) != "undefined"){ 

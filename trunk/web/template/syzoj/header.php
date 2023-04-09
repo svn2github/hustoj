@@ -126,7 +126,7 @@
 <?php if(isset($OJ_BG)&&$OJ_BG!="") echo " background:url($OJ_BG) no-repeat; " ?>
 background-size: 100%">
     <div id="page-header" class="ui fixed borderless menu" style="position: fixed; height: 49px; z-index:99999">
-        <div id="menu" class="ui stackable mobile ui container computer" style="margin-left:calc(10%)!important">
+        <div id="menu" class="ui stackable mobile ui container computer" style="margin-left:auto;margin-right:auto;">
             <a class="header item"  href="/"><span
                     style="font-family: 'Exo 2'; font-size: 1.5em; font-weight: 600; "><?php echo $domain==$DOMAIN?$OJ_NAME:ucwords($OJ_NAME)."'s OJ"?></span></a>
             <a class="desktop-only item <?php if ($url=="") echo "active";?>" href="/"><i class="home icon"></i> <?php echo $MSG_HOME?></a>

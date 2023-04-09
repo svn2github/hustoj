@@ -193,7 +193,7 @@ if (!$OJ_MEMCACHE) {
 
 // 还未开始
 if ($start_time > time()) {
-    $view_errors = "Contest Not Started!";
+    $view_errors = "$MSG_CONTEST $MSG_Contest_Pending!";
     require("template/" . $OJ_TEMPLATE . "/error.php");
     exit(0);
 }

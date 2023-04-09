@@ -113,13 +113,13 @@ if ($rows_cnt>0) {
 
 if (!$OJ_MEMCACHE)
 	if ($start_time==0) {
-		$view_errors = "No Such Contest";
+		$view_errors = "Wrong $MSG_CONTEST id";
 		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	}
 
 if ($start_time>time()) {
-	$view_errors = "Contest Not Started!";
+	$view_errors = "$MSG_CONTEST $MSG_Contest_Pending!";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }

@@ -15,7 +15,7 @@ $sql="SELECT title,end_time FROM `contest` WHERE `contest_id`=? AND `start_time`
 $result=pdo_query($sql,$cid);
 $num=count($result);
 if ($num==0){
-	$view_errors= "Not Started!";
+	$view_errors = "$MSG_CONTEST $MSG_Contest_Pending!";
 	require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }

@@ -181,9 +181,32 @@ else {
 
 		foreach ($result as $row) {
 			$mycontests .= ",".$row[0];
-	  }
+	        }
 
 		$len = mb_strlen($OJ_NAME.'_');
+                                $user_id = $_SESSION[ $OJ_NAME . '_' . 'user_id' ];
+
+                if($user_id){
+                        // 已登录的
+                        $sql = "SELECT * FROM `privilege` WHERE `user_id`=?";
+                        $result = pdo_query( $sql, $user_id );
+
+                        // 刷新各种权限
+                        foreach ( $result as $row ){
+                                if(isset($row[ 'valuestr' ])){
+                                        $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = $row[ 'valuestr' ];
+                                }else {
+                                        $_SESSION[ $OJ_NAME . '_' . $row[ 'rightstr' ] ] = true;
+                                }
+                        }
+                       if(isset($_SESSION[ $OJ_NAME . '_vip' ])) {  // VIP mark can access all [VIP] marked contest
+                                $sql="select contest_id from contest where title like '%[VIP]%'";
+                                $result=pdo_query($sql);
+                                foreach ($result as $row){
+                                        $_SESSION[ $OJ_NAME . '_c' .$row['contest_id'] ] = true;
+                                }
+                        };
+                }
 
 		foreach ($_SESSION as $key => $value) {
 			if (($key[$len]=='m' || $key[$len]=='c') && intval(mb_substr($key,$len+1))>0) {

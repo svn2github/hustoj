@@ -87,7 +87,7 @@
       </center>
       <?php require_once("../include/set_post_key.php");?>
     </form>
-    - Import Problem from unkownOJ - json - zip<br>曾经以为是QDUOJ，但似乎不是，暂留<br>
+    - Import Problem from unkownOJ - json - zip<br>曾经以为是QDUOJ，但似乎不是，谁知道请告诉我<br>
     <form class='form-inline' action='problem_import_unkownoj.php' method=post enctype="multipart/form-data">
       <div class='form-group'>
         <input class='form-control' type=file name=fps>
@@ -99,6 +99,19 @@
       </center>
       <?php require_once("../include/set_post_key.php");?>
     </form>
+    - Import Problem from SYZOJ - zip<br><br>
+    <form class='form-inline' action='problem_import_syzoj.php' method=post enctype="multipart/form-data">
+      <div class='form-group'>
+        <input class='form-control' type=file name=fps>
+      </div>
+      <center>
+      <div class='form-group'>
+        <button class='btn btn-default btn-sm' type=submit>Upload to HUSTOJ</button>
+      </div>
+      </center>
+      <?php require_once("../include/set_post_key.php");?>
+    </form>
+
     - Import Problem from HydroOJ - zip<br><br>
     <form class='form-inline' action='problem_import_hydro.php' method=post enctype="multipart/form-data">
       <div class='form-group'>

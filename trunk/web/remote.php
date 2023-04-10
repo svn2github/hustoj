@@ -2,11 +2,11 @@
      require_once "include/db_info.inc.php";
      require_once "include/init.php";
         $remote_ojs=array(
-                "pku","hdu"
+                "pku","hdu"                                       //使用一本通启蒙设为："bas"  
         );
-		$sites=array(
-			"http://www.poj.org/","http://acm.hdu.edu.cn/"
-		);
+	$sites=array(
+		"http://www.poj.org/","http://acm.hdu.edu.cn/"    // 使用一本通启蒙设为："http://bas.ssoier.cn:8086/about.php"
+	);
 $i=0;
 foreach($remote_ojs as $remote_oj){
 	$file="include/remote_$remote_oj.php";

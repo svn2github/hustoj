@@ -12,6 +12,7 @@ if (isset($OJ_LANG)) {
 }
 
 require_once ("../include/const.inc.php");
+require_once ("../include/curl.php");
 require_once ("../include/problem.php");
 ?>
 
@@ -24,80 +25,9 @@ require_once ("../include/problem.php");
 <br><br>
 
 <?php
-function strip($Node, $TagName) {
-  $len=mb_strlen($TagName);
-  $i=mb_strpos($Node,"<".$TagName.">");
-  $j=mb_strpos($Node,"</".$TagName.">");
-
-  return mb_substr($Node,$i+$len+2,$j-($i+$len+2));
-}
-
-function getAttribute($Node, $TagName,$attribute) {
-  return $Node->children()->$TagName->attributes()->$attribute;
-}
-
-function hasProblem($title) {
-  //return false;	
-  $md5 = md5($title);
-  $sql = "SELECT 1 FROM problem WHERE md5(title)=?";  
-  $result = pdo_query($sql, $md5);
-  $rows_cnt = count($result);		
-  //echo "row->$rows_cnt";			
-  return ($rows_cnt>0);
-}
-
-function mkpta($pid,$prepends,$node) {
-  $language_ext = $GLOBALS['language_ext'];
-  $OJ_DATA = $GLOBALS['OJ_DATA'];
-
-  foreach ($prepends as $prepend) {
-    $language = $prepend->attributes()->language;
-    $lang = getLang($language);
-    $file_ext = $language_ext[$lang];
-    $basedir = "$OJ_DATA/$pid";
-    $file_name = "$basedir/$node.$file_ext";
-    file_put_contents($file_name,$prepend);
-  }
-}
-
 function get_extension($file) {
   $info = pathinfo($file);
   return $info['extension'];
-}
-
-function import_dir($json) {
-  global $OJ_DATA,$OJ_SAE,$OJ_REDIS,$OJ_REDISSERVER,$OJ_REDISPORT,$OJ_REDISQNAME,$domain,$DOMAIN;
-  $qduoj_problem=json_decode($json);
-  echo( $qduoj_problem->{'problem'}->{'title'})."<br>";
-
-    $title = $qduoj_problem->{'problem'}->{'title'};
-
-    $time_limit = floatval($qduoj_problem->{'problem'}->{'timeLimit'});
-    $unit = "ms";
-    //echo $unit;
-
-    if ($unit=='ms')
-      $time_limit /= 1000;
-
-    $memory_limit =  floatval($qduoj_problem->{'problem'}->{'memoryLimit'});
-    $unit = "M";
-
-    if ($unit=='kb')
-      $memory_limit /= 1024;
-
-    $description = $qduoj_problem->{'problem'}->{'description'};
-    $input = $qduoj_problem->{'problem'}->{'input'};
-    $output = $qduoj_problem->{'problem'}->{'output'};
-    $sample_input = strip($qduoj_problem->{'problem'}->{'examples'},"input");
-    $sample_output = strip($qduoj_problem->{'problem'}->{'examples'},"output");
-//    echo $sample_input."<br>";
-//    echo $sample_output;
-    $hint = $qduoj_problem->{'problem'}->{'hint'};
-    $source = $qduoj_problem->{'problem'}->{'source'};				
-    $spj=0;
-    
-    $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
-    return $pid;
 }
 
 
@@ -125,8 +55,11 @@ else {
 			$description="<div class='md'>\n".$file_content."\n</div>";	
 			$title=explode("\n",$file_content)[0];	
 			$title=mb_substr($title,2);
+			$time=getPartByMark($file_content,"时间限制：","ms");			
+			$time=intval($time)/1000;
+			$memory=getPartByMark($file_content,"空间限制：","MiB");			
 			echo "<hr>".htmlentities(" $title $source");
-    			$pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
+    			$pid = addproblem($title,$time,$memory, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
 			echo "PID:$pid";
 			mkdir($OJ_DATA."/$pid");
 			echo ("mv $tempdir/data/* $OJ_DATA/$pid/");

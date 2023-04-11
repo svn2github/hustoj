@@ -95,6 +95,15 @@ function getAttribute($Node, $TagName,$attribute) {
   return $Node->children()->$TagName->attributes()->$attribute;
 }
 
+function hasRemoteProblem($remote_oj,$remote_id) {
+  if($remote_oj=="" || $remote_id=="")return false;	
+  $md5 = md5($title);
+  $sql = "SELECT 1 FROM problem WHERE remote_oj=? and remote_id=?";  
+  $result = pdo_query($sql,$remote_oj,$remote_id);
+  $rows_cnt = count($result);		
+  //echo "row->$rows_cnt";			
+  return ($rows_cnt>0);
+}
 function hasProblem($title) {
   //return false;	
   $md5 = md5($title);
@@ -165,10 +174,12 @@ function import_fps($tempfile) {
     $tpjcode = getValue ($searchNode,'tpj');
     if($tpjcode) $tpjlang=getAttribute($searchNode,'tpj','language');
     $spj = trim($spjcode.$tpjcode)?1:0;
-
-    if (!hasProblem($title)) {
+    if(hasRemoteProblem($remote_oj,$remote_id)){
+   	$sql="update problem set title=?,time_limit=?,memory_limit=?,description=?,input=?,output=?,sample_input=?,sample_output=?,hint=?,source=?,spj=? where remote_oj=? and remote_id=?";
+        pdo_query($sql,$title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj,$remote_oj,$remote_id);	
+    }else if (!hasProblem($title)) {
       $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
-       if($remote_oj!=""){
+      if($remote_oj!=""){
         $sql="update problem set remote_oj=?,remote_id=? where problem_id=?";
         pdo_query($sql,$remote_oj,$remote_id,$pid);
       }
@@ -269,12 +280,12 @@ function import_fps($tempfile) {
 			  $fp = fopen("$basedir/spj.cc","w");
 			  fputs($fp, $spjcode);
 			  fclose($fp);
-			  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+			  //////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
 		  }else{
 			    $fp = fopen("$basedir/spj.c","w");
 			    fputs($fp, $spjcode);
 			    fclose($fp);
-			    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
+			    //////system( " gcc -o $basedir/spj $basedir/spj.c  ");
 
 		  }
 		    if (!file_exists("$basedir/spj")) {
@@ -291,12 +302,12 @@ function import_fps($tempfile) {
 			  $fp = fopen("$basedir/tpj.cc","w");
 			  fputs($fp, $tpjcode);
 			  fclose($fp);
-			  ////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
+			  //////system( " g++ -o $basedir/spj $basedir/spj.cc  ");
 		  }else{
 			    $fp = fopen("$basedir/tpj.c","w");
 			    fputs($fp, $spjcode);
 			    fclose($fp);
-			    ////system( " gcc -o $basedir/spj $basedir/spj.c  ");
+			    //////system( " gcc -o $basedir/spj $basedir/spj.c  ");
 		  }
 	    if (!file_exists("$basedir/tpj")) {
 	      echo "you need to compile $basedir/tpj.cc for tpj[  g++ -o $basedir/tpj $basedir/tpj.cc   ]<br> and rejudge $pid";

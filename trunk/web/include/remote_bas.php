@@ -204,7 +204,7 @@ function do_result($remote_site,$remote_user,$remote_pass){
 // 判题API由一本通系列OJ开发维护者文仲友老师提供，使用时请遵守基本的互联网礼仪，若出现访问频率过快，提交恶意程序，可能会禁用相关测试账号，敬请谅解。
 $remote_oj="bas";
 $remote_site="http://www.ssoier.cn:18087/pubtest/";
-$remote_user='用户名';   //测试期到2024-8-1结束
+$remote_user='用户名';    //测试期到2024-8-1结束，一个机构一个账号，请勿外借。
 $remote_pass='密码';      //账号、密码加群23361372，找群主登记： 学校或机构	email	手机  后可以申请。
 $remote_cookie=$OJ_DATA.'/'.get_domain($remote_site).'.cookie';
 $remote_delay=1;

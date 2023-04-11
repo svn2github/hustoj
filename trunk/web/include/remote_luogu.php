@@ -230,8 +230,8 @@ if(isset($_POST[$OJ_NAME.'_refer'])){
 	unset($_SESSION[$OJ_NAME.'_refer']);
 }else{
 	if(time()-fileatime($remote_cookie.".sub")>$remote_delay){
-		do_submit($remote_site,$remote_user);
 		touch($remote_cookie.".sub");
+		do_submit($remote_site,$remote_user);	
 	}
  
 	//echo (htmlentities(curl_get($remote_site."/login0.php")));
@@ -246,8 +246,8 @@ if(isset($_POST[$OJ_NAME.'_refer'])){
 	}
 }
 if(time()-fileatime(__FILE__)>$remote_delay){
-	do_result($remote_site);
 	touch(__FILE__);
+	do_result($remote_site);
 }
 if(isset($_GET['check'])){
 	// $remote_delay*=2;

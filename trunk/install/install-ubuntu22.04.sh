@@ -131,7 +131,7 @@ sed -i "s/post_max_size = 8M/post_max_size = 180M/g" /etc/php/$PHP_VER/fpm/php.i
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 180M/g" /etc/php/$PHP_VER/fpm/php.ini
 WWW_CONF=$(find /etc/php -name www.conf)
 sed -i 's/;request_terminate_timeout = 0/request_terminate_timeout = 128/g' "$WWW_CONF"
-sed -i 's/pm.max_children = 5/pm.max_children = 200/g' "$WWW_CONF"
+sed -i 's/pm.max_children = 5/pm.max_children = 500/g' "$WWW_CONF"
  
 COMPENSATION=$(grep 'mips' /proc/cpuinfo|head -1|awk -F: '{printf("%.2f",$2/3000)}')
 sed -i "s/OJ_CPU_COMPENSATION=1.0/OJ_CPU_COMPENSATION=$COMPENSATION/g" etc/judge.conf

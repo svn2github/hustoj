@@ -189,8 +189,8 @@ if(isset($_POST[$OJ_NAME.'_refer'])){
 	}
 }
 if(time()-fileatime(__FILE__)>$remote_delay){
-	do_result($remote_site);
 	touch(__FILE__);
+	do_result($remote_site);
 }
 if(isset($_GET['check'])){
 	$remote_delay*=2;

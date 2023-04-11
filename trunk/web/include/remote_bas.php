@@ -90,7 +90,7 @@ function do_submit($remote_site,$remote_user,$remote_pass){
 			break;
 		}
 		//50ms once
-		usleep(50000);
+		usleep(150000);
 	}
 }
 function getResult($short){
@@ -196,7 +196,7 @@ function do_result($remote_site,$remote_user,$remote_pass){
 			echo "error code:".$ret;
 			break;
 		}else{
-			usleep(50000);
+			usleep(150000);
 		}
 	}
 }

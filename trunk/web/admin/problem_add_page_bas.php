@@ -22,7 +22,7 @@ function getPartByMark($html,$mark1,$mark2){
    $i=mb_strpos($html,$mark1);
    $j=mb_strpos($html,$mark2,$i+mb_strlen($mark1)+1);
   $descriptionHTML=mb_substr($html,$i+ mb_strlen($mark1),$j-($i+ mb_strlen($mark1)));
-  
+  $descriptionHTML=str_replace("\\n","<br>",$descriptionHTML);
    return stripslashes($descriptionHTML);
 }
   $url=$_POST ['url'];

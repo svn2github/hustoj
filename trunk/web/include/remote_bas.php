@@ -192,7 +192,12 @@ function do_result($remote_site,$remote_user,$remote_pass){
 		$rid=$row['remote_id'];
 		echo "$sid=>$rid";
 		$ret=do_result_one($remote_site,$remote_user,$remote_pass,$sid,$rid);
-		if($ret<0) echo "error code:".$ret;
+		if($ret<0) {
+			echo "error code:".$ret;
+			break;
+		}else{
+			usleep(50000);
+		}
 	}
 }
 // 本组件由一本通系列教材作者董永建老师委托开发，以GPL v2形式开源，参考本组件的代码进行二次开发，请注意遵守开源协议。

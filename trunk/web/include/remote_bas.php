@@ -228,8 +228,8 @@ if(isset($_POST['vcode'])){
 	}
 }
 if(time()-fileatime(__FILE__)>$remote_delay){
-	do_result($remote_site,$remote_user,$remote_pass);
 	touch(__FILE__);
+	do_result($remote_site,$remote_user,$remote_pass);
 }
 if(isset($_GET['check'])){
 	$remote_delay*=2;

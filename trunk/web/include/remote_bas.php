@@ -214,8 +214,8 @@ if(isset($_POST['vcode'])){
 	unset($_SESSION[$OJ_NAME.'_refer']);
 }else{
 	if(time()-fileatime($remote_cookie.".sub")>$remote_delay){
-		do_submit($remote_site,$remote_user,$remote_pass);
 		touch($remote_cookie.".sub");
+		do_submit($remote_site,$remote_user,$remote_pass);	
 	}
 	//echo (htmlentities(curl_get($remote_site."/login0.php")));
 	if ( false && !is_login($remote_site)){

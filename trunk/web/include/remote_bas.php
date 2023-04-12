@@ -125,7 +125,7 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	$memory=0;
 	echo "<br>==".htmlentities($html)."==";
 	if($data[2]=="Waiting"){
-		$sql="update solution set result=17 judgetime=now()  where solution_id=?";
+		$sql="update solution set result=17,judgetime=now()  where solution_id=?";
 		pdo_query($sql,$sid);
 		return -1;
 	}else if($data[2]=="Compile Error"){

@@ -100,7 +100,7 @@ chown -R root:root src/web/.svn
 chmod 750 -R src/web/.svn
 
 chown www-data:www-data src/web/upload
-chown www-data:www-data data
+chown www-data:judge data
 chmod 750 -R data
 if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;

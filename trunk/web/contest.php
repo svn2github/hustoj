@@ -209,8 +209,8 @@ else {
                 }
 
 		foreach ($_SESSION as $key => $value) {
-			if (($key[$len]=='m' || $key[$len]=='c') && intval(mb_substr($key,$len+1))>0) {
-				//echo substr($key,1)."<br>";
+			if ((mb_substr($key,$len,1)=='m' || mb_substr($key,$len,1)=='c') && intval(mb_substr($key,$len+1))>0) {
+                         	//echo substr($key,1)."<br>";
 				$mycontests .= ",".intval(mb_substr($key,$len+1));
 			}
 		}

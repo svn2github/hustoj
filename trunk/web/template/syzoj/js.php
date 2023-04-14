@@ -23,9 +23,9 @@ or
 -->
 <script>
 $(document).ready(function(){
-  var msg="<marquee style='margin-top:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
+  var msg="<marquee style='margin-top:-10px;margin-bottom:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+
       " onMouseOut='this.start()' class=toprow>"+<?php echo json_encode($view_marquee_msg); ?>+"</marquee>";
-  $(".jumbotron").prepend(msg);
+  $("#main").prepend(msg);
   $("form").append("<div id='csrf' />");
   $("#csrf").load("<?php echo $path_fix?>csrf.php");
   let left=window.innerWidth-parseInt($("#menu").css("width")) - 100;

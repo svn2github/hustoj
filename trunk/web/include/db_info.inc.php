@@ -39,7 +39,7 @@ static  $OJ_MEMPORT=11211;
 static  $OJ_UDP=true;   //使用UDP通知
 static  $OJ_UDPSERVER="127.0.0.1";    // 多个判题机可用逗号分隔，有非标端口可以用冒号 如 $OJ_UDPSERVER="192.168.0.1,192.168.0.2,192.168.0.3:1537"; 
 static  $OJ_UDPPORT=1536;
-static  $OJ_JUDGE_HUB_PATH="../judge";  // UDO发给给JudgeHub的子路径
+static  $OJ_JUDGE_HUB_PATH="../judge";  // UDP 发给给JudgeHub的子路径
 static  $OJ_REDIS=false;   //使用REDIS队列
 static  $OJ_REDISSERVER="127.0.0.1";
 static  $OJ_REDISPORT=6379;

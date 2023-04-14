@@ -1,6 +1,6 @@
 <?php
   $show_title="$MSG_ERROR_INFO - $OJ_NAME";
-  include(dirname(__FILE__)."/header.php");
+  if(isset($OJ_MEMCACHE)) include(dirname(__FILE__)."/header.php");
 ?>
 <div class="ui negative icon message">
   <i class="remove icon"></i>

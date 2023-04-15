@@ -112,9 +112,17 @@ function getResult($short){
 		"Output Limit Exceeded" => 9,
 		"System Error" => 10,
 		"Validator Error" => 10,
+		"Compiling" => 17,
 	
 	);
-	return $map[$short];
+	if(isset($map[$short])){
+                return $map[$short];
+        }else if(mb_strpos($short,"Error")>0){
+                return 10;
+        }else{
+                return 17;
+        }
+
 }
 function do_result_one($remote_site,$sid,$rid){
 	$html=curl_get($remote_site."/showsource?solution_id=".$rid);

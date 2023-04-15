@@ -101,6 +101,7 @@ function getResult($short){
 	//echo "short:$short<br>";
 	$map=array(
 		"Accepted" => 4,
+		"Runtime Error" => 10,
 		"Runtime Error<br>(ACCESS_VIOLATION)" => 10,
 		"Compilation Error" => 11,
 		"Wrong Answer" => 6,
@@ -111,7 +112,10 @@ function getResult($short){
 		"System Error" => 10,
 		"Validator Error" => 10,
 	);
-	return $map[$short];
+	if(isset($map[$short]))
+		return $map[$short];
+	else
+		return 10;
 }
 function do_result_one($remote_site,$sid,$rid){
 	$html=curl_get($remote_site."/status.php?first=".$rid);

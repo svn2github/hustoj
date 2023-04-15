@@ -160,6 +160,8 @@ $view_errors.="
         </form></div>
 
 ";
+require( "template/" . $OJ_TEMPLATE . "/css.php" );
+require( "template/" . $OJ_TEMPLATE . "/js.php" );
 require( "template/" . $OJ_TEMPLATE . "/error.php" );
 /////////////////////////Common foot
 ?>

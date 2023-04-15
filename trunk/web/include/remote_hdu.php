@@ -89,9 +89,11 @@ function do_submit($remote_site,$remote_user){
 		if($rid>0){
 			$sql="update solution set remote_oj=?,remote_id=?,result=17 where solution_id=?";
 			pdo_query($sql,$remote_oj,$rid,$sid);
+		}else{
+			//40s once
+			break;
 		}
-		//40s once
-		break;
+		usleep(150000);
 	}
 
 }
@@ -162,7 +164,13 @@ function do_result($remote_site){
 		$sid=$row['solution_id'];
 		$rid=$row['remote_id'];
 	//	echo "$sid=>$rid";
-		do_result_one($remote_site,$sid,$rid);
+		$ret=do_result_one($remote_site,$sid,$rid);
+		if($ret<0) {
+			echo "error code:".$ret;
+			break;
+		}else{
+			usleep(150000);
+		}
 	}
 
 }

@@ -98,25 +98,30 @@ function do_submit($remote_site,$remote_user){
 
 }
 function getResult($short){
-	//echo "short:$short<br>";
-	$map=array(
-		"Accepted" => 4,
-		"Runtime Error" => 10,
-		"Runtime Error<br>(ACCESS_VIOLATION)" => 10,
-		"Compilation Error" => 11,
-		"Wrong Answer" => 6,
-		"Presentation Error" => 5,
-		"Time Limit Exceeded" => 7,
-		"Memory Limit Exceeded" => 8,
-		"Output Limit Exceeded" => 9,
-		"System Error" => 10,
-		"Validator Error" => 10,
-	);
-	if(isset($map[$short]))
-		return $map[$short];
-	else
-		return 10;
+        //echo "short:$short<br>";
+        $map=array(
+                "Queuing" => 17,
+                "Accepted" => 4,
+                "Runtime Error" => 10,
+                "Runtime Error<br>(ACCESS_VIOLATION)" => 10,
+                "Compilation Error" => 11,
+                "Wrong Answer" => 6,
+                "Presentation Error" => 5,
+                "Time Limit Exceeded" => 7,
+                "Memory Limit Exceeded" => 8,
+                "Output Limit Exceeded" => 9,
+                "System Error" => 10,
+                "Validator Error" => 10,
+        );
+        if(isset($map[$short])){
+                return $map[$short];
+        }else if(mb_strpos($short,"Error")>0){
+                return 10;
+        }else{
+                return 17;
+        }
 }
+
 function do_result_one($remote_site,$sid,$rid){
 	$html=curl_get($remote_site."/status.php?first=".$rid);
 	$data=getPartByMark($html,"</center></form></td></tr>","</tr>");

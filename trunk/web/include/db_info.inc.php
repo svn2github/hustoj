@@ -19,11 +19,11 @@ static  $OJ_ONLINE=false;  //是否记录在线情况
 static  $OJ_LANG="en";  //默认语言
 static  $OJ_SIM=false;  //显示相似度，注意只是显示，启动检测的开关在judge.conf，且自己抄自己不计为抄袭
 static  $OJ_DICT=false; //显示在线翻译
-static  $OJ_LANGMASK=4194224; //TIOBE index top 10, calculator :   https://pigeon-developer.github.io/hustoj-langmask/   -524288 to get matlab(octave)
+static  $OJ_LANGMASK=4194224; //掩码计算器:https://pigeon-developer.github.io/hustoj-langmask/
 static  $OJ_ACE_EDITOR=true;  // 是否启用有高亮提示的提交代码输入框
-static  $OJ_AUTO_SHARE=false; //true: One can view all AC submit if he/she has ACed it once.
-static  $OJ_CSS="white.css";  // bing.css kawai.css black.css blue.css green.css hznu.css
-static  $OJ_SAE=false; //using sina application engine
+static  $OJ_AUTO_SHARE=false; //true: 设为true则通过的题目可在统计页查看其他人代码.
+static  $OJ_CSS="white.css";  // bing.css | kawai.css | black.css | blue.css | green.css | hznu.css
+static  $OJ_SAE=false; //使用新浪引擎
 static  $OJ_VCODE=false;  //验证码
 static 	$OJ_REG_SPEED=0 ; //限制每小时同ip注册个数，0不限制
 static  $OJ_APPENDCODE=true;  // 代码预定模板
@@ -32,7 +32,7 @@ if (!$OJ_APPENDCODE) 	ini_set("session.cookie_httponly", 1);   // APPENDCODE模�
 static  $OJ_CE_PENALTY=false;  // 编译错误是否罚时
 static  $OJ_PRINTER=false;  //启用打印服务
 static  $OJ_MAIL=false; //内邮
-static  $OJ_MARK="mark"; // "mark" for right "percent" for WA
+static  $OJ_MARK="mark"; // "mark" 显示正确得分， "percent" 显示错误比率
 static  $OJ_MEMCACHE=false;  //使用内存缓存
 static  $OJ_MEMSERVER="127.0.0.1";
 static  $OJ_MEMPORT=11211;
@@ -44,11 +44,11 @@ static  $OJ_REDIS=false;   //使用REDIS队列
 static  $OJ_REDISSERVER="127.0.0.1";
 static  $OJ_REDISPORT=6379;
 static  $OJ_REDISQNAME="hustoj";
-static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";
-static  $OJ_CDN_URL="";  //  http://cdn.hustoj.com/  https://raw.githubusercontent.com/zhblue/hustoj/master/trunk/web/ 
+static  $SAE_STORAGE_ROOT="http://hustoj-web.stor.sinaapp.com/";  //新浪云存储引擎
+static  $OJ_CDN_URL="";  // 如果服务器带宽较小，可选用他人同版本的OJ作为静态资源来源 http://cdn.hustoj.com/ 
 static  $OJ_TEMPLATE="syzoj"; //使用的默认模板,template目录下的每个子目录都是一个模板, [bs3 mdui sweet syzoj mario bshark] work with discuss3
 static 	$OJ_BG="";  //双引号里面填写背景图片的url，默认不写为默认白色
-static  $OJ_LOGIN_MOD="hustoj";
+static  $OJ_LOGIN_MOD="hustoj"; //需要在include目录下配置login-xxxx.php来调用其他登录模块。
 static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
 static  $OJ_NEED_LOGIN=false; //需要登录才能访问
@@ -88,11 +88,10 @@ static  $OJ_NO_CONTEST_WATCHER=false ; //是否禁止无权限用户观战私有
 /* share code */
 static  $OJ_SHARE_CODE=false; // 代码分享功能
 /* recent contest */
-static  $OJ_RECENT_CONTEST=true; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
+static  $OJ_RECENT_CONTEST=false; // "http://algcontest.rainng.com/contests.json" ; // 名校联赛
 
-//$OJ_ON_SITE_TEAM_TOTAL用于根据比例的计算奖牌的队伍总数
-//0表示根据榜单上的出现的队伍总数计算，不计打星队伍
-static $OJ_ON_SITE_TEAM_TOTAL=0;
+
+static $OJ_ON_SITE_TEAM_TOTAL=0;  //用于根据比例的计算奖牌的队伍总数，0表示根据榜单上的出现的队伍总数计算，不计打星队伍
 
 static $OJ_OPENID_PWD='8a367fe87b1e406ea8e94d7d508dcf01';
 

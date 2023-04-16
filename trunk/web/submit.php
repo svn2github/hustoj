@@ -334,9 +334,7 @@ if (~$OJ_LANGMASK&(1<<$language)) {
     }
   }
 
-  $sql = "UPDATE solution SET result=0 WHERE solution_id=?";
-  pdo_query($sql, $insert_id);
-	
+
  ////remote oj
   $result=0;
   $sql="select remote_oj from problem where problem_id=?";
@@ -345,10 +343,29 @@ if (~$OJ_LANGMASK&(1<<$language)) {
           $remote_oj=$remote_oj[0][0];
           if($remote_oj!=""){
                 $result=16;
-                $sql="update solution set result=16,remote_oj=? where solution_id=?";
-                pdo_query($sql,$remote_oj,$insert_id);
           }
   }
+  
+  ////poison robot account,give system resources to the REAL people
+  if(isset($OJ_POISON_BOT_COUNT) && $OJ_POISON_BOT_COUNT >0 &&
+          !(isset($_SESSION[$OJ_NAME."_administrator"])||
+            isset($_SESSION[$OJ_NAME."_source_browser"])||
+            isset($_SESSION[$OJ_NAME."_contest_creator"])||
+            isset($_SESSION[$OJ_NAME."_problem_editor"])
+           )
+    ){
+        $sql="select count(1) from solution where user_id=? and result=4 and problem_id=?";
+        $count=pdo_query($sql,$user_id,$id);
+        if($count) $count=$count[0][0];
+        if($count>=$OJ_POISON_BOT_COUNT){
+                $result=rand(4,11);
+                $memory=rand(100,2000);
+                $time=rand(100,2000);
+                $sql="update solution set memory=?,time=? where solution_id=?";
+                pdo_query($sql,$memory,$time,$insert_id);
+        }
+  }
+
   $sql = "UPDATE solution SET result=? WHERE solution_id=?";
   pdo_query($sql,$result,$insert_id);
 

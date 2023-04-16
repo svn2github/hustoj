@@ -360,7 +360,7 @@ if (~$OJ_LANGMASK&(1<<$language)) {
         $count=pdo_query($sql,$user_id,$id);
         if($count) $count=$count[0][0];
         if($count>=$OJ_POISON_BOT_COUNT){
-                $result=rand(4,11);
+                $result=rand(5,11);
                 $memory=rand(100,2000);
                 $time=rand(100,2000);
                 $sql="update solution set memory=?,time=? where solution_id=?";

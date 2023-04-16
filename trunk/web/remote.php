@@ -5,14 +5,16 @@
                 "pku","hdu"                                       //使用一本通启蒙设为："bas"  
         );
 	$sites=array(
-		"http://www.poj.org/","http://acm.hdu.edu.cn/"    // 使用一本通启蒙设为："http://bas.ssoier.cn:8086/about.php"
+		"pku" => "http://www.poj.org/",
+		"hdu" => "http://acm.hdu.edu.cn/",
+		"bas" => "http://bas.ssoier.cn:8086/about.php"
 	);
 $i=0;
 foreach($remote_ojs as $remote_oj){
 	$file="include/remote_$remote_oj.php";
     if(file_exists($file)){
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $sites[$i]);
+		curl_setopt($ch, CURLOPT_URL, $sites[$remote_oj]);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_exec($ch);  

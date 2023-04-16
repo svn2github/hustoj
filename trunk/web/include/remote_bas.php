@@ -28,8 +28,8 @@ function do_submit_one($remote_site,$username,$password,$sid){
 	$langMap= array(
     		0 => 7, //C
     		1 => 7, //C++
-		3 => 3, //Java
-		2 => 4, //Pascal
+//		3 => 3, //Java
+//		2 => 4, //Pascal
 		6 => 5  //Python
 	);
 	$problem_id=3001;
@@ -40,7 +40,7 @@ function do_submit_one($remote_site,$username,$password,$sid){
  	$data=pdo_query($sql,$sid);	
 	if(count($data)>0){
 		$row=$data[0];
-	        $language=$langMap[ $row['language']];
+	        if(isset($langMap[ $row['language']])) $language=$langMap[ $row['language']];
 	        $problem_id=$row['problem_id'];
 		$sql="select remote_oj,remote_id from problem where problem_id=?";
 		$data=pdo_query($sql,$problem_id);

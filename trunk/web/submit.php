@@ -343,6 +343,8 @@ if (~$OJ_LANGMASK&(1<<$language)) {
           $remote_oj=$remote_oj[0][0];
           if($remote_oj!=""){
                 $result=16;
+                $sql="update solution set result=16,remote_oj=? where solution_id=?";
+                pdo_query($sql,$remote_oj,$insert_id);
           }
   }
   

@@ -105,3 +105,15 @@ switch($OJ_FRIENDLY_LEVEL) {
 // if using EXAM or ON site auto turn off free practice
 if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTICE=false;
 
+// if OJ_BG==bing ,using bing.com for hourly change background
+if(isset($OJ_BG)&&$OJ_BG=="bing"){
+   $bg_file=dirname(dirname(__FILE__))."/image/bg.url";
+   if(time()-fileatime($bg_file)>3600){
+           require_once(dirname(__FILE__)."/curl.php");
+           $data=curl_get("https://cn.bing.com");
+           $OJ_BG=getPartByMark($data,"<link rel=\"preload\" href=\"","\" as=\"image\" id=\"preloadBg\"");
+           if($OJ_BG)file_put_contents($bg_file,$OJ_BG);
+   }else{
+           $OJ_BG=file_get_contents($bg_file);
+   }
+}

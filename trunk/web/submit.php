@@ -1,6 +1,7 @@
 <?php session_start();
 require_once "include/db_info.inc.php";
 require_once "include/my_func.inc.php";
+require_once "include/email.class.php";
 
 if(isset($OJ_CSRF) && $OJ_CSRF && $OJ_TEMPLATE=="bs3" && !isset($_SESSION[$OJ_NAME.'_'.'http_judge']))
   require_once(dirname(__FILE__)."/include/csrf_check.php");
@@ -365,6 +366,9 @@ if (~$OJ_LANGMASK&(1<<$language)) {
                 $time=rand(100,2000);
                 $sql="update solution set memory=?,time=? where solution_id=?";
                 pdo_query($sql,$memory,$time,$insert_id);
+                if( $OJ_ADMIN != "root@localhost" ){
+                         email($OJ_ADMIN,$MSG_SYS_WARN,"$DOMAIN $MSG_USER $user_id $MSG_IS_ROBOT");
+                }
         }
         /*   //prepare system ready for even worse robots
         if($count>=$OJ_POISON_BOT_COUNT*2){

@@ -417,4 +417,6 @@
  //sourcecompare.php
  $MSG_Source_Compare = " сравнение исходного кода ";
  $MSG_BACK = " Вернуться на предыдущую страницу ";
-?>
+ 	//email
+	$MSG_SYS_WARN="System Warning!";
+	$MSG_IS_ROBOT="could be a robot , verify and disable it !";

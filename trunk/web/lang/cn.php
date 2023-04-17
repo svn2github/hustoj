@@ -428,4 +428,7 @@
   // sourcecompare.php
   $MSG_Source_Compare="源代码对比";
   $MSG_BACK="返回上一页";
-?>
+  
+  //email
+  $MSG_SYS_WARN="系统警告！";
+  $MSG_IS_ROBOT="疑似机器人，注意封禁！";

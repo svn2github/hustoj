@@ -432,5 +432,3 @@
   //email
   $MSG_SYS_WARN="系统警告！";
   $MSG_IS_ROBOT="疑似机器人，注意封禁！";
-
-?>

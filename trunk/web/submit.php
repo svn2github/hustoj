@@ -366,6 +366,26 @@ if (~$OJ_LANGMASK&(1<<$language)) {
                 $sql="update solution set memory=?,time=? where solution_id=?";
                 pdo_query($sql,$memory,$time,$insert_id);
         }
+        /*   //prepare system ready for even worse robots
+        if($count>=$OJ_POISON_BOT_COUNT*2){
+                $sql="update users set defunct='Y' where user_id=?";
+                pdo_query($sql,$_SESSION[$OJ_NAME."_user_id"]);
+                $sql="select ip from users where user_id=? ";
+                $ip=pdo_query($sql,$_SESSION[$OJ_NAME."_user_id"]);
+                if(count($ip)>0){
+                        $ip=$ip[0][0];
+                        if($ip!="" && $ip!="127.0.0.1"){
+                                $sql="update users set defunct='Y' where ip=?";
+                                pdo_query($sql,$ip);
+                        }
+                }
+                unset($_SESSION[$OJ_NAME.'_'.'user_id']);
+                setcookie($OJ_NAME."_user","");
+                setcookie($OJ_NAME."_check","");
+                session_destroy();
+                header("Location:index.php");
+        }
+        */
   }
 
   $sql = "UPDATE solution SET result=? WHERE solution_id=?";

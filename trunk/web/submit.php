@@ -367,9 +367,8 @@ if (~$OJ_LANGMASK&(1<<$language)) {
                 $sql="update solution set memory=?,time=? where solution_id=?";
                 pdo_query($sql,$memory,$time,$insert_id);
                 if( $OJ_ADMIN != "root@localhost" ){
-                        email($OJ_ADMIN,"系统警告 "," $DOMAIN 用户 $user_id 可能是机器人账号，注意封禁！");
+                         email($OJ_ADMIN,$MSG_SYS_WARN,"$DOMAIN $MSG_USER $user_id $MSG_IS_ROBOT");
                 }
-
         }
         /*   //prepare system ready for even worse robots
         if($count>=$OJ_POISON_BOT_COUNT*2){

@@ -396,4 +396,6 @@
 	// sourcecompare.php
 	$MSG_Source_Compare="Source Code Comparation";
 	$MSG_BACK="Return to Last Page";
- ?>
+ 	//email
+	$MSG_SYS_WARN="System Warning!";
+	$MSG_IS_ROBOT="could be a robot , verify and disable it !";

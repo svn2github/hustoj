@@ -86,6 +86,11 @@ if(  ($ok && $OJ_FRIENDLY_LEVEL>2) ||
   else if(strpos($row['error'],"PASS")!==false) $view_reinfo =  "error3";
   else if($OJ_SHOW_DIFF && $row && ($ok||$isRE) && ($OJ_TEST_RUN||is_valid($row['error'])||$ok)){ 
     $view_reinfo = htmlentities(str_replace("\n\r","\n",$row['error']),ENT_QUOTES,"UTF-8");
+    $sql="select pass_rate*100 from solution where solution_id=?";
+    $result = pdo_query($sql,$id);
+    if(count($result)>0) $mark=$result[0][0];
+    $view_reinfo .="<br>$MSG_MARK : $mark";
+
   }
   else{
     $view_errors = $MSG_WARNING_ACCESS_DENIED;

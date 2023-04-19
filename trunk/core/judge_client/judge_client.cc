@@ -1641,7 +1641,7 @@ void get_solution(int solution_id, char *work_dir, int lang)
 		_get_solution_mysql(solution_id, work_dir, lang);
 #endif
 	}
-	if(lang == 6 ){    // 从源码中搜索python2字样，失败的结果非零默认python3,成功的结果为0是python2
+	if(lang == LANG_PYTHON ){    // 从源码中搜索python2字样，失败的结果非零默认python3,成功的结果为0是python2
 		py2 = execute_cmd("/bin/grep 'python2' %s/Main.py > /dev/null", work_dir);
                 execute_cmd("sed -i 's/import.*os//g' %s/%s", work_dir, src_pth);
 	}
@@ -3158,7 +3158,6 @@ int get_sim(int solution_id, int lang, int pid, int &sim_s_id)
         if (!sim){
                 if(pf){
                         execute_cmd("/bin/mkdir ../data/%d/ac/ 2>/dev/null", pid);
-
                 execute_cmd("/bin/cp %s ../data/%d/ac/%d.%s 2>/dev/null", src_pth, pid, solution_id,
                                         lang_ext[lang]);
                 //c cpp will
@@ -3299,6 +3298,16 @@ int mark_of_name(const char * name){
 	}else{
 		return 10;
 	}
+}
+
+int same_subtask(char * last,char * cur){
+    int i=0;
+    for(i=0;last[i]!='.' && cur[i]!='.';i++){
+    	if (last[i]!=cur[i]){
+		break;
+	}
+    }	
+    return last[i]==cur[i];
 }
 int main(int argc, char **argv)
 {
@@ -3556,7 +3565,8 @@ int main(int argc, char **argv)
 		finalACflg = OJ_RE;
 		
 	}
-
+	char last_name[BUFFER_SIZE];
+	int minus_mark=0;
 	for (int i=0 ; (oi_mode || ACflg == OJ_AC || ACflg == OJ_PE) && i < namelist_len ;i++)
 	{
 		dirp=namelist[i];
@@ -3634,6 +3644,20 @@ int main(int argc, char **argv)
 			{
 				++pass_rate;
 				get_mark+=mark;
+				if(same_subtask(last_name,dirp->d_name)){ //相同子任务
+					if(minus_mark >=0 ){              //本子任务未曾失败
+						minus_mark+=mark;         //累计任务内积分
+					}else{
+						get_mark-=mark;           //任务已经失败，扣除本次得分
+					}
+				}else{
+					minus_mark=mark;                 //跨越任务，积分重新累计
+				}
+			}else{
+				if(same_subtask(last_name,dirp->d_name)){ //相同子任务，初次失败
+					if(minus_mark>=0) get_mark-=minus_mark;  //扣除任务内积分
+				}
+				minus_mark= -1 ;                          //当前任务失败，标记
 			}
 			if (finalACflg < ACflg)
 			{
@@ -3646,6 +3670,7 @@ int main(int argc, char **argv)
 		if (!http_judge)
                          check_mysql_conn();
 #endif
+		strcpy(last_name,dirp->d_name);
 
 	}
 	if (ACflg == OJ_AC && PEflg == OJ_PE)

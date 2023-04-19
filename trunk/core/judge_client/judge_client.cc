@@ -3575,7 +3575,7 @@ int main(int argc, char **argv)
 		{
 			//out file does not exist
 			char error[BUFFER_SIZE];
-			sprintf(error, "missing out file %s, report to system administrator!\n", outfile);
+			sprintf(error, "missing out file %s, report to system administrator!\n", basename(outfile));
 			print_runtimeerror(infile+strlen(oj_home)+5,error);
 			ACflg = OJ_RE;
 		}

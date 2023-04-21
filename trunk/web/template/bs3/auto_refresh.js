@@ -5,7 +5,8 @@ function auto_refresh() {
         interval *=2 ;
         var tb = window.document.getElementById('result-tab');
         var rows = tb.rows;
-        for (var i=rows.length-1; i>0; i--) {
+        var i=rows.length-1;
+        for (; i>0; i--) {
                 var result = $(rows[i].cells[4].children[0]).attr("result");
                 result=$(rows[i].cells[4]).find("span").attr("result");
                 rows[i].cells[4].className = "td_result";

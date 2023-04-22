@@ -5,7 +5,7 @@
                 "pku","hdu"                                       //使用一本通启蒙设为："bas"  
         );
 	$sites=array(
-		"pku" => "http://www.poj.org/",
+		"pku" => "http://poj.org/",
 		"hdu" => "http://acm.hdu.edu.cn/",
 		"bas" => "http://bas.ssoier.cn:8086/about.php"
 	);
@@ -22,7 +22,13 @@ foreach($remote_ojs as $remote_oj){
 		curl_close($ch);
 		if ($curl_code == 200){
 			echo "<iframe src='$file?check' ></iframe>";
-		}
+		}else{
+                        echo "$remote_oj error code:".$curl_code;
+
+                }
+    }else{
+        echo "no file:".$file;
     }
+
 	$i++;
 }

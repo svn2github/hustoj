@@ -21,6 +21,7 @@ or
 </script>
 
 -->
+<script src="<?php echo $OJ_CDN_URL.$path_fix."template/bs3/"?>bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
   var msg="<marquee style='margin-top:-10px;margin-bottom:10px' id=broadcast direction='left' scrollamount=3 scrolldelay=50 onMouseOver='this.stop()'"+

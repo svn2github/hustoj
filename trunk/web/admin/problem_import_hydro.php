@@ -126,7 +126,7 @@ else {
 			$title=$hydrop['title'];	
 			$source=implode(" ",$hydrop['tag']);	
 			echo "<hr>".htmlentities($file_name." $title $source");
-		}else if(basename($file_name)=="problem_zh.md"){
+		}else if(basename($file_name)=="problem_zh.md"||basename($file_name)=="problem.md"){
 			$description="<div class='md'>".$file_content."</div>";	
 			//echo htmlentities("$description");
     			$pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);

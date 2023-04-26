@@ -54,6 +54,9 @@ function do_submit_one($remote_site,$username,$password,$sid){
 	if(count($data)>0){
 		$row=$data[0];
 		$source=$row['source'];
+		if(strlen($source)>20000){
+                          $source=substr($source,0,19999);
+                }
 	}
 	$form=array(
 		'user_id' => $username,

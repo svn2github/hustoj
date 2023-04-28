@@ -463,7 +463,7 @@ if (isset($cid)) {
   $statusURI .= "&cid=$cid&fixed=";
 }
 
-if (!$test_run) {
+if (!$test_run&&!isset($_GET['ajax'])) {
   header("Location: $statusURI");
 }
 else {

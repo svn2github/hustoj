@@ -132,8 +132,8 @@ include_once("kindeditor.php") ;
 
       $sample_input = $_POST['sample_input'];
       $sample_output = $_POST['sample_output'];
-      if ($sample_input=="") $sample_input="\n";
-      if ($sample_output=="") $sample_output="\n";
+      //if ($sample_input=="") $sample_input="\n";
+      //if ($sample_output=="") $sample_output="\n";
 
       $hint = $_POST['hint'];
      // $hint = str_replace("<p>", "", $hint);

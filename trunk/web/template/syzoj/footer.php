@@ -30,6 +30,7 @@
          <!--   <div> Running on <a href='https://debian.org' target='_blank'>Debian11</a> / <a href='https://www.loongson.cn' target='_blank'>Loongson 3A3000</a> </div> -->
             <?php if ($OJ_BEIAN) { ?>
             <div>
+            <img src="image/icp.png">
                 <a href="https://beian.miit.gov.cn/" style="text-decoration: none; color: #444444;"
                     target="_blank"><?php echo $OJ_BEIAN; ?></a>
             </div>

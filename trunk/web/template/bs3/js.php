@@ -31,7 +31,7 @@ $(document).ready(function(){
   $("body").append("<div class=center > <img src='http://cdn.hustoj.com/wx.jpg' width='120px'><img src='http://cdn.hustoj.com/alipay.png' width='120px'><br> 欢迎关注微信公众号onlinejudge</div>");
   
   <?php if(isset($OJ_BEIAN)&&$OJ_BEIAN){ ?>
-         $("body").append("<br><center><a href='http://beian.miit.gov.cn/' target='_blank'><?php echo $OJ_BEIAN?></a></center>");
+         $("body").append("<br><center><img src='image/icp.png'><a href='http://beian.miit.gov.cn/' target='_blank'><?php echo $OJ_BEIAN?></a></center>");
   <?php } ?>
 
 	

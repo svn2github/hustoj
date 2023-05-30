@@ -109,7 +109,7 @@
     explain();
     <?php
   if(isset($OJ_DOWNLOAD)&&$OJ_DOWNLOAD){
-    if(isset($OJ_WASHUJU) && $OJ_WASHUJU){
+    if(isset($OJ_DL_1ST_WA_ONLY) && $OJ_DL_1ST_WA_ONLY){
      echo  "showDownload2()";
     }else{
      echo  "showDownload();";

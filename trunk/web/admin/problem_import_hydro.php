@@ -136,7 +136,7 @@ else {
 			$time=floatval($hydrop['time']);
 			$memory=floatval($hydrop['memory']);
 			$iofile=$hydrop['filename'];
-			if($pid!=""){
+			if($pid!=""&&$iofile!=""){
 				file_put_contents($OJ_DATA."/$pid/input.name",$iofile.".in\n");
 				file_put_contents($OJ_DATA."/$pid/output.name",$iofile.".out\n");
 

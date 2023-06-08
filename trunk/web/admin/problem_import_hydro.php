@@ -129,12 +129,12 @@ else {
 		}else if(basename($file_name)=="problem_zh.md"||basename($file_name)=="problem.md"){
 			$description="<div class='md'>".$file_content."</div>";	
 			//echo htmlentities("$description");
-    			if(!hasProblem($title)){
-                                $pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
-                        }else{
-                                echo "skiped $title";
-                                $pid=0;
-                        }
+			if(!hasProblem($title)){
+    				$pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
+			}else{
+				echo "skiped $title";
+				$pid=0;
+			}
 			echo "PID:$pid";
 		}else if(basename($file_name)=="config.yaml"){
 			$hydrop=yaml_parse($file_content);	
@@ -151,7 +151,13 @@ else {
 		}else if($pid!="" && strpos($file_path,"testdata") !== false && basename($file_name) != "testdata" ){
 	  		echo ".";
 			mkdir($OJ_DATA."/$pid/");
-		        file_put_contents($OJ_DATA."/$pid/".basename($file_name),$file_content);
+			$dataname=basename($file_name);
+			$pattern = '/input([0-9]*).txt/i';
+			$dataname=preg_replace($pattern, '\\1.in', $dataname);
+			$pattern = '/output([0-9]*).txt/i';
+			$dataname=preg_replace($pattern, '\\1.out', $dataname);
+
+		        file_put_contents($OJ_DATA."/$pid/".$dataname,$file_content);
 		}
 	}else{
 	  echo $file_name;

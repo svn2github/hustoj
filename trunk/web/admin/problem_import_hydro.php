@@ -129,7 +129,12 @@ else {
 		}else if(basename($file_name)=="problem_zh.md"||basename($file_name)=="problem.md"){
 			$description="<div class='md'>".$file_content."</div>";	
 			//echo htmlentities("$description");
-    			$pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
+    			if(!hasProblem($title)){
+                                $pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
+                        }else{
+                                echo "skiped $title";
+                                $pid=0;
+                        }
 			echo "PID:$pid";
 		}else if(basename($file_name)=="config.yaml"){
 			$hydrop=yaml_parse($file_content);	

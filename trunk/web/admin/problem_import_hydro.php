@@ -131,6 +131,7 @@ else {
 			//echo htmlentities("$description");
 			if(!hasProblem($title)){
     				$pid = addproblem($title,1,128, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
+				mkdir($OJ_DATA."/$pid/");
 			}else{
 				echo "skiped $title";
 				$pid=0;
@@ -150,7 +151,7 @@ else {
 			pdo_query("update problem set time_limit=?,memory_limit=? where problem_id=?",$time,$memory,$pid);
 		}else if($pid!="" && strpos($file_path,"testdata") !== false && basename($file_name) != "testdata" ){
 	  		echo ".";
-			mkdir($OJ_DATA."/$pid/");
+			
 			$dataname=basename($file_name);
 			$pattern = '/input([0-9]*).txt/i';
 			$dataname=preg_replace($pattern, '\\1.in', $dataname);

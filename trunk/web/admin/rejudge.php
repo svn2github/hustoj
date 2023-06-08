@@ -44,17 +44,21 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
                 echo "<script>location.href='$url';</script>";
         }else if (isset($_POST['rjcid'])){
                 $rjcid=intval($_POST['rjcid']);
-                if(isset($_POST['pid'])){
-                        $pid=intval($_POST['pid']);
-                        $sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=? and num=?";
-                        pdo_query($sql,$rjcid,$pid) ;
-                }else{
-                        $sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=? and problem_id>0";
-                        pdo_query($sql,$rjcid) ;
-                }
-                $url="../status.php?cid=".($rjcid);
-                echo "Rejudged Contest id :".$rjcid;
-                echo "<script>location.href='$url';</script>";
+		if( $rjcid>0 ){
+			if(isset($_POST['pid'])){
+				$pid=intval($_POST['pid']);
+				$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=? and num=?";
+				pdo_query($sql,$rjcid,$pid) ;
+			}else{
+				$sql="UPDATE `solution` SET `result`=1 WHERE `contest_id`=? and problem_id>0";
+				pdo_query($sql,$rjcid) ;
+			}
+			$url="../status.php?cid=".($rjcid);
+			echo "Rejudged Contest id :".$rjcid;
+			echo "<script>location.href='$url';</script>";
+		}else{
+			echo "<script>location.href='rejudge.php';</script>";
+		}
         }
         echo str_repeat(" ",4096);
         flush();

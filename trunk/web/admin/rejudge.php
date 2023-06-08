@@ -120,7 +120,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
         </form>
         <li><?php echo $MSG_CONTEST?>
         <form action='rejudge.php' method=post>
-                <input type=input name='rjcid' placeholder="1003">      <input type='hidden' name='do' value='do'>
+                <input type=input name='rjcid' placeholder="1003" value='1003' > <input type='hidden' name='do' value='do'>
                 <input type=hidden name="postkey" value="<?php echo $_SESSION[$OJ_NAME.'_'.'postkey']?>">
                 <input type=submit value=submit>
         </form>

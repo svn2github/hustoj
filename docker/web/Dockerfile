@@ -15,6 +15,7 @@ RUN bash /opt/sources.list.sh && \
         php-gd \
         php-zip \
         php-mbstring \
+        php-yaml \
         php-xml
 
 COPY trunk/ /trunk/

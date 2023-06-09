@@ -25,6 +25,7 @@ RUN apt-get -y update  && \
         php-zip \
         php-mbstring \
         php-xml \
+        php-yaml \
         make \
         flex \
         gcc \

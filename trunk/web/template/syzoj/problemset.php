@@ -106,8 +106,8 @@
         <?php } ?>
         <th class="one wide"><?php echo $MSG_PROBLEM_ID?></th>
         <th class="left aligned"><?php echo $MSG_TITLE?></th>
-        <th class="one wide"><?php echo $MSG_SOVLED?></th>
-        <th class="one wide"><?php echo $MSG_SUBMIT?></th>
+        <th class="one wide"><?php echo $MSG_SOVLED."/".$MSG_SUBMIT?></th>
+        
         <th class="one wide"><?php echo $MSG_PASS_RATE?></th>
       </tr>
     </thead>
@@ -144,14 +144,14 @@
               //echo "</span></div>";
 	      echo "</div>";
             echo "</td>";
-            echo "<td><a href=\"status.php?problem_id=".$row['problem_id']."&jresult=4\">".$row['accepted']."</a></td>";
-            echo "<td><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></td>";
-            if ($row['submit'] == 0)
-              echo "<td>0.000%</td>";
-            else{
-              $tt = sprintf ( "%.03lf%%", 100 * $row['accepted'] / $row['submit'] );
-              echo "<td>".$tt."</td>";
-            }
+          echo "<td><a href=\"status.php?problem_id=".$row['problem_id']."&jresult=4\">".$row['accepted']."/".$row['submit']."</a></td>";
+           // echo "<td><a href='status.php?problem_id=".$row['problem_id']."'>".$row['submit']."</a></td>";
+            if ($row['submit'] == 0) {
+    echo '<td><div class="progress" style="margin-bottom:-20px; "><div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;">0.000%</div></div></td>';
+} else {
+    $percentage = round(100 * $row['accepted'] / $row['submit'], 3);
+    echo '<td><div class="progress" style="margin-bottom:-20px;"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%;">'.$percentage.'%</div></div></td>';
+}
             echo  "</tr>";
             $i++;
           }

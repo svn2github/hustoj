@@ -263,7 +263,7 @@ if (!$OJ_BENCHMARK_MODE) {
   $sql = "SELECT `in_date`,solution_id FROM `solution` WHERE `user_id`=? AND in_date>? ORDER BY `in_date` DESC LIMIT 1";
   $res = pdo_query($sql, $user_id, $now);
 
-  if (count($res)==1) {
+  if (count($res)>=1) {
     /*
     $view_errors = $MSG_BREAK_TIME."<br>";
     require "template/".$OJ_TEMPLATE."/error.php";

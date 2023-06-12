@@ -371,6 +371,9 @@ if (~$OJ_LANGMASK&(1<<$language)) {
                 }
         }
         /*   //prepare system ready for even worse robots
+        $now = strftime("%Y-%m-%d %X", time()-$OJ_SUBMIT_COOLDOWN_TIME * 6 );
+        $sql="select count(1) from solution where user_id=? and in_date > ?";
+        $count=pdo_query($sql,$user_id,$now);
         if($count>=$OJ_POISON_BOT_COUNT*2){
                 $sql="update users set defunct='Y' where user_id=?";
                 pdo_query($sql,$_SESSION[$OJ_NAME."_user_id"]);

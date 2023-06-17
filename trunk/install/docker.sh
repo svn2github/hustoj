@@ -17,6 +17,8 @@ cat > /etc/docker/daemon.json <<EOF
 }
 EOF
 
+bash add_dns_to_docker.sh
+
 systemctl restart docker
 
 while ! docker build -t hustoj .

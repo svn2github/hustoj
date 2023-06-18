@@ -78,8 +78,9 @@ echo "</select>";
 
 <center>
 <table width=100% border=1 style="text-align:center;">
-  <form method=post action=contest_add.php>
+  <form id='pform' method=post action=contest_add.php >
 <input type="hidden" name=keyword value="<?php if(isset($_GET['keyword']))echo htmlentities($_GET['keyword'],ENT_QUOTES,"utf-8")?>">
+<input type="hidden" name=hlist value="" >
     <tr>
       <td width=60px><?php echo $MSG_PROBLEM_ID?><input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
       <td><?php echo $MSG_TITLE?></td>
@@ -155,6 +156,47 @@ function phpfm(pid){
     }
   });
 }
+$(document).ready(function(){
+
+	$('input[type=checkbox]').change(function(){
+		
+		let plist=sessionStorage.getItem('plist');
+		let oldArray=plist.split(',');
+		let pid=$(this).attr('value');
+		let index=oldArray.indexOf(pid);
+//		console.log("pid:"+pid);
+//	console.log("before:"+plist);
+		if($(this).prop('checked')){
+			console.log("add:"+pid);
+			if(index<0){
+				oldArray[oldArray.length]=pid;
+			}
+			plist=oldArray.join();
+		}else{
+			console.log("remove:"+pid+" index:"+index);
+			if(index>-1){
+				oldArray.splice(index,1);
+			}
+			plist=oldArray.join();
+		}
+//	console.log("after:"+plist);
+		if(!!sessionStorage){
+		        sessionStorage.setItem('plist',plist);
+			$("input[name=hlist]").val(plist);
+		}
+//		console.log(plist);
+
+	
+	});
+	let plist=sessionStorage.getItem('plist');
+	let oldArray=plist.split(',');
+	for(let i=0;i<oldArray.length;i++){
+		if(oldArray[i]!="")
+			$('input[value='+oldArray[i]+']').prop("checked",true);
+	}
+	$("input[name=hlist]").val(plist);
+
+});
 </script>
 </div>
 

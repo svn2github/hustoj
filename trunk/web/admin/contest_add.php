@@ -150,6 +150,12 @@ else{
       else
         $plist=$i;
     }
+  $plist = trim($_POST['hlist']);
+  $pieces = explode(",",$plist );
+  $pieces = array_unique($pieces);
+  unset($pieces[0]);
+  $plist=implode(",",$pieces);
+
   }else if(isset($_GET['spid'])){
     //require_once("../include/check_get_key.php");
     $spid = intval($_GET['spid']);

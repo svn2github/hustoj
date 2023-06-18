@@ -23,6 +23,11 @@ foreach($_POST['pid'] as $i){
     $plist = $i;
 }
 //echo "===".$plist;
+  $plist = trim($_POST['hlist']);
+  $pieces = explode(",",$plist );
+  $pieces = array_unique($pieces);
+  unset($pieces[0]);
+  $plist=implode(",",$pieces);
 
 if(isset($_POST['enable'])&&$plist){
   $sql = "UPDATE `problem` SET defunct='N' WHERE `problem_id` IN ($plist)";           

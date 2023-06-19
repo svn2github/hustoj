@@ -4,7 +4,7 @@ while ! apt-get install -y podman containerd
 do
 		echo "Network fail, retry... you might want to make sure podman is available in your apt source"
 done
-
+IP=`curl http://hustoj.com/ip.php`
 while ! podman build -t hustoj .
 do
                 echo "Visit http://$IP to regist your admin account of HUSTOJ instance."

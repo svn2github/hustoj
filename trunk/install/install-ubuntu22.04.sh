@@ -189,6 +189,8 @@ else
         sed -i 's|/usr/include/c++/9|/usr/include/c++/11|g' Dockerfile
         bash podman.sh
 fi
+IP=`curl http://hustoj.com/ip.php`
+LIP=`ip a|grep inet|grep brd|head -1|awk '{print $2}'|awk -F/ '{print $1}'`
 clear
 reset
 
@@ -197,7 +199,7 @@ echo "username:$USER"
 echo "password:$PASSWORD"
 echo "DO NOT POST THESE INFORMATION ON ANY PUBLIC CHANNEL!"
 echo "Register a user as 'admin' on http://127.0.0.1/ "
-echo "打开http://127.0.0.1/ 注册用户admin，获得管理员权限。"
+echo "打开http://127.0.0.1/ 或者 http://$IP  或者 http://$LIP 注册用户admin，获得管理员权限。"
 echo "不要在QQ群或其他地方公开发送以上信息，否则可能导致系统安全受到威胁。"
 echo "█████████████████████████████████████████"
 echo "████ ▄▄▄▄▄ ██▄▄ ▀  █▀█▄▄██ ███ ▄▄▄▄▄ ████"

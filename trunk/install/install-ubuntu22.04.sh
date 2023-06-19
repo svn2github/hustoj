@@ -71,6 +71,10 @@ if [ "$MEM" -lt "1000" ] ; then
                 mkswap /swap
                 swapon /swap
                 echo "/swap none swap defaults 0 0 " >> /etc/fstab
+                sed -i 's/#key_buffer_size        = 128M/key_buffer_size        = 1M/' /etc/mysql/mariadb.conf.d/50-server.cnf
+                sed -i 's/#table_cache            = 64/#table_cache            = 5/' /etc/mysql/mariadb.conf.d/50-server.cnf
+                sed -i 's/#skip-name-resolve/skip-name-resolve/' /etc/mysql/mariadb.conf.d/50-server.cnf
+                
         fi
 else
         echo "Memory size : $MEM MB"

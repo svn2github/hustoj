@@ -10,7 +10,7 @@ sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 sed -i 's/cn.archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 sed -i "s|#\$nrconf{restart} = 'i'|\$nrconf{restart} = 'a'|g" /etc/needrestart/needrestart.conf
 
-service snapd stop
+
 apt-get update && apt-get -y upgrade
 
 apt-get install -y software-properties-common
@@ -74,7 +74,8 @@ if [ "$MEM" -lt "1000" ] ; then
                 sed -i 's/#key_buffer_size        = 128M/key_buffer_size        = 1M/' /etc/mysql/mariadb.conf.d/50-server.cnf
                 sed -i 's/#table_cache            = 64/#table_cache            = 5/' /etc/mysql/mariadb.conf.d/50-server.cnf
                 sed -i 's/#skip-name-resolve/skip-name-resolve/' /etc/mysql/mariadb.conf.d/50-server.cnf
-                
+                /etc/init.d/multipath-tools stop
+                service snapd stop
         fi
 else
         echo "Memory size : $MEM MB"

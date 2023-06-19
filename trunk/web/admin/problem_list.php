@@ -78,8 +78,9 @@ echo "</select>";
 
 <center>
 <table width=100% border=1 style="text-align:center;">
-  <form method=post action=contest_add.php>
+  <form id='pform' method=post action=contest_add.php >
 <input type="hidden" name=keyword value="<?php if(isset($_GET['keyword']))echo htmlentities($_GET['keyword'],ENT_QUOTES,"utf-8")?>">
+<input type="hidden" name=hlist value="" >
     <tr>
       <td width=60px><?php echo $MSG_PROBLEM_ID?><input type=checkbox style='vertical-align:2px;' onchange='$("input[type=checkbox]").prop("checked", this.checked)'></td>
       <td><?php echo $MSG_TITLE?></td>
@@ -155,6 +156,94 @@ function phpfm(pid){
     }
   });
 }
+function delPid(pid){
+
+		let plist=sessionStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
+		let oldArray=plist.split(',');
+		oldArray=oldArray.filter(onlyUnique);
+		let index=oldArray.indexOf(pid);
+			console.log("remove:"+pid+" index:"+index);
+			if(index>-1){
+				oldArray.splice(index,1);
+			}
+			plist=oldArray.join();
+		if(!!sessionStorage){
+		        sessionStorage.setItem('plist',plist);
+			$("input[name=hlist]").attr("value",plist);
+			console.log(plist);
+		}
+}
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+function addPid(pid){
+
+		let plist=sessionStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
+		let oldArray=plist.split(',');
+		//oldArray=oldArray.filter(onlyUnique);
+		let index=oldArray.indexOf(pid);
+			console.log("add:"+pid);
+			plist=oldArray.join();
+			if(index<0){
+				plist+=","+pid;
+			}
+		if(!!sessionStorage){
+		        sessionStorage.setItem('plist',plist);
+			$("input[name=hlist]").attr("value",plist);
+		
+			console.log(plist);
+		}
+}
+$(document).ready(function(){
+	let plist=sessionStorage.getItem('plist');
+	if(typeof(plist)=="undefined" || plist == null) plist="";
+	let oldArray=plist.split(',');
+	oldArray=oldArray.filter(onlyUnique);
+	for(let i=0;i<oldArray.length;i++){
+		if(oldArray[i]!="")
+			$('input[value='+oldArray[i]+']').prop("checked",true);
+	}
+	$("input[name=hlist]").val(plist);
+
+	$('input[type=checkbox]').change(function(){
+		
+		let plist=sessionStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
+		let oldArray=plist.split(',');
+		oldArray=oldArray.filter(onlyUnique);
+		let pid=$(this).attr('value');
+		let index=oldArray.indexOf(pid);
+//		console.log("pid:"+pid);
+//	console.log("before:"+plist);
+		if(typeof(pid)=='undefiend'||pid==null ){
+			console.log("all");
+			$('input[type=checkbox]').each(function(){
+				let pid=parseInt($(this).val());
+				if(pid>0){
+					if($(this).prop('checked')){
+						addPid(""+pid);
+					}else{
+						delPid(""+pid);
+					}
+				}
+			});
+			return;
+		}else{
+			if($(this).prop('checked')){
+				addPid(""+pid);
+			}else{
+				delPid(""+pid);
+			}
+		}
+//	console.log("after:"+plist);
+//		console.log(plist);
+
+	
+	});
+
+});
 </script>
 </div>
 

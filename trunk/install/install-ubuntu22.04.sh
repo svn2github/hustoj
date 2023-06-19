@@ -84,7 +84,7 @@ mkdir etc data log backup
 
 cp src/install/java0.policy  /home/judge/etc
 cp src/install/judge.conf  /home/judge/etc
-chmod +x src/install/ans2out
+chmod +x src/install/ans2out /home/judge/src/install/*.sh
 
 # create enough runX dirs for each CPU core
 if grep "OJ_SHM_RUN=0" etc/judge.conf ; then

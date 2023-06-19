@@ -108,7 +108,8 @@ if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTIC
 // if OJ_BG==bing ,using bing.com for hourly change background
 if(isset($OJ_BG)&&$OJ_BG=="bing"){
    $bg_file=dirname(dirname(__FILE__))."/image/bg.url";
-   if(time()-fileatime($bg_file)>3600){
+   if(!file_exists($bg_file)) touch($bg_file);
+   if(time()-fileatime($bg_file)>3600*24){
            require_once(dirname(__FILE__)."/curl.php");
            $data=curl_get("https://cn.bing.com");
            $OJ_BG=getPartByMark($data,"<link rel=\"preload\" href=\"","\" as=\"image\" id=\"preloadBg\"");

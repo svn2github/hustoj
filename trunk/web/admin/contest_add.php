@@ -153,7 +153,7 @@ else{
   $plist = trim($_POST['hlist']);
   $pieces = explode(",",$plist );
   $pieces = array_unique($pieces);
-  unset($pieces[0]);
+  if($pieces[0]=="") unset($pieces[0]);
   $plist=implode(",",$pieces);
 
   }else if(isset($_GET['spid'])){

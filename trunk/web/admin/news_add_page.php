@@ -34,7 +34,7 @@ if(isset($_POST['pid'])){
   $plist = trim($_POST['hlist']);
   $pieces = explode(",",$plist );
   $pieces = array_unique($pieces);
-  unset($pieces[0]);
+  if($pieces[0]=="") unset($pieces[0]);
   $plist=implode(",",$pieces);
 
 	  $content="[plist=".$plist."]".htmlentities($_POST['keyword'],ENT_QUOTES,"utf-8")."[/plist]";

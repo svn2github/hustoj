@@ -7,6 +7,8 @@ done
 
 while ! podman build -t hustoj .
 do
+                echo "Visit http://$IP to regist your admin account of HUSTOJ instance."
+		echo "Left this console working on retry ... podman activation."
 		echo "Network fail, retry... you might want to make sure podman image source is available"
 done
 

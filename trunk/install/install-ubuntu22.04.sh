@@ -187,7 +187,7 @@ if test -f  /.dockerenv ;then
 else
         sed -i 's/ubuntu:20/ubuntu:22/g' Dockerfile
         sed -i 's|/usr/include/c++/9|/usr/include/c++/11|g' Dockerfile
-        bash podman.sh
+        bash docker.sh
 fi
 IP=`curl http://hustoj.com/ip.php`
 LIP=`ip a|grep inet|grep brd|head -1|awk '{print $2}'|awk -F/ '{print $1}'`

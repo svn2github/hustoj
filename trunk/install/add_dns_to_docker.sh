@@ -1,5 +1,5 @@
 #!/bin/bash
-DNS=`cat /etc/resolv.conf |grep nameserver|awk '{print $2}'`
+DNS=`cat /etc/resolv.conf |grep nameserver|awk '{print $2}' | tail -1 `
 cd /etc/docker
 if grep 'dns' daemon.json > /dev/null ; then
         echo "has dns"

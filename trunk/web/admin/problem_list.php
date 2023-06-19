@@ -156,45 +156,92 @@ function phpfm(pid){
     }
   });
 }
-$(document).ready(function(){
+function delPid(pid){
 
-	$('input[type=checkbox]').change(function(){
-		
-		let plist=sessionStorage.getItem('plist');
+		let plist=localStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
 		let oldArray=plist.split(',');
-		let pid=$(this).attr('value');
+		oldArray=oldArray.filter(onlyUnique);
 		let index=oldArray.indexOf(pid);
-//		console.log("pid:"+pid);
-//	console.log("before:"+plist);
-		if($(this).prop('checked')){
-			console.log("add:"+pid);
-			if(index<0){
-				oldArray[oldArray.length]=pid;
-			}
-			plist=oldArray.join();
-		}else{
 			console.log("remove:"+pid+" index:"+index);
 			if(index>-1){
 				oldArray.splice(index,1);
 			}
 			plist=oldArray.join();
+		if(!!localStorage){
+		        localStorage.setItem('plist',plist);
+			$("input[name=hlist]").attr("value",plist);
+			console.log(plist);
 		}
-//	console.log("after:"+plist);
-		if(!!sessionStorage){
-		        sessionStorage.setItem('plist',plist);
-			$("input[name=hlist]").val(plist);
-		}
-//		console.log(plist);
+}
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+function addPid(pid){
 
-	
-	});
-	let plist=sessionStorage.getItem('plist');
+		let plist=localStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
+		let oldArray=plist.split(',');
+		//oldArray=oldArray.filter(onlyUnique);
+		let index=oldArray.indexOf(pid);
+			console.log("add:"+pid);
+			plist=oldArray.join();
+			if(index<0){
+				plist+=","+pid;
+			}
+		if(!!localStorage){
+		        localStorage.setItem('plist',plist);
+			$("input[name=hlist]").attr("value",plist);
+		
+			console.log(plist);
+		}
+}
+$(document).ready(function(){
+	let plist=localStorage.getItem('plist');
+	if(typeof(plist)=="undefined" || plist == null) plist="";
 	let oldArray=plist.split(',');
+	oldArray=oldArray.filter(onlyUnique);
 	for(let i=0;i<oldArray.length;i++){
 		if(oldArray[i]!="")
 			$('input[value='+oldArray[i]+']').prop("checked",true);
 	}
 	$("input[name=hlist]").val(plist);
+
+	$('input[type=checkbox]').change(function(){
+		
+		let plist=localStorage.getItem('plist');
+		if(typeof(plist)=='undefined'||plist==null) plist="";
+		let oldArray=plist.split(',');
+		oldArray=oldArray.filter(onlyUnique);
+		let pid=$(this).attr('value');
+		let index=oldArray.indexOf(pid);
+//		console.log("pid:"+pid);
+//	console.log("before:"+plist);
+		if(typeof(pid)=='undefiend'||pid==null ){
+			console.log("all");
+			$('input[type=checkbox]').each(function(){
+				let pid=parseInt($(this).val());
+				if(pid>0){
+					if($(this).prop('checked')){
+						addPid(""+pid);
+					}else{
+						delPid(""+pid);
+					}
+				}
+			});
+			return;
+		}else{
+			if($(this).prop('checked')){
+				addPid(""+pid);
+			}else{
+				delPid(""+pid);
+			}
+		}
+//	console.log("after:"+plist);
+//		console.log(plist);
+
+	
+	});
 
 });
 </script>

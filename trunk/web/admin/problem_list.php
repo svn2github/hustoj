@@ -158,7 +158,7 @@ function phpfm(pid){
 }
 function delPid(pid){
 
-		let plist=localStorage.getItem('plist');
+		let plist=sessionStorage.getItem('plist');
 		if(typeof(plist)=='undefined'||plist==null) plist="";
 		let oldArray=plist.split(',');
 		oldArray=oldArray.filter(onlyUnique);
@@ -168,8 +168,8 @@ function delPid(pid){
 				oldArray.splice(index,1);
 			}
 			plist=oldArray.join();
-		if(!!localStorage){
-		        localStorage.setItem('plist',plist);
+		if(!!sessionStorage){
+		        sessionStorage.setItem('plist',plist);
 			$("input[name=hlist]").attr("value",plist);
 			console.log(plist);
 		}
@@ -179,7 +179,7 @@ function onlyUnique(value, index, array) {
 }
 function addPid(pid){
 
-		let plist=localStorage.getItem('plist');
+		let plist=sessionStorage.getItem('plist');
 		if(typeof(plist)=='undefined'||plist==null) plist="";
 		let oldArray=plist.split(',');
 		//oldArray=oldArray.filter(onlyUnique);
@@ -189,15 +189,15 @@ function addPid(pid){
 			if(index<0){
 				plist+=","+pid;
 			}
-		if(!!localStorage){
-		        localStorage.setItem('plist',plist);
+		if(!!sessionStorage){
+		        sessionStorage.setItem('plist',plist);
 			$("input[name=hlist]").attr("value",plist);
 		
 			console.log(plist);
 		}
 }
 $(document).ready(function(){
-	let plist=localStorage.getItem('plist');
+	let plist=sessionStorage.getItem('plist');
 	if(typeof(plist)=="undefined" || plist == null) plist="";
 	let oldArray=plist.split(',');
 	oldArray=oldArray.filter(onlyUnique);
@@ -209,7 +209,7 @@ $(document).ready(function(){
 
 	$('input[type=checkbox]').change(function(){
 		
-		let plist=localStorage.getItem('plist');
+		let plist=sessionStorage.getItem('plist');
 		if(typeof(plist)=='undefined'||plist==null) plist="";
 		let oldArray=plist.split(',');
 		oldArray=oldArray.filter(onlyUnique);

@@ -76,6 +76,7 @@ if [ "$MEM" -lt "1000" ] ; then
                 sed -i 's/#skip-name-resolve/skip-name-resolve/' /etc/mysql/mariadb.conf.d/50-server.cnf
                 /etc/init.d/multipath-tools stop
                 service snapd stop
+                service mariadb restart
         fi
 else
         echo "Memory size : $MEM MB"

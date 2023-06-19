@@ -163,7 +163,7 @@ function delPid(pid){
 		let oldArray=plist.split(',');
 		oldArray=oldArray.filter(onlyUnique);
 		let index=oldArray.indexOf(pid);
-			console.log("remove:"+pid+" index:"+index);
+		//	console.log("remove:"+pid+" index:"+index);
 			if(index>-1){
 				oldArray.splice(index,1);
 			}
@@ -171,7 +171,7 @@ function delPid(pid){
 		if(!!sessionStorage){
 		        sessionStorage.setItem('plist',plist);
 			$("input[name=hlist]").attr("value",plist);
-			console.log(plist);
+		//	console.log(plist);
 		}
 }
 function onlyUnique(value, index, array) {
@@ -184,7 +184,7 @@ function addPid(pid){
 		let oldArray=plist.split(',');
 		//oldArray=oldArray.filter(onlyUnique);
 		let index=oldArray.indexOf(pid);
-			console.log("add:"+pid);
+		//	console.log("add:"+pid);
 			plist=oldArray.join();
 			if(index<0){
 				plist+=","+pid;
@@ -193,7 +193,7 @@ function addPid(pid){
 		        sessionStorage.setItem('plist',plist);
 			$("input[name=hlist]").attr("value",plist);
 		
-			console.log(plist);
+		//	console.log(plist);
 		}
 }
 $(document).ready(function(){
@@ -218,7 +218,7 @@ $(document).ready(function(){
 //		console.log("pid:"+pid);
 //	console.log("before:"+plist);
 		if(typeof(pid)=='undefiend'||pid==null ){
-			console.log("all");
+//			console.log("all");
 			$('input[type=checkbox]').each(function(){
 				let pid=parseInt($(this).val());
 				if(pid>0){

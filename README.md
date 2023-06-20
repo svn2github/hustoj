@@ -672,7 +672,10 @@ sudo bash /home/judge/src/install/fixing.sh
 
 ## 硬件需求
 
-x86 arm mips 架构处理器， 1G以上内存，10G外部存储。
+处理器1CPU核心， 1G内存，20G硬盘可以安装，1Mbps 网络带宽，约能满足20~50人轻度使用。
+
+人数每增加50人，等比例增加核心数，内存，硬盘空间和网络带宽。
+
 
 [阿里云](https://www.aliyun.com/)，[腾讯云](https://curl.qcloud.com/kevnXODi)，[华为云](https://activity.huaweicloud.com/)，最小学生机均可稳定运行。
 

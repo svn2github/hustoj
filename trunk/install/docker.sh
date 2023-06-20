@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /home/judge/src/install || exit 1；
+dpkg --configure -a
 while ! apt-get install -y docker.io containerd
 do
 		service docker start

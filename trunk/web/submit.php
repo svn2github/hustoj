@@ -280,6 +280,7 @@ if (!$OJ_BENCHMARK_MODE) {
 	} else {
 		echo $res[0][1];
 	}
+	exit();
    }
 }
 

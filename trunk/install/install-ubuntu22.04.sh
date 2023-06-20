@@ -5,7 +5,24 @@ if [ -d /mnt/c ]; then
     echo "WSL is NOT supported."
     exit 1
 fi
+MEM=`free -m|grep Mem|awk '{print $2}'`
 
+if [ "$MEM" -lt "1000" ] ; then
+        echo "Memory size less than 1GB."
+        if grep 'swap' /etc/fstab ; then
+                echo "already has swap"
+        else
+                dd if=/dev/zero of=/swap bs=1M count=1024
+                chmod 600 /swap
+                mkswap /swap
+                swapon /swap
+                echo "/swap none swap defaults 0 0 " >> /etc/fstab 
+                /etc/init.d/multipath-tools stop
+                service snapd stop
+        fi
+else
+        echo "Memory size : $MEM MB"
+fi
 sed -i 's/tencentyun/aliyun/g' /etc/apt/sources.list
 sed -i 's/cn.archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 sed -i "s|#\$nrconf{restart} = 'i'|\$nrconf{restart} = 'a'|g" /etc/needrestart/needrestart.conf
@@ -63,20 +80,14 @@ MEM=`free -m|grep Mem|awk '{print $2}'`
 
 if [ "$MEM" -lt "1000" ] ; then
         echo "Memory size less than 1GB."
-        if grep 'swap' /etc/fstab ; then
-                echo "already has swap"
+        if grep 'key_buffer_size        = 1M' /etc/fstab ; then
+                echo "already trim config"
         else
-                dd if=/dev/zero of=/swap bs=1M count=1024
-                chmod 600 /swap
-                mkswap /swap
-                swapon /swap
-                echo "/swap none swap defaults 0 0 " >> /etc/fstab
                 sed -i 's/#key_buffer_size        = 128M/key_buffer_size        = 1M/' /etc/mysql/mariadb.conf.d/50-server.cnf
                 sed -i 's/#table_cache            = 64/#table_cache            = 5/' /etc/mysql/mariadb.conf.d/50-server.cnf
                 sed -i 's/#skip-name-resolve/skip-name-resolve/' /etc/mysql/mariadb.conf.d/50-server.cnf
-                /etc/init.d/multipath-tools stop
-                service snapd stop
                 service mariadb restart
+                free -h
         fi
 else
         echo "Memory size : $MEM MB"

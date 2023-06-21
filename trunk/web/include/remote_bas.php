@@ -92,22 +92,15 @@ function do_submit($remote_site,$remote_user,$remote_pass){
 		}else{
 			break;
 		}
-		//50ms once
 		usleep(150000);
 	}
 }
 function getResult($short){
 	//echo "short:$short<br>";
 	$map=array(
-		"AC" => 4,
-		"RE" => 10,
-		"CE" => 11,
-		"WA" => 6,
-		"PE" => 5,
-		"TLE" => 7,
-		"MLE" => 8,
-		"OLE" => 9,
-		"RF" => 10,
+		"AC" => 4,		"RE" => 10,		"CE" => 11,
+		"WA" => 6,		"PE" => 5,		"TLE" => 7,
+		"MLE" => 8,		"OLE" => 9,		"RF" => 10,
 	);
 	return $map[$short];
 }
@@ -182,7 +175,6 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
                      $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=? AND `result`=4 and contest_id=?) WHERE `problem_id`=? and contest_id=?";
                      pdo_query($sql,$pid,$cid, $pid,$cid);
                 }
-
 	}
 	return $result;
 }
@@ -239,5 +231,4 @@ if(isset($_GET['check'])){
 	echo "<meta http-equiv='refresh' content='$remote_delay'>";
 	echo "$remote_oj<br>";
 }
-
 chmod($remote_cookie,0600);

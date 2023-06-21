@@ -2,40 +2,15 @@
 require_once(realpath(dirname(__FILE__)."/..")."/include/db_info.inc.php");
 require_once(realpath(dirname(__FILE__)."/..")."/include/init.php");
 require_once(dirname(__FILE__)."/curl.php");
-function is_login($remote_site){
-	$html=curl_get($remote_site.'/mail_index.php');
-	if (str_contains($html,"Please login first.")) return false; 
-	else return true;
-}
-function show_vcode($remote_site){
-	$url = $remote_site.'/login_xx.php'; 
-	$imgData=curl_get($url);
-	$imgBase64 = base64_encode($imgData);
-	return '<img width=200px src="data:image/jpg;base64,'.$imgBase64.'" />';
-}
-function do_login($remote_site,$username,$password,$vcode){
-	$form= array(
-    		'username' => $username,
-    		'password' => $password,
-		'auth' => $vcode
-	);
-	 $data=curl_post($remote_site.'/login.php',$form);
-	if(str_contains($data,"验证码错误")) return false;
-	else return true;
-}
-function do_submit_one($remote_site,$username,$password,$sid){
-	
+function do_submit_one($remote_site,$username,$password,$sid){	
 	$langMap= array(
     		0 => 7, //C
     		1 => 7, //C++
-//		3 => 3, //Java
-//		2 => 4, //Pascal
 		6 => 5  //Python
 	);
 	$problem_id=3001;
 	$language=7;
 	$source="";
-	
 	$sql="select * from solution where solution_id=?";
  	$data=pdo_query($sql,$sid);	
 	if(count($data)>0){
@@ -133,7 +108,6 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 		pdo_query($sql,$result,0,$time,$memory,$sid);
 		return $result;	
 	}
-	//echo "<br>";
 	$summary=explode(":",$data[2]);
 	$detail=explode(",",$summary[1]);
 	$total=count($detail)-1;
@@ -150,7 +124,6 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 		$time+=intval($m_t[1]);
 		$reinfo.= $i.":   ". $re[0]." ".intval($m_t[0])."kb  ".intval($m_t[1])."ms \n";
 	}
-	//echo "[$ac==$i]";
 	if($ac==$i) {
 		$result=4;
 	}
@@ -203,24 +176,13 @@ $remote_user='用户名';    //测试期到2024-8-1结束，一个机构一个�
 $remote_pass='密码';      //账号、密码加群23361372，找群主登记： 学校或机构	email	手机  后可以申请。
 $remote_cookie=$OJ_DATA.'/'.get_domain($remote_site).'.cookie';
 $remote_delay=1;
-if(isset($_POST['vcode'])){
-	do_login($remote_site,$remote_user,$remote_pass,$_POST['vcode']);
+if(time()-fileatime($remote_cookie.".sub")>$remote_delay){
+	touch($remote_cookie.".sub");
+	do_submit($remote_site,$remote_user,$remote_pass);	
+}
+if(isset($_SESSION[$OJ_NAME.'_refer'])){
 	header("location:".$_SESSION[$OJ_NAME.'_refer']);
 	unset($_SESSION[$OJ_NAME.'_refer']);
-}else{
-	if(time()-fileatime($remote_cookie.".sub")>$remote_delay){
-		touch($remote_cookie.".sub");
-		do_submit($remote_site,$remote_user,$remote_pass);	
-	}
-	//echo (htmlentities(curl_get($remote_site."/login0.php")));
-	if ( false && !is_login($remote_site)){
-		$view_errors="$MSG_VCODE".show_vcode($remote_site);
-		$view_errors.="	<form method='post' ><input name=vcode ><input type=submit> </form>";
-		require(dirname(__FILE__)."/../template/$OJ_TEMPLATE/error.php");
-	}else if(isset($_SESSION[$OJ_NAME.'_refer'])){
-		header("location:".$_SESSION[$OJ_NAME.'_refer']);
-		unset($_SESSION[$OJ_NAME.'_refer']);
-	}
 }
 if(time()-fileatime(__FILE__)>$remote_delay){
 	touch(__FILE__);

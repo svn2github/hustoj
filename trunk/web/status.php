@@ -290,6 +290,7 @@ $view_status = Array();
 $last = 0;
 $avg_delay=0;
 $total_count=0;
+$need_refresh_remote=false;
 for ($i=0; $i<$rows_cnt; $i++) {
   $row = $result[$i];
   //$view_status[$i]=$row;
@@ -383,7 +384,9 @@ for ($i=0; $i<$rows_cnt; $i++) {
     default:
       $MSG_Tips = "";
   }
-
+  if($row['result'] > 15){
+        $need_refresh_remote=true;
+  }
   $AC_RATE = floatval($row['pass_rate']*100);
   if (isset($OJ_MARK) && $OJ_MARK!="mark") {
     $mark = "";
@@ -515,7 +518,7 @@ if(file_exists('./include/cache_end.php'))
 
 //触发Remote judge模块
 $remote_delay=5;   //最小轮询周期，单位秒
-if(isset($OJ_REMOTE_JUDGE)&&$OJ_REMOTE_JUDGE&& (time()-fileatime("remote.php")>$remote_delay)){ 
+if( $need_refresh_remote && isset($OJ_REMOTE_JUDGE)&&$OJ_REMOTE_JUDGE&& (time()-fileatime("remote.php")>$remote_delay)){ 
        touch("remote.php");
        ?>
         <iframe src='remote.php' width=0 height=0 ></iframe>

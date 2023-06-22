@@ -33,7 +33,7 @@
         <div class="ui toggle checkbox" id="show_tag">
           <style id="show_tag_style"></style>
           <script>
-          if (localStorage.getItem('show_tag') === '1') {
+          if (localStorage.getItem('show_tag') != '0') {
             document.write('<input type="checkbox" checked>');
             document.getElementById('show_tag_style').innerHTML = '.show_tag_controled { white-space: nowrap; overflow: hidden; }';
           } else {

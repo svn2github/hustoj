@@ -22,21 +22,26 @@ function get_domain($url){
   return false;
 }
 function curl_get($url){
-	global $curl,$OJ_DATA,$remote_cookie;
-	$curl = curl_init($url);
-	//curl_setopt($curl, CURLOPT_COOKIE, 'PHPSESSID=buiebpv91e0cdhpmm6a320j1l7; path=/');
-        //curl_setopt($curl, CURLOPT_HEADER, true);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array('Expect:')); 
-	curl_setopt($curl, CURLOPT_COOKIEFILE, $remote_cookie); // use saved cookies
-	curl_setopt($curl, CURLOPT_COOKIEJAR, $remote_cookie);  // save coockies
-	curl_setopt($curl, CURLOPT_REFERER, "$url"); 
-	curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"); 
-	curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-	$data = curl_exec($curl);
-	return $data;
+        global $curl,$OJ_DATA,$remote_cookie;
+        if(function_exists('curl_init')){
+                $curl = curl_init($url);
+                //curl_setopt($curl, CURLOPT_COOKIE, 'PHPSESSID=buiebpv91e0cdhpmm6a320j1l7; path=/');
+                //curl_setopt($curl, CURLOPT_HEADER, true);
+                curl_setopt($curl, CURLOPT_COOKIEFILE, $remote_cookie); // use saved cookies
+                curl_setopt($curl, CURLOPT_COOKIEJAR, $remote_cookie);  // save coockies
+                curl_setopt($curl, CURLOPT_REFERER, "$url");
+                curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36");
+                curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+                $data = curl_exec($curl);
+                return $data;
+        }else{
+                echo "PHP-curl missing (apt-get install php-curl)";
+                return "PHP-curl missing (apt-get install php-curl)";
+        }
 }
+
 function curl_post_urlencoded($url,$form){
 	global $curl,$OJ_DATA,$remote_cookie;
 	$curl = curl_init($url);

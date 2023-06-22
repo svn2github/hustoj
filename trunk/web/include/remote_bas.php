@@ -1,4 +1,5 @@
 <?php
+// 接口描述参考文件末尾注释
 require_once(realpath(dirname(__FILE__)."/..")."/include/db_info.inc.php");
 require_once(realpath(dirname(__FILE__)."/..")."/include/init.php");
 require_once(dirname(__FILE__)."/curl.php");

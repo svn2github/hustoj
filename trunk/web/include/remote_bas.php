@@ -170,6 +170,7 @@ function do_result($remote_site,$remote_user,$remote_pass){
 }
 // 本组件由一本通系列教材作者董永建老师委托开发，以GPL v2形式开源，参考本组件的代码进行二次开发，请注意遵守开源协议。
 // 判题API由一本通系列OJ开发维护者文仲友老师提供，使用时请遵守基本的互联网礼仪，若出现访问频率过快，提交恶意程序，可能会禁用相关测试账号，敬请谅解。
+
 $remote_oj="bas";
 $remote_site="http://www.ssoier.cn:18087/pubtest/";
 $remote_user='用户名';    //测试期到2024-8-1结束，一个机构一个账号，请勿外借。
@@ -194,3 +195,27 @@ if(isset($_GET['check'])){
 	echo "$remote_oj<br>";
 }
 chmod($remote_cookie,0600);
+
+/* 
+以下接口描述，由文老师提供，供其他OJ系统开发者参考。
+-----------------------------------
+题面前台:
+http://bas.ssoier.cn:8086/problem_list.php?page=10,10
+一、程序提交：
+   网址：http://www.ssoier.cn:8087/pubtest/index1.php
+   返回值：
+   -2：访问频繁（低于50Ms访问一次）
+   -1：访问出错
+   0：提交成功（首行为0，第二行为运行结果id,即runid,为一个正整数）
+二、获取结果：
+   网址：http://www.ssoier.cn:8087/pubtest/index2.php
+   返回值：
+   -2：访问频繁（低于50Ms访问一次）
+   -1：访问出错
+   首行为0：访问成功，第2行是runid,第3行开始有以下情况：
+   （1）Waiting(等待评测)
+   （2）Judging(正在评测)
+   （3）"Compile Error",第4行开始为具体的编译信息
+   （4）Accepted...(通过，具体评测信息)
+   （5）Unaccepted...(未通过，具体评测信息)
+*/

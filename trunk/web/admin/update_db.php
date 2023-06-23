@@ -207,6 +207,7 @@ $csql[44]="alter table solution add column remote_id char(16) not null default '
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");
 	echo "Executing...<br>";
+	set_time_limit(60);
 	for($i=0;isset($tsql[$i]);$i++){
 		if($tsql[$i]){
 			echo $tsql[$i]."<br>";

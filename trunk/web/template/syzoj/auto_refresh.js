@@ -106,7 +106,7 @@ hj_ss += "<input type='button' class='http_judge btn' name='manual' value='ç¡®å®
 
 $(".http_judge_form").append(hj_ss);
 
-auto_refresh();
+window.setTimeout("auto_refresh();",1000);
 
 $(".td_result").mouseover(function () {
   //$(this).children(".btn").hide(300);

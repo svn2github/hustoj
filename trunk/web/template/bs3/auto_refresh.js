@@ -114,7 +114,7 @@ hj_ss += "<input type='button' class='http_judge' name='manual' value='确定' o
 
 $(".http_judge_form").append(hj_ss);
 
-auto_refresh();
+window.setTimeout("auto_refresh();",1000);
 
 $(".td_result").mouseover(function () {
   //$(this).children(".label").hide(300);

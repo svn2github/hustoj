@@ -75,7 +75,7 @@ chgrp www-data  /home/judge
 USER="hustoj"
 PASSWORD=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
 mysql < src/install/db.sql
-echo "CREATE USER $USER identified by '$PASSWORD';grant all privileges on jol.* to $USER ;\n flush privileges;\n"|mysql
+echo "CREATE USER $USER identified by '$PASSWORD';grant all privileges on jol.* to $USER ;flush privileges;"|mysql
 CPU=$(grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}')
 MEM=`free -m|grep Mem|awk '{print $2}'`
 

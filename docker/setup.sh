@@ -84,7 +84,16 @@ sed -i "s#DB_PASS[[:space:]]*=[[:space:]]*\"root\"#DB_PASS=\"$PASSWORD\"#g"     
 	sed -i "s:}#added by hustoj::g" /etc/nginx/sites-enabled/default
 	sed -i "s:php7.4:php$PHP_VER:g" /etc/nginx/sites-enabled/default
 	sed -i "s|# deny access to .htaccess files|}#added by hustoj\n\n\n\t# deny access to .htaccess files|g" /etc/nginx/sites-enabled/default
-  
+
+sed -i "s/post_max_size = 8M/post_max_size = 500M/g" /etc/php/8.1/fpm/php.ini     
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/g" /etc/php/8.1/fpm/php.ini 
+
+if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
+    echo "client_max_body_size already added" ;
+else
+    sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    280m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
+fi
+
 # Nginx & PHP starting test
 PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
@@ -104,3 +113,5 @@ w3m -dump http://127.0.0.1/status.php | grep 'AWT'
 #ls -lh /home/judge/run0/log/
 #cat /home/judge/run0/log/ce.txt
 #cat /home/judge/run0/log/Main.c
+
+  

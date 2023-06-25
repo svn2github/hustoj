@@ -40,15 +40,10 @@ for i in `seq 1 $RUNNING`; do
     chown judge /home/judge/run`expr ${i} - 1`;
 done 
 
-regexp=`cat /home/judge/src/web/template/bs3/js.php | grep http://hustoj.com/wx.jpg | grep http://hustoj.com/alipay.png`;
-if [ ! -z $regexp ];then
-    sed -i "s#$regexp##g" /home/judge/src/web/template/bs3/js.php
-fi
-
 ln -sf /dev/stdout /var/log/nginx/access.log
 ln -sf /dev/stderr /var/log/nginx/error.log
 
 service mysql      start  
-service php7.2-fpm start  
+service php8.1-fpm start  
 service hustoj     start  
 nginx -g "daemon off;"

@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-COPY trunk/install/sources.list.sh /opt/sources.list.sh
+#COPY trunk/install/sources.list.sh /opt/sources.list.sh
 
 ARG APT_MIRROR="Y"
 ARG APT_CA="N"
@@ -39,5 +39,6 @@ RUN bash /opt/docker/setup.sh
 
 # VOLUME [ "/volume", "/home/judge/backup", "/home/judge/data", "/home/judge/etc", "/home/judge/web", "/var/lib/mysql" ]
 VOLUME [ "/volume" ]
+EXPOSE 80
 
 ENTRYPOINT [ "/bin/bash", "/opt/docker/entrypoint.sh" ]

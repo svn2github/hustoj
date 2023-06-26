@@ -10,7 +10,7 @@ static 	$DB_NAME="jol";   //数据库名
 static 	$DB_USER="root";  //数据库账户
 static 	$DB_PASS="root";  //数据库密码
 
-static 	$OJ_NAME="HUSTOJ";  //左上角显示的系统名称
+static 	$OJ_NAME="HUSTOJ";  //左上角显示的系统名称, 尽量简洁，避免用中文和空格，如需中文、长字符串、图片，可以直接修改template/syzoj/header.php
 static 	$OJ_HOME="./";    //主页目录
 static 	$OJ_ADMIN="root@localhost";  //管理员email
 static 	$OJ_DATA="/home/judge/data";  //测试数据目录

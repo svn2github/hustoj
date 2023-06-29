@@ -40,6 +40,7 @@
     </div>
 
 </footer>
+<iframe src="session.php" height=0px width=0px ></iframe>
 </body>
 
 </html>

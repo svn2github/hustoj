@@ -2622,40 +2622,55 @@ int fix_java_mis_judge(char *work_dir, int &ACflg, int &topmemory,
 	return comp_res;
 }
 float raw_text_judge( char *infile, char *outfile, char *userfile){
-	float mark=0;
-	int total=0;
-	FILE *in=fopen(infile,"r");
-	if(fscanf(in,"%d",&total)!=1) return -1;
-	fclose(in);
-	FILE *out=fopen(outfile,"r");
-	int num=0;
-	char user_answer[4096];
-	float m[total+1];
-	char ans[total+1][128];
-	for(int i=0;i<total;i++){
-		if(fscanf(out,"%d",&num)!=1) return -2;
-		if(i==num-1){
-			if(fscanf(out,"%*[^\[][%f] %s",&m[num],ans[num])!=2) return -3;
-		}
-	}
-	fclose(out);
-	FILE *user=fopen(userfile,"r");
-	FILE *df=fopen("diff.out","a");
-	for(int i=1;i<=total;i++){
-		if(fscanf(user,"%d %s",&num,user_answer)!=2) continue;
-		if(num>0&&num<=total){
-			if(strcasecmp(ans[num],user_answer)==0 || strcasecmp(ans[num],"*")==0){
-				mark+=m[num];
-				printf("raw_text_judge%d:%.1f\n",num,m[num]);
-			}else{
-				fprintf(df,"%d:%s[%s] -%.1f\n",i,ans[i],user_answer,m[i]);
-			}
-			m[num]=0;
-		}
-	}
-	fclose(user);
-	fclose(df);
-	return mark;
+        float mark=0;
+        int total=0;
+        FILE *in=fopen(infile,"r");
+        if(fscanf(in,"%d",&total)!=1) return -1;
+        fclose(in);
+        FILE *out=fopen(outfile,"r");
+        int num=0;
+        char * user_answer=(char * )malloc(4096);
+        long unsigned int user_length=4095;
+        long unsigned int ans_length=4095;
+        float m[total+1];
+        char * ans[total+1];
+        for(int i=1;i<=total;i++){
+                ans[i]=(char *)malloc(4096);
+                if(fscanf(out,"%d",&num)!=1) return -2;
+                if(i==num){
+                        if(fscanf(out,"%*[^\[][%f]",&m[num])!=1) return -3;
+                        ans_length=getline(&ans[i],&ans_length,out);
+                        for(int j=ans_length-1;'\n'==ans[i][j]||'\r'==ans[i][j];j--){
+                                ans[i][j]='\0';
+                        }
+                }else{
+                }
+        }
+        fclose(out);
+        FILE *user=fopen(userfile,"r");
+        FILE *df=fopen("diff.out","a");
+        for(int i=1;i<=total;i++){
+                if(fscanf(user,"%d",&num)==EOF) continue;
+                user_length=getline(&user_answer,&user_length,user);
+                int j=0;
+                for(j=user_length-1;'\n'==user_answer[j]||'\r'==user_answer[j];j--){
+                        user_answer[j]='\0';
+                }
+                if(num>0&&num<=total){
+                        if(strcasecmp(ans[num],user_answer)==0 || strcasecmp(ans[num],"*")==0){
+                                mark+=m[num];
+                        }else{
+                                fprintf(df,"%d:%s[%s] -%.1f\n",i,ans[i],user_answer,m[i]);
+                        }
+                        m[num]=0;
+                }
+                free(ans[i]);
+        }
+        free(user_answer);
+        fclose(user);
+        fclose(df);
+        return mark;
+
 }
 int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 				  char *userfile,double* pass_rate,int spj)

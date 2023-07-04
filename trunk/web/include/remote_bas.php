@@ -109,9 +109,6 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 		pdo_query($sql,$result,0,$time,$memory,$sid);
 		return $result;	
 	}
-	//get user_id
-	$data=pdo_query("select user_id from solution where solution_id=?",$sid);
-	$user_id=$data[0]['user_id'];
 	
 	$summary=explode(":",$data[2]);
 	$detail=explode(",",$summary[1]);
@@ -132,7 +129,13 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	if($ac==$i) {
 		$result=4;
 	}
+	//get user_id
+	$data=pdo_query("select user_id from solution where solution_id=?",$sid);
+	$user_id=$data[0]['user_id'];
+	//update user
 	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=? AND `result`=4) WHERE `user_id`=?";
+	pdo_query($sql,$user_id,$user_id);
+	$sql="UPDATE `users` SET `submit`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=?               ) WHERE `user_id`=?";
 	pdo_query($sql,$user_id,$user_id);
 	
 	$sql="insert into runtimeinfo(solution_id,error) values(?,?) on duplicate key update error=? ";

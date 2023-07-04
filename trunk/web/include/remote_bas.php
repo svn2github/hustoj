@@ -109,6 +109,8 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 		pdo_query($sql,$result,0,$time,$memory,$sid);
 		return $result;	
 	}
+	$data=pdo_query("select user_id from solution where solution_id=?",$sid);
+	$user_id=$data[0]['user_id'];
 	$summary=explode(":",$data[2]);
 	$detail=explode(",",$summary[1]);
 	$total=count($detail)-1;

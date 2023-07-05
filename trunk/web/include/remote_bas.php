@@ -133,8 +133,6 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	$data=pdo_query("select user_id from solution where solution_id=?",$sid);
 	$user_id=$data[0]['user_id'];
 	//update user
-	$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=? AND `result`=4) WHERE `user_id`=?";
-	pdo_query($sql,$user_id,$user_id);
 	$sql="UPDATE `users` SET `submit`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=?               ) WHERE `user_id`=?";
 	pdo_query($sql,$user_id,$user_id);
 	
@@ -159,6 +157,8 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
                      $sql="UPDATE `contest_problem` SET `c_accepted`=(SELECT count(*) FROM `solution` WHERE `problem_id`=? AND `result`=4 and contest_id=?) WHERE `problem_id`=? and contest_id=?";
                      pdo_query($sql,$pid,$cid, $pid,$cid);
                 }
+		$sql="UPDATE `users` SET `solved`=(SELECT count(DISTINCT `problem_id`) FROM `solution` WHERE `user_id`=? AND `result`=4) WHERE `user_id`=?";
+		pdo_query($sql,$user_id,$user_id);
 	}
 	return $result;
 }

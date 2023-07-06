@@ -35,7 +35,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
   echo "&nbsp;&nbsp;- Error: ".$_FILES ["fps"] ["error"]."File size is too big, change in PHP.ini<br />";
 }
 else {
-  $tempdir = sys_get_temp_dir()."/import_syzoj";	
+  $tempdir = sys_get_temp_dir()."/import_syzoj".time();	
   mkdir($tempdir);
   $tempfile = $_FILES ["fps"] ["tmp_name"];
   if (get_extension( $_FILES ["fps"] ["name"])=="zip") {
@@ -71,8 +71,11 @@ else {
 			if(get_extension($name)=="ans"){
 				$name=basename($file_name,".ans").".out";
 			}
-		        file_put_contents($tempdir."/data/".$name,$file_content);
-			echo $file_name.":$pid<br>";
+		        echo "[$pid]";
+                        if($pid>0)
+                                file_put_contents("$OJ_DATA/$pid/".$name,$file_content);
+                        else
+                                file_put_contents($tempdir."/data/".$name,$file_content);
 		}else{
 			echo $file_name.":$pid<br>";
 		}

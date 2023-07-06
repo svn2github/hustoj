@@ -2,10 +2,10 @@ HUSTOJ安装说明
 	by zhblue(newsclan@gmail.com)
 	
 
-小白用户推荐ubuntu20.04
+小白用户推荐ubuntu22.04
 
-    wget http://dl.hustoj.com/install-ubuntu20.04.sh
-    sudo bash install-ubuntu20.04.sh
+    wget http://dl.hustoj.com/install.sh
+    sudo bash install.sh
 
 服务器无法安装ubuntu可以用centos7 （有的语言可能不支持），可以用下面脚本快速安装OJ：  
 

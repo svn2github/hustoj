@@ -107,7 +107,7 @@ if ($_FILES ["fps"] ["error"] > 0) {
   echo "&nbsp;&nbsp;- Error: ".$_FILES ["fps"] ["error"]."File size is too big, change in PHP.ini<br />";
 }
 else {
-  $tempdir = sys_get_temp_dir()."/import_qduoj";	
+  $tempdir = sys_get_temp_dir()."/import_qduoj".time();	
   echo  $tempdir ;
   mkdir($tempdir);
   $tempfile = $_FILES ["fps"] ["tmp_name"];

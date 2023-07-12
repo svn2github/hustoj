@@ -80,13 +80,13 @@ function do_submit_one($remote_site,$username,$sid){
 	$language=1;
 	$source="";
 	
-	$sql="select * from solution where solution_id=?";
+	$sql="select * from solution where result=16 and solution_id=?";
  	$data=pdo_query($sql,$sid);	
 	if(count($data)>0){
 		$row = $data[0];
 		$language = $langMap[$row['language']];
 		$problem_id = $row['problem_id'];
-		$sql = "select remote_oj,remote_id from problem where result=16 and problem_id=?";
+		$sql = "select remote_oj,remote_id from problem where problem_id=?";
 		$data = pdo_query($sql,$problem_id);
 		if (count($data)>0) {
 			$row=$data[0];

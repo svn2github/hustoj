@@ -45,12 +45,16 @@ function do_submit_one($remote_site,$username,$sid){
 		$row=$data[0];
 	        $language=$langMap[ $row['language']];
 	        $problem_id=$row['problem_id'];
-		$sql="select remote_oj,remote_id from problem where problem_id=?";
+		$sql="select remote_oj,remote_id from problem where result=16 and problem_id=?";
 		$data=pdo_query($sql,$problem_id);
 		if(count($data)>0){
 			$row=$data[0];
 			$problem_id=$row['remote_id'];
+		}else{
+			return -1;
 		}
+	}else{
+		return -1;
 	}
 	$sql="select * from source_code where solution_id=?";
  	$data=pdo_query($sql,$sid);	

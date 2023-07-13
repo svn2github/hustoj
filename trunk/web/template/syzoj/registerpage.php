@@ -1,7 +1,7 @@
-<?php $show_title="注册 - $OJ_NAME"; ?>
+<?php $show_title="<?php echo $MSG_REG_INFO?> - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="padding">
-  <h1>注册</h1>
+  <h1><?php echo $MSG_REG_INFO?></h1>
   <div class="ui error message" id="error" data-am-alert hidden>
     <p id="error_info"></p>
   </div>

@@ -7,40 +7,40 @@
   </div>
           <form action="register.php" method="post" role="form" class="ui form">
                 <div class="field">
-                    <label for="username">用户名*</label>
+                    <label for="username"><?php echo $MSG_USER_ID?>*</label>
                     <input name="user_id" class="form-control" placeholder="" type="text">
                 </div>
                 <div class="field">
-                    <label for="username">昵称*</label>
+                    <label for="username"><?php echo $MSG_NICK?>*</label>
                     <input name="nick" placeholder="" type="text">
                 </div>
                 <div class="two fields">
                     <div class="field">
-                    <label class="ui header">密码*</label>
+                    <label class="ui header"><?php echo $MSG_PASSWORD?>*</label>
                       <input name="password" placeholder="" type="password">
                     </div>
                     <div class="field">
-                      <label class="ui header">确认密码*</label>
+                      <label class="ui header"><?php echo $MSG_REPEAT_PASSWORD?>*</label>
                       <input name="rptpassword" placeholder="" type="password">
                     </div>
                 </div>
                 <div class="field">
-                    <label for="username">个性签名</label>
+                    <label for="username"><?php echo $MSG_SCHOOL?></label>
                     <input name="school" placeholder="" type="text" value="">
                 </div>
                 <div class="field">
-                    <label for="email">邮箱*</label>
+                    <label for="email"><?php echo $MSG_EMAIL?>*</label>
                     <input name="email" placeholder="" type="text">
                 </div>
                 <?php if($OJ_VCODE){?>
                   <div class="field">
-                    <label for="email">验证码*</label>
+                    <label for="email"><?php echo $MSG_VCODE?>*</label>
                     <input name="vcode" class="form-control" placeholder="" type="text">
                     <img alt="click to change" src="vcode.php" onclick="this.src='vcode.php?'+Math.random()" height="30px">
                   </div>
                 <?php }?>
-                <button name="submit" type="submit" class="ui button">注册</button>
-                <button name="submit" type="reset" class="ui button">重置</button>
+                <button name="submit" type="submit" class="ui button"><?php echo $MSG_REGISTER; ?></button>
+                <button name="submit" type="reset" class="ui button"><?php echo $MSG_RESET; ?></button>
             </form>
 </div>
 <?php include("template/$OJ_TEMPLATE/footer.php");?>

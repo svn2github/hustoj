@@ -100,19 +100,24 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	$time=0;
 	$memory=0;
 	echo "<br>==".htmlentities($html)."==";
-	if($data[2]=="Waiting"){
-		$sql="update solution set result=17,judgetime=now()  where solution_id=?";
-		pdo_query($sql,$sid);
-		return -1;
-	}else if($data[2]=="Compile Error"){
-		$reinfo=$html;
-		$sql="insert into compileinfo(solution_id,error) values(?,?) on duplicate key update error=? ";
-		pdo_query($sql,$sid,$reinfo,$reinfo);
-		$result=11;
-		$sql="update solution set result=?,pass_rate=?,time=?,memory=?,judgetime=now()  where solution_id=?";
-		pdo_query($sql,$result,0,$time,$memory,$sid);
-		return $result;	
-	}
+        if($data[2]=="Waiting"||$data[2]=="Judging"){
+                $sql="update solution set result=17,judgetime=now()  where solution_id=?";
+                pdo_query($sql,$sid);
+                return -1;
+        }else if($data[2]=="Compile Error"){
+                $reinfo=$html;
+                $sql="insert into compileinfo(solution_id,error) values(?,?) on duplicate key update error=? ";
+                pdo_query($sql,$sid,$reinfo,$reinfo);
+                $result=11;
+                $sql="update solution set result=?,pass_rate=?,time=?,memory=?,judgetime=now()  where solution_id=?";
+                pdo_query($sql,$result,0,$time,$memory,$sid);
+                return $result;
+        }else if(str_contains($data[2],"Accepted")){
+                $result=4;
+        }else if(str_contains($data[2],"Unaccepted")){
+                $result=5;
+        }
+
 	
 	$summary=explode(":",$data[2]);
 	$detail=explode(",",$summary[1]);

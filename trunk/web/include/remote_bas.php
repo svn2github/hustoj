@@ -138,6 +138,7 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	if($ac==$i) {
 		$result=4;
 	}
+	if($result==4&&$time==0&&$memory==0) return -1;
 	//get user_id
 	$data=pdo_query("select user_id from solution where solution_id=?",$sid);
 	$user_id=$data[0]['user_id'];

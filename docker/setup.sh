@@ -48,7 +48,7 @@ chmod +x /usr/bin/sim_c
 chmod +X /usr/bin/sim_cc
 chmod +x /usr/bin/sim_java
 chmod +x /usr/bin/sim.sh
-judge_client 1 0 /home/judge/ | grep "final result:4"
+
 
 # Adjust system configuration
 CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
@@ -100,7 +100,7 @@ PHP_INIT=`find /etc/init.d -name "php*-fpm"`
 PHP_SERVICE=`basename $PHP_INIT`
 service nginx restart
 service $PHP_SERVICE start
-
+judge_client 1 0 /home/judge/ | grep "final result:4"
 cd /home/judge/src/web
 chmod 755 /home/judge
 for page in problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php

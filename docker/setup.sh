@@ -48,6 +48,7 @@ chmod +x /usr/bin/sim_c
 chmod +X /usr/bin/sim_cc
 chmod +x /usr/bin/sim_java
 chmod +x /usr/bin/sim.sh
+judge_client 1 0 /home/judge/ | grep "final result:4"
 
 # Adjust system configuration
 CPU=`grep "cpu cores" /proc/cpuinfo |head -1|awk '{print $4}'`
@@ -108,7 +109,7 @@ do
 done;
 
 w3m -dump http://127.0.0.1/ 
-judge_client 1 0 /home/judge/ | grep "final result:4"
+
 w3m -dump http://127.0.0.1/status.php | grep 'AWT'
 w3m -dump http://hustoj.com/ip.php
 #ls -lh /home/judge/run0/log/

@@ -43,31 +43,33 @@ $view_news .= "</div>";
 
 $view_apc_info = "";
 
-$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 8000) solution  where result<13 group by md order by md desc limit 200";
-$result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
+$last_1000_id=pdo_query("select max(solution_id)-1000 from solution");
+if(count($last_1000_id)>0)  $last_1000_id=$last_1000_id[0][0];
+else $last_1000_id=0;
+$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 8000) solution  where result<13 and solution_id > $last_1000_id group by md order by md desc limit 200";
+$result = pdo_query( $sql ); //mysql_escape_string($sql));
 $chart_data_all = array();
 //echo $sql;
 
 foreach ( $result as $row ) {
-	array_push( $chart_data_all, array( $row[ 'md' ], $row[ 'c' ] ) );
+        array_push( $chart_data_all, array( $row[ 'md' ], $row[ 'c' ] ) );
 }
 
-$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * from solution order by solution_id desc limit 8000) solution where result=4 group by md order by md desc limit 200";
-$result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
+$sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * from solution order by solution_id desc limit 8000) solution where result=4 and solution_id > $last_1000_id group by md order by md desc limit 200";
+$result = pdo_query( $sql ); //mysql_escape_string($sql));
 $chart_data_ac = array();
 //echo $sql;
 
 foreach ( $result as $row ) {
-	array_push( $chart_data_ac, array( $row[ 'md' ], $row[ 'c' ] ) );
+        array_push( $chart_data_ac, array( $row[ 'md' ], $row[ 'c' ] ) );
 }
 if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
-	$sql = "select avg(sp) sp from (select  avg(1) sp,judgetime DIV 3600 from solution where result>3 and judgetime>date_sub(now(),interval 1 hour)  group by (judgetime DIV 3600) order by sp) tt;";
-	$result = mysql_query_cache( $sql );
-	$speed = ( $result[ 0 ][ 0 ] ? $result[ 0 ][ 0 ] : 0 ) . '/min';
+        $sql = "select avg(sp) sp from (select  avg(1) sp,judgetime DIV 3600 from solution where result>3 and solution_id >$last_1000_id  group by (judgetime DIV 3600) order by sp) tt;";
+        $result = pdo_query( $sql );
+        $speed = ( $result[ 0 ][ 0 ] ? $result[ 0 ][ 0 ] : 0 ) . '/min';
 } else {
-	if(isset($chart_data_all[ 0 ][ 1 ] ))$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
+        if(isset($chart_data_all[ 0 ][ 1 ] ))$speed = ( $chart_data_all[ 0 ][ 1 ] ? $chart_data_all[ 0 ][ 1 ] : 0 ) . '/day';
 }
-
 /////////////////////////Template
 require( "template/" . $OJ_TEMPLATE . "/index.php" );
 if( isset($OJ_LONG_LOGIN)

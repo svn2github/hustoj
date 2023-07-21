@@ -102,8 +102,8 @@ service $PHP_SERVICE start
 
 cd /home/judge/src/web
 chmod 755 /home/judge
-for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
-  do 
+for page in problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
+do 
   w3m -dump http://127.0.0.1/$page | grep HUSTOJ
 done;
 

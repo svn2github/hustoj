@@ -42,10 +42,10 @@ $view_news .= "<div class='panel-footer'></div>";
 $view_news .= "</div>";
 
 $view_apc_info = "";
-
+$last_1000_id=0;
 $last_1000_id=pdo_query("select max(solution_id)-1000 from solution");
 if(count($last_1000_id)>0)  $last_1000_id=$last_1000_id[0][0];
-else $last_1000_id=0;
+
 $sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * from solution order by solution_id desc limit 8000) solution  where result<13 and solution_id > $last_1000_id group by md order by md desc limit 200";
 $result = pdo_query( $sql ); //mysql_escape_string($sql));
 $chart_data_all = array();

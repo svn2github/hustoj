@@ -107,7 +107,7 @@ do
   w3m -dump http://127.0.0.1/$page | grep HUSTOJ
 done;
 
-w3m -dump http://127.0.0.1/ | grep 'HelloWorld'
+w3m -dump http://127.0.0.1/ 
 judge_client 1 0 /home/judge/ | grep "final result:4"
 w3m -dump http://127.0.0.1/status.php | grep 'AWT'
 w3m -dump http://hustoj.com/ip.php

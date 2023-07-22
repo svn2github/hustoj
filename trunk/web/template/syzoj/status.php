@@ -102,7 +102,9 @@
     $i=0;
     echo "<tr>";
     foreach($row as $table_cell){
-      if($i>3&&$i!=8)
+      if ($i==4)
+        echo "<td class='td_result'><b>";
+      else if($i>3&&$i!=8)
         echo "<td class='hidden-xs'><b>";
       else
         echo "<td><b>";

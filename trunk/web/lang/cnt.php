@@ -169,7 +169,8 @@
  $MSG_SET_LOGIN_IP ="指定登錄IP ";
  $MSG_PRIVILEGE_TYPE ="權限類型";
  $MSG_NEWS_MENU ="是否展示到菜單";
- 
+ $MSG_LAST_LOGIN="最後登錄";
+
  //contest.php
  $MSG_PRIVATE_WARNING ="比賽尚未開始或私有，不能查看題目。 ";
  $MSG_PRIVATE_USERS_ADD =" *可以將學生學號從Excel整列複製過來，然後要求他們用學號做UserID註冊,就能進入Private的比賽作為作業和測驗。 ";

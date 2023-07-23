@@ -18,3 +18,7 @@ HUSTOJ 分为两大部分，`core` 和 `web` ，分别对应判题和数据管�
 - [Core 与 Web 的连接方式解析](/Composition_Client)
 - [数据库解析](/Composition-Database)
 - [LiveCD 解析](/Composition-LiveCD)
+
+### 思维导图
+
+![](images/hustoj-mind.png)

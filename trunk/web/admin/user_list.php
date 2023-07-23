@@ -61,15 +61,15 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
 <center>
   <table width=100% border=1 style="text-align:center;">
     <tr>
-      <td>ID</td>
-      <td>Nick</td>
-      <td>Email</td>
-      <td>School</td>
-      <td>LastLogin</td> 
-      <td>Signed Up</td> 
-      <td>Use</td>
-      <td>PasswordReset</td>
-      <td>AddPrivilege</td>
+    <td><?php echo $MSG_USER_ID?></td>
+      <td><?php echo $MSG_NICK?></td>
+      <td><?php echo $MSG_EMAIL?></td>
+      <td><?php echo $MSG_SCHOOL?></td>
+      <td><?php echo $MSG_LAST_LOGIN?></td>
+      <td><?php echo $MSG_REGISTER?></td>
+      <td><?php echo $MSG_STATUS?></td>
+      <td><?php echo $MSG_SETPASSWORD?></td>
+      <td><?php echo $MSG_PRIVILEGE."-".$MSG_ADD ?></td>
       </tr>
     <?php
     foreach($result as $row){

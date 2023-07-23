@@ -158,7 +158,7 @@
   $MSG_SET_LOGIN_IP="SetLoginIP";
 	$MSG_PRIVILEGE_TYPE="Privilege Type";
 	$MSG_NEWS_MENU="Show in menu";
-
+        $MSG_LAST_LOGIN="Last Login";
   //contest.php
   $MSG_PRIVATE_WARNING="Contest has not started or you don't have privilege of it.";
   $MSG_PRIVATE_USERS_ADD="*Enter userIDs with newline, or you can copy and paste from a spreadsheet.";
@@ -227,7 +227,7 @@
   $MSG_SHOW_TAGS="Show Tags";
   $MSG_SHOW_ALL_TAGS="All Tags";
   $MSG_RESERVED="Reserved";
-
+  
   $MSG_HELP_SEEOJ="watch the front pages";
   $MSG_HELP_ADD_NEWS="add news for the homepage";
   $MSG_HELP_NEWS_LIST="edit or shutdown published news";

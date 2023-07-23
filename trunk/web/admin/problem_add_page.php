@@ -34,23 +34,23 @@
           <input class="input input-mini" type=number min="1" max="2048" step="1" name=memory_limit size=20 value=128> MiB<br><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_Description."</h4>"?>
+          <?php echo "<h4>".$MSG_Description."(<64kB)</h4>"?>
           <textarea class="kindeditor" rows=13 name=description cols=80></textarea><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_Input."</h4>"?>
+          <?php echo "<h4>".$MSG_Input."(<64kB)</h4>"?>
           <textarea class="kindeditor" rows=13 name=input cols=80></textarea><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_Output."</h4>"?>
+          <?php echo "<h4>".$MSG_Output."(<64kB)</h4>"?>
           <textarea  class="kindeditor" rows=13 name=output cols=80></textarea><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_Sample_Input."</h4>"?>
+          <?php echo "<h4>".$MSG_Sample_Input."(<64kB)</h4>"?>
           <textarea  class="input input-large" style="width:100%;" rows=13 name=sample_input></textarea><br><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_Sample_Output."</h4>"?>
+          <?php echo "<h4>".$MSG_Sample_Output."(<64kB)</h4>"?>
           <textarea  class="input input-large" style="width:100%;" rows=13 name=sample_output></textarea><br><br>
         </p>
         <p align=left>
@@ -64,7 +64,7 @@
           <textarea class="input input-large" style="width:100%;" rows=13 name=test_output></textarea><br><br>
         </p>
         <p align=left>
-          <?php echo "<h4>".$MSG_HINT."</h4>"?>
+          <?php echo "<h4>".$MSG_HINT."(<64kB)</h4>"?>
           <textarea class="kindeditor" rows=13 name=hint cols=80></textarea><br>
         </p>
         <p>

@@ -190,6 +190,8 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_CONTEST_OPEN="ئوچۇق";
 	$MSG_CONTEST_CREATOR="ئىجادچى";
 	$MSG_CONTEST_PENALTY="يىغىندى ۋاقىت";
+ 	$MSG_LOG="Log";
+        $MSG_SUSPECT="Audit";
 	$MSG_IP_VERIFICATION="IP دەلىلەش";
 	$MSG_CONTEST_SUSPECT1="كۆپ ID لىق IP ئادرېسى بار. ئەگەر مۇسابىقە، ئىمتىھان مەزگىلىدە ئوخشاش بىر كومپيۇتېردا نۇرغۇن ID نى زىيارەت قىلغان بولسىڭىز، بۇ ID خاتىرىلىنىدۇ. ";
 	$MSG_CONTEST_SUSPECT2="كۆپلىگەن IP ئادرېسىغا ئىگە ID. ئەگەر مۇسابىقە، ئىمتىھان مەزگىلىدە باشقا بىر كومپيۇتېرغا ئالماشسا، ئۇ خاتىرىلىنىدۇ. ";

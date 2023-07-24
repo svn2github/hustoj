@@ -28,7 +28,7 @@ if($OJ_SaaS_ENABLE){
 	$DOMAIN=$domain;
 }
 
-if(strpos($_SERVER["HTTP_USER_AGENT"],"MSIE")){  // 360 or IE use bs3 instead
+if(isset($_SERVER["HTTP_USER_AGENT"])&&strpos($_SERVER["HTTP_USER_AGENT"],"MSIE")){  // 360 or IE use bs3 instead
     $OJ_TEMPLATE="bs3";
 }
 // $OJ_BG="/image/bg".date('H').".jpg";  //每个整点更换壁纸，需要准备bg[0~23].jpg在image目录

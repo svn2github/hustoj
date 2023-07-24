@@ -180,6 +180,8 @@
 	$MSG_CONTEST_OPEN="대회 구분";
 	$MSG_CONTEST_CREATOR="등록자";
 	$MSG_CONTEST_PENALTY="누적시간";
+	$MSG_LOG="Log";
+        $MSG_SUSPECT="Audit";
 	$MSG_IP_VERIFICATION="IP검증";
 	$MSG_CONTEST_SUSPECT1="여러 개의 ID가 사용된 IP 주소. 대회 중에 같은 컴퓨터에서 다른 ID로 접근하면 기록됩니다.";
 	$MSG_CONTEST_SUSPECT2="여러 개의 IP 주소에서 접속된 ID. 대회 중에 다른 컴퓨터로 바꾸면 기록됩니다.";

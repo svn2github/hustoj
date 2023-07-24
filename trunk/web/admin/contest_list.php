@@ -61,17 +61,17 @@ if(isset($_GET['keyword']) && $_GET['keyword']!=""){
 <center>
   <table width=100% border=1 style="text-align:center;">
     <tr>
-      <td>ID</td>
-      <td>TITLE</td>
-      <td>START</td>
-      <td>END</td>
-      <td>OPEN</td>
-      <td>NOW</td>
+    <td><?php echo $MSG_CONTEST_ID?></td>
+      <td><?php echo $MSG_CONTEST_NAME?></td>
+      <td><?php echo $MSG_START_TIME?></td>
+      <td><?php echo $MSG_END_TIME?></td>
+      <td><?php echo $MSG_CONTEST_OPEN?></td>
+      <td><?php echo $MSG_STATUS?></td>
       <td><?php echo $MSG_EDIT ?></td>
-      <td>COPY</td>
-      <td>EXPORT</td>
-      <td>LOGS</td>
-      <td>SUSPECT</td>
+      <td><?php echo $MSG_COPY?></td>
+      <td><?php echo $MSG_EXPORT ?></td>
+      <td><?php echo $MSG_LOG?></td>
+      <td><?php echo $MSG_SUSPECT?></td>
     </tr>
     <?php
     foreach($result as $row){

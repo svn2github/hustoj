@@ -190,6 +190,8 @@
  $MSG_CONTEST_CREATOR ="創建人";
  $MSG_CONTEST_PENALTY ="累計時間";
  $MSG_IP_VERIFICATION =" IP驗證";
+ $MSG_LOG="日誌";
+ $MSG_SUSPECT="審計";
  $MSG_CONTEST_SUSPECT1 ="具有多個ID的IP地址。如果在競賽/考試期間在同一台計算機上訪問了多個ID，則會記錄該ID。 ";
  $MSG_CONTEST_SUSPECT2 ="具有多個IP地址的ID。 如果在競賽/考試期間切換到另一台計算機，它將記錄下來。 ";
  

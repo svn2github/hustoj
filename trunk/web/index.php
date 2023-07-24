@@ -50,7 +50,7 @@ $sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM (select * f
 $result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
 $chart_data_all = array();
 //echo $sql;
-if(count($result)>0)
+if(is_array($result))
 foreach ( $result as $row ) {
         array_push( $chart_data_all, array( $row[ 'md' ], $row[ 'c' ] ) );
 }
@@ -59,7 +59,7 @@ $sql = "SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM  (select * 
 $result = mysql_query_cache( $sql ); //mysql_escape_string($sql));
 $chart_data_ac = array();
 //echo $sql;
-if(count($result)>0)
+if(is_array($result))
 foreach ( $result as $row ) {
         array_push( $chart_data_ac, array( $row[ 'md' ], $row[ 'c' ] ) );
 }

@@ -63,6 +63,7 @@ if(is_array($result))
 foreach ( $result as $row ) {
         array_push( $chart_data_ac, array( $row[ 'md' ], $row[ 'c' ] ) );
 }
+$speed=0;
 if ( isset( $_SESSION[ $OJ_NAME . '_' . 'administrator' ] ) ) {
         $sql = "select avg(sp) sp from (select  avg(1) sp,judgetime DIV 3600 from solution where result>3 and solution_id >$last_1000_id  group by (judgetime DIV 3600) order by sp) tt;";
         $result = mysql_query_cache( $sql );

@@ -109,7 +109,7 @@
       <a class="dropdown-item btn-sm" href="../online.php" target="main"><b><?php echo $MSG_SYSTEM."-".$MSG_HELP_ONLINE?></b></a>      
       <a class="dropdown-item btn-sm" href="update_db.php" target="main" title="<?php echo $MSG_HELP_UPDATE_DATABASE?>"><b><?php echo $MSG_SYSTEM."-".$MSG_UPDATE_DATABASE?></b></a>
       <a class="dropdown-item btn-sm" href="backup.php" target="main" title="<?php echo $MSG_HELP_BACKUP_DATABASE?>"><b><?php echo $MSG_SYSTEM."-".$MSG_BACKUP_DATABASE?></b></a>
-      <a class="dropdown-item btn-sm" href="../daochu.php" target="main" title="<?php echo "导出排行榜"?>"><b><?php echo "导出排行榜"?></b></a>
+      <a class="dropdown-item btn-sm" href="ranklist_export.php" target="main" title="<?php echo "导出排行榜"?>"><b><?php echo "导出排行榜"?></b></a>
     
     </div>
   </div>

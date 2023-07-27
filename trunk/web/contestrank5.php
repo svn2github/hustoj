@@ -4,6 +4,7 @@
         require_once('./include/cache_start.php');
     require_once('./include/db_info.inc.php');
         require_once('./include/setlang.php');
+// NOIP 补题榜
         $view_title= $MSG_CONTEST.$MSG_RANKLIST;
 	$show_title= $view_title;
         $title="";

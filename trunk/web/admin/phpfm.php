@@ -3484,7 +3484,15 @@ function dir_list_form() {
                     <input type=\"button\" style=\"width:100\" onclick=\"test_prompt(71)\" value=\"".et('Compress')."\">";
             if ($islinux) $out .= "
                     <input type=\"button\" style=\"width:100\" onclick=\"resolveIDs()\" value=\"".et('ResolveIDs')."\">";
-            $out .= "
+            $out .= "<span title='一般推荐用英文命名，相同文件名的.in .out文件为一组。
+不支持.ans的扩展名，请在上传前用Windows的命令行统一修改ren *.ans *.out。
+支持在文件名中使用方括号[]来标注分数。如 test01[20].in / test01[20].out将视为分数是20分,未标注的文件按10分计分，系统最终根据所有文件的总分和运行得分，记录提交的通过率pass_rate放入solution表，用于前台显示。
+评测的时候根据所有.in文件的字典序来评测, 因此test10先于test2评测, 后于test02评测。
+subtask的命名规则，可以在分数之前，再增加一个英文句号. 系统认为这个句号之前的内容为subtask的名字，相同subtask名字的测试数据为一组，互相绑定。
+例如: subtask1.1[10].in/out 和 subtask1.2[20].in/out 为一组subtask,必须同时通过才能得分共30分。
+subtask不限定必须是数字，如 TaskA.a[20].in/out 和 TaskA.b[20].in/out也可以是一组，共计40分。
+subtask的题目中也可以有不跟其他数据绑定的，认为是自己一组，如big[30].in/out可以跟前面两个例子同时放在一个题目中，共计100分。' >
+               命名规则: .in/.out 对应，[]标记分数，.标记subtask ， 如 TaskA.a[20].in/out 和 TaskA.b[20].in/out 是一组subtask，共计40分。</span>
                 </nobr></td>
                 </tr>
 				<tr>

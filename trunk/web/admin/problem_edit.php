@@ -24,6 +24,11 @@ include_once("kindeditor.php") ;
     <?php
     if (isset($_GET['id'])) {
       ;//require_once("../include/check_get_key.php");
+        $pid=intval($_GET['pid']);
+        if(! (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$pid])) ){
+                echo "No Privilege.";
+                exit(0);
+        }
     ?>
 
     <form method=POST action=problem_edit.php>
@@ -105,7 +110,10 @@ include_once("kindeditor.php") ;
     else {
       require_once("../include/check_post_key.php");
       $id = intval($_POST['problem_id']);
-
+      if(! (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$id])) ){
+                echo "No Privilege.";
+                exit(0)    ;
+      }
       if (!(isset($_SESSION[$OJ_NAME.'_'."p$id"]) || isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'.'problem_editor']) )) exit();
 
       $title = $_POST['title'];

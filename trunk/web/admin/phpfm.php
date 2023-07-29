@@ -86,7 +86,7 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
         $pid=intval(basename($current_dir));
         if($pid==0) $pid=intval(basename($dir_dest));
     }
-    $current_dir="$OJ_DATA/".intval($_GET['pid'])."/";
+    $current_dir="$OJ_DATA/$pid/";
     if(! (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$pid])) ){
         echo "No Privilege.";
         exit(0)    ;

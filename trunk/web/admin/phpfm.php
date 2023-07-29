@@ -78,14 +78,20 @@ if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator'])
         case 1: error_reporting(E_ERROR | E_PARSE | E_COMPILE_ERROR); @ini_set("display_errors",1); break;
         case 2: error_reporting(E_ALL); @ini_set("display_errors",1); break;
     }
-    if(isset($_GET['pid'])){
-		$current_dir="$OJ_DATA/".intval($_GET['pid'])."/";
-    }else{
-	$pid=intval(basename($current_dir));
-	if($pid==0) $pid=intval(basename($dir_dest));
 
-	$current_dir="$OJ_DATA/".intval($pid)."/";
+    $pid=0;
+    if(isset($_GET['pid'])){
+        $pid=intval($_GET['pid']);
+    }else{
+        $pid=intval(basename($current_dir));
+        if($pid==0) $pid=intval(basename($dir_dest));
     }
+    $current_dir="$OJ_DATA/".intval($_GET['pid'])."/";
+    if(! (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$pid])) ){
+        echo "No Privilege.";
+        exit(0)    ;
+    }
+
     $dir_dest=$current_dir;
     if (!isset($current_dir)){
         $current_dir = $path_info["dirname"]."/";

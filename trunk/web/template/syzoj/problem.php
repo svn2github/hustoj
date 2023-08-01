@@ -133,7 +133,7 @@ div[class*=ace_br] {
     $soutput=str_replace("<","&lt;",$row['sample_output']);
     $soutput=str_replace(">","&gt;",$soutput);
   ?>
-  <?php if(strlen($sinput)){ ?>
+  <?php if(strlen($sinput)>0 && $sinput!="\n"){ ?>
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Sample_Input?> 
@@ -147,7 +147,7 @@ div[class*=ace_br] {
         </div>
     </div>
   <?php }?>
-  <?php if(strlen($sinput)){ ?>
+  <?php if(strlen($soutput)>0 && $soutput!="\n"){ ?>
     <div class="row">
         <div class="column">
           <h4 class="ui top attached block header"><?php echo $MSG_Sample_Output?>

@@ -175,6 +175,7 @@ if (isset($sample_sql)) {
 	$view_sample_output = $row['sample_output'];
 	$problem_id = $row['problem_id'];
 	$spj=$row['spj'];
+	if($spj>1) $OJ_ACE_EDITOR=false;
 }
 
   

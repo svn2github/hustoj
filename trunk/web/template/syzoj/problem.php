@@ -303,7 +303,7 @@ div[class*=ace_br] {
 
 
   <script>
-    var clipboardin=new Clipboard(copyin);
+    var clipboardin=new Clipboard($('#copyin')[0]);
     clipboardin.on('success', function(e){
       $("#copyin").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
           setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
@@ -315,7 +315,7 @@ div[class*=ace_br] {
       console.log(e);
     });
 
-    var clipboardout=new Clipboard(copyout);
+    var clipboardout=new Clipboard($('#copyout')[0]);
     clipboardout.on('success', function(e){
       $("#copyout").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
           setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);    

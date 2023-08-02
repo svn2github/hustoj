@@ -303,29 +303,34 @@ div[class*=ace_br] {
 
 
   <script>
-    var clipboardin=new Clipboard($('#copyin')[0]);
-    clipboardin.on('success', function(e){
-      $("#copyin").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
-          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
-      console.log(e);
-    });
-    clipboardin.on('error', function(e){
-      $("#copyin").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
-          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);
-      console.log(e);
-    });
+	  if($('#copyin')[0]!= undefined ){
 
-    var clipboardout=new Clipboard($('#copyout')[0]);
-    clipboardout.on('success', function(e){
-      $("#copyout").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
-          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
-      console.log(e);
-    });
-    clipboardout.on('error', function(e){
-      $("#copyout").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
-          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);
-      console.log(e);
-    });
+		    var clipboardin=new Clipboard($('#copyin')[0]);
+		    clipboardin.on('success', function(e){
+		      $("#copyin").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
+		          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
+		      console.log(e);
+		    });
+		    clipboardin.on('error', function(e){
+		      $("#copyin").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
+		          setTimeout(function () {$("#copyin").text("<?php echo $MSG_COPY; ?>"); }, 1500);
+		      console.log(e);
+		    });
+	  }
+	  if($('#copyout')[0]!= undefined ){
+
+		    var clipboardout=new Clipboard($('#copyout')[0]);
+		    clipboardout.on('success', function(e){
+		      $("#copyout").text("<?php echo $MSG_COPY.$MSG_SUCCESS; ?>!"); 
+		          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);    
+		      console.log(e);
+		    });
+		    clipboardout.on('error', function(e){
+		      $("#copyout").text("<?php echo $MSG_COPY.$MSG_FAIL; ?>!"); 
+		          setTimeout(function () {$("#copyout").text("<?php echo $MSG_COPY; ?>"); }, 1500);
+		      console.log(e);
+		    });
+	  }
 
   </script>
 <?php if (isset($OJ_MATHJAX)&&$OJ_MATHJAX){?>

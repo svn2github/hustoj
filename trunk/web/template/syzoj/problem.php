@@ -289,14 +289,28 @@ div[class*=ace_br] {
       }
     });
   }
+function selectOne( num, answer){
+          let editor = $("iframe")[0].contentWindow.$("#source");
+          let old=editor.text();
+          let key= num+".*";
+          console.log(key);
+          let rep=old.replace(new RegExp(key),num+" "+answer);
+          editor.text(rep);
+  }
 
   $(document).ready(function(){
-    $("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
-<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
-                        $("div.md").each(function(){
-                                $(this).html(marked.parse($(this).text()));
-                        });
-<?php } ?>
+    	$("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
+	<?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
+		$("div.md").each(function(){
+			$(this).html(marked.parse($(this).text()));
+		});
+	<?php } ?>
+        $('input[type="radio"]').click(function(){
+                if ($(this).is(':checked'))
+                {
+                   selectOne($(this).attr("name"),$(this).val());
+                }
+        });
 
   });
   </script>   

@@ -20,18 +20,14 @@ if (!isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 $problem_id = 1000;
 if (isset($_GET['id'])) {
 	$id = intval($_GET['id']);
-	$sample_sql = "SELECT sample_input,sample_output,problem_id FROM problem WHERE problem_id = ?";
 }
 else if (isset($_GET['cid']) && isset($_GET['pid'])) {
 	$cid = intval($_GET['cid']);
 	$pid = intval($_GET['pid']);
-
 	$psql = "SELECT problem_id FROM contest_problem WHERE contest_id=? AND num=?";
 	$data = pdo_query($psql,$cid,$pid);
-
 	$row = $data[0];
 	$problem_id = $row[0];
-	$sample_sql = "SELECT p.sample_input, p.sample_output, p.problem_id FROM problem p WHERE problem_id = ? ";
 }
 else {
 	$view_errors = "<h2>No Such Problem!</h2>";
@@ -158,7 +154,8 @@ if (isset($id))
 
 $view_sample_input = "1 2";
 $view_sample_output = "3";
-
+$spj=0;
+$sample_sql = "SELECT sample_input,sample_output,problem_id,spj FROM problem WHERE problem_id = ?";
 if (isset($sample_sql)) {
 	//echo $sample_sql;
 	if (isset($_GET['id'])) {
@@ -167,18 +164,17 @@ if (isset($sample_sql)) {
 	else {
 	  $result = pdo_query($sample_sql,$problem_id);
 	}
-
 	if($result == false)
 	{
 		$view_errors = "<h2>No Such Problem!</h2>";
 		require("template/".$OJ_TEMPLATE."/error.php");
 		exit(0);
 	}
-
 	$row = $result[0];
-	$view_sample_input = $row[0];
-	$view_sample_output = $row[1];
-	$problem_id = $row[2];
+	$view_sample_input = $row['sample_input'];
+	$view_sample_output = $row['sample_output'];
+	$problem_id = $row['problem_id'];
+	$spj=$row['spj'];
 }
 
   

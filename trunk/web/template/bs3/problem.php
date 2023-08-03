@@ -94,8 +94,6 @@
 					//echo "</div>";
 
 				}
-	      
-	      
 	      }
                     
 				echo "</div>";
@@ -245,7 +243,15 @@
 				}
 			} );
 		}
-
+               function selectOne( num, answer){
+		          let editor = $("iframe")[0].contentWindow.$("#source");
+		          let old=editor.text();
+		          let key= num+".*";
+		          console.log(key);
+		          let rep=old.replace(new RegExp(key),num+" "+answer);
+		          editor.text(rep);
+  		}
+		
 		$( document ).ready( function () {
 			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
 <?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
@@ -253,6 +259,16 @@
                                 $(this).html(marked.parse($(this).html()));
                         });
 <?php } ?>
+        $('input[type="radio"]').click(function(){
+                if ($(this).is(':checked'))
+                {
+                   selectOne($(this).attr("name"),$(this).val());
+                }
+        });
+<?php if ($row['spj']>1){ ?>
+    transform();
+<?php }?>
+
 
 		} );
 		function CopyToClipboard (input) {

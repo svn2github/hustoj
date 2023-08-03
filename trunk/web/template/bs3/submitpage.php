@@ -82,7 +82,7 @@
 	    <pre style="width:80%;height:<?php echo $height?>;font-size:13pt" cols=180 rows=20 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
             <input type=hidden id="hide_source" name="source" value=""/>
           <?php }else{ ?>
-            <textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"> <?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
+            <textarea style="width:80%;height:600" cols=180 rows=20 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
           <?php }?>
 
           <?php if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN){?>

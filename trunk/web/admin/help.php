@@ -19,9 +19,10 @@ $delay=pdo_query($sql);
     <td ><center><a class='btn btn-info btn-sm' href='help.php'>System Status </a></center></td><td>
 		    Delay:<?php echo $delay[0][0] ?>s/judge &nbsp;&nbsp;  
 		    CPU:<?php echo sys_getloadavg()[0];?>tasks/1min  &nbsp;&nbsp; 
+	<?php if(function_exists('system')){  ?>
 		    FreeMem:<?php system(" free -h|grep Mem|awk '{print $7\"/\"$2 }'");?>&nbsp;&nbsp;  
 		    FreeDisk:<?php system("df -h|grep '/dev/'|grep -v 'shm'|awk '{print $4 \"/\" $2}'");?>&nbsp;&nbsp;  
-
+	<?php } ?>
 	</td>
 			
     </tr>

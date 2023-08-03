@@ -251,6 +251,7 @@ div[class*=ace_br] {
        	 	main.parent().append("<div id='submitPage' class='container' style='opacity:0.95;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
 		$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
 	}
+	$("#submit").remove();
   }
 
   function submit_code() {
@@ -311,6 +312,9 @@ function selectOne( num, answer){
                    selectOne($(this).attr("name"),$(this).val());
                 }
         });
+	<?php if ($row['spj']>1){ ?>
+	    transform();
+	<?php }?>
 
   });
   </script>   

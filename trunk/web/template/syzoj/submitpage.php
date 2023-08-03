@@ -16,7 +16,12 @@
 .ace-chrome .ace_marker-layer .ace_active-line{   /*当前行*/
    background-color: rgba(0,0,199,0.3);
 }
+            .button, input, optgroup, select, textarea {  /*选择题的题号大小*/
+    font-family: sans-serif;
+    font-size: 150%;
+    line-height: 1.2;
 
+}
   </style>
     
 <center>

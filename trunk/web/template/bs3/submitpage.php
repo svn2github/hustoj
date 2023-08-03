@@ -167,12 +167,12 @@
             if(ra[0]==11)
               tb.innerHTML="<a href='ceinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</a>";
             else
-              tb.innerHTML="<a href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"</a>";
+              tb.innerHTML="<a href='reinfo.php?sid="+solution_id+"' class='badge badge-info' target=_blank>"+judge_result[ra[0]]+"AC:"+ra[4]+"</a>";
           }
 
-          if(ra[0]<4)tb.innerHTML+=loader;
+          if(ra[0]<4)tb.innerHTML=loader;
           
-          tb.innerHTML="Memory:"+ra[1];
+          tb.innerHTML+="Memory:"+ra[1];
           tb.innerHTML+="Time:"+ra[2];
 
           if(ra[0]<4)
@@ -233,85 +233,77 @@
       document.getElementById("frmSolution").submit();
     }
 
-    function do_submit(){
-      <?php if($OJ_LONG_LOGIN==true&&isset($_COOKIE[$OJ_NAME."_user"])&&isset($_COOKIE[$OJ_NAME."_check"]))echo"let xhr=new XMLHttpRequest();xhr.open('GET','login.php',true);xhr.send();";?>
-      if(using_blockly) 
-        translate();
-     
-      if(typeof(editor) != "undefined"){ 
-        $("#hide_source").val(editor.getValue());
-      }
+function do_submit(){
+	 $("#Submit").attr("disabled","true");   // mouse has a bad key1
+	if(using_blockly) 
+		 translate();
+	if(typeof(editor) != "undefined"){ 
+		$("#hide_source").val(editor.getValue());
+	}
+	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+	var problem_id=document.getElementById(mark);
+	if(mark=='problem_id')
+	problem_id.value='<?php if (isset($id))echo $id?>';
+	else
+	problem_id.value='<?php if (isset($cid))echo $cid?>';
+	document.getElementById("frmSolution").target="_self";
+	
+<?php if(isset($_GET['spa'])){?>
+        $.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
+        $("#Submit").prop('disabled', true);
+        $("#TestRub").prop('disabled', true);
+        count=<?php echo $OJ_SUBMIT_COOLDOWN_TIME?> * 2 ;
+        handler_interval= window.setTimeout("resume();",1000);
+<?php }else{?>
+        document.getElementById("frmSolution").submit();
+<?php }?>
 
-      var mark="<?php echo isset($id)?'problem_id':'cid';?>";
-      var problem_id=document.getElementById(mark);
-
-      if(mark=='problem_id')
-        problem_id.value='<?php if (isset($id))echo $id?>';
-      else
-        problem_id.value='<?php if (isset($cid))echo $cid?>';
-
-      document.getElementById("frmSolution").target="_self";
-      document.getElementById("frmSolution").submit();
-    }
+}
 
     var handler_interval;
 
-    function do_test_run(){
-      if( handler_interval) window.clearInterval( handler_interval);
+function do_test_run(){
+	if( handler_interval) window.clearInterval( handler_interval);
+	var loader="<img width=18 src=image/loader.gif>";
+	var tb=window.document.getElementById('result');
+        var source=$("#source").val();
+	if(typeof(editor) != "undefined") {
+		source=editor.getValue();
+        	$("#hide_source").val(source);
+	}
+	if(source.length<10) return alert("too short!");
+	if(tb!=null)tb.innerHTML=loader;
 
-      var loader="<img width=18 src=image/loader.gif>";
-      var tb=window.document.getElementById('result');
-      var source=$("#source").val();
-
-      if(typeof(editor) != "undefined") {
-        source = editor.getValue();
-        $("#hide_source").val(source);
-      }
-
-      if(source.length<10) return alert("too short!");
-
-      if(tb!=null) tb.innerHTML=loader;
-
-      var mark="<?php echo isset($id)?'problem_id':'cid';?>";
-      var problem_id=document.getElementById(mark);
-      problem_id.value=-problem_id.value;
-      document.getElementById("frmSolution").target="testRun";
-      //$("#hide_source").val(editor.getValue());
-      //document.getElementById("frmSolution").submit();
-      $.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
-      $("#Submit").prop('disabled', true);
-      $("#TestRun").prop('disabled', true);
-      problem_id.value=-problem_id.value;
-      count=20;
-      handler_interval= window.setTimeout("resume();",1000);
-    }
-
-    function resume(){
-      count--;
-      var s=$("#Submit")[0];
-      var t=$("#TestRun")[0];
-      if(count<0){
-        s.disabled=false;
-        if(t!=null)t.disabled=false;
-     
-        s.value="<?php echo $MSG_SUBMIT?>";
-        
-        if(t!=null)t.value="<?php echo $MSG_TR?>";
-        
-        if( handler_interval) window.clearInterval( handler_interval);
-        
-        if($("#vcode")!=null) $("#vcode").click();
-        
-        $("#csrf").load("csrf.php?"+sid);
-        
-      }else{
-        s.value="<?php echo $MSG_SUBMIT?>("+count+")";
-        
-        if(t!=null)t.value="<?php echo $MSG_TR?>("+count+")";
-        
-        window.setTimeout("resume();",1000);
-      }
-    }
+	var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+	var problem_id=document.getElementById(mark);
+	problem_id.value=-problem_id.value;
+	document.getElementById("frmSolution").target="testRun";
+	//$("#hide_source").val(editor.getValue());
+	//document.getElementById("frmSolution").submit();
+	$.post("submit.php?ajax",$("#frmSolution").serialize(),function(data){fresh_result(data);});
+  	$("#Submit").prop('disabled', true);
+  	$("#TestRub").prop('disabled', true);
+	problem_id.value=-problem_id.value;
+	count=<?php echo $OJ_SUBMIT_COOLDOWN_TIME?> * 2 ;
+	handler_interval= window.setTimeout("resume();",1000);
+}
+function resume(){
+	count--;
+	var s=$("#Submit")[0];
+	var t=$("#TestRub")[0];
+	if(count<0){
+		s.disabled=false;
+		if(t!=null)t.disabled=false;
+		 $("#Submit").text("<?php echo $MSG_SUBMIT?>");
+		if(t!=null)t.value="<?php echo $MSG_TR?>";
+		if( handler_interval) window.clearInterval( handler_interval);
+		if($("#vcode")!=null) $("#vcode").click();
+	}else{
+		 $("#Submit").text("<?php echo $MSG_SUBMIT?>("+count+")");
+		if(t!=null)t.value="<?php echo $MSG_TR?>("+count+")";
+		window.setTimeout("resume();",1000);
+	}
+}
 
     function switchLang(lang){
       var langnames=new Array("c_cpp","c_cpp","pascal","java","ruby","sh","python","php","perl","csharp","objectivec","vbscript","scheme","c_cpp","c_cpp","lua","javascript","golang");
@@ -359,34 +351,38 @@
       $("#language").val(6);
     }
 
-   function autoSave(){
-        var mark="<?php echo isset($id)?'problem_id':'cid';?>";
-        var problem_id=$("#"+mark).val();
-	if(!!localStorage){
-		let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
-		if(typeof(editor) != "undefined")
-			$("#hide_source").val(editor.getValue());
-		localStorage.setItem(key,$("#hide_source").val());
-		console.log("autosaving "+key+"..."+new Date());
-	}
-   }
     function loadFromBlockly(){
       translate();
       do_test_run();
       $("#frame_source").hide();
      //  $("#Submit").prop('disabled', false);
     }
-   $(document).ready(function(){
-   	$("#source").css("height",window.parent.innerHeight-220);  
+   function autoSave(){
+        var mark="<?php echo isset($id)?'problem_id':'cid';?>";
+        var problem_id=$("#"+mark).val();
 	if(!!localStorage){
-                let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
-                let saved=localStorage.getItem(key);
-                if(saved!=null&&saved!=""&&saved.length>editor.getValue().length){
-                 	console.log("loading "+saved.length);
-                        if(typeof(editor) != "undefined")
-                                editor.setValue(saved);
-                 }
-        }
+		 let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
+		if(typeof(editor) != "undefined")
+			$("#hide_source").val(editor.getValue());
+		localStorage.setItem(key,$("#hide_source").val());
+		//console.log("autosaving "+key+"..."+new Date());
+	}
+   }
+   $(document).ready(function(){
+   	$("#source").css("height",window.innerHeight-180);  
+	if(!!localStorage){
+		let key="<?php echo $_SESSION[$OJ_NAME.'_user_id']?>source:"+location.href;
+		let saved=localStorage.getItem(key);
+		   if(saved!=null&&saved!=""&&saved.length>editor.getValue().length){
+                        //let load=confirm("发现自动保存的源码，是否加载？（仅有一次机会）");
+                        //if(load){
+                                console.log("loading "+saved.length);
+                                if(typeof(editor) != "undefined")
+                                        editor.setValue(saved);
+                        //}
+                }
+
+	}
 	window.setInterval('autoSave();',5000);
    });
   </script>

@@ -9,7 +9,7 @@
       <?php echo $view_errors;?>
       <?php if ($OJ_LANG=="cn")  echo "<br>如果你是管理员，希望解决这个问题，请打开
                         <a href='http://hustoj.com' target='_blank'>HUSTOJ常见问题</a>，按Ctrl+F查找上面错误信息中的关键词。<br>\n
-                        如果你不是管理员，可以联系管理员${OJ_ADMIN}。";?>
+                        如果你不是管理员，可以联系管理员$OJ_ADMIN 。";?>
     </div>
       <!-- <p><%= err.details %></p> -->
     <p>

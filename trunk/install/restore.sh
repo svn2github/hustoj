@@ -27,6 +27,10 @@ mv home/judge/src/web/upload /home/judge/src/web/
 chown www-data -R /home/judge/src/web/
 bzip2 -d var/backups/db_${BAKDATE}.sql.bz2
 sed -i 's/COLLATE=utf8mb4_0900_ai_ci//g' var/backups/db_${BAKDATE}.sql
-mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < var/backups/db_${BAKDATE}.sql
-mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < /home/judge/src/install/update.sql
+if ! mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < var/backups/db_${BAKDATE}.sql ; then
+   mysql $DATABASE < var/backups/db_${BAKDATE}.sql
+fi
+if ! mysql -h $SERVER -u$USER -p$PASSWORD $DATABASE < /home/judge/src/install/update.sql ; then
+   mysql $DATABASE < /home/judge/src/install/update.sql
+fi
 

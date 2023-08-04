@@ -282,14 +282,14 @@ div[class*=ace_br] {
 <?php include("template/$OJ_TEMPLATE/footer.php");?>
 
   <script>
-  function phpfm(pid){
+function phpfm(pid){
     //alert(pid);
     $.post("admin/phpfm.php",{'frame':3,'pid':pid,'pass':''},function(data,status){
       if(status=="success"){
         document.location.href="admin/phpfm.php?frame=3&pid="+pid;
       }
     });
-  }
+}
 function selectOne( num, answer){
           let editor = $("iframe")[0].contentWindow.$("#source");
           let old=editor.text();
@@ -297,7 +297,15 @@ function selectOne( num, answer){
           console.log(key);
           let rep=old.replace(new RegExp(key),num+" "+answer);
           editor.text(rep);
-  }
+}
+function selectMulti( num, answer){
+  let editor = $("iframe")[0].contentWindow.$("#source");
+  let old=editor.text();
+  let key= num+".*";
+  console.log(key);
+  let rep=old.replace(new RegExp(key),num+" "+answer);
+  editor.text(rep);
+}
 
   $(document).ready(function(){
     	$("#creator").load("problem-ajax.php?pid=<?php echo $id?>");
@@ -308,9 +316,16 @@ function selectOne( num, answer){
 	<?php } ?>
         $('input[type="radio"]').click(function(){
                 if ($(this).is(':checked'))
-                {
                    selectOne($(this).attr("name"),$(this).val());
-                }
+        });
+	$('input[type="checkbox"]').click(function(){
+                let num=$(this).attr("name");
+                let answer="";
+                $("input[type=checkbox][name="+num+"]").each(function(){
+                        if ($(this).is(':checked'))
+                                answer+=$(this).val();
+                });
+                selectMulti(num,answer);
         });
 	<?php if ($row['spj']>1){ ?>
 	    transform();

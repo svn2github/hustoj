@@ -31,7 +31,7 @@ if($view_content)
 echo "<center>
 <table>
 <tr>
-<td class=blue>$from_user:${to_user}[".htmlentities(str_replace("\n\r","\n",$view_title),ENT_QUOTES,"UTF-8")." ]</td>
+<td class=blue>$from_user -&gt; $to_user[".htmlentities(str_replace("\n\r","\n",$view_title),ENT_QUOTES,"UTF-8")." ]</td>
 </tr>
 <tr><td><pre>". htmlentities(str_replace("\n\r","\n",$view_content),ENT_QUOTES,"UTF-8")."</pre>
 </td></tr>

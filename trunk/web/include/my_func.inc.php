@@ -10,7 +10,7 @@ function create_subdomain($user_id,$template="bs3",$friendly="0"){
         pdo_query("create database `jol_$user_id`;\n");
         pdo_query("drop USER '$NEW_USER'@'localhost';");
         pdo_query("create USER '$NEW_USER'@'localhost' identified by '$NEW_PASS';");
-        pdo_query("grant all privileges on jol_${user_id}.* to '$NEW_USER'@'localhost' ;");
+        pdo_query("grant all privileges on jol_$user_id.* to '$NEW_USER'@'localhost' ;");
         pdo_query("flush privileges;\n");
         $sql="use `jol_$user_id`;\n";
         $csql=file_get_contents("/home/judge/src/install/db.sql");
@@ -64,11 +64,11 @@ grant {
 //      echo "</pre>".$CONF_FILE;
         file_put_contents($CONF_FILE,$CONF_STR);
         $DB_NAME="jol_".$user_id;
-        $sql="delete from jol_${user_id}.privilege where user_id='".$user_id."'; ";
+        $sql="delete from jol_".$user_id.".privilege where user_id='".$user_id."'; ";
         pdo_query($sql);
-        $sql="INSERT INTO jol_${user_id}.privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'administrator', 'true', 'N');";
+        $sql="INSERT INTO jol_".$user_id.".privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'administrator', 'true', 'N');";
         pdo_query($sql);
-        $sql="INSERT INTO jol_${user_id}.privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'source_browser', 'true', 'N');";
+        $sql="INSERT INTO jol_".$user_id.".privilege(user_id,rightstr,valuestr,defunct) values('".$user_id."', 'source_browser', 'true', 'N');";
         pdo_query($sql);
 
 }

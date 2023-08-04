@@ -1,7 +1,9 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND noninteractive
-RUN     sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list &&\
-	apt-get update && apt-get -y upgrade
+#RUN     echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+#RUN     echo "100.100.2.148 mirrors.cloud.aliyuncs.com" >> /etc/hosts
+RUN     apt-get update && apt-get -y upgrade
+
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        apt-utils 	
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        libmariadb-dev 
 RUN    	DEBIAN_FRONTEND=noninteractive  apt-get -y install --no-install-recommends        libmysqlclient-dev 

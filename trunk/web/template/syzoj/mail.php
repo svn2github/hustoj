@@ -1,4 +1,4 @@
-<?php $show_title="错误信息 - $OJ_NAME"; ?>
+<?php $show_title="Mail - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <div class="ui icon message">
   <i class="mail icon"></i>

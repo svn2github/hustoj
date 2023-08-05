@@ -251,7 +251,14 @@
 		          let rep=old.replace(new RegExp(key),num+" "+answer);
 		          editor.text(rep);
   		}
-		
+		function selectMulti( num, answer){
+			  let editor = $("iframe")[0].contentWindow.$("#source");
+			  let old=editor.text();
+			  let key= num+".*";
+			  console.log(key);
+			  let rep=old.replace(new RegExp(key),num+" "+answer);
+			  editor.text(rep);
+		}
 		$( document ).ready( function () {
 			$( "#creator" ).load( "problem-ajax.php?pid=<?php echo $id?>" );
 <?php if(isset($OJ_MARKDOWN)&&$OJ_MARKDOWN){ ?>
@@ -264,6 +271,15 @@
                 {
                    selectOne($(this).attr("name"),$(this).val());
                 }
+        });
+	$('input[type="checkbox"]').click(function(){
+                let num=$(this).attr("name");
+                let answer="";
+                $("input[type=checkbox][name="+num+"]").each(function(){
+                        if ($(this).is(':checked'))
+                                answer+=$(this).val();
+                });
+                selectMulti(num,answer);
         });
 <?php if ($row['spj']>1){ ?>
     transform();
@@ -358,7 +374,10 @@
        	 	main.parent().append("<div id='submitPage' class='container' style='opacity:0.8;position:fixed;z-index:1000;top:49px;right:-"+width2+"px'></div>");
 		$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
 	}
-	      
+	$("#submit").remove();      
+        <?php if ($row['spj']>1){ ?>
+            window.setTimeout('$("iframe")[0].contentWindow.$("#TestRun").remove();',1000);
+        <?php }?>
 
   }
 

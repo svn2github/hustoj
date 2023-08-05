@@ -2621,7 +2621,7 @@ int fix_java_mis_judge(char *work_dir, int &ACflg, int &topmemory,
 	}
 	return comp_res;
 }
-float raw_text_judge( char *infile, char *outfile, char *userfile){
+float raw_text_judge( char *infile, char *outfile, char *userfile, int *total_mark){
         float mark=0;
         int total=0;
         FILE *in=fopen(infile,"r");
@@ -2634,11 +2634,13 @@ float raw_text_judge( char *infile, char *outfile, char *userfile){
         long unsigned int ans_length=4095;
         float m[total+1];
         char * ans[total+1];
+	*total_mark=0;
         for(int i=1;i<=total;i++){
                 ans[i]=(char *)malloc(4096);
                 if(fscanf(out,"%d",&num)!=1) return -2;
                 if(i==num){
                         if(fscanf(out,"%*[^\[][%f]",&m[num])!=1) return -3;
+			*total_mark+=m[num];
                         ans_length=getline(&ans[i],&ans_length,out);
                         for(int j=ans_length-1;'\n'==ans[i][j]||'\r'==ans[i][j];j--){
                                 ans[i][j]='\0';
@@ -3746,12 +3748,12 @@ int main(int argc, char **argv)
 			char src_pth[BUFFER_SIZE];
 			printf("raw text judge %d \n",p_id);
         		sprintf(src_pth, "Main.%s", lang_ext[lang]);
-			mark=raw_text_judge(infile, outfile, src_pth);
+			mark=raw_text_judge(infile, outfile, src_pth,&total_mark);
 			printf("raw_text_mark:%.1f\n",mark);
 			if(mark>=0 && mark<=100) pass_rate=mark;
-			pass_rate/=100.0;
-			if(mark==100) finalACflg=ACflg=OJ_AC;else finalACflg=ACflg=OJ_WA;
-			update_solution(solution_id, finalACflg,mark*10-((int)mark)*10,mark,sim,sim_s_id, pass_rate);
+			pass_rate/=total_mark;
+			if(mark==total_mark) finalACflg=ACflg=OJ_AC;else finalACflg=ACflg=OJ_WA;
+			update_solution(solution_id, finalACflg,total_mark,mark,sim,sim_s_id, pass_rate);
 
 	}
 	FILE *df=fopen("diff.out","a");

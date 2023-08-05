@@ -252,6 +252,9 @@ div[class*=ace_br] {
 		$("#submitPage").html("<iframe src='"+submitURL+"&spa' width='"+width+"px' height='"+height+"px' ></iframe>");
 	}
 	$("#submit").remove();
+	<?php if ($row['spj']>1){ ?>
+            window.setTimeout('$("iframe")[0].contentWindow.$("#TestRun").remove();',1000);
+        <?php }?>
   }
 
   function submit_code() {

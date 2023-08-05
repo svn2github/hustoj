@@ -23,6 +23,8 @@
                                     .$row["title"]."</a></td>"
                                     ."<td>".$row["time"]."</td>"."</tr>";
                             }
+                        }else{
+                            echo "check database connection or account ! ";
                         }
                         ?>
                     </tbody>

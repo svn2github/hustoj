@@ -90,11 +90,11 @@
 								}
 								if (isset($U[$i]->p_wa_num[$j]) && $U[$i]->p_wa_num[$j] > 0) {
 									echo "<span class=\"score score_10\">";
-									echo "100";
+									echo $U[$i]->p_pass_rate[$j]*100;
 									echo "</span>";
 								} else {
 									echo "<span class=\"score score_10\">";
-									echo "100";
+									echo $U[$i]->p_pass_rate[$j]*100;
 									echo "</span>";
 								}
 								echo "<div class=\"submit_time\">";

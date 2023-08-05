@@ -1,7 +1,8 @@
 <?php 
 require_once("../include/db_info.inc.php");
 require_once ("../include/my_func.inc.php");
-;?>
+?>
+<!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href='../include/hoj.css' type='text/css'>
 <script src="../template/bs3/jquery.min.js"></script>

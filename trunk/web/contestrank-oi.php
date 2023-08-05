@@ -59,6 +59,7 @@ class TM{
 			}
 				
 			$this->total+=$res*100;
+			$this->p_pass_rate[$pid]=$res;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
 //                      echo "Time:".$this->time."<br>";
 //                      echo "Solved:".$this->solved."<br>";

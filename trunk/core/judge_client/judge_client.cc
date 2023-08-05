@@ -3732,7 +3732,7 @@ int main(int argc, char **argv)
 			}
 			if (total_mark > 0 ){
 				pass_rate =get_mark;
-				pass_rate /= total_mark;
+				pass_rate /= 100.0;
 			}
 			update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
 							sim_s_id, pass_rate);
@@ -3750,8 +3750,8 @@ int main(int argc, char **argv)
         		sprintf(src_pth, "Main.%s", lang_ext[lang]);
 			mark=raw_text_judge(infile, outfile, src_pth,&total_mark);
 			printf("raw_text_mark:%.1f\n",mark);
-			if(mark>=0 && mark<=100) pass_rate=mark;
-			pass_rate/=total_mark;
+			if(mark>=0 && mark<=total_mark) pass_rate=mark;
+			pass_rate/=100.0;
 			if(mark==total_mark) finalACflg=ACflg=OJ_AC;else finalACflg=ACflg=OJ_WA;
 			update_solution(solution_id, finalACflg,total_mark,mark,sim,sim_s_id, pass_rate);
 

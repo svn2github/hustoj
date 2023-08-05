@@ -27,11 +27,11 @@ class TM{
                 $this->p_pass_rate=array(0);
 		$this->total=0;
         }
-        function Add($pid,$sec,$res){
+        function Add($pid,$sec,$res,$result){
 //              echo "Add $pid $sec $res<br>";
                 if (isset($this->p_ac_sec[$pid])&&$this->p_ac_sec[$pid]>0)
                         return;
-                if ($res*100<99){
+                if ($result!=4){
                         if(isset($this->p_pass_rate[$pid])){
                                 if($res>$this->p_pass_rate[$pid]){
 					$this->total-=$this->p_pass_rate[$pid]*100;
@@ -55,10 +55,10 @@ class TM{
                         if(isset($this->p_pass_rate[$pid])){
 				$this->total-=$this->p_pass_rate[$pid]*100;
 			}else{
-				$this->p_pass_rate[$pid]=$res;
+				$this->p_pass_rate[$pid]=$res*100;
 			}
 				
-			$this->total+=100;
+			$this->total+=$res*100;
 			$this->time+=$sec+$this->p_wa_num[$pid]*1200;
 //                      echo "Time:".$this->time."<br>";
 //                      echo "Solved:".$this->solved."<br>";
@@ -117,7 +117,7 @@ if ($start_time==0){
 }
 
 if ($start_time>time()){
- 	$view_errors = "$MSG_CONTEST $MSG_Contest_Pending!";
+        $view_errors= "Contest Not Started!";
         require("template/".$OJ_TEMPLATE."/error.php");
         exit(0);
 }
@@ -188,9 +188,9 @@ for ($i=0;$i<$rows_cnt;$i++){
         }
 	if($row['result']!=4 && $row['pass_rate']>=0.99) $row['pass_rate']=0;
         if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
-        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0);
+        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0,0);
         else
-        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate']);
+        	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,$row['pass_rate'],$row['result']);
        
 }
 usort($U,"s_cmp");

@@ -392,10 +392,7 @@ for ($i=0; $i<$rows_cnt; $i++) {
     $mark = "";
   }
   else {
-    if($AC_RATE > 99)
-      $mark = "";
-    else
-      $mark = " "."AC:".$AC_RATE."%";
+    $mark = " ".$MSG_MARK.$AC_RATE;
   }
 
   if ((!isset($_SESSION[$OJ_NAME.'_'.'user_id']) || $row['user_id']!=$_SESSION[$OJ_NAME.'_'.'user_id']) && !isset($_SESSION[$OJ_NAME.'_'.'source_browser']))

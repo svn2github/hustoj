@@ -199,6 +199,8 @@ if (!$view_src) {
 
 	if (file_exists($template_file)) {
 		$view_src = file_get_contents($template_file);
+	}else if (file_exists("$OJ_DATA/$problem_id/template.c")) {
+		$view_src = file_get_contents("$OJ_DATA/$problem_id/template.c");
 	}
 }
 

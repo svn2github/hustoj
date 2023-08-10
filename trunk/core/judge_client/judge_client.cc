@@ -3732,7 +3732,8 @@ int main(int argc, char **argv)
 			}
 			if (total_mark > 0 ){
 				pass_rate =get_mark;
-				pass_rate /= 100.0;
+				 if(total_mark>100) pass_rate /= total_mark;
+                                else pass_rate /= 100.0;
 			}
 			update_solution(solution_id, finalACflg, usedtime, topmemory >> 10, sim,
 							sim_s_id, pass_rate);

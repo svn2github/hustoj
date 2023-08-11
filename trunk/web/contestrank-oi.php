@@ -188,7 +188,8 @@ for ($i=0;$i<$rows_cnt;$i++){
                 $user_name=$n_user;
         }
 	if($row['result']!=4 && $row['pass_rate']>=0.99) $row['pass_rate']=0;
-        if($row['result']==4) $row['pass_rate']=1.0;
+        if($row['result']==4 && !( isset($OJ_CONTEST_TOTAL_100) && $OJ_CONTEST_TOTAL_100))
+		$row['pass_rate']=1.0;
 	if(time()<$end_time+$OJ_RANK_LOCK_DELAY&&$lock<strtotime($row['in_date']))
         	   $U[$user_cnt]->Add($row['num'],strtotime($row['in_date'])-$start_time,0,0);
         else

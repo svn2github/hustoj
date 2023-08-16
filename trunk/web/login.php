@@ -88,7 +88,7 @@ if($login){
 		}
 		$C_res=sha1($C_res);
 		$C_time=time()+86400*$OJ_KEEP_TIME;
-		setcookie($OJ_NAME."_user",$login,time()+$C_time);
+		setcookie($OJ_NAME."_user",$login,$C_time);
 		setcookie($OJ_NAME."_check",$C_res.(strlen($C_res)*strlen($C_res))%7,$C_time);
 	}
 	echo "<script language='javascript'>\n";

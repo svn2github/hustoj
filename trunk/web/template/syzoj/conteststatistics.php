@@ -2,7 +2,7 @@
   $show_title="$MSG_STATISTICS - $OJ_NAME";
   include("template/$OJ_TEMPLATE/header.php");
 ?>
-<div class="container">
+<div class="padding">
 
 	<?php
 	function formatTimeLength($length) {

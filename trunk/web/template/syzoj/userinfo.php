@@ -167,7 +167,7 @@
 
 					<?php
 					if(isset($_SESSION[$OJ_NAME.'_'.'administrator'])){
-					?><table border=1>
+					?><table border=1 class='ui table'>
 					<thead><tr class=toprow><th>UserID</th><th>Password</th><th>IP</th><th>Time</th></tr></thead>
 					<tbody>
 					<?php

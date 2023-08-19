@@ -7,9 +7,19 @@
 	require_once("./include/const.inc.php");
 	require_once("./include/my_func.inc.php");
 	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE&&!isset($_SESSION[$OJ_NAME."_administrator"])){
-		header("location:index.php");
-		exit();
-	}
+                $now = strftime("%Y-%m-%d %H:%M",time());
+                $sql="select count(contest_id) from contest where start_time<'$now' and end_time>'$now' and title like '%$OJ_NOIP_KEYWORD%'";
+                $row=pdo_query($sql);
+                $cols=$row[0];
+                //echo $sql;
+                //echo $cols[0];
+                if($cols[0]>0) {
+                      $view_errors =  "<h2> $MSG_NOIP_WARNING </h2>";
+                      require("template/".$OJ_TEMPLATE."/error.php");
+                      exit(0);
+                }
+        }
+
  // check user
 $user=$_GET['user'];
 if (!is_valid_user_name($user)){

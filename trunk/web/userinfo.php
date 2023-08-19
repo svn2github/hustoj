@@ -97,7 +97,15 @@ $sql=	"SELECT UNIX_TIMESTAMP(date(in_date))*1000 md,count(1) c FROM `solution` w
 		$chart_data_ac[$row['md']]=$row['c'];
     }
   
-  
+$acc_arr=Array();
+if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
+        $sql = "SELECT distinct `problem_id` FROM `solution` WHERE `user_id`=? AND `result`=4 ";
+        if(isset($pids)&&$pids!="") $sql.=" and problem_id in ($pids)";
+        $result = mysql_query_cache($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
+        foreach ($result as $row)
+                $acc_arr[$row[0]] = true;
+}
+
     
 /////////////////////////Template
 require("template/".$OJ_TEMPLATE."/userinfo.php");

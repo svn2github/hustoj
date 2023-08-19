@@ -131,8 +131,8 @@
                             <div class="ui bottom attached segment">
                                 <script language='javascript'>
                                     function p(id, c) {
-                                        document.write("<a href=problem.php?id=" + id + " class=\"ui green basic label\" id=\"show-problem-id\">" + id +
-                                            " </a>");
+                                        if(c>0)document.write("<a href=problem.php?id=" + id + " class=\"ui green basic label\" id=\"show-problem-id\">" + id + " </a>");
+                                        else document.write("<a href=problem.php?id=" + id + " class=\"ui red basic label\" id=\"show-problem-id\">" + id + " </a>");
                                     }
 
                                     function ptot(len) {
@@ -143,12 +143,17 @@
                                     if ($ret = pdo_query($sql, $user)) {
                                         $len = count($ret);
                                         echo "ptot($len);";
-                                        foreach ($ret as $row)
-                                            echo "p($row[0],$row[1]);";
+                                        foreach ($ret as $row){
+                                            if (isset($acc_arr[$row['problem_id']]))
+                                                echo "p($row[0],$row[1]);";
+                                            else
+                                                echo "p($row[0],0);";
+                                        }
                                     }
                                     ?>
                                 </script>
                             </div>
+
                         </div>
                     </div>
 

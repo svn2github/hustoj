@@ -124,7 +124,7 @@ $OJ_CACHE_SHARE = false;
 $OJ_LANG="en";
 $OJ_TEMPLATE ="syzoj";
 $view_title = "Install HUST Online Judge";
-$config=file_get_contents("include/db_info.inc.sample.php");
+$config=file_get_contents("https://gitee.com/zhblue/hustoj/raw/master/trunk/web/include/db_info.inc.php");
 if(isset($_POST['$DB_HOST'])){
 
         $ret=generate_config($config);

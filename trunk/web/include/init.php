@@ -114,6 +114,7 @@ if(isset($OJ_BG)&&$OJ_BG=="bing"){
            $data=curl_get("https://cn.bing.com");
            $OJ_BG=getPartByMark($data,"<link rel=\"preload\" href=\"","\" as=\"image\" id=\"preloadBg\"");
            if($OJ_BG)file_put_contents($bg_file,$OJ_BG);
+	   else touch($bg_file);
    }else{
            $OJ_BG=file_get_contents($bg_file);
    }

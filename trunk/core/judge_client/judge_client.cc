@@ -2630,8 +2630,8 @@ float raw_text_judge( char *infile, char *outfile, char *userfile, int *total_ma
         FILE *out=fopen(outfile,"r");
         int num=0;
         char * user_answer=(char * )malloc(4096);
-        long unsigned int user_length=4095;
-        long unsigned int ans_length=4095;
+        size_t user_length=4095;
+        size_t ans_length=4095;
         float m[total+1];
         char * ans[total+1];
 	*total_mark=0;

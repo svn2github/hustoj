@@ -3390,7 +3390,7 @@ int main(int argc, char **argv)
 	get_solution(solution_id, work_dir, lang);
 
 	//java and other VM language are lucky to have the global bonus in judge.conf
-	if (lang >= LANG_JAVA && lang != LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP && lang != LANG_GO)
+	if (lang >= LANG_JAVA && lang != LANG_OBJC && lang != LANG_CLANG && lang != LANG_CLANGPP )
 	{ //ObjectivC Clang Clang++ Go not VM or Script
 		// the limit for java
 		time_lmt = time_lmt + java_time_bonus;

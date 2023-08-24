@@ -317,6 +317,32 @@ function selectMulti( num, answer){
 			$(this).html(marked.parse($(this).text()));
 		});
 	<?php } ?>
+	//单纯文本1. A. B. C. D. 自动变控件
+	$('span[class=auto_select]').each(function(){
+                let i=1;
+                let start=0;
+                let raw=$(this).html();
+                let options=['A','B','C','D'];
+                while(start>=0){
+                        start=raw.indexOf(i+".",start);
+                        if(start<0) break;
+                        let end=start;
+                        for(let j=0;j<4;j++){
+                                let option=options[j];
+                                end=raw.indexOf(option+".",start);
+                                if (end<0) break;
+                                let disp="<input type=\"radio\" name=\""+i+"\" value=\""+option+"\" />"+option+".";
+                                //console.log(disp);
+                                raw= raw.substring(0,end-1)+disp+raw.substring(end+2);
+                                start+=disp.length;
+                        }
+                        start=end+1;
+                        i++;
+                }
+                //console.log(raw);
+                $(this).html(raw);
+        });
+
         $('input[type="radio"]').click(function(){
                 if ($(this).is(':checked'))
                    selectOne($(this).attr("name"),$(this).val());

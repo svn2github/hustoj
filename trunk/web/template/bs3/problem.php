@@ -266,6 +266,7 @@
                                 $(this).html(marked.parse($(this).html()));
                         });
 <?php } ?>
+	//单纯文本1. A. B. C. D. 自动变控件
 	$('span[class=auto_select]').each(function(){
                 let i=1;
                 let start=0;
@@ -275,11 +276,13 @@
                         start=raw.indexOf(i+".",start);
                         if(start<0) break;
                         let end=start;
+                        let type="radio"
                         for(let j=0;j<4;j++){
                                 let option=options[j];
                                 end=raw.indexOf(option+".",start);
+                                if(j==0&&raw.substring(start,end).indexOf("多选")>0) type="checkbox";
                                 if (end<0) break;
-                                let disp="<input type=\"radio\" name=\""+i+"\" value=\""+option+"\" />"+option+".";
+                                let disp="<input type=\""+type+"\" name=\""+i+"\" value=\""+option+"\" />"+option+".";
                                 //console.log(disp);
                                 raw= raw.substring(0,end-1)+disp+raw.substring(end+2);
                                 start+=disp.length;
@@ -290,7 +293,6 @@
                 //console.log(raw);
                 $(this).html(raw);
         });
-
         $('input[type="radio"]').click(function(){
                 if ($(this).is(':checked'))
                 {

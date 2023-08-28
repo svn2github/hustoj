@@ -10,7 +10,7 @@
 	$MSG_RECENT_CONTEST="세계대회";
 	$MSG_LOGOUT="로그아웃";
 	$MSG_LOGIN="로그인";
-	$MSG_LOST_PASSWORD="비밀번호 분실";
+	$MSG_LOST_PASSWORD="비밀번호 찾기";
 	$MSG_REGISTER="회원가입";
 	$MSG_ADMIN="관리";
 	$MSG_SYSTEM="시스템";
@@ -161,7 +161,8 @@
 	$MSG_SET_LOGIN_IP="IP 변경";
 	$MSG_PRIVILEGE_TYPE="권한 종류";
 	$MSG_NEWS_MENU="메뉴 보기";
-        $MSG_LAST_LOGIN="Last Login";
+	$MSG_LAST_LOGIN="최근 로그인";
+	
 	//contest.php
 	$MSG_PRIVATE_WARNING="대회에 참가할 수 있는 권한이 없습니다.";
 	$MSG_PRIVATE_USERS_ADD="*참여시킬 사용자ID를 줄을 바꿔 입력하거나, 스프레드시트에서 사용자ID를 복사해서 붙여넣으세요.";
@@ -180,8 +181,8 @@
 	$MSG_CONTEST_OPEN="대회 구분";
 	$MSG_CONTEST_CREATOR="등록자";
 	$MSG_CONTEST_PENALTY="누적시간";
-	$MSG_LOG="Log";
-        $MSG_SUSPECT="Audit";
+	$MSG_LOG="기록";
+	$MSG_SUSPECT="의심스러운 사용자";
 	$MSG_IP_VERIFICATION="IP검증";
 	$MSG_CONTEST_SUSPECT1="여러 개의 ID가 사용된 IP 주소. 대회 중에 같은 컴퓨터에서 다른 ID로 접근하면 기록됩니다.";
 	$MSG_CONTEST_SUSPECT2="여러 개의 IP 주소에서 접속된 ID. 대회 중에 다른 컴퓨터로 바꾸면 기록됩니다.";
@@ -387,7 +388,7 @@
 	$MSG_TOTAL="";
 	$MSG_NUMBER_OF_PROBLEMS="문제";
 
-	$MSG_SUBMIT_RECORD="기록 제출";
+	$MSG_SUBMIT_RECORD="채점기록";
 	$MSG_RETURN_CONTEST="대회로 돌아가기";
 	$MSG_COPY="복사";
 	$MSG_SUCCESS="성공";

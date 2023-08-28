@@ -203,7 +203,7 @@ if(isset($_POST[$OJ_NAME.'_refer'])){
 	header("location:".$_SESSION[$OJ_NAME.'_refer']);
 	unset($_SESSION[$OJ_NAME.'_refer']);
 }else{
-	if(time()-fileatime($remote_cookie.".sub")>$remote_delay){
+	if(time()-fileatime($remote_cookie.".sub")>$remote_delay && is_login($remote_site) ){
 		touch($remote_cookie.".sub");
 		do_submit($remote_site,$remote_user);
 	}

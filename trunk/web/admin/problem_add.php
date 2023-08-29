@@ -68,11 +68,11 @@ if (false) {
   $source = stripslashes($source);
 }
 
-$title = RemoveXSS($title);
-$description = RemoveXSS($description);
-$input = RemoveXSS($input);
-$output = RemoveXSS($output);
-$hint = RemoveXSS($hint);
+$title = ($title);
+$description = ($description);
+$input = ($input);
+$output = ($output);
+$hint = ($hint);
 //echo "->".$OJ_DATA."<-"; 
 $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
 $basedir = "$OJ_DATA/$pid";

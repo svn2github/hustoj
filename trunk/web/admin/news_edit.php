@@ -39,7 +39,7 @@ if(isset($_POST['news_id'])){
 
 
   $title = RemoveXSS($title);
-  $content = RemoveXSS($content);
+  $content = ($content);
 
   $sql = "UPDATE `news` SET `title`=?,`time`=now(),`content`=?,user_id=?,`menu`=? WHERE `news_id`=?";
   //echo $sql;

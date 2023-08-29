@@ -36,11 +36,6 @@ if(isset($_POST['news_id'])){
     $content = stripslashes($content);
   }
 
-
-
-  $title = RemoveXSS($title);
-  $content = ($content);
-
   $sql = "UPDATE `news` SET `title`=?,`time`=now(),`content`=?,user_id=?,`menu`=? WHERE `news_id`=?";
   //echo $sql;
   pdo_query($sql,$title,$content,$user_id,$menu,$news_id);

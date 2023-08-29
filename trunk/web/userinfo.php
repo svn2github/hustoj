@@ -6,6 +6,7 @@
 	require_once('./include/setlang.php');
 	require_once("./include/const.inc.php");
 	require_once("./include/my_func.inc.php");
+	require_once("include/memcache.php");
 	if(isset($OJ_OI_MODE)&&$OJ_OI_MODE&&!isset($_SESSION[$OJ_NAME."_administrator"])){
                 $now = strftime("%Y-%m-%d %H:%M",time());
                 $sql="select count(contest_id) from contest where start_time<'$now' and end_time>'$now' and title like '%$OJ_NOIP_KEYWORD%'";

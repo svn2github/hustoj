@@ -26,8 +26,7 @@ $content = str_replace("<p>", "", $content);
 $content = str_replace("</p>", "<br />", $content);
 $content = str_replace(",", "&#44;", $content);
 
-$title=RemoveXSS($title);
-$content=RemoveXSS($content);
+
 
 $sql = "INSERT INTO news(`user_id`,`title`,`content`,`time`,`menu`) VALUES(?,?,?,now(),?)";
 pdo_query($sql,$user_id,$title,$content,$menu);

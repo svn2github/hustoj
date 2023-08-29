@@ -62,6 +62,7 @@ function do_submit_one($remote_site,$username,$sid){
 		$row=$data[0];
 		$source=$row['source'];
 	}
+	while(strlen($source)<50) $source.="\n          \n";     // hdu要求至少50
 	$form=array(
 		'problemid' => $problem_id, 
 		'language' => $language,

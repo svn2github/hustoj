@@ -16,6 +16,8 @@ alter table problem add column remote_oj varchar(16) default NULL after solved;
 alter table problem add column remote_id varchar(32) default NULL after remote_oj;
 alter table solution add column remote_oj char(16) not null default '' after judger;
 alter table solution add column remote_id char(32) not null default '' after remote_oj;
+alter table news modify content mediumtext not null;
+alter table problem modify description mediumtext not null, modify input  mediumtext not null, modify output mediumtext not null;
 
 #create fulltext index problem_title_source_index on problem(title,source);
 

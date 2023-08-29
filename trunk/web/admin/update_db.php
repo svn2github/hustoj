@@ -203,6 +203,8 @@ $tsql[43]="alter table problem add column remote_oj varchar(16) default NULL aft
 $csql[43]="alter table problem add column remote_id varchar(16) default NULL after remote_oj;";
 $tsql[44]="alter table solution add column remote_oj char(16) not null default '' after judger;";
 $csql[44]="alter table solution add column remote_id char(16) not null default '' after remote_oj;";
+$tsql[45]="alter table news modify content mediumtext not null;";
+$csql[45]="alter table problem modify description mediumtext not null, modify input  mediumtext not null, modify output mediumtext not null;";
 
 if(isset($_POST['do'])){
 	require_once("../include/check_post_key.php");

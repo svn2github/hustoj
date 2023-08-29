@@ -170,10 +170,10 @@ include_once("kindeditor.php") ;
       }
 
       $title = ($title);
-      $description = RemoveXSS($description);
-      $input = RemoveXSS($input);
-      $output = RemoveXSS($output);
-      $hint = RemoveXSS($hint);
+      $description = ($description);
+      $input = ($input);
+      $output = ($output);
+      $hint = ($hint);
       $basedir = $OJ_DATA."/$id";
 
       echo "Problem Updated!<br>";

@@ -201,7 +201,15 @@ if (!$view_src) {
 		$view_src = file_get_contents($template_file);
 	}else if ($spj>1 && file_exists("$OJ_DATA/$problem_id/template.c")) {
 		$view_src = file_get_contents("$OJ_DATA/$problem_id/template.c");
-	}
+	}else if ($spj==2 && file_exists("$OJ_DATA/$problem_id/test.in") ){
+                $total=file_get_contents("$OJ_DATA/$problem_id/test.in");
+                $total=intval($total);
+                $view_src="";
+                for($i=1;$i<=$total;$i++){
+                        $view_src.=$i."\n";
+                }
+        }
+
 }
 
 $sql = "SELECT count(1) FROM `solution` WHERE result<4";

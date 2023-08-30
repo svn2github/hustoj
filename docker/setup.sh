@@ -103,7 +103,7 @@ service $PHP_SERVICE start
 judge_client 1 0 /home/judge/ | grep "final result:4"
 cd /home/judge/src/web
 chmod 755 /home/judge
-for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php
+for page in index.php problemset.php category.php status.php ranklist.php contest.php loginpage.php registerpage.php "userinfo.php?user=zhblue"
 do 
   w3m -dump http://127.0.0.1/$page | grep HUSTOJ
 done;

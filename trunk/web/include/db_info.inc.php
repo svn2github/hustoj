@@ -54,7 +54,11 @@ static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
 static  $OJ_NEED_LOGIN=false; //需要登录才能访问
 static  $OJ_LONG_LOGIN=false; //启用长时间登录信息保留
 static  $OJ_KEEP_TIME="30";  //登录Cookie有效时间(单位:天(day),仅在上一行为true时生效)
-static  $OJ_RANK_LOCK_PERCENT=0; //比赛封榜时间比例
+
+static  $OJ_RANK_LOCK_PERCENT=0; //比赛封榜时间比例，例如设0.2，则5小时的比赛，最后一小时为封榜时间。
+static  $OJ_RANK_LOCK_DELAY=3600; //赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
+static  $OJ_SHOW_METAL=true; //榜单上是否按比例显示奖牌
+
 static  $OJ_SHOW_DIFF=true; //是否显示WA的对比说明
 static  $OJ_DL_1ST_WA_ONLY=false; //是否只允许下载第一个WA的测试数据(前提需开启$OJ_DOWNLOAD)
 static  $OJ_DOWNLOAD=false; //是否允许下载所有WA的测试数据
@@ -64,8 +68,7 @@ static  $OJ_BLOCKLY=false; //是否启用Blockly界面 , remember to execute `wg
 static  $OJ_ENCODE_SUBMIT=false; //是否启用base64编码提交的功能，用来回避WAF防火墙误拦截。
 static  $OJ_OI_1_SOLUTION_ONLY=false; //比赛是否采用noip中的仅保留最后一次提交的规则。true则在新提交发生时，将本场比赛该题老的提交删除。
 static  $OJ_OI_MODE=false; //是否开启OI比赛模式，禁用排名、状态、统计、用户信息、内邮、论坛等。
-static  $OJ_SHOW_METAL=true; //榜单上是否按比例显示奖牌
-static  $OJ_RANK_LOCK_DELAY=3600; //赛后封榜持续时间，单位秒。根据实际情况调整，在闭幕式颁奖结束后设为0即可立即解封。
+
 static  $OJ_BENCHMARK_MODE=false; //此选项将影响代码提交，不再有提交间隔限制，提交后会返回solution id
 static  $OJ_CONTEST_RANK_FIX_HEADER=false; //比赛排名水平滚动时固定名单
 static  $OJ_NOIP_KEYWORD="noip";  // 标题包含此关键词，激活noip模式，赛中不显示结果，仅保留最后一次提交。

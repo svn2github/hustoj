@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__)."/pdo.php");
+require_once(dirname(__FILE__)."/memcache.php");
 
 //if(date('H')<5||date('H')>21||isset($_GET['dark'])) $OJ_CSS="dark.css";
 if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {

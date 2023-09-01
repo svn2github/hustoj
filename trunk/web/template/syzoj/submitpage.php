@@ -258,7 +258,7 @@ function do_test_run(){
   	$("#Submit").prop('disabled', true);
   	$("#TestRub").prop('disabled', true);
 	problem_id.value=-problem_id.value;
-	count=<?php echo $OJ_SUBMIT_COOLDOWN_TIME?> * 2 ;
+	count=<?php echo isset($OJ_SUBMIT_COOLDOWN_TIME)?$OJ_SUBMIT_COOLDOWN_TIME:5  ?> * 2 ;
 	handler_interval= window.setTimeout("resume();",1000);
 }
 function resume(){

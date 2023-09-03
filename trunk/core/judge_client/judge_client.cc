@@ -2929,7 +2929,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 			break;
 		}
 
-		if (((tick & 0xff)==0x00) &&(!(spj&&outFileSize==0)) && get_file_size(userfile) >outFileSize * 2 + 1024)
+		if (((tick & 0xff)==0x00) &&(!spj) && get_file_size(userfile) >outFileSize * 2 + 1024)
 		{
 			ACflg = OJ_OL;
 			ptrace(PTRACE_KILL, pidApp, NULL, NULL);

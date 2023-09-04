@@ -10,9 +10,7 @@
 .ace_gutter-cell {   /* 行号 */
    background-color: #ffeeee;
 }
-.ace_content{    /* 代码 */
-   background-color: #eeffee;
-}
+
 .ace-chrome .ace_marker-layer .ace_active-line{   /*当前行*/
    background-color: rgba(0,0,199,0.3);
 }
@@ -39,7 +37,7 @@ Problem <span class=blue><b><?php echo chr($pid+ord('A'))?></b></span> of Contes
 <input id="cid" type='hidden' value='<?php echo $cid?>' name="cid">
 <input id="pid" type='hidden' value='<?php echo $pid?>' name="pid">
 <?php }?>
-<span id="language_span">Language:
+<span id="language_span">Language: 
 <select id="language" name="language" onChange="reloadtemplate($(this).val());" >
 <?php
 $lang_count=count($language_ext);
@@ -73,12 +71,26 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php }?>
 <span class="btn" id=result>状态</span>	
 </span>
+
+ <button onclick="toggleTheme(event)" style="background-color: bisque; position: absolute; top: 5px; right: 170px;">
+        <i >🌗</i>
+    </button>
+    <button onclick="increaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right:120px;">
+        <i >➕</i>
+    </button>
+    <button onclick="decreaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right: 80px;">
+        <i>➖</i>
+    </button>
 <?php if($OJ_ACE_EDITOR){ 
 
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="500px";
 	?>
+		        	
+<div style="position: relative;">
+    <div id="source" style="width:100%;" cols=180 rows=16></div>
 	<pre style="width:90%;height:<?php echo $height?>" cols=180 rows=16 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
 	<input type=hidden id="hide_source" name="source" value=""/>
+
 <?php }else{ ?>
 	<textarea style="width:80%;height:600" cols=180 rows=25 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>
 <?php }?>
@@ -333,7 +345,7 @@ function loadFromBlockly(){
 <script>
     ace.require("ace/ext/language_tools");
     var editor = ace.edit("source");
-    editor.setTheme("ace/theme/chrome");
+    editor.setTheme("ace/theme/xcode");
     switchLang(<?php echo $lastlang ?>);
     editor.setOptions({
         enableBasicAutocompletion: true,
@@ -371,6 +383,29 @@ function loadFromBlockly(){
 	}
 	window.setInterval('autoSave();',5000);
    });
+</script>
+<script>
+    function increaseFontSize(event) {
+        event.preventDefault();
+        var currentSize = parseInt(editor.getFontSize());
+        editor.setFontSize(currentSize + 1);
+    }
+
+    function decreaseFontSize(event) {
+        event.preventDefault();
+        var currentSize = parseInt(editor.getFontSize());
+        editor.setFontSize(currentSize - 1);
+    }
+   function toggleTheme(event) {
+    event.preventDefault();
+    
+    if (editor.getTheme() === "ace/theme/xcode") {
+        editor.setTheme("ace/theme/monokai");
+    } else {
+        editor.setTheme("ace/theme/xcode");
+    }
+}
+
 </script>
 <?php }?>
 

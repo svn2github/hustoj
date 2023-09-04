@@ -12,7 +12,7 @@ width: 1px;\
 background: #e8e8e8\
 }\
 .ace-xcode {\
-background-color: #FFFFFF;\
+background-color: #eeffee;\
 color: #000000\
 }\
 .ace-xcode .ace_cursor {\

@@ -86,7 +86,7 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="500px";
 	?>
 		        	
-<div style="position: relative;">
+
    
 	<pre style="width:90%;height:<?php echo $height?>" cols=180 rows=16 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
 	<input type=hidden id="hide_source" name="source" value=""/>

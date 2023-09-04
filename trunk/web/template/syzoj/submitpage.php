@@ -388,13 +388,13 @@ function loadFromBlockly(){
     function increaseFontSize(event) {
         event.preventDefault();
         var currentSize = parseInt(editor.getFontSize());
-        editor.setFontSize(currentSize + 1);
+        editor.setFontSize(currentSize + 3);
     }
 
     function decreaseFontSize(event) {
         event.preventDefault();
         var currentSize = parseInt(editor.getFontSize());
-        editor.setFontSize(currentSize - 1);
+        editor.setFontSize(currentSize - 3);
     }
    function toggleTheme(event) {
     event.preventDefault();

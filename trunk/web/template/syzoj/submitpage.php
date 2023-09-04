@@ -71,6 +71,16 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php }?>
 <span class="btn" id=result>状态</span>	
 </span>
+
+ <button onclick="toggleTheme(event)" style="background-color: bisque; position: absolute; top: 5px; right: 170px;">
+        <i >🌗</i>
+    </button>
+    <button onclick="increaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right:120px;">
+        <i >➕</i>
+    </button>
+    <button onclick="decreaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right: 80px;">
+        <i>➖</i>
+    </button>
 <?php if($OJ_ACE_EDITOR){ 
 
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="500px";
@@ -78,20 +88,8 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 		        	?>
 <div style="position: relative;">
     <div id="source" style="width:100%;" cols=180 rows=16></div>
-     
-<button onclick="toggleTheme(event)" style="position: absolute; top: 5px; right: 70px;">
-        <i >🌗</i>
-    </button>
-    <button onclick="increaseFontSize(event)" style="position: absolute; top: 5px; right: 40px;">
-        <i >➕</i>
-    </button>
-    <button onclick="decreaseFontSize(event)" style="position: absolute; top: 5px; right: 10px;">
-        <i>➖</i>
-    </button>
-    
-   
-</div>
-<input type="hidden" id="hide_source" name="source" value="" />
+	<pre style="width:90%;height:<?php echo $height?>" cols=180 rows=16 id="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></pre>
+	<input type=hidden id="hide_source" name="source" value=""/>
 
 <?php }else{ ?>
 	<textarea style="width:80%;height:600" cols=180 rows=25 id="source" name="source"><?php echo htmlentities($view_src,ENT_QUOTES,"UTF-8")?></textarea>

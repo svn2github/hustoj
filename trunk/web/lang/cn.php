@@ -120,6 +120,7 @@
  	$MSG_WEEK="周排行";
 	$MSG_MONTH="月排行";
 	$MSG_YEAR="年排行";
+
 	//registerpage.php
 	$MSG_USER_ID="用户名（学号）";
 	$MSG_PASSWORD="密码";
@@ -128,6 +129,9 @@
 	$MSG_EMAIL="电子邮件";
 	$MSG_REG_INFO="设置注册信息";
 	$MSG_VCODE="验证码";
+        $MSG_ACTIVE_YOUR_ACCOUNT="激活账号";
+        $MSG_CLICK_COPY="点击或者复制访问链接";
+        $MSG_CHECK="检查";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="题目当前不可用!<br>它可能被用于未来的比赛、过去的私有比赛，或者管理员由于尚未测试通过等其他原因暂时停止了该题目用于练习。";

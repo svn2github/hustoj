@@ -2,6 +2,7 @@
 require_once("./include/db_info.inc.php");
 if(isset($OJ_REGISTER)&&!$OJ_REGISTER) exit(0);
 require_once("./include/my_func.inc.php");
+require_once("./include/email.class.php");     // 新版本的邮件发送信息请填写到这个文件中
 if(isset($OJ_CSRF)&&$OJ_CSRF)require_once("./include/csrf_check.php");
 $err_str="";
 $err_cnt=0;
@@ -85,6 +86,11 @@ $nick=(htmlentities ($nick,ENT_QUOTES,"UTF-8"));
 $school=(htmlentities ($school,ENT_QUOTES,"UTF-8"));
 $email=(htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $ip = ($_SERVER['REMOTE_ADDR']);
+if(isset($OJ_EMAIL_CONFIRM) && $OJ_EMAIL_CONFIRM) 
+	$_SESSION[$OJ_NAME.'_'.'activecode']=getToken(16);
+else
+	$_SESSION[$OJ_NAME.'_'.'activecode']="";
+
 if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])&&!empty(trim($_SERVER['HTTP_X_FORWARDED_FOR']))) {
     $REMOTE_ADDR = $_SERVER['HTTP_X_FORWARDED_FOR'];
     $tmp_ip = explode(',', $REMOTE_ADDR);
@@ -94,32 +100,19 @@ if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])&&!empty(trim($_SERVER['HTTP_X_FORWAR
     $tmp_ip = explode(',', $REMOTE_ADDR);
     $ip = (htmlentities($tmp_ip[0], ENT_QUOTES, "UTF-8"));
 }
-
-// 检查IP是否已经注册过
-if (isset($OJ_REG_SPEED) && $OJ_REG_SPEED > 0 ) {
-
-    // 查询最近1小时内该IP地址已经注册的用户数量
-    $sql = "SELECT COUNT(*) FROM `users` WHERE `ip` = ? AND `reg_time` > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
-    $result = pdo_query($sql, $ip);
-    $count = intval($result[0][0]);
-    
-    if ($count > $OJ_REG_SPEED ) {
-        // 如果数量大于$OJ_REG_SPEED ，则表示该IP地址在最近1小时内已经注册过$OJ_REG_SPEED个账户
-        print "<script language='javascript'>\n";
-        print "alert('您的IP地址已经注册过$OJ_REG_SPEED个账户，请稍后再试。\\n');\n";
-        print "history.go(-1);\n</script>";
-        exit(0);
-    }
-}
-
 if(isset($OJ_REG_NEED_CONFIRM)&&$OJ_REG_NEED_CONFIRM) $defunct="Y";
 else $defunct="N";
 $sql="INSERT INTO `users`("
-."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`,`defunct`)"
-."VALUES(?,?,?,NOW(),?,NOW(),?,?,?)";
-//echo "$sql:$user_id,$email,$ip,$password,$nick,$school,$defunct";
-$rows=pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$defunct);// or die("Insert Error!\n");
-//echo $rows;
+."`user_id`,`email`,`ip`,`accesstime`,`password`,`reg_time`,`nick`,`school`,`defunct`,activecode)"
+."VALUES(?,?,?,NOW(),?,NOW(),?,?,?,?)";
+$rows=pdo_query($sql,$user_id,$email,$ip,$password,$nick,$school,$defunct,$_SESSION[$OJ_NAME.'_'.'activecode']);// or die("Insert Error!\n");
+//发送激活邮件
+if (isset($OJ_EMAIL_CONFIRM) && $OJ_EMAIL_CONFIRM) {
+	email($email,"$MSG_ACTIVE_YOUR_ACCOUNT",
+		"$MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT :\n ".$_SESSION[$OJ_NAME.'_'.'activecode']
+	
+	);
+}
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);
 

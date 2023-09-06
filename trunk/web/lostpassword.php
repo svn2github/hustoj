@@ -19,7 +19,7 @@
         $lost_user_id=stripslashes($lost_user_id);
         $lost_email=stripslashes($lost_email);
   }
-  $sql="SELECT `email` FROM `users` WHERE `user_id`=?";
+  $sql="SELECT `email` FROM `users` WHERE `user_id`=? and defunct='N' ";
                 $result=pdo_query($sql,$lost_user_id);
                 $row = $result[0];
  if($row && $row['email']==$lost_email&&strpos($lost_email,'@')){
@@ -27,7 +27,7 @@
    $_SESSION[$OJ_NAME.'_'.'lost_key']=getToken(16);
 
   
-	require_once "include/email.class.php";     // 新版本的邮件发送信息请填写到这个文件中
+	require_once ("include/email.class.php");     // 新版本的邮件发送信息请填写到这个文件中
 /* 弃用留存，不做修改
 	//******************** 配置信息 ********************************
 	$smtpserver = "smtp.qiye.aliyun.com";//SMTP服务器

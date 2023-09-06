@@ -129,6 +129,10 @@ if (isset($OJ_EMAIL_CONFIRM) && $OJ_EMAIL_CONFIRM ) {
 	$link= 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."active.php?code=".$_SESSION[$OJ_NAME.'_'.'activecode'];
 	email($email,"$MSG_ACTIVE_YOUR_ACCOUNT",
 		"$MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT $user_id :\n ".$link );
+
+	$view_errors= "$MSG_CHECK $MSG_EMAIL $email $MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT";
+	require("template/".$OJ_TEMPLATE."/error.php");
+	exit(0);
 }
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";
 pdo_query($sql,$user_id,"no save",$ip);

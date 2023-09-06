@@ -122,7 +122,10 @@
  $MSG_EMAIL ="電子郵件";
  $MSG_REG_INFO ="設置註冊信息";
  $MSG_VCODE ="驗證碼";
- 
+ $MSG_ACTIVE_YOUR_ACCOUNT="Active Your Account ";
+ $MSG_CLICK_COPY="Click or Copy the LINK to open in browser ";
+ $MSG_CHECK="Check out ";
+
  //problem.php
  $MSG_NO_SUCH_PROBLEM ="題目當前不可用!<br>它可能被用於未來的比賽、過去的私有比賽，或者管理員由於尚未測試通過等其他原因暫時停止了該題目用於練習。 ";
  $MSG_Description ="題目描述" ;

@@ -114,6 +114,9 @@
 	$MSG_EMAIL="E-mail";
 	$MSG_REG_INFO="등록정보";
 	$MSG_VCODE="확인코드";
+        $MSG_ACTIVE_YOUR_ACCOUNT="Active Your Account ";
+        $MSG_CLICK_COPY="Click or Copy the LINK to open in browser ";
+        $MSG_CHECK="Check out ";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="문제가 없습니다!";

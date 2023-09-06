@@ -124,6 +124,9 @@ if(date('m')==4&&date('d')==1&&rand(0,100)<10){
 	$MSG_EMAIL="ئېلخەت";
 	$MSG_REG_INFO="رويىخەت ئۇچۇرى";
 	$MSG_VCODE="دەلىللەش كودى ";
+        $MSG_ACTIVE_YOUR_ACCOUNT="Active Your Account ";
+        $MSG_CLICK_COPY="Click or Copy the LINK to open in browser ";
+        $MSG_CHECK="Check out ";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="بۇ سوئال شەخسىيگە تەۋە،كۆرۈشكە رۇخسەت يوق";

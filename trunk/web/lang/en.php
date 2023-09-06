@@ -115,6 +115,9 @@
 	$MSG_EMAIL="Email";
 	$MSG_REG_INFO="Register Information";
 	$MSG_VCODE="Verify Code";
+        $MSG_ACTIVE_YOUR_ACCOUNT="Active Your Account ";
+        $MSG_CLICK_COPY="Click or Copy the LINK to open in browser ";
+        $MSG_CHECK="Check out ";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="Problem is not Available!";

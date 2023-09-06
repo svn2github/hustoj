@@ -111,6 +111,9 @@
 	$MSG_EMAIL="อีเมล์";
 	$MSG_REG_INFO="ข้อมูล";
 	$MSG_VCODE="Verify Code";
+        $MSG_ACTIVE_YOUR_ACCOUNT="Active Your Account ";
+        $MSG_CLICK_COPY="Click or Copy the LINK to open in browser ";
+        $MSG_CHECK="Check out ";
 
 	//problem.php
 	$MSG_NO_SUCH_PROBLEM="ไม่พบโจทย์นี้";

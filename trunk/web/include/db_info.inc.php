@@ -51,6 +51,8 @@ static 	$OJ_BG="bing";  //双引号里面填写背景图片的url，默认bing�
 static  $OJ_LOGIN_MOD="hustoj"; //需要在include目录下配置login-xxxx.php来调用其他登录模块。
 static  $OJ_REGISTER=true; //允许注册新用户
 static  $OJ_REG_NEED_CONFIRM=false; //新注册用户需要审核
+static  $OJ_EMAIL_CONFIRM=false; //允许邮件激活账号
+
 static  $OJ_NEED_LOGIN=false; //需要登录才能访问
 static  $OJ_LONG_LOGIN=false; //启用长时间登录信息保留
 static  $OJ_KEEP_TIME="30";  //登录Cookie有效时间(单位:天(day),仅在上一行为true时生效)

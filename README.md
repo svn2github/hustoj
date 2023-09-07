@@ -79,11 +79,11 @@
 
 ## 自带的5种模板演示
 
+[syzoj主题](http://syzoj.hustoj.com/)  added by[@renbaoshuo](https://github.com/renbaoshuo)
+
 [bs3原版](http://bs3.hustoj.com/)
 
 [sweet主题](http://sweet.hustoj.com/)
-
-[syzoj主题](http://syzoj.hustoj.com/)  added by[@renbaoshuo](https://github.com/renbaoshuo)
 
 [bshark主题](http://bshark.hustoj.com/)  added by [@yemaster](https://github.com/yemaster)
 
@@ -136,6 +136,7 @@ Star us, please!
 	
   日期  | 类型 |  更新内容
 ------- | :--: | :-------
+09-06 | 更新 | 增加邮件激活账号功能。
 08-25 | 更新 | 选择题题面用span class=auto_select标记的范围，自动生成单选框控件；题面标注“多选”，生成复选框。
 08-05 | 更新 | 在AC时记实际分数，不再是100分，比赛可以组合合适的题目，使OI排名中的总分为100分。
 08-04 | 更新 | 支持多选题，允许用&lt;input type=checkbox name=1 value=A&gt; 添加多选按钮。

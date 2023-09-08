@@ -7,11 +7,11 @@ if(!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))){
 
 echo "<hr>";
 echo "<center><h3>".$MSG_NEWS."-".$MSG_SETMESSAGE."</h3></center>";
-
+$msgfile=$OJ_SAE?"saestor://web/msg.txt":"msg/$domain.txt";
 if(isset($_POST['do'])){
   require_once("../include/check_post_key.php");
   mkdir("msg");
-  $fp = fopen($OJ_SAE?"saestor://web/msg.txt":"msg/$domain.txt","w");
+  $fp = fopen($msgfile,"w");
   $msg = $_POST['msg'];
 
   $msg = str_replace("<p>", "", $msg);
@@ -27,8 +27,8 @@ if(isset($_POST['do'])){
   fclose($fp);
   echo "<center><h4 class='text-danger'>Message Updated At ".date('Y-m-d h:i:s')."</h4></center>";
 }
-
-$msg = file_get_contents($OJ_SAE?"saestor://web/msg.txt":"msg/$domain.txt");
+if(file_exists($msgfile))
+    $msg = file_get_contents($msgfile);
 
 include("kindeditor.php");
 ?>

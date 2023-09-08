@@ -60,7 +60,7 @@
         </div>
 		<div class="form-group">
           <label class="col-sm-4 control-label"><?php echo $MSG_REFRESH_PRIVILEGE?></label>
-          <div class="col-sm-4"><a href="./refresh-privilege.php" target="_blank" class="btn btn-default btn-block"><?php echo $REFRESH_PRIVILEGE?></a></div>
+          <div class="col-sm-4"><a href="./refresh-privilege.php" target="_blank" class="btn btn-default btn-block"><?php echo $MSG_REFRESH_PRIVILEGE?></a></div>
         </div>
 
         <div class="form-group">

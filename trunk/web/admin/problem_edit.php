@@ -24,7 +24,7 @@ include_once("kindeditor.php") ;
     <?php
     if (isset($_GET['id'])) {
       ;//require_once("../include/check_get_key.php");
-        $pid=intval($_GET['pid']);
+        $pid=intval($_GET['id']);
         if(! (isset($_SESSION[$OJ_NAME.'_'.'administrator']) || isset($_SESSION[$OJ_NAME.'_'."p".$pid])) ){
                 echo "No Privilege.";
                 exit(0);

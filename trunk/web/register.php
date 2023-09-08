@@ -130,8 +130,10 @@ if (isset($OJ_EMAIL_CONFIRM) && $OJ_EMAIL_CONFIRM ) {
 	email($email,"$MSG_ACTIVE_YOUR_ACCOUNT",
 		"$MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT $user_id :\n ".$link );
 
-	$view_errors= "$MSG_CHECK $MSG_EMAIL $email $MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT";
-	require("template/".$OJ_TEMPLATE."/error.php");
+	$view_errors= "<div class='ui main container' ><font size=5 > $MSG_CHECK $email $MSG_EMAIL , $MSG_CLICK_COPY $MSG_ACTIVE_YOUR_ACCOUNT";
+        $view_errors.="</font></div><hr><hr>";
+
+        require("template/".$OJ_TEMPLATE."/error.php");
 	exit(0);
 }
 $sql="INSERT INTO `loginlog` VALUES(?,?,?,NOW())";

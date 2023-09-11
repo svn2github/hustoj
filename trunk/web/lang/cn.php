@@ -164,7 +164,8 @@
 	$MSG_SAVE="保存";	
         $MSG_DELETED="已删除";	
         $MSG_NORMAL="正常";	
-        
+        $MSG_RESERVED="未启用";
+
 	$MSG_TEAMGENERATOR="比赛队帐号生成器";
 	$MSG_SETMESSAGE="设置公告";
 	$MSG_SETPASSWORD="修改密码";
@@ -402,7 +403,7 @@
 
   $MSG_NEW_CONTEST="创建新比赛";
   $MSG_AVAILABLE="启用";
-  $MSG_RESERVED="未启用";
+ 
   $MSG_NEW_PROBLEM_LIST="创建新题单";
   $MSG_DELETE="删除";
   $MSG_EDIT="编辑";

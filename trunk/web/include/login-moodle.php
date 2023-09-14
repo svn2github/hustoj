@@ -17,7 +17,7 @@
 		$password=md5($password.$moodle_salt);
 		$ret=false;
 		$moodle_pre="mdl_";
-		$sql="select password from "$moodle_db.".".$moodle_pre."user where username=?";
+		$sql="select password from ".$moodle_db.".".$moodle_pre."user where username=?";
 		if($moodle_dbh){
 			$sth = $moodle_dbh->prepare($sql);
 			$args=array();

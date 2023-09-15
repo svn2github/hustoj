@@ -326,6 +326,8 @@ Ubuntu 18.04 安装 (https://www.bilibili.com/video/BV1Mp4y1C7Xx)
 阿里云用户请百度 `阿里云 80端口`
 
 ### 基于 Ubuntu 22.04 安装
+
+**各类公有云首选, 最容易，成功率最高，近期部署数量最多，开发者原型机**
 	
 **仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
 
@@ -336,9 +338,7 @@ wget http://dl.hustoj.com/install.sh
 sudo bash install.sh
 ```
 
-### 基于 Ubuntu 20.04 安装
-	
-**各类公有云首选, 最容易，成功率最高，近期部署数量最多，开发者原型机**
+### 基于 Ubuntu 20.04 安装	
 	
 **仅支持原生Ubuntu系统，不支持WSL和docker中的Ubuntu系统**
 	

@@ -99,6 +99,11 @@ function do_result_one($remote_site,$username,$password,$sid,$rid){
 	$result=5;
 	$time=0;
 	$memory=0;
+	if(substr($html,3)=="-1"){
+                pdo_query("update solution set result=16,remote_id=0 where solution_id=?",$sid);
+                echo "previous submission failed , pending another submiting ";
+                return -1;
+        }
 	echo "<br>==".htmlentities($html)."==";
         if($data[2]=="Waiting"||$data[2]=="Judging"){
                 $sql="update solution set result=17,judgetime=now()  where solution_id=?";

@@ -63,7 +63,7 @@ if (count($result)>0) {
 					exit(0);
 				}
 			}
-
+			if($row['result']==4) $row['pass_rate']=1;  // stop students asking about why not 100 on AC
 			if (isset($_GET['t']) && "json"==$_GET['t']) {
 				echo json_encode($row);
 			}

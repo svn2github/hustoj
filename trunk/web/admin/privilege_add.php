@@ -1,5 +1,5 @@
 <?php require_once("admin-header.php");
-
+require_once("../include/email.class.php");
 if (!(isset($_SESSION[$OJ_NAME.'_'.'administrator']))) {
 	echo "<a href='../loginpage.php'>Please Login First!</a>";
 	exit(1);
@@ -29,8 +29,16 @@ if (isset($_POST['do'])) {
 		$rightstr = "s$rightstr";
 
 	$sql = "insert into `privilege`(user_id,rightstr,valuestr,defunct) values(?,?,?,'N')";
-	$rows = pdo_query($sql,$user_id,$rightstr,$valuestr);
-	echo "<center><h4 class='text-danger'>User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')."'s Privilege Added!</h4></center>";
+	$link= 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']);
+        $msg = $_SESSION[$OJ_NAME.'_user_id']." add $rightstr [$valuestr] to $user_id at ".date('Y-m-d h:i:s a', time());
+        $msg .="\n\nmessage from site: $link";
+        $rows = pdo_query($sql,$user_id,$rightstr,$valuestr);
+        if ($OJ_ADMIN=="root@localhost"){
+                $sql="select email from users where user_id=? ";
+                $OJ_ADMIN=pdo_query($sql,$_SESSION[$OJ_NAME.'_user_id'])[0][0];
+        }
+        email($OJ_ADMIN,"Privilege Add Warning!",$msg);
+        echo "<center><h4 class='text-danger'>User ".htmlentities($_POST['user_id'], ENT_QUOTES, 'UTF-8')."'s Privilege Added!</h4></center>";
 }
 ?>
 

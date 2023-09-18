@@ -71,16 +71,18 @@ echo"<option value=$i ".( $lastlang==$i?"selected":"").">
 <?php }?>
 <span class="btn" id=result>状态</span>	
 </span>
-
- <button onclick="toggleTheme(event)" style="background-color: bisque; position: absolute; top: 5px; right: 170px;">
-        <i >🌗</i>
+<?php if($spj <= 1): ?>
+    <button onclick="toggleTheme(event)" style="background-color: bisque; position: absolute; top: 5px; right: 170px;" v-if="false">
+        <i>🌗</i>
     </button>
-    <button onclick="increaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right:120px;">
-        <i >➕</i>
+    <button onclick="increaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right:120px;" v-if="false">
+        <i>➕</i>
     </button>
-    <button onclick="decreaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right: 80px;">
+    <button onclick="decreaseFontSize(event)" style="background-color: bisque; position: absolute; top: 5px; right: 80px;" v-if="false">
         <i>➖</i>
     </button>
+<?php endif; ?>
+
 <?php if($OJ_ACE_EDITOR){ 
 
 			if (isset($OJ_TEST_RUN)&&$OJ_TEST_RUN) $height="400px";else $height="500px";

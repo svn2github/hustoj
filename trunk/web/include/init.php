@@ -32,7 +32,7 @@ if($OJ_SaaS_ENABLE){
 if(isset($_SERVER["HTTP_USER_AGENT"])&&strpos($_SERVER["HTTP_USER_AGENT"],"MSIE")){  // 360 or IE use bs3 instead
     $OJ_TEMPLATE="bs3";
 }
-// $OJ_BG="/image/bg".date('H').".jpg";  //每个整点更换壁纸，需要准备bg[0~23].jpg在image目录
+
 
 if(isset($_SESSION[$OJ_NAME.'_user_id'])&&isset($OJ_LIMIT_TO_1_IP)&& $OJ_LIMIT_TO_1_IP){
         $ip = ($_SERVER['REMOTE_ADDR']);
@@ -106,7 +106,9 @@ switch($OJ_FRIENDLY_LEVEL) {
 // if using EXAM or ON site auto turn off free practice
 if(isset($OJ_ON_SITE_CONTEST_ID) || isset($OJ_EXAM_CONTEST_ID)) $OJ_FREE_PRACTICE=false;
 
-// if OJ_BG==bing ,using bing.com for hourly change background
+// $OJ_BG="/image/bg".date('H').".jpg";  //每个整点更换壁纸，需要准备bg[0~23].jpg在image目录
+// if OJ_BG==bing ,using bing.com for daily change background
+
 if(isset($OJ_BG)&&$OJ_BG=="bing"){
    $bg_file=dirname(dirname(__FILE__))."/image/bg.url";
    if(!file_exists($bg_file)) touch($bg_file);

@@ -147,9 +147,8 @@ function image_base64_encode($img_url) {
 
   if (substr($img_url,0,4)!="http")
     return false;
-
-  $handle = @fopen($img_url, "rb");
-
+  $context = stream_context_create(array('http' => array('timeout' => 5)));    // prevent stuck on export image failed
+  $handle = @fopen($img_url, "rb",false,$context);
   if ($handle) {
     $contents = stream_get_contents($handle);
     $encoded_img = base64_encode($contents);

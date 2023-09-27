@@ -9,8 +9,16 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
 	$OJ_LANG=$_COOKIE['lang'];
 } else if (isset($_GET['lang']) && in_array($_GET['lang'], array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
 	$OJ_LANG=$_GET['lang'];
-} else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strstr($_SERVER['HTTP_ACCEPT_LANGUAGE'], "zh-CN")) {
-	$OJ_LANG="cn";
+} else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    $userLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+    foreach ($userLanguages as $userLang) {
+        $langParts = explode(';', $userLang);
+        $lang = strtolower(substr($langParts[0], 0, 2));
+        if (in_array($lang, array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
+            $OJ_LANG = $lang;
+            break;
+        }
+    }
 }
 require(dirname(__FILE__)."/../lang/$OJ_LANG.php");
 

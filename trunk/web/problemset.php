@@ -51,6 +51,7 @@ $postfix="";
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$search = "%".($_GET['search'])."%";
 	$filter_sql = " ( title like ? or source like ?)";
+	$filter_sql = " and A.ROWNUM >='" . strval($pstart) . "' AND A.ROWNUM < '". strval($pend) . "' ";
 	//$pstart = 0;
 	//$pend = 100;
  	$postfix="&search=".urlencode($_GET['search']);

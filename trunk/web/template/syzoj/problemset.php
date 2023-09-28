@@ -67,7 +67,7 @@
     </div>
   </div>
 
-<?php if (!isset($_GET['search'])){ ?>
+<?php if (!isset($_GET['list'])){ ?>
 
 <div style="margin-bottom: 30px; ">
     
@@ -80,15 +80,15 @@
     ?>
 <div style="text-align: center; ">
   <div class="ui pagination menu" style="box-shadow: none; ">
-    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "problemset.php?page=".($page-1); ?>" id="page_prev">  
+    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "problemset.php?page=".($page-1).htmlentities($postfix,ENT_QUOTES,'UTF-8'); ?>" id="page_prev">  
       <i class="left chevron icon"></i>
     </a>
     <?php
       for ($i=$start;$i<=$end;$i++){
-        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"problemset.php?page=".$i."\">".$i."</a>";
+        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"problemset.php?page=".$i.htmlentities($postfix,ENT_QUOTES,'UTF-8')."\">".$i."</a>";
       }
     ?>
-    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "problemset.php?page=".($page+1); ?>" id="page_next">
+    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "problemset.php?page=".($page+1).htmlentities($postfix,ENT_QUOTES,'UTF-8'); ?>" id="page_next">
     <i class="right chevron icon"></i>
     </a>  
   </div>
@@ -161,7 +161,7 @@
 
     </tbody>
   </table><br>
-<?php if (!isset($_GET['search'])){ ?>
+<?php if (!isset($_GET['list'])){ ?>
   <div style="margin-bottom: 30px; ">
     
     <?php
@@ -173,15 +173,15 @@
     ?>
 <div style="text-align: center; ">
   <div class="ui pagination menu" style="box-shadow: none; ">
-    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "problemset.php?page=".($page-1); ?>" id="page_prev">  
+    <a class="<?php if($page==1) echo "disabled "; ?>icon item" href="<?php if($page<>1) echo "problemset.php?page=".($page-1).htmlentities($postfix,ENT_QUOTES,'UTF-8'); ?>" id="page_prev">  
       <i class="left chevron icon"></i>
     </a>
     <?php
       for ($i=$start;$i<=$end;$i++){
-        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"problemset.php?page=".$i."\">".$i."</a>";
+        echo "<a class=\"".($page==$i?"active ":"")."item\" href=\"problemset.php?page=".$i.htmlentities($postfix,ENT_QUOTES,'UTF-8')."\">".$i."</a>";
       }
     ?>
-    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "problemset.php?page=".($page+1); ?>" id="page_next">
+    <a class="<?php if($page==$view_total_page) echo "disabled "; ?> icon item" href="<?php if($page<>$view_total_page) echo "problemset.php?page=".($page+1).htmlentities($postfix,ENT_QUOTES,'UTF-8'); ?>" id="page_next">
     <i class="right chevron icon"></i>
     </a>  
   </div>

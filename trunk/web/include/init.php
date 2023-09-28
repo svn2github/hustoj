@@ -14,8 +14,10 @@ if (isset($_SESSION[$OJ_NAME . '_' . 'OJ_LANG'])) {
     foreach ($userLanguages as $userLang) {
         $langParts = explode(';', $userLang);
         $lang = strtolower(substr($langParts[0], 0, 2));
-        if (in_array($lang, array("cn", "ug", "en", 'fa', 'ko', 'th'))) {
+        
+	if (in_array($lang, array("zh", "ug", "en", 'fa', 'ko', 'th'))) {
             $OJ_LANG = $lang;
+	    if($lang=="zh") $OJ_LANG="cn";
             break;
         }
     }

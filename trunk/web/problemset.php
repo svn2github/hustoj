@@ -47,13 +47,13 @@ if ($row['upid'] % $page_cnt == 0) $cnt = $cnt-1;
 if ($page > $cnt+1 && ! isset($_SESSION[$OJ_NAME.'_administrator']) ) $page = $cnt+1 ;
 $pstart = $page_cnt*intval($page)-$page_cnt+1; //start 1
 $pend = $pstart+$page_cnt;
-
+$postfix="";
 if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$search = "%".($_GET['search'])."%";
 	$filter_sql = " ( title like ? or source like ?)";
-	$pstart = 0;
-	$pend = 100;
-
+	//$pstart = 0;
+	//$pend = 100;
+ 	$postfix="&search=".urlencode($_GET['search']);
 }else if (isset($_GET['list']) && trim($_GET['list']!="")){
         $plist= explode(",",$_GET['list']);
 	$pids="0";

@@ -185,7 +185,7 @@ if ($loggedon==$auth_pass){
             }
     }
 } else {
-    if (isset($pass)) login();
+    if (isset($_SESSION[$OJ_NAME.'_administrator'])||isset($_SESSION[$OJ_NAME.'_problem_editor'])) login();
     else login_form();
 }
 // +--------------------------------------------------

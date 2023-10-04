@@ -8,7 +8,10 @@
           <form action="" method="get">
             <div class="ui search" style="width: 280px; height: 28px; margin-top: -5.3px;float:left ">
               <div class="ui left icon input" style="width: 100%; ">
-                <input class="prompt" style="width: 100%; " type="text" value="" placeholder=" <?php echo $MSG_TITLE;?> …" name="search">
+                <input class="prompt" style="width: 100%; " type="text" placeholder=" <?php echo $MSG_TITLE;?> …" name="search"
+		       value="<?php if(isset($_GET['search']))echo htmlentities($_GET['search'],ENT_QUOTES,'UTF-8') ?>"
+                >
+
                 <i class="search icon"></i>
               </div>
               <div class="results" style="width: 100%; "></div>

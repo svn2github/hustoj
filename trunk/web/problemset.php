@@ -76,7 +76,7 @@ else {
 $sub_arr = Array(); 
 $acc_arr = Array(); 
 if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
-	$sql = "SELECT problem_id, MIN(result) AS min_result FROM solution WHERE user_id=? GROUP BY problem_id ";
+	$sql = "SELECT problem_id, MIN(result) AS result FROM solution WHERE user_id=? GROUP BY problem_id ";
 	$result = pdo_query($sql,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	foreach ($result as $row){
 		$sub_arr[$row['problem_id']] = true;

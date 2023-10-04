@@ -58,8 +58,7 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
           $pids.=",$pid";
         }
         $filter_sql = " problem_id in ($pids) order by FIELD(problem_id,$pids)"; // 如果希望按难度顺序改成 order by accepted desc ;
-        $limit_sql = " LIMIT ".($page-1)*$page_cnt.",".$page_cnt;
-
+        $limit_sql="";  // list 不翻页
 }else if(isset($_GET['my'])){
         $filter_sql = " 1";
         $limit_sql = " LIMIT ".($page-1)*$page_cnt.",".$page_cnt;

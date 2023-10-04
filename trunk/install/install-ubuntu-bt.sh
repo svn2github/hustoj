@@ -134,7 +134,7 @@ else
          sed -i "s/OJ_USE_DOCKER=0/OJ_USE_DOCKER=1/g" /home/judge/etc/judge.conf
          sed -i "s/OJ_PYTHON_FREE=0/OJ_PYTHON_FREE=1/g" /home/judge/etc/judge.conf
 fi
-cls
+clear
 reset
 
 echo "Remember your database account for HUST Online Judge:"

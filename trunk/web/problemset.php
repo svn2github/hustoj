@@ -15,12 +15,10 @@ $view_title = "Problem Set";
 $page = "1";
 if (isset($_GET['page'])) {
 	$page = intval($_GET['page']);
-
-	if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])) {
+	if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!isset($_GET['search'])) {
 		$sql = "update users set volume=? where user_id=?";
 		pdo_query($sql,$page,$_SESSION[$OJ_NAME.'_'.'user_id']);
 	}
-
 }
 else {
 	if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])&&!isset($_GET['search'])) {
@@ -38,8 +36,6 @@ else {
 //end of remember page
 
 //Page Setting
-if(isset($_GET['page'])) $page = intval($_GET['page']);
-else $page = 1;
 $page_cnt = 50;  //50 problems per page
 
 $postfix="";
@@ -62,11 +58,7 @@ if (isset($_GET['search']) && trim($_GET['search'])!="") {
 	$order_by = "order by FIELD(problem_id,$pids)"; // 如果希望按难度顺序改成 order by accepted desc ;
 	//$limit_sql = " LIMIT ".($page-1)*$page_cnt.",".$page_cnt;
 	$limit_sql="";  // list 不翻页
-}else if(isset($_GET['my'])){
-	$filter_sql = " 1";
-	$limit_sql = " LIMIT ".($page-1)*$page_cnt.",".$page_cnt;
-}
-else {
+}else {
 	$filter_sql = " 1";
 	$limit_sql = " LIMIT ".($page-1)*$page_cnt.",".$page_cnt;
 }
@@ -86,10 +78,8 @@ if (isset($_SESSION[$OJ_NAME.'_'.'user_id'])){
 
 // Problem Page Navigator
 //if($OJ_SAE) $first=1;
-$limit = "";
-
 if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
-    $limit = $limit_sql;
+    //$limit = $limit_sql;
 }else if ($OJ_FREE_PRACTICE){  // open free practice without limit of contest using	
     $filter_sql .= " and defunct='N' ";
 }else {  //page problems (not include in contests period)
@@ -100,8 +90,7 @@ if (isset($_SESSION[$OJ_NAME.'_'.'administrator'])) {  //all problems
 						INNER JOIN  `contest_problem` cp ON c.`contest_id` = cp.`contest_id` ".
 				 			" AND (c.`defunct` = 'N' AND '$now'<c.`end_time`)" .    // option style show all non-running contest
 						//"and (c.`end_time` >  '$now'  OR c.private =1)" . // original style , hidden all private contest problems
-				 ") ORDER BY `problem_id` 
-	";
+				 ") ";
 }
 // End Page Setting
     pdo_query("SET sort_buffer_size = 1024*1024");   // Out of sort memory, consider increasing server sort buffer size

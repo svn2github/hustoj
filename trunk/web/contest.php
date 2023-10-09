@@ -132,9 +132,10 @@ if (isset($_GET['cid'])) {
 
 			$tresult = pdo_query($sql, $tpid);
 
-			if (intval($tresult) != 0 ) { //if the problem will be use remained contes/exam 
+			if (intval($tresult) != 0 && !isset($_SESSION[$OJ_NAME.'_'."m$cid"]) ) { 
+				//if the problem will be use remained contes/exam don't show to other teachers and students
 				$view_problemset[$cnt][1] = $PID[$cnt]; //hide the title after contest
-				$view_problemset[$cnt][2] = '----';
+				$view_problemset[$cnt][2] = '--using in another private contest--';
 			}
 			else {
 				$view_problemset[$cnt][1] = "<a href='problem.php?id=".$row['problem_id']."'>".$PID[$cnt]."</a>";

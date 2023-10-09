@@ -177,7 +177,15 @@ function import_fps($tempfile) {
     if(hasRemoteProblem($remote_oj,$remote_id)){
    	$sql="update problem set title=?,time_limit=?,memory_limit=?,description=?,input=?,output=?,sample_input=?,sample_output=?,hint=?,source=?,spj=? where remote_oj=? and remote_id=?";
         pdo_query($sql,$title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj,$remote_oj,$remote_id);	
-    }else if (!hasProblem($title)) {
+    }else{
+             $tail=0;
+             $ptitle = $title;
+             while (hasProblem($ptitle)) {
+                 $tail++;
+                 $ptitle = $title."_".$tail;
+             }
+            $title=$ptitle;
+
       $pid = addproblem($title, $time_limit, $memory_limit, $description, $input, $output, $sample_input, $sample_output, $hint, $source, $spj, $OJ_DATA);
       if($remote_oj!=""){
         $sql="update problem set remote_oj=?,remote_id=? where problem_id=?";
@@ -336,9 +344,6 @@ function import_fps($tempfile) {
 
       $prepends = $searchNode->children()->append;
       mkpta($pid,$prepends,"append");
-    }
-    else {
-      echo "<br>&nbsp;&nbsp;- <span class=red>$title is already in this OJ</span>";		
     }
   }
 

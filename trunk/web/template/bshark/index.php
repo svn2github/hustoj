@@ -178,7 +178,7 @@
                                     <th>
                                         <?php echo $MSG_TITLE; ?>
                                     </th>
-                                    <th><?php echo $MSG_STATUS; ?></th>
+                                    <th  style="width: 82px;" ><?php echo $MSG_STATUS; ?></th>
                                     <th>
                                         <?php echo $MSG_START_TIME; ?>
                                     </th>

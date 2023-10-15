@@ -3306,11 +3306,13 @@ void print_call_array()
 	}
 	printf("0};\n");
 }
+int has_mark_in_name=0;
 int mark_of_name(const char * name){
 	int mark;
 	printf("reading mark from %s \n",name);
 	if(sscanf(name,"%*[^\[][%d]",&mark)==1){
 		printf("reading mark %d \n",mark);
+		has_mark_in_name=1;
 		return mark;
 	}else{
 		return 10;
@@ -3730,7 +3732,7 @@ int main(int argc, char **argv)
 			if (num_of_test > 0){
 				pass_rate /= num_of_test;
 			}
-			if (total_mark > 0 ){
+			if (total_mark > 0 && has_mark_in_name ){
 				pass_rate =get_mark;
 				 if(total_mark>100) pass_rate /= total_mark;
                                 else pass_rate /= 100.0;

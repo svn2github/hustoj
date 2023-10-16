@@ -3637,8 +3637,12 @@ int main(int argc, char **argv)
 			judge_solution(ACflg, usedtime, time_lmt, spj, p_id, infile,
 						   outfile, userfile, PEflg, lang, work_dir, topmemory,
 						   mem_lmt, solution_id, num_of_test,&pass_rate);
+			/*
+   			if(usedtime > time_lmt * 1000) {          // 如果觉得的显示超时结果的计时过长，可以覆盖数据。
+					usedtime = time_lmt * 1000;
+			}
+			*/
 			time_space_index+=sprintf(time_space_table+time_space_index,"%s:%s mem=%dk time=%dms\n",infile+strlen(oj_home)+5,jresult[ACflg],topmemory/1024,usedtime);
-			
 			/*   // full diff code backup
 			 if( ACflg != OJ_AC ){
                                 FILE *DF=fopen("diff.out","a");
@@ -3722,10 +3726,7 @@ int main(int argc, char **argv)
 		usedtime = total_time;
 	}
 	
-/*	if(usedtime > time_lmt * 1000) {                  // show real time cost
-		usedtime = time_lmt * 1000;
-	}
-*/
+
 	if(spj!=2){
 		if (oi_mode)
 		{

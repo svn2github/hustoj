@@ -2438,9 +2438,9 @@ void run_solution(int &lang, char *work_dir, double &time_lmt, int &usedtime,
 	struct rlimit LIM; // time limit, file limit& memory limit
 	// time limit
 	if (time_limit_to_total)
-		LIM.rlim_cur = (time_lmt / cpu_compensation - usedtime / 1000.0f) ;
+		LIM.rlim_cur = (time_lmt / cpu_compensation - usedtime / 1000.0f) + 1;
 	else
-		LIM.rlim_cur = time_lmt / cpu_compensation ;
+		LIM.rlim_cur = time_lmt / cpu_compensation + 1 ;
 	LIM.rlim_max = LIM.rlim_cur + 1 ;
 	//if(DEBUG) printf("LIM_CPU=%d",(int)(LIM.rlim_cur));
 	setrlimit(RLIMIT_CPU, &LIM);

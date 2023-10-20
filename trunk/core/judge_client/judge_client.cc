@@ -2700,7 +2700,7 @@ int special_judge(char *oj_home, int problem_id, char *infile, char *outfile,
 
 		struct rlimit LIM; // time limit, file limit& memory limit
 
-		LIM.rlim_cur = 5;
+		LIM.rlim_cur = 15;
 		LIM.rlim_max = LIM.rlim_cur;
 		setrlimit(RLIMIT_CPU, &LIM);
 		alarm(0);

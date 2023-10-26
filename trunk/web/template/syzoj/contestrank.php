@@ -14,7 +14,7 @@
          <button  class='ui small yellow button' onclick='$("tr[class!=active]").toggle();'>Show/Hide</button>
  </h1>
 </div>
-<div class="padding" style="overflow-y:auto;">
+<div id="rankdiv" class="padding" onclick="$(this).css('margin-left',(548-window.innerWidth/2)+'px').css('margin-right',(548-window.innerWidth/2)+'px')" style="margin-left:calc(1024-window.innerWidth);margin-right:-200px;overflow:auto"
     <?php if($user_cnt>0){ ?>
     <table class="ui very basic center aligned table" sylye="margin:30px">
         <thead>

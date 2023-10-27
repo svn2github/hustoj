@@ -316,6 +316,7 @@ function selectMulti( num, answer){
 		$("div.md").each(function(){
 			$(this).html(marked.parse($(this).text()));
 		});
+	        $(".md table").attr("border",1);
 	<?php } ?>
 	//单纯文本1. A. B. C. D. 自动变控件
 	$('span[class=auto_select]').each(function(){

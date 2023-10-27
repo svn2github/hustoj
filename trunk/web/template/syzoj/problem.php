@@ -316,7 +316,22 @@ function selectMulti( num, answer){
 		$("div.md").each(function(){
 			$(this).html(marked.parse($(this).text()));
 		});
-	        $(".md table").attr("border",1);
+	       
+    $(".md table tr td").css({
+            "border": "1px solid grey",
+            "text-align": "center",
+            "width": "200px",
+            "height": "30px"
+        });
+
+        $(".md table th").css({
+            "border": "1px solid grey",
+            "width": "200px",
+            "height": "30px",
+            "background-color": "#9e9e9ea1",
+            "text-align": "center"
+        });
+	        
 	<?php } ?>
 	//单纯文本1. A. B. C. D. 自动变控件
 	$('span[class=auto_select]').each(function(){

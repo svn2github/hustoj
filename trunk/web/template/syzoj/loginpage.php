@@ -1,4 +1,4 @@
-<?php $show_title="登陆 - $OJ_NAME"; ?>
+<?php $show_title="$MSG_LOGIN - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 
 <div class="ui error message" id="error" hidden></div>
@@ -7,7 +7,7 @@
     <div class="column" style="max-width: 450px">
       <h2 class="ui image header">
         <div class="content" style="margin-bottom: 10px; ">
-          登录
+          <?php echo $MSG_LOGIN ?>
         </div>
       </h2>
       <form class="ui large form" id="login" action="login.php" method="post" role="form" class="form-horizontal" onSubmit="return jsMd5();" >
@@ -15,25 +15,25 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input name="user_id" placeholder="用户名" type="text" id="username">
+              <input name="user_id" placeholder="<?php echo $MSG_USER_ID ?>" type="text" id="username">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input name="password" placeholder="密码" type="password" id="password">
+              <input name="password" placeholder="<?php echo $MSG_PASSWORD ?>" type="password" id="password">
             </div>
           </div>
           <?php if($OJ_VCODE){?>
             <div class="field">
               <div class="ui left icon input">
                 <i class="lock icon"></i>
-                <input name="vcode" placeholder="验证码" type="text">
+                <input name="vcode" placeholder="<?php echo $MSG_VCODE ?>" type="text">
                 <img id="vcode-img" onclick="this.src='vcode.php?'+Math.random()" height="30px">
               </div>
             </div>
           <?php }?>
-          <button name="submit" type="submit" class="ui fluid large submit button" >登录</button>
+          <button name="submit" type="submit" class="ui fluid large submit button" ><?php echo $MSG_LOGIN ?></button>
         </div>
 
         <div class="ui error message"></div>
@@ -41,9 +41,9 @@
       </form>
 
       <div class="ui message">
-        <a href="registerpage.php">注册账号</a>
+        <a href="registerpage.php"><?php echo $MSG_REGISTER ?></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="lostpassword.php">忘记密码</a>
+        <a href="lostpassword.php"><?php echo $MSG_LOST_PASSWORD ?></a>
       </div>
     </div>
   </div>

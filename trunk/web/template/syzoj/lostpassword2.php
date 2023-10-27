@@ -1,4 +1,4 @@
-<?php $show_title="找回密码 - $OJ_NAME"; ?>
+<?php $show_title="$MSG_LOSTPASSWORD_MAILBOX - $OJ_NAME"; ?>
 <?php include("template/$OJ_TEMPLATE/header.php");?>
 <!DOCTYPE html>
 <html lang="en">

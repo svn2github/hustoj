@@ -1,5 +1,5 @@
 <?php
-        require_once("./include/db_info.inc.php");
+     require_once(dirname(__FILE__)."/db_info.inc.php");
         //cache head start
         if(!isset($cache_time)) $cache_time=10;
         $sid=$OJ_NAME.$_SERVER["HTTP_HOST"];

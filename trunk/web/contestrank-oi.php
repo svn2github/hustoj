@@ -109,7 +109,12 @@ if ($rows_cnt>0){
         $end_time=strtotime($row['end_time']);
         $title=$row['title'];
 	$view_title = $title;
-        
+        if(isset($_GET['down'])){
+                header ( "Content-type:   application/excel" );
+                $ftitle=rawurlencode(preg_replace('/\.|\\\|\\/|\:|\*|\?|\"|\<|\>|\|/','',$title));
+                header ( "content-disposition:   attachment;   filename=contest".$cid."_".$ftitle.".xls" );
+        }
+
 }
 if ($start_time==0){
         $view_errors= "No Such Contest";

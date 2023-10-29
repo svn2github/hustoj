@@ -10,8 +10,8 @@ echo "<center><h3>$MSG_SETMESSAGE</h3></center>";
 
 if(isset($_POST['do'])){
   require_once("../include/check_post_key.php");
-
-  $fp = fopen($OJ_SAE?"saestor://web/msg.txt":"msg.txt","w");
+  @mkdir("../admin/msg");
+  $fp = fopen($OJ_SAE?"saestor://web/msg.txt":"../admin/msg/$domain.txt","w");
   $msg = $_POST['msg'];
 
   $msg = str_replace("<p>", "", $msg);

@@ -341,14 +341,14 @@ function selectMulti( num, answer){
                 let raw=$(this).html();
                 let options=['A','B','C','D'];
                 while(start>=0){
-                        start=raw.indexOf(i+".",start);
+                        start=raw.indexOf("\n"+i+".",start);
                         if(start<0) break;
                         let end=start;
                         let type="radio"
                         for(let j=0;j<4;j++){
                                 let option=options[j];
                                 end=raw.indexOf(option+".",start);
-                                next=raw.indexOf((i+1)+".",start);
+                                next=raw.indexOf("\n"+(i+1)+".",start);
                                 if ( end<0 || ( end > next && next > 0 )) {
                                         console.log("i:"+i+" j:"+option+" end:"+end+" next:"+next);
                                         end=start;

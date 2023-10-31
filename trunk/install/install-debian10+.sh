@@ -55,6 +55,7 @@ PHP_VER=`ls /etc/php | head -1`
 if grep "added by hustoj" /etc/nginx/sites-enabled/default ; then
 	echo "hustoj nginx config added!"
 else
+	sed -i "s/php7.4/php$PHP_VER/g" /etc/nginx/sites-enabled/default
         sed -i "s#root /var/www/html;#root /home/judge/src/web;#g" /etc/nginx/sites-enabled/default
 	sed -i "s:index index.html:index index.php:g" /etc/nginx/sites-enabled/default
 	sed -i "s:#location ~ \\\.php\\$:location ~ \\\.php\\$:g" /etc/nginx/sites-enabled/default

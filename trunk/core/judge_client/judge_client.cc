@@ -578,7 +578,7 @@ void init_judge_conf()   //读取判题主目录etc中的配置文件judge.conf
  	if(strcmp(http_username,"IP")==0){
                   FILE * fjobs = fopen("/etc/hostname","r");
                   if(1!=fscanf(fjobs, "%s", http_username)) printf("IP/HOSTNAME read fail...\n");
-                  pclose(fjobs);
+                  fclose(fjobs);
         }
 	if(turbo_mode==2) tbname="solution2";
 }

@@ -17,7 +17,7 @@
  * along with HUSTOJ. if not, see <http://www.gnu.org/licenses/>.
  */
 //c & c++
-int LANG_CV[CALL_ARRAY_SIZE] = {3,4,8,10,11,33,45,85,122,125,140,146,191,192,197,243,252,258,272,311,355,383,386,SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
+int LANG_CV[CALL_ARRAY_SIZE] = {3,4,8,10,11,33,45,85,122,125,140,146,191,192,197,240,243,252,258,272,311,355,383,386,SYS_time, SYS_read, SYS_uname, SYS_write, SYS_open,
 		SYS_close, SYS_access, SYS_brk, SYS_munmap, SYS_mprotect,
 		SYS_mmap2, SYS_fstat64, SYS_set_thread_area, 463, 0 };
 //pascal

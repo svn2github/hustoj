@@ -3686,7 +3686,7 @@ int main(int argc, char **argv)
 			{
 				finalACflg = ACflg;
 			}
-
+			if (ACflg==OJ_TL) break;     // limit all TLE submit to protect the system from D.o.S flooding
 			ACflg = OJ_AC;
 		}
 #ifdef _mysql_h

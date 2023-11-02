@@ -3106,7 +3106,7 @@ void watch_solution(pid_t pidApp, char *infile, int &ACflg, int spj,
 	}
 	
 	ptrace(PTRACE_KILL, pidApp, NULL, NULL);    // 杀死出问题的进程
-        execute_cmd("pkill -9 %d",pidApp);          // 抗拒的补刀
+        execute_cmd("kill -9 %d",pidApp);          // 抗拒的补刀
 	usedtime += (ruse.ru_utime.tv_sec * 1000 + ruse.ru_utime.tv_usec / 1000) * cpu_compensation; // 统计用户态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 	usedtime += (ruse.ru_stime.tv_sec * 1000 + ruse.ru_stime.tv_usec / 1000) * cpu_compensation; // 统计内核态耗时，在更快速的CPU上加以cpu_compensation倍数放大
 

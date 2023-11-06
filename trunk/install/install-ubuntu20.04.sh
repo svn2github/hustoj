@@ -32,9 +32,10 @@ svn up src
 #手工解决阿里云软件源的包依赖问题
 apt install libssl1.1=1.1.1f-1ubuntu2.8 -y --allow-downgrades
 apt-get install -y libmysqlclient-dev
+apt-get install -y default-libmysqlclient-dev
 apt-get install -y libmysql++-dev 
 
-for pkg in net-tools make g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap php-yaml tzdata
+for pkg in net-tools make flex g++ php-fpm nginx mysql-server php-mysql  php-common php-gd php-zip php-mbstring php-xml php-curl php-intl php-xmlrpc php-soap php-yaml tzdata
 do
 	while ! apt-get install -y "$pkg" 
 	do

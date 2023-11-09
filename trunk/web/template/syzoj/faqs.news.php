@@ -3,7 +3,7 @@
 <div class="padding">
     <h1 class="ui center aligned header">帮助</h1>
     <div style="font-content">
-    
+             <?php echo $view_faqs?>
     </div>
 </div>
 
